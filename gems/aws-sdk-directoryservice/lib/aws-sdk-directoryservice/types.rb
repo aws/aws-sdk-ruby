@@ -1237,6 +1237,75 @@ module Aws::DirectoryService
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the inputs for the <a>DescribeCAEnrollmentPolicy</a> operation.</p>
+    # @!attribute directory_id
+    #   <p>The identifier of the directory for which to retrieve the CA enrollment policy
+    #         information.</p>
+    #   @return [String]
+    class DescribeCAEnrollmentPolicyRequest < Struct.new(
+      :directory_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the results of the <a>DescribeCAEnrollmentPolicy</a> operation.</p>
+    # @!attribute directory_id
+    #   <p>The identifier of the directory associated with this CA enrollment policy.</p>
+    #   @return [String]
+    # @!attribute pca_connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Private Certificate Authority (PCA) connector
+    #         that is configured for automatic certificate enrollment in this directory.</p>
+    #   @return [String]
+    # @!attribute ca_enrollment_policy_status
+    #   <p>The current status of the CA enrollment policy. This indicates if automatic certificate
+    #         enrollment is currently active, inactive, or in a transitional state.</p>
+    #            <p>Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IN_PROGRESS</code> - The policy is being activated T</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SUCCESS</code> - The policy is active and automatic certificate enrollment is
+    #             operational</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FAILED</code> - The policy activation or deactivation failed</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DISABLING</code> - The policy is being deactivated</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DISABLED</code> - The policy is inactive and automatic certificate enrollment is
+    #             not available</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>IMPAIRED</code> - Network connectivity is impaired.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute last_updated_date_time
+    #   <p>The date and time when the CA enrollment policy was last modified or updated.</p>
+    #   @return [Time]
+    # @!attribute ca_enrollment_policy_status_reason
+    #   <p>Additional information explaining the current status of the CA enrollment policy,
+    #         particularly useful when the policy is in an error or transitional state.</p>
+    #   @return [String]
+    class DescribeCAEnrollmentPolicyResult < Struct.new(
+      :directory_id,
+      :pca_connector_arn,
+      :ca_enrollment_policy_status,
+      :last_updated_date_time,
+      :ca_enrollment_policy_status_reason,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute directory_id
     #   <p>The identifier of the directory.</p>
     #   @return [String]
@@ -2158,6 +2227,36 @@ module Aws::DirectoryService
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A disable operation for CA enrollment policy is already in progress for this directory.</p>
+    # @!attribute message
+    #   <p>The descriptive message for the exception.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request identifier.</p>
+    #   @return [String]
+    class DisableAlreadyInProgressException < Struct.new(
+      :message,
+      :request_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the inputs for the <a>DisableCAEnrollmentPolicy</a> operation.</p>
+    # @!attribute directory_id
+    #   <p>The identifier of the directory for which to disable the CA enrollment policy.</p>
+    #   @return [String]
+    class DisableCAEnrollmentPolicyRequest < Struct.new(
+      :directory_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the results of the <a>DisableCAEnrollmentPolicy</a> operation.</p>
+    class DisableCAEnrollmentPolicyResult < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute directory_id
     #   <p>The identifier of the directory </p>
     #   @return [String]
@@ -2316,6 +2415,46 @@ module Aws::DirectoryService
     class DomainControllerLimitExceededException < Struct.new(
       :message,
       :request_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An enable operation for CA enrollment policy is already in progress for this directory.</p>
+    # @!attribute message
+    #   <p>The descriptive message for the exception.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request identifier.</p>
+    #   @return [String]
+    class EnableAlreadyInProgressException < Struct.new(
+      :message,
+      :request_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the inputs for the <a>EnableCAEnrollmentPolicy</a> operation.</p>
+    # @!attribute directory_id
+    #   <p>The identifier of the directory for which to enable the CA enrollment policy.</p>
+    #   @return [String]
+    # @!attribute pca_connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the Private Certificate Authority (PCA) connector to use
+    #         for automatic certificate enrollment. This connector must be properly configured and
+    #         accessible from the directory.</p>
+    #            <p>The ARN format is:
+    #         <code>arn:aws:pca-connector-ad:<i>region</i>:<i>account-id</i>:connector/<i>connector-id</i>
+    #               </code>
+    #            </p>
+    #   @return [String]
+    class EnableCAEnrollmentPolicyRequest < Struct.new(
+      :directory_id,
+      :pca_connector_arn,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the results of the <a>EnableCAEnrollmentPolicy</a> operation.</p>
+    class EnableCAEnrollmentPolicyResult < Struct.new(
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

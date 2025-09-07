@@ -3116,6 +3116,30 @@ module Aws::Glue
       attr_accessor arguments: Hash[String, String]?
     end
 
+    class CreateGlueIdentityCenterConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?scopes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor scopes: Array[String]?
+    end
+
+    class CreateGlueIdentityCenterConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
     class CreateGrokClassifierRequest
       include Smithy::Schema::Structure
 
@@ -4152,6 +4176,27 @@ module Aws::Glue
       attr_accessor composite_rule_evaluation_method: String?
     end
 
+    class DataQualityGlueTable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?table_name: String,
+        ?catalog_id: String,
+        ?connection_name: String,
+        ?additional_options: Hash[String, String],
+        ?pre_processing_query: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor catalog_id: String?
+      attr_accessor connection_name: String?
+      attr_accessor additional_options: Hash[String, String]?
+      attr_accessor pre_processing_query: String?
+    end
+
     class DataQualityMetricValues
       include Smithy::Schema::Structure
 
@@ -4424,10 +4469,12 @@ module Aws::Glue
 
       def initialize: (
         ?glue_table: Types::GlueTable,
+        ?data_quality_glue_table: Types::DataQualityGlueTable,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor glue_table: Types::GlueTable?
+      attr_accessor data_quality_glue_table: Types::DataQualityGlueTable?
     end
 
     class Database
@@ -4459,6 +4506,7 @@ module Aws::Glue
 
     module DatabaseAttributes
       NAME: String
+      TARGET_DATABASE: String
     end
 
     class DatabaseIdentifier
@@ -4841,6 +4889,24 @@ module Aws::Glue
     end
 
     class DeleteDevEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteGlueIdentityCenterConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteGlueIdentityCenterConfigurationResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -7272,6 +7338,30 @@ module Aws::Glue
       attr_accessor next_token: String?
     end
 
+    class GetGlueIdentityCenterConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetGlueIdentityCenterConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?instance_arn: String,
+        ?scopes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor instance_arn: String?
+      attr_accessor scopes: Array[String]?
+    end
+
     class GetIntegrationResourcePropertyRequest
       include Smithy::Schema::Structure
 
@@ -9324,11 +9414,13 @@ module Aws::Glue
       def initialize: (
         ?refresh_interval: String,
         ?source_properties: Hash[String, String],
+        ?continuous_sync: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor refresh_interval: String?
       attr_accessor source_properties: Hash[String, String]?
+      attr_accessor continuous_sync: bool?
     end
 
     class IntegrationConflictOperationFault
@@ -11154,6 +11246,7 @@ module Aws::Glue
         ?integration_identifier: String,
         ?description: String,
         ?data_filter: String,
+        ?integration_config: Types::IntegrationConfig,
         ?integration_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -11161,6 +11254,7 @@ module Aws::Glue
       attr_accessor integration_identifier: String?
       attr_accessor description: String?
       attr_accessor data_filter: String?
+      attr_accessor integration_config: Types::IntegrationConfig?
       attr_accessor integration_name: String?
     end
 
@@ -11180,6 +11274,7 @@ module Aws::Glue
         ?create_time: Time,
         ?errors: Array[Types::IntegrationError],
         ?data_filter: String,
+        ?integration_config: Types::IntegrationConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -11195,6 +11290,7 @@ module Aws::Glue
       attr_accessor create_time: Time?
       attr_accessor errors: Array[Types::IntegrationError]?
       attr_accessor data_filter: String?
+      attr_accessor integration_config: Types::IntegrationConfig?
     end
 
     class MongoDBTarget
@@ -15811,6 +15907,26 @@ module Aws::Glue
     end
 
     class UpdateDevEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateGlueIdentityCenterConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scopes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scopes: Array[String]?
+    end
+
+    class UpdateGlueIdentityCenterConfigurationResponse
       include Smithy::Schema::Structure
 
       def initialize: (

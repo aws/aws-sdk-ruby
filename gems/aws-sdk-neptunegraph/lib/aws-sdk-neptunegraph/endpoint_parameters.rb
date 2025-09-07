@@ -167,7 +167,15 @@ module Aws::NeptuneGraph
           {
             api_type: "ControlPlane",
           }
+        when :start_graph
+          {
+            api_type: "ControlPlane",
+          }
         when :start_import_task
+          {
+            api_type: "ControlPlane",
+          }
+        when :stop_graph
           {
             api_type: "ControlPlane",
           }

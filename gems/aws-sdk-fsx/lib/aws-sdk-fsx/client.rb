@@ -533,7 +533,7 @@ module Aws::FSx
     #             administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #             progress_percent: 1,
     #             request_time: Time.now,
-    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #             target_file_system_values: {
     #               # recursive FileSystem
     #             },
@@ -667,7 +667,8 @@ module Aws::FSx
     #               }
     #             },
     #             total_transfer_bytes: 1,
-    #             remaining_transfer_bytes: 1
+    #             remaining_transfer_bytes: 1,
+    #             message: "ErrorMessage"
     #           }
     #         ],
     #         ontap_configuration: {
@@ -802,7 +803,7 @@ module Aws::FSx
     #             administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #             progress_percent: 1,
     #             request_time: Time.now,
-    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #             target_file_system_values: {
     #               owner_id: "AWSAccountId",
     #               creation_time: Time.now,
@@ -984,7 +985,8 @@ module Aws::FSx
     #               }
     #             },
     #             total_transfer_bytes: 1,
-    #             remaining_transfer_bytes: 1
+    #             remaining_transfer_bytes: 1,
+    #             message: "ErrorMessage"
     #           }
     #         ],
     #         open_zfs_configuration: {
@@ -1113,7 +1115,7 @@ module Aws::FSx
     #         administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #         progress_percent: 1,
     #         request_time: Time.now,
-    #         status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #         status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #         target_file_system_values: {
     #           owner_id: "AWSAccountId",
     #           creation_time: Time.now,
@@ -1398,7 +1400,8 @@ module Aws::FSx
     #           }
     #         },
     #         total_transfer_bytes: 1,
-    #         remaining_transfer_bytes: 1
+    #         remaining_transfer_bytes: 1,
+    #         message: "ErrorMessage"
     #       }
     #     ]
     #   }
@@ -1737,7 +1740,7 @@ module Aws::FSx
     #             administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #             progress_percent: 1,
     #             request_time: Time.now,
-    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #             target_file_system_values: {
     #               # recursive FileSystem
     #             },
@@ -1871,7 +1874,8 @@ module Aws::FSx
     #               }
     #             },
     #             total_transfer_bytes: 1,
-    #             remaining_transfer_bytes: 1
+    #             remaining_transfer_bytes: 1,
+    #             message: "ErrorMessage"
     #           }
     #         ],
     #         ontap_configuration: {
@@ -2006,7 +2010,7 @@ module Aws::FSx
     #             administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #             progress_percent: 1,
     #             request_time: Time.now,
-    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #             target_file_system_values: {
     #               owner_id: "AWSAccountId",
     #               creation_time: Time.now,
@@ -2188,7 +2192,8 @@ module Aws::FSx
     #               }
     #             },
     #             total_transfer_bytes: 1,
-    #             remaining_transfer_bytes: 1
+    #             remaining_transfer_bytes: 1,
+    #             message: "ErrorMessage"
     #           }
     #         ],
     #         open_zfs_configuration: {
@@ -3208,7 +3213,7 @@ module Aws::FSx
     #           administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #           progress_percent: 1,
     #           request_time: Time.now,
-    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #           target_file_system_values: {
     #             # recursive FileSystem
     #           },
@@ -3342,7 +3347,8 @@ module Aws::FSx
     #             }
     #           },
     #           total_transfer_bytes: 1,
-    #           remaining_transfer_bytes: 1
+    #           remaining_transfer_bytes: 1,
+    #           message: "ErrorMessage"
     #         }
     #       ],
     #       ontap_configuration: {
@@ -3792,7 +3798,7 @@ module Aws::FSx
     #           administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #           progress_percent: 1,
     #           request_time: Time.now,
-    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #           target_file_system_values: {
     #             # recursive FileSystem
     #           },
@@ -3926,7 +3932,8 @@ module Aws::FSx
     #             }
     #           },
     #           total_transfer_bytes: 1,
-    #           remaining_transfer_bytes: 1
+    #           remaining_transfer_bytes: 1,
+    #           message: "ErrorMessage"
     #         }
     #       ],
     #       ontap_configuration: {
@@ -4067,7 +4074,7 @@ module Aws::FSx
     #           administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #           progress_percent: 1,
     #           request_time: Time.now,
-    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #           target_file_system_values: {
     #             owner_id: "AWSAccountId",
     #             creation_time: Time.now,
@@ -4335,7 +4342,8 @@ module Aws::FSx
     #             # recursive Snapshot
     #           },
     #           total_transfer_bytes: 1,
-    #           remaining_transfer_bytes: 1
+    #           remaining_transfer_bytes: 1,
+    #           message: "ErrorMessage"
     #         }
     #       ]
     #     }
@@ -4651,7 +4659,7 @@ module Aws::FSx
     #           administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #           progress_percent: 1,
     #           request_time: Time.now,
-    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #           target_file_system_values: {
     #             owner_id: "AWSAccountId",
     #             creation_time: Time.now,
@@ -4833,7 +4841,8 @@ module Aws::FSx
     #             }
     #           },
     #           total_transfer_bytes: 1,
-    #           remaining_transfer_bytes: 1
+    #           remaining_transfer_bytes: 1,
+    #           message: "ErrorMessage"
     #         }
     #       ],
     #       open_zfs_configuration: {
@@ -5027,7 +5036,7 @@ module Aws::FSx
     #           administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #           progress_percent: 1,
     #           request_time: Time.now,
-    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #           target_file_system_values: {
     #             owner_id: "AWSAccountId",
     #             creation_time: Time.now,
@@ -5209,7 +5218,8 @@ module Aws::FSx
     #             }
     #           },
     #           total_transfer_bytes: 1,
-    #           remaining_transfer_bytes: 1
+    #           remaining_transfer_bytes: 1,
+    #           message: "ErrorMessage"
     #         }
     #       ],
     #       open_zfs_configuration: {
@@ -5821,7 +5831,7 @@ module Aws::FSx
     #               administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #               progress_percent: 1,
     #               request_time: Time.now,
-    #               status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #               status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #               target_file_system_values: {
     #                 # recursive FileSystem
     #               },
@@ -5955,7 +5965,8 @@ module Aws::FSx
     #                 }
     #               },
     #               total_transfer_bytes: 1,
-    #               remaining_transfer_bytes: 1
+    #               remaining_transfer_bytes: 1,
+    #               message: "ErrorMessage"
     #             }
     #           ],
     #           ontap_configuration: {
@@ -6090,7 +6101,7 @@ module Aws::FSx
     #               administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #               progress_percent: 1,
     #               request_time: Time.now,
-    #               status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #               status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #               target_file_system_values: {
     #                 owner_id: "AWSAccountId",
     #                 creation_time: Time.now,
@@ -6272,7 +6283,8 @@ module Aws::FSx
     #                 }
     #               },
     #               total_transfer_bytes: 1,
-    #               remaining_transfer_bytes: 1
+    #               remaining_transfer_bytes: 1,
+    #               message: "ErrorMessage"
     #             }
     #           ],
     #           open_zfs_configuration: {
@@ -6806,7 +6818,7 @@ module Aws::FSx
     #             administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #             progress_percent: 1,
     #             request_time: Time.now,
-    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #             target_file_system_values: {
     #               # recursive FileSystem
     #             },
@@ -6940,7 +6952,8 @@ module Aws::FSx
     #               }
     #             },
     #             total_transfer_bytes: 1,
-    #             remaining_transfer_bytes: 1
+    #             remaining_transfer_bytes: 1,
+    #             message: "ErrorMessage"
     #           }
     #         ],
     #         ontap_configuration: {
@@ -7184,7 +7197,7 @@ module Aws::FSx
     #             administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #             progress_percent: 1,
     #             request_time: Time.now,
-    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #             target_file_system_values: {
     #               owner_id: "AWSAccountId",
     #               creation_time: Time.now,
@@ -7452,7 +7465,8 @@ module Aws::FSx
     #               # recursive Snapshot
     #             },
     #             total_transfer_bytes: 1,
-    #             remaining_transfer_bytes: 1
+    #             remaining_transfer_bytes: 1,
+    #             message: "ErrorMessage"
     #           }
     #         ]
     #       }
@@ -7655,7 +7669,7 @@ module Aws::FSx
     #             administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #             progress_percent: 1,
     #             request_time: Time.now,
-    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #             status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #             target_file_system_values: {
     #               owner_id: "AWSAccountId",
     #               creation_time: Time.now,
@@ -7837,7 +7851,8 @@ module Aws::FSx
     #               }
     #             },
     #             total_transfer_bytes: 1,
-    #             remaining_transfer_bytes: 1
+    #             remaining_transfer_bytes: 1,
+    #             message: "ErrorMessage"
     #           }
     #         ],
     #         open_zfs_configuration: {
@@ -8168,7 +8183,7 @@ module Aws::FSx
     #           administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #           progress_percent: 1,
     #           request_time: Time.now,
-    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #           target_file_system_values: {
     #             # recursive FileSystem
     #           },
@@ -8302,7 +8317,8 @@ module Aws::FSx
     #             }
     #           },
     #           total_transfer_bytes: 1,
-    #           remaining_transfer_bytes: 1
+    #           remaining_transfer_bytes: 1,
+    #           message: "ErrorMessage"
     #         }
     #       ],
     #       ontap_configuration: {
@@ -8413,7 +8429,7 @@ module Aws::FSx
     #         administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #         progress_percent: 1,
     #         request_time: Time.now,
-    #         status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #         status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #         target_file_system_values: {
     #           owner_id: "AWSAccountId",
     #           creation_time: Time.now,
@@ -8698,7 +8714,8 @@ module Aws::FSx
     #           }
     #         },
     #         total_transfer_bytes: 1,
-    #         remaining_transfer_bytes: 1
+    #         remaining_transfer_bytes: 1,
+    #         message: "ErrorMessage"
     #       }
     #     ]
     #   }
@@ -8829,7 +8846,7 @@ module Aws::FSx
     #           administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #           progress_percent: 1,
     #           request_time: Time.now,
-    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #           target_file_system_values: {
     #             # recursive FileSystem
     #           },
@@ -8963,7 +8980,8 @@ module Aws::FSx
     #             }
     #           },
     #           total_transfer_bytes: 1,
-    #           remaining_transfer_bytes: 1
+    #           remaining_transfer_bytes: 1,
+    #           message: "ErrorMessage"
     #         }
     #       ],
     #       ontap_configuration: {
@@ -9511,8 +9529,8 @@ module Aws::FSx
     # @option params [Integer] :storage_capacity
     #   <p>Use this parameter to increase the storage capacity of an FSx for Windows File Server,
     #         FSx for Lustre, FSx for OpenZFS, or FSx for ONTAP file system.
-    #         Specifies the storage capacity target value, in GiB, to increase the storage capacity for
-    #         the file system that you're updating. </p>
+    #         For second-generation FSx for ONTAP file systems, you can also decrease the storage capacity.
+    #         Specifies the storage capacity target value, in GiB, for the file system that you're updating. </p>
     #            <note>
     #               <p>You can't make a storage capacity increase request if there is an existing storage
     #           capacity increase request in progress.</p>
@@ -9543,10 +9561,10 @@ module Aws::FSx
     #         must have at least 16 MBps of throughput capacity. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html">Managing storage
     #           capacity</a> in the <i>Amazon FSxfor Windows File Server User
     #             Guide</i>.</p>
-    #            <p>For ONTAP file systems, the storage capacity target value must be at least 10 percent
-    #         greater than the current storage capacity value.  For more information, see
-    #         <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html">Managing storage capacity and provisioned IOPS</a> in the <i>Amazon FSx for NetApp ONTAP User
-    #             Guide</i>.</p>
+    #            <p>For ONTAP file systems, when increasing storage capacity, the storage capacity target value must be at least 10 percent
+    #         greater than the current storage capacity value. When decreasing storage capacity on second-generation file systems, the target value must be at least 9 percent smaller than the current SSD storage capacity. For more information, see
+    #         <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/storage-capacity-and-IOPS.html">File system storage capacity and IOPS</a> in the Amazon FSx for NetApp ONTAP User
+    #             Guide.</p>
     # @option params [Types::UpdateFileSystemWindowsConfiguration] :windows_configuration
     #   <p>The configuration updates for an Amazon FSx for Windows File Server file system.</p>
     # @option params [Types::UpdateFileSystemLustreConfiguration] :lustre_configuration
@@ -9762,7 +9780,7 @@ module Aws::FSx
     #           administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #           progress_percent: 1,
     #           request_time: Time.now,
-    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #           target_file_system_values: {
     #             # recursive FileSystem
     #           },
@@ -9896,7 +9914,8 @@ module Aws::FSx
     #             }
     #           },
     #           total_transfer_bytes: 1,
-    #           remaining_transfer_bytes: 1
+    #           remaining_transfer_bytes: 1,
+    #           message: "ErrorMessage"
     #         }
     #       ],
     #       ontap_configuration: {
@@ -10040,7 +10059,7 @@ module Aws::FSx
     #           administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #           progress_percent: 1,
     #           request_time: Time.now,
-    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #           target_file_system_values: {
     #             owner_id: "AWSAccountId",
     #             creation_time: Time.now,
@@ -10308,7 +10327,8 @@ module Aws::FSx
     #             # recursive Snapshot
     #           },
     #           total_transfer_bytes: 1,
-    #           remaining_transfer_bytes: 1
+    #           remaining_transfer_bytes: 1,
+    #           message: "ErrorMessage"
     #         }
     #       ]
     #     }
@@ -10565,7 +10585,7 @@ module Aws::FSx
     #           administrative_action_type: "FILE_SYSTEM_UPDATE" # One of: ["FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"],
     #           progress_percent: 1,
     #           request_time: Time.now,
-    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"],
+    #           status: "FAILED" # One of: ["FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"],
     #           target_file_system_values: {
     #             owner_id: "AWSAccountId",
     #             creation_time: Time.now,
@@ -10747,7 +10767,8 @@ module Aws::FSx
     #             }
     #           },
     #           total_transfer_bytes: 1,
-    #           remaining_transfer_bytes: 1
+    #           remaining_transfer_bytes: 1,
+    #           message: "ErrorMessage"
     #         }
     #       ],
     #       open_zfs_configuration: {

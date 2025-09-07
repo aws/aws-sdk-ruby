@@ -47,6 +47,8 @@ module Aws::DirectoryService
     AuthenticationFailedException: StructureShape
     AvailabilityZone: StringShape
     AvailabilityZones: ListShape
+    CaEnrollmentPolicyStatus: EnumShape
+    CaEnrollmentPolicyStatusReason: StringShape
     CancelSchemaExtensionRequest: StructureShape
     CancelSchemaExtensionResult: StructureShape
     Certificate: StructureShape
@@ -126,6 +128,8 @@ module Aws::DirectoryService
     DeregisterEventTopicResult: StructureShape
     DescribeADAssessmentRequest: StructureShape
     DescribeADAssessmentResult: StructureShape
+    DescribeCAEnrollmentPolicyRequest: StructureShape
+    DescribeCAEnrollmentPolicyResult: StructureShape
     DescribeCertificateRequest: StructureShape
     DescribeCertificateResult: StructureShape
     DescribeClientAuthenticationSettingsRequest: StructureShape
@@ -190,6 +194,9 @@ module Aws::DirectoryService
     DirectoryUnavailableException: StructureShape
     DirectoryVpcSettings: StructureShape
     DirectoryVpcSettingsDescription: StructureShape
+    DisableAlreadyInProgressException: StructureShape
+    DisableCAEnrollmentPolicyRequest: StructureShape
+    DisableCAEnrollmentPolicyResult: StructureShape
     DisableClientAuthenticationRequest: StructureShape
     DisableClientAuthenticationResult: StructureShape
     DisableDirectoryDataAccessRequest: StructureShape
@@ -208,6 +215,9 @@ module Aws::DirectoryService
     DomainControllerStatus: EnumShape
     DomainControllerStatusReason: StringShape
     DomainControllers: ListShape
+    EnableAlreadyInProgressException: StructureShape
+    EnableCAEnrollmentPolicyRequest: StructureShape
+    EnableCAEnrollmentPolicyResult: StructureShape
     EnableClientAuthenticationRequest: StructureShape
     EnableClientAuthenticationResult: StructureShape
     EnableDirectoryDataAccessRequest: StructureShape
@@ -292,6 +302,7 @@ module Aws::DirectoryService
     OwnerDirectoryDescription: StructureShape
     PageLimit: IntegerShape
     Password: StringShape
+    PcaConnectorArn: StringShape
     PortNumber: IntegerShape
     RadiusAuthenticationProtocol: EnumShape
     RadiusDisplayLabel: StringShape

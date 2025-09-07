@@ -60,7 +60,15 @@ module Aws::DirectoryService
       def message: () -> String?
       def request_id: () -> String?
     end
+    class DisableAlreadyInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
     class DomainControllerLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class EnableAlreadyInProgressException < Smithy::Client::ServiceError
       def message: () -> String?
       def request_id: () -> String?
     end

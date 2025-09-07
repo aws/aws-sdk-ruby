@@ -1012,7 +1012,7 @@ module Aws::QConnect
       request.send_request(options)
     end
 
-    # <p>Creates an Amazon Q in Connect AI Prompt.</p>
+    # <p>Creates an Amazon Q in Connect AI Prompt.</p> <note> <p>For more information on supported models, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system and custom prompts</a>.</p> </note>
     # @param [Hash, Types::CreateAIPromptRequest] params
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>..</p>
@@ -6435,6 +6435,8 @@ module Aws::QConnect
     #   <p>The configuration of the prompt template for this AI Prompt.</p>
     # @option params [String] :description
     #   <p>The description of the Amazon Q in Connect AI Prompt.</p>
+    # @option params [String] :model_id
+    #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For more information on supported models, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system and custom prompts</a>.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -6447,7 +6449,8 @@ module Aws::QConnect
     #         text: "TextAIPrompt", # required
     #       }
     #     },
-    #     description: "Description"
+    #     description: "Description",
+    #     model_id: "AIPromptModelIdentifier"
     #   }
     #   options = {}
     #   response = client.update_ai_prompt(params, options)

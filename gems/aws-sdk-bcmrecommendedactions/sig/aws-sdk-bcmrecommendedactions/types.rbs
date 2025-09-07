@@ -1,0 +1,202 @@
+module Aws::BCMRecommendedActions
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?match_option: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor match_option: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module ActionType
+      ADD_ALTERNATE_BILLING_CONTACT: String
+      CREATE_ANOMALY_MONITOR: String
+      CREATE_BUDGET: String
+      ENABLE_COST_OPTIMIZATION_HUB: String
+      MIGRATE_TO_GRANULAR_PERMISSIONS: String
+      PAYMENTS_DUE: String
+      PAYMENTS_PAST_DUE: String
+      REVIEW_ANOMALIES: String
+      REVIEW_BUDGET_ALERTS: String
+      REVIEW_BUDGETS_EXCEEDED: String
+      REVIEW_EXPIRING_RI: String
+      REVIEW_EXPIRING_SP: String
+      REVIEW_FREETIER_USAGE_ALERTS: String
+      REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS: String
+      UPDATE_EXPIRED_PAYMENT_METHOD: String
+      UPDATE_INVALID_PAYMENT_METHOD: String
+      UPDATE_TAX_EXEMPTION_CERTIFICATE: String
+      UPDATE_TAX_REGISTRATION_NUMBER: String
+    end
+
+    module Feature
+      ACCOUNT: String
+      BUDGETS: String
+      COST_ANOMALY_DETECTION: String
+      COST_OPTIMIZATION_HUB: String
+      FREE_TIER: String
+      IAM: String
+      PAYMENTS: String
+      RESERVATIONS: String
+      SAVINGS_PLANS: String
+      TAX_SETTINGS: String
+    end
+
+    module FilterName
+      FEATURE: String
+      SEVERITY: String
+      TYPE: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListRecommendedActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::RequestFilter,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::RequestFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendedActionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_actions: Array[Types::RecommendedAction],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_actions: Array[Types::RecommendedAction]?
+      attr_accessor next_token: String?
+    end
+
+    module MatchOption
+      EQUALS: String
+      NOT_EQUALS: String
+    end
+
+    class RecommendedAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?account_id: String,
+        ?severity: String,
+        ?feature: String,
+        ?context: Hash[String, String],
+        ?next_steps: Array[String],
+        ?last_updated_time_stamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor account_id: String?
+      attr_accessor severity: String?
+      attr_accessor feature: String?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor next_steps: Array[String]?
+      attr_accessor last_updated_time_stamp: String?
+    end
+
+    class RequestFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actions: Array[Types::ActionFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actions: Array[Types::ActionFilter]?
+    end
+
+    module Severity
+      INFO: String
+      WARNING: String
+      CRITICAL: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+  end
+end

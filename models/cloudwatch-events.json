@@ -1093,17 +1093,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1114,17 +1103,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1141,17 +1119,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1162,17 +1129,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -7216,20 +7172,20 @@
                 "Name": {
                     "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of parameter to start execution of a SageMaker Model Building Pipeline.</p>",
+                        "smithy.api#documentation": "<p>Name of parameter to start execution of a SageMaker AI Model Building Pipeline.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Value of parameter to start execution of a SageMaker Model Building Pipeline.</p>",
+                        "smithy.api#documentation": "<p>Value of parameter to start execution of a SageMaker AI Model Building Pipeline.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Name/Value pair of a parameter to start execution of a SageMaker Model Building\n      Pipeline.</p>"
+                "smithy.api#documentation": "<p>Name/Value pair of a parameter to start execution of a SageMaker AI Model Building\n      Pipeline.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterList": {
@@ -7269,12 +7225,12 @@
                 "PipelineParameterList": {
                     "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of Parameter names and values for SageMaker Model Building Pipeline execution.</p>"
+                        "smithy.api#documentation": "<p>List of Parameter names and values for SageMaker AI Model Building Pipeline execution.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are custom parameters to use when the target is a SageMaker Model Building Pipeline\n      that starts based on EventBridge events.</p>"
+                "smithy.api#documentation": "<p>These are custom parameters to use when the target is a SageMaker AI Model Building Pipeline\n      that starts based on EventBridge events.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#ScheduleExpression": {
@@ -7656,7 +7612,7 @@
                 "SageMakerPipelineParameters": {
                     "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the SageMaker Model Building Pipeline parameters to start execution of a\n      SageMaker Model Building Pipeline.</p>\n         <p>If you specify a SageMaker Model Building Pipeline as a target, you can use this to\n      specify parameters to start a pipeline execution based on EventBridge events.</p>"
+                        "smithy.api#documentation": "<p>Contains the SageMaker AI Model Building Pipeline parameters to start execution of a\n      SageMaker AI Model Building Pipeline.</p>\n         <p>If you specify a SageMaker AI Model Building Pipeline as a target, you can use this to\n      specify parameters to start a pipeline execution based on EventBridge events.</p>"
                     }
                 },
                 "DeadLetterConfig": {

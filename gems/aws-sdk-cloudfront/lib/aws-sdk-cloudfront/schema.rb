@@ -371,6 +371,7 @@ module Aws::CloudFront
     InvalidationList = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudfront#InvalidationList', name: 'InvalidationList')
     InvalidationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudfront#InvalidationSummary', name: 'InvalidationSummary')
     InvalidationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudfront#InvalidationSummaryList', name: 'InvalidationSummaryList')
+    IpAddressType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudfront#IpAddressType', name: 'IpAddressType')
     ItemSelection = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudfront#ItemSelection', name: 'ItemSelection')
     KGKeyPairIds = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudfront#KGKeyPairIds', name: 'KGKeyPairIds')
     KGKeyPairIdsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudfront#KGKeyPairIdsList', name: 'KGKeyPairIdsList')
@@ -1307,6 +1308,7 @@ module Aws::CloudFront
     CustomOriginConfig.add_member(:origin_ssl_protocols, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OriginSslProtocols, location_name: 'OriginSslProtocols'))
     CustomOriginConfig.add_member(:origin_read_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'OriginReadTimeout'))
     CustomOriginConfig.add_member(:origin_keepalive_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'OriginKeepaliveTimeout'))
+    CustomOriginConfig.add_member(:ip_address_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddressType, location_name: 'IpAddressType'))
     CustomOriginConfig.type = Types::CustomOriginConfig
     CustomizationActionType.add_member(:override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'override', traits: {"smithy.api#enumValue" => "override"}))
     CustomizationActionType.add_member(:disable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'disable', traits: {"smithy.api#enumValue" => "disable"}))
@@ -2055,6 +2057,9 @@ module Aws::CloudFront
     InvalidationSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Status', traits: {"smithy.api#required" => {}}))
     InvalidationSummary.type = Types::InvalidationSummary
     InvalidationSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidationSummary, traits: {"smithy.api#xmlName" => "InvalidationSummary"})
+    IpAddressType.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Ipv4', traits: {"smithy.api#enumValue" => "ipv4"}))
+    IpAddressType.add_member(:ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Ipv6', traits: {"smithy.api#enumValue" => "ipv6"}))
+    IpAddressType.add_member(:dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DualStack', traits: {"smithy.api#enumValue" => "dualstack"}))
     ItemSelection.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'none', traits: {"smithy.api#enumValue" => "none"}))
     ItemSelection.add_member(:whitelist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'whitelist', traits: {"smithy.api#enumValue" => "whitelist"}))
     ItemSelection.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'all', traits: {"smithy.api#enumValue" => "all"}))

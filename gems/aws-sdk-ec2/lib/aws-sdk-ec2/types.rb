@@ -2967,7 +2967,7 @@ module Aws::EC2
     #               the assigned value.</p>
     #   @return [String]
     # @!attribute device_name
-    #   <p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>
+    #   <p>The device name. For available device names, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html">Device names for volumes</a>.</p>
     #   @return [String]
     # @!attribute virtual_name
     #   <p>The virtual device name (<code>ephemeral</code>N). Instance store volumes are numbered
@@ -4932,6 +4932,9 @@ module Aws::EC2
     # @!attribute client_ip
     #   <p>The IP address of the client.</p>
     #   @return [String]
+    # @!attribute client_ipv6_address
+    #   <p>The IPv6 address assigned to the client connection when using a dual-stack Client VPN endpoint. This field is only populated when the endpoint is configured for dual-stack addressing, and the client is using IPv6 for connectivity.</p>
+    #   @return [String]
     # @!attribute common_name
     #   <p>The common name associated with the client. This is either the name of the client certificate,
     #   			or the Active Directory user name.</p>
@@ -4956,6 +4959,7 @@ module Aws::EC2
       :ingress_packets,
       :egress_packets,
       :client_ip,
+      :client_ipv6_address,
       :common_name,
       :status,
       :connection_end_time,
@@ -5066,6 +5070,12 @@ module Aws::EC2
     # @!attribute disconnect_on_session_timeout
     #   <p>Indicates whether the client VPN session is disconnected after the maximum <code>sessionTimeoutHours</code> is reached. If <code>true</code>, users are prompted to reconnect client VPN. If <code>false</code>, client VPN attempts to reconnect automatically. The default value is <code>true</code>.</p>
     #   @return [Boolean]
+    # @!attribute endpoint_ip_address_type
+    #   <p>The IP address type of the Client VPN endpoint. Possible values are <code>ipv4</code> for IPv4 addressing only, <code>ipv6</code> for IPv6 addressing only, or <code>dual-stack </code>for both IPv4 and IPv6 addressing.</p>
+    #   @return [String]
+    # @!attribute traffic_ip_address_type
+    #   <p>The IP address type of the Client VPN endpoint. Possible values are either <code>ipv4</code> for IPv4 addressing only, <code>ipv6</code> for IPv6 addressing only, or <code>dual-stack</code> for both IPv4 and IPv6 addressing.</p>
+    #   @return [String]
     class ClientVpnEndpoint < Struct.new(
       :client_vpn_endpoint_id,
       :description,
@@ -5092,6 +5102,8 @@ module Aws::EC2
       :client_login_banner_options,
       :client_route_enforcement_options,
       :disconnect_on_session_timeout,
+      :endpoint_ip_address_type,
+      :traffic_ip_address_type,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -5621,13 +5633,13 @@ module Aws::EC2
     #         Reference</i>.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>A description for the new AMI in the destination Region.</p>
+    #   <p>A description for the new AMI.</p>
     #   @return [String]
     # @!attribute encrypted
-    #   <p>Specifies whether the destination snapshots of the copied image should be encrypted. You
-    #         can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an
-    #         encrypted snapshot. The default KMS key for Amazon EBS is used unless you specify a non-default
-    #         Key Management Service (KMS) KMS key using <code>KmsKeyId</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html">Use encryption with
+    #   <p>Specifies whether to encrypt the snapshots of the copied image.</p>
+    #            <p>You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted
+    #         copy of an encrypted snapshot. The default KMS key for Amazon EBS is used unless you specify a
+    #         non-default Key Management Service (KMS) KMS key using <code>KmsKeyId</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html">Use encryption with
     #           EBS-backed AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute kms_key_id
@@ -5655,7 +5667,7 @@ module Aws::EC2
     #            <p>Amazon EBS does not support asymmetric KMS keys.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the new AMI in the destination Region.</p>
+    #   <p>The name of the new AMI.</p>
     #   @return [String]
     # @!attribute source_image_id
     #   <p>The ID of the AMI to copy.</p>
@@ -5664,16 +5676,19 @@ module Aws::EC2
     #   <p>The name of the Region that contains the AMI to copy.</p>
     #   @return [String]
     # @!attribute destination_outpost_arn
-    #   <p>The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only specify this
-    #         parameter when copying an AMI from an Amazon Web Services Region to an Outpost. The AMI must be in the
-    #         Region of the destination Outpost. You cannot copy an AMI from an Outpost to a Region, from
-    #         one Outpost to another, or within the same Outpost.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Outpost for the new AMI.</p>
+    #            <p>Only specify this parameter when copying an AMI from an Amazon Web Services Region to an Outpost. The
+    #         AMI must be in the Region of the destination Outpost. You can't copy an AMI from an Outpost to
+    #         a Region, from one Outpost to another, or within the same Outpost.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-amis">Copy AMIs from an Amazon Web Services Region
     #           to an Outpost</a> in the <i>Amazon EBS User Guide</i>.</p>
+    #            <p>Only one of <code>DestinationAvailabilityZone</code>,
+    #           <code>DestinationAvailabilityZoneId</code>, or <code>DestinationOutpostArn</code> can be
+    #         specified.</p>
     #   @return [String]
     # @!attribute copy_image_tags
-    #   <p>Indicates whether to include your user-defined AMI tags when copying the AMI.</p>
-    #            <p>The following tags will not be copied:</p>
+    #   <p>Specifies whether to copy your user-defined AMI tags to the new AMI.</p>
+    #            <p>The following tags are not be copied:</p>
     #            <ul>
     #               <li>
     #                  <p>System tags (prefixed with <code>aws:</code>)</p>
@@ -5709,9 +5724,25 @@ module Aws::EC2
     #         meet the timing target.</p>
     #            <p>If you do not specify a value, the AMI copy operation is completed on a best-effort 
     #         basis.</p>
+    #            <note>
+    #               <p>This parameter is not supported when copying an AMI to or from a Local Zone, or to an
+    #           Outpost.</p>
+    #            </note>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html">Time-based copies for Amazon EBS snapshots and
     #           EBS-backed AMIs</a>.</p>
     #   @return [Integer]
+    # @!attribute destination_availability_zone
+    #   <p>The Local Zone for the new AMI (for example, <code>cn-north-1-pkx-1a</code>).</p>
+    #            <p>Only one of <code>DestinationAvailabilityZone</code>,
+    #           <code>DestinationAvailabilityZoneId</code>, or <code>DestinationOutpostArn</code> can be
+    #         specified.</p>
+    #   @return [String]
+    # @!attribute destination_availability_zone_id
+    #   <p>The ID of the Local Zone for the new AMI (for example, <code>cnn1-pkx1-az1</code>).</p>
+    #            <p>Only one of <code>DestinationAvailabilityZone</code>,
+    #           <code>DestinationAvailabilityZoneId</code>, or <code>DestinationOutpostArn</code> can be
+    #         specified.</p>
+    #   @return [String]
     # @!attribute dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
     #   			and provides an error response. If you have the required permissions, the error response is 
@@ -5729,6 +5760,8 @@ module Aws::EC2
       :copy_image_tags,
       :tag_specifications,
       :snapshot_copy_completion_duration_minutes,
+      :destination_availability_zone,
+      :destination_availability_zone_id,
       :dry_run,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -5748,14 +5781,13 @@ module Aws::EC2
     #   <p>A description for the EBS snapshot.</p>
     #   @return [String]
     # @!attribute destination_outpost_arn
-    #   <p>The Amazon Resource Name (ARN) of the Outpost to which to copy the snapshot. Only 
-    #   		specify this parameter when copying a snapshot from an Amazon Web Services Region to an Outpost. 
-    #   		The snapshot must be in the Region for the destination Outpost. You cannot copy a 
-    #   		snapshot from an Outpost to a Region, from one Outpost to another, or within the same 
-    #   		Outpost.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Outpost to which to copy the snapshot.</p>
+    #            <note>
+    #               <p>Only supported when copying a snapshot to an Outpost.</p>
+    #            </note>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots">
     #     		Copy snapshots from an Amazon Web Services Region to an Outpost</a> in the 
-    #     		<i>Amazon EBS User Guide</i>.</p>
+    #         <i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     # @!attribute destination_region
     #   <p>The destination Region to use in the <code>PresignedUrl</code> parameter of a snapshot
@@ -5820,13 +5852,23 @@ module Aws::EC2
     #   <p>The tags to apply to the new snapshot.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute completion_duration_minutes
-    #   <p>Specify a completion duration, in 15 minute increments, to initiate a time-based snapshot 
+    #   <note>
+    #               <p>Not supported when copying snapshots to or from Local Zones or Outposts.</p>
+    #            </note>
+    #            <p>Specify a completion duration, in 15 minute increments, to initiate a time-based snapshot 
     #         copy. Time-based snapshot copy operations complete within the specified duration. For more 
     #         information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html">
     #           Time-based copies</a>.</p>
     #            <p>If you do not specify a value, the snapshot copy operation is completed on a 
     #         best-effort basis.</p>
     #   @return [Integer]
+    # @!attribute destination_availability_zone
+    #   <p>The Local Zone, for example, <code>cn-north-1-pkx-1a</code> to which to copy the 
+    #         snapshot.</p>
+    #            <note>
+    #               <p>Only supported when copying a snapshot to a Local Zone.</p>
+    #            </note>
+    #   @return [String]
     # @!attribute dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
     #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
@@ -5843,6 +5885,7 @@ module Aws::EC2
       :source_snapshot_id,
       :tag_specifications,
       :completion_duration_minutes,
+      :destination_availability_zone,
       :dry_run,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -6446,6 +6489,15 @@ module Aws::EC2
     #   <p>Indicates whether the client VPN session is disconnected after the maximum timeout specified in <code>SessionTimeoutHours</code> is reached. If <code>true</code>, users are prompted to reconnect client VPN. If <code>false</code>, client VPN attempts to reconnect automatically. 
     #                      The default value is <code>true</code>.</p>
     #   @return [Boolean]
+    # @!attribute endpoint_ip_address_type
+    #   <p>The IP address type for the Client VPN endpoint. Valid values are <code>ipv4</code>
+    #   			(default) for IPv4 addressing only, <code>ipv6</code> for IPv6 addressing only, or <code>dual-stack</code> for both IPv4 and IPv6
+    #   			addressing. When set to <code>dual-stack,</code> clients can connect to the endpoint
+    #   			using either IPv4 or IPv6 addresses..</p>
+    #   @return [String]
+    # @!attribute traffic_ip_address_type
+    #   <p>The IP address type for traffic within the Client VPN tunnel. Valid values are <code>ipv4</code> (default) for IPv4 traffic only, <code>ipv6</code> for IPv6 addressing only, or <code>dual-stack</code> for both IPv4 and IPv6 traffic. When set to <code>dual-stack</code>, clients can access both IPv4 and IPv6 resources through the VPN .</p>
+    #   @return [String]
     class CreateClientVpnEndpointRequest < Struct.new(
       :client_cidr_block,
       :server_certificate_arn,
@@ -6467,6 +6519,8 @@ module Aws::EC2
       :client_login_banner_options,
       :client_route_enforcement_options,
       :disconnect_on_session_timeout,
+      :endpoint_ip_address_type,
+      :traffic_ip_address_type,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -7344,6 +7398,50 @@ module Aws::EC2
     #   @return [String]
     class CreateImageResult < Struct.new(
       :image_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute image_id
+    #   <p>The ID of the image to report on.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
+    #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
+    #   @return [Boolean]
+    # @!attribute resource_types
+    #   <p>The resource types to include in the report.</p>
+    #   @return [Array<Types::ImageUsageResourceTypeRequest>]
+    # @!attribute account_ids
+    #   <p>The Amazon Web Services account IDs to include in the report. To include all accounts, omit this
+    #         parameter.</p>
+    #   @return [Array<String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>
+    #   @return [String]
+    # @!attribute tag_specifications
+    #   <p>The tags to apply to the report on creation. The <code>ResourceType</code> must be set to
+    #           <code>image-usage-report</code>; any other value will cause the report creation to
+    #         fail.</p>
+    #            <p>To tag a report after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>
+    #   @return [Array<Types::TagSpecification>]
+    class CreateImageUsageReportRequest < Struct.new(
+      :image_id,
+      :dry_run,
+      :resource_types,
+      :account_ids,
+      :client_token,
+      :tag_specifications,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute report_id
+    #   <p>The ID of the report.</p>
+    #   @return [String]
+    class CreateImageUsageReportResult < Struct.new(
+      :report_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -12392,6 +12490,30 @@ module Aws::EC2
     #   <p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>
     #   @return [Boolean]
     class DeleteFpgaImageResult < Struct.new(
+      :return,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute report_id
+    #   <p>The ID of the report to delete.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
+    #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
+    #   @return [Boolean]
+    class DeleteImageUsageReportRequest < Struct.new(
+      :report_id,
+      :dry_run,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute return
+    #   <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>
+    #   @return [Boolean]
+    class DeleteImageUsageReportResult < Struct.new(
       :return,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -17466,6 +17588,196 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute image_ids
+    #   <p>The IDs of the images to check for resource references.</p>
+    #   @return [Array<String>]
+    # @!attribute include_all_resource_types
+    #   <p>Specifies whether to check all supported Amazon Web Services resource types for image references. When
+    #         specified, default values are applied for <code>ResourceTypeOptions</code>. For the default
+    #         values, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-ami-references-works.html">How AMI reference checks
+    #           work</a> in the <i>Amazon EC2 User Guide</i>. If you also specify
+    #           <code>ResourceTypes</code> with <code>ResourceTypeOptions</code>, your specified values
+    #         override the default values.</p>
+    #            <p>Supported resource types: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code> |
+    #           <code>ssm:Parameter</code> | <code>imagebuilder:ImageRecipe</code> |
+    #           <code>imagebuilder:ContainerRecipe</code>
+    #            </p>
+    #            <p>Either <code>IncludeAllResourceTypes</code> or <code>ResourceTypes</code> must be
+    #         specified.</p>
+    #   @return [Boolean]
+    # @!attribute resource_types
+    #   <p>The Amazon Web Services resource types to check for image references.</p>
+    #            <p>Either <code>IncludeAllResourceTypes</code> or <code>ResourceTypes</code> must be
+    #         specified.</p>
+    #   @return [Array<Types::ResourceTypeRequest>]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
+    #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
+    #   @return [Boolean]
+    # @!attribute max_results
+    #   <p>
+    #         The maximum number of items to return for this request.
+    #            To get the next page of items, make another request with the token returned in the output.
+    #   	        For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.
+    #       </p>
+    #   @return [Integer]
+    class DescribeImageReferencesRequest < Struct.new(
+      :image_ids,
+      :include_all_resource_types,
+      :resource_types,
+      :next_token,
+      :dry_run,
+      :max_results,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there
+    #            are no more items to return.</p>
+    #   @return [String]
+    # @!attribute image_references
+    #   <p>The resources that are referencing the specified images.</p>
+    #   @return [Array<Types::ImageReference>]
+    class DescribeImageReferencesResult < Struct.new(
+      :next_token,
+      :image_references,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute image_ids
+    #   <p>The IDs of the images for filtering the report entries. If specified, only report entries
+    #         containing these images are returned.</p>
+    #   @return [Array<String>]
+    # @!attribute report_ids
+    #   <p>The IDs of the usage reports.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>account-id</code> - A 12-digit Amazon Web Services account ID.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>creation-time</code> - The time when the report was created, in the ISO 8601
+    #             format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,
+    #             <code>2025-11-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for
+    #             example, <code>2025-11-29T*</code>, which matches an entire day.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>resource-type</code> - The resource type (<code>ec2:Instance</code> |
+    #               <code>ec2:LaunchTemplate</code>).</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Filter>]
+    # @!attribute dry_run
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
+    #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
+    #   @return [Boolean]
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request.
+    #            To get the next page of items, make another request with the token returned in the output.
+    #   	        For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
+    #   @return [Integer]
+    class DescribeImageUsageReportEntriesRequest < Struct.new(
+      :image_ids,
+      :report_ids,
+      :next_token,
+      :filters,
+      :dry_run,
+      :max_results,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there
+    #            are no more items to return.</p>
+    #   @return [String]
+    # @!attribute image_usage_report_entries
+    #   <p>The content of the usage reports.</p>
+    #   @return [Array<Types::ImageUsageReportEntry>]
+    class DescribeImageUsageReportEntriesResult < Struct.new(
+      :next_token,
+      :image_usage_report_entries,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute image_ids
+    #   <p>The IDs of the images for filtering the reports. If specified, only reports containing
+    #         these images are returned.</p>
+    #   @return [Array<String>]
+    # @!attribute report_ids
+    #   <p>The IDs of the image usage reports.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>creation-time</code> - The time when the report was created, in the ISO 8601
+    #             format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,
+    #             <code>2025-11-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for
+    #             example, <code>2025-11-29T*</code>, which matches an entire day.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>state</code> - The state of the report (<code>available</code> |
+    #               <code>pending</code> | <code>error</code>).</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Filter>]
+    # @!attribute dry_run
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
+    #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
+    #   @return [Boolean]
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request.
+    #            To get the next page of items, make another request with the token returned in the output.
+    #   	        For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
+    #   @return [Integer]
+    class DescribeImageUsageReportsRequest < Struct.new(
+      :image_ids,
+      :report_ids,
+      :next_token,
+      :filters,
+      :dry_run,
+      :max_results,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there
+    #            are no more items to return.</p>
+    #   @return [String]
+    # @!attribute image_usage_reports
+    #   <p>The image usage reports.</p>
+    #   @return [Array<Types::ImageUsageReport>]
+    class DescribeImageUsageReportsResult < Struct.new(
+      :next_token,
+      :image_usage_reports,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute executable_users
     #   <p>Scopes the images by users with explicit launch permissions. Specify an Amazon Web Services account ID, <code>self</code> (the sender of the request), or <code>all</code>
     #         (public AMIs).</p>
@@ -18614,6 +18926,16 @@ module Aws::EC2
     #                  <p>
     #                     <code>dedicated-hosts-supported</code> - Indicates whether the instance type supports
     #        Dedicated Hosts.  (<code>true</code> | <code>false</code>)</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ebs-info.attachment-limit-type</code> - The type of Amazon EBS volume attachment limit 
+    #        (<code>shared</code> | <code>dedicated</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ebs-info.maximum-ebs-attachments</code> - The maximum number of Amazon EBS volumes that 
+    #        can be attached to the instance type.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -26401,11 +26723,6 @@ module Aws::EC2
     #                     <code>resource-configuration-group-arn</code> - The Amazon Resource Name (ARN) of
     #                  the resource configuration of type GROUP.</p>
     #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>service-network-resource-association-id</code> - The ID of the
-    #                  association.</p>
-    #               </li>
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_results
@@ -29068,11 +29385,23 @@ module Aws::EC2
     # @!attribute nvme_support
     #   <p>Indicates whether non-volatile memory express (NVMe) is supported.</p>
     #   @return [String]
+    # @!attribute maximum_ebs_attachments
+    #   <p>Indicates the maximum number of Amazon EBS volumes that can be attached to 
+    #      the instance type. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html">Amazon EBS volume limits for 
+    #       Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
+    #   @return [Integer]
+    # @!attribute attachment_limit_type
+    #   <p>Indicates whether the instance type features a shared or dedicated Amazon EBS 
+    #      volume attachment limit. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html">Amazon EBS volume limits for 
+    #       Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
+    #   @return [String]
     class EbsInfo < Struct.new(
       :ebs_optimized_support,
       :encryption_support,
       :ebs_optimized_info,
       :nvme_support,
+      :maximum_ebs_attachments,
+      :attachment_limit_type,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -29256,6 +29585,9 @@ module Aws::EC2
     # @!attribute ip_address_type
     #   <p>The IP address type of the endpoint.</p>
     #   @return [String]
+    # @!attribute public_dns_names
+    #   <p>The public DNS names of the endpoint.</p>
+    #   @return [Types::InstanceConnectEndpointPublicDnsNames]
     class Ec2InstanceConnectEndpoint < Struct.new(
       :owner_id,
       :instance_connect_endpoint_id,
@@ -29273,6 +29605,7 @@ module Aws::EC2
       :security_group_ids,
       :tags,
       :ip_address_type,
+      :public_dns_names,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -31391,11 +31724,15 @@ module Aws::EC2
 
     # <p>Describes an EC2 Fleet.</p>
     # @!attribute activity_status
-    #   <p>The progress of the EC2 Fleet. If there is an error, the status is <code>error</code>. After
-    #            all requests are placed, the status is <code>pending_fulfillment</code>. If the size of the
-    #            EC2 Fleet is equal to or greater than its target capacity, the status is <code>fulfilled</code>.
-    #            If the size of the EC2 Fleet is decreased, the status is <code>pending_termination</code> while
-    #            instances are terminating.</p>
+    #   <p>The progress of the EC2 Fleet.</p>
+    #            <p>For fleets of type <code>instant</code>, the status is <code>fulfilled</code> after all
+    #            requests are placed, regardless of whether target capacity is met (this is the only
+    #            possible status for <code>instant</code> fleets).</p>
+    #            <p>For fleets of type <code>request</code> or <code>maintain</code>, the status is
+    #               <code>pending_fulfillment</code> after all requests are placed, <code>fulfilled</code>
+    #            when the fleet size meets or exceeds target capacity, <code>pending_termination</code>
+    #            while instances are terminating when fleet size is decreased, and <code>error</code> if
+    #            there's an error.</p>
     #   @return [String]
     # @!attribute create_time
     #   <p>The creation date and time of the EC2 Fleet.</p>
@@ -35756,6 +36093,183 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A resource that is referencing an image.</p>
+    # @!attribute image_id
+    #   <p>The ID of the referenced image.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of resource referencing the image.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the resource referencing the image.</p>
+    #   @return [String]
+    class ImageReference < Struct.new(
+      :image_id,
+      :resource_type,
+      :arn,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration and status of an image usage report.</p>
+    # @!attribute image_id
+    #   <p>The ID of the image that was specified when the report was created.</p>
+    #   @return [String]
+    # @!attribute report_id
+    #   <p>The ID of the report.</p>
+    #   @return [String]
+    # @!attribute resource_types
+    #   <p>The resource types that were specified when the report was created.</p>
+    #   @return [Array<Types::ImageUsageResourceType>]
+    # @!attribute account_ids
+    #   <p>The IDs of the Amazon Web Services accounts that were specified when the report was created.</p>
+    #   @return [Array<String>]
+    # @!attribute state
+    #   <p>The current state of the report. Possible values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>available</code> - The report is available to view.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>pending</code> - The report is being created and not available to view.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>error</code> - The report could not be created.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute state_reason
+    #   <p>Provides additional details when the report is in an <code>error</code> state.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time when the report was created.</p>
+    #   @return [Time]
+    # @!attribute expiration_time
+    #   <p>The date and time when Amazon EC2 will delete the report (30 days after the report was
+    #         created).</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>Any tags assigned to the report.</p>
+    #   @return [Array<Types::Tag>]
+    class ImageUsageReport < Struct.new(
+      :image_id,
+      :report_id,
+      :resource_types,
+      :account_ids,
+      :state,
+      :state_reason,
+      :creation_time,
+      :expiration_time,
+      :tags,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A single entry in an image usage report, detailing how an image is being used by a
+    #       specific Amazon Web Services account and resource type.</p>
+    # @!attribute resource_type
+    #   <p>The type of resource (<code>ec2:Instance</code> or
+    #         <code>ec2:LaunchTemplate</code>).</p>
+    #   @return [String]
+    # @!attribute report_id
+    #   <p>The ID of the report.</p>
+    #   @return [String]
+    # @!attribute usage_count
+    #   <p>The number of times resources of this type reference this image in the account.</p>
+    #   @return [Integer]
+    # @!attribute account_id
+    #   <p>The ID of the account that uses the image.</p>
+    #   @return [String]
+    # @!attribute image_id
+    #   <p>The ID of the image.</p>
+    #   @return [String]
+    # @!attribute report_creation_time
+    #   <p>The date and time the report creation was initiated.</p>
+    #   @return [Time]
+    class ImageUsageReportEntry < Struct.new(
+      :resource_type,
+      :report_id,
+      :usage_count,
+      :account_id,
+      :image_id,
+      :report_creation_time,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A resource type to include in the report. Associated options can also be specified if the
+    #       resource type is a launch template.</p>
+    # @!attribute resource_type
+    #   <p>The resource type.</p>
+    #            <p>Valid values: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute resource_type_options
+    #   <p>The options that affect the scope of the report. Valid only when <code>ResourceType</code>
+    #         is <code>ec2:LaunchTemplate</code>.</p>
+    #   @return [Array<Types::ImageUsageResourceTypeOption>]
+    class ImageUsageResourceType < Struct.new(
+      :resource_type,
+      :resource_type_options,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The options that affect the scope of the report.</p>
+    # @!attribute option_name
+    #   <p>The name of the option.</p>
+    #   @return [String]
+    # @!attribute option_values
+    #   <p>The number of launch template versions to check.</p>
+    #   @return [Array<String>]
+    class ImageUsageResourceTypeOption < Struct.new(
+      :option_name,
+      :option_values,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The options that affect the scope of the report.</p>
+    # @!attribute option_name
+    #   <p>The name of the option.</p>
+    #            <p>Valid value: <code>version-depth</code> - The number of launch template versions to
+    #         check.</p>
+    #   @return [String]
+    # @!attribute option_values
+    #   <p>A value for the specified option.</p>
+    #            <p>Valid values: Integers between <code>1</code> and <code>10000</code>
+    #            </p>
+    #            <p>Default: <code>20</code>
+    #            </p>
+    #   @return [Array<String>]
+    class ImageUsageResourceTypeOptionRequest < Struct.new(
+      :option_name,
+      :option_values,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A resource type to include in the report. Associated options can also be specified if the
+    #       resource type is a launch template.</p>
+    # @!attribute resource_type
+    #   <p>The resource type.</p>
+    #            <p>Valid values: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute resource_type_options
+    #   <p>The options that affect the scope of the report. Valid only when <code>ResourceType</code>
+    #         is <code>ec2:LaunchTemplate</code>.</p>
+    #   @return [Array<Types::ImageUsageResourceTypeOptionRequest>]
+    class ImageUsageResourceTypeRequest < Struct.new(
+      :resource_type,
+      :resource_type_options,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute client_vpn_endpoint_id
     #   <p>The ID of the Client VPN endpoint to which the client certificate revocation list applies.</p>
     #   @return [String]
@@ -36871,7 +37385,7 @@ module Aws::EC2
 
     # <p>Describes a block device mapping.</p>
     # @!attribute device_name
-    #   <p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>
+    #   <p>The device name.</p>
     #   @return [String]
     # @!attribute ebs
     #   <p>Parameters used to automatically set up EBS volumes when the instance is
@@ -36886,7 +37400,7 @@ module Aws::EC2
 
     # <p>Describes a block device mapping entry.</p>
     # @!attribute device_name
-    #   <p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>
+    #   <p>The device name. For available device names, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html">Device names for volumes</a>.</p>
     #   @return [String]
     # @!attribute ebs
     #   <p>Parameters used to automatically set up EBS volumes when the instance is
@@ -36924,6 +37438,35 @@ module Aws::EC2
       :available_capacity,
       :instance_type,
       :total_capacity,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The DNS names of the endpoint.</p>
+    # @!attribute dns_name
+    #   <p>The DNS name of the EC2 Instance Connect Endpoint.</p>
+    #   @return [String]
+    # @!attribute fips_dns_name
+    #   <p>The Federal Information Processing Standards (FIPS) compliant DNS name of the EC2 Instance Connect Endpoint.</p>
+    #   @return [String]
+    class InstanceConnectEndpointDnsNames < Struct.new(
+      :dns_name,
+      :fips_dns_name,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The public DNS names of the endpoint, including IPv4-only and dualstack DNS
+    #             names.</p>
+    # @!attribute ipv4
+    #   <p>The IPv4-only DNS name of the EC2 Instance Connect Endpoint.</p>
+    #   @return [Types::InstanceConnectEndpointDnsNames]
+    # @!attribute dualstack
+    #   <p>The dualstack DNS name of the EC2 Instance Connect Endpoint. A dualstack DNS name supports connections from both IPv4 and IPv6 clients.</p>
+    #   @return [Types::InstanceConnectEndpointDnsNames]
+    class InstanceConnectEndpointPublicDnsNames < Struct.new(
+      :ipv4,
+      :dualstack,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -43972,6 +44515,72 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute dry_run
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
+    #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
+    #   @return [Boolean]
+    # @!attribute instance_connect_endpoint_id
+    #   <p>The ID of the EC2 Instance Connect Endpoint to modify.</p>
+    #   @return [String]
+    # @!attribute ip_address_type
+    #   <p>The new IP address type for the EC2 Instance Connect Endpoint.</p>
+    #            <note>
+    #               <p>
+    #                  <code>PreserveClientIp</code> is only supported on IPv4 EC2 Instance Connect
+    #                   Endpoints. To use <code>PreserveClientIp</code>, the value for
+    #                   <code>IpAddressType</code> must be <code>ipv4</code>.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute security_group_ids
+    #   <p>Changes the security groups for the EC2 Instance Connect Endpoint. The new set of
+    #               groups you specify replaces the current set. You must specify at least one group, even
+    #               if it's just the default security group in the VPC. You must specify the ID of the
+    #               security group, not the name.</p>
+    #   @return [Array<String>]
+    # @!attribute preserve_client_ip
+    #   <p>Indicates whether the client IP address is preserved as the source. The following are the possible values.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>true</code> - Use the client IP address as the source.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>false</code> - Use the network interface IP address as the source.</p>
+    #               </li>
+    #            </ul>
+    #            <note>
+    #               <p>
+    #                  <code>PreserveClientIp=true</code> is only supported on IPv4 EC2 Instance Connect
+    #                   Endpoints. If modifying <code>PreserveClientIp</code> to <code>true</code>, either
+    #                   the endpoint's existing <code>IpAddressType</code> must be <code>ipv4</code>, or if
+    #                   modifying <code>IpAddressType</code> in the same request, the new value must be
+    #                       <code>ipv4</code>.</p>
+    #            </note>
+    #            <p>Default: <code>false</code>
+    #            </p>
+    #   @return [Boolean]
+    class ModifyInstanceConnectEndpointRequest < Struct.new(
+      :dry_run,
+      :instance_connect_endpoint_id,
+      :ip_address_type,
+      :security_group_ids,
+      :preserve_client_ip,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute return
+    #   <p>The return value of the request. Returns <code>true</code> if the specified product
+    #               code is owned by the requester and associated with the specified instance.</p>
+    #   @return [Boolean]
+    class ModifyInstanceConnectEndpointResult < Struct.new(
+      :return,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute instance_id
     #   <p>The ID of the instance to update.</p>
     #   @return [String]
@@ -45519,7 +46128,11 @@ module Aws::EC2
     #   <p>The ID of the default association route table.</p>
     #   @return [String]
     # @!attribute default_route_table_propagation
-    #   <p>Enable or disable automatic propagation of routes to the default propagation route table.</p>
+    #   <p>Indicates whether resource attachments automatically propagate routes to the default
+    #             propagation route table. Enabled by default. If <code>defaultRouteTablePropagation</code>
+    #             is set to <code>enable</code>,
+    #             Amazon Web Services Transit Gateway will create the default transit gateway route
+    #             table.</p>
     #   @return [String]
     # @!attribute propagation_default_route_table_id
     #   <p>The ID of the default propagation route table.</p>
@@ -49127,9 +49740,9 @@ module Aws::EC2
     # <p>Describes the placement of an instance.</p>
     # @!attribute availability_zone_id
     #   <p>The ID of the Availability Zone of the instance.</p>
-    #            <p>Either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> can be
-    #               specified, but not both. If neither is specified, Amazon EC2 automatically selects an
-    #               Availability Zone based on the load balancing criteria for the Region.</p>
+    #            <p>On input, you can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, 
+    #               but not both. If you specify neither one, Amazon EC2 automatically selects an Availability Zone
+    #               for you.</p>
     #            <p>This parameter is not supported for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a>.</p>
     #   @return [String]
     # @!attribute affinity
@@ -49137,8 +49750,9 @@ module Aws::EC2
     #            <p>This parameter is not supported for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html">ImportInstance</a>.</p>
     #   @return [String]
     # @!attribute group_name
-    #   <p>The name of the placement group that the instance is in. If you specify
-    #                   <code>GroupName</code>, you can't specify <code>GroupId</code>.</p>
+    #   <p>The name of the placement group that the instance is in.</p>
+    #            <p>On input, you can specify <code>GroupId</code> or <code>GroupName</code>,
+    #               but not both.</p>
     #   @return [String]
     # @!attribute partition_number
     #   <p>The number of the partition that the instance is in. Valid only if the placement group
@@ -49162,18 +49776,19 @@ module Aws::EC2
     #   @return [String]
     # @!attribute host_resource_group_arn
     #   <p>The ARN of the host resource group in which to launch the instances.</p>
-    #            <p>If you specify this parameter, either omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p>
+    #            <p>On input, if you specify this parameter, either omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p>
     #            <p>This parameter is not supported for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a>.</p>
     #   @return [String]
     # @!attribute group_id
-    #   <p>The ID of the placement group that the instance is in. If you specify
-    #                   <code>GroupId</code>, you can't specify <code>GroupName</code>.</p>
+    #   <p>The ID of the placement group that the instance is in.</p>
+    #            <p>On input, you can specify <code>GroupId</code> or <code>GroupName</code>,
+    #               but not both.</p>
     #   @return [String]
     # @!attribute availability_zone
     #   <p>The Availability Zone of the instance.</p>
-    #            <p>Either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> can be
-    #               specified, but not both. If neither is specified, Amazon EC2 automatically selects an
-    #               Availability Zone based on the load balancing criteria for the Region.</p>
+    #            <p>On input, you can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, 
+    #               but not both. If you specify neither one, Amazon EC2 automatically selects an Availability Zone
+    #               for you.</p>
     #            <p>This parameter is not supported for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a>.</p>
     #   @return [String]
     class Placement < Struct.new(
@@ -52445,6 +53060,76 @@ module Aws::EC2
     class ResourceStatementRequest < Struct.new(
       :resources,
       :resource_types,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The options that affect the scope of the response.</p>
+    # @!attribute option_name
+    #   <p>The name of the option.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>For <code>ec2:Instance</code>:</p>
+    #                  <p>Specify <code>state-name</code> - The current state of the EC2 instance.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For <code>ec2:LaunchTemplate</code>:</p>
+    #                  <p>Specify <code>version-depth</code> - The number of launch template versions to check,
+    #             starting from the most recent version.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute option_values
+    #   <p>A value for the specified option.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>For <code>state-name</code>:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>Valid values: <code>pending</code> | <code>running</code> | <code>shutting-down</code> |
+    #               <code>terminated</code> | <code>stopping</code> | <code>stopped</code>
+    #                        </p>
+    #                     </li>
+    #                     <li>
+    #                        <p>Default: All states</p>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #               <li>
+    #                  <p>For <code>version-depth</code>:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>Valid values: Integers between <code>1</code> and <code>10000</code>
+    #                        </p>
+    #                     </li>
+    #                     <li>
+    #                        <p>Default: <code>10</code>
+    #                        </p>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    class ResourceTypeOption < Struct.new(
+      :option_name,
+      :option_values,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A resource type to check for image references. Associated options can also be specified if the
+    #       resource type is an EC2 instance or launch template.</p>
+    # @!attribute resource_type
+    #   <p>The resource type.</p>
+    #   @return [String]
+    # @!attribute resource_type_options
+    #   <p>The options that affect the scope of the response. Valid only when
+    #           <code>ResourceType</code> is <code>ec2:Instance</code> or
+    #         <code>ec2:LaunchTemplate</code>.</p>
+    #   @return [Array<Types::ResourceTypeOption>]
+    class ResourceTypeRequest < Struct.new(
+      :resource_type,
+      :resource_type_options,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -58661,10 +59346,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute default_route_table_association
     #   <p>Indicates whether resource attachments are automatically associated with the default
-    #            association route table. Enabled by default. If <code>defaultRouteTableAssociation</code>
-    #            is set to <code>enable</code>,
-    #            Amazon Web Services Transit Gateway will create the default transit gateway route
-    #            table.</p>
+    #            association route table. Enabled by default. Either <code>defaultRouteTableAssociation</code> or <code>defaultRouteTablePropagation</code> must be set to <code>enable</code> for Amazon Web Services Transit Gateway to create the default transit gateway route table.</p>
     #   @return [String]
     # @!attribute association_default_route_table_id
     #   <p>The ID of the default association route table.</p>
@@ -58673,7 +59355,7 @@ module Aws::EC2
     #   <p>Indicates whether resource attachments automatically propagate routes to the default
     #            propagation route table. Enabled by default. If <code>defaultRouteTablePropagation</code>
     #            is set to <code>enable</code>,
-    #            Amazon Web Services Transit Gateway will create the default transit gateway route
+    #            Amazon Web Services Transit Gateway creates the default transit gateway route
     #            table.</p>
     #   @return [String]
     # @!attribute propagation_default_route_table_id

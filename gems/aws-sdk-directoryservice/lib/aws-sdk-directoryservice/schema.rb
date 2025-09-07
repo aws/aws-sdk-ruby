@@ -51,6 +51,8 @@ module Aws::DirectoryService
     AuthenticationFailedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#AuthenticationFailedException', name: 'AuthenticationFailedException', traits: {"smithy.api#error" => "client"})
     AvailabilityZone = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#AvailabilityZone', name: 'AvailabilityZone')
     AvailabilityZones = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#AvailabilityZones', name: 'AvailabilityZones')
+    CaEnrollmentPolicyStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.directoryservice#CaEnrollmentPolicyStatus', name: 'CaEnrollmentPolicyStatus')
+    CaEnrollmentPolicyStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#CaEnrollmentPolicyStatusReason', name: 'CaEnrollmentPolicyStatusReason')
     CancelSchemaExtensionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#CancelSchemaExtensionRequest', name: 'CancelSchemaExtensionRequest')
     CancelSchemaExtensionResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#CancelSchemaExtensionResult', name: 'CancelSchemaExtensionResult')
     Certificate = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#Certificate', name: 'Certificate')
@@ -130,6 +132,8 @@ module Aws::DirectoryService
     DeregisterEventTopicResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DeregisterEventTopicResult', name: 'DeregisterEventTopicResult')
     DescribeADAssessmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DescribeADAssessmentRequest', name: 'DescribeADAssessmentRequest')
     DescribeADAssessmentResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DescribeADAssessmentResult', name: 'DescribeADAssessmentResult')
+    DescribeCAEnrollmentPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DescribeCAEnrollmentPolicyRequest', name: 'DescribeCAEnrollmentPolicyRequest')
+    DescribeCAEnrollmentPolicyResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DescribeCAEnrollmentPolicyResult', name: 'DescribeCAEnrollmentPolicyResult')
     DescribeCertificateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DescribeCertificateRequest', name: 'DescribeCertificateRequest')
     DescribeCertificateResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DescribeCertificateResult', name: 'DescribeCertificateResult')
     DescribeClientAuthenticationSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DescribeClientAuthenticationSettingsRequest', name: 'DescribeClientAuthenticationSettingsRequest')
@@ -194,6 +198,9 @@ module Aws::DirectoryService
     DirectoryUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DirectoryUnavailableException', name: 'DirectoryUnavailableException', traits: {"smithy.api#error" => "client"})
     DirectoryVpcSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DirectoryVpcSettings', name: 'DirectoryVpcSettings')
     DirectoryVpcSettingsDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DirectoryVpcSettingsDescription', name: 'DirectoryVpcSettingsDescription')
+    DisableAlreadyInProgressException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DisableAlreadyInProgressException', name: 'DisableAlreadyInProgressException', traits: {"smithy.api#error" => "client"})
+    DisableCAEnrollmentPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DisableCAEnrollmentPolicyRequest', name: 'DisableCAEnrollmentPolicyRequest')
+    DisableCAEnrollmentPolicyResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DisableCAEnrollmentPolicyResult', name: 'DisableCAEnrollmentPolicyResult')
     DisableClientAuthenticationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DisableClientAuthenticationRequest', name: 'DisableClientAuthenticationRequest')
     DisableClientAuthenticationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DisableClientAuthenticationResult', name: 'DisableClientAuthenticationResult')
     DisableDirectoryDataAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DisableDirectoryDataAccessRequest', name: 'DisableDirectoryDataAccessRequest')
@@ -212,6 +219,9 @@ module Aws::DirectoryService
     DomainControllerStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.directoryservice#DomainControllerStatus', name: 'DomainControllerStatus')
     DomainControllerStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#DomainControllerStatusReason', name: 'DomainControllerStatusReason')
     DomainControllers = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#DomainControllers', name: 'DomainControllers')
+    EnableAlreadyInProgressException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#EnableAlreadyInProgressException', name: 'EnableAlreadyInProgressException', traits: {"smithy.api#error" => "client"})
+    EnableCAEnrollmentPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#EnableCAEnrollmentPolicyRequest', name: 'EnableCAEnrollmentPolicyRequest')
+    EnableCAEnrollmentPolicyResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#EnableCAEnrollmentPolicyResult', name: 'EnableCAEnrollmentPolicyResult')
     EnableClientAuthenticationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#EnableClientAuthenticationRequest', name: 'EnableClientAuthenticationRequest')
     EnableClientAuthenticationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#EnableClientAuthenticationResult', name: 'EnableClientAuthenticationResult')
     EnableDirectoryDataAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#EnableDirectoryDataAccessRequest', name: 'EnableDirectoryDataAccessRequest')
@@ -296,6 +306,7 @@ module Aws::DirectoryService
     OwnerDirectoryDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#OwnerDirectoryDescription', name: 'OwnerDirectoryDescription')
     PageLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.directoryservice#PageLimit', name: 'PageLimit', traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
     Password = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#Password', name: 'Password', traits: {"smithy.api#pattern" => "^(?=^.{8,64}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9\\s])(?=.*[a-z])|(?=.*[^A-Za-z0-9\\s])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\\s]))^", "smithy.api#sensitive" => {}})
+    PcaConnectorArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#PcaConnectorArn', name: 'PcaConnectorArn', traits: {"smithy.api#pattern" => "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"})
     PortNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.directoryservice#PortNumber', name: 'PortNumber', traits: {"smithy.api#range" => {"min" => 1025, "max" => 65535}})
     RadiusAuthenticationProtocol = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.directoryservice#RadiusAuthenticationProtocol', name: 'RadiusAuthenticationProtocol')
     RadiusDisplayLabel = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#RadiusDisplayLabel', name: 'RadiusDisplayLabel', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
@@ -511,6 +522,12 @@ module Aws::DirectoryService
     AuthenticationFailedException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: 'RequestId'))
     AuthenticationFailedException.type = Types::AuthenticationFailedException
     AvailabilityZones.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone)
+    CaEnrollmentPolicyStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IN_PROGRESS', traits: {"smithy.api#enumValue" => "InProgress"}))
+    CaEnrollmentPolicyStatus.add_member(:success, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SUCCESS', traits: {"smithy.api#enumValue" => "Success"}))
+    CaEnrollmentPolicyStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FAILED', traits: {"smithy.api#enumValue" => "Failed"}))
+    CaEnrollmentPolicyStatus.add_member(:disabling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLING', traits: {"smithy.api#enumValue" => "Disabling"}))
+    CaEnrollmentPolicyStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLED', traits: {"smithy.api#enumValue" => "Disabled"}))
+    CaEnrollmentPolicyStatus.add_member(:impaired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IMPAIRED', traits: {"smithy.api#enumValue" => "Impaired"}))
     CancelSchemaExtensionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
     CancelSchemaExtensionRequest.add_member(:schema_extension_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaExtensionId, location_name: 'SchemaExtensionId', traits: {"smithy.api#required" => {}}))
     CancelSchemaExtensionRequest.type = Types::CancelSchemaExtensionRequest
@@ -692,6 +709,14 @@ module Aws::DirectoryService
     DescribeADAssessmentResult.add_member(:assessment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Assessment, location_name: 'Assessment'))
     DescribeADAssessmentResult.add_member(:assessment_reports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssessmentReports, location_name: 'AssessmentReports'))
     DescribeADAssessmentResult.type = Types::DescribeADAssessmentResult
+    DescribeCAEnrollmentPolicyRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
+    DescribeCAEnrollmentPolicyRequest.type = Types::DescribeCAEnrollmentPolicyRequest
+    DescribeCAEnrollmentPolicyResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId'))
+    DescribeCAEnrollmentPolicyResult.add_member(:pca_connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PcaConnectorArn, location_name: 'PcaConnectorArn'))
+    DescribeCAEnrollmentPolicyResult.add_member(:ca_enrollment_policy_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaEnrollmentPolicyStatus, location_name: 'CaEnrollmentPolicyStatus'))
+    DescribeCAEnrollmentPolicyResult.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: 'LastUpdatedDateTime'))
+    DescribeCAEnrollmentPolicyResult.add_member(:ca_enrollment_policy_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaEnrollmentPolicyStatusReason, location_name: 'CaEnrollmentPolicyStatusReason'))
+    DescribeCAEnrollmentPolicyResult.type = Types::DescribeCAEnrollmentPolicyResult
     DescribeCertificateRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
     DescribeCertificateRequest.add_member(:certificate_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateId, location_name: 'CertificateId', traits: {"smithy.api#required" => {}}))
     DescribeCertificateRequest.type = Types::DescribeCertificateRequest
@@ -904,6 +929,12 @@ module Aws::DirectoryService
     DirectoryVpcSettingsDescription.add_member(:security_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: 'SecurityGroupId'))
     DirectoryVpcSettingsDescription.add_member(:availability_zones, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: 'AvailabilityZones'))
     DirectoryVpcSettingsDescription.type = Types::DirectoryVpcSettingsDescription
+    DisableAlreadyInProgressException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'Message'))
+    DisableAlreadyInProgressException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: 'RequestId'))
+    DisableAlreadyInProgressException.type = Types::DisableAlreadyInProgressException
+    DisableCAEnrollmentPolicyRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
+    DisableCAEnrollmentPolicyRequest.type = Types::DisableCAEnrollmentPolicyRequest
+    DisableCAEnrollmentPolicyResult.type = Types::DisableCAEnrollmentPolicyResult
     DisableClientAuthenticationRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
     DisableClientAuthenticationRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationType, location_name: 'Type', traits: {"smithy.api#required" => {}}))
     DisableClientAuthenticationRequest.type = Types::DisableClientAuthenticationRequest
@@ -948,6 +979,13 @@ module Aws::DirectoryService
     DomainControllerStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FAILED', traits: {"smithy.api#enumValue" => "Failed"}))
     DomainControllerStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATING', traits: {"smithy.api#enumValue" => "Updating"}))
     DomainControllers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainController)
+    EnableAlreadyInProgressException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'Message'))
+    EnableAlreadyInProgressException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: 'RequestId'))
+    EnableAlreadyInProgressException.type = Types::EnableAlreadyInProgressException
+    EnableCAEnrollmentPolicyRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
+    EnableCAEnrollmentPolicyRequest.add_member(:pca_connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PcaConnectorArn, location_name: 'PcaConnectorArn', traits: {"smithy.api#required" => {}}))
+    EnableCAEnrollmentPolicyRequest.type = Types::EnableCAEnrollmentPolicyRequest
+    EnableCAEnrollmentPolicyResult.type = Types::EnableCAEnrollmentPolicyResult
     EnableClientAuthenticationRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
     EnableClientAuthenticationRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationType, location_name: 'Type', traits: {"smithy.api#required" => {}}))
     EnableClientAuthenticationRequest.type = Types::EnableClientAuthenticationRequest
@@ -1742,6 +1780,17 @@ module Aws::DirectoryService
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         operation.traits = {}
       end)
+      service.add_operation(:describe_ca_enrollment_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directoryservice#DescribeCAEnrollmentPolicy"
+        operation.name = "DescribeCAEnrollmentPolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCAEnrollmentPolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCAEnrollmentPolicyResult)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        operation.traits = {}
+      end)
       service.add_operation(:describe_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DescribeCertificate"
         operation.name = "DescribeCertificate"
@@ -1942,6 +1991,21 @@ module Aws::DirectoryService
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeUpdateDirectory.new
       end)
+      service.add_operation(:disable_ca_enrollment_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directoryservice#DisableCAEnrollmentPolicy"
+        operation.name = "DisableCAEnrollmentPolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableCAEnrollmentPolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableCAEnrollmentPolicyResult)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableAlreadyInProgressException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.traits = {}
+      end)
       service.add_operation(:disable_client_authentication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directoryservice#DisableClientAuthentication"
         operation.name = "DisableClientAuthentication"
@@ -2002,6 +2066,22 @@ module Aws::DirectoryService
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
+        operation.traits = {}
+      end)
+      service.add_operation(:enable_ca_enrollment_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directoryservice#EnableCAEnrollmentPolicy"
+        operation.name = "EnableCAEnrollmentPolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableCAEnrollmentPolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableCAEnrollmentPolicyResult)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableAlreadyInProgressException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
         operation.traits = {}
       end)

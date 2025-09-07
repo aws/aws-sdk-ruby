@@ -473,6 +473,11 @@ module Aws::BedrockAgent
       :agent_alias_arn,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:agent_alias_arn] = '' unless options.key?(:agent_alias_arn)
+        super
+      end
     end
 
     # <p>Contains details about a knowledge base that is associated with an agent.</p>
@@ -3661,6 +3666,12 @@ module Aws::BedrockAgent
       :language,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:code] = '' unless options.key?(:code)
+        options[:language] = 'Python_3' unless options.key?(:language)
+        super
+      end
     end
 
     # <p>Contains information about content defined inline to ingest into a data source. Choose a <code>type</code> and include the field that corresponds to it.</p>
@@ -3892,6 +3903,11 @@ module Aws::BedrockAgent
       :orchestration_configuration,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:knowledge_base_id] = '' unless options.key?(:knowledge_base_id)
+        super
+      end
     end
 
     # <p>Configures how the knowledge base orchestrates the retrieval and generation process, allowing for customization of prompts, inference parameters, and performance settings.</p>
@@ -3960,6 +3976,11 @@ module Aws::BedrockAgent
       :lambda_arn,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:lambda_arn] = '' unless options.key?(:lambda_arn)
+        super
+      end
     end
 
     # <p>Contains configurations for a Lex node in the flow. You specify a Amazon Lex bot to invoke. This node takes an utterance as the input and returns as the output the intent identified by the Amazon Lex bot. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
@@ -3974,6 +3995,12 @@ module Aws::BedrockAgent
       :locale_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:bot_alias_arn] = '' unless options.key?(:bot_alias_arn)
+        options[:locale_id] = '' unless options.key?(:locale_id)
+        super
+      end
     end
 
     # @!attribute agent_id
@@ -5214,6 +5241,12 @@ module Aws::BedrockAgent
       :additional_model_request_fields,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:template_type] = 'TEXT' unless options.key?(:template_type)
+        options[:model_id] = '' unless options.key?(:model_id)
+        super
+      end
     end
 
     # <p>Contains configurations for a prompt from Prompt management to use in a node.</p>
@@ -5224,6 +5257,11 @@ module Aws::BedrockAgent
       :prompt_arn,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:prompt_arn] = '' unless options.key?(:prompt_arn)
+        super
+      end
     end
 
     # <p>Contains configurations for a prompt and whether it is from Prompt management or defined inline.</p>
@@ -5769,6 +5807,11 @@ module Aws::BedrockAgent
       :bucket_name,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:bucket_name] = '' unless options.key?(:bucket_name)
+        super
+      end
     end
 
     # <p>Contains configurations for the service to use for retrieving data to return as the output from the node.</p>
@@ -6153,6 +6196,11 @@ module Aws::BedrockAgent
       :bucket_name,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:bucket_name] = '' unless options.key?(:bucket_name)
+        super
+      end
     end
 
     # <p>Contains configurations for the service to use for storing the input into the node.</p>

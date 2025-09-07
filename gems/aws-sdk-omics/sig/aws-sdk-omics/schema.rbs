@@ -47,6 +47,7 @@ module Aws::Omics
     CompletionTime: TimestampShape
     ConflictException: StructureShape
     ConnectionArn: StringShape
+    ContainerRegistryMap: StructureShape
     CreateAnnotationStoreRequest: StructureShape
     CreateAnnotationStoreResponse: StructureShape
     CreateAnnotationStoreVersionRequest: StructureShape
@@ -99,6 +100,7 @@ module Aws::Omics
     ETag: StructureShape
     ETagAlgorithm: StringShape
     ETagAlgorithmFamily: StringShape
+    EcrRepositoryPrefix: StringShape
     Encoding: StringShape
     EncryptionType: StringShape
     EngineLogStream: StringShape
@@ -171,6 +173,9 @@ module Aws::Omics
     GetWorkflowVersionResponse: StructureShape
     Header: BooleanShape
     IdList: ListShape
+    ImageDetails: StructureShape
+    ImageMapping: StructureShape
+    ImageMappingsList: ListShape
     ImportJobId: StringShape
     ImportReadSetFilter: StructureShape
     ImportReadSetJobItem: StructureShape
@@ -307,6 +312,8 @@ module Aws::Omics
     ReferenceStoreId: StringShape
     ReferenceStoreName: StringShape
     ReferenceStreamingBlob: BlobShape
+    RegistryMapping: StructureShape
+    RegistryMappingsList: ListShape
     RequestTimeoutException: StructureShape
     ResourceId: StringShape
     ResourceIdentifier: StringShape
@@ -427,6 +434,7 @@ module Aws::Omics
     TagValue: StringShape
     TaskFailureReason: StringShape
     TaskId: StringShape
+    TaskImageDigest: StringShape
     TaskInstanceType: StringShape
     TaskList: ListShape
     TaskListItem: StructureShape
@@ -459,6 +467,8 @@ module Aws::Omics
     UploadId: StringShape
     UploadReadSetPartRequest: StructureShape
     UploadReadSetPartResponse: StructureShape
+    UpstreamRepositoryPrefix: StringShape
+    Uri: StringShape
     UserCustomDescription: StringShape
     UserCustomName: StringShape
     ValidationException: StructureShape

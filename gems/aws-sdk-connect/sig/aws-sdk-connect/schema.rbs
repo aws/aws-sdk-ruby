@@ -31,6 +31,7 @@ module Aws::Connect
     AgentStatus: StructureShape
     AgentStatusDescription: StringShape
     AgentStatusId: StringShape
+    AgentStatusIdentifier: StructureShape
     AgentStatusList: ListShape
     AgentStatusName: StringShape
     AgentStatusOrderNumber: IntegerShape
@@ -43,6 +44,7 @@ module Aws::Connect
     AgentStatusSummaryList: ListShape
     AgentStatusType: EnumShape
     AgentStatusTypes: ListShape
+    AgentStatuses: ListShape
     AgentUsername: StringShape
     AgentsCriteria: StructureShape
     AgentsMinOneMaxHundred: ListShape

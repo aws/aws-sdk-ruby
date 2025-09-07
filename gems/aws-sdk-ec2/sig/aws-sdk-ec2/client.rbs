@@ -910,6 +910,8 @@ module Aws::EC2
         }
       ],
       ?snapshot_copy_completion_duration_minutes: Integer,
+      ?destination_availability_zone: String,
+      ?destination_availability_zone_id: String,
       ?dry_run: bool
     ) -> _CopyImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyImageResponse
 
@@ -939,6 +941,7 @@ module Aws::EC2
         }
       ],
       ?completion_duration_minutes: Integer,
+      ?destination_availability_zone: String,
       ?dry_run: bool
     ) -> _CopySnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopySnapshotResponse
 
@@ -1131,7 +1134,9 @@ module Aws::EC2
       ?client_route_enforcement_options: {
         enforced: bool
       },
-      ?disconnect_on_session_timeout: bool
+      ?disconnect_on_session_timeout: bool,
+      ?endpoint_ip_address_type: String,
+      ?traffic_ip_address_type: String
     ) -> _CreateClientVpnEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClientVpnEndpointResponse
 
     interface _CreateClientVpnRouteResponse
@@ -1575,6 +1580,39 @@ module Aws::EC2
         }
       ]
     ) -> _CreateImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImageResponse
+
+    interface _CreateImageUsageReportResponse
+      include Smithy::Client::_Response[Types::CreateImageUsageReportResult]
+      def report_id: () -> String?
+    end
+    def create_image_usage_report: (
+      ?image_id: String,
+      ?dry_run: bool,
+      ?resource_types: Array[
+        {
+          resource_type: String,
+          resource_type_options: Array[
+            {
+              option_name: String,
+              option_values: Array[String]
+            }
+          ]
+        }
+      ],
+      ?account_ids: Array[String],
+      ?client_token: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _CreateImageUsageReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImageUsageReportResponse
 
     interface _CreateInstanceConnectEndpointResponse
       include Smithy::Client::_Response[Types::CreateInstanceConnectEndpointResult]
@@ -4206,6 +4244,15 @@ module Aws::EC2
       ?fpga_image_id: String
     ) -> _DeleteFpgaImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFpgaImageResponse
 
+    interface _DeleteImageUsageReportResponse
+      include Smithy::Client::_Response[Types::DeleteImageUsageReportResult]
+      def return: () -> bool?
+    end
+    def delete_image_usage_report: (
+      ?report_id: String,
+      ?dry_run: bool
+    ) -> _DeleteImageUsageReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteImageUsageReportResponse
+
     interface _DeleteInstanceConnectEndpointResponse
       include Smithy::Client::_Response[Types::DeleteInstanceConnectEndpointResult]
       def instance_connect_endpoint: () -> Types::Ec2InstanceConnectEndpoint?
@@ -5709,6 +5756,68 @@ module Aws::EC2
       ?image_id: String,
       ?dry_run: bool
     ) -> _DescribeImageAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImageAttributeResponse
+
+    interface _DescribeImageReferencesResponse
+      include Smithy::Client::_Response[Types::DescribeImageReferencesResult]
+      def next_token: () -> String?
+      def image_references: () -> Array[Types::ImageReference]?
+    end
+    def describe_image_references: (
+      ?image_ids: Array[String],
+      ?include_all_resource_types: bool,
+      ?resource_types: Array[
+        {
+          resource_type: String,
+          resource_type_options: Array[
+            {
+              option_name: String,
+              option_values: Array[String]
+            }
+          ]
+        }
+      ],
+      ?next_token: String,
+      ?dry_run: bool,
+      ?max_results: Integer
+    ) -> _DescribeImageReferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImageReferencesResponse
+
+    interface _DescribeImageUsageReportEntriesResponse
+      include Smithy::Client::_Response[Types::DescribeImageUsageReportEntriesResult]
+      def next_token: () -> String?
+      def image_usage_report_entries: () -> Array[Types::ImageUsageReportEntry]?
+    end
+    def describe_image_usage_report_entries: (
+      ?image_ids: Array[String],
+      ?report_ids: Array[String],
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?dry_run: bool,
+      ?max_results: Integer
+    ) -> _DescribeImageUsageReportEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImageUsageReportEntriesResponse
+
+    interface _DescribeImageUsageReportsResponse
+      include Smithy::Client::_Response[Types::DescribeImageUsageReportsResult]
+      def next_token: () -> String?
+      def image_usage_reports: () -> Array[Types::ImageUsageReport]?
+    end
+    def describe_image_usage_reports: (
+      ?image_ids: Array[String],
+      ?report_ids: Array[String],
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?dry_run: bool,
+      ?max_results: Integer
+    ) -> _DescribeImageUsageReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImageUsageReportsResponse
 
     interface _DescribeImagesResponse
       include Smithy::Client::_Response[Types::DescribeImagesResult]
@@ -10124,6 +10233,18 @@ module Aws::EC2
       },
       ?dry_run: bool
     ) -> _ModifyInstanceCapacityReservationAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyInstanceCapacityReservationAttributesResponse
+
+    interface _ModifyInstanceConnectEndpointResponse
+      include Smithy::Client::_Response[Types::ModifyInstanceConnectEndpointResult]
+      def return: () -> bool?
+    end
+    def modify_instance_connect_endpoint: (
+      ?dry_run: bool,
+      ?instance_connect_endpoint_id: String,
+      ?ip_address_type: String,
+      ?security_group_ids: Array[String],
+      ?preserve_client_ip: bool
+    ) -> _ModifyInstanceConnectEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyInstanceConnectEndpointResponse
 
     interface _ModifyInstanceCpuOptionsResponse
       include Smithy::Client::_Response[Types::ModifyInstanceCpuOptionsResult]

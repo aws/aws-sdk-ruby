@@ -540,7 +540,9 @@ module Aws::MediaConvert
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #             sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #             sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #             selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #             streams: [1]
     #           }
     #         }
     #       ],
@@ -1010,6 +1012,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1
     #                     },
     #                     mp2_settings: {
+    #                       audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                       bitrate: 1,
     #                       channels: 1,
     #                       sample_rate: 1
@@ -1307,7 +1310,7 @@ module Aws::MediaConvert
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                   descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                   i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                   i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                   segment_modifier: "__string"
     #                 }
     #               },
@@ -1803,6 +1806,7 @@ module Aws::MediaConvert
     #       job_engine_version_used: "__string",
     #       job_percent_complete: 1,
     #       job_template: "__string",
+    #       last_share_details: "__string",
     #       messages: {
     #         info: ["__string"],
     #         warning: ["__string"]
@@ -2096,7 +2100,9 @@ module Aws::MediaConvert
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #               sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #               sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #               selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #               streams: [1]
     #             }
     #           }
     #         ],
@@ -2566,6 +2572,7 @@ module Aws::MediaConvert
     #                         sample_rate: 1
     #                       },
     #                       mp2_settings: {
+    #                         audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                         bitrate: 1,
     #                         channels: 1,
     #                         sample_rate: 1
@@ -2863,7 +2870,7 @@ module Aws::MediaConvert
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                     descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                     segment_modifier: "__string"
     #                   }
     #                 },
@@ -3321,6 +3328,7 @@ module Aws::MediaConvert
     #           ]
     #         }
     #       },
+    #       share_status: "NOT_SHARED" # One of: ["NOT_SHARED", "INITIATED", "SHARED"],
     #       simulate_reserved_queue: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #       status: "SUBMITTED" # One of: ["SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"],
     #       status_update_interval: "SECONDS_10" # One of: ["SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"],
@@ -3629,7 +3637,9 @@ module Aws::MediaConvert
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #             sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #             sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #             selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #             streams: [1]
     #           }
     #         }
     #       ],
@@ -4099,6 +4109,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1
     #                     },
     #                     mp2_settings: {
+    #                       audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                       bitrate: 1,
     #                       channels: 1,
     #                       sample_rate: 1
@@ -4396,7 +4407,7 @@ module Aws::MediaConvert
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                   descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                   i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                   i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                   segment_modifier: "__string"
     #                 }
     #               },
@@ -5127,7 +5138,9 @@ module Aws::MediaConvert
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #               sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #               sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #               selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #               streams: [1]
     #             }
     #           }
     #         ],
@@ -5597,6 +5610,7 @@ module Aws::MediaConvert
     #                         sample_rate: 1
     #                       },
     #                       mp2_settings: {
+    #                         audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                         bitrate: 1,
     #                         channels: 1,
     #                         sample_rate: 1
@@ -5894,7 +5908,7 @@ module Aws::MediaConvert
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                     descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                     segment_modifier: "__string"
     #                   }
     #                 },
@@ -6479,6 +6493,7 @@ module Aws::MediaConvert
     #               sample_rate: 1
     #             },
     #             mp2_settings: {
+    #               audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #               bitrate: 1,
     #               channels: 1,
     #               sample_rate: 1
@@ -7317,6 +7332,7 @@ module Aws::MediaConvert
     #                 sample_rate: 1
     #               },
     #               mp2_settings: {
+    #                 audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                 bitrate: 1,
     #                 channels: 1,
     #                 sample_rate: 1
@@ -8121,6 +8137,28 @@ module Aws::MediaConvert
       request.send_request(options)
     end
 
+    # Create a new resource share request for MediaConvert resources with AWS Support.
+    # @param [Hash, Types::CreateResourceShareRequest] params
+    # @option params [String] :job_id
+    #   Specify MediaConvert Job ID or ARN to share
+    # @option params [String] :support_case_id
+    #   AWS Support case identifier
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     job_id: "__string", # required
+    #     support_case_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.create_resource_share(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::CreateResourceShareResponse]
+    def create_resource_share(params = {}, options = {})
+      request = build_request(:create_resource_share, params)
+      request.send_request(options)
+    end
+
     # Permanently delete a job template you have created.
     # @param [Hash, Types::DeleteJobTemplateRequest] params
     # @option params [String] :name
@@ -8283,6 +8321,7 @@ module Aws::MediaConvert
     #       job_engine_version_used: "__string",
     #       job_percent_complete: 1,
     #       job_template: "__string",
+    #       last_share_details: "__string",
     #       messages: {
     #         info: ["__string"],
     #         warning: ["__string"]
@@ -8576,7 +8615,9 @@ module Aws::MediaConvert
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #               sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #               sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #               selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #               streams: [1]
     #             }
     #           }
     #         ],
@@ -9046,6 +9087,7 @@ module Aws::MediaConvert
     #                         sample_rate: 1
     #                       },
     #                       mp2_settings: {
+    #                         audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                         bitrate: 1,
     #                         channels: 1,
     #                         sample_rate: 1
@@ -9343,7 +9385,7 @@ module Aws::MediaConvert
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                     descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                     segment_modifier: "__string"
     #                   }
     #                 },
@@ -9801,6 +9843,7 @@ module Aws::MediaConvert
     #           ]
     #         }
     #       },
+    #       share_status: "NOT_SHARED" # One of: ["NOT_SHARED", "INITIATED", "SHARED"],
     #       simulate_reserved_queue: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #       status: "SUBMITTED" # One of: ["SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"],
     #       status_update_interval: "SECONDS_10" # One of: ["SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"],
@@ -10102,7 +10145,9 @@ module Aws::MediaConvert
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #               sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #               sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #               selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #               streams: [1]
     #             }
     #           }
     #         ],
@@ -10572,6 +10617,7 @@ module Aws::MediaConvert
     #                         sample_rate: 1
     #                       },
     #                       mp2_settings: {
+    #                         audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                         bitrate: 1,
     #                         channels: 1,
     #                         sample_rate: 1
@@ -10869,7 +10915,7 @@ module Aws::MediaConvert
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                     descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                     segment_modifier: "__string"
     #                   }
     #                 },
@@ -11478,6 +11524,7 @@ module Aws::MediaConvert
     #                 sample_rate: 1
     #               },
     #               mp2_settings: {
+    #                 audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                 bitrate: 1,
     #                 channels: 1,
     #                 sample_rate: 1
@@ -12547,7 +12594,9 @@ module Aws::MediaConvert
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #                 sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #                 sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #                 selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #                 streams: [1]
     #               }
     #             }
     #           ],
@@ -13017,6 +13066,7 @@ module Aws::MediaConvert
     #                           sample_rate: 1
     #                         },
     #                         mp2_settings: {
+    #                           audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                           bitrate: 1,
     #                           channels: 1,
     #                           sample_rate: 1
@@ -13314,7 +13364,7 @@ module Aws::MediaConvert
     #                       audio_rendition_sets: "__string",
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                       descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                       segment_modifier: "__string"
     #                     }
     #                   },
@@ -13834,6 +13884,7 @@ module Aws::MediaConvert
     #         job_engine_version_used: "__string",
     #         job_percent_complete: 1,
     #         job_template: "__string",
+    #         last_share_details: "__string",
     #         messages: {
     #           info: ["__string"],
     #           warning: ["__string"]
@@ -14127,7 +14178,9 @@ module Aws::MediaConvert
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #                 sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #                 sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #                 selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #                 streams: [1]
     #               }
     #             }
     #           ],
@@ -14597,6 +14650,7 @@ module Aws::MediaConvert
     #                           sample_rate: 1
     #                         },
     #                         mp2_settings: {
+    #                           audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                           bitrate: 1,
     #                           channels: 1,
     #                           sample_rate: 1
@@ -14894,7 +14948,7 @@ module Aws::MediaConvert
     #                       audio_rendition_sets: "__string",
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                       descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                       segment_modifier: "__string"
     #                     }
     #                   },
@@ -15352,6 +15406,7 @@ module Aws::MediaConvert
     #             ]
     #           }
     #         },
+    #         share_status: "NOT_SHARED" # One of: ["NOT_SHARED", "INITIATED", "SHARED"],
     #         simulate_reserved_queue: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #         status: "SUBMITTED" # One of: ["SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"],
     #         status_update_interval: "SECONDS_10" # One of: ["SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"],
@@ -15513,6 +15568,7 @@ module Aws::MediaConvert
     #                   sample_rate: 1
     #                 },
     #                 mp2_settings: {
+    #                   audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                   bitrate: 1,
     #                   channels: 1,
     #                   sample_rate: 1
@@ -16526,6 +16582,7 @@ module Aws::MediaConvert
     #         job_engine_version_used: "__string",
     #         job_percent_complete: 1,
     #         job_template: "__string",
+    #         last_share_details: "__string",
     #         messages: {
     #           info: ["__string"],
     #           warning: ["__string"]
@@ -16819,7 +16876,9 @@ module Aws::MediaConvert
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #                 sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #                 sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #                 selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #                 streams: [1]
     #               }
     #             }
     #           ],
@@ -17289,6 +17348,7 @@ module Aws::MediaConvert
     #                           sample_rate: 1
     #                         },
     #                         mp2_settings: {
+    #                           audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                           bitrate: 1,
     #                           channels: 1,
     #                           sample_rate: 1
@@ -17586,7 +17646,7 @@ module Aws::MediaConvert
     #                       audio_rendition_sets: "__string",
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                       descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                       segment_modifier: "__string"
     #                     }
     #                   },
@@ -18044,6 +18104,7 @@ module Aws::MediaConvert
     #             ]
     #           }
     #         },
+    #         share_status: "NOT_SHARED" # One of: ["NOT_SHARED", "INITIATED", "SHARED"],
     #         simulate_reserved_queue: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #         status: "SUBMITTED" # One of: ["SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"],
     #         status_update_interval: "SECONDS_10" # One of: ["SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"],
@@ -18398,7 +18459,9 @@ module Aws::MediaConvert
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #             sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #             sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #             selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #             streams: [1]
     #           }
     #         }
     #       ],
@@ -18868,6 +18931,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1
     #                     },
     #                     mp2_settings: {
+    #                       audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                       bitrate: 1,
     #                       channels: 1,
     #                       sample_rate: 1
@@ -19165,7 +19229,7 @@ module Aws::MediaConvert
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                   descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                   i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                   i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                   segment_modifier: "__string"
     #                 }
     #               },
@@ -19893,7 +19957,9 @@ module Aws::MediaConvert
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
-    #               sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"]
+    #               sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #               selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #               streams: [1]
     #             }
     #           }
     #         ],
@@ -20363,6 +20429,7 @@ module Aws::MediaConvert
     #                         sample_rate: 1
     #                       },
     #                       mp2_settings: {
+    #                         audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                         bitrate: 1,
     #                         channels: 1,
     #                         sample_rate: 1
@@ -20660,7 +20727,7 @@ module Aws::MediaConvert
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
     #                     descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
-    #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
     #                     segment_modifier: "__string"
     #                   }
     #                 },
@@ -21243,6 +21310,7 @@ module Aws::MediaConvert
     #               sample_rate: 1
     #             },
     #             mp2_settings: {
+    #               audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #               bitrate: 1,
     #               channels: 1,
     #               sample_rate: 1
@@ -22078,6 +22146,7 @@ module Aws::MediaConvert
     #                 sample_rate: 1
     #               },
     #               mp2_settings: {
+    #                 audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
     #                 bitrate: 1,
     #                 channels: 1,
     #                 sample_rate: 1

@@ -227,14 +227,14 @@ module Aws::Mq
     # @option params [Hash<String, String>] :tags
     #   <p>Create tags when creating the broker.</p>
     # @option params [Array<Types::User>] :users
-    #   <p>The list of broker users (persons or applications) who can access queues and topics. For Amazon MQ for RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.</p>
+    #   <p>The list of broker users (persons or applications) who can access queues and topics. For Amazon MQ for RabbitMQ brokers, an administrative user is required if using simple authentication and authorization. For brokers using OAuth2, this user is optional. When provided, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.</p>
     # @option params [String] :data_replication_mode
     #   <p>Defines whether this broker is a part of a data replication pair.</p>
     # @option params [String] :data_replication_primary_broker_arn
     #   <p>The Amazon Resource Name (ARN) of the primary broker that is used to replicate data from in a data replication pair, and is applied to the replica broker. Must be set when dataReplicationMode is set to CRDR.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP"],
+    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP", "CONFIG_MANAGED"],
     #     auto_minor_version_upgrade: false,
     #     broker_name: "__string", # required
     #     configuration: {
@@ -279,7 +279,7 @@ module Aws::Mq
     #     tags: {
     #       "__string" => "__string"
     #     },
-    #     users: [ # required
+    #     users: [
     #       {
     #         console_access: false,
     #         groups: ["__string"],
@@ -319,7 +319,7 @@ module Aws::Mq
     #   <p>Create tags when creating the configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP"],
+    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP", "CONFIG_MANAGED"],
     #     engine_type: "ACTIVEMQ" # One of: ["ACTIVEMQ", "RABBITMQ"], # required
     #     engine_version: "__string",
     #     name: "__string", # required
@@ -333,7 +333,7 @@ module Aws::Mq
     #   response.to_h #=>
     #   {
     #     arn: "__string",
-    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP"],
+    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP", "CONFIG_MANAGED"],
     #     created: Time.now,
     #     id: "__string",
     #     latest_revision: {
@@ -512,7 +512,7 @@ module Aws::Mq
     #         action_required_info: "__string"
     #       }
     #     ],
-    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP"],
+    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP", "CONFIG_MANAGED"],
     #     auto_minor_version_upgrade: false,
     #     broker_arn: "__string",
     #     broker_id: "__string",
@@ -577,7 +577,7 @@ module Aws::Mq
     #       time_of_day: "__string", # required
     #       time_zone: "__string"
     #     },
-    #     pending_authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP"],
+    #     pending_authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP", "CONFIG_MANAGED"],
     #     pending_engine_version: "__string",
     #     pending_host_instance_type: "__string",
     #     pending_ldap_server_metadata: {
@@ -729,7 +729,7 @@ module Aws::Mq
     #   response.to_h #=>
     #   {
     #     arn: "__string",
-    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP"],
+    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP", "CONFIG_MANAGED"],
     #     created: Time.now,
     #     description: "__string",
     #     engine_type: "ACTIVEMQ" # One of: ["ACTIVEMQ", "RABBITMQ"],
@@ -902,7 +902,7 @@ module Aws::Mq
     #     configurations: [
     #       {
     #         arn: "__string", # required
-    #         authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP"], # required
+    #         authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP", "CONFIG_MANAGED"], # required
     #         created: Time.now, # required
     #         description: "__string", # required
     #         engine_type: "ACTIVEMQ" # One of: ["ACTIVEMQ", "RABBITMQ"], # required
@@ -1055,7 +1055,7 @@ module Aws::Mq
     #   <p>Defines whether this broker is a part of a data replication pair.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP"],
+    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP", "CONFIG_MANAGED"],
     #     auto_minor_version_upgrade: false,
     #     broker_id: "__string", # required
     #     configuration: {
@@ -1094,7 +1094,7 @@ module Aws::Mq
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP"],
+    #     authentication_strategy: "SIMPLE" # One of: ["SIMPLE", "LDAP", "CONFIG_MANAGED"],
     #     auto_minor_version_upgrade: false,
     #     broker_id: "__string",
     #     configuration: {

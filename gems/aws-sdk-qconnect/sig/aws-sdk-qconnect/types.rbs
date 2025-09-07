@@ -5252,6 +5252,7 @@ module Aws::QConnect
         ?visibility_status: String,
         ?template_configuration: Types::AIPromptTemplateConfiguration,
         ?description: String,
+        ?model_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5261,6 +5262,7 @@ module Aws::QConnect
       attr_accessor visibility_status: String?
       attr_accessor template_configuration: Types::AIPromptTemplateConfiguration?
       attr_accessor description: String?
+      attr_accessor model_id: String?
     end
 
     class UpdateAIPromptResponse

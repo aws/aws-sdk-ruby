@@ -472,7 +472,8 @@ module Aws::MediaLive
                 shadow_y_offset: untyped,
                 teletext_grid_control: String,
                 x_position: Integer,
-                y_position: untyped
+                y_position: untyped,
+                subtitle_rows: String
               },
               dvb_sub_destination_settings: {
                 alignment: String,
@@ -491,7 +492,8 @@ module Aws::MediaLive
                 shadow_y_offset: untyped,
                 teletext_grid_control: String,
                 x_position: untyped,
-                y_position: untyped
+                y_position: untyped,
+                subtitle_rows: String
               },
               ebu_tt_d_destination_settings: {
                 copyright_holder: String,
@@ -740,7 +742,12 @@ module Aws::MediaLive
                 ],
                 timed_metadata_id3_frame: String,
                 timed_metadata_id3_period: untyped,
-                timed_metadata_passthrough: String
+                timed_metadata_passthrough: String,
+                additional_destinations: Array[
+                  {
+                    destination: untyped
+                  }
+                ]
               },
               srt_group_settings: {
                 input_loss_action: untyped
@@ -3035,7 +3042,8 @@ module Aws::MediaLive
                 shadow_y_offset: untyped,
                 teletext_grid_control: String,
                 x_position: Integer,
-                y_position: untyped
+                y_position: untyped,
+                subtitle_rows: String
               },
               dvb_sub_destination_settings: {
                 alignment: String,
@@ -3054,7 +3062,8 @@ module Aws::MediaLive
                 shadow_y_offset: untyped,
                 teletext_grid_control: String,
                 x_position: untyped,
-                y_position: untyped
+                y_position: untyped,
+                subtitle_rows: String
               },
               ebu_tt_d_destination_settings: {
                 copyright_holder: String,
@@ -3303,7 +3312,12 @@ module Aws::MediaLive
                 ],
                 timed_metadata_id3_frame: String,
                 timed_metadata_id3_period: untyped,
-                timed_metadata_passthrough: String
+                timed_metadata_passthrough: String,
+                additional_destinations: Array[
+                  {
+                    destination: untyped
+                  }
+                ]
               },
               srt_group_settings: {
                 input_loss_action: untyped

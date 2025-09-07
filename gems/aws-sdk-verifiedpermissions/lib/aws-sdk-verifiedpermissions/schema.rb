@@ -62,6 +62,7 @@ module Aws::VerifiedPermissions
     CreatePolicyStoreOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.verifiedpermissions#CreatePolicyStoreOutput', name: 'CreatePolicyStoreOutput')
     CreatePolicyTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.verifiedpermissions#CreatePolicyTemplateInput', name: 'CreatePolicyTemplateInput')
     CreatePolicyTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.verifiedpermissions#CreatePolicyTemplateOutput', name: 'CreatePolicyTemplateOutput')
+    DatetimeAttribute = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.verifiedpermissions#DatetimeAttribute', name: 'DatetimeAttribute', traits: {"smithy.api#length" => {"min" => 10, "max" => 28}, "smithy.api#pattern" => "^\\d{4}-\\d{2}-\\d{2}(T\\d{2}:\\d{2}:\\d{2}(\\.\\d{3})?(Z|[+-]\\d{4}))?$", "smithy.api#sensitive" => {}})
     Decimal = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.verifiedpermissions#Decimal', name: 'Decimal', traits: {"smithy.api#length" => {"min" => 3, "max" => 23}, "smithy.api#pattern" => "^-?\\d{1,15}\\.\\d{1,4}$", "smithy.api#sensitive" => {}})
     Decision = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.verifiedpermissions#Decision', name: 'Decision')
     DeleteIdentitySourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.verifiedpermissions#DeleteIdentitySourceInput', name: 'DeleteIdentitySourceInput')
@@ -76,6 +77,7 @@ module Aws::VerifiedPermissions
     DeterminingPolicyItem = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.verifiedpermissions#DeterminingPolicyItem', name: 'DeterminingPolicyItem')
     DeterminingPolicyList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.verifiedpermissions#DeterminingPolicyList', name: 'DeterminingPolicyList', traits: {"smithy.api#uniqueItems" => {}})
     DiscoveryUrl = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.verifiedpermissions#DiscoveryUrl', name: 'DiscoveryUrl', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^https://.*$"})
+    Duration = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.verifiedpermissions#Duration', name: 'Duration', traits: {"smithy.api#length" => {"min" => 2, "max" => 100}, "smithy.api#pattern" => "^-?(\\d+d)?(\\d+h)?(\\d+m)?(\\d+s)?(\\d+ms)?$", "smithy.api#sensitive" => {}})
     EntitiesDefinition = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.verifiedpermissions#EntitiesDefinition', name: 'EntitiesDefinition')
     EntityAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.verifiedpermissions#EntityAttributes', name: 'EntityAttributes')
     EntityId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.verifiedpermissions#EntityId', name: 'EntityId', traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^.*$", "smithy.api#sensitive" => {}})
@@ -237,6 +239,8 @@ module Aws::VerifiedPermissions
     AttributeValue.add_member(:record, Types::AttributeValue::Record, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordAttribute, location_name: 'record'))
     AttributeValue.add_member(:ipaddr, Types::AttributeValue::Ipaddr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddr, location_name: 'ipaddr'))
     AttributeValue.add_member(:decimal, Types::AttributeValue::Decimal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Decimal, location_name: 'decimal'))
+    AttributeValue.add_member(:datetime, Types::AttributeValue::Datetime, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatetimeAttribute, location_name: 'datetime'))
+    AttributeValue.add_member(:duration, Types::AttributeValue::Duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Duration, location_name: 'duration'))
     AttributeValue.add_member(:unknown, Types::AttributeValue::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     AttributeValue.type = Types::AttributeValue
     Audiences.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Audience)
@@ -853,7 +857,7 @@ module Aws::VerifiedPermissions
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.traits = {"aws.iam#iamAction" => {"name" => "GetPolicy"}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"name" => "GetPolicy", "documentation" => "Grants permission to retrieve information about the specified policy", "relativeDocumentation" => "API_GetPolicy.html", "resources" => {"required" => {"policy-store" => {}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:batch_is_authorized, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#BatchIsAuthorized"
@@ -865,7 +869,7 @@ module Aws::VerifiedPermissions
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to make a batch authorization decision about a service request described in the parameters", "name" => "IsAuthorized"}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to make authorization decisions about the service requests described in the parameters", "name" => "IsAuthorized", "relativeDocumentation" => "API_IsAuthorized.html", "resources" => {"required" => {"policy-store" => {}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:batch_is_authorized_with_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#BatchIsAuthorizedWithToken"
@@ -877,7 +881,7 @@ module Aws::VerifiedPermissions
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to make a batch authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source", "name" => "IsAuthorizedWithToken"}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to make authorization decisions about the service requests described in the parameters. The principal in this request comes from an external identity source", "name" => "IsAuthorizedWithToken", "relativeDocumentation" => "API_IsAuthorizedWithToken.html", "resources" => {"required" => {"policy-store" => {}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:create_identity_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#CreateIdentitySource"
@@ -1007,7 +1011,7 @@ module Aws::VerifiedPermissions
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve information about the specified policy"}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"name" => "GetPolicy", "documentation" => "Grants permission to retrieve information about the specified policy", "relativeDocumentation" => "API_GetPolicy.html", "resources" => {"required" => {"policy-store" => {}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_policy_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#GetPolicyStore"
@@ -1055,7 +1059,7 @@ module Aws::VerifiedPermissions
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to make an authorization decision about a service request described in the parameters"}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to make authorization decisions about the service requests described in the parameters"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:is_authorized_with_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#IsAuthorizedWithToken"
@@ -1067,7 +1071,7 @@ module Aws::VerifiedPermissions
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to make an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source"}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to make authorization decisions about the service requests described in the parameters. The principal in this request comes from an external identity source"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_identity_sources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#ListIdentitySources"

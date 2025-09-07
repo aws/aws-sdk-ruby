@@ -220,6 +220,7 @@ module Aws::Polly
     MaxLexiconsNumberExceededException.type = Types::MaxLexiconsNumberExceededException
     OutputFormat.add_member(:json, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'JSON', traits: {"smithy.api#enumValue" => "json"}))
     OutputFormat.add_member(:mp3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MP3', traits: {"smithy.api#enumValue" => "mp3"}))
+    OutputFormat.add_member(:ogg_opus, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OGG_OPUS', traits: {"smithy.api#enumValue" => "ogg_opus"}))
     OutputFormat.add_member(:ogg_vorbis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OGG_VORBIS', traits: {"smithy.api#enumValue" => "ogg_vorbis"}))
     OutputFormat.add_member(:pcm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PCM', traits: {"smithy.api#enumValue" => "pcm"}))
     PutLexiconInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LexiconName, location_name: 'Name', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))

@@ -15,6 +15,7 @@ module Aws::XRay
     Annotations = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.xray#Annotations', name: 'Annotations')
     AnomalousService = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#AnomalousService', name: 'AnomalousService')
     AnomalousServiceList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.xray#AnomalousServiceList', name: 'AnomalousServiceList')
+    AnomalyCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.xray#AnomalyCount', name: 'AnomalyCount', traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     AttributeKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.xray#AttributeKey', name: 'AttributeKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 32}})
     AttributeMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.xray#AttributeMap', name: 'AttributeMap', traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
     AttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.xray#AttributeValue', name: 'AttributeValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 32}})
@@ -27,6 +28,7 @@ module Aws::XRay
     CancelTraceRetrievalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#CancelTraceRetrievalRequest', name: 'CancelTraceRetrievalRequest')
     CancelTraceRetrievalResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#CancelTraceRetrievalResult', name: 'CancelTraceRetrievalResult')
     ClientID = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.xray#ClientID', name: 'ClientID', traits: {"smithy.api#length" => {"min" => 24, "max" => 24}})
+    CooldownWindowMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.xray#CooldownWindowMinutes', name: 'CooldownWindowMinutes', traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     CreateGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#CreateGroupRequest', name: 'CreateGroupRequest')
     CreateGroupResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#CreateGroupResult', name: 'CreateGroupResult')
     CreateSamplingRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#CreateSamplingRuleRequest', name: 'CreateSamplingRuleRequest')
@@ -148,6 +150,7 @@ module Aws::XRay
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#ListTagsForResourceResponse', name: 'ListTagsForResourceResponse')
     LockoutPreventionException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#LockoutPreventionException', name: 'LockoutPreventionException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     MalformedPolicyDocumentException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#MalformedPolicyDocumentException', name: 'MalformedPolicyDocumentException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    MaxRate = ::Smithy::Schema::Shapes::FloatShape.new(id: 'com.amazonaws.xray#MaxRate', name: 'MaxRate', traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 1}})
     NullableBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.xray#NullableBoolean', name: 'NullableBoolean')
     NullableDouble = ::Smithy::Schema::Shapes::FloatShape.new(id: 'com.amazonaws.xray#NullableDouble', name: 'NullableDouble')
     NullableInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.xray#NullableInteger', name: 'NullableInteger')
@@ -192,7 +195,12 @@ module Aws::XRay
     RootCauseExceptions = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.xray#RootCauseExceptions', name: 'RootCauseExceptions')
     RuleLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#RuleLimitExceededException', name: 'RuleLimitExceededException', traits: {"smithy.api#error" => "client"})
     RuleName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.xray#RuleName', name: 'RuleName', traits: {"smithy.api#length" => {"min" => 1, "max" => 32}})
+    SampledAnomalyCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.xray#SampledAnomalyCount', name: 'SampledAnomalyCount', traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     SampledCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.xray#SampledCount', name: 'SampledCount', traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
+    SamplingBoost = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#SamplingBoost', name: 'SamplingBoost')
+    SamplingBoostStatisticsDocument = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#SamplingBoostStatisticsDocument', name: 'SamplingBoostStatisticsDocument')
+    SamplingBoostStatisticsDocumentList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.xray#SamplingBoostStatisticsDocumentList', name: 'SamplingBoostStatisticsDocumentList', traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
+    SamplingRateBoost = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#SamplingRateBoost', name: 'SamplingRateBoost')
     SamplingRule = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#SamplingRule', name: 'SamplingRule')
     SamplingRuleRecord = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#SamplingRuleRecord', name: 'SamplingRuleRecord')
     SamplingRuleRecordList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.xray#SamplingRuleRecordList', name: 'SamplingRuleRecordList')
@@ -240,6 +248,7 @@ module Aws::XRay
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: 'com.amazonaws.xray#Timestamp', name: 'Timestamp')
     Token = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.xray#Token', name: 'Token', traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}})
     TooManyTagsException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#TooManyTagsException', name: 'TooManyTagsException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    TotalCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.xray#TotalCount', name: 'TotalCount', traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     Trace = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.xray#Trace', name: 'Trace')
     TraceAvailabilityZones = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.xray#TraceAvailabilityZones', name: 'TraceAvailabilityZones')
     TraceFormatType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.xray#TraceFormatType', name: 'TraceFormatType')
@@ -479,10 +488,12 @@ module Aws::XRay
     GetSamplingStatisticSummariesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken'))
     GetSamplingStatisticSummariesResult.type = Types::GetSamplingStatisticSummariesResult
     GetSamplingTargetsRequest.add_member(:sampling_statistics_documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamplingStatisticsDocumentList, location_name: 'SamplingStatisticsDocuments', traits: {"smithy.api#required" => {}}))
+    GetSamplingTargetsRequest.add_member(:sampling_boost_statistics_documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamplingBoostStatisticsDocumentList, location_name: 'SamplingBoostStatisticsDocuments'))
     GetSamplingTargetsRequest.type = Types::GetSamplingTargetsRequest
     GetSamplingTargetsResult.add_member(:sampling_target_documents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamplingTargetDocumentList, location_name: 'SamplingTargetDocuments'))
     GetSamplingTargetsResult.add_member(:last_rule_modification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'LastRuleModification'))
     GetSamplingTargetsResult.add_member(:unprocessed_statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnprocessedStatisticsList, location_name: 'UnprocessedStatistics'))
+    GetSamplingTargetsResult.add_member(:unprocessed_boost_statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnprocessedStatisticsList, location_name: 'UnprocessedBoostStatistics'))
     GetSamplingTargetsResult.type = Types::GetSamplingTargetsResult
     GetServiceGraphRequest.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'StartTime', traits: {"smithy.api#required" => {}}))
     GetServiceGraphRequest.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'EndTime', traits: {"smithy.api#required" => {}}))
@@ -736,6 +747,20 @@ module Aws::XRay
     RootCauseExceptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RootCauseException)
     RuleLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
     RuleLimitExceededException.type = Types::RuleLimitExceededException
+    SamplingBoost.add_member(:boost_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Double, location_name: 'BoostRate', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SamplingBoost.add_member(:boost_rate_ttl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'BoostRateTTL', traits: {"smithy.api#required" => {}}))
+    SamplingBoost.type = Types::SamplingBoost
+    SamplingBoostStatisticsDocument.add_member(:rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleName, location_name: 'RuleName', traits: {"smithy.api#required" => {}}))
+    SamplingBoostStatisticsDocument.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceName, location_name: 'ServiceName', traits: {"smithy.api#required" => {}}))
+    SamplingBoostStatisticsDocument.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'Timestamp', traits: {"smithy.api#required" => {}}))
+    SamplingBoostStatisticsDocument.add_member(:anomaly_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnomalyCount, location_name: 'AnomalyCount', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SamplingBoostStatisticsDocument.add_member(:total_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TotalCount, location_name: 'TotalCount', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SamplingBoostStatisticsDocument.add_member(:sampled_anomaly_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SampledAnomalyCount, location_name: 'SampledAnomalyCount', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SamplingBoostStatisticsDocument.type = Types::SamplingBoostStatisticsDocument
+    SamplingBoostStatisticsDocumentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamplingBoostStatisticsDocument)
+    SamplingRateBoost.add_member(:max_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxRate, location_name: 'MaxRate', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SamplingRateBoost.add_member(:cooldown_window_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CooldownWindowMinutes, location_name: 'CooldownWindowMinutes', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SamplingRateBoost.type = Types::SamplingRateBoost
     SamplingRule.add_member(:rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleName, location_name: 'RuleName'))
     SamplingRule.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'RuleARN'))
     SamplingRule.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: 'ResourceARN', traits: {"smithy.api#required" => {}}))
@@ -749,6 +774,7 @@ module Aws::XRay
     SamplingRule.add_member(:url_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: URLPath, location_name: 'URLPath', traits: {"smithy.api#required" => {}}))
     SamplingRule.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: 'Version', traits: {"smithy.api#required" => {}}))
     SamplingRule.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMap, location_name: 'Attributes'))
+    SamplingRule.add_member(:sampling_rate_boost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamplingRateBoost, location_name: 'SamplingRateBoost'))
     SamplingRule.type = Types::SamplingRule
     SamplingRuleRecord.add_member(:sampling_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamplingRule, location_name: 'SamplingRule'))
     SamplingRuleRecord.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'CreatedAt'))
@@ -767,6 +793,7 @@ module Aws::XRay
     SamplingRuleUpdate.add_member(:http_method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HTTPMethod, location_name: 'HTTPMethod'))
     SamplingRuleUpdate.add_member(:url_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: URLPath, location_name: 'URLPath'))
     SamplingRuleUpdate.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMap, location_name: 'Attributes'))
+    SamplingRuleUpdate.add_member(:sampling_rate_boost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamplingRateBoost, location_name: 'SamplingRateBoost'))
     SamplingRuleUpdate.type = Types::SamplingRuleUpdate
     SamplingStatisticSummary.add_member(:rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'RuleName'))
     SamplingStatisticSummary.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'Timestamp'))
@@ -793,6 +820,7 @@ module Aws::XRay
     SamplingTargetDocument.add_member(:reservoir_quota, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableInteger, location_name: 'ReservoirQuota'))
     SamplingTargetDocument.add_member(:reservoir_quota_ttl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'ReservoirQuotaTTL'))
     SamplingTargetDocument.add_member(:interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableInteger, location_name: 'Interval'))
+    SamplingTargetDocument.add_member(:sampling_boost, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamplingBoost, location_name: 'SamplingBoost'))
     SamplingTargetDocument.type = Types::SamplingTargetDocument
     SamplingTargetDocumentList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SamplingTargetDocument)
     Segment.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentId, location_name: 'Id'))

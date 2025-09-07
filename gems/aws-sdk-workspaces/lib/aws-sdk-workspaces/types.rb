@@ -951,6 +951,21 @@ module Aws::WorkSpaces
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes in-depth details about the error. These details include the
+    #          possible causes of the error and troubleshooting information.</p>
+    # @!attribute error_code
+    #   <p>The error code that is returned for the image import.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The text of the error message that is returned for the image import.</p>
+    #   @return [String]
+    class CustomWorkspaceImageImportErrorDetails < Struct.new(
+      :error_code,
+      :error_message,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes the data replication settings.</p>
     # @!attribute data_replication
     #   <p>Indicates whether data replication is enabled, and if enabled, the type of data replication.</p>
@@ -1346,10 +1361,14 @@ module Aws::WorkSpaces
     # @!attribute dedicated_tenancy_account_type
     #   <p>The type of linked account.</p>
     #   @return [String]
+    # @!attribute message
+    #   <p>The text message to describe the status of BYOL.</p>
+    #   @return [String]
     class DescribeAccountResult < Struct.new(
       :dedicated_tenancy_support,
       :dedicated_tenancy_management_cidr_range,
       :dedicated_tenancy_account_type,
+      :message,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1613,6 +1632,53 @@ module Aws::WorkSpaces
     class DescribeConnectionAliasesResult < Struct.new(
       :connection_aliases,
       :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute image_id
+    #   <p>The identifier of the WorkSpace image.</p>
+    #   @return [String]
+    class DescribeCustomWorkspaceImageImportRequest < Struct.new(
+      :image_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute image_id
+    #   <p>The identifier of the WorkSpace image.</p>
+    #   @return [String]
+    # @!attribute infrastructure_configuration_arn
+    #   <p>The infrastructure configuration ARN that specifies how the WorkSpace image is built.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the WorkSpace image.</p>
+    #   @return [String]
+    # @!attribute created
+    #   <p>The timestamp when the WorkSpace image import was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated_time
+    #   <p>The timestamp when the WorkSpace image import was last updated.</p>
+    #   @return [Time]
+    # @!attribute image_source
+    #   <p>Describes the image import source.</p>
+    #   @return [Types::ImageSourceIdentifier]
+    # @!attribute image_builder_instance_id
+    #   <p>The image builder instance ID of the WorkSpace image.</p>
+    #   @return [String]
+    # @!attribute error_details
+    #   <p>Describes in-depth details about the error. These details include the
+    #            possible causes of the error and troubleshooting information.</p>
+    #   @return [Array<Types::CustomWorkspaceImageImportErrorDetails>]
+    class DescribeCustomWorkspaceImageImportResult < Struct.new(
+      :image_id,
+      :infrastructure_configuration_arn,
+      :state,
+      :created,
+      :last_updated_time,
+      :image_source,
+      :image_builder_instance_id,
+      :error_details,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -2313,6 +2379,30 @@ module Aws::WorkSpaces
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes the image import source.</p>
+    # @!attribute ec2_import_task_id
+    #   <p>The EC2 import task ID to import the image from the Amazon EC2 VM import process.</p>
+    #   @return [String]
+    # @!attribute image_build_version_arn
+    #   <p>The ARN of the EC2 Image Builder image.</p>
+    #   @return [String]
+    # @!attribute ec2_image_id
+    #   <p>The identifier of the EC2 image.</p>
+    #   @return [String]
+    class ImageSourceIdentifier < Struct.new(
+      :ec2_import_task_id,
+      :image_build_version_arn,
+      :ec2_image_id,
+      :unknown,
+      keyword_init: true)
+      include ::Smithy::Schema::Union
+
+      class Ec2ImportTaskId < ImageSourceIdentifier; end
+      class ImageBuildVersionArn < ImageSourceIdentifier; end
+      class Ec2ImageId < ImageSourceIdentifier; end
+      class Unknown < ImageSourceIdentifier; end
+    end
+
     # @!attribute resource_id
     #   <p>The directory identifier of the WorkSpace for which you want to import client
     #            branding.</p>
@@ -2372,6 +2462,60 @@ module Aws::WorkSpaces
       :device_type_ios,
       :device_type_linux,
       :device_type_web,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute image_name
+    #   <p>The name of the WorkSpace image.</p>
+    #   @return [String]
+    # @!attribute image_description
+    #   <p>The description of the WorkSpace image.</p>
+    #   @return [String]
+    # @!attribute compute_type
+    #   <p>The supported compute type for the WorkSpace image.</p>
+    #   @return [String]
+    # @!attribute protocol
+    #   <p>The supported protocol for the WorkSpace image. Windows 11 does not support PCOIP protocol.</p>
+    #   @return [String]
+    # @!attribute image_source
+    #   <p>The options for image import source.</p>
+    #   @return [Types::ImageSourceIdentifier]
+    # @!attribute infrastructure_configuration_arn
+    #   <p>The infrastructure configuration ARN that specifies how the WorkSpace image is built.</p>
+    #   @return [String]
+    # @!attribute platform
+    #   <p>The platform for the WorkSpace image source.</p>
+    #   @return [String]
+    # @!attribute os_version
+    #   <p>The OS version for the WorkSpace image source.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The resource tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>
+    #   @return [Array<Types::Tag>]
+    class ImportCustomWorkspaceImageRequest < Struct.new(
+      :image_name,
+      :image_description,
+      :compute_type,
+      :protocol,
+      :image_source,
+      :infrastructure_configuration_arn,
+      :platform,
+      :os_version,
+      :tags,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute image_id
+    #   <p>The identifier of the WorkSpace image.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the WorkSpace image.</p>
+    #   @return [String]
+    class ImportCustomWorkspaceImageResult < Struct.new(
+      :image_id,
+      :state,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -2801,7 +2945,11 @@ module Aws::WorkSpaces
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute message
+    #   <p>The text message to describe the status of BYOL modification.</p>
+    #   @return [String]
     class ModifyAccountResult < Struct.new(
+      :message,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

@@ -7,6 +7,9 @@ module Aws::GeoMaps
       def message: () -> String?
       def retryable?: () -> true
     end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ThrottlingException < Smithy::Client::ServiceError
       def message: () -> String?
       def retryable?: () -> true

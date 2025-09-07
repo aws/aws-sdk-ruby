@@ -23,6 +23,7 @@ module Aws::TimestreamInfluxDB
       AVAILABLE: String
       FAILED: String
       DELETED: String
+      MAINTENANCE: String
     end
 
     class ConflictException
@@ -933,6 +934,7 @@ module Aws::TimestreamInfluxDB
       FAILED: String
       UPDATING_DEPLOYMENT_TYPE: String
       UPDATING_INSTANCE_TYPE: String
+      MAINTENANCE: String
     end
 
     class TagResourceRequest

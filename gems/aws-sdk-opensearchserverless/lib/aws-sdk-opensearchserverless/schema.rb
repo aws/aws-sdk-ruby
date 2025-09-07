@@ -76,6 +76,7 @@ module Aws::OpenSearchServerless
     EffectiveLifecyclePolicyDetails = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.opensearchserverless#EffectiveLifecyclePolicyDetails', name: 'EffectiveLifecyclePolicyDetails')
     EffectiveLifecyclePolicyErrorDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.opensearchserverless#EffectiveLifecyclePolicyErrorDetail', name: 'EffectiveLifecyclePolicyErrorDetail')
     EffectiveLifecyclePolicyErrorDetails = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.opensearchserverless#EffectiveLifecyclePolicyErrorDetails', name: 'EffectiveLifecyclePolicyErrorDetails')
+    FipsEndpoints = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.opensearchserverless#FipsEndpoints', name: 'FipsEndpoints')
     GetAccessPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.opensearchserverless#GetAccessPolicyInput', name: 'GetAccessPolicyInput')
     GetAccessPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.opensearchserverless#GetAccessPolicyOutput', name: 'GetAccessPolicyOutput')
     GetAccountSettingsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.opensearchserverless#GetAccountSettingsInput', name: 'GetAccountSettingsInput')
@@ -154,7 +155,7 @@ module Aws::OpenSearchServerless
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.opensearchserverless#ServiceQuotaExceededException', name: 'ServiceQuotaExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     StandbyReplicas = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.opensearchserverless#StandbyReplicas', name: 'StandbyReplicas', traits: {"smithy.api#enum" => [{"name" => "ENABLED", "value" => "ENABLED", "documentation" => "Standby replicas enabled"}, {"name" => "DISABLED", "value" => "DISABLED", "documentation" => "Standby replicas disabled"}]})
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.opensearchserverless#SubnetId', name: 'SubnetId', traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"})
-    SubnetIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.opensearchserverless#SubnetIds', name: 'SubnetIds', traits: {"smithy.api#length" => {"min" => 1, "max" => 6}})
+    SubnetIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.opensearchserverless#SubnetIds', name: 'SubnetIds', traits: {"smithy.api#length" => {"min" => 1}})
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.opensearchserverless#Tag', name: 'Tag')
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.opensearchserverless#TagKey', name: 'TagKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     TagKeys = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.opensearchserverless#TagKeys', name: 'TagKeys', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
@@ -259,6 +260,7 @@ module Aws::OpenSearchServerless
     CollectionDetail.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: 'lastModifiedDate'))
     CollectionDetail.add_member(:collection_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'collectionEndpoint'))
     CollectionDetail.add_member(:dashboard_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'dashboardEndpoint'))
+    CollectionDetail.add_member(:fips_endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FipsEndpoints, location_name: 'fipsEndpoints'))
     CollectionDetail.add_member(:failure_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'failureCode'))
     CollectionDetail.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'failureMessage'))
     CollectionDetail.type = Types::CollectionDetail
@@ -412,6 +414,9 @@ module Aws::OpenSearchServerless
     EffectiveLifecyclePolicyErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'errorCode'))
     EffectiveLifecyclePolicyErrorDetail.type = Types::EffectiveLifecyclePolicyErrorDetail
     EffectiveLifecyclePolicyErrorDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EffectiveLifecyclePolicyErrorDetail)
+    FipsEndpoints.add_member(:collection_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'collectionEndpoint'))
+    FipsEndpoints.add_member(:dashboard_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'dashboardEndpoint'))
+    FipsEndpoints.type = Types::FipsEndpoints
     GetAccessPolicyInput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessPolicyType, location_name: 'type', traits: {"smithy.api#required" => {}}))
     GetAccessPolicyInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyName, location_name: 'name', traits: {"smithy.api#required" => {}}))
     GetAccessPolicyInput.type = Types::GetAccessPolicyInput

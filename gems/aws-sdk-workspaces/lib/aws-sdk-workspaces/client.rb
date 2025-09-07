@@ -1342,7 +1342,8 @@ module Aws::WorkSpaces
     #   {
     #     dedicated_tenancy_support: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #     dedicated_tenancy_management_cidr_range: "DedicatedTenancyManagementCidrRange",
-    #     dedicated_tenancy_account_type: "SOURCE_ACCOUNT" # One of: ["SOURCE_ACCOUNT", "TARGET_ACCOUNT"]
+    #     dedicated_tenancy_account_type: "SOURCE_ACCOUNT" # One of: ["SOURCE_ACCOUNT", "TARGET_ACCOUNT"],
+    #     message: "Message"
     #   }
     # @return [Types::DescribeAccountResult]
     def describe_account(params = {}, options = {})
@@ -1749,6 +1750,44 @@ module Aws::WorkSpaces
     # @return [Types::DescribeConnectionAliasesResult]
     def describe_connection_aliases(params = {}, options = {})
       request = build_request(:describe_connection_aliases, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about a WorkSpace BYOL image being imported via ImportCustomWorkspaceImage.</p>
+    # @param [Hash, Types::DescribeCustomWorkspaceImageImportRequest] params
+    # @option params [String] :image_id
+    #   <p>The identifier of the WorkSpace image.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     image_id: "WorkspaceImageId", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_custom_workspace_image_import(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     image_id: "WorkspaceImageId",
+    #     infrastructure_configuration_arn: "InfrastructureConfigurationArn",
+    #     state: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "COMPLETED", "ERROR"],
+    #     created: Time.now,
+    #     last_updated_time: Time.now,
+    #     image_source: {
+    #       # One of:
+    #       ec2_import_task_id: "Ec2ImportTaskId",
+    #       image_build_version_arn: "ImageBuildVersionArn",
+    #       ec2_image_id: "Ec2ImageId"
+    #     },
+    #     image_builder_instance_id: "NonEmptyString",
+    #     error_details: [
+    #       {
+    #         error_code: "ErrorCode",
+    #         error_message: "ImageErrorMessage"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::DescribeCustomWorkspaceImageImportResult]
+    def describe_custom_workspace_image_import(params = {}, options = {})
+      request = build_request(:describe_custom_workspace_image_import, params)
       request.send_request(options)
     end
 
@@ -2751,6 +2790,67 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
+    # <p>Imports the specified Windows 10 or 11 Bring Your Own License (BYOL)
+    #          image into Amazon WorkSpaces using EC2 Image Builder. The image must be an already licensed image that is
+    #          in your Amazon Web Services account, and you must own the image. For more information about
+    #          creating BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html"> Bring Your Own Windows
+    #             Desktop Licenses</a>.
+    #       </p>
+    # @param [Hash, Types::ImportCustomWorkspaceImageRequest] params
+    # @option params [String] :image_name
+    #   <p>The name of the WorkSpace image.</p>
+    # @option params [String] :image_description
+    #   <p>The description of the WorkSpace image.</p>
+    # @option params [String] :compute_type
+    #   <p>The supported compute type for the WorkSpace image.</p>
+    # @option params [String] :protocol
+    #   <p>The supported protocol for the WorkSpace image. Windows 11 does not support PCOIP protocol.</p>
+    # @option params [Types::ImageSourceIdentifier] :image_source
+    #   <p>The options for image import source.</p>
+    # @option params [String] :infrastructure_configuration_arn
+    #   <p>The infrastructure configuration ARN that specifies how the WorkSpace image is built.</p>
+    # @option params [String] :platform
+    #   <p>The platform for the WorkSpace image source.</p>
+    # @option params [String] :os_version
+    #   <p>The OS version for the WorkSpace image source.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>The resource tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     image_name: "WorkspaceImageName", # required
+    #     image_description: "WorkspaceImageDescription", # required
+    #     compute_type: "BASE" # One of: ["BASE", "GRAPHICS_G4DN"], # required
+    #     protocol: "PCOIP" # One of: ["PCOIP", "DCV", "BYOP"], # required
+    #     image_source: { # required
+    #       # One of:
+    #       ec2_import_task_id: "Ec2ImportTaskId",
+    #       image_build_version_arn: "ImageBuildVersionArn",
+    #       ec2_image_id: "Ec2ImageId"
+    #     },
+    #     infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
+    #     platform: "WINDOWS" # One of: ["WINDOWS"], # required
+    #     os_version: "Windows_10" # One of: ["Windows_10", "Windows_11"], # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.import_custom_workspace_image(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     image_id: "WorkspaceImageId",
+    #     state: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "COMPLETED", "ERROR"]
+    #   }
+    # @return [Types::ImportCustomWorkspaceImageResult]
+    def import_custom_workspace_image(params = {}, options = {})
+      request = build_request(:import_custom_workspace_image, params)
+      request.send_request(options)
+    end
+
     # <p>Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) 
     #          image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is 
     #          in your Amazon Web Services account, and you must own the image. For more information about 
@@ -2950,7 +3050,9 @@ module Aws::WorkSpaces
     #   response = client.modify_account(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
-    #   {}
+    #   {
+    #     message: "Message"
+    #   }
     # @return [Types::ModifyAccountResult]
     def modify_account(params = {}, options = {})
       request = build_request(:modify_account, params)

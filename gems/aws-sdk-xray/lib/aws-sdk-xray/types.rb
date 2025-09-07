@@ -920,8 +920,12 @@ module Aws::XRay
     # @!attribute sampling_statistics_documents
     #   <p>Information about rules that the service is using to sample requests.</p>
     #   @return [Array<Types::SamplingStatisticsDocument>]
+    # @!attribute sampling_boost_statistics_documents
+    #   <p>Information about rules that the service is using to boost sampling rate.</p>
+    #   @return [Array<Types::SamplingBoostStatisticsDocument>]
     class GetSamplingTargetsRequest < Struct.new(
       :sampling_statistics_documents,
+      :sampling_boost_statistics_documents,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -938,10 +942,15 @@ module Aws::XRay
     #   <p>Information about <a href="https://docs.aws.amazon.com/xray/latest/api/API_SamplingStatisticsDocument.html">SamplingStatisticsDocument</a> that X-Ray could not
     #            process.</p>
     #   @return [Array<Types::UnprocessedStatistics>]
+    # @!attribute unprocessed_boost_statistics
+    #   <p>Information about <a href="https://docs.aws.amazon.com/xray/latest/api/API_SamplingBoostStatisticsDocument.html">SamplingBoostStatisticsDocument</a> that X-Ray could not
+    #            process.</p>
+    #   @return [Array<Types::UnprocessedStatistics>]
     class GetSamplingTargetsResult < Struct.new(
       :sampling_target_documents,
       :last_rule_modification,
       :unprocessed_statistics,
+      :unprocessed_boost_statistics,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -2124,6 +2133,87 @@ module Aws::XRay
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Temporary boost sampling rate. X-Ray calculates sampling boost for each service based on the recent sampling boost stats of all services that called
+    #       <a href="https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html">GetSamplingTargets</a>.</p>
+    # @!attribute boost_rate
+    #   <p>The calculated sampling boost rate for this service </p>
+    #   @return [Float]
+    # @!attribute boost_rate_ttl
+    #   <p>When the sampling boost expires.</p>
+    #   @return [Time]
+    class SamplingBoost < Struct.new(
+      :boost_rate,
+      :boost_rate_ttl,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:boost_rate] = 0 unless options.key?(:boost_rate)
+        super
+      end
+    end
+
+    # <p>Request anomaly stats for a single rule from a service. Results are for the last 10
+    #       seconds unless the service has been assigned a longer reporting interval after a previous call
+    #       to <a href="https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html">GetSamplingTargets</a>.</p>
+    # @!attribute rule_name
+    #   <p>The name of the sampling rule.</p>
+    #   @return [String]
+    # @!attribute service_name
+    #   <p>Matches the <code>name</code> that the service uses to identify itself in segments.</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>The current time.</p>
+    #   @return [Time]
+    # @!attribute anomaly_count
+    #   <p>The number of requests with anomaly.</p>
+    #   @return [Integer]
+    # @!attribute total_count
+    #   <p>The number of requests that associated to the rule.</p>
+    #   @return [Integer]
+    # @!attribute sampled_anomaly_count
+    #   <p>The number of requests with anomaly recorded.</p>
+    #   @return [Integer]
+    class SamplingBoostStatisticsDocument < Struct.new(
+      :rule_name,
+      :service_name,
+      :timestamp,
+      :anomaly_count,
+      :total_count,
+      :sampled_anomaly_count,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:anomaly_count] = 0 unless options.key?(:anomaly_count)
+        options[:total_count] = 0 unless options.key?(:total_count)
+        options[:sampled_anomaly_count] = 0 unless options.key?(:sampled_anomaly_count)
+        super
+      end
+    end
+
+    # <p>Enable temporary sampling rate increases when you detect anomalies to improve visibility.</p>
+    # @!attribute max_rate
+    #   <p>Defines max temporary sampling rate to apply when a boost is triggered.
+    #         Calculated boost rate by X-Ray will be less than or equal to this max rate.</p>
+    #   @return [Float]
+    # @!attribute cooldown_window_minutes
+    #   <p>Sets the time window (in minutes) in which only one sampling rate boost can be triggered.
+    #         After a boost occurs, no further boosts are allowed until the next window.</p>
+    #   @return [Integer]
+    class SamplingRateBoost < Struct.new(
+      :max_rate,
+      :cooldown_window_minutes,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:max_rate] = 0 unless options.key?(:max_rate)
+        options[:cooldown_window_minutes] = 0 unless options.key?(:cooldown_window_minutes)
+        super
+      end
+    end
+
     # <p>A sampling rule that services use to decide whether to instrument a request. Rule
     #       fields can match properties of the service, or properties of a request. The service can ignore
     #       rules that don't match its properties.</p>
@@ -2168,6 +2258,10 @@ module Aws::XRay
     # @!attribute attributes
     #   <p>Matches attributes derived from the request.</p>
     #   @return [Hash<String, String>]
+    # @!attribute sampling_rate_boost
+    #   <p>Specifies the multiplier applied to the base sampling rate.
+    #         This boost allows you to temporarily increase sampling without changing the rule's configuration.</p>
+    #   @return [Types::SamplingRateBoost]
     class SamplingRule < Struct.new(
       :rule_name,
       :rule_arn,
@@ -2182,6 +2276,7 @@ module Aws::XRay
       :url_path,
       :version,
       :attributes,
+      :sampling_rate_boost,
       keyword_init: true)
       include ::Smithy::Schema::Structure
 
@@ -2249,6 +2344,10 @@ module Aws::XRay
     # @!attribute attributes
     #   <p>Matches attributes derived from the request.</p>
     #   @return [Hash<String, String>]
+    # @!attribute sampling_rate_boost
+    #   <p>Specifies the multiplier applied to the base sampling rate.
+    #         This boost allows you to temporarily increase sampling without changing the rule's configuration.</p>
+    #   @return [Types::SamplingRateBoost]
     class SamplingRuleUpdate < Struct.new(
       :rule_name,
       :rule_arn,
@@ -2262,6 +2361,7 @@ module Aws::XRay
       :http_method,
       :url_path,
       :attributes,
+      :sampling_rate_boost,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -2372,12 +2472,16 @@ module Aws::XRay
     #   <p>The number of seconds for the service to wait before getting sampling targets
     #         again.</p>
     #   @return [Integer]
+    # @!attribute sampling_boost
+    #   <p>The sampling boost that X-Ray allocated for this service.</p>
+    #   @return [Types::SamplingBoost]
     class SamplingTargetDocument < Struct.new(
       :rule_name,
       :fixed_rate,
       :reservoir_quota,
       :reservoir_quota_ttl,
       :interval,
+      :sampling_boost,
       keyword_init: true)
       include ::Smithy::Schema::Structure
 
@@ -2746,8 +2850,7 @@ module Aws::XRay
     #         subsegments.</p>
     #   @return [String]
     # @!attribute duration
-    #   <p>The length of time in seconds between the start time of the root segment and the end
-    #         time of the last segment that completed.</p>
+    #   <p>The length of time in seconds between the start time of the earliest segment that started and the end time of the last segment that completed.</p>
     #   @return [Float]
     # @!attribute limit_exceeded
     #   <p>LimitExceeded is set to true when the trace has exceeded the <code>Trace document size</code> limit. For
@@ -2774,8 +2877,7 @@ module Aws::XRay
     #   <p>The start time of a trace, based on the earliest trace segment start time.</p>
     #   @return [Time]
     # @!attribute duration
-    #   <p>The length of time in seconds between the start time of the root segment and the end
-    #         time of the last segment that completed.</p>
+    #   <p> The length of time in seconds between the start time of the earliest segment that started and the end time of the last segment that completed.</p>
     #   @return [Float]
     # @!attribute response_time
     #   <p>The length of time in seconds between the start and end times of the root segment. If

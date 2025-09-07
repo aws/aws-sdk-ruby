@@ -244,7 +244,7 @@ module Aws::SQS
     #                  <p>
     #                     <code>MaximumMessageSize</code> – The limit of how many bytes a message
     #                       can contain before Amazon SQS rejects it. Valid values: An integer from 1,024 bytes
-    #                       (1 KiB) to 262,144 bytes (256 KiB). Default: 262,144 (256 KiB). </p>
+    #                       (1 KiB) to 1,048,576 bytes (1 MiB). Default: 1,048,576 bytes (1 MiB). </p>
     #               </li>
     #               <li>
     #                  <p>
@@ -1313,7 +1313,7 @@ module Aws::SQS
     #             <code>Name</code>, <code>type</code>, <code>value</code> and the message body must not
     #             be empty or null. All parts of the message attribute, including <code>Name</code>,
     #                 <code>Type</code>, and <code>Value</code>, are part of the message size restriction
-    #             (256 KiB or 262,144 bytes).</p>
+    #             (1 MiB or 1,048,576 bytes).</p>
     # @!attribute string_value
     #   <p>Strings are Unicode with UTF-8 binary encoding. For a list of code values, see <a href="http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters">ASCII Printable
     #                   Characters</a>.</p>
@@ -2083,8 +2083,8 @@ module Aws::SQS
     #            <p>Queue URLs and names are case-sensitive.</p>
     #   @return [String]
     # @!attribute message_body
-    #   <p>The message to send. The minimum size is one character. The maximum size is 256
-    #               KiB.</p>
+    #   <p>The message to send. The minimum size is one character. The maximum size is 
+    #           1 MiB or 1,048,576 bytes</p>
     #            <important>
     #               <p>A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed. For more information, see the <a href="http://www.w3.org/TR/REC-xml/#charsets">W3C specification for characters</a>.</p>
     #               <p>
@@ -2295,7 +2295,7 @@ module Aws::SQS
     #                  <p>
     #                     <code>MaximumMessageSize</code> – The limit of how many bytes a message
     #                       can contain before Amazon SQS rejects it. Valid values: An integer from 1,024 bytes
-    #                       (1 KiB) up to 262,144 bytes (256 KiB). Default: 262,144 (256 KiB). </p>
+    #                       (1 KiB) up to 1,048,576 bytes (1 MiB). Default: 1,048,576 bytes (1 MiB). </p>
     #               </li>
     #               <li>
     #                  <p>

@@ -1995,6 +1995,11 @@ module Aws::EC2
       attr_accessor ena_srd_udp_enabled: bool?
     end
 
+    module AttachmentLimitType
+      SHARED: String
+      DEDICATED: String
+    end
+
     module AttachmentStatus
       attaching: String
       attached: String
@@ -3732,6 +3737,7 @@ module Aws::EC2
         ?ingress_packets: String,
         ?egress_packets: String,
         ?client_ip: String,
+        ?client_ipv6_address: String,
         ?common_name: String,
         ?status: Types::ClientVpnConnectionStatus,
         ?connection_end_time: String,
@@ -3749,6 +3755,7 @@ module Aws::EC2
       attr_accessor ingress_packets: String?
       attr_accessor egress_packets: String?
       attr_accessor client_ip: String?
+      attr_accessor client_ipv6_address: String?
       attr_accessor common_name: String?
       attr_accessor status: Types::ClientVpnConnectionStatus?
       attr_accessor connection_end_time: String?
@@ -3804,6 +3811,8 @@ module Aws::EC2
         ?client_login_banner_options: Types::ClientLoginBannerResponseOptions,
         ?client_route_enforcement_options: Types::ClientRouteEnforcementResponseOptions,
         ?disconnect_on_session_timeout: bool,
+        ?endpoint_ip_address_type: String,
+        ?traffic_ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3832,6 +3841,8 @@ module Aws::EC2
       attr_accessor client_login_banner_options: Types::ClientLoginBannerResponseOptions?
       attr_accessor client_route_enforcement_options: Types::ClientRouteEnforcementResponseOptions?
       attr_accessor disconnect_on_session_timeout: bool?
+      attr_accessor endpoint_ip_address_type: String?
+      attr_accessor traffic_ip_address_type: String?
     end
 
     class ClientVpnEndpointAttributeStatus
@@ -4234,6 +4245,8 @@ module Aws::EC2
         ?copy_image_tags: bool,
         ?tag_specifications: Array[Types::TagSpecification],
         ?snapshot_copy_completion_duration_minutes: Integer,
+        ?destination_availability_zone: String,
+        ?destination_availability_zone_id: String,
         ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4249,6 +4262,8 @@ module Aws::EC2
       attr_accessor copy_image_tags: bool?
       attr_accessor tag_specifications: Array[Types::TagSpecification]?
       attr_accessor snapshot_copy_completion_duration_minutes: Integer?
+      attr_accessor destination_availability_zone: String?
+      attr_accessor destination_availability_zone_id: String?
       attr_accessor dry_run: bool?
     end
 
@@ -4277,6 +4292,7 @@ module Aws::EC2
         ?source_snapshot_id: String,
         ?tag_specifications: Array[Types::TagSpecification],
         ?completion_duration_minutes: Integer,
+        ?destination_availability_zone: String,
         ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4291,6 +4307,7 @@ module Aws::EC2
       attr_accessor source_snapshot_id: String?
       attr_accessor tag_specifications: Array[Types::TagSpecification]?
       attr_accessor completion_duration_minutes: Integer?
+      attr_accessor destination_availability_zone: String?
       attr_accessor dry_run: bool?
     end
 
@@ -4572,6 +4589,8 @@ module Aws::EC2
         ?client_login_banner_options: Types::ClientLoginBannerOptions,
         ?client_route_enforcement_options: Types::ClientRouteEnforcementOptions,
         ?disconnect_on_session_timeout: bool,
+        ?endpoint_ip_address_type: String,
+        ?traffic_ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4595,6 +4614,8 @@ module Aws::EC2
       attr_accessor client_login_banner_options: Types::ClientLoginBannerOptions?
       attr_accessor client_route_enforcement_options: Types::ClientRouteEnforcementOptions?
       attr_accessor disconnect_on_session_timeout: bool?
+      attr_accessor endpoint_ip_address_type: String?
+      attr_accessor traffic_ip_address_type: String?
     end
 
     class CreateClientVpnEndpointResult
@@ -5080,6 +5101,38 @@ module Aws::EC2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor image_id: String?
+    end
+
+    class CreateImageUsageReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?dry_run: bool,
+        ?resource_types: Array[Types::ImageUsageResourceTypeRequest],
+        ?account_ids: Array[String],
+        ?client_token: String,
+        ?tag_specifications: Array[Types::TagSpecification],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor dry_run: bool?
+      attr_accessor resource_types: Array[Types::ImageUsageResourceTypeRequest]?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor client_token: String?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
+    end
+
+    class CreateImageUsageReportResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
     end
 
     class CreateInstanceConnectEndpointRequest
@@ -8354,6 +8407,30 @@ module Aws::EC2
     end
 
     class DeleteFpgaImageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?return: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor return: bool?
+    end
+
+    class DeleteImageUsageReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class DeleteImageUsageReportResult
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -11797,6 +11874,108 @@ module Aws::EC2
       attr_accessor attribute: String?
       attr_accessor image_id: String?
       attr_accessor dry_run: bool?
+    end
+
+    class DescribeImageReferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_ids: Array[String],
+        ?include_all_resource_types: bool,
+        ?resource_types: Array[Types::ResourceTypeRequest],
+        ?next_token: String,
+        ?dry_run: bool,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_ids: Array[String]?
+      attr_accessor include_all_resource_types: bool?
+      attr_accessor resource_types: Array[Types::ResourceTypeRequest]?
+      attr_accessor next_token: String?
+      attr_accessor dry_run: bool?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeImageReferencesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?image_references: Array[Types::ImageReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor image_references: Array[Types::ImageReference]?
+    end
+
+    class DescribeImageUsageReportEntriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_ids: Array[String],
+        ?report_ids: Array[String],
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+        ?dry_run: bool,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_ids: Array[String]?
+      attr_accessor report_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor dry_run: bool?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeImageUsageReportEntriesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?image_usage_report_entries: Array[Types::ImageUsageReportEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor image_usage_report_entries: Array[Types::ImageUsageReportEntry]?
+    end
+
+    class DescribeImageUsageReportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_ids: Array[String],
+        ?report_ids: Array[String],
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+        ?dry_run: bool,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_ids: Array[String]?
+      attr_accessor report_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor dry_run: bool?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeImageUsageReportsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?image_usage_reports: Array[Types::ImageUsageReport],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor image_usage_reports: Array[Types::ImageUsageReport]?
     end
 
     class DescribeImagesRequest
@@ -17147,6 +17326,8 @@ module Aws::EC2
         ?encryption_support: String,
         ?ebs_optimized_info: Types::EbsOptimizedInfo,
         ?nvme_support: String,
+        ?maximum_ebs_attachments: Integer,
+        ?attachment_limit_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -17154,6 +17335,8 @@ module Aws::EC2
       attr_accessor encryption_support: String?
       attr_accessor ebs_optimized_info: Types::EbsOptimizedInfo?
       attr_accessor nvme_support: String?
+      attr_accessor maximum_ebs_attachments: Integer?
+      attr_accessor attachment_limit_type: String?
     end
 
     class EbsInstanceBlockDevice
@@ -17273,6 +17456,7 @@ module Aws::EC2
         ?security_group_ids: Array[String],
         ?tags: Array[Types::Tag],
         ?ip_address_type: String,
+        ?public_dns_names: Types::InstanceConnectEndpointPublicDnsNames,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -17292,6 +17476,7 @@ module Aws::EC2
       attr_accessor security_group_ids: Array[String]?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor ip_address_type: String?
+      attr_accessor public_dns_names: Types::InstanceConnectEndpointPublicDnsNames?
     end
 
     module Ec2InstanceConnectEndpointState
@@ -17301,6 +17486,9 @@ module Aws::EC2
       delete_in_progress: String
       delete_complete: String
       delete_failed: String
+      update_in_progress: String
+      update_complete: String
+      update_failed: String
     end
 
     class EfaInfo
@@ -18098,6 +18286,12 @@ module Aws::EC2
     module EndDateType
       unlimited: String
       limited: String
+    end
+
+    module EndpointIpAddressType
+      ipv4: String
+      ipv6: String
+      dual_stack: String
     end
 
     module EphemeralNvmeSupport
@@ -21584,6 +21778,34 @@ module Aws::EC2
       attr_accessor recycle_bin_exit_time: Time?
     end
 
+    class ImageReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?resource_type: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor arn: String?
+    end
+
+    module ImageReferenceOptionName
+      STATE_NAME: String
+      VERSION_DEPTH: String
+    end
+
+    module ImageReferenceResourceType
+      EC2_INSTANCE: String
+      EC2_LAUNCH_TEMPLATE: String
+      SSM_PARAMETER: String
+      IMAGE_BUILDER_IMAGE_RECIPE: String
+      IMAGE_BUILDER_CONTAINER_RECIPE: String
+    end
+
     module ImageState
       pending: String
       available: String
@@ -21599,6 +21821,106 @@ module Aws::EC2
       machine: String
       kernel: String
       ramdisk: String
+    end
+
+    class ImageUsageReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?report_id: String,
+        ?resource_types: Array[Types::ImageUsageResourceType],
+        ?account_ids: Array[String],
+        ?state: String,
+        ?state_reason: String,
+        ?creation_time: Time,
+        ?expiration_time: Time,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor report_id: String?
+      attr_accessor resource_types: Array[Types::ImageUsageResourceType]?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor creation_time: Time?
+      attr_accessor expiration_time: Time?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ImageUsageReportEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?report_id: String,
+        ?usage_count: Integer,
+        ?account_id: String,
+        ?image_id: String,
+        ?report_creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor report_id: String?
+      attr_accessor usage_count: Integer?
+      attr_accessor account_id: String?
+      attr_accessor image_id: String?
+      attr_accessor report_creation_time: Time?
+    end
+
+    class ImageUsageResourceType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_type_options: Array[Types::ImageUsageResourceTypeOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_type_options: Array[Types::ImageUsageResourceTypeOption]?
+    end
+
+    class ImageUsageResourceTypeOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?option_name: String,
+        ?option_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor option_name: String?
+      attr_accessor option_values: Array[String]?
+    end
+
+    class ImageUsageResourceTypeOptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?option_name: String,
+        ?option_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor option_name: String?
+      attr_accessor option_values: Array[String]?
+    end
+
+    class ImageUsageResourceTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_type_options: Array[Types::ImageUsageResourceTypeOptionRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_type_options: Array[Types::ImageUsageResourceTypeOptionRequest]?
     end
 
     module ImdsSupportValues
@@ -22321,6 +22643,32 @@ module Aws::EC2
       attr_accessor available_capacity: Integer?
       attr_accessor instance_type: String?
       attr_accessor total_capacity: Integer?
+    end
+
+    class InstanceConnectEndpointDnsNames
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_name: String,
+        ?fips_dns_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_name: String?
+      attr_accessor fips_dns_name: String?
+    end
+
+    class InstanceConnectEndpointPublicDnsNames
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ipv4: Types::InstanceConnectEndpointDnsNames,
+        ?dualstack: Types::InstanceConnectEndpointDnsNames,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ipv4: Types::InstanceConnectEndpointDnsNames?
+      attr_accessor dualstack: Types::InstanceConnectEndpointDnsNames?
     end
 
     class InstanceCount
@@ -24221,6 +24569,63 @@ module Aws::EC2
       c8gn_metal_48xl: String
       f2_6xlarge: String
       p6e_gb200_36xlarge: String
+      g6f_large: String
+      g6f_xlarge: String
+      g6f_2xlarge: String
+      g6f_4xlarge: String
+      gr6f_4xlarge: String
+      p5_4xlarge: String
+      r8i_large: String
+      r8i_xlarge: String
+      r8i_2xlarge: String
+      r8i_4xlarge: String
+      r8i_8xlarge: String
+      r8i_12xlarge: String
+      r8i_16xlarge: String
+      r8i_24xlarge: String
+      r8i_32xlarge: String
+      r8i_48xlarge: String
+      r8i_96xlarge: String
+      r8i_metal_48xl: String
+      r8i_metal_96xl: String
+      r8i_flex_large: String
+      r8i_flex_xlarge: String
+      r8i_flex_2xlarge: String
+      r8i_flex_4xlarge: String
+      r8i_flex_8xlarge: String
+      r8i_flex_12xlarge: String
+      r8i_flex_16xlarge: String
+      m8i_large: String
+      m8i_xlarge: String
+      m8i_2xlarge: String
+      m8i_4xlarge: String
+      m8i_8xlarge: String
+      m8i_12xlarge: String
+      m8i_16xlarge: String
+      m8i_24xlarge: String
+      m8i_32xlarge: String
+      m8i_48xlarge: String
+      m8i_96xlarge: String
+      m8i_metal_48xl: String
+      m8i_metal_96xl: String
+      m8i_flex_large: String
+      m8i_flex_xlarge: String
+      m8i_flex_2xlarge: String
+      m8i_flex_4xlarge: String
+      m8i_flex_8xlarge: String
+      m8i_flex_12xlarge: String
+      m8i_flex_16xlarge: String
+      i8ge_large: String
+      i8ge_xlarge: String
+      i8ge_2xlarge: String
+      i8ge_3xlarge: String
+      i8ge_6xlarge: String
+      i8ge_12xlarge: String
+      i8ge_18xlarge: String
+      i8ge_24xlarge: String
+      i8ge_48xlarge: String
+      i8ge_metal_24xl: String
+      i8ge_metal_48xl: String
     end
 
     module InstanceTypeHypervisor
@@ -27559,6 +27964,36 @@ module Aws::EC2
     end
 
     class ModifyInstanceCapacityReservationAttributesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?return: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor return: bool?
+    end
+
+    class ModifyInstanceConnectEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dry_run: bool,
+        ?instance_connect_endpoint_id: String,
+        ?ip_address_type: String,
+        ?security_group_ids: Array[String],
+        ?preserve_client_ip: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dry_run: bool?
+      attr_accessor instance_connect_endpoint_id: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor preserve_client_ip: bool?
+    end
+
+    class ModifyInstanceConnectEndpointResult
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -33323,6 +33758,7 @@ module Aws::EC2
       fpga_image: String
       host_reservation: String
       image: String
+      image_usage_report: String
       import_image_task: String
       import_snapshot_task: String
       instance: String
@@ -33402,6 +33838,32 @@ module Aws::EC2
       ipam_external_resource_verification_token: String
       capacity_block: String
       mac_modification_task: String
+    end
+
+    class ResourceTypeOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?option_name: String,
+        ?option_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor option_name: String?
+      attr_accessor option_values: Array[String]?
+    end
+
+    class ResourceTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_type_options: Array[Types::ResourceTypeOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_type_options: Array[Types::ResourceTypeOption]?
     end
 
     class ResponseError
@@ -33853,6 +34315,7 @@ module Aws::EC2
       CreateRouteTable: String
       CreateRoute: String
       EnableVgwRoutePropagation: String
+      Advertisement: String
     end
 
     class RouteServer
@@ -34144,6 +34607,7 @@ module Aws::EC2
     module RouteState
       active: String
       blackhole: String
+      filtered: String
     end
 
     class RouteTable
@@ -36805,6 +37269,12 @@ module Aws::EC2
       egress: String
     end
 
+    module TrafficIpAddressType
+      ipv4: String
+      ipv6: String
+      dual_stack: String
+    end
+
     class TrafficMirrorFilter
       include Smithy::Schema::Structure
 
@@ -39204,6 +39674,7 @@ module Aws::EC2
       ok: String
       impaired: String
       insufficient_data: String
+      warning: String
     end
 
     class VolumeStatusItem

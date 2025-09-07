@@ -1551,7 +1551,8 @@ module Aws::QConnect
           text: String
         }
       },
-      ?description: String
+      ?description: String,
+      ?model_id: String
     ) -> _UpdateAIPromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAIPromptResponse
 
     interface _UpdateAssistantAIAgentResponse

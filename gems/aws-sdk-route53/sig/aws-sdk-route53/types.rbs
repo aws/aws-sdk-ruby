@@ -406,6 +406,7 @@ module Aws::Route53
       ap_southeast_7: String
       ap_east_2: String
       eu_isoe_west_1: String
+      ap_southeast_6: String
     end
 
     class CollectionSummary
@@ -3106,6 +3107,7 @@ module Aws::Route53
       us_gov_east_1: String
       us_gov_west_1: String
       ap_east_2: String
+      ap_southeast_6: String
     end
 
     class ResourceTagSet
@@ -3620,6 +3622,7 @@ module Aws::Route53
       ap_southeast_7: String
       ap_east_2: String
       eu_isoe_west_1: String
+      ap_southeast_6: String
     end
   end
 end

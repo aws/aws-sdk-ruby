@@ -418,7 +418,7 @@ module Aws::Route53RecoveryReadiness
       service.id = "com.amazonaws.route53recoveryreadiness#Route53RecoveryReadiness"
       service.name = "Route53RecoveryReadiness"
       service.version = "2019-12-02"
-      service.traits = {"aws.api#service" => {"sdkId" => "Route53 Recovery Readiness", "arnNamespace" => "route53-recovery-readiness", "cloudFormationName" => "Route53RecoveryReadiness", "cloudTrailEventSource" => "route53-recovery-readiness.amazonaws.com", "endpointPrefix" => "route53-recovery-readiness"}, "aws.auth#sigv4" => {"name" => "route53-recovery-readiness"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Route53 Recovery Readiness"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Route53 Recovery Readiness", "arnNamespace" => "route53-recovery-readiness", "cloudFormationName" => "Route53RecoveryReadiness", "cloudTrailEventSource" => "route53-recovery-readiness.amazonaws.com", "endpointPrefix" => "route53-recovery-readiness"}, "aws.auth#sigv4" => {"name" => "route53-recovery-readiness"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AWS Route53 Recovery Readiness"}
       service.add_operation(:create_cell, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53recoveryreadiness#CreateCell"
         operation.name = "CreateCell"

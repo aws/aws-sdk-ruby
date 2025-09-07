@@ -243,6 +243,7 @@ module Aws::ServiceDiscovery
         ?query_parameters: Hash[String, String],
         ?optional_parameters: Hash[String, String],
         ?health_status: String,
+        ?owner_account: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -252,6 +253,7 @@ module Aws::ServiceDiscovery
       attr_accessor query_parameters: Hash[String, String]?
       attr_accessor optional_parameters: Hash[String, String]?
       attr_accessor health_status: String?
+      attr_accessor owner_account: String?
     end
 
     class DiscoverInstancesResponse
@@ -273,11 +275,13 @@ module Aws::ServiceDiscovery
       def initialize: (
         ?namespace_name: String,
         ?service_name: String,
+        ?owner_account: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor namespace_name: String?
       attr_accessor service_name: String?
+      attr_accessor owner_account: String?
     end
 
     class DiscoverInstancesRevisionResponse
@@ -380,10 +384,12 @@ module Aws::ServiceDiscovery
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?resource_owner: String,
         ?instance: Types::Instance,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor resource_owner: String?
       attr_accessor instance: Types::Instance?
     end
 
@@ -444,10 +450,12 @@ module Aws::ServiceDiscovery
 
       def initialize: (
         ?operation_id: String,
+        ?owner_account: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor operation_id: String?
+      attr_accessor owner_account: String?
     end
 
     class GetOperationResponse
@@ -598,12 +606,14 @@ module Aws::ServiceDiscovery
         ?id: String,
         ?creator_request_id: String,
         ?attributes: Hash[String, String],
+        ?created_by_account: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor creator_request_id: String?
       attr_accessor attributes: Hash[String, String]?
+      attr_accessor created_by_account: String?
     end
 
     class InstanceNotFound
@@ -623,11 +633,13 @@ module Aws::ServiceDiscovery
       def initialize: (
         ?id: String,
         ?attributes: Hash[String, String],
+        ?created_by_account: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor attributes: Hash[String, String]?
+      attr_accessor created_by_account: String?
     end
 
     class InvalidInput
@@ -660,11 +672,13 @@ module Aws::ServiceDiscovery
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?resource_owner: String,
         ?instances: Array[Types::InstanceSummary],
         ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor resource_owner: String?
       attr_accessor instances: Array[Types::InstanceSummary]?
       attr_accessor next_token: String?
     end
@@ -781,6 +795,7 @@ module Aws::ServiceDiscovery
       def initialize: (
         ?id: String,
         ?arn: String,
+        ?resource_owner: String,
         ?name: String,
         ?type: String,
         ?description: String,
@@ -793,6 +808,7 @@ module Aws::ServiceDiscovery
 
       attr_accessor id: String?
       attr_accessor arn: String?
+      attr_accessor resource_owner: String?
       attr_accessor name: String?
       attr_accessor type: String?
       attr_accessor description: String?
@@ -836,6 +852,7 @@ module Aws::ServiceDiscovery
       TYPE: String
       NAME: String
       HTTP_NAME: String
+      RESOURCE_OWNER: String
     end
 
     class NamespaceNotFound
@@ -868,6 +885,7 @@ module Aws::ServiceDiscovery
       def initialize: (
         ?id: String,
         ?arn: String,
+        ?resource_owner: String,
         ?name: String,
         ?type: String,
         ?description: String,
@@ -879,6 +897,7 @@ module Aws::ServiceDiscovery
 
       attr_accessor id: String?
       attr_accessor arn: String?
+      attr_accessor resource_owner: String?
       attr_accessor name: String?
       attr_accessor type: String?
       attr_accessor description: String?
@@ -898,6 +917,7 @@ module Aws::ServiceDiscovery
 
       def initialize: (
         ?id: String,
+        ?owner_account: String,
         ?type: String,
         ?status: String,
         ?error_message: String,
@@ -909,6 +929,7 @@ module Aws::ServiceDiscovery
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
+      attr_accessor owner_account: String?
       attr_accessor type: String?
       attr_accessor status: String?
       attr_accessor error_message: String?
@@ -1213,6 +1234,7 @@ module Aws::ServiceDiscovery
       def initialize: (
         ?id: String,
         ?arn: String,
+        ?resource_owner: String,
         ?name: String,
         ?namespace_id: String,
         ?description: String,
@@ -1223,11 +1245,13 @@ module Aws::ServiceDiscovery
         ?health_check_custom_config: Types::HealthCheckCustomConfig,
         ?create_date: Time,
         ?creator_request_id: String,
+        ?created_by_account: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor arn: String?
+      attr_accessor resource_owner: String?
       attr_accessor name: String?
       attr_accessor namespace_id: String?
       attr_accessor description: String?
@@ -1238,6 +1262,7 @@ module Aws::ServiceDiscovery
       attr_accessor health_check_custom_config: Types::HealthCheckCustomConfig?
       attr_accessor create_date: Time?
       attr_accessor creator_request_id: String?
+      attr_accessor created_by_account: String?
     end
 
     class ServiceAlreadyExists
@@ -1247,12 +1272,14 @@ module Aws::ServiceDiscovery
         ?message: String,
         ?creator_request_id: String,
         ?service_id: String,
+        ?service_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
       attr_accessor creator_request_id: String?
       attr_accessor service_id: String?
+      attr_accessor service_arn: String?
     end
 
     class ServiceAttributes
@@ -1260,11 +1287,13 @@ module Aws::ServiceDiscovery
 
       def initialize: (
         ?service_arn: String,
+        ?resource_owner: String,
         ?attributes: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor service_arn: String?
+      attr_accessor resource_owner: String?
       attr_accessor attributes: Hash[String, String]?
     end
 
@@ -1311,6 +1340,7 @@ module Aws::ServiceDiscovery
 
     module ServiceFilterName
       NAMESPACE_ID: String
+      RESOURCE_OWNER: String
     end
 
     class ServiceNotFound
@@ -1330,6 +1360,7 @@ module Aws::ServiceDiscovery
       def initialize: (
         ?id: String,
         ?arn: String,
+        ?resource_owner: String,
         ?name: String,
         ?type: String,
         ?description: String,
@@ -1338,11 +1369,13 @@ module Aws::ServiceDiscovery
         ?health_check_config: Types::HealthCheckConfig,
         ?health_check_custom_config: Types::HealthCheckCustomConfig,
         ?create_date: Time,
+        ?created_by_account: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor arn: String?
+      attr_accessor resource_owner: String?
       attr_accessor name: String?
       attr_accessor type: String?
       attr_accessor description: String?
@@ -1351,6 +1384,7 @@ module Aws::ServiceDiscovery
       attr_accessor health_check_config: Types::HealthCheckConfig?
       attr_accessor health_check_custom_config: Types::HealthCheckCustomConfig?
       attr_accessor create_date: Time?
+      attr_accessor created_by_account: String?
     end
 
     module ServiceType

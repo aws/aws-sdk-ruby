@@ -47,7 +47,8 @@ module Aws::HealthLake
       end
     end
 
-    # <p>The data store is in a transition state and the user requested action can not be performed.</p>
+    # <p>The data store is in a transition state and the user requested action cannot be
+    #          performed.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::ConflictException] data
@@ -60,7 +61,7 @@ module Aws::HealthLake
       end
     end
 
-    # <p>Unknown error occurs in the service.</p>
+    # <p>An unknown internal error occurred in the service.</p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::InternalServerException] data
@@ -73,7 +74,7 @@ module Aws::HealthLake
       end
     end
 
-    # <p> The requested data store was not found.</p>
+    # <p>The requested data store was not found.</p>
     class ResourceNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::ResourceNotFoundException] data

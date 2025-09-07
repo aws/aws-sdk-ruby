@@ -145,6 +145,7 @@ module Aws::DirectConnect
       def virtual_interface_name: () -> String?
       def vlan: () -> Integer?
       def asn: () -> Integer?
+      def asn_long: () -> Integer?
       def amazon_side_asn: () -> Integer?
       def auth_key: () -> String?
       def amazon_address: () -> String?
@@ -171,6 +172,7 @@ module Aws::DirectConnect
         virtual_interface_name: String,
         vlan: Integer,
         asn: Integer,
+        asn_long: Integer,
         mtu: Integer,
         auth_key: String,
         amazon_address: String,
@@ -195,6 +197,7 @@ module Aws::DirectConnect
       def virtual_interface_name: () -> String?
       def vlan: () -> Integer?
       def asn: () -> Integer?
+      def asn_long: () -> Integer?
       def amazon_side_asn: () -> Integer?
       def auth_key: () -> String?
       def amazon_address: () -> String?
@@ -221,6 +224,7 @@ module Aws::DirectConnect
         virtual_interface_name: String,
         vlan: Integer,
         asn: Integer,
+        asn_long: Integer,
         auth_key: String,
         amazon_address: String,
         customer_address: String,
@@ -250,6 +254,7 @@ module Aws::DirectConnect
         virtual_interface_name: String,
         vlan: Integer,
         asn: Integer,
+        asn_long: Integer,
         mtu: Integer,
         auth_key: String,
         amazon_address: String,
@@ -348,6 +353,7 @@ module Aws::DirectConnect
       def virtual_interface_name: () -> String?
       def vlan: () -> Integer?
       def asn: () -> Integer?
+      def asn_long: () -> Integer?
       def amazon_side_asn: () -> Integer?
       def auth_key: () -> String?
       def amazon_address: () -> String?
@@ -423,6 +429,7 @@ module Aws::DirectConnect
       ?virtual_interface_id: String,
       ?new_bgp_peer: {
         asn: Integer,
+        asn_long: Integer,
         auth_key: String,
         address_family: String,
         amazon_address: String,
@@ -614,6 +621,7 @@ module Aws::DirectConnect
       def virtual_interface_name: () -> String?
       def vlan: () -> Integer?
       def asn: () -> Integer?
+      def asn_long: () -> Integer?
       def amazon_side_asn: () -> Integer?
       def auth_key: () -> String?
       def amazon_address: () -> String?
@@ -639,6 +647,7 @@ module Aws::DirectConnect
         virtual_interface_name: String,
         vlan: Integer,
         asn: Integer,
+        asn_long: Integer,
         mtu: Integer,
         auth_key: String,
         amazon_address: String,
@@ -666,6 +675,7 @@ module Aws::DirectConnect
       def virtual_interface_name: () -> String?
       def vlan: () -> Integer?
       def asn: () -> Integer?
+      def asn_long: () -> Integer?
       def amazon_side_asn: () -> Integer?
       def auth_key: () -> String?
       def amazon_address: () -> String?
@@ -691,6 +701,7 @@ module Aws::DirectConnect
         virtual_interface_name: String,
         vlan: Integer,
         asn: Integer,
+        asn_long: Integer,
         auth_key: String,
         amazon_address: String,
         customer_address: String,
@@ -719,6 +730,7 @@ module Aws::DirectConnect
         virtual_interface_name: String,
         vlan: Integer,
         asn: Integer,
+        asn_long: Integer,
         mtu: Integer,
         auth_key: String,
         amazon_address: String,
@@ -742,6 +754,7 @@ module Aws::DirectConnect
     def delete_bgp_peer: (
       ?virtual_interface_id: String,
       ?asn: Integer,
+      ?asn_long: Integer,
       ?customer_address: String,
       ?bgp_peer_id: String
     ) -> _DeleteBGPPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBGPPeerResponse
@@ -859,14 +872,18 @@ module Aws::DirectConnect
     interface _DescribeConnectionsResponse
       include Smithy::Client::_Response[Types::DescribeConnectionsOutput]
       def connections: () -> Array[Types::Connection]?
+      def next_token: () -> String?
     end
     def describe_connections: (
-      ?connection_id: String
+      ?connection_id: String,
+      ?max_results: Integer,
+      ?next_token: String
     ) -> _DescribeConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectionsResponse
 
     interface _DescribeConnectionsOnInterconnectResponse
       include Smithy::Client::_Response[Types::DescribeConnectionsOnInterconnectOutput]
       def connections: () -> Array[Types::Connection]?
+      def next_token: () -> String?
     end
     def describe_connections_on_interconnect: (
       ?interconnect_id: String
@@ -932,9 +949,12 @@ module Aws::DirectConnect
     interface _DescribeHostedConnectionsResponse
       include Smithy::Client::_Response[Types::DescribeHostedConnectionsOutput]
       def connections: () -> Array[Types::Connection]?
+      def next_token: () -> String?
     end
     def describe_hosted_connections: (
-      ?connection_id: String
+      ?connection_id: String,
+      ?max_results: Integer,
+      ?next_token: String
     ) -> _DescribeHostedConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeHostedConnectionsResponse
 
     interface _DescribeInterconnectLoaResponse
@@ -950,17 +970,23 @@ module Aws::DirectConnect
     interface _DescribeInterconnectsResponse
       include Smithy::Client::_Response[Types::DescribeInterconnectsOutput]
       def interconnects: () -> Array[Types::Interconnect]?
+      def next_token: () -> String?
     end
     def describe_interconnects: (
-      ?interconnect_id: String
+      ?interconnect_id: String,
+      ?max_results: Integer,
+      ?next_token: String
     ) -> _DescribeInterconnectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInterconnectsResponse
 
     interface _DescribeLagsResponse
       include Smithy::Client::_Response[Types::DescribeLagsOutput]
       def lags: () -> Array[Types::Lag]?
+      def next_token: () -> String?
     end
     def describe_lags: (
-      ?lag_id: String
+      ?lag_id: String,
+      ?max_results: Integer,
+      ?next_token: String
     ) -> _DescribeLagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLagsResponse
 
     interface _DescribeLoaResponse
@@ -1009,10 +1035,13 @@ module Aws::DirectConnect
     interface _DescribeVirtualInterfacesResponse
       include Smithy::Client::_Response[Types::DescribeVirtualInterfacesOutput]
       def virtual_interfaces: () -> Array[Types::VirtualInterface]?
+      def next_token: () -> String?
     end
     def describe_virtual_interfaces: (
       ?connection_id: String,
-      ?virtual_interface_id: String
+      ?virtual_interface_id: String,
+      ?max_results: Integer,
+      ?next_token: String
     ) -> _DescribeVirtualInterfacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVirtualInterfacesResponse
 
     interface _DisassociateConnectionFromLagResponse
@@ -1209,6 +1238,7 @@ module Aws::DirectConnect
       def virtual_interface_name: () -> String?
       def vlan: () -> Integer?
       def asn: () -> Integer?
+      def asn_long: () -> Integer?
       def amazon_side_asn: () -> Integer?
       def auth_key: () -> String?
       def amazon_address: () -> String?

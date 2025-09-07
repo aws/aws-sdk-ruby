@@ -684,7 +684,7 @@ module Aws::Glue
     #         profile_id: "HashString",
     #         score: 1.0,
     #         data_source: {
-    #           glue_table: { # required
+    #           glue_table: {
     #             database_name: "NameString", # required
     #             table_name: "NameString", # required
     #             catalog_id: "NameString",
@@ -692,6 +692,16 @@ module Aws::Glue
     #             additional_options: {
     #               "NameString" => "DescriptionString"
     #             }
+    #           },
+    #           data_quality_glue_table: {
+    #             database_name: "NameString", # required
+    #             table_name: "NameString", # required
+    #             catalog_id: "NameString",
+    #             connection_name: "NameString",
+    #             additional_options: {
+    #               "NameString" => "DescriptionString"
+    #             },
+    #             pre_processing_query: "PreProcessingQueryString"
     #           }
     #         },
     #         ruleset_name: "NameString",
@@ -3039,10 +3049,13 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Annotate datapoints over time for a specific data quality statistic.</p>
+    # <p>Annotate datapoints over time for a specific data quality statistic.
+    #         The API requires both profileID and statisticID as part of the InclusionAnnotation input.
+    #         The API only works for a single statisticId across multiple profiles.</p>
     # @param [Hash, Types::BatchPutDataQualityStatisticAnnotationRequest] params
     # @option params [Array<Types::DatapointInclusionAnnotation>] :inclusion_annotations
-    #   <p>A list of <code>DatapointInclusionAnnotation</code>'s.</p>
+    #   <p>A list of <code>DatapointInclusionAnnotation</code>'s. The InclusionAnnotations must contain a profileId and statisticId.
+    #           If there are multiple InclusionAnnotations, the list must refer to a single statisticId across multiple profileIds.</p>
     # @option params [String] :client_token
     #   <p>Client Token.</p>
     # @example Request syntax with placeholder values
@@ -4048,6 +4061,31 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Creates a new Glue Identity Center configuration to enable integration between Glue and Amazon Web Services IAM 
+    #       Identity Center for authentication and authorization.</p>
+    # @param [Hash, Types::CreateGlueIdentityCenterConfigurationRequest] params
+    # @option params [String] :instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the Identity Center instance to be associated with the Glue configuration.</p>
+    # @option params [Array<String>] :scopes
+    #   <p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instance_arn: "IdentityCenterInstanceArn", # required
+    #     scopes: ["IdentityCenterScope"]
+    #   }
+    #   options = {}
+    #   response = client.create_glue_identity_center_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     application_arn: "ApplicationArn"
+    #   }
+    # @return [Types::CreateGlueIdentityCenterConfigurationResponse]
+    def create_glue_identity_center_configuration(params = {}, options = {})
+      request = build_request(:create_glue_identity_center_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a Zero-ETL integration in the caller's account between two resources with Amazon Resource Names (ARNs): the <code>SourceArn</code> and <code>TargetArn</code>.</p>
     # @param [Hash, Types::CreateIntegrationRequest] params
     # @option params [String] :integration_name
@@ -4089,7 +4127,8 @@ module Aws::Glue
     #       refresh_interval: "String128",
     #       source_properties: {
     #         "IntegrationString" => "IntegrationString"
-    #       }
+    #       },
+    #       continuous_sync: false
     #     }
     #   }
     #   options = {}
@@ -4125,7 +4164,8 @@ module Aws::Glue
     #       refresh_interval: "String128",
     #       source_properties: {
     #         "IntegrationString" => "IntegrationString"
-    #       }
+    #       },
+    #       continuous_sync: false
     #     }
     #   }
     # @return [Types::CreateIntegrationResponse]
@@ -7369,6 +7409,22 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Deletes the existing Glue Identity Center configuration, removing the integration between Glue and 
+    #       Amazon Web Services IAM Identity Center.</p>
+    # @param [Hash, Types::DeleteGlueIdentityCenterConfigurationRequest] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.delete_glue_identity_center_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteGlueIdentityCenterConfigurationResponse]
+    def delete_glue_identity_center_configuration(params = {}, options = {})
+      request = build_request(:delete_glue_identity_center_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the specified Zero-ETL integration.</p>
     # @param [Hash, Types::DeleteIntegrationRequest] params
     # @option params [String] :integration_identifier
@@ -8218,7 +8274,8 @@ module Aws::Glue
     #           refresh_interval: "String128",
     #           source_properties: {
     #             "IntegrationString" => "IntegrationString"
-    #           }
+    #           },
+    #           continuous_sync: false
     #         },
     #         errors: [
     #           {
@@ -8286,7 +8343,8 @@ module Aws::Glue
     #           refresh_interval: "String128",
     #           source_properties: {
     #             "IntegrationString" => "IntegrationString"
-    #           }
+    #           },
+    #           continuous_sync: false
     #         },
     #         errors: [
     #           {
@@ -9700,7 +9758,7 @@ module Aws::Glue
     #     profile_id: "HashString",
     #     score: 1.0,
     #     data_source: {
-    #       glue_table: { # required
+    #       glue_table: {
     #         database_name: "NameString", # required
     #         table_name: "NameString", # required
     #         catalog_id: "NameString",
@@ -9708,6 +9766,16 @@ module Aws::Glue
     #         additional_options: {
     #           "NameString" => "DescriptionString"
     #         }
+    #       },
+    #       data_quality_glue_table: {
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         catalog_id: "NameString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString"
+    #         },
+    #         pre_processing_query: "PreProcessingQueryString"
     #       }
     #     },
     #     ruleset_name: "NameString",
@@ -9788,7 +9856,7 @@ module Aws::Glue
     #   {
     #     run_id: "HashString",
     #     data_source: {
-    #       glue_table: { # required
+    #       glue_table: {
     #         database_name: "NameString", # required
     #         table_name: "NameString", # required
     #         catalog_id: "NameString",
@@ -9796,6 +9864,16 @@ module Aws::Glue
     #         additional_options: {
     #           "NameString" => "DescriptionString"
     #         }
+    #       },
+    #       data_quality_glue_table: {
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         catalog_id: "NameString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString"
+    #         },
+    #         pre_processing_query: "PreProcessingQueryString"
     #       }
     #     },
     #     role: "RoleString",
@@ -9864,7 +9942,7 @@ module Aws::Glue
     #   {
     #     run_id: "HashString",
     #     data_source: {
-    #       glue_table: { # required
+    #       glue_table: {
     #         database_name: "NameString", # required
     #         table_name: "NameString", # required
     #         catalog_id: "NameString",
@@ -9872,6 +9950,16 @@ module Aws::Glue
     #         additional_options: {
     #           "NameString" => "DescriptionString"
     #         }
+    #       },
+    #       data_quality_glue_table: {
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         catalog_id: "NameString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString"
+    #         },
+    #         pre_processing_query: "PreProcessingQueryString"
     #       }
     #     },
     #     role: "RoleString",
@@ -9892,7 +9980,7 @@ module Aws::Glue
     #     result_ids: ["HashString"],
     #     additional_data_sources: {
     #       "NameString" => {
-    #         glue_table: { # required
+    #         glue_table: {
     #           database_name: "NameString", # required
     #           table_name: "NameString", # required
     #           catalog_id: "NameString",
@@ -9900,6 +9988,16 @@ module Aws::Glue
     #           additional_options: {
     #             "NameString" => "DescriptionString"
     #           }
+    #         },
+    #         data_quality_glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString"
+    #           },
+    #           pre_processing_query: "PreProcessingQueryString"
     #         }
     #       }
     #     }
@@ -9993,7 +10091,7 @@ module Aws::Glue
     #     next_token: "Token",
     #     max_results: 1,
     #     resource_share_type: "FOREIGN" # One of: ["FOREIGN", "ALL", "FEDERATED"],
-    #     attributes_to_get: ["NAME" # One of: ["NAME"]]
+    #     attributes_to_get: ["NAME" # One of: ["NAME", "TARGET_DATABASE"]]
     #   }
     #   options = {}
     #   response = client.get_databases(params, options)
@@ -10243,6 +10341,26 @@ module Aws::Glue
     # @return [Types::GetEntityRecordsResponse]
     def get_entity_records(params = {}, options = {})
       request = build_request(:get_entity_records, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the current Glue Identity Center configuration details, including the associated Identity Center instance and 
+    #       application information.</p>
+    # @param [Hash, Types::GetGlueIdentityCenterConfigurationRequest] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.get_glue_identity_center_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     application_arn: "ApplicationArn",
+    #     instance_arn: "IdentityCenterInstanceArn",
+    #     scopes: ["GenericString"]
+    #   }
+    # @return [Types::GetGlueIdentityCenterConfigurationResponse]
+    def get_glue_identity_center_configuration(params = {}, options = {})
+      request = build_request(:get_glue_identity_center_configuration, params)
       request.send_request(options)
     end
 
@@ -17787,7 +17905,7 @@ module Aws::Glue
     #   params = {
     #     filter: {
     #       data_source: {
-    #         glue_table: { # required
+    #         glue_table: {
     #           database_name: "NameString", # required
     #           table_name: "NameString", # required
     #           catalog_id: "NameString",
@@ -17795,6 +17913,16 @@ module Aws::Glue
     #           additional_options: {
     #             "NameString" => "DescriptionString"
     #           }
+    #         },
+    #         data_quality_glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString"
+    #           },
+    #           pre_processing_query: "PreProcessingQueryString"
     #         }
     #       },
     #       job_name: "NameString",
@@ -17814,7 +17942,7 @@ module Aws::Glue
     #       {
     #         result_id: "HashString",
     #         data_source: {
-    #           glue_table: { # required
+    #           glue_table: {
     #             database_name: "NameString", # required
     #             table_name: "NameString", # required
     #             catalog_id: "NameString",
@@ -17822,6 +17950,16 @@ module Aws::Glue
     #             additional_options: {
     #               "NameString" => "DescriptionString"
     #             }
+    #           },
+    #           data_quality_glue_table: {
+    #             database_name: "NameString", # required
+    #             table_name: "NameString", # required
+    #             catalog_id: "NameString",
+    #             connection_name: "NameString",
+    #             additional_options: {
+    #               "NameString" => "DescriptionString"
+    #             },
+    #             pre_processing_query: "PreProcessingQueryString"
     #           }
     #         },
     #         job_name: "NameString",
@@ -17849,7 +17987,7 @@ module Aws::Glue
     #   params = {
     #     filter: {
     #       data_source: { # required
-    #         glue_table: { # required
+    #         glue_table: {
     #           database_name: "NameString", # required
     #           table_name: "NameString", # required
     #           catalog_id: "NameString",
@@ -17857,6 +17995,16 @@ module Aws::Glue
     #           additional_options: {
     #             "NameString" => "DescriptionString"
     #           }
+    #         },
+    #         data_quality_glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString"
+    #           },
+    #           pre_processing_query: "PreProcessingQueryString"
     #         }
     #       },
     #       started_before: Time.now,
@@ -17876,7 +18024,7 @@ module Aws::Glue
     #         status: "STARTING" # One of: ["STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"],
     #         started_on: Time.now,
     #         data_source: {
-    #           glue_table: { # required
+    #           glue_table: {
     #             database_name: "NameString", # required
     #             table_name: "NameString", # required
     #             catalog_id: "NameString",
@@ -17884,6 +18032,16 @@ module Aws::Glue
     #             additional_options: {
     #               "NameString" => "DescriptionString"
     #             }
+    #           },
+    #           data_quality_glue_table: {
+    #             database_name: "NameString", # required
+    #             table_name: "NameString", # required
+    #             catalog_id: "NameString",
+    #             connection_name: "NameString",
+    #             additional_options: {
+    #               "NameString" => "DescriptionString"
+    #             },
+    #             pre_processing_query: "PreProcessingQueryString"
     #           }
     #         }
     #       }
@@ -17908,7 +18066,7 @@ module Aws::Glue
     #   params = {
     #     filter: {
     #       data_source: { # required
-    #         glue_table: { # required
+    #         glue_table: {
     #           database_name: "NameString", # required
     #           table_name: "NameString", # required
     #           catalog_id: "NameString",
@@ -17916,6 +18074,16 @@ module Aws::Glue
     #           additional_options: {
     #             "NameString" => "DescriptionString"
     #           }
+    #         },
+    #         data_quality_glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString"
+    #           },
+    #           pre_processing_query: "PreProcessingQueryString"
     #         }
     #       },
     #       started_before: Time.now,
@@ -17935,7 +18103,7 @@ module Aws::Glue
     #         status: "STARTING" # One of: ["STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"],
     #         started_on: Time.now,
     #         data_source: {
-    #           glue_table: { # required
+    #           glue_table: {
     #             database_name: "NameString", # required
     #             table_name: "NameString", # required
     #             catalog_id: "NameString",
@@ -17943,6 +18111,16 @@ module Aws::Glue
     #             additional_options: {
     #               "NameString" => "DescriptionString"
     #             }
+    #           },
+    #           data_quality_glue_table: {
+    #             database_name: "NameString", # required
+    #             table_name: "NameString", # required
+    #             catalog_id: "NameString",
+    #             connection_name: "NameString",
+    #             additional_options: {
+    #               "NameString" => "DescriptionString"
+    #             },
+    #             pre_processing_query: "PreProcessingQueryString"
     #           }
     #         }
     #       }
@@ -18709,6 +18887,8 @@ module Aws::Glue
     #   <p>A description of the integration.</p>
     # @option params [String] :data_filter
     #   <p>Selects source tables for the integration using Maxwell filter syntax.</p>
+    # @option params [Types::IntegrationConfig] :integration_config
+    #   <p>Properties associated with the integration.</p>
     # @option params [String] :integration_name
     #   <p>A unique name for an integration in Glue.</p>
     # @example Request syntax with placeholder values
@@ -18716,6 +18896,13 @@ module Aws::Glue
     #     integration_identifier: "String128", # required
     #     description: "IntegrationDescription",
     #     data_filter: "String2048",
+    #     integration_config: {
+    #       refresh_interval: "String128",
+    #       source_properties: {
+    #         "IntegrationString" => "IntegrationString"
+    #       },
+    #       continuous_sync: false
+    #     },
     #     integration_name: "String128"
     #   }
     #   options = {}
@@ -18746,7 +18933,14 @@ module Aws::Glue
     #         error_message: "String2048"
     #       }
     #     ],
-    #     data_filter: "String2048"
+    #     data_filter: "String2048",
+    #     integration_config: {
+    #       refresh_interval: "String128",
+    #       source_properties: {
+    #         "IntegrationString" => "IntegrationString"
+    #       },
+    #       continuous_sync: false
+    #     }
     #   }
     # @return [Types::ModifyIntegrationResponse]
     def modify_integration(params = {}, options = {})
@@ -19546,7 +19740,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #   params = {
     #     data_source: { # required
-    #       glue_table: { # required
+    #       glue_table: {
     #         database_name: "NameString", # required
     #         table_name: "NameString", # required
     #         catalog_id: "NameString",
@@ -19554,6 +19748,16 @@ module Aws::Glue
     #         additional_options: {
     #           "NameString" => "DescriptionString"
     #         }
+    #       },
+    #       data_quality_glue_table: {
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         catalog_id: "NameString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString"
+    #         },
+    #         pre_processing_query: "PreProcessingQueryString"
     #       }
     #     },
     #     role: "RoleString", # required
@@ -19597,7 +19801,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #   params = {
     #     data_source: { # required
-    #       glue_table: { # required
+    #       glue_table: {
     #         database_name: "NameString", # required
     #         table_name: "NameString", # required
     #         catalog_id: "NameString",
@@ -19605,6 +19809,16 @@ module Aws::Glue
     #         additional_options: {
     #           "NameString" => "DescriptionString"
     #         }
+    #       },
+    #       data_quality_glue_table: {
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         catalog_id: "NameString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString"
+    #         },
+    #         pre_processing_query: "PreProcessingQueryString"
     #       }
     #     },
     #     role: "RoleString", # required
@@ -19619,7 +19833,7 @@ module Aws::Glue
     #     ruleset_names: ["NameString"], # required
     #     additional_data_sources: {
     #       "NameString" => {
-    #         glue_table: { # required
+    #         glue_table: {
     #           database_name: "NameString", # required
     #           table_name: "NameString", # required
     #           catalog_id: "NameString",
@@ -19627,6 +19841,16 @@ module Aws::Glue
     #           additional_options: {
     #             "NameString" => "DescriptionString"
     #           }
+    #         },
+    #         data_quality_glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString"
+    #           },
+    #           pre_processing_query: "PreProcessingQueryString"
     #         }
     #       }
     #     }
@@ -21118,6 +21342,25 @@ module Aws::Glue
     # @return [Types::UpdateDevEndpointResponse]
     def update_dev_endpoint(params = {}, options = {})
       request = build_request(:update_dev_endpoint, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the existing Glue Identity Center configuration, allowing modification of scopes and permissions for the integration.</p>
+    # @param [Hash, Types::UpdateGlueIdentityCenterConfigurationRequest] params
+    # @option params [Array<String>] :scopes
+    #   <p>A list of Identity Center scopes that define the updated permissions and access levels for the Glue configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     scopes: ["IdentityCenterScope"]
+    #   }
+    #   options = {}
+    #   response = client.update_glue_identity_center_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateGlueIdentityCenterConfigurationResponse]
+    def update_glue_identity_center_configuration(params = {}, options = {})
+      request = build_request(:update_glue_identity_center_configuration, params)
       request.send_request(options)
     end
 

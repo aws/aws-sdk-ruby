@@ -188,8 +188,7 @@ module Aws::QApps
       super
     end
 
-    # <p>Associates a rating or review for a library item with the user submitting the request.
-    #       This increments the rating count for the specified library item.</p>
+    # <p>Associates a rating or review for a library item with the user submitting the request. This increments the rating count for the specified library item.</p>
     # @param [Hash, Types::AssociateLibraryItemReviewInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier for the Amazon Q Business application environment instance.</p>
@@ -221,10 +220,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>This operation creates a link between the user's identity calling the operation and a
-    #       specific Q App. This is useful to mark the Q App as a <i>favorite</i> for the
-    #       user if the user doesn't own the Amazon Q App so they can still run it and see it in their
-    #       inventory of Q Apps.</p>
+    # <p>This operation creates a link between the user's identity calling the operation and a specific Q App. This is useful to mark the Q App as a <i>favorite</i> for the user if the user doesn't own the Amazon Q App so they can still run it and see it in their inventory of Q Apps.</p>
     # @param [Hash, Types::AssociateQAppWithUserInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -256,9 +252,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Creates Categories for the Amazon Q Business application environment instance. Web experience users use
-    #       Categories to tag and filter library items. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html">Custom
-    #         labels for Amazon Q Apps</a>.</p>
+    # <p>Creates Categories for the Amazon Q Business application environment instance. Web experience users use Categories to tag and filter library items. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html">Custom labels for Amazon Q Apps</a>.</p>
     # @param [Hash, Types::BatchCreateCategoryInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -305,9 +299,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Deletes Categories for the Amazon Q Business application environment instance. Web experience users use
-    #       Categories to tag and filter library items. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html">Custom
-    #         labels for Amazon Q Apps</a>.</p>
+    # <p>Deletes Categories for the Amazon Q Business application environment instance. Web experience users use Categories to tag and filter library items. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html">Custom labels for Amazon Q Apps</a>.</p>
     # @param [Hash, Types::BatchDeleteCategoryInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -341,9 +333,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Updates Categories for the Amazon Q Business application environment instance. Web experience users use
-    #       Categories to tag and filter library items. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html">Custom
-    #         labels for Amazon Q Apps</a>.</p>
+    # <p>Updates Categories for the Amazon Q Business application environment instance. Web experience users use Categories to tag and filter library items. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html">Custom labels for Amazon Q Apps</a>.</p>
     # @param [Hash, Types::BatchUpdateCategoryInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -390,8 +380,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Creates a new library item for an Amazon Q App, allowing it to be discovered and used by
-    #       other allowed users. </p>
+    # <p>Creates a new library item for an Amazon Q App, allowing it to be discovered and used by other allowed users. </p>
     # @param [Hash, Types::CreateLibraryItemInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -451,10 +440,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Creates a presigned URL for an S3 POST operation to upload a file. You can use this URL to
-    #       set a default file for a <code>FileUploadCard</code> in a Q App definition or to provide a
-    #       file for a single Q App run. The <code>scope</code> parameter determines how the file will be
-    #       used, either at the app definition level or the app session level.</p>
+    # <p>Creates a presigned URL for an S3 POST operation to upload a file. You can use this URL to set a default file for a <code>FileUploadCard</code> in a Q App definition or to provide a file for a single Q App run. The <code>scope</code> parameter determines how the file will be used, either at the app definition level or the app session level.</p> <note> <p>The IAM permissions are derived from the <code>qapps:ImportDocument</code> action. For more information on the IAM policy for Amazon Q Apps, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-q-apps-iam-permissions.html">IAM permissions for using Amazon Q Apps</a>.</p> </note>
     # @param [Hash, Types::CreatePresignedUrlInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -467,11 +453,9 @@ module Aws::QApps
     # @option params [String] :file_name
     #   <p>The name of the file to be uploaded.</p>
     # @option params [String] :scope
-    #   <p>Whether the file is associated with a Q App definition or a specific Q App
-    #         session.</p>
+    #   <p>Whether the file is associated with a Q App definition or a specific Q App session.</p>
     # @option params [String] :session_id
-    #   <p>The unique identifier of the Q App session the file is associated with, if
-    #         applicable.</p>
+    #   <p>The unique identifier of the Q App session the file is associated with, if applicable.</p>
     # @example Upload a file to a specific session
     #   # Example operation for create_presigned_url
     #   params = {
@@ -549,9 +533,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Creates a new Amazon Q App based on the provided definition. The Q App definition specifies
-    #       the cards and flow of the Q App. This operation also calculates the dependencies between the
-    #       cards by inspecting the references in the prompts. </p>
+    # <p>Creates a new Amazon Q App based on the provided definition. The Q App definition specifies the cards and flow of the Q App. This operation also calculates the dependencies between the cards by inspecting the references in the prompts. </p>
     # @param [Hash, Types::CreateQAppInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -770,8 +752,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Deletes a library item for an Amazon Q App, removing it from the library so it can no longer
-    #       be discovered or used by other users.</p>
+    # <p>Deletes a library item for an Amazon Q App, removing it from the library so it can no longer be discovered or used by other users.</p>
     # @param [Hash, Types::DeleteLibraryItemInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -803,8 +784,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Deletes an Amazon Q App owned by the user. If the Q App was previously published to the
-    #       library, it is also removed from the library.</p>
+    # <p>Deletes an Amazon Q App owned by the user. If the Q App was previously published to the library, it is also removed from the library.</p>
     # @param [Hash, Types::DeleteQAppInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -990,8 +970,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Retrieves details about a library item for an Amazon Q App, including its metadata,
-    #       categories, ratings, and usage statistics.</p>
+    # <p>Retrieves details about a library item for an Amazon Q App, including its metadata, categories, ratings, and usage statistics.</p>
     # @param [Hash, Types::GetLibraryItemInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -1074,8 +1053,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Retrieves the full details of an Q App, including its definition specifying the cards and
-    #       flow.</p>
+    # <p>Retrieves the full details of an Q App, including its definition specifying the cards and flow.</p>
     # @param [Hash, Types::GetQAppInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -1423,10 +1401,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Uploads a file that can then be used either as a default in a <code>FileUploadCard</code>
-    #       from Q App definition or as a file that is used inside a single Q App run. The purpose of
-    #       the document is determined by a scope parameter that indicates whether it is at the app
-    #       definition level or at the app session level.</p>
+    # <p>Uploads a file that can then be used either as a default in a <code>FileUploadCard</code> from Q App definition or as a file that is used inside a single Q App run. The purpose of the document is determined by a scope parameter that indicates whether it is at the app definition level or at the app session level.</p>
     # @param [Hash, Types::ImportDocumentInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -1439,11 +1414,9 @@ module Aws::QApps
     # @option params [String] :file_name
     #   <p>The name of the file being uploaded.</p>
     # @option params [String] :scope
-    #   <p>Whether the file is associated with a Q App definition or a specific Q App
-    #         session.</p>
+    #   <p>Whether the file is associated with a Q App definition or a specific Q App session.</p>
     # @option params [String] :session_id
-    #   <p>The unique identifier of the Q App session the file is associated with, if
-    #         applicable.</p>
+    #   <p>The unique identifier of the Q App session the file is associated with, if applicable.</p>
     # @example Upload a file to a specific session
     #   # Example operation for import_document
     #   params = {
@@ -1500,8 +1473,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Lists the categories of a Amazon Q Business application environment instance. For more information, see
-    #         <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html">Custom labels for Amazon Q Apps</a>.</p>
+    # <p>Lists the categories of a Amazon Q Business application environment instance. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html">Custom labels for Amazon Q Apps</a>.</p>
     # @param [Hash, Types::ListCategoriesInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -1553,8 +1525,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Lists the library items for Amazon Q Apps that are published and available for users in your
-    #         Amazon Web Services account.</p>
+    # <p>Lists the library items for Amazon Q Apps that are published and available for users in your Amazon Web Services account.</p>
     # @param [Hash, Types::ListLibraryItemsInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -1723,9 +1694,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Lists the Amazon Q Apps owned by or associated with the user either because they created it
-    #       or because they used it from the library in the past. The user identity is extracted from the
-    #       credentials used to invoke this operation..</p>
+    # <p>Lists the Amazon Q Apps owned by or associated with the user either because they created it or because they used it from the library in the past. The user identity is extracted from the credentials used to invoke this operation..</p>
     # @param [Hash, Types::ListQAppsInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -1883,15 +1852,12 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Generates an Amazon Q App definition based on either a conversation or a problem statement
-    #       provided as input.The resulting app definition can be used to call <code>CreateQApp</code>.
-    #       This API doesn't create Amazon Q Apps directly.</p>
+    # <p>Generates an Amazon Q App definition based on either a conversation or a problem statement provided as input.The resulting app definition can be used to call <code>CreateQApp</code>. This API doesn't create Amazon Q Apps directly.</p>
     # @param [Hash, Types::PredictQAppInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
     # @option params [Types::PredictQAppInputOptions] :options
-    #   <p>The input to generate the Q App definition from, either a conversation or problem
-    #         statement.</p>
+    #   <p>The input to generate the Q App definition from, either a conversation or problem statement.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     instance_id: "InstanceId", # required
@@ -2053,12 +2019,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Starts a new session for an Amazon Q App, allowing inputs to be provided and the app to be
-    #       run.</p>
-    #          <note>
-    #             <p>Each Q App session will be condensed into a single conversation in the web
-    #         experience.</p>
-    #          </note>
+    # <p>Starts a new session for an Amazon Q App, allowing inputs to be provided and the app to be run.</p> <note> <p>Each Q App session will be condensed into a single conversation in the web experience.</p> </note>
     # @param [Hash, Types::StartQAppSessionInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -2126,9 +2087,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Stops an active session for an Amazon Q App.This deletes all data related to the session and
-    #       makes it invalid for future uses. The results of the session will be persisted as part of the
-    #       conversation.</p>
+    # <p>Stops an active session for an Amazon Q App.This deletes all data related to the session and makes it invalid for future uses. The results of the session will be persisted as part of the conversation.</p>
     # @param [Hash, Types::StopQAppSessionInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -2341,8 +2300,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Updates an existing Amazon Q App, allowing modifications to its title, description, and
-    #       definition.</p>
+    # <p>Updates an existing Amazon Q App, allowing modifications to its title, description, and definition.</p>
     # @param [Hash, Types::UpdateQAppInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -2688,11 +2646,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Updates the session for a given Q App <code>sessionId</code>. This is only valid when at
-    #       least one card of the session is in the <code>WAITING</code> state. Data for each
-    #         <code>WAITING</code> card can be provided as input. If inputs are not provided, the call
-    #       will be accepted but session will not move forward. Inputs for cards that are not in the
-    #         <code>WAITING</code> status will be ignored.</p>
+    # <p>Updates the session for a given Q App <code>sessionId</code>. This is only valid when at least one card of the session is in the <code>WAITING</code> state. Data for each <code>WAITING</code> card can be provided as input. If inputs are not provided, the call will be accepted but session will not move forward. Inputs for cards that are not in the <code>WAITING</code> status will be ignored.</p>
     # @param [Hash, Types::UpdateQAppSessionInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
@@ -2729,8 +2683,7 @@ module Aws::QApps
       request.send_request(options)
     end
 
-    # <p>Updates the configuration metadata of a session for a given Q App
-    #       <code>sessionId</code>.</p>
+    # <p>Updates the configuration metadata of a session for a given Q App <code>sessionId</code>.</p>
     # @param [Hash, Types::UpdateQAppSessionMetadataInput] params
     # @option params [String] :instance_id
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>

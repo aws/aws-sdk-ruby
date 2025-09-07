@@ -45,7 +45,7 @@ module Aws::ApiGatewayManagementApi
       service.id = "com.amazonaws.apigatewaymanagementapi#ApiGatewayManagementApi"
       service.name = "ApiGatewayManagementApi"
       service.version = "2018-11-29"
-      service.traits = {"aws.api#service" => {"sdkId" => "ApiGatewayManagementApi", "arnNamespace" => "apigateway", "cloudFormationName" => "ApiGatewayManagementApi", "cloudTrailEventSource" => "apigatewaymanagementapi.amazonaws.com", "endpointPrefix" => "execute-api"}, "aws.auth#sigv4" => {"name" => "execute-api"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AmazonApiGatewayManagementApi"}
+      service.traits = {"aws.api#service" => {"sdkId" => "ApiGatewayManagementApi", "arnNamespace" => "apigateway", "cloudFormationName" => "ApiGatewayManagementApi", "cloudTrailEventSource" => "apigatewaymanagementapi.amazonaws.com", "endpointPrefix" => "execute-api"}, "aws.auth#sigv4" => {"name" => "execute-api"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AmazonApiGatewayManagementApi"}
       service.add_operation(:delete_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.apigatewaymanagementapi#DeleteConnection"
         operation.name = "DeleteConnection"

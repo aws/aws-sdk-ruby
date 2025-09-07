@@ -174,22 +174,26 @@ module Aws::ARCZonalShift
     #   <p>The identifier of the resource that Amazon Web Services shifts traffic for with a practice run zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p> <p>Amazon Application Recovery Controller currently supports enabling the following resources for zonal shift and zonal autoshift:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html">Amazon EC2 Auto Scaling groups</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html">Amazon Elastic Kubernetes Service</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html">Application Load Balancer</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html">Network Load Balancer</a> </p> </li> </ul>
     #   @return [String]
     # @!attribute blocked_windows
-    #   <p>Optionally, you can block ARC from starting practice runs for specific windows of days and times. </p> <p>The format for blocked windows is: DAY:HH:SS-DAY:HH:SS. Keep in mind, when you specify dates, that dates and times for practice runs are in UTC. Also, be aware of potential time adjustments that might be required for daylight saving time differences. Separate multiple blocked windows with spaces.</p> <p>For example, say you run business report summaries three days a week. For this scenario, you might set the following recurring days and times as blocked windows, for example: <code>MON-20:30-21:30 WED-20:30-21:30 FRI-20:30-21:30</code>.</p>
+    #   <p>Optionally, you can block ARC from starting practice runs for specific windows of days and times. </p> <p>The format for blocked windows is: DAY:HH:SS-DAY:HH:SS. Keep in mind, when you specify dates, that dates and times for practice runs are in UTC. Also, be aware of potential time adjustments that might be required for daylight saving time differences. Separate multiple blocked windows with spaces.</p> <p>For example, say you run business report summaries three days a week. For this scenario, you could set the following recurring days and times as blocked windows, for example: <code>Mon:00:00-Mon:10:00 Wed-20:30-Wed:21:30 Fri-20:30-Fri:21:30</code>.</p> <important> <p>The <code>blockedWindows</code> have to start and end on the same day. Windows that span multiple days aren't supported.</p> </important>
     #   @return [Array<String>]
     # @!attribute blocked_dates
     #   <p>Optionally, you can block ARC from starting practice runs for a resource on specific calendar dates.</p> <p>The format for blocked dates is: YYYY-MM-DD. Keep in mind, when you specify dates, that dates and times for practice runs are in UTC. Separate multiple blocked dates with spaces.</p> <p>For example, if you have an application update scheduled to launch on May 1, 2024, and you don't want practice runs to shift traffic away at that time, you could set a blocked date for <code>2024-05-01</code>.</p>
     #   @return [Array<String>]
     # @!attribute blocking_alarms
-    #   <p>An Amazon CloudWatch alarm that you can specify for zonal autoshift practice runs. This alarm blocks ARC from starting practice run zonal shifts, and ends a practice run that's in progress, when the alarm is in an <code>ALARM</code> state. </p>
+    #   <p> <i>Blocking alarms</i> for practice runs are optional alarms that you can specify that block practice runs when one or more of the alarms is in an <code>ALARM</code> state.</p>
     #   @return [Array<Types::ControlCondition>]
+    # @!attribute allowed_windows
+    #   <p>Optionally, you can allow ARC to start practice runs for specific windows of days and times. </p> <p>The format for allowed windows is: DAY:HH:SS-DAY:HH:SS. Keep in mind, when you specify dates, that dates and times for practice runs are in UTC. Also, be aware of potential time adjustments that might be required for daylight saving time differences. Separate multiple allowed windows with spaces.</p> <p>For example, say you want to allow practice runs only on Wednesdays and Fridays from noon to 5 p.m. For this scenario, you could set the following recurring days and times as allowed windows, for example: <code>Wed-12:00-Wed:17:00 Fri-12:00-Fri:17:00</code>.</p> <important> <p>The <code>allowedWindows</code> have to start and end on the same day. Windows that span multiple days aren't supported.</p> </important>
+    #   @return [Array<String>]
     # @!attribute outcome_alarms
-    #   <p>The <i>outcome alarm</i> for practice runs is a required Amazon CloudWatch alarm that you specify that ends a practice run when the alarm is in an <code>ALARM</code> state.</p> <p>Configure the alarm to monitor the health of your application when traffic is shifted away from an Availability Zone during each practice run. You should configure the alarm to go into an <code>ALARM</code> state if your application is impacted by the zonal shift, and you want to stop the zonal shift, to let traffic for the resource return to the Availability Zone.</p>
+    #   <p> <i>Outcome alarms</i> for practice runs are alarms that you specify that end a practice run when one or more of the alarms is in an <code>ALARM</code> state.</p> <p>Configure one or more of these alarms to monitor the health of your application when traffic is shifted away from an Availability Zone during each practice run. You should configure these alarms to go into an <code>ALARM</code> state if you want to stop a zonal shift, to let traffic for the resource return to the original Availability Zone.</p>
     #   @return [Array<Types::ControlCondition>]
     class CreatePracticeRunConfigurationRequest < Struct.new(
       :resource_identifier,
       :blocked_windows,
       :blocked_dates,
       :blocking_alarms,
+      :allowed_windows,
       :outcome_alarms,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -437,13 +441,16 @@ module Aws::ARCZonalShift
 
     # <p>A practice run configuration for a resource includes the Amazon CloudWatch alarms that you've specified for a practice run, as well as any blocked dates or blocked windows for the practice run. When a resource has a practice run configuration, ARC shifts traffic for the resource weekly for practice runs.</p> <p>Practice runs are required for zonal autoshift. The zonal shifts that ARC starts for practice runs help you to ensure that shifting away traffic from an Availability Zone during an autoshift is safe for your application.</p> <p>You can update or delete a practice run configuration. Before you delete a practice run configuration, you must disable zonal autoshift for the resource. A practice run configuration is required when zonal autoshift is enabled.</p>
     # @!attribute blocking_alarms
-    #   <p>The <i>blocking alarm</i> for practice runs is an optional alarm that you can specify that blocks practice runs when the alarm is in an <code>ALARM</code> state.</p>
+    #   <p> <i>Blocking alarms</i> for practice runs are optional alarms that you can specify that block practice runs when one or more of the alarms is in an <code>ALARM</code> state.</p>
     #   @return [Array<Types::ControlCondition>]
     # @!attribute outcome_alarms
-    #   <p>The <i>outcome alarm</i> for practice runs is an alarm that you specify that ends a practice run when the alarm is in an <code>ALARM</code> state.</p>
+    #   <p> <i>Outcome alarms</i> for practice runs are alarms that you specify that end a practice run when one or more of the alarms is in an <code>ALARM</code> state.</p>
     #   @return [Array<Types::ControlCondition>]
     # @!attribute blocked_windows
-    #   <p>An array of one or more windows of days and times that you can block ARC from starting practice runs for a resource.</p> <p>Specify the blocked windows in UTC, using the format <code>DAY:HH:MM-DAY:HH:MM</code>, separated by spaces. For example, <code>MON:18:30-MON:19:30 TUE:18:30-TUE:19:30</code>.</p>
+    #   <p>An array of one or more windows of days and times that you can block ARC from starting practice runs for a resource.</p> <p>Specify the blocked windows in UTC, using the format <code>DAY:HH:MM-DAY:HH:MM</code>, separated by spaces. For example, <code>MON:18:30-MON:19:30 TUE:18:30-TUE:19:30</code>.</p> <p>The <code>blockedWindows</code> have to start and end on the same day. Windows that span multiple days aren't supported.</p>
+    #   @return [Array<String>]
+    # @!attribute allowed_windows
+    #   <p>An array of one or more windows of days and times that you can allow ARC to start practice runs for a resource.</p> <p>For example, say you want to allow practice runs only on Wednesdays and Fridays from noon to 5 p.m. For this scenario, you could set the following recurring days and times as allowed windows, for example: <code>Wed-12:00-Wed:17:00 Fri-12:00-Fri:17:00</code>.</p> <p>The <code>allowedWindows</code> have to start and end on the same day. Windows that span multiple days aren't supported.</p>
     #   @return [Array<String>]
     # @!attribute blocked_dates
     #   <p>An array of one or more dates that you can specify when Amazon Web Services does not start practice runs for a resource.</p> <p>Specify blocked dates, in UTC, in the format <code>YYYY-MM-DD</code>, separated by spaces. </p>
@@ -452,6 +459,7 @@ module Aws::ARCZonalShift
       :blocking_alarms,
       :outcome_alarms,
       :blocked_windows,
+      :allowed_windows,
       :blocked_dates,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -612,16 +620,20 @@ module Aws::ARCZonalShift
     #   <p>Add, change, or remove blocked dates for a practice run in zonal autoshift.</p> <p>Optionally, you can block practice runs for specific calendar dates. The format for blocked dates is: YYYY-MM-DD. Keep in mind, when you specify dates, that dates and times for practice runs are in UTC. Separate multiple blocked dates with spaces.</p> <p>For example, if you have an application update scheduled to launch on May 1, 2024, and you don't want practice runs to shift traffic away at that time, you could set a blocked date for <code>2024-05-01</code>.</p>
     #   @return [Array<String>]
     # @!attribute blocking_alarms
-    #   <p>Add, change, or remove the Amazon CloudWatch alarm that you optionally specify as the blocking alarm for practice runs.</p>
+    #   <p>Add, change, or remove the Amazon CloudWatch alarms that you optionally specify as the blocking alarms for practice runs.</p>
     #   @return [Array<Types::ControlCondition>]
+    # @!attribute allowed_windows
+    #   <p>Add, change, or remove windows of days and times for when you can, optionally, allow ARC to start a practice run for a resource.</p> <p>The format for allowed windows is: DAY:HH:SS-DAY:HH:SS. Keep in mind, when you specify dates, that dates and times for practice runs are in UTC. Also, be aware of potential time adjustments that might be required for daylight saving time differences. Separate multiple allowed windows with spaces.</p> <p>For example, say you want to allow practice runs only on Wednesdays and Fridays from noon to 5 p.m. For this scenario, you could set the following recurring days and times as allowed windows, for example: <code>Wed-12:00-Wed:17:00 Fri-12:00-Fri:17:00</code>.</p> <important> <p>The <code>allowedWindows</code> have to start and end on the same day. Windows that span multiple days aren't supported.</p> </important>
+    #   @return [Array<String>]
     # @!attribute outcome_alarms
-    #   <p>Specify a new the Amazon CloudWatch alarm as the outcome alarm for practice runs.</p>
+    #   <p>Specify one or more Amazon CloudWatch alarms as the outcome alarms for practice runs.</p>
     #   @return [Array<Types::ControlCondition>]
     class UpdatePracticeRunConfigurationRequest < Struct.new(
       :resource_identifier,
       :blocked_windows,
       :blocked_dates,
       :blocking_alarms,
+      :allowed_windows,
       :outcome_alarms,
       keyword_init: true)
       include ::Smithy::Schema::Structure

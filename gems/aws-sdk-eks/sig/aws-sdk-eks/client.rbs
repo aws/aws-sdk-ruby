@@ -132,7 +132,10 @@ module Aws::EKS
           service_account: String,
           role_arn: untyped
         }
-      ]
+      ],
+      ?namespace_config: {
+        namespace: String
+      }
     ) -> _CreateAddonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAddonResponse
 
     interface _CreateClusterResponse
@@ -494,6 +497,17 @@ module Aws::EKS
       ?id: String
     ) -> _DescribeInsightResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInsightResponse
 
+    interface _DescribeInsightsRefreshResponse
+      include Smithy::Client::_Response[Types::DescribeInsightsRefreshResponse]
+      def message: () -> String?
+      def status: () -> String?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+    end
+    def describe_insights_refresh: (
+      ?cluster_name: String
+    ) -> _DescribeInsightsRefreshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInsightsRefreshResponse
+
     interface _DescribeNodegroupResponse
       include Smithy::Client::_Response[Types::DescribeNodegroupResponse]
       def nodegroup: () -> Types::Nodegroup?
@@ -710,6 +724,15 @@ module Aws::EKS
       ?client_request_token: String,
       ?tags: Hash[String, String]
     ) -> _RegisterClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterClusterResponse
+
+    interface _StartInsightsRefreshResponse
+      include Smithy::Client::_Response[Types::StartInsightsRefreshResponse]
+      def message: () -> String?
+      def status: () -> String?
+    end
+    def start_insights_refresh: (
+      ?cluster_name: String
+    ) -> _StartInsightsRefreshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartInsightsRefreshResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]

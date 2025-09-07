@@ -865,6 +865,10 @@ module Aws::KinesisAnalyticsV2
     #             }
     #           }
     #         ]
+    #       },
+    #       application_encryption_configuration: {
+    #         key_id: "KeyId",
+    #         key_type: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
     #       }
     #     },
     #     cloud_watch_logging_options: [
@@ -1098,6 +1102,10 @@ module Aws::KinesisAnalyticsV2
     #               }
     #             }
     #           ]
+    #         },
+    #         application_encryption_configuration_description: {
+    #           key_id: "KeyId",
+    #           key_type: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
     #         }
     #       },
     #       cloud_watch_logging_option_descriptions: [
@@ -1660,6 +1668,10 @@ module Aws::KinesisAnalyticsV2
     #               }
     #             }
     #           ]
+    #         },
+    #         application_encryption_configuration_description: {
+    #           key_id: "KeyId",
+    #           key_type: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
     #         }
     #       },
     #       cloud_watch_logging_option_descriptions: [
@@ -1687,12 +1699,15 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # Returns information about a specific operation performed on a Managed Service for Apache Flink application
+    # <p>Provides a detailed description of a specified application operation. To see a list of all the operations of an application, invoke the <a>ListApplicationOperations</a> operation.</p>
+    #          <note>
+    #             <p>This operation is supported only for Managed Service for Apache Flink.</p>
+    #          </note>
     # @param [Hash, Types::DescribeApplicationOperationRequest] params
     # @option params [String] :application_name
-    #   The name of the application
+    #   <p>The name of the application.</p>
     # @option params [String] :operation_id
-    #   Identifier of the Operation
+    #   <p>The operation ID of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     application_name: "ApplicationName", # required
@@ -1748,7 +1763,11 @@ module Aws::KinesisAnalyticsV2
     #       snapshot_status: "CREATING" # One of: ["CREATING", "READY", "DELETING", "FAILED"], # required
     #       application_version_id: 1, # required
     #       snapshot_creation_timestamp: Time.now,
-    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"]
+    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"],
+    #       application_encryption_configuration_description: {
+    #         key_id: "KeyId",
+    #         key_type: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
+    #       }
     #     }
     #   }
     # @return [Types::DescribeApplicationSnapshotResponse]
@@ -1989,6 +2008,10 @@ module Aws::KinesisAnalyticsV2
     #               }
     #             }
     #           ]
+    #         },
+    #         application_encryption_configuration_description: {
+    #           key_id: "KeyId",
+    #           key_type: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
     #         }
     #       },
     #       cloud_watch_logging_option_descriptions: [
@@ -2093,18 +2116,23 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # Lists information about operations performed on a Managed Service for Apache Flink application
+    # <p>Lists all the operations performed for the specified application such as UpdateApplication, StartApplication etc.
+    #       The response also includes a summary of the operation.</p>
+    #          <p>To get the complete description of a specific operation, invoke the <a>DescribeApplicationOperation</a> operation.</p>
+    #          <note>
+    #             <p>This operation is supported only for Managed Service for Apache Flink.</p>
+    #          </note>
     # @param [Hash, Types::ListApplicationOperationsRequest] params
     # @option params [String] :application_name
-    #   The name of the application
+    #   <p>The name of the application.</p>
     # @option params [Integer] :limit
-    #   Limit on the number of records returned in the response
+    #   <p>The limit on the number of records to be returned in the response.</p>
     # @option params [String] :next_token
-    #   If a previous command returned a pagination token, pass it into this value to retrieve the next set of results
+    #   <p>A pagination token that can be used in a subsequent request.</p>
     # @option params [String] :operation
-    #   Type of operation performed on an application
+    #   <p>The type of operation that is performed on an application.</p>
     # @option params [String] :operation_status
-    #   Status of the operation performed on an application
+    #   <p>The status of the operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     application_name: "ApplicationName", # required
@@ -2162,7 +2190,11 @@ module Aws::KinesisAnalyticsV2
     #         snapshot_status: "CREATING" # One of: ["CREATING", "READY", "DELETING", "FAILED"], # required
     #         application_version_id: 1, # required
     #         snapshot_creation_timestamp: Time.now,
-    #         runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"]
+    #         runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"],
+    #         application_encryption_configuration_description: {
+    #           key_id: "KeyId",
+    #           key_type: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
+    #         }
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -2515,6 +2547,10 @@ module Aws::KinesisAnalyticsV2
     #               }
     #             }
     #           ]
+    #         },
+    #         application_encryption_configuration_description: {
+    #           key_id: "KeyId",
+    #           key_type: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
     #         }
     #       },
     #       cloud_watch_logging_option_descriptions: [
@@ -2899,6 +2935,10 @@ module Aws::KinesisAnalyticsV2
     #             }
     #           }
     #         ]
+    #       },
+    #       application_encryption_configuration_update: {
+    #         key_id_update: "KeyId",
+    #         key_type_update: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
     #       }
     #     },
     #     service_execution_role_update: "RoleARN",
@@ -3138,6 +3178,10 @@ module Aws::KinesisAnalyticsV2
     #               }
     #             }
     #           ]
+    #         },
+    #         application_encryption_configuration_description: {
+    #           key_id: "KeyId",
+    #           key_type: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
     #         }
     #       },
     #       cloud_watch_logging_option_descriptions: [

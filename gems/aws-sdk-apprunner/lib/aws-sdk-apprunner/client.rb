@@ -669,8 +669,7 @@ module Aws::AppRunner
     #           Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.</p>
     #            <note>
     #               <p>
-    #           App Runner currently only provides support for IPv4.
-    #         </p>
+    #           App Runner only supports subnets of IP address type <i>IPv4</i> and <i>dual stack</i> (IPv4 and IPv6).</p>
     #            </note>
     # @option params [Array<String>] :security_groups
     #   <p>A list of IDs of security groups that App Runner should use for access to Amazon Web Services resources under the specified subnets. If not specified, App Runner uses the

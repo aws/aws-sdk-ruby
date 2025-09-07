@@ -310,7 +310,7 @@ module Aws::Mq
     #   <p>Create tags when creating the broker.</p>
     #   @return [Hash<String, String>]
     # @!attribute users
-    #   <p>The list of broker users (persons or applications) who can access queues and topics. For Amazon MQ for RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.</p>
+    #   <p>The list of broker users (persons or applications) who can access queues and topics. For Amazon MQ for RabbitMQ brokers, an administrative user is required if using simple authentication and authorization. For brokers using OAuth2, this user is optional. When provided, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.</p>
     #   @return [Array<Types::User>]
     # @!attribute data_replication_mode
     #   <p>Defines whether this broker is a part of a data replication pair.</p>

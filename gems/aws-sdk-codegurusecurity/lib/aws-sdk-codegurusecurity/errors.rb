@@ -63,9 +63,7 @@ module Aws::CodeGuruSecurity
       end
     end
 
-    # <p>The requested operation would cause a conflict with the current state of a service
-    #       resource associated with the request. Resolve the conflict before retrying this
-    #       request.</p>
+    # <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeGuruSecurity::Types::ConflictException] data

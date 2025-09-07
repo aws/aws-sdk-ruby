@@ -35,8 +35,7 @@ module Aws::SsmSap
     #   <p>The status message.</p>
     #   @return [String]
     # @!attribute associated_application_arns
-    #   <p>The Amazon Resource Names of the associated AWS Systems Manager for SAP
-    #            applications.</p>
+    #   <p>The Amazon Resource Names of the associated AWS Systems Manager for SAP applications.</p>
     #   @return [Array<String>]
     class Application < Struct.new(
       :id,
@@ -61,8 +60,7 @@ module Aws::SsmSap
     #   <p>The type of the application credentials. </p>
     #   @return [String]
     # @!attribute secret_id
-    #   <p>The secret ID created in AWS Secrets Manager to store the credentials of the SAP
-    #            application. </p>
+    #   <p>The secret ID created in AWS Secrets Manager to store the credentials of the SAP application. </p>
     #   @return [String]
     class ApplicationCredential < Struct.new(
       :database_name,
@@ -72,8 +70,7 @@ module Aws::SsmSap
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The summary of the SAP application registered with AWS Systems Manager for SAP.
-    #       </p>
+    # <p>The summary of the SAP application registered with AWS Systems Manager for SAP. </p>
     # @!attribute id
     #   <p>The ID of the application.</p>
     #   @return [String]
@@ -121,8 +118,7 @@ module Aws::SsmSap
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Configuration parameters for AWS Backint Agent for SAP HANA. You can backup your SAP
-    #          HANA database with AWS Backup or Amazon S3.</p>
+    # <p>Configuration parameters for AWS Backint Agent for SAP HANA. You can backup your SAP HANA database with AWS Backup or Amazon S3.</p>
     # @!attribute backint_mode
     #   <p>AWS service for your database backup.</p>
     #   @return [String]
@@ -147,14 +143,10 @@ module Aws::SsmSap
     #   <p>The SAP system number of the application component.</p>
     #   @return [String]
     # @!attribute parent_component
-    #   <p>The parent component of a highly available environment. For example, in a highly
-    #            available SAP on AWS workload, the parent component consists of the entire setup,
-    #            including the child components.</p>
+    #   <p>The parent component of a highly available environment. For example, in a highly available SAP on AWS workload, the parent component consists of the entire setup, including the child components.</p>
     #   @return [String]
     # @!attribute child_components
-    #   <p>The child components of a highly available environment. For example, in a highly
-    #            available SAP on AWS workload, the child component consists of the primary and secondar
-    #            instances.</p>
+    #   <p>The child components of a highly available environment. For example, in a highly available SAP on AWS workload, the child component consists of the primary and secondar instances.</p>
     #   @return [Array<String>]
     # @!attribute application_id
     #   <p>The ID of the application.</p>
@@ -163,35 +155,7 @@ module Aws::SsmSap
     #   <p>The type of the component.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of the component.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>ACTIVATED - this status has been deprecated.</p>
-    #               </li>
-    #               <li>
-    #                  <p>STARTING - the component is in the process of being started.</p>
-    #               </li>
-    #               <li>
-    #                  <p>STOPPED - the component is not running.</p>
-    #               </li>
-    #               <li>
-    #                  <p>STOPPING - the component is in the process of being stopped.</p>
-    #               </li>
-    #               <li>
-    #                  <p>RUNNING - the component is running.</p>
-    #               </li>
-    #               <li>
-    #                  <p>RUNNING_WITH_ERROR - one or more child component(s) of the parent component is not
-    #                  running. Call <a href="https://docs.aws.amazon.com/ssmsap/latest/APIReference/API_GetComponent.html">
-    #                        <code>GetComponent</code>
-    #                     </a> to review the status of each child
-    #                  component.</p>
-    #               </li>
-    #               <li>
-    #                  <p>UNDEFINED - AWS Systems Manager for SAP cannot provide the component status
-    #                  based on the discovered information. Verify your SAP application.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The status of the component.</p> <ul> <li> <p>ACTIVATED - this status has been deprecated.</p> </li> <li> <p>STARTING - the component is in the process of being started.</p> </li> <li> <p>STOPPED - the component is not running.</p> </li> <li> <p>STOPPING - the component is in the process of being stopped.</p> </li> <li> <p>RUNNING - the component is running.</p> </li> <li> <p>RUNNING_WITH_ERROR - one or more child component(s) of the parent component is not running. Call <a href="https://docs.aws.amazon.com/ssmsap/latest/APIReference/API_GetComponent.html"> <code>GetComponent</code> </a> to review the status of each child component.</p> </li> <li> <p>UNDEFINED - AWS Systems Manager for SAP cannot provide the component status based on the discovered information. Verify your SAP application.</p> </li> </ul>
     #   @return [String]
     # @!attribute sap_hostname
     #   <p>The hostname of the component.</p>
@@ -258,19 +222,15 @@ module Aws::SsmSap
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This is information about the component of 
-    #          your SAP application, such as Web Dispatcher.</p>
+    # <p>This is information about the component of your SAP application, such as Web Dispatcher.</p>
     # @!attribute component_type
-    #   <p>This string is the type of the component.</p>
-    #            <p>Accepted value is <code>WD</code>.</p>
+    #   <p>This string is the type of the component.</p> <p>Accepted value is <code>WD</code>.</p>
     #   @return [String]
     # @!attribute sid
-    #   <p>This string is the SAP System ID of the component.</p>
-    #            <p>Accepted values are alphanumeric.</p>
+    #   <p>This string is the SAP System ID of the component.</p> <p>Accepted values are alphanumeric.</p>
     #   @return [String]
     # @!attribute ec2_instance_id
-    #   <p>This is the Amazon EC2 instance on which your SAP component is running.</p>
-    #            <p>Accepted values are alphanumeric.</p>
+    #   <p>This is the Amazon EC2 instance on which your SAP component is running.</p> <p>Accepted values are alphanumeric.</p>
     #   @return [String]
     class ComponentInfo < Struct.new(
       :component_type,
@@ -306,6 +266,74 @@ module Aws::SsmSap
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents a configuration check definition supported by AWS Systems Manager for SAP.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the configuration check.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the configuration check.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of what the configuration check validates.</p>
+    #   @return [String]
+    # @!attribute applicable_application_types
+    #   <p>The list of SSMSAP application types that this configuration check can be evaluated against.</p>
+    #   @return [Array<String>]
+    class ConfigurationCheckDefinition < Struct.new(
+      :id,
+      :name,
+      :description,
+      :applicable_application_types,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a configuration check operation that has been executed against an application.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the configuration check operation.</p>
+    #   @return [String]
+    # @!attribute application_id
+    #   <p>The ID of the application against which the configuration check was performed.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the configuration check operation.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>A message providing additional details about the status of the configuration check operation.</p>
+    #   @return [String]
+    # @!attribute configuration_check_id
+    #   <p>The unique identifier of the configuration check that was performed.</p>
+    #   @return [String]
+    # @!attribute configuration_check_name
+    #   <p>The name of the configuration check that was performed.</p>
+    #   @return [String]
+    # @!attribute configuration_check_description
+    #   <p>A description of the configuration check that was performed.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The time at which the configuration check operation started.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The time at which the configuration check operation completed.</p>
+    #   @return [Time]
+    # @!attribute rule_status_counts
+    #   <p>A summary of all the rule results, showing counts for each status type.</p>
+    #   @return [Types::RuleStatusCounts]
+    class ConfigurationCheckOperation < Struct.new(
+      :id,
+      :application_id,
+      :status,
+      :status_message,
+      :configuration_check_id,
+      :configuration_check_name,
+      :configuration_check_description,
+      :start_time,
+      :end_time,
+      :rule_status_counts,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A conflict has occurred.</p>
     # @!attribute message
     #   @return [String]
@@ -315,8 +343,7 @@ module Aws::SsmSap
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The SAP HANA database of the application registered with AWS Systems Manager for
-    #          SAP.</p>
+    # <p>The SAP HANA database of the application registered with AWS Systems Manager for SAP.</p>
     # @!attribute application_id
     #   <p>The ID of the application.</p>
     #   @return [String]
@@ -351,8 +378,7 @@ module Aws::SsmSap
     #   <p>The time at which the database was last updated.</p>
     #   @return [Time]
     # @!attribute connected_component_arns
-    #   <p>The Amazon Resource Names of the connected AWS Systems Manager for SAP
-    #            components.</p>
+    #   <p>The Amazon Resource Names of the connected AWS Systems Manager for SAP components.</p>
     #   @return [Array<String>]
     class Database < Struct.new(
       :application_id,
@@ -464,9 +490,7 @@ module Aws::SsmSap
     #   <p>The name of the filter. Filter names are case-sensitive. </p>
     #   @return [String]
     # @!attribute value
-    #   <p>The filter values. Filter values are case-sensitive. If you specify multiple values for
-    #            a filter, the values are joined with an OR, and the request returns all results that match
-    #            any of the specified values</p>
+    #   <p>The filter values. Filter values are case-sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values</p>
     #   @return [String]
     # @!attribute operator
     #   <p>The operator for the filter. </p>
@@ -497,8 +521,7 @@ module Aws::SsmSap
     end
 
     # @!attribute application
-    #   <p>Returns all of the metadata of an application registered with AWS Systems Manager for
-    #            SAP.</p>
+    #   <p>Returns all of the metadata of an application registered with AWS Systems Manager for SAP.</p>
     #   @return [Types::Application]
     # @!attribute tags
     #   <p>The tags of a registered application.</p>
@@ -536,6 +559,24 @@ module Aws::SsmSap
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute operation_id
+    #   <p>The ID of the configuration check operation.</p>
+    #   @return [String]
+    class GetConfigurationCheckOperationInput < Struct.new(
+      :operation_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute configuration_check_operation
+    #   <p>Returns the details of a configuration check operation.</p>
+    #   @return [Types::ConfigurationCheckOperation]
+    class GetConfigurationCheckOperationOutput < Struct.new(
+      :configuration_check_operation,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute application_id
     #   <p>The ID of the application.</p>
     #   @return [String]
@@ -558,8 +599,7 @@ module Aws::SsmSap
     end
 
     # @!attribute database
-    #   <p>The SAP HANA database of an application registered with AWS Systems Manager for
-    #            SAP.</p>
+    #   <p>The SAP HANA database of an application registered with AWS Systems Manager for SAP.</p>
     #   @return [Types::Database]
     # @!attribute tags
     #   <p>The tags of a database.</p>
@@ -672,8 +712,7 @@ module Aws::SsmSap
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return with a single call. To retrieve the remaining
-    #            results, make another call with the returned nextToken value.</p>
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>
     #   @return [Integer]
     # @!attribute filters
     #   <p>The filter of name, value, and operator.</p>
@@ -690,8 +729,7 @@ module Aws::SsmSap
     #   <p>The applications registered with AWS Systems Manager for SAP.</p>
     #   @return [Array<Types::ApplicationSummary>]
     # @!attribute next_token
-    #   <p>The token to use to retrieve the next page of results. This value is null when there are
-    #            no more results to return.</p>
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListApplicationsOperationOutput < Struct.new(
       :applications,
@@ -707,10 +745,7 @@ module Aws::SsmSap
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return with a single call. To retrieve the remaining
-    #            results, make another call with the returned nextToken value.</p>
-    #            <p>If you do not specify a value for MaxResults, the request returns 50 items per page by
-    #            default.</p>
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p> <p>If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>
     #   @return [Integer]
     class ListComponentsOperationInput < Struct.new(
       :application_id,
@@ -724,11 +759,74 @@ module Aws::SsmSap
     #   <p>List of components registered with AWS System Manager for SAP.</p>
     #   @return [Array<Types::ComponentSummary>]
     # @!attribute next_token
-    #   <p>The token to use to retrieve the next page of results. This value is null when there are
-    #            no more results to return.</p>
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListComponentsOperationOutput < Struct.new(
       :components,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListConfigurationCheckDefinitionsInput < Struct.new(
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute configuration_checks
+    #   <p>The configuration check types supported by AWS Systems Manager for SAP.</p>
+    #   @return [Array<Types::ConfigurationCheckDefinition>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListConfigurationCheckDefinitionsOutput < Struct.new(
+      :configuration_checks,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_id
+    #   <p>The ID of the application.</p>
+    #   @return [String]
+    # @!attribute list_mode
+    #   <p>The mode for listing configuration check operations. Defaults to "LATEST_PER_CHECK".</p> <ul> <li> <p>LATEST_PER_CHECK - Will list the latest configuration check operation per check type.</p> </li> <li> <p>ALL_OPERATIONS - Will list all configuration check operations performed on the application.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters of an operation.</p>
+    #   @return [Array<Types::Filter>]
+    class ListConfigurationCheckOperationsInput < Struct.new(
+      :application_id,
+      :list_mode,
+      :max_results,
+      :next_token,
+      :filters,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute configuration_check_operations
+    #   <p>The configuration check operations performed by AWS Systems Manager for SAP.</p>
+    #   @return [Array<Types::ConfigurationCheckOperation>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListConfigurationCheckOperationsOutput < Struct.new(
+      :configuration_check_operations,
       :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -744,9 +842,7 @@ module Aws::SsmSap
     #   <p>The token for the next page of results. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return with a single call. To retrieve the remaining
-    #            results, make another call with the returned nextToken value. If you do not specify a value
-    #            for MaxResults, the request returns 50 items per page by default.</p>
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>
     #   @return [Integer]
     class ListDatabasesOperationInput < Struct.new(
       :application_id,
@@ -761,8 +857,7 @@ module Aws::SsmSap
     #   <p>The SAP HANA databases of an application.</p>
     #   @return [Array<Types::DatabaseSummary>]
     # @!attribute next_token
-    #   <p>The token to use to retrieve the next page of results. This value is null when there are
-    #            no more results to return.</p>
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListDatabasesOperationOutput < Struct.new(
       :databases,
@@ -775,20 +870,13 @@ module Aws::SsmSap
     #   <p>The ID of the operation.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return with a single call. To retrieve the remaining
-    #            results, make another call with the returned nextToken value.</p>
-    #            <p>If you do not specify a value for <code>MaxResults</code>, the request returns 50 items
-    #            per page by default.</p>
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p> <p>If you do not specify a value for <code>MaxResults</code>, the request returns 50 items per page by default.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token to use to retrieve the next page of results. This value is null when there are
-    #            no more results to return.</p>
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     # @!attribute filters
-    #   <p>Optionally specify filters to narrow the returned operation event items.</p>
-    #            <p>Valid filter names include <code>status</code>, <code>resourceID</code>, and
-    #               <code>resourceType</code>. The valid operator for all three filters is
-    #               <code>Equals</code>.</p>
+    #   <p>Optionally specify filters to narrow the returned operation event items.</p> <p>Valid filter names include <code>status</code>, <code>resourceID</code>, and <code>resourceType</code>. The valid operator for all three filters is <code>Equals</code>.</p>
     #   @return [Array<Types::Filter>]
     class ListOperationEventsInput < Struct.new(
       :operation_id,
@@ -803,8 +891,7 @@ module Aws::SsmSap
     #   <p>A returned list of operation events that meet the filter criteria.</p>
     #   @return [Array<Types::OperationEvent>]
     # @!attribute next_token
-    #   <p>The token to use to retrieve the next page of results. This value is null when there are
-    #            no more results to return.</p>
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListOperationEventsOutput < Struct.new(
       :operation_events,
@@ -817,9 +904,7 @@ module Aws::SsmSap
     #   <p>The ID of the application.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return with a single call. To retrieve the remaining
-    #            results, make another call with the returned nextToken value. If you do not specify a value
-    #            for MaxResults, the request returns 50 items per page by default.</p>
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>The token for the next page of results. </p>
@@ -840,11 +925,70 @@ module Aws::SsmSap
     #   <p>List of operations performed by AWS Systems Manager for SAP.</p>
     #   @return [Array<Types::Operation>]
     # @!attribute next_token
-    #   <p>The token to use to retrieve the next page of results. This value is null when there are
-    #            no more results to return.</p>
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
     #   @return [String]
     class ListOperationsOperationOutput < Struct.new(
       :operations,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute operation_id
+    #   <p>The ID of the configuration check operation.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListSubCheckResultsInput < Struct.new(
+      :operation_id,
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute sub_check_results
+    #   <p>The sub-check results of a configuration check operation.</p>
+    #   @return [Array<Types::SubCheckResult>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListSubCheckResultsOutput < Struct.new(
+      :sub_check_results,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute sub_check_result_id
+    #   <p>The ID of the sub check result.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListSubCheckRuleResultsInput < Struct.new(
+      :sub_check_result_id,
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_results
+    #   <p>The rule results of a sub-check belonging to a configuration check operation.</p>
+    #   @return [Array<Types::RuleResult>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListSubCheckRuleResultsOutput < Struct.new(
+      :rule_results,
       :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -918,38 +1062,15 @@ module Aws::SsmSap
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An operation event returns details for an operation, including key milestones which can
-    #          be used to monitor and track operations in progress.</p>
-    #          <p>Operation events contain:</p>
-    #          <ul>
-    #             <li>
-    #                <p>Description string</p>
-    #             </li>
-    #             <li>
-    #                <p>Resource, including its ARN and type</p>
-    #             </li>
-    #             <li>
-    #                <p>Status</p>
-    #             </li>
-    #             <li>
-    #                <p>StatusMessage string</p>
-    #             </li>
-    #             <li>
-    #                <p>TimeStamp</p>
-    #             </li>
-    #          </ul>
-    #          <p>Operation event examples include StartApplication or StopApplication.</p>
+    # <p>An operation event returns details for an operation, including key milestones which can be used to monitor and track operations in progress.</p> <p>Operation events contain:</p> <ul> <li> <p>Description string</p> </li> <li> <p>Resource, including its ARN and type</p> </li> <li> <p>Status</p> </li> <li> <p>StatusMessage string</p> </li> <li> <p>TimeStamp</p> </li> </ul> <p>Operation event examples include StartApplication or StopApplication.</p>
     # @!attribute description
-    #   <p>A description of the operation event. For example, "Stop the EC2 instance
-    #            i-abcdefgh987654321".</p>
+    #   <p>A description of the operation event. For example, "Stop the EC2 instance i-abcdefgh987654321".</p>
     #   @return [String]
     # @!attribute resource
-    #   <p>The resource involved in the operations event.</p>
-    #            <p>Contains <code>ResourceArn</code> ARN and <code>ResourceType</code>.</p>
+    #   <p>The resource involved in the operations event.</p> <p>Contains <code>ResourceArn</code> ARN and <code>ResourceType</code>.</p>
     #   @return [Types::Resource]
     # @!attribute status
-    #   <p>The status of the operation event. The possible statuses are: <code>IN_PROGRESS</code>,
-    #               <code>COMPLETED</code>, and <code>FAILED</code>.</p>
+    #   <p>The status of the operation event. The possible statuses are: <code>IN_PROGRESS</code>, <code>COMPLETED</code>, and <code>FAILED</code>.</p>
     #   @return [String]
     # @!attribute status_message
     #   <p>The status message relating to a specific operation event.</p>
@@ -1018,11 +1139,7 @@ module Aws::SsmSap
     #   <p>The Amazon Resource Name of the SAP HANA database.</p>
     #   @return [String]
     # @!attribute components_info
-    #   <p>This is an optional parameter for component details 
-    #            to which the SAP ABAP application is attached, 
-    #            such as Web Dispatcher.</p>
-    #            <p>This is an array of ApplicationComponent objects. 
-    #            You may input 0 to 5 items.</p>
+    #   <p>This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.</p> <p>This is an array of ApplicationComponent objects. You may input 0 to 5 items.</p>
     #   @return [Array<Types::ComponentInfo>]
     class RegisterApplicationOperationInput < Struct.new(
       :application_id,
@@ -1077,17 +1194,12 @@ module Aws::SsmSap
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The resource contains a <code>ResourceArn</code> and the
-    #          <code>ResourceType</code>.</p>
+    # <p>The resource contains a <code>ResourceArn</code> and the <code>ResourceType</code>.</p>
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the source resource.</p>
-    #            <p>Example of <code>ResourceArn</code>:
-    #               "<code>arn:aws:ec2:us-east-1:111111111111:instance/i-abcdefgh987654321</code>"</p>
+    #   <p>The Amazon Resource Name (ARN) of the source resource.</p> <p>Example of <code>ResourceArn</code>: "<code>arn:aws:ec2:us-east-1:111111111111:instance/i-abcdefgh987654321</code>"</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>The resource type.</p>
-    #            <p>Example of <code>ResourceType</code>: "<code>AWS::SystemsManagerSAP::Component</code>"
-    #            or "<code>AWS::EC2::Instance</code>".</p>
+    #   <p>The resource type.</p> <p>Example of <code>ResourceType</code>: "<code>AWS::SystemsManagerSAP::Component</code>" or "<code>AWS::EC2::Instance</code>".</p>
     #   @return [String]
     class Resource < Struct.new(
       :resource_arn,
@@ -1101,6 +1213,58 @@ module Aws::SsmSap
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the result of a single rule within a configuration check.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the rule result.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of what the rule validates.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the rule result.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message providing details about the rule result.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>Additional metadata associated with the rule result.</p>
+    #   @return [Hash<String, String>]
+    class RuleResult < Struct.new(
+      :id,
+      :description,
+      :status,
+      :message,
+      :metadata,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of rule results, providing counts for each status type.</p>
+    # @!attribute failed
+    #   <p>The number of rules that failed.</p>
+    #   @return [Integer]
+    # @!attribute warning
+    #   <p>The number of rules that returned warnings.</p>
+    #   @return [Integer]
+    # @!attribute info
+    #   <p>The number of rules that returned informational results.</p>
+    #   @return [Integer]
+    # @!attribute passed
+    #   <p>The number of rules that passed.</p>
+    #   @return [Integer]
+    # @!attribute unknown
+    #   <p>The number of rules with unknown status.</p>
+    #   @return [Integer]
+    class RuleStatusCounts < Struct.new(
+      :failed,
+      :warning,
+      :info,
+      :passed,
+      :unknown,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1144,14 +1308,33 @@ module Aws::SsmSap
     # @!attribute application_id
     #   <p>The ID of the application.</p>
     #   @return [String]
+    # @!attribute configuration_check_ids
+    #   <p>The list of configuration checks to perform.</p>
+    #   @return [Array<String>]
+    class StartConfigurationChecksInput < Struct.new(
+      :application_id,
+      :configuration_check_ids,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute configuration_check_operations
+    #   <p>The configuration check operations that were started.</p>
+    #   @return [Array<Types::ConfigurationCheckOperation>]
+    class StartConfigurationChecksOutput < Struct.new(
+      :configuration_check_operations,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_id
+    #   <p>The ID of the application.</p>
+    #   @return [String]
     # @!attribute stop_connected_entity
-    #   <p>Specify the <code>ConnectedEntityType</code>. Accepted type is <code>DBMS</code>.</p>
-    #            <p>If this parameter is included, the connected DBMS (Database Management System) will be
-    #            stopped.</p>
+    #   <p>Specify the <code>ConnectedEntityType</code>. Accepted type is <code>DBMS</code>.</p> <p>If this parameter is included, the connected DBMS (Database Management System) will be stopped.</p>
     #   @return [String]
     # @!attribute include_ec2_instance_shutdown
-    #   <p>Boolean. If included and if set to <code>True</code>, the StopApplication operation will
-    #            shut down the associated Amazon EC2 instance in addition to the application.</p>
+    #   <p>Boolean. If included and if set to <code>True</code>, the StopApplication operation will shut down the associated Amazon EC2 instance in addition to the application.</p>
     #   @return [Boolean]
     class StopApplicationInput < Struct.new(
       :application_id,
@@ -1166,6 +1349,28 @@ module Aws::SsmSap
     #   @return [String]
     class StopApplicationOutput < Struct.new(
       :operation_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the result of a sub-check within a configuration check operation.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the sub-check result.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the sub-check.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of what the sub-check validates.</p>
+    #   @return [String]
+    # @!attribute references
+    #   <p>A list of references or documentation links related to the sub-check.</p>
+    #   @return [Array<String>]
+    class SubCheckResult < Struct.new(
+      :id,
+      :name,
+      :description,
+      :references,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1201,8 +1406,7 @@ module Aws::SsmSap
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     # @!attribute tag_keys
-    #   <p>Adds/updates or removes credentials for applications registered with AWS Systems
-    #            Manager for SAP.</p>
+    #   <p>Adds/updates or removes credentials for applications registered with AWS Systems Manager for SAP.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
       :resource_arn,
@@ -1229,8 +1433,7 @@ module Aws::SsmSap
     #   <p>Installation of AWS Backint Agent for SAP HANA.</p>
     #   @return [Types::BackintConfig]
     # @!attribute database_arn
-    #   <p>The Amazon Resource Name of the SAP HANA database that replaces the current SAP HANA
-    #            connection with the SAP_ABAP application.</p>
+    #   <p>The Amazon Resource Name of the SAP HANA database that replaces the current SAP HANA connection with the SAP_ABAP application.</p>
     #   @return [String]
     class UpdateApplicationSettingsOperationInput < Struct.new(
       :application_id,

@@ -191,9 +191,7 @@ module Aws::CodeGuruSecurity
     # <p>Returns a list of requested findings from standard scans.</p>
     # @param [Hash, Types::BatchGetFindingsRequest] params
     # @option params [Array<Types::FindingIdentifier>] :finding_identifiers
-    #   <p>A list of finding identifiers. Each identifier consists of a <code>scanName</code> and a
-    #           <code>findingId</code>. You retrieve the <code>findingId</code> when you call
-    #           <code>GetFindings</code>.</p>
+    #   <p>A list of finding identifiers. Each identifier consists of a <code>scanName</code> and a <code>findingId</code>. You retrieve the <code>findingId</code> when you call <code>GetFindings</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     finding_identifiers: [ # required
@@ -277,39 +275,17 @@ module Aws::CodeGuruSecurity
     # <p>Use to create a scan using code uploaded to an Amazon S3 bucket.</p>
     # @param [Hash, Types::CreateScanRequest] params
     # @option params [String] :client_token
-    #   <p>The idempotency token for the request. Amazon CodeGuru Security uses this value to prevent
-    #         the accidental creation of duplicate scans if there are failures and retries.</p>
+    #   <p>The idempotency token for the request. Amazon CodeGuru Security uses this value to prevent the accidental creation of duplicate scans if there are failures and retries.</p>
     # @option params [Types::ResourceId] :resource_id
     #   <p>The identifier for the resource object to be scanned.</p>
     # @option params [String] :scan_name
-    #   <p>The unique name that CodeGuru Security uses to track revisions across multiple scans of
-    #         the same resource. Only allowed for a <code>STANDARD</code> scan type. </p>
+    #   <p>The unique name that CodeGuru Security uses to track revisions across multiple scans of the same resource. Only allowed for a <code>STANDARD</code> scan type. </p>
     # @option params [String] :scan_type
-    #   <p>The type of scan, either <code>Standard</code> or <code>Express</code>. Defaults to
-    #         <code>Standard</code> type if missing.</p>
-    #            <p>
-    #               <code>Express</code> scans run on limited resources and use a limited set of detectors to
-    #         analyze your code in near-real time. <code>Standard</code> scans have standard resource limits
-    #         and use the full set of detectors to analyze your code.</p>
+    #   <p>The type of scan, either <code>Standard</code> or <code>Express</code>. Defaults to <code>Standard</code> type if missing.</p> <p> <code>Express</code> scans run on limited resources and use a limited set of detectors to analyze your code in near-real time. <code>Standard</code> scans have standard resource limits and use the full set of detectors to analyze your code.</p>
     # @option params [String] :analysis_type
-    #   <p>The type of analysis you want CodeGuru Security to perform in the scan, either
-    #           <code>Security</code> or <code>All</code>. The <code>Security</code> type only generates
-    #         findings related to security. The <code>All</code> type generates both security findings and
-    #         quality findings. Defaults to <code>Security</code> type if missing.</p>
+    #   <p>The type of analysis you want CodeGuru Security to perform in the scan, either <code>Security</code> or <code>All</code>. The <code>Security</code> type only generates findings related to security. The <code>All</code> type generates both security findings and quality findings. Defaults to <code>Security</code> type if missing.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>An array of key-value pairs used to tag a scan. A tag is a custom attribute
-    #         label with two parts:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or
-    #               <code>Secret</code>. Tag keys are case sensitive.</p>
-    #               </li>
-    #               <li>
-    #                  <p>An optional tag value field. For example, <code>111122223333</code>,
-    #               <code>Production</code>, or a team name. Omitting the tag value is the same as using an
-    #               empty string. Tag values are case sensitive.</p>
-    #               </li>
-    #            </ul>
+    #   <p>An array of key-value pairs used to tag a scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -344,15 +320,10 @@ module Aws::CodeGuruSecurity
       request.send_request(options)
     end
 
-    # <p>Generates a pre-signed URL, request headers used to upload a code resource, and code
-    #       artifact identifier for the uploaded resource.</p>
-    #          <p>You can upload your code resource to the URL with the request headers using any HTTP
-    #       client.</p>
+    # <p>Generates a pre-signed URL, request headers used to upload a code resource, and code artifact identifier for the uploaded resource.</p> <p>You can upload your code resource to the URL with the request headers using any HTTP client.</p>
     # @param [Hash, Types::CreateUploadUrlRequest] params
     # @option params [String] :scan_name
-    #   <p>The name of the scan that will use the uploaded resource. CodeGuru Security uses the
-    #         unique scan name to track revisions across multiple scans of the same resource. Use this 
-    #         <code>scanName</code> when you call <code>CreateScan</code> on the code resource you upload to this URL.</p>
+    #   <p>The name of the scan that will use the uploaded resource. CodeGuru Security uses the unique scan name to track revisions across multiple scans of the same resource. Use this <code>scanName</code> when you call <code>CreateScan</code> on the code resource you upload to this URL.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     scan_name: "ScanName", # required
@@ -398,17 +369,11 @@ module Aws::CodeGuruSecurity
     # @option params [String] :scan_name
     #   <p>The name of the scan you want to retrieve findings from.</p>
     # @option params [String] :next_token
-    #   <p>A token to use for paginating results that are returned in the response. Set the value of
-    #         this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value
-    #         returned from the previous request to continue listing results after the first page.</p>
+    #   <p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request to continue listing results after the first page.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in the response. Use this parameter when
-    #         paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code>
-    #         element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve
-    #         additional results. If not specified, returns 1000 results.</p>
+    #   <p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results. If not specified, returns 1000 results.</p>
     # @option params [String] :status
-    #   <p>The status of the findings you want to get. Pass either <code>Open</code>,
-    #         <code>Closed</code>, or <code>All</code>.</p>
+    #   <p>The status of the findings you want to get. Pass either <code>Open</code>, <code>Closed</code>, or <code>All</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     scan_name: "ScanName", # required
@@ -480,13 +445,10 @@ module Aws::CodeGuruSecurity
       request.send_request(options)
     end
 
-    # <p>Returns a summary of metrics for an account from a specified date, including number of open
-    #       findings, the categories with most findings, the scans with most open findings, and scans with
-    #       most open critical findings. </p>
+    # <p>Returns a summary of metrics for an account from a specified date, including number of open findings, the categories with most findings, the scans with most open findings, and scans with most open critical findings. </p>
     # @param [Hash, Types::GetMetricsSummaryRequest] params
     # @option params [Time] :date
-    #   <p>The date you want to retrieve summary metrics from, rounded to the nearest day. The date
-    #         must be within the past two years.</p>
+    #   <p>The date you want to retrieve summary metrics from, rounded to the nearest day. The date must be within the past two years.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     date: Time.now, # required
@@ -536,8 +498,7 @@ module Aws::CodeGuruSecurity
     # @option params [String] :scan_name
     #   <p>The name of the scan you want to view details about.</p>
     # @option params [String] :run_id
-    #   <p>UUID that identifies the individual scan run you want to view details about. You retrieve
-    #         this when you call the <code>CreateScan</code> operation. Defaults to the latest scan run if missing.</p>
+    #   <p>UUID that identifies the individual scan run you want to view details about. You retrieve this when you call the <code>CreateScan</code> operation. Defaults to the latest scan run if missing.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     scan_name: "ScanName", # required
@@ -567,21 +528,13 @@ module Aws::CodeGuruSecurity
     # <p>Returns metrics about all findings in an account within a specified time range.</p>
     # @param [Hash, Types::ListFindingsMetricsRequest] params
     # @option params [String] :next_token
-    #   <p>A token to use for paginating results that are returned in the response. Set the
-    #         value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code>
-    #         value returned from the previous request to continue listing results after the first
-    #         page.</p>
+    #   <p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request to continue listing results after the first page.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in the response. Use this parameter when
-    #         paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code>
-    #         element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve
-    #         additional results. If not specified, returns 1000 results.</p>
+    #   <p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results. If not specified, returns 1000 results.</p>
     # @option params [Time] :start_date
-    #   <p>The start date of the interval which you want to retrieve metrics from. Rounds to the
-    #         nearest day.</p>
+    #   <p>The start date of the interval which you want to retrieve metrics from. Rounds to the nearest day.</p>
     # @option params [Time] :end_date
-    #   <p>The end date of the interval which you want to retrieve metrics from. Round to the nearest
-    #         day.</p>
+    #   <p>The end date of the interval which you want to retrieve metrics from. Round to the nearest day.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "NextToken",
@@ -635,18 +588,12 @@ module Aws::CodeGuruSecurity
       request.send_request(options)
     end
 
-    # <p>Returns a list of all scans in an account. Does not return <code>EXPRESS</code>
-    #       scans.</p>
+    # <p>Returns a list of all scans in an account. Does not return <code>EXPRESS</code> scans.</p>
     # @param [Hash, Types::ListScansRequest] params
     # @option params [String] :next_token
-    #   <p>A token to use for paginating results that are returned in the response. Set the value of
-    #         this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value
-    #         returned from the previous request to continue listing results after the first page.</p>
+    #   <p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request to continue listing results after the first page.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in the response. Use this parameter when
-    #         paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code>
-    #         element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve
-    #         additional results. If not specified, returns 100 results.</p>
+    #   <p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results. If not specified, returns 100 results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "NextToken",
@@ -678,8 +625,7 @@ module Aws::CodeGuruSecurity
     # <p>Returns a list of all tags associated with a scan.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling
-    #           <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>
+    #   <p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "ScanNameArn", # required
@@ -702,22 +648,9 @@ module Aws::CodeGuruSecurity
     # <p>Use to add one or more tags to an existing scan.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling
-    #           <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>
+    #   <p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute
-    #       label with two parts:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or
-    #             <code>Secret</code>. Tag keys are case sensitive.</p>
-    #               </li>
-    #               <li>
-    #                  <p>An optional tag value field. For example, <code>111122223333</code>,
-    #             <code>Production</code>, or a team name. Omitting the tag value is the same as using an
-    #             empty string. Tag values are case sensitive.</p>
-    #               </li>
-    #            </ul>
+    #   <p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "ScanNameArn", # required
@@ -739,8 +672,7 @@ module Aws::CodeGuruSecurity
     # <p>Use to remove one or more tags from an existing scan.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling
-    #           <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>
+    #   <p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>
     # @option params [Array<String>] :tag_keys
     #   <p>A list of keys for each tag you want to remove from a scan.</p>
     # @example Request syntax with placeholder values
@@ -762,10 +694,7 @@ module Aws::CodeGuruSecurity
     # <p>Use to update the encryption configuration for an account.</p>
     # @param [Hash, Types::UpdateAccountConfigurationRequest] params
     # @option params [Types::EncryptionConfig] :encryption_config
-    #   <p>The customer-managed KMS key ARN you want to use for encryption. If not specified,
-    #         CodeGuru Security will use an AWS-managed key for encryption. If you previously specified a
-    #         customer-managed KMS key and want CodeGuru Security to use an AWS-managed key for encryption
-    #         instead, pass nothing.</p>
+    #   <p>The customer-managed KMS key ARN you want to use for encryption. If not specified, CodeGuru Security will use an AWS-managed key for encryption. If you previously specified a customer-managed KMS key and want CodeGuru Security to use an AWS-managed key for encryption instead, pass nothing.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     encryption_config: { # required

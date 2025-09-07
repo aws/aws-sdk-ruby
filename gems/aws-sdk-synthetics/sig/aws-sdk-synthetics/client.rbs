@@ -99,6 +99,11 @@ module Aws::Synthetics
       },
       ?resources_to_replicate_tags: Array[String],
       ?provisioned_resource_cleanup: String,
+      ?browser_configs: Array[
+        {
+          browser_type: String
+        }
+      ],
       ?tags: Hash[String, String],
       ?artifact_config: {
         s3_encryption: {
@@ -151,7 +156,8 @@ module Aws::Synthetics
     def describe_canaries_last_run: (
       ?next_token: String,
       ?max_results: Integer,
-      ?names: Array[String]
+      ?names: Array[String],
+      ?browser_type: String
     ) -> _DescribeCanariesLastRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCanariesLastRunResponse
 
     interface _DescribeRuntimeVersionsResponse
@@ -291,7 +297,8 @@ module Aws::Synthetics
             ignore_coordinates: Array[String]
           }
         ],
-        base_canary_run_id: untyped
+        base_canary_run_id: untyped,
+        browser_type: String
       },
       ?artifact_s3_location: String,
       ?artifact_config: {
@@ -300,7 +307,24 @@ module Aws::Synthetics
           kms_key_arn: String
         }
       },
-      ?provisioned_resource_cleanup: String
+      ?provisioned_resource_cleanup: String,
+      ?browser_configs: Array[
+        {
+          browser_type: String
+        }
+      ],
+      ?visual_references: Array[
+        {
+          base_screenshots: Array[
+            {
+              screenshot_name: String,
+              ignore_coordinates: Array[String]
+            }
+          ],
+          base_canary_run_id: untyped,
+          browser_type: String
+        }
+      ]
     ) -> _StartCanaryDryRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCanaryDryRunResponse
 
     interface _StopCanaryResponse
@@ -374,7 +398,8 @@ module Aws::Synthetics
             ignore_coordinates: Array[String]
           }
         ],
-        base_canary_run_id: untyped
+        base_canary_run_id: untyped,
+        browser_type: String
       },
       ?artifact_s3_location: String,
       ?artifact_config: {
@@ -384,7 +409,24 @@ module Aws::Synthetics
         }
       },
       ?provisioned_resource_cleanup: String,
-      ?dry_run_id: String
+      ?dry_run_id: String,
+      ?visual_references: Array[
+        {
+          base_screenshots: Array[
+            {
+              screenshot_name: String,
+              ignore_coordinates: Array[String]
+            }
+          ],
+          base_canary_run_id: untyped,
+          browser_type: String
+        }
+      ],
+      ?browser_configs: Array[
+        {
+          browser_type: String
+        }
+      ]
     ) -> _UpdateCanaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCanaryResponse
   end
 end

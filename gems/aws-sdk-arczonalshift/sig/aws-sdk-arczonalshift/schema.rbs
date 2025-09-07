@@ -3,6 +3,8 @@ module Aws::ARCZonalShift
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    AllowedWindow: StringShape
+    AllowedWindows: ListShape
     AppliedStatus: EnumShape
     AppliedWeights: MapShape
     AutoshiftAppliedStatus: EnumShape
@@ -18,6 +20,7 @@ module Aws::ARCZonalShift
     BlockedDates: ListShape
     BlockedWindow: StringShape
     BlockedWindows: ListShape
+    BlockingAlarms: ListShape
     CancelPracticeRunRequest: StructureShape
     CancelPracticeRunResponse: StructureShape
     CancelZonalShiftOutput: StructureShape
@@ -26,7 +29,6 @@ module Aws::ARCZonalShift
     ConflictExceptionReason: EnumShape
     ControlCondition: StructureShape
     ControlConditionType: EnumShape
-    ControlConditions: ListShape
     CreatePracticeRunConfigurationRequest: StructureShape
     CreatePracticeRunConfigurationResponse: StructureShape
     DeletePracticeRunConfigurationRequest: StructureShape
@@ -48,6 +50,7 @@ module Aws::ARCZonalShift
     ManagedResourceSummary: StructureShape
     MaxResults: IntegerShape
     MetricIdentifier: StringShape
+    OutcomeAlarms: ListShape
     PracticeRunConfiguration: StructureShape
     PracticeRunOutcome: EnumShape
     ResourceArn: StringShape

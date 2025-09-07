@@ -12,8 +12,9 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('HealthLake', Module.new) unless Aws.const_defined?('HealthLake')
 
 # @title Amazon HealthLake
-# <p>AWS HealthLake is a HIPAA eligibile service that allows customers to store,
-#          transform, query, and analyze their FHIR-formatted data in a consistent fashion in the cloud.</p>
+# <p>This is the <i>AWS HealthLake API Reference</i>. For an introduction to
+#          the service, see <a href="https://docs.aws.amazon.com/healthlake/latest/devguide/what-is.html">What is AWS HealthLake?</a> in the <i>AWS HealthLake Developer
+#             Guide</i>.</p>
 module Aws::HealthLake
   VERSION = '2.0.0.pre0'
 end

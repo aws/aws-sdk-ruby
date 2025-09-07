@@ -11,6 +11,7 @@ module Aws::XRay
     Annotations: MapShape
     AnomalousService: StructureShape
     AnomalousServiceList: ListShape
+    AnomalyCount: IntegerShape
     AttributeKey: StringShape
     AttributeMap: MapShape
     AttributeValue: StringShape
@@ -23,6 +24,7 @@ module Aws::XRay
     CancelTraceRetrievalRequest: StructureShape
     CancelTraceRetrievalResult: StructureShape
     ClientID: StringShape
+    CooldownWindowMinutes: IntegerShape
     CreateGroupRequest: StructureShape
     CreateGroupResult: StructureShape
     CreateSamplingRuleRequest: StructureShape
@@ -144,6 +146,7 @@ module Aws::XRay
     ListTagsForResourceResponse: StructureShape
     LockoutPreventionException: StructureShape
     MalformedPolicyDocumentException: StructureShape
+    MaxRate: FloatShape
     NullableBoolean: BooleanShape
     NullableDouble: FloatShape
     NullableInteger: IntegerShape
@@ -188,7 +191,12 @@ module Aws::XRay
     RootCauseExceptions: ListShape
     RuleLimitExceededException: StructureShape
     RuleName: StringShape
+    SampledAnomalyCount: IntegerShape
     SampledCount: IntegerShape
+    SamplingBoost: StructureShape
+    SamplingBoostStatisticsDocument: StructureShape
+    SamplingBoostStatisticsDocumentList: ListShape
+    SamplingRateBoost: StructureShape
     SamplingRule: StructureShape
     SamplingRuleRecord: StructureShape
     SamplingRuleRecordList: ListShape
@@ -236,6 +244,7 @@ module Aws::XRay
     Timestamp: TimestampShape
     Token: StringShape
     TooManyTagsException: StructureShape
+    TotalCount: IntegerShape
     Trace: StructureShape
     TraceAvailabilityZones: ListShape
     TraceFormatType: EnumShape

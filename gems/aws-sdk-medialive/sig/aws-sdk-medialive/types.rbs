@@ -172,6 +172,17 @@ module Aws::MediaLive
       attr_accessor kms_key_id: String?
     end
 
+    class AdditionalDestinations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: Types::OutputLocationRef,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: Types::OutputLocationRef?
+    end
+
     module AfdSignaling
       AUTO: String
       FIXED: String
@@ -1032,6 +1043,7 @@ module Aws::MediaLive
         ?teletext_grid_control: String,
         ?x_position: Integer,
         ?y_position: Integer,
+        ?subtitle_rows: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1052,6 +1064,13 @@ module Aws::MediaLive
       attr_accessor teletext_grid_control: String?
       attr_accessor x_position: Integer?
       attr_accessor y_position: Integer?
+      attr_accessor subtitle_rows: String?
+    end
+
+    module BurnInDestinationSubtitleRows
+      ROWS_16: String
+      ROWS_20: String
+      ROWS_24: String
     end
 
     module BurnInFontColor
@@ -1628,6 +1647,7 @@ module Aws::MediaLive
         ?timed_metadata_id3_frame: String,
         ?timed_metadata_id3_period: Integer,
         ?timed_metadata_passthrough: String,
+        ?additional_destinations: Array[Types::AdditionalDestinations],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1647,6 +1667,7 @@ module Aws::MediaLive
       attr_accessor timed_metadata_id3_frame: String?
       attr_accessor timed_metadata_id3_period: Integer?
       attr_accessor timed_metadata_passthrough: String?
+      attr_accessor additional_destinations: Array[Types::AdditionalDestinations]?
     end
 
     class CmafIngestOutputSettings
@@ -3917,6 +3938,7 @@ module Aws::MediaLive
         ?teletext_grid_control: String,
         ?x_position: Integer,
         ?y_position: Integer,
+        ?subtitle_rows: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3937,12 +3959,19 @@ module Aws::MediaLive
       attr_accessor teletext_grid_control: String?
       attr_accessor x_position: Integer?
       attr_accessor y_position: Integer?
+      attr_accessor subtitle_rows: String?
     end
 
     module DvbSubDestinationShadowColor
       BLACK: String
       NONE: String
       WHITE: String
+    end
+
+    module DvbSubDestinationSubtitleRows
+      ROWS_16: String
+      ROWS_20: String
+      ROWS_24: String
     end
 
     module DvbSubDestinationTeletextGridControl

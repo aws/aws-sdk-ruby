@@ -188,27 +188,25 @@ module Aws::HealthLake
       super
     end
 
-    # <p>Creates a data store that can ingest and export FHIR formatted data.</p>
+    # <p>Create a FHIR-enabled data store.</p>
     # @param [Hash, Types::CreateFHIRDatastoreRequest] params
     # @option params [String] :datastore_name
-    #   <p>The user generated name for the data store.</p>
+    #   <p>The data store name (user-generated).</p>
     # @option params [String] :datastore_type_version
-    #   <p>The FHIR version of the data store. The only supported version is R4.</p>
+    #   <p>The FHIR release version supported by the data store. Current support is for version
+    #               <code>R4</code>.</p>
     # @option params [Types::SseConfiguration] :sse_configuration
-    #   <p>
-    #               The server-side encryption key configuration for a customer provided encryption key specified for creating a data store.
-    #            </p>
+    #   <p>The server-side encryption key configuration for a customer-provided encryption key
+    #            specified for creating a data store. </p>
     # @option params [Types::PreloadDataConfig] :preload_data_config
-    #   <p>Optional parameter to preload data upon creation of the data store. Currently, the only
-    #            supported preloaded data is synthetic data generated from Synthea.</p>
+    #   <p>An optional parameter to preload (import) open source Synthea FHIR data upon creation of
+    #            the data store.</p>
     # @option params [String] :client_token
-    #   <p>Optional user provided token used for ensuring idempotency.</p>
+    #   <p>An optional user-provided token to ensure API idempotency.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>
-    #               Resource tags that are applied to a data store when it is created.
-    #            </p>
+    #   <p>The resource tags applied to a data store when it is created.</p>
     # @option params [Types::IdentityProviderConfiguration] :identity_provider_configuration
-    #   <p>The configuration of the identity provider that you want to use for your data store.</p>
+    #   <p>The identity provider configuration to use for the data store.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     datastore_name: "DatastoreName",
@@ -252,10 +250,10 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>Deletes a data store. </p>
+    # <p>Delete a FHIR-enabled data store.</p>
     # @param [Hash, Types::DeleteFHIRDatastoreRequest] params
     # @option params [String] :datastore_id
-    #   <p> The AWS-generated ID for the data store to be deleted.</p>
+    #   <p> The AWS-generated identifier for the data store to be deleted.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     datastore_id: "DatastoreId", # required
@@ -276,11 +274,10 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>Gets the properties associated with the FHIR data store, including the data store ID,
-    #          data store ARN, data store name, data store status, when the data store was created, data store type version, and the data store's endpoint.</p>
+    # <p>Get properties for a FHIR-enabled data store.</p>
     # @param [Hash, Types::DescribeFHIRDatastoreRequest] params
     # @option params [String] :datastore_id
-    #   <p>The AWS-generated data store ID.</p>
+    #   <p>The data store identifier.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     datastore_id: "DatastoreId", # required
@@ -325,12 +322,12 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>Displays the properties of a FHIR export job, including the ID, ARN, name, and the status of the job.</p>
+    # <p>Get FHIR export job properties.</p>
     # @param [Hash, Types::DescribeFHIRExportJobRequest] params
     # @option params [String] :datastore_id
-    #   <p>The AWS generated ID for the data store from which files are being exported from for an export job.</p>
+    #   <p>The data store identifier from which FHIR data is being exported from.</p>
     # @option params [String] :job_id
-    #   <p>The AWS generated ID for an export job.</p>
+    #   <p>The export job identifier.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     datastore_id: "DatastoreId", # required
@@ -365,12 +362,12 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job. </p>
+    # <p>Get the import job properties to learn more about the job or job progress.</p>
     # @param [Hash, Types::DescribeFHIRImportJobRequest] params
     # @option params [String] :datastore_id
-    #   <p>The AWS-generated ID of the data store.</p>
+    #   <p>The data store identifier.</p>
     # @option params [String] :job_id
-    #   <p>The AWS-generated job ID.</p>
+    #   <p>The import job identifier.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     datastore_id: "DatastoreId", # required
@@ -410,7 +407,8 @@ module Aws::HealthLake
     #         throughput: 1.0
     #       },
     #       data_access_role_arn: "IamRoleArn",
-    #       message: "Message"
+    #       message: "Message",
+    #       validation_level: "strict" # One of: ["strict", "structure-only", "minimal"]
     #     }
     #   }
     # @return [Types::DescribeFHIRImportJobResponse]
@@ -419,14 +417,16 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>Lists all FHIR data stores that are in the user’s account, regardless of data store status.</p>
+    # <p>List all FHIR-enabled data stores in a user’s account, regardless of data store
+    #          status.</p>
     # @param [Hash, Types::ListFHIRDatastoresRequest] params
     # @option params [Types::DatastoreFilter] :filter
-    #   <p>Lists all filters associated with a FHIR data store request.</p>
+    #   <p>List all filters associated with a FHIR data store request.</p>
     # @option params [String] :next_token
-    #   <p>Fetches the next page of data stores when results are paginated.</p>
+    #   <p>The token used to retrieve the next page of data stores when results are
+    #            paginated.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of data stores returned in a single page of a ListFHIRDatastoresRequest call.</p>
+    #   <p>The maximum number of data stores returned on a page.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     filter: {
@@ -481,38 +481,23 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>
-    #             Lists all FHIR export jobs associated with an account and their statuses.
-    #          </p>
+    # <p>Lists all FHIR export jobs associated with an account and their statuses.</p>
     # @param [Hash, Types::ListFHIRExportJobsRequest] params
     # @option params [String] :datastore_id
-    #   <p>
-    #               This parameter limits the response to the export job with the specified data store ID.
-    #            </p>
+    #   <p>Limits the response to the export job with the specified data store ID. </p>
     # @option params [String] :next_token
-    #   <p>
-    #               A pagination token used to identify the next page of results to return for a ListFHIRExportJobs query. 
-    #            </p>
+    #   <p>A pagination token used to identify the next page of results to return.</p>
     # @option params [Integer] :max_results
-    #   <p>
-    #               This parameter limits the number of results returned for a ListFHIRExportJobs to a maximum quantity specified by the user. 
-    #            </p>
+    #   <p>Limits the number of results returned for a ListFHIRExportJobs to a maximum quantity
+    #            specified by the user.</p>
     # @option params [String] :job_name
-    #   <p>
-    #               This parameter limits the response to the export job with the specified job name.
-    #            </p>
+    #   <p>Limits the response to the export job with the specified job name. </p>
     # @option params [String] :job_status
-    #   <p>
-    #               This parameter limits the response to the export jobs with the specified job status. 
-    #            </p>
+    #   <p>Limits the response to export jobs with the specified job status. </p>
     # @option params [Time] :submitted_before
-    #   <p>
-    #               This parameter limits the response to FHIR export jobs submitted before a user specified date. 
-    #            </p>
+    #   <p>Limits the response to FHIR export jobs submitted before a user- specified date.</p>
     # @option params [Time] :submitted_after
-    #   <p>
-    #               This parameter limits the response to FHIR export jobs submitted after a user specified date. 
-    #            </p>
+    #   <p>Limits the response to FHIR export jobs submitted after a user-specified date.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     datastore_id: "DatastoreId", # required
@@ -555,38 +540,23 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>
-    #             Lists all FHIR import jobs associated with an account and their statuses.
-    #          </p>
+    # <p>List all FHIR import jobs associated with an account and their statuses.</p>
     # @param [Hash, Types::ListFHIRImportJobsRequest] params
     # @option params [String] :datastore_id
-    #   <p>
-    #               This parameter limits the response to the import job with the specified data store ID.
-    #            </p>
+    #   <p>Limits the response to the import job with the specified data store ID. </p>
     # @option params [String] :next_token
-    #   <p>
-    #               A pagination token used to identify the next page of results to return for a ListFHIRImportJobs query.
-    #            </p>
+    #   <p>The pagination token used to identify the next page of results to return.</p>
     # @option params [Integer] :max_results
-    #   <p>
-    #               This parameter limits the number of results returned for a ListFHIRImportJobs to a maximum quantity specified by the user.
-    #            </p>
+    #   <p>Limits the number of results returned for <code>ListFHIRImportJobs</code> to a maximum
+    #            quantity specified by the user.</p>
     # @option params [String] :job_name
-    #   <p>
-    #               This parameter limits the response to the import job with the specified job name.
-    #            </p>
+    #   <p>Limits the response to the import job with the specified job name. </p>
     # @option params [String] :job_status
-    #   <p>
-    #               This parameter limits the response to the import job with the specified job status.
-    #            </p>
+    #   <p>Limits the response to the import job with the specified job status. </p>
     # @option params [Time] :submitted_before
-    #   <p>
-    #               This parameter limits the response to FHIR import jobs submitted before a user specified date.
-    #            </p>
+    #   <p>Limits the response to FHIR import jobs submitted before a user- specified date. </p>
     # @option params [Time] :submitted_after
-    #   <p>
-    #               This parameter limits the response to FHIR import jobs submitted after a user specified date.
-    #            </p>
+    #   <p>Limits the response to FHIR import jobs submitted after a user-specified date.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     datastore_id: "DatastoreId", # required
@@ -632,7 +602,8 @@ module Aws::HealthLake
     #           throughput: 1.0
     #         },
     #         data_access_role_arn: "IamRoleArn",
-    #         message: "Message"
+    #         message: "Message",
+    #         validation_level: "strict" # One of: ["strict", "structure-only", "minimal"]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -643,14 +614,10 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>
-    #             Returns a list of all existing tags associated with a data store.
-    #          </p>
+    # <p>Returns a list of all existing tags associated with a data store.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>
-    #               The Amazon Resource Name(ARN) of the data store for which tags are being added.
-    #            </p>
+    #   <p>The Amazon Resource Name (ARN) of the data store to which tags are being added.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "AmazonResourceName", # required
@@ -673,18 +640,18 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>Begins a FHIR export job.</p>
+    # <p>Start a FHIR export job.</p>
     # @param [Hash, Types::StartFHIRExportJobRequest] params
     # @option params [String] :job_name
-    #   <p>The user generated name for an export job.</p>
+    #   <p>The export job name.</p>
     # @option params [Types::OutputDataConfig] :output_data_config
-    #   <p>The output data configuration that was supplied when the export job was created.</p>
+    #   <p>The output data configuration supplied when the export job was started.</p>
     # @option params [String] :datastore_id
-    #   <p>The AWS generated ID for the data store from which files are being exported for an export job.</p>
+    #   <p>The data store identifier from which files are being exported.</p>
     # @option params [String] :data_access_role_arn
-    #   <p>The Amazon Resource Name used during the initiation of the job.</p>
+    #   <p>The Amazon Resource Name (ARN) used during initiation of the export job.</p>
     # @option params [String] :client_token
-    #   <p>An optional user provided token used for ensuring idempotency.</p>
+    #   <p>An optional user provided token used for ensuring API idempotency.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     job_name: "JobName",
@@ -714,20 +681,24 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>Begins a FHIR Import job.</p>
+    # <p>Start importing bulk FHIR data into an ACTIVE data store. The import job imports FHIR
+    #          data found in the <code>InputDataConfig</code> object and stores processing results in the
+    #             <code>JobOutputDataConfig</code> object.</p>
     # @param [Hash, Types::StartFHIRImportJobRequest] params
     # @option params [String] :job_name
-    #   <p>The name of the FHIR Import job in the StartFHIRImport job request.</p>
+    #   <p>The import job name.</p>
     # @option params [Types::InputDataConfig] :input_data_config
-    #   <p>The input properties of the FHIR Import job in the StartFHIRImport job request.</p>
+    #   <p>The input properties for the import job request.</p>
     # @option params [Types::OutputDataConfig] :job_output_data_config
-    #   <p>The output data configuration that was supplied when the export job was created.</p>
+    #   <p>The output data configuration supplied when the export job was created.</p>
     # @option params [String] :datastore_id
-    #   <p>The AWS-generated data store ID.</p>
+    #   <p>The data store identifier.</p>
     # @option params [String] :data_access_role_arn
-    #   <p>The Amazon Resource Name (ARN) that gives AWS HealthLake access permission.</p>
+    #   <p>The Amazon Resource Name (ARN) that grants access permission to AWS HealthLake.</p>
     # @option params [String] :client_token
-    #   <p>Optional user provided token used for ensuring idempotency.</p>
+    #   <p>The optional user-provided token used for ensuring API idempotency.</p>
+    # @option params [String] :validation_level
+    #   <p>The validation level of the import job.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     job_name: "JobName",
@@ -744,7 +715,8 @@ module Aws::HealthLake
     #     },
     #     datastore_id: "DatastoreId", # required
     #     data_access_role_arn: "IamRoleArn", # required
-    #     client_token: "ClientTokenString"
+    #     client_token: "ClientTokenString",
+    #     validation_level: "strict" # One of: ["strict", "structure-only", "minimal"]
     #   }
     #   options = {}
     #   response = client.start_fhir_import_job(params, options)
@@ -761,18 +733,12 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>
-    #             Adds a user specified key and value tag to a data store.
-    #          </p>
+    # <p>Add a user-specifed key and value tag to a data store.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>
-    #               The Amazon Resource Name(ARN)that gives AWS HealthLake access to the data store which tags are being added to.
-    #            </p>
+    #   <p>The Amazon Resource Name (ARN) that grants access to the data store tags are being added to.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>
-    #               The user specified key and value pair tags being added to a data store.
-    #            </p>
+    #   <p>The user-specified key and value pair tags being added to a data store.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "AmazonResourceName", # required
@@ -794,16 +760,12 @@ module Aws::HealthLake
       request.send_request(options)
     end
 
-    # <p>
-    #             Removes tags from a data store.
-    #          </p>
+    # <p>Remove a user-specifed key and value tag from a data store.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name(ARN) of the data store for which tags are being removed.</p>
+    #   <p>The Amazon Resource Name (ARN) of the data store from which tags are being removed.</p>
     # @option params [Array<String>] :tag_keys
-    #   <p>
-    #               The keys for the tags to be removed from the HealthLake data store.
-    #            </p>
+    #   <p>The keys for the tags to be removed from the data store.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "AmazonResourceName", # required
@@ -903,7 +865,12 @@ module Aws::HealthLake
     private
 
     def waiters
-      {}
+      {
+        fhir_datastore_active: Waiters::FHIRDatastoreActive,
+        fhir_datastore_deleted: Waiters::FHIRDatastoreDeleted,
+        fhir_export_job_completed: Waiters::FHIRExportJobCompleted,
+        fhir_import_job_completed: Waiters::FHIRImportJobCompleted
+      }
     end
 
     class << self

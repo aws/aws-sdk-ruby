@@ -1643,6 +1643,7 @@ module Aws::CloudFront
         ?origin_ssl_protocols: Types::OriginSslProtocols,
         ?origin_read_timeout: Integer,
         ?origin_keepalive_timeout: Integer,
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1652,6 +1653,7 @@ module Aws::CloudFront
       attr_accessor origin_ssl_protocols: Types::OriginSslProtocols?
       attr_accessor origin_read_timeout: Integer?
       attr_accessor origin_keepalive_timeout: Integer?
+      attr_accessor ip_address_type: String?
     end
 
     module CustomizationActionType
@@ -4310,6 +4312,12 @@ module Aws::CloudFront
       attr_accessor id: String?
       attr_accessor create_time: Time?
       attr_accessor status: String?
+    end
+
+    module IpAddressType
+      Ipv4: String
+      Ipv6: String
+      DualStack: String
     end
 
     module ItemSelection

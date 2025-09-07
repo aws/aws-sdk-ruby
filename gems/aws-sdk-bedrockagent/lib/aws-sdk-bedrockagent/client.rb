@@ -1042,7 +1042,7 @@ module Aws::BedrockAgent
     #             output: {
     #             },
     #             knowledge_base: {
-    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               knowledge_base_id: "FlowKnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
     #               guardrail_configuration: {
     #                 guardrail_identifier: "GuardrailIdentifier",
@@ -1119,14 +1119,14 @@ module Aws::BedrockAgent
     #               ]
     #             },
     #             lex: {
-    #               bot_alias_arn: "LexBotAliasArn", # required
-    #               locale_id: "LexBotLocaleId", # required
+    #               bot_alias_arn: "FlowLexBotAliasArn", # required
+    #               locale_id: "FlowLexBotLocaleId", # required
     #             },
     #             prompt: {
     #               source_configuration: { # required
     #                 # One of:
     #                 resource: {
-    #                   prompt_arn: "PromptArn", # required
+    #                   prompt_arn: "FlowPromptArn", # required
     #                 },
     #                 inline: {
     #                   template_type: "TEXT" # One of: ["TEXT", "CHAT"], # required
@@ -1196,7 +1196,7 @@ module Aws::BedrockAgent
     #                       }
     #                     }
     #                   },
-    #                   model_id: "PromptModelIdentifier", # required
+    #                   model_id: "FlowPromptModelIdentifier", # required
     #                   inference_configuration: {
     #                     # One of:
     #                     text: {
@@ -1215,24 +1215,24 @@ module Aws::BedrockAgent
     #               }
     #             },
     #             lambda_function: {
-    #               lambda_arn: "LambdaArn", # required
+    #               lambda_arn: "FlowLambdaArn", # required
     #             },
     #             storage: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
     #             agent: {
-    #               agent_alias_arn: "AgentAliasArn", # required
+    #               agent_alias_arn: "FlowAgentAliasArn", # required
     #             },
     #             retrieval: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
@@ -1326,7 +1326,7 @@ module Aws::BedrockAgent
     #             output: {
     #             },
     #             knowledge_base: {
-    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               knowledge_base_id: "FlowKnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
     #               guardrail_configuration: {
     #                 guardrail_identifier: "GuardrailIdentifier",
@@ -1403,14 +1403,14 @@ module Aws::BedrockAgent
     #               ]
     #             },
     #             lex: {
-    #               bot_alias_arn: "LexBotAliasArn", # required
-    #               locale_id: "LexBotLocaleId", # required
+    #               bot_alias_arn: "FlowLexBotAliasArn", # required
+    #               locale_id: "FlowLexBotLocaleId", # required
     #             },
     #             prompt: {
     #               source_configuration: { # required
     #                 # One of:
     #                 resource: {
-    #                   prompt_arn: "PromptArn", # required
+    #                   prompt_arn: "FlowPromptArn", # required
     #                 },
     #                 inline: {
     #                   template_type: "TEXT" # One of: ["TEXT", "CHAT"], # required
@@ -1480,7 +1480,7 @@ module Aws::BedrockAgent
     #                       }
     #                     }
     #                   },
-    #                   model_id: "PromptModelIdentifier", # required
+    #                   model_id: "FlowPromptModelIdentifier", # required
     #                   inference_configuration: {
     #                     # One of:
     #                     text: {
@@ -1499,24 +1499,24 @@ module Aws::BedrockAgent
     #               }
     #             },
     #             lambda_function: {
-    #               lambda_arn: "LambdaArn", # required
+    #               lambda_arn: "FlowLambdaArn", # required
     #             },
     #             storage: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
     #             agent: {
-    #               agent_alias_arn: "AgentAliasArn", # required
+    #               agent_alias_arn: "FlowAgentAliasArn", # required
     #             },
     #             retrieval: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
@@ -1688,7 +1688,7 @@ module Aws::BedrockAgent
     #             output: {
     #             },
     #             knowledge_base: {
-    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               knowledge_base_id: "FlowKnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
     #               guardrail_configuration: {
     #                 guardrail_identifier: "GuardrailIdentifier",
@@ -1765,14 +1765,14 @@ module Aws::BedrockAgent
     #               ]
     #             },
     #             lex: {
-    #               bot_alias_arn: "LexBotAliasArn", # required
-    #               locale_id: "LexBotLocaleId", # required
+    #               bot_alias_arn: "FlowLexBotAliasArn", # required
+    #               locale_id: "FlowLexBotLocaleId", # required
     #             },
     #             prompt: {
     #               source_configuration: { # required
     #                 # One of:
     #                 resource: {
-    #                   prompt_arn: "PromptArn", # required
+    #                   prompt_arn: "FlowPromptArn", # required
     #                 },
     #                 inline: {
     #                   template_type: "TEXT" # One of: ["TEXT", "CHAT"], # required
@@ -1842,7 +1842,7 @@ module Aws::BedrockAgent
     #                       }
     #                     }
     #                   },
-    #                   model_id: "PromptModelIdentifier", # required
+    #                   model_id: "FlowPromptModelIdentifier", # required
     #                   inference_configuration: {
     #                     # One of:
     #                     text: {
@@ -1861,24 +1861,24 @@ module Aws::BedrockAgent
     #               }
     #             },
     #             lambda_function: {
-    #               lambda_arn: "LambdaArn", # required
+    #               lambda_arn: "FlowLambdaArn", # required
     #             },
     #             storage: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
     #             agent: {
-    #               agent_alias_arn: "AgentAliasArn", # required
+    #               agent_alias_arn: "FlowAgentAliasArn", # required
     #             },
     #             retrieval: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
@@ -3644,7 +3644,7 @@ module Aws::BedrockAgent
     #             output: {
     #             },
     #             knowledge_base: {
-    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               knowledge_base_id: "FlowKnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
     #               guardrail_configuration: {
     #                 guardrail_identifier: "GuardrailIdentifier",
@@ -3721,14 +3721,14 @@ module Aws::BedrockAgent
     #               ]
     #             },
     #             lex: {
-    #               bot_alias_arn: "LexBotAliasArn", # required
-    #               locale_id: "LexBotLocaleId", # required
+    #               bot_alias_arn: "FlowLexBotAliasArn", # required
+    #               locale_id: "FlowLexBotLocaleId", # required
     #             },
     #             prompt: {
     #               source_configuration: { # required
     #                 # One of:
     #                 resource: {
-    #                   prompt_arn: "PromptArn", # required
+    #                   prompt_arn: "FlowPromptArn", # required
     #                 },
     #                 inline: {
     #                   template_type: "TEXT" # One of: ["TEXT", "CHAT"], # required
@@ -3798,7 +3798,7 @@ module Aws::BedrockAgent
     #                       }
     #                     }
     #                   },
-    #                   model_id: "PromptModelIdentifier", # required
+    #                   model_id: "FlowPromptModelIdentifier", # required
     #                   inference_configuration: {
     #                     # One of:
     #                     text: {
@@ -3817,24 +3817,24 @@ module Aws::BedrockAgent
     #               }
     #             },
     #             lambda_function: {
-    #               lambda_arn: "LambdaArn", # required
+    #               lambda_arn: "FlowLambdaArn", # required
     #             },
     #             storage: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
     #             agent: {
-    #               agent_alias_arn: "AgentAliasArn", # required
+    #               agent_alias_arn: "FlowAgentAliasArn", # required
     #             },
     #             retrieval: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
@@ -4105,7 +4105,7 @@ module Aws::BedrockAgent
     #             output: {
     #             },
     #             knowledge_base: {
-    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               knowledge_base_id: "FlowKnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
     #               guardrail_configuration: {
     #                 guardrail_identifier: "GuardrailIdentifier",
@@ -4182,14 +4182,14 @@ module Aws::BedrockAgent
     #               ]
     #             },
     #             lex: {
-    #               bot_alias_arn: "LexBotAliasArn", # required
-    #               locale_id: "LexBotLocaleId", # required
+    #               bot_alias_arn: "FlowLexBotAliasArn", # required
+    #               locale_id: "FlowLexBotLocaleId", # required
     #             },
     #             prompt: {
     #               source_configuration: { # required
     #                 # One of:
     #                 resource: {
-    #                   prompt_arn: "PromptArn", # required
+    #                   prompt_arn: "FlowPromptArn", # required
     #                 },
     #                 inline: {
     #                   template_type: "TEXT" # One of: ["TEXT", "CHAT"], # required
@@ -4259,7 +4259,7 @@ module Aws::BedrockAgent
     #                       }
     #                     }
     #                   },
-    #                   model_id: "PromptModelIdentifier", # required
+    #                   model_id: "FlowPromptModelIdentifier", # required
     #                   inference_configuration: {
     #                     # One of:
     #                     text: {
@@ -4278,24 +4278,24 @@ module Aws::BedrockAgent
     #               }
     #             },
     #             lambda_function: {
-    #               lambda_arn: "LambdaArn", # required
+    #               lambda_arn: "FlowLambdaArn", # required
     #             },
     #             storage: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
     #             agent: {
-    #               agent_alias_arn: "AgentAliasArn", # required
+    #               agent_alias_arn: "FlowAgentAliasArn", # required
     #             },
     #             retrieval: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
@@ -6520,7 +6520,7 @@ module Aws::BedrockAgent
     #             output: {
     #             },
     #             knowledge_base: {
-    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               knowledge_base_id: "FlowKnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
     #               guardrail_configuration: {
     #                 guardrail_identifier: "GuardrailIdentifier",
@@ -6597,14 +6597,14 @@ module Aws::BedrockAgent
     #               ]
     #             },
     #             lex: {
-    #               bot_alias_arn: "LexBotAliasArn", # required
-    #               locale_id: "LexBotLocaleId", # required
+    #               bot_alias_arn: "FlowLexBotAliasArn", # required
+    #               locale_id: "FlowLexBotLocaleId", # required
     #             },
     #             prompt: {
     #               source_configuration: { # required
     #                 # One of:
     #                 resource: {
-    #                   prompt_arn: "PromptArn", # required
+    #                   prompt_arn: "FlowPromptArn", # required
     #                 },
     #                 inline: {
     #                   template_type: "TEXT" # One of: ["TEXT", "CHAT"], # required
@@ -6674,7 +6674,7 @@ module Aws::BedrockAgent
     #                       }
     #                     }
     #                   },
-    #                   model_id: "PromptModelIdentifier", # required
+    #                   model_id: "FlowPromptModelIdentifier", # required
     #                   inference_configuration: {
     #                     # One of:
     #                     text: {
@@ -6693,24 +6693,24 @@ module Aws::BedrockAgent
     #               }
     #             },
     #             lambda_function: {
-    #               lambda_arn: "LambdaArn", # required
+    #               lambda_arn: "FlowLambdaArn", # required
     #             },
     #             storage: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
     #             agent: {
-    #               agent_alias_arn: "AgentAliasArn", # required
+    #               agent_alias_arn: "FlowAgentAliasArn", # required
     #             },
     #             retrieval: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
@@ -6801,7 +6801,7 @@ module Aws::BedrockAgent
     #             output: {
     #             },
     #             knowledge_base: {
-    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               knowledge_base_id: "FlowKnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
     #               guardrail_configuration: {
     #                 guardrail_identifier: "GuardrailIdentifier",
@@ -6878,14 +6878,14 @@ module Aws::BedrockAgent
     #               ]
     #             },
     #             lex: {
-    #               bot_alias_arn: "LexBotAliasArn", # required
-    #               locale_id: "LexBotLocaleId", # required
+    #               bot_alias_arn: "FlowLexBotAliasArn", # required
+    #               locale_id: "FlowLexBotLocaleId", # required
     #             },
     #             prompt: {
     #               source_configuration: { # required
     #                 # One of:
     #                 resource: {
-    #                   prompt_arn: "PromptArn", # required
+    #                   prompt_arn: "FlowPromptArn", # required
     #                 },
     #                 inline: {
     #                   template_type: "TEXT" # One of: ["TEXT", "CHAT"], # required
@@ -6955,7 +6955,7 @@ module Aws::BedrockAgent
     #                       }
     #                     }
     #                   },
-    #                   model_id: "PromptModelIdentifier", # required
+    #                   model_id: "FlowPromptModelIdentifier", # required
     #                   inference_configuration: {
     #                     # One of:
     #                     text: {
@@ -6974,24 +6974,24 @@ module Aws::BedrockAgent
     #               }
     #             },
     #             lambda_function: {
-    #               lambda_arn: "LambdaArn", # required
+    #               lambda_arn: "FlowLambdaArn", # required
     #             },
     #             storage: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
     #             agent: {
-    #               agent_alias_arn: "AgentAliasArn", # required
+    #               agent_alias_arn: "FlowAgentAliasArn", # required
     #             },
     #             retrieval: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
@@ -7741,7 +7741,7 @@ module Aws::BedrockAgent
     #             output: {
     #             },
     #             knowledge_base: {
-    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               knowledge_base_id: "FlowKnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
     #               guardrail_configuration: {
     #                 guardrail_identifier: "GuardrailIdentifier",
@@ -7818,14 +7818,14 @@ module Aws::BedrockAgent
     #               ]
     #             },
     #             lex: {
-    #               bot_alias_arn: "LexBotAliasArn", # required
-    #               locale_id: "LexBotLocaleId", # required
+    #               bot_alias_arn: "FlowLexBotAliasArn", # required
+    #               locale_id: "FlowLexBotLocaleId", # required
     #             },
     #             prompt: {
     #               source_configuration: { # required
     #                 # One of:
     #                 resource: {
-    #                   prompt_arn: "PromptArn", # required
+    #                   prompt_arn: "FlowPromptArn", # required
     #                 },
     #                 inline: {
     #                   template_type: "TEXT" # One of: ["TEXT", "CHAT"], # required
@@ -7895,7 +7895,7 @@ module Aws::BedrockAgent
     #                       }
     #                     }
     #                   },
-    #                   model_id: "PromptModelIdentifier", # required
+    #                   model_id: "FlowPromptModelIdentifier", # required
     #                   inference_configuration: {
     #                     # One of:
     #                     text: {
@@ -7914,24 +7914,24 @@ module Aws::BedrockAgent
     #               }
     #             },
     #             lambda_function: {
-    #               lambda_arn: "LambdaArn", # required
+    #               lambda_arn: "FlowLambdaArn", # required
     #             },
     #             storage: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },
     #             agent: {
-    #               agent_alias_arn: "AgentAliasArn", # required
+    #               agent_alias_arn: "FlowAgentAliasArn", # required
     #             },
     #             retrieval: {
     #               service_configuration: { # required
     #                 # One of:
     #                 s3: {
-    #                   bucket_name: "S3BucketName", # required
+    #                   bucket_name: "FlowS3BucketName", # required
     #                 }
     #               }
     #             },

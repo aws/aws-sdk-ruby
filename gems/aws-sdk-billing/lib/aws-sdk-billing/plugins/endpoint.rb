@@ -16,6 +16,12 @@ module Aws::Billing
       end
 
       option(
+        :use_dual_stack_endpoint,
+        doc_type: 'Boolean',
+        docstring: 'TODO'
+      )
+
+      option(
         :use_fips_endpoint,
         doc_type: 'Boolean',
         docstring: 'TODO'

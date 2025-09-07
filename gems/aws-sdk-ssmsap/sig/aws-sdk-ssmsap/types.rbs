@@ -241,6 +241,63 @@ module Aws::SsmSap
       ERS: String
     end
 
+    class ConfigurationCheckDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?applicable_application_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor applicable_application_types: Array[String]?
+    end
+
+    class ConfigurationCheckOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?application_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?configuration_check_id: String,
+        ?configuration_check_name: String,
+        ?configuration_check_description: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?rule_status_counts: Types::RuleStatusCounts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor application_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor configuration_check_id: String?
+      attr_accessor configuration_check_name: String?
+      attr_accessor configuration_check_description: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor rule_status_counts: Types::RuleStatusCounts?
+    end
+
+    module ConfigurationCheckOperationListingMode
+      ALL_OPERATIONS: String
+      LATEST_PER_CHECK: String
+    end
+
+    module ConfigurationCheckType
+      SAP_CHECK_01: String
+      SAP_CHECK_02: String
+      SAP_CHECK_03: String
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -469,6 +526,28 @@ module Aws::SsmSap
       attr_accessor tags: Hash[String, String]?
     end
 
+    class GetConfigurationCheckOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class GetConfigurationCheckOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_check_operation: Types::ConfigurationCheckOperation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_check_operation: Types::ConfigurationCheckOperation?
+    end
+
     class GetDatabaseOperationInput
       include Smithy::Schema::Structure
 
@@ -655,6 +734,64 @@ module Aws::SsmSap
       attr_accessor next_token: String?
     end
 
+    class ListConfigurationCheckDefinitionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfigurationCheckDefinitionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_checks: Array[Types::ConfigurationCheckDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_checks: Array[Types::ConfigurationCheckDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfigurationCheckOperationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?list_mode: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor list_mode: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListConfigurationCheckOperationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_check_operations: Array[Types::ConfigurationCheckOperation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_check_operations: Array[Types::ConfigurationCheckOperation]?
+      attr_accessor next_token: String?
+    end
+
     class ListDatabasesOperationInput
       include Smithy::Schema::Structure
 
@@ -742,6 +879,62 @@ module Aws::SsmSap
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor operations: Array[Types::Operation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubCheckResultsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubCheckResultsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sub_check_results: Array[Types::SubCheckResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sub_check_results: Array[Types::SubCheckResult]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubCheckRuleResultsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sub_check_result_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sub_check_result_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubCheckRuleResultsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_results: Array[Types::RuleResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_results: Array[Types::RuleResult]?
       attr_accessor next_token: String?
     end
 
@@ -958,6 +1151,52 @@ module Aws::SsmSap
       attr_accessor message: String?
     end
 
+    class RuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?description: String,
+        ?status: String,
+        ?message: String,
+        ?metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor metadata: Hash[String, String]?
+    end
+
+    module RuleResultStatus
+      PASSED: String
+      FAILED: String
+      WARNING: String
+      INFO: String
+      UNKNOWN: String
+    end
+
+    class RuleStatusCounts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed: Integer,
+        ?warning: Integer,
+        ?info: Integer,
+        ?passed: Integer,
+        ?unknown: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed: Integer?
+      attr_accessor warning: Integer?
+      attr_accessor info: Integer?
+      attr_accessor passed: Integer?
+      attr_accessor unknown: Integer?
+    end
+
     class StartApplicationInput
       include Smithy::Schema::Structure
 
@@ -1002,6 +1241,30 @@ module Aws::SsmSap
       attr_accessor operation_id: String?
     end
 
+    class StartConfigurationChecksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_check_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_check_ids: Array[String]?
+    end
+
+    class StartConfigurationChecksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_check_operations: Array[Types::ConfigurationCheckOperation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_check_operations: Array[Types::ConfigurationCheckOperation]?
+    end
+
     class StopApplicationInput
       include Smithy::Schema::Structure
 
@@ -1026,6 +1289,23 @@ module Aws::SsmSap
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor operation_id: String?
+    end
+
+    class SubCheckResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?references: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor references: Array[String]?
     end
 
     class TagResourceInput

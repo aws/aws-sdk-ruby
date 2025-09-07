@@ -47,7 +47,7 @@ module Aws::Codestarnotifications
     #         repositories in CodeCommit, and build projects in CodeBuild.</p>
     #   @return [String]
     # @!attribute targets
-    #   <p>A list of Amazon Resource Names (ARNs) of Amazon Simple Notification Service topics and Chatbot clients to associate with the
+    #   <p>A list of Amazon Resource Names (ARNs) of Amazon Simple Notification Service topics and Amazon Q Developer in chat applications clients to associate with the
     #         notification rule.</p>
     #   @return [Array<Types::Target>]
     # @!attribute detail_type
@@ -113,10 +113,10 @@ module Aws::Codestarnotifications
     end
 
     # @!attribute target_address
-    #   <p>The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client to delete.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client to delete.</p>
     #   @return [String]
     # @!attribute force_unsubscribe_all
-    #   <p>A Boolean value that can be used to delete all associations with this Chatbot topic. The
+    #   <p>A Boolean value that can be used to delete all associations with this Amazon Q Developer in chat applications topic. The
     #               default value is FALSE. If set to TRUE, all associations between that target and every
     #               notification rule in your Amazon Web Services account are deleted.</p>
     #   @return [Boolean]
@@ -155,7 +155,7 @@ module Aws::Codestarnotifications
     #         rule.</p>
     #   @return [String]
     # @!attribute targets
-    #   <p>A list of the Chatbot topics and Chatbot clients associated with the notification rule.</p>
+    #   <p>A list of the Amazon Q Developer in chat applications topics and Amazon Q Developer in chat applications clients associated with the notification rule.</p>
     #   @return [Array<Types::TargetSummary>]
     # @!attribute detail_type
     #   <p>The level of detail included in the notifications for this resource. BASIC will include only the 
@@ -360,7 +360,7 @@ module Aws::Codestarnotifications
 
     # <p>Information about a filter to apply to the list of returned targets. You can filter by
     #             target type, address, or status. For example, to filter results to notification rules
-    #             that have active Chatbot topics as targets, you could specify a ListTargetsFilter
+    #             that have active Amazon Q Developer in chat applications topics as targets, you could specify a ListTargetsFilter
     #             Name as <code>TargetType</code> and a Value of <code>SNS</code>, and a Name of <code>TARGET_STATUS</code> and a Value of
     #             <code>ACTIVE</code>.</p>
     # @!attribute name
@@ -452,7 +452,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the notification rule for which you want to create the association.</p>
     #   @return [String]
     # @!attribute target
-    #   <p>Information about the Chatbot topics or Chatbot clients associated with a  notification rule.</p>
+    #   <p>Information about the Amazon Q Developer in chat applications topics or Amazon Q Developer in chat applications clients associated with a  notification rule.</p>
     #   @return [Types::Target]
     # @!attribute client_request_token
     #   <p>An enumeration token that, when provided in a request, returns the next batch of the
@@ -497,20 +497,20 @@ module Aws::Codestarnotifications
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the Chatbot topics or Chatbot clients associated with a  notification rule.</p>
+    # <p>Information about the Amazon Q Developer in chat applications topics or Amazon Q Developer in chat applications clients associated with a  notification rule.</p>
     # @!attribute target_type
-    #   <p>The target type. Can be an Chatbot topic or Chatbot client.</p>
+    #   <p>The target type. Can be an Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client.</p>
     #            <ul>
     #               <li>
-    #                  <p>Chatbot topics are specified as <code>SNS</code>.</p>
+    #                  <p>Amazon Q Developer in chat applications topics are specified as <code>SNS</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Chatbot clients are specified as <code>AWSChatbotSlack</code>.</p>
+    #                  <p>Amazon Q Developer in chat applications clients are specified as <code>AWSChatbotSlack</code>.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute target_address
-    #   <p>The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client.</p>
     #   @return [String]
     class Target < Struct.new(
       :target_type,
@@ -521,16 +521,16 @@ module Aws::Codestarnotifications
 
     # <p>Information about the targets specified for a notification rule.</p>
     # @!attribute target_address
-    #   <p>The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client.</p>
     #   @return [String]
     # @!attribute target_type
     #   <p>The type of the target (for example, <code>SNS</code>).</p>
     #            <ul>
     #               <li>
-    #                  <p>Chatbot topics are specified as <code>SNS</code>.</p>
+    #                  <p>Amazon Q Developer in chat applications topics are specified as <code>SNS</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Chatbot clients are specified as <code>AWSChatbotSlack</code>.</p>
+    #                  <p>Amazon Q Developer in chat applications clients are specified as <code>AWSChatbotSlack</code>.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -549,7 +549,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the notification rule.</p>
     #   @return [String]
     # @!attribute target_address
-    #   <p>The ARN of the Chatbot topic to unsubscribe from the notification rule.</p>
+    #   <p>The ARN of the Amazon Q Developer in chat applications topic to unsubscribe from the notification rule.</p>
     #   @return [String]
     class UnsubscribeRequest < Struct.new(
       :arn,

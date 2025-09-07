@@ -539,6 +539,31 @@ module Aws::Amp
       request.send_request(options)
     end
 
+    # <p>Deletes the resource-based policy attached to an Amazon Managed Service for Prometheus workspace.</p>
+    # @param [Hash, Types::DeleteResourcePolicyRequest] params
+    # @option params [String] :workspace_id
+    #   <p>The ID of the workspace from which to delete the resource-based policy.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the request is safe to retry (idempotent).</p>
+    # @option params [String] :revision_id
+    #   <p>The revision ID of the policy to delete. Use this parameter to ensure that you are deleting the correct version of the policy.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_id: "WorkspaceId", # required
+    #     client_token: "IdempotencyToken",
+    #     revision_id: "String"
+    #   }
+    #   options = {}
+    #   response = client.delete_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_resource_policy(params = {}, options = {})
+      request = build_request(:delete_resource_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes one rule groups namespace and its associated rule groups definition.</p>
     # @param [Hash, Types::DeleteRuleGroupsNamespaceInput] params
     # @option params [String] :workspace_id
@@ -723,6 +748,29 @@ module Aws::Amp
     # @return [Types::DescribeQueryLoggingConfigurationResponse]
     def describe_query_logging_configuration(params = {}, options = {})
       request = build_request(:describe_query_logging_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns information about the resource-based policy attached to an Amazon Managed Service for Prometheus workspace.</p>
+    # @param [Hash, Types::DescribeResourcePolicyRequest] params
+    # @option params [String] :workspace_id
+    #   <p>The ID of the workspace to describe the resource-based policy for.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_id: "WorkspaceId", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     policy_document: "String", # required
+    #     policy_status: "WorkspacePolicyStatusCode", # required
+    #     revision_id: "String", # required
+    #   }
+    # @return [Types::DescribeResourcePolicyResponse]
+    def describe_resource_policy(params = {}, options = {})
+      request = build_request(:describe_resource_policy, params)
       request.send_request(options)
     end
 
@@ -1270,6 +1318,37 @@ module Aws::Amp
     # @return [Types::PutAlertManagerDefinitionOutput]
     def put_alert_manager_definition(params = {}, options = {})
       request = build_request(:put_alert_manager_definition, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates or updates a resource-based policy for an Amazon Managed Service for Prometheus workspace. Use resource-based policies to grant permissions to other AWS accounts or services to access your workspace.</p> <p>Only Prometheus-compatible APIs can be used for workspace sharing. You can add non-Prometheus-compatible APIs to the policy, but they will be ignored. For more information, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-APIReference-Prometheus-Compatible-Apis.html">Prometheus-compatible APIs</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>If your workspace uses customer-managed KMS keys for encryption, you must grant the principals in your resource-based policy access to those KMS keys. You can do this by creating KMS grants. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html">CreateGrant</a> in the <i>AWS Key Management Service API Reference</i> and <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/encryption-at-rest-Amazon-Service-Prometheus.html">Encryption at rest</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>For more information about working with IAM, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/security_iam_service-with-iam.html">Using Amazon Managed Service for Prometheus with IAM</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>
+    # @param [Hash, Types::PutResourcePolicyRequest] params
+    # @option params [String] :workspace_id
+    #   <p>The ID of the workspace to attach the resource-based policy to.</p>
+    # @option params [String] :policy_document
+    #   <p>The JSON policy document to use as the resource-based policy. This policy defines the permissions that other AWS accounts or services have to access your workspace.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the request is safe to retry (idempotent).</p>
+    # @option params [String] :revision_id
+    #   <p>The revision ID of the policy to update. Use this parameter to ensure that you are updating the correct version of the policy. If you don't specify a revision ID, the policy is updated regardless of its current revision.</p> <p>For the first <b>PUT</b> request on a workspace that doesn't have an existing resource policy, you can specify <code>NO_POLICY</code> as the revision ID.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_id: "WorkspaceId", # required
+    #     policy_document: "String", # required
+    #     client_token: "IdempotencyToken",
+    #     revision_id: "String"
+    #   }
+    #   options = {}
+    #   response = client.put_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     policy_status: "WorkspacePolicyStatusCode", # required
+    #     revision_id: "String", # required
+    #   }
+    # @return [Types::PutResourcePolicyResponse]
+    def put_resource_policy(params = {}, options = {})
+      request = build_request(:put_resource_policy, params)
       request.send_request(options)
     end
 

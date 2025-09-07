@@ -14,7 +14,7 @@ module Aws::MediaConvert
     #   Specify the average bitrate in bits per second. The set of valid values for this setting is: 6000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 288000, 320000, 384000, 448000, 512000, 576000, 640000, 768000, 896000, 1024000. The value you set is also constrained by the values that you choose for Profile, Bitrate control mode, and Sample rate. Default values depend on Bitrate control mode and Profile.
     #   @return [Integer]
     # @!attribute codec_profile
-    #   Specify the AAC profile. For the widest player compatibility and where higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds parametric stereo, which optimizes for encoding stereo audio at very low bitrates.
+    #   Specify the AAC profile. For the widest player compatibility and where higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds parametric stereo, which optimizes for encoding stereo audio at very low bitrates. For improved audio quality at lower bitrates, adaptive audio bitrate switching, and loudness control: Choose XHE.
     #   @return [String]
     # @!attribute coding_mode
     #   The Coding mode that you specify determines the number of audio channels and the audio channel layout metadata in your AAC output. Valid coding modes depend on the Rate control mode and Profile that you select. The following list shows the number of audio channels and channel layout for each coding mode. * 1.0 Audio Description (Receiver Mix): One channel, C. Includes audio description data from your stereo input. For more information see ETSI TS 101 154 Annex E. * 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. * 5.1 Surround: Six channels, C, L, R, Ls, Rs, LFE.
@@ -1606,6 +1606,24 @@ module Aws::MediaConvert
     #   @return [Types::Queue]
     class CreateQueueResponse < Struct.new(
       :queue,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   Specify MediaConvert Job ID or ARN to share
+    #   @return [String]
+    # @!attribute support_case_id
+    #   AWS Support case identifier
+    #   @return [String]
+    class CreateResourceShareRequest < Struct.new(
+      :job_id,
+      :support_case_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    class CreateResourceShareResponse < Struct.new(
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3433,7 +3451,7 @@ module Aws::MediaConvert
     #   Specify whether to flag this audio track as descriptive video service (DVS) in your HLS parent manifest. When you choose Flag, MediaConvert includes the parameter CHARACTERISTICS="public.accessibility.describes-video" in the EXT-X-MEDIA entry for this track. When you keep the default choice, Don't flag, MediaConvert leaves this parameter out. The DVS flag can help with accessibility on Apple devices. For more information, see the Apple documentation.
     #   @return [String]
     # @!attribute i_frame_only_manifest
-    #   Choose Include to have MediaConvert generate a child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude.
+    #   Generate a variant manifest that lists only the I-frames for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only variant manifest and the regular variant manifest to the multivariant manifest. To have MediaConvert write a variant manifest that references I-frames from your output content using EXT-X-BYTERANGE tags: Choose Include. To have MediaConvert output I-frames as single frame TS files and a corresponding variant manifest that references them: Choose Include as TS. When you don't need the I-frame only variant manifest: Keep the default value, Exclude.
     #   @return [String]
     # @!attribute segment_modifier
     #   Use this setting to add an identifying string to the filename of each segment. The service adds this string between the name modifier and segment index number. You can use format identifiers in the string. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
@@ -3664,16 +3682,16 @@ module Aws::MediaConvert
 
     # Specify a Time Addressable Media Store (TAMS) server as an input source. TAMS is an open-source API specification that provides access to time-segmented media content. Use TAMS to retrieve specific time ranges from live or archived media streams. When you specify TAMS settings, MediaConvert connects to your TAMS server, retrieves the media segments for your specified time range, and processes them as a single input. This enables workflows like extracting clips from live streams or processing specific portions of archived content. To use TAMS, you must: 1. Have access to a TAMS-compliant server 2. Specify the server URL in the Input file URL field 3. Provide the required SourceId and Timerange parameters 4. Configure authentication, if your TAMS server requires it
     # @!attribute auth_connection_arn
-    #   Specify the ARN (Amazon Resource Name) of an EventBridge Connection to authenticate with your TAMS server. The EventBridge Connection stores your authentication credentials securely. MediaConvert assumes your job's IAM role to access this connection, so ensure the role has the events:RetrieveConnectionCredentials, secretsmanager:DescribeSecret, and secretsmanager:GetSecretValue permissions. Format: arn:aws:events:region:account-id:connection/connection-name/unique-id
+    #   Specify the ARN (Amazon Resource Name) of an EventBridge Connection to authenticate with your TAMS server. The EventBridge Connection stores your authentication credentials securely. MediaConvert assumes your job's IAM role to access this connection, so ensure the role has the events:RetrieveConnectionCredentials, secretsmanager:DescribeSecret, and secretsmanager:GetSecretValue permissions. Format: arn:aws:events:region:account-id:connection/connection-name/unique-id This setting is required when you include TAMS settings in your job.
     #   @return [String]
     # @!attribute gap_handling
     #   Specify how MediaConvert handles gaps between media segments in your TAMS source. Gaps can occur in live streams due to network issues or other interruptions. Choose from the following options: * Skip gaps - Default. Skip over gaps and join segments together. This creates a continuous output with no blank frames, but may cause timeline discontinuities. * Fill with black - Insert black frames to fill gaps between segments. This maintains timeline continuity but adds black frames where content is missing. * Hold last frame - Repeat the last frame before a gap until the next segment begins. This maintains visual continuity during gaps.
     #   @return [String]
     # @!attribute source_id
-    #   Specify the unique identifier for the media source in your TAMS server. MediaConvert uses this source ID to locate the appropriate flows containing the media segments you want to process. The source ID corresponds to a specific media source registered in your TAMS server. This source must be of type urn:x-nmos:format:multi, and can can reference multiple flows for audio, video, or combined audio/video content. MediaConvert automatically selects the highest quality flows available for your job. This setting is required when include TAMS settings in your job.
+    #   Specify the unique identifier for the media source in your TAMS server. MediaConvert uses this source ID to locate the appropriate flows containing the media segments you want to process. The source ID corresponds to a specific media source registered in your TAMS server. This source must be of type urn:x-nmos:format:multi, and can can reference multiple flows for audio, video, or combined audio/video content. MediaConvert automatically selects the highest quality flows available for your job. This setting is required when you include TAMS settings in your job.
     #   @return [String]
     # @!attribute timerange
-    #   Specify the time range of media segments to retrieve from your TAMS server. MediaConvert fetches only the segments that fall within this range. Use the format specified by your TAMS server implementation. This must be two timestamp values with the format {sign?}{seconds}:{nanoseconds}, separated by an underscore, surrounded by either parentheses or square brackets.  Example: [15:0_35:0) This setting is required when include TAMS settings in your job.
+    #   Specify the time range of media segments to retrieve from your TAMS server. MediaConvert fetches only the segments that fall within this range. Use the format specified by your TAMS server implementation. This must be two timestamp values with the format {sign?}{seconds}:{nanoseconds}, separated by an underscore, surrounded by either parentheses or square brackets.  Example: [15:0_35:0) This setting is required when you include TAMS settings in your job.
     #   @return [String]
     class InputTamsSettings < Struct.new(
       :auth_connection_arn,
@@ -3913,6 +3931,9 @@ module Aws::MediaConvert
     # @!attribute job_template
     #   The job template that the job is created from, if it is created from a job template.
     #   @return [String]
+    # @!attribute last_share_details
+    #   Contains information about the most recent share attempt for the job. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/creating-resource-share.html
+    #   @return [String]
     # @!attribute messages
     #   Provides messages from the service about jobs that you have already successfully submitted.
     #   @return [Types::JobMessages]
@@ -3937,6 +3958,9 @@ module Aws::MediaConvert
     # @!attribute settings
     #   JobSettings contains all the transcode settings for a job.
     #   @return [Types::JobSettings]
+    # @!attribute share_status
+    #   A job's share status can be NOT_SHARED, INITIATED, or SHARED
+    #   @return [String]
     # @!attribute simulate_reserved_queue
     #   Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default.
     #   @return [String]
@@ -3971,6 +3995,7 @@ module Aws::MediaConvert
       :job_engine_version_used,
       :job_percent_complete,
       :job_template,
+      :last_share_details,
       :messages,
       :output_group_details,
       :priority,
@@ -3979,6 +4004,7 @@ module Aws::MediaConvert
       :retry_count,
       :role,
       :settings,
+      :share_status,
       :simulate_reserved_queue,
       :status,
       :status_update_interval,
@@ -4874,6 +4900,9 @@ module Aws::MediaConvert
     end
 
     # Required when you set Codec to the value MP2.
+    # @!attribute audio_description_mix
+    #   Choose BROADCASTER_MIXED_AD when the input contains pre-mixed main audio + audio description (AD) as a stereo pair. The value for AudioType will be set to 3, which signals to downstream systems that this stream contains "broadcaster mixed AD". Note that the input received by the encoder must contain pre-mixed audio; the encoder does not perform the mixing. When you choose BROADCASTER_MIXED_AD, the encoder ignores any values you provide in AudioType and FollowInputAudioType. Choose NONE when the input does not contain pre-mixed audio + audio description (AD). In this case, the encoder will use any values you provide for AudioType and FollowInputAudioType.
+    #   @return [String]
     # @!attribute bitrate
     #   Specify the average bitrate in bits per second.
     #   @return [Integer]
@@ -4884,6 +4913,7 @@ module Aws::MediaConvert
     #   Sample rate in Hz.
     #   @return [Integer]
     class Mp2Settings < Struct.new(
+      :audio_description_mix,
       :bitrate,
       :channels,
       :sample_rate,
@@ -7004,6 +7034,12 @@ module Aws::MediaConvert
     # @!attribute sample_range
     #   If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow, for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata.
     #   @return [String]
+    # @!attribute selector_type
+    #   Choose the video selector type for your HLS input. Use to specify which video rendition MediaConvert uses from your HLS input. To have MediaConvert automatically use the highest bitrate rendition from your HLS input: Keep the default value, Auto. To manually specify a rendition: Choose Stream. Then enter the unique stream number in the Streams array, starting at 1, corresponding to the stream order in the manifest.
+    #   @return [String]
+    # @!attribute streams
+    #   Specify a stream for MediaConvert to use from your HLS input. Enter an integer corresponding to the stream order in your HLS manifest.
+    #   @return [Array<Integer>]
     class VideoSelector < Struct.new(
       :alpha_behavior,
       :color_space,
@@ -7016,6 +7052,8 @@ module Aws::MediaConvert
       :program_number,
       :rotate,
       :sample_range,
+      :selector_type,
+      :streams,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

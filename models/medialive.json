@@ -628,6 +628,23 @@
                 "smithy.api#documentation": "Placeholder documentation for AccountConfiguration"
             }
         },
+        "com.amazonaws.medialive#AdditionalDestinations": {
+            "type": "structure",
+            "members": {
+                "Destination": {
+                    "target": "com.amazonaws.medialive#OutputLocationRef",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The destination location",
+                        "smithy.api#jsonName": "destination",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Additional output destinations for a CMAF Ingest output group"
+            }
+        },
         "com.amazonaws.medialive#AfdSignaling": {
             "type": "enum",
             "members": {
@@ -1769,7 +1786,7 @@
                     }
                 },
                 "BufSize": {
-                    "target": "com.amazonaws.medialive#__integerMin50000Max16000000",
+                    "target": "com.amazonaws.medialive#__integerMin50000Max24000000",
                     "traits": {
                         "smithy.api#documentation": "The size of the buffer (HRD buffer model) in bits.",
                         "smithy.api#jsonName": "bufSize"
@@ -1836,7 +1853,7 @@
                     }
                 },
                 "MaxBitrate": {
-                    "target": "com.amazonaws.medialive#__integerMin50000Max8000000",
+                    "target": "com.amazonaws.medialive#__integerMin50000Max12000000",
                     "traits": {
                         "smithy.api#documentation": "The maximum bitrate to assign.\nFor recommendations, see the description for qvbrQualityLevel.",
                         "smithy.api#jsonName": "maxBitrate"
@@ -1885,7 +1902,7 @@
                     }
                 },
                 "Bitrate": {
-                    "target": "com.amazonaws.medialive#__integerMin50000Max8000000",
+                    "target": "com.amazonaws.medialive#__integerMin50000Max12000000",
                     "traits": {
                         "smithy.api#documentation": "Average bitrate in bits/second. Required when the rate control mode is CBR. Not used for QVBR.",
                         "smithy.api#jsonName": "bitrate"
@@ -2884,10 +2901,43 @@
                         "smithy.api#documentation": "Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "yPosition"
                     }
+                },
+                "SubtitleRows": {
+                    "target": "com.amazonaws.medialive#BurnInDestinationSubtitleRows",
+                    "traits": {
+                        "smithy.api#documentation": "Applies only when the input captions are Teletext and the output captions are DVB-Sub or Burn-In. Choose the number of lines for the captions bitmap. The captions bitmap is 700 wide × 576 high and will be laid over the video. For example, a value of 16 divides the bitmap into 16 lines, with each line 36 pixels high (16 × 36 = 576). The default is 24 (24 pixels high). Enter the same number in every encode in every output that converts the same Teletext source to DVB-Sub or Burn-in.",
+                        "smithy.api#jsonName": "subtitleRows"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Burn In Destination Settings"
+            }
+        },
+        "com.amazonaws.medialive#BurnInDestinationSubtitleRows": {
+            "type": "enum",
+            "members": {
+                "ROWS_16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROWS_16"
+                    }
+                },
+                "ROWS_20": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROWS_20"
+                    }
+                },
+                "ROWS_24": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROWS_24"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Burn In Destination Subtitle Rows"
             }
         },
         "com.amazonaws.medialive#BurnInFontColor": {
@@ -4691,6 +4741,13 @@
                     "traits": {
                         "smithy.api#documentation": "Set to enabled to pass through ID3 metadata from the input sources.",
                         "smithy.api#jsonName": "timedMetadataPassthrough"
+                    }
+                },
+                "AdditionalDestinations": {
+                    "target": "com.amazonaws.medialive#__listOfAdditionalDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "Optional an array of additional destinational HTTP destinations for the OutputGroup outputs",
+                        "smithy.api#jsonName": "additionalDestinations"
                     }
                 }
             },
@@ -13125,6 +13182,13 @@
                         "smithy.api#documentation": "Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  This option is not valid for source captions that are STL, 608/embedded or teletext.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "yPosition"
                     }
+                },
+                "SubtitleRows": {
+                    "target": "com.amazonaws.medialive#DvbSubDestinationSubtitleRows",
+                    "traits": {
+                        "smithy.api#documentation": "Applies only when the input captions are Teletext and the output captions are DVB-Sub or Burn-In. Choose the number of lines for the captions bitmap. The captions bitmap is 700 wide × 576 high and will be laid over the video. For example, a value of 16 divides the bitmap into 16 lines, with each line 36 pixels high (16 × 36 = 576). The default is 24 (24 pixels high). Enter the same number in every encode in every output that converts the same Teletext source to DVB-Sub or Burn-in.",
+                        "smithy.api#jsonName": "subtitleRows"
+                    }
                 }
             },
             "traits": {
@@ -13155,6 +13219,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "Dvb Sub Destination Shadow Color"
+            }
+        },
+        "com.amazonaws.medialive#DvbSubDestinationSubtitleRows": {
+            "type": "enum",
+            "members": {
+                "ROWS_16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROWS_16"
+                    }
+                },
+                "ROWS_20": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROWS_20"
+                    }
+                },
+                "ROWS_24": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROWS_24"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dvb Sub Destination Subtitle Rows"
             }
         },
         "com.amazonaws.medialive#DvbSubDestinationTeletextGridControl": {
@@ -25922,17 +26012,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -25946,28 +26025,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -25978,17 +26035,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -38412,23 +38458,23 @@
                 }
             }
         },
-        "com.amazonaws.medialive#__integerMin50000Max16000000": {
+        "com.amazonaws.medialive#__integerMin50000Max12000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max16000000",
+                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max12000000",
                 "smithy.api#range": {
                     "min": 50000,
-                    "max": 16000000
+                    "max": 12000000
                 }
             }
         },
-        "com.amazonaws.medialive#__integerMin50000Max8000000": {
+        "com.amazonaws.medialive#__integerMin50000Max24000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max8000000",
+                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max24000000",
                 "smithy.api#range": {
                     "min": 50000,
-                    "max": 8000000
+                    "max": 24000000
                 }
             }
         },
@@ -38510,6 +38556,15 @@
                     "min": -60,
                     "max": 60
                 }
+            }
+        },
+        "com.amazonaws.medialive#__listOfAdditionalDestinations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#AdditionalDestinations"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfAdditionalDestinations"
             }
         },
         "com.amazonaws.medialive#__listOfAudioChannelMapping": {

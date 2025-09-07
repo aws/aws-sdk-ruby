@@ -1926,6 +1926,7 @@ module Aws::CloudFormation
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?hook_result_id: String,
         ?invocation_point: String,
         ?failure_mode: String,
         ?type_name: String,
@@ -1933,9 +1934,15 @@ module Aws::CloudFormation
         ?type_configuration_version_id: String,
         ?status: String,
         ?hook_status_reason: String,
+        ?invoked_at: Time,
+        ?target_type: String,
+        ?target_id: String,
+        ?type_arn: String,
+        ?hook_execution_target: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor hook_result_id: String?
       attr_accessor invocation_point: String?
       attr_accessor failure_mode: String?
       attr_accessor type_name: String?
@@ -1943,6 +1950,11 @@ module Aws::CloudFormation
       attr_accessor type_configuration_version_id: String?
       attr_accessor status: String?
       attr_accessor hook_status_reason: String?
+      attr_accessor invoked_at: Time?
+      attr_accessor target_type: String?
+      attr_accessor target_id: String?
+      attr_accessor type_arn: String?
+      attr_accessor hook_execution_target: String?
     end
 
     module HookStatus
@@ -2133,12 +2145,16 @@ module Aws::CloudFormation
       def initialize: (
         ?target_type: String,
         ?target_id: String,
+        ?type_arn: String,
+        ?status: String,
         ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor target_type: String?
       attr_accessor target_id: String?
+      attr_accessor type_arn: String?
+      attr_accessor status: String?
       attr_accessor next_token: String?
     end
 
@@ -3707,6 +3723,7 @@ module Aws::CloudFormation
         ?hook_status: String,
         ?hook_status_reason: String,
         ?hook_invocation_point: String,
+        ?hook_invocation_id: String,
         ?hook_failure_mode: String,
         ?detailed_status: String,
       ) -> void
@@ -3727,6 +3744,7 @@ module Aws::CloudFormation
       attr_accessor hook_status: String?
       attr_accessor hook_status_reason: String?
       attr_accessor hook_invocation_point: String?
+      attr_accessor hook_invocation_id: String?
       attr_accessor hook_failure_mode: String?
       attr_accessor detailed_status: String?
     end

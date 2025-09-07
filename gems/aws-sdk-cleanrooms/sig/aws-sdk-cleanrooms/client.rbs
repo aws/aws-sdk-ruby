@@ -117,6 +117,9 @@ module Aws::CleanRooms
       ],
       ?schema: {
         referenced_tables: Array[String]
+      },
+      ?error_message_configuration: {
+        type: String
       }
     ) -> _CreateAnalysisTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnalysisTemplateResponse
 
@@ -183,8 +186,29 @@ module Aws::CleanRooms
           is_responsible: untyped
         }
       },
-      ?analytics_engine: String
+      ?analytics_engine: String,
+      ?auto_approved_change_request_types: Array[String]
     ) -> _CreateCollaborationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCollaborationResponse
+
+    interface _CreateCollaborationChangeRequestResponse
+      include Smithy::Client::_Response[Types::CreateCollaborationChangeRequestOutput]
+      def collaboration_change_request: () -> Types::CollaborationChangeRequest?
+    end
+    def create_collaboration_change_request: (
+      ?collaboration_identifier: String,
+      ?changes: Array[
+        {
+          specification_type: String,
+          specification: {
+            member: {
+              account_id: String,
+              member_abilities: Array[String],
+              display_name: String
+            }
+          }
+        }
+      ]
+    ) -> _CreateCollaborationChangeRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCollaborationChangeRequestResponse
 
     interface _CreateConfiguredAudienceModelAssociationResponse
       include Smithy::Client::_Response[Types::CreateConfiguredAudienceModelAssociationOutput]
@@ -549,6 +573,15 @@ module Aws::CleanRooms
       ?analysis_template_arn: String
     ) -> _GetCollaborationAnalysisTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCollaborationAnalysisTemplateResponse
 
+    interface _GetCollaborationChangeRequestResponse
+      include Smithy::Client::_Response[Types::GetCollaborationChangeRequestOutput]
+      def collaboration_change_request: () -> Types::CollaborationChangeRequest?
+    end
+    def get_collaboration_change_request: (
+      ?collaboration_identifier: String,
+      ?change_request_identifier: String
+    ) -> _GetCollaborationChangeRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCollaborationChangeRequestResponse
+
     interface _GetCollaborationConfiguredAudienceModelAssociationResponse
       include Smithy::Client::_Response[Types::GetCollaborationConfiguredAudienceModelAssociationOutput]
       def collaboration_configured_audience_model_association: () -> Types::CollaborationConfiguredAudienceModelAssociation?
@@ -714,6 +747,18 @@ module Aws::CleanRooms
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListCollaborationAnalysisTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationAnalysisTemplatesResponse
+
+    interface _ListCollaborationChangeRequestsResponse
+      include Smithy::Client::_Response[Types::ListCollaborationChangeRequestsOutput]
+      def collaboration_change_request_summaries: () -> Array[Types::CollaborationChangeRequestSummary]?
+      def next_token: () -> String?
+    end
+    def list_collaboration_change_requests: (
+      ?collaboration_identifier: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCollaborationChangeRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationChangeRequestsResponse
 
     interface _ListCollaborationConfiguredAudienceModelAssociationsResponse
       include Smithy::Client::_Response[Types::ListCollaborationConfiguredAudienceModelAssociationsOutput]
@@ -952,6 +997,12 @@ module Aws::CleanRooms
           member: {
             account_id: String
           }
+        }
+      },
+      ?compute_configuration: {
+        worker: {
+          type: String,
+          number: Integer
         }
       }
     ) -> _StartProtectedJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartProtectedJobResponse

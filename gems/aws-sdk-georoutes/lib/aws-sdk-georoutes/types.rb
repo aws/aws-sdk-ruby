@@ -19,69 +19,37 @@ module Aws::GeoRoutes
     #   <p>Features that are allowed while calculating an isoline.</p>
     #   @return [Types::IsolineAllowOptions]
     # @!attribute arrival_time
-    #   <p>Time of arrival at the destination.</p>
-    #            <p>Time format: <code>YYYY-MM-DDThh:mm:ss.sssZ |
-    #            YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of arrival at the destination.</p> <p>Time format: <code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     #   @return [String]
     # @!attribute avoid
-    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis.
-    #            If an avoidance can't be satisfied for a particular case, it violates the avoidance and the
-    #            returned response produces a notice for the violation.</p>
+    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.</p>
     #   @return [Types::IsolineAvoidanceOptions]
     # @!attribute depart_now
     #   <p>Uses the current time as the time of departure.</p>
     #   @return [Boolean]
     # @!attribute departure_time
-    #   <p>Time of departure from thr origin.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     #   @return [String]
     # @!attribute destination
-    #   <p>The final position for the route. In the World Geodetic System (WGS 84) format:
-    #               <code>[longitude, latitude]</code>.</p>
+    #   <p>The final position for the route. In the World Geodetic System (WGS 84) format: <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     # @!attribute destination_options
     #   <p>Destination related options.</p>
     #   @return [Types::IsolineDestinationOptions]
     # @!attribute isoline_geometry_format
-    #   <p>The format of the returned IsolineGeometry. </p>
-    #            <p>Default Value:<code>FlexiblePolyline</code>
-    #            </p>
+    #   <p>The format of the returned IsolineGeometry. </p> <p>Default Value:<code>FlexiblePolyline</code> </p>
     #   @return [String]
     # @!attribute isoline_granularity
     #   <p>Defines the granularity of the returned Isoline.</p>
     #   @return [Types::IsolineGranularityOptions]
     # @!attribute key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4
-    #            signature must be provided when making a request. </p>
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     #   @return [String]
     # @!attribute optimize_isoline_for
-    #   <p>Specifies the optimization criteria for when calculating an isoline. AccurateCalculation
-    #            generates an isoline of higher granularity that is more precise. FastCalculation generates
-    #            an isoline faster by reducing the granularity, and in turn the quality of the isoline.
-    #            BalancedCalculation generates an isoline by balancing between quality and performance. </p>
-    #            <p>Default Value: <code>BalancedCalculation</code>
-    #            </p>
+    #   <p>Specifies the optimization criteria for when calculating an isoline. AccurateCalculation generates an isoline of higher granularity that is more precise. FastCalculation generates an isoline faster by reducing the granularity, and in turn the quality of the isoline. BalancedCalculation generates an isoline by balancing between quality and performance. </p> <p>Default Value: <code>BalancedCalculation</code> </p>
     #   @return [String]
     # @!attribute optimize_routing_for
-    #   <p>Specifies the optimization criteria for calculating a route.</p>
-    #            <p>Default Value: <code>FastestRoute</code>
-    #            </p>
+    #   <p>Specifies the optimization criteria for calculating a route.</p> <p>Default Value: <code>FastestRoute</code> </p>
     #   @return [String]
     # @!attribute origin
     #   <p>The start position for the route.</p>
@@ -90,25 +58,13 @@ module Aws::GeoRoutes
     #   <p>Origin related options.</p>
     #   @return [Types::IsolineOriginOptions]
     # @!attribute thresholds
-    #   <p>Threshold to be used for the isoline calculation. Up to 3 thresholds per provided type
-    #            can be requested.</p>
-    #            <p> You incur a calculation charge for each threshold. Using a large amount of thresholds in a
-    #             request can lead you to incur unexpected charges. See
-    #             <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`">
-    #                 Amazon Location's pricing page</a> for more information.</p>
+    #   <p>Threshold to be used for the isoline calculation. Up to 3 thresholds per provided type can be requested.</p> <p> You incur a calculation charge for each threshold. Using a large amount of thresholds in a request can lead you to incur unexpected charges. See <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`"> Amazon Location's pricing page</a> for more information.</p>
     #   @return [Types::IsolineThresholds]
     # @!attribute traffic
     #   <p>Traffic related options.</p>
     #   @return [Types::IsolineTrafficOptions]
     # @!attribute travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <note>
-    #               <p> The mode <code>Scooter</code> also applies to motorcycles, set to
-    #                  <code>Scooter</code> when wanted to calculate options for motorcycles.</p>
-    #            </note>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <note> <p> The mode <code>Scooter</code> also applies to motorcycles, set to <code>Scooter</code> when wanted to calculate options for motorcycles.</p> </note> <p>Default Value: <code>Car</code> </p>
     #   @return [String]
     # @!attribute travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
@@ -137,34 +93,13 @@ module Aws::GeoRoutes
     end
 
     # @!attribute arrival_time
-    #   <p>Time of arrival at the destination. This parameter is returned only if the Destination
-    #            parameters was provided in the request. </p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of arrival at the destination. This parameter is returned only if the Destination parameters was provided in the request. </p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     #   @return [String]
     # @!attribute departure_time
-    #   <p>Time of departure from thr origin.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     #   @return [String]
     # @!attribute isoline_geometry_format
-    #   <p>The format of the returned IsolineGeometry. </p>
-    #            <p>Default Value:<code>FlexiblePolyline</code>
-    #            </p>
+    #   <p>The format of the returned IsolineGeometry. </p> <p>Default Value:<code>FlexiblePolyline</code> </p>
     #   @return [String]
     # @!attribute isolines
     #   <p>Calculated isolines and associated properties.</p>
@@ -194,70 +129,37 @@ module Aws::GeoRoutes
     #   <p>Features that are allowed while calculating a route.</p>
     #   @return [Types::RouteMatrixAllowOptions]
     # @!attribute avoid
-    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis.
-    #            If an avoidance can't be satisfied for a particular case, it violates the avoidance and the
-    #            returned response produces a notice for the violation.</p>
+    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.</p>
     #   @return [Types::RouteMatrixAvoidanceOptions]
     # @!attribute depart_now
     #   <p>Uses the current time as the time of departure.</p>
     #   @return [Boolean]
     # @!attribute departure_time
-    #   <p>Time of departure from thr origin.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     #   @return [String]
     # @!attribute destinations
-    #   <p>List of destinations for the route.</p>
-    #            <note>
-    #               <p>Route calculations are billed for each origin and destination pair. If you use a large matrix of origins and destinations, your costs will increase accordingly. See
-    #               <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`">
-    #                   Amazon Location's pricing page</a> for more information.</p>
-    #            </note>
+    #   <p>List of destinations for the route.</p> <note> <p>Route calculations are billed for each origin and destination pair. If you use a large matrix of origins and destinations, your costs will increase accordingly. See <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`"> Amazon Location's pricing page</a> for more information.</p> </note>
     #   @return [Array<Types::RouteMatrixDestination>]
     # @!attribute exclude
     #   <p>Features to be strictly excluded while calculating the route.</p>
     #   @return [Types::RouteMatrixExclusionOptions]
     # @!attribute key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4
-    #            signature must be provided when making a request. </p>
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     #   @return [String]
     # @!attribute optimize_routing_for
-    #   <p>Specifies the optimization criteria for calculating a route.</p>
-    #            <p>Default Value: <code>FastestRoute</code>
-    #            </p>
+    #   <p>Specifies the optimization criteria for calculating a route.</p> <p>Default Value: <code>FastestRoute</code> </p>
     #   @return [String]
     # @!attribute origins
-    #   <p>The position in longitude and latitude for the origin.</p>
-    #            <note>
-    #               <p>Route calculations are billed for each origin and destination pair. Using a large amount of Origins in a
-    #               request can lead you to incur unexpected charges. See
-    #               <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`">
-    #                   Amazon Location's pricing page</a> for more information.</p>
-    #            </note>
+    #   <p>The position in longitude and latitude for the origin.</p> <note> <p>Route calculations are billed for each origin and destination pair. Using a large amount of Origins in a request can lead you to incur unexpected charges. See <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`"> Amazon Location's pricing page</a> for more information.</p> </note>
     #   @return [Array<Types::RouteMatrixOrigin>]
     # @!attribute routing_boundary
-    #   <p>Boundary within which the matrix is to be calculated. All data, origins and destinations
-    #            outside the boundary are considered invalid.</p>
-    #            <note>
-    #               <p>When request routing boundary was set as AutoCircle, the response routing boundary
-    #               will return Circle derived from the AutoCircle settings.</p>
-    #            </note>
+    #   <p>Boundary within which the matrix is to be calculated. All data, origins and destinations outside the boundary are considered invalid.</p> <note> <p>When request routing boundary was set as AutoCircle, the response routing boundary will return Circle derived from the AutoCircle settings.</p> </note>
     #   @return [Types::RouteMatrixBoundary]
     # @!attribute traffic
     #   <p>Traffic related options.</p>
     #   @return [Types::RouteMatrixTrafficOptions]
     # @!attribute travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
     #   @return [String]
     # @!attribute travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
@@ -281,25 +183,16 @@ module Aws::GeoRoutes
     end
 
     # @!attribute error_count
-    #   <p>The count of error results in the route matrix. If this number is 0, all routes were
-    #            calculated successfully.</p>
+    #   <p>The count of error results in the route matrix. If this number is 0, all routes were calculated successfully.</p>
     #   @return [Integer]
     # @!attribute pricing_bucket
     #   <p>The pricing bucket for which the query is charged at.</p>
     #   @return [String]
     # @!attribute route_matrix
-    #   <p>The calculated route matrix containing the results for all pairs of Origins to
-    #            Destination positions. Each row corresponds to one entry in Origins. Each entry in the row
-    #            corresponds to the route from that entry in Origins to an entry in Destination
-    #            positions.</p>
+    #   <p>The calculated route matrix containing the results for all pairs of Origins to Destination positions. Each row corresponds to one entry in Origins. Each entry in the row corresponds to the route from that entry in Origins to an entry in Destination positions.</p>
     #   @return [Array<Array<Types::RouteMatrixEntry>>]
     # @!attribute routing_boundary
-    #   <p>Boundary within which the matrix is to be calculated. All data, origins and destinations
-    #            outside the boundary are considered invalid.</p>
-    #            <note>
-    #               <p>When request routing boundary was set as AutoCircle, the response routing boundary
-    #               will return Circle derived from the AutoCircle settings.</p>
-    #            </note>
+    #   <p>Boundary within which the matrix is to be calculated. All data, origins and destinations outside the boundary are considered invalid.</p> <note> <p>When request routing boundary was set as AutoCircle, the response routing boundary will return Circle derived from the AutoCircle settings.</p> </note>
     #   @return [Types::RouteMatrixBoundary]
     class CalculateRouteMatrixResponse < Struct.new(
       :error_count,
@@ -314,40 +207,19 @@ module Aws::GeoRoutes
     #   <p>Features that are allowed while calculating a route.</p>
     #   @return [Types::RouteAllowOptions]
     # @!attribute arrival_time
-    #   <p>Time of arrival at the destination.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of arrival at the destination.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     #   @return [String]
     # @!attribute avoid
-    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis.
-    #            If an avoidance can't be satisfied for a particular case, it violates the avoidance and the
-    #            returned response produces a notice for the violation.</p>
+    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.</p>
     #   @return [Types::RouteAvoidanceOptions]
     # @!attribute depart_now
     #   <p>Uses the current time as the time of departure.</p>
     #   @return [Boolean]
     # @!attribute departure_time
-    #   <p>Time of departure from thr origin.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     #   @return [String]
     # @!attribute destination
-    #   <p>The final position for the route. In the World Geodetic System (WGS 84) format:
-    #               <code>[longitude, latitude]</code>.</p>
+    #   <p>The final position for the route. In the World Geodetic System (WGS 84) format: <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     # @!attribute destination_options
     #   <p>Destination related options.</p>
@@ -362,85 +234,22 @@ module Aws::GeoRoutes
     #   <p>Measurement system to be used for instructions within steps in the response.</p>
     #   @return [String]
     # @!attribute key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4
-    #            signature must be provided when making a request. </p>
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     #   @return [String]
     # @!attribute languages
-    #   <p>List of languages for instructions within steps in the response.</p>
-    #            <note>
-    #               <p>Instructions in the requested language are returned only if they are
-    #               available.</p>
-    #            </note>
+    #   <p>List of languages for instructions within steps in the response.</p> <note> <p>Instructions in the requested language are returned only if they are available.</p> </note>
     #   @return [Array<String>]
     # @!attribute leg_additional_features
-    #   <p>A list of optional additional parameters such as timezone that can be requested for each
-    #            result.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>Elevation</code>: Retrieves the elevation information for each
-    #                  location.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Incidents</code>: Provides information on traffic incidents along the
-    #                  route.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>PassThroughWaypoints</code>: Indicates waypoints that are passed through
-    #                  without stopping.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Summary</code>: Returns a summary of the route, including distance and
-    #                  duration.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Tolls</code>: Supplies toll cost information along the route.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>TravelStepInstructions</code>: Provides step-by-step instructions for travel
-    #                  along the route.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>TruckRoadTypes</code>: Returns information about road types suitable for
-    #                  trucks.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>TypicalDuration</code>: Gives typical travel duration based on historical
-    #                  data.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Zones</code>: Specifies the time zone information for each waypoint.</p>
-    #               </li>
-    #            </ul>
+    #   <p>A list of optional additional parameters such as timezone that can be requested for each result.</p> <ul> <li> <p> <code>Elevation</code>: Retrieves the elevation information for each location.</p> </li> <li> <p> <code>Incidents</code>: Provides information on traffic incidents along the route.</p> </li> <li> <p> <code>PassThroughWaypoints</code>: Indicates waypoints that are passed through without stopping.</p> </li> <li> <p> <code>Summary</code>: Returns a summary of the route, including distance and duration.</p> </li> <li> <p> <code>Tolls</code>: Supplies toll cost information along the route.</p> </li> <li> <p> <code>TravelStepInstructions</code>: Provides step-by-step instructions for travel along the route.</p> </li> <li> <p> <code>TruckRoadTypes</code>: Returns information about road types suitable for trucks.</p> </li> <li> <p> <code>TypicalDuration</code>: Gives typical travel duration based on historical data.</p> </li> <li> <p> <code>Zones</code>: Specifies the time zone information for each waypoint.</p> </li> </ul>
     #   @return [Array<String>]
     # @!attribute leg_geometry_format
-    #   <p>Specifies the format of the geometry returned for each leg of the route. You can choose
-    #            between two different geometry encoding formats.</p>
-    #            <p>
-    #               <code>FlexiblePolyline</code>: A compact and precise encoding format for the leg
-    #            geometry. For more information on the format, see the GitHub repository for <a href="https://github.com/heremaps/flexible-polyline">
-    #                  <code>FlexiblePolyline</code>
-    #               </a>.</p>
-    #            <p>
-    #               <code>Simple</code>: A less compact encoding, which is easier to decode but may be less
-    #            precise and result in larger payloads.</p>
+    #   <p>Specifies the format of the geometry returned for each leg of the route. You can choose between two different geometry encoding formats.</p> <p> <code>FlexiblePolyline</code>: A compact and precise encoding format for the leg geometry. For more information on the format, see the GitHub repository for <a href="https://github.com/heremaps/flexible-polyline"> <code>FlexiblePolyline</code> </a>.</p> <p> <code>Simple</code>: A less compact encoding, which is easier to decode but may be less precise and result in larger payloads.</p>
     #   @return [String]
     # @!attribute max_alternatives
-    #   <p>Maximum number of alternative routes to be provided in the response, if
-    #            available.</p>
+    #   <p>Maximum number of alternative routes to be provided in the response, if available.</p>
     #   @return [Integer]
     # @!attribute optimize_routing_for
-    #   <p>Specifies the optimization criteria for calculating a route.</p>
-    #            <p>Default Value: <code>FastestRoute</code>
-    #            </p>
+    #   <p>Specifies the optimization criteria for calculating a route.</p> <p>Default Value: <code>FastestRoute</code> </p>
     #   @return [String]
     # @!attribute origin
     #   <p>The start position for the route.</p>
@@ -449,8 +258,7 @@ module Aws::GeoRoutes
     #   <p>Origin related options.</p>
     #   @return [Types::RouteOriginOptions]
     # @!attribute span_additional_features
-    #   <p>A list of optional features such as SpeedLimit that can be requested for a Span. A span
-    #            is a section of a Leg for which the requested features have the same values.</p>
+    #   <p>A list of optional features such as SpeedLimit that can be requested for a Span. A span is a section of a Leg for which the requested features have the same values.</p>
     #   @return [Array<String>]
     # @!attribute tolls
     #   <p>Toll related options.</p>
@@ -459,18 +267,13 @@ module Aws::GeoRoutes
     #   <p>Traffic related options.</p>
     #   @return [Types::RouteTrafficOptions]
     # @!attribute travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
     #   @return [String]
     # @!attribute travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
     #   @return [Types::RouteTravelModeOptions]
     # @!attribute travel_step_type
-    #   <p>Type of step returned by the response. Default provides basic steps intended for web
-    #            based applications. TurnByTurn provides detailed instructions with more granularity
-    #            intended for a turn based navigation system.</p>
+    #   <p>Type of step returned by the response. Default provides basic steps intended for web based applications. TurnByTurn provides detailed instructions with more granularity intended for a turn based navigation system.</p>
     #   @return [String]
     # @!attribute waypoints
     #   <p>List of waypoints between the Origin and Destination.</p>
@@ -509,8 +312,7 @@ module Aws::GeoRoutes
     #   <p>Specifies the format of the geometry returned for each leg of the route.</p>
     #   @return [String]
     # @!attribute notices
-    #   <p>Notices are additional information returned that indicate issues that occurred during
-    #            route calculation.</p>
+    #   <p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>
     #   @return [Array<Types::RouteResponseNotice>]
     # @!attribute pricing_bucket
     #   <p>The pricing bucket for which the query is charged at.</p>
@@ -527,20 +329,13 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Geometry defined as a circle. When request routing boundary was set as
-    #             <code>AutoCircle</code>, the response routing boundary will return <code>Circle</code>
-    #          derived from the <code>AutoCircle</code> settings.</p>
+    # <p>Geometry defined as a circle. When request routing boundary was set as <code>AutoCircle</code>, the response routing boundary will return <code>Circle</code> derived from the <code>AutoCircle</code> settings.</p>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute center
-    #   <p>Center of the Circle defined in longitude and latitude coordinates.</p>
-    #            <p>Example: <code>[-123.1174, 49.2847]</code> represents the position with longitude
-    #               <code>-123.1174</code> and latitude <code>49.2847</code>. </p>
+    #   <p>Center of the Circle defined in longitude and latitude coordinates.</p> <p>Example: <code>[-123.1174, 49.2847]</code> represents the position with longitude <code>-123.1174</code> and latitude <code>49.2847</code>. </p>
     #   @return [Array<Float>]
     # @!attribute radius
-    #   <p>Radius of the Circle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>meters</code>
-    #            </p>
+    #   <p>Radius of the Circle.</p> <p> <b>Unit</b>: <code>meters</code> </p>
     #   @return [Float]
     class Circle < Struct.new(
       :center,
@@ -549,14 +344,10 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Geometry defined as a corridor - a LineString with a radius that defines the width of
-    #          the corridor.</p>
+    # <p>Geometry defined as a corridor - a LineString with a radius that defines the width of the corridor.</p>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute line_string
-    #   <p>An ordered list of positions used to plot a route on a map.</p>
-    #            <note>
-    #               <p>LineString and Polyline are mutually exclusive properties.</p>
-    #            </note>
+    #   <p>An ordered list of positions used to plot a route on a map.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [Array<Array<Float>>]
     # @!attribute radius
     #   <p>Radius that defines the width of the corridor.</p>
@@ -568,8 +359,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request processing has failed because of an unknown error, exception or
-    #          failure.</p>
+    # <p>The request processing has failed because of an unknown error, exception or failure.</p>
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
@@ -580,9 +370,7 @@ module Aws::GeoRoutes
 
     # <p>Calculated isolines and associated properties.</p>
     # @!attribute connections
-    #   <p>Isolines may contain multiple components, if these components are connected by ferry
-    #            links. These components are returned as separate polygons while the ferry links are
-    #            returned as connections.</p>
+    #   <p>Isolines may contain multiple components, if these components are connected by ferry links. These components are returned as separate polygons while the ferry links are returned as connections.</p>
     #   @return [Array<Types::IsolineConnection>]
     # @!attribute distance_threshold
     #   <p>Distance threshold corresponding to the calculated Isoline.</p>
@@ -610,14 +398,10 @@ module Aws::GeoRoutes
 
     # <p>Features that are allowed while calculating an isoline.</p>
     # @!attribute hot
-    #   <p>Allow Hot (High Occupancy Toll) lanes while calculating an isoline.</p>
-    #            <p>Default value: <code>false</code>
-    #            </p>
+    #   <p>Allow Hot (High Occupancy Toll) lanes while calculating an isoline.</p> <p>Default value: <code>false</code> </p>
     #   @return [Boolean]
     # @!attribute hov
-    #   <p>Allow Hov (High Occupancy vehicle) lanes while calculating an isoline.</p>
-    #            <p>Default value: <code>false</code>
-    #            </p>
+    #   <p>Allow Hov (High Occupancy vehicle) lanes while calculating an isoline.</p> <p>Default value: <code>false</code> </p>
     #   @return [Boolean]
     class IsolineAllowOptions < Struct.new(
       :hot,
@@ -628,8 +412,7 @@ module Aws::GeoRoutes
 
     # <p>The area to be avoided.</p>
     # @!attribute except
-    #   <p>Exceptions to the provided avoidance geometry, to be included while calculating an
-    #            isoline.</p>
+    #   <p>Exceptions to the provided avoidance geometry, to be included while calculating an isoline.</p>
     #   @return [Array<Types::IsolineAvoidanceAreaGeometry>]
     # @!attribute geometry
     #   <p>Geometry of the area to be avoided.</p>
@@ -643,25 +426,19 @@ module Aws::GeoRoutes
 
     # <p>The avoidance geometry, to be included while calculating an isoline.</p>
     # @!attribute bounding_box
-    #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates
-    #            (longitude and latitude,) of the southwest corner of the bounding box; the second pair
-    #            represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
+    #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates (longitude and latitude,) of the southwest corner of the bounding box; the second pair represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
     #   @return [Array<Float>]
     # @!attribute corridor
-    #   <p>Geometry defined as a corridor - a LineString with a radius that defines the width of
-    #            the corridor.</p>
+    #   <p>Geometry defined as a corridor - a LineString with a radius that defines the width of the corridor.</p>
     #   @return [Types::Corridor]
     # @!attribute polygon
-    #   <p>A list of Polygon will be excluded for calculating isolines, the list can only contain 1
-    #            polygon.</p>
+    #   <p>A list of Polygon will be excluded for calculating isolines, the list can only contain 1 polygon.</p>
     #   @return [Array<Array<Array<Float>>>]
     # @!attribute polyline_corridor
-    #   <p>Geometry defined as an encoded corridor – a polyline with a radius that defines the
-    #            width of the corridor. For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
+    #   <p>Geometry defined as an encoded corridor – a polyline with a radius that defines the width of the corridor. For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
     #   @return [Types::PolylineCorridor]
     # @!attribute polyline_polygon
-    #   <p>A list of PolylinePolygon's that are excluded for calculating isolines, the list can
-    #            only contain 1 polygon. For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>. </p>
+    #   <p>A list of PolylinePolygon's that are excluded for calculating isolines, the list can only contain 1 polygon. For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>. </p>
     #   @return [Array<String>]
     class IsolineAvoidanceAreaGeometry < Struct.new(
       :bounding_box,
@@ -673,9 +450,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Features that are avoided while calculating isolines. Avoidance is on a best-case basis.
-    #          If an avoidance can't be satisfied for a particular case, it violates the avoidance and the
-    #          returned response produces a notice for the violation.</p>
+    # <p>Features that are avoided while calculating isolines. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.</p>
     # @!attribute areas
     #   <p>Areas to be avoided.</p>
     #   @return [Array<Types::IsolineAvoidanceArea>]
@@ -701,11 +476,7 @@ module Aws::GeoRoutes
     #   <p>Avoids roads where the specified toll transponders are the only mode of payment.</p>
     #   @return [Boolean]
     # @!attribute truck_road_types
-    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to
-    #            Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>
-    #            <note>
-    #               <p>There are currently no other supported values as of 26th April 2024.</p>
-    #            </note>
+    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p> <note> <p>There are currently no other supported values as of 26th April 2024.</p> </note>
     #   @return [Array<String>]
     # @!attribute tunnels
     #   <p>Avoid tunnels while calculating an isoline.</p>
@@ -751,15 +522,10 @@ module Aws::GeoRoutes
     #   <p>The vehicle License Plate.</p>
     #   @return [Types::IsolineVehicleLicensePlate]
     # @!attribute max_speed
-    #   <p>Maximum speed.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Maximum speed.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute occupancy
-    #   <p>The number of occupants in the vehicle.</p>
-    #            <p>Default Value: <code>1</code>
-    #            </p>
+    #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class IsolineCarOptions < Struct.new(
       :engine_type,
@@ -776,19 +542,15 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Isolines may contain multiple components, if these components are connected by ferry
-    #          links. These components are returned as separate polygons while the ferry links are
-    #          returned as connections.</p>
+    # <p>Isolines may contain multiple components, if these components are connected by ferry links. These components are returned as separate polygons while the ferry links are returned as connections.</p>
     # @!attribute from_polygon_index
-    #   <p>Index of the polygon corresponding to the "from" component of the connection.
-    #            The polygon is available from <code>Isoline[].Geometries</code>.</p>
+    #   <p>Index of the polygon corresponding to the "from" component of the connection. The polygon is available from <code>Isoline[].Geometries</code>.</p>
     #   @return [Integer]
     # @!attribute geometry
     #   <p>The isoline geometry.</p>
     #   @return [Types::IsolineConnectionGeometry]
     # @!attribute to_polygon_index
-    #   <p>Index of the polygon corresponding to the "to" component of the connection.
-    #            The polygon is available from <code>Isoline[].Geometries</code>.</p>
+    #   <p>Index of the polygon corresponding to the "to" component of the connection. The polygon is available from <code>Isoline[].Geometries</code>.</p>
     #   @return [Integer]
     class IsolineConnection < Struct.new(
       :from_polygon_index,
@@ -800,17 +562,10 @@ module Aws::GeoRoutes
 
     # <p>Geometry of the connection between different isoline components.</p>
     # @!attribute line_string
-    #   <p>An ordered list of positions used to plot a route on a map.</p>
-    #            <note>
-    #               <p>LineString and Polyline are mutually exclusive properties.</p>
-    #            </note>
+    #   <p>An ordered list of positions used to plot a route on a map.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [Array<Array<Float>>]
     # @!attribute polyline
-    #   <p>An ordered list of positions used to plot a route on a map in a lossy compression
-    #            format.</p>
-    #            <note>
-    #               <p>LineString and Polyline are mutually exclusive properties.</p>
-    #            </note>
+    #   <p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [String]
     class IsolineConnectionGeometry < Struct.new(
       :line_string,
@@ -821,9 +576,7 @@ module Aws::GeoRoutes
 
     # <p>Destination related options.</p>
     # @!attribute avoid_actions_for_distance
-    #   <p>Avoids actions for the provided distance. This is typically to consider for users in
-    #            moving vehicles who may not have sufficient time to make an action at an origin or a
-    #            destination.</p>
+    #   <p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>
     #   @return [Integer]
     # @!attribute heading
     #   <p>GPS Heading at the position.</p>
@@ -854,10 +607,7 @@ module Aws::GeoRoutes
     #   <p>Maximum number of points of returned Isoline.</p>
     #   @return [Integer]
     # @!attribute max_resolution
-    #   <p>Maximum resolution of the returned isoline.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>meters</code>
-    #            </p>
+    #   <p>Maximum resolution of the returned isoline.</p> <p> <b>Unit</b>: <code>meters</code> </p>
     #   @return [Integer]
     class IsolineGranularityOptions < Struct.new(
       :max_points,
@@ -877,23 +627,13 @@ module Aws::GeoRoutes
     #   <p>Attempts to match the provided position to a road similar to the provided name.</p>
     #   @return [String]
     # @!attribute on_road_threshold
-    #   <p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint
-    #            will be snapped to the highway/bridge/tunnel/sliproad.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>meters</code>
-    #            </p>
+    #   <p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint will be snapped to the highway/bridge/tunnel/sliproad.</p> <p> <b>Unit</b>: <code>meters</code> </p>
     #   @return [Integer]
     # @!attribute radius
-    #   <p>Considers all roads within the provided radius to match the provided destination to. The
-    #            roads that are considered are determined by the provided Strategy.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Meters</code>
-    #            </p>
+    #   <p>Considers all roads within the provided radius to match the provided destination to. The roads that are considered are determined by the provided Strategy.</p> <p> <b>Unit</b>: <code>Meters</code> </p>
     #   @return [Integer]
     # @!attribute strategy
-    #   <p>Strategy that defines matching of the position onto the road network. MatchAny considers
-    #            all roads possible, whereas MatchMostSignificantRoad matches to the most significant
-    #            road.</p>
+    #   <p>Strategy that defines matching of the position onto the road network. MatchAny considers all roads possible, whereas MatchMostSignificantRoad matches to the most significant road.</p>
     #   @return [String]
     class IsolineMatchingOptions < Struct.new(
       :name_hint,
@@ -912,9 +652,7 @@ module Aws::GeoRoutes
 
     # <p>Origin related options.</p>
     # @!attribute avoid_actions_for_distance
-    #   <p>Avoids actions for the provided distance. This is typically to consider for users in
-    #            moving vehicles who may not have sufficient time to make an action at an origin or a
-    #            destination.</p>
+    #   <p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>
     #   @return [Integer]
     # @!attribute heading
     #   <p>GPS Heading at the position.</p>
@@ -940,8 +678,7 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Travel mode options when the provided travel mode is <code>Scooter</code>
-    #          </p>
+    # <p>Travel mode options when the provided travel mode is <code>Scooter</code> </p>
     # @!attribute engine_type
     #   <p>Engine type of the vehicle.</p>
     #   @return [String]
@@ -949,15 +686,10 @@ module Aws::GeoRoutes
     #   <p>The vehicle License Plate.</p>
     #   @return [Types::IsolineVehicleLicensePlate]
     # @!attribute max_speed
-    #   <p>Maximum speed specified.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Maximum speed specified.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute occupancy
-    #   <p>The number of occupants in the vehicle.</p>
-    #            <p>Default Value: <code>1</code>
-    #            </p>
+    #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class IsolineScooterOptions < Struct.new(
       :engine_type,
@@ -976,13 +708,10 @@ module Aws::GeoRoutes
 
     # <p>Geometry of the connection between different Isoline components.</p>
     # @!attribute polygon
-    #   <p>A list of Isoline Polygons, for each isoline polygon, it contains polygons of the first
-    #            linear ring (the outer ring) and from 2nd item to the last item (the inner rings).</p>
+    #   <p>A list of Isoline Polygons, for each isoline polygon, it contains polygons of the first linear ring (the outer ring) and from 2nd item to the last item (the inner rings).</p>
     #   @return [Array<Array<Array<Float>>>]
     # @!attribute polyline_polygon
-    #   <p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains
-    #            PolylinePolygon of the first linear ring (the outer ring) and from 2nd item to the last
-    #            item (the inner rings). For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
+    #   <p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains PolylinePolygon of the first linear ring (the outer ring) and from 2nd item to the last item (the inner rings). For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
     #   @return [Array<String>]
     class IsolineShapeGeometry < Struct.new(
       :polygon,
@@ -996,10 +725,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     # @!attribute use_with
-    #   <p>Strategy that defines when the side of street position should be used. AnyStreet will
-    #            always use the provided position.</p>
-    #            <p>Default Value: <code>DividedStreetOnly</code>
-    #            </p>
+    #   <p>Strategy that defines when the side of street position should be used. AnyStreet will always use the provided position.</p> <p>Default Value: <code>DividedStreetOnly</code> </p>
     #   @return [String]
     class IsolineSideOfStreetOptions < Struct.new(
       :position,
@@ -1008,8 +734,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Threshold to be used for the isoline calculation. Up to 5 thresholds per provided type
-    #          can be requested.</p>
+    # <p>Threshold to be used for the isoline calculation. Up to 5 thresholds per provided type can be requested.</p>
     # @!attribute distance
     #   <p>Distance to be used for the isoline calculation.</p>
     #   @return [Array<Integer>]
@@ -1025,18 +750,10 @@ module Aws::GeoRoutes
 
     # <p>Options related to traffic.</p>
     # @!attribute flow_event_threshold_override
-    #   <p>Duration for which flow traffic is considered valid. For this period, the flow traffic
-    #            is used over historical traffic data. Flow traffic refers to congestion, which changes very
-    #            quickly. Duration in seconds for which flow traffic event would be considered valid. While
-    #            flow traffic event is valid it will be used over the historical traffic data. </p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration for which flow traffic is considered valid. For this period, the flow traffic is used over historical traffic data. Flow traffic refers to congestion, which changes very quickly. Duration in seconds for which flow traffic event would be considered valid. While flow traffic event is valid it will be used over the historical traffic data. </p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute usage
-    #   <p>Determines if traffic should be used or ignored while calculating the route.</p>
-    #            <p>Default Value: <code>UseTrafficData</code>
-    #            </p>
+    #   <p>Determines if traffic should be used or ignored while calculating the route.</p> <p>Default Value: <code>UseTrafficData</code> </p>
     #   @return [String]
     class IsolineTrafficOptions < Struct.new(
       :flow_event_threshold_override,
@@ -1055,9 +772,7 @@ module Aws::GeoRoutes
     #   <p>Total number of axles of the vehicle.</p>
     #   @return [Integer]
     # @!attribute trailer_count
-    #   <p>Number of trailers attached to the vehicle.</p>
-    #            <p>Default Value: <code>0</code>
-    #            </p>
+    #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Integer]
     class IsolineTrailerOptions < Struct.new(
       :axle_count,
@@ -1077,12 +792,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode options when the provided travel mode is "Car"</p>
     #   @return [Types::IsolineCarOptions]
     # @!attribute scooter
-    #   <p>Travel mode options when the provided travel mode is <code>Scooter</code>
-    #            </p>
-    #            <note>
-    #               <p>When travel mode is set to <code>Scooter</code>, then the avoidance option
-    #                  <code>ControlledAccessHighways</code> defaults to <code>true</code>.</p>
-    #            </note>
+    #   <p>Travel mode options when the provided travel mode is <code>Scooter</code> </p> <note> <p>When travel mode is set to <code>Scooter</code>, then the avoidance option <code>ControlledAccessHighways</code> defaults to <code>true</code>.</p> </note>
     #   @return [Types::IsolineScooterOptions]
     # @!attribute truck
     #   <p>Travel mode options when the provided travel mode is "Truck"</p>
@@ -1103,57 +813,34 @@ module Aws::GeoRoutes
     #   <p>Engine type of the vehicle.</p>
     #   @return [String]
     # @!attribute gross_weight
-    #   <p>Gross weight of the vehicle including trailers, and goods at capacity.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Gross weight of the vehicle including trailers, and goods at capacity.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute hazardous_cargos
     #   <p>List of Hazardous cargo contained in the vehicle.</p>
     #   @return [Array<String>]
     # @!attribute height
-    #   <p>Height of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Height of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute height_above_first_axle
-    #   <p>Height of the vehicle above its first axle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Height of the vehicle above its first axle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute kpra_length
-    #   <p>Kingpin to rear axle length of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Kingpin to rear axle length of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute length
-    #   <p>Length of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Length of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute license_plate
     #   <p>The vehicle License Plate.</p>
     #   @return [Types::IsolineVehicleLicensePlate]
     # @!attribute max_speed
-    #   <p>Maximum speed specified.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Maximum speed specified.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute occupancy
-    #   <p>The number of occupants in the vehicle.</p>
-    #            <p>Default Value: <code>1</code>
-    #            </p>
+    #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     # @!attribute payload_capacity
-    #   <p>Payload capacity of the vehicle and trailers attached.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>kilograms</code>
-    #            </p>
+    #   <p>Payload capacity of the vehicle and trailers attached.</p> <p> <b>Unit</b>: <code>kilograms</code> </p>
     #   @return [Integer]
     # @!attribute tire_count
     #   <p>Number of tires on the vehicle.</p>
@@ -1165,93 +852,16 @@ module Aws::GeoRoutes
     #   <p>Type of the truck.</p>
     #   @return [String]
     # @!attribute tunnel_restriction_code
-    #   <p>The tunnel restriction code.</p>
-    #            <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels
-    #            in Great Britain. They relate to the types of dangerous goods that can be transported
-    #            through them.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category B</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Limited risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Few restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category C</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Medium risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Some restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category D</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: High risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Many restrictions occur</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category E</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Very high risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Restricted tunnel</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The tunnel restriction code.</p> <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. They relate to the types of dangerous goods that can be transported through them.</p> <ul> <li> <p> <i>Tunnel Category B</i> </p> <ul> <li> <p> <i>Risk Level</i>: Limited risk</p> </li> <li> <p> <i>Restrictions</i>: Few restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category C</i> </p> <ul> <li> <p> <i>Risk Level</i>: Medium risk</p> </li> <li> <p> <i>Restrictions</i>: Some restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category D</i> </p> <ul> <li> <p> <i>Risk Level</i>: High risk</p> </li> <li> <p> <i>Restrictions</i>: Many restrictions occur</p> </li> </ul> </li> <li> <p> <i>Tunnel Category E</i> </p> <ul> <li> <p> <i>Risk Level</i>: Very high risk</p> </li> <li> <p> <i>Restrictions</i>: Restricted tunnel</p> </li> </ul> </li> </ul>
     #   @return [String]
     # @!attribute weight_per_axle
-    #   <p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for
-    #            usage in countries where the differences in axle types or axle groups are not
-    #            distinguished.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for usage in countries where the differences in axle types or axle groups are not distinguished.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute weight_per_axle_group
-    #   <p>Specifies the total weight for the specified axle group. Meant for usage in countries
-    #            that have different regulations based on the axle group type.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Specifies the total weight for the specified axle group. Meant for usage in countries that have different regulations based on the axle group type.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Types::WeightPerAxleGroup]
     # @!attribute width
-    #   <p>Width of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Width of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     class IsolineTruckOptions < Struct.new(
       :axle_count,
@@ -1294,6 +904,7 @@ module Aws::GeoRoutes
     end
 
     # <p>The vehicle license plate.</p>
+    # @note This shape contains sensitive data and should be treated as such.
     # @!attribute last_character
     #   <p>The last character of the License Plate.</p>
     #   @return [String]
@@ -1305,9 +916,7 @@ module Aws::GeoRoutes
 
     # <p>The localized string.</p>
     # @!attribute language
-    #   <p>A list of BCP 47 compliant language codes for the results to be rendered in. The request
-    #            uses the regional default as the fallback if the requested language can't be
-    #            provided.</p>
+    #   <p>A list of BCP 47 compliant language codes for the results to be rendered in. The request uses the regional default as the fallback if the requested language can't be provided.</p>
     #   @return [String]
     # @!attribute value
     #   <p>The value of the localized string.</p>
@@ -1320,28 +929,16 @@ module Aws::GeoRoutes
     end
 
     # @!attribute avoid
-    #   <p>Features that are avoided. Avoidance is on a best-case basis. If an avoidance can't be
-    #            satisfied for a particular case, this setting is ignored.</p>
+    #   <p>Features that are avoided. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, this setting is ignored.</p>
     #   @return [Types::WaypointOptimizationAvoidanceOptions]
     # @!attribute clustering
-    #   <p>Clustering allows you to specify how nearby waypoints can be clustered to improve the
-    #            optimized sequence.</p>
+    #   <p>Clustering allows you to specify how nearby waypoints can be clustered to improve the optimized sequence.</p>
     #   @return [Types::WaypointOptimizationClusteringOptions]
     # @!attribute departure_time
-    #   <p>Departure time from the waypoint.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Departure time from the waypoint.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     #   @return [String]
     # @!attribute destination
-    #   <p>The final position for the route in the World Geodetic System (WGS 84) format:
-    #               <code>[longitude, latitude]</code>.</p>
+    #   <p>The final position for the route in the World Geodetic System (WGS 84) format: <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     # @!attribute destination_options
     #   <p>Destination related options.</p>
@@ -1353,12 +950,10 @@ module Aws::GeoRoutes
     #   <p>Features to be strictly excluded while calculating the route.</p>
     #   @return [Types::WaypointOptimizationExclusionOptions]
     # @!attribute key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4
-    #            signature must be provided when making a request. </p>
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     #   @return [String]
     # @!attribute optimize_sequencing_for
-    #   <p>Specifies the optimization criteria for the calculated sequence.</p>
-    #            <p>Default Value: <code>FastestRoute</code>.</p>
+    #   <p>Specifies the optimization criteria for the calculated sequence.</p> <p>Default Value: <code>FastestRoute</code>.</p>
     #   @return [String]
     # @!attribute origin
     #   <p>The start position for the route.</p>
@@ -1370,10 +965,7 @@ module Aws::GeoRoutes
     #   <p>Traffic-related options.</p>
     #   @return [Types::WaypointOptimizationTrafficOptions]
     # @!attribute travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
     #   @return [String]
     # @!attribute travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
@@ -1402,21 +994,16 @@ module Aws::GeoRoutes
     end
 
     # @!attribute connections
-    #   <p>Details about the connection from one waypoint to the next, within the optimized
-    #            sequence.</p>
+    #   <p>Details about the connection from one waypoint to the next, within the optimized sequence.</p>
     #   @return [Array<Types::WaypointOptimizationConnection>]
     # @!attribute distance
     #   <p>Overall distance to travel the whole sequence.</p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Overall duration to travel the whole sequence.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Overall duration to travel the whole sequence.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute impeding_waypoints
-    #   <p>Returns waypoints that caused the optimization problem to fail, and the constraints that
-    #            were unsatisfied leading to the failure.</p>
+    #   <p>Returns waypoints that caused the optimization problem to fail, and the constraints that were unsatisfied leading to the failure.</p>
     #   @return [Array<Types::WaypointOptimizationImpedingWaypoint>]
     # @!attribute optimized_waypoints
     #   <p>Waypoints in the order of the optimized sequence.</p>
@@ -1445,22 +1032,13 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Geometry defined as an encoded corridor - an encoded polyline with a radius that defines
-    #          the width of the corridor.</p>
+    # <p>Geometry defined as an encoded corridor - an encoded polyline with a radius that defines the width of the corridor.</p>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute polyline
-    #   <p>An ordered list of positions used to plot a route on a map in a lossy compression
-    #            format.</p>
-    #            <note>
-    #               <p>LineString and Polyline are mutually exclusive properties.</p>
-    #            </note>
+    #   <p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [String]
     # @!attribute radius
-    #   <p>Considers all roads within the provided radius to match the provided destination to. The
-    #            roads that are considered are determined by the provided Strategy.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Meters</code>
-    #            </p>
+    #   <p>Considers all roads within the provided radius to match the provided destination to. The roads that are considered are determined by the provided Strategy.</p> <p> <b>Unit</b>: <code>Meters</code> </p>
     #   @return [Integer]
     class PolylineCorridor < Struct.new(
       :polyline,
@@ -1469,8 +1047,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Notices provide information around factors that may have influenced snapping in a manner
-    #          atypical to the standard use cases.</p>
+    # <p>Notices provide information around factors that may have influenced snapping in a manner atypical to the standard use cases.</p>
     # @!attribute code
     #   <p>Code corresponding to the issue.</p>
     #   @return [String]
@@ -1490,17 +1067,10 @@ module Aws::GeoRoutes
 
     # <p>Interpolated geometry for the snapped route that is overlay-able onto a map.</p>
     # @!attribute line_string
-    #   <p>An ordered list of positions used to plot a route on a map.</p>
-    #            <note>
-    #               <p>LineString and Polyline are mutually exclusive properties.</p>
-    #            </note>
+    #   <p>An ordered list of positions used to plot a route on a map.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [Array<Array<Float>>]
     # @!attribute polyline
-    #   <p>An ordered list of positions used to plot a route on a map in a lossy compression
-    #            format.</p>
-    #            <note>
-    #               <p>LineString and Polyline are mutually exclusive properties.</p>
-    #            </note>
+    #   <p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [String]
     class RoadSnapSnappedGeometry < Struct.new(
       :line_string,
@@ -1517,8 +1087,7 @@ module Aws::GeoRoutes
     #   <p>Position of the TracePoint provided within the request, at the same index.</p>
     #   @return [Array<Float>]
     # @!attribute snapped_position
-    #   <p>Snapped position of the TracePoint provided within the request, at the same index.
-    #         </p>
+    #   <p>Snapped position of the TracePoint provided within the request, at the same index. </p>
     #   @return [Array<Float>]
     class RoadSnapSnappedTracePoint < Struct.new(
       :confidence,
@@ -1536,10 +1105,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     # @!attribute speed
-    #   <p>Speed at the specified trace point .</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Speed at the specified trace point .</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute timestamp
     #   <p>Timestamp of the event.</p>
@@ -1561,9 +1127,7 @@ module Aws::GeoRoutes
 
     # <p>Trailer options corresponding to the vehicle.</p>
     # @!attribute trailer_count
-    #   <p>Number of trailers attached to the vehicle.</p>
-    #            <p>Default Value: <code>0</code>
-    #            </p>
+    #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Integer]
     class RoadSnapTrailerOptions < Struct.new(
       :trailer_count,
@@ -1583,96 +1147,22 @@ module Aws::GeoRoutes
 
     # <p>Travel mode options when the provided travel mode is "Truck".</p>
     # @!attribute gross_weight
-    #   <p>Gross weight of the vehicle including trailers, and goods at capacity.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Gross weight of the vehicle including trailers, and goods at capacity.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute hazardous_cargos
     #   <p>List of Hazardous cargos contained in the vehicle.</p>
     #   @return [Array<String>]
     # @!attribute height
-    #   <p>Height of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Height of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute length
-    #   <p>Length of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Length of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute trailer
     #   <p>Trailer options corresponding to the vehicle.</p>
     #   @return [Types::RoadSnapTrailerOptions]
     # @!attribute tunnel_restriction_code
-    #   <p>The tunnel restriction code.</p>
-    #            <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels
-    #            in Great Britain. They relate to the types of dangerous goods that can be transported
-    #            through them.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category B</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Limited risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Few restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category C</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Medium risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Some restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category D</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: High risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Many restrictions occur</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category E</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Very high risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Restricted tunnel</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The tunnel restriction code.</p> <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. They relate to the types of dangerous goods that can be transported through them.</p> <ul> <li> <p> <i>Tunnel Category B</i> </p> <ul> <li> <p> <i>Risk Level</i>: Limited risk</p> </li> <li> <p> <i>Restrictions</i>: Few restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category C</i> </p> <ul> <li> <p> <i>Risk Level</i>: Medium risk</p> </li> <li> <p> <i>Restrictions</i>: Some restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category D</i> </p> <ul> <li> <p> <i>Risk Level</i>: High risk</p> </li> <li> <p> <i>Restrictions</i>: Many restrictions occur</p> </li> </ul> </li> <li> <p> <i>Tunnel Category E</i> </p> <ul> <li> <p> <i>Risk Level</i>: Very high risk</p> </li> <li> <p> <i>Restrictions</i>: Restricted tunnel</p> </li> </ul> </li> </ul>
     #   @return [String]
     # @!attribute width
     #   <p>Width of the vehicle in centimenters.</p>
@@ -1699,15 +1189,10 @@ module Aws::GeoRoutes
 
     # <p>The route.</p>
     # @!attribute legs
-    #   <p>A leg is a section of a route from one waypoint to the next. A leg could be of type
-    #            Vehicle, Pedestrian or Ferry. Legs of different types could occur together within a single
-    #            route. For example, a car employing the use of a Ferry will contain Vehicle legs
-    #            corresponding to journey on land, and Ferry legs corresponding to the journey via
-    #            Ferry.</p>
+    #   <p>A leg is a section of a route from one waypoint to the next. A leg could be of type Vehicle, Pedestrian or Ferry. Legs of different types could occur together within a single route. For example, a car employing the use of a Ferry will contain Vehicle legs corresponding to journey on land, and Ferry legs corresponding to the journey via Ferry.</p>
     #   @return [Array<Types::RouteLeg>]
     # @!attribute major_road_labels
-    #   <p>Important labels including names and route numbers that differentiate the current route
-    #            from the alternatives presented.</p>
+    #   <p>Important labels including names and route numbers that differentiate the current route from the alternatives presented.</p>
     #   @return [Array<Types::RouteMajorRoadLabel>]
     # @!attribute summary
     #   <p>Summarized details of the leg.</p>
@@ -1722,14 +1207,10 @@ module Aws::GeoRoutes
 
     # <p>Features that are allowed while calculating a route.</p>
     # @!attribute hot
-    #   <p>Allow Hot (High Occupancy Toll) lanes while calculating the route.</p>
-    #            <p>Default value: <code>false</code>
-    #            </p>
+    #   <p>Allow Hot (High Occupancy Toll) lanes while calculating the route.</p> <p>Default value: <code>false</code> </p>
     #   @return [Boolean]
     # @!attribute hov
-    #   <p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p>
-    #            <p>Default value: <code>false</code>
-    #            </p>
+    #   <p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p> <p>Default value: <code>false</code> </p>
     #   @return [Boolean]
     class RouteAllowOptions < Struct.new(
       :hot,
@@ -1740,8 +1221,7 @@ module Aws::GeoRoutes
 
     # <p>Areas to be avoided.</p>
     # @!attribute except
-    #   <p>Exceptions to the provided avoidance geometry, to be included while calculating the
-    #            route.</p>
+    #   <p>Exceptions to the provided avoidance geometry, to be included while calculating the route.</p>
     #   @return [Array<Types::RouteAvoidanceAreaGeometry>]
     # @!attribute geometry
     #   <p>Geometry of the area to be avoided.</p>
@@ -1755,25 +1235,19 @@ module Aws::GeoRoutes
 
     # <p>Geometry of the area to be avoided.</p>
     # @!attribute corridor
-    #   <p>Geometry defined as a corridor - a LineString with a radius that defines the width of
-    #            the corridor.</p>
+    #   <p>Geometry defined as a corridor - a LineString with a radius that defines the width of the corridor.</p>
     #   @return [Types::Corridor]
     # @!attribute bounding_box
-    #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates
-    #            (longitude and latitude,) of the southwest corner of the bounding box; the second pair
-    #            represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
+    #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates (longitude and latitude,) of the southwest corner of the bounding box; the second pair represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
     #   @return [Array<Float>]
     # @!attribute polygon
     #   <p>Geometry defined as a polygon with only one linear ring.</p>
     #   @return [Array<Array<Array<Float>>>]
     # @!attribute polyline_corridor
-    #   <p>Geometry defined as an encoded corridor - an encoded polyline with a radius that defines
-    #            the width of the corridor.</p>
+    #   <p>Geometry defined as an encoded corridor - an encoded polyline with a radius that defines the width of the corridor.</p>
     #   @return [Types::PolylineCorridor]
     # @!attribute polyline_polygon
-    #   <p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains
-    #            PolylinePolygon of the first linear ring (the outer ring) and from 2nd item to the last
-    #            item (the inner rings). For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
+    #   <p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains PolylinePolygon of the first linear ring (the outer ring) and from 2nd item to the last item (the inner rings). For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
     #   @return [Array<String>]
     class RouteAvoidanceAreaGeometry < Struct.new(
       :corridor,
@@ -1785,11 +1259,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies options for areas to avoid when calculating the route. This is a best-effort
-    #          avoidance setting, meaning the router will try to honor the avoidance preferences but may
-    #          still include restricted areas if no feasible alternative route exists. If avoidance
-    #          options are not followed, the response will indicate that the avoidance criteria were
-    #          violated.</p>
+    # <p>Specifies options for areas to avoid when calculating the route. This is a best-effort avoidance setting, meaning the router will try to honor the avoidance preferences but may still include restricted areas if no feasible alternative route exists. If avoidance options are not followed, the response will indicate that the avoidance criteria were violated.</p>
     # @!attribute areas
     #   <p>Areas to be avoided.</p>
     #   @return [Array<Types::RouteAvoidanceArea>]
@@ -1815,11 +1285,7 @@ module Aws::GeoRoutes
     #   <p>Avoids roads where the specified toll transponders are the only mode of payment.</p>
     #   @return [Boolean]
     # @!attribute truck_road_types
-    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to
-    #            Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>
-    #            <note>
-    #               <p>There are currently no other supported values as of 26th April 2024.</p>
-    #            </note>
+    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p> <note> <p>There are currently no other supported values as of 26th April 2024.</p> </note>
     #   @return [Array<String>]
     # @!attribute tunnels
     #   <p>Avoid tunnels while calculating the route.</p>
@@ -1865,15 +1331,10 @@ module Aws::GeoRoutes
     #   <p>The vehicle License Plate.</p>
     #   @return [Types::RouteVehicleLicensePlate]
     # @!attribute max_speed
-    #   <p>Maximum speed specified.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Maximum speed specified.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute occupancy
-    #   <p>The number of occupants in the vehicle.</p>
-    #            <p>Default Value: <code>1</code>
-    #            </p>
+    #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class RouteCarOptions < Struct.new(
       :engine_type,
@@ -1929,9 +1390,7 @@ module Aws::GeoRoutes
 
     # <p>Options related to the destination.</p>
     # @!attribute avoid_actions_for_distance
-    #   <p>Avoids actions for the provided distance. This is typically to consider for users in
-    #            moving vehicles who may not have sufficient time to make an action at an origin or a
-    #            destination.</p>
+    #   <p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>
     #   @return [Integer]
     # @!attribute avoid_u_turns
     #   <p>Avoid U-turns for calculation on highways and motorways.</p>
@@ -1946,10 +1405,7 @@ module Aws::GeoRoutes
     #   <p>Options to configure matching the provided position to a side of the street.</p>
     #   @return [Types::RouteSideOfStreetOptions]
     # @!attribute stop_duration
-    #   <p>Duration of the stop.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the stop.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteDestinationOptions < Struct.new(
       :avoid_actions_for_distance,
@@ -1979,19 +1435,12 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Interval of the driver work-rest schedule. Stops are added to fulfil the provided rest
-    #          schedule.</p>
+    # <p>Interval of the driver work-rest schedule. Stops are added to fulfil the provided rest schedule.</p>
     # @!attribute drive_duration
-    #   <p>Maximum allowed driving time before stopping to rest.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Maximum allowed driving time before stopping to rest.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute rest_duration
-    #   <p>Resting time before the driver can continue driving.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Resting time before the driver can continue driving.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteDriverScheduleInterval < Struct.new(
       :drive_duration,
@@ -2006,20 +1455,12 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Type of the emission.</p>
-    #          <p>
-    #             <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5,
-    #             Euro6, EuroEev</code>
-    #          </p>
+    # <p>Type of the emission.</p> <p> <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5, Euro6, EuroEev</code> </p>
     # @!attribute co2_emission_class
     #   <p>The CO 2 emission classes.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>Type of the emission.</p>
-    #            <p>
-    #               <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5,
-    #               Euro6, EuroEev</code>
-    #            </p>
+    #   <p>Type of the emission.</p> <p> <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5, Euro6, EuroEev</code> </p>
     #   @return [String]
     class RouteEmissionType < Struct.new(
       :co2_emission_class,
@@ -2055,12 +1496,9 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Specifies strict exclusion options for the route calculation. This setting mandates that
-    #          the router will avoid any routes that include the specified options, rather than merely
-    #          attempting to minimize them.</p>
+    # <p>Specifies strict exclusion options for the route calculation. This setting mandates that the router will avoid any routes that include the specified options, rather than merely attempting to minimize them.</p>
     # @!attribute countries
-    #   <p>List of countries to be avoided defined by two-letter or three-letter country
-    #            codes.</p>
+    #   <p>List of countries to be avoided defined by two-letter or three-letter country codes.</p>
     #   @return [Array<String>]
     class RouteExclusionOptions < Struct.new(
       :countries,
@@ -2102,16 +1540,10 @@ module Aws::GeoRoutes
 
     # <p>Steps of a leg that must be performed after the travel portion of the leg.</p>
     # @!attribute duration
-    #   <p>Duration of the step.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute instruction
-    #   <p>Brief description of the step in the requested language.</p>
-    #            <note>
-    #               <p>Only available when the TravelStepType is Default.</p>
-    #            </note>
+    #   <p>Brief description of the step in the requested language.</p> <note> <p>Only available when the TravelStepType is Default.</p> </note>
     #   @return [String]
     # @!attribute type
     #   <p>Type of the step.</p>
@@ -2145,16 +1577,10 @@ module Aws::GeoRoutes
 
     # <p>Steps of a leg that must be performed before the travel portion of the leg.</p>
     # @!attribute duration
-    #   <p>Duration of the step.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute instruction
-    #   <p>Brief description of the step in the requested language.</p>
-    #            <note>
-    #               <p>Only available when the TravelStepType is Default.</p>
-    #            </note>
+    #   <p>Brief description of the step in the requested language.</p> <note> <p>Only available when the TravelStepType is Default.</p> </note>
     #   @return [String]
     # @!attribute type
     #   <p>Type of the step.</p>
@@ -2186,8 +1612,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>FerryLegDetails is populated when the Leg type is Ferry, and provides additional
-    #          information that is specific</p>
+    # <p>FerryLegDetails is populated when the Leg type is Ferry, and provides additional information that is specific</p>
     # @!attribute after_travel_steps
     #   <p>Steps of a leg that must be performed after the travel portion of the leg.</p>
     #   @return [Array<Types::RouteFerryAfterTravelStep>]
@@ -2201,12 +1626,10 @@ module Aws::GeoRoutes
     #   <p>Details corresponding to the departure for the leg.</p>
     #   @return [Types::RouteFerryDeparture]
     # @!attribute notices
-    #   <p>Notices are additional information returned that indicate issues that occurred during
-    #            route calculation.</p>
+    #   <p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>
     #   @return [Array<Types::RouteFerryNotice>]
     # @!attribute pass_through_waypoints
-    #   <p>Waypoints that were passed through during the leg. This includes the waypoints that were
-    #            configured with the PassThrough option.</p>
+    #   <p>Waypoints that were passed through during the leg. This includes the waypoints that were configured with the PassThrough option.</p>
     #   @return [Array<Types::RoutePassThroughWaypoint>]
     # @!attribute route_name
     #   <p>Route name of the ferry line.</p>
@@ -2235,14 +1658,12 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Notices are additional information returned that indicate issues that occurred during
-    #          route calculation.</p>
+    # <p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>
     # @!attribute code
     #   <p>Code corresponding to the issue.</p>
     #   @return [String]
     # @!attribute impact
-    #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High
-    #            impact notices must be evaluated further to determine the impact.</p>
+    #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>
     #   @return [String]
     class RouteFerryNotice < Struct.new(
       :code,
@@ -2256,10 +1677,7 @@ module Aws::GeoRoutes
     #   <p>Distance of the step.</p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Duration of the step.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteFerryOverviewSummary < Struct.new(
       :distance,
@@ -2301,18 +1719,10 @@ module Aws::GeoRoutes
     #   <p>3 letter Country code corresponding to the Span.</p>
     #   @return [String]
     # @!attribute distance
-    #   <p>Distance of the computed span. This feature doesn't split a span, but is always computed
-    #            on a span split by other properties.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>meters</code>
-    #            </p>
+    #   <p>Distance of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p> <p> <b>Unit</b>: <code>meters</code> </p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Duration of the computed span. This feature doesn't split a span, but is always computed
-    #            on a span split by other properties.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute geometry_offset
     #   <p>Offset in the leg geometry corresponding to the start of this span.</p>
@@ -2321,8 +1731,7 @@ module Aws::GeoRoutes
     #   <p>Provides an array of names of the ferry span in available languages.</p>
     #   @return [Array<Types::LocalizedString>]
     # @!attribute region
-    #   <p>2-3 letter Region code corresponding to the Span. This is either a province or a
-    #            state.</p>
+    #   <p>2-3 letter Region code corresponding to the Span. This is either a province or a state.</p>
     #   @return [String]
     class RouteFerrySpan < Struct.new(
       :country,
@@ -2341,15 +1750,12 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Summarized details for the leg including travel steps only. The Distance for the travel
-    #          only portion of the journey is the same as the Distance within the Overview summary.</p>
+    # <p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is the same as the Distance within the Overview summary.</p>
     # @!attribute overview
-    #   <p>Summarized details for the leg including before travel, travel and after travel
-    #            steps.</p>
+    #   <p>Summarized details for the leg including before travel, travel and after travel steps.</p>
     #   @return [Types::RouteFerryOverviewSummary]
     # @!attribute travel_only
-    #   <p>Summarized details for the leg including travel steps only. The Distance for the travel
-    #            only portion of the journey is in meters</p>
+    #   <p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is in meters</p>
     #   @return [Types::RouteFerryTravelOnlySummary]
     class RouteFerrySummary < Struct.new(
       :overview,
@@ -2358,14 +1764,9 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Summarized details for the leg including travel steps only. The Distance for the travel
-    #          only portion of the journey is the same as the Distance within the Overview summary.</p>
+    # <p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is the same as the Distance within the Overview summary.</p>
     # @!attribute duration
-    #   <p>Total duration in free flowing traffic, which is the best case or shortest duration
-    #            possible to cover the leg.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Total duration in free flowing traffic, which is the best case or shortest duration possible to cover the leg.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteFerryTravelOnlySummary < Struct.new(
       :duration,
@@ -2383,19 +1784,13 @@ module Aws::GeoRoutes
     #   <p>Distance of the step.</p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Duration of the step.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute geometry_offset
     #   <p>Offset in the leg geometry corresponding to the start of this step.</p>
     #   @return [Integer]
     # @!attribute instruction
-    #   <p>Brief description of the step in the requested language.</p>
-    #            <note>
-    #               <p>Only available when the TravelStepType is Default.</p>
-    #            </note>
+    #   <p>Brief description of the step in the requested language.</p> <note> <p>Only available when the TravelStepType is Default.</p> </note>
     #   @return [String]
     # @!attribute type
     #   <p>Type of the step.</p>
@@ -2443,14 +1838,9 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>A leg is a section of a route from one waypoint to the next. A leg could be of type
-    #          Vehicle, Pedestrian or Ferry. Legs of different types could occur together within a single
-    #          route. For example, a car employing the use of a Ferry will contain Vehicle legs
-    #          corresponding to journey on land, and Ferry legs corresponding to the journey via
-    #          Ferry.</p>
+    # <p>A leg is a section of a route from one waypoint to the next. A leg could be of type Vehicle, Pedestrian or Ferry. Legs of different types could occur together within a single route. For example, a car employing the use of a Ferry will contain Vehicle legs corresponding to journey on land, and Ferry legs corresponding to the journey via Ferry.</p>
     # @!attribute ferry_leg_details
-    #   <p>FerryLegDetails is populated when the Leg type is Ferry, and provides additional
-    #            information that is specific</p>
+    #   <p>FerryLegDetails is populated when the Leg type is Ferry, and provides additional information that is specific</p>
     #   @return [Types::RouteFerryLegDetails]
     # @!attribute geometry
     #   <p>Geometry of the area to be avoided.</p>
@@ -2462,10 +1852,7 @@ module Aws::GeoRoutes
     #   <p>Details related to the pedestrian leg.</p>
     #   @return [Types::RoutePedestrianLegDetails]
     # @!attribute travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
     #   @return [String]
     # @!attribute type
     #   <p>Type of the leg.</p>
@@ -2487,17 +1874,10 @@ module Aws::GeoRoutes
 
     # <p>The returned Route leg geometry.</p>
     # @!attribute line_string
-    #   <p>An ordered list of positions used to plot a route on a map.</p>
-    #            <note>
-    #               <p>LineString and Polyline are mutually exclusive properties.</p>
-    #            </note>
+    #   <p>An ordered list of positions used to plot a route on a map.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [Array<Array<Float>>]
     # @!attribute polyline
-    #   <p>An ordered list of positions used to plot a route on a map in a lossy compression
-    #            format.</p>
-    #            <note>
-    #               <p>LineString and Polyline are mutually exclusive properties.</p>
-    #            </note>
+    #   <p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p> <note> <p>LineString and Polyline are mutually exclusive properties.</p> </note>
     #   @return [String]
     class RouteLegGeometry < Struct.new(
       :line_string,
@@ -2506,8 +1886,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Important labels including names and route numbers that differentiate the current route
-    #          from the alternatives presented.</p>
+    # <p>Important labels including names and route numbers that differentiate the current route from the alternatives presented.</p>
     # @!attribute road_name
     #   <p>Name of the road (localized).</p>
     #   @return [Types::LocalizedString]
@@ -2526,23 +1905,13 @@ module Aws::GeoRoutes
     #   <p>Attempts to match the provided position to a road similar to the provided name.</p>
     #   @return [String]
     # @!attribute on_road_threshold
-    #   <p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint
-    #            will be snapped to the highway/bridge/tunnel/sliproad.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>meters</code>
-    #            </p>
+    #   <p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint will be snapped to the highway/bridge/tunnel/sliproad.</p> <p> <b>Unit</b>: <code>meters</code> </p>
     #   @return [Integer]
     # @!attribute radius
-    #   <p>Considers all roads within the provided radius to match the provided destination to. The
-    #            roads that are considered are determined by the provided Strategy.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Meters</code>
-    #            </p>
+    #   <p>Considers all roads within the provided radius to match the provided destination to. The roads that are considered are determined by the provided Strategy.</p> <p> <b>Unit</b>: <code>Meters</code> </p>
     #   @return [Integer]
     # @!attribute strategy
-    #   <p>Strategy that defines matching of the position onto the road network. MatchAny considers
-    #            all roads possible, whereas MatchMostSignificantRoad matches to the most significant
-    #            road.</p>
+    #   <p>Strategy that defines matching of the position onto the road network. MatchAny considers all roads possible, whereas MatchMostSignificantRoad matches to the most significant road.</p>
     #   @return [String]
     class RouteMatchingOptions < Struct.new(
       :name_hint,
@@ -2560,15 +1929,12 @@ module Aws::GeoRoutes
     end
 
     # <p>Allow Options related to the route matrix.</p>
+    # @note This shape contains sensitive data and should be treated as such.
     # @!attribute hot
-    #   <p>Allow Hot (High Occupancy Toll) lanes while calculating the route.</p>
-    #            <p>Default value: <code>false</code>
-    #            </p>
+    #   <p>Allow Hot (High Occupancy Toll) lanes while calculating the route.</p> <p>Default value: <code>false</code> </p>
     #   @return [Boolean]
     # @!attribute hov
-    #   <p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p>
-    #            <p>Default value: <code>false</code>
-    #            </p>
+    #   <p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p> <p>Default value: <code>false</code> </p>
     #   @return [Boolean]
     class RouteMatrixAllowOptions < Struct.new(
       :hot,
@@ -2609,17 +1975,13 @@ module Aws::GeoRoutes
 
     # <p>Geometry of the area to be avoided.</p>
     # @!attribute bounding_box
-    #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates
-    #            (longitude and latitude,) of the southwest corner of the bounding box; the second pair
-    #            represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
+    #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates (longitude and latitude,) of the southwest corner of the bounding box; the second pair represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
     #   @return [Array<Float>]
     # @!attribute polygon
     #   <p>Geometry defined as a polygon with only one linear ring.</p>
     #   @return [Array<Array<Array<Float>>>]
     # @!attribute polyline_polygon
-    #   <p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains
-    #            PolylinePolygon of the first linear ring (the outer ring) and from second item to the last
-    #            item (the inner rings). For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
+    #   <p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains PolylinePolygon of the first linear ring (the outer ring) and from second item to the last item (the inner rings). For more information on polyline encoding, see <a href="https://github.com/heremaps/flexiblepolyline/blob/master/README.md">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>
     #   @return [Array<String>]
     class RouteMatrixAvoidanceAreaGeometry < Struct.new(
       :bounding_box,
@@ -2629,11 +1991,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies options for areas to avoid when calculating the route. This is a best-effort
-    #          avoidance setting, meaning the router will try to honor the avoidance preferences but may
-    #          still include restricted areas if no feasible alternative route exists. If avoidance
-    #          options are not followed, the response will indicate that the avoidance criteria were
-    #          violated.</p>
+    # <p>Specifies options for areas to avoid when calculating the route. This is a best-effort avoidance setting, meaning the router will try to honor the avoidance preferences but may still include restricted areas if no feasible alternative route exists. If avoidance options are not followed, the response will indicate that the avoidance criteria were violated.</p>
     # @!attribute areas
     #   <p>Areas to be avoided.</p>
     #   @return [Array<Types::RouteMatrixAvoidanceArea>]
@@ -2656,11 +2014,7 @@ module Aws::GeoRoutes
     #   <p>Avoids roads where the specified toll transponders are the only mode of payment.</p>
     #   @return [Boolean]
     # @!attribute truck_road_types
-    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to
-    #            Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>
-    #            <note>
-    #               <p>There are currently no other supported values as of 26th April 2024.</p>
-    #            </note>
+    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p> <note> <p>There are currently no other supported values as of 26th April 2024.</p> </note>
     #   @return [Array<String>]
     # @!attribute tunnels
     #   <p>Avoid tunnels while calculating the route.</p>
@@ -2697,14 +2051,12 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Boundary within which the matrix is to be calculated. All data, origins and destinations
-    #          outside the boundary are considered invalid.</p>
+    # <p>Boundary within which the matrix is to be calculated. All data, origins and destinations outside the boundary are considered invalid.</p>
     # @!attribute geometry
     #   <p>Geometry of the area to be avoided.</p>
     #   @return [Types::RouteMatrixBoundaryGeometry]
     # @!attribute unbounded
-    #   <p>No restrictions in terms of a routing boundary, and is typically used for longer
-    #            routes.</p>
+    #   <p>No restrictions in terms of a routing boundary, and is typically used for longer routes.</p>
     #   @return [Boolean]
     class RouteMatrixBoundary < Struct.new(
       :geometry,
@@ -2718,14 +2070,10 @@ module Aws::GeoRoutes
     #   <p>Provides the circle that was used while calculating the route.</p>
     #   @return [Types::RouteMatrixAutoCircle]
     # @!attribute circle
-    #   <p>Geometry defined as a circle. When request routing boundary was set as
-    #               <code>AutoCircle</code>, the response routing boundary will return <code>Circle</code>
-    #            derived from the <code>AutoCircle</code> settings.</p>
+    #   <p>Geometry defined as a circle. When request routing boundary was set as <code>AutoCircle</code>, the response routing boundary will return <code>Circle</code> derived from the <code>AutoCircle</code> settings.</p>
     #   @return [Types::Circle]
     # @!attribute bounding_box
-    #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates
-    #            (longitude and latitude,) of the southwest corner of the bounding box; the second pair
-    #            represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
+    #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates (longitude and latitude,) of the southwest corner of the bounding box; the second pair represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
     #   @return [Array<Float>]
     # @!attribute polygon
     #   <p>Geometry defined as a polygon with only one linear ring.</p>
@@ -2744,15 +2092,10 @@ module Aws::GeoRoutes
     #   <p>The vehicle License Plate.</p>
     #   @return [Types::RouteMatrixVehicleLicensePlate]
     # @!attribute max_speed
-    #   <p>Maximum speed</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Maximum speed</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute occupancy
-    #   <p>The number of occupants in the vehicle.</p>
-    #            <p>Default Value: <code>1</code>
-    #            </p>
+    #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class RouteMatrixCarOptions < Struct.new(
       :license_plate,
@@ -2784,9 +2127,7 @@ module Aws::GeoRoutes
 
     # <p>Options related to the destination.</p>
     # @!attribute avoid_actions_for_distance
-    #   <p>Avoids actions for the provided distance. This is typically to consider for users in
-    #            moving vehicles who may not have sufficient time to make an action at an origin or a
-    #            destination.</p>
+    #   <p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>
     #   @return [Integer]
     # @!attribute heading
     #   <p>GPS Heading at the position.</p>
@@ -2812,18 +2153,12 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>The calculated route matrix containing the results for all pairs of Origins to
-    #          Destination positions. Each row corresponds to one entry in Origins. Each entry in the row
-    #          corresponds to the route from that entry in Origins to an entry in Destination
-    #          positions.</p>
+    # <p>The calculated route matrix containing the results for all pairs of Origins to Destination positions. Each row corresponds to one entry in Origins. Each entry in the row corresponds to the route from that entry in Origins to an entry in Destination positions.</p>
     # @!attribute distance
     #   <p>The total distance of travel for the route.</p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>The expected duration of travel for the route.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>The expected duration of travel for the route.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute error
     #   <p>Error code that occurred during calculation of the route.</p>
@@ -2842,12 +2177,9 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Specifies strict exclusion options for the route calculation. This setting mandates that
-    #          the router will avoid any routes that include the specified options, rather than merely
-    #          attempting to minimize them.</p>
+    # <p>Specifies strict exclusion options for the route calculation. This setting mandates that the router will avoid any routes that include the specified options, rather than merely attempting to minimize them.</p>
     # @!attribute countries
-    #   <p>List of countries to be avoided defined by two-letter or three-letter country
-    #            codes.</p>
+    #   <p>List of countries to be avoided defined by two-letter or three-letter country codes.</p>
     #   @return [Array<String>]
     class RouteMatrixExclusionOptions < Struct.new(
       :countries,
@@ -2860,23 +2192,13 @@ module Aws::GeoRoutes
     #   <p>Attempts to match the provided position to a road similar to the provided name.</p>
     #   @return [String]
     # @!attribute on_road_threshold
-    #   <p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint
-    #            will be snapped to the highway/bridge/tunnel/sliproad.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>meters</code>
-    #            </p>
+    #   <p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint will be snapped to the highway/bridge/tunnel/sliproad.</p> <p> <b>Unit</b>: <code>meters</code> </p>
     #   @return [Integer]
     # @!attribute radius
-    #   <p>Considers all roads within the provided radius to match the provided destination to. The
-    #            roads that are considered are determined by the provided Strategy.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Meters</code>
-    #            </p>
+    #   <p>Considers all roads within the provided radius to match the provided destination to. The roads that are considered are determined by the provided Strategy.</p> <p> <b>Unit</b>: <code>Meters</code> </p>
     #   @return [Integer]
     # @!attribute strategy
-    #   <p>Strategy that defines matching of the position onto the road network. MatchAny considers
-    #            all roads possible, whereas MatchMostSignificantRoad matches to the most significant
-    #            road.</p>
+    #   <p>Strategy that defines matching of the position onto the road network. MatchAny considers all roads possible, whereas MatchMostSignificantRoad matches to the most significant road.</p>
     #   @return [String]
     class RouteMatrixMatchingOptions < Struct.new(
       :name_hint,
@@ -2909,9 +2231,7 @@ module Aws::GeoRoutes
 
     # <p>Origin related options.</p>
     # @!attribute avoid_actions_for_distance
-    #   <p>Avoids actions for the provided distance. This is typically to consider for users in
-    #            moving vehicles who may not have sufficient time to make an action at an origin or a
-    #            destination.</p>
+    #   <p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>
     #   @return [Integer]
     # @!attribute heading
     #   <p>GPS Heading at the position.</p>
@@ -2937,21 +2257,15 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Travel mode options when the provided travel mode is <code>Scooter</code>
-    #          </p>
+    # <p>Travel mode options when the provided travel mode is <code>Scooter</code> </p>
     # @!attribute license_plate
     #   <p>The vehicle License Plate.</p>
     #   @return [Types::RouteMatrixVehicleLicensePlate]
     # @!attribute max_speed
-    #   <p>Maximum speed.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Maximum speed.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute occupancy
-    #   <p>The number of occupants in the vehicle.</p>
-    #            <p>Default Value: <code>1</code>
-    #            </p>
+    #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class RouteMatrixScooterOptions < Struct.new(
       :license_plate,
@@ -2972,10 +2286,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     # @!attribute use_with
-    #   <p>Strategy that defines when the side of street position should be used. AnyStreet will
-    #            always use the provided position.</p>
-    #            <p>Default Value: <code>DividedStreetOnly</code>
-    #            </p>
+    #   <p>Strategy that defines when the side of street position should be used. AnyStreet will always use the provided position.</p> <p>Default Value: <code>DividedStreetOnly</code> </p>
     #   @return [String]
     class RouteMatrixSideOfStreetOptions < Struct.new(
       :position,
@@ -2986,15 +2297,10 @@ module Aws::GeoRoutes
 
     # <p>Traffic related options.</p>
     # @!attribute flow_event_threshold_override
-    #   <p>Duration for which flow traffic is considered valid. For this period, the flow traffic
-    #            is used over historical traffic data. Flow traffic refers to congestion, which changes very
-    #            quickly. Duration in seconds for which flow traffic event would be considered valid. While
-    #            flow traffic event is valid it will be used over the historical traffic data. </p>
+    #   <p>Duration for which flow traffic is considered valid. For this period, the flow traffic is used over historical traffic data. Flow traffic refers to congestion, which changes very quickly. Duration in seconds for which flow traffic event would be considered valid. While flow traffic event is valid it will be used over the historical traffic data. </p>
     #   @return [Integer]
     # @!attribute usage
-    #   <p>Determines if traffic should be used or ignored while calculating the route.</p>
-    #            <p>Default Value: <code>UseTrafficData</code>
-    #            </p>
+    #   <p>Determines if traffic should be used or ignored while calculating the route.</p> <p>Default Value: <code>UseTrafficData</code> </p>
     #   @return [String]
     class RouteMatrixTrafficOptions < Struct.new(
       :flow_event_threshold_override,
@@ -3010,9 +2316,7 @@ module Aws::GeoRoutes
 
     # <p>Trailer options corresponding to the vehicle.</p>
     # @!attribute trailer_count
-    #   <p>Number of trailers attached to the vehicle.</p>
-    #            <p>Default Value: <code>0</code>
-    #            </p>
+    #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Integer]
     class RouteMatrixTrailerOptions < Struct.new(
       :trailer_count,
@@ -3025,12 +2329,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode options when the provided travel mode is "Car"</p>
     #   @return [Types::RouteMatrixCarOptions]
     # @!attribute scooter
-    #   <p>Travel mode options when the provided travel mode is <code>Scooter</code>
-    #            </p>
-    #            <note>
-    #               <p>When travel mode is set to <code>Scooter</code>, then the avoidance option
-    #                  <code>ControlledAccessHighways</code> defaults to <code>true</code>.</p>
-    #            </note>
+    #   <p>Travel mode options when the provided travel mode is <code>Scooter</code> </p> <note> <p>When travel mode is set to <code>Scooter</code>, then the avoidance option <code>ControlledAccessHighways</code> defaults to <code>true</code>.</p> </note>
     #   @return [Types::RouteMatrixScooterOptions]
     # @!attribute truck
     #   <p>Travel mode options when the provided travel mode is "Truck"</p>
@@ -3048,51 +2347,31 @@ module Aws::GeoRoutes
     #   <p>Total number of axles of the vehicle.</p>
     #   @return [Integer]
     # @!attribute gross_weight
-    #   <p>Gross weight of the vehicle including trailers, and goods at capacity.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Gross weight of the vehicle including trailers, and goods at capacity.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute hazardous_cargos
     #   <p>List of Hazardous cargo contained in the vehicle.</p>
     #   @return [Array<String>]
     # @!attribute height
-    #   <p>Height of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Height of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute kpra_length
-    #   <p>Kingpin to rear axle length of the vehicle</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Kingpin to rear axle length of the vehicle</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute length
-    #   <p>Length of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Length of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute license_plate
     #   <p>The vehicle License Plate.</p>
     #   @return [Types::RouteMatrixVehicleLicensePlate]
     # @!attribute max_speed
-    #   <p>Maximum speed</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Maximum speed</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute occupancy
-    #   <p>The number of occupants in the vehicle.</p>
-    #            <p>Default Value: <code>1</code>
-    #            </p>
+    #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     # @!attribute payload_capacity
-    #   <p>Payload capacity of the vehicle and trailers attached.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>kilograms</code>
-    #            </p>
+    #   <p>Payload capacity of the vehicle and trailers attached.</p> <p> <b>Unit</b>: <code>kilograms</code> </p>
     #   @return [Integer]
     # @!attribute trailer
     #   <p>Trailer options corresponding to the vehicle.</p>
@@ -3101,90 +2380,16 @@ module Aws::GeoRoutes
     #   <p>Type of the truck.</p>
     #   @return [String]
     # @!attribute tunnel_restriction_code
-    #   <p>The tunnel restriction code.</p>
-    #            <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels
-    #            in Great Britain. They relate to the types of dangerous goods that can be transported
-    #            through them.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category B</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Limited risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Few restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category C</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Medium risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Some restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category D</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: High risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Many restrictions occur</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category E</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Very high risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Restricted tunnel</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The tunnel restriction code.</p> <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. They relate to the types of dangerous goods that can be transported through them.</p> <ul> <li> <p> <i>Tunnel Category B</i> </p> <ul> <li> <p> <i>Risk Level</i>: Limited risk</p> </li> <li> <p> <i>Restrictions</i>: Few restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category C</i> </p> <ul> <li> <p> <i>Risk Level</i>: Medium risk</p> </li> <li> <p> <i>Restrictions</i>: Some restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category D</i> </p> <ul> <li> <p> <i>Risk Level</i>: High risk</p> </li> <li> <p> <i>Restrictions</i>: Many restrictions occur</p> </li> </ul> </li> <li> <p> <i>Tunnel Category E</i> </p> <ul> <li> <p> <i>Risk Level</i>: Very high risk</p> </li> <li> <p> <i>Restrictions</i>: Restricted tunnel</p> </li> </ul> </li> </ul>
     #   @return [String]
     # @!attribute weight_per_axle
-    #   <p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for
-    #            usage in countries where the differences in axle types or axle groups are not
-    #            distinguished.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for usage in countries where the differences in axle types or axle groups are not distinguished.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute weight_per_axle_group
-    #   <p>Specifies the total weight for the specified axle group. Meant for usage in countries
-    #            that have different regulations based on the axle group type.</p>
+    #   <p>Specifies the total weight for the specified axle group. Meant for usage in countries that have different regulations based on the axle group type.</p>
     #   @return [Types::WeightPerAxleGroup]
     # @!attribute width
-    #   <p>Width of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Width of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     class RouteMatrixTruckOptions < Struct.new(
       :axle_count,
@@ -3222,6 +2427,7 @@ module Aws::GeoRoutes
     end
 
     # <p>The vehicle License Plate.</p>
+    # @note This shape contains sensitive data and should be treated as such.
     # @!attribute last_character
     #   <p>The last character of the License Plate.</p>
     #   @return [String]
@@ -3265,9 +2471,7 @@ module Aws::GeoRoutes
 
     # <p>Origin related options.</p>
     # @!attribute avoid_actions_for_distance
-    #   <p>Avoids actions for the provided distance. This is typically to consider for users in
-    #            moving vehicles who may not have sufficient time to make an action at an origin or a
-    #            destination.</p>
+    #   <p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>
     #   @return [Integer]
     # @!attribute avoid_u_turns
     #   <p>Avoid U-turns for calculation on highways and motorways.</p>
@@ -3315,8 +2519,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>If the waypoint should be treated as a stop. If yes, the route is split up into
-    #          different legs around the stop.</p>
+    # <p>If the waypoint should be treated as a stop. If yes, the route is split up into different legs around the stop.</p>
     # @!attribute geometry_offset
     #   <p>Offset in the leg geometry corresponding to the start of this step.</p>
     #   @return [Integer]
@@ -3330,16 +2533,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Details corresponding to the arrival for a leg.</p>
-    #          <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #          </p>
-    #          <p>Examples:</p>
-    #          <p>
-    #             <code>2020-04-22T17:57:24Z</code>
-    #          </p>
-    #          <p>
-    #             <code>2020-04-22T17:57:24+02:00</code>
-    #          </p>
+    # <p>Details corresponding to the arrival for a leg.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @!attribute place
     #   <p>The place details.</p>
     #   @return [Types::RoutePedestrianPlace]
@@ -3353,16 +2547,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Details corresponding to the departure for a leg.</p>
-    #          <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #          </p>
-    #          <p>Examples:</p>
-    #          <p>
-    #             <code>2020-04-22T17:57:24Z</code>
-    #          </p>
-    #          <p>
-    #             <code>2020-04-22T17:57:24+02:00</code>
-    #          </p>
+    # <p>Details corresponding to the departure for a leg.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @!attribute place
     #   <p>The place details.</p>
     #   @return [Types::RoutePedestrianPlace]
@@ -3384,12 +2569,10 @@ module Aws::GeoRoutes
     #   <p>Details corresponding to the departure for the leg.</p>
     #   @return [Types::RoutePedestrianDeparture]
     # @!attribute notices
-    #   <p>Notices are additional information returned that indicate issues that occurred during
-    #            route calculation.</p>
+    #   <p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>
     #   @return [Array<Types::RoutePedestrianNotice>]
     # @!attribute pass_through_waypoints
-    #   <p>Waypoints that were passed through during the leg. This includes the waypoints that were
-    #            configured with the PassThrough option.</p>
+    #   <p>Waypoints that were passed through during the leg. This includes the waypoints that were configured with the PassThrough option.</p>
     #   @return [Array<Types::RoutePassThroughWaypoint>]
     # @!attribute spans
     #   <p>Spans that were computed for the requested SpanAdditionalFeatures.</p>
@@ -3412,14 +2595,12 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Notices are additional information returned that indicate issues that occurred during
-    #          route calculation.</p>
+    # <p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>
     # @!attribute code
     #   <p>Code corresponding to the issue.</p>
     #   @return [String]
     # @!attribute impact
-    #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High
-    #            impact notices must be evaluated further to determine the impact.</p>
+    #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>
     #   @return [String]
     class RoutePedestrianNotice < Struct.new(
       :code,
@@ -3491,30 +2672,19 @@ module Aws::GeoRoutes
 
     # <p>Span computed for the requested SpanAdditionalFeatures.</p>
     # @!attribute best_case_duration
-    #   <p>Duration of the computed span without traffic congestion.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the computed span without traffic congestion.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute country
     #   <p>3 letter Country code corresponding to the Span.</p>
     #   @return [String]
     # @!attribute distance
-    #   <p>Distance of the computed span. This feature doesn't split a span, but is always computed
-    #            on a span split by other properties.</p>
+    #   <p>Distance of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Duration of the computed span. This feature doesn't split a span, but is always computed
-    #            on a span split by other properties.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute dynamic_speed
-    #   <p>Dynamic speed details corresponding to the span.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Dynamic speed details corresponding to the span.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Types::RouteSpanDynamicSpeedDetails]
     # @!attribute functional_classification
     #   <p>Functional classification of the road segment corresponding to the span.</p>
@@ -3523,8 +2693,7 @@ module Aws::GeoRoutes
     #   <p>Offset in the leg geometry corresponding to the start of this span.</p>
     #   @return [Integer]
     # @!attribute incidents
-    #   <p>Incidents corresponding to the span. These index into the Incidents in the parent
-    #            Leg.</p>
+    #   <p>Incidents corresponding to the span. These index into the Incidents in the parent Leg.</p>
     #   @return [Array<Integer>]
     # @!attribute names
     #   <p>Provides an array of names of the pedestrian span in available languages.</p>
@@ -3533,8 +2702,7 @@ module Aws::GeoRoutes
     #   <p>Access attributes for a pedestrian corresponding to the span.</p>
     #   @return [Array<String>]
     # @!attribute region
-    #   <p>2-3 letter Region code corresponding to the Span. This is either a province or a
-    #            state.</p>
+    #   <p>2-3 letter Region code corresponding to the Span. This is either a province or a state.</p>
     #   @return [String]
     # @!attribute road_attributes
     #   <p>Attributes for the road segment corresponding to the span. </p>
@@ -3543,16 +2711,10 @@ module Aws::GeoRoutes
     #   <p>Designated route name or number corresponding to the span.</p>
     #   @return [Array<Types::RouteNumber>]
     # @!attribute speed_limit
-    #   <p>Speed limit details corresponding to the span.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Speed limit details corresponding to the span.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Types::RouteSpanSpeedLimitDetails]
     # @!attribute typical_duration
-    #   <p>Duration of the computed span under typical traffic congestion.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the computed span under typical traffic congestion.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RoutePedestrianSpan < Struct.new(
       :best_case_duration,
@@ -3582,15 +2744,12 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Summarized details for the leg including before travel, travel and after travel
-    #          steps.</p>
+    # <p>Summarized details for the leg including before travel, travel and after travel steps.</p>
     # @!attribute overview
-    #   <p>Summarized details for the leg including before travel, travel and after travel
-    #            steps.</p>
+    #   <p>Summarized details for the leg including before travel, travel and after travel steps.</p>
     #   @return [Types::RoutePedestrianOverviewSummary]
     # @!attribute travel_only
-    #   <p>Summarized details for the leg including travel steps only. The Distance for the travel
-    #            only portion of the journey is in meters</p>
+    #   <p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is in meters</p>
     #   @return [Types::RoutePedestrianTravelOnlySummary]
     class RoutePedestrianSummary < Struct.new(
       :overview,
@@ -3601,10 +2760,7 @@ module Aws::GeoRoutes
 
     # <p>Summarized details for the leg including travel steps.</p>
     # @!attribute duration
-    #   <p>Duration of the step.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RoutePedestrianTravelOnlySummary < Struct.new(
       :duration,
@@ -3628,10 +2784,7 @@ module Aws::GeoRoutes
     #   <p>Distance of the step.</p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Duration of the step.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute exit_number
     #   <p>Exit number of the road exit, if applicable.</p>
@@ -3640,10 +2793,7 @@ module Aws::GeoRoutes
     #   <p>Offset in the leg geometry corresponding to the start of this step.</p>
     #   @return [Integer]
     # @!attribute instruction
-    #   <p>Brief description of the step in the requested language.</p>
-    #            <note>
-    #               <p>Only available when the TravelStepType is Default.</p>
-    #            </note>
+    #   <p>Brief description of the step in the requested language.</p> <note> <p>Only available when the TravelStepType is Default.</p> </note>
     #   @return [String]
     # @!attribute keep_step_details
     #   <p>Details that are specific to a Keep step.</p>
@@ -3661,8 +2811,7 @@ module Aws::GeoRoutes
     #   <p>Details that are specific to a Roundabout Pass step.</p>
     #   @return [Types::RouteRoundaboutPassStepDetails]
     # @!attribute signpost
-    #   <p>Sign post information of the action, applicable only for TurnByTurn steps. See
-    #            RouteSignpost for details of sub-attributes.</p>
+    #   <p>Sign post information of the action, applicable only for TurnByTurn steps. See RouteSignpost for details of sub-attributes.</p>
     #   @return [Types::RouteSignpost]
     # @!attribute turn_step_details
     #   <p>Details that are specific to a turn step.</p>
@@ -3723,14 +2872,12 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Notices are additional information returned that indicate issues that occurred during
-    #          route calculation.</p>
+    # <p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>
     # @!attribute code
     #   <p>Code corresponding to the issue.</p>
     #   @return [String]
     # @!attribute impact
-    #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High
-    #            impact notices must be evaluated further to determine the impact.</p>
+    #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>
     #   @return [String]
     class RouteResponseNotice < Struct.new(
       :code,
@@ -3843,8 +2990,7 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Travel mode options when the provided travel mode is <code>Scooter</code>
-    #          </p>
+    # <p>Travel mode options when the provided travel mode is <code>Scooter</code> </p>
     # @!attribute engine_type
     #   <p>Engine type of the vehicle.</p>
     #   @return [String]
@@ -3852,15 +2998,10 @@ module Aws::GeoRoutes
     #   <p>The vehicle License Plate.</p>
     #   @return [Types::RouteVehicleLicensePlate]
     # @!attribute max_speed
-    #   <p>Maximum speed</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Maximum speed</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute occupancy
-    #   <p>The number of occupants in the vehicle.</p>
-    #            <p>Default Value: <code>1</code>
-    #            </p>
+    #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     class RouteScooterOptions < Struct.new(
       :engine_type,
@@ -3882,9 +3023,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     # @!attribute use_with
-    #   <p>Strategy that defines when the side of street position should be used.</p>
-    #            <p>Default Value: <code>DividedStreetOnly</code>
-    #            </p>
+    #   <p>Strategy that defines when the side of street position should be used.</p> <p>Default Value: <code>DividedStreetOnly</code> </p>
     #   @return [String]
     class RouteSideOfStreetOptions < Struct.new(
       :position,
@@ -3893,8 +3032,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Sign post information of the action, applicable only for TurnByTurn steps. See
-    #          RouteSignpost for details of sub-attributes.</p>
+    # <p>Sign post information of the action, applicable only for TurnByTurn steps. See RouteSignpost for details of sub-attributes.</p>
     # @!attribute labels
     #   <p>Labels present on the sign post.</p>
     #   @return [Array<Types::RouteSignpostLabel>]
@@ -3918,27 +3056,15 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Details about the dynamic speed.</p>
-    #          <p>
-    #             <b>Unit</b>: <code>KilometersPerHour</code>
-    #          </p>
+    # <p>Details about the dynamic speed.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     # @!attribute best_case_speed
-    #   <p>Estimated speed while traversing the span without traffic congestion.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Estimated speed while traversing the span without traffic congestion.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute turn_duration
-    #   <p>Estimated time to turn from this span into the next. </p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Estimated time to turn from this span into the next. </p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute typical_speed
-    #   <p>Estimated speed while traversing the span under typical traffic congestion.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Estimated speed while traversing the span under typical traffic congestion.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     class RouteSpanDynamicSpeedDetails < Struct.new(
       :best_case_speed,
@@ -3955,15 +3081,9 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Details about the speed limit corresponding to the span.</p>
-    #          <p>
-    #             <b>Unit</b>: <code>KilometersPerHour</code>
-    #          </p>
+    # <p>Details about the speed limit corresponding to the span.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     # @!attribute max_speed
-    #   <p>Maximum speed.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Maximum speed.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute unlimited
     #   <p>If the span doesn't have a speed limit like the Autobahn.</p>
@@ -3980,16 +3100,12 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Summarized details for the leg including travel steps only. The Distance for the travel
-    #          only portion of the journey is the same as the Distance within the Overview summary.</p>
+    # <p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is the same as the Distance within the Overview summary.</p>
     # @!attribute distance
     #   <p>Distance of the route.</p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Duration of the route.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the route.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute tolls
     #   <p>Toll summary for the complete route.</p>
@@ -4008,9 +3124,7 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Provides details about toll information along a route, including the payment sites,
-    #          applicable toll rates, toll systems, and the country associated with the toll
-    #          collection.</p>
+    # <p>Provides details about toll information along a route, including the payment sites, applicable toll rates, toll systems, and the country associated with the toll collection.</p>
     # @!attribute country
     #   <p>The alpha-2 or alpha-3 character code for the country.</p>
     #   @return [String]
@@ -4034,24 +3148,16 @@ module Aws::GeoRoutes
 
     # <p>Options related to Tolls on a route.</p>
     # @!attribute all_transponders
-    #   <p>Specifies if the user has valid transponder with access to all toll systems. This
-    #            impacts toll calculation, and if true the price with transponders is used.</p>
+    #   <p>Specifies if the user has valid transponder with access to all toll systems. This impacts toll calculation, and if true the price with transponders is used.</p>
     #   @return [Boolean]
     # @!attribute all_vignettes
-    #   <p>Specifies if the user has valid vignettes with access for all toll roads. If a user has
-    #            a vignette for a toll road, then toll cost for that road is omitted since no further
-    #            payment is necessary.</p>
+    #   <p>Specifies if the user has valid vignettes with access for all toll roads. If a user has a vignette for a toll road, then toll cost for that road is omitted since no further payment is necessary.</p>
     #   @return [Boolean]
     # @!attribute currency
-    #   <p>Currency code corresponding to the price. This is the same as Currency specified in the
-    #            request.</p>
+    #   <p>Currency code corresponding to the price. This is the same as Currency specified in the request.</p>
     #   @return [String]
     # @!attribute emission_type
-    #   <p>Emission type of the vehicle for toll cost calculation.</p>
-    #            <p>
-    #               <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5,
-    #               Euro6, EuroEev</code>
-    #            </p>
+    #   <p>Emission type of the vehicle for toll cost calculation.</p> <p> <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5, Euro6, EuroEev</code> </p>
     #   @return [Types::RouteEmissionType]
     # @!attribute vehicle_category
     #   <p>Vehicle category for toll cost calculation.</p>
@@ -4122,21 +3228,16 @@ module Aws::GeoRoutes
 
     # <p>The toll price.</p>
     # @!attribute currency
-    #   <p>Currency code corresponding to the price. This is the same as Currency specified in the
-    #            request.</p>
+    #   <p>Currency code corresponding to the price. This is the same as Currency specified in the request.</p>
     #   @return [String]
     # @!attribute estimate
     #   <p>If the price is an estimate or an exact value. </p>
     #   @return [Boolean]
     # @!attribute per_duration
-    #   <p>Duration for which the price corresponds to.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration for which the price corresponds to.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute range
-    #   <p>If the price is a range or an exact value. If any of the toll fares making up the route
-    #            is a range, the overall price is also a range.</p>
+    #   <p>If the price is a range or an exact value. If any of the toll fares making up the route is a range, the overall price is also a range.</p>
     #   @return [Boolean]
     # @!attribute range_value
     #   <p>Price range with a minimum and maximum value, if a range.</p>
@@ -4162,15 +3263,13 @@ module Aws::GeoRoutes
 
     # <p>Summary of the route and toll price.</p>
     # @!attribute currency
-    #   <p>Currency code corresponding to the price. This is the same as Currency specified in the
-    #            request.</p>
+    #   <p>Currency code corresponding to the price. This is the same as Currency specified in the request.</p>
     #   @return [String]
     # @!attribute estimate
     #   <p>If the price is an estimate or an exact value. </p>
     #   @return [Boolean]
     # @!attribute range
-    #   <p>If the price is a range or an exact value. If any of the toll fares making up the route
-    #            is a range, the overall price is also a range.</p>
+    #   <p>If the price is a range or an exact value. If any of the toll fares making up the route is a range, the overall price is also a range.</p>
     #   @return [Boolean]
     # @!attribute range_value
     #   <p>Price range with a minimum and maximum value, if a range.</p>
@@ -4242,8 +3341,7 @@ module Aws::GeoRoutes
 
     # <p>The toll summary for the complete route.</p>
     # @!attribute total
-    #   <p>Total toll summary for the complete route. Total is the only summary available
-    #            today.</p>
+    #   <p>Total toll summary for the complete route. Total is the only summary available today.</p>
     #   @return [Types::RouteTollPriceSummary]
     class RouteTollSummary < Struct.new(
       :total,
@@ -4263,15 +3361,10 @@ module Aws::GeoRoutes
 
     # <p>Traffic options for the route.</p>
     # @!attribute flow_event_threshold_override
-    #   <p>Duration for which flow traffic is considered valid. For this period, the flow traffic
-    #            is used over historical traffic data. Flow traffic refers to congestion, which changes very
-    #            quickly. Duration in seconds for which flow traffic event would be considered valid. While
-    #            flow traffic event is valid it will be used over the historical traffic data. </p>
+    #   <p>Duration for which flow traffic is considered valid. For this period, the flow traffic is used over historical traffic data. Flow traffic refers to congestion, which changes very quickly. Duration in seconds for which flow traffic event would be considered valid. While flow traffic event is valid it will be used over the historical traffic data. </p>
     #   @return [Integer]
     # @!attribute usage
-    #   <p>Determines if traffic should be used or ignored while calculating the route.</p>
-    #            <p>Default Value: <code>UseTrafficData</code>
-    #            </p>
+    #   <p>Determines if traffic should be used or ignored while calculating the route.</p> <p>Default Value: <code>UseTrafficData</code> </p>
     #   @return [String]
     class RouteTrafficOptions < Struct.new(
       :flow_event_threshold_override,
@@ -4290,9 +3383,7 @@ module Aws::GeoRoutes
     #   <p>Total number of axles of the vehicle.</p>
     #   @return [Integer]
     # @!attribute trailer_count
-    #   <p>Number of trailers attached to the vehicle.</p>
-    #            <p>Default Value: <code>0</code>
-    #            </p>
+    #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Integer]
     class RouteTrailerOptions < Struct.new(
       :axle_count,
@@ -4325,12 +3416,7 @@ module Aws::GeoRoutes
     #   <p>Travel mode options when the provided travel mode is "Pedestrian"</p>
     #   @return [Types::RoutePedestrianOptions]
     # @!attribute scooter
-    #   <p>Travel mode options when the provided travel mode is <code>Scooter</code>
-    #            </p>
-    #            <note>
-    #               <p>When travel mode is set to <code>Scooter</code>, then the avoidance option
-    #                  <code>ControlledAccessHighways</code> defaults to <code>true</code>.</p>
-    #            </note>
+    #   <p>Travel mode options when the provided travel mode is <code>Scooter</code> </p> <note> <p>When travel mode is set to <code>Scooter</code>, then the avoidance option <code>ControlledAccessHighways</code> defaults to <code>true</code>.</p> </note>
     #   @return [Types::RouteScooterOptions]
     # @!attribute truck
     #   <p>Travel mode options when the provided travel mode is "Truck"</p>
@@ -4352,57 +3438,34 @@ module Aws::GeoRoutes
     #   <p>Engine type of the vehicle.</p>
     #   @return [String]
     # @!attribute gross_weight
-    #   <p>Gross weight of the vehicle including trailers, and goods at capacity.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Gross weight of the vehicle including trailers, and goods at capacity.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute hazardous_cargos
     #   <p>List of Hazardous cargo contained in the vehicle.</p>
     #   @return [Array<String>]
     # @!attribute height
-    #   <p>Height of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Height of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute height_above_first_axle
-    #   <p>Height of the vehicle above its first axle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Height of the vehicle above its first axle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute kpra_length
-    #   <p>Kingpin to rear axle length of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Kingpin to rear axle length of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute length
-    #   <p>Length of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>c</code>
-    #            </p>
+    #   <p>Length of the vehicle.</p> <p> <b>Unit</b>: <code>c</code> </p>
     #   @return [Integer]
     # @!attribute license_plate
     #   <p>The vehicle License Plate.</p>
     #   @return [Types::RouteVehicleLicensePlate]
     # @!attribute max_speed
-    #   <p>Maximum speed</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Maximum speed</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     # @!attribute occupancy
-    #   <p>The number of occupants in the vehicle.</p>
-    #            <p>Default Value: <code>1</code>
-    #            </p>
+    #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Integer]
     # @!attribute payload_capacity
-    #   <p>Payload capacity of the vehicle and trailers attached.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>kilograms</code>
-    #            </p>
+    #   <p>Payload capacity of the vehicle and trailers attached.</p> <p> <b>Unit</b>: <code>kilograms</code> </p>
     #   @return [Integer]
     # @!attribute tire_count
     #   <p>Number of tires on the vehicle.</p>
@@ -4414,93 +3477,16 @@ module Aws::GeoRoutes
     #   <p>Type of the truck.</p>
     #   @return [String]
     # @!attribute tunnel_restriction_code
-    #   <p>The tunnel restriction code.</p>
-    #            <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels
-    #            in Great Britain. They relate to the types of dangerous goods that can be transported
-    #            through them.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category B</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Limited risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Few restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category C</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Medium risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Some restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category D</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: High risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Many restrictions occur</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category E</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Very high risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Restricted tunnel</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The tunnel restriction code.</p> <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. They relate to the types of dangerous goods that can be transported through them.</p> <ul> <li> <p> <i>Tunnel Category B</i> </p> <ul> <li> <p> <i>Risk Level</i>: Limited risk</p> </li> <li> <p> <i>Restrictions</i>: Few restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category C</i> </p> <ul> <li> <p> <i>Risk Level</i>: Medium risk</p> </li> <li> <p> <i>Restrictions</i>: Some restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category D</i> </p> <ul> <li> <p> <i>Risk Level</i>: High risk</p> </li> <li> <p> <i>Restrictions</i>: Many restrictions occur</p> </li> </ul> </li> <li> <p> <i>Tunnel Category E</i> </p> <ul> <li> <p> <i>Risk Level</i>: Very high risk</p> </li> <li> <p> <i>Restrictions</i>: Restricted tunnel</p> </li> </ul> </li> </ul>
     #   @return [String]
     # @!attribute weight_per_axle
-    #   <p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for
-    #            usage in countries where the differences in axle types or axle groups are not
-    #            distinguished.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for usage in countries where the differences in axle types or axle groups are not distinguished.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute weight_per_axle_group
-    #   <p>Specifies the total weight for the specified axle group. Meant for usage in countries
-    #            that have different regulations based on the axle group type.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Specifies the total weight for the specified axle group. Meant for usage in countries that have different regulations based on the axle group type.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Types::WeightPerAxleGroup]
     # @!attribute width
-    #   <p>Width of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Width of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     class RouteTruckOptions < Struct.new(
       :axle_count,
@@ -4632,10 +3618,7 @@ module Aws::GeoRoutes
     #   <p>End timestamp of the incident.</p>
     #   @return [String]
     # @!attribute severity
-    #   <p>Severity of the incident Critical - The part of the route the incident affects is
-    #            unusable. Major- Major impact on the leg duration, for example stop and go Minor- Minor
-    #            impact on the leg duration, for example traffic jam Low - Low on duration, for example
-    #            slightly increased traffic</p>
+    #   <p>Severity of the incident Critical - The part of the route the incident affects is unusable. Major- Major impact on the leg duration, for example stop and go Minor- Minor impact on the leg duration, for example traffic jam Low - Low on duration, for example slightly increased traffic</p>
     #   @return [String]
     # @!attribute start_time
     #   <p>Start time of the incident.</p>
@@ -4664,12 +3647,10 @@ module Aws::GeoRoutes
     #   <p>Incidents corresponding to this leg of the route.</p>
     #   @return [Array<Types::RouteVehicleIncident>]
     # @!attribute notices
-    #   <p>Notices are additional information returned that indicate issues that occurred during
-    #            route calculation.</p>
+    #   <p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>
     #   @return [Array<Types::RouteVehicleNotice>]
     # @!attribute pass_through_waypoints
-    #   <p>Waypoints that were passed through during the leg. This includes the waypoints that were
-    #            configured with the PassThrough option.</p>
+    #   <p>Waypoints that were passed through during the leg. This includes the waypoints that were configured with the PassThrough option.</p>
     #   @return [Array<Types::RoutePassThroughWaypoint>]
     # @!attribute spans
     #   <p>Spans that were computed for the requested SpanAdditionalFeatures.</p>
@@ -4687,11 +3668,7 @@ module Aws::GeoRoutes
     #   <p>Steps of a leg that must be performed before the travel portion of the leg.</p>
     #   @return [Array<Types::RouteVehicleTravelStep>]
     # @!attribute truck_road_types
-    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to
-    #            Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>
-    #            <note>
-    #               <p>There are currently no other supported values as of 26th April 2024.</p>
-    #            </note>
+    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p> <note> <p>There are currently no other supported values as of 26th April 2024.</p> </note>
     #   @return [Array<String>]
     # @!attribute zones
     #   <p>Zones corresponding to this leg of the route.</p>
@@ -4713,8 +3690,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>License plate information of the vehicle. Currently, only the last character is used
-    #          where license plate based controlled access is enforced.</p>
+    # <p>License plate information of the vehicle. Currently, only the last character is used where license plate based controlled access is enforced.</p>
     # @!attribute last_character
     #   <p>The last character of the License Plate.</p>
     #   @return [String]
@@ -4724,8 +3700,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Notices are additional information returned that indicate issues that occurred during
-    #          route calculation.</p>
+    # <p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>
     # @!attribute code
     #   <p>Code corresponding to the issue.</p>
     #   @return [String]
@@ -4733,8 +3708,7 @@ module Aws::GeoRoutes
     #   <p>Additional details of the notice.</p>
     #   @return [Array<Types::RouteVehicleNoticeDetail>]
     # @!attribute impact
-    #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High
-    #            impact notices must be evaluated further to determine the impact.</p>
+    #   <p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>
     #   @return [String]
     class RouteVehicleNotice < Struct.new(
       :code,
@@ -4760,26 +3734,16 @@ module Aws::GeoRoutes
 
     # <p>Summarized details of the leg.</p>
     # @!attribute best_case_duration
-    #   <p>Total duration in free flowing traffic, which is the best case or shortest duration
-    #            possible to cover the leg.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Total duration in free flowing traffic, which is the best case or shortest duration possible to cover the leg.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute distance
     #   <p>Distance of the step.</p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Duration of the step.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute typical_duration
-    #   <p>Duration of the computed span under typical traffic congestion. </p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the computed span under typical traffic congestion. </p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteVehicleOverviewSummary < Struct.new(
       :best_case_duration,
@@ -4826,10 +3790,7 @@ module Aws::GeoRoutes
 
     # <p>Span computed for the requested SpanAdditionalFeatures.</p>
     # @!attribute best_case_duration
-    #   <p>Duration of the computed span without traffic congestion.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the computed span without traffic congestion.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute car_access
     #   <p>Access attributes for a car corresponding to the span.</p>
@@ -4838,50 +3799,37 @@ module Aws::GeoRoutes
     #   <p>3 letter Country code corresponding to the Span.</p>
     #   @return [String]
     # @!attribute distance
-    #   <p>Distance of the computed span. This feature doesn't split a span, but is always computed
-    #            on a span split by other properties.</p>
+    #   <p>Distance of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Duration of the computed span. This feature doesn't split a span, but is always computed
-    #            on a span split by other properties.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute dynamic_speed
-    #   <p>Dynamic speed details corresponding to the span.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Dynamic speed details corresponding to the span.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Types::RouteSpanDynamicSpeedDetails]
     # @!attribute functional_classification
     #   <p>Functional classification of the road segment corresponding to the span.</p>
     #   @return [Integer]
     # @!attribute gate
-    #   <p>Attributes corresponding to a gate. The gate is present at the end of the returned
-    #            span.</p>
+    #   <p>Attributes corresponding to a gate. The gate is present at the end of the returned span.</p>
     #   @return [String]
     # @!attribute geometry_offset
     #   <p>Offset in the leg geometry corresponding to the start of this span.</p>
     #   @return [Integer]
     # @!attribute incidents
-    #   <p>Incidents corresponding to the span. These index into the Incidents in the parent
-    #            Leg.</p>
+    #   <p>Incidents corresponding to the span. These index into the Incidents in the parent Leg.</p>
     #   @return [Array<Integer>]
     # @!attribute names
     #   <p>Provides an array of names of the vehicle span in available languages.</p>
     #   @return [Array<Types::LocalizedString>]
     # @!attribute notices
-    #   <p>Notices are additional information returned that indicate issues that occurred during
-    #            route calculation.</p>
+    #   <p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>
     #   @return [Array<Integer>]
     # @!attribute railway_crossing
-    #   <p>Attributes corresponding to a railway crossing. The gate is present at the end of the
-    #            returned span.</p>
+    #   <p>Attributes corresponding to a railway crossing. The gate is present at the end of the returned span.</p>
     #   @return [String]
     # @!attribute region
-    #   <p>2-3 letter Region code corresponding to the Span. This is either a province or a
-    #            state.</p>
+    #   <p>2-3 letter Region code corresponding to the Span. This is either a province or a state.</p>
     #   @return [String]
     # @!attribute road_attributes
     #   <p>Attributes for the road segment corresponding to the span. </p>
@@ -4893,10 +3841,7 @@ module Aws::GeoRoutes
     #   <p>Access attributes for a scooter corresponding to the span.</p>
     #   @return [Array<String>]
     # @!attribute speed_limit
-    #   <p>Speed limit details corresponding to the span.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Speed limit details corresponding to the span.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Types::RouteSpanSpeedLimitDetails]
     # @!attribute toll_systems
     #   <p>Toll systems are authorities that collect payments for the toll.</p>
@@ -4905,17 +3850,10 @@ module Aws::GeoRoutes
     #   <p>Access attributes for a truck corresponding to the span.</p>
     #   @return [Array<String>]
     # @!attribute truck_road_types
-    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to
-    #            Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>
-    #            <note>
-    #               <p>There are currently no other supported values as of 26th April 2024.</p>
-    #            </note>
+    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p> <note> <p>There are currently no other supported values as of 26th April 2024.</p> </note>
     #   @return [Array<Integer>]
     # @!attribute typical_duration
-    #   <p>Duration of the computed span under typical traffic congestion. </p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the computed span under typical traffic congestion. </p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute zones
     #   <p>Zones corresponding to this leg of the route.</p>
@@ -4958,12 +3896,10 @@ module Aws::GeoRoutes
 
     # <p>Summarized details of the route.</p>
     # @!attribute overview
-    #   <p>Summarized details for the leg including before travel, travel and after travel
-    #            steps.</p>
+    #   <p>Summarized details for the leg including before travel, travel and after travel steps.</p>
     #   @return [Types::RouteVehicleOverviewSummary]
     # @!attribute travel_only
-    #   <p>Summarized details for the leg including travel steps only. The Distance for the travel
-    #            only portion of the journey is in meters</p>
+    #   <p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is in meters</p>
     #   @return [Types::RouteVehicleTravelOnlySummary]
     class RouteVehicleSummary < Struct.new(
       :overview,
@@ -4974,23 +3910,13 @@ module Aws::GeoRoutes
 
     # <p>Summarized details of the route.</p>
     # @!attribute best_case_duration
-    #   <p>Total duration in free flowing traffic, which is the best case or shortest duration
-    #            possible to cover the leg.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Total duration in free flowing traffic, which is the best case or shortest duration possible to cover the leg.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Duration of the step.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute typical_duration
-    #   <p>Duration of the computed span under typical traffic congestion.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the computed span under typical traffic congestion.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteVehicleTravelOnlySummary < Struct.new(
       :best_case_duration,
@@ -5021,10 +3947,7 @@ module Aws::GeoRoutes
     #   <p>Distance of the step.</p>
     #   @return [Integer]
     # @!attribute duration
-    #   <p>Duration of the step.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute enter_highway_step_details
     #   <p>Details that are specific to a Enter Highway step.</p>
@@ -5039,10 +3962,7 @@ module Aws::GeoRoutes
     #   <p>Offset in the leg geometry corresponding to the start of this step.</p>
     #   @return [Integer]
     # @!attribute instruction
-    #   <p>Brief description of the step in the requested language.</p>
-    #            <note>
-    #               <p>Only available when the TravelStepType is Default.</p>
-    #            </note>
+    #   <p>Brief description of the step in the requested language.</p> <note> <p>Only available when the TravelStepType is Default.</p> </note>
     #   @return [String]
     # @!attribute keep_step_details
     #   <p>Details that are specific to a Keep step.</p>
@@ -5063,8 +3983,7 @@ module Aws::GeoRoutes
     #   <p>Details that are specific to a Roundabout Pass step.</p>
     #   @return [Types::RouteRoundaboutPassStepDetails]
     # @!attribute signpost
-    #   <p>Sign post information of the action, applicable only for TurnByTurn steps. See
-    #            RouteSignpost for details of sub-attributes.</p>
+    #   <p>Sign post information of the action, applicable only for TurnByTurn steps. See RouteSignpost for details of sub-attributes.</p>
     #   @return [Types::RouteSignpost]
     # @!attribute turn_step_details
     #   <p>Details that are specific to a Turn step.</p>
@@ -5108,8 +4027,7 @@ module Aws::GeoRoutes
 
     # <p>This property contains a summary of violated constraints.</p>
     # @!attribute all_hazards_restricted
-    #   <p>This restriction applies to truck cargo, where the resulting route excludes roads on
-    #            which hazardous materials are prohibited from being transported.</p>
+    #   <p>This restriction applies to truck cargo, where the resulting route excludes roads on which hazardous materials are prohibited from being transported.</p>
     #   @return [Boolean]
     # @!attribute axle_count
     #   <p>Total number of axles of the vehicle.</p>
@@ -5121,45 +4039,28 @@ module Aws::GeoRoutes
     #   <p>The maximum height of the vehicle.</p>
     #   @return [Integer]
     # @!attribute max_kpra_length
-    #   <p>The maximum Kpra length of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>The maximum Kpra length of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute max_length
     #   <p>The maximum length of the vehicle.</p>
     #   @return [Integer]
     # @!attribute max_payload_capacity
-    #   <p>The maximum load capacity of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>kilograms</code>
-    #            </p>
+    #   <p>The maximum load capacity of the vehicle.</p> <p> <b>Unit</b>: <code>kilograms</code> </p>
     #   @return [Integer]
     # @!attribute max_weight
-    #   <p>The maximum weight of the route.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>The maximum weight of the route.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Types::RouteWeightConstraint]
     # @!attribute max_weight_per_axle
-    #   <p>The maximum weight per axle of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>The maximum weight per axle of the vehicle.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute max_weight_per_axle_group
-    #   <p>The maximum weight per axle group of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>The maximum weight per axle group of the vehicle.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Types::WeightPerAxleGroup]
     # @!attribute max_width
     #   <p>The maximum width of the vehicle.</p>
     #   @return [Integer]
     # @!attribute occupancy
-    #   <p>The number of occupants in the vehicle.</p>
-    #            <p>Default Value: <code>1</code>
-    #            </p>
+    #   <p>The number of occupants in the vehicle.</p> <p>Default Value: <code>1</code> </p>
     #   @return [Types::RouteNoticeDetailRange]
     # @!attribute restricted_times
     #   <p>Access radius restrictions based on time.</p>
@@ -5168,90 +4069,19 @@ module Aws::GeoRoutes
     #   <p>The time dependent constraint.</p>
     #   @return [Boolean]
     # @!attribute trailer_count
-    #   <p>Number of trailers attached to the vehicle.</p>
-    #            <p>Default Value: <code>0</code>
-    #            </p>
+    #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Types::RouteNoticeDetailRange]
     # @!attribute travel_mode
     #   <p>Travel mode corresponding to the leg.</p>
     #   @return [Boolean]
     # @!attribute truck_road_type
-    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to
-    #            Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>
-    #            <note>
-    #               <p>There are currently no other supported values as of 26th April 2024.</p>
-    #            </note>
+    #   <p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p> <note> <p>There are currently no other supported values as of 26th April 2024.</p> </note>
     #   @return [String]
     # @!attribute truck_type
     #   <p>Type of the truck.</p>
     #   @return [String]
     # @!attribute tunnel_restriction_code
-    #   <p>The tunnel restriction code.</p>
-    #            <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels
-    #            in Great Britain. They relate to the types of dangerous goods that can be transported
-    #            through them.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category B</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Limited risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Few restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category C</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Medium risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Some restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category D</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: High risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Many restrictions occur</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category E</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Very high risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Restricted tunnel</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The tunnel restriction code.</p> <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. They relate to the types of dangerous goods that can be transported through them.</p> <ul> <li> <p> <i>Tunnel Category B</i> </p> <ul> <li> <p> <i>Risk Level</i>: Limited risk</p> </li> <li> <p> <i>Restrictions</i>: Few restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category C</i> </p> <ul> <li> <p> <i>Risk Level</i>: Medium risk</p> </li> <li> <p> <i>Restrictions</i>: Some restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category D</i> </p> <ul> <li> <p> <i>Risk Level</i>: High risk</p> </li> <li> <p> <i>Restrictions</i>: Many restrictions occur</p> </li> </ul> </li> <li> <p> <i>Tunnel Category E</i> </p> <ul> <li> <p> <i>Risk Level</i>: Very high risk</p> </li> <li> <p> <i>Restrictions</i>: Restricted tunnel</p> </li> </ul> </li> </ul>
     #   @return [String]
     class RouteViolatedConstraints < Struct.new(
       :all_hazards_restricted,
@@ -5289,9 +4119,7 @@ module Aws::GeoRoutes
 
     # <p>Waypoint between the Origin and Destination.</p>
     # @!attribute avoid_actions_for_distance
-    #   <p>Avoids actions for the provided distance. This is typically to consider for users in
-    #            moving vehicles who may not have sufficient time to make an action at an origin or a
-    #            destination.</p>
+    #   <p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>
     #   @return [Integer]
     # @!attribute avoid_u_turns
     #   <p>Avoid U-turns for calculation on highways and motorways.</p>
@@ -5303,8 +4131,7 @@ module Aws::GeoRoutes
     #   <p>Options to configure matching the provided position to the road network.</p>
     #   @return [Types::RouteMatchingOptions]
     # @!attribute pass_through
-    #   <p>If the waypoint should not be treated as a stop. If yes, the waypoint is passed through
-    #            and doesn't split the route into different legs.</p>
+    #   <p>If the waypoint should not be treated as a stop. If yes, the waypoint is passed through and doesn't split the route into different legs.</p>
     #   @return [Boolean]
     # @!attribute position
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
@@ -5313,10 +4140,7 @@ module Aws::GeoRoutes
     #   <p>Options to configure matching the provided position to a side of the street.</p>
     #   @return [Types::RouteSideOfStreetOptions]
     # @!attribute stop_duration
-    #   <p>Duration of the stop.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of the stop.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class RouteWaypoint < Struct.new(
       :avoid_actions_for_distance,
@@ -5338,18 +4162,12 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>The weight constraint for the route.</p>
-    #          <p>
-    #             <b>Unit</b>: <code>Kilograms</code>
-    #          </p>
+    # <p>The weight constraint for the route.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     # @!attribute type
     #   <p>The type of constraint.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>The constraint value.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>The constraint value.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     class RouteWeightConstraint < Struct.new(
       :type,
@@ -5378,30 +4196,19 @@ module Aws::GeoRoutes
     end
 
     # @!attribute key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4
-    #            signature must be provided when making a request. </p>
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     #   @return [String]
     # @!attribute snapped_geometry_format
-    #   <p>Chooses what the returned SnappedGeometry format should be.</p>
-    #            <p>Default Value: <code>FlexiblePolyline</code>
-    #            </p>
+    #   <p>Chooses what the returned SnappedGeometry format should be.</p> <p>Default Value: <code>FlexiblePolyline</code> </p>
     #   @return [String]
     # @!attribute snap_radius
-    #   <p>The radius around the provided tracepoint that is considered for snapping.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>meters</code>
-    #            </p>
-    #            <p>Default value: <code>300</code>
-    #            </p>
+    #   <p>The radius around the provided tracepoint that is considered for snapping.</p> <p> <b>Unit</b>: <code>meters</code> </p> <p>Default value: <code>300</code> </p>
     #   @return [Integer]
     # @!attribute trace_points
     #   <p>List of trace points to be snapped onto the road network.</p>
     #   @return [Array<Types::RoadSnapTracePoint>]
     # @!attribute travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
     #   @return [String]
     # @!attribute travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
@@ -5418,8 +4225,7 @@ module Aws::GeoRoutes
     end
 
     # @!attribute notices
-    #   <p>Notices are additional information returned that indicate issues that occurred during
-    #            route calculation.</p>
+    #   <p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>
     #   @return [Array<Types::RoadSnapNotice>]
     # @!attribute pricing_bucket
     #   <p>The pricing bucket for which the query is charged at.</p>
@@ -5469,8 +4275,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The input fails to satisfy the constraints specified by the Amazon Location
-    #          service.</p>
+    # <p>The input fails to satisfy the constraints specified by the Amazon Location service.</p>
     # @!attribute name
     #   <p>The name of the Validation Exception Field.</p>
     #   @return [String]
@@ -5524,9 +4329,7 @@ module Aws::GeoRoutes
 
     # <p>Geometry of the area to be avoided.</p>
     # @!attribute bounding_box
-    #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates
-    #            (longitude and latitude,) of the southwest corner of the bounding box; the second pair
-    #            represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
+    #   <p>Geometry defined as a bounding box. The first pair represents the X and Y coordinates (longitude and latitude,) of the southwest corner of the bounding box; the second pair represents the X and Y coordinates (longitude and latitude) of the northeast corner.</p>
     #   @return [Array<Float>]
     class WaypointOptimizationAvoidanceAreaGeometry < Struct.new(
       :bounding_box,
@@ -5534,10 +4337,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies options for areas to avoid. This is a best-effort avoidance setting, meaning
-    #          the router will try to honor the avoidance preferences but may still include restricted
-    #          areas if no feasible alternative route exists. If avoidance options are not followed, the
-    #          response will indicate that the avoidance criteria were violated.</p>
+    # <p>Specifies options for areas to avoid. This is a best-effort avoidance setting, meaning the router will try to honor the avoidance preferences but may still include restricted areas if no feasible alternative route exists. If avoidance options are not followed, the response will indicate that the avoidance criteria were violated.</p>
     # @!attribute areas
     #   <p>Areas to be avoided.</p>
     #   @return [Array<Types::WaypointOptimizationAvoidanceArea>]
@@ -5577,15 +4377,10 @@ module Aws::GeoRoutes
 
     # <p>Options for WaypointOptimizationClustering.</p>
     # @!attribute algorithm
-    #   <p>The algorithm to be used. <code>DrivingDistance</code> assigns all the waypoints that
-    #            are within driving distance of each other into a single cluster.
-    #               <code>TopologySegment</code> assigns all the waypoints that are within the same topology
-    #            segment into a single cluster. A Topology segment is a linear stretch of road between two
-    #            junctions.</p>
+    #   <p>The algorithm to be used. <code>DrivingDistance</code> assigns all the waypoints that are within driving distance of each other into a single cluster. <code>TopologySegment</code> assigns all the waypoints that are within the same topology segment into a single cluster. A Topology segment is a linear stretch of road between two junctions.</p>
     #   @return [String]
     # @!attribute driving_distance_options
-    #   <p>Driving distance options to be used when the clustering algorithm is
-    #            DrivingDistance.</p>
+    #   <p>Driving distance options to be used when the clustering algorithm is DrivingDistance.</p>
     #   @return [Types::WaypointOptimizationDrivingDistanceOptions]
     class WaypointOptimizationClusteringOptions < Struct.new(
       :algorithm,
@@ -5594,8 +4389,7 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This contains information such as distance and duration from one waypoint to the next
-    #          waypoint in the sequence.</p>
+    # <p>This contains information such as distance and duration from one waypoint to the next waypoint in the sequence.</p>
     # @!attribute distance
     #   <p>Distance of the step.</p>
     #   @return [Integer]
@@ -5609,16 +4403,10 @@ module Aws::GeoRoutes
     #   <p>Contains the ID of the ending waypoint in this connection.</p>
     #   @return [String]
     # @!attribute travel_duration
-    #   <p>Total duration.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Total duration.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute wait_duration
-    #   <p>Duration of a wait step.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Duration of a wait step.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class WaypointOptimizationConnection < Struct.new(
       :distance,
@@ -5653,11 +4441,7 @@ module Aws::GeoRoutes
     #   <p>The waypoint Id.</p>
     #   @return [String]
     # @!attribute service_duration
-    #   <p>Service time spent at the destination. At an appointment, the service time should be the
-    #            appointment duration.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Service time spent at the destination. At an appointment, the service time should be the appointment duration.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute side_of_street
     #   <p>Options to configure matching the provided position to a side of the street.</p>
@@ -5681,17 +4465,13 @@ module Aws::GeoRoutes
 
     # <p>Driver related options.</p>
     # @!attribute rest_cycles
-    #   <p>Driver work-rest schedules defined by a short and long cycle. A rest needs to be taken
-    #            after the short work duration. The short cycle can be repeated until you hit the long work
-    #            duration, at which point the long rest duration should be taken before restarting.</p>
+    #   <p>Driver work-rest schedules defined by a short and long cycle. A rest needs to be taken after the short work duration. The short cycle can be repeated until you hit the long work duration, at which point the long rest duration should be taken before restarting.</p>
     #   @return [Types::WaypointOptimizationRestCycles]
     # @!attribute rest_profile
-    #   <p>Pre defined rest profiles for a driver schedule. The only currently supported profile is
-    #            EU.</p>
+    #   <p>Pre defined rest profiles for a driver schedule. The only currently supported profile is EU.</p>
     #   @return [Types::WaypointOptimizationRestProfile]
     # @!attribute treat_service_time_as
-    #   <p>If the service time provided at a waypoint/destination should be considered as rest or
-    #            work. This contributes to the total time breakdown returned within the response.</p>
+    #   <p>If the service time provided at a waypoint/destination should be considered as rest or work. This contributes to the total time breakdown returned within the response.</p>
     #   @return [String]
     class WaypointOptimizationDriverOptions < Struct.new(
       :rest_cycles,
@@ -5703,8 +4483,7 @@ module Aws::GeoRoutes
 
     # <p>Driving distance related options.</p>
     # @!attribute driving_distance
-    #   <p>DrivingDistance assigns all the waypoints that are within driving distance of each other
-    #            into a single cluster.</p>
+    #   <p>DrivingDistance assigns all the waypoints that are within driving distance of each other into a single cluster.</p>
     #   @return [Integer]
     class WaypointOptimizationDrivingDistanceOptions < Struct.new(
       :driving_distance,
@@ -5717,12 +4496,9 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Specifies strict exclusion options for the route calculation. This setting mandates that
-    #          the router will avoid any routes that include the specified options, rather than merely
-    #          attempting to minimize them.</p>
+    # <p>Specifies strict exclusion options for the route calculation. This setting mandates that the router will avoid any routes that include the specified options, rather than merely attempting to minimize them.</p>
     # @!attribute countries
-    #   <p>List of countries to be avoided defined by two-letter or three-letter country
-    #            codes.</p>
+    #   <p>List of countries to be avoided defined by two-letter or three-letter country codes.</p>
     #   @return [Array<String>]
     class WaypointOptimizationExclusionOptions < Struct.new(
       :countries,
@@ -5764,31 +4540,13 @@ module Aws::GeoRoutes
 
     # <p>The optimized waypoint.</p>
     # @!attribute arrival_time
-    #   <p>Estimated time of arrival at the destination.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Estimated time of arrival at the destination.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     #   @return [String]
     # @!attribute cluster_index
     #   <p>Index of the cluster the waypoint is associated with. The index is included in the response only if clustering was performed while processing the request.</p>
     #   @return [Integer]
     # @!attribute departure_time
-    #   <p>Estimated time of departure from thr origin.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Estimated time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     #   @return [String]
     # @!attribute id
     #   <p>The waypoint Id.</p>
@@ -5818,10 +4576,7 @@ module Aws::GeoRoutes
 
     # <p>Options related to a pedestrian.</p>
     # @!attribute speed
-    #   <p>Walking speed.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>KilometersPerHour</code>
-    #            </p>
+    #   <p>Walking speed.</p> <p> <b>Unit</b>: <code>KilometersPerHour</code> </p>
     #   @return [Float]
     class WaypointOptimizationPedestrianOptions < Struct.new(
       :speed,
@@ -5834,23 +4589,12 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Driver work-rest schedules defined by a short and long cycle. A rest needs to be taken
-    #          after the short work duration. The short cycle can be repeated until you hit the long work
-    #          duration, at which point the long rest duration should be taken before restarting.</p>
-    #          <p>
-    #             <b>Unit</b>: <code>seconds</code>
-    #          </p>
+    # <p>Driver work-rest schedules defined by a short and long cycle. A rest needs to be taken after the short work duration. The short cycle can be repeated until you hit the long work duration, at which point the long rest duration should be taken before restarting.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     # @!attribute rest_duration
-    #   <p>Resting phase of the cycle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Resting phase of the cycle.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute work_duration
-    #   <p>Working phase of the cycle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Working phase of the cycle.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class WaypointOptimizationRestCycleDurations < Struct.new(
       :rest_duration,
@@ -5879,11 +4623,9 @@ module Aws::GeoRoutes
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Pre defined rest profiles for a driver schedule. The only currently supported profile is
-    #          EU.</p>
+    # <p>Pre defined rest profiles for a driver schedule. The only currently supported profile is EU.</p>
     # @!attribute profile
-    #   <p>Pre defined rest profiles for a driver schedule. The only currently supported profile is
-    #            EU.</p>
+    #   <p>Pre defined rest profiles for a driver schedule. The only currently supported profile is EU.</p>
     #   @return [String]
     class WaypointOptimizationRestProfile < Struct.new(
       :profile,
@@ -5896,10 +4638,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     # @!attribute use_with
-    #   <p>Strategy that defines when the side of street position should be used. AnyStreet will
-    #            always use the provided position.</p>
-    #            <p>Default Value: <code>DividedStreetOnly</code>
-    #            </p>
+    #   <p>Strategy that defines when the side of street position should be used. AnyStreet will always use the provided position.</p> <p>Default Value: <code>DividedStreetOnly</code> </p>
     #   @return [String]
     class WaypointOptimizationSideOfStreetOptions < Struct.new(
       :position,
@@ -5910,29 +4649,16 @@ module Aws::GeoRoutes
 
     # <p>Time breakdown for the sequence.</p>
     # @!attribute rest_duration
-    #   <p>Resting phase of the cycle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Resting phase of the cycle.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute service_duration
-    #   <p>Service time spent at the destination. At an appointment, the service time should be the
-    #            appointment duration.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Service time spent at the destination. At an appointment, the service time should be the appointment duration.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute travel_duration
-    #   <p>Traveling phase of the cycle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Traveling phase of the cycle.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute wait_duration
-    #   <p>Waiting phase of the cycle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Waiting phase of the cycle.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     class WaypointOptimizationTimeBreakdown < Struct.new(
       :rest_duration,
@@ -5953,9 +4679,7 @@ module Aws::GeoRoutes
 
     # <p>Options related to traffic.</p>
     # @!attribute usage
-    #   <p>Determines if traffic should be used or ignored while calculating the route.</p>
-    #            <p>Default Value: <code>UseTrafficData</code>
-    #            </p>
+    #   <p>Determines if traffic should be used or ignored while calculating the route.</p> <p>Default Value: <code>UseTrafficData</code> </p>
     #   @return [String]
     class WaypointOptimizationTrafficOptions < Struct.new(
       :usage,
@@ -5965,9 +4689,7 @@ module Aws::GeoRoutes
 
     # <p>Trailer options corresponding to the vehicle.</p>
     # @!attribute trailer_count
-    #   <p>Number of trailers attached to the vehicle.</p>
-    #            <p>Default Value: <code>0</code>
-    #            </p>
+    #   <p>Number of trailers attached to the vehicle.</p> <p>Default Value: <code>0</code> </p>
     #   @return [Integer]
     class WaypointOptimizationTrailerOptions < Struct.new(
       :trailer_count,
@@ -5991,25 +4713,16 @@ module Aws::GeoRoutes
 
     # <p>Travel mode options when the provided travel mode is "Truck"</p>
     # @!attribute gross_weight
-    #   <p>Gross weight of the vehicle including trailers, and goods at capacity.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Gross weight of the vehicle including trailers, and goods at capacity.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute hazardous_cargos
     #   <p>List of Hazardous cargo contained in the vehicle.</p>
     #   @return [Array<String>]
     # @!attribute height
-    #   <p>Height of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Height of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute length
-    #   <p>Length of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Length of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     # @!attribute trailer
     #   <p>Trailer options corresponding to the vehicle.</p>
@@ -6018,86 +4731,13 @@ module Aws::GeoRoutes
     #   <p>Type of the truck.</p>
     #   @return [String]
     # @!attribute tunnel_restriction_code
-    #   <p>The tunnel restriction code.</p>
-    #            <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels
-    #            in Great Britain. They relate to the types of dangerous goods that can be transported
-    #            through them.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category B</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Limited risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Few restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category C</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Medium risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Some restrictions</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category D</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: High risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Many restrictions occur</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <i>Tunnel Category E</i>
-    #                  </p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <i>Risk Level</i>: Very high risk</p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <i>Restrictions</i>: Restricted tunnel</p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The tunnel restriction code.</p> <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. They relate to the types of dangerous goods that can be transported through them.</p> <ul> <li> <p> <i>Tunnel Category B</i> </p> <ul> <li> <p> <i>Risk Level</i>: Limited risk</p> </li> <li> <p> <i>Restrictions</i>: Few restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category C</i> </p> <ul> <li> <p> <i>Risk Level</i>: Medium risk</p> </li> <li> <p> <i>Restrictions</i>: Some restrictions</p> </li> </ul> </li> <li> <p> <i>Tunnel Category D</i> </p> <ul> <li> <p> <i>Risk Level</i>: High risk</p> </li> <li> <p> <i>Restrictions</i>: Many restrictions occur</p> </li> </ul> </li> <li> <p> <i>Tunnel Category E</i> </p> <ul> <li> <p> <i>Risk Level</i>: Very high risk</p> </li> <li> <p> <i>Restrictions</i>: Restricted tunnel</p> </li> </ul> </li> </ul>
     #   @return [String]
     # @!attribute weight_per_axle
-    #   <p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for
-    #            usage in countries where the differences in axle types or axle groups are not
-    #            distinguished.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for usage in countries where the differences in axle types or axle groups are not distinguished.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute width
-    #   <p>Width of the vehicle.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>centimeters</code>
-    #            </p>
+    #   <p>Width of the vehicle.</p> <p> <b>Unit</b>: <code>centimeters</code> </p>
     #   @return [Integer]
     class WaypointOptimizationTruckOptions < Struct.new(
       :gross_weight,
@@ -6142,11 +4782,7 @@ module Aws::GeoRoutes
     #   <p>Position defined as <code>[longitude, latitude]</code>.</p>
     #   @return [Array<Float>]
     # @!attribute service_duration
-    #   <p>Service time spent at the waypoint. At an appointment, the service time should be the
-    #            appointment duration.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>seconds</code>
-    #            </p>
+    #   <p>Service time spent at the waypoint. At an appointment, the service time should be the appointment duration.</p> <p> <b>Unit</b>: <code>seconds</code> </p>
     #   @return [Integer]
     # @!attribute side_of_street
     #   <p>Options to configure matching the provided position to a side of the street.</p>
@@ -6170,40 +4806,21 @@ module Aws::GeoRoutes
       end
     end
 
-    # <p>Specifies the total weight for the specified axle group. Meant for usage in countries
-    #          that have different regulations based on the axle group type.</p>
-    #          <p>
-    #             <b>Unit</b>: <code>Kilograms</code>
-    #          </p>
+    # <p>Specifies the total weight for the specified axle group. Meant for usage in countries that have different regulations based on the axle group type.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     # @!attribute single
-    #   <p>Weight for single axle group.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Weight for single axle group.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute tandem
-    #   <p>Weight for tandem axle group.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Weight for tandem axle group.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute triple
-    #   <p>Weight for triple axle group.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Weight for triple axle group.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute quad
-    #   <p>Weight for quad axle group.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Weight for quad axle group.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     # @!attribute quint
-    #   <p>Weight for quad quint group.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>Kilograms</code>
-    #            </p>
+    #   <p>Weight for quad quint group.</p> <p> <b>Unit</b>: <code>Kilograms</code> </p>
     #   @return [Integer]
     class WeightPerAxleGroup < Struct.new(
       :single,

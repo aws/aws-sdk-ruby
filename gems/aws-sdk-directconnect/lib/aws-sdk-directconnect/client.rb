@@ -426,7 +426,8 @@ module Aws::DirectConnect
     #     new_private_virtual_interface_allocation: { # required
     #       virtual_interface_name: "VirtualInterfaceName", # required
     #       vlan: 1, # required
-    #       asn: 1, # required
+    #       asn: 1,
+    #       asn_long: 1,
     #       mtu: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -453,6 +454,7 @@ module Aws::DirectConnect
     #     virtual_interface_name: "VirtualInterfaceName",
     #     vlan: 1,
     #     asn: 1,
+    #     asn_long: 1,
     #     amazon_side_asn: 1,
     #     auth_key: "BGPAuthKey",
     #     amazon_address: "AmazonAddress",
@@ -473,6 +475,7 @@ module Aws::DirectConnect
     #       {
     #         bgp_peer_id: "BGPPeerId",
     #         asn: 1,
+    #         asn_long: 1,
     #         auth_key: "BGPAuthKey",
     #         address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #         amazon_address: "AmazonAddress",
@@ -520,7 +523,8 @@ module Aws::DirectConnect
     #     new_public_virtual_interface_allocation: { # required
     #       virtual_interface_name: "VirtualInterfaceName", # required
     #       vlan: 1, # required
-    #       asn: 1, # required
+    #       asn: 1,
+    #       asn_long: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
     #       customer_address: "CustomerAddress",
@@ -551,6 +555,7 @@ module Aws::DirectConnect
     #     virtual_interface_name: "VirtualInterfaceName",
     #     vlan: 1,
     #     asn: 1,
+    #     asn_long: 1,
     #     amazon_side_asn: 1,
     #     auth_key: "BGPAuthKey",
     #     amazon_address: "AmazonAddress",
@@ -571,6 +576,7 @@ module Aws::DirectConnect
     #       {
     #         bgp_peer_id: "BGPPeerId",
     #         asn: 1,
+    #         asn_long: 1,
     #         auth_key: "BGPAuthKey",
     #         address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #         amazon_address: "AmazonAddress",
@@ -616,6 +622,7 @@ module Aws::DirectConnect
     #       virtual_interface_name: "VirtualInterfaceName",
     #       vlan: 1,
     #       asn: 1,
+    #       asn_long: 1,
     #       mtu: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -643,6 +650,7 @@ module Aws::DirectConnect
     #       virtual_interface_name: "VirtualInterfaceName",
     #       vlan: 1,
     #       asn: 1,
+    #       asn_long: 1,
     #       amazon_side_asn: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -663,6 +671,7 @@ module Aws::DirectConnect
     #         {
     #           bgp_peer_id: "BGPPeerId",
     #           asn: 1,
+    #           asn_long: 1,
     #           auth_key: "BGPAuthKey",
     #           address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #           amazon_address: "AmazonAddress",
@@ -909,6 +918,7 @@ module Aws::DirectConnect
     #     virtual_interface_name: "VirtualInterfaceName",
     #     vlan: 1,
     #     asn: 1,
+    #     asn_long: 1,
     #     amazon_side_asn: 1,
     #     auth_key: "BGPAuthKey",
     #     amazon_address: "AmazonAddress",
@@ -929,6 +939,7 @@ module Aws::DirectConnect
     #       {
     #         bgp_peer_id: "BGPPeerId",
     #         asn: 1,
+    #         asn_long: 1,
     #         auth_key: "BGPAuthKey",
     #         address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #         amazon_address: "AmazonAddress",
@@ -1110,6 +1121,7 @@ module Aws::DirectConnect
     #     virtual_interface_id: "VirtualInterfaceId",
     #     new_bgp_peer: {
     #       asn: 1,
+    #       asn_long: 1,
     #       auth_key: "BGPAuthKey",
     #       address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #       amazon_address: "AmazonAddress",
@@ -1130,6 +1142,7 @@ module Aws::DirectConnect
     #       virtual_interface_name: "VirtualInterfaceName",
     #       vlan: 1,
     #       asn: 1,
+    #       asn_long: 1,
     #       amazon_side_asn: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -1150,6 +1163,7 @@ module Aws::DirectConnect
     #         {
     #           bgp_peer_id: "BGPPeerId",
     #           asn: 1,
+    #           asn_long: 1,
     #           auth_key: "BGPAuthKey",
     #           address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #           amazon_address: "AmazonAddress",
@@ -1701,7 +1715,8 @@ module Aws::DirectConnect
     #     new_private_virtual_interface: { # required
     #       virtual_interface_name: "VirtualInterfaceName", # required
     #       vlan: 1, # required
-    #       asn: 1, # required
+    #       asn: 1,
+    #       asn_long: 1,
     #       mtu: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -1731,6 +1746,7 @@ module Aws::DirectConnect
     #     virtual_interface_name: "VirtualInterfaceName",
     #     vlan: 1,
     #     asn: 1,
+    #     asn_long: 1,
     #     amazon_side_asn: 1,
     #     auth_key: "BGPAuthKey",
     #     amazon_address: "AmazonAddress",
@@ -1751,6 +1767,7 @@ module Aws::DirectConnect
     #       {
     #         bgp_peer_id: "BGPPeerId",
     #         asn: 1,
+    #         asn_long: 1,
     #         auth_key: "BGPAuthKey",
     #         address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #         amazon_address: "AmazonAddress",
@@ -1793,7 +1810,8 @@ module Aws::DirectConnect
     #     new_public_virtual_interface: { # required
     #       virtual_interface_name: "VirtualInterfaceName", # required
     #       vlan: 1, # required
-    #       asn: 1, # required
+    #       asn: 1,
+    #       asn_long: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
     #       customer_address: "CustomerAddress",
@@ -1824,6 +1842,7 @@ module Aws::DirectConnect
     #     virtual_interface_name: "VirtualInterfaceName",
     #     vlan: 1,
     #     asn: 1,
+    #     asn_long: 1,
     #     amazon_side_asn: 1,
     #     auth_key: "BGPAuthKey",
     #     amazon_address: "AmazonAddress",
@@ -1844,6 +1863,7 @@ module Aws::DirectConnect
     #       {
     #         bgp_peer_id: "BGPPeerId",
     #         asn: 1,
+    #         asn_long: 1,
     #         auth_key: "BGPAuthKey",
     #         address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #         amazon_address: "AmazonAddress",
@@ -1893,6 +1913,7 @@ module Aws::DirectConnect
     #       virtual_interface_name: "VirtualInterfaceName",
     #       vlan: 1,
     #       asn: 1,
+    #       asn_long: 1,
     #       mtu: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -1922,6 +1943,7 @@ module Aws::DirectConnect
     #       virtual_interface_name: "VirtualInterfaceName",
     #       vlan: 1,
     #       asn: 1,
+    #       asn_long: 1,
     #       amazon_side_asn: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -1942,6 +1964,7 @@ module Aws::DirectConnect
     #         {
     #           bgp_peer_id: "BGPPeerId",
     #           asn: 1,
+    #           asn_long: 1,
     #           auth_key: "BGPAuthKey",
     #           address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #           amazon_address: "AmazonAddress",
@@ -1976,7 +1999,37 @@ module Aws::DirectConnect
     # @option params [String] :virtual_interface_id
     #   <p>The ID of the virtual interface.</p>
     # @option params [Integer] :asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    # @option params [Integer] :asn_long
+    #   <p>The long ASN for the BGP peer to be deleted from a Direct Connect virtual interface. The valid range is from 1 to 4294967294 for BGP configuration. </p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     # @option params [String] :customer_address
     #   <p>The IP address assigned to the customer interface.</p>
     # @option params [String] :bgp_peer_id
@@ -1985,6 +2038,7 @@ module Aws::DirectConnect
     #   params = {
     #     virtual_interface_id: "VirtualInterfaceId",
     #     asn: 1,
+    #     asn_long: 1,
     #     customer_address: "CustomerAddress",
     #     bgp_peer_id: "BGPPeerId"
     #   }
@@ -2002,6 +2056,7 @@ module Aws::DirectConnect
     #       virtual_interface_name: "VirtualInterfaceName",
     #       vlan: 1,
     #       asn: 1,
+    #       asn_long: 1,
     #       amazon_side_asn: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -2022,6 +2077,7 @@ module Aws::DirectConnect
     #         {
     #           bgp_peer_id: "BGPPeerId",
     #           asn: 1,
+    #           asn_long: 1,
     #           auth_key: "BGPAuthKey",
     #           address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #           amazon_address: "AmazonAddress",
@@ -2420,9 +2476,18 @@ module Aws::DirectConnect
     # @param [Hash, Types::DescribeConnectionsRequest] params
     # @option params [String] :connection_id
     #   <p>The ID of the connection.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     connection_id: "ConnectionId"
+    #     connection_id: "ConnectionId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
     #   }
     #   options = {}
     #   response = client.describe_connections(params, options)
@@ -2467,7 +2532,8 @@ module Aws::DirectConnect
     #         ],
     #         partner_interconnect_mac_sec_capable: false
     #       }
-    #     ]
+    #     ],
+    #     next_token: "PaginationToken"
     #   }
     # @return [Types::DescribeConnectionsOutput]
     def describe_connections(params = {}, options = {})
@@ -2532,7 +2598,8 @@ module Aws::DirectConnect
     #         ],
     #         partner_interconnect_mac_sec_capable: false
     #       }
-    #     ]
+    #     ],
+    #     next_token: "PaginationToken"
     #   }
     # @deprecated
     # @return [Types::DescribeConnectionsOnInterconnectOutput]
@@ -2823,9 +2890,18 @@ module Aws::DirectConnect
     # @param [Hash, Types::DescribeHostedConnectionsRequest] params
     # @option params [String] :connection_id
     #   <p>The ID of the interconnect or LAG.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     connection_id: "ConnectionId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
     #   }
     #   options = {}
     #   response = client.describe_hosted_connections(params, options)
@@ -2870,7 +2946,8 @@ module Aws::DirectConnect
     #         ],
     #         partner_interconnect_mac_sec_capable: false
     #       }
-    #     ]
+    #     ],
+    #     next_token: "PaginationToken"
     #   }
     # @return [Types::DescribeHostedConnectionsOutput]
     def describe_hosted_connections(params = {}, options = {})
@@ -2919,9 +2996,18 @@ module Aws::DirectConnect
     # @param [Hash, Types::DescribeInterconnectsRequest] params
     # @option params [String] :interconnect_id
     #   <p>The ID of the interconnect.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     interconnect_id: "InterconnectId"
+    #     interconnect_id: "InterconnectId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
     #   }
     #   options = {}
     #   response = client.describe_interconnects(params, options)
@@ -2962,7 +3048,8 @@ module Aws::DirectConnect
     #           }
     #         ]
     #       }
-    #     ]
+    #     ],
+    #     next_token: "PaginationToken"
     #   }
     # @return [Types::DescribeInterconnectsOutput]
     def describe_interconnects(params = {}, options = {})
@@ -2974,9 +3061,18 @@ module Aws::DirectConnect
     # @param [Hash, Types::DescribeLagsRequest] params
     # @option params [String] :lag_id
     #   <p>The ID of the LAG.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     lag_id: "LagId"
+    #     lag_id: "LagId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
     #   }
     #   options = {}
     #   response = client.describe_lags(params, options)
@@ -3057,7 +3153,8 @@ module Aws::DirectConnect
     #           }
     #         ]
     #       }
-    #     ]
+    #     ],
+    #     next_token: "PaginationToken"
     #   }
     # @return [Types::DescribeLagsOutput]
     def describe_lags(params = {}, options = {})
@@ -3222,15 +3319,32 @@ module Aws::DirectConnect
     #       connection ID, only the virtual interfaces associated with the connection are returned.
     #       If you specify a virtual interface ID, then only a single virtual interface is returned.</p>
     #          <p>A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer network.</p>
+    #          <ul>
+    #             <li>
+    #                <p>If you're using an <code>asn</code>, the response includes ASN value in both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #             </li>
+    #             <li>
+    #                <p>If you're using <code>asnLong</code>, the response returns a value of <code>0</code> (zero) for the <code>asn</code> attribute because it exceeds the highest ASN value of 2,147,483,647 that it can support</p>
+    #             </li>
+    #          </ul>
     # @param [Hash, Types::DescribeVirtualInterfacesRequest] params
     # @option params [String] :connection_id
     #   <p>The ID of the connection.</p>
     # @option params [String] :virtual_interface_id
     #   <p>The ID of the virtual interface.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     connection_id: "ConnectionId",
-    #     virtual_interface_id: "VirtualInterfaceId"
+    #     virtual_interface_id: "VirtualInterfaceId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
     #   }
     #   options = {}
     #   response = client.describe_virtual_interfaces(params, options)
@@ -3247,6 +3361,7 @@ module Aws::DirectConnect
     #         virtual_interface_name: "VirtualInterfaceName",
     #         vlan: 1,
     #         asn: 1,
+    #         asn_long: 1,
     #         amazon_side_asn: 1,
     #         auth_key: "BGPAuthKey",
     #         amazon_address: "AmazonAddress",
@@ -3267,6 +3382,7 @@ module Aws::DirectConnect
     #           {
     #             bgp_peer_id: "BGPPeerId",
     #             asn: 1,
+    #             asn_long: 1,
     #             auth_key: "BGPAuthKey",
     #             address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #             amazon_address: "AmazonAddress",
@@ -3288,7 +3404,8 @@ module Aws::DirectConnect
     #         ],
     #         site_link_enabled: false
     #       }
-    #     ]
+    #     ],
+    #     next_token: "PaginationToken"
     #   }
     # @return [Types::DescribeVirtualInterfacesOutput]
     def describe_virtual_interfaces(params = {}, options = {})
@@ -3898,6 +4015,7 @@ module Aws::DirectConnect
     #     virtual_interface_name: "VirtualInterfaceName",
     #     vlan: 1,
     #     asn: 1,
+    #     asn_long: 1,
     #     amazon_side_asn: 1,
     #     auth_key: "BGPAuthKey",
     #     amazon_address: "AmazonAddress",
@@ -3918,6 +4036,7 @@ module Aws::DirectConnect
     #       {
     #         bgp_peer_id: "BGPPeerId",
     #         asn: 1,
+    #         asn_long: 1,
     #         auth_key: "BGPAuthKey",
     #         address_family: "ipv4" # One of: ["ipv4", "ipv6"],
     #         amazon_address: "AmazonAddress",

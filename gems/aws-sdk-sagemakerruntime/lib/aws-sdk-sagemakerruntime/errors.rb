@@ -125,7 +125,7 @@ module Aws::SageMakerRuntime
     #          <dl>
     #             <dt>ModelInvocationTimeExceeded</dt>
     #             <dd>
-    #                <p>The model failed to finish sending the response within the timeout period allowed by Amazon SageMaker.</p>
+    #                <p>The model failed to finish sending the response within the timeout period allowed by Amazon SageMaker AI.</p>
     #             </dd>
     #             <dt>StreamBroken</dt>
     #             <dd>
@@ -149,7 +149,7 @@ module Aws::SageMakerRuntime
       #             <dt>ModelInvocationTimeExceeded</dt>
       #             <dd>
       #                <p>The model failed to finish sending the response within the timeout period
-      #                         allowed by Amazon SageMaker.</p>
+      #                         allowed by Amazon SageMaker AI.</p>
       #             </dd>
       #             <dt>StreamBroken</dt>
       #             <dd>

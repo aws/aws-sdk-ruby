@@ -122,6 +122,10 @@ module Aws::WorkSpaces
     CreateWorkspacesPoolResult: StructureShape
     CreateWorkspacesRequest: StructureShape
     CreateWorkspacesResult: StructureShape
+    CustomImageProtocol: EnumShape
+    CustomWorkspaceImageImportErrorDetails: StructureShape
+    CustomWorkspaceImageImportErrorDetailsList: ListShape
+    CustomWorkspaceImageImportState: EnumShape
     DataReplication: EnumShape
     DataReplicationSettings: StructureShape
     DedicatedTenancyAccountType: EnumShape
@@ -179,6 +183,8 @@ module Aws::WorkSpaces
     DescribeConnectionAliasPermissionsResult: StructureShape
     DescribeConnectionAliasesRequest: StructureShape
     DescribeConnectionAliasesResult: StructureShape
+    DescribeCustomWorkspaceImageImportRequest: StructureShape
+    DescribeCustomWorkspaceImageImportResult: StructureShape
     DescribeImageAssociationsRequest: StructureShape
     DescribeImageAssociationsResult: StructureShape
     DescribeIpGroupsRequest: StructureShape
@@ -232,7 +238,9 @@ module Aws::WorkSpaces
     DnsIpAddresses: ListShape
     DomainName: StringShape
     Ec2ImageId: StringShape
+    Ec2ImportTaskId: StringShape
     EndpointEncryptionMode: EnumShape
+    ErrorCode: StringShape
     ErrorDetails: StructureShape
     ErrorDetailsList: ListShape
     ErrorMessage: StringShape
@@ -257,16 +265,23 @@ module Aws::WorkSpaces
     IdleDisconnectTimeoutInSeconds: IntegerShape
     ImageAssociatedResourceType: EnumShape
     ImageAssociatedResourceTypeList: ListShape
+    ImageBuildVersionArn: StringShape
+    ImageComputeType: EnumShape
+    ImageErrorMessage: StringShape
     ImagePermission: StructureShape
     ImagePermissions: ListShape
     ImageResourceAssociation: StructureShape
     ImageResourceAssociationList: ListShape
+    ImageSourceIdentifier: UnionShape
     ImageType: EnumShape
     ImportClientBrandingRequest: StructureShape
     ImportClientBrandingResult: StructureShape
+    ImportCustomWorkspaceImageRequest: StructureShape
+    ImportCustomWorkspaceImageResult: StructureShape
     ImportWorkspaceImageRequest: StructureShape
     ImportWorkspaceImageResult: StructureShape
     IncompatibleApplicationsException: StructureShape
+    InfrastructureConfigurationArn: StringShape
     InternalServerException: StructureShape
     InternetFallbackProtocol: EnumShape
     InternetFallbackProtocolList: ListShape
@@ -302,6 +317,7 @@ module Aws::WorkSpaces
     ManagementCidrRangeMaxResults: IntegerShape
     MaxUserDurationInSeconds: IntegerShape
     MaximumLength: IntegerShape
+    Message: StringShape
     MicrosoftEntraConfig: StructureShape
     MicrosoftEntraConfigTenantId: StringShape
     MigrateWorkspaceRequest: StructureShape
@@ -334,6 +350,7 @@ module Aws::WorkSpaces
     ModifyWorkspaceStateResult: StructureShape
     NetworkAccessConfiguration: StructureShape
     NonEmptyString: StringShape
+    OSVersion: EnumShape
     OperatingSystem: StructureShape
     OperatingSystemName: EnumShape
     OperatingSystemNameList: ListShape
@@ -344,6 +361,7 @@ module Aws::WorkSpaces
     PaginationToken: StringShape
     PendingCreateStandbyWorkspacesRequest: StructureShape
     PendingCreateStandbyWorkspacesRequestList: ListShape
+    Platform: EnumShape
     PoolsRunningMode: EnumShape
     Protocol: EnumShape
     ProtocolList: ListShape

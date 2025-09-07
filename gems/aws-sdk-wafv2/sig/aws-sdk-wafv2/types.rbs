@@ -3942,6 +3942,7 @@ module Aws::WAFV2
         ?token_domains: Array[String],
         ?association_config: Types::AssociationConfig,
         ?on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig,
+        ?application_config: Types::ApplicationConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3960,6 +3961,7 @@ module Aws::WAFV2
       attr_accessor token_domains: Array[String]?
       attr_accessor association_config: Types::AssociationConfig?
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig?
+      attr_accessor application_config: Types::ApplicationConfig?
     end
 
     class UpdateWebACLResponse

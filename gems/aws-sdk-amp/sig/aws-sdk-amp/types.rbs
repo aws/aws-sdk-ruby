@@ -308,6 +308,21 @@ module Aws::Amp
       attr_accessor client_token: String?
     end
 
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?client_token: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor client_token: String?
+      attr_accessor revision_id: String?
+    end
+
     class DeleteRuleGroupsNamespaceInput
       include Smithy::Schema::Structure
 
@@ -426,6 +441,32 @@ module Aws::Amp
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor query_logging_configuration: Types::QueryLoggingConfigurationMetadata?
+    end
+
+    class DescribeResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_document: String,
+        ?policy_status: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_document: String?
+      attr_accessor policy_status: String?
+      attr_accessor revision_id: String?
     end
 
     class DescribeRuleGroupsNamespaceInput
@@ -794,6 +835,36 @@ module Aws::Amp
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status: Types::AlertManagerDefinitionStatus?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?policy_document: String,
+        ?client_token: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor policy_document: String?
+      attr_accessor client_token: String?
+      attr_accessor revision_id: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_status: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_status: String?
+      attr_accessor revision_id: String?
     end
 
     class PutRuleGroupsNamespaceInput

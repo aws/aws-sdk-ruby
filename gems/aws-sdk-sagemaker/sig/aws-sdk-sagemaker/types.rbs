@@ -2355,15 +2355,70 @@ module Aws::SageMaker
       MULTI_LANGUAGE: String
     end
 
+    module ClusterAutoScalerType
+      KARPENTER: String
+    end
+
+    class ClusterAutoScalingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?auto_scaler_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor auto_scaler_type: String?
+    end
+
+    class ClusterAutoScalingConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?auto_scaler_type: String,
+        ?status: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor auto_scaler_type: String?
+      attr_accessor status: String?
+      attr_accessor failure_message: String?
+    end
+
+    module ClusterAutoScalingMode
+      ENABLE: String
+      DISABLE: String
+    end
+
+    module ClusterAutoScalingStatus
+      INSERVICE: String
+      FAILED: String
+      CREATING: String
+      DELETING: String
+    end
+
+    module ClusterConfigMode
+      ENABLE: String
+      DISABLE: String
+    end
+
     class ClusterEbsVolumeConfig
       include Smithy::Schema::Structure
 
       def initialize: (
         ?volume_size_in_gb: Integer,
+        ?volume_kms_key_id: String,
+        ?root_volume: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor volume_size_in_gb: Integer?
+      attr_accessor volume_kms_key_id: String?
+      attr_accessor root_volume: bool?
     end
 
     class ClusterEventDetail
@@ -2554,6 +2609,7 @@ module Aws::SageMaker
       ML_P4D_24XLARGE: String
       ML_P4DE_24XLARGE: String
       ML_P5_48XLARGE: String
+      ML_P6E_GB200_36XLARGE: String
       ML_TRN1_32XLARGE: String
       ML_TRN1N_32XLARGE: String
       ML_G5_XLARGE: String
@@ -2919,6 +2975,19 @@ module Aws::SageMaker
       attr_accessor creation_time: Time?
       attr_accessor cluster_status: String?
       attr_accessor training_plan_arns: Array[String]?
+    end
+
+    class ClusterTieredStorageConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?instance_memory_allocation_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor instance_memory_allocation_percentage: Integer?
     end
 
     class CodeEditorAppImageConfig
@@ -3606,7 +3675,10 @@ module Aws::SageMaker
         ?tags: Array[Types::Tag],
         ?orchestrator: Types::ClusterOrchestrator,
         ?node_recovery: String,
+        ?tiered_storage_config: Types::ClusterTieredStorageConfig,
         ?node_provisioning_mode: String,
+        ?cluster_role: String,
+        ?auto_scaling: Types::ClusterAutoScalingConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3617,7 +3689,10 @@ module Aws::SageMaker
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor orchestrator: Types::ClusterOrchestrator?
       attr_accessor node_recovery: String?
+      attr_accessor tiered_storage_config: Types::ClusterTieredStorageConfig?
       attr_accessor node_provisioning_mode: String?
+      attr_accessor cluster_role: String?
+      attr_accessor auto_scaling: Types::ClusterAutoScalingConfig?
     end
 
     class CreateClusterResponse
@@ -4902,6 +4977,7 @@ module Aws::SageMaker
         ?instance_type: String,
         ?subnet_id: String,
         ?security_group_ids: Array[String],
+        ?ip_address_type: String,
         ?role_arn: String,
         ?kms_key_id: String,
         ?tags: Array[Types::Tag],
@@ -4921,6 +4997,7 @@ module Aws::SageMaker
       attr_accessor instance_type: String?
       attr_accessor subnet_id: String?
       attr_accessor security_group_ids: Array[String]?
+      attr_accessor ip_address_type: String?
       attr_accessor role_arn: String?
       attr_accessor kms_key_id: String?
       attr_accessor tags: Array[Types::Tag]?
@@ -7417,8 +7494,11 @@ module Aws::SageMaker
         ?restricted_instance_groups: Array[Types::ClusterRestrictedInstanceGroupDetails],
         ?vpc_config: Types::VpcConfig,
         ?orchestrator: Types::ClusterOrchestrator,
+        ?tiered_storage_config: Types::ClusterTieredStorageConfig,
         ?node_recovery: String,
         ?node_provisioning_mode: String,
+        ?cluster_role: String,
+        ?auto_scaling: Types::ClusterAutoScalingConfigOutput,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7431,8 +7511,11 @@ module Aws::SageMaker
       attr_accessor restricted_instance_groups: Array[Types::ClusterRestrictedInstanceGroupDetails]?
       attr_accessor vpc_config: Types::VpcConfig?
       attr_accessor orchestrator: Types::ClusterOrchestrator?
+      attr_accessor tiered_storage_config: Types::ClusterTieredStorageConfig?
       attr_accessor node_recovery: String?
       attr_accessor node_provisioning_mode: String?
+      attr_accessor cluster_role: String?
+      attr_accessor auto_scaling: Types::ClusterAutoScalingConfigOutput?
     end
 
     class DescribeClusterSchedulerConfigRequest
@@ -9244,6 +9327,7 @@ module Aws::SageMaker
         ?failure_reason: String,
         ?url: String,
         ?instance_type: String,
+        ?ip_address_type: String,
         ?subnet_id: String,
         ?security_groups: Array[String],
         ?role_arn: String,
@@ -9269,6 +9353,7 @@ module Aws::SageMaker
       attr_accessor failure_reason: String?
       attr_accessor url: String?
       attr_accessor instance_type: String?
+      attr_accessor ip_address_type: String?
       attr_accessor subnet_id: String?
       attr_accessor security_groups: Array[String]?
       attr_accessor role_arn: String?
@@ -10453,11 +10538,13 @@ module Aws::SageMaker
       def initialize: (
         ?enable_docker_access: String,
         ?vpc_only_trusted_accounts: Array[String],
+        ?rootless_docker: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enable_docker_access: String?
       attr_accessor vpc_only_trusted_accounts: Array[String]?
+      attr_accessor rootless_docker: String?
     end
 
     class DomainDetails
@@ -12640,6 +12727,11 @@ module Aws::SageMaker
       attr_accessor max_resource: Integer?
     end
 
+    module IPAddressType
+      IPV4: String
+      DUALSTACK: String
+    end
+
     class IamIdentity
       include Smithy::Schema::Structure
 
@@ -13499,6 +13591,7 @@ module Aws::SageMaker
       ML_P4D_24XLARGE: String
       ML_P4DE_24XLARGE: String
       ML_P5_48XLARGE: String
+      ML_P6_B200_48XLARGE: String
       ML_M6I_LARGE: String
       ML_M6I_XLARGE: String
       ML_M6I_2XLARGE: String
@@ -20333,6 +20426,7 @@ module Aws::SageMaker
       ML_R7I_16XLARGE: String
       ML_R7I_24XLARGE: String
       ML_R7I_48XLARGE: String
+      ML_P5_4XLARGE: String
     end
 
     class ProcessingJob
@@ -20918,6 +21012,7 @@ module Aws::SageMaker
       ML_C6IN_32XLARGE: String
       ML_P6_B200_48XLARGE: String
       ML_P6E_GB200_36XLARGE: String
+      ML_P5_4XLARGE: String
     end
 
     class ProductionVariantManagedInstanceScaling
@@ -21832,6 +21927,7 @@ module Aws::SageMaker
       ML_P6_B200_48XLARGE: String
       ML_P4DE_24XLARGE: String
       ML_P6E_GB200_36XLARGE: String
+      ML_P5_4XLARGE: String
     end
 
     class ReservedCapacityOffering
@@ -24232,6 +24328,7 @@ module Aws::SageMaker
       ML_R7I_24XLARGE: String
       ML_R7I_48XLARGE: String
       ML_P6E_GB200_36XLARGE: String
+      ML_P5_4XLARGE: String
     end
 
     class TrainingJob
@@ -25434,16 +25531,22 @@ module Aws::SageMaker
         ?cluster_name: String,
         ?instance_groups: Array[Types::ClusterInstanceGroupSpecification],
         ?restricted_instance_groups: Array[Types::ClusterRestrictedInstanceGroupSpecification],
+        ?tiered_storage_config: Types::ClusterTieredStorageConfig,
         ?node_recovery: String,
         ?instance_groups_to_delete: Array[String],
+        ?cluster_role: String,
+        ?auto_scaling: Types::ClusterAutoScalingConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cluster_name: String?
       attr_accessor instance_groups: Array[Types::ClusterInstanceGroupSpecification]?
       attr_accessor restricted_instance_groups: Array[Types::ClusterRestrictedInstanceGroupSpecification]?
+      attr_accessor tiered_storage_config: Types::ClusterTieredStorageConfig?
       attr_accessor node_recovery: String?
       attr_accessor instance_groups_to_delete: Array[String]?
+      attr_accessor cluster_role: String?
+      attr_accessor auto_scaling: Types::ClusterAutoScalingConfig?
     end
 
     class UpdateClusterResponse
@@ -26223,6 +26326,7 @@ module Aws::SageMaker
       def initialize: (
         ?notebook_instance_name: String,
         ?instance_type: String,
+        ?ip_address_type: String,
         ?role_arn: String,
         ?lifecycle_config_name: String,
         ?disassociate_lifecycle_config: bool,
@@ -26240,6 +26344,7 @@ module Aws::SageMaker
 
       attr_accessor notebook_instance_name: String?
       attr_accessor instance_type: String?
+      attr_accessor ip_address_type: String?
       attr_accessor role_arn: String?
       attr_accessor lifecycle_config_name: String?
       attr_accessor disassociate_lifecycle_config: bool?

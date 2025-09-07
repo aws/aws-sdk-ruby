@@ -144,7 +144,14 @@ module Aws::CleanRoomsML
             container_logs: Array[
               {
                 allowed_account_ids: Array[String],
-                filter_pattern: String
+                filter_pattern: String,
+                log_type: String,
+                log_redaction_configuration: {
+                  entities_to_redact: Array[String],
+                  custom_entity_config: {
+                    custom_data_identifiers: Array[String]
+                  }
+                }
               }
             ],
             container_metrics: {
@@ -412,9 +419,6 @@ module Aws::CleanRoomsML
 
     interface _GetCollaborationMLInputChannelResponse
       include Smithy::Client::_Response[Types::GetCollaborationMLInputChannelResponse]
-      def create_time: () -> Time?
-      def update_time: () -> Time?
-      def creator_account_id: () -> String?
       def membership_identifier: () -> String?
       def collaboration_identifier: () -> String?
       def ml_input_channel_arn: () -> String?
@@ -425,6 +429,9 @@ module Aws::CleanRoomsML
       def retention_in_days: () -> Integer?
       def number_of_records: () -> Integer?
       def description: () -> String?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def creator_account_id: () -> String?
     end
     def get_collaboration_ml_input_channel: (
       ?ml_input_channel_arn: String,
@@ -539,12 +546,8 @@ module Aws::CleanRoomsML
 
     interface _GetMLInputChannelResponse
       include Smithy::Client::_Response[Types::GetMLInputChannelResponse]
-      def create_time: () -> Time?
-      def update_time: () -> Time?
       def membership_identifier: () -> String?
       def collaboration_identifier: () -> String?
-      def input_channel: () -> Types::InputChannel?
-      def protected_query_identifier: () -> String?
       def ml_input_channel_arn: () -> String?
       def name: () -> String?
       def configured_model_algorithm_associations: () -> Array[String]?
@@ -552,9 +555,13 @@ module Aws::CleanRoomsML
       def status_details: () -> Types::StatusDetails?
       def retention_in_days: () -> Integer?
       def number_of_records: () -> Integer?
+      def description: () -> String?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def input_channel: () -> Types::InputChannel?
+      def protected_query_identifier: () -> String?
       def number_of_files: () -> Float?
       def size_in_gb: () -> Float?
-      def description: () -> String?
       def kms_key_arn: () -> String?
       def tags: () -> Hash[String, String]?
     end

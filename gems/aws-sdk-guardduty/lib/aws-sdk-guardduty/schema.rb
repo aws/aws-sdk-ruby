@@ -104,8 +104,12 @@ module Aws::GuardDuty
     CreateS3BucketResource = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#CreateS3BucketResource', name: 'CreateS3BucketResource')
     CreateSampleFindingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#CreateSampleFindingsRequest', name: 'CreateSampleFindingsRequest')
     CreateSampleFindingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#CreateSampleFindingsResponse', name: 'CreateSampleFindingsResponse')
+    CreateThreatEntitySetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#CreateThreatEntitySetRequest', name: 'CreateThreatEntitySetRequest')
+    CreateThreatEntitySetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#CreateThreatEntitySetResponse', name: 'CreateThreatEntitySetResponse')
     CreateThreatIntelSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#CreateThreatIntelSetRequest', name: 'CreateThreatIntelSetRequest')
     CreateThreatIntelSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#CreateThreatIntelSetResponse', name: 'CreateThreatIntelSetResponse')
+    CreateTrustedEntitySetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#CreateTrustedEntitySetRequest', name: 'CreateTrustedEntitySetRequest')
+    CreateTrustedEntitySetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#CreateTrustedEntitySetResponse', name: 'CreateTrustedEntitySetResponse')
     Criterion = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.guardduty#Criterion', name: 'Criterion')
     CriterionKey = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.guardduty#CriterionKey', name: 'CriterionKey')
     DNSLogsConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DNSLogsConfigurationResult', name: 'DNSLogsConfigurationResult')
@@ -133,8 +137,12 @@ module Aws::GuardDuty
     DeleteMembersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DeleteMembersResponse', name: 'DeleteMembersResponse')
     DeletePublishingDestinationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DeletePublishingDestinationRequest', name: 'DeletePublishingDestinationRequest')
     DeletePublishingDestinationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DeletePublishingDestinationResponse', name: 'DeletePublishingDestinationResponse')
+    DeleteThreatEntitySetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DeleteThreatEntitySetRequest', name: 'DeleteThreatEntitySetRequest')
+    DeleteThreatEntitySetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DeleteThreatEntitySetResponse', name: 'DeleteThreatEntitySetResponse')
     DeleteThreatIntelSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DeleteThreatIntelSetRequest', name: 'DeleteThreatIntelSetRequest')
     DeleteThreatIntelSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DeleteThreatIntelSetResponse', name: 'DeleteThreatIntelSetResponse')
+    DeleteTrustedEntitySetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DeleteTrustedEntitySetRequest', name: 'DeleteTrustedEntitySetRequest')
+    DeleteTrustedEntitySetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DeleteTrustedEntitySetResponse', name: 'DeleteTrustedEntitySetResponse')
     DescribeMalwareScansRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DescribeMalwareScansRequest', name: 'DescribeMalwareScansRequest')
     DescribeMalwareScansResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DescribeMalwareScansResponse', name: 'DescribeMalwareScansResponse')
     DescribeOrganizationConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#DescribeOrganizationConfigurationRequest', name: 'DescribeOrganizationConfigurationRequest')
@@ -183,13 +191,14 @@ module Aws::GuardDuty
     EcsTaskDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#EcsTaskDetails', name: 'EcsTaskDetails')
     EksCluster = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#EksCluster', name: 'EksCluster')
     EksClusterDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#EksClusterDetails', name: 'EksClusterDetails')
-    Email = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.guardduty#Email', name: 'Email', traits: {"smithy.api#length" => {"min" => 6, "max" => 64}, "smithy.api#pattern" => "^See rules in parameter description$", "smithy.api#sensitive" => {}})
+    Email = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.guardduty#Email', name: 'Email', traits: {"smithy.api#length" => {"min" => 6, "max" => 64}, "smithy.api#sensitive" => {}})
     EnableOrganizationAdminAccountRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#EnableOrganizationAdminAccountRequest', name: 'EnableOrganizationAdminAccountRequest')
     EnableOrganizationAdminAccountResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#EnableOrganizationAdminAccountResponse', name: 'EnableOrganizationAdminAccountResponse')
     EndpointIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.guardduty#EndpointIds', name: 'EndpointIds', traits: {"smithy.api#length" => {"min" => 0, "max" => 400}})
     Eq = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.guardduty#Eq', name: 'Eq')
     Equals = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.guardduty#Equals', name: 'Equals')
     Evidence = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#Evidence', name: 'Evidence')
+    ExpectedBucketOwner = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.guardduty#ExpectedBucketOwner', name: 'ExpectedBucketOwner', traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^[0-9]+$"})
     FargateDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#FargateDetails', name: 'FargateDetails')
     FeatureAdditionalConfiguration = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.guardduty#FeatureAdditionalConfiguration', name: 'FeatureAdditionalConfiguration')
     FeatureStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.guardduty#FeatureStatus', name: 'FeatureStatus')
@@ -252,8 +261,12 @@ module Aws::GuardDuty
     GetOrganizationStatisticsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetOrganizationStatisticsResponse', name: 'GetOrganizationStatisticsResponse')
     GetRemainingFreeTrialDaysRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetRemainingFreeTrialDaysRequest', name: 'GetRemainingFreeTrialDaysRequest')
     GetRemainingFreeTrialDaysResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetRemainingFreeTrialDaysResponse', name: 'GetRemainingFreeTrialDaysResponse')
+    GetThreatEntitySetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetThreatEntitySetRequest', name: 'GetThreatEntitySetRequest')
+    GetThreatEntitySetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetThreatEntitySetResponse', name: 'GetThreatEntitySetResponse')
     GetThreatIntelSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetThreatIntelSetRequest', name: 'GetThreatIntelSetRequest')
     GetThreatIntelSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetThreatIntelSetResponse', name: 'GetThreatIntelSetResponse')
+    GetTrustedEntitySetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetTrustedEntitySetRequest', name: 'GetTrustedEntitySetRequest')
+    GetTrustedEntitySetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetTrustedEntitySetResponse', name: 'GetTrustedEntitySetResponse')
     GetUsageStatisticsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetUsageStatisticsRequest', name: 'GetUsageStatisticsRequest')
     GetUsageStatisticsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#GetUsageStatisticsResponse', name: 'GetUsageStatisticsResponse')
     GroupByType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.guardduty#GroupByType', name: 'GroupByType')
@@ -329,8 +342,12 @@ module Aws::GuardDuty
     ListPublishingDestinationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#ListPublishingDestinationsResponse', name: 'ListPublishingDestinationsResponse')
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#ListTagsForResourceRequest', name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#ListTagsForResourceResponse', name: 'ListTagsForResourceResponse')
+    ListThreatEntitySetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#ListThreatEntitySetsRequest', name: 'ListThreatEntitySetsRequest')
+    ListThreatEntitySetsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#ListThreatEntitySetsResponse', name: 'ListThreatEntitySetsResponse')
     ListThreatIntelSetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#ListThreatIntelSetsRequest', name: 'ListThreatIntelSetsRequest')
     ListThreatIntelSetsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#ListThreatIntelSetsResponse', name: 'ListThreatIntelSetsResponse')
+    ListTrustedEntitySetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#ListTrustedEntitySetsRequest', name: 'ListTrustedEntitySetsRequest')
+    ListTrustedEntitySetsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#ListTrustedEntitySetsResponse', name: 'ListTrustedEntitySetsResponse')
     LocalIpDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#LocalIpDetails', name: 'LocalIpDetails')
     LocalPortDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#LocalPortDetails', name: 'LocalPortDetails')
     Location = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.guardduty#Location', name: 'Location', traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
@@ -522,6 +539,9 @@ module Aws::GuardDuty
     Tags = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.guardduty#Tags', name: 'Tags')
     Threat = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#Threat', name: 'Threat')
     ThreatDetectedByName = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#ThreatDetectedByName', name: 'ThreatDetectedByName')
+    ThreatEntitySetFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.guardduty#ThreatEntitySetFormat', name: 'ThreatEntitySetFormat', traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
+    ThreatEntitySetIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.guardduty#ThreatEntitySetIds', name: 'ThreatEntitySetIds', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    ThreatEntitySetStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.guardduty#ThreatEntitySetStatus', name: 'ThreatEntitySetStatus', traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
     ThreatIntelSetFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.guardduty#ThreatIntelSetFormat', name: 'ThreatIntelSetFormat', traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
     ThreatIntelSetIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.guardduty#ThreatIntelSetIds', name: 'ThreatIntelSetIds', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     ThreatIntelSetStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.guardduty#ThreatIntelSetStatus', name: 'ThreatIntelSetStatus', traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
@@ -533,6 +553,9 @@ module Aws::GuardDuty
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: 'com.amazonaws.guardduty#Timestamp', name: 'Timestamp')
     Total = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#Total', name: 'Total')
     TriggerDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#TriggerDetails', name: 'TriggerDetails')
+    TrustedEntitySetFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.guardduty#TrustedEntitySetFormat', name: 'TrustedEntitySetFormat', traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
+    TrustedEntitySetIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.guardduty#TrustedEntitySetIds', name: 'TrustedEntitySetIds', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    TrustedEntitySetStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.guardduty#TrustedEntitySetStatus', name: 'TrustedEntitySetStatus', traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
     UnarchiveFindingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UnarchiveFindingsRequest', name: 'UnarchiveFindingsRequest')
     UnarchiveFindingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UnarchiveFindingsResponse', name: 'UnarchiveFindingsResponse')
     UnprocessedAccount = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UnprocessedAccount', name: 'UnprocessedAccount')
@@ -559,8 +582,12 @@ module Aws::GuardDuty
     UpdatePublishingDestinationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UpdatePublishingDestinationRequest', name: 'UpdatePublishingDestinationRequest')
     UpdatePublishingDestinationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UpdatePublishingDestinationResponse', name: 'UpdatePublishingDestinationResponse')
     UpdateS3BucketResource = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UpdateS3BucketResource', name: 'UpdateS3BucketResource')
+    UpdateThreatEntitySetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UpdateThreatEntitySetRequest', name: 'UpdateThreatEntitySetRequest')
+    UpdateThreatEntitySetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UpdateThreatEntitySetResponse', name: 'UpdateThreatEntitySetResponse')
     UpdateThreatIntelSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UpdateThreatIntelSetRequest', name: 'UpdateThreatIntelSetRequest')
     UpdateThreatIntelSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UpdateThreatIntelSetResponse', name: 'UpdateThreatIntelSetResponse')
+    UpdateTrustedEntitySetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UpdateTrustedEntitySetRequest', name: 'UpdateTrustedEntitySetRequest')
+    UpdateTrustedEntitySetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UpdateTrustedEntitySetResponse', name: 'UpdateTrustedEntitySetResponse')
     UsageAccountResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UsageAccountResult', name: 'UsageAccountResult')
     UsageAccountResultList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.guardduty#UsageAccountResultList', name: 'UsageAccountResultList')
     UsageCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.guardduty#UsageCriteria', name: 'UsageCriteria')
@@ -907,6 +934,17 @@ module Aws::GuardDuty
     CreateSampleFindingsRequest.add_member(:finding_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FindingTypes, location_name: 'FindingTypes', traits: {"smithy.api#jsonName" => "findingTypes"}))
     CreateSampleFindingsRequest.type = Types::CreateSampleFindingsRequest
     CreateSampleFindingsResponse.type = Types::CreateSampleFindingsResponse
+    CreateThreatEntitySetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
+    CreateThreatEntitySetRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
+    CreateThreatEntitySetRequest.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThreatEntitySetFormat, location_name: 'Format', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "format", "smithy.api#required" => {}}))
+    CreateThreatEntitySetRequest.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: 'Location', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "location", "smithy.api#required" => {}}))
+    CreateThreatEntitySetRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: 'ExpectedBucketOwner', traits: {"smithy.api#jsonName" => "expectedBucketOwner"}))
+    CreateThreatEntitySetRequest.add_member(:activate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Activate', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "activate", "smithy.api#required" => {}}))
+    CreateThreatEntitySetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'ClientToken', traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#jsonName" => "clientToken"}))
+    CreateThreatEntitySetRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags', traits: {"smithy.api#jsonName" => "tags"}))
+    CreateThreatEntitySetRequest.type = Types::CreateThreatEntitySetRequest
+    CreateThreatEntitySetResponse.add_member(:threat_entity_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ThreatEntitySetId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "threatEntitySetId", "smithy.api#required" => {}}))
+    CreateThreatEntitySetResponse.type = Types::CreateThreatEntitySetResponse
     CreateThreatIntelSetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
     CreateThreatIntelSetRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
     CreateThreatIntelSetRequest.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThreatIntelSetFormat, location_name: 'Format', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "format", "smithy.api#required" => {}}))
@@ -918,6 +956,17 @@ module Aws::GuardDuty
     CreateThreatIntelSetRequest.type = Types::CreateThreatIntelSetRequest
     CreateThreatIntelSetResponse.add_member(:threat_intel_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ThreatIntelSetId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "threatIntelSetId", "smithy.api#required" => {}}))
     CreateThreatIntelSetResponse.type = Types::CreateThreatIntelSetResponse
+    CreateTrustedEntitySetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
+    CreateTrustedEntitySetRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
+    CreateTrustedEntitySetRequest.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustedEntitySetFormat, location_name: 'Format', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "format", "smithy.api#required" => {}}))
+    CreateTrustedEntitySetRequest.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: 'Location', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "location", "smithy.api#required" => {}}))
+    CreateTrustedEntitySetRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: 'ExpectedBucketOwner', traits: {"smithy.api#jsonName" => "expectedBucketOwner"}))
+    CreateTrustedEntitySetRequest.add_member(:activate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Activate', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "activate", "smithy.api#required" => {}}))
+    CreateTrustedEntitySetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'ClientToken', traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#jsonName" => "clientToken"}))
+    CreateTrustedEntitySetRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags', traits: {"smithy.api#jsonName" => "tags"}))
+    CreateTrustedEntitySetRequest.type = Types::CreateTrustedEntitySetRequest
+    CreateTrustedEntitySetResponse.add_member(:trusted_entity_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'TrustedEntitySetId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "trustedEntitySetId", "smithy.api#required" => {}}))
+    CreateTrustedEntitySetResponse.type = Types::CreateTrustedEntitySetResponse
     Criterion.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
     Criterion.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Condition)
     CriterionKey.add_member(:ec2_instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EC2_INSTANCE_ARN', traits: {"smithy.api#enumValue" => "EC2_INSTANCE_ARN"}))
@@ -996,10 +1045,18 @@ module Aws::GuardDuty
     DeletePublishingDestinationRequest.add_member(:destination_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DestinationId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "destinationId", "smithy.api#required" => {}}))
     DeletePublishingDestinationRequest.type = Types::DeletePublishingDestinationRequest
     DeletePublishingDestinationResponse.type = Types::DeletePublishingDestinationResponse
+    DeleteThreatEntitySetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
+    DeleteThreatEntitySetRequest.add_member(:threat_entity_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ThreatEntitySetId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "threatEntitySetId", "smithy.api#required" => {}}))
+    DeleteThreatEntitySetRequest.type = Types::DeleteThreatEntitySetRequest
+    DeleteThreatEntitySetResponse.type = Types::DeleteThreatEntitySetResponse
     DeleteThreatIntelSetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
     DeleteThreatIntelSetRequest.add_member(:threat_intel_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ThreatIntelSetId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "threatIntelSetId", "smithy.api#required" => {}}))
     DeleteThreatIntelSetRequest.type = Types::DeleteThreatIntelSetRequest
     DeleteThreatIntelSetResponse.type = Types::DeleteThreatIntelSetResponse
+    DeleteTrustedEntitySetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
+    DeleteTrustedEntitySetRequest.add_member(:trusted_entity_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'TrustedEntitySetId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "trustedEntitySetId", "smithy.api#required" => {}}))
+    DeleteTrustedEntitySetRequest.type = Types::DeleteTrustedEntitySetRequest
+    DeleteTrustedEntitySetResponse.type = Types::DeleteTrustedEntitySetResponse
     DescribeMalwareScansRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
     DescribeMalwareScansRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken', traits: {"smithy.api#jsonName" => "nextToken"}))
     DescribeMalwareScansRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerValueWithMax, location_name: 'MaxResults', traits: {"smithy.api#jsonName" => "maxResults"}))
@@ -1371,6 +1428,19 @@ module Aws::GuardDuty
     GetRemainingFreeTrialDaysResponse.add_member(:accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountFreeTrialInfos, location_name: 'Accounts', traits: {"smithy.api#jsonName" => "accounts"}))
     GetRemainingFreeTrialDaysResponse.add_member(:unprocessed_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnprocessedAccounts, location_name: 'UnprocessedAccounts', traits: {"smithy.api#jsonName" => "unprocessedAccounts"}))
     GetRemainingFreeTrialDaysResponse.type = Types::GetRemainingFreeTrialDaysResponse
+    GetThreatEntitySetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
+    GetThreatEntitySetRequest.add_member(:threat_entity_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ThreatEntitySetId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "threatEntitySetId", "smithy.api#required" => {}}))
+    GetThreatEntitySetRequest.type = Types::GetThreatEntitySetRequest
+    GetThreatEntitySetResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
+    GetThreatEntitySetResponse.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThreatEntitySetFormat, location_name: 'Format', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "format", "smithy.api#required" => {}}))
+    GetThreatEntitySetResponse.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: 'Location', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "location", "smithy.api#required" => {}}))
+    GetThreatEntitySetResponse.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: 'ExpectedBucketOwner', traits: {"smithy.api#jsonName" => "expectedBucketOwner"}))
+    GetThreatEntitySetResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThreatEntitySetStatus, location_name: 'Status', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "status", "smithy.api#required" => {}}))
+    GetThreatEntitySetResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags', traits: {"smithy.api#jsonName" => "tags"}))
+    GetThreatEntitySetResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'CreatedAt', traits: {"smithy.api#jsonName" => "createdAt"}))
+    GetThreatEntitySetResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'UpdatedAt', traits: {"smithy.api#jsonName" => "updatedAt"}))
+    GetThreatEntitySetResponse.add_member(:error_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ErrorDetails', traits: {"smithy.api#jsonName" => "errorDetails"}))
+    GetThreatEntitySetResponse.type = Types::GetThreatEntitySetResponse
     GetThreatIntelSetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
     GetThreatIntelSetRequest.add_member(:threat_intel_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ThreatIntelSetId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "threatIntelSetId", "smithy.api#required" => {}}))
     GetThreatIntelSetRequest.type = Types::GetThreatIntelSetRequest
@@ -1381,6 +1451,19 @@ module Aws::GuardDuty
     GetThreatIntelSetResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags', traits: {"smithy.api#jsonName" => "tags"}))
     GetThreatIntelSetResponse.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'ExpectedBucketOwner', traits: {"smithy.api#jsonName" => "expectedBucketOwner"}))
     GetThreatIntelSetResponse.type = Types::GetThreatIntelSetResponse
+    GetTrustedEntitySetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
+    GetTrustedEntitySetRequest.add_member(:trusted_entity_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'TrustedEntitySetId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "trustedEntitySetId", "smithy.api#required" => {}}))
+    GetTrustedEntitySetRequest.type = Types::GetTrustedEntitySetRequest
+    GetTrustedEntitySetResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
+    GetTrustedEntitySetResponse.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustedEntitySetFormat, location_name: 'Format', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "format", "smithy.api#required" => {}}))
+    GetTrustedEntitySetResponse.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: 'Location', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "location", "smithy.api#required" => {}}))
+    GetTrustedEntitySetResponse.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: 'ExpectedBucketOwner', traits: {"smithy.api#jsonName" => "expectedBucketOwner"}))
+    GetTrustedEntitySetResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustedEntitySetStatus, location_name: 'Status', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "status", "smithy.api#required" => {}}))
+    GetTrustedEntitySetResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags', traits: {"smithy.api#jsonName" => "tags"}))
+    GetTrustedEntitySetResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'CreatedAt', traits: {"smithy.api#jsonName" => "createdAt"}))
+    GetTrustedEntitySetResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'UpdatedAt', traits: {"smithy.api#jsonName" => "updatedAt"}))
+    GetTrustedEntitySetResponse.add_member(:error_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ErrorDetails', traits: {"smithy.api#jsonName" => "errorDetails"}))
+    GetTrustedEntitySetResponse.type = Types::GetTrustedEntitySetResponse
     GetUsageStatisticsRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
     GetUsageStatisticsRequest.add_member(:usage_statistic_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageStatisticType, location_name: 'UsageStatisticType', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "usageStatisticsType", "smithy.api#required" => {}}))
     GetUsageStatisticsRequest.add_member(:usage_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsageCriteria, location_name: 'UsageCriteria', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "usageCriteria", "smithy.api#required" => {}}))
@@ -1650,6 +1733,13 @@ module Aws::GuardDuty
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags', traits: {"smithy.api#jsonName" => "tags"}))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
+    ListThreatEntitySetsRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
+    ListThreatEntitySetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults', traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#jsonName" => "maxResults"}))
+    ListThreatEntitySetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#jsonName" => "nextToken"}))
+    ListThreatEntitySetsRequest.type = Types::ListThreatEntitySetsRequest
+    ListThreatEntitySetsResponse.add_member(:threat_entity_set_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThreatEntitySetIds, location_name: 'ThreatEntitySetIds', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "threatEntitySetIds", "smithy.api#required" => {}}))
+    ListThreatEntitySetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken', traits: {"smithy.api#jsonName" => "nextToken"}))
+    ListThreatEntitySetsResponse.type = Types::ListThreatEntitySetsResponse
     ListThreatIntelSetsRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
     ListThreatIntelSetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults', traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#jsonName" => "maxResults"}))
     ListThreatIntelSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#jsonName" => "nextToken"}))
@@ -1657,6 +1747,13 @@ module Aws::GuardDuty
     ListThreatIntelSetsResponse.add_member(:threat_intel_set_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThreatIntelSetIds, location_name: 'ThreatIntelSetIds', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "threatIntelSetIds", "smithy.api#required" => {}}))
     ListThreatIntelSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken', traits: {"smithy.api#jsonName" => "nextToken"}))
     ListThreatIntelSetsResponse.type = Types::ListThreatIntelSetsResponse
+    ListTrustedEntitySetsRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
+    ListTrustedEntitySetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults', traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#jsonName" => "maxResults"}))
+    ListTrustedEntitySetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#jsonName" => "nextToken"}))
+    ListTrustedEntitySetsRequest.type = Types::ListTrustedEntitySetsRequest
+    ListTrustedEntitySetsResponse.add_member(:trusted_entity_set_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustedEntitySetIds, location_name: 'TrustedEntitySetIds', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "trustedEntitySetIds", "smithy.api#required" => {}}))
+    ListTrustedEntitySetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken', traits: {"smithy.api#jsonName" => "nextToken"}))
+    ListTrustedEntitySetsResponse.type = Types::ListTrustedEntitySetsResponse
     LocalIpDetails.add_member(:ip_address_v4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: 'IpAddressV4', traits: {"smithy.api#jsonName" => "ipAddressV4"}))
     LocalIpDetails.add_member(:ip_address_v6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: 'IpAddressV6', traits: {"smithy.api#jsonName" => "ipAddressV6"}))
     LocalIpDetails.type = Types::LocalIpDetails
@@ -2257,6 +2354,20 @@ module Aws::GuardDuty
     ThreatDetectedByName.add_member(:shortened, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Shortened', traits: {"smithy.api#jsonName" => "shortened"}))
     ThreatDetectedByName.add_member(:threat_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScanThreatNames, location_name: 'ThreatNames', traits: {"smithy.api#jsonName" => "threatNames"}))
     ThreatDetectedByName.type = Types::ThreatDetectedByName
+    ThreatEntitySetFormat.add_member(:txt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TXT', traits: {"smithy.api#enumValue" => "TXT"}))
+    ThreatEntitySetFormat.add_member(:stix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STIX', traits: {"smithy.api#enumValue" => "STIX"}))
+    ThreatEntitySetFormat.add_member(:otx_csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OTX_CSV', traits: {"smithy.api#enumValue" => "OTX_CSV"}))
+    ThreatEntitySetFormat.add_member(:alien_vault, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ALIEN_VAULT', traits: {"smithy.api#enumValue" => "ALIEN_VAULT"}))
+    ThreatEntitySetFormat.add_member(:proof_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PROOF_POINT', traits: {"smithy.api#enumValue" => "PROOF_POINT"}))
+    ThreatEntitySetFormat.add_member(:fire_eye, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FIRE_EYE', traits: {"smithy.api#enumValue" => "FIRE_EYE"}))
+    ThreatEntitySetIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
+    ThreatEntitySetStatus.add_member(:inactive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INACTIVE', traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    ThreatEntitySetStatus.add_member(:activating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACTIVATING', traits: {"smithy.api#enumValue" => "ACTIVATING"}))
+    ThreatEntitySetStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACTIVE', traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ThreatEntitySetStatus.add_member(:deactivating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DEACTIVATING', traits: {"smithy.api#enumValue" => "DEACTIVATING"}))
+    ThreatEntitySetStatus.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ERROR', traits: {"smithy.api#enumValue" => "ERROR"}))
+    ThreatEntitySetStatus.add_member(:delete_pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETE_PENDING', traits: {"smithy.api#enumValue" => "DELETE_PENDING"}))
+    ThreatEntitySetStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETED', traits: {"smithy.api#enumValue" => "DELETED"}))
     ThreatIntelSetFormat.add_member(:txt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TXT', traits: {"smithy.api#enumValue" => "TXT"}))
     ThreatIntelSetFormat.add_member(:stix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STIX', traits: {"smithy.api#enumValue" => "STIX"}))
     ThreatIntelSetFormat.add_member(:otx_csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OTX_CSV', traits: {"smithy.api#enumValue" => "OTX_CSV"}))
@@ -2286,6 +2397,20 @@ module Aws::GuardDuty
     TriggerDetails.add_member(:guard_duty_finding_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'GuardDutyFindingId', traits: {"smithy.api#jsonName" => "guardDutyFindingId"}))
     TriggerDetails.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'Description', traits: {"smithy.api#jsonName" => "description"}))
     TriggerDetails.type = Types::TriggerDetails
+    TrustedEntitySetFormat.add_member(:txt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TXT', traits: {"smithy.api#enumValue" => "TXT"}))
+    TrustedEntitySetFormat.add_member(:stix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STIX', traits: {"smithy.api#enumValue" => "STIX"}))
+    TrustedEntitySetFormat.add_member(:otx_csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OTX_CSV', traits: {"smithy.api#enumValue" => "OTX_CSV"}))
+    TrustedEntitySetFormat.add_member(:alien_vault, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ALIEN_VAULT', traits: {"smithy.api#enumValue" => "ALIEN_VAULT"}))
+    TrustedEntitySetFormat.add_member(:proof_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PROOF_POINT', traits: {"smithy.api#enumValue" => "PROOF_POINT"}))
+    TrustedEntitySetFormat.add_member(:fire_eye, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FIRE_EYE', traits: {"smithy.api#enumValue" => "FIRE_EYE"}))
+    TrustedEntitySetIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
+    TrustedEntitySetStatus.add_member(:inactive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INACTIVE', traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    TrustedEntitySetStatus.add_member(:activating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACTIVATING', traits: {"smithy.api#enumValue" => "ACTIVATING"}))
+    TrustedEntitySetStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACTIVE', traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    TrustedEntitySetStatus.add_member(:deactivating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DEACTIVATING', traits: {"smithy.api#enumValue" => "DEACTIVATING"}))
+    TrustedEntitySetStatus.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ERROR', traits: {"smithy.api#enumValue" => "ERROR"}))
+    TrustedEntitySetStatus.add_member(:delete_pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETE_PENDING', traits: {"smithy.api#enumValue" => "DELETE_PENDING"}))
+    TrustedEntitySetStatus.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETED', traits: {"smithy.api#enumValue" => "DELETED"}))
     UnarchiveFindingsRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
     UnarchiveFindingsRequest.add_member(:finding_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FindingIds, location_name: 'FindingIds', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "findingIds", "smithy.api#required" => {}}))
     UnarchiveFindingsRequest.type = Types::UnarchiveFindingsRequest
@@ -2363,6 +2488,14 @@ module Aws::GuardDuty
     UpdatePublishingDestinationResponse.type = Types::UpdatePublishingDestinationResponse
     UpdateS3BucketResource.add_member(:object_prefixes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MalwareProtectionPlanObjectPrefixesList, location_name: 'ObjectPrefixes', traits: {"smithy.api#jsonName" => "objectPrefixes"}))
     UpdateS3BucketResource.type = Types::UpdateS3BucketResource
+    UpdateThreatEntitySetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
+    UpdateThreatEntitySetRequest.add_member(:threat_entity_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ThreatEntitySetId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "threatEntitySetId", "smithy.api#required" => {}}))
+    UpdateThreatEntitySetRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#jsonName" => "name"}))
+    UpdateThreatEntitySetRequest.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: 'Location', traits: {"smithy.api#jsonName" => "location"}))
+    UpdateThreatEntitySetRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: 'ExpectedBucketOwner', traits: {"smithy.api#jsonName" => "expectedBucketOwner"}))
+    UpdateThreatEntitySetRequest.add_member(:activate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Activate', traits: {"smithy.api#jsonName" => "activate"}))
+    UpdateThreatEntitySetRequest.type = Types::UpdateThreatEntitySetRequest
+    UpdateThreatEntitySetResponse.type = Types::UpdateThreatEntitySetResponse
     UpdateThreatIntelSetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
     UpdateThreatIntelSetRequest.add_member(:threat_intel_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ThreatIntelSetId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "threatIntelSetId", "smithy.api#required" => {}}))
     UpdateThreatIntelSetRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#jsonName" => "name"}))
@@ -2371,6 +2504,14 @@ module Aws::GuardDuty
     UpdateThreatIntelSetRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'ExpectedBucketOwner', traits: {"smithy.api#jsonName" => "expectedBucketOwner"}))
     UpdateThreatIntelSetRequest.type = Types::UpdateThreatIntelSetRequest
     UpdateThreatIntelSetResponse.type = Types::UpdateThreatIntelSetResponse
+    UpdateTrustedEntitySetRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetectorId, location_name: 'DetectorId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
+    UpdateTrustedEntitySetRequest.add_member(:trusted_entity_set_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'TrustedEntitySetId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "trustedEntitySetId", "smithy.api#required" => {}}))
+    UpdateTrustedEntitySetRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#jsonName" => "name"}))
+    UpdateTrustedEntitySetRequest.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: 'Location', traits: {"smithy.api#jsonName" => "location"}))
+    UpdateTrustedEntitySetRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: 'ExpectedBucketOwner', traits: {"smithy.api#jsonName" => "expectedBucketOwner"}))
+    UpdateTrustedEntitySetRequest.add_member(:activate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Activate', traits: {"smithy.api#jsonName" => "activate"}))
+    UpdateTrustedEntitySetRequest.type = Types::UpdateTrustedEntitySetRequest
+    UpdateTrustedEntitySetResponse.type = Types::UpdateTrustedEntitySetResponse
     UsageAccountResult.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#jsonName" => "accountId"}))
     UsageAccountResult.add_member(:total, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Total, location_name: 'Total', traits: {"smithy.api#jsonName" => "total"}))
     UsageAccountResult.type = Types::UsageAccountResult
@@ -2553,6 +2694,15 @@ module Aws::GuardDuty
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detector/{DetectorId}/findings/create", "code" => 200}}
       end)
+      service.add_operation(:create_threat_entity_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.guardduty#CreateThreatEntitySet"
+        operation.name = "CreateThreatEntitySet"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateThreatEntitySetRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateThreatEntitySetResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detector/{DetectorId}/threatentityset", "code" => 200}}
+      end)
       service.add_operation(:create_threat_intel_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.guardduty#CreateThreatIntelSet"
         operation.name = "CreateThreatIntelSet"
@@ -2562,6 +2712,15 @@ module Aws::GuardDuty
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detector/{DetectorId}/threatintelset", "code" => 200}}
+      end)
+      service.add_operation(:create_trusted_entity_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.guardduty#CreateTrustedEntitySet"
+        operation.name = "CreateTrustedEntitySet"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTrustedEntitySetRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTrustedEntitySetResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detector/{DetectorId}/trustedentityset", "code" => 200}}
       end)
       service.add_operation(:decline_invitations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.guardduty#DeclineInvitations"
@@ -2637,6 +2796,15 @@ module Aws::GuardDuty
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/detector/{DetectorId}/publishingDestination/{DestinationId}", "code" => 200}}
       end)
+      service.add_operation(:delete_threat_entity_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.guardduty#DeleteThreatEntitySet"
+        operation.name = "DeleteThreatEntitySet"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteThreatEntitySetRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteThreatEntitySetResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}", "code" => 200}}
+      end)
       service.add_operation(:delete_threat_intel_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.guardduty#DeleteThreatIntelSet"
         operation.name = "DeleteThreatIntelSet"
@@ -2645,6 +2813,15 @@ module Aws::GuardDuty
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/detector/{DetectorId}/threatintelset/{ThreatIntelSetId}", "code" => 200}}
+      end)
+      service.add_operation(:delete_trusted_entity_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.guardduty#DeleteTrustedEntitySet"
+        operation.name = "DeleteTrustedEntitySet"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTrustedEntitySetRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTrustedEntitySetResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}", "code" => 200}}
       end)
       service.add_operation(:describe_malware_scans, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.guardduty#DescribeMalwareScans"
@@ -2857,6 +3034,15 @@ module Aws::GuardDuty
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detector/{DetectorId}/freeTrial/daysRemaining", "code" => 200}}
       end)
+      service.add_operation(:get_threat_entity_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.guardduty#GetThreatEntitySet"
+        operation.name = "GetThreatEntitySet"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetThreatEntitySetRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetThreatEntitySetResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}", "code" => 200}}
+      end)
       service.add_operation(:get_threat_intel_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.guardduty#GetThreatIntelSet"
         operation.name = "GetThreatIntelSet"
@@ -2865,6 +3051,15 @@ module Aws::GuardDuty
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/detector/{DetectorId}/threatintelset/{ThreatIntelSetId}", "code" => 200}}
+      end)
+      service.add_operation(:get_trusted_entity_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.guardduty#GetTrustedEntitySet"
+        operation.name = "GetTrustedEntitySet"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTrustedEntitySetRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTrustedEntitySetResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}", "code" => 200}}
       end)
       service.add_operation(:get_usage_statistics, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.guardduty#GetUsageStatistics"
@@ -2995,6 +3190,16 @@ module Aws::GuardDuty
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
+      service.add_operation(:list_threat_entity_sets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.guardduty#ListThreatEntitySets"
+        operation.name = "ListThreatEntitySets"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListThreatEntitySetsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListThreatEntitySetsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/detector/{DetectorId}/threatentityset", "code" => 200}}
+        operation[:paginator] = Paginators::ListThreatEntitySets.new
+      end)
       service.add_operation(:list_threat_intel_sets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.guardduty#ListThreatIntelSets"
         operation.name = "ListThreatIntelSets"
@@ -3004,6 +3209,16 @@ module Aws::GuardDuty
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/detector/{DetectorId}/threatintelset", "code" => 200}}
         operation[:paginator] = Paginators::ListThreatIntelSets.new
+      end)
+      service.add_operation(:list_trusted_entity_sets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.guardduty#ListTrustedEntitySets"
+        operation.name = "ListTrustedEntitySets"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTrustedEntitySetsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTrustedEntitySetsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/detector/{DetectorId}/trustedentityset", "code" => 200}}
+        operation[:paginator] = Paginators::ListTrustedEntitySets.new
       end)
       service.add_operation(:start_malware_scan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.guardduty#StartMalwareScan"
@@ -3146,6 +3361,15 @@ module Aws::GuardDuty
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detector/{DetectorId}/publishingDestination/{DestinationId}", "code" => 200}}
       end)
+      service.add_operation(:update_threat_entity_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.guardduty#UpdateThreatEntitySet"
+        operation.name = "UpdateThreatEntitySet"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateThreatEntitySetRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateThreatEntitySetResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}", "code" => 200}}
+      end)
       service.add_operation(:update_threat_intel_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.guardduty#UpdateThreatIntelSet"
         operation.name = "UpdateThreatIntelSet"
@@ -3155,6 +3379,15 @@ module Aws::GuardDuty
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detector/{DetectorId}/threatintelset/{ThreatIntelSetId}", "code" => 200}}
+      end)
+      service.add_operation(:update_trusted_entity_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.guardduty#UpdateTrustedEntitySet"
+        operation.name = "UpdateTrustedEntitySet"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTrustedEntitySetRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTrustedEntitySetResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}", "code" => 200}}
       end)
 
     end

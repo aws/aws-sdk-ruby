@@ -1625,8 +1625,59 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
+    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a threat entity set.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A user-friendly name to identify the threat entity set.</p>
+    #            <p>The name of your list can include 
+    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    #   @return [String]
+    # @!attribute format
+    #   <p>The format of the file that contains the threat entity set.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The URI of the file that contains the threat entity set.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
+    #   @return [String]
+    # @!attribute activate
+    #   <p>A boolean value that indicates whether GuardDuty should start using the uploaded threat entity set to
+    #           generate findings.</p>
+    #   @return [Boolean]
+    # @!attribute client_token
+    #   <p>The idempotency token for the create request.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to be added to a new threat entity set resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateThreatEntitySetRequest < Struct.new(
+      :detector_id,
+      :name,
+      :format,
+      :location,
+      :expected_bucket_owner,
+      :activate,
+      :client_token,
+      :tags,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute threat_entity_set_id
+    #   <p>The ID returned by GuardDuty after creation of the threat entity set resource.</p>
+    #   @return [String]
+    class CreateThreatEntitySetResponse < Struct.new(
+      :threat_entity_set_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
     #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a
-    #         <code>ThreatIntelSet</code>.</p>
+    #         <code>threatIntelSet</code>.</p>
     #            <p>To find the <code>detectorId</code> in the current Region, see the
     #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
@@ -1671,6 +1722,58 @@ module Aws::GuardDuty
     #   @return [String]
     class CreateThreatIntelSetResponse < Struct.new(
       :threat_intel_set_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
+    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a trusted
+    #         entity set.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A user-friendly name to identify the trusted entity set.</p>
+    #            <p>The name of your list can include 
+    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    #   @return [String]
+    # @!attribute format
+    #   <p>The format of the file that contains the trusted entity set.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The URI of the file that contains the trusted entity set.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
+    #         parameter.</p>
+    #   @return [String]
+    # @!attribute activate
+    #   <p>A boolean value that indicates whether GuardDuty is to start using the uploaded trusted entity set.</p>
+    #   @return [Boolean]
+    # @!attribute client_token
+    #   <p>The idempotency token for the create request.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to be added to a new trusted entity set resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateTrustedEntitySetRequest < Struct.new(
+      :detector_id,
+      :name,
+      :format,
+      :location,
+      :expected_bucket_owner,
+      :activate,
+      :client_token,
+      :tags,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute trusted_entity_set_id
+    #   <p>The ID returned by GuardDuty after creation of the trusted entity set resource.</p>
+    #   @return [String]
+    class CreateTrustedEntitySetResponse < Struct.new(
+      :trusted_entity_set_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1969,6 +2072,26 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
+    #   <p>The unique ID of the detector associated with the threat entity set resource.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute threat_entity_set_id
+    #   <p>The unique ID that helps GuardDuty identify which threat entity set needs to be deleted.</p>
+    #   @return [String]
+    class DeleteThreatEntitySetRequest < Struct.new(
+      :detector_id,
+      :threat_entity_set_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteThreatEntitySetResponse < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
     #   <p>The unique ID of the detector that is associated with the threatIntelSet.</p>
     #            <p>To find the <code>detectorId</code> in the current Region, see the
     #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
@@ -1984,6 +2107,26 @@ module Aws::GuardDuty
     end
 
     class DeleteThreatIntelSetResponse < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
+    #   <p>The unique ID of the detector associated with the trusted entity set resource.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute trusted_entity_set_id
+    #   <p>The unique ID that helps GuardDuty identify which trusted entity set needs to be deleted.</p>
+    #   @return [String]
+    class DeleteTrustedEntitySetRequest < Struct.new(
+      :detector_id,
+      :trusted_entity_set_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteTrustedEntitySetResponse < Struct.new(
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3462,6 +3605,63 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
+    #   <p>The unique ID of the detector associated with the threat entity set resource.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute threat_entity_set_id
+    #   <p>The unique ID that helps GuardDuty identify the threat entity set.</p>
+    #   @return [String]
+    class GetThreatEntitySetRequest < Struct.new(
+      :detector_id,
+      :threat_entity_set_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the threat entity set associated with the specified <code>threatEntitySetId</code>.</p>
+    #   @return [String]
+    # @!attribute format
+    #   <p>The format of the file that contains the threat entity set.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The URI of the file that contains the threat entity set.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
+    #          parameter.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the associated threat entity set.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags associated with the threat entity set resource.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute created_at
+    #   <p>The timestamp when the associated threat entity set was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the associated threat entity set was updated.</p>
+    #   @return [Time]
+    # @!attribute error_details
+    #   <p>The error details when the status is shown as <code>ERROR</code>.</p>
+    #   @return [String]
+    class GetThreatEntitySetResponse < Struct.new(
+      :name,
+      :format,
+      :location,
+      :expected_bucket_owner,
+      :status,
+      :tags,
+      :created_at,
+      :updated_at,
+      :error_details,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
     #   <p>The unique ID of the detector that is associated with the threatIntelSet.</p>
     #            <p>To find the <code>detectorId</code> in the current Region, see the
     #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
@@ -3503,6 +3703,61 @@ module Aws::GuardDuty
       :status,
       :tags,
       :expected_bucket_owner,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
+    #   <p>The unique ID of the GuardDuty detector associated with this trusted entity set.</p>
+    #   @return [String]
+    # @!attribute trusted_entity_set_id
+    #   <p>The unique ID that helps GuardDuty identify the trusted entity set.</p>
+    #   @return [String]
+    class GetTrustedEntitySetRequest < Struct.new(
+      :detector_id,
+      :trusted_entity_set_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the threat entity set associated with the specified <code>trustedEntitySetId</code>.</p>
+    #   @return [String]
+    # @!attribute format
+    #   <p>The format of the file that contains the trusted entity set.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The URI of the file that contains the trusted entity set.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
+    #          parameter.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the associated trusted entity set.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags associated with trusted entity set resource.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute created_at
+    #   <p>The timestamp when the associated trusted entity set was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the associated trusted entity set was updated.</p>
+    #   @return [Time]
+    # @!attribute error_details
+    #   <p>The error details when the status is shown as <code>ERROR</code>.</p>
+    #   @return [String]
+    class GetTrustedEntitySetResponse < Struct.new(
+      :name,
+      :format,
+      :location,
+      :expected_bucket_owner,
+      :status,
+      :tags,
+      :created_at,
+      :updated_at,
+      :error_details,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -4700,6 +4955,42 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
+    #   <p>The unique ID of the GuardDuty detector that is associated with this threat entity set.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>You can use this parameter to indicate the maximum number of 
+    #          items you want in the response. The default value is 50.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>You can use this parameter when paginating results. Set the value 
+    #          of this parameter to null on your first call to the list action. For
+    #          subsequent calls to the action, fill nextToken in the request 
+    #          with the value of NextToken from the previous response to continue listing data.</p>
+    #   @return [String]
+    class ListThreatEntitySetsRequest < Struct.new(
+      :detector_id,
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute threat_entity_set_ids
+    #   <p>The IDs of the threat entity set resources.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
+    #   @return [String]
+    class ListThreatEntitySetsResponse < Struct.new(
+      :threat_entity_set_ids,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
     #   <p>The unique ID of the detector that is associated with the threatIntelSet.</p>
     #            <p>To find the <code>detectorId</code> in the current Region, see the
     #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
@@ -4731,6 +5022,42 @@ module Aws::GuardDuty
     #   @return [String]
     class ListThreatIntelSetsResponse < Struct.new(
       :threat_intel_set_ids,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
+    #   <p>The unique ID of the GuardDuty detector that is associated with this threat entity set.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>You can use this parameter to indicate the maximum number of 
+    #          items you want in the response. The default value is 50.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>You can use this parameter when paginating results. Set the value 
+    #          of this parameter to null on your first call to the list action. For
+    #          subsequent calls to the action, fill nextToken in the request 
+    #          with the value of NextToken from the previous response to continue listing data.</p>
+    #   @return [String]
+    class ListTrustedEntitySetsRequest < Struct.new(
+      :detector_id,
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute trusted_entity_set_ids
+    #   <p>The IDs of the trusted entity set resources.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
+    #   @return [String]
+    class ListTrustedEntitySetsResponse < Struct.new(
+      :trusted_entity_set_ids,
       :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -7694,6 +8021,48 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
+    #   <p>The unique ID of the GuardDuty detector associated with the threat entity set that you want to
+    #         update.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute threat_entity_set_id
+    #   <p>The ID returned by GuardDuty after updating the threat entity set resource.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A user-friendly name to identify the trusted entity set.</p>
+    #            <p>The name of your list can include 
+    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The URI of the file that contains the trusted entity set.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
+    #          parameter.</p>
+    #   @return [String]
+    # @!attribute activate
+    #   <p>A boolean value that indicates whether GuardDuty is to start using this updated threat entity set. After you
+    #         update an entity set, you will need to activate it again. It might take up to 15 minutes for the updated
+    #         entity set to be effective.</p>
+    #   @return [Boolean]
+    class UpdateThreatEntitySetRequest < Struct.new(
+      :detector_id,
+      :threat_entity_set_id,
+      :name,
+      :location,
+      :expected_bucket_owner,
+      :activate,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateThreatEntitySetResponse < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
     #   <p>The detectorID that specifies the GuardDuty service whose ThreatIntelSet you want to
     #         update.</p>
     #            <p>To find the <code>detectorId</code> in the current Region, see the
@@ -7727,6 +8096,48 @@ module Aws::GuardDuty
     end
 
     class UpdateThreatIntelSetResponse < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
+    #   <p>The unique ID of the GuardDuty detector associated with the threat entity set that you want to
+    #            update.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute trusted_entity_set_id
+    #   <p>The ID returned by GuardDuty after updating the trusted entity set resource.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A user-friendly name to identify the trusted entity set.</p>
+    #            <p>The name of your list can include 
+    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The URI of the file that contains the trusted entity set.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
+    #          parameter.</p>
+    #   @return [String]
+    # @!attribute activate
+    #   <p>A boolean value that indicates whether GuardDuty is to start using this updated trusted entity set. After you
+    #          update an entity set, you will need to activate it again. It might take up to 15 minutes for the updated
+    #          entity set to be effective.</p>
+    #   @return [Boolean]
+    class UpdateTrustedEntitySetRequest < Struct.new(
+      :detector_id,
+      :trusted_entity_set_id,
+      :name,
+      :location,
+      :expected_bucket_owner,
+      :activate,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateTrustedEntitySetResponse < Struct.new(
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

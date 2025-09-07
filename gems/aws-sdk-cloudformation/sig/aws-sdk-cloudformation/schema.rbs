@@ -190,6 +190,7 @@ module Aws::CloudFormation
     HandlerErrorCode: EnumShape
     HookFailureMode: EnumShape
     HookInvocationCount: IntegerShape
+    HookInvocationId: StringShape
     HookInvocationPoint: EnumShape
     HookResultId: StringShape
     HookResultNotFoundException: StructureShape
@@ -200,6 +201,7 @@ module Aws::CloudFormation
     HookTargetType: EnumShape
     HookTargetTypeName: StringShape
     HookType: StringShape
+    HookTypeArn: StringShape
     HookTypeConfigurationVersionId: StringShape
     HookTypeName: StringShape
     HookTypeVersionId: StringShape

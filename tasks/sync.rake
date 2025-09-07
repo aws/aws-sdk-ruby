@@ -45,7 +45,7 @@ namespace :sync do
       json_name = sdk_id.downcase.gsub(' ', '-')
       dest_path = File.join(dest_dir, "#{json_name}.json")
       puts "Copying from #{src_path} to #{dest_path}"
-      FileUtils.cp(src_path, dest_dir)
+      FileUtils.cp(src_path, dest_path)
     end
   end
 end

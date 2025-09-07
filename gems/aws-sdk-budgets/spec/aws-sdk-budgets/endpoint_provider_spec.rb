@@ -231,20 +231,6 @@ module Aws::Budgets
 
     end
 
-    context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: true})
-        expect do
-          subject.resolve(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-
-    end
-
     context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-iso-east-1"}]}, "url" => "https://budgets-fips.c2s.ic.gov"}}
@@ -256,20 +242,6 @@ module Aws::Budgets
         expect(endpoint.uri).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-
-    end
-
-    context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "DualStack is enabled but this partition does not support DualStack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: true})
-        expect do
-          subject.resolve(params)
-        end.to raise_error(ArgumentError, expected['error'])
       end
 
     end
@@ -289,20 +261,6 @@ module Aws::Budgets
 
     end
 
-    context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: true, use_dual_stack: true})
-        expect do
-          subject.resolve(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-
-    end
-
     context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isob-east-1"}]}, "url" => "https://budgets-fips.sc2s.sgov.gov"}}
@@ -314,20 +272,6 @@ module Aws::Budgets
         expect(endpoint.uri).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-
-    end
-
-    context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "DualStack is enabled but this partition does not support DualStack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: false, use_dual_stack: true})
-        expect do
-          subject.resolve(params)
-        end.to raise_error(ArgumentError, expected['error'])
       end
 
     end
@@ -347,20 +291,6 @@ module Aws::Budgets
 
     end
 
-    context "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-isoe-west-1", use_fips: true, use_dual_stack: true})
-        expect do
-          subject.resolve(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-
-    end
-
     context "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eu-isoe-west-1"}]}, "url" => "https://budgets-fips.cloud.adc-e.uk"}}
@@ -372,20 +302,6 @@ module Aws::Budgets
         expect(endpoint.uri).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-
-    end
-
-    context "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "DualStack is enabled but this partition does not support DualStack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-isoe-west-1", use_fips: false, use_dual_stack: true})
-        expect do
-          subject.resolve(params)
-        end.to raise_error(ArgumentError, expected['error'])
       end
 
     end
@@ -405,20 +321,6 @@ module Aws::Budgets
 
     end
 
-    context "For region us-isof-south-1 with FIPS enabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-isof-south-1", use_fips: true, use_dual_stack: true})
-        expect do
-          subject.resolve(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-
-    end
-
     context "For region us-isof-south-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]}, "url" => "https://budgets-fips.csp.hci.ic.gov"}}
@@ -434,20 +336,6 @@ module Aws::Budgets
 
     end
 
-    context "For region us-isof-south-1 with FIPS disabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "DualStack is enabled but this partition does not support DualStack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-isof-south-1", use_fips: false, use_dual_stack: true})
-        expect do
-          subject.resolve(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-
-    end
-
     context "For region us-isof-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]}, "url" => "https://budgets.global.csp.hci.ic.gov"}}
@@ -455,6 +343,36 @@ module Aws::Budgets
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-isof-south-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region eusc-de-east-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]}, "url" => "https://budgets-fips.amazonaws.eu"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "eusc-de-east-1", use_fips: true, use_dual_stack: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+    end
+
+    context "For region eusc-de-east-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]}, "url" => "https://budgets.amazonaws.eu"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "eusc-de-east-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
         expect(endpoint.uri).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})

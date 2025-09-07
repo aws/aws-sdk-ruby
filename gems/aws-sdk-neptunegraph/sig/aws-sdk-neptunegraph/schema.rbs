@@ -134,8 +134,12 @@ module Aws::NeptuneGraph
     SnapshotStatus: EnumShape
     StartExportTaskInput: StructureShape
     StartExportTaskOutput: StructureShape
+    StartGraphInput: StructureShape
+    StartGraphOutput: StructureShape
     StartImportTaskInput: StructureShape
     StartImportTaskOutput: StructureShape
+    StopGraphInput: StructureShape
+    StopGraphOutput: StructureShape
     SubnetId: StringShape
     SubnetIds: ListShape
     TagKey: StringShape

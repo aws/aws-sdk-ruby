@@ -922,6 +922,9 @@ module Aws::NeptuneGraph
       SNAPSHOTTING: String
       FAILED: String
       IMPORTING: String
+      STARTING: String
+      STOPPING: String
+      STOPPED: String
     end
 
     class GraphSummary
@@ -1543,6 +1546,56 @@ module Aws::NeptuneGraph
       attr_accessor export_filter: Types::ExportFilter?
     end
 
+    class StartGraphInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+    end
+
+    class StartGraphOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?create_time: Time,
+        ?provisioned_memory: Integer,
+        ?endpoint: String,
+        ?public_connectivity: bool,
+        ?vector_search_configuration: Types::VectorSearchConfiguration,
+        ?replica_count: Integer,
+        ?kms_key_identifier: String,
+        ?source_snapshot_id: String,
+        ?deletion_protection: bool,
+        ?build_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor create_time: Time?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor endpoint: String?
+      attr_accessor public_connectivity: bool?
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration?
+      attr_accessor replica_count: Integer?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor source_snapshot_id: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor build_number: String?
+    end
+
     class StartImportTaskInput
       include Smithy::Schema::Structure
 
@@ -1591,6 +1644,56 @@ module Aws::NeptuneGraph
       attr_accessor role_arn: String?
       attr_accessor status: String?
       attr_accessor import_options: Types::ImportOptions?
+    end
+
+    class StopGraphInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?graph_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph_identifier: String?
+    end
+
+    class StopGraphOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?create_time: Time,
+        ?provisioned_memory: Integer,
+        ?endpoint: String,
+        ?public_connectivity: bool,
+        ?vector_search_configuration: Types::VectorSearchConfiguration,
+        ?replica_count: Integer,
+        ?kms_key_identifier: String,
+        ?source_snapshot_id: String,
+        ?deletion_protection: bool,
+        ?build_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor create_time: Time?
+      attr_accessor provisioned_memory: Integer?
+      attr_accessor endpoint: String?
+      attr_accessor public_connectivity: bool?
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration?
+      attr_accessor replica_count: Integer?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor source_snapshot_id: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor build_number: String?
     end
 
     class TagResourceInput

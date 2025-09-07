@@ -947,6 +947,32 @@ module Aws::WorkSpaces
       attr_accessor pending_requests: Array[Types::Workspace]?
     end
 
+    module CustomImageProtocol
+      PCOIP: String
+      DCV: String
+      BYOP: String
+    end
+
+    class CustomWorkspaceImageImportErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module CustomWorkspaceImageImportState
+      PENDING: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      ERROR: String
+    end
+
     module DataReplication
       NO_REPLICATION: String
       PRIMARY_AS_SOURCE: String
@@ -1307,12 +1333,14 @@ module Aws::WorkSpaces
         ?dedicated_tenancy_support: String,
         ?dedicated_tenancy_management_cidr_range: String,
         ?dedicated_tenancy_account_type: String,
+        ?message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dedicated_tenancy_support: String?
       attr_accessor dedicated_tenancy_management_cidr_range: String?
       attr_accessor dedicated_tenancy_account_type: String?
+      attr_accessor message: String?
     end
 
     class DescribeApplicationAssociationsRequest
@@ -1545,6 +1573,42 @@ module Aws::WorkSpaces
 
       attr_accessor connection_aliases: Array[Types::ConnectionAlias]?
       attr_accessor next_token: String?
+    end
+
+    class DescribeCustomWorkspaceImageImportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+    end
+
+    class DescribeCustomWorkspaceImageImportResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?infrastructure_configuration_arn: String,
+        ?state: String,
+        ?created: Time,
+        ?last_updated_time: Time,
+        ?image_source: Types::ImageSourceIdentifier,
+        ?image_builder_instance_id: String,
+        ?error_details: Array[Types::CustomWorkspaceImageImportErrorDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor infrastructure_configuration_arn: String?
+      attr_accessor state: String?
+      attr_accessor created: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor image_source: Types::ImageSourceIdentifier?
+      attr_accessor image_builder_instance_id: String?
+      attr_accessor error_details: Array[Types::CustomWorkspaceImageImportErrorDetails]?
     end
 
     class DescribeImageAssociationsRequest
@@ -2151,6 +2215,11 @@ module Aws::WorkSpaces
       APPLICATION: String
     end
 
+    module ImageComputeType
+      BASE: String
+      GRAPHICS_G4DN: String
+    end
+
     class ImagePermission
       include Smithy::Schema::Structure
 
@@ -2183,6 +2252,30 @@ module Aws::WorkSpaces
       attr_accessor image_id: String?
       attr_accessor state: String?
       attr_accessor state_reason: Types::AssociationStateReason?
+    end
+
+    class ImageSourceIdentifier
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ec2_import_task_id: String,
+        ?image_build_version_arn: String,
+        ?ec2_image_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_import_task_id: String?
+      attr_accessor image_build_version_arn: String?
+      attr_accessor ec2_image_id: String?
+
+      class Ec2ImportTaskId < ImageSourceIdentifier
+      end
+      class ImageBuildVersionArn < ImageSourceIdentifier
+      end
+      class Ec2ImageId < ImageSourceIdentifier
+      end
+      class Unknown < ImageSourceIdentifier
+      end
     end
 
     module ImageType
@@ -2232,6 +2325,46 @@ module Aws::WorkSpaces
       attr_accessor device_type_ios: Types::IosClientBrandingAttributes?
       attr_accessor device_type_linux: Types::DefaultClientBrandingAttributes?
       attr_accessor device_type_web: Types::DefaultClientBrandingAttributes?
+    end
+
+    class ImportCustomWorkspaceImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_name: String,
+        ?image_description: String,
+        ?compute_type: String,
+        ?protocol: String,
+        ?image_source: Types::ImageSourceIdentifier,
+        ?infrastructure_configuration_arn: String,
+        ?platform: String,
+        ?os_version: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_name: String?
+      attr_accessor image_description: String?
+      attr_accessor compute_type: String?
+      attr_accessor protocol: String?
+      attr_accessor image_source: Types::ImageSourceIdentifier?
+      attr_accessor infrastructure_configuration_arn: String?
+      attr_accessor platform: String?
+      attr_accessor os_version: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ImportCustomWorkspaceImageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor state: String?
     end
 
     class ImportWorkspaceImageRequest
@@ -2523,9 +2656,11 @@ module Aws::WorkSpaces
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor message: String?
     end
 
     class ModifyCertificateBasedAuthPropertiesRequest
@@ -2767,6 +2902,11 @@ module Aws::WorkSpaces
       attr_accessor eni_id: String?
     end
 
+    module OSVersion
+      Windows_10: String
+      Windows_11: String
+    end
+
     class OperatingSystem
       include Smithy::Schema::Structure
 
@@ -2847,6 +2987,10 @@ module Aws::WorkSpaces
       attr_accessor directory_id: String?
       attr_accessor state: String?
       attr_accessor workspace_id: String?
+    end
+
+    module Platform
+      WINDOWS: String
     end
 
     module PoolsRunningMode

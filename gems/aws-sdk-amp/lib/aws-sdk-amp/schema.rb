@@ -30,6 +30,7 @@ module Aws::Amp
     DeleteAlertManagerDefinitionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteAlertManagerDefinitionInput', name: 'DeleteAlertManagerDefinitionInput')
     DeleteLoggingConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteLoggingConfigurationInput', name: 'DeleteLoggingConfigurationInput')
     DeleteQueryLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteQueryLoggingConfigurationRequest', name: 'DeleteQueryLoggingConfigurationRequest')
+    DeleteResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteResourcePolicyRequest', name: 'DeleteResourcePolicyRequest')
     DeleteRuleGroupsNamespaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteRuleGroupsNamespaceInput', name: 'DeleteRuleGroupsNamespaceInput')
     DeleteScraperRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteScraperRequest', name: 'DeleteScraperRequest')
     DeleteScraperResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteScraperResponse', name: 'DeleteScraperResponse')
@@ -40,6 +41,8 @@ module Aws::Amp
     DescribeLoggingConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeLoggingConfigurationOutput', name: 'DescribeLoggingConfigurationOutput')
     DescribeQueryLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeQueryLoggingConfigurationRequest', name: 'DescribeQueryLoggingConfigurationRequest')
     DescribeQueryLoggingConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeQueryLoggingConfigurationResponse', name: 'DescribeQueryLoggingConfigurationResponse')
+    DescribeResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeResourcePolicyRequest', name: 'DescribeResourcePolicyRequest')
+    DescribeResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeResourcePolicyResponse', name: 'DescribeResourcePolicyResponse')
     DescribeRuleGroupsNamespaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeRuleGroupsNamespaceInput', name: 'DescribeRuleGroupsNamespaceInput')
     DescribeRuleGroupsNamespaceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeRuleGroupsNamespaceOutput', name: 'DescribeRuleGroupsNamespaceOutput')
     DescribeScraperRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeScraperRequest', name: 'DescribeScraperRequest')
@@ -73,7 +76,7 @@ module Aws::Amp
     ListTagsForResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ListTagsForResourceOutput', name: 'ListTagsForResourceOutput')
     ListWorkspacesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ListWorkspacesInput', name: 'ListWorkspacesInput')
     ListWorkspacesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ListWorkspacesOutput', name: 'ListWorkspacesOutput')
-    LogGroupArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#LogGroupArn', name: 'LogGroupArn', traits: {"aws.api#arnReference" => {"type" => "AWS::Logs::LogGroup"}, "smithy.api#pattern" => "^arn:aws[-a-z]*:logs:[-a-z0-9]+:[0-9]{12}:log-group:[A-Za-z0-9\\.\\-\\_\\#/]{1,512}\\:\\*$"})
+    LogGroupArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#LogGroupArn', name: 'LogGroupArn', traits: {"aws.api#arnReference" => {"type" => "AWS::Logs::LogGroup"}, "smithy.api#pattern" => "^arn:aws[a-z0-9-]*:logs:[a-z0-9-]+:[0-9]{12}:log-group:[A-Za-z0-9\\.\\-\\_\\#/]{1,512}\\:\\*$"})
     LoggingConfigurationMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#LoggingConfigurationMetadata', name: 'LoggingConfigurationMetadata')
     LoggingConfigurationStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#LoggingConfigurationStatus', name: 'LoggingConfigurationStatus')
     LoggingConfigurationStatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#LoggingConfigurationStatusCode', name: 'LoggingConfigurationStatusCode', traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING", "documentation" => "Logging configuration is being created. Update/Deletion is disallowed until logging configuration is ACTIVE and workspace status is ACTIVE."}, {"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Logging configuration has been created/updated. Update/Deletion is disallowed until logging configuration is ACTIVE and workspace status is ACTIVE."}, {"name" => "UPDATING", "value" => "UPDATING", "documentation" => "Logging configuration is being updated. Update/Deletion is disallowed until logging configuration is ACTIVE and workspace status is ACTIVE."}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "Logging configuration is being deleting. Update/Deletion is disallowed until logging configuration is ACTIVE and workspace status is ACTIVE."}, {"name" => "CREATION_FAILED", "value" => "CREATION_FAILED", "documentation" => "Logging configuration creation failed."}, {"name" => "UPDATE_FAILED", "value" => "UPDATE_FAILED", "documentation" => "Logging configuration update failed."}]})
@@ -83,6 +86,8 @@ module Aws::Amp
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#PaginationToken', name: 'PaginationToken', traits: {"smithy.api#length" => {"max" => 1000}})
     PutAlertManagerDefinitionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#PutAlertManagerDefinitionInput', name: 'PutAlertManagerDefinitionInput')
     PutAlertManagerDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#PutAlertManagerDefinitionOutput', name: 'PutAlertManagerDefinitionOutput')
+    PutResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#PutResourcePolicyRequest', name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#PutResourcePolicyResponse', name: 'PutResourcePolicyResponse')
     PutRuleGroupsNamespaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#PutRuleGroupsNamespaceInput', name: 'PutRuleGroupsNamespaceInput')
     PutRuleGroupsNamespaceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#PutRuleGroupsNamespaceOutput', name: 'PutRuleGroupsNamespaceOutput')
     QueryLoggingConfigurationMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#QueryLoggingConfigurationMetadata', name: 'QueryLoggingConfigurationMetadata')
@@ -145,6 +150,7 @@ module Aws::Amp
     WorkspaceConfigurationStatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#WorkspaceConfigurationStatusCode', name: 'WorkspaceConfigurationStatusCode', traits: {"smithy.api#enum" => [{"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Workspace configuration has been updated. Update is disallowed until workspace configuration is ACTIVE and workspace status is ACTIVE."}, {"name" => "UPDATING", "value" => "UPDATING", "documentation" => "Workspace configuration is being updated. Update is disallowed until workspace configuration is ACTIVE and workspace status is ACTIVE."}, {"name" => "UPDATE_FAILED", "value" => "UPDATE_FAILED", "documentation" => "Workspace configuration update failed."}]})
     WorkspaceDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#WorkspaceDescription', name: 'WorkspaceDescription', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.amp#Workspace"}]})
     WorkspaceId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#WorkspaceId', name: 'WorkspaceId', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "[0-9A-Za-z][-.0-9A-Z_a-z]*"})
+    WorkspacePolicyStatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#WorkspacePolicyStatusCode', name: 'WorkspacePolicyStatusCode', traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING", "documentation" => "Resource-based Policy is being created. Update/Deletion is disallowed until Resource-based Policy is ACTIVE and Workspace is ACTIVE."}, {"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Resource-based Policy has been created/updated. Update/Deletion is disallowed until Resource-based Policy is ACTIVE and Workspace is ACTIVE."}, {"name" => "UPDATING", "value" => "UPDATING", "documentation" => "Resource-based Policy is being updated. Update/Deletion is disallowed until Resource-based Policy is ACTIVE and Workspace is ACTIVE."}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "Resource-based Policy is being deleting. Update/Deletion is disallowed until Resource-based Policy is ACTIVE and Workspace is ACTIVE."}]})
     WorkspaceStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#WorkspaceStatus', name: 'WorkspaceStatus')
     WorkspaceStatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#WorkspaceStatusCode', name: 'WorkspaceStatusCode', traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING", "documentation" => "Workspace is being created. Deletion is disallowed until status is ACTIVE."}, {"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Workspace has been created and is usable."}, {"name" => "UPDATING", "value" => "UPDATING", "documentation" => "Workspace is being updated. Updates are allowed only when status is ACTIVE."}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "Workspace is being deleted. Deletions are allowed only when status is ACTIVE."}, {"name" => "CREATION_FAILED", "value" => "CREATION_FAILED", "documentation" => "Workspace creation failed. Refer to WorkspaceStatus.failureReason for more details."}]})
     WorkspaceSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#WorkspaceSummary', name: 'WorkspaceSummary', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.amp#Workspace"}]})
@@ -230,6 +236,10 @@ module Aws::Amp
     DeleteQueryLoggingConfigurationRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceId, location_name: 'workspaceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteQueryLoggingConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: 'clientToken', traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteQueryLoggingConfigurationRequest.type = Types::DeleteQueryLoggingConfigurationRequest
+    DeleteResourcePolicyRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceId, location_name: 'workspaceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteResourcePolicyRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: 'clientToken', traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
+    DeleteResourcePolicyRequest.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'revisionId', traits: {"smithy.api#httpQuery" => "revisionId"}))
+    DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
     DeleteRuleGroupsNamespaceInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceId, location_name: 'workspaceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRuleGroupsNamespaceInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, location_name: 'name', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRuleGroupsNamespaceInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: 'clientToken', traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
@@ -255,6 +265,12 @@ module Aws::Amp
     DescribeQueryLoggingConfigurationRequest.type = Types::DescribeQueryLoggingConfigurationRequest
     DescribeQueryLoggingConfigurationResponse.add_member(:query_logging_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLoggingConfigurationMetadata, location_name: 'queryLoggingConfiguration', traits: {"smithy.api#required" => {}}))
     DescribeQueryLoggingConfigurationResponse.type = Types::DescribeQueryLoggingConfigurationResponse
+    DescribeResourcePolicyRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceId, location_name: 'workspaceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeResourcePolicyRequest.type = Types::DescribeResourcePolicyRequest
+    DescribeResourcePolicyResponse.add_member(:policy_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'policyDocument', traits: {"smithy.api#required" => {}}))
+    DescribeResourcePolicyResponse.add_member(:policy_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspacePolicyStatusCode, location_name: 'policyStatus', traits: {"smithy.api#required" => {}}))
+    DescribeResourcePolicyResponse.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'revisionId', traits: {"smithy.api#required" => {}}))
+    DescribeResourcePolicyResponse.type = Types::DescribeResourcePolicyResponse
     DescribeRuleGroupsNamespaceInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceId, location_name: 'workspaceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeRuleGroupsNamespaceInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, location_name: 'name', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeRuleGroupsNamespaceInput.type = Types::DescribeRuleGroupsNamespaceInput
@@ -341,6 +357,14 @@ module Aws::Amp
     PutAlertManagerDefinitionInput.type = Types::PutAlertManagerDefinitionInput
     PutAlertManagerDefinitionOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlertManagerDefinitionStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     PutAlertManagerDefinitionOutput.type = Types::PutAlertManagerDefinitionOutput
+    PutResourcePolicyRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceId, location_name: 'workspaceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:policy_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'policyDocument', traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    PutResourcePolicyRequest.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'revisionId'))
+    PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
+    PutResourcePolicyResponse.add_member(:policy_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspacePolicyStatusCode, location_name: 'policyStatus', traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyResponse.add_member(:revision_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'revisionId', traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyResponse.type = Types::PutResourcePolicyResponse
     PutRuleGroupsNamespaceInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceId, location_name: 'workspaceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutRuleGroupsNamespaceInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, location_name: 'name', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutRuleGroupsNamespaceInput.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleGroupsNamespaceData, location_name: 'data', traits: {"smithy.api#required" => {}}))
@@ -638,6 +662,19 @@ module Aws::Amp
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "DELETE", "uri" => "/workspaces/{workspaceId}/logging/query"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:delete_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#DeleteResourcePolicy"
+        operation.name = "DeleteResourcePolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "DELETE", "uri" => "/workspaces/{workspaceId}/policy"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_rule_groups_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#DeleteRuleGroupsNamespace"
         operation.name = "DeleteRuleGroupsNamespace"
@@ -710,6 +747,18 @@ module Aws::Amp
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/workspaces/{workspaceId}/logging/query"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#DescribeResourcePolicy"
+        operation.name = "DescribeResourcePolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeResourcePolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeResourcePolicyResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/workspaces/{workspaceId}/policy"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_rule_groups_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#DescribeRuleGroupsNamespace"
@@ -831,6 +880,19 @@ module Aws::Amp
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "PUT", "uri" => "/workspaces/{workspaceId}/alertmanager/definition"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#PutResourcePolicy"
+        operation.name = "PutResourcePolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "PUT", "uri" => "/workspaces/{workspaceId}/policy"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_rule_groups_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#PutRuleGroupsNamespace"

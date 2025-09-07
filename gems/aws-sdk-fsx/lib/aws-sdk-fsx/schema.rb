@@ -521,6 +521,7 @@ module Aws::FSx
     AdministrativeAction.add_member(:target_snapshot_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Snapshot, location_name: 'TargetSnapshotValues'))
     AdministrativeAction.add_member(:total_transfer_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TotalTransferBytes, location_name: 'TotalTransferBytes'))
     AdministrativeAction.add_member(:remaining_transfer_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemainingTransferBytes, location_name: 'RemainingTransferBytes'))
+    AdministrativeAction.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
     AdministrativeAction.type = Types::AdministrativeAction
     AdministrativeActionFailureDetails.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
     AdministrativeActionFailureDetails.type = Types::AdministrativeActionFailureDetails
@@ -1702,6 +1703,8 @@ module Aws::FSx
     Status.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'COMPLETED', traits: {"smithy.api#enumValue" => "COMPLETED"}))
     Status.add_member(:updated_optimizing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATED_OPTIMIZING', traits: {"smithy.api#enumValue" => "UPDATED_OPTIMIZING"}))
     Status.add_member(:optimizing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OPTIMIZING', traits: {"smithy.api#enumValue" => "OPTIMIZING"}))
+    Status.add_member(:paused, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PAUSED', traits: {"smithy.api#enumValue" => "PAUSED"}))
+    Status.add_member(:cancelled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CANCELLED', traits: {"smithy.api#enumValue" => "CANCELLED"}))
     StorageType.add_member(:ssd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SSD', traits: {"smithy.api#enumValue" => "SSD"}))
     StorageType.add_member(:hdd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HDD', traits: {"smithy.api#enumValue" => "HDD"}))
     StorageType.add_member(:intelligent_tiering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INTELLIGENT_TIERING', traits: {"smithy.api#enumValue" => "INTELLIGENT_TIERING"}))

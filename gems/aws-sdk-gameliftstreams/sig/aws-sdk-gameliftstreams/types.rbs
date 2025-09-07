@@ -1083,12 +1083,14 @@ module Aws::GameLiftStreams
         ?identifier: String,
         ?location_configurations: Array[Types::LocationConfiguration],
         ?description: String,
+        ?default_application_identifier: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identifier: String?
       attr_accessor location_configurations: Array[Types::LocationConfiguration]?
       attr_accessor description: String?
+      attr_accessor default_application_identifier: String?
     end
 
     class UpdateStreamGroupOutput

@@ -484,6 +484,7 @@ module Aws::GameLiftStreams
     UpdateStreamGroupInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: 'Identifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     UpdateStreamGroupInput.add_member(:location_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationConfigurations, location_name: 'LocationConfigurations', traits: {"smithy.api#notProperty" => {}}))
     UpdateStreamGroupInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'Description'))
+    UpdateStreamGroupInput.add_member(:default_application_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: 'DefaultApplicationIdentifier', traits: {"smithy.api#notProperty" => {}}))
     UpdateStreamGroupInput.type = Types::UpdateStreamGroupInput
     UpdateStreamGroupOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Identifier, location_name: 'Arn', traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     UpdateStreamGroupOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'Description'))

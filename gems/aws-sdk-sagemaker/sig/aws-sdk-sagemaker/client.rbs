@@ -705,7 +705,9 @@ module Aws::SageMaker
           instance_storage_configs: Array[
             {
               ebs_volume_config: {
-                volume_size_in_gb: Integer
+                volume_size_in_gb: Integer,
+                volume_kms_key_id: String,
+                root_volume: bool
               }
             }
           ],
@@ -746,7 +748,9 @@ module Aws::SageMaker
           instance_storage_configs: Array[
             {
               ebs_volume_config: {
-                volume_size_in_gb: Integer
+                volume_size_in_gb: Integer,
+                volume_kms_key_id: String,
+                root_volume: bool
               }
             }
           ],
@@ -798,7 +802,16 @@ module Aws::SageMaker
         }
       },
       ?node_recovery: String,
-      ?node_provisioning_mode: String
+      ?tiered_storage_config: {
+        mode: String,
+        instance_memory_allocation_percentage: Integer
+      },
+      ?node_provisioning_mode: String,
+      ?cluster_role: String,
+      ?auto_scaling: {
+        mode: String,
+        auto_scaler_type: String
+      }
     ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
 
     interface _CreateClusterSchedulerConfigResponse
@@ -1246,7 +1259,8 @@ module Aws::SageMaker
         },
         docker_settings: {
           enable_docker_access: untyped,
-          vpc_only_trusted_accounts: Array[String]
+          vpc_only_trusted_accounts: Array[String],
+          rootless_docker: untyped
         },
         amazon_q_settings: {
           status: untyped,
@@ -3342,6 +3356,7 @@ module Aws::SageMaker
       ?instance_type: String,
       ?subnet_id: String,
       ?security_group_ids: Array[String],
+      ?ip_address_type: String,
       ?role_arn: String,
       ?kms_key_id: String,
       ?tags: Array[
@@ -4947,8 +4962,11 @@ module Aws::SageMaker
       def restricted_instance_groups: () -> Array[Types::ClusterRestrictedInstanceGroupDetails]?
       def vpc_config: () -> Types::VpcConfig?
       def orchestrator: () -> Types::ClusterOrchestrator?
+      def tiered_storage_config: () -> Types::ClusterTieredStorageConfig?
       def node_recovery: () -> String?
       def node_provisioning_mode: () -> String?
+      def cluster_role: () -> String?
+      def auto_scaling: () -> Types::ClusterAutoScalingConfigOutput?
     end
     def describe_cluster: (
       ?cluster_name: String
@@ -5745,6 +5763,7 @@ module Aws::SageMaker
       def failure_reason: () -> String?
       def url: () -> String?
       def instance_type: () -> String?
+      def ip_address_type: () -> String?
       def subnet_id: () -> String?
       def security_groups: () -> Array[String]?
       def role_arn: () -> String?
@@ -8111,7 +8130,9 @@ module Aws::SageMaker
           instance_storage_configs: Array[
             {
               ebs_volume_config: {
-                volume_size_in_gb: Integer
+                volume_size_in_gb: Integer,
+                volume_kms_key_id: String,
+                root_volume: bool
               }
             }
           ],
@@ -8152,7 +8173,9 @@ module Aws::SageMaker
           instance_storage_configs: Array[
             {
               ebs_volume_config: {
-                volume_size_in_gb: Integer
+                volume_size_in_gb: Integer,
+                volume_kms_key_id: String,
+                root_volume: bool
               }
             }
           ],
@@ -8188,8 +8211,17 @@ module Aws::SageMaker
           }
         }
       ],
+      ?tiered_storage_config: {
+        mode: String,
+        instance_memory_allocation_percentage: Integer
+      },
       ?node_recovery: String,
-      ?instance_groups_to_delete: Array[String]
+      ?instance_groups_to_delete: Array[String],
+      ?cluster_role: String,
+      ?auto_scaling: {
+        mode: String,
+        auto_scaler_type: String
+      }
     ) -> _UpdateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterResponse
 
     interface _UpdateClusterSchedulerConfigResponse
@@ -8497,7 +8529,8 @@ module Aws::SageMaker
         },
         docker_settings: {
           enable_docker_access: untyped,
-          vpc_only_trusted_accounts: Array[String]
+          vpc_only_trusted_accounts: Array[String],
+          rootless_docker: untyped
         },
         amazon_q_settings: {
           status: untyped,
@@ -9153,6 +9186,7 @@ module Aws::SageMaker
     def update_notebook_instance: (
       ?notebook_instance_name: String,
       ?instance_type: String,
+      ?ip_address_type: String,
       ?role_arn: String,
       ?lifecycle_config_name: String,
       ?disassociate_lifecycle_config: bool,

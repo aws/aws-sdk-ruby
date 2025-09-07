@@ -300,8 +300,14 @@ module Aws::SageMaker
     ClientSecret: StringShape
     ClientToken: StringShape
     ClusterArn: StringShape
+    ClusterAutoScalerType: EnumShape
+    ClusterAutoScalingConfig: StructureShape
+    ClusterAutoScalingConfigOutput: StructureShape
+    ClusterAutoScalingMode: EnumShape
+    ClusterAutoScalingStatus: EnumShape
     ClusterAvailabilityZone: StringShape
     ClusterAvailabilityZoneId: StringShape
+    ClusterConfigMode: EnumShape
     ClusterEbsVolumeConfig: StructureShape
     ClusterEbsVolumeSizeInGB: IntegerShape
     ClusterEventDetail: StructureShape
@@ -316,6 +322,7 @@ module Aws::SageMaker
     ClusterInstanceGroupSpecification: StructureShape
     ClusterInstanceGroupSpecifications: ListShape
     ClusterInstanceGroupsToDelete: ListShape
+    ClusterInstanceMemoryAllocationPercentage: IntegerShape
     ClusterInstancePlacement: StructureShape
     ClusterInstanceStatus: EnumShape
     ClusterInstanceStatusDetails: StructureShape
@@ -356,6 +363,7 @@ module Aws::SageMaker
     ClusterSummaries: ListShape
     ClusterSummary: StructureShape
     ClusterThreadsPerCore: IntegerShape
+    ClusterTieredStorageConfig: StructureShape
     CodeEditorAppImageConfig: StructureShape
     CodeEditorAppSettings: StructureShape
     CodeRepositories: ListShape
@@ -1181,6 +1189,7 @@ module Aws::SageMaker
     HyperbandStrategyConfig: StructureShape
     HyperbandStrategyMaxResource: IntegerShape
     HyperbandStrategyMinResource: IntegerShape
+    IPAddressType: EnumShape
     IamIdentity: StructureShape
     IamPolicyConstraints: StructureShape
     IdempotencyToken: StringShape

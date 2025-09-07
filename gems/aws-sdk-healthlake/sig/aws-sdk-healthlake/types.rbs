@@ -309,6 +309,7 @@ module Aws::HealthLake
         ?job_progress_report: Types::JobProgressReport,
         ?data_access_role_arn: String,
         ?message: String,
+        ?validation_level: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -323,6 +324,7 @@ module Aws::HealthLake
       attr_accessor job_progress_report: Types::JobProgressReport?
       attr_accessor data_access_role_arn: String?
       attr_accessor message: String?
+      attr_accessor validation_level: String?
     end
 
     class InputDataConfig
@@ -635,6 +637,7 @@ module Aws::HealthLake
         ?datastore_id: String,
         ?data_access_role_arn: String,
         ?client_token: String,
+        ?validation_level: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -644,6 +647,7 @@ module Aws::HealthLake
       attr_accessor datastore_id: String?
       attr_accessor data_access_role_arn: String?
       attr_accessor client_token: String?
+      attr_accessor validation_level: String?
     end
 
     class StartFHIRImportJobResponse
@@ -738,6 +742,12 @@ module Aws::HealthLake
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module ValidationLevel
+      STRICT: String
+      STRUCTURE_ONLY: String
+      MINIMAL: String
     end
   end
 end

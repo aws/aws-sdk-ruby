@@ -150,6 +150,8 @@ module Aws::CognitoIdentityProvider
     CreateManagedLoginBrandingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#CreateManagedLoginBrandingResponse', name: 'CreateManagedLoginBrandingResponse')
     CreateResourceServerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#CreateResourceServerRequest', name: 'CreateResourceServerRequest')
     CreateResourceServerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#CreateResourceServerResponse', name: 'CreateResourceServerResponse')
+    CreateTermsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#CreateTermsRequest', name: 'CreateTermsRequest')
+    CreateTermsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#CreateTermsResponse', name: 'CreateTermsResponse')
     CreateUserImportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#CreateUserImportJobRequest', name: 'CreateUserImportJobRequest')
     CreateUserImportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#CreateUserImportJobResponse', name: 'CreateUserImportJobResponse')
     CreateUserPoolClientRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#CreateUserPoolClientRequest', name: 'CreateUserPoolClientRequest')
@@ -171,6 +173,7 @@ module Aws::CognitoIdentityProvider
     DeleteIdentityProviderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DeleteIdentityProviderRequest', name: 'DeleteIdentityProviderRequest')
     DeleteManagedLoginBrandingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DeleteManagedLoginBrandingRequest', name: 'DeleteManagedLoginBrandingRequest')
     DeleteResourceServerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DeleteResourceServerRequest', name: 'DeleteResourceServerRequest')
+    DeleteTermsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DeleteTermsRequest', name: 'DeleteTermsRequest')
     DeleteUserAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DeleteUserAttributesRequest', name: 'DeleteUserAttributesRequest')
     DeleteUserAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DeleteUserAttributesResponse', name: 'DeleteUserAttributesResponse')
     DeleteUserPoolClientRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientRequest', name: 'DeleteUserPoolClientRequest')
@@ -193,6 +196,8 @@ module Aws::CognitoIdentityProvider
     DescribeResourceServerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DescribeResourceServerResponse', name: 'DescribeResourceServerResponse')
     DescribeRiskConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DescribeRiskConfigurationRequest', name: 'DescribeRiskConfigurationRequest')
     DescribeRiskConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DescribeRiskConfigurationResponse', name: 'DescribeRiskConfigurationResponse')
+    DescribeTermsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DescribeTermsRequest', name: 'DescribeTermsRequest')
+    DescribeTermsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DescribeTermsResponse', name: 'DescribeTermsResponse')
     DescribeUserImportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DescribeUserImportJobRequest', name: 'DescribeUserImportJobRequest')
     DescribeUserImportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DescribeUserImportJobResponse', name: 'DescribeUserImportJobResponse')
     DescribeUserPoolClientRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#DescribeUserPoolClientRequest', name: 'DescribeUserPoolClientRequest')
@@ -307,7 +312,10 @@ module Aws::CognitoIdentityProvider
     InvalidSmsRoleTrustRelationshipException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#InvalidSmsRoleTrustRelationshipException', name: 'InvalidSmsRoleTrustRelationshipException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidUserPoolConfigurationException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#InvalidUserPoolConfigurationException', name: 'InvalidUserPoolConfigurationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     LambdaConfigType = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#LambdaConfigType', name: 'LambdaConfigType')
+    LanguageIdType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cognitoidentityprovider#LanguageIdType', name: 'LanguageIdType', traits: {"smithy.api#pattern" => "^cognito:(default|english|french|spanish|german|bahasa-indonesia|italian|japanese|korean|portuguese-brazil|chinese-(simplified|traditional))$"})
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#LimitExceededException', name: 'LimitExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    LinkUrlType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cognitoidentityprovider#LinkUrlType', name: 'LinkUrlType', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"})
+    LinksType = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.cognitoidentityprovider#LinksType', name: 'LinksType', traits: {"smithy.api#length" => {"min" => 1, "max" => 12}})
     ListDevicesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListDevicesRequest', name: 'ListDevicesRequest')
     ListDevicesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListDevicesResponse', name: 'ListDevicesResponse')
     ListGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListGroupsRequest', name: 'ListGroupsRequest')
@@ -321,6 +329,9 @@ module Aws::CognitoIdentityProvider
     ListResourceServersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListResourceServersResponse', name: 'ListResourceServersResponse')
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListTagsForResourceRequest', name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListTagsForResourceResponse', name: 'ListTagsForResourceResponse')
+    ListTermsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListTermsRequest', name: 'ListTermsRequest')
+    ListTermsRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListTermsRequestMaxResultsInteger', name: 'ListTermsRequestMaxResultsInteger', traits: {"smithy.api#range" => {"min" => 1, "max" => 60}})
+    ListTermsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListTermsResponse', name: 'ListTermsResponse')
     ListUserImportJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListUserImportJobsRequest', name: 'ListUserImportJobsRequest')
     ListUserImportJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListUserImportJobsResponse', name: 'ListUserImportJobsResponse')
     ListUserPoolClientsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#ListUserPoolClientsRequest', name: 'ListUserPoolClientsRequest')
@@ -463,6 +474,14 @@ module Aws::CognitoIdentityProvider
     TagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#TagResourceResponse', name: 'TagResourceResponse')
     TagValueType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cognitoidentityprovider#TagValueType', name: 'TagValueType', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     TemporaryPasswordValidityDaysType = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.cognitoidentityprovider#TemporaryPasswordValidityDaysType', name: 'TemporaryPasswordValidityDaysType', traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 365}})
+    TermsDescriptionListType = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cognitoidentityprovider#TermsDescriptionListType', name: 'TermsDescriptionListType')
+    TermsDescriptionType = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#TermsDescriptionType', name: 'TermsDescriptionType')
+    TermsEnforcementType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cognitoidentityprovider#TermsEnforcementType', name: 'TermsEnforcementType')
+    TermsExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#TermsExistsException', name: 'TermsExistsException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    TermsIdType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cognitoidentityprovider#TermsIdType', name: 'TermsIdType', traits: {"smithy.api#pattern" => "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"})
+    TermsNameType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cognitoidentityprovider#TermsNameType', name: 'TermsNameType', traits: {"smithy.api#pattern" => "^(terms-of-use|privacy-policy)$"})
+    TermsSourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cognitoidentityprovider#TermsSourceType', name: 'TermsSourceType')
+    TermsType = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#TermsType', name: 'TermsType')
     TierChangeNotAllowedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#TierChangeNotAllowedException', name: 'TierChangeNotAllowedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     TimeUnitsType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cognitoidentityprovider#TimeUnitsType', name: 'TimeUnitsType')
     TokenModelType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cognitoidentityprovider#TokenModelType', name: 'TokenModelType', traits: {"smithy.api#pattern" => "^[A-Za-z0-9-_=.]+$", "smithy.api#sensitive" => {}})
@@ -490,6 +509,8 @@ module Aws::CognitoIdentityProvider
     UpdateManagedLoginBrandingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#UpdateManagedLoginBrandingResponse', name: 'UpdateManagedLoginBrandingResponse')
     UpdateResourceServerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#UpdateResourceServerRequest', name: 'UpdateResourceServerRequest')
     UpdateResourceServerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#UpdateResourceServerResponse', name: 'UpdateResourceServerResponse')
+    UpdateTermsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#UpdateTermsRequest', name: 'UpdateTermsRequest')
+    UpdateTermsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#UpdateTermsResponse', name: 'UpdateTermsResponse')
     UpdateUserAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#UpdateUserAttributesRequest', name: 'UpdateUserAttributesRequest')
     UpdateUserAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#UpdateUserAttributesResponse', name: 'UpdateUserAttributesResponse')
     UpdateUserPoolClientRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cognitoidentityprovider#UpdateUserPoolClientRequest', name: 'UpdateUserPoolClientRequest')
@@ -988,6 +1009,15 @@ module Aws::CognitoIdentityProvider
     CreateResourceServerRequest.type = Types::CreateResourceServerRequest
     CreateResourceServerResponse.add_member(:resource_server, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerType, location_name: 'ResourceServer', traits: {"smithy.api#required" => {}}))
     CreateResourceServerResponse.type = Types::CreateResourceServerResponse
+    CreateTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: 'UserPoolId', traits: {"smithy.api#required" => {}}))
+    CreateTermsRequest.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: 'ClientId', traits: {"smithy.api#required" => {}}))
+    CreateTermsRequest.add_member(:terms_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsNameType, location_name: 'TermsName', traits: {"smithy.api#required" => {}}))
+    CreateTermsRequest.add_member(:terms_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsSourceType, location_name: 'TermsSource', traits: {"smithy.api#required" => {}}))
+    CreateTermsRequest.add_member(:enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsEnforcementType, location_name: 'Enforcement', traits: {"smithy.api#required" => {}}))
+    CreateTermsRequest.add_member(:links, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinksType, location_name: 'Links'))
+    CreateTermsRequest.type = Types::CreateTermsRequest
+    CreateTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsType, location_name: 'Terms'))
+    CreateTermsResponse.type = Types::CreateTermsResponse
     CreateUserImportJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobNameType, location_name: 'JobName', traits: {"smithy.api#required" => {}}))
     CreateUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: 'UserPoolId', traits: {"smithy.api#required" => {}}))
     CreateUserImportJobRequest.add_member(:cloud_watch_logs_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnType, location_name: 'CloudWatchLogsRoleArn', traits: {"smithy.api#required" => {}}))
@@ -1080,6 +1110,9 @@ module Aws::CognitoIdentityProvider
     DeleteResourceServerRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: 'UserPoolId', traits: {"smithy.api#required" => {}}))
     DeleteResourceServerRequest.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerIdentifierType, location_name: 'Identifier', traits: {"smithy.api#required" => {}}))
     DeleteResourceServerRequest.type = Types::DeleteResourceServerRequest
+    DeleteTermsRequest.add_member(:terms_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsIdType, location_name: 'TermsId', traits: {"smithy.api#required" => {}}))
+    DeleteTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: 'UserPoolId', traits: {"smithy.api#required" => {}}))
+    DeleteTermsRequest.type = Types::DeleteTermsRequest
     DeleteUserAttributesRequest.add_member(:user_attribute_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeNameListType, location_name: 'UserAttributeNames', traits: {"smithy.api#required" => {}}))
     DeleteUserAttributesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: 'AccessToken', traits: {"smithy.api#required" => {}}))
     DeleteUserAttributesRequest.type = Types::DeleteUserAttributesRequest
@@ -1131,6 +1164,11 @@ module Aws::CognitoIdentityProvider
     DescribeRiskConfigurationRequest.type = Types::DescribeRiskConfigurationRequest
     DescribeRiskConfigurationResponse.add_member(:risk_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RiskConfigurationType, location_name: 'RiskConfiguration', traits: {"smithy.api#required" => {}}))
     DescribeRiskConfigurationResponse.type = Types::DescribeRiskConfigurationResponse
+    DescribeTermsRequest.add_member(:terms_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsIdType, location_name: 'TermsId', traits: {"smithy.api#required" => {}}))
+    DescribeTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: 'UserPoolId', traits: {"smithy.api#required" => {}}))
+    DescribeTermsRequest.type = Types::DescribeTermsRequest
+    DescribeTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsType, location_name: 'Terms'))
+    DescribeTermsResponse.type = Types::DescribeTermsResponse
     DescribeUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: 'UserPoolId', traits: {"smithy.api#required" => {}}))
     DescribeUserImportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserImportJobIdType, location_name: 'JobId', traits: {"smithy.api#required" => {}}))
     DescribeUserImportJobRequest.type = Types::DescribeUserImportJobRequest
@@ -1415,6 +1453,8 @@ module Aws::CognitoIdentityProvider
     LambdaConfigType.type = Types::LambdaConfigType
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: 'message'))
     LimitExceededException.type = Types::LimitExceededException
+    LinksType.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LanguageIdType)
+    LinksType.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinkUrlType)
     ListDevicesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: 'AccessToken', traits: {"smithy.api#required" => {}}))
     ListDevicesRequest.add_member(:limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLimitType, location_name: 'Limit'))
     ListDevicesRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchPaginationTokenType, location_name: 'PaginationToken'))
@@ -1448,6 +1488,13 @@ module Aws::CognitoIdentityProvider
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: 'Tags'))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
+    ListTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: 'UserPoolId', traits: {"smithy.api#required" => {}}))
+    ListTermsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTermsRequestMaxResultsInteger, location_name: 'MaxResults'))
+    ListTermsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: 'NextToken'))
+    ListTermsRequest.type = Types::ListTermsRequest
+    ListTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsDescriptionListType, location_name: 'Terms', traits: {"smithy.api#required" => {}}))
+    ListTermsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringType, location_name: 'NextToken'))
+    ListTermsResponse.type = Types::ListTermsResponse
     ListUserImportJobsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: 'UserPoolId', traits: {"smithy.api#required" => {}}))
     ListUserImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PoolQueryLimitType, location_name: 'MaxResults', traits: {"smithy.api#required" => {}}))
     ListUserImportJobsRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: 'PaginationToken'))
@@ -1768,6 +1815,27 @@ module Aws::CognitoIdentityProvider
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: 'Tags', traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
+    TermsDescriptionListType.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsDescriptionType)
+    TermsDescriptionType.add_member(:terms_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsIdType, location_name: 'TermsId', traits: {"smithy.api#required" => {}}))
+    TermsDescriptionType.add_member(:terms_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsNameType, location_name: 'TermsName', traits: {"smithy.api#required" => {}}))
+    TermsDescriptionType.add_member(:enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsEnforcementType, location_name: 'Enforcement', traits: {"smithy.api#required" => {}}))
+    TermsDescriptionType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: 'CreationDate', traits: {"smithy.api#required" => {}}))
+    TermsDescriptionType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: 'LastModifiedDate', traits: {"smithy.api#required" => {}}))
+    TermsDescriptionType.type = Types::TermsDescriptionType
+    TermsEnforcementType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NONE', traits: {"smithy.api#enumValue" => "NONE"}))
+    TermsExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: 'message'))
+    TermsExistsException.type = Types::TermsExistsException
+    TermsSourceType.add_member(:link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LINK', traits: {"smithy.api#enumValue" => "LINK"}))
+    TermsType.add_member(:terms_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsIdType, location_name: 'TermsId', traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: 'UserPoolId', traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:client_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientIdType, location_name: 'ClientId', traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:terms_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsNameType, location_name: 'TermsName', traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:terms_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsSourceType, location_name: 'TermsSource', traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsEnforcementType, location_name: 'Enforcement', traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:links, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinksType, location_name: 'Links', traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: 'CreationDate', traits: {"smithy.api#required" => {}}))
+    TermsType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateType, location_name: 'LastModifiedDate', traits: {"smithy.api#required" => {}}))
+    TermsType.type = Types::TermsType
     TierChangeNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageType, location_name: 'message'))
     TierChangeNotAllowedException.type = Types::TierChangeNotAllowedException
     TimeUnitsType.add_member(:seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SECONDS', traits: {"smithy.api#enumValue" => "seconds"}))
@@ -1849,6 +1917,15 @@ module Aws::CognitoIdentityProvider
     UpdateResourceServerRequest.type = Types::UpdateResourceServerRequest
     UpdateResourceServerResponse.add_member(:resource_server, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerType, location_name: 'ResourceServer', traits: {"smithy.api#required" => {}}))
     UpdateResourceServerResponse.type = Types::UpdateResourceServerResponse
+    UpdateTermsRequest.add_member(:terms_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsIdType, location_name: 'TermsId', traits: {"smithy.api#required" => {}}))
+    UpdateTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: 'UserPoolId', traits: {"smithy.api#required" => {}}))
+    UpdateTermsRequest.add_member(:terms_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsNameType, location_name: 'TermsName'))
+    UpdateTermsRequest.add_member(:terms_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsSourceType, location_name: 'TermsSource'))
+    UpdateTermsRequest.add_member(:enforcement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsEnforcementType, location_name: 'Enforcement'))
+    UpdateTermsRequest.add_member(:links, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LinksType, location_name: 'Links'))
+    UpdateTermsRequest.type = Types::UpdateTermsRequest
+    UpdateTermsResponse.add_member(:terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsType, location_name: 'Terms'))
+    UpdateTermsResponse.type = Types::UpdateTermsResponse
     UpdateUserAttributesRequest.add_member(:user_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeListType, location_name: 'UserAttributes', traits: {"smithy.api#required" => {}}))
     UpdateUserAttributesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenModelType, location_name: 'AccessToken', traits: {"smithy.api#required" => {}}))
     UpdateUserAttributesRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: 'ClientMetadata'))
@@ -2719,6 +2796,21 @@ module Aws::CognitoIdentityProvider
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {}
       end)
+      service.add_operation(:create_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#CreateTerms"
+        operation.name = "CreateTerms"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTermsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateTermsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsExistsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.traits = {}
+      end)
       service.add_operation(:create_user_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#CreateUserImportJob"
         operation.name = "CreateUserImportJob"
@@ -2825,6 +2917,19 @@ module Aws::CognitoIdentityProvider
         operation.name = "DeleteResourceServer"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourceServerRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#DeleteTerms"
+        operation.name = "DeleteTerms"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteTermsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
@@ -2975,6 +3080,18 @@ module Aws::CognitoIdentityProvider
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPoolAddOnNotEnabledException)
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#DescribeTerms"
+        operation.name = "DescribeTerms"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTermsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeTermsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {}
       end)
       service.add_operation(:describe_user_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -3337,6 +3454,18 @@ module Aws::CognitoIdentityProvider
         operation.name = "ListTagsForResource"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.traits = {}
+      end)
+      service.add_operation(:list_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#ListTerms"
+        operation.name = "ListTerms"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTermsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTermsResponse)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
@@ -3739,6 +3868,20 @@ module Aws::CognitoIdentityProvider
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.traits = {}
+      end)
+      service.add_operation(:update_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#UpdateTerms"
+        operation.name = "UpdateTerms"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTermsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateTermsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalErrorException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermsExistsException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {}
       end)

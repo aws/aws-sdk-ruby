@@ -84,6 +84,14 @@ module Aws::SsmSap
       ?component_id: String
     ) -> _GetComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComponentResponse
 
+    interface _GetConfigurationCheckOperationResponse
+      include Smithy::Client::_Response[Types::GetConfigurationCheckOperationOutput]
+      def configuration_check_operation: () -> Types::ConfigurationCheckOperation?
+    end
+    def get_configuration_check_operation: (
+      ?operation_id: String
+    ) -> _GetConfigurationCheckOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationCheckOperationResponse
+
     interface _GetDatabaseResponse
       include Smithy::Client::_Response[Types::GetDatabaseOperationOutput]
       def database: () -> Types::Database?
@@ -141,6 +149,35 @@ module Aws::SsmSap
       ?max_results: Integer
     ) -> _ListComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentsResponse
 
+    interface _ListConfigurationCheckDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListConfigurationCheckDefinitionsOutput]
+      def configuration_checks: () -> Array[Types::ConfigurationCheckDefinition]?
+      def next_token: () -> String?
+    end
+    def list_configuration_check_definitions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConfigurationCheckDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationCheckDefinitionsResponse
+
+    interface _ListConfigurationCheckOperationsResponse
+      include Smithy::Client::_Response[Types::ListConfigurationCheckOperationsOutput]
+      def configuration_check_operations: () -> Array[Types::ConfigurationCheckOperation]?
+      def next_token: () -> String?
+    end
+    def list_configuration_check_operations: (
+      ?application_id: String,
+      ?list_mode: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          value: String,
+          operator: String
+        }
+      ]
+    ) -> _ListConfigurationCheckOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationCheckOperationsResponse
+
     interface _ListDatabasesResponse
       include Smithy::Client::_Response[Types::ListDatabasesOperationOutput]
       def databases: () -> Array[Types::DatabaseSummary]?
@@ -188,6 +225,28 @@ module Aws::SsmSap
         }
       ]
     ) -> _ListOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOperationsResponse
+
+    interface _ListSubCheckResultsResponse
+      include Smithy::Client::_Response[Types::ListSubCheckResultsOutput]
+      def sub_check_results: () -> Array[Types::SubCheckResult]?
+      def next_token: () -> String?
+    end
+    def list_sub_check_results: (
+      ?operation_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSubCheckResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubCheckResultsResponse
+
+    interface _ListSubCheckRuleResultsResponse
+      include Smithy::Client::_Response[Types::ListSubCheckRuleResultsOutput]
+      def rule_results: () -> Array[Types::RuleResult]?
+      def next_token: () -> String?
+    end
+    def list_sub_check_rule_results: (
+      ?sub_check_result_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSubCheckRuleResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubCheckRuleResultsResponse
 
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
@@ -251,6 +310,15 @@ module Aws::SsmSap
     def start_application_refresh: (
       ?application_id: String
     ) -> _StartApplicationRefreshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartApplicationRefreshResponse
+
+    interface _StartConfigurationChecksResponse
+      include Smithy::Client::_Response[Types::StartConfigurationChecksOutput]
+      def configuration_check_operations: () -> Array[Types::ConfigurationCheckOperation]?
+    end
+    def start_configuration_checks: (
+      ?application_id: String,
+      ?configuration_check_ids: Array[String]
+    ) -> _StartConfigurationChecksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartConfigurationChecksResponse
 
     interface _StopApplicationResponse
       include Smithy::Client::_Response[Types::StopApplicationOutput]

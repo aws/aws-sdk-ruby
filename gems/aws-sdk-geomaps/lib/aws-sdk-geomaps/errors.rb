@@ -24,6 +24,7 @@ module Aws::GeoMaps
   #
   # * {AccessDeniedException}
   # * {InternalServerException}
+  # * {ResourceNotFoundException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -32,8 +33,7 @@ module Aws::GeoMaps
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>The request was denied because of insufficient access or permissions. Check with an
-    #          administrator to verify your permissions.</p>
+    # <p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GeoMaps::Types::AccessDeniedException] data
@@ -46,8 +46,7 @@ module Aws::GeoMaps
       end
     end
 
-    # <p>The request processing has failed because of an unknown error, exception or
-    #          failure.</p>
+    # <p>The request processing has failed because of an unknown error, exception or failure.</p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GeoMaps::Types::InternalServerException] data
@@ -61,6 +60,19 @@ module Aws::GeoMaps
 
       def retryable?
         true
+      end
+    end
+
+    # <p>Exception thrown when the associated resource could not be found.</p>
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::GeoMaps::Types::ResourceNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super(context, data)
+      end
+
+      def message
+        @data[:message]
       end
     end
 

@@ -569,7 +569,7 @@ module Aws::MediaPackage
       service.id = "com.amazonaws.mediapackage#MediaPackage"
       service.name = "MediaPackage"
       service.version = "2017-10-12"
-      service.traits = {"aws.api#service" => {"sdkId" => "MediaPackage", "arnNamespace" => "mediapackage", "cloudFormationName" => "MediaPackage", "cloudTrailEventSource" => "mediapackage.amazonaws.com", "endpointPrefix" => "mediapackage"}, "aws.auth#sigv4" => {"name" => "mediapackage"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Elemental MediaPackage"}
+      service.traits = {"aws.api#service" => {"sdkId" => "MediaPackage", "arnNamespace" => "mediapackage", "cloudFormationName" => "MediaPackage", "cloudTrailEventSource" => "mediapackage.amazonaws.com", "endpointPrefix" => "mediapackage"}, "aws.auth#sigv4" => {"name" => "mediapackage"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AWS Elemental MediaPackage"}
       service.add_operation(:configure_logs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediapackage#ConfigureLogs"
         operation.name = "ConfigureLogs"

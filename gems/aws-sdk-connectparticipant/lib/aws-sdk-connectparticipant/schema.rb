@@ -15,6 +15,9 @@ module Aws::ConnectParticipant
     AttachmentName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#AttachmentName', name: 'AttachmentName', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     AttachmentSizeInBytes = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.connectparticipant#AttachmentSizeInBytes', name: 'AttachmentSizeInBytes', traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 1}})
     Attachments = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connectparticipant#Attachments', name: 'Attachments')
+    Attendee = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#Attendee', name: 'Attendee')
+    AttendeeId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#AttendeeId', name: 'AttendeeId')
+    AudioFeatures = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#AudioFeatures', name: 'AudioFeatures')
     AuthenticationUrl = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#AuthenticationUrl', name: 'AuthenticationUrl', traits: {"smithy.api#length" => {"min" => 1, "max" => 2083}})
     Bool = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.connectparticipant#Bool', name: 'Bool')
     CancelParticipantAuthenticationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#CancelParticipantAuthenticationRequest', name: 'CancelParticipantAuthenticationRequest')
@@ -45,11 +48,15 @@ module Aws::ConnectParticipant
     GetAuthenticationUrlResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#GetAuthenticationUrlResponse', name: 'GetAuthenticationUrlResponse')
     GetTranscriptRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#GetTranscriptRequest', name: 'GetTranscriptRequest')
     GetTranscriptResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#GetTranscriptResponse', name: 'GetTranscriptResponse')
+    GuidString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#GuidString', name: 'GuidString', traits: {"smithy.api#pattern" => "^[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}$"})
     ISO8601Datetime = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#ISO8601Datetime', name: 'ISO8601Datetime')
     Instant = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#Instant', name: 'Instant', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     Item = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#Item', name: 'Item')
+    JoinToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#JoinToken', name: 'JoinToken', traits: {"smithy.api#sensitive" => {}})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.connectparticipant#MaxResults', name: 'MaxResults', traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 100}})
+    MeetingFeatureStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connectparticipant#MeetingFeatureStatus', name: 'MeetingFeatureStatus')
+    MeetingFeaturesConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#MeetingFeaturesConfiguration', name: 'MeetingFeaturesConfiguration')
     Message = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#Message', name: 'Message')
     MessageMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#MessageMetadata', name: 'MessageMetadata')
     MostRecent = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.connectparticipant#MostRecent', name: 'MostRecent', traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 100}})
@@ -80,6 +87,7 @@ module Aws::ConnectParticipant
     StartPosition = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#StartPosition', name: 'StartPosition')
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#ThrottlingException', name: 'ThrottlingException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     Transcript = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connectparticipant#Transcript', name: 'Transcript')
+    URI = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#URI', name: 'URI', traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}})
     URLExpiryInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.connectparticipant#URLExpiryInSeconds', name: 'URLExpiryInSeconds', traits: {"smithy.api#range" => {"min" => 5, "max" => 300}})
     UploadMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#UploadMetadata', name: 'UploadMetadata')
     UploadMetadataSignedHeaders = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.connectparticipant#UploadMetadataSignedHeaders', name: 'UploadMetadataSignedHeaders')
@@ -97,6 +105,9 @@ module Aws::ConnectParticipant
     ViewTemplate = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#ViewTemplate', name: 'ViewTemplate', traits: {"smithy.api#sensitive" => {}})
     ViewToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectparticipant#ViewToken', name: 'ViewToken', traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}})
     ViewVersion = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.connectparticipant#ViewVersion', name: 'ViewVersion')
+    WebRTCConnection = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#WebRTCConnection', name: 'WebRTCConnection')
+    WebRTCMediaPlacement = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#WebRTCMediaPlacement', name: 'WebRTCMediaPlacement')
+    WebRTCMeeting = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#WebRTCMeeting', name: 'WebRTCMeeting')
     Websocket = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectparticipant#Websocket', name: 'Websocket')
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: 'Message', traits: {"smithy.api#required" => {}}))
@@ -111,6 +122,11 @@ module Aws::ConnectParticipant
     AttachmentItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArtifactStatus, location_name: 'Status'))
     AttachmentItem.type = Types::AttachmentItem
     Attachments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachmentItem)
+    Attendee.add_member(:attendee_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttendeeId, location_name: 'AttendeeId'))
+    Attendee.add_member(:join_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JoinToken, location_name: 'JoinToken'))
+    Attendee.type = Types::Attendee
+    AudioFeatures.add_member(:echo_reduction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeetingFeatureStatus, location_name: 'EchoReduction'))
+    AudioFeatures.type = Types::AudioFeatures
     CancelParticipantAuthenticationRequest.add_member(:session_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionId, location_name: 'SessionId', traits: {"smithy.api#required" => {}}))
     CancelParticipantAuthenticationRequest.add_member(:connection_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParticipantToken, location_name: 'ConnectionToken', traits: {"smithy.api#httpHeader" => "X-Amz-Bearer", "smithy.api#required" => {}}))
     CancelParticipantAuthenticationRequest.type = Types::CancelParticipantAuthenticationRequest
@@ -139,6 +155,7 @@ module Aws::ConnectParticipant
     ConnectionCredentials.type = Types::ConnectionCredentials
     ConnectionType.add_member(:websocket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'WEBSOCKET', traits: {"smithy.api#enumValue" => "WEBSOCKET"}))
     ConnectionType.add_member(:connection_credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CONNECTION_CREDENTIALS', traits: {"smithy.api#enumValue" => "CONNECTION_CREDENTIALS"}))
+    ConnectionType.add_member(:webrtc_connection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'WEBRTC_CONNECTION', traits: {"smithy.api#enumValue" => "WEBRTC_CONNECTION"}))
     ConnectionTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionType)
     CreateParticipantConnectionRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionTypeList, location_name: 'Type'))
     CreateParticipantConnectionRequest.add_member(:participant_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParticipantToken, location_name: 'ParticipantToken', traits: {"smithy.api#httpHeader" => "X-Amz-Bearer", "smithy.api#required" => {}}))
@@ -146,6 +163,7 @@ module Aws::ConnectParticipant
     CreateParticipantConnectionRequest.type = Types::CreateParticipantConnectionRequest
     CreateParticipantConnectionResponse.add_member(:websocket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Websocket, location_name: 'Websocket'))
     CreateParticipantConnectionResponse.add_member(:connection_credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionCredentials, location_name: 'ConnectionCredentials'))
+    CreateParticipantConnectionResponse.add_member(:web_rtc_connection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebRTCConnection, location_name: 'WebRTCConnection'))
     CreateParticipantConnectionResponse.type = Types::CreateParticipantConnectionResponse
     DescribeViewRequest.add_member(:view_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewToken, location_name: 'ViewToken', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeViewRequest.add_member(:connection_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParticipantToken, location_name: 'ConnectionToken', traits: {"smithy.api#httpHeader" => "X-Amz-Bearer", "smithy.api#required" => {}}))
@@ -197,6 +215,10 @@ module Aws::ConnectParticipant
     Item.add_member(:related_contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactId, location_name: 'RelatedContactId'))
     Item.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactId, location_name: 'ContactId'))
     Item.type = Types::Item
+    MeetingFeatureStatus.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AVAILABLE', traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    MeetingFeatureStatus.add_member(:unavailable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UNAVAILABLE', traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
+    MeetingFeaturesConfiguration.add_member(:audio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioFeatures, location_name: 'Audio'))
+    MeetingFeaturesConfiguration.type = Types::MeetingFeaturesConfiguration
     MessageMetadata.add_member(:message_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChatItemId, location_name: 'MessageId'))
     MessageMetadata.add_member(:receipts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Receipts, location_name: 'Receipts'))
     MessageMetadata.type = Types::MessageMetadata
@@ -279,6 +301,18 @@ module Aws::ConnectParticipant
     ViewContent.add_member(:template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewTemplate, location_name: 'Template'))
     ViewContent.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ViewActions, location_name: 'Actions'))
     ViewContent.type = Types::ViewContent
+    WebRTCConnection.add_member(:attendee, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attendee, location_name: 'Attendee'))
+    WebRTCConnection.add_member(:meeting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebRTCMeeting, location_name: 'Meeting'))
+    WebRTCConnection.type = Types::WebRTCConnection
+    WebRTCMediaPlacement.add_member(:audio_host_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: URI, location_name: 'AudioHostUrl'))
+    WebRTCMediaPlacement.add_member(:audio_fallback_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: URI, location_name: 'AudioFallbackUrl'))
+    WebRTCMediaPlacement.add_member(:signaling_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: URI, location_name: 'SignalingUrl'))
+    WebRTCMediaPlacement.add_member(:event_ingestion_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: URI, location_name: 'EventIngestionUrl'))
+    WebRTCMediaPlacement.type = Types::WebRTCMediaPlacement
+    WebRTCMeeting.add_member(:media_placement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebRTCMediaPlacement, location_name: 'MediaPlacement'))
+    WebRTCMeeting.add_member(:meeting_features, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: 'MeetingFeatures'))
+    WebRTCMeeting.add_member(:meeting_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuidString, location_name: 'MeetingId'))
+    WebRTCMeeting.type = Types::WebRTCMeeting
     Websocket.add_member(:url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreSignedConnectionUrl, location_name: 'Url'))
     Websocket.add_member(:connection_expiry, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: 'ConnectionExpiry'))
     Websocket.type = Types::Websocket

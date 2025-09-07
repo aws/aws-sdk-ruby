@@ -188,87 +188,42 @@ module Aws::GeoRoutes
       super
     end
 
-    # <p>Use the <code>CalculateIsolines</code> action to find service areas that can be reached
-    #          in a given threshold of time, distance.</p>
+    # <p>Use the <code>CalculateIsolines</code> action to find service areas that can be reached in a given threshold of time, distance.</p>
     # @param [Hash, Types::CalculateIsolinesRequest] params
     # @option params [Types::IsolineAllowOptions] :allow
     #   <p>Features that are allowed while calculating an isoline.</p>
     # @option params [String] :arrival_time
-    #   <p>Time of arrival at the destination.</p>
-    #            <p>Time format: <code>YYYY-MM-DDThh:mm:ss.sssZ |
-    #            YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of arrival at the destination.</p> <p>Time format: <code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Types::IsolineAvoidanceOptions] :avoid
-    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis.
-    #            If an avoidance can't be satisfied for a particular case, it violates the avoidance and the
-    #            returned response produces a notice for the violation.</p>
+    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.</p>
     # @option params [Boolean] :depart_now
     #   <p>Uses the current time as the time of departure.</p>
     # @option params [String] :departure_time
-    #   <p>Time of departure from thr origin.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Array<Float>] :destination
-    #   <p>The final position for the route. In the World Geodetic System (WGS 84) format:
-    #               <code>[longitude, latitude]</code>.</p>
+    #   <p>The final position for the route. In the World Geodetic System (WGS 84) format: <code>[longitude, latitude]</code>.</p>
     # @option params [Types::IsolineDestinationOptions] :destination_options
     #   <p>Destination related options.</p>
     # @option params [String] :isoline_geometry_format
-    #   <p>The format of the returned IsolineGeometry. </p>
-    #            <p>Default Value:<code>FlexiblePolyline</code>
-    #            </p>
+    #   <p>The format of the returned IsolineGeometry. </p> <p>Default Value:<code>FlexiblePolyline</code> </p>
     # @option params [Types::IsolineGranularityOptions] :isoline_granularity
     #   <p>Defines the granularity of the returned Isoline.</p>
     # @option params [String] :key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4
-    #            signature must be provided when making a request. </p>
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     # @option params [String] :optimize_isoline_for
-    #   <p>Specifies the optimization criteria for when calculating an isoline. AccurateCalculation
-    #            generates an isoline of higher granularity that is more precise. FastCalculation generates
-    #            an isoline faster by reducing the granularity, and in turn the quality of the isoline.
-    #            BalancedCalculation generates an isoline by balancing between quality and performance. </p>
-    #            <p>Default Value: <code>BalancedCalculation</code>
-    #            </p>
+    #   <p>Specifies the optimization criteria for when calculating an isoline. AccurateCalculation generates an isoline of higher granularity that is more precise. FastCalculation generates an isoline faster by reducing the granularity, and in turn the quality of the isoline. BalancedCalculation generates an isoline by balancing between quality and performance. </p> <p>Default Value: <code>BalancedCalculation</code> </p>
     # @option params [String] :optimize_routing_for
-    #   <p>Specifies the optimization criteria for calculating a route.</p>
-    #            <p>Default Value: <code>FastestRoute</code>
-    #            </p>
+    #   <p>Specifies the optimization criteria for calculating a route.</p> <p>Default Value: <code>FastestRoute</code> </p>
     # @option params [Array<Float>] :origin
     #   <p>The start position for the route.</p>
     # @option params [Types::IsolineOriginOptions] :origin_options
     #   <p>Origin related options.</p>
     # @option params [Types::IsolineThresholds] :thresholds
-    #   <p>Threshold to be used for the isoline calculation. Up to 3 thresholds per provided type
-    #            can be requested.</p>
-    #            <p> You incur a calculation charge for each threshold. Using a large amount of thresholds in a
-    #             request can lead you to incur unexpected charges. See
-    #             <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`">
-    #                 Amazon Location's pricing page</a> for more information.</p>
+    #   <p>Threshold to be used for the isoline calculation. Up to 3 thresholds per provided type can be requested.</p> <p> You incur a calculation charge for each threshold. Using a large amount of thresholds in a request can lead you to incur unexpected charges. See <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`"> Amazon Location's pricing page</a> for more information.</p>
     # @option params [Types::IsolineTrafficOptions] :traffic
     #   <p>Traffic related options.</p>
     # @option params [String] :travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <note>
-    #               <p> The mode <code>Scooter</code> also applies to motorcycles, set to
-    #                  <code>Scooter</code> when wanted to calculate options for motorcycles.</p>
-    #            </note>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <note> <p> The mode <code>Scooter</code> also applies to motorcycles, set to <code>Scooter</code> when wanted to calculate options for motorcycles.</p> </note> <p>Default Value: <code>Car</code> </p>
     # @option params [Types::IsolineTravelModeOptions] :travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
     # @example Request syntax with placeholder values
@@ -485,68 +440,32 @@ module Aws::GeoRoutes
       request.send_request(options)
     end
 
-    # <p> Use <code>CalculateRouteMatrix</code> to compute results for all pairs of Origins to
-    #          Destinations. Each row corresponds to one entry in Origins. Each entry in the row
-    #          corresponds to the route from that entry in Origins to an entry in Destinations
-    #          positions.</p>
+    # <p> Use <code>CalculateRouteMatrix</code> to compute results for all pairs of Origins to Destinations. Each row corresponds to one entry in Origins. Each entry in the row corresponds to the route from that entry in Origins to an entry in Destinations positions.</p>
     # @param [Hash, Types::CalculateRouteMatrixRequest] params
     # @option params [Types::RouteMatrixAllowOptions] :allow
     #   <p>Features that are allowed while calculating a route.</p>
     # @option params [Types::RouteMatrixAvoidanceOptions] :avoid
-    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis.
-    #            If an avoidance can't be satisfied for a particular case, it violates the avoidance and the
-    #            returned response produces a notice for the violation.</p>
+    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.</p>
     # @option params [Boolean] :depart_now
     #   <p>Uses the current time as the time of departure.</p>
     # @option params [String] :departure_time
-    #   <p>Time of departure from thr origin.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Array<Types::RouteMatrixDestination>] :destinations
-    #   <p>List of destinations for the route.</p>
-    #            <note>
-    #               <p>Route calculations are billed for each origin and destination pair. If you use a large matrix of origins and destinations, your costs will increase accordingly. See
-    #               <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`">
-    #                   Amazon Location's pricing page</a> for more information.</p>
-    #            </note>
+    #   <p>List of destinations for the route.</p> <note> <p>Route calculations are billed for each origin and destination pair. If you use a large matrix of origins and destinations, your costs will increase accordingly. See <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`"> Amazon Location's pricing page</a> for more information.</p> </note>
     # @option params [Types::RouteMatrixExclusionOptions] :exclude
     #   <p>Features to be strictly excluded while calculating the route.</p>
     # @option params [String] :key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4
-    #            signature must be provided when making a request. </p>
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     # @option params [String] :optimize_routing_for
-    #   <p>Specifies the optimization criteria for calculating a route.</p>
-    #            <p>Default Value: <code>FastestRoute</code>
-    #            </p>
+    #   <p>Specifies the optimization criteria for calculating a route.</p> <p>Default Value: <code>FastestRoute</code> </p>
     # @option params [Array<Types::RouteMatrixOrigin>] :origins
-    #   <p>The position in longitude and latitude for the origin.</p>
-    #            <note>
-    #               <p>Route calculations are billed for each origin and destination pair. Using a large amount of Origins in a
-    #               request can lead you to incur unexpected charges. See
-    #               <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`">
-    #                   Amazon Location's pricing page</a> for more information.</p>
-    #            </note>
+    #   <p>The position in longitude and latitude for the origin.</p> <note> <p>Route calculations are billed for each origin and destination pair. Using a large amount of Origins in a request can lead you to incur unexpected charges. See <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`"> Amazon Location's pricing page</a> for more information.</p> </note>
     # @option params [Types::RouteMatrixBoundary] :routing_boundary
-    #   <p>Boundary within which the matrix is to be calculated. All data, origins and destinations
-    #            outside the boundary are considered invalid.</p>
-    #            <note>
-    #               <p>When request routing boundary was set as AutoCircle, the response routing boundary
-    #               will return Circle derived from the AutoCircle settings.</p>
-    #            </note>
+    #   <p>Boundary within which the matrix is to be calculated. All data, origins and destinations outside the boundary are considered invalid.</p> <note> <p>When request routing boundary was set as AutoCircle, the response routing boundary will return Circle derived from the AutoCircle settings.</p> </note>
     # @option params [Types::RouteMatrixTrafficOptions] :traffic
     #   <p>Traffic related options.</p>
     # @option params [String] :travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
     # @option params [Types::RouteMatrixTravelModeOptions] :travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
     # @example Request syntax with placeholder values
@@ -740,43 +659,20 @@ module Aws::GeoRoutes
       request.send_request(options)
     end
 
-    # <p>
-    #             <code>CalculateRoutes</code> computes routes given the following required parameters:
-    #             <code>Origin</code> and <code>Destination</code>.</p>
+    # <p> <code>CalculateRoutes</code> computes routes given the following required parameters: <code>Origin</code> and <code>Destination</code>.</p>
     # @param [Hash, Types::CalculateRoutesRequest] params
     # @option params [Types::RouteAllowOptions] :allow
     #   <p>Features that are allowed while calculating a route.</p>
     # @option params [String] :arrival_time
-    #   <p>Time of arrival at the destination.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of arrival at the destination.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Types::RouteAvoidanceOptions] :avoid
-    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis.
-    #            If an avoidance can't be satisfied for a particular case, it violates the avoidance and the
-    #            returned response produces a notice for the violation.</p>
+    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.</p>
     # @option params [Boolean] :depart_now
     #   <p>Uses the current time as the time of departure.</p>
     # @option params [String] :departure_time
-    #   <p>Time of departure from thr origin.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Array<Float>] :destination
-    #   <p>The final position for the route. In the World Geodetic System (WGS 84) format:
-    #               <code>[longitude, latitude]</code>.</p>
+    #   <p>The final position for the route. In the World Geodetic System (WGS 84) format: <code>[longitude, latitude]</code>.</p>
     # @option params [Types::RouteDestinationOptions] :destination_options
     #   <p>Destination related options.</p>
     # @option params [Types::RouteDriverOptions] :driver
@@ -786,102 +682,33 @@ module Aws::GeoRoutes
     # @option params [String] :instructions_measurement_system
     #   <p>Measurement system to be used for instructions within steps in the response.</p>
     # @option params [String] :key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4
-    #            signature must be provided when making a request. </p>
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     # @option params [Array<String>] :languages
-    #   <p>List of languages for instructions within steps in the response.</p>
-    #            <note>
-    #               <p>Instructions in the requested language are returned only if they are
-    #               available.</p>
-    #            </note>
+    #   <p>List of languages for instructions within steps in the response.</p> <note> <p>Instructions in the requested language are returned only if they are available.</p> </note>
     # @option params [Array<String>] :leg_additional_features
-    #   <p>A list of optional additional parameters such as timezone that can be requested for each
-    #            result.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>Elevation</code>: Retrieves the elevation information for each
-    #                  location.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Incidents</code>: Provides information on traffic incidents along the
-    #                  route.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>PassThroughWaypoints</code>: Indicates waypoints that are passed through
-    #                  without stopping.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Summary</code>: Returns a summary of the route, including distance and
-    #                  duration.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Tolls</code>: Supplies toll cost information along the route.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>TravelStepInstructions</code>: Provides step-by-step instructions for travel
-    #                  along the route.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>TruckRoadTypes</code>: Returns information about road types suitable for
-    #                  trucks.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>TypicalDuration</code>: Gives typical travel duration based on historical
-    #                  data.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Zones</code>: Specifies the time zone information for each waypoint.</p>
-    #               </li>
-    #            </ul>
+    #   <p>A list of optional additional parameters such as timezone that can be requested for each result.</p> <ul> <li> <p> <code>Elevation</code>: Retrieves the elevation information for each location.</p> </li> <li> <p> <code>Incidents</code>: Provides information on traffic incidents along the route.</p> </li> <li> <p> <code>PassThroughWaypoints</code>: Indicates waypoints that are passed through without stopping.</p> </li> <li> <p> <code>Summary</code>: Returns a summary of the route, including distance and duration.</p> </li> <li> <p> <code>Tolls</code>: Supplies toll cost information along the route.</p> </li> <li> <p> <code>TravelStepInstructions</code>: Provides step-by-step instructions for travel along the route.</p> </li> <li> <p> <code>TruckRoadTypes</code>: Returns information about road types suitable for trucks.</p> </li> <li> <p> <code>TypicalDuration</code>: Gives typical travel duration based on historical data.</p> </li> <li> <p> <code>Zones</code>: Specifies the time zone information for each waypoint.</p> </li> </ul>
     # @option params [String] :leg_geometry_format
-    #   <p>Specifies the format of the geometry returned for each leg of the route. You can choose
-    #            between two different geometry encoding formats.</p>
-    #            <p>
-    #               <code>FlexiblePolyline</code>: A compact and precise encoding format for the leg
-    #            geometry. For more information on the format, see the GitHub repository for <a href="https://github.com/heremaps/flexible-polyline">
-    #                  <code>FlexiblePolyline</code>
-    #               </a>.</p>
-    #            <p>
-    #               <code>Simple</code>: A less compact encoding, which is easier to decode but may be less
-    #            precise and result in larger payloads.</p>
+    #   <p>Specifies the format of the geometry returned for each leg of the route. You can choose between two different geometry encoding formats.</p> <p> <code>FlexiblePolyline</code>: A compact and precise encoding format for the leg geometry. For more information on the format, see the GitHub repository for <a href="https://github.com/heremaps/flexible-polyline"> <code>FlexiblePolyline</code> </a>.</p> <p> <code>Simple</code>: A less compact encoding, which is easier to decode but may be less precise and result in larger payloads.</p>
     # @option params [Integer] :max_alternatives
-    #   <p>Maximum number of alternative routes to be provided in the response, if
-    #            available.</p>
+    #   <p>Maximum number of alternative routes to be provided in the response, if available.</p>
     # @option params [String] :optimize_routing_for
-    #   <p>Specifies the optimization criteria for calculating a route.</p>
-    #            <p>Default Value: <code>FastestRoute</code>
-    #            </p>
+    #   <p>Specifies the optimization criteria for calculating a route.</p> <p>Default Value: <code>FastestRoute</code> </p>
     # @option params [Array<Float>] :origin
     #   <p>The start position for the route.</p>
     # @option params [Types::RouteOriginOptions] :origin_options
     #   <p>Origin related options.</p>
     # @option params [Array<String>] :span_additional_features
-    #   <p>A list of optional features such as SpeedLimit that can be requested for a Span. A span
-    #            is a section of a Leg for which the requested features have the same values.</p>
+    #   <p>A list of optional features such as SpeedLimit that can be requested for a Span. A span is a section of a Leg for which the requested features have the same values.</p>
     # @option params [Types::RouteTollOptions] :tolls
     #   <p>Toll related options.</p>
     # @option params [Types::RouteTrafficOptions] :traffic
     #   <p>Traffic related options.</p>
     # @option params [String] :travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
     # @option params [Types::RouteTravelModeOptions] :travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
     # @option params [String] :travel_step_type
-    #   <p>Type of step returned by the response. Default provides basic steps intended for web
-    #            based applications. TurnByTurn provides detailed instructions with more granularity
-    #            intended for a turn based navigation system.</p>
+    #   <p>Type of step returned by the response. Default provides basic steps intended for web based applications. TurnByTurn provides detailed instructions with more granularity intended for a turn based navigation system.</p>
     # @option params [Array<Types::RouteWaypoint>] :waypoints
     #   <p>List of waypoints between the Origin and Destination.</p>
     # @example Request syntax with placeholder values
@@ -1011,8 +838,8 @@ module Aws::GeoRoutes
     #       all_vignettes: false,
     #       currency: "CurrencyCode",
     #       emission_type: {
-    #         co2_emission_class: "String",
-    #         type: "String", # required
+    #         co2_emission_class: "SensitiveString",
+    #         type: "SensitiveString", # required
     #       },
     #       vehicle_category: "RouteTollVehicleCategory"
     #     },
@@ -1025,7 +852,7 @@ module Aws::GeoRoutes
     #       car: {
     #         engine_type: "RouteEngineType",
     #         license_plate: {
-    #           last_character: "String"
+    #           last_character: "SensitiveString"
     #         },
     #         max_speed: 1.0,
     #         occupancy: 1
@@ -1036,7 +863,7 @@ module Aws::GeoRoutes
     #       scooter: {
     #         engine_type: "RouteEngineType",
     #         license_plate: {
-    #           last_character: "String"
+    #           last_character: "SensitiveString"
     #         },
     #         max_speed: 1.0,
     #         occupancy: 1
@@ -1051,7 +878,7 @@ module Aws::GeoRoutes
     #         kpra_length: 1,
     #         length: 1,
     #         license_plate: {
-    #           last_character: "String"
+    #           last_character: "SensitiveString"
     #         },
     #         max_speed: 1.0,
     #         occupancy: 1,
@@ -1117,13 +944,13 @@ module Aws::GeoRoutes
     #               after_travel_steps: [ # required
     #                 {
     #                   duration: 1, # required
-    #                   instruction: "String",
+    #                   instruction: "SensitiveString",
     #                   type: "RouteFerryAfterTravelStepType", # required
     #                 }
     #               ],
     #               arrival: { # required
     #                 place: { # required
-    #                   name: "String",
+    #                   name: "SensitiveString",
     #                   original_position: [1.0],
     #                   position: [1.0], # required
     #                   waypoint_index: 1
@@ -1133,13 +960,13 @@ module Aws::GeoRoutes
     #               before_travel_steps: [ # required
     #                 {
     #                   duration: 1, # required
-    #                   instruction: "String",
+    #                   instruction: "SensitiveString",
     #                   type: "RouteFerryBeforeTravelStepType", # required
     #                 }
     #               ],
     #               departure: { # required
     #                 place: { # required
-    #                   name: "String",
+    #                   name: "SensitiveString",
     #                   original_position: [1.0],
     #                   position: [1.0], # required
     #                   waypoint_index: 1
@@ -1162,7 +989,7 @@ module Aws::GeoRoutes
     #                   }
     #                 }
     #               ],
-    #               route_name: "String",
+    #               route_name: "SensitiveString",
     #               spans: [ # required
     #                 {
     #                   country: "CountryCode3",
@@ -1172,10 +999,10 @@ module Aws::GeoRoutes
     #                   names: [
     #                     {
     #                       language: "LanguageTag",
-    #                       value: "String", # required
+    #                       value: "SensitiveString", # required
     #                     }
     #                   ],
-    #                   region: "String"
+    #                   region: "SensitiveString"
     #                 }
     #               ],
     #               summary: {
@@ -1192,7 +1019,7 @@ module Aws::GeoRoutes
     #                   distance: 1,
     #                   duration: 1, # required
     #                   geometry_offset: 1,
-    #                   instruction: "String",
+    #                   instruction: "SensitiveString",
     #                   type: "RouteFerryTravelStepType", # required
     #                 }
     #               ]
@@ -1207,7 +1034,7 @@ module Aws::GeoRoutes
     #             pedestrian_leg_details: {
     #               arrival: { # required
     #                 place: { # required
-    #                   name: "String",
+    #                   name: "SensitiveString",
     #                   original_position: [1.0],
     #                   position: [1.0], # required
     #                   side_of_street: "RouteSideOfStreet",
@@ -1217,7 +1044,7 @@ module Aws::GeoRoutes
     #               },
     #               departure: { # required
     #                 place: { # required
-    #                   name: "String",
+    #                   name: "SensitiveString",
     #                   original_position: [1.0],
     #                   position: [1.0], # required
     #                   side_of_street: "RouteSideOfStreet",
@@ -1258,17 +1085,17 @@ module Aws::GeoRoutes
     #                   names: [
     #                     {
     #                       language: "LanguageTag",
-    #                       value: "String", # required
+    #                       value: "SensitiveString", # required
     #                     }
     #                   ],
     #                   pedestrian_access: ["RouteSpanPedestrianAccessAttribute"],
-    #                   region: "String",
+    #                   region: "SensitiveString",
     #                   road_attributes: ["RouteSpanRoadAttribute"],
     #                   route_numbers: [
     #                     {
     #                       direction: "RouteDirection",
     #                       language: "LanguageTag",
-    #                       value: "String", # required
+    #                       value: "SensitiveString", # required
     #                     }
     #                   ],
     #                   speed_limit: {
@@ -1293,7 +1120,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ]
     #                   },
@@ -1301,20 +1128,20 @@ module Aws::GeoRoutes
     #                     road_name: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     route_number: [ # required
     #                       {
     #                         direction: "RouteDirection",
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     towards: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     type: "RouteRoadType"
@@ -1324,16 +1151,16 @@ module Aws::GeoRoutes
     #                   exit_number: [
     #                     {
     #                       language: "LanguageTag",
-    #                       value: "String", # required
+    #                       value: "SensitiveString", # required
     #                     }
     #                   ],
     #                   geometry_offset: 1,
-    #                   instruction: "String",
+    #                   instruction: "SensitiveString",
     #                   keep_step_details: {
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1344,20 +1171,20 @@ module Aws::GeoRoutes
     #                     road_name: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     route_number: [ # required
     #                       {
     #                         direction: "RouteDirection",
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     towards: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     type: "RouteRoadType"
@@ -1366,7 +1193,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1377,7 +1204,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     relative_exit: 1,
@@ -1388,7 +1215,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1401,11 +1228,11 @@ module Aws::GeoRoutes
     #                         route_number: {
     #                           direction: "RouteDirection",
     #                           language: "LanguageTag",
-    #                           value: "String", # required
+    #                           value: "SensitiveString", # required
     #                         },
     #                         text: {
     #                           language: "LanguageTag",
-    #                           value: "String", # required
+    #                           value: "SensitiveString", # required
     #                         }
     #                       }
     #                     ]
@@ -1414,7 +1241,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1430,7 +1257,7 @@ module Aws::GeoRoutes
     #             vehicle_leg_details: {
     #               arrival: { # required
     #                 place: { # required
-    #                   name: "String",
+    #                   name: "SensitiveString",
     #                   original_position: [1.0],
     #                   position: [1.0], # required
     #                   side_of_street: "RouteSideOfStreet",
@@ -1440,7 +1267,7 @@ module Aws::GeoRoutes
     #               },
     #               departure: { # required
     #                 place: { # required
-    #                   name: "String",
+    #                   name: "SensitiveString",
     #                   original_position: [1.0],
     #                   position: [1.0], # required
     #                   side_of_street: "RouteSideOfStreet",
@@ -1450,7 +1277,7 @@ module Aws::GeoRoutes
     #               },
     #               incidents: [ # required
     #                 {
-    #                   description: "String",
+    #                   description: "SensitiveString",
     #                   end_time: "TimestampWithTimezoneOffset",
     #                   severity: "RouteVehicleIncidentSeverity",
     #                   start_time: "TimestampWithTimezoneOffset",
@@ -1462,7 +1289,7 @@ module Aws::GeoRoutes
     #                   code: "RouteVehicleNoticeCode", # required
     #                   details: [ # required
     #                     {
-    #                       title: "String",
+    #                       title: "SensitiveString",
     #                       violated_constraints: {
     #                         all_hazards_restricted: false,
     #                         axle_count: {
@@ -1536,18 +1363,18 @@ module Aws::GeoRoutes
     #                   names: [
     #                     {
     #                       language: "LanguageTag",
-    #                       value: "String", # required
+    #                       value: "SensitiveString", # required
     #                     }
     #                   ],
     #                   notices: [1],
     #                   railway_crossing: "RouteSpanRailwayCrossingAttribute",
-    #                   region: "String",
+    #                   region: "SensitiveString",
     #                   road_attributes: ["RouteSpanRoadAttribute"],
     #                   route_numbers: [
     #                     {
     #                       direction: "RouteDirection",
     #                       language: "LanguageTag",
-    #                       value: "String", # required
+    #                       value: "SensitiveString", # required
     #                     }
     #                   ],
     #                   scooter_access: ["RouteSpanScooterAccessAttribute"],
@@ -1586,7 +1413,7 @@ module Aws::GeoRoutes
     #                   ],
     #                   rates: [ # required
     #                     {
-    #                       applicable_times: "String",
+    #                       applicable_times: "SensitiveString",
     #                       converted_price: {
     #                         currency: "CurrencyCode", # required
     #                         estimate: false, # required
@@ -1598,7 +1425,7 @@ module Aws::GeoRoutes
     #                         },
     #                         value: 1.0, # required
     #                       },
-    #                       id: "String", # required
+    #                       id: "SensitiveString", # required
     #                       local_price: { # required
     #                         currency: "CurrencyCode", # required
     #                         estimate: false, # required
@@ -1610,7 +1437,7 @@ module Aws::GeoRoutes
     #                         },
     #                         value: 1.0, # required
     #                       },
-    #                       name: "String", # required
+    #                       name: "SensitiveString", # required
     #                       pass: {
     #                         includes_return_trip: false,
     #                         senior_pass: false,
@@ -1624,7 +1451,7 @@ module Aws::GeoRoutes
     #                       payment_methods: ["RouteTollPaymentMethod"], # required
     #                       transponders: [ # required
     #                         {
-    #                           system_name: "String"
+    #                           system_name: "SensitiveString"
     #                         }
     #                       ]
     #                     }
@@ -1634,7 +1461,7 @@ module Aws::GeoRoutes
     #               ],
     #               toll_systems: [ # required
     #                 {
-    #                   name: "String"
+    #                   name: "SensitiveString"
     #                 }
     #               ],
     #               travel_steps: [ # required
@@ -1643,7 +1470,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1654,7 +1481,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ]
     #                   },
@@ -1662,20 +1489,20 @@ module Aws::GeoRoutes
     #                     road_name: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     route_number: [ # required
     #                       {
     #                         direction: "RouteDirection",
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     towards: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     type: "RouteRoadType"
@@ -1686,7 +1513,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1696,14 +1523,14 @@ module Aws::GeoRoutes
     #                   exit_number: [
     #                     {
     #                       language: "LanguageTag",
-    #                       value: "String", # required
+    #                       value: "SensitiveString", # required
     #                     }
     #                   ],
     #                   exit_step_details: {
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     relative_exit: 1,
@@ -1712,12 +1539,12 @@ module Aws::GeoRoutes
     #                     turn_intensity: "RouteTurnIntensity"
     #                   },
     #                   geometry_offset: 1,
-    #                   instruction: "String",
+    #                   instruction: "SensitiveString",
     #                   keep_step_details: {
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1728,20 +1555,20 @@ module Aws::GeoRoutes
     #                     road_name: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     route_number: [ # required
     #                       {
     #                         direction: "RouteDirection",
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     towards: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     type: "RouteRoadType"
@@ -1750,7 +1577,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1761,7 +1588,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1772,7 +1599,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     relative_exit: 1,
@@ -1783,7 +1610,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1796,11 +1623,11 @@ module Aws::GeoRoutes
     #                         route_number: {
     #                           direction: "RouteDirection",
     #                           language: "LanguageTag",
-    #                           value: "String", # required
+    #                           value: "SensitiveString", # required
     #                         },
     #                         text: {
     #                           language: "LanguageTag",
-    #                           value: "String", # required
+    #                           value: "SensitiveString", # required
     #                         }
     #                       }
     #                     ]
@@ -1809,7 +1636,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1821,7 +1648,7 @@ module Aws::GeoRoutes
     #                     intersection: [ # required
     #                       {
     #                         language: "LanguageTag",
-    #                         value: "String", # required
+    #                         value: "SensitiveString", # required
     #                       }
     #                     ],
     #                     steering_direction: "RouteSteeringDirection",
@@ -1834,7 +1661,7 @@ module Aws::GeoRoutes
     #               zones: [ # required
     #                 {
     #                   category: "RouteZoneCategory",
-    #                   name: "String"
+    #                   name: "SensitiveString"
     #                 }
     #               ]
     #             }
@@ -1844,12 +1671,12 @@ module Aws::GeoRoutes
     #           {
     #             road_name: {
     #               language: "LanguageTag",
-    #               value: "String", # required
+    #               value: "SensitiveString", # required
     #             },
     #             route_number: {
     #               direction: "RouteDirection",
     #               language: "LanguageTag",
-    #               value: "String", # required
+    #               value: "SensitiveString", # required
     #             }
     #           }
     #         ],
@@ -1878,31 +1705,16 @@ module Aws::GeoRoutes
       request.send_request(options)
     end
 
-    # <p>
-    #             <code>OptimizeWaypoints</code> calculates the optimal order to travel between a set of
-    #          waypoints to minimize either the travel time or the distance travelled during the journey,
-    #          based on road network restrictions and the traffic pattern data.</p>
+    # <p> <code>OptimizeWaypoints</code> calculates the optimal order to travel between a set of waypoints to minimize either the travel time or the distance travelled during the journey, based on road network restrictions and the traffic pattern data.</p>
     # @param [Hash, Types::OptimizeWaypointsRequest] params
     # @option params [Types::WaypointOptimizationAvoidanceOptions] :avoid
-    #   <p>Features that are avoided. Avoidance is on a best-case basis. If an avoidance can't be
-    #            satisfied for a particular case, this setting is ignored.</p>
+    #   <p>Features that are avoided. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, this setting is ignored.</p>
     # @option params [Types::WaypointOptimizationClusteringOptions] :clustering
-    #   <p>Clustering allows you to specify how nearby waypoints can be clustered to improve the
-    #            optimized sequence.</p>
+    #   <p>Clustering allows you to specify how nearby waypoints can be clustered to improve the optimized sequence.</p>
     # @option params [String] :departure_time
-    #   <p>Departure time from the waypoint.</p>
-    #            <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>
-    #            </p>
-    #            <p>Examples:</p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24Z</code>
-    #            </p>
-    #            <p>
-    #               <code>2020-04-22T17:57:24+02:00</code>
-    #            </p>
+    #   <p>Departure time from the waypoint.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Array<Float>] :destination
-    #   <p>The final position for the route in the World Geodetic System (WGS 84) format:
-    #               <code>[longitude, latitude]</code>.</p>
+    #   <p>The final position for the route in the World Geodetic System (WGS 84) format: <code>[longitude, latitude]</code>.</p>
     # @option params [Types::WaypointOptimizationDestinationOptions] :destination_options
     #   <p>Destination related options.</p>
     # @option params [Types::WaypointOptimizationDriverOptions] :driver
@@ -1910,11 +1722,9 @@ module Aws::GeoRoutes
     # @option params [Types::WaypointOptimizationExclusionOptions] :exclude
     #   <p>Features to be strictly excluded while calculating the route.</p>
     # @option params [String] :key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4
-    #            signature must be provided when making a request. </p>
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     # @option params [String] :optimize_sequencing_for
-    #   <p>Specifies the optimization criteria for the calculated sequence.</p>
-    #            <p>Default Value: <code>FastestRoute</code>.</p>
+    #   <p>Specifies the optimization criteria for the calculated sequence.</p> <p>Default Value: <code>FastestRoute</code>.</p>
     # @option params [Array<Float>] :origin
     #   <p>The start position for the route.</p>
     # @option params [Types::WaypointOptimizationOriginOptions] :origin_options
@@ -1922,10 +1732,7 @@ module Aws::GeoRoutes
     # @option params [Types::WaypointOptimizationTrafficOptions] :traffic
     #   <p>Traffic-related options.</p>
     # @option params [String] :travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
     # @option params [Types::WaypointOptimizationTravelModeOptions] :travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
     # @option params [Array<Types::WaypointOptimizationWaypoint>] :waypoints
@@ -1988,7 +1795,7 @@ module Aws::GeoRoutes
     #         }
     #       },
     #       rest_profile: {
-    #         profile: "String", # required
+    #         profile: "SensitiveString", # required
     #       },
     #       treat_service_time_as: "WaypointOptimizationServiceTimeTreatment"
     #     },
@@ -2070,7 +1877,7 @@ module Aws::GeoRoutes
     #         failed_constraints: [ # required
     #           {
     #             constraint: "WaypointOptimizationConstraint",
-    #             reason: "String"
+    #             reason: "SensitiveString"
     #           }
     #         ],
     #         id: "WaypointId", # required
@@ -2100,30 +1907,18 @@ module Aws::GeoRoutes
       request.send_request(options)
     end
 
-    # <p>
-    #             <code>SnapToRoads</code> matches GPS trace to roads most likely traveled on.</p>
+    # <p> <code>SnapToRoads</code> matches GPS trace to roads most likely traveled on.</p>
     # @param [Hash, Types::SnapToRoadsRequest] params
     # @option params [String] :key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4
-    #            signature must be provided when making a request. </p>
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     # @option params [String] :snapped_geometry_format
-    #   <p>Chooses what the returned SnappedGeometry format should be.</p>
-    #            <p>Default Value: <code>FlexiblePolyline</code>
-    #            </p>
+    #   <p>Chooses what the returned SnappedGeometry format should be.</p> <p>Default Value: <code>FlexiblePolyline</code> </p>
     # @option params [Integer] :snap_radius
-    #   <p>The radius around the provided tracepoint that is considered for snapping.</p>
-    #            <p>
-    #               <b>Unit</b>: <code>meters</code>
-    #            </p>
-    #            <p>Default value: <code>300</code>
-    #            </p>
+    #   <p>The radius around the provided tracepoint that is considered for snapping.</p> <p> <b>Unit</b>: <code>meters</code> </p> <p>Default value: <code>300</code> </p>
     # @option params [Array<Types::RoadSnapTracePoint>] :trace_points
     #   <p>List of trace points to be snapped onto the road network.</p>
     # @option params [String] :travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed
-    #            of travel and road compatibility.</p>
-    #            <p>Default Value: <code>Car</code>
-    #            </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
     # @option params [Types::RoadSnapTravelModeOptions] :travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
     # @example Request syntax with placeholder values
@@ -2162,7 +1957,7 @@ module Aws::GeoRoutes
     #     notices: [ # required
     #       {
     #         code: "RoadSnapNoticeCode", # required
-    #         title: "String", # required
+    #         title: "SensitiveString", # required
     #         trace_point_indexes: [1], # required
     #       }
     #     ],

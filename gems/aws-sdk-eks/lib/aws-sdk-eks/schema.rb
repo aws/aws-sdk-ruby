@@ -23,6 +23,8 @@ module Aws::EKS
     AddonIssue = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#AddonIssue', name: 'AddonIssue')
     AddonIssueCode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.eks#AddonIssueCode', name: 'AddonIssueCode')
     AddonIssueList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.eks#AddonIssueList', name: 'AddonIssueList')
+    AddonNamespaceConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#AddonNamespaceConfigRequest', name: 'AddonNamespaceConfigRequest')
+    AddonNamespaceConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#AddonNamespaceConfigResponse', name: 'AddonNamespaceConfigResponse')
     AddonPodIdentityAssociations = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#AddonPodIdentityAssociations', name: 'AddonPodIdentityAssociations')
     AddonPodIdentityAssociationsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.eks#AddonPodIdentityAssociationsList', name: 'AddonPodIdentityAssociationsList')
     AddonPodIdentityConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#AddonPodIdentityConfiguration', name: 'AddonPodIdentityConfiguration')
@@ -129,6 +131,8 @@ module Aws::EKS
     DescribeIdentityProviderConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#DescribeIdentityProviderConfigResponse', name: 'DescribeIdentityProviderConfigResponse')
     DescribeInsightRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#DescribeInsightRequest', name: 'DescribeInsightRequest')
     DescribeInsightResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#DescribeInsightResponse', name: 'DescribeInsightResponse')
+    DescribeInsightsRefreshRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#DescribeInsightsRefreshRequest', name: 'DescribeInsightsRefreshRequest')
+    DescribeInsightsRefreshResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#DescribeInsightsRefreshResponse', name: 'DescribeInsightsRefreshResponse')
     DescribeNodegroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#DescribeNodegroupRequest', name: 'DescribeNodegroupRequest')
     DescribeNodegroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#DescribeNodegroupResponse', name: 'DescribeNodegroupResponse')
     DescribePodIdentityAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#DescribePodIdentityAssociationRequest', name: 'DescribePodIdentityAssociationRequest')
@@ -178,6 +182,7 @@ module Aws::EKS
     InsightSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.eks#InsightSummaries', name: 'InsightSummaries')
     InsightSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#InsightSummary', name: 'InsightSummary')
     InsightsFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#InsightsFilter', name: 'InsightsFilter')
+    InsightsRefreshStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.eks#InsightsRefreshStatus', name: 'InsightsRefreshStatus')
     Integer = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.eks#Integer', name: 'Integer', traits: {"smithy.api#default" => 0})
     InvalidParameterException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#InvalidParameterException', name: 'InvalidParameterException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#InvalidRequestException', name: 'InvalidRequestException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -271,6 +276,8 @@ module Aws::EKS
     RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.eks#RoleArn', name: 'RoleArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     ServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#ServerException', name: 'ServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     ServiceUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#ServiceUnavailableException', name: 'ServiceUnavailableException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 503})
+    StartInsightsRefreshRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#StartInsightsRefreshRequest', name: 'StartInsightsRefreshRequest')
+    StartInsightsRefreshResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#StartInsightsRefreshResponse', name: 'StartInsightsRefreshResponse')
     StorageConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#StorageConfigRequest', name: 'StorageConfigRequest')
     StorageConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.eks#StorageConfigResponse', name: 'StorageConfigResponse')
     String = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.eks#String', name: 'String')
@@ -327,6 +334,7 @@ module Aws::EKS
     LabelValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.eks#labelValue', name: 'LabelValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 63}})
     LabelsKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.eks#labelsKeyList', name: 'LabelsKeyList')
     LabelsMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.eks#labelsMap', name: 'LabelsMap')
+    Namespace = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.eks#namespace', name: 'Namespace', traits: {"smithy.api#length" => {"min" => 1, "max" => 63}})
     RequiredClaimsKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.eks#requiredClaimsKey', name: 'RequiredClaimsKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 63}})
     RequiredClaimsMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.eks#requiredClaimsMap', name: 'RequiredClaimsMap')
     RequiredClaimsValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.eks#requiredClaimsValue', name: 'RequiredClaimsValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 253}})
@@ -394,6 +402,7 @@ module Aws::EKS
     Addon.add_member(:marketplace_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MarketplaceInformation, location_name: 'marketplaceInformation'))
     Addon.add_member(:configuration_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'configurationValues'))
     Addon.add_member(:pod_identity_associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: 'podIdentityAssociations'))
+    Addon.add_member(:namespace_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddonNamespaceConfigResponse, location_name: 'namespaceConfig'))
     Addon.type = Types::Addon
     AddonCompatibilityDetail.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'name'))
     AddonCompatibilityDetail.add_member(:compatible_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: 'compatibleVersions'))
@@ -407,6 +416,7 @@ module Aws::EKS
     AddonInfo.add_member(:publisher, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'publisher'))
     AddonInfo.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'owner'))
     AddonInfo.add_member(:marketplace_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MarketplaceInformation, location_name: 'marketplaceInformation'))
+    AddonInfo.add_member(:default_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'defaultNamespace'))
     AddonInfo.type = Types::AddonInfo
     AddonIssue.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddonIssueCode, location_name: 'code'))
     AddonIssue.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'message'))
@@ -423,6 +433,10 @@ module Aws::EKS
     AddonIssueCode.add_member(:addon_subscription_needed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ADDON_SUBSCRIPTION_NEEDED', traits: {"smithy.api#enumValue" => "AddonSubscriptionNeeded"}))
     AddonIssueCode.add_member(:addon_permission_failure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ADDON_PERMISSION_FAILURE', traits: {"smithy.api#enumValue" => "AddonPermissionFailure"}))
     AddonIssueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddonIssue)
+    AddonNamespaceConfigRequest.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: 'namespace'))
+    AddonNamespaceConfigRequest.type = Types::AddonNamespaceConfigRequest
+    AddonNamespaceConfigResponse.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: 'namespace'))
+    AddonNamespaceConfigResponse.type = Types::AddonNamespaceConfigResponse
     AddonPodIdentityAssociations.add_member(:service_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'serviceAccount', traits: {"smithy.api#required" => {}}))
     AddonPodIdentityAssociations.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'roleArn', traits: {"smithy.api#required" => {}}))
     AddonPodIdentityAssociations.type = Types::AddonPodIdentityAssociations
@@ -638,6 +652,7 @@ module Aws::EKS
     CreateAddonRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags'))
     CreateAddonRequest.add_member(:configuration_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'configurationValues'))
     CreateAddonRequest.add_member(:pod_identity_associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddonPodIdentityAssociationsList, location_name: 'podIdentityAssociations'))
+    CreateAddonRequest.add_member(:namespace_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddonNamespaceConfigRequest, location_name: 'namespaceConfig'))
     CreateAddonRequest.type = Types::CreateAddonRequest
     CreateAddonResponse.add_member(:addon, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Addon, location_name: 'addon'))
     CreateAddonResponse.type = Types::CreateAddonResponse
@@ -823,6 +838,13 @@ module Aws::EKS
     DescribeInsightRequest.type = Types::DescribeInsightRequest
     DescribeInsightResponse.add_member(:insight, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Insight, location_name: 'insight'))
     DescribeInsightResponse.type = Types::DescribeInsightResponse
+    DescribeInsightsRefreshRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'clusterName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeInsightsRefreshRequest.type = Types::DescribeInsightsRefreshRequest
+    DescribeInsightsRefreshResponse.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'message'))
+    DescribeInsightsRefreshResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsightsRefreshStatus, location_name: 'status'))
+    DescribeInsightsRefreshResponse.add_member(:started_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'startedAt'))
+    DescribeInsightsRefreshResponse.add_member(:ended_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'endedAt'))
+    DescribeInsightsRefreshResponse.type = Types::DescribeInsightsRefreshResponse
     DescribeNodegroupRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'clusterName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeNodegroupRequest.add_member(:nodegroup_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'nodegroupName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeNodegroupRequest.type = Types::DescribeNodegroupRequest
@@ -991,6 +1013,9 @@ module Aws::EKS
     InsightsFilter.add_member(:kubernetes_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: 'kubernetesVersions'))
     InsightsFilter.add_member(:statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsightStatusValueList, location_name: 'statuses'))
     InsightsFilter.type = Types::InsightsFilter
+    InsightsRefreshStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IN_PROGRESS', traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    InsightsRefreshStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FAILED', traits: {"smithy.api#enumValue" => "FAILED"}))
+    InsightsRefreshStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'COMPLETED', traits: {"smithy.api#enumValue" => "COMPLETED"}))
     InvalidParameterException.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'clusterName'))
     InvalidParameterException.add_member(:nodegroup_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'nodegroupName'))
     InvalidParameterException.add_member(:fargate_profile_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'fargateProfileName'))
@@ -1337,6 +1362,11 @@ module Aws::EKS
     ServerException.type = Types::ServerException
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'message'))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
+    StartInsightsRefreshRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'clusterName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartInsightsRefreshRequest.type = Types::StartInsightsRefreshRequest
+    StartInsightsRefreshResponse.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'message'))
+    StartInsightsRefreshResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsightsRefreshStatus, location_name: 'status'))
+    StartInsightsRefreshResponse.type = Types::StartInsightsRefreshResponse
     StorageConfigRequest.add_member(:block_storage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockStorage, location_name: 'blockStorage'))
     StorageConfigRequest.type = Types::StorageConfigRequest
     StorageConfigResponse.add_member(:block_storage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlockStorage, location_name: 'blockStorage'))
@@ -1897,6 +1927,17 @@ module Aws::EKS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/clusters/{clusterName}/insights/{id}", "code" => 200}}
       end)
+      service.add_operation(:describe_insights_refresh, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.eks#DescribeInsightsRefresh"
+        operation.name = "DescribeInsightsRefresh"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeInsightsRefreshRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeInsightsRefreshResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/clusters/{clusterName}/insights-refresh", "code" => 200}}
+      end)
       service.add_operation(:describe_nodegroup, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.eks#DescribeNodegroup"
         operation.name = "DescribeNodegroup"
@@ -2121,6 +2162,17 @@ module Aws::EKS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/cluster-registrations", "code" => 200}}
+      end)
+      service.add_operation(:start_insights_refresh, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.eks#StartInsightsRefresh"
+        operation.name = "StartInsightsRefresh"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartInsightsRefreshRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartInsightsRefreshResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/clusters/{clusterName}/insights-refresh", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.eks#TagResource"

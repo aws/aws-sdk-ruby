@@ -360,6 +360,7 @@ module Aws::DirectConnect
     AllocatePrivateVirtualInterfaceOutput.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName'))
     AllocatePrivateVirtualInterfaceOutput.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0}))
     AllocatePrivateVirtualInterfaceOutput.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    AllocatePrivateVirtualInterfaceOutput.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     AllocatePrivateVirtualInterfaceOutput.add_member(:amazon_side_asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'amazonSideAsn'))
     AllocatePrivateVirtualInterfaceOutput.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     AllocatePrivateVirtualInterfaceOutput.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -391,6 +392,7 @@ module Aws::DirectConnect
     AllocatePublicVirtualInterfaceOutput.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName'))
     AllocatePublicVirtualInterfaceOutput.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0}))
     AllocatePublicVirtualInterfaceOutput.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    AllocatePublicVirtualInterfaceOutput.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     AllocatePublicVirtualInterfaceOutput.add_member(:amazon_side_asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'amazonSideAsn'))
     AllocatePublicVirtualInterfaceOutput.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     AllocatePublicVirtualInterfaceOutput.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -490,6 +492,7 @@ module Aws::DirectConnect
     AssociateVirtualInterfaceOutput.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName'))
     AssociateVirtualInterfaceOutput.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0}))
     AssociateVirtualInterfaceOutput.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    AssociateVirtualInterfaceOutput.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     AssociateVirtualInterfaceOutput.add_member(:amazon_side_asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'amazonSideAsn'))
     AssociateVirtualInterfaceOutput.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     AssociateVirtualInterfaceOutput.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -525,6 +528,7 @@ module Aws::DirectConnect
     AvailablePortSpeeds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortSpeed)
     BGPPeer.add_member(:bgp_peer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPPeerId, location_name: 'bgpPeerId'))
     BGPPeer.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    BGPPeer.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     BGPPeer.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     BGPPeer.add_member(:address_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddressFamily, location_name: 'addressFamily'))
     BGPPeer.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -727,6 +731,7 @@ module Aws::DirectConnect
     CreatePrivateVirtualInterfaceOutput.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName'))
     CreatePrivateVirtualInterfaceOutput.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0}))
     CreatePrivateVirtualInterfaceOutput.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    CreatePrivateVirtualInterfaceOutput.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     CreatePrivateVirtualInterfaceOutput.add_member(:amazon_side_asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'amazonSideAsn'))
     CreatePrivateVirtualInterfaceOutput.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     CreatePrivateVirtualInterfaceOutput.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -757,6 +762,7 @@ module Aws::DirectConnect
     CreatePublicVirtualInterfaceOutput.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName'))
     CreatePublicVirtualInterfaceOutput.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0}))
     CreatePublicVirtualInterfaceOutput.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    CreatePublicVirtualInterfaceOutput.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     CreatePublicVirtualInterfaceOutput.add_member(:amazon_side_asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'amazonSideAsn'))
     CreatePublicVirtualInterfaceOutput.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     CreatePublicVirtualInterfaceOutput.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -789,6 +795,7 @@ module Aws::DirectConnect
     CustomerAgreement.type = Types::CustomerAgreement
     DeleteBGPPeerRequest.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: 'virtualInterfaceId'))
     DeleteBGPPeerRequest.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    DeleteBGPPeerRequest.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     DeleteBGPPeerRequest.add_member(:customer_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerAddress, location_name: 'customerAddress'))
     DeleteBGPPeerRequest.add_member(:bgp_peer_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPPeerId, location_name: 'bgpPeerId'))
     DeleteBGPPeerRequest.type = Types::DeleteBGPPeerRequest
@@ -873,12 +880,16 @@ module Aws::DirectConnect
     DescribeConnectionLoaResponse.add_member(:loa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Loa, location_name: 'loa'))
     DescribeConnectionLoaResponse.type = Types::DescribeConnectionLoaResponse
     DescribeConnectionsOnInterconnectOutput.add_member(:connections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionList, location_name: 'connections'))
+    DescribeConnectionsOnInterconnectOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeConnectionsOnInterconnectOutput.type = Types::DescribeConnectionsOnInterconnectOutput
     DescribeConnectionsOnInterconnectRequest.add_member(:interconnect_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InterconnectId, location_name: 'interconnectId', traits: {"smithy.api#required" => {}}))
     DescribeConnectionsOnInterconnectRequest.type = Types::DescribeConnectionsOnInterconnectRequest
     DescribeConnectionsOutput.add_member(:connections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionList, location_name: 'connections'))
+    DescribeConnectionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeConnectionsOutput.type = Types::DescribeConnectionsOutput
     DescribeConnectionsRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionId, location_name: 'connectionId'))
+    DescribeConnectionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: 'maxResults'))
+    DescribeConnectionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeConnectionsRequest.type = Types::DescribeConnectionsRequest
     DescribeCustomerMetadataResponse.add_member(:agreements, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgreementList, location_name: 'agreements'))
     DescribeCustomerMetadataResponse.add_member(:nni_partner_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NniPartnerType, location_name: 'nniPartnerType'))
@@ -918,8 +929,11 @@ module Aws::DirectConnect
     DescribeDirectConnectGatewaysResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeDirectConnectGatewaysResult.type = Types::DescribeDirectConnectGatewaysResult
     DescribeHostedConnectionsOutput.add_member(:connections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionList, location_name: 'connections'))
+    DescribeHostedConnectionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeHostedConnectionsOutput.type = Types::DescribeHostedConnectionsOutput
     DescribeHostedConnectionsRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionId, location_name: 'connectionId', traits: {"smithy.api#required" => {}}))
+    DescribeHostedConnectionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: 'maxResults'))
+    DescribeHostedConnectionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeHostedConnectionsRequest.type = Types::DescribeHostedConnectionsRequest
     DescribeInterconnectLoaRequest.add_member(:interconnect_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InterconnectId, location_name: 'interconnectId', traits: {"smithy.api#required" => {}}))
     DescribeInterconnectLoaRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProviderName, location_name: 'providerName'))
@@ -928,12 +942,18 @@ module Aws::DirectConnect
     DescribeInterconnectLoaResponse.add_member(:loa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Loa, location_name: 'loa'))
     DescribeInterconnectLoaResponse.type = Types::DescribeInterconnectLoaResponse
     DescribeInterconnectsOutput.add_member(:interconnects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InterconnectList, location_name: 'interconnects'))
+    DescribeInterconnectsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeInterconnectsOutput.type = Types::DescribeInterconnectsOutput
     DescribeInterconnectsRequest.add_member(:interconnect_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InterconnectId, location_name: 'interconnectId'))
+    DescribeInterconnectsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: 'maxResults'))
+    DescribeInterconnectsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeInterconnectsRequest.type = Types::DescribeInterconnectsRequest
     DescribeLagsOutput.add_member(:lags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LagList, location_name: 'lags'))
+    DescribeLagsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeLagsOutput.type = Types::DescribeLagsOutput
     DescribeLagsRequest.add_member(:lag_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LagId, location_name: 'lagId'))
+    DescribeLagsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: 'maxResults'))
+    DescribeLagsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeLagsRequest.type = Types::DescribeLagsRequest
     DescribeLoaOutput.add_member(:loa_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoaContent, location_name: 'loaContent'))
     DescribeLoaOutput.add_member(:loa_content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoaContentType, location_name: 'loaContentType'))
@@ -959,9 +979,12 @@ module Aws::DirectConnect
     DescribeVirtualGatewaysOutput.add_member(:virtual_gateways, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualGatewayList, location_name: 'virtualGateways'))
     DescribeVirtualGatewaysOutput.type = Types::DescribeVirtualGatewaysOutput
     DescribeVirtualInterfacesOutput.add_member(:virtual_interfaces, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceList, location_name: 'virtualInterfaces'))
+    DescribeVirtualInterfacesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeVirtualInterfacesOutput.type = Types::DescribeVirtualInterfacesOutput
     DescribeVirtualInterfacesRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionId, location_name: 'connectionId'))
     DescribeVirtualInterfacesRequest.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: 'virtualInterfaceId'))
+    DescribeVirtualInterfacesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: 'maxResults'))
+    DescribeVirtualInterfacesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     DescribeVirtualInterfacesRequest.type = Types::DescribeVirtualInterfacesRequest
     DirectConnectClientException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message'))
     DirectConnectClientException.type = Types::DirectConnectClientException
@@ -1152,6 +1175,7 @@ module Aws::DirectConnect
     MacSecKey.type = Types::MacSecKey
     MacSecKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MacSecKey)
     NewBGPPeer.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    NewBGPPeer.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     NewBGPPeer.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     NewBGPPeer.add_member(:address_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddressFamily, location_name: 'addressFamily'))
     NewBGPPeer.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -1159,7 +1183,8 @@ module Aws::DirectConnect
     NewBGPPeer.type = Types::NewBGPPeer
     NewPrivateVirtualInterface.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName', traits: {"smithy.api#required" => {}}))
     NewPrivateVirtualInterface.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    NewPrivateVirtualInterface.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    NewPrivateVirtualInterface.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    NewPrivateVirtualInterface.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     NewPrivateVirtualInterface.add_member(:mtu, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MTU, location_name: 'mtu'))
     NewPrivateVirtualInterface.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     NewPrivateVirtualInterface.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -1172,7 +1197,8 @@ module Aws::DirectConnect
     NewPrivateVirtualInterface.type = Types::NewPrivateVirtualInterface
     NewPrivateVirtualInterfaceAllocation.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName', traits: {"smithy.api#required" => {}}))
     NewPrivateVirtualInterfaceAllocation.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    NewPrivateVirtualInterfaceAllocation.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    NewPrivateVirtualInterfaceAllocation.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    NewPrivateVirtualInterfaceAllocation.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     NewPrivateVirtualInterfaceAllocation.add_member(:mtu, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MTU, location_name: 'mtu'))
     NewPrivateVirtualInterfaceAllocation.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     NewPrivateVirtualInterfaceAllocation.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -1182,7 +1208,8 @@ module Aws::DirectConnect
     NewPrivateVirtualInterfaceAllocation.type = Types::NewPrivateVirtualInterfaceAllocation
     NewPublicVirtualInterface.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName', traits: {"smithy.api#required" => {}}))
     NewPublicVirtualInterface.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    NewPublicVirtualInterface.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    NewPublicVirtualInterface.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    NewPublicVirtualInterface.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     NewPublicVirtualInterface.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     NewPublicVirtualInterface.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
     NewPublicVirtualInterface.add_member(:customer_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerAddress, location_name: 'customerAddress'))
@@ -1192,7 +1219,8 @@ module Aws::DirectConnect
     NewPublicVirtualInterface.type = Types::NewPublicVirtualInterface
     NewPublicVirtualInterfaceAllocation.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName', traits: {"smithy.api#required" => {}}))
     NewPublicVirtualInterfaceAllocation.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    NewPublicVirtualInterfaceAllocation.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    NewPublicVirtualInterfaceAllocation.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    NewPublicVirtualInterfaceAllocation.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     NewPublicVirtualInterfaceAllocation.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     NewPublicVirtualInterfaceAllocation.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
     NewPublicVirtualInterfaceAllocation.add_member(:customer_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerAddress, location_name: 'customerAddress'))
@@ -1203,6 +1231,7 @@ module Aws::DirectConnect
     NewTransitVirtualInterface.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName'))
     NewTransitVirtualInterface.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0}))
     NewTransitVirtualInterface.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    NewTransitVirtualInterface.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     NewTransitVirtualInterface.add_member(:mtu, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MTU, location_name: 'mtu'))
     NewTransitVirtualInterface.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     NewTransitVirtualInterface.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -1215,6 +1244,7 @@ module Aws::DirectConnect
     NewTransitVirtualInterfaceAllocation.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName'))
     NewTransitVirtualInterfaceAllocation.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0}))
     NewTransitVirtualInterfaceAllocation.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    NewTransitVirtualInterfaceAllocation.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     NewTransitVirtualInterfaceAllocation.add_member(:mtu, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MTU, location_name: 'mtu'))
     NewTransitVirtualInterfaceAllocation.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     NewTransitVirtualInterfaceAllocation.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -1340,6 +1370,7 @@ module Aws::DirectConnect
     UpdateVirtualInterfaceAttributesOutput.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName'))
     UpdateVirtualInterfaceAttributesOutput.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0}))
     UpdateVirtualInterfaceAttributesOutput.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    UpdateVirtualInterfaceAttributesOutput.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     UpdateVirtualInterfaceAttributesOutput.add_member(:amazon_side_asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'amazonSideAsn'))
     UpdateVirtualInterfaceAttributesOutput.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     UpdateVirtualInterfaceAttributesOutput.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))
@@ -1376,6 +1407,7 @@ module Aws::DirectConnect
     VirtualInterface.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: 'virtualInterfaceName'))
     VirtualInterface.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VLAN, location_name: 'vlan', traits: {"smithy.api#default" => 0}))
     VirtualInterface.add_member(:asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ASN, location_name: 'asn', traits: {"smithy.api#default" => 0}))
+    VirtualInterface.add_member(:asn_long, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'asnLong'))
     VirtualInterface.add_member(:amazon_side_asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongAsn, location_name: 'amazonSideAsn'))
     VirtualInterface.add_member(:auth_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: 'authKey'))
     VirtualInterface.add_member(:amazon_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonAddress, location_name: 'amazonAddress'))

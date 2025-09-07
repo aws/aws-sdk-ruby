@@ -2919,6 +2919,225 @@ module Aws::BedrockRuntime
       request.send_request(options)
     end
 
+    # <p>Returns the token count for a given inference request. This operation helps you estimate token usage before sending requests to foundation models by returning the token count that would be used if the same input were sent to the model in an inference request.</p> <p>Token counting is model-specific because different models use different tokenization strategies. The token count returned by this operation will match the token count that would be charged if the same input were sent to the model in an <code>InvokeModel</code> or <code>Converse</code> request.</p> <p>You can use this operation to:</p> <ul> <li> <p>Estimate costs before sending inference requests.</p> </li> <li> <p>Optimize prompts to fit within token limits.</p> </li> <li> <p>Plan for token usage in your applications.</p> </li> </ul> <p>This operation accepts the same input formats as <code>InvokeModel</code> and <code>Converse</code>, allowing you to count tokens for both raw text inputs and structured conversation formats.</p> <p>The following operations are related to <code>CountTokens</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/API/API_runtime_InvokeModel.html">InvokeModel</a> - Sends inference requests to foundation models</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/API/API_runtime_Converse.html">Converse</a> - Sends conversation-based inference requests to foundation models</p> </li> </ul>
+    # @param [Hash, Types::CountTokensRequest] params
+    # @option params [String] :model_id
+    #   <p>The unique identifier or ARN of the foundation model to use for token counting. Each model processes tokens differently, so the token count is specific to the model you specify.</p>
+    # @option params [Types::CountTokensInput] :input
+    #   <p>The input for which to count tokens. The structure of this parameter depends on whether you're counting tokens for an <code>InvokeModel</code> or <code>Converse</code> request:</p> <ul> <li> <p>For <code>InvokeModel</code> requests, provide the request body in the <code>invokeModel</code> field</p> </li> <li> <p>For <code>Converse</code> requests, provide the messages and system content in the <code>converse</code> field</p> </li> </ul> <p>The input format must be compatible with the model specified in the <code>modelId</code> parameter.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     model_id: "FoundationModelVersionIdentifier", # required
+    #     input: { # required
+    #       # One of:
+    #       invoke_model: {
+    #         body: "data", # required
+    #       },
+    #       converse: {
+    #         messages: [
+    #           {
+    #             role: "user" # One of: ["user", "assistant"], # required
+    #             content: [{ # required
+    #               # One of:
+    #               text: "String",
+    #               image: {
+    #                 format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
+    #                 source: { # required
+    #                   # One of:
+    #                   bytes: "data",
+    #                   s3_location: {
+    #                     uri: "S3Uri", # required
+    #                     bucket_owner: "AccountId"
+    #                   }
+    #                 }
+    #               },
+    #               document: {
+    #                 format: "pdf" # One of: ["pdf", "csv", "doc", "docx", "xls", "xlsx", "html", "txt", "md"],
+    #                 name: "String", # required
+    #                 source: { # required
+    #                   # One of:
+    #                   bytes: "data",
+    #                   s3_location: {
+    #                     uri: "S3Uri", # required
+    #                     bucket_owner: "AccountId"
+    #                   },
+    #                   text: "String",
+    #                   content: [{
+    #                     # One of:
+    #                     text: "String"
+    #                   }]
+    #                 },
+    #                 context: "String",
+    #                 citations: {
+    #                   enabled: false, # required
+    #                 }
+    #               },
+    #               video: {
+    #                 format: "mkv" # One of: ["mkv", "mov", "mp4", "webm", "flv", "mpeg", "mpg", "wmv", "three_gp"], # required
+    #                 source: { # required
+    #                   # One of:
+    #                   bytes: "data",
+    #                   s3_location: {
+    #                     uri: "S3Uri", # required
+    #                     bucket_owner: "AccountId"
+    #                   }
+    #                 }
+    #               },
+    #               tool_use: {
+    #                 tool_use_id: "ToolUseId", # required
+    #                 name: "ToolName", # required
+    #                 input: ""null"", # required
+    #               },
+    #               tool_result: {
+    #                 tool_use_id: "ToolUseId", # required
+    #                 content: [{ # required
+    #                   # One of:
+    #                   json: ""null"",
+    #                   text: "String",
+    #                   image: {
+    #                     format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
+    #                     source: { # required
+    #                       # One of:
+    #                       bytes: "data",
+    #                       s3_location: {
+    #                         uri: "S3Uri", # required
+    #                         bucket_owner: "AccountId"
+    #                       }
+    #                     }
+    #                   },
+    #                   document: {
+    #                     format: "pdf" # One of: ["pdf", "csv", "doc", "docx", "xls", "xlsx", "html", "txt", "md"],
+    #                     name: "String", # required
+    #                     source: { # required
+    #                       # One of:
+    #                       bytes: "data",
+    #                       s3_location: {
+    #                         uri: "S3Uri", # required
+    #                         bucket_owner: "AccountId"
+    #                       },
+    #                       text: "String",
+    #                       content: [{
+    #                         # One of:
+    #                         text: "String"
+    #                       }]
+    #                     },
+    #                     context: "String",
+    #                     citations: {
+    #                       enabled: false, # required
+    #                     }
+    #                   },
+    #                   video: {
+    #                     format: "mkv" # One of: ["mkv", "mov", "mp4", "webm", "flv", "mpeg", "mpg", "wmv", "three_gp"], # required
+    #                     source: { # required
+    #                       # One of:
+    #                       bytes: "data",
+    #                       s3_location: {
+    #                         uri: "S3Uri", # required
+    #                         bucket_owner: "AccountId"
+    #                       }
+    #                     }
+    #                   }
+    #                 }],
+    #                 status: "success" # One of: ["success", "error"]
+    #               },
+    #               guard_content: {
+    #                 # One of:
+    #                 text: {
+    #                   text: "String", # required
+    #                   qualifiers: ["grounding_source" # One of: ["grounding_source", "query", "guard_content"]]
+    #                 },
+    #                 image: {
+    #                   format: "png" # One of: ["png", "jpeg"], # required
+    #                   source: { # required
+    #                     # One of:
+    #                     bytes: "data"
+    #                   }
+    #                 }
+    #               },
+    #               cache_point: {
+    #                 type: "default" # One of: ["default"], # required
+    #               },
+    #               reasoning_content: {
+    #                 # One of:
+    #                 reasoning_text: {
+    #                   text: "String", # required
+    #                   signature: "String"
+    #                 },
+    #                 redacted_content: "data"
+    #               },
+    #               citations_content: {
+    #                 content: [{
+    #                   # One of:
+    #                   text: "String"
+    #                 }],
+    #                 citations: [
+    #                   {
+    #                     title: "String",
+    #                     source_content: [{
+    #                       # One of:
+    #                       text: "String"
+    #                     }],
+    #                     location: {
+    #                       # One of:
+    #                       document_char: {
+    #                         document_index: 1,
+    #                         start: 1,
+    #                         end: 1
+    #                       },
+    #                       document_page: {
+    #                         document_index: 1,
+    #                         start: 1,
+    #                         end: 1
+    #                       },
+    #                       document_chunk: {
+    #                         document_index: 1,
+    #                         start: 1,
+    #                         end: 1
+    #                       }
+    #                     }
+    #                   }
+    #                 ]
+    #               }
+    #             }]
+    #           }
+    #         ],
+    #         system: [{
+    #           # One of:
+    #           text: "NonEmptyString",
+    #           guard_content: {
+    #             # One of:
+    #             text: {
+    #               text: "String", # required
+    #               qualifiers: ["grounding_source" # One of: ["grounding_source", "query", "guard_content"]]
+    #             },
+    #             image: {
+    #               format: "png" # One of: ["png", "jpeg"], # required
+    #               source: { # required
+    #                 # One of:
+    #                 bytes: "data"
+    #               }
+    #             }
+    #           },
+    #           cache_point: {
+    #             type: "default" # One of: ["default"], # required
+    #           }
+    #         }]
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.count_tokens(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     input_tokens: 1, # required
+    #   }
+    # @return [Types::CountTokensResponse]
+    def count_tokens(params = {}, options = {})
+      request = build_request(:count_tokens, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieve information about an asynchronous invocation.</p>
     # @param [Hash, Types::GetAsyncInvokeRequest] params
     # @option params [String] :invocation_arn

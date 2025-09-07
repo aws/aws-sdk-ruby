@@ -84,6 +84,7 @@ module Aws::HealthLake
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
     ValidationException: StructureShape
+    ValidationLevel: EnumShape
 
     HealthLake: ServiceShape
   end

@@ -35,6 +35,7 @@ module Aws::Connect
     AgentStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AgentStatus', name: 'AgentStatus')
     AgentStatusDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#AgentStatusDescription', name: 'AgentStatusDescription', traits: {"smithy.api#length" => {"min" => 1, "max" => 250}})
     AgentStatusId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#AgentStatusId', name: 'AgentStatusId')
+    AgentStatusIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AgentStatusIdentifier', name: 'AgentStatusIdentifier')
     AgentStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#AgentStatusList', name: 'AgentStatusList')
     AgentStatusName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#AgentStatusName', name: 'AgentStatusName', traits: {"smithy.api#length" => {"min" => 1, "max" => 127}})
     AgentStatusOrderNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.connect#AgentStatusOrderNumber', name: 'AgentStatusOrderNumber', traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
@@ -47,6 +48,7 @@ module Aws::Connect
     AgentStatusSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#AgentStatusSummaryList', name: 'AgentStatusSummaryList')
     AgentStatusType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#AgentStatusType', name: 'AgentStatusType')
     AgentStatusTypes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#AgentStatusTypes', name: 'AgentStatusTypes', traits: {"smithy.api#length" => {"min" => 0, "max" => 3}})
+    AgentStatuses = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#AgentStatuses', name: 'AgentStatuses')
     AgentUsername = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#AgentUsername', name: 'AgentUsername', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     AgentsCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AgentsCriteria', name: 'AgentsCriteria')
     AgentsMinOneMaxHundred = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#AgentsMinOneMaxHundred', name: 'AgentsMinOneMaxHundred', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
@@ -1632,6 +1634,9 @@ module Aws::Connect
     AgentStatus.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'LastModifiedTime'))
     AgentStatus.add_member(:last_modified_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'LastModifiedRegion'))
     AgentStatus.type = Types::AgentStatus
+    AgentStatusIdentifier.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: 'Arn'))
+    AgentStatusIdentifier.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatusId, location_name: 'Id'))
+    AgentStatusIdentifier.type = Types::AgentStatusIdentifier
     AgentStatusList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatus)
     AgentStatusReference.add_member(:status_start_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'StatusStartTimestamp'))
     AgentStatusReference.add_member(:status_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: 'StatusArn'))
@@ -1658,6 +1663,7 @@ module Aws::Connect
     AgentStatusType.add_member(:custom, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CUSTOM', traits: {"smithy.api#enumValue" => "CUSTOM"}))
     AgentStatusType.add_member(:offline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OFFLINE', traits: {"smithy.api#enumValue" => "OFFLINE"}))
     AgentStatusTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatusType)
+    AgentStatuses.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatusId)
     AgentsCriteria.add_member(:agent_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentIds, location_name: 'AgentIds'))
     AgentsCriteria.type = Types::AgentsCriteria
     AgentsMinOneMaxHundred.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserId)
@@ -2863,6 +2869,7 @@ module Aws::Connect
     Dimensions.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channel, location_name: 'Channel'))
     Dimensions.add_member(:routing_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileReference, location_name: 'RoutingProfile'))
     Dimensions.add_member(:routing_step_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingExpression, location_name: 'RoutingStepExpression'))
+    Dimensions.add_member(:agent_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatusIdentifier, location_name: 'AgentStatus'))
     Dimensions.type = Types::Dimensions
     DimensionsV2Map.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionsV2Key)
     DimensionsV2Map.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionsV2Value)
@@ -3238,6 +3245,7 @@ module Aws::Connect
     Filters.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channels, location_name: 'Channels'))
     Filters.add_member(:routing_profiles, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfiles, location_name: 'RoutingProfiles'))
     Filters.add_member(:routing_step_expressions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingExpressions, location_name: 'RoutingStepExpressions'))
+    Filters.add_member(:agent_statuses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatuses, location_name: 'AgentStatuses'))
     Filters.type = Types::Filters
     FiltersV2List.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterV2)
     FlowAssociationResourceType.add_member(:sms_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SMS_PHONE_NUMBER', traits: {"smithy.api#enumValue" => "SMS_PHONE_NUMBER"}))
@@ -3389,6 +3397,7 @@ module Aws::Connect
     Grouping.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CHANNEL', traits: {"smithy.api#enumValue" => "CHANNEL"}))
     Grouping.add_member(:routing_profile, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ROUTING_PROFILE', traits: {"smithy.api#enumValue" => "ROUTING_PROFILE"}))
     Grouping.add_member(:routing_step_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ROUTING_STEP_EXPRESSION', traits: {"smithy.api#enumValue" => "ROUTING_STEP_EXPRESSION"}))
+    Grouping.add_member(:agent_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AGENT_STATUS', traits: {"smithy.api#enumValue" => "AGENT_STATUS"}))
     Groupings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grouping)
     GroupingsV2.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupingV2)
     HierarchyGroup.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: 'Id'))
@@ -4274,6 +4283,7 @@ module Aws::Connect
     ParticipantDetails.type = Types::ParticipantDetails
     ParticipantDetailsToAdd.add_member(:participant_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParticipantRole, location_name: 'ParticipantRole'))
     ParticipantDetailsToAdd.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisplayName, location_name: 'DisplayName'))
+    ParticipantDetailsToAdd.add_member(:participant_capabilities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParticipantCapabilities, location_name: 'ParticipantCapabilities'))
     ParticipantDetailsToAdd.type = Types::ParticipantDetailsToAdd
     ParticipantMetrics.add_member(:participant_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParticipantId, location_name: 'ParticipantId'))
     ParticipantMetrics.add_member(:participant_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParticipantType, location_name: 'ParticipantType'))
@@ -6761,6 +6771,7 @@ module Aws::Connect
         operation.name = "CreateParticipant"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateParticipantRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateParticipantResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)

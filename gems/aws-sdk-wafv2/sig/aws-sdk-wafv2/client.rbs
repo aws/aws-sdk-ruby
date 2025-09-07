@@ -2674,6 +2674,14 @@ module Aws::WAFV2
       },
       ?on_source_d_do_s_protection_config: {
         alb_low_reputation_mode: String
+      },
+      ?application_config: {
+        attributes: Array[
+          {
+            name: String,
+            values: Array[String]
+          }
+        ]
       }
     ) -> _UpdateWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebACLResponse
   end

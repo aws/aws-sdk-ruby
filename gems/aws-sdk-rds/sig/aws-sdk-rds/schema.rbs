@@ -396,6 +396,7 @@ module Aws::RDS
     EnableHttpEndpointResponse: StructureShape
     EncryptionContextMap: MapShape
     Endpoint: StructureShape
+    EndpointNetworkType: EnumShape
     Engine: StringShape
     EngineDefaults: StructureShape
     EngineFamily: EnumShape
@@ -507,6 +508,7 @@ module Aws::RDS
     LongOptional: IntegerShape
     MajorEngineVersion: StringShape
     Marker: StringShape
+    MasterUserAuthenticationType: EnumShape
     MasterUserSecret: StructureShape
     MaxDBShardGroupLimitReached: StructureShape
     MaxRecords: IntegerShape
@@ -745,6 +747,7 @@ module Aws::RDS
     Tag: StructureShape
     TagList: ListShape
     TagListMessage: StructureShape
+    TargetConnectionNetworkType: EnumShape
     TargetDBClusterParameterGroupName: StringShape
     TargetDBInstanceClass: StringShape
     TargetDBParameterGroupName: StringShape

@@ -43,8 +43,8 @@ module Aws::ServiceDiscovery
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>The health check for the instance that's specified by <code>ServiceId</code> and <code>InstanceId</code>
-    #    isn't a custom health check. </p>
+    # <p>The health check for the instance that's specified by <code>ServiceId</code> and
+    #     <code>InstanceId</code> isn't a custom health check. </p>
     class CustomHealthNotFound < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::CustomHealthNotFound] data
@@ -75,8 +75,8 @@ module Aws::ServiceDiscovery
       end
     end
 
-    # <p>No instance exists with the specified ID, or the instance was recently registered, and information about
-    #    the instance hasn't propagated yet.</p>
+    # <p>No instance exists with the specified ID, or the instance was recently registered, and
+    #    information about the instance hasn't propagated yet.</p>
     class InstanceNotFound < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::InstanceNotFound] data
@@ -89,8 +89,9 @@ module Aws::ServiceDiscovery
       end
     end
 
-    # <p>One or more specified values aren't valid. For example, a required value might be missing, a numeric value
-    #    might be outside the allowed range, or a string value might exceed length constraints.</p>
+    # <p>One or more specified values aren't valid. For example, a required value might be missing, a
+    #    numeric value might be outside the allowed range, or a string value might exceed length
+    #    constraints.</p>
     class InvalidInput < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::InvalidInput] data
@@ -152,9 +153,9 @@ module Aws::ServiceDiscovery
       end
     end
 
-    # <p>The operation can't be completed because you've reached the quota for the number of requests. For more
-    #    information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html">Cloud Map API request
-    #     throttling quota</a> in the <i>Cloud Map Developer Guide</i>.</p>
+    # <p>The operation can't be completed because you've reached the quota for the number of
+    #    requests. For more information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html">Cloud Map API request throttling quota</a> in the
+    #     <i>Cloud Map Developer Guide</i>.</p>
     class RequestLimitExceeded < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::RequestLimitExceeded] data
@@ -167,8 +168,8 @@ module Aws::ServiceDiscovery
       end
     end
 
-    # <p>The specified resource can't be deleted because it contains other resources. For example, you can't delete
-    #    a service that contains any instances.</p>
+    # <p>The specified resource can't be deleted because it contains other resources. For example,
+    #    you can't delete a service that contains any instances.</p>
     class ResourceInUse < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::ResourceInUse] data
@@ -181,7 +182,8 @@ module Aws::ServiceDiscovery
       end
     end
 
-    # <p>The resource can't be created because you've reached the quota on the number of resources.</p>
+    # <p>The resource can't be created because you've reached the quota on the number of
+    #    resources.</p>
     class ResourceLimitExceeded < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::ResourceLimitExceeded] data
@@ -228,9 +230,15 @@ module Aws::ServiceDiscovery
       def service_id
         @data[:service_id]
       end
+
+      # <p>The ARN of the existing service.</p>
+      def service_arn
+        @data[:service_arn]
+      end
     end
 
-    # <p>The attribute can't be added to the service because you've exceeded the quota for the number of attributes you can add to a service.</p>
+    # <p>The attribute can't be added to the service because you've exceeded the quota for the number
+    #    of attributes you can add to a service.</p>
     class ServiceAttributesLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::ServiceAttributesLimitExceededException] data
@@ -256,8 +264,8 @@ module Aws::ServiceDiscovery
       end
     end
 
-    # <p>The list of tags on the resource is over the quota. The maximum number of tags that can be applied to a
-    #    resource is 50.</p>
+    # <p>The list of tags on the resource is over the quota. The maximum number of tags that can be
+    #    applied to a resource is 50.</p>
     class TooManyTagsException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServiceDiscovery::Types::TooManyTagsException] data

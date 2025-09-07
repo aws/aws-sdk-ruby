@@ -2863,13 +2863,13 @@ module Aws::CloudWatchEvents
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Name/Value pair of a parameter to start execution of a SageMaker Model Building
+    # <p>Name/Value pair of a parameter to start execution of a SageMaker AI Model Building
     #       Pipeline.</p>
     # @!attribute name
-    #   <p>Name of parameter to start execution of a SageMaker Model Building Pipeline.</p>
+    #   <p>Name of parameter to start execution of a SageMaker AI Model Building Pipeline.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>Value of parameter to start execution of a SageMaker Model Building Pipeline.</p>
+    #   <p>Value of parameter to start execution of a SageMaker AI Model Building Pipeline.</p>
     #   @return [String]
     class SageMakerPipelineParameter < Struct.new(
       :name,
@@ -2878,10 +2878,10 @@ module Aws::CloudWatchEvents
       include ::Smithy::Schema::Structure
     end
 
-    # <p>These are custom parameters to use when the target is a SageMaker Model Building Pipeline
+    # <p>These are custom parameters to use when the target is a SageMaker AI Model Building Pipeline
     #       that starts based on EventBridge events.</p>
     # @!attribute pipeline_parameter_list
-    #   <p>List of Parameter names and values for SageMaker Model Building Pipeline execution.</p>
+    #   <p>List of Parameter names and values for SageMaker AI Model Building Pipeline execution.</p>
     #   @return [Array<Types::SageMakerPipelineParameter>]
     class SageMakerPipelineParameters < Struct.new(
       :pipeline_parameter_list,
@@ -3061,9 +3061,9 @@ module Aws::CloudWatchEvents
     #         invoke the Amazon Redshift Data API ExecuteStatement based on EventBridge events.</p>
     #   @return [Types::RedshiftDataParameters]
     # @!attribute sage_maker_pipeline_parameters
-    #   <p>Contains the SageMaker Model Building Pipeline parameters to start execution of a
-    #         SageMaker Model Building Pipeline.</p>
-    #            <p>If you specify a SageMaker Model Building Pipeline as a target, you can use this to
+    #   <p>Contains the SageMaker AI Model Building Pipeline parameters to start execution of a
+    #         SageMaker AI Model Building Pipeline.</p>
+    #            <p>If you specify a SageMaker AI Model Building Pipeline as a target, you can use this to
     #         specify parameters to start a pipeline execution based on EventBridge events.</p>
     #   @return [Types::SageMakerPipelineParameters]
     # @!attribute dead_letter_config

@@ -188,7 +188,7 @@ module Aws::Omics
       super
     end
 
-    # <p>Stops a multipart upload.</p>
+    # <p>Stops a multipart read set upload into a sequence store and returns a response with no body if the operation is successful. To confirm that a multipart read set upload has been stopped, use the <code>ListMultipartReadSetUploads</code> API operation to view all active multipart read set uploads.</p>
     # @param [Hash, Types::AbortMultipartReadSetUploadRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The sequence store ID for the store involved in the multipart upload.</p>
@@ -231,7 +231,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Deletes one or more read sets.</p>
+    # <p>Deletes one or more read sets. If the operation is successful, it returns a response with no body. If there is an error with deleting one of the read sets, the operation returns an error list. If the operation successfully deletes only a subset of files, it will return an error list for the remaining files that fail to be deleted. There is a limit of 100 read sets that can be deleted in each <code>BatchDeleteReadSet</code> API call.</p>
     # @param [Hash, Types::BatchDeleteReadSetRequest] params
     # @option params [Array<String>] :ids
     #   <p>The read sets' IDs.</p>
@@ -318,7 +318,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Concludes a multipart upload once you have uploaded all the components.</p>
+    # <p>Completes a multipart read set upload into a sequence store after you have initiated the upload process with <code>CreateMultipartReadSetUpload</code> and uploaded all read set parts using <code>UploadReadSetPart</code>. You must specify the parts you uploaded using the parts parameter. If the operation is successful, it returns the read set ID(s) of the uploaded read set(s).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/synchronous-uploads.html">Direct upload to a sequence store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::CompleteMultipartReadSetUploadRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The sequence store ID for the store involved in the multipart upload.</p>
@@ -504,7 +504,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Begins a multipart read set upload.</p>
+    # <p>Initiates a multipart read set upload for uploading partitioned source files into a sequence store. You can directly import source files from an EC2 instance and other local compute, or from an S3 bucket. To separate these source files into parts, use the <code>split</code> operation. Each part cannot be larger than 100 MB. If the operation is successful, it provides an <code>uploadId</code> which is required by the <code>UploadReadSetPart</code> API operation to upload parts into a sequence store.</p> <p>To continue uploading a multipart read set into your sequence store, you must use the <code>UploadReadSetPart</code> API operation to upload each part individually following the steps below:</p> <ul> <li> <p>Specify the <code>uploadId</code> obtained from the previous call to <code>CreateMultipartReadSetUpload</code>.</p> </li> <li> <p>Upload parts for that <code>uploadId</code>.</p> </li> </ul> <p>When you have finished uploading parts, use the <code>CompleteMultipartReadSetUpload</code> API to complete the multipart read set upload and to retrieve the final read set IDs in the response.</p> <p>To learn more about creating parts and the <code>split</code> operation, see <a href="https://docs.aws.amazon.com/omics/latest/dev/synchronous-uploads.html">Direct upload to a sequence store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::CreateMultipartReadSetUploadRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The sequence store ID for the store that is the destination of the multipart uploads.</p>
@@ -566,7 +566,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Creates a reference store.</p>
+    # <p>Creates a reference store and returns metadata in JSON format. Reference stores are used to store reference genomes in FASTA format. A reference store is created when the first reference genome is imported. To import additional reference genomes from an Amazon S3 bucket, use the <code>StartReferenceImportJob</code> API operation. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html">Creating a HealthOmics reference store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::CreateReferenceStoreRequest] params
     # @option params [String] :name
     #   <p>A name for the store.</p>
@@ -703,7 +703,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Creates a sequence store.</p>
+    # <p>Creates a sequence store and returns its metadata. Sequence stores are used to store sequence data files called read sets that are saved in FASTQ, BAM, uBAM, or CRAM formats. For aligned formats (BAM and CRAM), a sequence store can only use one reference genome. For unaligned formats (FASTQ and uBAM), a reference genome is not required. You can create multiple sequence stores per region per account. </p> <p>The following are optional parameters you can specify for your sequence store:</p> <ul> <li> <p>Use <code>s3AccessConfig</code> to configure your sequence store with S3 access logs (recommended).</p> </li> <li> <p>Use <code>sseConfig</code> to define your own KMS key for encryption.</p> </li> <li> <p>Use <code>eTagAlgorithmFamily</code> to define which algorithm to use for the HealthOmics eTag on objects.</p> </li> <li> <p>Use <code>fallbackLocation</code> to define a backup location for storing files that have failed a direct upload.</p> </li> <li> <p>Use <code>propagatedSetLevelTags</code> to configure tags that propagate to all objects in your store.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/create-sequence-store.html">Creating a HealthOmics sequence store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::CreateSequenceStoreRequest] params
     # @option params [String] :name
     #   <p>A name for the store.</p>
@@ -712,17 +712,17 @@ module Aws::Omics
     # @option params [Types::SseConfig] :sse_config
     #   <p>Server-side encryption (SSE) settings for the store.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Tags for the store.</p>
+    #   <p>Tags for the store. You can configure up to 50 tags.</p>
     # @option params [String] :client_token
-    #   <p>To ensure that requests don't run multiple times, specify a unique token for each request.</p>
+    #   <p>An idempotency token used to dedupe retry requests so that duplicate runs are not created.</p>
     # @option params [String] :fallback_location
-    #   <p>An S3 location that is used to store files that have failed a direct upload.</p>
+    #   <p>An S3 location that is used to store files that have failed a direct upload. You can add or change the <code>fallbackLocation</code> after creating a sequence store. This is not required if you are uploading files from a different S3 bucket.</p>
     # @option params [String] :e_tag_algorithm_family
-    #   <p>The ETag algorithm family to use for ingested read sets.</p>
+    #   <p>The ETag algorithm family to use for ingested read sets. The default value is MD5up. For more information on ETags, see <a href="https://docs.aws.amazon.com/omics/latest/dev/etags-and-provenance.html">ETags and data provenance</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @option params [Array<String>] :propagated_set_level_tags
-    #   <p>The tags keys to propagate to the S3 objects associated with read sets in the sequence store.</p>
+    #   <p>The tags keys to propagate to the S3 objects associated with read sets in the sequence store. These tags can be used as input to add metadata to your read sets.</p>
     # @option params [Types::S3AccessConfig] :s3_access_config
-    #   <p>S3 access configuration parameters</p>
+    #   <p>S3 access configuration parameters. This specifies the parameters needed to access logs stored in S3 buckets. The S3 bucket must be in the same region and account as the sequence store. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "SequenceStoreName", # required
@@ -850,7 +850,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Creates a private workflow. Before you create a private workflow, you must create and configure these required resources:</p> <ul> <li> <p> <i>Workflow definition files</i>: Define your workflow in one or more workflow definition files, written in WDL, Nextflow, or CWL. The workflow definition specifies the inputs and outputs for runs that use the workflow. It also includes specifications for the runs and run tasks for your workflow, including compute and memory requirements. The workflow definition file must be in .zip format.</p> </li> <li> <p>(Optional) <i>Parameter template</i>: You can create a parameter template file that defines the run parameters, or Amazon Web Services HealthOmics can generate the parameter template for you.</p> </li> <li> <p> <i>ECR container images</i>: Create one or more container images for the workflow. Store the images in a private ECR repository.</p> </li> <li> <p>(Optional) <i>Sentieon licenses</i>: Request a Sentieon license if using the Sentieon software in a private workflow.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html">Creating or updating a private workflow in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
+    # <p>Creates a private workflow. Before you create a private workflow, you must create and configure these required resources:</p> <ul> <li> <p> <i>Workflow definition files</i>: Define your workflow in one or more workflow definition files, written in WDL, Nextflow, or CWL. The workflow definition specifies the inputs and outputs for runs that use the workflow. It also includes specifications for the runs and run tasks for your workflow, including compute and memory requirements. The workflow definition file must be in .zip format.</p> </li> <li> <p>(Optional) <i>Parameter template</i>: You can create a parameter template file that defines the run parameters, or Amazon Web Services HealthOmics can generate the parameter template for you.</p> </li> <li> <p> <i>ECR container images</i>: Create container images for the workflow in a private ECR repository, or synchronize images from a supported upstream registry with your Amazon ECR private repository.</p> </li> <li> <p>(Optional) <i>Sentieon licenses</i>: Request a Sentieon license if using the Sentieon software in a private workflow.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html">Creating or updating a private workflow in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::CreateWorkflowRequest] params
     # @option params [String] :name
     #   <p>Name (optional but highly recommended) for the workflow to locate relevant information in the CloudWatch logs and Amazon Web Services HealthOmics console. </p>
@@ -876,6 +876,10 @@ module Aws::Omics
     #   <p>The computational accelerator specified to run the workflow.</p>
     # @option params [String] :storage_type
     #   <p>The default storage type for runs that use this workflow. The <code>storageType</code> can be overridden at run time. <code>DYNAMIC</code> storage dynamically scales the storage up or down, based on file system utilization. <code>STATIC</code> storage allocates a fixed amount of storage. For more information about dynamic and static storage types, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html">Run storage types</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
+    # @option params [Types::ContainerRegistryMap] :container_registry_map
+    #   <p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>
+    # @option params [String] :container_registry_map_uri
+    #   <p>(Optional) URI of the S3 location for the registry mapping file.</p>
     # @option params [String] :readme_markdown
     #   <p>The markdown content for the workflow's README file. This provides documentation and usage information for users of the workflow.</p>
     # @option params [String] :parameter_template_path
@@ -909,6 +913,23 @@ module Aws::Omics
     #     request_id: "WorkflowRequestId", # required
     #     accelerators: "Accelerators",
     #     storage_type: "StorageType",
+    #     container_registry_map: {
+    #       registry_mappings: [
+    #         {
+    #           upstream_registry_url: "Uri",
+    #           ecr_repository_prefix: "EcrRepositoryPrefix",
+    #           upstream_repository_prefix: "UpstreamRepositoryPrefix",
+    #           ecr_account_id: "AwsAccountId"
+    #         }
+    #       ],
+    #       image_mappings: [
+    #         {
+    #           source_image: "Uri",
+    #           destination_image: "Uri"
+    #         }
+    #       ]
+    #     },
+    #     container_registry_map_uri: "Uri",
     #     readme_markdown: "ReadmeMarkdown",
     #     parameter_template_path: "ParameterTemplatePath",
     #     readme_path: "ReadmePath",
@@ -943,36 +964,40 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Creates a new workflow version for the workflow that you specify with the <code>workflowId</code> parameter.</p> <p>When you create a new version of a workflow, you need to specify the configuration for the new version. It doesn't inherit any configuration values from the workflow.</p> <p>Provide a version name that is unique for this workflow. You cannot change the name after HealthOmics creates the version.</p> <note> <p>Don’t include any personally identifiable information (PII) in the version name. Version names appear in the workflow version ARN.</p> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html">Workflow versioning in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
+    # <p>Creates a new workflow version for the workflow that you specify with the <code>workflowId</code> parameter.</p> <p>When you create a new version of a workflow, you need to specify the configuration for the new version. It doesn't inherit any configuration values from the workflow.</p> <p>Provide a version name that is unique for this workflow. You cannot change the name after HealthOmics creates the version.</p> <note> <p>Don't include any personally identifiable information (PII) in the version name. Version names appear in the workflow version ARN.</p> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html">Workflow versioning in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::CreateWorkflowVersionRequest] params
     # @option params [String] :workflow_id
-    #   <p>The ID of the workflow where you are creating the new version.</p>
+    #   <p>The ID of the workflow where you are creating the new version. The <code>workflowId</code> is not the UUID.</p>
     # @option params [String] :version_name
     #   <p>A name for the workflow version. Provide a version name that is unique for this workflow. You cannot change the name after HealthOmics creates the version. </p> <p>The version name must start with a letter or number and it can include upper-case and lower-case letters, numbers, hyphens, periods and underscores. The maximum length is 64 characters. You can use a simple naming scheme, such as version1, version2, version3. You can also match your workflow versions with your own internal versioning conventions, such as 2.7.0, 2.7.1, 2.7.2.</p>
     # @option params [String] :definition_zip
-    #   <p>A zip archive containing the workflow definition for this workflow version.</p>
+    #   <p>A ZIP archive containing the main workflow definition file and dependencies that it imports for this workflow version. You can use a file with a ://fileb prefix instead of the Base64 string. For more information, see Workflow definition requirements in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @option params [String] :definition_uri
-    #   <p>The URI specifies the location of the workflow definition for this workflow version.</p>
+    #   <p>The S3 URI of a definition for this workflow version. The S3 bucket must be in the same region as this workflow version.</p>
     # @option params [String] :accelerators
     #   <p>The computational accelerator for this workflow version.</p>
     # @option params [String] :description
     #   <p>A description for this workflow version.</p>
     # @option params [String] :engine
-    #   <p>The workflow engine for this workflow version.</p>
+    #   <p>The workflow engine for this workflow version. This is only required if you have workflow definition files from more than one engine in your zip file. Otherwise, the service can detect the engine automatically from your workflow definition.</p>
     # @option params [String] :main
-    #   <p>The path of the main definition file for this workflow version.</p>
+    #   <p>The path of the main definition file for this workflow version. This parameter is not required if the ZIP archive contains only one workflow definition file, or if the main definition file is named “main”. An example path is: <code>workflow-definition/main-file.wdl</code>. </p>
     # @option params [Hash<String, Types::WorkflowParameter>] :parameter_template
-    #   <p>The parameter template defines the input parameters for runs that use this workflow version.</p>
+    #   <p>A parameter template for this workflow version. If this field is blank, Amazon Web Services HealthOmics will automatically parse the parameter template values from your workflow definition file. To override these service generated default values, provide a parameter template. To view an example of a parameter template, see <a href="https://docs.aws.amazon.com/omics/latest/dev/parameter-templates.html">Parameter template files</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @option params [String] :request_id
-    #   <p>To ensure that requests don't run multiple times, specify a unique ID for each request.</p>
+    #   <p>An idempotency token to ensure that duplicate workflows are not created when Amazon Web Services HealthOmics submits retry requests.</p>
     # @option params [String] :storage_type
-    #   <p>The default storage type for runs that use this workflow. STATIC storage allocates a fixed amount of storage. DYNAMIC storage dynamically scales the storage up or down, based on file system utilization. For more information about static and dynamic storage, see <a href="https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html">Running workflows</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
+    #   <p>The default storage type for runs that use this workflow version. The <code>storageType</code> can be overridden at run time. <code>DYNAMIC</code> storage dynamically scales the storage up or down, based on file system utilization. STATIC storage allocates a fixed amount of storage. For more information about dynamic and static storage types, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html">Run storage types</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @option params [Integer] :storage_capacity
-    #   <p>The default static storage capacity (in gibibytes) for runs that use this workflow or workflow version.</p>
+    #   <p>The default static storage capacity (in gibibytes) for runs that use this workflow version. The <code>storageCapacity</code> can be overwritten at run time. The storage capacity is not required for runs with a <code>DYNAMIC</code> storage type.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Optional tags to associate with this workflow version.</p>
+    #   <p>Tags for this workflow version. You can define up to 50 tags for the workflow. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/add-a-tag.html">Adding a tag</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @option params [String] :workflow_bucket_owner_id
     #   <p>Amazon Web Services Id of the owner of the S3 bucket that contains the workflow definition. You need to specify this parameter if your account is not the bucket owner.</p>
+    # @option params [Types::ContainerRegistryMap] :container_registry_map
+    #   <p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>
+    # @option params [String] :container_registry_map_uri
+    #   <p>(Optional) URI of the S3 location for the registry mapping file.</p>
     # @option params [String] :readme_markdown
     #   <p>The markdown content for the workflow version's README file. This provides documentation and usage information for users of this specific workflow version.</p>
     # @option params [String] :parameter_template_path
@@ -1006,6 +1031,23 @@ module Aws::Omics
     #       "TagKey" => "TagValue"
     #     },
     #     workflow_bucket_owner_id: "WorkflowBucketOwnerId",
+    #     container_registry_map: {
+    #       registry_mappings: [
+    #         {
+    #           upstream_registry_url: "Uri",
+    #           ecr_repository_prefix: "EcrRepositoryPrefix",
+    #           upstream_repository_prefix: "UpstreamRepositoryPrefix",
+    #           ecr_account_id: "AwsAccountId"
+    #         }
+    #       ],
+    #       image_mappings: [
+    #         {
+    #           source_image: "Uri",
+    #           destination_image: "Uri"
+    #         }
+    #       ]
+    #     },
+    #     container_registry_map_uri: "Uri",
     #     readme_markdown: "ReadmeMarkdown",
     #     parameter_template_path: "ParameterTemplatePath",
     #     readme_path: "ReadmePath",
@@ -1096,7 +1138,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Deletes a genome reference.</p>
+    # <p>Deletes a reference genome and returns a response with no body if the operation is successful. The read set associated with the reference genome must first be deleted before deleting the reference genome. After the reference genome is deleted, you can delete the reference store using the <code>DeleteReferenceStore</code> API operation.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/deleting-reference-and-sequence-stores.html">Deleting HealthOmics reference and sequence stores</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::DeleteReferenceRequest] params
     # @option params [String] :id
     #   <p>The reference's ID.</p>
@@ -1118,7 +1160,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Deletes a genome reference store.</p>
+    # <p>Deletes a reference store and returns a response with no body if the operation is successful. You can only delete a reference store when it does not contain any reference genomes. To empty a reference store, use <code>DeleteReference</code>.</p> <p>For more information about your workflow status, see <a href="https://docs.aws.amazon.com/omics/latest/dev/deleting-reference-and-sequence-stores.html">Deleting HealthOmics reference and sequence stores</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::DeleteReferenceStoreRequest] params
     # @option params [String] :id
     #   <p>The store's ID.</p>
@@ -1213,7 +1255,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Deletes a sequence store.</p>
+    # <p>Deletes a sequence store and returns a response with no body if the operation is successful. You can only delete a sequence store when it does not contain any read sets.</p> <p>Use the <code>BatchDeleteReadSet</code> API operation to ensure that all read sets in the sequence store are deleted. When a sequence store is deleted, all tags associated with the store are also deleted.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/deleting-reference-and-sequence-stores.html">Deleting HealthOmics reference and sequence stores</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::DeleteSequenceStoreRequest] params
     # @option params [String] :id
     #   <p>The sequence store's ID.</p>
@@ -1277,7 +1319,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Deletes a workflow by specifying its ID. No response is returned if the deletion is successful.</p> <p>To verify that the workflow is deleted:</p> <ul> <li> <p>Use <code>ListWorkflows</code> to confirm the workflow no longer appears in the list.</p> </li> <li> <p>Use <code>GetWorkflow</code> to verify the workflow cannot be found.</p> </li> </ul>
+    # <p>Deletes a workflow by specifying its ID. This operation returns a response with no body if the deletion is successful.</p> <p>To verify that the workflow is deleted:</p> <ul> <li> <p>Use <code>ListWorkflows</code> to confirm the workflow no longer appears in the list.</p> </li> <li> <p>Use <code>GetWorkflow</code> to verify the workflow cannot be found.</p> </li> </ul>
     # @param [Hash, Types::DeleteWorkflowRequest] params
     # @option params [String] :id
     #   <p>The workflow's ID.</p>
@@ -1484,7 +1526,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Gets a file from a read set.</p>
+    # <p>Retrieves detailed information from parts of a read set and returns the read set in the same format that it was uploaded. You must have read sets uploaded to your sequence store in order to run this operation.</p>
     # @param [Hash, Types::GetReadSetRequest] params
     # @option params [String] :id
     #   <p>The read set's ID.</p>
@@ -1514,7 +1556,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Gets information about a read set activation job.</p>
+    # <p>Returns detailed information about the status of a read set activation job in JSON format.</p>
     # @param [Hash, Types::GetReadSetActivationJobRequest] params
     # @option params [String] :id
     #   <p>The job's ID.</p>
@@ -1550,7 +1592,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Gets information about a read set export job.</p>
+    # <p>Retrieves status information about a read set export job and returns the data in JSON format. Use this operation to actively monitor the progress of an export job.</p>
     # @param [Hash, Types::GetReadSetExportJobRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The job's sequence store ID.</p>
@@ -1587,7 +1629,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Gets information about a read set import job.</p>
+    # <p>Gets detailed and status information about a read set import job and returns the data in JSON format.</p>
     # @param [Hash, Types::GetReadSetImportJobRequest] params
     # @option params [String] :id
     #   <p>The job's ID.</p>
@@ -1638,7 +1680,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Gets details about a read set.</p>
+    # <p>Retrieves the metadata for a read set from a sequence store in JSON format. This operation does not return tags. To retrieve the list of tags for a read set, use the <code>ListTagsForResource</code> API operation.</p>
     # @param [Hash, Types::GetReadSetMetadataRequest] params
     # @option params [String] :id
     #   <p>The read set's ID.</p>
@@ -1712,7 +1754,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Gets a reference file.</p>
+    # <p>Downloads parts of data from a reference genome and returns the reference file in the same format that it was uploaded.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html">Creating a HealthOmics reference store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::GetReferenceRequest] params
     # @option params [String] :id
     #   <p>The reference's ID.</p>
@@ -1745,7 +1787,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Gets information about a reference import job.</p>
+    # <p>Monitors the status of a reference import job. This operation can be called after calling the <code>StartReferenceImportJob</code> operation.</p>
     # @param [Hash, Types::GetReferenceImportJobRequest] params
     # @option params [String] :id
     #   <p>The job's ID.</p>
@@ -1788,7 +1830,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Gets information about a genome reference's metadata.</p>
+    # <p>Retrieves metadata for a reference genome. This operation returns the number of parts, part size, and MD5 of an entire file. This operation does not return tags. To retrieve the list of tags for a read set, use the <code>ListTagsForResource</code> API operation.</p>
     # @param [Hash, Types::GetReferenceMetadataRequest] params
     # @option params [String] :id
     #   <p>The reference's ID.</p>
@@ -2028,7 +2070,12 @@ module Aws::Omics
     #     log_stream: "TaskLogStream",
     #     gpus: 1,
     #     instance_type: "TaskInstanceType",
-    #     failure_reason: "TaskFailureReason"
+    #     failure_reason: "TaskFailureReason",
+    #     image_details: {
+    #       image: "Uri",
+    #       image_digest: "TaskImageDigest",
+    #       source_image: "Uri"
+    #     }
     #   }
     # @return [Types::GetRunTaskResponse]
     def get_run_task(params = {}, options = {})
@@ -2061,7 +2108,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Gets information about a sequence store.</p>
+    # <p>Retrieves metadata for a sequence store using its ID and returns it in JSON format.</p>
     # @param [Hash, Types::GetSequenceStoreRequest] params
     # @option params [String] :id
     #   <p>The store's ID.</p>
@@ -2262,6 +2309,22 @@ module Aws::Omics
     #     accelerators: "Accelerators",
     #     storage_type: "StorageType",
     #     uuid: "WorkflowUuid",
+    #     container_registry_map: {
+    #       registry_mappings: [
+    #         {
+    #           upstream_registry_url: "Uri",
+    #           ecr_repository_prefix: "EcrRepositoryPrefix",
+    #           upstream_repository_prefix: "UpstreamRepositoryPrefix",
+    #           ecr_account_id: "AwsAccountId"
+    #         }
+    #       ],
+    #       image_mappings: [
+    #         {
+    #           source_image: "Uri",
+    #           destination_image: "Uri"
+    #         }
+    #       ]
+    #     },
     #     readme: "ReadmeS3PresignedUrl",
     #     definition_repository_details: {
     #       connection_arn: "ConnectionArn",
@@ -2284,7 +2347,7 @@ module Aws::Omics
     # <p>Gets information about a workflow version. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html">Workflow versioning in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::GetWorkflowVersionRequest] params
     # @option params [String] :workflow_id
-    #   <p>The workflow's ID.</p>
+    #   <p>The workflow's ID. The <code>workflowId</code> is not the UUID.</p>
     # @option params [String] :version_name
     #   <p>The workflow version name.</p>
     # @option params [String] :type
@@ -2292,7 +2355,7 @@ module Aws::Omics
     # @option params [Array<String>] :export
     #   <p>The export format for the workflow.</p>
     # @option params [String] :workflow_owner_id
-    #   <p>Amazon Web Services Id of the owner of the workflow.</p>
+    #   <p>The 12-digit account ID of the workflow owner. The workflow owner ID can be retrieved using the <code>GetShare</code> API operation. If you are the workflow owner, you do not need to include this ID.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workflow_id: "WorkflowId", # required
@@ -2335,6 +2398,22 @@ module Aws::Omics
     #     },
     #     uuid: "WorkflowUuid",
     #     workflow_bucket_owner_id: "WorkflowBucketOwnerId",
+    #     container_registry_map: {
+    #       registry_mappings: [
+    #         {
+    #           upstream_registry_url: "Uri",
+    #           ecr_repository_prefix: "EcrRepositoryPrefix",
+    #           upstream_repository_prefix: "UpstreamRepositoryPrefix",
+    #           ecr_account_id: "AwsAccountId"
+    #         }
+    #       ],
+    #       image_mappings: [
+    #         {
+    #           source_image: "Uri",
+    #           destination_image: "Uri"
+    #         }
+    #       ]
+    #     },
     #     readme: "ReadmeS3PresignedUrl",
     #     definition_repository_details: {
     #       connection_arn: "ConnectionArn",
@@ -2504,7 +2583,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Lists multipart read set uploads and for in progress uploads. Once the upload is completed, a read set is created and the upload will no longer be returned in the response.</p>
+    # <p>Lists in-progress multipart read set uploads for a sequence store and returns it in a JSON formatted output. Multipart read set uploads are initiated by the <code>CreateMultipartReadSetUploads</code> API operation. This operation returns a response with no body when the upload is complete. </p>
     # @param [Hash, Types::ListMultipartReadSetUploadsRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The Sequence Store ID used for the multipart uploads.</p>
@@ -2548,7 +2627,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of read set activation jobs.</p>
+    # <p>Retrieves a list of read set activation jobs and returns the metadata in a JSON formatted output. To extract metadata from a read set activation job, use the <code>GetReadSetActivationJob</code> API operation.</p>
     # @param [Hash, Types::ListReadSetActivationJobsRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The read set's sequence store ID.</p>
@@ -2591,7 +2670,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of read set export jobs.</p>
+    # <p>Retrieves a list of read set export jobs in a JSON formatted response. This API operation is used to check the status of a read set export job initiated by the <code>StartReadSetExportJob</code> API operation.</p>
     # @param [Hash, Types::ListReadSetExportJobsRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The jobs' sequence store ID.</p>
@@ -2635,7 +2714,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of read set import jobs.</p>
+    # <p>Retrieves a list of read set import jobs and returns the data in JSON format.</p>
     # @param [Hash, Types::ListReadSetImportJobsRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of jobs to return in one page of results.</p>
@@ -2679,7 +2758,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>This operation will list all parts in a requested multipart upload for a sequence store.</p>
+    # <p>Lists all parts in a multipart read set upload for a sequence store and returns the metadata in a JSON formatted output.</p>
     # @param [Hash, Types::ListReadSetUploadPartsRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The Sequence Store ID used for the multipart uploads.</p>
@@ -2728,7 +2807,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of read sets.</p>
+    # <p>Retrieves a list of read sets from a sequence store ID and returns the metadata in JSON format.</p>
     # @param [Hash, Types::ListReadSetsRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The jobs' sequence store ID.</p>
@@ -2796,7 +2875,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of reference import jobs.</p>
+    # <p>Retrieves the metadata of one or more reference import jobs for a reference store.</p>
     # @param [Hash, Types::ListReferenceImportJobsRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of jobs to return in one page of results.</p>
@@ -2840,7 +2919,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of reference stores.</p>
+    # <p>Retrieves a list of reference stores linked to your account and returns their metadata in JSON format.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html">Creating a reference store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::ListReferenceStoresRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of stores to return in one page of results.</p>
@@ -2884,7 +2963,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of references.</p>
+    # <p>Retrieves the metadata of one or more reference genomes in a reference store.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html">Creating a reference store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::ListReferencesRequest] params
     # @option params [String] :reference_store_id
     #   <p>The references' reference store ID.</p>
@@ -3101,7 +3180,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of sequence stores.</p>
+    # <p>Retrieves a list of sequence stores and returns each sequence store's metadata.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/create-sequence-store.html">Creating a HealthOmics sequence store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::ListSequenceStoresRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of stores to return in one page of results.</p>
@@ -3328,11 +3407,11 @@ module Aws::Omics
     # <p>Lists the workflow versions for the specified workflow. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html">Workflow versioning in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::ListWorkflowVersionsRequest] params
     # @option params [String] :workflow_id
-    #   <p>The workflow's ID.</p>
+    #   <p>The workflow's ID. The <code>workflowId</code> is not the UUID.</p>
     # @option params [String] :type
     #   <p>The workflow type.</p>
     # @option params [String] :workflow_owner_id
-    #   <p>Amazon Web Services Id of the owner of the workflow.</p>
+    #   <p>The 12-digit account ID of the workflow owner. The workflow owner ID can be retrieved using the <code>GetShare</code> API operation. If you are the workflow owner, you do not need to include this ID.</p>
     # @option params [String] :starting_token
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
@@ -3507,7 +3586,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Activates an archived read set. To reduce storage charges, Amazon Omics archives unused read sets after 30 days.</p>
+    # <p>Activates an archived read set and returns its metadata in a JSON formatted output. AWS HealthOmics automatically archives unused read sets after 30 days. To monitor the status of your read set activation job, use the <code>GetReadSetActivationJob</code> operation.</p> <p>To learn more, see <a href="https://docs.aws.amazon.com/omics/latest/dev/activating-read-sets.html">Activating read sets</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::StartReadSetActivationJobRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The read set's sequence store ID.</p>
@@ -3541,7 +3620,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Exports a read set to Amazon S3.</p>
+    # <p>Starts a read set export job. When the export job is finished, the read set is exported to an Amazon S3 bucket which can be retrieved using the <code>GetReadSetExportJob</code> API operation.</p> <p>To monitor the status of the export job, use the <code>ListReadSetExportJobs</code> API operation. </p>
     # @param [Hash, Types::StartReadSetExportJobRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The read set's sequence store ID.</p>
@@ -3582,7 +3661,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Starts a read set import job.</p>
+    # <p>Imports a read set from the sequence store. Read set import jobs support a maximum of 100 read sets of different types. Monitor the progress of your read set import job by calling the <code>GetReadSetImportJob</code> API operation.</p>
     # @param [Hash, Types::StartReadSetImportJobRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The read set's sequence store ID.</p>
@@ -3633,7 +3712,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>Starts a reference import job.</p>
+    # <p>Imports a reference genome from Amazon S3 into a specified reference store. You can have multiple reference genomes in a reference store. You can only import reference genomes one at a time into each reference store. Monitor the status of your reference import job by using the <code>GetReferenceImportJob</code> API operation.</p>
     # @param [Hash, Types::StartReferenceImportJobRequest] params
     # @option params [String] :reference_store_id
     #   <p>The job's reference store ID.</p>
@@ -3729,7 +3808,7 @@ module Aws::Omics
     #     priority: 1,
     #     parameters: ""null"",
     #     storage_capacity: 1,
-    #     output_uri: "RunOutputUri",
+    #     output_uri: "RunOutputUri", # required
     #     log_level: "RunLogLevel",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -4119,15 +4198,15 @@ module Aws::Omics
     # <p>Updates information about the workflow version. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html">Workflow versioning in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::UpdateWorkflowVersionRequest] params
     # @option params [String] :workflow_id
-    #   <p>The workflow's ID.</p>
+    #   <p>The workflow's ID. The <code>workflowId</code> is not the UUID.</p>
     # @option params [String] :version_name
     #   <p>The name of the workflow version.</p>
     # @option params [String] :description
     #   <p>Description of the workflow version.</p>
     # @option params [String] :storage_type
-    #   <p>The default storage type for runs that use this workflow. STATIC storage allocates a fixed amount of storage. DYNAMIC storage dynamically scales the storage up or down, based on file system utilization. For more information about static and dynamic storage, see <a href="https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html">Running workflows</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
+    #   <p>The default storage type for runs that use this workflow version. The <code>storageType</code> can be overridden at run time. <code>DYNAMIC</code> storage dynamically scales the storage up or down, based on file system utilization. STATIC storage allocates a fixed amount of storage. For more information about dynamic and static storage types, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html">Run storage types</a> in the <i>in the <i>Amazon Web Services HealthOmics User Guide</i> </i>.</p>
     # @option params [Integer] :storage_capacity
-    #   <p>The default static storage capacity (in gibibytes) for runs that use this workflow or workflow version.</p>
+    #   <p>The default static storage capacity (in gibibytes) for runs that use this workflow version. The <code>storageCapacity</code> can be overwritten at run time. The storage capacity is not required for runs with a <code>DYNAMIC</code> storage type.</p>
     # @option params [String] :readme_markdown
     #   <p>The markdown content for the workflow version's README file. This provides documentation and usage information for users of this specific workflow version.</p>
     # @example Request syntax with placeholder values
@@ -4150,7 +4229,7 @@ module Aws::Omics
       request.send_request(options)
     end
 
-    # <p>This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten.</p>
+    # <p>Uploads a specific part of a read set into a sequence store. When you a upload a read set part with a part number that already exists, the new part replaces the existing one. This operation returns a JSON formatted response containing a string identifier that is used to confirm that parts are being added to the intended upload.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/synchronous-uploads.html">Direct upload to a sequence store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @param [Hash, Types::UploadReadSetPartRequest] params
     # @option params [String] :sequence_store_id
     #   <p>The Sequence Store ID used for the multipart upload.</p>

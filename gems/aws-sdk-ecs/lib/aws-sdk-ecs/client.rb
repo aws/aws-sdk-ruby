@@ -746,10 +746,19 @@ module Aws::ECS
     #   			the <i>
     #                  <i>Amazon Elastic Container Service Developer Guide</i>
     #               </i>.</p>
+    #            <p>The default behavior of <code>AvailabilityZoneRebalancing</code> differs between create and update requests:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>For create service requests, when when no value is specified for <code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults the value to to <code>ENABLED</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For update service requests, when no value is specified for <code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults to the existing service’s <code>AvailabilityZoneRebalancing</code> value. If the service never had an <code>AvailabilityZoneRebalancing</code> value set, Amazon ECS treats this as <code>DISABLED</code>.</p>
+    #               </li>
+    #            </ul>
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   <p>A load balancer object representing the load balancers to use with your service. For
     #   			more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html">Service load balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
-    #            <p>If the service uses the rolling update (<code>ECS</code>) deployment controller and
+    #            <p>If the service uses the <code>ECS</code> deployment controller and
     #   			using either an Application Load Balancer or Network Load Balancer, you must specify one or more target group ARNs to attach
     #   			to the service. The service-linked role is required for services that use multiple
     #   			target groups. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html">Using service-linked roles for Amazon ECS</a> in the
@@ -867,16 +876,7 @@ module Aws::ECS
     #   			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Task networking</a>
     #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     # @option params [Integer] :health_check_grace_period_seconds
-    #   <p>The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy
-    #   			Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you don't
-    #   			specify a health check grace period value, the default value of <code>0</code> is used.
-    #   			If you don't use any of the health checks, then
-    #   				<code>healthCheckGracePeriodSeconds</code> is unused.</p>
-    #            <p>If your service's tasks take a while to start and respond to health checks, you can
-    #   			specify a health check grace period of up to 2,147,483,647 seconds (about 69 years).
-    #   			During that time, the Amazon ECS service scheduler ignores health check status. This grace
-    #   			period can prevent the service scheduler from marking tasks as unhealthy and stopping
-    #   			them before they have time to come up.</p>
+    #   <p>The period of time, in seconds, that the Amazon Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then <code>healthCheckGracePeriodSeconds</code> is unused.</p>
     # @option params [String] :scheduling_strategy
     #   <p>The scheduling strategy to use for the service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">Services</a>.</p>
     #            <p>There are two service scheduler strategies available:</p>
@@ -5242,8 +5242,7 @@ module Aws::ECS
     # @param [Hash, Types::DescribeTasksRequest] params
     # @option params [String] :cluster
     #   <p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task or tasks to
-    #   			describe. If you do not specify a cluster, the default cluster is assumed. If you do not specify a
-    #   			value, the <code>default</code> cluster is used.</p>
+    #   			describe. If you do not specify a cluster, the default cluster is assumed.</p>
     # @option params [Array<String>] :tasks
     #   <p>A list of up to 100 task IDs or full ARN entries.</p>
     # @option params [Array<String>] :include
@@ -11142,12 +11141,14 @@ module Aws::ECS
     # @option params [Integer] :desired_count
     #   <p>The number of instantiations of the task to place and keep running in your
     #   			service.</p>
+    #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [String] :task_definition
     #   <p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or
     #   			full ARN of the task definition to run in your service. If a <code>revision</code> is
     #   			not specified, the latest <code>ACTIVE</code> revision is used. If you modify the task
     #   			definition with <code>UpdateService</code>, Amazon ECS spawns a task with the new version of
     #   			the task definition and then stops an old task after the new version is running.</p>
+    #            <p>This parameter triggers a new service deployment.</p>
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   <p>The details of a capacity provider strategy. You can set a capacity provider when you
     #   			create a cluster, run a task, or update a service.</p>
@@ -11176,17 +11177,30 @@ module Aws::ECS
     #               </li>
     #            </ul>
     #            <p>For information about Amazon Web Services CDK considerations, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service-parameters.html">Amazon Web Services CDK considerations</a>.</p>
+    #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   <p>Optional deployment parameters that control how many tasks run during the deployment
     #   			and the ordering of stopping and starting tasks.</p>
+    #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [String] :availability_zone_rebalancing
     #   <p>Indicates whether to use Availability Zone rebalancing for the service.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html">Balancing an Amazon ECS service across Availability Zones</a> in
     #   			the <i>
     #                  <i>Amazon Elastic Container Service Developer Guide</i>
     #               </i>.</p>
+    #            <p>The default behavior of <code>AvailabilityZoneRebalancing</code> differs between create and update requests:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>For create service requests, when when no value is specified for <code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults the value to to <code>ENABLED</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For update service requests, when no value is specified for <code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults to the existing service’s <code>AvailabilityZoneRebalancing</code> value. If the service never had an <code>AvailabilityZoneRebalancing</code> value set, Amazon ECS treats this as <code>DISABLED</code>.</p>
+    #               </li>
+    #            </ul>
+    #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   <p>An object representing the network configuration for the service.</p>
+    #            <p>This parameter triggers a new service deployment.</p>
     # @option params [Array<Types::PlacementConstraint>] :placement_constraints
     #   <p>An array of task placement constraint objects to update the service to use. If no
     #   			value is specified, the existing placement constraints for the service will remain
@@ -11195,18 +11209,21 @@ module Aws::ECS
     #   			specify an empty array.</p>
     #            <p>You can specify a maximum of 10 constraints for each task. This limit includes
     #   			constraints in the task definition and those specified at runtime.</p>
+    #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [Array<Types::PlacementStrategy>] :placement_strategy
     #   <p>The task placement strategy objects to update the service to use. If no value is
     #   			specified, the existing placement strategy for the service will remain unchanged. If
     #   			this value is specified, it will override the existing placement strategy defined for
     #   			the service. To remove an existing placement strategy, specify an empty object.</p>
     #            <p>You can specify a maximum of five strategy rules for each service.</p>
+    #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [String] :platform_version
     #   <p>The platform version that your tasks in the service run on. A platform version is only
     #   			specified for tasks using the Fargate launch type. If a platform version
     #   			is not specified, the <code>LATEST</code> platform version is used. For more
     #   			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate Platform
     #   				Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>This parameter triggers a new service deployment.</p>
     # @option params [Boolean] :force_new_deployment
     #   <p>Determines whether to force a new deployment of the service. By default, deployments
     #   			aren't forced. You can use this option to start a new deployment with no service
@@ -11224,6 +11241,7 @@ module Aws::ECS
     #   			During that time, the Amazon ECS service scheduler ignores health check status. This grace
     #   			period can prevent the service scheduler from marking tasks as unhealthy and stopping
     #   			them before they have time to come up.</p>
+    #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [Types::DeploymentController] :deployment_controller
     #   <p>The deployment controller to use for the service. </p>
     # @option params [Boolean] :enable_execute_command
@@ -11231,6 +11249,7 @@ module Aws::ECS
     #   			containers.</p>
     #            <p>If you do not want to override the value that was set when the service was created,
     #   			you can set this to <code>null</code> when performing this action.</p>
+    #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [Boolean] :enable_ecs_managed_tags
     #   <p>Determines whether to turn on Amazon ECS managed tags for the tasks in the service. For
     #   			more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html">Tagging Your Amazon ECS
@@ -11238,6 +11257,7 @@ module Aws::ECS
     #            <p>Only tasks launched after the update will reflect the update. To update the tags on
     #   			all tasks, set <code>forceNewDeployment</code> to <code>true</code>, so that Amazon ECS
     #   			starts new tasks with the updated tags.</p>
+    #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   <note>
     #               <p>You must have a service-linked role when you update this property</p>
@@ -11263,12 +11283,14 @@ module Aws::ECS
     #   			information see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html">Register
     #   				multiple target groups with a service</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. </p>
     #            <p>You can remove existing <code>loadBalancers</code> by passing an empty list.</p>
+    #            <p>This parameter triggers a new service deployment.</p>
     # @option params [String] :propagate_tags
     #   <p>Determines whether to propagate the tags from the task definition or the service to
     #   			the task. If no value is specified, the tags aren't propagated.</p>
     #            <p>Only tasks launched after the update will reflect the update. To update the tags on
     #   			all tasks, set <code>forceNewDeployment</code> to <code>true</code>, so that Amazon ECS
     #   			starts new tasks with the updated tags.</p>
+    #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [Array<Types::ServiceRegistry>] :service_registries
     #   <note>
     #               <p>You must have a service-linked role when you update this property.</p>
@@ -11285,6 +11307,7 @@ module Aws::ECS
     #   			when the new tasks are running.</p>
     #            <p>You can remove existing <code>serviceRegistries</code> by passing an empty
     #   			list.</p>
+    #            <p>This parameter triggers a new service deployment.</p>
     # @option params [Types::ServiceConnectConfiguration] :service_connect_configuration
     #   <p>The configuration for this service to discover and connect to
     #   	services, and be discovered by, and connected from, other services within a namespace.</p>
@@ -11294,15 +11317,18 @@ module Aws::ECS
     #   	that collects logs and metrics for increased visibility.
     #   	Only the tasks that Amazon ECS services create are supported with Service Connect.
     #   	For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    #            <p>This parameter triggers a new service deployment.</p>
     # @option params [Array<Types::ServiceVolumeConfiguration>] :volume_configurations
     #   <p>The details of the volume that was <code>configuredAtLaunch</code>. You can configure
     #   			the size, volumeType, IOPS, throughput, snapshot and encryption in <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html">ServiceManagedEBSVolumeConfiguration</a>. The <code>name</code> of the volume
     #   			must match the <code>name</code> from the task definition. If set to null, no new
     #   			deployment is triggered. Otherwise, if this configuration differs from the existing one,
     #   			it triggers a new deployment.</p>
+    #            <p>This parameter triggers a new service deployment.</p>
     # @option params [Array<Types::VpcLatticeConfiguration>] :vpc_lattice_configurations
     #   <p>An object representing the VPC Lattice configuration for the service being
     #   			updated.</p>
+    #            <p>This parameter triggers a new service deployment.</p>
     # @example To change the number of tasks in a service
     #   # This example updates the desired count of the my-http-service service to 10.
     #   params = {

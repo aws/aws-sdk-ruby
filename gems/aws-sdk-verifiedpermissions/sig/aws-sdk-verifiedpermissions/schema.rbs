@@ -58,6 +58,7 @@ module Aws::VerifiedPermissions
     CreatePolicyStoreOutput: StructureShape
     CreatePolicyTemplateInput: StructureShape
     CreatePolicyTemplateOutput: StructureShape
+    DatetimeAttribute: StringShape
     Decimal: StringShape
     Decision: EnumShape
     DeleteIdentitySourceInput: StructureShape
@@ -72,6 +73,7 @@ module Aws::VerifiedPermissions
     DeterminingPolicyItem: StructureShape
     DeterminingPolicyList: ListShape
     DiscoveryUrl: StringShape
+    Duration: StringShape
     EntitiesDefinition: UnionShape
     EntityAttributes: MapShape
     EntityId: StringShape

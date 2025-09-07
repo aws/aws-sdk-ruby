@@ -120,6 +120,7 @@ module Aws::Mq
     ActionRequired.type = Types::ActionRequired
     AuthenticationStrategy.add_member(:simple, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SIMPLE', traits: {"smithy.api#enumValue" => "SIMPLE"}))
     AuthenticationStrategy.add_member(:ldap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LDAP', traits: {"smithy.api#enumValue" => "LDAP"}))
+    AuthenticationStrategy.add_member(:config_managed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CONFIG_MANAGED', traits: {"smithy.api#enumValue" => "CONFIG_MANAGED"}))
     AvailabilityZone.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Name', traits: {"smithy.api#jsonName" => "name"}))
     AvailabilityZone.type = Types::AvailabilityZone
     BadRequestException.add_member(:error_attribute, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ErrorAttribute', traits: {"smithy.api#jsonName" => "errorAttribute"}))
@@ -203,7 +204,7 @@ module Aws::Mq
     CreateBrokerRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: 'StorageType', traits: {"smithy.api#jsonName" => "storageType"}))
     CreateBrokerRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListofString, location_name: 'SubnetIds', traits: {"smithy.api#jsonName" => "subnetIds"}))
     CreateBrokerRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MapofString, location_name: 'Tags', traits: {"smithy.api#jsonName" => "tags"}))
-    CreateBrokerRequest.add_member(:users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofuser, location_name: 'Users', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "users", "smithy.api#required" => {}}))
+    CreateBrokerRequest.add_member(:users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofuser, location_name: 'Users', traits: {"smithy.api#jsonName" => "users"}))
     CreateBrokerRequest.add_member(:data_replication_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataReplicationMode, location_name: 'DataReplicationMode', traits: {"smithy.api#jsonName" => "dataReplicationMode"}))
     CreateBrokerRequest.add_member(:data_replication_primary_broker_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DataReplicationPrimaryBrokerArn', traits: {"smithy.api#jsonName" => "dataReplicationPrimaryBrokerArn"}))
     CreateBrokerRequest.type = Types::CreateBrokerRequest

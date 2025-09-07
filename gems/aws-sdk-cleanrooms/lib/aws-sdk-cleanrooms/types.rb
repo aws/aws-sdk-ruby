@@ -347,6 +347,9 @@ module Aws::CleanRooms
     # @!attribute validations
     #   <p>Information about the validations performed on the analysis template.</p>
     #   @return [Array<Types::AnalysisTemplateValidationStatusDetail>]
+    # @!attribute error_message_configuration
+    #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
+    #   @return [Types::ErrorMessageConfiguration]
     class AnalysisTemplate < Struct.new(
       :id,
       :arn,
@@ -364,6 +367,7 @@ module Aws::CleanRooms
       :source_metadata,
       :analysis_parameters,
       :validations,
+      :error_message_configuration,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -662,6 +666,52 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents a single change within a collaboration change request, containing the change identifier and specification.</p>
+    # @!attribute specification_type
+    #   <p>The type of specification for this change.</p>
+    #   @return [String]
+    # @!attribute specification
+    #   <p>The specification details for this change.</p>
+    #   @return [Types::ChangeSpecification]
+    # @!attribute types
+    #   <p>The list of change types that were applied.</p>
+    #   @return [Array<String>]
+    class Change < Struct.new(
+      :specification_type,
+      :specification,
+      :types,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies a change to apply to a collaboration.</p>
+    # @!attribute specification_type
+    #   <p>The type of specification for the change. Currently supports <code>MEMBER</code> for member-related changes.</p>
+    #   @return [String]
+    # @!attribute specification
+    #   <p>The specification details for the change. The structure depends on the specification type.</p>
+    #   @return [Types::ChangeSpecification]
+    class ChangeInput < Struct.new(
+      :specification_type,
+      :specification,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A union that contains the specification details for different types of changes.</p>
+    # @!attribute member
+    #   <p>The member change specification when the change type is <code>MEMBER</code>.</p>
+    #   @return [Types::MemberChangeSpecification]
+    class ChangeSpecification < Struct.new(
+      :member,
+      :unknown,
+      keyword_init: true)
+      include ::Smithy::Schema::Union
+
+      class Member < ChangeSpecification; end
+      class Unknown < ChangeSpecification; end
+    end
+
     # <p>The multi-party data share environment. The collaboration contains metadata about its purpose and participants.</p>
     # @!attribute id
     #   <p>The unique ID for the collaboration.</p>
@@ -708,6 +758,9 @@ module Aws::CleanRooms
     # @!attribute analytics_engine
     #   <p> The analytics engine for the collaboration.</p> <note> <p>After July 16, 2025, the <code>CLEAN_ROOMS_SQL</code> parameter will no longer be available. </p> </note>
     #   @return [String]
+    # @!attribute auto_approved_change_types
+    #   <p>The types of change requests that are automatically approved for this collaboration.</p>
+    #   @return [Array<String>]
     class Collaboration < Struct.new(
       :id,
       :arn,
@@ -724,6 +777,7 @@ module Aws::CleanRooms
       :query_log_status,
       :job_log_status,
       :analytics_engine,
+      :auto_approved_change_types,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -774,6 +828,9 @@ module Aws::CleanRooms
     # @!attribute validations
     #   <p>The validations that were performed.</p>
     #   @return [Array<Types::AnalysisTemplateValidationStatusDetail>]
+    # @!attribute error_message_configuration
+    #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
+    #   @return [Types::ErrorMessageConfiguration]
     class CollaborationAnalysisTemplate < Struct.new(
       :id,
       :arn,
@@ -790,6 +847,7 @@ module Aws::CleanRooms
       :source_metadata,
       :analysis_parameters,
       :validations,
+      :error_message_configuration,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -832,6 +890,74 @@ module Aws::CleanRooms
       :collaboration_id,
       :creator_account_id,
       :description,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a request to modify a collaboration. Change requests enable structured modifications to collaborations after they have been created.</p>
+    # @!attribute id
+    #   <p>The unique identifier for the change request.</p>
+    #   @return [String]
+    # @!attribute collaboration_id
+    #   <p>The unique identifier for the collaboration being modified.</p>
+    #   @return [String]
+    # @!attribute create_time
+    #   <p>The time when the change request was created.</p>
+    #   @return [Time]
+    # @!attribute update_time
+    #   <p>The time when the change request was last updated.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the change request. Valid values are <code>PENDING</code>, <code>APPROVED</code>, <code>DENIED</code>, <code>COMMITTED</code>, and <code>CANCELLED</code>.</p>
+    #   @return [String]
+    # @!attribute is_auto_approved
+    #   <p>Whether the change request was automatically approved based on the collaboration's auto-approval settings.</p>
+    #   @return [Boolean]
+    # @!attribute changes
+    #   <p>The list of changes specified in this change request.</p>
+    #   @return [Array<Types::Change>]
+    class CollaborationChangeRequest < Struct.new(
+      :id,
+      :collaboration_id,
+      :create_time,
+      :update_time,
+      :status,
+      :is_auto_approved,
+      :changes,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a collaboration change request.</p>
+    # @!attribute id
+    #   <p>The unique identifier for the change request.</p>
+    #   @return [String]
+    # @!attribute collaboration_id
+    #   <p>The unique identifier for the collaboration.</p>
+    #   @return [String]
+    # @!attribute create_time
+    #   <p>The time when the change request was created.</p>
+    #   @return [Time]
+    # @!attribute update_time
+    #   <p>The time when the change request was last updated.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the change request.</p>
+    #   @return [String]
+    # @!attribute is_auto_approved
+    #   <p>Whether the change request was automatically approved.</p>
+    #   @return [Boolean]
+    # @!attribute changes
+    #   <p>Summary of the changes in this change request.</p>
+    #   @return [Array<Types::Change>]
+    class CollaborationChangeRequestSummary < Struct.new(
+      :id,
+      :collaboration_id,
+      :create_time,
+      :update_time,
+      :status,
+      :is_auto_approved,
+      :changes,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1913,6 +2039,9 @@ module Aws::CleanRooms
     # @!attribute schema
     #   <p>A relation within an analysis.</p>
     #   @return [Types::AnalysisSchema]
+    # @!attribute error_message_configuration
+    #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
+    #   @return [Types::ErrorMessageConfiguration]
     class CreateAnalysisTemplateOperationInput < Struct.new(
       :description,
       :membership_identifier,
@@ -1922,6 +2051,7 @@ module Aws::CleanRooms
       :tags,
       :analysis_parameters,
       :schema,
+      :error_message_configuration,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1931,6 +2061,28 @@ module Aws::CleanRooms
     #   @return [Types::AnalysisTemplate]
     class CreateAnalysisTemplateOperationOutput < Struct.new(
       :analysis_template,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute collaboration_identifier
+    #   <p>The identifier of the collaboration that the change request is made against.</p>
+    #   @return [String]
+    # @!attribute changes
+    #   <p>The list of changes to apply to the collaboration. Each change specifies the type of modification and the details of what should be changed.</p>
+    #   @return [Array<Types::ChangeInput>]
+    class CreateCollaborationChangeRequestInput < Struct.new(
+      :collaboration_identifier,
+      :changes,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute collaboration_change_request
+    #   <p>Represents a request to modify a collaboration. Change requests enable structured modifications to collaborations after they have been created.</p>
+    #   @return [Types::CollaborationChangeRequest]
+    class CreateCollaborationChangeRequestOutput < Struct.new(
+      :collaboration_change_request,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1971,6 +2123,9 @@ module Aws::CleanRooms
     # @!attribute analytics_engine
     #   <p> The analytics engine.</p> <note> <p>After July 16, 2025, the <code>CLEAN_ROOMS_SQL</code> parameter will no longer be available. </p> </note>
     #   @return [String]
+    # @!attribute auto_approved_change_request_types
+    #   <p>The types of change requests that are automatically approved for this collaboration.</p>
+    #   @return [Array<String>]
     class CreateCollaborationOperationInput < Struct.new(
       :members,
       :name,
@@ -1984,6 +2139,7 @@ module Aws::CleanRooms
       :tags,
       :creator_payment_configuration,
       :analytics_engine,
+      :auto_approved_change_request_types,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -2733,6 +2889,16 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A structure that defines the level of detail included in error messages returned by PySpark jobs. This configuration allows you to control the verbosity of error messages to help with troubleshooting PySpark jobs while maintaining appropriate security controls.</p>
+    # @!attribute type
+    #   <p>The level of detail for error messages returned by the PySpark job. When set to DETAILED, error messages include more information to help troubleshoot issues with your PySpark job.</p> <p>Because this setting may expose sensitive data, it is recommended for development and testing environments.</p>
+    #   @return [String]
+    class ErrorMessageConfiguration < Struct.new(
+      :type,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute membership_identifier
     #   <p>The identifier for a membership resource.</p>
     #   @return [String]
@@ -2773,6 +2939,28 @@ module Aws::CleanRooms
     #   @return [Types::CollaborationAnalysisTemplate]
     class GetCollaborationAnalysisTemplateOperationOutput < Struct.new(
       :collaboration_analysis_template,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute collaboration_identifier
+    #   <p>The identifier of the collaboration that the change request is made against.</p>
+    #   @return [String]
+    # @!attribute change_request_identifier
+    #   <p>A unique identifier for the change request to retrieve.</p>
+    #   @return [String]
+    class GetCollaborationChangeRequestInput < Struct.new(
+      :collaboration_identifier,
+      :change_request_identifier,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute collaboration_change_request
+    #   <p>The collaboration change request that was requested.</p>
+    #   @return [Types::CollaborationChangeRequest]
+    class GetCollaborationChangeRequestOutput < Struct.new(
+      :collaboration_change_request,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3572,6 +3760,40 @@ module Aws::CleanRooms
     end
 
     # @!attribute collaboration_identifier
+    #   <p>The identifier of the collaboration that the change request is made against.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>A filter to only return change requests with the specified status.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results that are returned for an API request call.</p>
+    #   @return [Integer]
+    class ListCollaborationChangeRequestsInput < Struct.new(
+      :collaboration_identifier,
+      :status,
+      :next_token,
+      :max_results,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute collaboration_change_request_summaries
+    #   <p>The list of collaboration change request summaries.</p>
+    #   @return [Array<Types::CollaborationChangeRequestSummary>]
+    # @!attribute next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    #   @return [String]
+    class ListCollaborationChangeRequestsOutput < Struct.new(
+      :collaboration_change_request_summaries,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute collaboration_identifier
     #   <p>A unique identifier for the collaboration that the configured audience model association belongs to. Accepts a collaboration ID.</p>
     #   @return [String]
     # @!attribute next_token
@@ -4135,6 +4357,24 @@ module Aws::CleanRooms
     class MLPaymentConfig < Struct.new(
       :model_training,
       :model_inference,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies changes to collaboration membership, including adding new members with their abilities and display names.</p>
+    # @!attribute account_id
+    #   <p>The Amazon Web Services account ID of the member to add to the collaboration.</p>
+    #   @return [String]
+    # @!attribute member_abilities
+    #   <p>The abilities granted to the collaboration member. These determine what actions the member can perform within the collaboration.</p> <note> <p>The following values are currently not supported: <code>CAN_QUERY</code>, <code>CAN_RECEIVE_RESULTS,</code> and <code>CAN_RUN_JOB</code>. </p> <p>Set the value of <code>memberAbilities</code> to <code>[]</code> to allow a member to contribute data.</p> </note>
+    #   @return [Array<String>]
+    # @!attribute display_name
+    #   <p>Specifies the display name that will be shown for this member in the collaboration. While this field is required when inviting new members, it becomes optional when modifying abilities of existing collaboration members. </p>
+    #   @return [String]
+    class MemberChangeSpecification < Struct.new(
+      :account_id,
+      :member_abilities,
+      :display_name,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -4810,6 +5050,9 @@ module Aws::CleanRooms
     # @!attribute error
     #   <p> The error from the protected job.</p>
     #   @return [Types::ProtectedJobError]
+    # @!attribute compute_configuration
+    #   <p>The compute configuration for the protected job.</p>
+    #   @return [Types::ProtectedJobComputeConfiguration]
     class ProtectedJob < Struct.new(
       :id,
       :membership_id,
@@ -4821,8 +5064,23 @@ module Aws::CleanRooms
       :statistics,
       :result,
       :error,
+      :compute_configuration,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration of the compute resources for a PySpark job.</p>
+    # @!attribute worker
+    #   <p>The worker configuration for the compute environment.</p>
+    #   @return [Types::ProtectedJobWorkerComputeConfiguration]
+    class ProtectedJobComputeConfiguration < Struct.new(
+      :worker,
+      :unknown,
+      keyword_init: true)
+      include ::Smithy::Schema::Union
+
+      class Worker < ProtectedJobComputeConfiguration; end
+      class Unknown < ProtectedJobComputeConfiguration; end
     end
 
     # <p>The protected job configuration details.</p>
@@ -5084,6 +5342,20 @@ module Aws::CleanRooms
         options[:receiver_configurations] = [] unless options.key?(:receiver_configurations)
         super
       end
+    end
+
+    # <p>The configuration of the compute resources for a PySpark job.</p>
+    # @!attribute type
+    #   <p>The worker compute configuration type.</p>
+    #   @return [String]
+    # @!attribute number
+    #   <p>The number of workers for a PySpark job.</p>
+    #   @return [Integer]
+    class ProtectedJobWorkerComputeConfiguration < Struct.new(
+      :type,
+      :number,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for an Clean Rooms protected query.</p>
@@ -5741,11 +6013,15 @@ module Aws::CleanRooms
     # @!attribute result_configuration
     #   <p>The details needed to write the job results.</p>
     #   @return [Types::ProtectedJobResultConfigurationInput]
+    # @!attribute compute_configuration
+    #   <p>The compute configuration for the protected job.</p>
+    #   @return [Types::ProtectedJobComputeConfiguration]
     class StartProtectedJobInput < Struct.new(
       :type,
       :membership_identifier,
       :job_parameters,
       :result_configuration,
+      :compute_configuration,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -6292,7 +6568,7 @@ module Aws::CleanRooms
     #   <p> The worker compute configuration type.</p>
     #   @return [String]
     # @!attribute number
-    #   <p> The number of workers.</p>
+    #   <p> The number of workers.</p> <p>SQL queries support a minimum value of 2 and a maximum value of 400. </p> <p>PySpark jobs support a minimum value of 4 and a maximum value of 128.</p>
     #   @return [Integer]
     class WorkerComputeConfiguration < Struct.new(
       :type,

@@ -758,10 +758,12 @@ module Aws::XRay
 
       def initialize: (
         ?sampling_statistics_documents: Array[Types::SamplingStatisticsDocument],
+        ?sampling_boost_statistics_documents: Array[Types::SamplingBoostStatisticsDocument],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor sampling_statistics_documents: Array[Types::SamplingStatisticsDocument]?
+      attr_accessor sampling_boost_statistics_documents: Array[Types::SamplingBoostStatisticsDocument]?
     end
 
     class GetSamplingTargetsResult
@@ -771,12 +773,14 @@ module Aws::XRay
         ?sampling_target_documents: Array[Types::SamplingTargetDocument],
         ?last_rule_modification: Time,
         ?unprocessed_statistics: Array[Types::UnprocessedStatistics],
+        ?unprocessed_boost_statistics: Array[Types::UnprocessedStatistics],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor sampling_target_documents: Array[Types::SamplingTargetDocument]?
       attr_accessor last_rule_modification: Time?
       attr_accessor unprocessed_statistics: Array[Types::UnprocessedStatistics]?
+      attr_accessor unprocessed_boost_statistics: Array[Types::UnprocessedStatistics]?
     end
 
     class GetServiceGraphRequest
@@ -1663,6 +1667,53 @@ module Aws::XRay
       attr_accessor message: String?
     end
 
+    class SamplingBoost
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?boost_rate: Float,
+        ?boost_rate_ttl: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor boost_rate: Float?
+      attr_accessor boost_rate_ttl: Time?
+    end
+
+    class SamplingBoostStatisticsDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?service_name: String,
+        ?timestamp: Time,
+        ?anomaly_count: Integer,
+        ?total_count: Integer,
+        ?sampled_anomaly_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor service_name: String?
+      attr_accessor timestamp: Time?
+      attr_accessor anomaly_count: Integer?
+      attr_accessor total_count: Integer?
+      attr_accessor sampled_anomaly_count: Integer?
+    end
+
+    class SamplingRateBoost
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_rate: Float,
+        ?cooldown_window_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_rate: Float?
+      attr_accessor cooldown_window_minutes: Integer?
+    end
+
     class SamplingRule
       include Smithy::Schema::Structure
 
@@ -1680,6 +1731,7 @@ module Aws::XRay
         ?url_path: String,
         ?version: Integer,
         ?attributes: Hash[String, String],
+        ?sampling_rate_boost: Types::SamplingRateBoost,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1696,6 +1748,7 @@ module Aws::XRay
       attr_accessor url_path: String?
       attr_accessor version: Integer?
       attr_accessor attributes: Hash[String, String]?
+      attr_accessor sampling_rate_boost: Types::SamplingRateBoost?
     end
 
     class SamplingRuleRecord
@@ -1729,6 +1782,7 @@ module Aws::XRay
         ?http_method: String,
         ?url_path: String,
         ?attributes: Hash[String, String],
+        ?sampling_rate_boost: Types::SamplingRateBoost,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1744,6 +1798,7 @@ module Aws::XRay
       attr_accessor http_method: String?
       attr_accessor url_path: String?
       attr_accessor attributes: Hash[String, String]?
+      attr_accessor sampling_rate_boost: Types::SamplingRateBoost?
     end
 
     class SamplingStatisticSummary
@@ -1813,6 +1868,7 @@ module Aws::XRay
         ?reservoir_quota: Integer,
         ?reservoir_quota_ttl: Time,
         ?interval: Integer,
+        ?sampling_boost: Types::SamplingBoost,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1821,6 +1877,7 @@ module Aws::XRay
       attr_accessor reservoir_quota: Integer?
       attr_accessor reservoir_quota_ttl: Time?
       attr_accessor interval: Integer?
+      attr_accessor sampling_boost: Types::SamplingBoost?
     end
 
     class Segment

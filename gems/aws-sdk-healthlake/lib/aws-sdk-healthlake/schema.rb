@@ -88,6 +88,7 @@ module Aws::HealthLake
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.healthlake#UntagResourceRequest', name: 'UntagResourceRequest')
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.healthlake#UntagResourceResponse', name: 'UntagResourceResponse')
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.healthlake#ValidationException', name: 'ValidationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ValidationLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.healthlake#ValidationLevel', name: 'ValidationLevel')
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Message'))
     AccessDeniedException.type = Types::AccessDeniedException
@@ -188,6 +189,7 @@ module Aws::HealthLake
     ImportJobProperties.add_member(:job_progress_report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobProgressReport, location_name: 'JobProgressReport'))
     ImportJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: 'DataAccessRoleArn'))
     ImportJobProperties.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: 'Message'))
+    ImportJobProperties.add_member(:validation_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationLevel, location_name: 'ValidationLevel'))
     ImportJobProperties.type = Types::ImportJobProperties
     ImportJobPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportJobProperties)
     InputDataConfig.add_member(:s3_uri, Types::InputDataConfig::S3Uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Uri, location_name: 'S3Uri'))
@@ -279,6 +281,7 @@ module Aws::HealthLake
     StartFHIRImportJobRequest.add_member(:datastore_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatastoreId, location_name: 'DatastoreId', traits: {"smithy.api#required" => {}}))
     StartFHIRImportJobRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IamRoleArn, location_name: 'DataAccessRoleArn', traits: {"smithy.api#required" => {}}))
     StartFHIRImportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientTokenString, location_name: 'ClientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    StartFHIRImportJobRequest.add_member(:validation_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationLevel, location_name: 'ValidationLevel'))
     StartFHIRImportJobRequest.type = Types::StartFHIRImportJobRequest
     StartFHIRImportJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: 'JobId', traits: {"smithy.api#required" => {}}))
     StartFHIRImportJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: 'JobStatus', traits: {"smithy.api#required" => {}}))
@@ -301,6 +304,9 @@ module Aws::HealthLake
     UntagResourceResponse.type = Types::UntagResourceResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Message'))
     ValidationException.type = Types::ValidationException
+    ValidationLevel.add_member(:strict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STRICT', traits: {"smithy.api#enumValue" => "strict"}))
+    ValidationLevel.add_member(:structure_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STRUCTURE_ONLY', traits: {"smithy.api#enumValue" => "structure-only"}))
+    ValidationLevel.add_member(:minimal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MINIMAL', traits: {"smithy.api#enumValue" => "minimal"}))
 
     HealthLake = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.healthlake#HealthLake"

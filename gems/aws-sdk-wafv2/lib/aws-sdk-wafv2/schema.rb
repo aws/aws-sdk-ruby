@@ -36,7 +36,7 @@ module Aws::WAFV2
     AssociationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.wafv2#AssociationConfig', name: 'AssociationConfig')
     AttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.wafv2#AttributeName', name: 'AttributeName', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w\\-]+$"})
     AttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.wafv2#AttributeValue', name: 'AttributeValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
-    AttributeValues = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.wafv2#AttributeValues', name: 'AttributeValues', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    AttributeValues = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.wafv2#AttributeValues', name: 'AttributeValues', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     BlockAction = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.wafv2#BlockAction', name: 'BlockAction')
     Body = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.wafv2#Body', name: 'Body')
     BodyParsingFallbackBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.wafv2#BodyParsingFallbackBehavior', name: 'BodyParsingFallbackBehavior')
@@ -1824,6 +1824,7 @@ module Aws::WAFV2
     UpdateWebACLRequest.add_member(:token_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenDomains, location_name: 'TokenDomains'))
     UpdateWebACLRequest.add_member(:association_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationConfig, location_name: 'AssociationConfig'))
     UpdateWebACLRequest.add_member(:on_source_d_do_s_protection_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OnSourceDDoSProtectionConfig, location_name: 'OnSourceDDoSProtectionConfig'))
+    UpdateWebACLRequest.add_member(:application_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: 'ApplicationConfig'))
     UpdateWebACLRequest.type = Types::UpdateWebACLRequest
     UpdateWebACLResponse.add_member(:next_lock_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LockToken, location_name: 'NextLockToken'))
     UpdateWebACLResponse.type = Types::UpdateWebACLResponse

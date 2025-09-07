@@ -1024,6 +1024,42 @@ module Aws::GuardDuty
 
     end
 
+    class CreateThreatEntitySetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?name: String,
+        ?format: String,
+        ?location: String,
+        ?expected_bucket_owner: String,
+        ?activate: bool,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor name: String?
+      attr_accessor format: String?
+      attr_accessor location: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor activate: bool?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateThreatEntitySetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_entity_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_entity_set_id: String?
+    end
+
     class CreateThreatIntelSetRequest
       include Smithy::Schema::Structure
 
@@ -1058,6 +1094,42 @@ module Aws::GuardDuty
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor threat_intel_set_id: String?
+    end
+
+    class CreateTrustedEntitySetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?name: String,
+        ?format: String,
+        ?location: String,
+        ?expected_bucket_owner: String,
+        ?activate: bool,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor name: String?
+      attr_accessor format: String?
+      attr_accessor location: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor activate: bool?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTrustedEntitySetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_entity_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_entity_set_id: String?
     end
 
     module CriterionKey
@@ -1358,6 +1430,28 @@ module Aws::GuardDuty
 
     end
 
+    class DeleteThreatEntitySetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?threat_entity_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor threat_entity_set_id: String?
+    end
+
+    class DeleteThreatEntitySetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteThreatIntelSetRequest
       include Smithy::Schema::Structure
 
@@ -1372,6 +1466,28 @@ module Aws::GuardDuty
     end
 
     class DeleteThreatIntelSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTrustedEntitySetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?trusted_entity_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor trusted_entity_set_id: String?
+    end
+
+    class DeleteTrustedEntitySetResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2592,6 +2708,46 @@ module Aws::GuardDuty
       attr_accessor unprocessed_accounts: Array[Types::UnprocessedAccount]?
     end
 
+    class GetThreatEntitySetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?threat_entity_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor threat_entity_set_id: String?
+    end
+
+    class GetThreatEntitySetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?format: String,
+        ?location: String,
+        ?expected_bucket_owner: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?error_details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor format: String?
+      attr_accessor location: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor error_details: String?
+    end
+
     class GetThreatIntelSetRequest
       include Smithy::Schema::Structure
 
@@ -2624,6 +2780,46 @@ module Aws::GuardDuty
       attr_accessor status: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetTrustedEntitySetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?trusted_entity_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor trusted_entity_set_id: String?
+    end
+
+    class GetTrustedEntitySetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?format: String,
+        ?location: String,
+        ?expected_bucket_owner: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?error_details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor format: String?
+      attr_accessor location: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor error_details: String?
     end
 
     class GetUsageStatisticsRequest
@@ -3459,6 +3655,34 @@ module Aws::GuardDuty
       attr_accessor tags: Hash[String, String]?
     end
 
+    class ListThreatEntitySetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListThreatEntitySetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_entity_set_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_entity_set_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
     class ListThreatIntelSetsRequest
       include Smithy::Schema::Structure
 
@@ -3484,6 +3708,34 @@ module Aws::GuardDuty
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor threat_intel_set_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTrustedEntitySetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTrustedEntitySetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trusted_entity_set_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trusted_entity_set_ids: Array[String]?
       attr_accessor next_token: String?
     end
 
@@ -5353,6 +5605,25 @@ module Aws::GuardDuty
       attr_accessor threat_names: Array[Types::ScanThreatName]?
     end
 
+    module ThreatEntitySetFormat
+      TXT: String
+      STIX: String
+      OTX_CSV: String
+      ALIEN_VAULT: String
+      PROOF_POINT: String
+      FIRE_EYE: String
+    end
+
+    module ThreatEntitySetStatus
+      INACTIVE: String
+      ACTIVATING: String
+      ACTIVE: String
+      DEACTIVATING: String
+      ERROR: String
+      DELETE_PENDING: String
+      DELETED: String
+    end
+
     module ThreatIntelSetFormat
       TXT: String
       STIX: String
@@ -5422,6 +5693,25 @@ module Aws::GuardDuty
 
       attr_accessor guard_duty_finding_id: String?
       attr_accessor description: String?
+    end
+
+    module TrustedEntitySetFormat
+      TXT: String
+      STIX: String
+      OTX_CSV: String
+      ALIEN_VAULT: String
+      PROOF_POINT: String
+      FIRE_EYE: String
+    end
+
+    module TrustedEntitySetStatus
+      INACTIVE: String
+      ACTIVATING: String
+      ACTIVE: String
+      DEACTIVATING: String
+      ERROR: String
+      DELETE_PENDING: String
+      DELETED: String
     end
 
     class UnarchiveFindingsRequest
@@ -5751,6 +6041,36 @@ module Aws::GuardDuty
       attr_accessor object_prefixes: Array[String]?
     end
 
+    class UpdateThreatEntitySetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?threat_entity_set_id: String,
+        ?name: String,
+        ?location: String,
+        ?expected_bucket_owner: String,
+        ?activate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor threat_entity_set_id: String?
+      attr_accessor name: String?
+      attr_accessor location: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor activate: bool?
+    end
+
+    class UpdateThreatEntitySetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class UpdateThreatIntelSetRequest
       include Smithy::Schema::Structure
 
@@ -5773,6 +6093,36 @@ module Aws::GuardDuty
     end
 
     class UpdateThreatIntelSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTrustedEntitySetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?trusted_entity_set_id: String,
+        ?name: String,
+        ?location: String,
+        ?expected_bucket_owner: String,
+        ?activate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor trusted_entity_set_id: String?
+      attr_accessor name: String?
+      attr_accessor location: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor activate: bool?
+    end
+
+    class UpdateTrustedEntitySetResponse
       include Smithy::Schema::Structure
 
       def initialize: (

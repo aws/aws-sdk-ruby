@@ -340,6 +340,23 @@ module Aws::Omics
       ?request_id: String,
       ?accelerators: String,
       ?storage_type: String,
+      ?container_registry_map: {
+        registry_mappings: Array[
+          {
+            upstream_registry_url: String,
+            ecr_repository_prefix: String,
+            upstream_repository_prefix: String,
+            ecr_account_id: String
+          }
+        ],
+        image_mappings: Array[
+          {
+            source_image: untyped,
+            destination_image: untyped
+          }
+        ]
+      },
+      ?container_registry_map_uri: String,
       ?readme_markdown: String,
       ?parameter_template_path: String,
       ?readme_path: String,
@@ -385,6 +402,23 @@ module Aws::Omics
       ?storage_capacity: Integer,
       ?tags: Hash[String, String],
       ?workflow_bucket_owner_id: String,
+      ?container_registry_map: {
+        registry_mappings: Array[
+          {
+            upstream_registry_url: String,
+            ecr_repository_prefix: String,
+            upstream_repository_prefix: String,
+            ecr_account_id: String
+          }
+        ],
+        image_mappings: Array[
+          {
+            source_image: untyped,
+            destination_image: untyped
+          }
+        ]
+      },
+      ?container_registry_map_uri: String,
       ?readme_markdown: String,
       ?parameter_template_path: String,
       ?readme_path: String,
@@ -802,6 +836,7 @@ module Aws::Omics
       def gpus: () -> Integer?
       def instance_type: () -> String?
       def failure_reason: () -> String?
+      def image_details: () -> Types::ImageDetails?
     end
     def get_run_task: (
       ?id: String,
@@ -906,6 +941,7 @@ module Aws::Omics
       def accelerators: () -> String?
       def storage_type: () -> String?
       def uuid: () -> String?
+      def container_registry_map: () -> Types::ContainerRegistryMap?
       def readme: () -> String?
       def definition_repository_details: () -> Types::DefinitionRepositoryDetails?
       def readme_path: () -> String?
@@ -939,6 +975,7 @@ module Aws::Omics
       def tags: () -> Hash[String, String]?
       def uuid: () -> String?
       def workflow_bucket_owner_id: () -> String?
+      def container_registry_map: () -> Types::ContainerRegistryMap?
       def readme: () -> String?
       def definition_repository_details: () -> Types::DefinitionRepositoryDetails?
       def readme_path: () -> String?

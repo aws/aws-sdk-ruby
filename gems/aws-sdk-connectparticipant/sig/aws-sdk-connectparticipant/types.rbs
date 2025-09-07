@@ -35,6 +35,30 @@ module Aws::ConnectParticipant
       attr_accessor status: String?
     end
 
+    class Attendee
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attendee_id: String,
+        ?join_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attendee_id: String?
+      attr_accessor join_token: String?
+    end
+
+    class AudioFeatures
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?echo_reduction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor echo_reduction: String?
+    end
+
     class CancelParticipantAuthenticationRequest
       include Smithy::Schema::Structure
 
@@ -123,6 +147,7 @@ module Aws::ConnectParticipant
     module ConnectionType
       WEBSOCKET: String
       CONNECTION_CREDENTIALS: String
+      WEBRTC_CONNECTION: String
     end
 
     class CreateParticipantConnectionRequest
@@ -146,11 +171,13 @@ module Aws::ConnectParticipant
       def initialize: (
         ?websocket: Types::Websocket,
         ?connection_credentials: Types::ConnectionCredentials,
+        ?web_rtc_connection: Types::WebRTCConnection,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor websocket: Types::Websocket?
       attr_accessor connection_credentials: Types::ConnectionCredentials?
+      attr_accessor web_rtc_connection: Types::WebRTCConnection?
     end
 
     class DescribeViewRequest
@@ -335,6 +362,22 @@ module Aws::ConnectParticipant
       attr_accessor message_metadata: Types::MessageMetadata?
       attr_accessor related_contact_id: String?
       attr_accessor contact_id: String?
+    end
+
+    module MeetingFeatureStatus
+      AVAILABLE: String
+      UNAVAILABLE: String
+    end
+
+    class MeetingFeaturesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio: Types::AudioFeatures,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio: Types::AudioFeatures?
     end
 
     class MessageMetadata
@@ -596,6 +639,51 @@ module Aws::ConnectParticipant
       attr_accessor input_schema: String?
       attr_accessor template: String?
       attr_accessor actions: Array[String]?
+    end
+
+    class WebRTCConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attendee: Types::Attendee,
+        ?meeting: Types::WebRTCMeeting,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attendee: Types::Attendee?
+      attr_accessor meeting: Types::WebRTCMeeting?
+    end
+
+    class WebRTCMediaPlacement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_host_url: String,
+        ?audio_fallback_url: String,
+        ?signaling_url: String,
+        ?event_ingestion_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_host_url: String?
+      attr_accessor audio_fallback_url: String?
+      attr_accessor signaling_url: String?
+      attr_accessor event_ingestion_url: String?
+    end
+
+    class WebRTCMeeting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_placement: Types::WebRTCMediaPlacement,
+        ?meeting_features: Types::MeetingFeaturesConfiguration,
+        ?meeting_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_placement: Types::WebRTCMediaPlacement?
+      attr_accessor meeting_features: Types::MeetingFeaturesConfiguration?
+      attr_accessor meeting_id: String?
     end
 
     class Websocket

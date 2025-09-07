@@ -188,7 +188,7 @@ module Aws::PCS
       super
     end
 
-    # <p>Creates a cluster in your account. Amazon Web Services PCS creates the cluster controller in a service-owned account. The cluster controller communicates with the cluster resources in your account. The subnets and security groups for the cluster must already exist before you use this API action.</p> <note> <p>It takes time for Amazon Web Services PCS to create the cluster. The cluster is in a <code>Creating</code> state until it is ready to use. There can only be 1 cluster in a <code>Creating</code> state per Amazon Web Services Region per Amazon Web Services account. <code>CreateCluster</code> fails with a <code>ServiceQuotaExceededException</code> if there is already a cluster in a <code>Creating</code> state.</p> </note>
+    # <p>Creates a cluster in your account. PCS creates the cluster controller in a service-owned account. The cluster controller communicates with the cluster resources in your account. The subnets and security groups for the cluster must already exist before you use this API action.</p> <note> <p>It takes time for PCS to create the cluster. The cluster is in a <code>Creating</code> state until it is ready to use. There can only be 1 cluster in a <code>Creating</code> state per Amazon Web Services Region per Amazon Web Services account. <code>CreateCluster</code> fails with a <code>ServiceQuotaExceededException</code> if there is already a cluster in a <code>Creating</code> state.</p> </note>
     # @param [Hash, Types::CreateClusterRequest] params
     # @option params [String] :cluster_name
     #   <p>A name to identify the cluster. Example: <code>MyCluster</code> </p>
@@ -297,22 +297,22 @@ module Aws::PCS
       request.send_request(options)
     end
 
-    # <p>Creates a managed set of compute nodes. You associate a compute node group with a cluster through 1 or more Amazon Web Services PCS queues or as part of the login fleet. A compute node group includes the definition of the compute properties and lifecycle management. Amazon Web Services PCS uses the information you provide to this API action to launch compute nodes in your account. You can only specify subnets in the same Amazon VPC as your cluster. You receive billing charges for the compute nodes that Amazon Web Services PCS launches in your account. You must already have a launch template before you call this API. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html">Launch an instance from a launch template</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.</p>
+    # <p>Creates a managed set of compute nodes. You associate a compute node group with a cluster through 1 or more PCS queues or as part of the login fleet. A compute node group includes the definition of the compute properties and lifecycle management. PCS uses the information you provide to this API action to launch compute nodes in your account. You can only specify subnets in the same Amazon VPC as your cluster. You receive billing charges for the compute nodes that PCS launches in your account. You must already have a launch template before you call this API. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html">Launch an instance from a launch template</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.</p>
     # @param [Hash, Types::CreateComputeNodeGroupRequest] params
     # @option params [String] :cluster_identifier
     #   <p>The name or ID of the cluster to create a compute node group in.</p>
     # @option params [String] :compute_node_group_name
     #   <p>A name to identify the cluster. Example: <code>MyCluster</code> </p>
     # @option params [String] :ami_id
-    #   <p> The ID of the Amazon Machine Image (AMI) that Amazon Web Services PCS uses to launch compute nodes (Amazon EC2 instances). If you don't provide this value, Amazon Web Services PCS uses the AMI ID specified in the custom launch template.</p>
+    #   <p> The ID of the Amazon Machine Image (AMI) that PCS uses to launch compute nodes (Amazon EC2 instances). If you don't provide this value, PCS uses the AMI ID specified in the custom launch template.</p>
     # @option params [Array<String>] :subnet_ids
     #   <p>The list of subnet IDs where the compute node group launches instances. Subnets must be in the same VPC as the cluster.</p>
     # @option params [String] :purchase_option
     #   <p>Specifies how EC2 instances are purchased on your behalf. Amazon Web Services PCS supports On-Demand and Spot instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Instance purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
     # @option params [Types::CustomLaunchTemplate] :custom_launch_template
-    #   <p>An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute nodes.</p>
+    #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     # @option params [String] :iam_instance_profile_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission. The resource identifier of the ARN must start with <code>AWSPCS</code> or it must have <code>/aws-pcs/</code> in its path.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p> <code>arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1</code> </p> </li> <li> <p> <code>arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2</code> </p> </li> </ul>
+    #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission and the role name must start with <code>AWSPCS</code> or must have the path <code>/aws-pcs/</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html">IAM instance profiles for PCS</a> in the <i>PCS User Guide</i>.</p>
     # @option params [Types::ScalingConfigurationRequest] :scaling_configuration
     #   <p>Specifies the boundaries of the compute node group auto scaling.</p>
     # @option params [Array<Types::InstanceConfig>] :instance_configs
@@ -522,7 +522,7 @@ module Aws::PCS
       request.send_request(options)
     end
 
-    # <p>Deletes a job queue. If the compute node group associated with this queue isn't associated with any other queues, Amazon Web Services PCS terminates all the compute nodes for this queue.</p>
+    # <p>Deletes a job queue. If the compute node group associated with this queue isn't associated with any other queues, PCS terminates all the compute nodes for this queue.</p>
     # @param [Hash, Types::DeleteQueueRequest] params
     # @option params [String] :cluster_identifier
     #   <p>The name or ID of the cluster of the queue.</p>
@@ -836,7 +836,7 @@ module Aws::PCS
       request.send_request(options)
     end
 
-    # <p>Returns a list of all tags on an Amazon Web Services PCS resource.</p>
+    # <p>Returns a list of all tags on an PCS resource.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource for which to list tags.</p>
@@ -859,7 +859,7 @@ module Aws::PCS
       request.send_request(options)
     end
 
-    # <important> <p>This API action isn't intended for you to use.</p> </important> <p>Amazon Web Services PCS uses this API action to register the compute nodes it launches in your account.</p>
+    # <important> <p>This API action isn't intended for you to use.</p> </important> <p>PCS uses this API action to register the compute nodes it launches in your account.</p>
     # @param [Hash, Types::RegisterComputeNodeGroupInstanceRequest] params
     # @option params [String] :cluster_identifier
     #   <p>The name or ID of the cluster to register the compute node group instance in.</p>
@@ -893,7 +893,7 @@ module Aws::PCS
       request.send_request(options)
     end
 
-    # <p>Adds or edits tags on an Amazon Web Services PCS resource. Each tag consists of a tag key and a tag value. The tag key and tag value are case-sensitive strings. The tag value can be an empty (null) string. To add a tag, specify a new tag key and a tag value. To edit a tag, specify an existing tag key and a new tag value.</p>
+    # <p>Adds or edits tags on an PCS resource. Each tag consists of a tag key and a tag value. The tag key and tag value are case-sensitive strings. The tag value can be an empty (null) string. To add a tag, specify a new tag key and a tag value. To edit a tag, specify an existing tag key and a new tag value.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
@@ -917,7 +917,7 @@ module Aws::PCS
       request.send_request(options)
     end
 
-    # <p>Deletes tags from an Amazon Web Services PCS resource. To delete a tag, specify the tag key and the Amazon Resource Name (ARN) of the Amazon Web Services PCS resource.</p>
+    # <p>Deletes tags from an PCS resource. To delete a tag, specify the tag key and the Amazon Resource Name (ARN) of the PCS resource.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
@@ -946,11 +946,11 @@ module Aws::PCS
     # @option params [String] :compute_node_group_identifier
     #   <p>The name or ID of the compute node group.</p>
     # @option params [String] :ami_id
-    #   <p>The ID of the Amazon Machine Image (AMI) that Amazon Web Services PCS uses to launch instances. If not provided, Amazon Web Services PCS uses the AMI ID specified in the custom launch template.</p>
+    #   <p>The ID of the Amazon Machine Image (AMI) that PCS uses to launch instances. If not provided, PCS uses the AMI ID specified in the custom launch template.</p>
     # @option params [Array<String>] :subnet_ids
     #   <p>The list of subnet IDs where the compute node group provisions instances. The subnets must be in the same VPC as the cluster.</p>
     # @option params [Types::CustomLaunchTemplate] :custom_launch_template
-    #   <p>An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute nodes.</p>
+    #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     # @option params [String] :purchase_option
     #   <p>Specifies how EC2 instances are purchased on your behalf. Amazon Web Services PCS supports On-Demand and Spot instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Instance purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
     # @option params [Types::SpotOptions] :spot_options
@@ -958,7 +958,7 @@ module Aws::PCS
     # @option params [Types::ScalingConfigurationRequest] :scaling_configuration
     #   <p>Specifies the boundaries of the compute node group auto scaling.</p>
     # @option params [String] :iam_instance_profile_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission. The resource identifier of the ARN must start with <code>AWSPCS</code> or it must have <code>/aws-pcs/</code> in its path.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p> <code>arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1</code> </p> </li> <li> <p> <code>arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2</code> </p> </li> </ul>
+    #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission and the role name must start with <code>AWSPCS</code> or must have the path <code>/aws-pcs/</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html">IAM instance profiles for PCS</a> in the <i>PCS User Guide</i>.</p>
     # @option params [Types::UpdateComputeNodeGroupSlurmConfigurationRequest] :slurm_configuration
     #   <p>Additional options related to the Slurm scheduler.</p>
     # @option params [String] :client_token

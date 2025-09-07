@@ -19,6 +19,7 @@ module Aws::B2bi
     CapabilityOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#CapabilityOptions', name: 'CapabilityOptions')
     CapabilitySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#CapabilitySummary', name: 'CapabilitySummary')
     CapabilityType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.b2bi#CapabilityType', name: 'CapabilityType')
+    CodeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.b2bi#CodeList', name: 'CodeList')
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConversionSource = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#ConversionSource', name: 'ConversionSource')
     ConversionSourceFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.b2bi#ConversionSourceFormat', name: 'ConversionSourceFormat')
@@ -42,6 +43,9 @@ module Aws::B2bi
     DeleteTransformerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#DeleteTransformerRequest', name: 'DeleteTransformerRequest')
     EdiConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#EdiConfiguration', name: 'EdiConfiguration')
     EdiType = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.b2bi#EdiType', name: 'EdiType')
+    ElementId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.b2bi#ElementId', name: 'ElementId')
+    ElementPosition = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.b2bi#ElementPosition', name: 'ElementPosition')
+    ElementRequirement = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.b2bi#ElementRequirement', name: 'ElementRequirement')
     Email = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.b2bi#Email', name: 'Email', traits: {"smithy.api#length" => {"min" => 5, "max" => 254}, "smithy.api#pattern" => "^[\\w\\.\\-]+@[\\w\\.\\-]+$", "smithy.api#sensitive" => {}})
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.b2bi#ErrorMessage', name: 'ErrorMessage', traits: {"smithy.api#length" => {"min" => 10, "max" => 1024}})
     FileFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.b2bi#FileFormat', name: 'FileFormat')
@@ -158,11 +162,14 @@ module Aws::B2bi
     X12AdvancedOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#X12AdvancedOptions', name: 'X12AdvancedOptions')
     X12ApplicationReceiverCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.b2bi#X12ApplicationReceiverCode', name: 'X12ApplicationReceiverCode', traits: {"smithy.api#length" => {"min" => 2, "max" => 15}, "smithy.api#pattern" => "^[a-zA-Z0-9 ]*$"})
     X12ApplicationSenderCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.b2bi#X12ApplicationSenderCode', name: 'X12ApplicationSenderCode', traits: {"smithy.api#length" => {"min" => 2, "max" => 15}, "smithy.api#pattern" => "^[a-zA-Z0-9 ]*$"})
+    X12CodeListValidationRule = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#X12CodeListValidationRule', name: 'X12CodeListValidationRule')
     X12ComponentSeparator = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.b2bi#X12ComponentSeparator', name: 'X12ComponentSeparator', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}, "smithy.api#pattern" => "^[!&'()*+,\\-./:;?=%@\\[\\]_{}|<>~^`\"]$"})
     X12ControlNumbers = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#X12ControlNumbers', name: 'X12ControlNumbers')
     X12DataElementSeparator = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.b2bi#X12DataElementSeparator', name: 'X12DataElementSeparator', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}, "smithy.api#pattern" => "^[!&'()*+,\\-./:;?=%@\\[\\]_{}|<>~^`\"]$"})
     X12Delimiters = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#X12Delimiters', name: 'X12Delimiters')
     X12Details = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#X12Details', name: 'X12Details')
+    X12ElementLengthValidationRule = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#X12ElementLengthValidationRule', name: 'X12ElementLengthValidationRule')
+    X12ElementRequirementValidationRule = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#X12ElementRequirementValidationRule', name: 'X12ElementRequirementValidationRule')
     X12Envelope = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#X12Envelope', name: 'X12Envelope')
     X12FunctionalAcknowledgment = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.b2bi#X12FunctionalAcknowledgment', name: 'X12FunctionalAcknowledgment')
     X12FunctionalGroupHeaders = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#X12FunctionalGroupHeaders', name: 'X12FunctionalGroupHeaders')
@@ -182,6 +189,9 @@ module Aws::B2bi
     X12TransactionSet = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.b2bi#X12TransactionSet', name: 'X12TransactionSet')
     X12UsageIndicatorCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.b2bi#X12UsageIndicatorCode', name: 'X12UsageIndicatorCode', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}, "smithy.api#pattern" => "^[a-zA-Z0-9]*$"})
     X12ValidateEdi = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.b2bi#X12ValidateEdi', name: 'X12ValidateEdi')
+    X12ValidationOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.b2bi#X12ValidationOptions', name: 'X12ValidationOptions')
+    X12ValidationRule = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.b2bi#X12ValidationRule', name: 'X12ValidationRule')
+    X12ValidationRules = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.b2bi#X12ValidationRules', name: 'X12ValidationRules')
     X12Version = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.b2bi#X12Version', name: 'X12Version')
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
@@ -204,6 +214,7 @@ module Aws::B2bi
     CapabilitySummary.add_member(:modified_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModifiedDate, location_name: 'modifiedAt'))
     CapabilitySummary.type = Types::CapabilitySummary
     CapabilityType.add_member(:edi, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EDI', traits: {"smithy.api#enumValue" => "edi"}))
+    CodeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
     ConversionSource.add_member(:file_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConversionSourceFormat, location_name: 'fileFormat', traits: {"smithy.api#required" => {}}))
@@ -214,6 +225,7 @@ module Aws::B2bi
     ConversionTarget.add_member(:file_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConversionTargetFormat, location_name: 'fileFormat', traits: {"smithy.api#required" => {}}))
     ConversionTarget.add_member(:format_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConversionTargetFormatDetails, location_name: 'formatDetails'))
     ConversionTarget.add_member(:output_sample_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputSampleFileSource, location_name: 'outputSampleFile'))
+    ConversionTarget.add_member(:advanced_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: 'advancedOptions'))
     ConversionTarget.type = Types::ConversionTarget
     ConversionTargetFormat.add_member(:x12, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'X12', traits: {"smithy.api#enumValue" => "X12"}))
     ConversionTargetFormatDetails.add_member(:x12, Types::ConversionTargetFormatDetails::X12, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12Details, location_name: 'x12'))
@@ -321,6 +333,8 @@ module Aws::B2bi
     EdiType.add_member(:x12_details, Types::EdiType::X12Details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12Details, location_name: 'x12Details'))
     EdiType.add_member(:unknown, Types::EdiType::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     EdiType.type = Types::EdiType
+    ElementRequirement.add_member(:optional, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OPTIONAL', traits: {"smithy.api#enumValue" => "OPTIONAL"}))
+    ElementRequirement.add_member(:mandatory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MANDATORY', traits: {"smithy.api#enumValue" => "MANDATORY"}))
     FileFormat.add_member(:xml, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'XML', traits: {"smithy.api#enumValue" => "XML"}))
     FileFormat.add_member(:json, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'JSON', traits: {"smithy.api#enumValue" => "JSON"}))
     FileFormat.add_member(:not_used, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NOT_USED', traits: {"smithy.api#enumValue" => "NOT_USED"}))
@@ -457,6 +471,7 @@ module Aws::B2bi
     OutboundEdiOptions.type = Types::OutboundEdiOptions
     OutputConversion.add_member(:to_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ToFormat, location_name: 'toFormat', traits: {"smithy.api#required" => {}}))
     OutputConversion.add_member(:format_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormatOptions, location_name: 'formatOptions'))
+    OutputConversion.add_member(:advanced_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: 'advancedOptions'))
     OutputConversion.type = Types::OutputConversion
     OutputSampleFileSource.add_member(:file_location, Types::OutputSampleFileSource::FileLocation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: 'fileLocation'))
     OutputSampleFileSource.add_member(:unknown, Types::OutputSampleFileSource::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -537,6 +552,7 @@ module Aws::B2bi
     TestParsingRequest.type = Types::TestParsingRequest
     TestParsingResponse.add_member(:parsed_file_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'parsedFileContent', traits: {"smithy.api#required" => {}}))
     TestParsingResponse.add_member(:parsed_split_file_contents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParsedSplitFileContentsList, location_name: 'parsedSplitFileContents'))
+    TestParsingResponse.add_member(:validation_messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationMessages, location_name: 'validationMessages'))
     TestParsingResponse.type = Types::TestParsingResponse
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'retryAfterSeconds', traits: {"smithy.api#httpHeader" => "Retry-After"}))
@@ -654,7 +670,12 @@ module Aws::B2bi
     X12AcknowledgmentOptions.add_member(:technical_acknowledgment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12TechnicalAcknowledgment, location_name: 'technicalAcknowledgment', traits: {"smithy.api#required" => {}}))
     X12AcknowledgmentOptions.type = Types::X12AcknowledgmentOptions
     X12AdvancedOptions.add_member(:split_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12SplitOptions, location_name: 'splitOptions'))
+    X12AdvancedOptions.add_member(:validation_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12ValidationOptions, location_name: 'validationOptions'))
     X12AdvancedOptions.type = Types::X12AdvancedOptions
+    X12CodeListValidationRule.add_member(:element_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ElementId, location_name: 'elementId', traits: {"smithy.api#required" => {}}))
+    X12CodeListValidationRule.add_member(:codes_to_add, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeList, location_name: 'codesToAdd'))
+    X12CodeListValidationRule.add_member(:codes_to_remove, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeList, location_name: 'codesToRemove'))
+    X12CodeListValidationRule.type = Types::X12CodeListValidationRule
     X12ControlNumbers.add_member(:starting_interchange_control_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartingInterchangeControlNumber, location_name: 'startingInterchangeControlNumber'))
     X12ControlNumbers.add_member(:starting_functional_group_control_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartingFunctionalGroupControlNumber, location_name: 'startingFunctionalGroupControlNumber'))
     X12ControlNumbers.add_member(:starting_transaction_set_control_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartingTransactionSetControlNumber, location_name: 'startingTransactionSetControlNumber'))
@@ -666,6 +687,13 @@ module Aws::B2bi
     X12Details.add_member(:transaction_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12TransactionSet, location_name: 'transactionSet'))
     X12Details.add_member(:version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12Version, location_name: 'version'))
     X12Details.type = Types::X12Details
+    X12ElementLengthValidationRule.add_member(:element_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ElementId, location_name: 'elementId', traits: {"smithy.api#required" => {}}))
+    X12ElementLengthValidationRule.add_member(:max_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxLength', traits: {"smithy.api#range" => {"min" => 1, "max" => 1000000}, "smithy.api#required" => {}}))
+    X12ElementLengthValidationRule.add_member(:min_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'minLength', traits: {"smithy.api#range" => {"min" => 1, "max" => 1000000}, "smithy.api#required" => {}}))
+    X12ElementLengthValidationRule.type = Types::X12ElementLengthValidationRule
+    X12ElementRequirementValidationRule.add_member(:element_position, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ElementPosition, location_name: 'elementPosition', traits: {"smithy.api#required" => {}}))
+    X12ElementRequirementValidationRule.add_member(:requirement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ElementRequirement, location_name: 'requirement', traits: {"smithy.api#required" => {}}))
+    X12ElementRequirementValidationRule.type = Types::X12ElementRequirementValidationRule
     X12Envelope.add_member(:common, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12OutboundEdiHeaders, location_name: 'common'))
     X12Envelope.add_member(:wrap_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrapOptions, location_name: 'wrapOptions'))
     X12Envelope.type = Types::X12Envelope
@@ -1044,6 +1072,14 @@ module Aws::B2bi
     X12TransactionSet.add_member(:x12_837_x292, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'X12_837_X292', traits: {"smithy.api#enumValue" => "X12_837_X292"}))
     X12TransactionSet.add_member(:x12_837_x298, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'X12_837_X298', traits: {"smithy.api#enumValue" => "X12_837_X298"}))
     X12TransactionSet.add_member(:x12_999_x231, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'X12_999_X231', traits: {"smithy.api#enumValue" => "X12_999_X231"}))
+    X12ValidationOptions.add_member(:validation_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12ValidationRules, location_name: 'validationRules'))
+    X12ValidationOptions.type = Types::X12ValidationOptions
+    X12ValidationRule.add_member(:code_list_validation_rule, Types::X12ValidationRule::CodeListValidationRule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12CodeListValidationRule, location_name: 'codeListValidationRule'))
+    X12ValidationRule.add_member(:element_length_validation_rule, Types::X12ValidationRule::ElementLengthValidationRule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12ElementLengthValidationRule, location_name: 'elementLengthValidationRule'))
+    X12ValidationRule.add_member(:element_requirement_validation_rule, Types::X12ValidationRule::ElementRequirementValidationRule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12ElementRequirementValidationRule, location_name: 'elementRequirementValidationRule'))
+    X12ValidationRule.add_member(:unknown, Types::X12ValidationRule::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    X12ValidationRule.type = Types::X12ValidationRule
+    X12ValidationRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: X12ValidationRule)
     X12Version.add_member(:version_4010, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'VERSION_4010', traits: {"smithy.api#enumValue" => "VERSION_4010"}))
     X12Version.add_member(:version_4030, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'VERSION_4030', traits: {"smithy.api#enumValue" => "VERSION_4030"}))
     X12Version.add_member(:version_4050, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'VERSION_4050', traits: {"smithy.api#enumValue" => "VERSION_4050"}))

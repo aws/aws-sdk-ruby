@@ -6,15 +6,12 @@ module Aws::DataZone
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>Specifies the prediction (aka, the automatically generated piece of metadata) and the
-    #          target (for example, a column name) that can be accepted.</p>
+    # <p>Specifies the prediction (aka, the automatically generated piece of metadata) and the target (for example, a column name) that can be accepted.</p>
     # @!attribute prediction_target
-    #   <p>Specifies the target (for example, a column name) where a prediction can be
-    #            accepted.</p>
+    #   <p>Specifies the target (for example, a column name) where a prediction can be accepted.</p>
     #   @return [String]
     # @!attribute prediction_choice
-    #   <p>Specifies the prediction (aka, the automatically generated piece of metadata) that can
-    #            be accepted.</p>
+    #   <p>Specifies the prediction (aka, the automatically generated piece of metadata) that can be accepted.</p>
     #   @return [Integer]
     # @!attribute edited_value
     #   <p>The edit of the prediction.</p>
@@ -40,12 +37,10 @@ module Aws::DataZone
     #   <p>Specifies the rule (or the conditions) under which a prediction can be accepted.</p>
     #   @return [Types::AcceptRule]
     # @!attribute accept_choices
-    #   <p>Specifies the prediction (aka, the automatically generated piece of metadata) and the
-    #            target (for example, a column name) that can be accepted.</p>
+    #   <p>Specifies the prediction (aka, the automatically generated piece of metadata) and the target (for example, a column name) that can be accepted.</p>
     #   @return [Array<Types::AcceptChoice>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is
-    #            automatically populated if not provided.</p>
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
     #   @return [String]
     class AcceptPredictionsInput < Struct.new(
       :domain_identifier,
@@ -80,8 +75,7 @@ module Aws::DataZone
     #   <p>Specifies whether you want to accept the top prediction for all targets or none.</p>
     #   @return [String]
     # @!attribute threshold
-    #   <p>The confidence score that specifies the condition at which a prediction can be
-    #            accepted.</p>
+    #   <p>The confidence score that specifies the condition at which a prediction can be accepted.</p>
     #   @return [Float]
     class AcceptRule < Struct.new(
       :rule,
@@ -97,8 +91,7 @@ module Aws::DataZone
     #   <p>The unique identifier of the subscription request that is to be accepted.</p>
     #   @return [String]
     # @!attribute decision_comment
-    #   <p>A description that specifies the reason for accepting the specified subscription
-    #            request.</p>
+    #   <p>A description that specifies the reason for accepting the specified subscription request.</p>
     #   @return [String]
     # @!attribute asset_scopes
     #   <p>The asset scopes of the accept subscription request.</p>
@@ -122,8 +115,7 @@ module Aws::DataZone
     #   <p>Specifies the Amazon DataZone user who updated the subscription request.</p>
     #   @return [String]
     # @!attribute domain_id
-    #   <p>The unique identifier of the Amazon DataZone domain where the specified subscription request
-    #            was accepted.</p>
+    #   <p>The unique identifier of the Amazon DataZone domain where the specified subscription request was accepted.</p>
     #   @return [String]
     # @!attribute status
     #   <p>Specifies the status of the subscription request.</p>
@@ -138,8 +130,7 @@ module Aws::DataZone
     #   <p>Specifies the reason for requesting a subscription to the asset.</p>
     #   @return [String]
     # @!attribute subscribed_principals
-    #   <p>Specifies the Amazon DataZone users who are subscribed to the asset specified in the
-    #            subscription request.</p>
+    #   <p>Specifies the Amazon DataZone users who are subscribed to the asset specified in the subscription request.</p>
     #   @return [Array<Types::SubscribedPrincipal>]
     # @!attribute subscribed_listings
     #   <p>Specifies the asset for which the subscription request was created.</p>
@@ -250,9 +241,7 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The source of accounts for the account pool. In the current release, it's either a
-    #          static list of accounts provided by the customer or a custom Amazon Web Services Lambda
-    #          handler. </p>
+    # <p>The source of accounts for the account pool. In the current release, it's either a static list of accounts provided by the customer or a custom Amazon Web Services Lambda handler. </p>
     # @!attribute accounts
     #   <p>The static list of accounts within an account pool.</p>
     #   @return [Array<Types::AccountInfo>]
@@ -298,8 +287,7 @@ module Aws::DataZone
     #   <p>The owner that you want to add to the entity.</p>
     #   @return [Types::OwnerProperties]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class AddEntityOwnerInput < Struct.new(
       :domain_identifier,
@@ -335,8 +323,7 @@ module Aws::DataZone
     #   <p>The details of the policy grant.</p>
     #   @return [Types::PolicyGrantDetail]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class AddPolicyGrantInput < Struct.new(
       :domain_identifier,
@@ -350,7 +337,11 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute grant_id
+    #   <p>The ID of the policy grant that was added to a specified entity.</p>
+    #   @return [String]
     class AddPolicyGrantOutput < Struct.new(
+      :grant_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -370,8 +361,7 @@ module Aws::DataZone
     #   <p>An attribute on which to compute aggregations.</p>
     #   @return [String]
     # @!attribute display_value
-    #   <p>The display value of the aggregation list item. Supported values include
-    #               <code>value</code> and <code>glossaryTerm.name</code>.</p>
+    #   <p>The display value of the aggregation list item. Supported values include <code>value</code> and <code>glossaryTerm.name</code>.</p>
     #   @return [String]
     class AggregationListItem < Struct.new(
       :attribute,
@@ -406,9 +396,7 @@ module Aws::DataZone
     #   <p>The count of the aggregation output item.</p>
     #   @return [Integer]
     # @!attribute display_value
-    #   <p>The display value of the aggregation. If the attribute being aggregated corresponds to
-    #            the id of a public resource, the service automatically resolves the id to the provided
-    #            display value.</p>
+    #   <p>The display value of the aggregation. If the attribute being aggregated corresponds to the id of a public resource, the service automatically resolves the id to the provided display value.</p>
     #   @return [String]
     class AggregationOutputItem < Struct.new(
       :value,
@@ -556,6 +544,9 @@ module Aws::DataZone
     # @!attribute additional_attributes
     #   <p>The additional attributes of a Amazon DataZone inventory asset. </p>
     #   @return [Types::AssetItemAdditionalAttributes]
+    # @!attribute governed_glossary_terms
+    #   <p>The restricted glossary terms accociated with an asset.</p>
+    #   @return [Array<String>]
     class AssetItem < Struct.new(
       :domain_id,
       :identifier,
@@ -571,6 +562,7 @@ module Aws::DataZone
       :glossary_terms,
       :owning_project_id,
       :additional_attributes,
+      :governed_glossary_terms,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -583,8 +575,7 @@ module Aws::DataZone
     #   <p>The read-only forms included in the additional attributes of an inventory asset.</p>
     #   @return [Array<Types::FormOutput>]
     # @!attribute latest_time_series_data_point_forms_output
-    #   <p>The latest time series data points forms included in the additional attributes of an
-    #            asset.</p>
+    #   <p>The latest time series data points forms included in the additional attributes of an asset.</p>
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     # @!attribute match_rationale
     #   <p>List of rationales indicating why this item was matched by search.</p>
@@ -615,15 +606,16 @@ module Aws::DataZone
     #   <p>The metadata forms attached to an asset published in an Amazon DataZone catalog. </p>
     #   @return [String]
     # @!attribute latest_time_series_data_point_forms
-    #   <p>The latest time series data points forms included in the additional attributes of an
-    #            asset.</p>
+    #   <p>The latest time series data points forms included in the additional attributes of an asset.</p>
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     # @!attribute glossary_terms
     #   <p>The glossary terms attached to an asset published in an Amazon DataZone catalog. </p>
     #   @return [Array<Types::DetailedGlossaryTerm>]
+    # @!attribute governed_glossary_terms
+    #   <p>The restricted glossary terms associated with an asset.</p>
+    #   @return [Array<Types::DetailedGlossaryTerm>]
     # @!attribute owning_project_id
-    #   <p>The identifier of the project where an asset published in an Amazon DataZone catalog exists.
-    #         </p>
+    #   <p>The identifier of the project where an asset published in an Amazon DataZone catalog exists. </p>
     #   @return [String]
     class AssetListing < Struct.new(
       :asset_id,
@@ -633,6 +625,7 @@ module Aws::DataZone
       :forms,
       :latest_time_series_data_point_forms,
       :glossary_terms,
+      :governed_glossary_terms,
       :owning_project_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -686,6 +679,9 @@ module Aws::DataZone
     # @!attribute glossary_terms
     #   <p>Glossary terms attached to the inventory asset.</p>
     #   @return [Array<Types::DetailedGlossaryTerm>]
+    # @!attribute governed_glossary_terms
+    #   <p>The restricted glossary terms associated with an asset.</p>
+    #   @return [Array<Types::DetailedGlossaryTerm>]
     # @!attribute owning_project_id
     #   <p>The identifier of the project that owns the inventory asset.</p>
     #   @return [String]
@@ -704,6 +700,7 @@ module Aws::DataZone
       :listing_created_by,
       :listing_updated_by,
       :glossary_terms,
+      :governed_glossary_terms,
       :owning_project_id,
       :additional_attributes,
       keyword_init: true)
@@ -718,8 +715,7 @@ module Aws::DataZone
     #   <p>List of rationales indicating why this item was matched by search.</p>
     #   @return [Array<Types::MatchRationaleItem>]
     # @!attribute latest_time_series_data_point_forms
-    #   <p>The latest time series data points forms included in the additional attributes of an
-    #            asset.</p>
+    #   <p>The latest time series data points forms included in the additional attributes of an asset.</p>
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     class AssetListingItemAdditionalAttributes < Struct.new(
       :forms,
@@ -811,8 +807,7 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon DataZone project that owns the asset type.</p>
     #   @return [String]
     # @!attribute origin_domain_id
-    #   <p>The identifier of the Amazon DataZone domain where the asset type was originally
-    #            created.</p>
+    #   <p>The identifier of the Amazon DataZone domain where the asset type was originally created.</p>
     #   @return [String]
     # @!attribute origin_project_id
     #   <p>The identifier of the Amazon DataZone project where the asset type exists.</p>
@@ -878,6 +873,32 @@ module Aws::DataZone
     end
 
     class AssociateEnvironmentRoleOutput < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The ID of the domain where governed terms are to be associated with an asset.</p>
+    #   @return [String]
+    # @!attribute entity_identifier
+    #   <p>The ID of the asset with which you want to associate a governed term.</p>
+    #   @return [String]
+    # @!attribute entity_type
+    #   <p>The type of the asset with which you want to associate a governed term.</p>
+    #   @return [String]
+    # @!attribute governed_glossary_terms
+    #   <p>The glossary terms in a restricted glossary.</p>
+    #   @return [Array<String>]
+    class AssociateGovernedTermsInput < Struct.new(
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :governed_glossary_terms,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    class AssociateGovernedTermsOutput < Struct.new(
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1065,8 +1086,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the Amazon DataZone domain in which the metadata generation run is to be
-    #            cancelled.</p>
+    #   <p>The ID of the Amazon DataZone domain in which the metadata generation run is to be cancelled.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The ID of the metadata generation run.</p>
@@ -1084,8 +1104,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The unique identifier of the Amazon DataZone domain where the subscription request is being
-    #            cancelled.</p>
+    #   <p>The unique identifier of the Amazon DataZone domain where the subscription request is being cancelled.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The unique identifier of the subscription that is being cancelled.</p>
@@ -1107,33 +1126,28 @@ module Aws::DataZone
     #   <p>The Amazon DataZone user that cancelled the subscription.</p>
     #   @return [String]
     # @!attribute domain_id
-    #   <p>The unique identifier of the Amazon DataZone domain where the subscription is being
-    #            cancelled.</p>
+    #   <p>The unique identifier of the Amazon DataZone domain where the subscription is being cancelled.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the request to cancel the subscription.</p>
     #   @return [String]
     # @!attribute created_at
-    #   <p>The timestamp that specifies when the request to cancel the subscription was
-    #            created.</p>
+    #   <p>The timestamp that specifies when the request to cancel the subscription was created.</p>
     #   @return [Time]
     # @!attribute updated_at
     #   <p>The timestamp that specifies when the subscription was cancelled.</p>
     #   @return [Time]
     # @!attribute subscribed_principal
-    #   <p>The Amazon DataZone user who is made a subscriber to the specified asset by the subscription
-    #            that is being cancelled.</p>
+    #   <p>The Amazon DataZone user who is made a subscriber to the specified asset by the subscription that is being cancelled.</p>
     #   @return [Types::SubscribedPrincipal]
     # @!attribute subscribed_listing
     #   <p>The asset to which a subscription is being cancelled.</p>
     #   @return [Types::SubscribedListing]
     # @!attribute subscription_request_id
-    #   <p>The unique ID of the subscripton request for the subscription that is being
-    #            cancelled.</p>
+    #   <p>The unique ID of the subscripton request for the subscription that is being cancelled.</p>
     #   @return [String]
     # @!attribute retain_permissions
-    #   <p>Specifies whether the permissions to the asset are retained after the subscription is
-    #            cancelled.</p>
+    #   <p>Specifies whether the permissions to the asset are retained after the subscription is cancelled.</p>
     #   @return [Boolean]
     class CancelSubscriptionOutput < Struct.new(
       :id,
@@ -1153,8 +1167,7 @@ module Aws::DataZone
 
     # <p>Part of the provisioning properties of the environment blueprint.</p>
     # @!attribute template_url
-    #   <p>The template URL of the cloud formation provisioning properties of the environment
-    #            blueprint.</p>
+    #   <p>The template URL of the cloud formation provisioning properties of the environment blueprint.</p>
     #   @return [String]
     class CloudFormationProperties < Struct.new(
       :template_url,
@@ -1428,9 +1441,7 @@ module Aws::DataZone
     #   <p>The mechanism used to resolve the account selection from the account pool.</p>
     #   @return [String]
     # @!attribute account_source
-    #   <p>The source of accounts for the account pool. In the current release, it's either a
-    #            static list of accounts provided by the customer or a custom Amazon Web Services Lambda
-    #            handler. </p>
+    #   <p>The source of accounts for the account pool. In the current release, it's either a static list of accounts provided by the customer or a custom Amazon Web Services Lambda handler. </p>
     #   @return [Types::AccountSource]
     class CreateAccountPoolInput < Struct.new(
       :domain_identifier,
@@ -1458,9 +1469,7 @@ module Aws::DataZone
     #   <p>The mechanism used to resolve the account selection from the account pool.</p>
     #   @return [String]
     # @!attribute account_source
-    #   <p>The source of accounts for the account pool. In the current release, it's either a
-    #            static list of accounts provided by the customer or a custom Amazon Web Services Lambda
-    #            handler. </p>
+    #   <p>The source of accounts for the account pool. In the current release, it's either a static list of accounts provided by the customer or a custom Amazon Web Services Lambda handler. </p>
     #   @return [Types::AccountSource]
     # @!attribute created_by
     #   <p>The user who created the account pool.</p>
@@ -1509,8 +1518,7 @@ module Aws::DataZone
     #   <p>The configuration of the asset filter.</p>
     #   @return [Types::AssetFilterConfiguration]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateAssetFilterInput < Struct.new(
       :domain_identifier,
@@ -1548,8 +1556,7 @@ module Aws::DataZone
     #   <p>The timestamp at which the asset filter was created.</p>
     #   @return [Time]
     # @!attribute error_message
-    #   <p>The error message that is displayed if the asset filter is not created
-    #            successfully.</p>
+    #   <p>The error message that is displayed if the asset filter is not created successfully.</p>
     #   @return [String]
     # @!attribute effective_column_names
     #   <p>The column names in the asset filter.</p>
@@ -1580,9 +1587,7 @@ module Aws::DataZone
     #   <p>Amazon DataZone domain where the asset is created.</p>
     #   @return [String]
     # @!attribute external_identifier
-    #   <p>The external identifier of the asset.</p>
-    #            <p>If the value for the <code>externalIdentifier</code> parameter is specified, it must be
-    #            a unique value.</p>
+    #   <p>The external identifier of the asset.</p> <p>If the value for the <code>externalIdentifier</code> parameter is specified, it must be a unique value.</p>
     #   @return [String]
     # @!attribute type_identifier
     #   <p>The unique identifier of this asset's type.</p>
@@ -1603,12 +1608,10 @@ module Aws::DataZone
     #   <p>The unique identifier of the project that owns this asset.</p>
     #   @return [String]
     # @!attribute prediction_configuration
-    #   <p>The configuration of the automatically generated business-friendly metadata for the
-    #            asset.</p>
+    #   <p>The configuration of the automatically generated business-friendly metadata for the asset.</p>
     #   @return [Types::PredictionConfiguration]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateAssetInput < Struct.new(
       :name,
@@ -1662,6 +1665,9 @@ module Aws::DataZone
     # @!attribute glossary_terms
     #   <p>The glossary terms that are attached to the created asset.</p>
     #   @return [Array<String>]
+    # @!attribute governed_glossary_terms
+    #   <p>The glossary terms in a restricted glossary.</p>
+    #   @return [Array<String>]
     # @!attribute owning_project_id
     #   <p>The ID of the Amazon DataZone project that owns the created asset. </p>
     #   @return [String]
@@ -1681,8 +1687,7 @@ module Aws::DataZone
     #   <p>The latest data point that was imported into the time series form for the asset. </p>
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     # @!attribute prediction_configuration
-    #   <p>The configuration of the automatically generated business-friendly metadata for the
-    #            asset.</p>
+    #   <p>The configuration of the automatically generated business-friendly metadata for the asset.</p>
     #   @return [Types::PredictionConfiguration]
     class CreateAssetOutput < Struct.new(
       :id,
@@ -1697,6 +1702,7 @@ module Aws::DataZone
       :first_revision_created_at,
       :first_revision_created_by,
       :glossary_terms,
+      :governed_glossary_terms,
       :owning_project_id,
       :domain_id,
       :listing,
@@ -1730,12 +1736,10 @@ module Aws::DataZone
     #   <p>The metadata forms to be attached to the asset as part of asset revision.</p>
     #   @return [Array<Types::FormInput>]
     # @!attribute prediction_configuration
-    #   <p>The configuration of the automatically generated business-friendly metadata for the
-    #            asset.</p>
+    #   <p>The configuration of the automatically generated business-friendly metadata for the asset.</p>
     #   @return [Types::PredictionConfiguration]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateAssetRevisionInput < Struct.new(
       :name,
@@ -1787,6 +1791,9 @@ module Aws::DataZone
     # @!attribute glossary_terms
     #   <p>The glossary terms that were attached to the asset as part of asset revision.</p>
     #   @return [Array<String>]
+    # @!attribute governed_glossary_terms
+    #   <p>The glossary terms in a restricted glossary.</p>
+    #   @return [Array<String>]
     # @!attribute owning_project_id
     #   <p>The unique identifier of the revised project that owns the asset.</p>
     #   @return [String]
@@ -1800,15 +1807,13 @@ module Aws::DataZone
     #   <p>The metadata forms that were attached to the asset as part of the asset revision.</p>
     #   @return [Array<Types::FormOutput>]
     # @!attribute read_only_forms_output
-    #   <p>The read-only metadata forms that were attached to the asset as part of the asset
-    #            revision.</p>
+    #   <p>The read-only metadata forms that were attached to the asset as part of the asset revision.</p>
     #   @return [Array<Types::FormOutput>]
     # @!attribute latest_time_series_data_point_forms_output
     #   <p>The latest data point that was imported into the time series form for the asset. </p>
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     # @!attribute prediction_configuration
-    #   <p>The configuration of the automatically generated business-friendly metadata for the
-    #            asset.</p>
+    #   <p>The configuration of the automatically generated business-friendly metadata for the asset.</p>
     #   @return [Types::PredictionConfiguration]
     class CreateAssetRevisionOutput < Struct.new(
       :id,
@@ -1823,6 +1828,7 @@ module Aws::DataZone
       :first_revision_created_at,
       :first_revision_created_by,
       :glossary_terms,
+      :governed_glossary_terms,
       :owning_project_id,
       :domain_id,
       :listing,
@@ -1835,8 +1841,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The unique identifier of the Amazon DataZone domain where the custom asset type is being
-    #            created.</p>
+    #   <p>The unique identifier of the Amazon DataZone domain where the custom asset type is being created.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of the custom asset type.</p>
@@ -1927,8 +1932,7 @@ module Aws::DataZone
     #   <p>The location where the connection is created.</p>
     #   @return [Types::AwsLocation]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     # @!attribute description
     #   <p>A connection description.</p>
@@ -2024,8 +2028,7 @@ module Aws::DataZone
     #   <p>The data assets of the data product.</p>
     #   @return [Array<Types::DataProductItem>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateDataProductInput < Struct.new(
       :domain_identifier,
@@ -2128,8 +2131,7 @@ module Aws::DataZone
     #   <p>The metadata forms of the data product revision.</p>
     #   @return [Array<Types::FormInput>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateDataProductRevisionInput < Struct.new(
       :domain_identifier,
@@ -2220,29 +2222,22 @@ module Aws::DataZone
     #   <p>The ID of the Amazon DataZone domain where the data source is created.</p>
     #   @return [String]
     # @!attribute project_identifier
-    #   <p>The identifier of the Amazon DataZone project in which you want to add this data
-    #            source.</p>
+    #   <p>The identifier of the Amazon DataZone project in which you want to add this data source.</p>
     #   @return [String]
     # @!attribute environment_identifier
-    #   <p>The unique identifier of the Amazon DataZone environment to which the data source publishes
-    #            assets. </p>
+    #   <p>The unique identifier of the Amazon DataZone environment to which the data source publishes assets. </p>
     #   @return [String]
     # @!attribute connection_identifier
     #   <p>The ID of the connection.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of the data source. In Amazon DataZone, you can use data sources to import
-    #            technical metadata of assets (data) from the source databases or data warehouses into
-    #            Amazon DataZone. In the current release of Amazon DataZone, you can create and run data
-    #            sources for Amazon Web Services Glue and Amazon Redshift.</p>
+    #   <p>The type of the data source. In Amazon DataZone, you can use data sources to import technical metadata of assets (data) from the source databases or data warehouses into Amazon DataZone. In the current release of Amazon DataZone, you can create and run data sources for Amazon Web Services Glue and Amazon Redshift.</p>
     #   @return [String]
     # @!attribute configuration
-    #   <p>Specifies the configuration of the data source. It can be set to either
-    #               <code>glueRunConfiguration</code> or <code>redshiftRunConfiguration</code>.</p>
+    #   <p>Specifies the configuration of the data source. It can be set to either <code>glueRunConfiguration</code> or <code>redshiftRunConfiguration</code>.</p>
     #   @return [Types::DataSourceConfigurationInput]
     # @!attribute recommendation
-    #   <p>Specifies whether the business name generation is to be enabled for this data
-    #            source.</p>
+    #   <p>Specifies whether the business name generation is to be enabled for this data source.</p>
     #   @return [Types::RecommendationConfiguration]
     # @!attribute enable_setting
     #   <p>Specifies whether the data source is enabled.</p>
@@ -2251,16 +2246,13 @@ module Aws::DataZone
     #   <p>The schedule of the data source runs.</p>
     #   @return [Types::ScheduleConfiguration]
     # @!attribute publish_on_import
-    #   <p>Specifies whether the assets that this data source creates in the inventory are to be
-    #            also automatically published to the catalog.</p>
+    #   <p>Specifies whether the assets that this data source creates in the inventory are to be also automatically published to the catalog.</p>
     #   @return [Boolean]
     # @!attribute asset_forms_input
-    #   <p>The metadata forms that are to be attached to the assets that this data source works
-    #            with.</p>
+    #   <p>The metadata forms that are to be attached to the assets that this data source works with.</p>
     #   @return [Array<Types::FormInput>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateDataSourceInput < Struct.new(
       :name,
@@ -2303,26 +2295,22 @@ module Aws::DataZone
     #   <p>The ID of the Amazon DataZone project to which the data source is added.</p>
     #   @return [String]
     # @!attribute environment_id
-    #   <p>The unique identifier of the Amazon DataZone environment to which the data source publishes
-    #            assets. </p>
+    #   <p>The unique identifier of the Amazon DataZone environment to which the data source publishes assets. </p>
     #   @return [String]
     # @!attribute connection_id
     #   <p>The ID of the connection.</p>
     #   @return [String]
     # @!attribute configuration
-    #   <p>Specifies the configuration of the data source. It can be set to either
-    #               <code>glueRunConfiguration</code> or <code>redshiftRunConfiguration</code>.</p>
+    #   <p>Specifies the configuration of the data source. It can be set to either <code>glueRunConfiguration</code> or <code>redshiftRunConfiguration</code>.</p>
     #   @return [Types::DataSourceConfigurationOutput]
     # @!attribute recommendation
-    #   <p>Specifies whether the business name generation is to be enabled for this data
-    #            source.</p>
+    #   <p>Specifies whether the business name generation is to be enabled for this data source.</p>
     #   @return [Types::RecommendationConfiguration]
     # @!attribute enable_setting
     #   <p>Specifies whether the data source is enabled.</p>
     #   @return [String]
     # @!attribute publish_on_import
-    #   <p>Specifies whether the assets that this data source creates in the inventory are to be
-    #            also automatically published to the catalog.</p>
+    #   <p>Specifies whether the assets that this data source creates in the inventory are to be also automatically published to the catalog.</p>
     #   @return [Boolean]
     # @!attribute asset_forms_output
     #   <p>The metadata forms attached to the assets that this data source creates.</p>
@@ -2337,12 +2325,10 @@ module Aws::DataZone
     #   <p>The timestamp that specifies when the data source was last run.</p>
     #   @return [Time]
     # @!attribute last_run_error_message
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute error_message
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute created_at
     #   <p>The timestamp of when the data source was created.</p>
@@ -2386,13 +2372,10 @@ module Aws::DataZone
     #   <p>The single-sign on configuration of the Amazon DataZone domain.</p>
     #   @return [Types::SingleSignOn]
     # @!attribute domain_execution_role
-    #   <p>The domain execution role that is created when an Amazon DataZone domain is created. The
-    #            domain execution role is created in the Amazon Web Services account that houses the
-    #            Amazon DataZone domain.</p>
+    #   <p>The domain execution role that is created when an Amazon DataZone domain is created. The domain execution role is created in the Amazon Web Services account that houses the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute kms_key_identifier
-    #   <p>The identifier of the Amazon Web Services Key Management Service (KMS) key that is used
-    #            to encrypt the Amazon DataZone domain, metadata, and reporting data. </p>
+    #   <p>The identifier of the Amazon Web Services Key Management Service (KMS) key that is used to encrypt the Amazon DataZone domain, metadata, and reporting data. </p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags specified for the Amazon DataZone domain.</p>
@@ -2404,8 +2387,7 @@ module Aws::DataZone
     #   <p>The service role of the domain that is created.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateDomainInput < Struct.new(
       :name,
@@ -2437,16 +2419,13 @@ module Aws::DataZone
     #   <p>The single-sign on configuration of the Amazon DataZone domain.</p>
     #   @return [Types::SingleSignOn]
     # @!attribute domain_execution_role
-    #   <p>The domain execution role that is created when an Amazon DataZone domain is created. The
-    #            domain execution role is created in the Amazon Web Services account that houses the
-    #            Amazon DataZone domain.</p>
+    #   <p>The domain execution role that is created when an Amazon DataZone domain is created. The domain execution role is created in the Amazon Web Services account that houses the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The ARN of the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute kms_key_identifier
-    #   <p>The identifier of the Amazon Web Services Key Management Service (KMS) key that is used
-    #            to encrypt the Amazon DataZone domain, metadata, and reporting data. </p>
+    #   <p>The identifier of the Amazon Web Services Key Management Service (KMS) key that is used to encrypt the Amazon DataZone domain, metadata, and reporting data. </p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the Amazon DataZone domain.</p>
@@ -2494,8 +2473,7 @@ module Aws::DataZone
     #   <p>The description of the domain unit.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateDomainUnitInput < Struct.new(
       :domain_identifier,
@@ -2571,8 +2549,7 @@ module Aws::DataZone
     #   <p>The parameters of the environment action.</p>
     #   @return [Types::ActionParameters]
     # @!attribute description
-    #   <p>The description of the environment action that is being created in the
-    #            environment.</p>
+    #   <p>The description of the environment action that is being created in the environment.</p>
     #   @return [String]
     class CreateEnvironmentActionInput < Struct.new(
       :domain_identifier,
@@ -2626,8 +2603,7 @@ module Aws::DataZone
     #   <p>The name of the Amazon DataZone environment.</p>
     #   @return [String]
     # @!attribute environment_profile_identifier
-    #   <p>The identifier of the environment profile that is used to create this Amazon DataZone
-    #            environment.</p>
+    #   <p>The identifier of the environment profile that is used to create this Amazon DataZone environment.</p>
     #   @return [String]
     # @!attribute user_parameters
     #   <p>The user parameters of this Amazon DataZone environment.</p>
@@ -2692,8 +2668,7 @@ module Aws::DataZone
     #   <p>The description of this Amazon DataZone environment.</p>
     #   @return [String]
     # @!attribute environment_profile_id
-    #   <p>The ID of the environment profile with which this Amazon DataZone environment was
-    #            created.</p>
+    #   <p>The ID of the environment profile with which this Amazon DataZone environment was created.</p>
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The Amazon Web Services account in which the Amazon DataZone environment is created.</p>
@@ -2810,12 +2785,10 @@ module Aws::DataZone
     #   <p>The ID of the Amazon DataZone domain in which this environment profile is created.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The Amazon Web Services account ID in which this Amazon DataZone environment profile is
-    #            created.</p>
+    #   <p>The Amazon Web Services account ID in which this Amazon DataZone environment profile is created.</p>
     #   @return [String]
     # @!attribute aws_account_region
-    #   <p>The Amazon Web Services region in which this Amazon DataZone environment profile is
-    #            created.</p>
+    #   <p>The Amazon Web Services region in which this Amazon DataZone environment profile is created.</p>
     #   @return [String]
     # @!attribute created_by
     #   <p>The Amazon DataZone user who created this environment profile.</p>
@@ -2913,12 +2886,10 @@ module Aws::DataZone
     #   <p>The ID of the project that owns this Amazon DataZone metadata form type.</p>
     #   @return [String]
     # @!attribute origin_domain_id
-    #   <p>The ID of the Amazon DataZone domain in which this metadata form type was originally
-    #            created.</p>
+    #   <p>The ID of the Amazon DataZone domain in which this metadata form type was originally created.</p>
     #   @return [String]
     # @!attribute origin_project_id
-    #   <p>The ID of the project in which this Amazon DataZone metadata form type was originally
-    #            created.</p>
+    #   <p>The ID of the project in which this Amazon DataZone metadata form type was originally created.</p>
     #   @return [String]
     class CreateFormTypeOutput < Struct.new(
       :domain_id,
@@ -2957,9 +2928,11 @@ module Aws::DataZone
     # @!attribute status
     #   <p>The status of this business glossary.</p>
     #   @return [String]
+    # @!attribute usage_restrictions
+    #   <p>The usage restriction of the restricted glossary.</p>
+    #   @return [Array<String>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateGlossaryInput < Struct.new(
       :domain_identifier,
@@ -2967,6 +2940,7 @@ module Aws::DataZone
       :owning_project_identifier,
       :description,
       :status,
+      :usage_restrictions,
       :client_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -2990,6 +2964,9 @@ module Aws::DataZone
     # @!attribute status
     #   <p>The status of this business glossary.</p>
     #   @return [String]
+    # @!attribute usage_restrictions
+    #   <p>The usage restriction of the restricted glossary.</p>
+    #   @return [Array<String>]
     class CreateGlossaryOutput < Struct.new(
       :domain_id,
       :id,
@@ -2997,6 +2974,7 @@ module Aws::DataZone
       :owning_project_id,
       :description,
       :status,
+      :usage_restrictions,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3033,8 +3011,7 @@ module Aws::DataZone
     #   <p>The term relations of this business glossary term.</p>
     #   @return [Types::TermRelations]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateGlossaryTermInput < Struct.new(
       :domain_identifier,
@@ -3073,6 +3050,9 @@ module Aws::DataZone
     # @!attribute term_relations
     #   <p>The term relations of this business glossary term.</p>
     #   @return [Types::TermRelations]
+    # @!attribute usage_restrictions
+    #   <p>The usage restriction of the restricted glossary.</p>
+    #   @return [Array<String>]
     class CreateGlossaryTermOutput < Struct.new(
       :id,
       :domain_id,
@@ -3082,6 +3062,7 @@ module Aws::DataZone
       :short_description,
       :long_description,
       :term_relations,
+      :usage_restrictions,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3093,8 +3074,7 @@ module Aws::DataZone
     #   <p>The identifier of the group for which the group profile is created.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p> A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p> A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateGroupProfileInput < Struct.new(
       :domain_identifier,
@@ -3141,8 +3121,7 @@ module Aws::DataZone
     #   <p>Specifies whether to publish or unpublish a listing.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateListingChangeSetInput < Struct.new(
       :domain_identifier,
@@ -3174,12 +3153,10 @@ module Aws::DataZone
 
     # <p>Specifies whether to create a project from project profile policy grant details.</p>
     # @!attribute include_child_domain_units
-    #   <p>Specifies whether to include child domain units when creating a project from project
-    #            profile policy grant details</p>
+    #   <p>Specifies whether to include child domain units when creating a project from project profile policy grant details</p>
     #   @return [Boolean]
     # @!attribute project_profiles
-    #   <p>Specifies project profiles when creating a project from project profile policy grant
-    #            details</p>
+    #   <p>Specifies project profiles when creating a project from project profile policy grant details</p>
     #   @return [Array<String>]
     class CreateProjectFromProjectProfilePolicyGrantDetail < Struct.new(
       :include_child_domain_units,
@@ -3201,8 +3178,7 @@ module Aws::DataZone
     #   <p>The glossary terms that can be used in this Amazon DataZone project.</p>
     #   @return [Array<String>]
     # @!attribute domain_unit_id
-    #   <p>The ID of the domain unit. This parameter is not required and if it is not specified,
-    #            then the project is created at the root domain unit level.</p>
+    #   <p>The ID of the domain unit. This parameter is not required and if it is not specified, then the project is created at the root domain unit level.</p>
     #   @return [String]
     # @!attribute project_profile_id
     #   <p>The ID of the project profile.</p>
@@ -3264,8 +3240,7 @@ module Aws::DataZone
     #   <p>The status of the Amazon DataZone project that was created.</p>
     #   @return [String]
     # @!attribute failure_reasons
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Array<Types::ProjectDeletionError>]
     # @!attribute created_by
     #   <p>The Amazon DataZone user who created the project.</p>
@@ -3416,8 +3391,7 @@ module Aws::DataZone
     #   <p>The description of the rule.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateRuleInput < Struct.new(
       :domain_identifier,
@@ -3497,8 +3471,7 @@ module Aws::DataZone
     #   <p>The names of the assets for which the subscription grant is created.</p>
     #   @return [Array<Types::AssetTargetNameMap>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateSubscriptionGrantInput < Struct.new(
       :domain_identifier,
@@ -3575,8 +3548,7 @@ module Aws::DataZone
     #   <p>The reason for the subscription request.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     # @!attribute metadata_forms
     #   <p>The metadata form included in the subscription request.</p>
@@ -3681,8 +3653,7 @@ module Aws::DataZone
     #   <p>The provider of the subscription target.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateSubscriptionTargetInput < Struct.new(
       :domain_identifier,
@@ -3774,8 +3745,7 @@ module Aws::DataZone
     #   <p>The user type of the user for which the user profile is created.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class CreateUserProfileInput < Struct.new(
       :domain_identifier,
@@ -3813,13 +3783,10 @@ module Aws::DataZone
 
     # <p>The custom Amazon Web Services Lambda handler within an account pool.</p>
     # @!attribute lambda_function_arn
-    #   <p>The ARN of the Amazon Web Services Lambda function for the custom Amazon Web Services
-    #            Lambda handler.</p>
+    #   <p>The ARN of the Amazon Web Services Lambda function for the custom Amazon Web Services Lambda handler.</p>
     #   @return [String]
     # @!attribute lambda_execution_role_arn
-    #   <p>The ARN of the IAM role that enables Amazon SageMaker Unified Studio to invoke the
-    #               Amazon Web Services Lambda funtion if the account source is the custom account pool
-    #            handler.</p>
+    #   <p>The ARN of the IAM role that enables Amazon SageMaker Unified Studio to invoke the Amazon Web Services Lambda funtion if the account source is the custom account pool handler.</p>
     #   @return [String]
     class CustomAccountPoolHandler < Struct.new(
       :lambda_function_arn,
@@ -4120,15 +4087,12 @@ module Aws::DataZone
       class Unknown < DataSourceConfigurationOutput; end
     end
 
-    # <p>The details of the error message that is returned if the operation cannot be
-    #          successfully completed.</p>
+    # <p>The details of the error message that is returned if the operation cannot be successfully completed.</p>
     # @!attribute error_type
-    #   <p>The type of the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>The type of the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [String]
     # @!attribute error_detail
-    #   <p>The details of the error message that is returned if the operation cannot be
-    #            successfully completed.</p>
+    #   <p>The details of the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [String]
     class DataSourceErrorMessage < Struct.new(
       :error_type,
@@ -4160,8 +4124,7 @@ module Aws::DataZone
     #   <p>The technical description included in the data source run activity.</p>
     #   @return [String]
     # @!attribute error_message
-    #   <p>The details of the error message that is returned if the operation cannot be
-    #            successfully completed.</p>
+    #   <p>The details of the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute lineage_summary
     #   <p>The data lineage summary.</p>
@@ -4218,8 +4181,7 @@ module Aws::DataZone
     #   <p>The asset statistics from the data source run.</p>
     #   @return [Types::RunStatisticsForAssets]
     # @!attribute error_message
-    #   <p>The details of the error message that is returned if the operation cannot be
-    #            successfully completed.</p>
+    #   <p>The details of the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute created_at
     #   <p>The timestamp of when a data source run was created.</p>
@@ -4288,8 +4250,7 @@ module Aws::DataZone
     #   <p>The timestamp of when the data source run was last performed.</p>
     #   @return [Time]
     # @!attribute last_run_error_message
-    #   <p>The details of the error message that is returned if the operation cannot be
-    #            successfully completed.</p>
+    #   <p>The details of the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute last_run_asset_count
     #   <p>The count of the assets created during the last data source run.</p>
@@ -4442,15 +4403,13 @@ module Aws::DataZone
     #   <p>The identifier of the data source that is deleted.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @deprecated
     #     This field is no longer required for idempotency.
     #     Since: 2024-12-02
     #   @return [String]
     # @!attribute retain_permissions_on_revoke_failure
-    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe
-    #            functionality failure for a data source.</p>
+    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.</p>
     #   @return [Boolean]
     class DeleteDataSourceInput < Struct.new(
       :domain_identifier,
@@ -4480,8 +4439,7 @@ module Aws::DataZone
     #   <p>The ID of the Amazon DataZone domain in which the data source is deleted.</p>
     #   @return [String]
     # @!attribute project_id
-    #   <p>The ID of the project in which this data source exists and from which it's
-    #            deleted.</p>
+    #   <p>The ID of the project in which this data source exists and from which it's deleted.</p>
     #   @return [String]
     # @!attribute environment_id
     #   <p>The ID of the environemnt associated with this data source.</p>
@@ -4493,12 +4451,10 @@ module Aws::DataZone
     #   <p>The configuration of the data source that is deleted.</p>
     #   @return [Types::DataSourceConfigurationOutput]
     # @!attribute enable_setting
-    #   <p>The enable setting of the data source that specifies whether the data source is enabled
-    #            or disabled.</p>
+    #   <p>The enable setting of the data source that specifies whether the data source is enabled or disabled.</p>
     #   @return [String]
     # @!attribute publish_on_import
-    #   <p>Specifies whether the assets that this data source creates in the inventory are to be
-    #            also automatically published to the catalog.</p>
+    #   <p>Specifies whether the assets that this data source creates in the inventory are to be also automatically published to the catalog.</p>
     #   @return [Boolean]
     # @!attribute asset_forms_output
     #   <p>The asset data forms associated with this data source.</p>
@@ -4513,12 +4469,10 @@ module Aws::DataZone
     #   <p>The timestamp of when the data source was last run.</p>
     #   @return [Time]
     # @!attribute last_run_error_message
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute error_message
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute created_at
     #   <p>The timestamp of when this data source was created.</p>
@@ -4530,8 +4484,7 @@ module Aws::DataZone
     #   <p>Specifies the status of the self-granting functionality.</p>
     #   @return [Types::SelfGrantStatusOutput]
     # @!attribute retain_permissions_on_revoke_failure
-    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe
-    #            functionality failure for a data source.</p>
+    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.</p>
     #   @return [Boolean]
     class DeleteDataSourceOutput < Struct.new(
       :id,
@@ -4564,8 +4517,7 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon Web Services domain that is to be deleted.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     # @!attribute skip_deletion_check
     #   <p>Specifies the optional flag to delete all child entities within the domain.</p>
@@ -4850,8 +4802,7 @@ module Aws::DataZone
     #   <p>The timestamp of when the subscription grant that is deleted was updated.</p>
     #   @return [Time]
     # @!attribute subscription_target_id
-    #   <p>The ID of the subscription target associated with the subscription grant that is
-    #            deleted.</p>
+    #   <p>The ID of the subscription target associated with the subscription grant that is deleted.</p>
     #   @return [String]
     # @!attribute granted_entity
     #   <p>The entity to which the subscription is deleted.</p>
@@ -4914,8 +4865,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the Amazon DataZone domain that houses the asset for which you want to delete
-    #            a time series form.</p>
+    #   <p>The ID of the Amazon DataZone domain that houses the asset for which you want to delete a time series form.</p>
     #   @return [String]
     # @!attribute entity_identifier
     #   <p>The ID of the asset for which you want to delete a time series form.</p>
@@ -4927,8 +4877,7 @@ module Aws::DataZone
     #   <p>The name of the time series form that you want to delete.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is
-    #            automatically populated if not provided.</p>
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
     #   @return [String]
     class DeleteTimeSeriesDataPointsInput < Struct.new(
       :domain_identifier,
@@ -5025,6 +4974,32 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute domain_identifier
+    #   <p>The ID of the domain where you want to disassociate restricted terms from an asset.</p>
+    #   @return [String]
+    # @!attribute entity_identifier
+    #   <p>The ID of an asset from which you want to disassociate restricted terms.</p>
+    #   @return [String]
+    # @!attribute entity_type
+    #   <p>The type of the asset from which you want to disassociate restricted terms.</p>
+    #   @return [String]
+    # @!attribute governed_glossary_terms
+    #   <p>The restricted glossary terms that you want to disassociate from an asset.</p>
+    #   @return [Array<String>]
+    class DisassociateGovernedTermsInput < Struct.new(
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :governed_glossary_terms,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    class DisassociateGovernedTermsOutput < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A summary of a Amazon DataZone domain.</p>
     # @!attribute id
     #   <p>The ID of the Amazon DataZone domain.</p>
@@ -5090,8 +5065,7 @@ module Aws::DataZone
       end
     end
 
-    # <p>The grant filter for the domain unit. In the current release of Amazon DataZone, the
-    #          only supported filter is the <code>allDomainUnitsGrantFilter</code>.</p>
+    # <p>The grant filter for the domain unit. In the current release of Amazon DataZone, the only supported filter is the <code>allDomainUnitsGrantFilter</code>.</p>
     # @!attribute all_domain_units_grant_filter
     #   <p>Specifies a grant filter containing all domain units.</p>
     #   @return [Types::AllDomainUnitsGrantFilter]
@@ -5190,9 +5164,7 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The details about the specified action configured for an environment. For example, the
-    #          details of the specified console links for an analytics tool that is available in this
-    #          environment.</p>
+    # <p>The details about the specified action configured for an environment. For example, the details of the specified console links for an analytics tool that is available in this environment.</p>
     # @!attribute domain_id
     #   <p>The Amazon DataZone domain ID of the environment action.</p>
     #   @return [String]
@@ -5230,15 +5202,13 @@ module Aws::DataZone
     #   <p>The identifier of the environment blueprint.</p>
     #   @return [String]
     # @!attribute provisioning_role_arn
-    #   <p>The ARN of the provisioning role specified in the environment blueprint
-    #            configuration.</p>
+    #   <p>The ARN of the provisioning role specified in the environment blueprint configuration.</p>
     #   @return [String]
     # @!attribute environment_role_permission_boundary
     #   <p>The environment role permission boundary.</p>
     #   @return [String]
     # @!attribute manage_access_role_arn
-    #   <p>The ARN of the manage access role specified in the environment blueprint
-    #            configuration.</p>
+    #   <p>The ARN of the manage access role specified in the environment blueprint configuration.</p>
     #   @return [String]
     # @!attribute enabled_regions
     #   <p>The enabled Amazon Web Services Regions specified in a blueprint configuration.</p>
@@ -5391,8 +5361,7 @@ module Aws::DataZone
     #   <p>The ID of the environment.</p>
     #   @return [String]
     # @!attribute environment_resolved_account
-    #   <p>Specifies the account/Region that is to be used during project creation for a particular
-    #            blueprint.</p>
+    #   <p>Specifies the account/Region that is to be used during project creation for a particular blueprint.</p>
     #   @return [Types::EnvironmentResolvedAccount]
     # @!attribute environment_configuration_name
     #   <p>The environment configuration name.</p>
@@ -5501,8 +5470,7 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies the account/Region that is to be used during project creation for a particular
-    #          blueprint.</p>
+    # <p>Specifies the account/Region that is to be used during project creation for a particular blueprint.</p>
     # @!attribute aws_account_id
     #   <p>The ID of the resolved account.</p>
     #   @return [String]
@@ -5615,8 +5583,7 @@ module Aws::DataZone
       class Unknown < EventSummary; end
     end
 
-    # <p>Specifies the error message that is returned if the operation cannot be successfully
-    #          completed.</p>
+    # <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     # @!attribute message
     #   <p>The description of the error message.</p>
     #   @return [String]
@@ -5779,8 +5746,7 @@ module Aws::DataZone
     #   <p>The identifier of the project that owns the form type.</p>
     #   @return [String]
     # @!attribute origin_domain_id
-    #   <p>The identifier of the Amazon DataZone domain in which the form type was originally
-    #            created.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which the form type was originally created.</p>
     #   @return [String]
     # @!attribute origin_project_id
     #   <p>The identifier of the project in which the form type was originally created.</p>
@@ -5815,8 +5781,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the domain in which the account pool lives whose details are to be
-    #            displayed.</p>
+    #   <p>The ID of the domain in which the account pool lives whose details are to be displayed.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The ID of the account pool whose details are to be displayed.</p>
@@ -5829,8 +5794,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_id
-    #   <p>The ID of the domain in which the account pool lives whose details are to be
-    #            displayed.</p>
+    #   <p>The ID of the domain in which the account pool lives whose details are to be displayed.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of the account pool.</p>
@@ -5845,9 +5809,7 @@ module Aws::DataZone
     #   <p>The mechanism used to resolve the account selection from the account pool.</p>
     #   @return [String]
     # @!attribute account_source
-    #   <p>The source of accounts for the account pool. In the current release, it's either a
-    #            static list of accounts provided by the customer or a custom Amazon Web Services Lambda
-    #            handler. </p>
+    #   <p>The source of accounts for the account pool. In the current release, it's either a static list of accounts provided by the customer or a custom Amazon Web Services Lambda handler. </p>
     #   @return [Types::AccountSource]
     # @!attribute created_by
     #   <p>The user who created the account pool.</p>
@@ -5950,11 +5912,7 @@ module Aws::DataZone
     #   <p>The ID of the Amazon DataZone domain to which the asset belongs.</p>
     #   @return [String]
     # @!attribute identifier
-    #   <p>The ID of the Amazon DataZone asset.</p>
-    #            <p>This parameter supports either the value of <code>assetId</code> or
-    #               <code>externalIdentifier</code> as input. If you are passing the value of
-    #               <code>externalIdentifier</code>, you must prefix this value with
-    #               <code>externalIdentifer%2F</code>.</p>
+    #   <p>The ID of the Amazon DataZone asset.</p> <p>This parameter supports either the value of <code>assetId</code> or <code>externalIdentifier</code> as input. If you are passing the value of <code>externalIdentifier</code>, you must prefix this value with <code>externalIdentifer%2F</code>.</p>
     #   @return [String]
     # @!attribute revision
     #   <p>The revision of the Amazon DataZone asset.</p>
@@ -6003,6 +5961,9 @@ module Aws::DataZone
     # @!attribute glossary_terms
     #   <p>The business glossary terms attached to the asset.</p>
     #   @return [Array<String>]
+    # @!attribute governed_glossary_terms
+    #   <p>The restricted glossary terms attached to an asset.</p>
+    #   @return [Array<String>]
     # @!attribute owning_project_id
     #   <p>The ID of the project that owns the asset.</p>
     #   @return [String]
@@ -6034,6 +5995,7 @@ module Aws::DataZone
       :first_revision_created_at,
       :first_revision_created_by,
       :glossary_terms,
+      :governed_glossary_terms,
       :owning_project_id,
       :domain_id,
       :listing,
@@ -6317,8 +6279,7 @@ module Aws::DataZone
     #   <p>Specifies whether this data source is enabled or not.</p>
     #   @return [String]
     # @!attribute publish_on_import
-    #   <p>Specifies whether the assets that this data source creates in the inventory are to be
-    #            also automatically published to the catalog.</p>
+    #   <p>Specifies whether the assets that this data source creates in the inventory are to be also automatically published to the catalog.</p>
     #   @return [Boolean]
     # @!attribute asset_forms_output
     #   <p>The metadata forms attached to the assets created by this data source.</p>
@@ -6333,15 +6294,13 @@ module Aws::DataZone
     #   <p>The timestamp of the last run of the data source.</p>
     #   @return [Time]
     # @!attribute last_run_error_message
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute last_run_asset_count
     #   <p>The number of assets created by the data source during its last run.</p>
     #   @return [Integer]
     # @!attribute error_message
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute created_at
     #   <p>The timestamp of when the data source was created.</p>
@@ -6421,8 +6380,7 @@ module Aws::DataZone
     #   <p>The summary of the data lineage.</p>
     #   @return [Types::DataSourceRunLineageSummary]
     # @!attribute error_message
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute created_at
     #   <p>The timestamp of when the data source run was created.</p>
@@ -6486,8 +6444,7 @@ module Aws::DataZone
     #   <p>The ARN of the specified Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute kms_key_identifier
-    #   <p>The identifier of the Amazon Web Services Key Management Service (KMS) key that is used
-    #            to encrypt the Amazon DataZone domain, metadata, and reporting data. </p>
+    #   <p>The identifier of the Amazon Web Services Key Management Service (KMS) key that is used to encrypt the Amazon DataZone domain, metadata, and reporting data. </p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the specified Amazon DataZone domain.</p>
@@ -6589,8 +6546,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the Amazon DataZone domain in which the <code>GetEnvironmentAction</code> API is
-    #            invoked. </p>
+    #   <p>The ID of the Amazon DataZone domain in which the <code>GetEnvironmentAction</code> API is invoked. </p>
     #   @return [String]
     # @!attribute environment_identifier
     #   <p>The environment ID of the environment action.</p>
@@ -6752,8 +6708,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the Amazon DataZone domain in which this environment and its credentials
-    #            exist.</p>
+    #   <p>The ID of the Amazon DataZone domain in which this environment and its credentials exist.</p>
     #   @return [String]
     # @!attribute environment_identifier
     #   <p>The ID of the environment whose credentials this operation gets.</p>
@@ -6997,8 +6952,7 @@ module Aws::DataZone
     #   <p>The ID of the project that owns this metadata form type.</p>
     #   @return [String]
     # @!attribute origin_domain_id
-    #   <p>The ID of the Amazon DataZone domain in which the metadata form type was originally
-    #            created.</p>
+    #   <p>The ID of the Amazon DataZone domain in which the metadata form type was originally created.</p>
     #   @return [String]
     # @!attribute origin_project_id
     #   <p>The ID of the project in which this metadata form type was originally created.</p>
@@ -7078,6 +7032,9 @@ module Aws::DataZone
     # @!attribute updated_by
     #   <p>The Amazon DataZone user who updated the business glossary.</p>
     #   @return [String]
+    # @!attribute usage_restrictions
+    #   <p>The usage restriction of the restricted glossary.</p>
+    #   @return [Array<String>]
     class GetGlossaryOutput < Struct.new(
       :domain_id,
       :id,
@@ -7089,6 +7046,7 @@ module Aws::DataZone
       :created_by,
       :updated_at,
       :updated_by,
+      :usage_restrictions,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -7142,6 +7100,9 @@ module Aws::DataZone
     # @!attribute updated_by
     #   <p>The Amazon DataZone user who updated the business glossary term.</p>
     #   @return [String]
+    # @!attribute usage_restrictions
+    #   <p>The usage restriction of a term within a restricted glossary.</p>
+    #   @return [Array<String>]
     class GetGlossaryTermOutput < Struct.new(
       :domain_id,
       :glossary_id,
@@ -7155,6 +7116,7 @@ module Aws::DataZone
       :created_by,
       :updated_at,
       :updated_by,
+      :usage_restrictions,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -7331,11 +7293,7 @@ module Aws::DataZone
     #   <p>The ID of the domain in which you want to get the data lineage node.</p>
     #   @return [String]
     # @!attribute identifier
-    #   <p>The ID of the data lineage node that you want to get.</p>
-    #            <p>Both, a lineage node identifier generated by Amazon DataZone and a
-    #               <code>sourceIdentifier</code> of the lineage node are supported. If
-    #               <code>sourceIdentifier</code> is greater than 1800 characters, you can use lineage node
-    #            identifier generated by Amazon DataZone to get the node details.</p>
+    #   <p>The ID of the data lineage node that you want to get.</p> <p>Both, a lineage node identifier generated by Amazon DataZone and a <code>sourceIdentifier</code> of the lineage node are supported. If <code>sourceIdentifier</code> is greater than 1800 characters, you can use lineage node identifier generated by Amazon DataZone to get the node details.</p>
     #   @return [String]
     # @!attribute event_timestamp
     #   <p>The event time stamp for which you want to get the data lineage node.</p>
@@ -7480,8 +7438,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the Amazon DataZone domain the metadata generation run of which you want to
-    #            get.</p>
+    #   <p>The ID of the Amazon DataZone domain the metadata generation run of which you want to get.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The identifier of the metadata generation run.</p>
@@ -7494,8 +7451,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_id
-    #   <p>The ID of the Amazon DataZone domain the metadata generation run of which you want to
-    #            get.</p>
+    #   <p>The ID of the Amazon DataZone domain the metadata generation run of which you want to get.</p>
     #   @return [String]
     # @!attribute id
     #   <p>The ID of the metadata generation run.</p>
@@ -7516,8 +7472,7 @@ module Aws::DataZone
     #   <p>The Amazon DataZone user who started the metadata generation run.</p>
     #   @return [String]
     # @!attribute owning_project_id
-    #   <p>The ID of the project that owns the assets for which you're running metadata
-    #            generation.</p>
+    #   <p>The ID of the project that owns the assets for which you're running metadata generation.</p>
     #   @return [String]
     class GetMetadataGenerationRunOutput < Struct.new(
       :domain_id,
@@ -7561,8 +7516,7 @@ module Aws::DataZone
     #   <p>The status of the project.</p>
     #   @return [String]
     # @!attribute failure_reasons
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Array<Types::ProjectDeletionError>]
     # @!attribute created_by
     #   <p>The Amazon DataZone user who created the project.</p>
@@ -7870,8 +7824,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which to get the subscription request
-    #            details.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which to get the subscription request details.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The identifier of the subscription request the details of which to get.</p>
@@ -8027,8 +7980,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the Amazon DataZone domain that houses the asset for which you want to get the
-    #            data point.</p>
+    #   <p>The ID of the Amazon DataZone domain that houses the asset for which you want to get the data point.</p>
     #   @return [String]
     # @!attribute entity_identifier
     #   <p>The ID of the asset for which you want to get the data point.</p>
@@ -8053,8 +8005,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_id
-    #   <p>The ID of the Amazon DataZone domain that houses the asset data point that you want to
-    #            get.</p>
+    #   <p>The ID of the Amazon DataZone domain that houses the asset data point that you want to get.</p>
     #   @return [String]
     # @!attribute entity_id
     #   <p>The ID of the asset for which you want to get the data point.</p>
@@ -8096,8 +8047,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_id
-    #   <p>the identifier of the Amazon DataZone domain of which you want to get the user
-    #            profile.</p>
+    #   <p>the identifier of the Amazon DataZone domain of which you want to get the user profile.</p>
     #   @return [String]
     # @!attribute id
     #   <p>The identifier of the user profile.</p>
@@ -8140,6 +8090,9 @@ module Aws::DataZone
     # @!attribute status
     #   <p>The business glossary status.</p>
     #   @return [String]
+    # @!attribute usage_restrictions
+    #   <p>The usage restrictions associated with a goverened glossary term.</p>
+    #   @return [Array<String>]
     # @!attribute created_at
     #   <p>The timestamp of when the glossary was created.</p>
     #   @return [Time]
@@ -8162,6 +8115,7 @@ module Aws::DataZone
       :owning_project_id,
       :description,
       :status,
+      :usage_restrictions,
       :created_at,
       :created_by,
       :updated_at,
@@ -8197,6 +8151,9 @@ module Aws::DataZone
     # @!attribute short_description
     #   <p>The short description of the business glossary term.</p>
     #   @return [String]
+    # @!attribute usage_restrictions
+    #   <p>The usage restrictions associated with a goverened glossary term.</p>
+    #   @return [Array<String>]
     # @!attribute long_description
     #   <p>The long description of the business glossary term.</p>
     #   @return [String]
@@ -8227,6 +8184,7 @@ module Aws::DataZone
       :id,
       :name,
       :short_description,
+      :usage_restrictions,
       :long_description,
       :term_relations,
       :status,
@@ -8347,12 +8305,10 @@ module Aws::DataZone
     #   <p>The match criteria of the Amazon Web Services Glue connection.</p>
     #   @return [String]
     # @!attribute validate_credentials
-    #   <p>Speciefies whether to validate credentials of the Amazon Web Services Glue
-    #            connection.</p>
+    #   <p>Speciefies whether to validate credentials of the Amazon Web Services Glue connection.</p>
     #   @return [Boolean]
     # @!attribute validate_for_compute_environments
-    #   <p>Speciefies whether to validate for compute environments of the Amazon Web Services Glue
-    #            connection.</p>
+    #   <p>Speciefies whether to validate for compute environments of the Amazon Web Services Glue connection.</p>
     #   @return [Array<String>]
     # @!attribute spark_properties
     #   <p>The Spark properties of the Amazon Web Services Glue connection.</p>
@@ -8460,16 +8416,13 @@ module Aws::DataZone
 
     # <p>The configuration details of the Amazon Web Services Glue data source.</p>
     # @!attribute data_access_role
-    #   <p>The data access role included in the configuration details of the Amazon Web Services Glue data
-    #            source.</p>
+    #   <p>The data access role included in the configuration details of the Amazon Web Services Glue data source.</p>
     #   @return [String]
     # @!attribute relational_filter_configurations
-    #   <p>The relational filter configurations included in the configuration details of the Amazon Web Services
-    #            Glue data source.</p>
+    #   <p>The relational filter configurations included in the configuration details of the Amazon Web Services Glue data source.</p>
     #   @return [Array<Types::RelationalFilterConfiguration>]
     # @!attribute auto_import_data_quality_result
-    #   <p>Specifies whether to automatically import data quality metrics as part of the data
-    #            source run.</p>
+    #   <p>Specifies whether to automatically import data quality metrics as part of the data source run.</p>
     #   @return [Boolean]
     # @!attribute catalog_name
     #   <p>The catalog name in the Amazon Web Services Glue run configuration.</p>
@@ -8485,24 +8438,19 @@ module Aws::DataZone
 
     # <p>The configuration details of the Amazon Web Services Glue data source.</p>
     # @!attribute account_id
-    #   <p>The Amazon Web Services account ID included in the configuration details of the Amazon Web Services Glue data
-    #            source. </p>
+    #   <p>The Amazon Web Services account ID included in the configuration details of the Amazon Web Services Glue data source. </p>
     #   @return [String]
     # @!attribute region
-    #   <p>The Amazon Web Services region included in the configuration details of the Amazon Web Services Glue data source.
-    #         </p>
+    #   <p>The Amazon Web Services region included in the configuration details of the Amazon Web Services Glue data source. </p>
     #   @return [String]
     # @!attribute data_access_role
-    #   <p>The data access role included in the configuration details of the Amazon Web Services Glue data
-    #            source. </p>
+    #   <p>The data access role included in the configuration details of the Amazon Web Services Glue data source. </p>
     #   @return [String]
     # @!attribute relational_filter_configurations
-    #   <p>The relational filter configurations included in the configuration details of the Amazon Web Services
-    #            Glue data source.</p>
+    #   <p>The relational filter configurations included in the configuration details of the Amazon Web Services Glue data source.</p>
     #   @return [Array<Types::RelationalFilterConfiguration>]
     # @!attribute auto_import_data_quality_result
-    #   <p>Specifies whether to automatically import data quality metrics as part of the data
-    #            source run.</p>
+    #   <p>Specifies whether to automatically import data quality metrics as part of the data source run.</p>
     #   @return [Boolean]
     # @!attribute catalog_name
     #   <p>The catalog name in the Amazon Web Services Glue run configuration.</p>
@@ -8660,8 +8608,7 @@ module Aws::DataZone
 
     # <p>The IAM properties of a connection.</p>
     # @!attribute glue_lineage_sync_enabled
-    #   <p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a
-    #            connection.</p>
+    #   <p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>
     #   @return [Boolean]
     class IamPropertiesInput < Struct.new(
       :glue_lineage_sync_enabled,
@@ -8674,8 +8621,7 @@ module Aws::DataZone
     #   <p>The environment ID of the connection.</p>
     #   @return [String]
     # @!attribute glue_lineage_sync_enabled
-    #   <p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a
-    #            connection.</p>
+    #   <p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>
     #   @return [Boolean]
     class IamPropertiesOutput < Struct.new(
       :environment_id,
@@ -8686,8 +8632,7 @@ module Aws::DataZone
 
     # <p>The IAM properties patch of a connection.</p>
     # @!attribute glue_lineage_sync_enabled
-    #   <p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a
-    #            connection.</p>
+    #   <p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>
     #   @return [Boolean]
     class IamPropertiesPatch < Struct.new(
       :glue_lineage_sync_enabled,
@@ -8838,12 +8783,10 @@ module Aws::DataZone
 
     # <p>The Lake Formation configuration of the Data Lake blueprint.</p>
     # @!attribute location_registration_role
-    #   <p>The role that is used to manage read/write access to the chosen Amazon S3 bucket(s) for
-    #            Data Lake using Amazon Web Services Lake Formation hybrid access mode.</p>
+    #   <p>The role that is used to manage read/write access to the chosen Amazon S3 bucket(s) for Data Lake using Amazon Web Services Lake Formation hybrid access mode.</p>
     #   @return [String]
     # @!attribute location_registration_exclude_s3_locations
-    #   <p>Specifies certain Amazon S3 locations if you do not want Amazon DataZone to
-    #            automatically register them in hybrid mode. </p>
+    #   <p>Specifies certain Amazon S3 locations if you do not want Amazon DataZone to automatically register them in hybrid mode. </p>
     #   @return [Array<String>]
     class LakeFormationConfiguration < Struct.new(
       :location_registration_role,
@@ -9077,8 +9020,7 @@ module Aws::DataZone
     #   <p>The total queries processed in the SQL query run details of a data lineage run.</p>
     #   @return [Integer]
     # @!attribute num_queries_failed
-    #   <p>The number of queries that failed in the SQL query run details of a data lineage
-    #            run.</p>
+    #   <p>The number of queries that failed in the SQL query run details of a data lineage run.</p>
     #   @return [Integer]
     # @!attribute error_messages
     #   <p>The error message of the SQL query run details of a data lineage run.</p>
@@ -9116,17 +9058,10 @@ module Aws::DataZone
     #   <p>The sort order in which the existing account pools are to be listed.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of account pools is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of account pools, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListAccountPools to list the next set of
-    #            account pools.</p>
+    #   <p>When the number of account pools is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of account pools, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAccountPools to list the next set of account pools.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of account pools to return in a single call to ListAccountPools. When
-    #            the number of account pools to be listed is greater than the value of MaxResults, the
-    #            response contains a NextToken value that you can use in a subsequent call to
-    #            ListAccountPools to list the next set of account pools.</p>
+    #   <p>The maximum number of account pools to return in a single call to ListAccountPools. When the number of account pools to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListAccountPools to list the next set of account pools.</p>
     #   @return [Integer]
     class ListAccountPoolsInput < Struct.new(
       :domain_identifier,
@@ -9143,11 +9078,7 @@ module Aws::DataZone
     #   <p>The results of the ListAccountPools operation.</p>
     #   @return [Array<Types::AccountPoolSummary>]
     # @!attribute next_token
-    #   <p>When the number of account pools is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of account pools, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListAccountPools to list the next set of
-    #            account pools.</p>
+    #   <p>When the number of account pools is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of account pools, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAccountPools to list the next set of account pools.</p>
     #   @return [String]
     class ListAccountPoolsOutput < Struct.new(
       :items,
@@ -9157,24 +9088,16 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the domain in which the accounts in the specified account pool are to be
-    #            listed.</p>
+    #   <p>The ID of the domain in which the accounts in the specified account pool are to be listed.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The ID of the account pool whose accounts are to be listed.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of accounts is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of accounts, the response includes a pagination token named NextToken. You can specify this
-    #            NextToken value in a subsequent call to ListAccountsInAccountPool to list the next set of
-    #            accounts.</p>
+    #   <p>When the number of accounts is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of accounts, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAccountsInAccountPool to list the next set of accounts.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of accounts to return in a single call to ListAccountsInAccountPool.
-    #            When the number of accounts to be listed is greater than the value of MaxResults, the
-    #            response contains a NextToken value that you can use in a subsequent call to
-    #            ListAccountsInAccountPool to list the next set of accounts.</p>
+    #   <p>The maximum number of accounts to return in a single call to ListAccountsInAccountPool. When the number of accounts to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListAccountsInAccountPool to list the next set of accounts.</p>
     #   @return [Integer]
     class ListAccountsInAccountPoolInput < Struct.new(
       :domain_identifier,
@@ -9189,11 +9112,7 @@ module Aws::DataZone
     #   <p>The results of the ListAccountsInAccountPool operation.</p>
     #   @return [Array<Types::AccountInfo>]
     # @!attribute next_token
-    #   <p>When the number of accounts is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of accounts, the response includes a pagination token named NextToken. You can specify this
-    #            NextToken value in a subsequent call to ListAccountsInAccountPool to list the next set of
-    #            accounts.</p>
+    #   <p>When the number of accounts is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of accounts, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAccountsInAccountPool to list the next set of accounts.</p>
     #   @return [String]
     class ListAccountsInAccountPoolOutput < Struct.new(
       :items,
@@ -9212,19 +9131,10 @@ module Aws::DataZone
     #   <p>The status of the asset filter.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of asset filters is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of asset filters, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to
-    #            list the next set of asset filters.</p>
+    #   <p>When the number of asset filters is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of asset filters, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to list the next set of asset filters.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of asset filters to return in a single call to
-    #               <code>ListAssetFilters</code>. When the number of asset filters to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListAssetFilters</code> to list the
-    #            next set of asset filters.</p>
+    #   <p>The maximum number of asset filters to return in a single call to <code>ListAssetFilters</code>. When the number of asset filters to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListAssetFilters</code> to list the next set of asset filters.</p>
     #   @return [Integer]
     class ListAssetFiltersInput < Struct.new(
       :domain_identifier,
@@ -9240,12 +9150,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListAssetFilters</code> action.</p>
     #   @return [Array<Types::AssetFilterSummary>]
     # @!attribute next_token
-    #   <p>When the number of asset filters is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of asset filters, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to
-    #            list the next set of asset filters.</p>
+    #   <p>When the number of asset filters is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of asset filters, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to list the next set of asset filters.</p>
     #   @return [String]
     class ListAssetFiltersOutput < Struct.new(
       :items,
@@ -9261,19 +9166,10 @@ module Aws::DataZone
     #   <p>The identifier of the asset.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of revisions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of revisions, the response includes
-    #            a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListAssetRevisions</code> to
-    #            list the next set of revisions.</p>
+    #   <p>When the number of revisions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of revisions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListAssetRevisions</code> to list the next set of revisions.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of revisions to return in a single call to
-    #               <code>ListAssetRevisions</code>. When the number of revisions to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListAssetRevisions</code> to list the
-    #            next set of revisions.</p>
+    #   <p>The maximum number of revisions to return in a single call to <code>ListAssetRevisions</code>. When the number of revisions to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListAssetRevisions</code> to list the next set of revisions.</p>
     #   @return [Integer]
     class ListAssetRevisionsInput < Struct.new(
       :domain_identifier,
@@ -9288,12 +9184,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListAssetRevisions</code> action.</p>
     #   @return [Array<Types::AssetRevision>]
     # @!attribute next_token
-    #   <p>When the number of revisions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of revisions, the response includes
-    #            a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListAssetRevisions</code> to
-    #            list the next set of revisions.</p>
+    #   <p>When the number of revisions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of revisions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListAssetRevisions</code> to list the next set of revisions.</p>
     #   @return [String]
     class ListAssetRevisionsOutput < Struct.new(
       :items,
@@ -9306,17 +9197,10 @@ module Aws::DataZone
     #   <p>The ID of the domain where you want to list connections.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of connections to return in a single call to ListConnections. When
-    #            the number of connections to be listed is greater than the value of MaxResults, the
-    #            response contains a NextToken value that you can use in a subsequent call to
-    #            ListConnections to list the next set of connections.</p>
+    #   <p>The maximum number of connections to return in a single call to ListConnections. When the number of connections to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListConnections to list the next set of connections.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of connections is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of connections, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListConnections to list the next set of
-    #            connections.</p>
+    #   <p>When the number of connections is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of connections, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListConnections to list the next set of connections.</p>
     #   @return [String]
     # @!attribute sort_by
     #   <p>Specifies how you want to sort the listed connections.</p>
@@ -9354,11 +9238,7 @@ module Aws::DataZone
     #   <p>The results of the ListConnections action.</p>
     #   @return [Array<Types::ConnectionSummary>]
     # @!attribute next_token
-    #   <p>When the number of connections is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of connections, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListConnections to list the next set of
-    #            connections.</p>
+    #   <p>When the number of connections is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of connections, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListConnections to list the next set of connections.</p>
     #   @return [String]
     class ListConnectionsOutput < Struct.new(
       :items,
@@ -9374,21 +9254,10 @@ module Aws::DataZone
     #   <p>The ID of the data product revision.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of asset filters to return in a single call to
-    #               <code>ListDataProductRevisions</code>. When the number of data product revisions to be
-    #            listed is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListDataProductRevisions</code> to list the next set of data product
-    #            revisions.</p>
+    #   <p>The maximum number of asset filters to return in a single call to <code>ListDataProductRevisions</code>. When the number of data product revisions to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataProductRevisions</code> to list the next set of data product revisions.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of data product revisions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of data product revisions, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListDataProductRevisions</code> to list the next set of data product
-    #            revisions.</p>
+    #   <p>When the number of data product revisions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of data product revisions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataProductRevisions</code> to list the next set of data product revisions.</p>
     #   @return [String]
     class ListDataProductRevisionsInput < Struct.new(
       :domain_identifier,
@@ -9403,13 +9272,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListDataProductRevisions</code> action.</p>
     #   @return [Array<Types::DataProductRevision>]
     # @!attribute next_token
-    #   <p>When the number of data product revisions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of data product revisions, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListDataProductRevisions</code> to list the next set of data product
-    #            revisions.</p>
+    #   <p>When the number of data product revisions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of data product revisions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataProductRevisions</code> to list the next set of data product revisions.</p>
     #   @return [String]
     class ListDataProductRevisionsOutput < Struct.new(
       :items,
@@ -9419,8 +9282,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which to list data source run
-    #            activities.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which to list data source run activities.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The identifier of the data source run.</p>
@@ -9429,19 +9291,10 @@ module Aws::DataZone
     #   <p>The status of the data source run.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of activities is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of activities, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
+    #   <p>When the number of activities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of activities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of activities to return in a single call to
-    #               <code>ListDataSourceRunActivities</code>. When the number of activities to be listed is
-    #            greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
+    #   <p>The maximum number of activities to return in a single call to <code>ListDataSourceRunActivities</code>. When the number of activities to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
     #   @return [Integer]
     class ListDataSourceRunActivitiesInput < Struct.new(
       :domain_identifier,
@@ -9457,12 +9310,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListDataSourceRunActivities</code> action.</p>
     #   @return [Array<Types::DataSourceRunActivity>]
     # @!attribute next_token
-    #   <p>When the number of activities is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of activities, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
+    #   <p>When the number of activities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of activities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
     #   @return [String]
     class ListDataSourceRunActivitiesOutput < Struct.new(
       :items,
@@ -9472,8 +9320,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which to invoke the
-    #               <code>ListDataSourceRuns</code> action.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which to invoke the <code>ListDataSourceRuns</code> action.</p>
     #   @return [String]
     # @!attribute data_source_identifier
     #   <p>The identifier of the data source.</p>
@@ -9482,19 +9329,10 @@ module Aws::DataZone
     #   <p>The status of the data source.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of runs is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of runs, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of
-    #            runs.</p>
+    #   <p>When the number of runs is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of runs, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of runs.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of runs to return in a single call to
-    #            <code>ListDataSourceRuns</code>. When the number of runs to be listed is greater than the
-    #            value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that
-    #            you can use in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of
-    #            runs.</p>
+    #   <p>The maximum number of runs to return in a single call to <code>ListDataSourceRuns</code>. When the number of runs to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of runs.</p>
     #   @return [Integer]
     class ListDataSourceRunsInput < Struct.new(
       :domain_identifier,
@@ -9510,12 +9348,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListDataSourceRuns</code> action.</p>
     #   @return [Array<Types::DataSourceRunSummary>]
     # @!attribute next_token
-    #   <p>When the number of runs is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of runs, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of
-    #            runs.</p>
+    #   <p>When the number of runs is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of runs, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of runs.</p>
     #   @return [String]
     class ListDataSourceRunsOutput < Struct.new(
       :items,
@@ -9546,19 +9379,10 @@ module Aws::DataZone
     #   <p>The name of the data source.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of data sources is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of data sources, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListDataSources</code> to
-    #            list the next set of data sources.</p>
+    #   <p>When the number of data sources is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of data sources, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSources</code> to list the next set of data sources.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of data sources to return in a single call to
-    #               <code>ListDataSources</code>. When the number of data sources to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListDataSources</code> to list the
-    #            next set of data sources.</p>
+    #   <p>The maximum number of data sources to return in a single call to <code>ListDataSources</code>. When the number of data sources to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataSources</code> to list the next set of data sources.</p>
     #   @return [Integer]
     class ListDataSourcesInput < Struct.new(
       :domain_identifier,
@@ -9578,12 +9402,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListDataSources</code> action.</p>
     #   @return [Array<Types::DataSourceSummary>]
     # @!attribute next_token
-    #   <p>When the number of data sources is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of data sources, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListDataSources</code> to
-    #            list the next set of data sources.</p>
+    #   <p>When the number of data sources is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of data sources, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSources</code> to list the next set of data sources.</p>
     #   @return [String]
     class ListDataSourcesOutput < Struct.new(
       :items,
@@ -9593,24 +9412,16 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the domain in which you want to list domain units for a parent domain
-    #            unit.</p>
+    #   <p>The ID of the domain in which you want to list domain units for a parent domain unit.</p>
     #   @return [String]
     # @!attribute parent_domain_unit_identifier
     #   <p>The ID of the parent domain unit.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of domain units to return in a single call to
-    #            ListDomainUnitsForParent. When the number of domain units to be listed is greater than the
-    #            value of MaxResults, the response contains a NextToken value that you can use in a
-    #            subsequent call to ListDomainUnitsForParent to list the next set of domain units.</p>
+    #   <p>The maximum number of domain units to return in a single call to ListDomainUnitsForParent. When the number of domain units to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListDomainUnitsForParent to list the next set of domain units.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of domain units is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of domain units, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set
-    #            of domain units.</p>
+    #   <p>When the number of domain units is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of domain units, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set of domain units.</p>
     #   @return [String]
     class ListDomainUnitsForParentInput < Struct.new(
       :domain_identifier,
@@ -9625,11 +9436,7 @@ module Aws::DataZone
     #   <p>The results returned by this action.</p>
     #   @return [Array<Types::DomainUnitSummary>]
     # @!attribute next_token
-    #   <p>When the number of domain units is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of domain units, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set
-    #            of domain units.</p>
+    #   <p>When the number of domain units is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of domain units, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set of domain units.</p>
     #   @return [String]
     class ListDomainUnitsForParentOutput < Struct.new(
       :items,
@@ -9642,19 +9449,10 @@ module Aws::DataZone
     #   <p>The status of the data source.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of domains to return in a single call to <code>ListDomains</code>.
-    #            When the number of domains to be listed is greater than the value of
-    #               <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you
-    #            can use in a subsequent call to <code>ListDomains</code> to list the next set of
-    #            domains.</p>
+    #   <p>The maximum number of domains to return in a single call to <code>ListDomains</code>. When the number of domains to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDomains</code> to list the next set of domains.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of domains is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of domains, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListDomains</code> to list the next set of
-    #            domains.</p>
+    #   <p>When the number of domains is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of domains, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDomains</code> to list the next set of domains.</p>
     #   @return [String]
     class ListDomainsInput < Struct.new(
       :status,
@@ -9668,12 +9466,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListDomains</code> action.</p>
     #   @return [Array<Types::DomainSummary>]
     # @!attribute next_token
-    #   <p>When the number of domains is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of domains, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListDomains</code> to list the next set of
-    #            domains.</p>
+    #   <p>When the number of domains is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of domains, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDomains</code> to list the next set of domains.</p>
     #   @return [String]
     class ListDomainsOutput < Struct.new(
       :items,
@@ -9692,19 +9485,10 @@ module Aws::DataZone
     #   <p>The ID of the entity that you want to list.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of entities to return in a single call to
-    #               <code>ListEntityOwners</code>. When the number of entities to be listed is greater than
-    #            the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value
-    #            that you can use in a subsequent call to <code>ListEntityOwners</code> to list the next set
-    #            of entities.</p>
+    #   <p>The maximum number of entities to return in a single call to <code>ListEntityOwners</code>. When the number of entities to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEntityOwners</code> to list the next set of entities.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of entities is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of entities, the response includes
-    #            a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListEntityOwners</code> to
-    #            list the next set of entities.</p>
+    #   <p>When the number of entities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of entities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEntityOwners</code> to list the next set of entities.</p>
     #   @return [String]
     class ListEntityOwnersInput < Struct.new(
       :domain_identifier,
@@ -9720,12 +9504,7 @@ module Aws::DataZone
     #   <p>The owners of the entity.</p>
     #   @return [Array<Types::OwnerPropertiesOutput>]
     # @!attribute next_token
-    #   <p>When the number of entities is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of entities, the response includes
-    #            a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListEntityOwners</code> to
-    #            list the next set of entities.</p>
+    #   <p>When the number of entities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of entities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEntityOwners</code> to list the next set of entities.</p>
     #   @return [String]
     class ListEntityOwnersOutput < Struct.new(
       :owners,
@@ -9741,19 +9520,10 @@ module Aws::DataZone
     #   <p>The ID of the envrironment whose environment actions are listed.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of environment actions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of environment actions, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentActions</code>
-    #            to list the next set of environment actions.</p>
+    #   <p>When the number of environment actions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environment actions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentActions</code> to list the next set of environment actions.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of environment actions to return in a single call to
-    #               <code>ListEnvironmentActions</code>. When the number of environment actions to be listed
-    #            is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListEnvironmentActions</code> to list the next set of environment actions.</p>
+    #   <p>The maximum number of environment actions to return in a single call to <code>ListEnvironmentActions</code>. When the number of environment actions to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironmentActions</code> to list the next set of environment actions.</p>
     #   @return [Integer]
     class ListEnvironmentActionsInput < Struct.new(
       :domain_identifier,
@@ -9768,12 +9538,7 @@ module Aws::DataZone
     #   <p>The results of <code>ListEnvironmentActions</code>.</p>
     #   @return [Array<Types::EnvironmentActionSummary>]
     # @!attribute next_token
-    #   <p>When the number of environment actions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of environment actions, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentActions</code>
-    #            to list the next set of environment actions.</p>
+    #   <p>When the number of environment actions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environment actions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentActions</code> to list the next set of environment actions.</p>
     #   @return [String]
     class ListEnvironmentActionsOutput < Struct.new(
       :items,
@@ -9786,21 +9551,10 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of blueprint configurations to return in a single call to
-    #               <code>ListEnvironmentBlueprintConfigurations</code>. When the number of configurations
-    #            to be listed is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of
-    #            configurations.</p>
+    #   <p>The maximum number of blueprint configurations to return in a single call to <code>ListEnvironmentBlueprintConfigurations</code>. When the number of configurations to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of configurations.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of blueprint configurations is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of configurations, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of
-    #            configurations.</p>
+    #   <p>When the number of blueprint configurations is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of configurations, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of configurations.</p>
     #   @return [String]
     class ListEnvironmentBlueprintConfigurationsInput < Struct.new(
       :domain_identifier,
@@ -9814,13 +9568,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListEnvironmentBlueprintConfigurations</code> action.</p>
     #   @return [Array<Types::EnvironmentBlueprintConfigurationItem>]
     # @!attribute next_token
-    #   <p>When the number of blueprint configurations is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of configurations, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of
-    #            configurations.</p>
+    #   <p>When the number of blueprint configurations is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of configurations, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of configurations.</p>
     #   @return [String]
     class ListEnvironmentBlueprintConfigurationsOutput < Struct.new(
       :items,
@@ -9833,19 +9581,10 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of blueprints to return in a single call to
-    #               <code>ListEnvironmentBlueprints</code>. When the number of blueprints to be listed is
-    #            greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListEnvironmentBlueprints</code> to list the next set of blueprints.</p>
+    #   <p>The maximum number of blueprints to return in a single call to <code>ListEnvironmentBlueprints</code>. When the number of blueprints to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironmentBlueprints</code> to list the next set of blueprints.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of blueprints in the environment is greater than the default value for
-    #            the <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of blueprints in the environment,
-    #            the response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListEnvironmentBlueprints</code>to list the next set of blueprints.</p>
+    #   <p>When the number of blueprints in the environment is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of blueprints in the environment, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentBlueprints</code>to list the next set of blueprints.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of the Amazon DataZone environment.</p>
@@ -9867,12 +9606,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListEnvironmentBlueprints</code> action.</p>
     #   @return [Array<Types::EnvironmentBlueprintSummary>]
     # @!attribute next_token
-    #   <p>When the number of blueprints in the environment is greater than the default value for
-    #            the <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of blueprints in the environment,
-    #            the response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListEnvironmentBlueprints</code>to list the next set of blueprints.</p>
+    #   <p>When the number of blueprints in the environment is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of blueprints in the environment, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentBlueprints</code>to list the next set of blueprints.</p>
     #   @return [String]
     class ListEnvironmentBlueprintsOutput < Struct.new(
       :items,
@@ -9885,15 +9619,13 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The identifier of the Amazon Web Services account where you want to list environment
-    #            profiles.</p>
+    #   <p>The identifier of the Amazon Web Services account where you want to list environment profiles.</p>
     #   @return [String]
     # @!attribute aws_account_region
     #   <p>The Amazon Web Services region where you want to list environment profiles.</p>
     #   @return [String]
     # @!attribute environment_blueprint_identifier
-    #   <p>The identifier of the blueprint that was used to create the environment profiles that
-    #            you want to list.</p>
+    #   <p>The identifier of the blueprint that was used to create the environment profiles that you want to list.</p>
     #   @return [String]
     # @!attribute project_identifier
     #   <p>The identifier of the Amazon DataZone project.</p>
@@ -9902,21 +9634,10 @@ module Aws::DataZone
     #   <p/>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of environment profiles is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of environment profiles, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListEnvironmentProfiles</code> to list the next set of environment
-    #            profiles.</p>
+    #   <p>When the number of environment profiles is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environment profiles, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentProfiles</code> to list the next set of environment profiles.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of environment profiles to return in a single call to
-    #               <code>ListEnvironmentProfiles</code>. When the number of environment profiles to be
-    #            listed is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListEnvironmentProfiles</code> to list the next set of environment
-    #            profiles.</p>
+    #   <p>The maximum number of environment profiles to return in a single call to <code>ListEnvironmentProfiles</code>. When the number of environment profiles to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironmentProfiles</code> to list the next set of environment profiles.</p>
     #   @return [Integer]
     class ListEnvironmentProfilesInput < Struct.new(
       :domain_identifier,
@@ -9935,13 +9656,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListEnvironmentProfiles</code> action. </p>
     #   @return [Array<Types::EnvironmentProfileSummary>]
     # @!attribute next_token
-    #   <p>When the number of environment profiles is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of environment profiles, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListEnvironmentProfiles</code> to list the next set of environment
-    #            profiles.</p>
+    #   <p>When the number of environment profiles is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environment profiles, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentProfiles</code> to list the next set of environment profiles.</p>
     #   @return [String]
     class ListEnvironmentProfilesOutput < Struct.new(
       :items,
@@ -9954,8 +9669,7 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The identifier of the Amazon Web Services account where you want to list
-    #            environments.</p>
+    #   <p>The identifier of the Amazon Web Services account where you want to list environments.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the environments that you want to list.</p>
@@ -9979,19 +9693,10 @@ module Aws::DataZone
     #   <p>The name of the environment.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of environments to return in a single call to
-    #               <code>ListEnvironments</code>. When the number of environments to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListEnvironments</code> to list the
-    #            next set of environments.</p>
+    #   <p>The maximum number of environments to return in a single call to <code>ListEnvironments</code>. When the number of environments to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironments</code> to list the next set of environments.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of environments is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of environments, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListEnvironments</code> to
-    #            list the next set of environments.</p>
+    #   <p>When the number of environments is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environments, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironments</code> to list the next set of environments.</p>
     #   @return [String]
     class ListEnvironmentsInput < Struct.new(
       :domain_identifier,
@@ -10013,12 +9718,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListEnvironments</code> action.</p>
     #   @return [Array<Types::EnvironmentSummary>]
     # @!attribute next_token
-    #   <p>When the number of environments is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of environments, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListEnvironments</code> to
-    #            list the next set of environments.</p>
+    #   <p>When the number of environments is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environments, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironments</code> to list the next set of environments.</p>
     #   @return [String]
     class ListEnvironmentsOutput < Struct.new(
       :items,
@@ -10040,17 +9740,10 @@ module Aws::DataZone
     #   <p>Specifies the order in which job runs are to be sorted.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of job runs is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of job runs, the response includes a pagination token named NextToken. You can specify this
-    #            NextToken value in a subsequent call to ListJobRuns to list the next set of job
-    #            runs.</p>
+    #   <p>When the number of job runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of job runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListJobRuns to list the next set of job runs.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of job runs to return in a single call to ListJobRuns. When the
-    #            number of job runs to be listed is greater than the value of MaxResults, the response
-    #            contains a NextToken value that you can use in a subsequent call to ListJobRuns to list the
-    #            next set of job runs.</p>
+    #   <p>The maximum number of job runs to return in a single call to ListJobRuns. When the number of job runs to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListJobRuns to list the next set of job runs.</p>
     #   @return [Integer]
     class ListJobRunsInput < Struct.new(
       :domain_identifier,
@@ -10067,11 +9760,7 @@ module Aws::DataZone
     #   <p>The results of the ListJobRuns action.</p>
     #   @return [Array<Types::JobRunSummary>]
     # @!attribute next_token
-    #   <p>When the number of job runs is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of job runs, the response includes a pagination token named NextToken. You can specify this
-    #            NextToken value in a subsequent call to ListJobRuns to list the next set of job
-    #            runs.</p>
+    #   <p>When the number of job runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of job runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListJobRuns to list the next set of job runs.</p>
     #   @return [String]
     class ListJobRunsOutput < Struct.new(
       :items,
@@ -10084,10 +9773,7 @@ module Aws::DataZone
     #   <p>The ID of the domain where you want to list lineage events.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of lineage events to return in a single call to ListLineageEvents.
-    #            When the number of lineage events to be listed is greater than the value of MaxResults, the
-    #            response contains a NextToken value that you can use in a subsequent call to
-    #            ListLineageEvents to list the next set of lineage events.</p>
+    #   <p>The maximum number of lineage events to return in a single call to ListLineageEvents. When the number of lineage events to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListLineageEvents to list the next set of lineage events.</p>
     #   @return [Integer]
     # @!attribute timestamp_after
     #   <p>The after timestamp of a lineage event.</p>
@@ -10102,11 +9788,7 @@ module Aws::DataZone
     #   <p>The sort order of the lineage events.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of lineage events is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of lineage events, the response includes a pagination token named NextToken. You can
-    #            specify this NextToken value in a subsequent call to ListLineageEvents to list the next set
-    #            of lineage events.</p>
+    #   <p>When the number of lineage events is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of lineage events, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListLineageEvents to list the next set of lineage events.</p>
     #   @return [String]
     class ListLineageEventsInput < Struct.new(
       :domain_identifier,
@@ -10124,11 +9806,7 @@ module Aws::DataZone
     #   <p>The results of the ListLineageEvents action.</p>
     #   @return [Array<Types::LineageEventSummary>]
     # @!attribute next_token
-    #   <p>When the number of lineage events is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of lineage events, the response includes a pagination token named NextToken. You can
-    #            specify this NextToken value in a subsequent call to ListLineageEvents to list the next set
-    #            of lineage events.</p>
+    #   <p>When the number of lineage events is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of lineage events, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListLineageEvents to list the next set of lineage events.</p>
     #   @return [String]
     class ListLineageEventsOutput < Struct.new(
       :items,
@@ -10138,38 +9816,25 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the domain where you want to list the history of the specified data lineage
-    #            node.</p>
+    #   <p>The ID of the domain where you want to list the history of the specified data lineage node.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of history items to return in a single call to
-    #            ListLineageNodeHistory. When the number of memberships to be listed is greater than the
-    #            value of MaxResults, the response contains a NextToken value that you can use in a
-    #            subsequent call to ListLineageNodeHistory to list the next set of items.</p>
+    #   <p>The maximum number of history items to return in a single call to ListLineageNodeHistory. When the number of memberships to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListLineageNodeHistory to list the next set of items.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of history items is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of items, the response includes a pagination token named NextToken. You can specify this
-    #            NextToken value in a subsequent call to ListLineageNodeHistory to list the next set of
-    #            items.</p>
+    #   <p>When the number of history items is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of items, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListLineageNodeHistory to list the next set of items.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The ID of the data lineage node whose history you want to list.</p>
     #   @return [String]
     # @!attribute direction
-    #   <p>The direction of the data lineage node refers to the lineage node having neighbors in
-    #            that direction. For example, if direction is <code>UPSTREAM</code>, the
-    #               <code>ListLineageNodeHistory</code> API responds with historical versions with upstream
-    #            neighbors only.</p>
+    #   <p>The direction of the data lineage node refers to the lineage node having neighbors in that direction. For example, if direction is <code>UPSTREAM</code>, the <code>ListLineageNodeHistory</code> API responds with historical versions with upstream neighbors only.</p>
     #   @return [String]
     # @!attribute event_timestamp_gte
-    #   <p>Specifies whether the action is to return data lineage node history from the time after
-    #            the event timestamp.</p>
+    #   <p>Specifies whether the action is to return data lineage node history from the time after the event timestamp.</p>
     #   @return [Time]
     # @!attribute event_timestamp_lte
-    #   <p>Specifies whether the action is to return data lineage node history from the time prior
-    #            of the event timestamp.</p>
+    #   <p>Specifies whether the action is to return data lineage node history from the time prior of the event timestamp.</p>
     #   @return [Time]
     # @!attribute sort_order
     #   <p>The order by which you want data lineage node history to be sorted.</p>
@@ -10191,11 +9856,7 @@ module Aws::DataZone
     #   <p>The nodes returned by the ListLineageNodeHistory action.</p>
     #   @return [Array<Types::LineageNodeSummary>]
     # @!attribute next_token
-    #   <p>When the number of history items is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of items, the response includes a pagination token named NextToken. You can specify this
-    #            NextToken value in a subsequent call to ListLineageNodeHistory to list the next set of
-    #            items.</p>
+    #   <p>When the number of history items is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of items, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListLineageNodeHistory to list the next set of items.</p>
     #   @return [String]
     class ListLineageNodeHistoryOutput < Struct.new(
       :nodes,
@@ -10205,8 +9866,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the Amazon DataZone domain where you want to list metadata generation
-    #            runs.</p>
+    #   <p>The ID of the Amazon DataZone domain where you want to list metadata generation runs.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the metadata generation runs.</p>
@@ -10215,18 +9875,10 @@ module Aws::DataZone
     #   <p>The type of the metadata generation runs.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of metadata generation runs is greater than the default value for the
-    #            MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than
-    #            the number of metadata generation runs, the response includes a pagination token named
-    #            NextToken. You can specify this NextToken value in a subsequent call to
-    #            ListMetadataGenerationRuns to list the next set of revisions.</p>
+    #   <p>When the number of metadata generation runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of metadata generation runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of metadata generation runs to return in a single call to
-    #            ListMetadataGenerationRuns. When the number of metadata generation runs to be listed is
-    #            greater than the value of MaxResults, the response contains a NextToken value that you can
-    #            use in a subsequent call to ListMetadataGenerationRuns to list the next set of
-    #            revisions.</p>
+    #   <p>The maximum number of metadata generation runs to return in a single call to ListMetadataGenerationRuns. When the number of metadata generation runs to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
     #   @return [Integer]
     class ListMetadataGenerationRunsInput < Struct.new(
       :domain_identifier,
@@ -10242,11 +9894,7 @@ module Aws::DataZone
     #   <p>The results of the ListMetadataGenerationRuns action.</p>
     #   @return [Array<Types::MetadataGenerationRunItem>]
     # @!attribute next_token
-    #   <p>When the number of metadata generation runs is greater than the default value for the
-    #            MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than
-    #            the number of metadata generation runs, the response includes a pagination token named
-    #            NextToken. You can specify this NextToken value in a subsequent call to
-    #            ListMetadataGenerationRuns to list the next set of revisions.</p>
+    #   <p>When the number of metadata generation runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of metadata generation runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
     #   @return [String]
     class ListMetadataGenerationRunsOutput < Struct.new(
       :items,
@@ -10274,19 +9922,10 @@ module Aws::DataZone
     #   <p>The task status of notifications.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of notifications to return in a single call to
-    #               <code>ListNotifications</code>. When the number of notifications to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListNotifications</code> to list the
-    #            next set of notifications.</p>
+    #   <p>The maximum number of notifications to return in a single call to <code>ListNotifications</code>. When the number of notifications to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListNotifications</code> to list the next set of notifications.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of notifications is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of notifications, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListNotifications</code> to
-    #            list the next set of notifications.</p>
+    #   <p>When the number of notifications is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notifications, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotifications</code> to list the next set of notifications.</p>
     #   @return [String]
     class ListNotificationsInput < Struct.new(
       :domain_identifier,
@@ -10305,12 +9944,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListNotifications</code> action.</p>
     #   @return [Array<Types::NotificationOutput>]
     # @!attribute next_token
-    #   <p>When the number of notifications is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of notifications, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListNotifications</code> to
-    #            list the next set of notifications.</p>
+    #   <p>When the number of notifications is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notifications, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotifications</code> to list the next set of notifications.</p>
     #   @return [String]
     class ListNotificationsOutput < Struct.new(
       :notifications,
@@ -10332,19 +9966,10 @@ module Aws::DataZone
     #   <p>The type of policy that you want to list.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of grants to return in a single call to
-    #            <code>ListPolicyGrants</code>. When the number of grants to be listed is greater than the
-    #            value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that
-    #            you can use in a subsequent call to <code>ListPolicyGrants</code> to list the next set of
-    #            grants.</p>
+    #   <p>The maximum number of grants to return in a single call to <code>ListPolicyGrants</code>. When the number of grants to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListPolicyGrants</code> to list the next set of grants.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of grants is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of grants, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListPolicyGrants</code> to list the next set of
-    #            grants.</p>
+    #   <p>When the number of grants is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of grants, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListPolicyGrants</code> to list the next set of grants.</p>
     #   @return [String]
     class ListPolicyGrantsInput < Struct.new(
       :domain_identifier,
@@ -10361,12 +9986,7 @@ module Aws::DataZone
     #   <p>The results of this action - the listed grants.</p>
     #   @return [Array<Types::PolicyGrantMember>]
     # @!attribute next_token
-    #   <p>When the number of grants is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of grants, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListPolicyGrants</code> to list the next set of
-    #            grants.</p>
+    #   <p>When the number of grants is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of grants, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListPolicyGrants</code> to list the next set of grants.</p>
     #   @return [String]
     class ListPolicyGrantsOutput < Struct.new(
       :grant_list,
@@ -10376,8 +9996,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which you want to list project
-    #            memberships.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which you want to list project memberships.</p>
     #   @return [String]
     # @!attribute project_identifier
     #   <p>The identifier of the project whose memberships you want to list.</p>
@@ -10389,19 +10008,10 @@ module Aws::DataZone
     #   <p>The sort order of the project memberships.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of memberships is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of memberships, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListProjectMemberships</code>
-    #            to list the next set of memberships.</p>
+    #   <p>When the number of memberships is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of memberships, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListProjectMemberships</code> to list the next set of memberships.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of memberships to return in a single call to
-    #               <code>ListProjectMemberships</code>. When the number of memberships to be listed is
-    #            greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListProjectMemberships</code> to list the next set of memberships.</p>
+    #   <p>The maximum number of memberships to return in a single call to <code>ListProjectMemberships</code>. When the number of memberships to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListProjectMemberships</code> to list the next set of memberships.</p>
     #   @return [Integer]
     class ListProjectMembershipsInput < Struct.new(
       :domain_identifier,
@@ -10418,12 +10028,7 @@ module Aws::DataZone
     #   <p>The members of the project.</p>
     #   @return [Array<Types::ProjectMember>]
     # @!attribute next_token
-    #   <p>When the number of memberships is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of memberships, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListProjectMemberships</code>
-    #            to list the next set of memberships.</p>
+    #   <p>When the number of memberships is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of memberships, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListProjectMemberships</code> to list the next set of memberships.</p>
     #   @return [String]
     class ListProjectMembershipsOutput < Struct.new(
       :members,
@@ -10445,17 +10050,10 @@ module Aws::DataZone
     #   <p>Specifies the sort order of the project profiles.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of project profiles is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of project profiles, the response includes a pagination token named NextToken. You can
-    #            specify this NextToken value in a subsequent call to ListProjectProfiles to list the next
-    #            set of project profiles.</p>
+    #   <p>When the number of project profiles is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of project profiles, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListProjectProfiles to list the next set of project profiles.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of project profiles to return in a single call to
-    #            ListProjectProfiles. When the number of project profiles to be listed is greater than the
-    #            value of MaxResults, the response contains a NextToken value that you can use in a
-    #            subsequent call to ListProjectProfiles to list the next set of project profiles.</p>
+    #   <p>The maximum number of project profiles to return in a single call to ListProjectProfiles. When the number of project profiles to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListProjectProfiles to list the next set of project profiles.</p>
     #   @return [Integer]
     class ListProjectProfilesInput < Struct.new(
       :domain_identifier,
@@ -10472,11 +10070,7 @@ module Aws::DataZone
     #   <p>The results of the ListProjectProfiles action.</p>
     #   @return [Array<Types::ProjectProfileSummary>]
     # @!attribute next_token
-    #   <p>When the number of project profiles is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of project profiles, the response includes a pagination token named NextToken. You can
-    #            specify this NextToken value in a subsequent call to ListProjectProfiles to list the next
-    #            set of project profiles.</p>
+    #   <p>When the number of project profiles is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of project profiles, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListProjectProfiles to list the next set of project profiles.</p>
     #   @return [String]
     class ListProjectProfilesOutput < Struct.new(
       :items,
@@ -10498,19 +10092,10 @@ module Aws::DataZone
     #   <p>The name of the project.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>When the number of projects is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of projects, the response includes
-    #            a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListProjects</code> to list
-    #            the next set of projects.</p>
+    #   <p>When the number of projects is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of projects, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListProjects</code> to list the next set of projects.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of projects to return in a single call to <code>ListProjects</code>.
-    #            When the number of projects to be listed is greater than the value of
-    #               <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you
-    #            can use in a subsequent call to <code>ListProjects</code> to list the next set of
-    #            projects.</p>
+    #   <p>The maximum number of projects to return in a single call to <code>ListProjects</code>. When the number of projects to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListProjects</code> to list the next set of projects.</p>
     #   @return [Integer]
     class ListProjectsInput < Struct.new(
       :domain_identifier,
@@ -10527,12 +10112,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListProjects</code> action.</p>
     #   @return [Array<Types::ProjectSummary>]
     # @!attribute next_token
-    #   <p>When the number of projects is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of projects, the response includes
-    #            a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListProjects</code> to list
-    #            the next set of projects.</p>
+    #   <p>When the number of projects is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of projects, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListProjects</code> to list the next set of projects.</p>
     #   @return [String]
     class ListProjectsOutput < Struct.new(
       :items,
@@ -10569,17 +10149,10 @@ module Aws::DataZone
     #   <p>Specifies whether to include cascading rules in the results.</p>
     #   @return [Boolean]
     # @!attribute max_results
-    #   <p>The maximum number of rules to return in a single call to <code>ListRules</code>. When
-    #            the number of rules to be listed is greater than the value of <code>MaxResults</code>, the
-    #            response contains a <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListRules</code> to list the next set of rules.</p>
+    #   <p>The maximum number of rules to return in a single call to <code>ListRules</code>. When the number of rules to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of rules is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of rules, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>
+    #   <p>When the number of rules is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of rules, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>
     #   @return [String]
     class ListRulesInput < Struct.new(
       :domain_identifier,
@@ -10601,11 +10174,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListRules</code> action.</p>
     #   @return [Array<Types::RuleSummary>]
     # @!attribute next_token
-    #   <p>When the number of rules is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of rules, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>
+    #   <p>When the number of rules is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of rules, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>
     #   @return [String]
     class ListRulesOutput < Struct.new(
       :items,
@@ -10639,19 +10208,10 @@ module Aws::DataZone
     #   <p>Specifies the sort order of this action.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of subscription grants to return in a single call to
-    #               <code>ListSubscriptionGrants</code>. When the number of subscription grants to be listed
-    #            is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListSubscriptionGrants</code> to list the next set of subscription grants.</p>
+    #   <p>The maximum number of subscription grants to return in a single call to <code>ListSubscriptionGrants</code>. When the number of subscription grants to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListSubscriptionGrants</code> to list the next set of subscription grants.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of subscription grants is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscription grants, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionGrants</code>
-    #            to list the next set of subscription grants.</p>
+    #   <p>When the number of subscription grants is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription grants, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionGrants</code> to list the next set of subscription grants.</p>
     #   @return [String]
     class ListSubscriptionGrantsInput < Struct.new(
       :domain_identifier,
@@ -10672,12 +10232,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListSubscriptionGrants</code> action. </p>
     #   @return [Array<Types::SubscriptionGrantSummary>]
     # @!attribute next_token
-    #   <p>When the number of subscription grants is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscription grants, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionGrants</code>
-    #            to list the next set of subscription grants.</p>
+    #   <p>When the number of subscription grants is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription grants, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionGrants</code> to list the next set of subscription grants.</p>
     #   @return [String]
     class ListSubscriptionGrantsOutput < Struct.new(
       :items,
@@ -10690,11 +10245,7 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>Specifies the status of the subscription requests.</p>
-    #            <note>
-    #               <p>This is not a required parameter, but if not specified, by default, Amazon DataZone
-    #               returns only <code>PENDING</code> subscription requests. </p>
-    #            </note>
+    #   <p>Specifies the status of the subscription requests.</p> <note> <p>This is not a required parameter, but if not specified, by default, Amazon DataZone returns only <code>PENDING</code> subscription requests. </p> </note>
     #   @return [String]
     # @!attribute subscribed_listing_id
     #   <p>The identifier of the subscribed listing.</p>
@@ -10712,21 +10263,10 @@ module Aws::DataZone
     #   <p>Specifies the sort order for the results of this action.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of subscription requests to return in a single call to
-    #               <code>ListSubscriptionRequests</code>. When the number of subscription requests to be
-    #            listed is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListSubscriptionRequests</code> to list the next set of subscription
-    #            requests.</p>
+    #   <p>The maximum number of subscription requests to return in a single call to <code>ListSubscriptionRequests</code>. When the number of subscription requests to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListSubscriptionRequests</code> to list the next set of subscription requests.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of subscription requests is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscription requests, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListSubscriptionRequests</code> to list the next set of subscription
-    #            requests.</p>
+    #   <p>When the number of subscription requests is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription requests, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionRequests</code> to list the next set of subscription requests.</p>
     #   @return [String]
     class ListSubscriptionRequestsInput < Struct.new(
       :domain_identifier,
@@ -10746,13 +10286,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListSubscriptionRequests</code> action. </p>
     #   @return [Array<Types::SubscriptionRequestSummary>]
     # @!attribute next_token
-    #   <p>When the number of subscription requests is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscription requests, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListSubscriptionRequests</code> to list the next set of subscription
-    #            requests.</p>
+    #   <p>When the number of subscription requests is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription requests, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionRequests</code> to list the next set of subscription requests.</p>
     #   @return [String]
     class ListSubscriptionRequestsOutput < Struct.new(
       :items,
@@ -10762,8 +10296,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain where you want to list subscription
-    #            targets.</p>
+    #   <p>The identifier of the Amazon DataZone domain where you want to list subscription targets.</p>
     #   @return [String]
     # @!attribute environment_identifier
     #   <p>The identifier of the environment where you want to list subscription targets.</p>
@@ -10775,21 +10308,10 @@ module Aws::DataZone
     #   <p>Specifies the sort order for the results of this action.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of subscription targets to return in a single call to
-    #               <code>ListSubscriptionTargets</code>. When the number of subscription targets to be
-    #            listed is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListSubscriptionTargets</code> to list the next set of subscription targets.
-    #         </p>
+    #   <p>The maximum number of subscription targets to return in a single call to <code>ListSubscriptionTargets</code>. When the number of subscription targets to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListSubscriptionTargets</code> to list the next set of subscription targets. </p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of subscription targets is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscription targets, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListSubscriptionTargets</code> to list the next set of subscription
-    #            targets.</p>
+    #   <p>When the number of subscription targets is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription targets, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionTargets</code> to list the next set of subscription targets.</p>
     #   @return [String]
     class ListSubscriptionTargetsInput < Struct.new(
       :domain_identifier,
@@ -10806,13 +10328,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListSubscriptionTargets</code> action.</p>
     #   @return [Array<Types::SubscriptionTargetSummary>]
     # @!attribute next_token
-    #   <p>When the number of subscription targets is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscription targets, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListSubscriptionTargets</code> to list the next set of subscription
-    #            targets.</p>
+    #   <p>When the number of subscription targets is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription targets, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionTargets</code> to list the next set of subscription targets.</p>
     #   @return [String]
     class ListSubscriptionTargetsOutput < Struct.new(
       :items,
@@ -10825,19 +10341,13 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute subscription_request_identifier
-    #   <p>The identifier of the subscription request for the subscriptions that you want to
-    #            list.</p>
+    #   <p>The identifier of the subscription request for the subscriptions that you want to list.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of the subscriptions that you want to list.</p>
-    #            <note>
-    #               <p>This is not a required parameter, but if not provided, by default, Amazon DataZone
-    #               returns only <code>APPROVED</code> subscriptions. </p>
-    #            </note>
+    #   <p>The status of the subscriptions that you want to list.</p> <note> <p>This is not a required parameter, but if not provided, by default, Amazon DataZone returns only <code>APPROVED</code> subscriptions. </p> </note>
     #   @return [String]
     # @!attribute subscribed_listing_id
-    #   <p>The identifier of the subscribed listing for the subscriptions that you want to
-    #            list.</p>
+    #   <p>The identifier of the subscribed listing for the subscriptions that you want to list.</p>
     #   @return [String]
     # @!attribute owning_project_id
     #   <p>The identifier of the owning project.</p>
@@ -10852,19 +10362,10 @@ module Aws::DataZone
     #   <p>Specifies the sort order for the results of this action.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of subscriptions to return in a single call to
-    #               <code>ListSubscriptions</code>. When the number of subscriptions to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListSubscriptions</code> to list the
-    #            next set of Subscriptions. </p>
+    #   <p>The maximum number of subscriptions to return in a single call to <code>ListSubscriptions</code>. When the number of subscriptions to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListSubscriptions</code> to list the next set of Subscriptions. </p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of subscriptions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscriptions, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListSubscriptions</code> to
-    #            list the next set of subscriptions.</p>
+    #   <p>When the number of subscriptions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscriptions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptions</code> to list the next set of subscriptions.</p>
     #   @return [String]
     class ListSubscriptionsInput < Struct.new(
       :domain_identifier,
@@ -10885,12 +10386,7 @@ module Aws::DataZone
     #   <p>The results of the <code>ListSubscriptions</code> action.</p>
     #   @return [Array<Types::SubscriptionSummary>]
     # @!attribute next_token
-    #   <p>When the number of subscriptions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscriptions, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListSubscriptions</code> to
-    #            list the next set of subscriptions.</p>
+    #   <p>When the number of subscriptions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscriptions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptions</code> to list the next set of subscriptions.</p>
     #   @return [String]
     class ListSubscriptionsOutput < Struct.new(
       :items,
@@ -10918,8 +10414,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the Amazon DataZone domain that houses the assets for which you want to list
-    #            time series data points.</p>
+    #   <p>The ID of the Amazon DataZone domain that houses the assets for which you want to list time series data points.</p>
     #   @return [String]
     # @!attribute entity_identifier
     #   <p>The ID of the asset for which you want to list data points.</p>
@@ -10937,17 +10432,10 @@ module Aws::DataZone
     #   <p>The timestamp at which the data points that you wanted to list ended.</p>
     #   @return [Time]
     # @!attribute next_token
-    #   <p>When the number of data points is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of data points, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set
-    #            of data points.</p>
+    #   <p>When the number of data points is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of data points, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set of data points.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of data points to return in a single call to
-    #            ListTimeSeriesDataPoints. When the number of data points to be listed is greater than the
-    #            value of MaxResults, the response contains a NextToken value that you can use in a
-    #            subsequent call to ListTimeSeriesDataPoints to list the next set of data points.</p>
+    #   <p>The maximum number of data points to return in a single call to ListTimeSeriesDataPoints. When the number of data points to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListTimeSeriesDataPoints to list the next set of data points.</p>
     #   @return [Integer]
     class ListTimeSeriesDataPointsInput < Struct.new(
       :domain_identifier,
@@ -10966,11 +10454,7 @@ module Aws::DataZone
     #   <p>The results of the ListTimeSeriesDataPoints action. </p>
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     # @!attribute next_token
-    #   <p>When the number of data points is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of data points, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set
-    #            of data points.</p>
+    #   <p>When the number of data points is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of data points, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set of data points.</p>
     #   @return [String]
     class ListTimeSeriesDataPointsOutput < Struct.new(
       :items,
@@ -11014,12 +10498,10 @@ module Aws::DataZone
 
     # <p>A revision to be made to an asset published in a Amazon DataZone catalog.</p>
     # @!attribute identifier
-    #   <p>An identifier of revision to be made to an asset published in a Amazon DataZone
-    #            catalog.</p>
+    #   <p>An identifier of revision to be made to an asset published in a Amazon DataZone catalog.</p>
     #   @return [String]
     # @!attribute revision
-    #   <p>The details of a revision to be made to an asset published in a Amazon DataZone
-    #            catalog.</p>
+    #   <p>The details of a revision to be made to an asset published in a Amazon DataZone catalog.</p>
     #   @return [String]
     class ListingRevisionInput < Struct.new(
       :identifier,
@@ -11174,8 +10656,7 @@ module Aws::DataZone
 
     # <p>The metadata generation run.</p>
     # @!attribute domain_id
-    #   <p>The ID of the Amazon DataZone domain in which the metadata generation run was
-    #            created.</p>
+    #   <p>The ID of the Amazon DataZone domain in which the metadata generation run was created.</p>
     #   @return [String]
     # @!attribute id
     #   <p>The ID of the metadata generation run.</p>
@@ -11196,8 +10677,7 @@ module Aws::DataZone
     #   <p>The user who created the metadata generation run.</p>
     #   @return [String]
     # @!attribute owning_project_id
-    #   <p>The ID of the project that owns the asset for which the metadata generation was
-    #            ran.</p>
+    #   <p>The ID of the project that owns the asset for which the metadata generation was ran.</p>
     #   @return [String]
     class MetadataGenerationRunItem < Struct.new(
       :domain_id,
@@ -11374,8 +10854,7 @@ module Aws::DataZone
     #   <p>The user managed client application client ID in the OAuth2Client application.</p>
     #   @return [String]
     # @!attribute a_ws_managed_client_application_reference
-    #   <p>The Amazon Web Services managed client application reference in the OAuth2Client
-    #            application.</p>
+    #   <p>The Amazon Web Services managed client application reference in the OAuth2Client application.</p>
     #   @return [String]
     class OAuth2ClientApplication < Struct.new(
       :user_managed_client_application_client_id,
@@ -11635,8 +11114,7 @@ module Aws::DataZone
     #   <p>Specifies whether to create a project from project profile.</p>
     #   @return [Types::CreateProjectFromProjectProfilePolicyGrantDetail]
     # @!attribute use_asset_type
-    #   <p> Specifies the domain unit(s) whose projects can use this asset type while creating
-    #            asset or asset revisions.</p>
+    #   <p> Specifies the domain unit(s) whose projects can use this asset type while creating asset or asset revisions.</p>
     #   @return [Types::UseAssetTypePolicyGrantDetail]
     class PolicyGrantDetail < Struct.new(
       :create_domain_unit,
@@ -11687,11 +11165,15 @@ module Aws::DataZone
     # @!attribute created_by
     #   <p>Specifies the user who created the policy grant member.</p>
     #   @return [String]
+    # @!attribute grant_id
+    #   <p>The ID of the policy grant.</p>
+    #   @return [String]
     class PolicyGrantMember < Struct.new(
       :principal,
       :detail,
       :created_at,
       :created_by,
+      :grant_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -11729,12 +11211,10 @@ module Aws::DataZone
     #   <p>The ID of the domain where you want to post a data lineage event.</p>
     #   @return [String]
     # @!attribute event
-    #   <p>The data lineage event that you want to post. Only open-lineage run event are supported
-    #            as events. </p>
+    #   <p>The data lineage event that you want to post. Only open-lineage run event are supported as events. </p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class PostLineageEventInput < Struct.new(
       :domain_identifier,
@@ -11758,8 +11238,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the Amazon DataZone domain in which you want to post time series data
-    #            points.</p>
+    #   <p>The ID of the Amazon DataZone domain in which you want to post time series data points.</p>
     #   @return [String]
     # @!attribute entity_identifier
     #   <p>The ID of the asset for which you want to post time series data points.</p>
@@ -11771,8 +11250,7 @@ module Aws::DataZone
     #   <p>The forms that contain the data points that you want to post.</p>
     #   @return [Array<Types::TimeSeriesDataPointFormInput>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class PostTimeSeriesDataPointsInput < Struct.new(
       :domain_identifier,
@@ -11785,8 +11263,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_id
-    #   <p>The ID of the Amazon DataZone domain in which you want to post time series data
-    #            points.</p>
+    #   <p>The ID of the Amazon DataZone domain in which you want to post time series data points.</p>
     #   @return [String]
     # @!attribute entity_id
     #   <p>The ID of the asset for which you want to post time series data points.</p>
@@ -11816,8 +11293,7 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies the error message that is returned if the operation cannot be successfully
-    #          completed.</p>
+    # <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     # @!attribute code
     #   <p>The code of the project deletion error.</p>
     #   @return [String]
@@ -11936,8 +11412,7 @@ module Aws::DataZone
     #   <p>The status of the project.</p>
     #   @return [String]
     # @!attribute failure_reasons
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Array<Types::ProjectDeletionError>]
     # @!attribute created_by
     #   <p>The Amazon DataZone user who created the project.</p>
@@ -11996,8 +11471,7 @@ module Aws::DataZone
 
     # <p>The provisioning properties of an environment blueprint.</p>
     # @!attribute cloud_formation
-    #   <p>The cloud formation properties included as part of the provisioning properties of an
-    #            environment blueprint.</p>
+    #   <p>The cloud formation properties included as part of the provisioning properties of an environment blueprint.</p>
     #   @return [Types::CloudFormationProperties]
     class ProvisioningProperties < Struct.new(
       :cloud_formation,
@@ -12091,11 +11565,9 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The recommendation to be updated as part of the <code>UpdateDataSource</code>
-    #          action.</p>
+    # <p>The recommendation to be updated as part of the <code>UpdateDataSource</code> action.</p>
     # @!attribute enable_business_name_generation
-    #   <p>Specifies whether automatic business name generation is to be enabled or not as part of
-    #            the recommendation configuration.</p>
+    #   <p>Specifies whether automatic business name generation is to be enabled or not as part of the recommendation configuration.</p>
     #   @return [Boolean]
     class RecommendationConfiguration < Struct.new(
       :enable_business_name_generation,
@@ -12279,19 +11751,16 @@ module Aws::DataZone
 
     # <p>The configuration details of the Amazon Redshift data source.</p>
     # @!attribute data_access_role
-    #   <p>The data access role included in the configuration details of the Amazon Redshift data
-    #            source.</p>
+    #   <p>The data access role included in the configuration details of the Amazon Redshift data source.</p>
     #   @return [String]
     # @!attribute relational_filter_configurations
-    #   <p>The relational filger configurations included in the configuration details of the Amazon
-    #            Redshift data source.</p>
+    #   <p>The relational filger configurations included in the configuration details of the Amazon Redshift data source.</p>
     #   @return [Array<Types::RelationalFilterConfiguration>]
     # @!attribute redshift_credential_configuration
     #   <p>The details of the credentials required to access an Amazon Redshift cluster.</p>
     #   @return [Types::RedshiftCredentialConfiguration]
     # @!attribute redshift_storage
-    #   <p>The details of the Amazon Redshift storage as part of the configuration of an Amazon
-    #            Redshift data source run.</p>
+    #   <p>The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.</p>
     #   @return [Types::RedshiftStorage]
     class RedshiftRunConfigurationInput < Struct.new(
       :data_access_role,
@@ -12304,27 +11773,22 @@ module Aws::DataZone
 
     # <p>The configuration details of the Amazon Redshift data source.</p>
     # @!attribute account_id
-    #   <p>The ID of the Amazon Web Services account included in the configuration details of the Amazon Redshift
-    #            data source.</p>
+    #   <p>The ID of the Amazon Web Services account included in the configuration details of the Amazon Redshift data source.</p>
     #   @return [String]
     # @!attribute region
-    #   <p>The Amazon Web Services region included in the configuration details of the Amazon Redshift data
-    #            source.</p>
+    #   <p>The Amazon Web Services region included in the configuration details of the Amazon Redshift data source.</p>
     #   @return [String]
     # @!attribute data_access_role
-    #   <p>The data access role included in the configuration details of the Amazon Redshift data
-    #            source.</p>
+    #   <p>The data access role included in the configuration details of the Amazon Redshift data source.</p>
     #   @return [String]
     # @!attribute relational_filter_configurations
-    #   <p>The relational filger configurations included in the configuration details of the Amazon
-    #            Redshift data source.</p>
+    #   <p>The relational filger configurations included in the configuration details of the Amazon Redshift data source.</p>
     #   @return [Array<Types::RelationalFilterConfiguration>]
     # @!attribute redshift_credential_configuration
     #   <p>The details of the credentials required to access an Amazon Redshift cluster.</p>
     #   @return [Types::RedshiftCredentialConfiguration]
     # @!attribute redshift_storage
-    #   <p>The details of the Amazon Redshift storage as part of the configuration of an Amazon
-    #            Redshift data source run.</p>
+    #   <p>The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.</p>
     #   @return [Types::RedshiftStorage]
     class RedshiftRunConfigurationOutput < Struct.new(
       :account_id,
@@ -12357,8 +11821,7 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The details of the Amazon Redshift storage as part of the configuration of an Amazon
-    #          Redshift data source run.</p>
+    # <p>The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.</p>
     # @!attribute redshift_cluster_source
     #   <p>The details of the Amazon Redshift cluster source.</p>
     #   @return [Types::RedshiftClusterStorage]
@@ -12417,8 +11880,7 @@ module Aws::DataZone
 
     # <p>The details of the automatically generated business metadata that is rejected.</p>
     # @!attribute prediction_target
-    #   <p>Specifies the target (for example, a column name) where a prediction can be
-    #            rejected.</p>
+    #   <p>Specifies the target (for example, a column name) where a prediction can be rejected.</p>
     #   @return [String]
     # @!attribute prediction_choices
     #   <p>Specifies the the automatically generated business metadata that can be rejected.</p>
@@ -12443,12 +11905,10 @@ module Aws::DataZone
     #   <p>Specifies the rule (or the conditions) under which a prediction can be rejected.</p>
     #   @return [Types::RejectRule]
     # @!attribute reject_choices
-    #   <p>Specifies the prediction (aka, the automatically generated piece of metadata) and the
-    #            target (for example, a column name) that can be rejected.</p>
+    #   <p>Specifies the prediction (aka, the automatically generated piece of metadata) and the target (for example, a column name) that can be rejected.</p>
     #   @return [Array<Types::RejectChoice>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class RejectPredictionsInput < Struct.new(
       :domain_identifier,
@@ -12483,8 +11943,7 @@ module Aws::DataZone
     #   <p>Specifies whether you want to reject the top prediction for all targets or none.</p>
     #   @return [String]
     # @!attribute threshold
-    #   <p>The confidence score that specifies the condition at which a prediction can be
-    #            rejected.</p>
+    #   <p>The confidence score that specifies the condition at which a prediction can be rejected.</p>
     #   @return [Float]
     class RejectRule < Struct.new(
       :rule,
@@ -12494,8 +11953,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which the subscription request was
-    #            rejected.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which the subscription request was rejected.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The identifier of the subscription request that was rejected.</p>
@@ -12521,8 +11979,7 @@ module Aws::DataZone
     #   <p>The Amazon DataZone user who updated the subscription request.</p>
     #   @return [String]
     # @!attribute domain_id
-    #   <p>The identifier of the Amazon DataZone domain in which the subscription request was
-    #            rejected.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which the subscription request was rejected.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the subscription request.</p>
@@ -12575,16 +12032,13 @@ module Aws::DataZone
 
     # <p>The relational filter configuration for the data source.</p>
     # @!attribute database_name
-    #   <p>The database name specified in the relational filter configuration for the data
-    #            source.</p>
+    #   <p>The database name specified in the relational filter configuration for the data source.</p>
     #   @return [String]
     # @!attribute schema_name
-    #   <p>The schema name specified in the relational filter configuration for the data
-    #            source.</p>
+    #   <p>The schema name specified in the relational filter configuration for the data source.</p>
     #   @return [String]
     # @!attribute filter_expressions
-    #   <p>The filter expressions specified in the relational filter configuration for the data
-    #            source.</p>
+    #   <p>The filter expressions specified in the relational filter configuration for the data source.</p>
     #   @return [Array<Types::FilterExpression>]
     class RelationalFilterConfiguration < Struct.new(
       :database_name,
@@ -12607,8 +12061,7 @@ module Aws::DataZone
     #   <p>The owner that you want to remove from an entity.</p>
     #   @return [Types::OwnerProperties]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class RemoveEntityOwnerInput < Struct.new(
       :domain_identifier,
@@ -12640,9 +12093,11 @@ module Aws::DataZone
     # @!attribute principal
     #   <p>The principal from which you want to remove a policy grant.</p>
     #   @return [Types::PolicyGrantPrincipal]
+    # @!attribute grant_identifier
+    #   <p>The ID of the policy grant that is to be removed from a specified entity.</p>
+    #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class RemovePolicyGrantInput < Struct.new(
       :domain_identifier,
@@ -12650,6 +12105,7 @@ module Aws::DataZone
       :entity_identifier,
       :policy_type,
       :principal,
+      :grant_identifier,
       :client_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -12992,8 +12448,7 @@ module Aws::DataZone
     #   <p>The Amazon S3 URI that's part of the Amazon S3 properties of a connection.</p>
     #   @return [String]
     # @!attribute s3_access_grant_location_id
-    #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a
-    #            connection.</p>
+    #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.</p>
     #   @return [String]
     class S3PropertiesInput < Struct.new(
       :s3_uri,
@@ -13007,8 +12462,7 @@ module Aws::DataZone
     #   <p>The Amazon S3 URI that's part of the Amazon S3 properties of a connection.</p>
     #   @return [String]
     # @!attribute s3_access_grant_location_id
-    #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a
-    #            connection.</p>
+    #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the Amazon S3 connection.</p>
@@ -13030,8 +12484,7 @@ module Aws::DataZone
     #   <p>The Amazon S3 URI that's part of the Amazon S3 properties patch of a connection.</p>
     #   @return [String]
     # @!attribute s3_access_grant_location_id
-    #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties patch of
-    #            a connection.</p>
+    #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties patch of a connection.</p>
     #   @return [String]
     class S3PropertiesPatch < Struct.new(
       :s3_uri,
@@ -13084,8 +12537,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which you want to search group
-    #            profiles.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which you want to search group profiles.</p>
     #   @return [String]
     # @!attribute group_type
     #   <p>The group type for which to search.</p>
@@ -13094,19 +12546,10 @@ module Aws::DataZone
     #   <p>Specifies the text for which to search.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return in a single call to
-    #               <code>SearchGroupProfiles</code>. When the number of results to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>SearchGroupProfiles</code> to list the
-    #            next set of results. </p>
+    #   <p>The maximum number of results to return in a single call to <code>SearchGroupProfiles</code>. When the number of results to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>SearchGroupProfiles</code> to list the next set of results. </p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchGroupProfiles</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchGroupProfiles</code> to list the next set of results.</p>
     #   @return [String]
     class SearchGroupProfilesInput < Struct.new(
       :domain_identifier,
@@ -13122,12 +12565,7 @@ module Aws::DataZone
     #   <p>The results of the <code>SearchGroupProfiles</code> action.</p>
     #   @return [Array<Types::GroupProfileSummary>]
     # @!attribute next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchGroupProfiles</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchGroupProfiles</code> to list the next set of results.</p>
     #   @return [String]
     class SearchGroupProfilesOutput < Struct.new(
       :items,
@@ -13153,17 +12591,10 @@ module Aws::DataZone
     #   <p>The identifier of the owning project specified for the search.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return in a single call to <code>Search</code>. When
-    #            the number of results to be listed is greater than the value of <code>MaxResults</code>,
-    #            the response contains a <code>NextToken</code> value that you can use in a subsequent call
-    #            to <code>Search</code> to list the next set of results.</p>
+    #   <p>The maximum number of results to return in a single call to <code>Search</code>. When the number of results to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>Search</code> to list the next set of results.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>Search</code> to list the next set of results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>Search</code> to list the next set of results.</p>
     #   @return [String]
     # @!attribute search_scope
     #   <p>The scope of the search.</p>
@@ -13237,26 +12668,16 @@ module Aws::DataZone
     #   <p>The details of the search.</p>
     #   @return [Array<Types::SearchInItem>]
     # @!attribute max_results
-    #   <p>The maximum number of results to return in a single call to <code>SearchListings</code>.
-    #            When the number of results to be listed is greater than the value of
-    #               <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you
-    #            can use in a subsequent call to <code>SearchListings</code> to list the next set of
-    #            results. </p>
+    #   <p>The maximum number of results to return in a single call to <code>SearchListings</code>. When the number of results to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>SearchListings</code> to list the next set of results. </p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchListings</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchListings</code> to list the next set of results.</p>
     #   @return [String]
     # @!attribute filters
     #   <p>Specifies the filters for the search of listings.</p>
     #   @return [Types::FilterClause]
     # @!attribute aggregations
-    #   <p>Enables you to specify one or more attributes to compute and return counts grouped by
-    #            field values.</p>
+    #   <p>Enables you to specify one or more attributes to compute and return counts grouped by field values.</p>
     #   @return [Array<Types::AggregationListItem>]
     # @!attribute sort
     #   <p>Specifies the way for sorting the search results.</p>
@@ -13282,19 +12703,13 @@ module Aws::DataZone
     #   <p>The results of the <code>SearchListings</code> action.</p>
     #   @return [Array<Types::SearchResultItem>]
     # @!attribute next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchListings</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchListings</code> to list the next set of results.</p>
     #   @return [String]
     # @!attribute total_match_count
     #   <p>Total number of search results.</p>
     #   @return [Integer]
     # @!attribute aggregates
-    #   <p>Contains computed counts grouped by field values based on the requested aggregation
-    #            attributes for the matching listings.</p>
+    #   <p>Contains computed counts grouped by field values based on the requested aggregation attributes for the matching listings.</p>
     #   @return [Array<Types::AggregationOutput>]
     class SearchListingsOutput < Struct.new(
       :items,
@@ -13309,11 +12724,7 @@ module Aws::DataZone
     #   <p>The results of the <code>Search</code> action.</p>
     #   @return [Array<Types::SearchInventoryResultItem>]
     # @!attribute next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>Search</code> to list the next set of results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>Search</code> to list the next set of results.</p>
     #   @return [String]
     # @!attribute total_match_count
     #   <p>Total number of search results.</p>
@@ -13328,8 +12739,7 @@ module Aws::DataZone
 
     # <p>The details of the results of the <code>SearchListings</code> action.</p>
     # @!attribute asset_listing
-    #   <p>The asset listing included in the results of the <code>SearchListings</code>
-    #            action.</p>
+    #   <p>The asset listing included in the results of the <code>SearchListings</code> action.</p>
     #   @return [Types::AssetListingItem]
     # @!attribute data_product_listing
     #   <p>The data product listing.</p>
@@ -13361,23 +12771,13 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which to invoke the <code>SearchTypes</code>
-    #            action.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which to invoke the <code>SearchTypes</code> action.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return in a single call to <code>SearchTypes</code>.
-    #            When the number of results to be listed is greater than the value of
-    #               <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you
-    #            can use in a subsequent call to <code>SearchTypes</code> to list the next set of results.
-    #         </p>
+    #   <p>The maximum number of results to return in a single call to <code>SearchTypes</code>. When the number of results to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>SearchTypes</code> to list the next set of results. </p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchTypes</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchTypes</code> to list the next set of results.</p>
     #   @return [String]
     # @!attribute search_scope
     #   <p>Specifies the scope of the search for types.</p>
@@ -13415,12 +12815,7 @@ module Aws::DataZone
     #   <p>The results of the <code>SearchTypes</code> action.</p>
     #   @return [Array<Types::SearchTypesResultItem>]
     # @!attribute next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchTypes</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchTypes</code> to list the next set of results.</p>
     #   @return [String]
     # @!attribute total_match_count
     #   <p>Total number of search results.</p>
@@ -13458,8 +12853,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which you want to search user
-    #            profiles.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which you want to search user profiles.</p>
     #   @return [String]
     # @!attribute user_type
     #   <p>Specifies the user type for the <code>SearchUserProfiles</code> action.</p>
@@ -13468,19 +12862,10 @@ module Aws::DataZone
     #   <p>Specifies the text for which to search.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return in a single call to
-    #               <code>SearchUserProfiles</code>. When the number of results to be listed is greater than
-    #            the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value
-    #            that you can use in a subsequent call to <code>SearchUserProfiles</code> to list the next
-    #            set of results. </p>
+    #   <p>The maximum number of results to return in a single call to <code>SearchUserProfiles</code>. When the number of results to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>SearchUserProfiles</code> to list the next set of results. </p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchUserProfiles</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchUserProfiles</code> to list the next set of results.</p>
     #   @return [String]
     class SearchUserProfilesInput < Struct.new(
       :domain_identifier,
@@ -13496,12 +12881,7 @@ module Aws::DataZone
     #   <p>The results of the <code>SearchUserProfiles</code> action.</p>
     #   @return [Array<Types::UserProfileSummary>]
     # @!attribute next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchUserProfiles</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchUserProfiles</code> to list the next set of results.</p>
     #   @return [String]
     class SearchUserProfilesOutput < Struct.new(
       :items,
@@ -13711,12 +13091,10 @@ module Aws::DataZone
     #   <p>The additional args in the Spark Amazon Web Services Glue properties.</p>
     #   @return [Types::SparkGlueArgs]
     # @!attribute glue_connection_name
-    #   <p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue
-    #            properties.</p>
+    #   <p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue properties.</p>
     #   @return [String]
     # @!attribute glue_version
-    #   <p>The Amazon Web Services Glue version in the Spark Amazon Web Services Glue
-    #            properties.</p>
+    #   <p>The Amazon Web Services Glue version in the Spark Amazon Web Services Glue properties.</p>
     #   @return [String]
     # @!attribute idle_timeout
     #   <p>The idle timeout in the Spark Amazon Web Services Glue properties.</p>
@@ -13751,12 +13129,10 @@ module Aws::DataZone
     #   <p>The additional args in the Spark Amazon Web Services Glue properties. </p>
     #   @return [Types::SparkGlueArgs]
     # @!attribute glue_connection_name
-    #   <p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue
-    #            properties. </p>
+    #   <p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue properties. </p>
     #   @return [String]
     # @!attribute glue_version
-    #   <p>The Amazon Web Services Glue version in the Spark Amazon Web Services Glue properties.
-    #         </p>
+    #   <p>The Amazon Web Services Glue version in the Spark Amazon Web Services Glue properties. </p>
     #   @return [String]
     # @!attribute idle_timeout
     #   <p>The idle timeout in the Spark Amazon Web Services Glue properties. </p>
@@ -13811,8 +13187,7 @@ module Aws::DataZone
     #   <p>The identifier of the data source.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class StartDataSourceRunInput < Struct.new(
       :domain_identifier,
@@ -13847,8 +13222,7 @@ module Aws::DataZone
     #   <p>Specifies run statistics for assets.</p>
     #   @return [Types::RunStatisticsForAssets]
     # @!attribute error_message
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute created_at
     #   <p>The timestamp of when data source run was created.</p>
@@ -13881,8 +13255,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The ID of the Amazon DataZone domain where you want to start a metadata generation
-    #            run.</p>
+    #   <p>The ID of the Amazon DataZone domain where you want to start a metadata generation run.</p>
     #   @return [String]
     # @!attribute type
     #   <p>The type of the metadata generation run.</p>
@@ -13891,12 +13264,10 @@ module Aws::DataZone
     #   <p>The asset for which you want to start a metadata generation run.</p>
     #   @return [Types::MetadataGenerationRunTarget]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is
-    #            automatically populated if not provided.</p>
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
     #   @return [String]
     # @!attribute owning_project_identifier
-    #   <p>The ID of the project that owns the asset for which you want to start a metadata
-    #            generation run.</p>
+    #   <p>The ID of the project that owns the asset for which you want to start a metadata generation run.</p>
     #   @return [String]
     class StartMetadataGenerationRunInput < Struct.new(
       :domain_identifier,
@@ -13909,8 +13280,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_id
-    #   <p>The ID of the Amazon DataZone domain in which the metadata generation run was
-    #            started.</p>
+    #   <p>The ID of the Amazon DataZone domain in which the metadata generation run was started.</p>
     #   @return [String]
     # @!attribute id
     #   <p>The ID of the metadata generation run.</p>
@@ -13928,8 +13298,7 @@ module Aws::DataZone
     #   <p>The ID of the user who started the metadata generation run.</p>
     #   @return [String]
     # @!attribute owning_project_id
-    #   <p>The ID of the project that owns the asset for which the metadata generation run was
-    #            started.</p>
+    #   <p>The ID of the project that owns the asset for which the metadata generation run was started.</p>
     #   @return [String]
     class StartMetadataGenerationRunOutput < Struct.new(
       :domain_id,
@@ -13957,15 +13326,13 @@ module Aws::DataZone
     #   <p>The target name of the asset for which the subscription grant is created.</p>
     #   @return [String]
     # @!attribute failure_cause
-    #   <p>The failure cause included in the details of the asset for which the subscription grant
-    #            is created.</p>
+    #   <p>The failure cause included in the details of the asset for which the subscription grant is created.</p>
     #   @return [Types::FailureCause]
     # @!attribute granted_timestamp
     #   <p>The timestamp of when the subscription grant to the asset is created.</p>
     #   @return [Time]
     # @!attribute failure_timestamp
-    #   <p>The failure timestamp included in the details of the asset for which the subscription
-    #            grant is created.</p>
+    #   <p>The failure timestamp included in the details of the asset for which the subscription grant is created.</p>
     #   @return [Time]
     # @!attribute asset_scope
     #   <p>The asset scope of the subscribed asset.</p>
@@ -13985,8 +13352,7 @@ module Aws::DataZone
 
     # <p>The details of the published asset for which the subscription grant is created.</p>
     # @!attribute entity_id
-    #   <p>The identifier of the published asset for which the subscription grant is
-    #            created.</p>
+    #   <p>The identifier of the published asset for which the subscription grant is created.</p>
     #   @return [String]
     # @!attribute entity_revision
     #   <p>The revision of the published asset for which the subscription grant is created.</p>
@@ -13995,12 +13361,10 @@ module Aws::DataZone
     #   <p>The type of the published asset for which the subscription grant is created.</p>
     #   @return [String]
     # @!attribute forms
-    #   <p>The forms attached to the published asset for which the subscription grant is
-    #            created.</p>
+    #   <p>The forms attached to the published asset for which the subscription grant is created.</p>
     #   @return [String]
     # @!attribute glossary_terms
-    #   <p>The glossary terms attached to the published asset for which the subscription grant is
-    #            created.</p>
+    #   <p>The glossary terms attached to the published asset for which the subscription grant is created.</p>
     #   @return [Array<Types::DetailedGlossaryTerm>]
     # @!attribute asset_scope
     #   <p>The asset scope of the subscribed asset listing.</p>
@@ -14018,8 +13382,7 @@ module Aws::DataZone
 
     # <p>The details of the published asset for which the subscription grant is created.</p>
     # @!attribute id
-    #   <p>The identifier of the published asset for which the subscription grant is
-    #            created.</p>
+    #   <p>The identifier of the published asset for which the subscription grant is created.</p>
     #   @return [String]
     # @!attribute revision
     #   <p>The revision of the published asset for which the subscription grant is created.</p>
@@ -14028,19 +13391,16 @@ module Aws::DataZone
     #   <p>The name of the published asset for which the subscription grant is created.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The description of the published asset for which the subscription grant is
-    #            created.</p>
+    #   <p>The description of the published asset for which the subscription grant is created.</p>
     #   @return [String]
     # @!attribute item
     #   <p>The published asset for which the subscription grant is created.</p>
     #   @return [Types::SubscribedListingItem]
     # @!attribute owner_project_id
-    #   <p>The identifier of the project of the published asset for which the subscription grant is
-    #            created.</p>
+    #   <p>The identifier of the project of the published asset for which the subscription grant is created.</p>
     #   @return [String]
     # @!attribute owner_project_name
-    #   <p>The name of the project that owns the published asset for which the subscription grant
-    #            is created.</p>
+    #   <p>The name of the project that owns the published asset for which the subscription grant is created.</p>
     #   @return [String]
     class SubscribedListing < Struct.new(
       :id,
@@ -14056,8 +13416,7 @@ module Aws::DataZone
 
     # <p>The published asset for which the subscription grant is to be created.</p>
     # @!attribute identifier
-    #   <p>The identifier of the published asset for which the subscription grant is to be
-    #            created.</p>
+    #   <p>The identifier of the published asset for which the subscription grant is to be created.</p>
     #   @return [String]
     class SubscribedListingInput < Struct.new(
       :identifier,
@@ -14622,9 +13981,7 @@ module Aws::DataZone
     #   <p>The mechanism used to resolve the account selection from the account pool.</p>
     #   @return [String]
     # @!attribute account_source
-    #   <p>The source of accounts for the account pool. In the current release, it's either a
-    #            static list of accounts provided by the customer or a custom Amazon Web Services Lambda
-    #            handler. </p>
+    #   <p>The source of accounts for the account pool. In the current release, it's either a static list of accounts provided by the customer or a custom Amazon Web Services Lambda handler. </p>
     #   @return [Types::AccountSource]
     class UpdateAccountPoolInput < Struct.new(
       :domain_identifier,
@@ -14653,9 +14010,7 @@ module Aws::DataZone
     #   <p>The mechanism used to resolve the account selection from the account pool.</p>
     #   @return [String]
     # @!attribute account_source
-    #   <p>The source of accounts for the account pool. In the current release, it's either a
-    #            static list of accounts provided by the customer or a custom Amazon Web Services Lambda
-    #            handler. </p>
+    #   <p>The source of accounts for the account pool. In the current release, it's either a static list of accounts provided by the customer or a custom Amazon Web Services Lambda handler. </p>
     #   @return [Types::AccountSource]
     # @!attribute created_by
     #   <p>The user who created the account pool.</p>
@@ -14846,35 +14201,28 @@ module Aws::DataZone
     #   <p>The name to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The description to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The description to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [String]
     # @!attribute enable_setting
-    #   <p>The enable setting to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The enable setting to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [String]
     # @!attribute publish_on_import
-    #   <p>The publish on import setting to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The publish on import setting to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [Boolean]
     # @!attribute asset_forms_input
-    #   <p>The asset forms to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The asset forms to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [Array<Types::FormInput>]
     # @!attribute schedule
     #   <p>The schedule to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [Types::ScheduleConfiguration]
     # @!attribute configuration
-    #   <p>The configuration to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The configuration to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [Types::DataSourceConfigurationInput]
     # @!attribute recommendation
-    #   <p>The recommendation to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The recommendation to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [Types::RecommendationConfiguration]
     # @!attribute retain_permissions_on_revoke_failure
-    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe
-    #            functionality failure for a data source.</p>
+    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.</p>
     #   @return [Boolean]
     class UpdateDataSourceInput < Struct.new(
       :domain_identifier,
@@ -14905,8 +14253,7 @@ module Aws::DataZone
     #   <p>The name to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The description to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The description to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [String]
     # @!attribute domain_id
     #   <p>The identifier of the Amazon DataZone domain in which a data source is to be updated.</p>
@@ -14921,24 +14268,19 @@ module Aws::DataZone
     #   <p>The connection ID.</p>
     #   @return [String]
     # @!attribute configuration
-    #   <p>The configuration to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The configuration to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [Types::DataSourceConfigurationOutput]
     # @!attribute recommendation
-    #   <p>The recommendation to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The recommendation to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [Types::RecommendationConfiguration]
     # @!attribute enable_setting
-    #   <p>The enable setting to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The enable setting to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [String]
     # @!attribute publish_on_import
-    #   <p>The publish on import setting to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The publish on import setting to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [Boolean]
     # @!attribute asset_forms_output
-    #   <p>The asset forms to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The asset forms to be updated as part of the <code>UpdateDataSource</code> action.</p>
     #   @return [Array<Types::FormOutput>]
     # @!attribute schedule
     #   <p>The schedule to be updated as part of the <code>UpdateDataSource</code> action.</p>
@@ -14953,8 +14295,7 @@ module Aws::DataZone
     #   <p>The last run error message of the data source.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute error_message
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::DataSourceErrorMessage]
     # @!attribute created_at
     #   <p>The timestamp of when the data source was updated.</p>
@@ -14966,8 +14307,7 @@ module Aws::DataZone
     #   <p>Specifies the status of the self-granting functionality.</p>
     #   @return [Types::SelfGrantStatusOutput]
     # @!attribute retain_permissions_on_revoke_failure
-    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe
-    #            functionality failure for a data source.</p>
+    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.</p>
     #   @return [Boolean]
     class UpdateDataSourceOutput < Struct.new(
       :id,
@@ -15004,12 +14344,10 @@ module Aws::DataZone
     #   <p>The description to be updated as part of the <code>UpdateDomain</code> action.</p>
     #   @return [String]
     # @!attribute single_sign_on
-    #   <p>The single sign-on option to be updated as part of the <code>UpdateDomain</code>
-    #            action.</p>
+    #   <p>The single sign-on option to be updated as part of the <code>UpdateDomain</code> action.</p>
     #   @return [Types::SingleSignOn]
     # @!attribute domain_execution_role
-    #   <p>The domain execution role to be updated as part of the <code>UpdateDomain</code>
-    #            action.</p>
+    #   <p>The domain execution role to be updated as part of the <code>UpdateDomain</code> action.</p>
     #   @return [String]
     # @!attribute service_role
     #   <p>The service role of the domain.</p>
@@ -15018,8 +14356,7 @@ module Aws::DataZone
     #   <p>The name to be updated as part of the <code>UpdateDomain</code> action.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class UpdateDomainInput < Struct.new(
       :identifier,
@@ -15046,8 +14383,7 @@ module Aws::DataZone
     #   <p>The single sign-on option of the Amazon DataZone domain.</p>
     #   @return [Types::SingleSignOn]
     # @!attribute domain_execution_role
-    #   <p>The domain execution role to be updated as part of the <code>UpdateDomain</code>
-    #            action.</p>
+    #   <p>The domain execution role to be updated as part of the <code>UpdateDomain</code> action.</p>
     #   @return [String]
     # @!attribute service_role
     #   <p>The service role of the domain.</p>
@@ -15205,16 +14541,13 @@ module Aws::DataZone
     #   <p>The name to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The description to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The description to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [String]
     # @!attribute glossary_terms
-    #   <p>The glossary terms to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The glossary terms to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [Array<String>]
     # @!attribute blueprint_version
-    #   <p>The blueprint version to which the environment should be updated. You can only specify
-    #            the following string for this parameter: <code>latest</code>.</p>
+    #   <p>The blueprint version to which the environment should be updated. You can only specify the following string for this parameter: <code>latest</code>.</p>
     #   @return [String]
     # @!attribute user_parameters
     #   <p>The user parameters of the environment.</p>
@@ -15253,15 +14586,13 @@ module Aws::DataZone
     #   <p>The name to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The description to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The description to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [String]
     # @!attribute environment_profile_id
     #   <p>The profile identifier of the environment.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The identifier of the Amazon Web Services account in which the environment is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon Web Services account in which the environment is to be updated.</p>
     #   @return [String]
     # @!attribute aws_account_region
     #   <p>The Amazon Web Services Region in which the environment is updated.</p>
@@ -15270,34 +14601,28 @@ module Aws::DataZone
     #   <p>The provider identifier of the environment.</p>
     #   @return [String]
     # @!attribute provisioned_resources
-    #   <p>The provisioned resources to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The provisioned resources to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [Array<Types::Resource>]
     # @!attribute status
     #   <p>The status to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [String]
     # @!attribute environment_actions
-    #   <p>The environment actions to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The environment actions to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [Array<Types::ConfigurableEnvironmentAction>]
     # @!attribute glossary_terms
-    #   <p>The glossary terms to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The glossary terms to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [Array<String>]
     # @!attribute user_parameters
-    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [Array<Types::CustomParameter>]
     # @!attribute last_deployment
     #   <p>The last deployment of the environment.</p>
     #   @return [Types::Deployment]
     # @!attribute provisioning_properties
-    #   <p>The provisioning properties to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The provisioning properties to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [Types::ProvisioningProperties]
     # @!attribute deployment_properties
-    #   <p>The deployment properties to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The deployment properties to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     #   @return [Types::DeploymentProperties]
     # @!attribute environment_blueprint_id
     #   <p>The blueprint identifier of the environment.</p>
@@ -15338,31 +14663,25 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which an environment profile is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which an environment profile is to be updated.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The identifier of the environment profile that is to be updated.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name to be updated as part of the <code>UpdateEnvironmentProfile</code>
-    #            action.</p>
+    #   <p>The name to be updated as part of the <code>UpdateEnvironmentProfile</code> action.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The description to be updated as part of the <code>UpdateEnvironmentProfile</code>
-    #            action.</p>
+    #   <p>The description to be updated as part of the <code>UpdateEnvironmentProfile</code> action.</p>
     #   @return [String]
     # @!attribute user_parameters
-    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentProfile</code>
-    #            action.</p>
+    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentProfile</code> action.</p>
     #   @return [Array<Types::EnvironmentParameter>]
     # @!attribute aws_account_id
-    #   <p>The Amazon Web Services account in which a specified environment profile is to be
-    #            udpated.</p>
+    #   <p>The Amazon Web Services account in which a specified environment profile is to be udpated.</p>
     #   @return [String]
     # @!attribute aws_account_region
-    #   <p>The Amazon Web Services Region in which a specified environment profile is to be
-    #            updated.</p>
+    #   <p>The Amazon Web Services Region in which a specified environment profile is to be updated.</p>
     #   @return [String]
     class UpdateEnvironmentProfileInput < Struct.new(
       :domain_identifier,
@@ -15380,16 +14699,13 @@ module Aws::DataZone
     #   <p>The identifier of the environment profile that is to be udpated.</p>
     #   @return [String]
     # @!attribute domain_id
-    #   <p>The identifier of the Amazon DataZone domain in which the environment profile is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which the environment profile is to be updated.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The Amazon Web Services account in which a specified environment profile is to be
-    #            udpated.</p>
+    #   <p>The Amazon Web Services account in which a specified environment profile is to be udpated.</p>
     #   @return [String]
     # @!attribute aws_account_region
-    #   <p>The Amazon Web Services Region in which a specified environment profile is to be
-    #            updated.</p>
+    #   <p>The Amazon Web Services Region in which a specified environment profile is to be updated.</p>
     #   @return [String]
     # @!attribute created_by
     #   <p>The Amazon DataZone user who created the environment profile.</p>
@@ -15401,12 +14717,10 @@ module Aws::DataZone
     #   <p>The timestamp of when the environment profile was updated.</p>
     #   @return [Time]
     # @!attribute name
-    #   <p>The name to be updated as part of the <code>UpdateEnvironmentProfile</code>
-    #            action.</p>
+    #   <p>The name to be updated as part of the <code>UpdateEnvironmentProfile</code> action.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The description to be updated as part of the <code>UpdateEnvironmentProfile</code>
-    #            action.</p>
+    #   <p>The description to be updated as part of the <code>UpdateEnvironmentProfile</code> action.</p>
     #   @return [String]
     # @!attribute environment_blueprint_id
     #   <p>The identifier of the blueprint of the environment profile that is to be updated.</p>
@@ -15415,8 +14729,7 @@ module Aws::DataZone
     #   <p>The identifier of the project of the environment profile that is to be updated.</p>
     #   @return [String]
     # @!attribute user_parameters
-    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentProfile</code>
-    #            action.</p>
+    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentProfile</code> action.</p>
     #   @return [Array<Types::CustomParameter>]
     class UpdateEnvironmentProfileOutput < Struct.new(
       :id,
@@ -15436,8 +14749,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which a business glossary is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a business glossary is to be updated.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The identifier of the business glossary to be updated.</p>
@@ -15452,8 +14764,7 @@ module Aws::DataZone
     #   <p>The status to be updated as part of the <code>UpdateGlossary</code> action.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     class UpdateGlossaryInput < Struct.new(
       :domain_identifier,
@@ -15467,8 +14778,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_id
-    #   <p>The identifier of the Amazon DataZone domain in which a business glossary is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a business glossary is to be updated.</p>
     #   @return [String]
     # @!attribute id
     #   <p>The identifier of the business glossary that is to be updated.</p>
@@ -15485,6 +14795,9 @@ module Aws::DataZone
     # @!attribute status
     #   <p>The status to be updated as part of the <code>UpdateGlossary</code> action.</p>
     #   @return [String]
+    # @!attribute usage_restrictions
+    #   <p>The usage restriction of the restricted glossary.</p>
+    #   @return [Array<String>]
     class UpdateGlossaryOutput < Struct.new(
       :domain_id,
       :id,
@@ -15492,13 +14805,13 @@ module Aws::DataZone
       :owning_project_id,
       :description,
       :status,
+      :usage_restrictions,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which a business glossary term is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a business glossary term is to be updated.</p>
     #   @return [String]
     # @!attribute glossary_identifier
     #   <p>The identifier of the business glossary in which a term is to be updated.</p>
@@ -15510,16 +14823,13 @@ module Aws::DataZone
     #   <p>The name to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     #   @return [String]
     # @!attribute short_description
-    #   <p>The short description to be updated as part of the <code>UpdateGlossaryTerm</code>
-    #            action.</p>
+    #   <p>The short description to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     #   @return [String]
     # @!attribute long_description
-    #   <p>The long description to be updated as part of the <code>UpdateGlossaryTerm</code>
-    #            action.</p>
+    #   <p>The long description to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     #   @return [String]
     # @!attribute term_relations
-    #   <p>The term relations to be updated as part of the <code>UpdateGlossaryTerm</code>
-    #            action.</p>
+    #   <p>The term relations to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     #   @return [Types::TermRelations]
     # @!attribute status
     #   <p>The status to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
@@ -15541,8 +14851,7 @@ module Aws::DataZone
     #   <p>The identifier of the business glossary term that is to be updated.</p>
     #   @return [String]
     # @!attribute domain_id
-    #   <p>The identifier of the Amazon DataZone domain in which a business glossary term is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a business glossary term is to be updated.</p>
     #   @return [String]
     # @!attribute glossary_id
     #   <p>The identifier of the business glossary in which a term is to be updated.</p>
@@ -15554,17 +14863,17 @@ module Aws::DataZone
     #   <p>The status to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     #   @return [String]
     # @!attribute short_description
-    #   <p>The short description to be updated as part of the <code>UpdateGlossaryTerm</code>
-    #            action.</p>
+    #   <p>The short description to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     #   @return [String]
     # @!attribute long_description
-    #   <p>The long description to be updated as part of the <code>UpdateGlossaryTerm</code>
-    #            action.</p>
+    #   <p>The long description to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     #   @return [String]
     # @!attribute term_relations
-    #   <p>The term relations to be updated as part of the <code>UpdateGlossaryTerm</code>
-    #            action.</p>
+    #   <p>The term relations to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     #   @return [Types::TermRelations]
+    # @!attribute usage_restrictions
+    #   <p>The usage restriction of a term within a restricted glossary.</p>
+    #   @return [Array<String>]
     class UpdateGlossaryTermOutput < Struct.new(
       :id,
       :domain_id,
@@ -15574,6 +14883,7 @@ module Aws::DataZone
       :short_description,
       :long_description,
       :term_relations,
+      :usage_restrictions,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -15629,8 +14939,7 @@ module Aws::DataZone
     #   <p>The description to be updated as part of the <code>UpdateProject</code> action.</p>
     #   @return [String]
     # @!attribute glossary_terms
-    #   <p>The glossary terms to be updated as part of the <code>UpdateProject</code>
-    #            action.</p>
+    #   <p>The glossary terms to be updated as part of the <code>UpdateProject</code> action.</p>
     #   @return [Array<String>]
     # @!attribute domain_unit_id
     #   <p>The ID of the domain unit.</p>
@@ -15642,8 +14951,7 @@ module Aws::DataZone
     #   <p>The user parameters of the project.</p>
     #   @return [Array<Types::EnvironmentConfigurationUserParameter>]
     # @!attribute project_profile_version
-    #   <p>The project profile version to which the project should be updated. You can only specify
-    #            the following string for this parameter: <code>latest</code>.</p>
+    #   <p>The project profile version to which the project should be updated. You can only specify the following string for this parameter: <code>latest</code>.</p>
     #   @return [String]
     class UpdateProjectInput < Struct.new(
       :domain_identifier,
@@ -15675,8 +14983,7 @@ module Aws::DataZone
     #   <p>The status of the project.</p>
     #   @return [String]
     # @!attribute failure_reasons
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Array<Types::ProjectDeletionError>]
     # @!attribute created_by
     #   <p>The Amazon DataZone user who created the project.</p>
@@ -15890,27 +15197,22 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which a subscription grant status is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a subscription grant status is to be updated.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The identifier of the subscription grant the status of which is to be updated.</p>
     #   @return [String]
     # @!attribute asset_identifier
-    #   <p>The identifier of the asset the subscription grant status of which is to be
-    #            updated.</p>
+    #   <p>The identifier of the asset the subscription grant status of which is to be updated.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status to be updated as part of the <code>UpdateSubscriptionGrantStatus</code>
-    #            action.</p>
+    #   <p>The status to be updated as part of the <code>UpdateSubscriptionGrantStatus</code> action.</p>
     #   @return [String]
     # @!attribute failure_cause
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     #   @return [Types::FailureCause]
     # @!attribute target_name
-    #   <p>The target name to be updated as part of the <code>UpdateSubscriptionGrantStatus</code>
-    #            action.</p>
+    #   <p>The target name to be updated as part of the <code>UpdateSubscriptionGrantStatus</code> action.</p>
     #   @return [String]
     class UpdateSubscriptionGrantStatusInput < Struct.new(
       :domain_identifier,
@@ -15933,8 +15235,7 @@ module Aws::DataZone
     #   <p>The Amazon DataZone user who updated the subscription grant status.</p>
     #   @return [String]
     # @!attribute domain_id
-    #   <p>The identifier of the Amazon DataZone domain in which a subscription grant status is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a subscription grant status is to be updated.</p>
     #   @return [String]
     # @!attribute created_at
     #   <p>The timestamp of when the subscription grant status was created.</p>
@@ -15943,16 +15244,13 @@ module Aws::DataZone
     #   <p>The timestamp of when the subscription grant status is to be updated.</p>
     #   @return [Time]
     # @!attribute subscription_target_id
-    #   <p>The identifier of the subscription target whose subscription grant status is to be
-    #            updated.</p>
+    #   <p>The identifier of the subscription target whose subscription grant status is to be updated.</p>
     #   @return [String]
     # @!attribute granted_entity
-    #   <p>The granted entity to be updated as part of the
-    #               <code>UpdateSubscriptionGrantStatus</code> action.</p>
+    #   <p>The granted entity to be updated as part of the <code>UpdateSubscriptionGrantStatus</code> action.</p>
     #   @return [Types::GrantedEntity]
     # @!attribute status
-    #   <p>The status to be updated as part of the <code>UpdateSubscriptionGrantStatus</code>
-    #            action.</p>
+    #   <p>The status to be updated as part of the <code>UpdateSubscriptionGrantStatus</code> action.</p>
     #   @return [String]
     # @!attribute assets
     #   <p>The details of the asset for which the subscription grant is created.</p>
@@ -15979,8 +15277,7 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which a subscription request is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a subscription request is to be updated.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>The identifier of the subscription request that is to be updated.</p>
@@ -16006,8 +15303,7 @@ module Aws::DataZone
     #   <p>The Amazon DataZone user who updated the subscription request.</p>
     #   @return [String]
     # @!attribute domain_id
-    #   <p>The identifier of the Amazon DataZone domain in which a subscription request is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a subscription request is to be updated.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the subscription request.</p>
@@ -16059,39 +15355,31 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which a subscription target is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a subscription target is to be updated.</p>
     #   @return [String]
     # @!attribute environment_identifier
-    #   <p>The identifier of the environment in which a subscription target is to be
-    #            updated.</p>
+    #   <p>The identifier of the environment in which a subscription target is to be updated.</p>
     #   @return [String]
     # @!attribute identifier
     #   <p>Identifier of the subscription target that is to be updated.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name to be updated as part of the <code>UpdateSubscriptionTarget</code>
-    #            action.</p>
+    #   <p>The name to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
     # @!attribute authorized_principals
-    #   <p>The authorized principals to be updated as part of the
-    #               <code>UpdateSubscriptionTarget</code> action.</p>
+    #   <p>The authorized principals to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [Array<String>]
     # @!attribute applicable_asset_types
-    #   <p>The applicable asset types to be updated as part of the
-    #               <code>UpdateSubscriptionTarget</code> action.</p>
+    #   <p>The applicable asset types to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [Array<String>]
     # @!attribute subscription_target_config
-    #   <p>The configuration to be updated as part of the <code>UpdateSubscriptionTarget</code>
-    #            action.</p>
+    #   <p>The configuration to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [Array<Types::SubscriptionTargetForm>]
     # @!attribute manage_access_role
-    #   <p>The manage access role to be updated as part of the
-    #               <code>UpdateSubscriptionTarget</code> action.</p>
+    #   <p>The manage access role to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
     # @!attribute provider
-    #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code>
-    #            action.</p>
+    #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
     class UpdateSubscriptionTargetInput < Struct.new(
       :domain_identifier,
@@ -16111,28 +15399,22 @@ module Aws::DataZone
     #   <p>Identifier of the subscription target that is to be updated.</p>
     #   @return [String]
     # @!attribute authorized_principals
-    #   <p>The authorized principals to be updated as part of the
-    #               <code>UpdateSubscriptionTarget</code> action. Updates are supported in batches of 5 at a
-    #            time.</p>
+    #   <p>The authorized principals to be updated as part of the <code>UpdateSubscriptionTarget</code> action. Updates are supported in batches of 5 at a time.</p>
     #   @return [Array<String>]
     # @!attribute domain_id
-    #   <p>The identifier of the Amazon DataZone domain in which a subscription target is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a subscription target is to be updated.</p>
     #   @return [String]
     # @!attribute project_id
     #   <p>The identifier of the project in which a subscription target is to be updated.</p>
     #   @return [String]
     # @!attribute environment_id
-    #   <p>The identifier of the environment in which a subscription target is to be
-    #            updated.</p>
+    #   <p>The identifier of the environment in which a subscription target is to be updated.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name to be updated as part of the <code>UpdateSubscriptionTarget</code>
-    #            action.</p>
+    #   <p>The name to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type to be updated as part of the <code>UpdateSubscriptionTarget</code>
-    #            action.</p>
+    #   <p>The type to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
     # @!attribute created_by
     #   <p>The Amazon DataZone user who created the subscription target.</p>
@@ -16147,20 +15429,16 @@ module Aws::DataZone
     #   <p>The timestamp of when the subscription target was updated.</p>
     #   @return [Time]
     # @!attribute manage_access_role
-    #   <p>The manage access role to be updated as part of the
-    #               <code>UpdateSubscriptionTarget</code> action.</p>
+    #   <p>The manage access role to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
     # @!attribute applicable_asset_types
-    #   <p>The applicable asset types to be updated as part of the
-    #               <code>UpdateSubscriptionTarget</code> action.</p>
+    #   <p>The applicable asset types to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [Array<String>]
     # @!attribute subscription_target_config
-    #   <p>The configuration to be updated as part of the <code>UpdateSubscriptionTarget</code>
-    #            action.</p>
+    #   <p>The configuration to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [Array<Types::SubscriptionTargetForm>]
     # @!attribute provider
-    #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code>
-    #            action.</p>
+    #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
     class UpdateSubscriptionTargetOutput < Struct.new(
       :id,
@@ -16228,8 +15506,7 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies the domain unit(s) whose projects can use this asset type while creating asset
-    #          or asset revisions.</p>
+    # <p>Specifies the domain unit(s) whose projects can use this asset type while creating asset or asset revisions.</p>
     # @!attribute domain_unit_id
     #   <p>The ID of the domain unit.</p>
     #   @return [String]

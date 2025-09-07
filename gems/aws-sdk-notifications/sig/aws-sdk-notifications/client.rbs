@@ -69,6 +69,14 @@ module Aws::Notifications
       ?managed_notification_configuration_arn: String
     ) -> _AssociateManagedNotificationAdditionalChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateManagedNotificationAdditionalChannelResponse
 
+    interface _AssociateOrganizationalUnitResponse
+      include Smithy::Client::_Response[Types::AssociateOrganizationalUnitResponse]
+    end
+    def associate_organizational_unit: (
+      ?organizational_unit_id: String,
+      ?notification_configuration_arn: String
+    ) -> _AssociateOrganizationalUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateOrganizationalUnitResponse
+
     interface _CreateEventRuleResponse
       include Smithy::Client::_Response[Types::CreateEventRuleResponse]
       def arn: () -> String?
@@ -147,6 +155,14 @@ module Aws::Notifications
       ?managed_notification_configuration_arn: String
     ) -> _DisassociateManagedNotificationAdditionalChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateManagedNotificationAdditionalChannelResponse
 
+    interface _DisassociateOrganizationalUnitResponse
+      include Smithy::Client::_Response[Types::DisassociateOrganizationalUnitResponse]
+    end
+    def disassociate_organizational_unit: (
+      ?organizational_unit_id: String,
+      ?notification_configuration_arn: String
+    ) -> _DisassociateOrganizationalUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateOrganizationalUnitResponse
+
     interface _EnableNotificationsAccessForOrganizationResponse
       include Smithy::Client::_Response[Types::EnableNotificationsAccessForOrganizationResponse]
     end
@@ -212,6 +228,7 @@ module Aws::Notifications
       def status: () -> String?
       def creation_time: () -> Time?
       def aggregation_duration: () -> String?
+      def subtype: () -> String?
     end
     def get_notification_configuration: (
       ?arn: String
@@ -311,6 +328,20 @@ module Aws::Notifications
       ?related_account: String
     ) -> _ListManagedNotificationEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedNotificationEventsResponse
 
+    interface _ListMemberAccountsResponse
+      include Smithy::Client::_Response[Types::ListMemberAccountsResponse]
+      def member_accounts: () -> Array[Types::MemberAccount]?
+      def next_token: () -> String?
+    end
+    def list_member_accounts: (
+      ?notification_configuration_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?member_account: String,
+      ?status: String,
+      ?organizational_unit_id: String
+    ) -> _ListMemberAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMemberAccountsResponse
+
     interface _ListNotificationConfigurationsResponse
       include Smithy::Client::_Response[Types::ListNotificationConfigurationsResponse]
       def next_token: () -> String?
@@ -320,6 +351,7 @@ module Aws::Notifications
       ?event_rule_source: String,
       ?channel_arn: String,
       ?status: String,
+      ?subtype: String,
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListNotificationConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationConfigurationsResponse
@@ -337,7 +369,8 @@ module Aws::Notifications
       ?include_child_events: bool,
       ?aggregate_notification_event_arn: String,
       ?max_results: Integer,
-      ?next_token: String
+      ?next_token: String,
+      ?organizational_unit_id: String
     ) -> _ListNotificationEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationEventsResponse
 
     interface _ListNotificationHubsResponse
@@ -349,6 +382,17 @@ module Aws::Notifications
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListNotificationHubsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationHubsResponse
+
+    interface _ListOrganizationalUnitsResponse
+      include Smithy::Client::_Response[Types::ListOrganizationalUnitsResponse]
+      def organizational_units: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_organizational_units: (
+      ?notification_configuration_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOrganizationalUnitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationalUnitsResponse
 
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]

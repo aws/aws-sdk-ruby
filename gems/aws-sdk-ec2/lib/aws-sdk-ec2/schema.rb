@@ -188,6 +188,7 @@ module Aws::EC2
     AttachVpnGatewayResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#AttachVpnGatewayResult', name: 'AttachVpnGatewayResult')
     AttachmentEnaSrdSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#AttachmentEnaSrdSpecification', name: 'AttachmentEnaSrdSpecification')
     AttachmentEnaSrdUdpSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#AttachmentEnaSrdUdpSpecification', name: 'AttachmentEnaSrdUdpSpecification')
+    AttachmentLimitType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#AttachmentLimitType', name: 'AttachmentLimitType')
     AttachmentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#AttachmentStatus', name: 'AttachmentStatus')
     AttributeBooleanValue = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#AttributeBooleanValue', name: 'AttributeBooleanValue')
     AttributeSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#AttributeSummary', name: 'AttributeSummary')
@@ -491,6 +492,8 @@ module Aws::EC2
     CreateFpgaImageResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#CreateFpgaImageResult', name: 'CreateFpgaImageResult')
     CreateImageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#CreateImageRequest', name: 'CreateImageRequest')
     CreateImageResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#CreateImageResult', name: 'CreateImageResult')
+    CreateImageUsageReportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#CreateImageUsageReportRequest', name: 'CreateImageUsageReportRequest')
+    CreateImageUsageReportResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#CreateImageUsageReportResult', name: 'CreateImageUsageReportResult')
     CreateInstanceConnectEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#CreateInstanceConnectEndpointRequest', name: 'CreateInstanceConnectEndpointRequest')
     CreateInstanceConnectEndpointResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#CreateInstanceConnectEndpointResult', name: 'CreateInstanceConnectEndpointResult')
     CreateInstanceEventWindowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#CreateInstanceEventWindowRequest', name: 'CreateInstanceEventWindowRequest')
@@ -710,6 +713,8 @@ module Aws::EC2
     DeleteFlowLogsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DeleteFlowLogsResult', name: 'DeleteFlowLogsResult')
     DeleteFpgaImageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DeleteFpgaImageRequest', name: 'DeleteFpgaImageRequest')
     DeleteFpgaImageResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DeleteFpgaImageResult', name: 'DeleteFpgaImageResult')
+    DeleteImageUsageReportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DeleteImageUsageReportRequest', name: 'DeleteImageUsageReportRequest')
+    DeleteImageUsageReportResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DeleteImageUsageReportResult', name: 'DeleteImageUsageReportResult')
     DeleteInstanceConnectEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DeleteInstanceConnectEndpointRequest', name: 'DeleteInstanceConnectEndpointRequest')
     DeleteInstanceConnectEndpointResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DeleteInstanceConnectEndpointResult', name: 'DeleteInstanceConnectEndpointResult')
     DeleteInstanceEventWindowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DeleteInstanceEventWindowRequest', name: 'DeleteInstanceEventWindowRequest')
@@ -991,6 +996,17 @@ module Aws::EC2
     DescribeIdentityIdFormatResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeIdentityIdFormatResult', name: 'DescribeIdentityIdFormatResult')
     DescribeImageAttributeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImageAttributeOutput', name: 'DescribeImageAttributeOutput')
     DescribeImageAttributeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImageAttributeRequest', name: 'DescribeImageAttributeRequest')
+    DescribeImageReferencesImageIdStringList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#DescribeImageReferencesImageIdStringList', name: 'DescribeImageReferencesImageIdStringList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    DescribeImageReferencesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#DescribeImageReferencesMaxResults', name: 'DescribeImageReferencesMaxResults', traits: {"smithy.api#range" => {"min" => 5}})
+    DescribeImageReferencesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImageReferencesRequest', name: 'DescribeImageReferencesRequest')
+    DescribeImageReferencesResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImageReferencesResult', name: 'DescribeImageReferencesResult')
+    DescribeImageUsageReportEntriesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#DescribeImageUsageReportEntriesMaxResults', name: 'DescribeImageUsageReportEntriesMaxResults', traits: {"smithy.api#range" => {"min" => 1}})
+    DescribeImageUsageReportEntriesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImageUsageReportEntriesRequest', name: 'DescribeImageUsageReportEntriesRequest')
+    DescribeImageUsageReportEntriesResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImageUsageReportEntriesResult', name: 'DescribeImageUsageReportEntriesResult')
+    DescribeImageUsageReportsImageIdStringList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#DescribeImageUsageReportsImageIdStringList', name: 'DescribeImageUsageReportsImageIdStringList', traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    DescribeImageUsageReportsMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#DescribeImageUsageReportsMaxResults', name: 'DescribeImageUsageReportsMaxResults', traits: {"smithy.api#range" => {"min" => 1}})
+    DescribeImageUsageReportsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImageUsageReportsRequest', name: 'DescribeImageUsageReportsRequest')
+    DescribeImageUsageReportsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImageUsageReportsResult', name: 'DescribeImageUsageReportsResult')
     DescribeImagesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImagesRequest', name: 'DescribeImagesRequest')
     DescribeImagesResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImagesResult', name: 'DescribeImagesResult')
     DescribeImportImageTasksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#DescribeImportImageTasksRequest', name: 'DescribeImportImageTasksRequest')
@@ -1500,6 +1516,7 @@ module Aws::EC2
     EnclaveOptionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#EnclaveOptionsRequest', name: 'EnclaveOptionsRequest')
     EncryptionInTransitSupported = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.ec2#EncryptionInTransitSupported', name: 'EncryptionInTransitSupported')
     EndDateType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#EndDateType', name: 'EndDateType')
+    EndpointIpAddressType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#EndpointIpAddressType', name: 'EndpointIpAddressType')
     EndpointSet = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#EndpointSet', name: 'EndpointSet')
     EphemeralNvmeSupport = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#EphemeralNvmeSupport', name: 'EphemeralNvmeSupport')
     ErrorSet = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ErrorSet', name: 'ErrorSet')
@@ -1812,8 +1829,32 @@ module Aws::EC2
     ImageProviderRequestList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageProviderRequestList', name: 'ImageProviderRequestList')
     ImageRecycleBinInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ImageRecycleBinInfo', name: 'ImageRecycleBinInfo')
     ImageRecycleBinInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageRecycleBinInfoList', name: 'ImageRecycleBinInfoList')
+    ImageReference = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ImageReference', name: 'ImageReference')
+    ImageReferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageReferenceList', name: 'ImageReferenceList')
+    ImageReferenceOptionName = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#ImageReferenceOptionName', name: 'ImageReferenceOptionName')
+    ImageReferenceResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#ImageReferenceResourceType', name: 'ImageReferenceResourceType')
     ImageState = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#ImageState', name: 'ImageState')
     ImageTypeValues = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#ImageTypeValues', name: 'ImageTypeValues')
+    ImageUsageReport = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ImageUsageReport', name: 'ImageUsageReport')
+    ImageUsageReportEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ImageUsageReportEntry', name: 'ImageUsageReportEntry')
+    ImageUsageReportEntryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageUsageReportEntryList', name: 'ImageUsageReportEntryList')
+    ImageUsageReportId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ec2#ImageUsageReportId', name: 'ImageUsageReportId')
+    ImageUsageReportIdStringList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageUsageReportIdStringList', name: 'ImageUsageReportIdStringList', traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    ImageUsageReportList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageUsageReportList', name: 'ImageUsageReportList')
+    ImageUsageReportState = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ec2#ImageUsageReportState', name: 'ImageUsageReportState')
+    ImageUsageReportStateReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ec2#ImageUsageReportStateReason', name: 'ImageUsageReportStateReason')
+    ImageUsageReportUserIdStringList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageUsageReportUserIdStringList', name: 'ImageUsageReportUserIdStringList', traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    ImageUsageResourceType = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceType', name: 'ImageUsageResourceType')
+    ImageUsageResourceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceTypeList', name: 'ImageUsageResourceTypeList')
+    ImageUsageResourceTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceTypeName', name: 'ImageUsageResourceTypeName')
+    ImageUsageResourceTypeOption = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceTypeOption', name: 'ImageUsageResourceTypeOption')
+    ImageUsageResourceTypeOptionList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceTypeOptionList', name: 'ImageUsageResourceTypeOptionList')
+    ImageUsageResourceTypeOptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceTypeOptionRequest', name: 'ImageUsageResourceTypeOptionRequest')
+    ImageUsageResourceTypeOptionRequestList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceTypeOptionRequestList', name: 'ImageUsageResourceTypeOptionRequestList')
+    ImageUsageResourceTypeOptionValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceTypeOptionValue', name: 'ImageUsageResourceTypeOptionValue')
+    ImageUsageResourceTypeOptionValuesList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceTypeOptionValuesList', name: 'ImageUsageResourceTypeOptionValuesList')
+    ImageUsageResourceTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceTypeRequest', name: 'ImageUsageResourceTypeRequest')
+    ImageUsageResourceTypeRequestList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ImageUsageResourceTypeRequestList', name: 'ImageUsageResourceTypeRequestList')
     ImdsSupportValues = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#ImdsSupportValues', name: 'ImdsSupportValues')
     ImportClientVpnClientCertificateRevocationListRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ImportClientVpnClientCertificateRevocationListRequest', name: 'ImportClientVpnClientCertificateRevocationListRequest')
     ImportClientVpnClientCertificateRevocationListResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ImportClientVpnClientCertificateRevocationListResult', name: 'ImportClientVpnClientCertificateRevocationListResult')
@@ -1869,8 +1910,10 @@ module Aws::EC2
     InstanceBlockDeviceMappingSpecificationList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#InstanceBlockDeviceMappingSpecificationList', name: 'InstanceBlockDeviceMappingSpecificationList')
     InstanceBootModeValues = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#InstanceBootModeValues', name: 'InstanceBootModeValues')
     InstanceCapacity = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#InstanceCapacity', name: 'InstanceCapacity')
+    InstanceConnectEndpointDnsNames = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#InstanceConnectEndpointDnsNames', name: 'InstanceConnectEndpointDnsNames')
     InstanceConnectEndpointId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ec2#InstanceConnectEndpointId', name: 'InstanceConnectEndpointId')
     InstanceConnectEndpointMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#InstanceConnectEndpointMaxResults', name: 'InstanceConnectEndpointMaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
+    InstanceConnectEndpointPublicDnsNames = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#InstanceConnectEndpointPublicDnsNames', name: 'InstanceConnectEndpointPublicDnsNames')
     InstanceConnectEndpointSet = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#InstanceConnectEndpointSet', name: 'InstanceConnectEndpointSet')
     InstanceCount = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#InstanceCount', name: 'InstanceCount')
     InstanceCountList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#InstanceCountList', name: 'InstanceCountList')
@@ -2292,6 +2335,7 @@ module Aws::EC2
     MaxResults2 = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#MaxResults2', name: 'MaxResults2', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxResultsParam = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#MaxResultsParam', name: 'MaxResultsParam', traits: {"smithy.api#range" => {"min" => 0, "max" => 100}})
     MaximumBandwidthInMbps = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#MaximumBandwidthInMbps', name: 'MaximumBandwidthInMbps')
+    MaximumEbsAttachments = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#MaximumEbsAttachments', name: 'MaximumEbsAttachments')
     MaximumEfaInterfaces = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#MaximumEfaInterfaces', name: 'MaximumEfaInterfaces')
     MaximumEnaQueueCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#MaximumEnaQueueCount', name: 'MaximumEnaQueueCount')
     MaximumEnaQueueCountPerInterface = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#MaximumEnaQueueCountPerInterface', name: 'MaximumEnaQueueCountPerInterface')
@@ -2345,6 +2389,8 @@ module Aws::EC2
     ModifyInstanceAttributeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ModifyInstanceAttributeRequest', name: 'ModifyInstanceAttributeRequest')
     ModifyInstanceCapacityReservationAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ModifyInstanceCapacityReservationAttributesRequest', name: 'ModifyInstanceCapacityReservationAttributesRequest')
     ModifyInstanceCapacityReservationAttributesResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ModifyInstanceCapacityReservationAttributesResult', name: 'ModifyInstanceCapacityReservationAttributesResult')
+    ModifyInstanceConnectEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ModifyInstanceConnectEndpointRequest', name: 'ModifyInstanceConnectEndpointRequest')
+    ModifyInstanceConnectEndpointResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ModifyInstanceConnectEndpointResult', name: 'ModifyInstanceConnectEndpointResult')
     ModifyInstanceCpuOptionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ModifyInstanceCpuOptionsRequest', name: 'ModifyInstanceCpuOptionsRequest')
     ModifyInstanceCpuOptionsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ModifyInstanceCpuOptionsResult', name: 'ModifyInstanceCpuOptionsResult')
     ModifyInstanceCreditSpecificationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ModifyInstanceCreditSpecificationRequest', name: 'ModifyInstanceCreditSpecificationRequest')
@@ -2882,6 +2928,12 @@ module Aws::EC2
     ResourceStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ResourceStatement', name: 'ResourceStatement')
     ResourceStatementRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ResourceStatementRequest', name: 'ResourceStatementRequest')
     ResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#ResourceType', name: 'ResourceType')
+    ResourceTypeOption = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ResourceTypeOption', name: 'ResourceTypeOption')
+    ResourceTypeOptionList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ResourceTypeOptionList', name: 'ResourceTypeOptionList')
+    ResourceTypeOptionValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ec2#ResourceTypeOptionValue', name: 'ResourceTypeOptionValue')
+    ResourceTypeOptionValuesList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ResourceTypeOptionValuesList', name: 'ResourceTypeOptionValuesList')
+    ResourceTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ResourceTypeRequest', name: 'ResourceTypeRequest')
+    ResourceTypeRequestList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ResourceTypeRequestList', name: 'ResourceTypeRequestList')
     ResponseError = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#ResponseError', name: 'ResponseError')
     ResponseHostIdList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ResponseHostIdList', name: 'ResponseHostIdList')
     ResponseHostIdSet = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#ResponseHostIdSet', name: 'ResponseHostIdSet')
@@ -3220,6 +3272,7 @@ module Aws::EC2
     TotalNeuronMemory = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#TotalNeuronMemory', name: 'TotalNeuronMemory')
     TpmSupportValues = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#TpmSupportValues', name: 'TpmSupportValues')
     TrafficDirection = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#TrafficDirection', name: 'TrafficDirection')
+    TrafficIpAddressType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#TrafficIpAddressType', name: 'TrafficIpAddressType')
     TrafficMirrorFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#TrafficMirrorFilter', name: 'TrafficMirrorFilter')
     TrafficMirrorFilterId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ec2#TrafficMirrorFilterId', name: 'TrafficMirrorFilterId')
     TrafficMirrorFilterIdList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#TrafficMirrorFilterIdList', name: 'TrafficMirrorFilterIdList')
@@ -3386,6 +3439,7 @@ module Aws::EC2
     UserIdGroupPair = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ec2#UserIdGroupPair', name: 'UserIdGroupPair')
     UserIdGroupPairList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#UserIdGroupPairList', name: 'UserIdGroupPairList')
     UserIdGroupPairSet = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#UserIdGroupPairSet', name: 'UserIdGroupPairSet')
+    UserIdList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#UserIdList', name: 'UserIdList')
     UserIdStringList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ec2#UserIdStringList', name: 'UserIdStringList')
     UserTrustProviderType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ec2#UserTrustProviderType', name: 'UserTrustProviderType')
     VCpuCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ec2#VCpuCount', name: 'VCpuCount')
@@ -4211,6 +4265,8 @@ module Aws::EC2
     AttachmentEnaSrdSpecification.type = Types::AttachmentEnaSrdSpecification
     AttachmentEnaSrdUdpSpecification.add_member(:ena_srd_udp_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'EnaSrdUdpEnabled', traits: {"aws.protocols#ec2QueryName" => "EnaSrdUdpEnabled", "smithy.api#xmlName" => "enaSrdUdpEnabled"}))
     AttachmentEnaSrdUdpSpecification.type = Types::AttachmentEnaSrdUdpSpecification
+    AttachmentLimitType.add_member(:shared, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SHARED', traits: {"smithy.api#enumValue" => "shared"}))
+    AttachmentLimitType.add_member(:dedicated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DEDICATED', traits: {"smithy.api#enumValue" => "dedicated"}))
     AttachmentStatus.add_member(:attaching, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'attaching', traits: {"smithy.api#enumValue" => "attaching"}))
     AttachmentStatus.add_member(:attached, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'attached', traits: {"smithy.api#enumValue" => "attached"}))
     AttachmentStatus.add_member(:detaching, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'detaching', traits: {"smithy.api#enumValue" => "detaching"}))
@@ -4827,6 +4883,7 @@ module Aws::EC2
     ClientVpnConnection.add_member(:ingress_packets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'IngressPackets', traits: {"aws.protocols#ec2QueryName" => "IngressPackets", "smithy.api#xmlName" => "ingressPackets"}))
     ClientVpnConnection.add_member(:egress_packets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'EgressPackets', traits: {"aws.protocols#ec2QueryName" => "EgressPackets", "smithy.api#xmlName" => "egressPackets"}))
     ClientVpnConnection.add_member(:client_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ClientIp', traits: {"aws.protocols#ec2QueryName" => "ClientIp", "smithy.api#xmlName" => "clientIp"}))
+    ClientVpnConnection.add_member(:client_ipv6_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ClientIpv6Address', traits: {"aws.protocols#ec2QueryName" => "ClientIpv6Address", "smithy.api#xmlName" => "clientIpv6Address"}))
     ClientVpnConnection.add_member(:common_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'CommonName', traits: {"aws.protocols#ec2QueryName" => "CommonName", "smithy.api#xmlName" => "commonName"}))
     ClientVpnConnection.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientVpnConnectionStatus, location_name: 'Status', traits: {"aws.protocols#ec2QueryName" => "Status", "smithy.api#xmlName" => "status"}))
     ClientVpnConnection.add_member(:connection_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ConnectionEndTime', traits: {"aws.protocols#ec2QueryName" => "ConnectionEndTime", "smithy.api#xmlName" => "connectionEndTime"}))
@@ -4865,6 +4922,8 @@ module Aws::EC2
     ClientVpnEndpoint.add_member(:client_login_banner_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLoginBannerResponseOptions, location_name: 'ClientLoginBannerOptions', traits: {"aws.protocols#ec2QueryName" => "ClientLoginBannerOptions", "smithy.api#xmlName" => "clientLoginBannerOptions"}))
     ClientVpnEndpoint.add_member(:client_route_enforcement_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRouteEnforcementResponseOptions, location_name: 'ClientRouteEnforcementOptions', traits: {"aws.protocols#ec2QueryName" => "ClientRouteEnforcementOptions", "smithy.api#xmlName" => "clientRouteEnforcementOptions"}))
     ClientVpnEndpoint.add_member(:disconnect_on_session_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DisconnectOnSessionTimeout', traits: {"aws.protocols#ec2QueryName" => "DisconnectOnSessionTimeout", "smithy.api#xmlName" => "disconnectOnSessionTimeout"}))
+    ClientVpnEndpoint.add_member(:endpoint_ip_address_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointIpAddressType, location_name: 'EndpointIpAddressType', traits: {"aws.protocols#ec2QueryName" => "EndpointIpAddressType", "smithy.api#xmlName" => "endpointIpAddressType"}))
+    ClientVpnEndpoint.add_member(:traffic_ip_address_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficIpAddressType, location_name: 'TrafficIpAddressType', traits: {"aws.protocols#ec2QueryName" => "TrafficIpAddressType", "smithy.api#xmlName" => "trafficIpAddressType"}))
     ClientVpnEndpoint.type = Types::ClientVpnEndpoint
     ClientVpnEndpointAttributeStatus.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientVpnEndpointAttributeStatusCode, location_name: 'Code', traits: {"aws.protocols#ec2QueryName" => "Code", "smithy.api#xmlName" => "code"}))
     ClientVpnEndpointAttributeStatus.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Message', traits: {"aws.protocols#ec2QueryName" => "Message", "smithy.api#xmlName" => "message"}))
@@ -5003,6 +5062,8 @@ module Aws::EC2
     CopyImageRequest.add_member(:copy_image_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'CopyImageTags'))
     CopyImageRequest.add_member(:tag_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: 'TagSpecifications', traits: {"smithy.api#xmlName" => "TagSpecification"}))
     CopyImageRequest.add_member(:snapshot_copy_completion_duration_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: 'SnapshotCopyCompletionDurationMinutes'))
+    CopyImageRequest.add_member(:destination_availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DestinationAvailabilityZone'))
+    CopyImageRequest.add_member(:destination_availability_zone_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DestinationAvailabilityZoneId'))
     CopyImageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun', traits: {"aws.protocols#ec2QueryName" => "DryRun", "smithy.api#xmlName" => "dryRun"}))
     CopyImageRequest.type = Types::CopyImageRequest
     CopyImageResult.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ImageId', traits: {"aws.protocols#ec2QueryName" => "ImageId", "smithy.api#xmlName" => "imageId"}))
@@ -5017,6 +5078,7 @@ module Aws::EC2
     CopySnapshotRequest.add_member(:source_snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SourceSnapshotId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CopySnapshotRequest.add_member(:tag_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: 'TagSpecifications', traits: {"smithy.api#xmlName" => "TagSpecification"}))
     CopySnapshotRequest.add_member(:completion_duration_minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotCompletionDurationMinutesRequest, location_name: 'CompletionDurationMinutes'))
+    CopySnapshotRequest.add_member(:destination_availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DestinationAvailabilityZone'))
     CopySnapshotRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun', traits: {"aws.protocols#ec2QueryName" => "DryRun", "smithy.api#xmlName" => "dryRun"}))
     CopySnapshotRequest.type = Types::CopySnapshotRequest
     CopySnapshotResult.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags', traits: {"aws.protocols#ec2QueryName" => "TagSet", "smithy.api#xmlName" => "tagSet"}))
@@ -5102,7 +5164,7 @@ module Aws::EC2
     CreateCarrierGatewayRequest.type = Types::CreateCarrierGatewayRequest
     CreateCarrierGatewayResult.add_member(:carrier_gateway, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CarrierGateway, location_name: 'CarrierGateway', traits: {"aws.protocols#ec2QueryName" => "CarrierGateway", "smithy.api#xmlName" => "carrierGateway"}))
     CreateCarrierGatewayResult.type = Types::CreateCarrierGatewayResult
-    CreateClientVpnEndpointRequest.add_member(:client_cidr_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ClientCidrBlock', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateClientVpnEndpointRequest.add_member(:client_cidr_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ClientCidrBlock'))
     CreateClientVpnEndpointRequest.add_member(:server_certificate_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ServerCertificateArn', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateClientVpnEndpointRequest.add_member(:authentication_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientVpnAuthenticationRequestList, location_name: 'AuthenticationOptions', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "Authentication"}))
     CreateClientVpnEndpointRequest.add_member(:connection_log_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionLogOptions, location_name: 'ConnectionLogOptions', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -5122,6 +5184,8 @@ module Aws::EC2
     CreateClientVpnEndpointRequest.add_member(:client_login_banner_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientLoginBannerOptions, location_name: 'ClientLoginBannerOptions'))
     CreateClientVpnEndpointRequest.add_member(:client_route_enforcement_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientRouteEnforcementOptions, location_name: 'ClientRouteEnforcementOptions'))
     CreateClientVpnEndpointRequest.add_member(:disconnect_on_session_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DisconnectOnSessionTimeout'))
+    CreateClientVpnEndpointRequest.add_member(:endpoint_ip_address_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointIpAddressType, location_name: 'EndpointIpAddressType'))
+    CreateClientVpnEndpointRequest.add_member(:traffic_ip_address_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficIpAddressType, location_name: 'TrafficIpAddressType'))
     CreateClientVpnEndpointRequest.type = Types::CreateClientVpnEndpointRequest
     CreateClientVpnEndpointResult.add_member(:client_vpn_endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ClientVpnEndpointId', traits: {"aws.protocols#ec2QueryName" => "ClientVpnEndpointId", "smithy.api#xmlName" => "clientVpnEndpointId"}))
     CreateClientVpnEndpointResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientVpnEndpointStatus, location_name: 'Status', traits: {"aws.protocols#ec2QueryName" => "Status", "smithy.api#xmlName" => "status"}))
@@ -5266,6 +5330,15 @@ module Aws::EC2
     CreateImageRequest.type = Types::CreateImageRequest
     CreateImageResult.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ImageId', traits: {"aws.protocols#ec2QueryName" => "ImageId", "smithy.api#xmlName" => "imageId"}))
     CreateImageResult.type = Types::CreateImageResult
+    CreateImageUsageReportRequest.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageId, location_name: 'ImageId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateImageUsageReportRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun'))
+    CreateImageUsageReportRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeRequestList, location_name: 'ResourceTypes', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "ResourceType"}))
+    CreateImageUsageReportRequest.add_member(:account_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportUserIdStringList, location_name: 'AccountIds', traits: {"smithy.api#xmlName" => "AccountId"}))
+    CreateImageUsageReportRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ClientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateImageUsageReportRequest.add_member(:tag_specifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: 'TagSpecifications', traits: {"smithy.api#xmlName" => "TagSpecification"}))
+    CreateImageUsageReportRequest.type = Types::CreateImageUsageReportRequest
+    CreateImageUsageReportResult.add_member(:report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportId, location_name: 'ReportId', traits: {"aws.protocols#ec2QueryName" => "ReportId", "smithy.api#xmlName" => "reportId"}))
+    CreateImageUsageReportResult.type = Types::CreateImageUsageReportResult
     CreateInstanceConnectEndpointRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun'))
     CreateInstanceConnectEndpointRequest.add_member(:subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: 'SubnetId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateInstanceConnectEndpointRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIdStringListRequest, location_name: 'SecurityGroupIds', traits: {"smithy.api#xmlName" => "SecurityGroupId"}))
@@ -6258,6 +6331,11 @@ module Aws::EC2
     DeleteFpgaImageRequest.type = Types::DeleteFpgaImageRequest
     DeleteFpgaImageResult.add_member(:return, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Return', traits: {"aws.protocols#ec2QueryName" => "Return", "smithy.api#xmlName" => "return"}))
     DeleteFpgaImageResult.type = Types::DeleteFpgaImageResult
+    DeleteImageUsageReportRequest.add_member(:report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportId, location_name: 'ReportId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteImageUsageReportRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun'))
+    DeleteImageUsageReportRequest.type = Types::DeleteImageUsageReportRequest
+    DeleteImageUsageReportResult.add_member(:return, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Return', traits: {"aws.protocols#ec2QueryName" => "Return", "smithy.api#xmlName" => "return"}))
+    DeleteImageUsageReportResult.type = Types::DeleteImageUsageReportResult
     DeleteInstanceConnectEndpointRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun'))
     DeleteInstanceConnectEndpointRequest.add_member(:instance_connect_endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceConnectEndpointId, location_name: 'InstanceConnectEndpointId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteInstanceConnectEndpointRequest.type = Types::DeleteInstanceConnectEndpointRequest
@@ -7128,6 +7206,38 @@ module Aws::EC2
     DescribeImageAttributeRequest.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageId, location_name: 'ImageId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeImageAttributeRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun', traits: {"aws.protocols#ec2QueryName" => "DryRun", "smithy.api#xmlName" => "dryRun"}))
     DescribeImageAttributeRequest.type = Types::DescribeImageAttributeRequest
+    DescribeImageReferencesImageIdStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageId)
+    DescribeImageReferencesRequest.add_member(:image_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageReferencesImageIdStringList, location_name: 'ImageIds', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "ImageId"}))
+    DescribeImageReferencesRequest.add_member(:include_all_resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'IncludeAllResourceTypes'))
+    DescribeImageReferencesRequest.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeRequestList, location_name: 'ResourceTypes', traits: {"smithy.api#xmlName" => "ResourceType"}))
+    DescribeImageReferencesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken'))
+    DescribeImageReferencesRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun'))
+    DescribeImageReferencesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageReferencesMaxResults, location_name: 'MaxResults'))
+    DescribeImageReferencesRequest.type = Types::DescribeImageReferencesRequest
+    DescribeImageReferencesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken', traits: {"aws.protocols#ec2QueryName" => "NextToken", "smithy.api#xmlName" => "nextToken"}))
+    DescribeImageReferencesResult.add_member(:image_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageReferenceList, location_name: 'ImageReferences', traits: {"aws.protocols#ec2QueryName" => "ImageReferenceSet", "smithy.api#xmlName" => "imageReferenceSet"}))
+    DescribeImageReferencesResult.type = Types::DescribeImageReferencesResult
+    DescribeImageUsageReportEntriesRequest.add_member(:image_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageUsageReportsImageIdStringList, location_name: 'ImageIds', traits: {"smithy.api#xmlName" => "ImageId"}))
+    DescribeImageUsageReportEntriesRequest.add_member(:report_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportIdStringList, location_name: 'ReportIds', traits: {"smithy.api#xmlName" => "ReportId"}))
+    DescribeImageUsageReportEntriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken'))
+    DescribeImageUsageReportEntriesRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: 'Filters', traits: {"smithy.api#xmlName" => "Filter"}))
+    DescribeImageUsageReportEntriesRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun'))
+    DescribeImageUsageReportEntriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageUsageReportEntriesMaxResults, location_name: 'MaxResults'))
+    DescribeImageUsageReportEntriesRequest.type = Types::DescribeImageUsageReportEntriesRequest
+    DescribeImageUsageReportEntriesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken', traits: {"aws.protocols#ec2QueryName" => "NextToken", "smithy.api#xmlName" => "nextToken"}))
+    DescribeImageUsageReportEntriesResult.add_member(:image_usage_report_entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportEntryList, location_name: 'ImageUsageReportEntries', traits: {"aws.protocols#ec2QueryName" => "ImageUsageReportEntrySet", "smithy.api#xmlName" => "imageUsageReportEntrySet"}))
+    DescribeImageUsageReportEntriesResult.type = Types::DescribeImageUsageReportEntriesResult
+    DescribeImageUsageReportsImageIdStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageId)
+    DescribeImageUsageReportsRequest.add_member(:image_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageUsageReportsImageIdStringList, location_name: 'ImageIds', traits: {"smithy.api#xmlName" => "ImageId"}))
+    DescribeImageUsageReportsRequest.add_member(:report_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportIdStringList, location_name: 'ReportIds', traits: {"smithy.api#xmlName" => "ReportId"}))
+    DescribeImageUsageReportsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken'))
+    DescribeImageUsageReportsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: 'Filters', traits: {"smithy.api#xmlName" => "Filter"}))
+    DescribeImageUsageReportsRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun'))
+    DescribeImageUsageReportsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageUsageReportsMaxResults, location_name: 'MaxResults'))
+    DescribeImageUsageReportsRequest.type = Types::DescribeImageUsageReportsRequest
+    DescribeImageUsageReportsResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken', traits: {"aws.protocols#ec2QueryName" => "NextToken", "smithy.api#xmlName" => "nextToken"}))
+    DescribeImageUsageReportsResult.add_member(:image_usage_reports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportList, location_name: 'ImageUsageReports', traits: {"aws.protocols#ec2QueryName" => "ImageUsageReportSet", "smithy.api#xmlName" => "imageUsageReportSet"}))
+    DescribeImageUsageReportsResult.type = Types::DescribeImageUsageReportsResult
     DescribeImagesRequest.add_member(:executable_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutableByStringList, location_name: 'ExecutableUsers', traits: {"smithy.api#xmlName" => "ExecutableBy"}))
     DescribeImagesRequest.add_member(:image_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageIdStringList, location_name: 'ImageIds', traits: {"smithy.api#xmlName" => "ImageId"}))
     DescribeImagesRequest.add_member(:owners, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnerStringList, location_name: 'Owners', traits: {"smithy.api#xmlName" => "Owner"}))
@@ -8615,6 +8725,8 @@ module Aws::EC2
     EbsInfo.add_member(:encryption_support, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EbsEncryptionSupport, location_name: 'EncryptionSupport', traits: {"aws.protocols#ec2QueryName" => "EncryptionSupport", "smithy.api#xmlName" => "encryptionSupport"}))
     EbsInfo.add_member(:ebs_optimized_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EbsOptimizedInfo, location_name: 'EbsOptimizedInfo', traits: {"aws.protocols#ec2QueryName" => "EbsOptimizedInfo", "smithy.api#xmlName" => "ebsOptimizedInfo"}))
     EbsInfo.add_member(:nvme_support, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EbsNvmeSupport, location_name: 'NvmeSupport', traits: {"aws.protocols#ec2QueryName" => "NvmeSupport", "smithy.api#xmlName" => "nvmeSupport"}))
+    EbsInfo.add_member(:maximum_ebs_attachments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumEbsAttachments, location_name: 'MaximumEbsAttachments', traits: {"aws.protocols#ec2QueryName" => "MaximumEbsAttachments", "smithy.api#xmlName" => "maximumEbsAttachments"}))
+    EbsInfo.add_member(:attachment_limit_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttachmentLimitType, location_name: 'AttachmentLimitType', traits: {"aws.protocols#ec2QueryName" => "AttachmentLimitType", "smithy.api#xmlName" => "attachmentLimitType"}))
     EbsInfo.type = Types::EbsInfo
     EbsInstanceBlockDevice.add_member(:attach_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTime, location_name: 'AttachTime', traits: {"aws.protocols#ec2QueryName" => "AttachTime", "smithy.api#xmlName" => "attachTime"}))
     EbsInstanceBlockDevice.add_member(:delete_on_termination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DeleteOnTermination', traits: {"aws.protocols#ec2QueryName" => "DeleteOnTermination", "smithy.api#xmlName" => "deleteOnTermination"}))
@@ -8664,6 +8776,7 @@ module Aws::EC2
     Ec2InstanceConnectEndpoint.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIdSet, location_name: 'SecurityGroupIds', traits: {"aws.protocols#ec2QueryName" => "SecurityGroupIdSet", "smithy.api#xmlName" => "securityGroupIdSet"}))
     Ec2InstanceConnectEndpoint.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags', traits: {"aws.protocols#ec2QueryName" => "TagSet", "smithy.api#xmlName" => "tagSet"}))
     Ec2InstanceConnectEndpoint.add_member(:ip_address_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddressType, location_name: 'IpAddressType', traits: {"aws.protocols#ec2QueryName" => "IpAddressType", "smithy.api#xmlName" => "ipAddressType"}))
+    Ec2InstanceConnectEndpoint.add_member(:public_dns_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceConnectEndpointPublicDnsNames, location_name: 'PublicDnsNames', traits: {"aws.protocols#ec2QueryName" => "PublicDnsNames", "smithy.api#xmlName" => "publicDnsNames"}))
     Ec2InstanceConnectEndpoint.type = Types::Ec2InstanceConnectEndpoint
     Ec2InstanceConnectEndpointState.add_member(:create_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'create_in_progress', traits: {"smithy.api#enumValue" => "create-in-progress"}))
     Ec2InstanceConnectEndpointState.add_member(:create_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'create_complete', traits: {"smithy.api#enumValue" => "create-complete"}))
@@ -8671,6 +8784,9 @@ module Aws::EC2
     Ec2InstanceConnectEndpointState.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'delete_in_progress', traits: {"smithy.api#enumValue" => "delete-in-progress"}))
     Ec2InstanceConnectEndpointState.add_member(:delete_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'delete_complete', traits: {"smithy.api#enumValue" => "delete-complete"}))
     Ec2InstanceConnectEndpointState.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'delete_failed', traits: {"smithy.api#enumValue" => "delete-failed"}))
+    Ec2InstanceConnectEndpointState.add_member(:update_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'update_in_progress', traits: {"smithy.api#enumValue" => "update-in-progress"}))
+    Ec2InstanceConnectEndpointState.add_member(:update_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'update_complete', traits: {"smithy.api#enumValue" => "update-complete"}))
+    Ec2InstanceConnectEndpointState.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'update_failed', traits: {"smithy.api#enumValue" => "update-failed"}))
     EfaInfo.add_member(:maximum_efa_interfaces, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaximumEfaInterfaces, location_name: 'MaximumEfaInterfaces', traits: {"aws.protocols#ec2QueryName" => "MaximumEfaInterfaces", "smithy.api#xmlName" => "maximumEfaInterfaces"}))
     EfaInfo.type = Types::EfaInfo
     EgressOnlyInternetGateway.add_member(:attachments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternetGatewayAttachmentList, location_name: 'Attachments', traits: {"aws.protocols#ec2QueryName" => "AttachmentSet", "smithy.api#xmlName" => "attachmentSet"}))
@@ -8881,6 +8997,9 @@ module Aws::EC2
     EnclaveOptionsRequest.type = Types::EnclaveOptionsRequest
     EndDateType.add_member(:unlimited, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'unlimited', traits: {"smithy.api#enumValue" => "unlimited"}))
     EndDateType.add_member(:limited, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'limited', traits: {"smithy.api#enumValue" => "limited"}))
+    EndpointIpAddressType.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ipv4', traits: {"smithy.api#enumValue" => "ipv4"}))
+    EndpointIpAddressType.add_member(:ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ipv6', traits: {"smithy.api#enumValue" => "ipv6"}))
+    EndpointIpAddressType.add_member(:dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'dual_stack', traits: {"smithy.api#enumValue" => "dual-stack"}))
     EndpointSet.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientVpnEndpoint, traits: {"smithy.api#xmlName" => "item"})
     EphemeralNvmeSupport.add_member(:unsupported, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UNSUPPORTED', traits: {"smithy.api#enumValue" => "unsupported"}))
     EphemeralNvmeSupport.add_member(:supported, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SUPPORTED', traits: {"smithy.api#enumValue" => "supported"}))
@@ -10017,6 +10136,18 @@ module Aws::EC2
     ImageRecycleBinInfo.add_member(:recycle_bin_exit_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: 'RecycleBinExitTime', traits: {"aws.protocols#ec2QueryName" => "RecycleBinExitTime", "smithy.api#xmlName" => "recycleBinExitTime"}))
     ImageRecycleBinInfo.type = Types::ImageRecycleBinInfo
     ImageRecycleBinInfoList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageRecycleBinInfo, traits: {"smithy.api#xmlName" => "item"})
+    ImageReference.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageId, location_name: 'ImageId', traits: {"aws.protocols#ec2QueryName" => "ImageId", "smithy.api#xmlName" => "imageId"}))
+    ImageReference.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageReferenceResourceType, location_name: 'ResourceType', traits: {"aws.protocols#ec2QueryName" => "ResourceType", "smithy.api#xmlName" => "resourceType"}))
+    ImageReference.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Arn', traits: {"aws.protocols#ec2QueryName" => "Arn", "smithy.api#xmlName" => "arn"}))
+    ImageReference.type = Types::ImageReference
+    ImageReferenceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageReference, traits: {"smithy.api#xmlName" => "item"})
+    ImageReferenceOptionName.add_member(:state_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STATE_NAME', traits: {"smithy.api#enumValue" => "state-name"}))
+    ImageReferenceOptionName.add_member(:version_depth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'VERSION_DEPTH', traits: {"smithy.api#enumValue" => "version-depth"}))
+    ImageReferenceResourceType.add_member(:ec2_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EC2_INSTANCE', traits: {"smithy.api#enumValue" => "ec2:Instance"}))
+    ImageReferenceResourceType.add_member(:ec2_launch_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EC2_LAUNCH_TEMPLATE', traits: {"smithy.api#enumValue" => "ec2:LaunchTemplate"}))
+    ImageReferenceResourceType.add_member(:ssm_parameter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SSM_PARAMETER', traits: {"smithy.api#enumValue" => "ssm:Parameter"}))
+    ImageReferenceResourceType.add_member(:image_builder_image_recipe, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IMAGE_BUILDER_IMAGE_RECIPE', traits: {"smithy.api#enumValue" => "imagebuilder:ImageRecipe"}))
+    ImageReferenceResourceType.add_member(:image_builder_container_recipe, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IMAGE_BUILDER_CONTAINER_RECIPE', traits: {"smithy.api#enumValue" => "imagebuilder:ContainerRecipe"}))
     ImageState.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'pending', traits: {"smithy.api#enumValue" => "pending"}))
     ImageState.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'available', traits: {"smithy.api#enumValue" => "available"}))
     ImageState.add_member(:invalid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'invalid', traits: {"smithy.api#enumValue" => "invalid"}))
@@ -10028,6 +10159,44 @@ module Aws::EC2
     ImageTypeValues.add_member(:machine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'machine', traits: {"smithy.api#enumValue" => "machine"}))
     ImageTypeValues.add_member(:kernel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'kernel', traits: {"smithy.api#enumValue" => "kernel"}))
     ImageTypeValues.add_member(:ramdisk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ramdisk', traits: {"smithy.api#enumValue" => "ramdisk"}))
+    ImageUsageReport.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageId, location_name: 'ImageId', traits: {"aws.protocols#ec2QueryName" => "ImageId", "smithy.api#xmlName" => "imageId"}))
+    ImageUsageReport.add_member(:report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportId, location_name: 'ReportId', traits: {"aws.protocols#ec2QueryName" => "ReportId", "smithy.api#xmlName" => "reportId"}))
+    ImageUsageReport.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeList, location_name: 'ResourceTypes', traits: {"aws.protocols#ec2QueryName" => "ResourceTypeSet", "smithy.api#xmlName" => "resourceTypeSet"}))
+    ImageUsageReport.add_member(:account_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserIdList, location_name: 'AccountIds', traits: {"aws.protocols#ec2QueryName" => "AccountIdSet", "smithy.api#xmlName" => "accountIdSet"}))
+    ImageUsageReport.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportState, location_name: 'State', traits: {"aws.protocols#ec2QueryName" => "State", "smithy.api#xmlName" => "state"}))
+    ImageUsageReport.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportStateReason, location_name: 'StateReason', traits: {"aws.protocols#ec2QueryName" => "StateReason", "smithy.api#xmlName" => "stateReason"}))
+    ImageUsageReport.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: 'CreationTime', traits: {"aws.protocols#ec2QueryName" => "CreationTime", "smithy.api#xmlName" => "creationTime"}))
+    ImageUsageReport.add_member(:expiration_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: 'ExpirationTime', traits: {"aws.protocols#ec2QueryName" => "ExpirationTime", "smithy.api#xmlName" => "expirationTime"}))
+    ImageUsageReport.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags', traits: {"aws.protocols#ec2QueryName" => "TagSet", "smithy.api#xmlName" => "tagSet"}))
+    ImageUsageReport.type = Types::ImageUsageReport
+    ImageUsageReportEntry.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeName, location_name: 'ResourceType', traits: {"aws.protocols#ec2QueryName" => "ResourceType", "smithy.api#xmlName" => "resourceType"}))
+    ImageUsageReportEntry.add_member(:report_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportId, location_name: 'ReportId', traits: {"aws.protocols#ec2QueryName" => "ReportId", "smithy.api#xmlName" => "reportId"}))
+    ImageUsageReportEntry.add_member(:usage_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: 'UsageCount', traits: {"aws.protocols#ec2QueryName" => "UsageCount", "smithy.api#xmlName" => "usageCount"}))
+    ImageUsageReportEntry.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'AccountId', traits: {"aws.protocols#ec2QueryName" => "AccountId", "smithy.api#xmlName" => "accountId"}))
+    ImageUsageReportEntry.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageId, location_name: 'ImageId', traits: {"aws.protocols#ec2QueryName" => "ImageId", "smithy.api#xmlName" => "imageId"}))
+    ImageUsageReportEntry.add_member(:report_creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: 'ReportCreationTime', traits: {"aws.protocols#ec2QueryName" => "ReportCreationTime", "smithy.api#xmlName" => "reportCreationTime"}))
+    ImageUsageReportEntry.type = Types::ImageUsageReportEntry
+    ImageUsageReportEntryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportEntry, traits: {"smithy.api#xmlName" => "item"})
+    ImageUsageReportIdStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReportId)
+    ImageUsageReportList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageReport, traits: {"smithy.api#xmlName" => "item"})
+    ImageUsageReportUserIdStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, traits: {"smithy.api#xmlName" => "UserId"})
+    ImageUsageResourceType.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeName, location_name: 'ResourceType', traits: {"aws.protocols#ec2QueryName" => "ResourceType", "smithy.api#xmlName" => "resourceType"}))
+    ImageUsageResourceType.add_member(:resource_type_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeOptionList, location_name: 'ResourceTypeOptions', traits: {"aws.protocols#ec2QueryName" => "ResourceTypeOptionSet", "smithy.api#xmlName" => "resourceTypeOptionSet"}))
+    ImageUsageResourceType.type = Types::ImageUsageResourceType
+    ImageUsageResourceTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceType, traits: {"smithy.api#xmlName" => "item"})
+    ImageUsageResourceTypeOption.add_member(:option_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'OptionName', traits: {"aws.protocols#ec2QueryName" => "OptionName", "smithy.api#xmlName" => "optionName"}))
+    ImageUsageResourceTypeOption.add_member(:option_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeOptionValuesList, location_name: 'OptionValues', traits: {"aws.protocols#ec2QueryName" => "OptionValueSet", "smithy.api#xmlName" => "optionValueSet"}))
+    ImageUsageResourceTypeOption.type = Types::ImageUsageResourceTypeOption
+    ImageUsageResourceTypeOptionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeOption, traits: {"smithy.api#xmlName" => "item"})
+    ImageUsageResourceTypeOptionRequest.add_member(:option_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'OptionName'))
+    ImageUsageResourceTypeOptionRequest.add_member(:option_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeOptionValuesList, location_name: 'OptionValues', traits: {"smithy.api#xmlName" => "OptionValue"}))
+    ImageUsageResourceTypeOptionRequest.type = Types::ImageUsageResourceTypeOptionRequest
+    ImageUsageResourceTypeOptionRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeOptionRequest)
+    ImageUsageResourceTypeOptionValuesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeOptionValue, traits: {"smithy.api#xmlName" => "item"})
+    ImageUsageResourceTypeRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeName, location_name: 'ResourceType'))
+    ImageUsageResourceTypeRequest.add_member(:resource_type_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeOptionRequestList, location_name: 'ResourceTypeOptions', traits: {"smithy.api#xmlName" => "ResourceTypeOption"}))
+    ImageUsageResourceTypeRequest.type = Types::ImageUsageResourceTypeRequest
+    ImageUsageResourceTypeRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageUsageResourceTypeRequest)
     ImdsSupportValues.add_member(:v2_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'v2_0', traits: {"smithy.api#enumValue" => "v2.0"}))
     ImportClientVpnClientCertificateRevocationListRequest.add_member(:client_vpn_endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientVpnEndpointId, location_name: 'ClientVpnEndpointId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ImportClientVpnClientCertificateRevocationListRequest.add_member(:certificate_revocation_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'CertificateRevocationList', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -10299,6 +10468,12 @@ module Aws::EC2
     InstanceCapacity.add_member(:instance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'InstanceType', traits: {"aws.protocols#ec2QueryName" => "InstanceType", "smithy.api#xmlName" => "instanceType"}))
     InstanceCapacity.add_member(:total_capacity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'TotalCapacity', traits: {"aws.protocols#ec2QueryName" => "TotalCapacity", "smithy.api#xmlName" => "totalCapacity"}))
     InstanceCapacity.type = Types::InstanceCapacity
+    InstanceConnectEndpointDnsNames.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DnsName', traits: {"aws.protocols#ec2QueryName" => "DnsName", "smithy.api#xmlName" => "dnsName"}))
+    InstanceConnectEndpointDnsNames.add_member(:fips_dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'FipsDnsName', traits: {"aws.protocols#ec2QueryName" => "FipsDnsName", "smithy.api#xmlName" => "fipsDnsName"}))
+    InstanceConnectEndpointDnsNames.type = Types::InstanceConnectEndpointDnsNames
+    InstanceConnectEndpointPublicDnsNames.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceConnectEndpointDnsNames, location_name: 'Ipv4', traits: {"aws.protocols#ec2QueryName" => "Ipv4", "smithy.api#xmlName" => "ipv4"}))
+    InstanceConnectEndpointPublicDnsNames.add_member(:dualstack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceConnectEndpointDnsNames, location_name: 'Dualstack', traits: {"aws.protocols#ec2QueryName" => "Dualstack", "smithy.api#xmlName" => "dualstack"}))
+    InstanceConnectEndpointPublicDnsNames.type = Types::InstanceConnectEndpointPublicDnsNames
     InstanceConnectEndpointSet.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2InstanceConnectEndpoint, traits: {"smithy.api#xmlName" => "item"})
     InstanceCount.add_member(:instance_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'InstanceCount', traits: {"aws.protocols#ec2QueryName" => "InstanceCount", "smithy.api#xmlName" => "instanceCount"}))
     InstanceCount.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListingState, location_name: 'State', traits: {"aws.protocols#ec2QueryName" => "State", "smithy.api#xmlName" => "state"}))
@@ -11599,6 +11774,63 @@ module Aws::EC2
     InstanceType.add_member(:c8gn_metal_48xl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'c8gn_metal_48xl', traits: {"smithy.api#enumValue" => "c8gn.metal-48xl"}))
     InstanceType.add_member(:f2_6xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'f2_6xlarge', traits: {"smithy.api#enumValue" => "f2.6xlarge"}))
     InstanceType.add_member(:p6e_gb200_36xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'p6e_gb200_36xlarge', traits: {"smithy.api#enumValue" => "p6e-gb200.36xlarge"}))
+    InstanceType.add_member(:g6f_large, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'g6f_large', traits: {"smithy.api#enumValue" => "g6f.large"}))
+    InstanceType.add_member(:g6f_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'g6f_xlarge', traits: {"smithy.api#enumValue" => "g6f.xlarge"}))
+    InstanceType.add_member(:g6f_2xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'g6f_2xlarge', traits: {"smithy.api#enumValue" => "g6f.2xlarge"}))
+    InstanceType.add_member(:g6f_4xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'g6f_4xlarge', traits: {"smithy.api#enumValue" => "g6f.4xlarge"}))
+    InstanceType.add_member(:gr6f_4xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'gr6f_4xlarge', traits: {"smithy.api#enumValue" => "gr6f.4xlarge"}))
+    InstanceType.add_member(:p5_4xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'p5_4xlarge', traits: {"smithy.api#enumValue" => "p5.4xlarge"}))
+    InstanceType.add_member(:r8i_large, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_large', traits: {"smithy.api#enumValue" => "r8i.large"}))
+    InstanceType.add_member(:r8i_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_xlarge', traits: {"smithy.api#enumValue" => "r8i.xlarge"}))
+    InstanceType.add_member(:r8i_2xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_2xlarge', traits: {"smithy.api#enumValue" => "r8i.2xlarge"}))
+    InstanceType.add_member(:r8i_4xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_4xlarge', traits: {"smithy.api#enumValue" => "r8i.4xlarge"}))
+    InstanceType.add_member(:r8i_8xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_8xlarge', traits: {"smithy.api#enumValue" => "r8i.8xlarge"}))
+    InstanceType.add_member(:r8i_12xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_12xlarge', traits: {"smithy.api#enumValue" => "r8i.12xlarge"}))
+    InstanceType.add_member(:r8i_16xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_16xlarge', traits: {"smithy.api#enumValue" => "r8i.16xlarge"}))
+    InstanceType.add_member(:r8i_24xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_24xlarge', traits: {"smithy.api#enumValue" => "r8i.24xlarge"}))
+    InstanceType.add_member(:r8i_32xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_32xlarge', traits: {"smithy.api#enumValue" => "r8i.32xlarge"}))
+    InstanceType.add_member(:r8i_48xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_48xlarge', traits: {"smithy.api#enumValue" => "r8i.48xlarge"}))
+    InstanceType.add_member(:r8i_96xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_96xlarge', traits: {"smithy.api#enumValue" => "r8i.96xlarge"}))
+    InstanceType.add_member(:r8i_metal_48xl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_metal_48xl', traits: {"smithy.api#enumValue" => "r8i.metal-48xl"}))
+    InstanceType.add_member(:r8i_metal_96xl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_metal_96xl', traits: {"smithy.api#enumValue" => "r8i.metal-96xl"}))
+    InstanceType.add_member(:r8i_flex_large, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_flex_large', traits: {"smithy.api#enumValue" => "r8i-flex.large"}))
+    InstanceType.add_member(:r8i_flex_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_flex_xlarge', traits: {"smithy.api#enumValue" => "r8i-flex.xlarge"}))
+    InstanceType.add_member(:r8i_flex_2xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_flex_2xlarge', traits: {"smithy.api#enumValue" => "r8i-flex.2xlarge"}))
+    InstanceType.add_member(:r8i_flex_4xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_flex_4xlarge', traits: {"smithy.api#enumValue" => "r8i-flex.4xlarge"}))
+    InstanceType.add_member(:r8i_flex_8xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_flex_8xlarge', traits: {"smithy.api#enumValue" => "r8i-flex.8xlarge"}))
+    InstanceType.add_member(:r8i_flex_12xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_flex_12xlarge', traits: {"smithy.api#enumValue" => "r8i-flex.12xlarge"}))
+    InstanceType.add_member(:r8i_flex_16xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'r8i_flex_16xlarge', traits: {"smithy.api#enumValue" => "r8i-flex.16xlarge"}))
+    InstanceType.add_member(:m8i_large, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_large', traits: {"smithy.api#enumValue" => "m8i.large"}))
+    InstanceType.add_member(:m8i_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_xlarge', traits: {"smithy.api#enumValue" => "m8i.xlarge"}))
+    InstanceType.add_member(:m8i_2xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_2xlarge', traits: {"smithy.api#enumValue" => "m8i.2xlarge"}))
+    InstanceType.add_member(:m8i_4xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_4xlarge', traits: {"smithy.api#enumValue" => "m8i.4xlarge"}))
+    InstanceType.add_member(:m8i_8xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_8xlarge', traits: {"smithy.api#enumValue" => "m8i.8xlarge"}))
+    InstanceType.add_member(:m8i_12xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_12xlarge', traits: {"smithy.api#enumValue" => "m8i.12xlarge"}))
+    InstanceType.add_member(:m8i_16xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_16xlarge', traits: {"smithy.api#enumValue" => "m8i.16xlarge"}))
+    InstanceType.add_member(:m8i_24xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_24xlarge', traits: {"smithy.api#enumValue" => "m8i.24xlarge"}))
+    InstanceType.add_member(:m8i_32xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_32xlarge', traits: {"smithy.api#enumValue" => "m8i.32xlarge"}))
+    InstanceType.add_member(:m8i_48xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_48xlarge', traits: {"smithy.api#enumValue" => "m8i.48xlarge"}))
+    InstanceType.add_member(:m8i_96xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_96xlarge', traits: {"smithy.api#enumValue" => "m8i.96xlarge"}))
+    InstanceType.add_member(:m8i_metal_48xl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_metal_48xl', traits: {"smithy.api#enumValue" => "m8i.metal-48xl"}))
+    InstanceType.add_member(:m8i_metal_96xl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_metal_96xl', traits: {"smithy.api#enumValue" => "m8i.metal-96xl"}))
+    InstanceType.add_member(:m8i_flex_large, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_flex_large', traits: {"smithy.api#enumValue" => "m8i-flex.large"}))
+    InstanceType.add_member(:m8i_flex_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_flex_xlarge', traits: {"smithy.api#enumValue" => "m8i-flex.xlarge"}))
+    InstanceType.add_member(:m8i_flex_2xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_flex_2xlarge', traits: {"smithy.api#enumValue" => "m8i-flex.2xlarge"}))
+    InstanceType.add_member(:m8i_flex_4xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_flex_4xlarge', traits: {"smithy.api#enumValue" => "m8i-flex.4xlarge"}))
+    InstanceType.add_member(:m8i_flex_8xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_flex_8xlarge', traits: {"smithy.api#enumValue" => "m8i-flex.8xlarge"}))
+    InstanceType.add_member(:m8i_flex_12xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_flex_12xlarge', traits: {"smithy.api#enumValue" => "m8i-flex.12xlarge"}))
+    InstanceType.add_member(:m8i_flex_16xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'm8i_flex_16xlarge', traits: {"smithy.api#enumValue" => "m8i-flex.16xlarge"}))
+    InstanceType.add_member(:i8ge_large, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_large', traits: {"smithy.api#enumValue" => "i8ge.large"}))
+    InstanceType.add_member(:i8ge_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_xlarge', traits: {"smithy.api#enumValue" => "i8ge.xlarge"}))
+    InstanceType.add_member(:i8ge_2xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_2xlarge', traits: {"smithy.api#enumValue" => "i8ge.2xlarge"}))
+    InstanceType.add_member(:i8ge_3xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_3xlarge', traits: {"smithy.api#enumValue" => "i8ge.3xlarge"}))
+    InstanceType.add_member(:i8ge_6xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_6xlarge', traits: {"smithy.api#enumValue" => "i8ge.6xlarge"}))
+    InstanceType.add_member(:i8ge_12xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_12xlarge', traits: {"smithy.api#enumValue" => "i8ge.12xlarge"}))
+    InstanceType.add_member(:i8ge_18xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_18xlarge', traits: {"smithy.api#enumValue" => "i8ge.18xlarge"}))
+    InstanceType.add_member(:i8ge_24xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_24xlarge', traits: {"smithy.api#enumValue" => "i8ge.24xlarge"}))
+    InstanceType.add_member(:i8ge_48xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_48xlarge', traits: {"smithy.api#enumValue" => "i8ge.48xlarge"}))
+    InstanceType.add_member(:i8ge_metal_24xl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_metal_24xl', traits: {"smithy.api#enumValue" => "i8ge.metal-24xl"}))
+    InstanceType.add_member(:i8ge_metal_48xl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'i8ge_metal_48xl', traits: {"smithy.api#enumValue" => "i8ge.metal-48xl"}))
     InstanceTypeHypervisor.add_member(:nitro, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NITRO', traits: {"smithy.api#enumValue" => "nitro"}))
     InstanceTypeHypervisor.add_member(:xen, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'XEN', traits: {"smithy.api#enumValue" => "xen"}))
     InstanceTypeInfo.add_member(:instance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceType, location_name: 'InstanceType', traits: {"aws.protocols#ec2QueryName" => "InstanceType", "smithy.api#xmlName" => "instanceType"}))
@@ -12846,6 +13078,14 @@ module Aws::EC2
     ModifyInstanceCapacityReservationAttributesRequest.type = Types::ModifyInstanceCapacityReservationAttributesRequest
     ModifyInstanceCapacityReservationAttributesResult.add_member(:return, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Return', traits: {"aws.protocols#ec2QueryName" => "Return", "smithy.api#xmlName" => "return"}))
     ModifyInstanceCapacityReservationAttributesResult.type = Types::ModifyInstanceCapacityReservationAttributesResult
+    ModifyInstanceConnectEndpointRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DryRun'))
+    ModifyInstanceConnectEndpointRequest.add_member(:instance_connect_endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceConnectEndpointId, location_name: 'InstanceConnectEndpointId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ModifyInstanceConnectEndpointRequest.add_member(:ip_address_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddressType, location_name: 'IpAddressType'))
+    ModifyInstanceConnectEndpointRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIdStringListRequest, location_name: 'SecurityGroupIds', traits: {"smithy.api#xmlName" => "SecurityGroupId"}))
+    ModifyInstanceConnectEndpointRequest.add_member(:preserve_client_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'PreserveClientIp'))
+    ModifyInstanceConnectEndpointRequest.type = Types::ModifyInstanceConnectEndpointRequest
+    ModifyInstanceConnectEndpointResult.add_member(:return, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Return', traits: {"aws.protocols#ec2QueryName" => "Return", "smithy.api#xmlName" => "return"}))
+    ModifyInstanceConnectEndpointResult.type = Types::ModifyInstanceConnectEndpointResult
     ModifyInstanceCpuOptionsRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModifyInstanceCpuOptionsRequest.add_member(:core_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'CoreCount', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModifyInstanceCpuOptionsRequest.add_member(:threads_per_core, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'ThreadsPerCore', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -14743,6 +14983,7 @@ module Aws::EC2
     ResourceType.add_member(:fpga_image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'fpga_image', traits: {"smithy.api#enumValue" => "fpga-image"}))
     ResourceType.add_member(:host_reservation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'host_reservation', traits: {"smithy.api#enumValue" => "host-reservation"}))
     ResourceType.add_member(:image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'image', traits: {"smithy.api#enumValue" => "image"}))
+    ResourceType.add_member(:image_usage_report, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'image_usage_report', traits: {"smithy.api#enumValue" => "image-usage-report"}))
     ResourceType.add_member(:import_image_task, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'import_image_task', traits: {"smithy.api#enumValue" => "import-image-task"}))
     ResourceType.add_member(:import_snapshot_task, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'import_snapshot_task', traits: {"smithy.api#enumValue" => "import-snapshot-task"}))
     ResourceType.add_member(:instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'instance', traits: {"smithy.api#enumValue" => "instance"}))
@@ -14822,6 +15063,15 @@ module Aws::EC2
     ResourceType.add_member(:ipam_external_resource_verification_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ipam_external_resource_verification_token', traits: {"smithy.api#enumValue" => "ipam-external-resource-verification-token"}))
     ResourceType.add_member(:capacity_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'capacity_block', traits: {"smithy.api#enumValue" => "capacity-block"}))
     ResourceType.add_member(:mac_modification_task, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'mac_modification_task', traits: {"smithy.api#enumValue" => "mac-modification-task"}))
+    ResourceTypeOption.add_member(:option_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageReferenceOptionName, location_name: 'OptionName'))
+    ResourceTypeOption.add_member(:option_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeOptionValuesList, location_name: 'OptionValues', traits: {"smithy.api#xmlName" => "OptionValue"}))
+    ResourceTypeOption.type = Types::ResourceTypeOption
+    ResourceTypeOptionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeOption)
+    ResourceTypeOptionValuesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeOptionValue)
+    ResourceTypeRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageReferenceResourceType, location_name: 'ResourceType'))
+    ResourceTypeRequest.add_member(:resource_type_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeOptionList, location_name: 'ResourceTypeOptions', traits: {"smithy.api#xmlName" => "ResourceTypeOption"}))
+    ResourceTypeRequest.type = Types::ResourceTypeRequest
+    ResourceTypeRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypeRequest)
     ResponseError.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LaunchTemplateErrorCode, location_name: 'Code', traits: {"aws.protocols#ec2QueryName" => "Code", "smithy.api#xmlName" => "code"}))
     ResponseError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Message', traits: {"aws.protocols#ec2QueryName" => "Message", "smithy.api#xmlName" => "message"}))
     ResponseError.type = Types::ResponseError
@@ -14983,6 +15233,7 @@ module Aws::EC2
     RouteOrigin.add_member(:create_route_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CreateRouteTable', traits: {"smithy.api#enumValue" => "CreateRouteTable"}))
     RouteOrigin.add_member(:create_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CreateRoute', traits: {"smithy.api#enumValue" => "CreateRoute"}))
     RouteOrigin.add_member(:enable_vgw_route_propagation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EnableVgwRoutePropagation', traits: {"smithy.api#enumValue" => "EnableVgwRoutePropagation"}))
+    RouteOrigin.add_member(:advertisement, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Advertisement', traits: {"smithy.api#enumValue" => "Advertisement"}))
     RouteServer.add_member(:route_server_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteServerId, location_name: 'RouteServerId', traits: {"aws.protocols#ec2QueryName" => "RouteServerId", "smithy.api#xmlName" => "routeServerId"}))
     RouteServer.add_member(:amazon_side_asn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: 'AmazonSideAsn', traits: {"aws.protocols#ec2QueryName" => "AmazonSideAsn", "smithy.api#xmlName" => "amazonSideAsn"}))
     RouteServer.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteServerState, location_name: 'State', traits: {"aws.protocols#ec2QueryName" => "State", "smithy.api#xmlName" => "state"}))
@@ -15103,6 +15354,7 @@ module Aws::EC2
     RouteServersList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteServer, traits: {"smithy.api#xmlName" => "item"})
     RouteState.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'active', traits: {"smithy.api#enumValue" => "active"}))
     RouteState.add_member(:blackhole, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'blackhole', traits: {"smithy.api#enumValue" => "blackhole"}))
+    RouteState.add_member(:filtered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'filtered', traits: {"smithy.api#enumValue" => "filtered"}))
     RouteTable.add_member(:associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableAssociationList, location_name: 'Associations', traits: {"aws.protocols#ec2QueryName" => "AssociationSet", "smithy.api#xmlName" => "associationSet"}))
     RouteTable.add_member(:propagating_vgws, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PropagatingVgwList, location_name: 'PropagatingVgws', traits: {"aws.protocols#ec2QueryName" => "PropagatingVgwSet", "smithy.api#xmlName" => "propagatingVgwSet"}))
     RouteTable.add_member(:route_table_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'RouteTableId', traits: {"aws.protocols#ec2QueryName" => "RouteTableId", "smithy.api#xmlName" => "routeTableId"}))
@@ -16088,6 +16340,9 @@ module Aws::EC2
     TpmSupportValues.add_member(:v2_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'v2_0', traits: {"smithy.api#enumValue" => "v2.0"}))
     TrafficDirection.add_member(:ingress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ingress', traits: {"smithy.api#enumValue" => "ingress"}))
     TrafficDirection.add_member(:egress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'egress', traits: {"smithy.api#enumValue" => "egress"}))
+    TrafficIpAddressType.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ipv4', traits: {"smithy.api#enumValue" => "ipv4"}))
+    TrafficIpAddressType.add_member(:ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ipv6', traits: {"smithy.api#enumValue" => "ipv6"}))
+    TrafficIpAddressType.add_member(:dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'dual_stack', traits: {"smithy.api#enumValue" => "dual-stack"}))
     TrafficMirrorFilter.add_member(:traffic_mirror_filter_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'TrafficMirrorFilterId', traits: {"aws.protocols#ec2QueryName" => "TrafficMirrorFilterId", "smithy.api#xmlName" => "trafficMirrorFilterId"}))
     TrafficMirrorFilter.add_member(:ingress_filter_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleList, location_name: 'IngressFilterRules', traits: {"aws.protocols#ec2QueryName" => "IngressFilterRuleSet", "smithy.api#xmlName" => "ingressFilterRuleSet"}))
     TrafficMirrorFilter.add_member(:egress_filter_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleList, location_name: 'EgressFilterRules', traits: {"aws.protocols#ec2QueryName" => "EgressFilterRuleSet", "smithy.api#xmlName" => "egressFilterRuleSet"}))
@@ -16661,6 +16916,7 @@ module Aws::EC2
     UserIdGroupPair.type = Types::UserIdGroupPair
     UserIdGroupPairList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserIdGroupPair, traits: {"smithy.api#xmlName" => "item"})
     UserIdGroupPairSet.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserIdGroupPair, traits: {"smithy.api#xmlName" => "item"})
+    UserIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, traits: {"smithy.api#xmlName" => "item"})
     UserIdStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, traits: {"smithy.api#xmlName" => "UserId"})
     UserTrustProviderType.add_member(:iam_identity_center, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'iam_identity_center', traits: {"smithy.api#enumValue" => "iam-identity-center"}))
     UserTrustProviderType.add_member(:oidc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'oidc', traits: {"smithy.api#enumValue" => "oidc"}))
@@ -16989,6 +17245,7 @@ module Aws::EC2
     VolumeStatusInfoStatus.add_member(:ok, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ok', traits: {"smithy.api#enumValue" => "ok"}))
     VolumeStatusInfoStatus.add_member(:impaired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'impaired', traits: {"smithy.api#enumValue" => "impaired"}))
     VolumeStatusInfoStatus.add_member(:insufficient_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'insufficient_data', traits: {"smithy.api#enumValue" => "insufficient-data"}))
+    VolumeStatusInfoStatus.add_member(:warning, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'warning', traits: {"smithy.api#enumValue" => "warning"}))
     VolumeStatusItem.add_member(:actions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VolumeStatusActionsList, location_name: 'Actions', traits: {"aws.protocols#ec2QueryName" => "ActionsSet", "smithy.api#xmlName" => "actionsSet"}))
     VolumeStatusItem.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'AvailabilityZone', traits: {"aws.protocols#ec2QueryName" => "AvailabilityZone", "smithy.api#xmlName" => "availabilityZone"}))
     VolumeStatusItem.add_member(:outpost_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'OutpostArn', traits: {"aws.protocols#ec2QueryName" => "OutpostArn", "smithy.api#xmlName" => "outpostArn"}))
@@ -17898,6 +18155,13 @@ module Aws::EC2
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateImageResult)
         operation.traits = {}
       end)
+      service.add_operation(:create_image_usage_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ec2#CreateImageUsageReport"
+        operation.name = "CreateImageUsageReport"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateImageUsageReportRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateImageUsageReportResult)
+        operation.traits = {}
+      end)
       service.add_operation(:create_instance_connect_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ec2#CreateInstanceConnectEndpoint"
         operation.name = "CreateInstanceConnectEndpoint"
@@ -18491,6 +18755,13 @@ module Aws::EC2
         operation.name = "DeleteFpgaImage"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFpgaImageRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteFpgaImageResult)
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_image_usage_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ec2#DeleteImageUsageReport"
+        operation.name = "DeleteImageUsageReport"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteImageUsageReportRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteImageUsageReportResult)
         operation.traits = {}
       end)
       service.add_operation(:delete_instance_connect_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -19406,6 +19677,30 @@ module Aws::EC2
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageAttributeRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageAttributeOutput)
         operation.traits = {}
+      end)
+      service.add_operation(:describe_image_references, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ec2#DescribeImageReferences"
+        operation.name = "DescribeImageReferences"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageReferencesRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageReferencesResult)
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeImageReferences.new
+      end)
+      service.add_operation(:describe_image_usage_report_entries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ec2#DescribeImageUsageReportEntries"
+        operation.name = "DescribeImageUsageReportEntries"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageUsageReportEntriesRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageUsageReportEntriesResult)
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeImageUsageReportEntries.new
+      end)
+      service.add_operation(:describe_image_usage_reports, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ec2#DescribeImageUsageReports"
+        operation.name = "DescribeImageUsageReports"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageUsageReportsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeImageUsageReportsResult)
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeImageUsageReports.new
       end)
       service.add_operation(:describe_images, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ec2#DescribeImages"
@@ -21398,6 +21693,13 @@ module Aws::EC2
         operation.name = "ModifyInstanceCapacityReservationAttributes"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModifyInstanceCapacityReservationAttributesRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModifyInstanceCapacityReservationAttributesResult)
+        operation.traits = {}
+      end)
+      service.add_operation(:modify_instance_connect_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ec2#ModifyInstanceConnectEndpoint"
+        operation.name = "ModifyInstanceConnectEndpoint"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModifyInstanceConnectEndpointRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModifyInstanceConnectEndpointResult)
         operation.traits = {}
       end)
       service.add_operation(:modify_instance_cpu_options, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

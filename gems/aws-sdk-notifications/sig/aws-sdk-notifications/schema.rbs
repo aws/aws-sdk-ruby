@@ -20,6 +20,8 @@ module Aws::Notifications
     AssociateManagedNotificationAccountContactResponse: StructureShape
     AssociateManagedNotificationAdditionalChannelRequest: StructureShape
     AssociateManagedNotificationAdditionalChannelResponse: StructureShape
+    AssociateOrganizationalUnitRequest: StructureShape
+    AssociateOrganizationalUnitResponse: StructureShape
     ChannelArn: StringShape
     ChannelAssociationOverrideOption: StringShape
     ChannelIdentifier: StringShape
@@ -47,6 +49,8 @@ module Aws::Notifications
     DisassociateManagedNotificationAccountContactResponse: StructureShape
     DisassociateManagedNotificationAdditionalChannelRequest: StructureShape
     DisassociateManagedNotificationAdditionalChannelResponse: StructureShape
+    DisassociateOrganizationalUnitRequest: StructureShape
+    DisassociateOrganizationalUnitResponse: StructureShape
     EnableNotificationsAccessForOrganizationRequest: StructureShape
     EnableNotificationsAccessForOrganizationResponse: StructureShape
     ErrorMessage: StringShape
@@ -87,12 +91,16 @@ module Aws::Notifications
     ListManagedNotificationConfigurationsResponse: StructureShape
     ListManagedNotificationEventsRequest: StructureShape
     ListManagedNotificationEventsResponse: StructureShape
+    ListMemberAccountsRequest: StructureShape
+    ListMemberAccountsResponse: StructureShape
     ListNotificationConfigurationsRequest: StructureShape
     ListNotificationConfigurationsResponse: StructureShape
     ListNotificationEventsRequest: StructureShape
     ListNotificationEventsResponse: StructureShape
     ListNotificationHubsRequest: StructureShape
     ListNotificationHubsResponse: StructureShape
+    ListOrganizationalUnitsRequest: StructureShape
+    ListOrganizationalUnitsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     LocaleCode: StringShape
@@ -120,6 +128,9 @@ module Aws::Notifications
     MediaElement: StructureShape
     MediaElementType: StringShape
     MediaId: StringShape
+    MemberAccount: StructureShape
+    MemberAccountNotificationConfigurationStatus: StringShape
+    MemberAccounts: ListShape
     MessageComponents: StructureShape
     MessageComponentsSummary: StructureShape
     NextToken: StringShape
@@ -128,6 +139,7 @@ module Aws::Notifications
     NotificationConfigurationName: StringShape
     NotificationConfigurationStatus: StringShape
     NotificationConfigurationStructure: StructureShape
+    NotificationConfigurationSubtype: StringShape
     NotificationConfigurations: ListShape
     NotificationEventArn: StringShape
     NotificationEventId: StringShape
@@ -143,6 +155,7 @@ module Aws::Notifications
     NotificationType: StringShape
     NotificationsAccessForOrganization: StructureShape
     OrganizationalUnitId: StringShape
+    OrganizationalUnits: ListShape
     QuotaCode: StringShape
     Region: StringShape
     Regions: ListShape

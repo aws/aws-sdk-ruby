@@ -165,6 +165,8 @@ module Aws::MediaConvert
     CreatePresetResponse: StructureShape
     CreateQueueRequest: StructureShape
     CreateQueueResponse: StructureShape
+    CreateResourceShareRequest: StructureShape
+    CreateResourceShareResponse: StructureShape
     DashAdditionalManifest: StructureShape
     DashIsoEncryptionSettings: StructureShape
     DashIsoGroupAudioChannelConfigSchemeIdUri: EnumShape
@@ -470,6 +472,7 @@ module Aws::MediaConvert
     MovPaddingControl: EnumShape
     MovReference: EnumShape
     MovSettings: StructureShape
+    Mp2AudioDescriptionMix: EnumShape
     Mp2Settings: StructureShape
     Mp3RateControlMode: EnumShape
     Mp3Settings: StructureShape
@@ -597,6 +600,7 @@ module Aws::MediaConvert
     SearchJobsRequest: StructureShape
     SearchJobsResponse: StructureShape
     ServiceOverride: StructureShape
+    ShareStatus: EnumShape
     SimulateReservedQueue: EnumShape
     SpekeKeyProvider: StructureShape
     SpekeKeyProviderCmaf: StructureShape
@@ -668,6 +672,7 @@ module Aws::MediaConvert
     VideoPreprocessor: StructureShape
     VideoProperties: StructureShape
     VideoSelector: StructureShape
+    VideoSelectorType: EnumShape
     VideoTimecodeInsertion: EnumShape
     VorbisSettings: StructureShape
     Vp8FramerateControl: EnumShape

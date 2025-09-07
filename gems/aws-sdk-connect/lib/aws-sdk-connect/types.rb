@@ -281,6 +281,20 @@ module Aws::Connect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Information about the agent status assigned to the user.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the agent status.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The identifier of the agent status.</p>
+    #   @return [String]
+    class AgentStatusIdentifier < Struct.new(
+      :arn,
+      :id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about the agent's status.</p>
     # @!attribute status_start_timestamp
     #   <p>The start timestamp of the agent's status.</p>
@@ -1117,7 +1131,7 @@ module Aws::Connect
     end
 
     # <p>This API is in preview release for Amazon Connect and is subject to change. To 
-    # request access to this API, contact Amazon Web ServicesSupport.</p>
+    # request access to this API, contact Amazon Web Services Support.</p>
     #          <p>Information about an authentication profile. An authentication profile is a resource that
     #    stores the authentication settings for users in your contact center. You use authentication
     #    profiles to set up IP address range restrictions and session timeouts. For more information, see
@@ -1195,7 +1209,7 @@ module Aws::Connect
     end
 
     # <p>This API is in preview release for Amazon Connect and is subject to change. To 
-    # request access to this API, contact Amazon Web ServicesSupport.</p>
+    # request access to this API, contact Amazon Web Services Support.</p>
     #          <p>A summary of a given authentication profile.</p>
     # @!attribute id
     #   <p>The unique identifier of the authentication profile.</p>
@@ -3326,7 +3340,9 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. </p>
     #   @return [String]
     # @!attribute contact_id
-    #   <p>The identifier of the contact in this instance of Amazon Connect.  Only contacts in the CHAT channel are supported.</p>
+    #   <p>The identifier of the contact in this instance of Amazon Connect.  Supports contacts in the CHAT channel and VOICE (WebRTC) channels. For WebRTC
+    #      calls, this should be the initial contact ID that was generated when the contact was first
+    #      created (from the StartWebRTCContact API) in the VOICE channel</p>
     #   @return [String]
     # @!attribute client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -3337,9 +3353,8 @@ module Aws::Connect
     # @!attribute participant_details
     #   <p>Information identifying the participant.</p>
     #            <important>
-    #               <p>The only Valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code>. </p>
-    #               <p>
-    #                  <code>DisplayName</code> is <b>Required</b>.</p>
+    #               <p>The only valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code> for chat
+    #       contact and <code>CUSTOMER</code> for voice contact.</p>
     #            </important>
     #   @return [Types::ParticipantDetailsToAdd]
     class CreateParticipantRequest < Struct.new(
@@ -5644,11 +5659,15 @@ module Aws::Connect
     # @!attribute routing_step_expression
     #   <p>The expression of a step in a routing criteria.</p>
     #   @return [String]
+    # @!attribute agent_status
+    #   <p>Information about the agent status assigned to the user.</p>
+    #   @return [Types::AgentStatusIdentifier]
     class Dimensions < Struct.new(
       :queue,
       :channel,
       :routing_profile,
       :routing_step_expression,
+      :agent_status,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -7078,11 +7097,15 @@ module Aws::Connect
     #   <p>A list of expressions as a filter, in which an expression is an object of a step in a
     #      routing criteria.</p>
     #   @return [Array<String>]
+    # @!attribute agent_statuses
+    #   <p>A list of up to 50 agent status IDs or ARNs.</p>
+    #   @return [Array<String>]
     class Filters < Struct.new(
       :queues,
       :channels,
       :routing_profiles,
       :routing_step_expressions,
+      :agent_statuses,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -7261,10 +7284,15 @@ module Aws::Connect
     #               <li>
     #                  <p>RoutingStepExpressions: 50</p>
     #               </li>
+    #               <li>
+    #                  <p>AgentStatuses: 50</p>
+    #               </li>
     #            </ul>
     #            <p>Metric data is retrieved only for the resources associated with the queues or routing
     #      profiles, and by any channels included in the filter. (You cannot filter by both queue AND
     #      routing profile.) You can include both resource IDs and resource ARNs in the same request.</p>
+    #            <p>When using <code>AgentStatuses</code> as filter make sure Queues is added as primary
+    #      filter.</p>
     #            <p>When using the <code>RoutingStepExpression</code> filter, you need to pass exactly one
     #       <code>QueueId</code>. The filter is also case sensitive so when using the
     #       <code>RoutingStepExpression</code> filter, grouping by <code>ROUTING_STEP_EXPRESSION</code> is
@@ -7272,23 +7300,28 @@ module Aws::Connect
     #            <p>Currently tagging is only supported on the resources that are passed in the filter.</p>
     #   @return [Types::Filters]
     # @!attribute groupings
-    #   <p>The grouping applied to the metrics returned. For example, when grouped by
-    #       <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all
-    #      queues. </p>
+    #   <p>Defines the level of aggregation for metrics data by a dimension(s). Its similar to sorting
+    #      items into buckets based on a common characteristic, then counting or calculating something for
+    #      each bucket. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each
+    #      queue rather than aggregated for all queues. </p>
+    #            <p>The grouping list is an ordered list, with the first item in the list defined as the primary
+    #      grouping. If no grouping is included in the request, the aggregation happens at the
+    #      instance-level.</p>
     #            <ul>
     #               <li>
     #                  <p>If you group by <code>CHANNEL</code>, you should include a Channels filter.
     #        VOICE, CHAT, and TASK channels are supported.</p>
     #               </li>
     #               <li>
+    #                  <p>If you group by <code>AGENT_STATUS</code>, you must include the <code>QUEUE</code> as the
+    #        primary grouping and use queue filter. When you group by <code>AGENT_STATUS</code>, the only
+    #        metric available is the <code>AGENTS_ONLINE</code> metric.</p>
+    #               </li>
+    #               <li>
     #                  <p>If you group by <code>ROUTING_PROFILE</code>, you must include either a queue or routing
     #        profile filter. In addition, a routing profile filter is required for metrics
     #         <code>CONTACTS_SCHEDULED</code>, <code>CONTACTS_IN_QUEUE</code>, and <code>
     #         OLDEST_CONTACT_AGE</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>If no <code>Grouping</code> is included in the request, a summary of metrics is
-    #        returned.</p>
     #               </li>
     #               <li>
     #                  <p>When using the <code>RoutingStepExpression</code> filter, group by
@@ -13183,9 +13216,15 @@ module Aws::Connect
     # @!attribute display_name
     #   <p>The display name of the participant.</p>
     #   @return [String]
+    # @!attribute participant_capabilities
+    #   <p>The configuration for the allowed video and screen sharing capabilities for participants
+    #      present over the call. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html">Set up in-app, web, video calling, and screen
+    #       sharing capabilities</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+    #   @return [Types::ParticipantCapabilities]
     class ParticipantDetailsToAdd < Struct.new(
       :participant_role,
       :display_name,
+      :participant_capabilities,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -19003,7 +19042,7 @@ module Aws::Connect
     #   <p>The type of attribute.</p>
     #            <note>
     #               <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature,
-    #       contact Amazon Web ServicesSupport for allowlisting.</p>
+    #       contact Amazon Web Services Support for allowlisting.</p>
     #            </note>
     #   @return [String]
     # @!attribute value

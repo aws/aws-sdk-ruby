@@ -215,6 +215,21 @@ module Aws::GuardDuty
       ?finding_types: Array[String]
     ) -> _CreateSampleFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSampleFindingsResponse
 
+    interface _CreateThreatEntitySetResponse
+      include Smithy::Client::_Response[Types::CreateThreatEntitySetResponse]
+      def threat_entity_set_id: () -> String?
+    end
+    def create_threat_entity_set: (
+      ?detector_id: String,
+      ?name: String,
+      ?format: String,
+      ?location: String,
+      ?expected_bucket_owner: String,
+      ?activate: bool,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateThreatEntitySetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateThreatEntitySetResponse
+
     interface _CreateThreatIntelSetResponse
       include Smithy::Client::_Response[Types::CreateThreatIntelSetResponse]
       def threat_intel_set_id: () -> String?
@@ -229,6 +244,21 @@ module Aws::GuardDuty
       ?tags: Hash[String, String],
       ?expected_bucket_owner: String
     ) -> _CreateThreatIntelSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateThreatIntelSetResponse
+
+    interface _CreateTrustedEntitySetResponse
+      include Smithy::Client::_Response[Types::CreateTrustedEntitySetResponse]
+      def trusted_entity_set_id: () -> String?
+    end
+    def create_trusted_entity_set: (
+      ?detector_id: String,
+      ?name: String,
+      ?format: String,
+      ?location: String,
+      ?expected_bucket_owner: String,
+      ?activate: bool,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateTrustedEntitySetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrustedEntitySetResponse
 
     interface _DeclineInvitationsResponse
       include Smithy::Client::_Response[Types::DeclineInvitationsResponse]
@@ -293,6 +323,14 @@ module Aws::GuardDuty
       ?destination_id: String
     ) -> _DeletePublishingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePublishingDestinationResponse
 
+    interface _DeleteThreatEntitySetResponse
+      include Smithy::Client::_Response[Types::DeleteThreatEntitySetResponse]
+    end
+    def delete_threat_entity_set: (
+      ?detector_id: String,
+      ?threat_entity_set_id: String
+    ) -> _DeleteThreatEntitySetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteThreatEntitySetResponse
+
     interface _DeleteThreatIntelSetResponse
       include Smithy::Client::_Response[Types::DeleteThreatIntelSetResponse]
     end
@@ -300,6 +338,14 @@ module Aws::GuardDuty
       ?detector_id: String,
       ?threat_intel_set_id: String
     ) -> _DeleteThreatIntelSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteThreatIntelSetResponse
+
+    interface _DeleteTrustedEntitySetResponse
+      include Smithy::Client::_Response[Types::DeleteTrustedEntitySetResponse]
+    end
+    def delete_trusted_entity_set: (
+      ?detector_id: String,
+      ?trusted_entity_set_id: String
+    ) -> _DeleteTrustedEntitySetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrustedEntitySetResponse
 
     interface _DescribeMalwareScansResponse
       include Smithy::Client::_Response[Types::DescribeMalwareScansResponse]
@@ -582,6 +628,23 @@ module Aws::GuardDuty
       ?account_ids: Array[String]
     ) -> _GetRemainingFreeTrialDaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRemainingFreeTrialDaysResponse
 
+    interface _GetThreatEntitySetResponse
+      include Smithy::Client::_Response[Types::GetThreatEntitySetResponse]
+      def name: () -> String?
+      def format: () -> String?
+      def location: () -> String?
+      def expected_bucket_owner: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def error_details: () -> String?
+    end
+    def get_threat_entity_set: (
+      ?detector_id: String,
+      ?threat_entity_set_id: String
+    ) -> _GetThreatEntitySetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetThreatEntitySetResponse
+
     interface _GetThreatIntelSetResponse
       include Smithy::Client::_Response[Types::GetThreatIntelSetResponse]
       def name: () -> String?
@@ -595,6 +658,23 @@ module Aws::GuardDuty
       ?detector_id: String,
       ?threat_intel_set_id: String
     ) -> _GetThreatIntelSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetThreatIntelSetResponse
+
+    interface _GetTrustedEntitySetResponse
+      include Smithy::Client::_Response[Types::GetTrustedEntitySetResponse]
+      def name: () -> String?
+      def format: () -> String?
+      def location: () -> String?
+      def expected_bucket_owner: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def error_details: () -> String?
+    end
+    def get_trusted_entity_set: (
+      ?detector_id: String,
+      ?trusted_entity_set_id: String
+    ) -> _GetTrustedEntitySetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrustedEntitySetResponse
 
     interface _GetUsageStatisticsResponse
       include Smithy::Client::_Response[Types::GetUsageStatisticsResponse]
@@ -777,6 +857,17 @@ module Aws::GuardDuty
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _ListThreatEntitySetsResponse
+      include Smithy::Client::_Response[Types::ListThreatEntitySetsResponse]
+      def threat_entity_set_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_threat_entity_sets: (
+      ?detector_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListThreatEntitySetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListThreatEntitySetsResponse
+
     interface _ListThreatIntelSetsResponse
       include Smithy::Client::_Response[Types::ListThreatIntelSetsResponse]
       def threat_intel_set_ids: () -> Array[String]?
@@ -787,6 +878,17 @@ module Aws::GuardDuty
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListThreatIntelSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListThreatIntelSetsResponse
+
+    interface _ListTrustedEntitySetsResponse
+      include Smithy::Client::_Response[Types::ListTrustedEntitySetsResponse]
+      def trusted_entity_set_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_trusted_entity_sets: (
+      ?detector_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTrustedEntitySetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrustedEntitySetsResponse
 
     interface _StartMalwareScanResponse
       include Smithy::Client::_Response[Types::StartMalwareScanResponse]
@@ -1051,6 +1153,18 @@ module Aws::GuardDuty
       }
     ) -> _UpdatePublishingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePublishingDestinationResponse
 
+    interface _UpdateThreatEntitySetResponse
+      include Smithy::Client::_Response[Types::UpdateThreatEntitySetResponse]
+    end
+    def update_threat_entity_set: (
+      ?detector_id: String,
+      ?threat_entity_set_id: String,
+      ?name: String,
+      ?location: String,
+      ?expected_bucket_owner: String,
+      ?activate: bool
+    ) -> _UpdateThreatEntitySetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateThreatEntitySetResponse
+
     interface _UpdateThreatIntelSetResponse
       include Smithy::Client::_Response[Types::UpdateThreatIntelSetResponse]
     end
@@ -1062,5 +1176,17 @@ module Aws::GuardDuty
       ?activate: bool,
       ?expected_bucket_owner: String
     ) -> _UpdateThreatIntelSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateThreatIntelSetResponse
+
+    interface _UpdateTrustedEntitySetResponse
+      include Smithy::Client::_Response[Types::UpdateTrustedEntitySetResponse]
+    end
+    def update_trusted_entity_set: (
+      ?detector_id: String,
+      ?trusted_entity_set_id: String,
+      ?name: String,
+      ?location: String,
+      ?expected_bucket_owner: String,
+      ?activate: bool
+    ) -> _UpdateTrustedEntitySetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrustedEntitySetResponse
   end
 end

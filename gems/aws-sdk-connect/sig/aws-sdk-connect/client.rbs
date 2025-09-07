@@ -610,7 +610,11 @@ module Aws::Connect
       ?client_token: String,
       ?participant_details: {
         participant_role: String,
-        display_name: String
+        display_name: String,
+        participant_capabilities: {
+          video: String,
+          screen_share: String
+        }
       }
     ) -> _CreateParticipantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateParticipantResponse
 
@@ -1716,7 +1720,8 @@ module Aws::Connect
         queues: Array[String],
         channels: Array[String],
         routing_profiles: Array[String],
-        routing_step_expressions: Array[String]
+        routing_step_expressions: Array[String],
+        agent_statuses: Array[String]
       },
       ?groupings: Array[String],
       ?current_metrics: Array[
@@ -1804,7 +1809,8 @@ module Aws::Connect
         queues: Array[String],
         channels: Array[String],
         routing_profiles: Array[String],
-        routing_step_expressions: Array[String]
+        routing_step_expressions: Array[String],
+        agent_statuses: Array[String]
       },
       ?groupings: Array[String],
       ?historical_metrics: Array[

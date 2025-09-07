@@ -1861,17 +1861,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1882,17 +1871,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1909,17 +1887,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1930,17 +1897,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -4239,7 +4195,7 @@
                 "AvailabilityZones": {
                     "target": "com.amazonaws.rds#AvailabilityZones",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Availability Zones (AZs) where you specifically want to create DB instances in the DB cluster.</p>\n         <p>For information on AZs, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.AvailabilityZones\">Availability Zones</a>\n            in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't specify more than three AZs.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list of Availability Zones (AZs) where you specifically want to create DB instances in the DB cluster.</p>\n         <p>For the first three DB instances that you create, RDS distributes each DB instance to\n            a different AZ that you specify. For additional DB instances that you create, RDS\n            randomly distributes them to the AZs that you specified. For example, if you create a DB\n            cluster with one writer instance and three reader instances, RDS might distribute the\n            writer instance to AZ 1, the first reader instance to AZ 2, the second reader instance\n            to AZ 3, and the third reader instance to either AZ 1, AZ 2, or AZ 3. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.AvailabilityZones\">Availability Zones</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Concepts.AuroraHighAvailability.Instances\">High availability for Aurora DB instances</a> in the <i>Amazon Aurora\n                User Guide</i>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't specify more than three AZs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "BackupRetentionPeriod": {
@@ -4571,6 +4527,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n             creating the DB cluster will fail if the DB major version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon Aurora</a> in the <i>Amazon Aurora User Guide</i>\n               </p>\n            </li>\n            <li>\n               <p>Amazon RDS - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
+                },
+                "MasterUserAuthenticationType": {
+                    "target": "com.amazonaws.rds#MasterUserAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB cluster.</p>\n         <p>You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>password</code> - Use standard database authentication with a password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
                     }
                 }
             },
@@ -5079,7 +5041,7 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the DB instance is a Multi-AZ deployment. You can't set \n          the <code>AvailabilityZone</code> parameter if the DB instance is a Multi-AZ deployment.</p>\n         <p>This setting doesn't apply to the following DB instances:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)</p>\n            </li>\n            <li>\n               <p>RDS Custom</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance is a Multi-AZ deployment. You can't set \n          the <code>AvailabilityZone</code> parameter if the DB instance is a Multi-AZ deployment.</p>\n         <p>This setting doesn't apply to Amazon Aurora because the DB instance Availability Zones (AZs)\n          are managed by the DB cluster.</p>"
                     }
                 },
                 "EngineVersion": {
@@ -5097,7 +5059,7 @@
                 "LicenseModel": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The license model information for this DB instance.</p>\n         <note>\n            <p>License models for RDS for Db2 require additional configuration. The Bring Your\n                Own License (BYOL) model requires a custom parameter group and an Amazon Web Services License Manager self-managed license. The Db2 license through\n                Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html\">Amazon RDS for Db2 licensing\n                    options</a> in the <i>Amazon RDS User Guide</i>.</p>\n            <p>The default for RDS for Db2 is <code>bring-your-own-license</code>.</p>\n         </note>\n         <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - <code>bring-your-own-license | marketplace-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - <code>license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MySQL - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Oracle - <code>bring-your-own-license | license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - <code>postgresql-license</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The license model information for this DB instance.</p>\n         <note>\n            <p>License models for RDS for Db2 require additional configuration. The bring your\n                own license (BYOL) model requires a custom parameter group and an Amazon Web Services License\n                Manager self-managed license. The Db2 license through Amazon Web Services Marketplace model\n                requires an Amazon Web Services Marketplace subscription. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html\">Amazon\n                    RDS for Db2 licensing options</a> in the <i>Amazon RDS User\n                    Guide</i>.</p>\n            <p>The default for RDS for Db2 is <code>bring-your-own-license</code>.</p>\n         </note>\n         <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - <code>bring-your-own-license | marketplace-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - <code>license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MySQL - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Oracle - <code>bring-your-own-license | license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - <code>postgresql-license</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Iops": {
@@ -5363,6 +5325,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              creating the DB instance will fail if the DB major version is past its end of standard support date.</p>\n         </note>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
                     }
+                },
+                "MasterUserAuthenticationType": {
+                    "target": "com.amazonaws.rds#MasterUserAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB instance.</p>\n         <p>You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>password</code> - Use standard database authentication with a password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>\n            </li>\n         </ul>\n         <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5453,7 +5421,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new DB instance that acts as a read replica for an existing source DB\n            instance or Multi-AZ DB cluster. You can create a read replica for a DB instance running\n            MariaDB, MySQL, Oracle, PostgreSQL, or SQL Server. You can create a read replica for a\n            Multi-AZ DB cluster running MySQL or PostgreSQL. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html\">Working\n                with read replicas</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html#multi-az-db-clusters-migrating-to-instance-with-read-replica\">Migrating from a Multi-AZ DB cluster to a DB instance using a read replica</a>\n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Amazon RDS for Db2 supports this operation for standby replicas. To create a standby\n            replica for a DB instance running Db2, you must set <code>ReplicaMode</code> to\n                <code>mounted</code>.</p>\n         <p>Amazon Aurora doesn't support this operation. To create a DB instance for an Aurora DB cluster, use the <code>CreateDBInstance</code>\n            operation.</p>\n         <p>RDS creates read replicas with backups disabled. All other attributes\n            (including DB security groups and DB parameter groups) are inherited from the source DB\n            instance or cluster, except as specified.</p>\n         <important>\n            <p>Your source DB instance or cluster must have backup retention enabled.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Creates a new DB instance that acts as a read replica for an existing source DB\n            instance or Multi-AZ DB cluster. You can create a read replica for a DB instance running\n            Db2, MariaDB, MySQL, Oracle, PostgreSQL, or SQL Server. You can create a read replica\n            for a Multi-AZ DB cluster running MySQL or PostgreSQL. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html\">Working\n                with read replicas</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html#multi-az-db-clusters-migrating-to-instance-with-read-replica\">Migrating from a Multi-AZ DB cluster to a DB instance using a read replica</a>\n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Amazon Aurora doesn't support this operation. To create a DB instance for an Aurora DB cluster, use the <code>CreateDBInstance</code>\n            operation.</p>\n         <p>RDS creates read replicas with backups disabled. All other attributes\n            (including DB security groups and DB parameter groups) are inherited from the source DB\n            instance or cluster, except as specified.</p>\n         <important>\n            <p>Your source DB instance or cluster must have backup retention enabled.</p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a DB instance read replica",
@@ -5537,7 +5505,7 @@
                 "DBParameterGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DB parameter group to associate with this read replica DB\n            instance.</p>\n         <p>For the Db2 DB engine, if your source DB instance uses the Bring Your Own License\n            model, then a custom parameter group must be associated with the replica. For a same\n            Amazon Web Services Region replica, if you don't specify a custom parameter group, Amazon RDS\n            associates the custom parameter group associated with the source DB instance. For a\n            cross-Region replica, you must specify a custom parameter group. This custom parameter\n            group must include your IBM Site ID and IBM Customer ID. For more information, see\n                <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html#db2-prereqs-ibm-info\"> IBM IDs\n                for Bring Your Own License for Db2</a>. </p>\n         <p>For Single-AZ or Multi-AZ DB instance read replica instances, if you don't specify a\n            value for <code>DBParameterGroupName</code>, then Amazon RDS uses the\n                <code>DBParameterGroup</code> of the source DB instance for a same Region read\n            replica, or the default <code>DBParameterGroup</code> for the specified DB engine for a\n            cross-Region read replica.</p>\n         <p>For Multi-AZ DB cluster same Region read replica instances, if you don't specify a\n            value for <code>DBParameterGroupName</code>, then Amazon RDS uses the default\n                <code>DBParameterGroup</code>.</p>\n         <p>Specifying a parameter group for this operation is only supported for MySQL DB\n            instances for cross-Region read replicas, for Multi-AZ DB cluster read replica\n            instances, for Db2 DB instances, and for Oracle DB instances. It isn't supported for\n            MySQL DB instances for same Region read replicas or for RDS Custom.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the DB parameter group to associate with this read replica DB\n            instance.</p>\n         <p>For the Db2 DB engine, if your source DB instance uses the bring your own license\n            (BYOL) model, then a custom parameter group must be associated with the replica. For a\n            same Amazon Web Services Region replica, if you don't specify a custom parameter group, Amazon RDS\n            associates the custom parameter group associated with the source DB instance. For a\n            cross-Region replica, you must specify a custom parameter group. This custom parameter\n            group must include your IBM Site ID and IBM Customer ID. For more information, see\n                <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html#db2-prereqs-ibm-info\">IBM IDs\n                for bring your own license (BYOL) for Db2</a>. </p>\n         <p>For Single-AZ or Multi-AZ DB instance read replica instances, if you don't specify a\n            value for <code>DBParameterGroupName</code>, then Amazon RDS uses the\n                <code>DBParameterGroup</code> of the source DB instance for a same Region read\n            replica, or the default <code>DBParameterGroup</code> for the specified DB engine for a\n            cross-Region read replica.</p>\n         <p>For Multi-AZ DB cluster same Region read replica instances, if you don't specify a\n            value for <code>DBParameterGroupName</code>, then Amazon RDS uses the default\n                <code>DBParameterGroup</code>.</p>\n         <p>Specifying a parameter group for this operation is only supported for MySQL DB\n            instances for cross-Region read replicas, for Multi-AZ DB cluster read replica\n            instances, for Db2 DB instances, and for Oracle DB instances. It isn't supported for\n            MySQL DB instances for same Region read replicas or for RDS Custom.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PubliclyAccessible": {
@@ -5690,7 +5658,7 @@
                 "ReplicaMode": {
                     "target": "com.amazonaws.rds#ReplicaMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The open mode of the replica database.</p>\n         <note>\n            <p>This parameter is only supported for Db2 DB instances and Oracle DB\n                instances.</p>\n         </note>\n         <dl>\n            <dt>Db2</dt>\n            <dd>\n               <p>Standby DB replicas are included in Db2 Advanced Edition (AE) and Db2\n                        Standard Edition (SE). The main use case for standby replicas is\n                        cross-Region disaster recovery. Because it doesn't accept user\n                        connections, a standby replica can't serve a read-only workload.</p>\n               <p>You can create a combination of standby and read-only DB replicas for the\n                        same primary DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html\">Working with read\n                            replicas for Amazon RDS for Db2</a> in the <i>Amazon RDS User\n                            Guide</i>.</p>\n               <p>To create standby DB replicas for RDS for Db2, set this parameter to\n                            <code>mounted</code>.</p>\n            </dd>\n            <dt>Oracle</dt>\n            <dd>\n               <p>Mounted DB replicas are included in Oracle Database Enterprise Edition. The main use case for\n                    mounted replicas is cross-Region disaster recovery. The primary database doesn't use Active\n                    Data Guard to transmit information to the mounted replica. Because it doesn't accept\n                    user connections, a mounted replica can't serve a read-only workload.</p>\n               <p>You can create a combination of mounted and read-only DB replicas for the same primary DB instance.\n                    For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Working with read replicas for Amazon RDS for Oracle</a> \n                    in the <i>Amazon RDS User Guide</i>.</p>\n               <p>For RDS Custom, you must specify this parameter and set it to\n                        <code>mounted</code>. The value won't be set by default. After replica\n                        creation, you can manage the open mode manually.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The open mode of the replica database.</p>\n         <p>This parameter is only supported for Db2 DB instances and Oracle DB\n            instances.</p>\n         <dl>\n            <dt>Db2</dt>\n            <dd>\n               <p>Standby DB replicas are included in Db2 Advanced Edition (AE) and Db2\n                        Standard Edition (SE). The main use case for standby replicas is\n                        cross-Region disaster recovery. Because it doesn't accept user\n                        connections, a standby replica can't serve a read-only workload.</p>\n               <p>You can create a combination of standby and read-only DB replicas for the\n                        same primary DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html\">Working with replicas for Amazon RDS for Db2</a> in the <i>Amazon RDS User\n                            Guide</i>.</p>\n               <p>To create standby DB replicas for RDS for Db2, set this parameter to\n                            <code>mounted</code>.</p>\n            </dd>\n            <dt>Oracle</dt>\n            <dd>\n               <p>Mounted DB replicas are included in Oracle Database Enterprise Edition. The main use case for\n                    mounted replicas is cross-Region disaster recovery. The primary database doesn't use Active\n                    Data Guard to transmit information to the mounted replica. Because it doesn't accept\n                    user connections, a mounted replica can't serve a read-only workload.</p>\n               <p>You can create a combination of mounted and read-only DB replicas for the same primary DB instance.\n                    For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Working with read replicas for Amazon RDS for Oracle</a> \n                    in the <i>Amazon RDS User Guide</i>.</p>\n               <p>For RDS Custom, you must specify this parameter and set it to\n                        <code>mounted</code>. The value won't be set by default. After replica\n                        creation, you can manage the open mode manually.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "MaxAllocatedStorage": {
@@ -5968,6 +5936,12 @@
                 },
                 "Tags": {
                     "target": "com.amazonaws.rds#TagList"
+                },
+                "EndpointNetworkType": {
+                    "target": "com.amazonaws.rds#EndpointNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy endpoint supports IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy endpoint supports IPv6 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code> - The proxy endpoint supports both IPv4 and IPv6.</p>\n            </li>\n         </ul>\n         <p>Default: <code>IPV4</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC and all subnets must have an IPv6 CIDR block.</p>\n            </li>\n            <li>\n               <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC tenancy cannot be <code>dedicated</code>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -6052,13 +6026,25 @@
                 "DebugLogging": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the proxy includes detailed information about SQL statements in its logs.\n        This information helps you to debug issues involving SQL behavior or the performance\n        and scalability of the proxy connections. The debug information includes the text of\n        SQL statements that you submit through the proxy. Thus, only enable this setting\n        when needed for debugging, and only when you have security measures in place to\n        safeguard any sensitive information that appears in the logs.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the proxy logs detailed connection and query information. \n            When you enable <code>DebugLogging</code>, the proxy captures connection details \n            and connection pool behavior from your queries. Debug logging increases CloudWatch costs \n            and can impact proxy performance. Enable this option only when you need \n            to troubleshoot connection or performance issues.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.rds#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.</p>"
+                    }
+                },
+                "EndpointNetworkType": {
+                    "target": "com.amazonaws.rds#EndpointNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy endpoint supports IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy endpoint supports IPv6 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code> - The proxy endpoint supports both IPv4 and IPv6.</p>\n            </li>\n         </ul>\n         <p>Default: <code>IPV4</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC and all subnets must have an IPv6 CIDR block.</p>\n            </li>\n            <li>\n               <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC tenancy cannot be <code>dedicated</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TargetConnectionNetworkType": {
+                    "target": "com.amazonaws.rds#TargetConnectionNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy connects to the database using IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy connects to the database using IPv6 only.</p>\n            </li>\n         </ul>\n         <p>Default: <code>IPV4</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you specify <code>IPV6</code>, the database must support dual-stack mode. RDS doesn't support IPv6-only databases.</p>\n            </li>\n            <li>\n               <p>All targets registered with the proxy must be compatible with the specified network type.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -9258,7 +9244,7 @@
                 "ReplicaMode": {
                     "target": "com.amazonaws.rds#ReplicaMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The open mode of a Db2 or an Oracle read replica. The default is\n                <code>open-read-only</code>. For more information, see  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html\">Working with read replicas for\n                Amazon RDS for Db2</a>  and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Working with read replicas\n                for Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>. </p>\n         <note>\n            <p>This attribute is only supported in RDS for Db2, RDS for Oracle, and RDS Custom\n                for Oracle.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The open mode of a Db2 or an Oracle read replica. The default is\n                <code>open-read-only</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html\">Working with replicas for\n                Amazon RDS for Db2</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Working with read\n                replicas for Amazon RDS for Oracle</a> in the <i>Amazon RDS User\n                Guide</i>. </p>\n         <note>\n            <p>This attribute is only supported in RDS for Db2, RDS for Oracle, and RDS Custom\n                for Oracle.</p>\n         </note>"
                     }
                 },
                 "LicenseModel": {
@@ -10418,7 +10404,7 @@
                 "DebugLogging": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the proxy includes detailed information about SQL statements in its logs.\n        This information helps you to debug issues involving SQL behavior or the performance\n        and scalability of the proxy connections. The debug information includes the text of\n        SQL statements that you submit through the proxy. Thus, only enable this setting\n        when needed for debugging, and only when you have security measures in place to\n        safeguard any sensitive information that appears in the logs.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the proxy logs detailed connection and query information. \n            When you enable <code>DebugLogging</code>, the proxy captures connection details \n            and connection pool behavior from your queries. Debug logging increases CloudWatch costs \n            and can impact proxy performance. Enable this option only when you need \n            to troubleshoot connection or performance issues.</p>"
                     }
                 },
                 "CreatedDate": {
@@ -10431,6 +10417,18 @@
                     "target": "com.amazonaws.rds#TStamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the proxy was last updated.</p>"
+                    }
+                },
+                "EndpointNetworkType": {
+                    "target": "com.amazonaws.rds#EndpointNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy endpoint supports IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy endpoint supports IPv6 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code> - The proxy endpoint supports both IPv4 and IPv6.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TargetConnectionNetworkType": {
+                    "target": "com.amazonaws.rds#TargetConnectionNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy connects to the database using IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy connects to the database using IPv6 only.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -10522,6 +10520,12 @@
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether this endpoint is the default endpoint for the associated DB proxy.\n        Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the\n        DB proxy can be either read/write or read-only.</p>"
+                    }
+                },
+                "EndpointNetworkType": {
+                    "target": "com.amazonaws.rds#EndpointNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy endpoint supports IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy endpoint supports IPv6 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code> - The proxy endpoint supports both IPv4 and IPv6.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -18994,6 +18998,29 @@
                 "smithy.api#documentation": "<p>This data type represents the information you need to connect to an Amazon RDS DB instance.\n      This data type is used as a response element in the following actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDBInstance</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBInstances</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDBInstance</code>\n               </p>\n            </li>\n         </ul>\n         <p>For the data structure that represents Amazon Aurora DB cluster endpoints,\n        see <code>DBClusterEndpoint</code>.</p>"
             }
         },
+        "com.amazonaws.rds#EndpointNetworkType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6"
+                    }
+                },
+                "DUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUAL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rds#Engine": {
             "type": "string",
             "traits": {
@@ -19745,7 +19772,7 @@
                 "GlobalClusterResourceId": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Region-unique, immutable identifier for the global database cluster. This identifier is found in\n        Amazon Web Services CloudTrail log entries whenever the Amazon Web Services KMS key for the DB cluster is accessed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services <a href=\"https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html?id=docs_gateway#partition\">partition</a>-unique, immutable identifier for the global database cluster. This identifier is found in\n        Amazon Web Services CloudTrail log entries whenever the Amazon Web Services KMS key for the DB cluster is accessed.</p>"
                     }
                 },
                 "GlobalClusterArn": {
@@ -21222,6 +21249,23 @@
                 }
             }
         },
+        "com.amazonaws.rds#MasterUserAuthenticationType": {
+            "type": "enum",
+            "members": {
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "password"
+                    }
+                },
+                "IAM_DB_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iam-db-auth"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rds#MasterUserSecret": {
             "type": "structure",
             "members": {
@@ -22081,7 +22125,7 @@
                 "DatabaseInsightsMode": {
                     "target": "com.amazonaws.rds#DatabaseInsightsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the DB cluster.</p>\n         <p>If you change the value from <code>standard</code> to <code>advanced</code>, you must set the \n            <code>PerformanceInsightsEnabled</code> parameter to <code>true</code> and the \n            <code>PerformanceInsightsRetentionPeriod</code> parameter to 465.</p>\n         <p>If you change the value from <code>advanced</code> to <code>standard</code>, you must \n            set the <code>PerformanceInsightsEnabled</code> parameter to <code>false</code>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the DB cluster.</p>\n         <p>If you change the value from <code>standard</code> to <code>advanced</code>, you must set the \n            <code>PerformanceInsightsEnabled</code> parameter to <code>true</code> and the \n            <code>PerformanceInsightsRetentionPeriod</code> parameter to 465.</p>\n         <p>If you change the value from <code>advanced</code> to <code>standard</code>, you can set the <code>PerformanceInsightsEnabled</code> parameter to <code>true</code> to collect detailed database counter and per-query metrics.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "EnablePerformanceInsights": {
@@ -22163,6 +22207,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB cluster's server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid for Cluster Type: Multi-AZ DB clusters</p>"
+                    }
+                },
+                "MasterUserAuthenticationType": {
+                    "target": "com.amazonaws.rds#MasterUserAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can change the master DB user to use IAM database authentication.</p>\n         <p>You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>password</code> - Use standard database authentication with a password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
                     }
                 }
             },
@@ -22766,7 +22816,7 @@
                 "ReplicaMode": {
                     "target": "com.amazonaws.rds#ReplicaMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The open mode of a replica database.</p>\n         <note>\n            <p>This parameter is only supported for Db2 DB instances and Oracle DB\n                instances.</p>\n         </note>\n         <dl>\n            <dt>Db2</dt>\n            <dd>\n               <p>Standby DB replicas are included in Db2 Advanced Edition (AE) and Db2\n                        Standard Edition (SE). The main use case for standby replicas is\n                        cross-Region disaster recovery. Because it doesn't accept user\n                        connections, a standby replica can't serve a read-only workload.</p>\n               <p>You can create a combination of standby and read-only DB replicas for the\n                        same primary DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html\">Working with read\n                            replicas for Amazon RDS for Db2</a> in the <i>Amazon RDS User\n                                Guide</i>.</p>\n               <p>To create standby DB replicas for RDS for Db2, set this parameter to\n                        <code>mounted</code>.</p>\n            </dd>\n            <dt>Oracle</dt>\n            <dd>\n               <p>Mounted DB replicas are included in Oracle Database Enterprise Edition. The main use case for\n                        mounted replicas is cross-Region disaster recovery. The primary database doesn't use Active\n                        Data Guard to transmit information to the mounted replica. Because it doesn't accept\n                        user connections, a mounted replica can't serve a read-only workload.</p>\n               <p>You can create a combination of mounted and read-only DB replicas for the\n                        same primary DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Working with\n                            read replicas for Amazon RDS for Oracle</a> in the <i>Amazon\n                            RDS User Guide</i>.</p>\n               <p>For RDS Custom, you must specify this parameter and set it to\n                            <code>mounted</code>. The value won't be set by default. After replica\n                        creation, you can manage the open mode manually.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The open mode of a replica database.</p>\n         <p>This parameter is only supported for Db2 DB instances and Oracle DB\n            instances.</p>\n         <dl>\n            <dt>Db2</dt>\n            <dd>\n               <p>Standby DB replicas are included in Db2 Advanced Edition (AE) and Db2\n                        Standard Edition (SE). The main use case for standby replicas is\n                        cross-Region disaster recovery. Because it doesn't accept user\n                        connections, a standby replica can't serve a read-only workload.</p>\n               <p>You can create a combination of standby and read-only DB replicas for the\n                        same primary DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html\">Working with\n                            replicas for Amazon RDS for Db2</a> in the <i>Amazon RDS User\n                            Guide</i>.</p>\n               <p>To create standby DB replicas for RDS for Db2, set this parameter to\n                        <code>mounted</code>.</p>\n            </dd>\n            <dt>Oracle</dt>\n            <dd>\n               <p>Mounted DB replicas are included in Oracle Database Enterprise Edition. The main use case for\n                        mounted replicas is cross-Region disaster recovery. The primary database doesn't use Active\n                        Data Guard to transmit information to the mounted replica. Because it doesn't accept\n                        user connections, a mounted replica can't serve a read-only workload.</p>\n               <p>You can create a combination of mounted and read-only DB replicas for the\n                        same primary DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Working with\n                            read replicas for Amazon RDS for Oracle</a> in the <i>Amazon\n                            RDS User Guide</i>.</p>\n               <p>For RDS Custom, you must specify this parameter and set it to\n                            <code>mounted</code>. The value won't be set by default. After replica\n                        creation, you can manage the open mode manually.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "EnableCustomerOwnedIp": {
@@ -22790,7 +22840,7 @@
                 "ResumeFullAutomationModeMinutes": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of minutes to pause the automation. When the time period ends, RDS Custom resumes \n            full automation.</p>\n         <p>Default: <code>60</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be at least 60.</p>\n            </li>\n            <li>\n               <p>Must be no more than 1,440.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of minutes to pause the automation. When the time period ends, RDS Custom\n            resumes full automation.</p>\n         <p>Default: <code>60</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be at least 60.</p>\n            </li>\n            <li>\n               <p>Must be no more than 1,440.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NetworkType": {
@@ -22839,6 +22889,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the to convert your DB instance from the single-tenant conﬁguration\n            to the multi-tenant conﬁguration. This parameter is supported only for RDS for Oracle\n            CDB instances.</p>\n         <p>During the conversion, RDS creates an initial tenant database and associates the DB\n            name, master user name, character set, and national character set metadata with this\n            database. The tags associated with the instance also propagate to the initial tenant\n            database. You can add more tenant databases to your DB instance by using the\n                <code>CreateTenantDatabase</code> operation.</p>\n         <important>\n            <p>The conversion to the multi-tenant configuration is permanent and irreversible, so\n                you can't later convert back to the single-tenant configuration. When you specify\n                this parameter, you must also specify <code>ApplyImmediately</code>.</p>\n         </important>"
+                    }
+                },
+                "MasterUserAuthenticationType": {
+                    "target": "com.amazonaws.rds#MasterUserAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can change the master DB user to use IAM database authentication.</p>\n         <p>You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>password</code> - Use standard database authentication with a password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>\n            </li>\n         </ul>\n         <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
                     }
                 }
             },
@@ -23051,7 +23107,7 @@
                 "DebugLogging": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the proxy includes detailed information about SQL statements in its logs.\n        This information helps you to debug issues involving SQL behavior or the performance\n        and scalability of the proxy connections. The debug information includes the text of\n        SQL statements that you submit through the proxy. Thus, only enable this setting\n        when needed for debugging, and only when you have security measures in place to\n        safeguard any sensitive information that appears in the logs.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the proxy logs detailed connection and query information. \n            When you enable <code>DebugLogging</code>, the proxy captures connection details \n            and connection pool behavior from your queries. Debug logging increases CloudWatch costs \n            and can impact proxy performance. Enable this option only when you need \n            to troubleshoot connection or performance issues.</p>"
                     }
                 },
                 "RoleArn": {
@@ -23275,7 +23331,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a manual DB snapshot with a new engine version. The snapshot can be encrypted\n            or unencrypted, but not shared or public.\n        \n    </p>\n         <p>Amazon RDS supports upgrading DB snapshots for MySQL, PostgreSQL, and Oracle. This operation\n          doesn't apply to RDS Custom or RDS for Db2.</p>",
+                "smithy.api#documentation": "<p>Updates a manual DB snapshot with a new engine version. The snapshot can be encrypted\n            or unencrypted, but not shared or public.\n        \n    </p>\n         <p>Amazon RDS supports upgrading DB snapshots for MariaDB, MySQL, PostgreSQL, and Oracle. This operation\n          doesn't apply to RDS Custom or RDS for Db2.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To modify a DB snapshot",
@@ -23451,7 +23507,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine version to upgrade the DB snapshot to.</p>\n         <p>The following are the database engines and engine versions that are available when you upgrade a DB snapshot.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>For the list of engine versions that are available for upgrading a DB snapshot, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html\">\n                Upgrading a MySQL DB snapshot engine version</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>19.0.0.0.ru-2022-01.rur-2022-01.r1</code> (supported for 12.2.0.1 DB\n                    snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>19.0.0.0.ru-2022-07.rur-2022-07.r1</code> (supported for 12.1.0.2 DB\n                    snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>12.1.0.2.v8</code>  (supported for 12.1.0.1 DB snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>11.2.0.4.v12</code> (supported for 11.2.0.2 DB snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>11.2.0.4.v11</code> (supported for 11.2.0.3 DB snapshots)</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>For the list of engine versions that are available for upgrading a DB snapshot, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.PostgreSQL.html\">\n                Upgrading a PostgreSQL DB snapshot engine version</a> in the <i>Amazon RDS User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>The engine version to upgrade the DB snapshot to.</p>\n         <p>The following are the database engines and engine versions that are available when you upgrade a DB snapshot.</p>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>For the list of engine versions that are available for upgrading a DB snapshot, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mariadb-upgrade-snapshot.html\">\n                Upgrading a MariaDB DB snapshot engine version</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>For the list of engine versions that are available for upgrading a DB snapshot, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html\">\n                Upgrading a MySQL DB snapshot engine version</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>21.0.0.0.ru-2025-04.rur-2025-04.r1</code> (supported for 21.0.0.0.ru-2022-01.rur-2022-01.r1, 21.0.0.0.ru-2022-04.rur-2022-04.r1, 21.0.0.0.ru-2022-07.rur-2022-07.r1, 21.0.0.0.ru-2022-10.rur-2022-10.r1, 21.0.0.0.ru-2023-01.rur-2023-01.r1 and 21.0.0.0.ru-2023-01.rur-2023-01.r2 DB snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>19.0.0.0.ru-2025-04.rur-2025-04.r1</code> (supported for 19.0.0.0.ru-2019-07.rur-2019-07.r1, 19.0.0.0.ru-2019-10.rur-2019-10.r1 and 0.0.0.ru-2020-01.rur-2020-01.r1 DB snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>19.0.0.0.ru-2022-01.rur-2022-01.r1</code> (supported for 12.2.0.1 DB\n                    snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>19.0.0.0.ru-2022-07.rur-2022-07.r1</code> (supported for 12.1.0.2 DB\n                    snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>12.1.0.2.v8</code>  (supported for 12.1.0.1 DB snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>11.2.0.4.v12</code> (supported for 11.2.0.2 DB snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>11.2.0.4.v11</code> (supported for 11.2.0.3 DB snapshots)</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>For the list of engine versions that are available for upgrading a DB snapshot, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.PostgreSQL.html\">\n                Upgrading a PostgreSQL DB snapshot engine version</a> in the <i>Amazon RDS User Guide.</i>\n         </p>"
                     }
                 },
                 "OptionGroupName": {
@@ -24953,6 +25009,12 @@
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports using a dedicated log volume (DLV).</p>"
+                    }
+                },
+                "SupportsHttpEndpoint": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a DB instance supports HTTP endpoints.</p>"
                     }
                 }
             },
@@ -28331,7 +28393,7 @@
                 "LicenseModel": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>License model information for the restored DB instance.</p>\n         <note>\n            <p>License models for RDS for Db2 require additional configuration. The Bring Your\n                Own License (BYOL) model requires a custom parameter group and an Amazon Web Services License Manager self-managed license. The Db2 license through\n                Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html\">Amazon RDS for Db2 licensing\n                    options</a> in the <i>Amazon RDS User Guide</i>.</p>\n         </note>\n         <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - <code>bring-your-own-license | marketplace-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - <code>license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MySQL - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Oracle - <code>bring-your-own-license | license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - <code>postgresql-license</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default: Same as the source.</p>"
+                        "smithy.api#documentation": "<p>License model information for the restored DB instance.</p>\n         <note>\n            <p>License models for RDS for Db2 require additional configuration. The bring your\n                own license (BYOL) model requires a custom parameter group and an Amazon Web Services License\n                Manager self-managed license. The Db2 license through Amazon Web Services Marketplace model\n                requires an Amazon Web Services Marketplace subscription. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html\">Amazon\n                    RDS for Db2 licensing options</a> in the <i>Amazon RDS User\n                    Guide</i>.</p>\n         </note>\n         <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - <code>bring-your-own-license | marketplace-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - <code>license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MySQL - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Oracle - <code>bring-your-own-license | license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - <code>postgresql-license</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default: Same as the source.</p>"
                     }
                 },
                 "DBName": {
@@ -28620,7 +28682,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Relational Database Service (Amazon RDS) \n            supports importing MySQL databases by using backup files. \n            You can create a backup of your on-premises database, \n            store it on Amazon Simple Storage Service (Amazon S3), \n            and then restore the backup file onto a new Amazon RDS DB instance running MySQL.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html\">Importing Data into an Amazon RDS MySQL DB Instance</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>This operation doesn't apply to RDS Custom.</p>"
+                "smithy.api#documentation": "<p>Amazon Relational Database Service (Amazon RDS) \n            supports importing MySQL databases by using backup files. \n            You can create a backup of your on-premises database, \n            store it on Amazon Simple Storage Service (Amazon S3), \n            and then restore the backup file onto a new Amazon RDS DB instance running MySQL.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html\">Restoring a backup into an Amazon RDS for MySQL DB instance</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>This operation doesn't apply to RDS Custom.</p>"
             }
         },
         "com.amazonaws.rds#RestoreDBInstanceFromS3Message": {
@@ -29221,7 +29283,7 @@
                 "LicenseModel": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The license model information for the restored DB instance.</p>\n         <note>\n            <p>License models for RDS for Db2 require additional configuration. The Bring Your\n                Own License (BYOL) model requires a custom parameter group and an Amazon Web Services License Manager self-managed license. The Db2 license through\n                Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html\">Amazon RDS for Db2 licensing\n                    options</a> in the <i>Amazon RDS User Guide</i>.</p>\n         </note>\n         <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - <code>bring-your-own-license | marketplace-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - <code>license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MySQL - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Oracle - <code>bring-your-own-license | license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - <code>postgresql-license</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default: Same as the source.</p>"
+                        "smithy.api#documentation": "<p>The license model information for the restored DB instance.</p>\n         <note>\n            <p>License models for RDS for Db2 require additional configuration. The bring your\n                own license (BYOL) model requires a custom parameter group and an Amazon Web Services License\n                Manager self-managed license. The Db2 license through Amazon Web Services Marketplace model\n                requires an Amazon Web Services Marketplace subscription. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html\">Amazon\n                    RDS for Db2 licensing options</a> in the <i>Amazon RDS User\n                    Guide</i>.</p>\n         </note>\n         <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - <code>bring-your-own-license | marketplace-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - <code>license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MySQL - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Oracle - <code>bring-your-own-license | license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - <code>postgresql-license</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default: Same as the source.</p>"
                     }
                 },
                 "DBName": {
@@ -31376,6 +31438,23 @@
             "traits": {
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rds#TargetConnectionNetworkType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#TargetDBClusterParameterGroupName": {

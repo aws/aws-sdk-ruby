@@ -257,6 +257,26 @@ module Aws::B2bi
           x12: {
             split_options: {
               split_by: String
+            },
+            validation_options: {
+              validation_rules: Array[
+                {
+                  code_list_validation_rule: {
+                    element_id: String,
+                    codes_to_add: Array[String],
+                    codes_to_remove: untyped
+                  },
+                  element_length_validation_rule: {
+                    element_id: untyped,
+                    max_length: Integer,
+                    min_length: untyped
+                  },
+                  element_requirement_validation_rule: {
+                    element_position: String,
+                    requirement: String
+                  }
+                }
+              ]
             }
           }
         }
@@ -271,6 +291,33 @@ module Aws::B2bi
           x12: {
             transaction_set: String,
             version: String
+          }
+        },
+        advanced_options: {
+          x12: {
+            split_options: {
+              split_by: String
+            },
+            validation_options: {
+              validation_rules: Array[
+                {
+                  code_list_validation_rule: {
+                    element_id: String,
+                    codes_to_add: Array[String],
+                    codes_to_remove: untyped
+                  },
+                  element_length_validation_rule: {
+                    element_id: untyped,
+                    max_length: Integer,
+                    min_length: untyped
+                  },
+                  element_requirement_validation_rule: {
+                    element_position: String,
+                    requirement: String
+                  }
+                }
+              ]
+            }
           }
         }
       },
@@ -510,6 +557,33 @@ module Aws::B2bi
             bucket_name: String,
             key: String
           }
+        },
+        advanced_options: {
+          x12: {
+            split_options: {
+              split_by: String
+            },
+            validation_options: {
+              validation_rules: Array[
+                {
+                  code_list_validation_rule: {
+                    element_id: String,
+                    codes_to_add: Array[String],
+                    codes_to_remove: untyped
+                  },
+                  element_length_validation_rule: {
+                    element_id: untyped,
+                    max_length: Integer,
+                    min_length: untyped
+                  },
+                  element_requirement_validation_rule: {
+                    element_position: String,
+                    requirement: String
+                  }
+                }
+              ]
+            }
+          }
         }
       }
     ) -> _TestConversionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestConversionResponse
@@ -528,6 +602,7 @@ module Aws::B2bi
       include Smithy::Client::_Response[Types::TestParsingResponse]
       def parsed_file_content: () -> String?
       def parsed_split_file_contents: () -> Array[String]?
+      def validation_messages: () -> Array[String]?
     end
     def test_parsing: (
       ?input_file: {
@@ -545,6 +620,26 @@ module Aws::B2bi
         x12: {
           split_options: {
             split_by: String
+          },
+          validation_options: {
+            validation_rules: Array[
+              {
+                code_list_validation_rule: {
+                  element_id: String,
+                  codes_to_add: Array[String],
+                  codes_to_remove: untyped
+                },
+                element_length_validation_rule: {
+                  element_id: untyped,
+                  max_length: Integer,
+                  min_length: untyped
+                },
+                element_requirement_validation_rule: {
+                  element_position: String,
+                  requirement: String
+                }
+              }
+            ]
           }
         }
       }
@@ -727,6 +822,26 @@ module Aws::B2bi
           x12: {
             split_options: {
               split_by: String
+            },
+            validation_options: {
+              validation_rules: Array[
+                {
+                  code_list_validation_rule: {
+                    element_id: String,
+                    codes_to_add: Array[String],
+                    codes_to_remove: untyped
+                  },
+                  element_length_validation_rule: {
+                    element_id: untyped,
+                    max_length: Integer,
+                    min_length: untyped
+                  },
+                  element_requirement_validation_rule: {
+                    element_position: String,
+                    requirement: String
+                  }
+                }
+              ]
             }
           }
         }
@@ -741,6 +856,33 @@ module Aws::B2bi
           x12: {
             transaction_set: String,
             version: String
+          }
+        },
+        advanced_options: {
+          x12: {
+            split_options: {
+              split_by: String
+            },
+            validation_options: {
+              validation_rules: Array[
+                {
+                  code_list_validation_rule: {
+                    element_id: String,
+                    codes_to_add: Array[String],
+                    codes_to_remove: untyped
+                  },
+                  element_length_validation_rule: {
+                    element_id: untyped,
+                    max_length: Integer,
+                    min_length: untyped
+                  },
+                  element_requirement_validation_rule: {
+                    element_position: String,
+                    requirement: String
+                  }
+                }
+              ]
+            }
           }
         }
       },

@@ -732,6 +732,20 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The inputs from a <code>Converse</code> API request for token counting.</p> <p>This structure mirrors the input format for the <code>Converse</code> operation, allowing you to count tokens for conversation-based inference requests.</p>
+    # @!attribute messages
+    #   <p>An array of messages to count tokens for.</p>
+    #   @return [Array<Types::Message>]
+    # @!attribute system
+    #   <p>The system content blocks to count tokens for. System content provides instructions or context to the model about how it should behave or respond. The token count will include any system content provided.</p>
+    #   @return [Array<Types::SystemContentBlock>]
+    class ConverseTokensRequest < Struct.new(
+      :messages,
+      :system,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The trace object in a response from <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a>. Currently, you can only trace guardrails.</p>
     # @!attribute guardrail
     #   <p>The guardrail trace object. </p>
@@ -742,6 +756,47 @@ module Aws::BedrockRuntime
     class ConverseTrace < Struct.new(
       :guardrail,
       :prompt_router,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The input value for token counting. The value should be either an <code>InvokeModel</code> or <code>Converse</code> request body. </p>
+    # @!attribute invoke_model
+    #   <p>An <code>InvokeModel</code> request for which to count tokens. Use this field when you want to count tokens for a raw text input that would be sent to the <code>InvokeModel</code> operation.</p>
+    #   @return [Types::InvokeModelTokensRequest]
+    # @!attribute converse
+    #   <p>A <code>Converse</code> request for which to count tokens. Use this field when you want to count tokens for a conversation-based input that would be sent to the <code>Converse</code> operation.</p>
+    #   @return [Types::ConverseTokensRequest]
+    class CountTokensInput < Struct.new(
+      :invoke_model,
+      :converse,
+      :unknown,
+      keyword_init: true)
+      include ::Smithy::Schema::Union
+
+      class InvokeModel < CountTokensInput; end
+      class Converse < CountTokensInput; end
+      class Unknown < CountTokensInput; end
+    end
+
+    # @!attribute model_id
+    #   <p>The unique identifier or ARN of the foundation model to use for token counting. Each model processes tokens differently, so the token count is specific to the model you specify.</p>
+    #   @return [String]
+    # @!attribute input
+    #   <p>The input for which to count tokens. The structure of this parameter depends on whether you're counting tokens for an <code>InvokeModel</code> or <code>Converse</code> request:</p> <ul> <li> <p>For <code>InvokeModel</code> requests, provide the request body in the <code>invokeModel</code> field</p> </li> <li> <p>For <code>Converse</code> requests, provide the messages and system content in the <code>converse</code> field</p> </li> </ul> <p>The input format must be compatible with the model specified in the <code>modelId</code> parameter.</p>
+    #   @return [Types::CountTokensInput]
+    class CountTokensRequest < Struct.new(
+      :model_id,
+      :input,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute input_tokens
+    #   <p>The number of tokens in the provided input according to the specified model's tokenization rules. This count represents the number of input tokens that would be processed if the same input were sent to the model in an inference request. Use this value to estimate costs and ensure your inputs stay within model token limits.</p>
+    #   @return [Integer]
+    class CountTokensResponse < Struct.new(
+      :input_tokens,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -960,25 +1015,25 @@ module Aws::BedrockRuntime
 
     # <p>Represents a logical validation result from automated reasoning policy evaluation. The finding indicates whether claims in the input are logically valid, invalid, satisfiable, impossible, or have other logical issues.</p>
     # @!attribute valid
-    #   <p>Indicates that the claims are definitively true and logically implied by the premises, with no possible alternative interpretations.</p>
+    #   <p>Contains the result when the automated reasoning evaluation determines that the claims in the input are logically valid and definitively true based on the provided premises and policy rules.</p>
     #   @return [Types::GuardrailAutomatedReasoningValidFinding]
     # @!attribute invalid
-    #   <p>Indicates that the claims are logically false and contradictory to the established rules or premises.</p>
+    #   <p>Contains the result when the automated reasoning evaluation determines that the claims in the input are logically invalid and contradict the established premises or policy rules.</p>
     #   @return [Types::GuardrailAutomatedReasoningInvalidFinding]
     # @!attribute satisfiable
-    #   <p>Indicates that the claims could be either true or false depending on additional assumptions not provided in the input.</p>
+    #   <p>Contains the result when the automated reasoning evaluation determines that the claims in the input could be either true or false depending on additional assumptions not provided in the input context.</p>
     #   @return [Types::GuardrailAutomatedReasoningSatisfiableFinding]
     # @!attribute impossible
-    #   <p>Indicates that no valid claims can be made due to logical contradictions in the premises or rules.</p>
+    #   <p>Contains the result when the automated reasoning evaluation determines that no valid logical conclusions can be drawn due to contradictions in the premises or policy rules themselves.</p>
     #   @return [Types::GuardrailAutomatedReasoningImpossibleFinding]
     # @!attribute translation_ambiguous
-    #   <p>Indicates that the input has multiple valid logical interpretations, requiring additional context or clarification.</p>
+    #   <p>Contains the result when the automated reasoning evaluation detects that the input has multiple valid logical interpretations, requiring additional context or clarification to proceed with validation.</p>
     #   @return [Types::GuardrailAutomatedReasoningTranslationAmbiguousFinding]
     # @!attribute too_complex
-    #   <p>Indicates that the input exceeds the processing capacity due to the volume or complexity of the logical information.</p>
+    #   <p>Contains the result when the automated reasoning evaluation cannot process the input due to its complexity or volume exceeding the system's processing capacity for logical analysis.</p>
     #   @return [Types::GuardrailAutomatedReasoningTooComplexFinding]
     # @!attribute no_translations
-    #   <p>Indicates that no relevant logical information could be extracted from the input for validation.</p>
+    #   <p>Contains the result when the automated reasoning evaluation cannot extract any relevant logical information from the input that can be validated against the policy rules.</p>
     #   @return [Types::GuardrailAutomatedReasoningNoTranslationsFinding]
     class GuardrailAutomatedReasoningFinding < Struct.new(
       :valid,
@@ -1865,6 +1920,16 @@ module Aws::BedrockRuntime
       :body,
       :content_type,
       :performance_config_latency,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The body of an <code>InvokeModel</code> API request for token counting. This structure mirrors the input format for the <code>InvokeModel</code> operation, allowing you to count tokens for raw text inference requests.</p>
+    # @!attribute body
+    #   <p>The request body to count tokens for, formatted according to the model's expected input format. To learn about the input format for different models, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html">Model inference parameters and responses</a>.</p>
+    #   @return [String]
+    class InvokeModelTokensRequest < Struct.new(
+      :body,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

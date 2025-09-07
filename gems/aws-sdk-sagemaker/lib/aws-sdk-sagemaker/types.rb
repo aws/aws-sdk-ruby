@@ -2153,12 +2153,56 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Specifies the autoscaling configuration for a HyperPod cluster.</p>
+    # @!attribute mode
+    #   <p>Describes whether autoscaling is enabled or disabled for the cluster. Valid values are <code>Enable</code> and <code>Disable</code>.</p>
+    #   @return [String]
+    # @!attribute auto_scaler_type
+    #   <p>The type of autoscaler to use. Currently supported value is <code>Karpenter</code>.</p>
+    #   @return [String]
+    class ClusterAutoScalingConfig < Struct.new(
+      :mode,
+      :auto_scaler_type,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The autoscaling configuration and status information for a HyperPod cluster.</p>
+    # @!attribute mode
+    #   <p>Describes whether autoscaling is enabled or disabled for the cluster.</p>
+    #   @return [String]
+    # @!attribute auto_scaler_type
+    #   <p>The type of autoscaler configured for the cluster.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the autoscaling configuration. Valid values are <code>InService</code>, <code>Failed</code>, <code>Creating</code>, and <code>Deleting</code>.</p>
+    #   @return [String]
+    # @!attribute failure_message
+    #   <p>If the autoscaling status is <code>Failed</code>, this field contains a message describing the failure.</p>
+    #   @return [String]
+    class ClusterAutoScalingConfigOutput < Struct.new(
+      :mode,
+      :auto_scaler_type,
+      :status,
+      :failure_message,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines the configuration for attaching an additional Amazon Elastic Block Store (EBS) volume to each instance of the SageMaker HyperPod cluster instance group. To learn more, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620">SageMaker HyperPod release notes: June 20, 2024</a>.</p>
     # @!attribute volume_size_in_gb
     #   <p>The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to <code>/opt/sagemaker</code>.</p>
     #   @return [Integer]
+    # @!attribute volume_kms_key_id
+    #   <p>The ID of a KMS key to encrypt the Amazon EBS volume.</p>
+    #   @return [String]
+    # @!attribute root_volume
+    #   <p>Specifies whether the configuration is for the cluster's root or secondary Amazon EBS volume. You can specify two <code>ClusterEbsVolumeConfig</code> fields to configure both the root and secondary volumes. Set the value to <code>True</code> if you'd like to provide your own customer managed Amazon Web Services KMS key to encrypt the root volume. When <code>True</code>:</p> <ul> <li> <p>The configuration is applied to the root volume.</p> </li> <li> <p>You can't specify the <code>VolumeSizeInGB</code> field. The size of the root volume is determined for you.</p> </li> <li> <p>You must specify a KMS key ID for <code>VolumeKmsKeyId</code> to encrypt the root volume with your own KMS key instead of an Amazon Web Services owned KMS key.</p> </li> </ul> <p>Otherwise, by default, the value is <code>False</code>, and the following applies:</p> <ul> <li> <p>The configuration is applied to the secondary volume, while the root volume is encrypted with an Amazon Web Services owned key.</p> </li> <li> <p>You must specify the <code>VolumeSizeInGB</code> field.</p> </li> <li> <p>You can optionally specify the <code>VolumeKmsKeyId</code> to encrypt the secondary volume with your own KMS key instead of an Amazon Web Services owned KMS key.</p> </li> </ul>
+    #   @return [Boolean]
     class ClusterEbsVolumeConfig < Struct.new(
       :volume_size_in_gb,
+      :volume_kms_key_id,
+      :root_volume,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -2348,7 +2392,7 @@ module Aws::SageMaker
     #   <p>The configuration object of the schedule that SageMaker uses to update the AMI.</p>
     #   @return [Types::ScheduledUpdateConfig]
     # @!attribute image_id
-    #   <p>When configuring your HyperPod cluster, you can specify an image ID using one of the following options:</p> <ul> <li> <p> <code>HyperPodPublicAmiId</code>: Use a HyperPod public AMI</p> </li> <li> <p> <code>CustomAmiId</code>: Use your custom AMI</p> </li> <li> <p> <code>default</code>: Use the default latest system image</p> </li> </ul> <p>f you choose to use a custom AMI (<code>CustomAmiId</code>), ensure it meets the following requirements:</p> <ul> <li> <p>Encryption: The custom AMI must be unencrypted.</p> </li> <li> <p>Ownership: The custom AMI must be owned by the same Amazon Web Services account that is creating the HyperPod cluster.</p> </li> <li> <p>Volume support: Only the primary AMI snapshot volume is supported; additional AMI volumes are not supported.</p> </li> </ul> <p>When updating the instance group's AMI through the <code>UpdateClusterSoftware</code> operation, if an instance group uses a custom AMI, you must provide an <code>ImageId</code> or use the default as input.</p>
+    #   <p>When configuring your HyperPod cluster, you can specify an image ID using one of the following options:</p> <ul> <li> <p> <code>HyperPodPublicAmiId</code>: Use a HyperPod public AMI</p> </li> <li> <p> <code>CustomAmiId</code>: Use your custom AMI</p> </li> <li> <p> <code>default</code>: Use the default latest system image</p> </li> </ul> <p>If you choose to use a custom AMI (<code>CustomAmiId</code>), ensure it meets the following requirements:</p> <ul> <li> <p>Encryption: The custom AMI must be unencrypted.</p> </li> <li> <p>Ownership: The custom AMI must be owned by the same Amazon Web Services account that is creating the HyperPod cluster.</p> </li> <li> <p>Volume support: Only the primary AMI snapshot volume is supported; additional AMI volumes are not supported.</p> </li> </ul> <p>When updating the instance group's AMI through the <code>UpdateClusterSoftware</code> operation, if an instance group uses a custom AMI, you must provide an <code>ImageId</code> or use the default as input. Note that if you don't specify an instance group in your <code>UpdateClusterSoftware</code> request, then all of the instance groups are patched with the specified image.</p>
     #   @return [String]
     class ClusterInstanceGroupSpecification < Struct.new(
       :instance_count,
@@ -2749,6 +2793,20 @@ module Aws::SageMaker
       :creation_time,
       :cluster_status,
       :training_plan_arns,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the configuration for managed tier checkpointing in a HyperPod cluster. Managed tier checkpointing uses multiple storage tiers, including cluster CPU memory, to provide faster checkpoint operations and improved fault tolerance for large-scale model training. The system automatically saves checkpoints at high frequency to memory and periodically persists them to durable storage, like Amazon S3.</p>
+    # @!attribute mode
+    #   <p>Specifies whether managed tier checkpointing is enabled or disabled for the HyperPod cluster. When set to <code>Enable</code>, the system installs a memory management daemon that provides disaggregated memory as a service for checkpoint storage. When set to <code>Disable</code>, the feature is turned off and the memory management daemon is removed from the cluster.</p>
+    #   @return [String]
+    # @!attribute instance_memory_allocation_percentage
+    #   <p>The percentage (int) of cluster memory to allocate for checkpointing.</p>
+    #   @return [Integer]
+    class ClusterTieredStorageConfig < Struct.new(
+      :mode,
+      :instance_memory_allocation_percentage,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3567,9 +3625,18 @@ module Aws::SageMaker
     # @!attribute node_recovery
     #   <p>The node recovery mode for the SageMaker HyperPod cluster. When set to <code>Automatic</code>, SageMaker HyperPod will automatically reboot or replace faulty nodes when issues are detected. When set to <code>None</code>, cluster administrators will need to manually manage any faulty cluster instances.</p>
     #   @return [String]
+    # @!attribute tiered_storage_config
+    #   <p>The configuration for managed tier checkpointing on the HyperPod cluster. When enabled, this feature uses a multi-tier storage approach for storing model checkpoints, providing faster checkpoint operations and improved fault tolerance across cluster nodes.</p>
+    #   @return [Types::ClusterTieredStorageConfig]
     # @!attribute node_provisioning_mode
     #   <p>The mode for provisioning nodes in the cluster. You can specify the following modes:</p> <ul> <li> <p> <b>Continuous</b>: Scaling behavior that enables 1) concurrent operation execution within instance groups, 2) continuous retry mechanisms for failed operations, 3) enhanced customer visibility into cluster events through detailed event streams, 4) partial provisioning capabilities. Your clusters and instance groups remain <code>InService</code> while scaling. This mode is only supported for EKS orchestrated clusters.</p> </li> </ul>
     #   @return [String]
+    # @!attribute cluster_role
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that HyperPod assumes to perform cluster autoscaling operations. This role must have permissions for <code>sagemaker:BatchAddClusterNodes</code> and <code>sagemaker:BatchDeleteClusterNodes</code>. This is only required when autoscaling is enabled and when HyperPod is performing autoscaling operations.</p>
+    #   @return [String]
+    # @!attribute auto_scaling
+    #   <p>The autoscaling configuration for the cluster. Enables automatic scaling of cluster nodes based on workload demand using a Karpenter-based system.</p>
+    #   @return [Types::ClusterAutoScalingConfig]
     class CreateClusterRequest < Struct.new(
       :cluster_name,
       :instance_groups,
@@ -3578,7 +3645,10 @@ module Aws::SageMaker
       :tags,
       :orchestrator,
       :node_recovery,
+      :tiered_storage_config,
       :node_provisioning_mode,
+      :cluster_role,
+      :auto_scaling,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -4671,7 +4741,7 @@ module Aws::SageMaker
     #   <p>The name of the labeling job. This name is used to identify the job in a list of labeling jobs. Labeling job names must be unique within an Amazon Web Services account and region. <code>LabelingJobName</code> is not case sensitive. For example, Example-job and example-job are considered the same labeling job name by Ground Truth.</p>
     #   @return [String]
     # @!attribute label_attribute_name
-    #   <p>The attribute name to use for the label in the output manifest file. This is the key for the key/value pair formed with the label that a worker assigns to the object. The <code>LabelAttributeName</code> must meet the following requirements.</p> <ul> <li> <p>The name can't end with "-metadata". </p> </li> <li> <p>If you are using one of the following <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html">built-in task types</a>, the attribute name <i>must</i> end with "-ref". If the task type you are using is not listed below, the attribute name <i>must not</i> end with "-ref".</p> <ul> <li> <p>Verification (<code>VerificationSemanticSegmentation</code>) labeling jobs for this task type.</p> </li> <li> <p>Video frame object detection (<code>VideoObjectDetection</code>), and adjustment and verification (<code>AdjustmentVideoObjectDetection</code>) labeling jobs for this task type.</p> </li> <li> <p>Video frame object tracking (<code>VideoObjectTracking</code>), and adjustment and verification (<code>AdjustmentVideoObjectTracking</code>) labeling jobs for this task type.</p> </li> <li> <p>3D point cloud semantic segmentation (<code>3DPointCloudSemanticSegmentation</code>), and adjustment and verification (<code>Adjustment3DPointCloudSemanticSegmentation</code>) labeling jobs for this task type. </p> </li> <li> <p>3D point cloud object tracking (<code>3DPointCloudObjectTracking</code>), and adjustment and verification (<code>Adjustment3DPointCloudObjectTracking</code>) labeling jobs for this task type. </p> </li> </ul> </li> </ul> <p/> <important> <p>If you are creating an adjustment or verification labeling job, you must use a <i>different</i> <code>LabelAttributeName</code> than the one used in the original labeling job. The original labeling job is the Ground Truth labeling job that produced the labels that you want verified or adjusted. To learn more about adjustment and verification labeling jobs, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html">Verify and Adjust Labels</a>.</p> </important>
+    #   <p>The attribute name to use for the label in the output manifest file. This is the key for the key/value pair formed with the label that a worker assigns to the object. The <code>LabelAttributeName</code> must meet the following requirements.</p> <ul> <li> <p>The name can't end with "-metadata". </p> </li> <li> <p>If you are using one of the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html">built-in task types</a> or one of the following, the attribute name <i>must</i> end with "-ref".</p> <ul> <li> <p>Image semantic segmentation (<code>SemanticSegmentation)</code> and adjustment (<code>AdjustmentSemanticSegmentation</code>) labeling jobs for this task type. One exception is that verification (<code>VerificationSemanticSegmentation</code>) <i>must not</i> end with -"ref".</p> </li> <li> <p>Video frame object detection (<code>VideoObjectDetection</code>), and adjustment and verification (<code>AdjustmentVideoObjectDetection</code>) labeling jobs for this task type.</p> </li> <li> <p>Video frame object tracking (<code>VideoObjectTracking</code>), and adjustment and verification (<code>AdjustmentVideoObjectTracking</code>) labeling jobs for this task type.</p> </li> <li> <p>3D point cloud semantic segmentation (<code>3DPointCloudSemanticSegmentation</code>), and adjustment and verification (<code>Adjustment3DPointCloudSemanticSegmentation</code>) labeling jobs for this task type. </p> </li> <li> <p>3D point cloud object tracking (<code>3DPointCloudObjectTracking</code>), and adjustment and verification (<code>Adjustment3DPointCloudObjectTracking</code>) labeling jobs for this task type. </p> </li> </ul> </li> </ul> <p/> <important> <p>If you are creating an adjustment or verification labeling job, you must use a <i>different</i> <code>LabelAttributeName</code> than the one used in the original labeling job. The original labeling job is the Ground Truth labeling job that produced the labels that you want verified or adjusted. To learn more about adjustment and verification labeling jobs, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html">Verify and Adjust Labels</a>.</p> </important>
     #   @return [String]
     # @!attribute input_config
     #   <p>Input data for the labeling job, such as the Amazon S3 location of the data objects and the location of the manifest file that describes the data objects.</p> <p>You must specify at least one of the following: <code>S3DataSource</code> or <code>SnsDataSource</code>. </p> <ul> <li> <p>Use <code>SnsDataSource</code> to specify an SNS input topic for a streaming labeling job. If you do not specify and SNS input topic ARN, Ground Truth will create a one-time labeling job that stops after all data objects in the input manifest file have been labeled.</p> </li> <li> <p>Use <code>S3DataSource</code> to specify an input manifest file for both streaming and one-time labeling jobs. Adding an <code>S3DataSource</code> is optional if you use <code>SnsDataSource</code> to create a streaming labeling job.</p> </li> </ul> <p>If you use the Amazon Mechanical Turk workforce, your input data should not include confidential information, personal information or protected health information. Use <code>ContentClassifiers</code> to specify that your data is free of personally identifiable information and adult content.</p>
@@ -5209,6 +5279,9 @@ module Aws::SageMaker
     # @!attribute security_group_ids
     #   <p>The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet. </p>
     #   @return [Array<String>]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for the notebook instance. Specify <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity. When you specify <code>dualstack</code>, the subnet must support IPv6 CIDR blocks. If not specified, defaults to <code>ipv4</code>.</p>
+    #   @return [String]
     # @!attribute role_arn
     #   <p> When you send any requests to Amazon Web Services resources from the notebook instance, SageMaker AI assumes this role to perform tasks on your behalf. You must grant this role necessary permissions so SageMaker AI can perform these tasks. The policy must allow the SageMaker AI service principal (sagemaker.amazonaws.com) permissions to assume this role. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">SageMaker AI Roles</a>. </p> <note> <p>To be able to pass this role to SageMaker AI, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>
     #   @return [String]
@@ -5250,6 +5323,7 @@ module Aws::SageMaker
       :instance_type,
       :subnet_id,
       :security_group_ids,
+      :ip_address_type,
       :role_arn,
       :kms_key_id,
       :tags,
@@ -8076,12 +8150,21 @@ module Aws::SageMaker
     # @!attribute orchestrator
     #   <p>The type of orchestrator used for the SageMaker HyperPod cluster. </p>
     #   @return [Types::ClusterOrchestrator]
+    # @!attribute tiered_storage_config
+    #   <p>The current configuration for managed tier checkpointing on the HyperPod cluster. For example, this shows whether the feature is enabled and the percentage of cluster memory allocated for checkpoint storage.</p>
+    #   @return [Types::ClusterTieredStorageConfig]
     # @!attribute node_recovery
     #   <p>The node recovery mode configured for the SageMaker HyperPod cluster.</p>
     #   @return [String]
     # @!attribute node_provisioning_mode
     #   <p>The mode used for provisioning nodes in the cluster.</p>
     #   @return [String]
+    # @!attribute cluster_role
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that HyperPod uses for cluster autoscaling operations.</p>
+    #   @return [String]
+    # @!attribute auto_scaling
+    #   <p>The current autoscaling configuration and status for the autoscaler.</p>
+    #   @return [Types::ClusterAutoScalingConfigOutput]
     class DescribeClusterResponse < Struct.new(
       :cluster_arn,
       :cluster_name,
@@ -8092,8 +8175,11 @@ module Aws::SageMaker
       :restricted_instance_groups,
       :vpc_config,
       :orchestrator,
+      :tiered_storage_config,
       :node_recovery,
       :node_provisioning_mode,
+      :cluster_role,
+      :auto_scaling,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -10689,6 +10775,9 @@ module Aws::SageMaker
     # @!attribute instance_type
     #   <p>The type of ML compute instance running on the notebook instance.</p>
     #   @return [String]
+    # @!attribute ip_address_type
+    #   <p>The IP address type configured for the notebook instance. Returns <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity.</p>
+    #   @return [String]
     # @!attribute subnet_id
     #   <p>The ID of the VPC subnet.</p>
     #   @return [String]
@@ -10744,6 +10833,7 @@ module Aws::SageMaker
       :failure_reason,
       :url,
       :instance_type,
+      :ip_address_type,
       :subnet_id,
       :security_groups,
       :role_arn,
@@ -10865,7 +10955,7 @@ module Aws::SageMaker
     #   <p>The type of SageMaker Partner AI App. Must be one of the following: <code>lakera-guard</code>, <code>comet</code>, <code>deepchecks-llm-evaluation</code>, or <code>fiddler</code>.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of the SageMaker Partner AI App.</p>
+    #   <p>The status of the SageMaker Partner AI App.</p> <ul> <li> <p>Creating: SageMaker AI is creating the partner AI app. The partner AI app is not available during creation.</p> </li> <li> <p>Updating: SageMaker AI is updating the partner AI app. The partner AI app is not available when updating.</p> </li> <li> <p>Deleting: SageMaker AI is deleting the partner AI app. The partner AI app is not available during deletion.</p> </li> <li> <p>Available: The partner AI app is provisioned and accessible.</p> </li> <li> <p>Failed: The partner AI app is in a failed state and isn't available. SageMaker AI is investigating the issue. For further guidance, contact Amazon Web Services Support.</p> </li> <li> <p>UpdateFailed: The partner AI app couldn't be updated but is available.</p> </li> <li> <p>Deleted: The partner AI app is permanently deleted and not available.</p> </li> </ul>
     #   @return [String]
     # @!attribute creation_time
     #   <p>The time that the SageMaker Partner AI App was created.</p>
@@ -12343,9 +12433,13 @@ module Aws::SageMaker
     # @!attribute vpc_only_trusted_accounts
     #   <p>The list of Amazon Web Services accounts that are trusted when the domain is created in VPC-only mode.</p>
     #   @return [Array<String>]
+    # @!attribute rootless_docker
+    #   <p>Indicates whether to use rootless Docker.</p>
+    #   @return [String]
     class DockerSettings < Struct.new(
       :enable_docker_access,
       :vpc_only_trusted_accounts,
+      :rootless_docker,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -28538,18 +28632,30 @@ module Aws::SageMaker
     # @!attribute restricted_instance_groups
     #   <p>The specialized instance groups for training models like Amazon Nova to be created in the SageMaker HyperPod cluster.</p>
     #   @return [Array<Types::ClusterRestrictedInstanceGroupSpecification>]
+    # @!attribute tiered_storage_config
+    #   <p>Updates the configuration for managed tier checkpointing on the HyperPod cluster. For example, you can enable or disable the feature and modify the percentage of cluster memory allocated for checkpoint storage.</p>
+    #   @return [Types::ClusterTieredStorageConfig]
     # @!attribute node_recovery
     #   <p>The node recovery mode to be applied to the SageMaker HyperPod cluster.</p>
     #   @return [String]
     # @!attribute instance_groups_to_delete
     #   <p>Specify the names of the instance groups to delete. Use a single <code>,</code> as the separator between multiple names.</p>
     #   @return [Array<String>]
+    # @!attribute cluster_role
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that HyperPod assumes for cluster autoscaling operations. Cannot be updated while autoscaling is enabled.</p>
+    #   @return [String]
+    # @!attribute auto_scaling
+    #   <p>Updates the autoscaling configuration for the cluster. Use to enable or disable automatic node scaling.</p>
+    #   @return [Types::ClusterAutoScalingConfig]
     class UpdateClusterRequest < Struct.new(
       :cluster_name,
       :instance_groups,
       :restricted_instance_groups,
+      :tiered_storage_config,
       :node_recovery,
       :instance_groups_to_delete,
+      :cluster_role,
+      :auto_scaling,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -28617,7 +28723,7 @@ module Aws::SageMaker
     #   <p>The configuration to use when updating the AMI versions.</p>
     #   @return [Types::DeploymentConfiguration]
     # @!attribute image_id
-    #   <p>When configuring your HyperPod cluster, you can specify an image ID using one of the following options:</p> <ul> <li> <p> <code>HyperPodPublicAmiId</code>: Use a HyperPod public AMI</p> </li> <li> <p> <code>CustomAmiId</code>: Use your custom AMI</p> </li> <li> <p> <code>default</code>: Use the default latest system image</p> </li> </ul> <p>f you choose to use a custom AMI (<code>CustomAmiId</code>), ensure it meets the following requirements:</p> <ul> <li> <p>Encryption: The custom AMI must be unencrypted.</p> </li> <li> <p>Ownership: The custom AMI must be owned by the same Amazon Web Services account that is creating the HyperPod cluster.</p> </li> <li> <p>Volume support: Only the primary AMI snapshot volume is supported; additional AMI volumes are not supported.</p> </li> </ul> <p>When updating the instance group's AMI through the <code>UpdateClusterSoftware</code> operation, if an instance group uses a custom AMI, you must provide an <code>ImageId</code> or use the default as input.</p>
+    #   <p>When configuring your HyperPod cluster, you can specify an image ID using one of the following options:</p> <ul> <li> <p> <code>HyperPodPublicAmiId</code>: Use a HyperPod public AMI</p> </li> <li> <p> <code>CustomAmiId</code>: Use your custom AMI</p> </li> <li> <p> <code>default</code>: Use the default latest system image</p> </li> </ul> <p>If you choose to use a custom AMI (<code>CustomAmiId</code>), ensure it meets the following requirements:</p> <ul> <li> <p>Encryption: The custom AMI must be unencrypted.</p> </li> <li> <p>Ownership: The custom AMI must be owned by the same Amazon Web Services account that is creating the HyperPod cluster.</p> </li> <li> <p>Volume support: Only the primary AMI snapshot volume is supported; additional AMI volumes are not supported.</p> </li> </ul> <p>When updating the instance group's AMI through the <code>UpdateClusterSoftware</code> operation, if an instance group uses a custom AMI, you must provide an <code>ImageId</code> or use the default as input. Note that if you don't specify an instance group in your <code>UpdateClusterSoftware</code> request, then all of the instance groups are patched with the specified image.</p>
     #   @return [String]
     class UpdateClusterSoftwareRequest < Struct.new(
       :cluster_name,
@@ -29440,6 +29546,9 @@ module Aws::SageMaker
     # @!attribute instance_type
     #   <p>The Amazon ML compute instance type.</p>
     #   @return [String]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for the notebook instance. Specify <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity. The notebook instance must be stopped before updating this setting. When you specify <code>dualstack</code>, the subnet must support IPv6 addressing.</p>
+    #   @return [String]
     # @!attribute role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role that SageMaker AI can assume to access the notebook instance. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">SageMaker AI Roles</a>. </p> <note> <p>To be able to pass this role to SageMaker AI, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>
     #   @return [String]
@@ -29479,6 +29588,7 @@ module Aws::SageMaker
     class UpdateNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
       :instance_type,
+      :ip_address_type,
       :role_arn,
       :lifecycle_config_name,
       :disassociate_lifecycle_config,

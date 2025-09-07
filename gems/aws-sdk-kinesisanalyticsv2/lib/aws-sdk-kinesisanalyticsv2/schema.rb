@@ -26,6 +26,9 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfigurationUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#ApplicationConfigurationUpdate', name: 'ApplicationConfigurationUpdate')
     ApplicationDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.kinesisanalyticsv2#ApplicationDescription', name: 'ApplicationDescription', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     ApplicationDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#ApplicationDetail', name: 'ApplicationDetail')
+    ApplicationEncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#ApplicationEncryptionConfiguration', name: 'ApplicationEncryptionConfiguration')
+    ApplicationEncryptionConfigurationDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#ApplicationEncryptionConfigurationDescription', name: 'ApplicationEncryptionConfigurationDescription')
+    ApplicationEncryptionConfigurationUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#ApplicationEncryptionConfigurationUpdate', name: 'ApplicationEncryptionConfigurationUpdate')
     ApplicationMaintenanceConfigurationDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#ApplicationMaintenanceConfigurationDescription', name: 'ApplicationMaintenanceConfigurationDescription')
     ApplicationMaintenanceConfigurationUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#ApplicationMaintenanceConfigurationUpdate', name: 'ApplicationMaintenanceConfigurationUpdate')
     ApplicationMaintenanceWindowEndTime = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.kinesisanalyticsv2#ApplicationMaintenanceWindowEndTime', name: 'ApplicationMaintenanceWindowEndTime', traits: {"smithy.api#length" => {"min" => 5, "max" => 5}, "smithy.api#pattern" => "^([01][0-9]|2[0-3]):[0-5][0-9]$"})
@@ -159,6 +162,8 @@ module Aws::KinesisAnalyticsV2
     InvalidRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#InvalidRequestException', name: 'InvalidRequestException', traits: {"smithy.api#error" => "client"})
     JSONMappingParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#JSONMappingParameters', name: 'JSONMappingParameters')
     JobPlanDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.kinesisanalyticsv2#JobPlanDescription', name: 'JobPlanDescription')
+    KeyId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.kinesisanalyticsv2#KeyId', name: 'KeyId', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    KeyType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.kinesisanalyticsv2#KeyType', name: 'KeyType')
     KinesisAnalyticsARN = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.kinesisanalyticsv2#KinesisAnalyticsARN', name: 'KinesisAnalyticsARN', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:"})
     KinesisFirehoseInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#KinesisFirehoseInput', name: 'KinesisFirehoseInput')
     KinesisFirehoseInputDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.kinesisanalyticsv2#KinesisFirehoseInputDescription', name: 'KinesisFirehoseInputDescription')
@@ -394,6 +399,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfiguration.add_member(:application_system_rollback_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSystemRollbackConfiguration, location_name: 'ApplicationSystemRollbackConfiguration'))
     ApplicationConfiguration.add_member(:vpc_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfigurations, location_name: 'VpcConfigurations'))
     ApplicationConfiguration.add_member(:zeppelin_application_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZeppelinApplicationConfiguration, location_name: 'ZeppelinApplicationConfiguration'))
+    ApplicationConfiguration.add_member(:application_encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationEncryptionConfiguration, location_name: 'ApplicationEncryptionConfiguration'))
     ApplicationConfiguration.type = Types::ApplicationConfiguration
     ApplicationConfigurationDescription.add_member(:sql_application_configuration_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlApplicationConfigurationDescription, location_name: 'SqlApplicationConfigurationDescription'))
     ApplicationConfigurationDescription.add_member(:application_code_configuration_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationCodeConfigurationDescription, location_name: 'ApplicationCodeConfigurationDescription'))
@@ -404,6 +410,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfigurationDescription.add_member(:application_system_rollback_configuration_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSystemRollbackConfigurationDescription, location_name: 'ApplicationSystemRollbackConfigurationDescription'))
     ApplicationConfigurationDescription.add_member(:vpc_configuration_descriptions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfigurationDescriptions, location_name: 'VpcConfigurationDescriptions'))
     ApplicationConfigurationDescription.add_member(:zeppelin_application_configuration_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZeppelinApplicationConfigurationDescription, location_name: 'ZeppelinApplicationConfigurationDescription'))
+    ApplicationConfigurationDescription.add_member(:application_encryption_configuration_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationEncryptionConfigurationDescription, location_name: 'ApplicationEncryptionConfigurationDescription'))
     ApplicationConfigurationDescription.type = Types::ApplicationConfigurationDescription
     ApplicationConfigurationUpdate.add_member(:sql_application_configuration_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SqlApplicationConfigurationUpdate, location_name: 'SqlApplicationConfigurationUpdate'))
     ApplicationConfigurationUpdate.add_member(:application_code_configuration_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationCodeConfigurationUpdate, location_name: 'ApplicationCodeConfigurationUpdate'))
@@ -413,6 +420,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfigurationUpdate.add_member(:application_system_rollback_configuration_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSystemRollbackConfigurationUpdate, location_name: 'ApplicationSystemRollbackConfigurationUpdate'))
     ApplicationConfigurationUpdate.add_member(:vpc_configuration_updates, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfigurationUpdates, location_name: 'VpcConfigurationUpdates'))
     ApplicationConfigurationUpdate.add_member(:zeppelin_application_configuration_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ZeppelinApplicationConfigurationUpdate, location_name: 'ZeppelinApplicationConfigurationUpdate'))
+    ApplicationConfigurationUpdate.add_member(:application_encryption_configuration_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationEncryptionConfigurationUpdate, location_name: 'ApplicationEncryptionConfigurationUpdate'))
     ApplicationConfigurationUpdate.type = Types::ApplicationConfigurationUpdate
     ApplicationDetail.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: 'ApplicationARN', traits: {"smithy.api#required" => {}}))
     ApplicationDetail.add_member(:application_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationDescription, location_name: 'ApplicationDescription'))
@@ -433,6 +441,15 @@ module Aws::KinesisAnalyticsV2
     ApplicationDetail.add_member(:application_version_rolled_back_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: 'ApplicationVersionRolledBackTo'))
     ApplicationDetail.add_member(:application_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationMode, location_name: 'ApplicationMode'))
     ApplicationDetail.type = Types::ApplicationDetail
+    ApplicationEncryptionConfiguration.add_member(:key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyId, location_name: 'KeyId'))
+    ApplicationEncryptionConfiguration.add_member(:key_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyType, location_name: 'KeyType', traits: {"smithy.api#required" => {}}))
+    ApplicationEncryptionConfiguration.type = Types::ApplicationEncryptionConfiguration
+    ApplicationEncryptionConfigurationDescription.add_member(:key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyId, location_name: 'KeyId'))
+    ApplicationEncryptionConfigurationDescription.add_member(:key_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyType, location_name: 'KeyType', traits: {"smithy.api#required" => {}}))
+    ApplicationEncryptionConfigurationDescription.type = Types::ApplicationEncryptionConfigurationDescription
+    ApplicationEncryptionConfigurationUpdate.add_member(:key_id_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyId, location_name: 'KeyIdUpdate'))
+    ApplicationEncryptionConfigurationUpdate.add_member(:key_type_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyType, location_name: 'KeyTypeUpdate', traits: {"smithy.api#required" => {}}))
+    ApplicationEncryptionConfigurationUpdate.type = Types::ApplicationEncryptionConfigurationUpdate
     ApplicationMaintenanceConfigurationDescription.add_member(:application_maintenance_window_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationMaintenanceWindowStartTime, location_name: 'ApplicationMaintenanceWindowStartTime', traits: {"smithy.api#required" => {}}))
     ApplicationMaintenanceConfigurationDescription.add_member(:application_maintenance_window_end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationMaintenanceWindowEndTime, location_name: 'ApplicationMaintenanceWindowEndTime', traits: {"smithy.api#required" => {}}))
     ApplicationMaintenanceConfigurationDescription.type = Types::ApplicationMaintenanceConfigurationDescription
@@ -768,6 +785,8 @@ module Aws::KinesisAnalyticsV2
     InvalidRequestException.type = Types::InvalidRequestException
     JSONMappingParameters.add_member(:record_row_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordRowPath, location_name: 'RecordRowPath', traits: {"smithy.api#required" => {}}))
     JSONMappingParameters.type = Types::JSONMappingParameters
+    KeyType.add_member(:aws_owned_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AWS_OWNED_KEY', traits: {"smithy.api#enumValue" => "AWS_OWNED_KEY"}))
+    KeyType.add_member(:customer_managed_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CUSTOMER_MANAGED_KEY', traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED_KEY"}))
     KinesisFirehoseInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: 'ResourceARN', traits: {"smithy.api#required" => {}}))
     KinesisFirehoseInput.type = Types::KinesisFirehoseInput
     KinesisFirehoseInputDescription.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceARN, location_name: 'ResourceARN', traits: {"smithy.api#required" => {}}))
@@ -1024,6 +1043,7 @@ module Aws::KinesisAnalyticsV2
     SnapshotDetails.add_member(:application_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: 'ApplicationVersionId', traits: {"smithy.api#required" => {}}))
     SnapshotDetails.add_member(:snapshot_creation_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'SnapshotCreationTimestamp'))
     SnapshotDetails.add_member(:runtime_environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuntimeEnvironment, location_name: 'RuntimeEnvironment'))
+    SnapshotDetails.add_member(:application_encryption_configuration_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationEncryptionConfigurationDescription, location_name: 'ApplicationEncryptionConfigurationDescription'))
     SnapshotDetails.type = Types::SnapshotDetails
     SnapshotStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
     SnapshotStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'READY', traits: {"smithy.api#enumValue" => "READY"}))

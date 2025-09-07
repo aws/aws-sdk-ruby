@@ -95,16 +95,22 @@ module Aws::VerifiedPermissions
                         set: untyped,
                         record: untyped,
                         ipaddr: String,
-                        decimal: String
+                        decimal: String,
+                        datetime: String,
+                        duration: String
                       }
                     ],
                     ipaddr: untyped,
-                    decimal: untyped
+                    decimal: untyped,
+                    datetime: untyped,
+                    duration: untyped
                   }
                 ],
                 record: untyped,
                 ipaddr: untyped,
-                decimal: untyped
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
               }
             ],
             parents: Array[
@@ -151,16 +157,22 @@ module Aws::VerifiedPermissions
                         set: untyped,
                         record: untyped,
                         ipaddr: String,
-                        decimal: String
+                        decimal: String,
+                        datetime: String,
+                        duration: String
                       }
                     ],
                     ipaddr: untyped,
-                    decimal: untyped
+                    decimal: untyped,
+                    datetime: untyped,
+                    duration: untyped
                   }
                 ],
                 record: untyped,
                 ipaddr: untyped,
-                decimal: untyped
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
               }
             ],
             cedar_json: String
@@ -207,16 +219,22 @@ module Aws::VerifiedPermissions
                         set: untyped,
                         record: untyped,
                         ipaddr: String,
-                        decimal: String
+                        decimal: String,
+                        datetime: String,
+                        duration: String
                       }
                     ],
                     ipaddr: untyped,
-                    decimal: untyped
+                    decimal: untyped,
+                    datetime: untyped,
+                    duration: untyped
                   }
                 ],
                 record: untyped,
                 ipaddr: untyped,
-                decimal: untyped
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
               }
             ],
             parents: Array[
@@ -262,16 +280,22 @@ module Aws::VerifiedPermissions
                         set: untyped,
                         record: untyped,
                         ipaddr: String,
-                        decimal: String
+                        decimal: String,
+                        datetime: String,
+                        duration: String
                       }
                     ],
                     ipaddr: untyped,
-                    decimal: untyped
+                    decimal: untyped,
+                    datetime: untyped,
+                    duration: untyped
                   }
                 ],
                 record: untyped,
                 ipaddr: untyped,
-                decimal: untyped
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
               }
             ],
             cedar_json: String
@@ -535,16 +559,22 @@ module Aws::VerifiedPermissions
                     set: untyped,
                     record: untyped,
                     ipaddr: String,
-                    decimal: String
+                    decimal: String,
+                    datetime: String,
+                    duration: String
                   }
                 ],
                 ipaddr: untyped,
-                decimal: untyped
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
               }
             ],
             record: untyped,
             ipaddr: untyped,
-            decimal: untyped
+            decimal: untyped,
+            datetime: untyped,
+            duration: untyped
           }
         ],
         cedar_json: String
@@ -578,16 +608,22 @@ module Aws::VerifiedPermissions
                         set: untyped,
                         record: untyped,
                         ipaddr: String,
-                        decimal: String
+                        decimal: String,
+                        datetime: String,
+                        duration: String
                       }
                     ],
                     ipaddr: untyped,
-                    decimal: untyped
+                    decimal: untyped,
+                    datetime: untyped,
+                    duration: untyped
                   }
                 ],
                 record: untyped,
                 ipaddr: untyped,
-                decimal: untyped
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
               }
             ],
             parents: Array[
@@ -647,16 +683,22 @@ module Aws::VerifiedPermissions
                     set: untyped,
                     record: untyped,
                     ipaddr: String,
-                    decimal: String
+                    decimal: String,
+                    datetime: String,
+                    duration: String
                   }
                 ],
                 ipaddr: untyped,
-                decimal: untyped
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
               }
             ],
             record: untyped,
             ipaddr: untyped,
-            decimal: untyped
+            decimal: untyped,
+            datetime: untyped,
+            duration: untyped
           }
         ],
         cedar_json: String
@@ -690,16 +732,22 @@ module Aws::VerifiedPermissions
                         set: untyped,
                         record: untyped,
                         ipaddr: String,
-                        decimal: String
+                        decimal: String,
+                        datetime: String,
+                        duration: String
                       }
                     ],
                     ipaddr: untyped,
-                    decimal: untyped
+                    decimal: untyped,
+                    datetime: untyped,
+                    duration: untyped
                   }
                 ],
                 record: untyped,
                 ipaddr: untyped,
-                decimal: untyped
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
               }
             ],
             parents: Array[

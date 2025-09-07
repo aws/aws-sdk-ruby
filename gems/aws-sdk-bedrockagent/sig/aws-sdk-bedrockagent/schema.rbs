@@ -179,6 +179,7 @@ module Aws::BedrockAgent
     FilterPattern: StringShape
     FilteredObjectType: StringShape
     FixedSizeChunkingConfiguration: StructureShape
+    FlowAgentAliasArn: StringShape
     FlowAliasArn: StringShape
     FlowAliasConcurrencyConfiguration: StructureShape
     FlowAliasId: StringShape
@@ -204,6 +205,10 @@ module Aws::BedrockAgent
     FlowExecutionRoleArn: StringShape
     FlowId: StringShape
     FlowIdentifier: StringShape
+    FlowKnowledgeBaseId: StringShape
+    FlowLambdaArn: StringShape
+    FlowLexBotAliasArn: StringShape
+    FlowLexBotLocaleId: StringShape
     FlowName: StringShape
     FlowNode: StructureShape
     FlowNodeConfiguration: UnionShape
@@ -219,6 +224,9 @@ module Aws::BedrockAgent
     FlowNodeOutputs: ListShape
     FlowNodeType: EnumShape
     FlowNodes: ListShape
+    FlowPromptArn: StringShape
+    FlowPromptModelIdentifier: StringShape
+    FlowS3BucketName: StringShape
     FlowStatus: EnumShape
     FlowSummaries: ListShape
     FlowSummary: StructureShape
@@ -313,7 +321,6 @@ module Aws::BedrockAgent
     KnowledgeBaseDocumentDetails: ListShape
     KnowledgeBaseDocuments: ListShape
     KnowledgeBaseFlowNodeConfiguration: StructureShape
-    KnowledgeBaseId: StringShape
     KnowledgeBaseModelIdentifier: StringShape
     KnowledgeBaseOrchestrationConfiguration: StructureShape
     KnowledgeBasePromptTemplate: StructureShape
@@ -327,8 +334,6 @@ module Aws::BedrockAgent
     KnowledgeBaseType: EnumShape
     LambdaArn: StringShape
     LambdaFunctionFlowNodeConfiguration: StructureShape
-    LexBotAliasArn: StringShape
-    LexBotLocaleId: StringShape
     LexFlowNodeConfiguration: StructureShape
     ListAgentActionGroupsRequest: StructureShape
     ListAgentActionGroupsResponse: StructureShape

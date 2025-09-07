@@ -753,6 +753,15 @@ module Aws::Glue
       ?arguments: Hash[String, String]
     ) -> _CreateDevEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDevEndpointResponse
 
+    interface _CreateGlueIdentityCenterConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateGlueIdentityCenterConfigurationResponse]
+      def application_arn: () -> String?
+    end
+    def create_glue_identity_center_configuration: (
+      ?instance_arn: String,
+      ?scopes: Array[String]
+    ) -> _CreateGlueIdentityCenterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlueIdentityCenterConfigurationResponse
+
     interface _CreateIntegrationResponse
       include Smithy::Client::_Response[Types::CreateIntegrationResponse]
       def source_arn: () -> String?
@@ -785,7 +794,8 @@ module Aws::Glue
       ],
       ?integration_config: {
         refresh_interval: String,
-        source_properties: Hash[String, String]
+        source_properties: Hash[String, String],
+        continuous_sync: bool
       }
     ) -> _CreateIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntegrationResponse
 
@@ -2369,6 +2379,11 @@ module Aws::Glue
       ?endpoint_name: String
     ) -> _DeleteDevEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDevEndpointResponse
 
+    interface _DeleteGlueIdentityCenterConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteGlueIdentityCenterConfigurationResponse]
+    end
+    def delete_glue_identity_center_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGlueIdentityCenterConfigurationResponse
+
     interface _DeleteIntegrationResponse
       include Smithy::Client::_Response[Types::DeleteIntegrationResponse]
       def source_arn: () -> String?
@@ -2992,6 +3007,14 @@ module Aws::Glue
       ?order_by: String,
       ?selected_fields: Array[String]
     ) -> _GetEntityRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEntityRecordsResponse
+
+    interface _GetGlueIdentityCenterConfigurationResponse
+      include Smithy::Client::_Response[Types::GetGlueIdentityCenterConfigurationResponse]
+      def application_arn: () -> String?
+      def instance_arn: () -> String?
+      def scopes: () -> Array[String]?
+    end
+    def get_glue_identity_center_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGlueIdentityCenterConfigurationResponse
 
     interface _GetIntegrationResourcePropertyResponse
       include Smithy::Client::_Response[Types::GetIntegrationResourcePropertyResponse]
@@ -3791,6 +3814,14 @@ module Aws::Glue
             catalog_id: untyped,
             connection_name: untyped,
             additional_options: Hash[String, String]
+          },
+          data_quality_glue_table: {
+            database_name: untyped,
+            table_name: untyped,
+            catalog_id: untyped,
+            connection_name: untyped,
+            additional_options: untyped,
+            pre_processing_query: String
           }
         },
         job_name: untyped,
@@ -3816,6 +3847,14 @@ module Aws::Glue
             catalog_id: untyped,
             connection_name: untyped,
             additional_options: Hash[String, String]
+          },
+          data_quality_glue_table: {
+            database_name: untyped,
+            table_name: untyped,
+            catalog_id: untyped,
+            connection_name: untyped,
+            additional_options: untyped,
+            pre_processing_query: String
           }
         },
         started_before: Time,
@@ -3839,6 +3878,14 @@ module Aws::Glue
             catalog_id: untyped,
             connection_name: untyped,
             additional_options: Hash[String, String]
+          },
+          data_quality_glue_table: {
+            database_name: untyped,
+            table_name: untyped,
+            catalog_id: untyped,
+            connection_name: untyped,
+            additional_options: untyped,
+            pre_processing_query: String
           }
         },
         started_before: Time,
@@ -4096,11 +4143,17 @@ module Aws::Glue
       def create_time: () -> Time?
       def errors: () -> Array[Types::IntegrationError]?
       def data_filter: () -> String?
+      def integration_config: () -> Types::IntegrationConfig?
     end
     def modify_integration: (
       ?integration_identifier: String,
       ?description: String,
       ?data_filter: String,
+      ?integration_config: {
+        refresh_interval: String,
+        source_properties: Hash[String, String],
+        continuous_sync: bool
+      },
       ?integration_name: String
     ) -> _ModifyIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIntegrationResponse
 
@@ -4364,6 +4417,14 @@ module Aws::Glue
           catalog_id: untyped,
           connection_name: untyped,
           additional_options: Hash[String, String]
+        },
+        data_quality_glue_table: {
+          database_name: untyped,
+          table_name: untyped,
+          catalog_id: untyped,
+          connection_name: untyped,
+          additional_options: untyped,
+          pre_processing_query: String
         }
       },
       ?role: String,
@@ -4386,6 +4447,14 @@ module Aws::Glue
           catalog_id: untyped,
           connection_name: untyped,
           additional_options: Hash[String, String]
+        },
+        data_quality_glue_table: {
+          database_name: untyped,
+          table_name: untyped,
+          catalog_id: untyped,
+          connection_name: untyped,
+          additional_options: untyped,
+          pre_processing_query: String
         }
       },
       ?role: String,
@@ -4406,6 +4475,14 @@ module Aws::Glue
             catalog_id: untyped,
             connection_name: untyped,
             additional_options: Hash[String, String]
+          },
+          data_quality_glue_table: {
+            database_name: untyped,
+            table_name: untyped,
+            catalog_id: untyped,
+            connection_name: untyped,
+            additional_options: untyped,
+            pre_processing_query: String
           }
         }
       ]
@@ -5044,6 +5121,13 @@ module Aws::Glue
       ?delete_arguments: Array[String],
       ?add_arguments: Hash[String, String]
     ) -> _UpdateDevEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDevEndpointResponse
+
+    interface _UpdateGlueIdentityCenterConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateGlueIdentityCenterConfigurationResponse]
+    end
+    def update_glue_identity_center_configuration: (
+      ?scopes: Array[String]
+    ) -> _UpdateGlueIdentityCenterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlueIdentityCenterConfigurationResponse
 
     interface _UpdateIntegrationResourcePropertyResponse
       include Smithy::Client::_Response[Types::UpdateIntegrationResourcePropertyResponse]

@@ -258,7 +258,7 @@ module Aws::TranscribeStreaming
     #          <ul>
     #             <li>
     #                <p>
-    #                   <code>language-code</code>
+    #                   <code>language-code</code> or <code>identify-language</code>
     #                </p>
     #             </li>
     #             <li>
@@ -329,6 +329,58 @@ module Aws::TranscribeStreaming
     #         in your transcription request. If the languages don't match, the custom language model isn't applied. 
     #         There are no errors or warnings associated with a language mismatch.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">Custom language models</a>.</p>
+    # @option params [Boolean] :identify_language
+    #   <p>Enables automatic language identification for your Call Analytics transcription.</p>
+    #            <p>If you include <code>IdentifyLanguage</code>, you must include a list of
+    #         language codes, using <code>LanguageOptions</code>, that you think may be present in 
+    #         your audio stream. You must provide a minimum of two language selections.</p>
+    #            <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a 
+    #         preferred language can help Amazon Transcribe identify the language faster than if you omit this 
+    #         parameter.</p>
+    #            <p>Note that you must include either <code>LanguageCode</code> or 
+    #         <code>IdentifyLanguage</code> in your request. If you include both parameters, your transcription job
+    #         fails.</p>
+    # @option params [String] :language_options
+    #   <p>Specify two or more language codes that represent the languages you think may be present 
+    #         in your media.</p>
+    #            <p>Including language options can improve the accuracy of language identification.</p>
+    #            <p>If you include <code>LanguageOptions</code> in your request, you must also include 
+    #         <code>IdentifyLanguage</code>.</p>
+    #            <p>For a list of languages supported with Call Analytics streaming, refer to the 
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported 
+    #           languages</a> table.</p>
+    #            <important>
+    #               <p>You can only include one language dialect per language per stream. For example, you
+    #           cannot include <code>en-US</code> and <code>en-AU</code> in the same request.</p>
+    #            </important>
+    # @option params [String] :preferred_language
+    #   <p>Specify a preferred language from the subset of languages codes you specified in 
+    #         <code>LanguageOptions</code>.</p>
+    #            <p>You can only use this parameter if you've included <code>IdentifyLanguage</code> and
+    #           <code>LanguageOptions</code> in your request.</p>
+    # @option params [String] :vocabulary_names
+    #   <p>Specify the names of the custom vocabularies that you want to use when processing your
+    #         Call Analytics transcription. Note that vocabulary names are case sensitive.</p>
+    #            <p>If the custom vocabulary's language doesn't match the identified media language, it won't be applied to the transcription.</p>
+    #            <important>
+    #               <p>This parameter is only intended for use <b>with</b> the
+    #             <code>IdentifyLanguage</code> parameter. If you're <b>not</b>
+    #           including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary
+    #           with your transcription, use the <code>VocabularyName</code> parameter instead.</p>
+    #            </important>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html">Custom vocabularies</a>.</p>
+    # @option params [String] :vocabulary_filter_names
+    #   <p>Specify the names of the custom vocabulary filters that you want to use when processing
+    #         your Call Analytics transcription. Note that vocabulary filter names are case sensitive.</p>
+    #            <p>These filters serve to customize the transcript output.</p>
+    #            <important>
+    #               <p>This parameter is only intended for use <b>with</b> 
+    #           the <code>IdentifyLanguage</code> parameter. If you're <b>not</b> 
+    #           including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter 
+    #           with your transcription, use the <code>VocabularyFilterName</code> parameter instead.</p>
+    #            </important>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted 
+    #         words</a>.</p>
     # @option params [Boolean] :enable_partial_results_stabilization
     #   <p>Enables partial result stabilization for your transcription. Partial result stabilization can reduce
     #         latency in your output, but may impact accuracy. For more information, see 
@@ -377,7 +429,7 @@ module Aws::TranscribeStreaming
     #         <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"], # required
+    #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"],
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac"], # required
     #     vocabulary_name: "VocabularyName",
@@ -405,6 +457,11 @@ module Aws::TranscribeStreaming
     #     vocabulary_filter_name: "VocabularyFilterName",
     #     vocabulary_filter_method: "remove" # One of: ["remove", "mask", "tag"],
     #     language_model_name: "ModelName",
+    #     identify_language: false,
+    #     language_options: "LanguageOptions",
+    #     preferred_language: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"],
+    #     vocabulary_names: "VocabularyNames",
+    #     vocabulary_filter_names: "VocabularyFilterNames",
     #     enable_partial_results_stabilization: false,
     #     partial_results_stability: "high" # One of: ["high", "medium", "low"],
     #     content_identification_type: "PII" # One of: ["PII"],
@@ -460,6 +517,13 @@ module Aws::TranscribeStreaming
     #               end: 1
     #             }
     #           }
+    #         ],
+    #         language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"],
+    #         language_identification: [
+    #           {
+    #             language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"],
+    #             score: 1.0
+    #           }
     #         ]
     #       },
     #       category_event: {
@@ -494,6 +558,11 @@ module Aws::TranscribeStreaming
     #     vocabulary_filter_name: "VocabularyFilterName",
     #     vocabulary_filter_method: "remove" # One of: ["remove", "mask", "tag"],
     #     language_model_name: "ModelName",
+    #     identify_language: false,
+    #     language_options: "LanguageOptions",
+    #     preferred_language: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"],
+    #     vocabulary_names: "VocabularyNames",
+    #     vocabulary_filter_names: "VocabularyFilterNames",
     #     enable_partial_results_stabilization: false,
     #     partial_results_stability: "high" # One of: ["high", "medium", "low"],
     #     content_identification_type: "PII" # One of: ["PII"],

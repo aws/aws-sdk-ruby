@@ -1124,7 +1124,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "SMART"],
@@ -1147,7 +1148,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             ebu_tt_d_destination_settings: {
     #               copyright_holder: "__stringMax1000",
@@ -1414,7 +1416,14 @@ module Aws::MediaLive
     #               ],
     #               timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #               timed_metadata_id3_period: 1,
-    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               additional_destinations: [
+    #                 {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
+    #                 }
+    #               ]
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
@@ -2375,7 +2384,8 @@ module Aws::MediaLive
     #                 shadow_y_offset: 1,
     #                 teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #                 x_position: 1,
-    #                 y_position: 1
+    #                 y_position: 1,
+    #                 subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #               },
     #               dvb_sub_destination_settings: {
     #                 alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "SMART"],
@@ -2398,7 +2408,8 @@ module Aws::MediaLive
     #                 shadow_y_offset: 1,
     #                 teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #                 x_position: 1,
-    #                 y_position: 1
+    #                 y_position: 1,
+    #                 subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #               },
     #               ebu_tt_d_destination_settings: {
     #                 copyright_holder: "__stringMax1000",
@@ -2665,7 +2676,14 @@ module Aws::MediaLive
     #                 ],
     #                 timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                 timed_metadata_id3_period: 1,
-    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 additional_destinations: [
+    #                   {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   }
+    #                 ]
     #               },
     #               srt_group_settings: {
     #                 input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
@@ -4885,7 +4903,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "SMART"],
@@ -4908,7 +4927,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             ebu_tt_d_destination_settings: {
     #               copyright_holder: "__stringMax1000",
@@ -5175,7 +5195,14 @@ module Aws::MediaLive
     #               ],
     #               timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #               timed_metadata_id3_period: 1,
-    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               additional_destinations: [
+    #                 {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
+    #                 }
+    #               ]
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
@@ -6698,7 +6725,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "SMART"],
@@ -6721,7 +6749,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             ebu_tt_d_destination_settings: {
     #               copyright_holder: "__stringMax1000",
@@ -6988,7 +7017,14 @@ module Aws::MediaLive
     #               ],
     #               timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #               timed_metadata_id3_period: 1,
-    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               additional_destinations: [
+    #                 {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
+    #                 }
+    #               ]
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
@@ -10430,7 +10466,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "SMART"],
@@ -10453,7 +10490,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             ebu_tt_d_destination_settings: {
     #               copyright_holder: "__stringMax1000",
@@ -10720,7 +10758,14 @@ module Aws::MediaLive
     #               ],
     #               timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #               timed_metadata_id3_period: 1,
-    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               additional_destinations: [
+    #                 {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
+    #                 }
+    #               ]
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
@@ -11712,7 +11757,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "SMART"],
@@ -11735,7 +11781,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             ebu_tt_d_destination_settings: {
     #               copyright_holder: "__stringMax1000",
@@ -12002,7 +12049,14 @@ module Aws::MediaLive
     #               ],
     #               timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #               timed_metadata_id3_period: 1,
-    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               additional_destinations: [
+    #                 {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
+    #                 }
+    #               ]
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
@@ -13332,7 +13386,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "SMART"],
@@ -13355,7 +13410,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             ebu_tt_d_destination_settings: {
     #               copyright_holder: "__stringMax1000",
@@ -13622,7 +13678,14 @@ module Aws::MediaLive
     #               ],
     #               timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #               timed_metadata_id3_period: 1,
-    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               additional_destinations: [
+    #                 {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
+    #                 }
+    #               ]
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
@@ -14739,7 +14802,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "SMART"],
@@ -14762,7 +14826,8 @@ module Aws::MediaLive
     #               shadow_y_offset: 1,
     #               teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #               x_position: 1,
-    #               y_position: 1
+    #               y_position: 1,
+    #               subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #             },
     #             ebu_tt_d_destination_settings: {
     #               copyright_holder: "__stringMax1000",
@@ -15029,7 +15094,14 @@ module Aws::MediaLive
     #               ],
     #               timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #               timed_metadata_id3_period: 1,
-    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               additional_destinations: [
+    #                 {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
+    #                 }
+    #               ]
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
@@ -15981,7 +16053,8 @@ module Aws::MediaLive
     #                 shadow_y_offset: 1,
     #                 teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #                 x_position: 1,
-    #                 y_position: 1
+    #                 y_position: 1,
+    #                 subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #               },
     #               dvb_sub_destination_settings: {
     #                 alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "SMART"],
@@ -16004,7 +16077,8 @@ module Aws::MediaLive
     #                 shadow_y_offset: 1,
     #                 teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #                 x_position: 1,
-    #                 y_position: 1
+    #                 y_position: 1,
+    #                 subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #               },
     #               ebu_tt_d_destination_settings: {
     #                 copyright_holder: "__stringMax1000",
@@ -16271,7 +16345,14 @@ module Aws::MediaLive
     #                 ],
     #                 timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                 timed_metadata_id3_period: 1,
-    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 additional_destinations: [
+    #                   {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   }
+    #                 ]
     #               },
     #               srt_group_settings: {
     #                 input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
@@ -17301,7 +17382,8 @@ module Aws::MediaLive
     #                 shadow_y_offset: 1,
     #                 teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #                 x_position: 1,
-    #                 y_position: 1
+    #                 y_position: 1,
+    #                 subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #               },
     #               dvb_sub_destination_settings: {
     #                 alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "SMART"],
@@ -17324,7 +17406,8 @@ module Aws::MediaLive
     #                 shadow_y_offset: 1,
     #                 teletext_grid_control: "FIXED" # One of: ["FIXED", "SCALED"],
     #                 x_position: 1,
-    #                 y_position: 1
+    #                 y_position: 1,
+    #                 subtitle_rows: "ROWS_16" # One of: ["ROWS_16", "ROWS_20", "ROWS_24"]
     #               },
     #               ebu_tt_d_destination_settings: {
     #                 copyright_holder: "__stringMax1000",
@@ -17591,7 +17674,14 @@ module Aws::MediaLive
     #                 ],
     #                 timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                 timed_metadata_id3_period: 1,
-    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 additional_destinations: [
+    #                   {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   }
+    #                 ]
     #               },
     #               srt_group_settings: {
     #                 input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]

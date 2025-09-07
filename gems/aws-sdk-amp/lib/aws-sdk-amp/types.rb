@@ -365,6 +365,23 @@ module Aws::Amp
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute workspace_id
+    #   <p>The ID of the workspace from which to delete the resource-based policy.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the request is safe to retry (idempotent).</p>
+    #   @return [String]
+    # @!attribute revision_id
+    #   <p>The revision ID of the policy to delete. Use this parameter to ensure that you are deleting the correct version of the policy.</p>
+    #   @return [String]
+    class DeleteResourcePolicyRequest < Struct.new(
+      :workspace_id,
+      :client_token,
+      :revision_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents the input of a <code>DeleteRuleGroupsNamespace</code> operation.</p>
     # @!attribute workspace_id
     #   <p>The ID of the workspace containing the rule groups namespace and definition to delete.</p>
@@ -479,6 +496,32 @@ module Aws::Amp
     #   @return [Types::QueryLoggingConfigurationMetadata]
     class DescribeQueryLoggingConfigurationResponse < Struct.new(
       :query_logging_configuration,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_id
+    #   <p>The ID of the workspace to describe the resource-based policy for.</p>
+    #   @return [String]
+    class DescribeResourcePolicyRequest < Struct.new(
+      :workspace_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy_document
+    #   <p>The JSON policy document for the resource-based policy attached to the workspace.</p>
+    #   @return [String]
+    # @!attribute policy_status
+    #   <p>The current status of the resource-based policy.</p>
+    #   @return [String]
+    # @!attribute revision_id
+    #   <p>The revision ID of the current resource-based policy.</p>
+    #   @return [String]
+    class DescribeResourcePolicyResponse < Struct.new(
+      :policy_document,
+      :policy_status,
+      :revision_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -857,6 +900,40 @@ module Aws::Amp
     #   @return [Types::AlertManagerDefinitionStatus]
     class PutAlertManagerDefinitionOutput < Struct.new(
       :status,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_id
+    #   <p>The ID of the workspace to attach the resource-based policy to.</p>
+    #   @return [String]
+    # @!attribute policy_document
+    #   <p>The JSON policy document to use as the resource-based policy. This policy defines the permissions that other AWS accounts or services have to access your workspace.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the request is safe to retry (idempotent).</p>
+    #   @return [String]
+    # @!attribute revision_id
+    #   <p>The revision ID of the policy to update. Use this parameter to ensure that you are updating the correct version of the policy. If you don't specify a revision ID, the policy is updated regardless of its current revision.</p> <p>For the first <b>PUT</b> request on a workspace that doesn't have an existing resource policy, you can specify <code>NO_POLICY</code> as the revision ID.</p>
+    #   @return [String]
+    class PutResourcePolicyRequest < Struct.new(
+      :workspace_id,
+      :policy_document,
+      :client_token,
+      :revision_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy_status
+    #   <p>The current status of the resource-based policy.</p>
+    #   @return [String]
+    # @!attribute revision_id
+    #   <p>The revision ID of the newly created or updated resource-based policy.</p>
+    #   @return [String]
+    class PutResourcePolicyResponse < Struct.new(
+      :policy_status,
+      :revision_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

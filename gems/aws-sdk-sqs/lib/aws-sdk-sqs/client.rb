@@ -513,7 +513,7 @@ module Aws::SQS
     #                  <p>
     #                     <code>MaximumMessageSize</code> – The limit of how many bytes a message
     #                       can contain before Amazon SQS rejects it. Valid values: An integer from 1,024 bytes
-    #                       (1 KiB) to 262,144 bytes (256 KiB). Default: 262,144 (256 KiB). </p>
+    #                       (1 KiB) to 1,048,576 bytes (1 MiB). Default: 1,048,576 bytes (1 MiB). </p>
     #               </li>
     #               <li>
     #                  <p>
@@ -1853,8 +1853,8 @@ module Aws::SQS
     #   <p>The URL of the Amazon SQS queue to which a message is sent.</p>
     #            <p>Queue URLs and names are case-sensitive.</p>
     # @option params [String] :message_body
-    #   <p>The message to send. The minimum size is one character. The maximum size is 256
-    #               KiB.</p>
+    #   <p>The message to send. The minimum size is one character. The maximum size is 
+    #           1 MiB or 1,048,576 bytes</p>
     #            <important>
     #               <p>A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed. For more information, see the <a href="http://www.w3.org/TR/REC-xml/#charsets">W3C specification for characters</a>.</p>
     #               <p>
@@ -2046,8 +2046,8 @@ module Aws::SQS
     #          <p>The result of sending each message is reported individually in the response.
     #             Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of <code>200</code>.</p>
     #          <p>The maximum allowed individual message size and the maximum total payload size (the
-    #             sum of the individual lengths of all of the batched messages) are both 256 KiB (262,144
-    #             bytes).</p>
+    #             sum of the individual lengths of all of the batched messages) are both 1 MiB 
+    #             1,048,576 bytes.</p>
     #          <important>
     #             <p>A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed. For more information, see the <a href="http://www.w3.org/TR/REC-xml/#charsets">W3C specification for characters</a>.</p>
     #             <p>
@@ -2167,7 +2167,7 @@ module Aws::SQS
     #                  <p>
     #                     <code>MaximumMessageSize</code> – The limit of how many bytes a message
     #                       can contain before Amazon SQS rejects it. Valid values: An integer from 1,024 bytes
-    #                       (1 KiB) up to 262,144 bytes (256 KiB). Default: 262,144 (256 KiB). </p>
+    #                       (1 KiB) up to 1,048,576 bytes (1 MiB). Default: 1,048,576 bytes (1 MiB). </p>
     #               </li>
     #               <li>
     #                  <p>

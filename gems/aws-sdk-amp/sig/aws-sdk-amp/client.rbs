@@ -171,6 +171,15 @@ module Aws::Amp
       ?client_token: String
     ) -> _DeleteQueryLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueryLoggingConfigurationResponse
 
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_policy: (
+      ?workspace_id: String,
+      ?client_token: String,
+      ?revision_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
     interface _DeleteRuleGroupsNamespaceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -221,6 +230,16 @@ module Aws::Amp
     def describe_query_logging_configuration: (
       ?workspace_id: String
     ) -> _DescribeQueryLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQueryLoggingConfigurationResponse
+
+    interface _DescribeResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DescribeResourcePolicyResponse]
+      def policy_document: () -> String?
+      def policy_status: () -> String?
+      def revision_id: () -> String?
+    end
+    def describe_resource_policy: (
+      ?workspace_id: String
+    ) -> _DescribeResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourcePolicyResponse
 
     interface _DescribeRuleGroupsNamespaceResponse
       include Smithy::Client::_Response[Types::DescribeRuleGroupsNamespaceOutput]
@@ -314,6 +333,18 @@ module Aws::Amp
       ?data: String,
       ?client_token: String
     ) -> _PutAlertManagerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAlertManagerDefinitionResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def policy_status: () -> String?
+      def revision_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?workspace_id: String,
+      ?policy_document: String,
+      ?client_token: String,
+      ?revision_id: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
 
     interface _PutRuleGroupsNamespaceResponse
       include Smithy::Client::_Response[Types::PutRuleGroupsNamespaceOutput]

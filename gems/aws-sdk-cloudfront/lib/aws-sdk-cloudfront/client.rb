@@ -362,7 +362,8 @@ module Aws::CloudFront
     #                   items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                 },
     #                 origin_read_timeout: 1,
-    #                 origin_keepalive_timeout: 1
+    #                 origin_keepalive_timeout: 1,
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
@@ -962,7 +963,8 @@ module Aws::CloudFront
     #                 items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #               },
     #               origin_read_timeout: 1,
-    #               origin_keepalive_timeout: 1
+    #               origin_keepalive_timeout: 1,
+    #               ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #             },
     #             vpc_origin_config: {
     #               vpc_origin_id: "string", # required
@@ -1286,7 +1288,8 @@ module Aws::CloudFront
     #                   items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                 },
     #                 origin_read_timeout: 1,
-    #                 origin_keepalive_timeout: 1
+    #                 origin_keepalive_timeout: 1,
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
@@ -1715,7 +1718,8 @@ module Aws::CloudFront
     #                   items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                 },
     #                 origin_read_timeout: 1,
-    #                 origin_keepalive_timeout: 1
+    #                 origin_keepalive_timeout: 1,
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
@@ -2048,7 +2052,8 @@ module Aws::CloudFront
     #                   items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                 },
     #                 origin_read_timeout: 1,
-    #                 origin_keepalive_timeout: 1
+    #                 origin_keepalive_timeout: 1,
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
@@ -4545,7 +4550,8 @@ module Aws::CloudFront
     #                   items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                 },
     #                 origin_read_timeout: 1,
-    #                 origin_keepalive_timeout: 1
+    #                 origin_keepalive_timeout: 1,
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
@@ -4858,7 +4864,8 @@ module Aws::CloudFront
     #                 items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #               },
     #               origin_read_timeout: 1,
-    #               origin_keepalive_timeout: 1
+    #               origin_keepalive_timeout: 1,
+    #               ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #             },
     #             vpc_origin_config: {
     #               vpc_origin_id: "string", # required
@@ -6750,7 +6757,8 @@ module Aws::CloudFront
     #                     items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                   },
     #                   origin_read_timeout: 1,
-    #                   origin_keepalive_timeout: 1
+    #                   origin_keepalive_timeout: 1,
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #                 },
     #                 vpc_origin_config: {
     #                   vpc_origin_id: "string", # required
@@ -7059,7 +7067,8 @@ module Aws::CloudFront
     #                     items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                   },
     #                   origin_read_timeout: 1,
-    #                   origin_keepalive_timeout: 1
+    #                   origin_keepalive_timeout: 1,
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #                 },
     #                 vpc_origin_config: {
     #                   vpc_origin_id: "string", # required
@@ -7402,7 +7411,8 @@ module Aws::CloudFront
     #                     items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                   },
     #                   origin_read_timeout: 1,
-    #                   origin_keepalive_timeout: 1
+    #                   origin_keepalive_timeout: 1,
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #                 },
     #                 vpc_origin_config: {
     #                   vpc_origin_id: "string", # required
@@ -7782,7 +7792,8 @@ module Aws::CloudFront
     #                     items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                   },
     #                   origin_read_timeout: 1,
-    #                   origin_keepalive_timeout: 1
+    #                   origin_keepalive_timeout: 1,
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #                 },
     #                 vpc_origin_config: {
     #                   vpc_origin_id: "string", # required
@@ -8177,7 +8188,8 @@ module Aws::CloudFront
     #                     items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                   },
     #                   origin_read_timeout: 1,
-    #                   origin_keepalive_timeout: 1
+    #                   origin_keepalive_timeout: 1,
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #                 },
     #                 vpc_origin_config: {
     #                   vpc_origin_id: "string", # required
@@ -9724,7 +9736,8 @@ module Aws::CloudFront
     #                 items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #               },
     #               origin_read_timeout: 1,
-    #               origin_keepalive_timeout: 1
+    #               origin_keepalive_timeout: 1,
+    #               ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #             },
     #             vpc_origin_config: {
     #               vpc_origin_id: "string", # required
@@ -10050,7 +10063,8 @@ module Aws::CloudFront
     #                   items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                 },
     #                 origin_read_timeout: 1,
-    #                 origin_keepalive_timeout: 1
+    #                 origin_keepalive_timeout: 1,
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
@@ -10516,7 +10530,8 @@ module Aws::CloudFront
     #                   items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
     #                 },
     #                 origin_read_timeout: 1,
-    #                 origin_keepalive_timeout: 1
+    #                 origin_keepalive_timeout: 1,
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required

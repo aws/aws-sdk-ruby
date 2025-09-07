@@ -550,6 +550,7 @@ module Aws::Route53
     CloudWatchRegion.add_member(:ap_southeast_7, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ap_southeast_7', traits: {"smithy.api#enumValue" => "ap-southeast-7"}))
     CloudWatchRegion.add_member(:ap_east_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ap_east_2', traits: {"smithy.api#enumValue" => "ap-east-2"}))
     CloudWatchRegion.add_member(:eu_isoe_west_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'eu_isoe_west_1', traits: {"smithy.api#enumValue" => "eu-isoe-west-1"}))
+    CloudWatchRegion.add_member(:ap_southeast_6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ap_southeast_6', traits: {"smithy.api#enumValue" => "ap-southeast-6"}))
     CollectionSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollectionSummary)
     CollectionSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: 'Arn'))
     CollectionSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'Id'))
@@ -1265,6 +1266,7 @@ module Aws::Route53
     ResourceRecordSetRegion.add_member(:us_gov_east_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'us_gov_east_1', traits: {"smithy.api#enumValue" => "us-gov-east-1"}))
     ResourceRecordSetRegion.add_member(:us_gov_west_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'us_gov_west_1', traits: {"smithy.api#enumValue" => "us-gov-west-1"}))
     ResourceRecordSetRegion.add_member(:ap_east_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ap_east_2', traits: {"smithy.api#enumValue" => "ap-east-2"}))
+    ResourceRecordSetRegion.add_member(:ap_southeast_6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ap_southeast_6', traits: {"smithy.api#enumValue" => "ap-southeast-6"}))
     ResourceRecordSets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceRecordSet, traits: {"smithy.api#xmlName" => "ResourceRecordSet"})
     ResourceRecords.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceRecord, traits: {"smithy.api#xmlName" => "ResourceRecord"})
     ResourceTagSet.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceType, location_name: 'ResourceType'))
@@ -1442,6 +1444,7 @@ module Aws::Route53
     VPCRegion.add_member(:ap_southeast_7, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ap_southeast_7', traits: {"smithy.api#enumValue" => "ap-southeast-7"}))
     VPCRegion.add_member(:ap_east_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ap_east_2', traits: {"smithy.api#enumValue" => "ap-east-2"}))
     VPCRegion.add_member(:eu_isoe_west_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'eu_isoe_west_1', traits: {"smithy.api#enumValue" => "eu-isoe-west-1"}))
+    VPCRegion.add_member(:ap_southeast_6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ap_southeast_6', traits: {"smithy.api#enumValue" => "ap-southeast-6"}))
     VPCs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VPC, traits: {"smithy.api#xmlName" => "VPC"})
 
     AWSDnsV20130401 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

@@ -689,7 +689,7 @@ module Aws::QBusiness
     #   <p>The identifier of the Amazon Q Business index to add the documents to. </p>
     #   @return [String]
     # @!attribute documents
-    #   <p>One or more documents to add to the index.</p>
+    #   <p>One or more documents to add to the index.</p> <important> <p>Ensure that the name of your document doesn't contain any confidential information. Amazon Q Business returns document names in chat responses and citations when relevant.</p> </important>
     #   @return [Array<Types::Document>]
     # @!attribute role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket.</p>
@@ -718,7 +718,7 @@ module Aws::QBusiness
 
     # <p>Provides information about the phrases blocked from chat by your chat control configuration.</p>
     # @!attribute blocked_phrases
-    #   <p>A list of phrases blocked from a Amazon Q Business web experience chat.</p>
+    #   <p>A list of phrases blocked from a Amazon Q Business web experience chat.</p> <note> <p>Each phrase can contain a maximum of 36 characters. The list can contain a maximum of 20 phrases.</p> </note>
     #   @return [Array<String>]
     # @!attribute system_message_override
     #   <p>The configured custom message displayed to an end user informing them that they've used a blocked phrase during chat.</p>
@@ -1446,7 +1446,7 @@ module Aws::QBusiness
     #   <p>Sets the frequency for Amazon Q Business to check the documents in your data source repository and update your index. If you don't set a schedule, Amazon Q Business won't periodically update the index.</p> <p>Specify a <code>cron-</code> format schedule string or an empty string to indicate that the index is updated on demand. You can't specify the <code>Schedule</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception. </p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.</p>
+    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources. This field is required for all connector types except custom connectors, where it is optional.</p>
     #   @return [String]
     # @!attribute client_token
     #   <p>A token you provide to identify a request to create a data source connector. Multiple calls to the <code>CreateDataSource</code> API with the same client token will create only one data source connector. </p>
@@ -1720,7 +1720,7 @@ module Aws::QBusiness
     #   <p>Sets the website domain origins that are allowed to embed the Amazon Q Business web experience. The <i>domain origin</i> refers to the base URL for accessing a website including the protocol (<code>http/https</code>), the domain name, and the port number (if specified). </p> <note> <p>You must only submit a <i>base URL</i> and not a full path. For example, <code>https://docs.aws.amazon.com</code>.</p> </note>
     #   @return [Array<String>]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of the service role attached to your web experience.</p> <note> <p>You must provide this value if you're using IAM Identity Center to manage end user access to your application. If you're using legacy identity management to manage user access, you don't need to provide this value.</p> </note>
+    #   <p>The Amazon Resource Name (ARN) of the service role attached to your web experience.</p> <note> <p>The <code>roleArn</code> parameter is required when your Amazon Q Business application is created with IAM Identity Center. It is not required for SAML-based applications.</p> </note>
     #   @return [String]
     # @!attribute tags
     #   <p>A list of key-value pairs that identify or categorize your Amazon Q Business web experience. You can also use tags to help control access to the web experience. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.</p>
@@ -3030,7 +3030,7 @@ module Aws::QBusiness
     #   <p>The unique identifier of the document that is indexed via BatchPutDocument API or file-upload or connector sync. It is also found in chat or chatSync response.</p>
     #   @return [String]
     # @!attribute output_format
-    #   <p>Raw document outputFormat.</p>
+    #   <p>Document outputFormat. Defaults to RAW if not selected.</p>
     #   @return [String]
     class GetDocumentContentRequest < Struct.new(
       :application_id,
@@ -3046,7 +3046,7 @@ module Aws::QBusiness
     #   <p>A pre-signed URL that provides temporary access to download the document content directly from Amazon Q Business. The URL expires after 5 minutes for security purposes. This URL is generated only after successful ACL validation.</p>
     #   @return [String]
     # @!attribute mime_type
-    #   <p>The MIME type of the document content (e.g., application/pdf, text/plain, application/vnd.openxmlformats-officedocument.wordprocessingml.document).</p>
+    #   <p>The MIME type of the document content. When outputFormat is RAW, this corresponds to the original document's MIME type (e.g., application/pdf, text/plain, application/vnd.openxmlformats-officedocument.wordprocessingml.document). When outputFormat is EXTRACTED, the MIME type is always application/json.</p>
     #   @return [String]
     class GetDocumentContentResponse < Struct.new(
       :presigned_url,

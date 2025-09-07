@@ -66,6 +66,11 @@ module Aws::TranscribeStreaming
       def vocabulary_filter_name: () -> String?
       def vocabulary_filter_method: () -> String?
       def language_model_name: () -> String?
+      def identify_language: () -> bool?
+      def language_options: () -> String?
+      def preferred_language: () -> String?
+      def vocabulary_names: () -> String?
+      def vocabulary_filter_names: () -> String?
       def enable_partial_results_stabilization: () -> bool?
       def partial_results_stability: () -> String?
       def content_identification_type: () -> String?
@@ -100,6 +105,11 @@ module Aws::TranscribeStreaming
       ?vocabulary_filter_name: String,
       ?vocabulary_filter_method: String,
       ?language_model_name: String,
+      ?identify_language: bool,
+      ?language_options: String,
+      ?preferred_language: String,
+      ?vocabulary_names: String,
+      ?vocabulary_filter_names: String,
       ?enable_partial_results_stabilization: bool,
       ?partial_results_stability: String,
       ?content_identification_type: String,

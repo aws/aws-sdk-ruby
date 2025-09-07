@@ -331,6 +331,12 @@ module Aws::Synthetics
     #            <p>If the value of this parameter is <code>OFF</code>, then the value of the <code>DeleteLambda</code> parameter
     #            of the <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html">DeleteCanary</a> operation
     #            determines whether the Lambda functions and layers will be deleted.</p>
+    # @option params [Array<Types::BrowserConfig>] :browser_configs
+    #   <p>CloudWatch Synthetics now supports multibrowser canaries for <code>syn-nodejs-puppeteer-11.0</code> and <code>syn-nodejs-playwright-3.0</code> runtimes. This feature allows you to run your canaries on both 
+    #            Firefox and Chrome browsers. To create a multibrowser canary, you need to specify the BrowserConfigs with a list of browsers you want to use.</p>
+    #            <note>
+    #               <p>If not specified, <code>browserConfigs</code> defaults to Chrome.</p>
+    #            </note>
     # @option params [Hash<String, String>] :tags
     #   <p>A list of key-value pairs to associate with the canary. 
     #            You can associate as many as 50 tags with a canary.</p>
@@ -387,6 +393,11 @@ module Aws::Synthetics
     #     },
     #     resources_to_replicate_tags: ["lambda-function" # One of: ["lambda-function"]],
     #     provisioned_resource_cleanup: "AUTOMATIC" # One of: ["AUTOMATIC", "OFF"],
+    #     browser_configs: [
+    #       {
+    #         browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #       }
+    #     ],
     #     tags: {
     #       "TagKey" => "TagValue"
     #     },
@@ -458,9 +469,33 @@ module Aws::Synthetics
     #             ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"]
     #           }
     #         ],
-    #         base_canary_run_id: "String"
+    #         base_canary_run_id: "String",
+    #         browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
     #       },
     #       provisioned_resource_cleanup: "AUTOMATIC" # One of: ["AUTOMATIC", "OFF"],
+    #       browser_configs: [
+    #         {
+    #           browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #         }
+    #       ],
+    #       engine_configs: [
+    #         {
+    #           engine_arn: "FunctionArn",
+    #           browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #         }
+    #       ],
+    #       visual_references: [
+    #         {
+    #           base_screenshots: [
+    #             {
+    #               screenshot_name: "String", # required
+    #               ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"]
+    #             }
+    #           ],
+    #           base_canary_run_id: "String",
+    #           browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #         }
+    #       ],
     #       tags: {
     #         "TagKey" => "TagValue"
     #       },
@@ -716,9 +751,33 @@ module Aws::Synthetics
     #               ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"]
     #             }
     #           ],
-    #           base_canary_run_id: "String"
+    #           base_canary_run_id: "String",
+    #           browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
     #         },
     #         provisioned_resource_cleanup: "AUTOMATIC" # One of: ["AUTOMATIC", "OFF"],
+    #         browser_configs: [
+    #           {
+    #             browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #           }
+    #         ],
+    #         engine_configs: [
+    #           {
+    #             engine_arn: "FunctionArn",
+    #             browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #           }
+    #         ],
+    #         visual_references: [
+    #           {
+    #             base_screenshots: [
+    #               {
+    #                 screenshot_name: "String", # required
+    #                 ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"]
+    #               }
+    #             ],
+    #             base_canary_run_id: "String",
+    #             browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #           }
+    #         ],
     #         tags: {
     #           "TagKey" => "TagValue"
     #         },
@@ -769,11 +828,14 @@ module Aws::Synthetics
     #            IAM policy that restricts which canaries that you are allowed to view. For more information, 
     #            see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html">
     #               Limiting a user to viewing specific canaries</a>.</p>
+    # @option params [String] :browser_type
+    #   <p>The type of browser to use for the canary run.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "Token",
     #     max_results: 1,
-    #     names: ["CanaryName"]
+    #     names: ["CanaryName"],
+    #     browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
     #   }
     #   options = {}
     #   response = client.describe_canaries_last_run(params, options)
@@ -802,7 +864,8 @@ module Aws::Synthetics
     #           artifact_s3_location: "String",
     #           dry_run_config: {
     #             dry_run_id: "UUID"
-    #           }
+    #           },
+    #           browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
     #         }
     #       }
     #     ],
@@ -948,9 +1011,33 @@ module Aws::Synthetics
     #             ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"]
     #           }
     #         ],
-    #         base_canary_run_id: "String"
+    #         base_canary_run_id: "String",
+    #         browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
     #       },
     #       provisioned_resource_cleanup: "AUTOMATIC" # One of: ["AUTOMATIC", "OFF"],
+    #       browser_configs: [
+    #         {
+    #           browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #         }
+    #       ],
+    #       engine_configs: [
+    #         {
+    #           engine_arn: "FunctionArn",
+    #           browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #         }
+    #       ],
+    #       visual_references: [
+    #         {
+    #           base_screenshots: [
+    #             {
+    #               screenshot_name: "String", # required
+    #               ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"]
+    #             }
+    #           ],
+    #           base_canary_run_id: "String",
+    #           browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #         }
+    #       ],
     #       tags: {
     #         "TagKey" => "TagValue"
     #       },
@@ -1040,7 +1127,8 @@ module Aws::Synthetics
     #         artifact_s3_location: "String",
     #         dry_run_config: {
     #           dry_run_id: "UUID"
-    #         }
+    #         },
+    #         browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
     #       }
     #     ],
     #     next_token: "Token"
@@ -1320,6 +1408,17 @@ module Aws::Synthetics
     #            <p>If the value of this parameter is <code>OFF</code>, then the value of the <code>DeleteLambda</code> parameter
     #            of the <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html">DeleteCanary</a> operation
     #            determines whether the Lambda functions and layers will be deleted.</p>
+    # @option params [Array<Types::BrowserConfig>] :browser_configs
+    #   <p>A structure that specifies the browser type to use for a canary run. CloudWatch Synthetics supports running canaries on both <code>CHROME</code> and <code>FIREFOX</code> browsers.</p>
+    #            <note>
+    #               <p>If not specified, <code>browserConfigs</code> defaults to Chrome.</p>
+    #            </note>
+    # @option params [Array<Types::VisualReferenceInput>] :visual_references
+    #   <p>A list of visual reference configurations for the canary, one for each browser type that the canary is configured to run on. Visual references are used for visual monitoring comparisons.</p>
+    #            <p>
+    #               <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and above, only supports <code>visualReferences</code>. <code>visualReference</code> field is not supported.</p>
+    #            <p>Versions older than <code>syn-nodejs-puppeteer-11.0</code> supports both <code>visualReference</code> and <code>visualReferences</code> for backward compatibility. It is recommended to use <code>visualReferences</code>
+    #            for consistency and future compatibility.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "CanaryName", # required
@@ -1362,6 +1461,7 @@ module Aws::Synthetics
     #         }
     #       ],
     #       base_canary_run_id: "String", # required
+    #       browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
     #     },
     #     artifact_s3_location: "String",
     #     artifact_config: {
@@ -1370,7 +1470,24 @@ module Aws::Synthetics
     #         kms_key_arn: "KmsKeyArn"
     #       }
     #     },
-    #     provisioned_resource_cleanup: "AUTOMATIC" # One of: ["AUTOMATIC", "OFF"]
+    #     provisioned_resource_cleanup: "AUTOMATIC" # One of: ["AUTOMATIC", "OFF"],
+    #     browser_configs: [
+    #       {
+    #         browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #       }
+    #     ],
+    #     visual_references: [
+    #       {
+    #         base_screenshots: [
+    #           {
+    #             screenshot_name: "String", # required
+    #             ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"]
+    #           }
+    #         ],
+    #         base_canary_run_id: "String", # required
+    #         browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.start_canary_dry_run(params, options)
@@ -1483,10 +1600,17 @@ module Aws::Synthetics
       request.send_request(options)
     end
 
-    # <p>Updates the configuration of a canary that has 
-    #          already been created.</p>
-    #          <p>You can't use this operation to update the tags of an existing canary. To 
-    #          change the tags of an existing canary, use
+    # <p>Updates the configuration of a canary that has already been created.</p>
+    #          <p>For multibrowser canaries, you can add or remove browsers by updating the browserConfig list in the update call. For example:</p>
+    #          <ul>
+    #             <li>
+    #                <p>To add Firefox to a canary that currently uses Chrome, specify browserConfigs as [CHROME, FIREFOX]</p>
+    #             </li>
+    #             <li>
+    #                <p>To remove Firefox and keep only Chrome, specify browserConfigs as [CHROME]</p>
+    #             </li>
+    #          </ul>
+    #          <p>You can't use this operation to update the tags of an existing canary. To change the tags of an existing canary, use
     #          <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html">TagResource</a>.</p>
     #          <note>
     #             <p>When you use the <code>dryRunId</code> field when updating a canary, the only other field you can provide is the <code>Schedule</code>. Adding any other field will thrown an exception.</p>
@@ -1600,6 +1724,21 @@ module Aws::Synthetics
     #            <note>
     #               <p>When you use the <code>dryRunId</code> field when updating a canary, the only other field you can provide is the <code>Schedule</code>. Adding any other field will thrown an exception.</p>
     #            </note>
+    # @option params [Array<Types::VisualReferenceInput>] :visual_references
+    #   <p>A list of visual reference configurations for the canary, one for each browser type that the canary is configured to run on. Visual references are used for visual monitoring comparisons.</p>
+    #            <p>
+    #               <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and above, only supports <code>visualReferences</code>. <code>visualReference</code> field is not supported.</p>
+    #            <p>Versions older than <code>syn-nodejs-puppeteer-11.0</code> supports both <code>visualReference</code> and <code>visualReferences</code> for backward compatibility. It is recommended to use <code>visualReferences</code>
+    #            for consistency and future compatibility.</p>
+    #            <p>For multibrowser visual monitoring,  you can update the baseline for all configured browsers in a single update call by specifying a list of VisualReference objects, one per browser. 
+    #            Each VisualReference object maps to a specific browser configuration, allowing you to manage visual baselines for multiple browsers simultaneously.</p>
+    #            <p>For single configuration canaries using Chrome browser (default browser), use visualReferences for <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and 
+    #            above canaries. The browserType in the visualReference object is not mandatory.</p>
+    # @option params [Array<Types::BrowserConfig>] :browser_configs
+    #   <p>A structure that specifies the browser type to use for a canary run. CloudWatch Synthetics supports running canaries on both <code>CHROME</code> and <code>FIREFOX</code> browsers.</p>
+    #            <note>
+    #               <p>If not specified, <code>browserConfigs</code> defaults to Chrome.</p>
+    #            </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "CanaryName", # required
@@ -1649,6 +1788,7 @@ module Aws::Synthetics
     #         }
     #       ],
     #       base_canary_run_id: "String", # required
+    #       browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
     #     },
     #     artifact_s3_location: "String",
     #     artifact_config: {
@@ -1658,7 +1798,24 @@ module Aws::Synthetics
     #       }
     #     },
     #     provisioned_resource_cleanup: "AUTOMATIC" # One of: ["AUTOMATIC", "OFF"],
-    #     dry_run_id: "UUID"
+    #     dry_run_id: "UUID",
+    #     visual_references: [
+    #       {
+    #         base_screenshots: [
+    #           {
+    #             screenshot_name: "String", # required
+    #             ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"]
+    #           }
+    #         ],
+    #         base_canary_run_id: "String", # required
+    #         browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #       }
+    #     ],
+    #     browser_configs: [
+    #       {
+    #         browser_type: "CHROME" # One of: ["CHROME", "FIREFOX"]
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.update_canary(params, options)

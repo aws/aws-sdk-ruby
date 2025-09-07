@@ -1346,6 +1346,34 @@ module Aws::DirectoryService
       request.send_request(options)
     end
 
+    # <p>Retrieves detailed information about the certificate authority (CA) enrollment policy for
+    #       the specified directory. This policy determines how client certificates are automatically enrolled and
+    #       managed through Amazon Web Services Private Certificate Authority. </p>
+    # @param [Hash, Types::DescribeCAEnrollmentPolicyRequest] params
+    # @option params [String] :directory_id
+    #   <p>The identifier of the directory for which to retrieve the CA enrollment policy
+    #         information.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     directory_id: "DirectoryId", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_ca_enrollment_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     directory_id: "DirectoryId",
+    #     pca_connector_arn: "PcaConnectorArn",
+    #     ca_enrollment_policy_status: "InProgress" # One of: ["InProgress", "Success", "Failed", "Disabling", "Disabled", "Impaired"],
+    #     last_updated_date_time: Time.now,
+    #     ca_enrollment_policy_status_reason: "CaEnrollmentPolicyStatusReason"
+    #   }
+    # @return [Types::DescribeCAEnrollmentPolicyResult]
+    def describe_ca_enrollment_policy(params = {}, options = {})
+      request = build_request(:describe_ca_enrollment_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Displays information about the certificate registered for secure LDAP or client
     #       certificate authentication.</p>
     # @param [Hash, Types::DescribeCertificateRequest] params
@@ -2212,6 +2240,31 @@ module Aws::DirectoryService
       request.send_request(options)
     end
 
+    # <p>Disables the certificate authority (CA) enrollment policy for the specified directory. This stops
+    #       automatic certificate enrollment and management for domain-joined clients, but does not affect
+    #       existing certificates.</p>
+    #          <important>
+    #             <p>Disabling the CA enrollment policy prevents new certificates from being automatically
+    #         enrolled, but existing certificates remain valid and functional until they expire.</p>
+    #          </important>
+    # @param [Hash, Types::DisableCAEnrollmentPolicyRequest] params
+    # @option params [String] :directory_id
+    #   <p>The identifier of the directory for which to disable the CA enrollment policy.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     directory_id: "DirectoryId", # required
+    #   }
+    #   options = {}
+    #   response = client.disable_ca_enrollment_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DisableCAEnrollmentPolicyResult]
+    def disable_ca_enrollment_policy(params = {}, options = {})
+      request = build_request(:disable_ca_enrollment_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Disables alternative client authentication methods for the specified directory. </p>
     # @param [Hash, Types::DisableClientAuthenticationRequest] params
     # @option params [String] :directory_id
@@ -2350,6 +2403,41 @@ module Aws::DirectoryService
     # @return [Types::DisableSsoResult]
     def disable_sso(params = {}, options = {})
       request = build_request(:disable_sso, params)
+      request.send_request(options)
+    end
+
+    # <p>Enables certificate authority (CA) enrollment policy for the specified directory. This allows
+    #       domain-joined clients to automatically request and receive certificates from the specified
+    #       Amazon Web Services Private Certificate Authority.</p>
+    #          <note>
+    #             <p>Before enabling CA enrollment, ensure that the PCA connector is properly configured and
+    #         accessible from the directory. The connector must be in an active state and have the
+    #         necessary permissions.</p>
+    #          </note>
+    # @param [Hash, Types::EnableCAEnrollmentPolicyRequest] params
+    # @option params [String] :directory_id
+    #   <p>The identifier of the directory for which to enable the CA enrollment policy.</p>
+    # @option params [String] :pca_connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the Private Certificate Authority (PCA) connector to use
+    #         for automatic certificate enrollment. This connector must be properly configured and
+    #         accessible from the directory.</p>
+    #            <p>The ARN format is:
+    #         <code>arn:aws:pca-connector-ad:<i>region</i>:<i>account-id</i>:connector/<i>connector-id</i>
+    #               </code>
+    #            </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     directory_id: "DirectoryId", # required
+    #     pca_connector_arn: "PcaConnectorArn", # required
+    #   }
+    #   options = {}
+    #   response = client.enable_ca_enrollment_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::EnableCAEnrollmentPolicyResult]
+    def enable_ca_enrollment_policy(params = {}, options = {})
+      request = build_request(:enable_ca_enrollment_policy, params)
       request.send_request(options)
     end
 

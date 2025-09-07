@@ -1420,6 +1420,38 @@ module Aws::CognitoIdentityProvider
       attr_accessor resource_server: Types::ResourceServerType?
     end
 
+    class CreateTermsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?client_id: String,
+        ?terms_name: String,
+        ?terms_source: String,
+        ?enforcement: String,
+        ?links: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor client_id: String?
+      attr_accessor terms_name: String?
+      attr_accessor terms_source: String?
+      attr_accessor enforcement: String?
+      attr_accessor links: Hash[String, String]?
+    end
+
+    class CreateTermsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terms: Types::TermsType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terms: Types::TermsType?
+    end
+
     class CreateUserImportJobRequest
       include Smithy::Schema::Structure
 
@@ -1712,6 +1744,19 @@ module Aws::CognitoIdentityProvider
       attr_accessor identifier: String?
     end
 
+    class DeleteTermsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terms_id: String,
+        ?user_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terms_id: String?
+      attr_accessor user_pool_id: String?
+    end
+
     class DeleteUserAttributesRequest
       include Smithy::Schema::Structure
 
@@ -1945,6 +1990,30 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor risk_configuration: Types::RiskConfigurationType?
+    end
+
+    class DescribeTermsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terms_id: String,
+        ?user_pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terms_id: String?
+      attr_accessor user_pool_id: String?
+    end
+
+    class DescribeTermsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terms: Types::TermsType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terms: Types::TermsType?
     end
 
     class DescribeUserImportJobRequest
@@ -3126,6 +3195,34 @@ module Aws::CognitoIdentityProvider
       attr_accessor tags: Hash[String, String]?
     end
 
+    class ListTermsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTermsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terms: Array[Types::TermsDescriptionType],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terms: Array[Types::TermsDescriptionType]?
+      attr_accessor next_token: String?
+    end
+
     class ListUserImportJobsRequest
       include Smithy::Schema::Structure
 
@@ -4286,6 +4383,71 @@ module Aws::CognitoIdentityProvider
 
     end
 
+    class TermsDescriptionType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terms_id: String,
+        ?terms_name: String,
+        ?enforcement: String,
+        ?creation_date: Time,
+        ?last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terms_id: String?
+      attr_accessor terms_name: String?
+      attr_accessor enforcement: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modified_date: Time?
+    end
+
+    module TermsEnforcementType
+      NONE: String
+    end
+
+    class TermsExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TermsSourceType
+      LINK: String
+    end
+
+    class TermsType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terms_id: String,
+        ?user_pool_id: String,
+        ?client_id: String,
+        ?terms_name: String,
+        ?terms_source: String,
+        ?enforcement: String,
+        ?links: Hash[String, String],
+        ?creation_date: Time,
+        ?last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terms_id: String?
+      attr_accessor user_pool_id: String?
+      attr_accessor client_id: String?
+      attr_accessor terms_name: String?
+      attr_accessor terms_source: String?
+      attr_accessor enforcement: String?
+      attr_accessor links: Hash[String, String]?
+      attr_accessor creation_date: Time?
+      attr_accessor last_modified_date: Time?
+    end
+
     class TierChangeNotAllowedException
       include Smithy::Schema::Structure
 
@@ -4620,6 +4782,38 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_server: Types::ResourceServerType?
+    end
+
+    class UpdateTermsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terms_id: String,
+        ?user_pool_id: String,
+        ?terms_name: String,
+        ?terms_source: String,
+        ?enforcement: String,
+        ?links: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terms_id: String?
+      attr_accessor user_pool_id: String?
+      attr_accessor terms_name: String?
+      attr_accessor terms_source: String?
+      attr_accessor enforcement: String?
+      attr_accessor links: Hash[String, String]?
+    end
+
+    class UpdateTermsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terms: Types::TermsType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terms: Types::TermsType?
     end
 
     class UpdateUserAttributesRequest

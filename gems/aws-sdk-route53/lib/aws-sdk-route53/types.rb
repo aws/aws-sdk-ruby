@@ -5285,8 +5285,7 @@ module Aws::Route53
     #   			| <code>AAAA</code> | <code>CAA</code> | <code>CNAME</code> | <code>MX</code> |
     #   				<code>NAPTR</code> | <code>PTR</code> | <code>SPF</code> | <code>SRV</code> |
     #   				<code>TXT</code>| <code>TLSA</code>| <code>SSHFP</code>| <code>SVCB</code>|
-    #   				<code>HTTPS</code>. When creating a group of weighted, latency, geolocation,
-    #   			or
+    #   				<code>HTTPS</code>. When creating a group of weighted, latency, geolocation, or
     #   			failover resource record sets, specify the same value for all of the resource record
     #   			sets in the group.</p>
     #            <p>Valid values for multivalue answer resource record sets: <code>A</code> |
@@ -6552,8 +6551,9 @@ module Aws::Route53
     #            </ul>
     #            <p>After you disable a health check, Route 53 considers the status of the health check to
     #   			always be healthy. If you configured DNS failover, Route 53 continues to route traffic
-    #   			to the corresponding resources. If you want to stop routing traffic to a resource,
-    #   			change the value of <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-Inverted">Inverted</a>. </p>
+    #   			to the corresponding resources. Additionally, in disabled state, you can also invert the
+    #   			status of the health check to route traffic differently. For more information, see
+    #   				<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-Inverted">Inverted</a>. </p>
     #            <p>Charges for a health check still apply when the health check is disabled. For more
     #   			information, see <a href="http://aws.amazon.com/route53/pricing/">Amazon Route 53
     #   				Pricing</a>.</p>

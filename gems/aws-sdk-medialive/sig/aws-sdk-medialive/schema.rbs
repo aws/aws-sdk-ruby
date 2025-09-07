@@ -22,6 +22,7 @@ module Aws::MediaLive
     AcceptInputDeviceTransferResponse: StructureShape
     AccessibilityType: EnumShape
     AccountConfiguration: StructureShape
+    AdditionalDestinations: StructureShape
     AfdSignaling: EnumShape
     Algorithm: EnumShape
     AncillarySourceSettings: StructureShape
@@ -94,6 +95,7 @@ module Aws::MediaLive
     BurnInAlignment: EnumShape
     BurnInBackgroundColor: EnumShape
     BurnInDestinationSettings: StructureShape
+    BurnInDestinationSubtitleRows: EnumShape
     BurnInFontColor: EnumShape
     BurnInOutlineColor: EnumShape
     BurnInShadowColor: EnumShape
@@ -265,6 +267,7 @@ module Aws::MediaLive
     DvbSubDestinationOutlineColor: EnumShape
     DvbSubDestinationSettings: StructureShape
     DvbSubDestinationShadowColor: EnumShape
+    DvbSubDestinationSubtitleRows: EnumShape
     DvbSubDestinationTeletextGridControl: EnumShape
     DvbSubOcrLanguage: EnumShape
     DvbSubSourceSettings: StructureShape
@@ -956,8 +959,8 @@ module Aws::MediaLive
     Integermin32max8191: IntegerShape
     Integermin40max16000: IntegerShape
     Integermin4max20: IntegerShape
-    Integermin50000max16000000: IntegerShape
-    Integermin50000max8000000: IntegerShape
+    Integermin50000max12000000: IntegerShape
+    Integermin50000max24000000: IntegerShape
     Integermin64max2160: IntegerShape
     Integermin800max3000: IntegerShape
     Integermin80max800: IntegerShape
@@ -966,6 +969,7 @@ module Aws::MediaLive
     Integerminnegative5max5: IntegerShape
     Integerminnegative60max6: IntegerShape
     Integerminnegative60max60: IntegerShape
+    Listofadditionaldestinations: ListShape
     Listofaudiochannelmapping: ListShape
     Listofaudiodescription: ListShape
     Listofaudioselector: ListShape

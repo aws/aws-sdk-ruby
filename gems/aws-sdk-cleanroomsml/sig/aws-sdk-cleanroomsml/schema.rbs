@@ -75,6 +75,9 @@ module Aws::CleanRoomsML
     CreateTrainedModelResponse: StructureShape
     CreateTrainingDatasetRequest: StructureShape
     CreateTrainingDatasetResponse: StructureShape
+    CustomDataIdentifier: StringShape
+    CustomDataIdentifierList: ListShape
+    CustomEntityConfig: StructureShape
     DataSource: StructureShape
     Dataset: StructureShape
     DatasetInputConfig: StructureShape
@@ -92,6 +95,8 @@ module Aws::CleanRoomsML
     DeleteTrainedModelOutputRequest: StructureShape
     DeleteTrainingDatasetRequest: StructureShape
     Destination: StructureShape
+    EntityType: EnumShape
+    EntityTypeList: ListShape
     Environment: MapShape
     GetAudienceGenerationJobRequest: StructureShape
     GetAudienceGenerationJobResponse: StructureShape
@@ -178,6 +183,8 @@ module Aws::CleanRoomsML
     ListTrainedModelsResponse: StructureShape
     ListTrainingDatasetsRequest: StructureShape
     ListTrainingDatasetsResponse: StructureShape
+    LogRedactionConfiguration: StructureShape
+    LogType: EnumShape
     LogsConfigurationPolicy: StructureShape
     LogsConfigurationPolicyList: ListShape
     LogsStatus: EnumShape

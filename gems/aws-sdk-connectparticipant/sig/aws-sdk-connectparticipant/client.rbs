@@ -67,6 +67,7 @@ module Aws::ConnectParticipant
       include Smithy::Client::_Response[Types::CreateParticipantConnectionResponse]
       def websocket: () -> Types::Websocket?
       def connection_credentials: () -> Types::ConnectionCredentials?
+      def web_rtc_connection: () -> Types::WebRTCConnection?
     end
     def create_participant_connection: (
       ?type: Array[String],

@@ -244,6 +244,7 @@ module Aws::KinesisAnalyticsV2
         ?application_system_rollback_configuration: Types::ApplicationSystemRollbackConfiguration,
         ?vpc_configurations: Array[Types::VpcConfiguration],
         ?zeppelin_application_configuration: Types::ZeppelinApplicationConfiguration,
+        ?application_encryption_configuration: Types::ApplicationEncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -255,6 +256,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_system_rollback_configuration: Types::ApplicationSystemRollbackConfiguration?
       attr_accessor vpc_configurations: Array[Types::VpcConfiguration]?
       attr_accessor zeppelin_application_configuration: Types::ZeppelinApplicationConfiguration?
+      attr_accessor application_encryption_configuration: Types::ApplicationEncryptionConfiguration?
     end
 
     class ApplicationConfigurationDescription
@@ -270,6 +272,7 @@ module Aws::KinesisAnalyticsV2
         ?application_system_rollback_configuration_description: Types::ApplicationSystemRollbackConfigurationDescription,
         ?vpc_configuration_descriptions: Array[Types::VpcConfigurationDescription],
         ?zeppelin_application_configuration_description: Types::ZeppelinApplicationConfigurationDescription,
+        ?application_encryption_configuration_description: Types::ApplicationEncryptionConfigurationDescription,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -282,6 +285,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_system_rollback_configuration_description: Types::ApplicationSystemRollbackConfigurationDescription?
       attr_accessor vpc_configuration_descriptions: Array[Types::VpcConfigurationDescription]?
       attr_accessor zeppelin_application_configuration_description: Types::ZeppelinApplicationConfigurationDescription?
+      attr_accessor application_encryption_configuration_description: Types::ApplicationEncryptionConfigurationDescription?
     end
 
     class ApplicationConfigurationUpdate
@@ -296,6 +300,7 @@ module Aws::KinesisAnalyticsV2
         ?application_system_rollback_configuration_update: Types::ApplicationSystemRollbackConfigurationUpdate,
         ?vpc_configuration_updates: Array[Types::VpcConfigurationUpdate],
         ?zeppelin_application_configuration_update: Types::ZeppelinApplicationConfigurationUpdate,
+        ?application_encryption_configuration_update: Types::ApplicationEncryptionConfigurationUpdate,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -307,6 +312,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_system_rollback_configuration_update: Types::ApplicationSystemRollbackConfigurationUpdate?
       attr_accessor vpc_configuration_updates: Array[Types::VpcConfigurationUpdate]?
       attr_accessor zeppelin_application_configuration_update: Types::ZeppelinApplicationConfigurationUpdate?
+      attr_accessor application_encryption_configuration_update: Types::ApplicationEncryptionConfigurationUpdate?
     end
 
     class ApplicationDetail
@@ -352,6 +358,45 @@ module Aws::KinesisAnalyticsV2
       attr_accessor conditional_token: String?
       attr_accessor application_version_rolled_back_to: Integer?
       attr_accessor application_mode: String?
+    end
+
+    class ApplicationEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?key_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor key_type: String?
+    end
+
+    class ApplicationEncryptionConfigurationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?key_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor key_type: String?
+    end
+
+    class ApplicationEncryptionConfigurationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id_update: String,
+        ?key_type_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id_update: String?
+      attr_accessor key_type_update: String?
     end
 
     class ApplicationMaintenanceConfigurationDescription
@@ -1647,6 +1692,11 @@ module Aws::KinesisAnalyticsV2
       attr_accessor record_row_path: String?
     end
 
+    module KeyType
+      AWS_OWNED_KEY: String
+      CUSTOMER_MANAGED_KEY: String
+    end
+
     class KinesisFirehoseInput
       include Smithy::Schema::Structure
 
@@ -2558,6 +2608,7 @@ module Aws::KinesisAnalyticsV2
         ?application_version_id: Integer,
         ?snapshot_creation_timestamp: Time,
         ?runtime_environment: String,
+        ?application_encryption_configuration_description: Types::ApplicationEncryptionConfigurationDescription,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2566,6 +2617,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_version_id: Integer?
       attr_accessor snapshot_creation_timestamp: Time?
       attr_accessor runtime_environment: String?
+      attr_accessor application_encryption_configuration_description: Types::ApplicationEncryptionConfigurationDescription?
     end
 
     module SnapshotStatus

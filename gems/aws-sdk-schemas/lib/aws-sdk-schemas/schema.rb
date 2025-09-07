@@ -420,7 +420,7 @@ module Aws::Schemas
       service.id = "com.amazonaws.schemas#schemas"
       service.name = "Schemas"
       service.version = "2019-12-02"
-      service.traits = {"aws.api#service" => {"sdkId" => "schemas", "arnNamespace" => "schemas", "cloudFormationName" => "EventSchemas", "cloudTrailEventSource" => "schemas.amazonaws.com", "endpointPrefix" => "schemas"}, "aws.auth#sigv4" => {"name" => "schemas"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Schemas"}
+      service.traits = {"aws.api#service" => {"sdkId" => "schemas", "arnNamespace" => "schemas", "cloudFormationName" => "EventSchemas", "cloudTrailEventSource" => "schemas.amazonaws.com", "endpointPrefix" => "schemas"}, "aws.auth#sigv4" => {"name" => "schemas"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "Schemas"}
       service.add_operation(:create_discoverer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.schemas#CreateDiscoverer"
         operation.name = "CreateDiscoverer"

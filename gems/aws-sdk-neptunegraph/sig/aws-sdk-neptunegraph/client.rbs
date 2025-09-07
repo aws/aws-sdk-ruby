@@ -514,6 +514,28 @@ module Aws::NeptuneGraph
       ?tags: Hash[String, String]
     ) -> _StartExportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExportTaskResponse
 
+    interface _StartGraphResponse
+      include Smithy::Client::_Response[Types::StartGraphOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def create_time: () -> Time?
+      def provisioned_memory: () -> Integer?
+      def endpoint: () -> String?
+      def public_connectivity: () -> bool?
+      def vector_search_configuration: () -> Types::VectorSearchConfiguration?
+      def replica_count: () -> Integer?
+      def kms_key_identifier: () -> String?
+      def source_snapshot_id: () -> String?
+      def deletion_protection: () -> bool?
+      def build_number: () -> String?
+    end
+    def start_graph: (
+      ?graph_identifier: String
+    ) -> _StartGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartGraphResponse
+
     interface _StartImportTaskResponse
       include Smithy::Client::_Response[Types::StartImportTaskOutput]
       def graph_id: () -> String?
@@ -542,6 +564,28 @@ module Aws::NeptuneGraph
       ?graph_identifier: String,
       ?role_arn: String
     ) -> _StartImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImportTaskResponse
+
+    interface _StopGraphResponse
+      include Smithy::Client::_Response[Types::StopGraphOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def create_time: () -> Time?
+      def provisioned_memory: () -> Integer?
+      def endpoint: () -> String?
+      def public_connectivity: () -> bool?
+      def vector_search_configuration: () -> Types::VectorSearchConfiguration?
+      def replica_count: () -> Integer?
+      def kms_key_identifier: () -> String?
+      def source_snapshot_id: () -> String?
+      def deletion_protection: () -> bool?
+      def build_number: () -> String?
+    end
+    def stop_graph: (
+      ?graph_identifier: String
+    ) -> _StopGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopGraphResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceOutput]

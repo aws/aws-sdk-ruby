@@ -146,6 +146,8 @@ module Aws::CognitoIdentityProvider
     CreateManagedLoginBrandingResponse: StructureShape
     CreateResourceServerRequest: StructureShape
     CreateResourceServerResponse: StructureShape
+    CreateTermsRequest: StructureShape
+    CreateTermsResponse: StructureShape
     CreateUserImportJobRequest: StructureShape
     CreateUserImportJobResponse: StructureShape
     CreateUserPoolClientRequest: StructureShape
@@ -167,6 +169,7 @@ module Aws::CognitoIdentityProvider
     DeleteIdentityProviderRequest: StructureShape
     DeleteManagedLoginBrandingRequest: StructureShape
     DeleteResourceServerRequest: StructureShape
+    DeleteTermsRequest: StructureShape
     DeleteUserAttributesRequest: StructureShape
     DeleteUserAttributesResponse: StructureShape
     DeleteUserPoolClientRequest: StructureShape
@@ -189,6 +192,8 @@ module Aws::CognitoIdentityProvider
     DescribeResourceServerResponse: StructureShape
     DescribeRiskConfigurationRequest: StructureShape
     DescribeRiskConfigurationResponse: StructureShape
+    DescribeTermsRequest: StructureShape
+    DescribeTermsResponse: StructureShape
     DescribeUserImportJobRequest: StructureShape
     DescribeUserImportJobResponse: StructureShape
     DescribeUserPoolClientRequest: StructureShape
@@ -303,7 +308,10 @@ module Aws::CognitoIdentityProvider
     InvalidSmsRoleTrustRelationshipException: StructureShape
     InvalidUserPoolConfigurationException: StructureShape
     LambdaConfigType: StructureShape
+    LanguageIdType: StringShape
     LimitExceededException: StructureShape
+    LinkUrlType: StringShape
+    LinksType: MapShape
     ListDevicesRequest: StructureShape
     ListDevicesResponse: StructureShape
     ListGroupsRequest: StructureShape
@@ -317,6 +325,9 @@ module Aws::CognitoIdentityProvider
     ListResourceServersResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    ListTermsRequest: StructureShape
+    ListTermsRequestMaxResultsInteger: IntegerShape
+    ListTermsResponse: StructureShape
     ListUserImportJobsRequest: StructureShape
     ListUserImportJobsResponse: StructureShape
     ListUserPoolClientsRequest: StructureShape
@@ -459,6 +470,14 @@ module Aws::CognitoIdentityProvider
     TagResourceResponse: StructureShape
     TagValueType: StringShape
     TemporaryPasswordValidityDaysType: IntegerShape
+    TermsDescriptionListType: ListShape
+    TermsDescriptionType: StructureShape
+    TermsEnforcementType: EnumShape
+    TermsExistsException: StructureShape
+    TermsIdType: StringShape
+    TermsNameType: StringShape
+    TermsSourceType: EnumShape
+    TermsType: StructureShape
     TierChangeNotAllowedException: StructureShape
     TimeUnitsType: EnumShape
     TokenModelType: StringShape
@@ -486,6 +505,8 @@ module Aws::CognitoIdentityProvider
     UpdateManagedLoginBrandingResponse: StructureShape
     UpdateResourceServerRequest: StructureShape
     UpdateResourceServerResponse: StructureShape
+    UpdateTermsRequest: StructureShape
+    UpdateTermsResponse: StructureShape
     UpdateUserAttributesRequest: StructureShape
     UpdateUserAttributesResponse: StructureShape
     UpdateUserPoolClientRequest: StructureShape

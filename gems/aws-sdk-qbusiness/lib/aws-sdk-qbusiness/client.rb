@@ -275,7 +275,7 @@ module Aws::QBusiness
     # @option params [String] :index_id
     #   <p>The identifier of the Amazon Q Business index to add the documents to. </p>
     # @option params [Array<Types::Document>] :documents
-    #   <p>One or more documents to add to the index.</p>
+    #   <p>One or more documents to add to the index.</p> <important> <p>Ensure that the name of your document doesn't contain any confidential information. Amazon Q Business returns document names in chat responses and citations when relevant.</p> </important>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket.</p>
     # @option params [String] :data_source_sync_id
@@ -1391,7 +1391,7 @@ module Aws::QBusiness
     # @option params [String] :sync_schedule
     #   <p>Sets the frequency for Amazon Q Business to check the documents in your data source repository and update your index. If you don't set a schedule, Amazon Q Business won't periodically update the index.</p> <p>Specify a <code>cron-</code> format schedule string or an empty string to indicate that the index is updated on demand. You can't specify the <code>Schedule</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception. </p>
     # @option params [String] :role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.</p>
+    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources. This field is required for all connector types except custom connectors, where it is optional.</p>
     # @option params [String] :client_token
     #   <p>A token you provide to identify a request to create a data source connector. Multiple calls to the <code>CreateDataSource</code> API with the same client token will create only one data source connector. </p>
     # @option params [Types::DocumentEnrichmentConfiguration] :document_enrichment_configuration
@@ -1796,7 +1796,7 @@ module Aws::QBusiness
     # @option params [Array<String>] :origins
     #   <p>Sets the website domain origins that are allowed to embed the Amazon Q Business web experience. The <i>domain origin</i> refers to the base URL for accessing a website including the protocol (<code>http/https</code>), the domain name, and the port number (if specified). </p> <note> <p>You must only submit a <i>base URL</i> and not a full path. For example, <code>https://docs.aws.amazon.com</code>.</p> </note>
     # @option params [String] :role_arn
-    #   <p>The Amazon Resource Name (ARN) of the service role attached to your web experience.</p> <note> <p>You must provide this value if you're using IAM Identity Center to manage end user access to your application. If you're using legacy identity management to manage user access, you don't need to provide this value.</p> </note>
+    #   <p>The Amazon Resource Name (ARN) of the service role attached to your web experience.</p> <note> <p>The <code>roleArn</code> parameter is required when your Amazon Q Business application is created with IAM Identity Center. It is not required for SAML-based applications.</p> </note>
     # @option params [Array<Types::Tag>] :tags
     #   <p>A list of key-value pairs that identify or categorize your Amazon Q Business web experience. You can also use tags to help control access to the web experience. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.</p>
     # @option params [String] :client_token
@@ -2643,14 +2643,14 @@ module Aws::QBusiness
     # @option params [String] :document_id
     #   <p>The unique identifier of the document that is indexed via BatchPutDocument API or file-upload or connector sync. It is also found in chat or chatSync response.</p>
     # @option params [String] :output_format
-    #   <p>Raw document outputFormat.</p>
+    #   <p>Document outputFormat. Defaults to RAW if not selected.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     application_id: "ApplicationId", # required
     #     index_id: "IndexId", # required
     #     data_source_id: "DataSourceId",
     #     document_id: "DocumentId", # required
-    #     output_format: "RAW" # One of: ["RAW"]
+    #     output_format: "RAW" # One of: ["RAW", "EXTRACTED"]
     #   }
     #   options = {}
     #   response = client.get_document_content(params, options)

@@ -80,6 +80,22 @@ module Aws::Synthetics
       attr_accessor ignore_coordinates: Array[String]?
     end
 
+    class BrowserConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_type: String?
+    end
+
+    module BrowserType
+      CHROME: String
+      FIREFOX: String
+    end
+
     class Canary
       include Smithy::Schema::Structure
 
@@ -100,6 +116,9 @@ module Aws::Synthetics
         ?vpc_config: Types::VpcConfigOutput,
         ?visual_reference: Types::VisualReferenceOutput,
         ?provisioned_resource_cleanup: String,
+        ?browser_configs: Array[Types::BrowserConfig],
+        ?engine_configs: Array[Types::EngineConfig],
+        ?visual_references: Array[Types::VisualReferenceOutput],
         ?tags: Hash[String, String],
         ?artifact_config: Types::ArtifactConfigOutput,
         ?dry_run_config: Types::DryRunConfigOutput,
@@ -122,6 +141,9 @@ module Aws::Synthetics
       attr_accessor vpc_config: Types::VpcConfigOutput?
       attr_accessor visual_reference: Types::VisualReferenceOutput?
       attr_accessor provisioned_resource_cleanup: String?
+      attr_accessor browser_configs: Array[Types::BrowserConfig]?
+      attr_accessor engine_configs: Array[Types::EngineConfig]?
+      attr_accessor visual_references: Array[Types::VisualReferenceOutput]?
       attr_accessor tags: Hash[String, String]?
       attr_accessor artifact_config: Types::ArtifactConfigOutput?
       attr_accessor dry_run_config: Types::DryRunConfigOutput?
@@ -199,6 +221,7 @@ module Aws::Synthetics
         ?timeline: Types::CanaryRunTimeline,
         ?artifact_s3_location: String,
         ?dry_run_config: Types::CanaryDryRunConfigOutput,
+        ?browser_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -210,6 +233,7 @@ module Aws::Synthetics
       attr_accessor timeline: Types::CanaryRunTimeline?
       attr_accessor artifact_s3_location: String?
       attr_accessor dry_run_config: Types::CanaryDryRunConfigOutput?
+      attr_accessor browser_type: String?
     end
 
     class CanaryRunConfigInput
@@ -413,6 +437,7 @@ module Aws::Synthetics
         ?vpc_config: Types::VpcConfigInput,
         ?resources_to_replicate_tags: Array[String],
         ?provisioned_resource_cleanup: String,
+        ?browser_configs: Array[Types::BrowserConfig],
         ?tags: Hash[String, String],
         ?artifact_config: Types::ArtifactConfigInput,
       ) -> void
@@ -430,6 +455,7 @@ module Aws::Synthetics
       attr_accessor vpc_config: Types::VpcConfigInput?
       attr_accessor resources_to_replicate_tags: Array[String]?
       attr_accessor provisioned_resource_cleanup: String?
+      attr_accessor browser_configs: Array[Types::BrowserConfig]?
       attr_accessor tags: Hash[String, String]?
       attr_accessor artifact_config: Types::ArtifactConfigInput?
     end
@@ -535,12 +561,14 @@ module Aws::Synthetics
         ?next_token: String,
         ?max_results: Integer,
         ?names: Array[String],
+        ?browser_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
       attr_accessor names: Array[String]?
+      attr_accessor browser_type: String?
     end
 
     class DescribeCanariesLastRunResponse
@@ -648,6 +676,19 @@ module Aws::Synthetics
     module EncryptionMode
       SSE_S3: String
       SSE_KMS: String
+    end
+
+    class EngineConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine_arn: String,
+        ?browser_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine_arn: String?
+      attr_accessor browser_type: String?
     end
 
     class GetCanaryRequest
@@ -1016,6 +1057,8 @@ module Aws::Synthetics
         ?artifact_s3_location: String,
         ?artifact_config: Types::ArtifactConfigInput,
         ?provisioned_resource_cleanup: String,
+        ?browser_configs: Array[Types::BrowserConfig],
+        ?visual_references: Array[Types::VisualReferenceInput],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1031,6 +1074,8 @@ module Aws::Synthetics
       attr_accessor artifact_s3_location: String?
       attr_accessor artifact_config: Types::ArtifactConfigInput?
       attr_accessor provisioned_resource_cleanup: String?
+      attr_accessor browser_configs: Array[Types::BrowserConfig]?
+      attr_accessor visual_references: Array[Types::VisualReferenceInput]?
     end
 
     class StartCanaryDryRunResponse
@@ -1157,6 +1202,8 @@ module Aws::Synthetics
         ?artifact_config: Types::ArtifactConfigInput,
         ?provisioned_resource_cleanup: String,
         ?dry_run_id: String,
+        ?visual_references: Array[Types::VisualReferenceInput],
+        ?browser_configs: Array[Types::BrowserConfig],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1174,6 +1221,8 @@ module Aws::Synthetics
       attr_accessor artifact_config: Types::ArtifactConfigInput?
       attr_accessor provisioned_resource_cleanup: String?
       attr_accessor dry_run_id: String?
+      attr_accessor visual_references: Array[Types::VisualReferenceInput]?
+      attr_accessor browser_configs: Array[Types::BrowserConfig]?
     end
 
     class UpdateCanaryResponse
@@ -1202,11 +1251,13 @@ module Aws::Synthetics
       def initialize: (
         ?base_screenshots: Array[Types::BaseScreenshot],
         ?base_canary_run_id: String,
+        ?browser_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor base_screenshots: Array[Types::BaseScreenshot]?
       attr_accessor base_canary_run_id: String?
+      attr_accessor browser_type: String?
     end
 
     class VisualReferenceOutput
@@ -1215,11 +1266,13 @@ module Aws::Synthetics
       def initialize: (
         ?base_screenshots: Array[Types::BaseScreenshot],
         ?base_canary_run_id: String,
+        ?browser_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor base_screenshots: Array[Types::BaseScreenshot]?
       attr_accessor base_canary_run_id: String?
+      attr_accessor browser_type: String?
     end
 
     class VpcConfigInput

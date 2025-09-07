@@ -188,16 +188,12 @@ module Aws::OpenSearchServerless
       super
     end
 
-    # <p>Returns attributes for one or more collections, including the collection endpoint and
-    #             the OpenSearch Dashboards endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and
-    #                 managing Amazon OpenSearch Serverless collections</a>.</p>
+    # <p>Returns attributes for one or more collections, including the collection endpoint, the OpenSearch Dashboards endpoint, and FIPS-compliant endpoints. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.</p>
     # @param [Hash, Types::BatchGetCollectionInput] params
     # @option params [Array<String>] :ids
-    #   <p>A list of collection IDs. You can't provide names and IDs in the same request. The ID
-    #               is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.</p>
+    #   <p>A list of collection IDs. You can't provide names and IDs in the same request. The ID is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.</p>
     # @option params [Array<String>] :names
-    #   <p>A list of collection names. You can't provide names and IDs in the same
-    #               request.</p>
+    #   <p>A list of collection names. You can't provide names and IDs in the same request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     ids: ["CollectionId"],
@@ -222,6 +218,10 @@ module Aws::OpenSearchServerless
     #         last_modified_date: 1,
     #         collection_endpoint: "String",
     #         dashboard_endpoint: "String",
+    #         fips_endpoints: {
+    #           collection_endpoint: "String",
+    #           dashboard_endpoint: "String"
+    #         },
     #         failure_code: "String",
     #         failure_message: "String"
     #       }
@@ -241,8 +241,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Returns a list of successful and failed retrievals for the OpenSearch Serverless indexes. For more
-    #             information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list">Viewing data lifecycle policies</a>.</p>
+    # <p>Returns a list of successful and failed retrievals for the OpenSearch Serverless indexes. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list">Viewing data lifecycle policies</a>.</p>
     # @param [Hash, Types::BatchGetEffectiveLifecyclePolicyRequest] params
     # @option params [Array<Types::LifecyclePolicyResourceIdentifier>] :resource_identifiers
     #   <p>The unique identifiers of policy types and resource names.</p>
@@ -285,8 +284,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Returns one or more configured OpenSearch Serverless lifecycle policies. For more information, see
-    #                 <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list">Viewing data lifecycle policies</a>.</p>
+    # <p>Returns one or more configured OpenSearch Serverless lifecycle policies. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list">Viewing data lifecycle policies</a>.</p>
     # @param [Hash, Types::BatchGetLifecyclePolicyRequest] params
     # @option params [Array<Types::LifecyclePolicyIdentifier>] :identifiers
     #   <p>The unique identifiers of policy types and policy names.</p>
@@ -330,9 +328,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Returns attributes for one or more VPC endpoints associated with the current account.
-    #             For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access
-    #                 Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
+    # <p>Returns attributes for one or more VPC endpoints associated with the current account. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
     # @param [Hash, Types::BatchGetVpcEndpointInput] params
     # @option params [Array<String>] :ids
     #   <p>A list of VPC endpoint identifiers.</p>
@@ -372,18 +368,14 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Creates a data access policy for OpenSearch Serverless. Access policies limit access to collections
-    #             and the resources within them, and allow a user to access that data irrespective of the
-    #             access mechanism or network source. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data
-    #                 access control for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Creates a data access policy for OpenSearch Serverless. Access policies limit access to collections and the resources within them, and allow a user to access that data irrespective of the access mechanism or network source. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data access control for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::CreateAccessPolicyInput] params
     # @option params [String] :type
     #   <p>The type of policy.</p>
     # @option params [String] :name
     #   <p>The name of the policy.</p>
     # @option params [String] :description
-    #   <p>A description of the policy. Typically used to store information about the permissions
-    #               defined in the policy.</p>
+    #   <p>A description of the policy. Typically used to store information about the permissions defined in the policy.</p>
     # @option params [String] :policy
     #   <p>The JSON policy document to use as the content for the policy.</p>
     # @option params [String] :client_token
@@ -417,8 +409,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Creates a new OpenSearch Serverless collection. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and
-    #                 managing Amazon OpenSearch Serverless collections</a>.</p>
+    # <p>Creates a new OpenSearch Serverless collection. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.</p>
     # @param [Hash, Types::CreateCollectionInput] params
     # @option params [String] :name
     #   <p>Name of the collection.</p>
@@ -427,8 +418,7 @@ module Aws::OpenSearchServerless
     # @option params [String] :description
     #   <p>Description of the collection.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless
-    #               collection.</p>
+    #   <p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection.</p>
     # @option params [String] :standby_replicas
     #   <p>Indicates whether standby replicas should be used for a collection.</p>
     # @option params [String] :client_token
@@ -471,19 +461,14 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Creates an index within an OpenSearch Serverless collection. Unlike other OpenSearch indexes, indexes
-    #             created by this API are automatically configured to conduct automatic semantic
-    #             enrichment ingestion and search. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment">About automatic semantic enrichment</a> in the <i>OpenSearch User
-    #                 Guide</i>.</p>
+    # <p>Creates an index within an OpenSearch Serverless collection. Unlike other OpenSearch indexes, indexes created by this API are automatically configured to conduct automatic semantic enrichment ingestion and search. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment">About automatic semantic enrichment</a> in the <i>OpenSearch User Guide</i>.</p>
     # @param [Hash, Types::CreateIndexRequest] params
     # @option params [String] :id
     #   <p>The unique identifier of the collection in which to create the index.</p>
     # @option params [String] :index_name
-    #   <p>The name of the index to create. Index names must be lowercase and can't begin with
-    #               underscores (_) or hyphens (-).</p>
+    #   <p>The name of the index to create. Index names must be lowercase and can't begin with underscores (_) or hyphens (-).</p>
     # @option params [JSON] :index_schema
-    #   <p>The JSON schema definition for the index, including field mappings and
-    #               settings.</p>
+    #   <p>The JSON schema definition for the index, including field mappings and settings.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     id: "CollectionId", # required
@@ -501,9 +486,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Creates a lifecyle policy to be applied to OpenSearch Serverless indexes. Lifecycle policies define
-    #             the number of days or hours to retain the data on an OpenSearch Serverless index. For more information,
-    #             see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-create">Creating data lifecycle policies</a>.</p>
+    # <p>Creates a lifecyle policy to be applied to OpenSearch Serverless indexes. Lifecycle policies define the number of days or hours to retain the data on an OpenSearch Serverless index. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-create">Creating data lifecycle policies</a>.</p>
     # @param [Hash, Types::CreateLifecyclePolicyRequest] params
     # @option params [String] :type
     #   <p>The type of lifecycle policy.</p>
@@ -544,8 +527,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Specifies a security configuration for OpenSearch Serverless. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML
-    #                 authentication for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Specifies a security configuration for OpenSearch Serverless. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML authentication for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::CreateSecurityConfigInput] params
     # @option params [String] :type
     #   <p>The type of security configuration.</p>
@@ -554,15 +536,11 @@ module Aws::OpenSearchServerless
     # @option params [String] :description
     #   <p>A description of the security configuration.</p>
     # @option params [Types::SamlConfigOptions] :saml_options
-    #   <p>Describes SAML options in in the form of a key-value map. This field is required if
-    #               you specify <code>SAML</code> for the <code>type</code> parameter.</p>
+    #   <p>Describes SAML options in in the form of a key-value map. This field is required if you specify <code>SAML</code> for the <code>type</code> parameter.</p>
     # @option params [Types::CreateIamIdentityCenterConfigOptions] :iam_identity_center_options
-    #   <p>Describes IAM Identity Center options in the form of a key-value map. This field is
-    #               required if you specify iamidentitycenter for the type parameter.</p>
+    #   <p>Describes IAM Identity Center options in the form of a key-value map. This field is required if you specify iamidentitycenter for the type parameter.</p>
     # @option params [Types::IamFederationConfigOptions] :iam_federation_options
-    #   <p>Describes IAM federation options in the form of a key-value map. This field is
-    #               required if you specify <code>iamFederation</code> for the <code>type</code>
-    #               parameter.</p>
+    #   <p>Describes IAM federation options in the form of a key-value map. This field is required if you specify <code>iamFederation</code> for the <code>type</code> parameter.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @example Request syntax with placeholder values
@@ -627,20 +605,14 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Creates a security policy to be used by one or more OpenSearch Serverless collections. Security
-    #             policies provide access to a collection and its OpenSearch Dashboards endpoint from
-    #             public networks or specific VPC endpoints. They also allow you to secure a collection
-    #             with a KMS encryption key. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html">Network
-    #                 access for Amazon OpenSearch Serverless</a> and <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html">Encryption
-    #                 at rest for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Creates a security policy to be used by one or more OpenSearch Serverless collections. Security policies provide access to a collection and its OpenSearch Dashboards endpoint from public networks or specific VPC endpoints. They also allow you to secure a collection with a KMS encryption key. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html">Network access for Amazon OpenSearch Serverless</a> and <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html">Encryption at rest for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::CreateSecurityPolicyInput] params
     # @option params [String] :type
     #   <p>The type of security policy.</p>
     # @option params [String] :name
     #   <p>The name of the policy.</p>
     # @option params [String] :description
-    #   <p>A description of the policy. Typically used to store information about the permissions
-    #               defined in the policy.</p>
+    #   <p>A description of the policy. Typically used to store information about the permissions defined in the policy.</p>
     # @option params [String] :policy
     #   <p>The JSON policy document to use as the content for the new policy.</p>
     # @option params [String] :client_token
@@ -674,8 +646,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Creates an OpenSearch Serverless-managed interface VPC endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access
-    #                 Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
+    # <p>Creates an OpenSearch Serverless-managed interface VPC endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
     # @param [Hash, Types::CreateVpcEndpointInput] params
     # @option params [String] :name
     #   <p>The name of the interface endpoint.</p>
@@ -684,8 +655,7 @@ module Aws::OpenSearchServerless
     # @option params [Array<String>] :subnet_ids
     #   <p>The ID of one or more subnets from which you'll access OpenSearch Serverless.</p>
     # @option params [Array<String>] :security_group_ids
-    #   <p>The unique identifiers of the security groups that define the ports, protocols, and
-    #               sources for inbound traffic that you are authorizing into your endpoint.</p>
+    #   <p>The unique identifiers of the security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @example Request syntax with placeholder values
@@ -713,8 +683,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Deletes an OpenSearch Serverless access policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data
-    #                 access control for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Deletes an OpenSearch Serverless access policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data access control for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::DeleteAccessPolicyInput] params
     # @option params [String] :type
     #   <p>The type of policy.</p>
@@ -739,12 +708,10 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Deletes an OpenSearch Serverless collection. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and
-    #                 managing Amazon OpenSearch Serverless collections</a>.</p>
+    # <p>Deletes an OpenSearch Serverless collection. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.</p>
     # @param [Hash, Types::DeleteCollectionInput] params
     # @option params [String] :id
-    #   <p>The unique identifier of the collection. For example, <code>1iu5usc406kd</code>. The
-    #               ID is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.</p>
+    #   <p>The unique identifier of the collection. For example, <code>1iu5usc406kd</code>. The ID is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @example Request syntax with placeholder values
@@ -769,9 +736,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Deletes an index from an OpenSearch Serverless collection. Be aware that the index might be
-    #             configured to conduct automatic semantic enrichment ingestion and search. For more
-    #             information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment">About automatic semantic enrichment</a>.</p>
+    # <p>Deletes an index from an OpenSearch Serverless collection. Be aware that the index might be configured to conduct automatic semantic enrichment ingestion and search. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment">About automatic semantic enrichment</a>.</p>
     # @param [Hash, Types::DeleteIndexRequest] params
     # @option params [String] :id
     #   <p>The unique identifier of the collection containing the index to delete.</p>
@@ -818,13 +783,10 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Deletes a security configuration for OpenSearch Serverless. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML
-    #                 authentication for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Deletes a security configuration for OpenSearch Serverless. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML authentication for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::DeleteSecurityConfigInput] params
     # @option params [String] :id
-    #   <p>The security configuration identifier. For SAML the ID will be
-    #                   <code>saml/&lt;accountId&gt;/&lt;idpProviderName&gt;</code>. For example,
-    #                   <code>saml/123456789123/OKTADev</code>.</p>
+    #   <p>The security configuration identifier. For SAML the ID will be <code>saml/&lt;accountId&gt;/&lt;idpProviderName&gt;</code>. For example, <code>saml/123456789123/OKTADev</code>.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @example Request syntax with placeholder values
@@ -868,8 +830,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Deletes an OpenSearch Serverless-managed interface endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access
-    #                 Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
+    # <p>Deletes an OpenSearch Serverless-managed interface endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
     # @param [Hash, Types::DeleteVpcEndpointInput] params
     # @option params [String] :id
     #   <p>The VPC endpoint identifier.</p>
@@ -897,8 +858,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Returns an OpenSearch Serverless access policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data
-    #                 access control for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Returns an OpenSearch Serverless access policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data access control for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::GetAccessPolicyInput] params
     # @option params [String] :type
     #   <p>Tye type of policy. Currently, the only supported value is <code>data</code>.</p>
@@ -952,9 +912,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Retrieves information about an index in an OpenSearch Serverless collection, including its schema
-    #             definition. The index might be configured to conduct automatic semantic enrichment
-    #             ingestion and search. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment">About automatic semantic enrichment</a>.</p>
+    # <p>Retrieves information about an index in an OpenSearch Serverless collection, including its schema definition. The index might be configured to conduct automatic semantic enrichment ingestion and search. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment">About automatic semantic enrichment</a>.</p>
     # @param [Hash, Types::GetIndexRequest] params
     # @option params [String] :id
     #   <p>The unique identifier of the collection containing the index.</p>
@@ -978,8 +936,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Returns statistical information about your OpenSearch Serverless access policies, security
-    #             configurations, and security policies.</p>
+    # <p>Returns statistical information about your OpenSearch Serverless access policies, security configurations, and security policies.</p>
     # @param [Hash, Types::GetPoliciesStatsInput] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -1009,9 +966,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Returns information about an OpenSearch Serverless security configuration. For more information, see
-    #                 <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML
-    #                 authentication for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Returns information about an OpenSearch Serverless security configuration. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML authentication for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::GetSecurityConfigInput] params
     # @option params [String] :id
     #   <p>The unique identifier of the security configuration.</p>
@@ -1058,10 +1013,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Returns information about a configured OpenSearch Serverless security policy. For more information,
-    #             see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html">Network
-    #                 access for Amazon OpenSearch Serverless</a> and <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html">Encryption
-    #                 at rest for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Returns information about a configured OpenSearch Serverless security policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html">Network access for Amazon OpenSearch Serverless</a> and <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html">Encryption at rest for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::GetSecurityPolicyInput] params
     # @option params [String] :type
     #   <p>The type of security policy.</p>
@@ -1100,13 +1052,9 @@ module Aws::OpenSearchServerless
     # @option params [Array<String>] :resource
     #   <p>Resource filters (can be collections or indexes) that policies can apply to.</p>
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListAccessPolicies</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListAccessPolicies</code> operations, which returns results in the next
-    #               page.</p>
+    #   <p>If your initial <code>ListAccessPolicies</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListAccessPolicies</code> operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #               use <code>nextToken</code> to get the next page of results. The default is 20.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     type: "AccessPolicyType", # required
@@ -1137,23 +1085,14 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Lists all OpenSearch Serverless collections. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and
-    #                 managing Amazon OpenSearch Serverless collections</a>.</p>
-    #          <note>
-    #             <p>Make sure to include an empty request body {} if you don't include any collection
-    #                 filters in the request.</p>
-    #          </note>
+    # <p>Lists all OpenSearch Serverless collections. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.</p> <note> <p>Make sure to include an empty request body {} if you don't include any collection filters in the request.</p> </note>
     # @param [Hash, Types::ListCollectionsInput] params
     # @option params [Types::CollectionFilters] :collection_filters
     #   <p> A list of filter names and values that you can use for requests.</p>
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListCollections</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListCollections</code> operations, which returns results in the next
-    #               page.</p>
+    #   <p>If your initial <code>ListCollections</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListCollections</code> operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return. Default is 20. You can use
-    #                   <code>nextToken</code> to get the next page of results.</p>
+    #   <p>The maximum number of results to return. Default is 20. You can use <code>nextToken</code> to get the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     collection_filters: {
@@ -1189,17 +1128,11 @@ module Aws::OpenSearchServerless
     # @option params [String] :type
     #   <p>The type of lifecycle policy.</p>
     # @option params [Array<String>] :resources
-    #   <p>Resource filters that policies can apply to. Currently, the only supported resource
-    #               type is <code>index</code>.</p>
+    #   <p>Resource filters that policies can apply to. Currently, the only supported resource type is <code>index</code>.</p>
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListLifecyclePolicies</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListLifecyclePolicies</code> operations, which returns results in the
-    #               next page.</p>
+    #   <p>If your initial <code>ListLifecyclePolicies</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListLifecyclePolicies</code> operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #               use use <code>nextToken</code> to get the next page of results. The default is
-    #               10.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use use <code>nextToken</code> to get the next page of results. The default is 10.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     type: "LifecyclePolicyType", # required
@@ -1230,20 +1163,14 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Returns information about configured OpenSearch Serverless security configurations. For more
-    #             information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML
-    #                 authentication for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Returns information about configured OpenSearch Serverless security configurations. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML authentication for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::ListSecurityConfigsInput] params
     # @option params [String] :type
     #   <p>The type of security configuration.</p>
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListSecurityConfigs</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListSecurityConfigs</code> operations, which returns results in the
-    #               next page.</p>
+    #   <p>If your initial <code>ListSecurityConfigs</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListSecurityConfigs</code> operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #               use <code>nextToken</code> to get the next page of results. The default is 20.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     type: "SecurityConfigType", # required
@@ -1280,13 +1207,9 @@ module Aws::OpenSearchServerless
     # @option params [Array<String>] :resource
     #   <p>Resource filters (can be collection or indexes) that policies can apply to. </p>
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListSecurityPolicies</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListSecurityPolicies</code> operations, which returns results in the
-    #               next page.</p>
+    #   <p>If your initial <code>ListSecurityPolicies</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListSecurityPolicies</code> operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #               use <code>nextToken</code> to get the next page of results. The default is 20.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     type: "SecurityPolicyType", # required
@@ -1317,13 +1240,10 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Returns the tags for an OpenSearch Serverless resource. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html">Tagging
-    #                 Amazon OpenSearch Serverless collections</a>.</p>
+    # <p>Returns the tags for an OpenSearch Serverless resource. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html">Tagging Amazon OpenSearch Serverless collections</a>.</p>
     # @param [Hash, Types::ListTagsForResourceInput] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the resource. The resource must be active (not in
-    #               the <code>DELETING</code> state), and must be owned by the account ID included in the
-    #               request.</p>
+    #   <p>The Amazon Resource Name (ARN) of the resource. The resource must be active (not in the <code>DELETING</code> state), and must be owned by the account ID included in the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "Arn", # required
@@ -1346,22 +1266,14 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Returns the OpenSearch Serverless-managed interface VPC endpoints associated with the current
-    #             account. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access
-    #                 Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
+    # <p>Returns the OpenSearch Serverless-managed interface VPC endpoints associated with the current account. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
     # @param [Hash, Types::ListVpcEndpointsInput] params
     # @option params [Types::VpcEndpointFilters] :vpc_endpoint_filters
-    #   <p>Filter the results according to the current status of the VPC endpoint. Possible
-    #               statuses are <code>CREATING</code>, <code>DELETING</code>, <code>UPDATING</code>,
-    #                   <code>ACTIVE</code>, and <code>FAILED</code>.</p>
+    #   <p>Filter the results according to the current status of the VPC endpoint. Possible statuses are <code>CREATING</code>, <code>DELETING</code>, <code>UPDATING</code>, <code>ACTIVE</code>, and <code>FAILED</code>.</p>
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListVpcEndpoints</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListVpcEndpoints</code> operations, which returns results in the next
-    #               page. </p>
+    #   <p>If your initial <code>ListVpcEndpoints</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListVpcEndpoints</code> operations, which returns results in the next page. </p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #               use <code>nextToken</code> to get the next page of results. The default is 20.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     vpc_endpoint_filters: {
@@ -1390,16 +1302,12 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Associates tags with an OpenSearch Serverless resource. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html">Tagging
-    #                 Amazon OpenSearch Serverless collections</a>.</p>
+    # <p>Associates tags with an OpenSearch Serverless resource. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html">Tagging Amazon OpenSearch Serverless collections</a>.</p>
     # @param [Hash, Types::TagResourceInput] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the resource. The resource must be active (not in
-    #               the <code>DELETING</code> state), and must be owned by the account ID included in the
-    #               request.</p>
+    #   <p>The Amazon Resource Name (ARN) of the resource. The resource must be active (not in the <code>DELETING</code> state), and must be owned by the account ID included in the request.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>A list of tags (key-value pairs) to add to the resource. All tag keys in the request
-    #               must be unique.</p>
+    #   <p>A list of tags (key-value pairs) to add to the resource. All tag keys in the request must be unique.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "Arn", # required
@@ -1421,16 +1329,12 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Removes a tag or set of tags from an OpenSearch Serverless resource. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html">Tagging
-    #                 Amazon OpenSearch Serverless collections</a>.</p>
+    # <p>Removes a tag or set of tags from an OpenSearch Serverless resource. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html">Tagging Amazon OpenSearch Serverless collections</a>.</p>
     # @param [Hash, Types::UntagResourceInput] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the resource to remove tags from. The resource must
-    #               be active (not in the <code>DELETING</code> state), and must be owned by the account ID
-    #               included in the request.</p>
+    #   <p>The Amazon Resource Name (ARN) of the resource to remove tags from. The resource must be active (not in the <code>DELETING</code> state), and must be owned by the account ID included in the request.</p>
     # @option params [Array<String>] :tag_keys
-    #   <p>The tag or set of tags to remove from the resource. All tag keys in the request must
-    #               be unique.</p>
+    #   <p>The tag or set of tags to remove from the resource. All tag keys in the request must be unique.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "Arn", # required
@@ -1447,8 +1351,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Updates an OpenSearch Serverless access policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data
-    #                 access control for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Updates an OpenSearch Serverless access policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data access control for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::UpdateAccessPolicyInput] params
     # @option params [String] :type
     #   <p>The type of policy.</p>
@@ -1457,8 +1360,7 @@ module Aws::OpenSearchServerless
     # @option params [String] :policy_version
     #   <p>The version of the policy being updated.</p>
     # @option params [String] :description
-    #   <p>A description of the policy. Typically used to store information about the permissions
-    #               defined in the policy.</p>
+    #   <p>A description of the policy. Typically used to store information about the permissions defined in the policy.</p>
     # @option params [String] :policy
     #   <p>The JSON policy document to use as the content for the policy.</p>
     # @option params [String] :client_token
@@ -1493,15 +1395,10 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more
-    #             information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing
-    #                 capacity limits for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing capacity limits for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::UpdateAccountSettingsInput] params
     # @option params [Types::CapacityLimits] :capacity_limits
-    #   <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units
-    #               (OCUs). These limits are used to scale your collections based on the current workload.
-    #               For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing
-    #                   capacity limits for Amazon OpenSearch Serverless</a>.</p>
+    #   <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units (OCUs). These limits are used to scale your collections based on the current workload. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing capacity limits for Amazon OpenSearch Serverless</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     capacity_limits: {
@@ -1563,18 +1460,14 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Updates an existing index in an OpenSearch Serverless collection. This operation allows you to modify
-    #             the index schema, including adding new fields or changing field mappings. You can also
-    #             enable automatic semantic enrichment ingestion and search. For more information, see
-    #                 <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment">About automatic semantic enrichment</a>.</p>
+    # <p>Updates an existing index in an OpenSearch Serverless collection. This operation allows you to modify the index schema, including adding new fields or changing field mappings. You can also enable automatic semantic enrichment ingestion and search. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment">About automatic semantic enrichment</a>.</p>
     # @param [Hash, Types::UpdateIndexRequest] params
     # @option params [String] :id
     #   <p>The unique identifier of the collection containing the index to update.</p>
     # @option params [String] :index_name
     #   <p>The name of the index to update.</p>
     # @option params [JSON] :index_schema
-    #   <p>The updated JSON schema definition for the index, including field mappings and
-    #               settings. </p>
+    #   <p>The updated JSON schema definition for the index, including field mappings and settings. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     id: "CollectionId", # required
@@ -1636,17 +1529,12 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Updates a security configuration for OpenSearch Serverless. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML
-    #                 authentication for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Updates a security configuration for OpenSearch Serverless. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML authentication for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::UpdateSecurityConfigInput] params
     # @option params [String] :id
-    #   <p>The security configuration identifier. For SAML the ID will be
-    #                   <code>saml/&lt;accountId&gt;/&lt;idpProviderName&gt;</code>. For example,
-    #                   <code>saml/123456789123/OKTADev</code>.</p>
+    #   <p>The security configuration identifier. For SAML the ID will be <code>saml/&lt;accountId&gt;/&lt;idpProviderName&gt;</code>. For example, <code>saml/123456789123/OKTADev</code>.</p>
     # @option params [String] :config_version
-    #   <p>The version of the security configuration to be updated. You can find the most recent
-    #               version of a security configuration using the <code>GetSecurityPolicy</code>
-    #               command.</p>
+    #   <p>The version of the security configuration to be updated. You can find the most recent version of a security configuration using the <code>GetSecurityPolicy</code> command.</p>
     # @option params [String] :description
     #   <p>A description of the security configuration.</p>
     # @option params [Types::SamlConfigOptions] :saml_options
@@ -1654,9 +1542,7 @@ module Aws::OpenSearchServerless
     # @option params [Types::UpdateIamIdentityCenterConfigOptions] :iam_identity_center_options_updates
     #   <p>Describes IAM Identity Center options in the form of a key-value map.</p>
     # @option params [Types::IamFederationConfigOptions] :iam_federation_options
-    #   <p>Describes IAM federation options in the form of a key-value map for updating an
-    #               existing security configuration. Use this field to modify IAM federation settings for
-    #               the security configuration.</p>
+    #   <p>Describes IAM federation options in the form of a key-value map for updating an existing security configuration. Use this field to modify IAM federation settings for the security configuration.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @example Request syntax with placeholder values
@@ -1720,9 +1606,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Updates an OpenSearch Serverless security policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html">Network
-    #                 access for Amazon OpenSearch Serverless</a> and <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html">Encryption
-    #                 at rest for Amazon OpenSearch Serverless</a>.</p>
+    # <p>Updates an OpenSearch Serverless security policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html">Network access for Amazon OpenSearch Serverless</a> and <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html">Encryption at rest for Amazon OpenSearch Serverless</a>.</p>
     # @param [Hash, Types::UpdateSecurityPolicyInput] params
     # @option params [String] :type
     #   <p>The type of access policy.</p>
@@ -1731,8 +1615,7 @@ module Aws::OpenSearchServerless
     # @option params [String] :policy_version
     #   <p>The version of the policy being updated.</p>
     # @option params [String] :description
-    #   <p>A description of the policy. Typically used to store information about the permissions
-    #               defined in the policy.</p>
+    #   <p>A description of the policy. Typically used to store information about the permissions defined in the policy.</p>
     # @option params [String] :policy
     #   <p>The JSON policy document to use as the content for the new policy.</p>
     # @option params [String] :client_token
@@ -1767,8 +1650,7 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
-    # <p>Updates an OpenSearch Serverless-managed interface endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access
-    #                 Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
+    # <p>Updates an OpenSearch Serverless-managed interface endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
     # @param [Hash, Types::UpdateVpcEndpointInput] params
     # @option params [String] :id
     #   <p>The unique identifier of the interface endpoint to update.</p>
@@ -1777,9 +1659,7 @@ module Aws::OpenSearchServerless
     # @option params [Array<String>] :remove_subnet_ids
     #   <p>The unique identifiers of the subnets to remove from the endpoint.</p>
     # @option params [Array<String>] :add_security_group_ids
-    #   <p>The unique identifiers of the security groups to add to the endpoint. Security groups
-    #               define the ports, protocols, and sources for inbound traffic that you are authorizing
-    #               into your endpoint.</p>
+    #   <p>The unique identifiers of the security groups to add to the endpoint. Security groups define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
     # @option params [Array<String>] :remove_security_group_ids
     #   <p>The unique identifiers of the security groups to remove from the endpoint.</p>
     # @option params [String] :client_token

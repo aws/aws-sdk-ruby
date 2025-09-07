@@ -54,6 +54,12 @@ module Aws::VerifiedPermissions
     # @!attribute decimal
     #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-decimal">decimal</a> type.</p> <p>Example: <code>{"decimal": "1.1"}</code> </p>
     #   @return [String]
+    # @!attribute datetime
+    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-datetime">datetime</a> type.</p> <p>Example: <code>{"datetime": "2024-10-15T11:35:00Z"}</code> </p>
+    #   @return [String]
+    # @!attribute duration
+    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-duration">duration</a> type.</p> <p>Example: <code>{"duration": "1h30m"}</code> </p>
+    #   @return [String]
     class AttributeValue < Struct.new(
       :boolean,
       :entity_identifier,
@@ -63,6 +69,8 @@ module Aws::VerifiedPermissions
       :record,
       :ipaddr,
       :decimal,
+      :datetime,
+      :duration,
       :unknown,
       keyword_init: true)
       include ::Smithy::Schema::Union
@@ -75,6 +83,8 @@ module Aws::VerifiedPermissions
       class Record < AttributeValue; end
       class Ipaddr < AttributeValue; end
       class Decimal < AttributeValue; end
+      class Datetime < AttributeValue; end
+      class Duration < AttributeValue; end
       class Unknown < AttributeValue; end
     end
 
@@ -2100,7 +2110,7 @@ module Aws::VerifiedPermissions
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about a policy created by instantiating a policy template. </p> <p>This </p>
+    # <p>Contains information about a policy created by instantiating a policy template. </p>
     # @!attribute policy_template_id
     #   <p>The unique identifier of the policy template used to create this policy.</p>
     #   @return [String]
