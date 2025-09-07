@@ -59,6 +59,8 @@ module Aws
   #     us_west_2.description #=> "US West (Oregon)"
   #     us_west_2.partition_name "aws"
   module Partitions
+    VERSION = File.read(File.expand_path('../VERSION', __dir__)).strip
+
     class << self
       include Enumerable
 

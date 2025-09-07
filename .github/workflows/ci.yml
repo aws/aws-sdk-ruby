@@ -73,7 +73,7 @@ jobs:
         run: bundle exec rake test:protocols
 
   rubocop:
-    needs: [core-test, protocol-test]
+    needs: [test, protocol-test]
     runs-on: ubuntu-latest
 
     steps:

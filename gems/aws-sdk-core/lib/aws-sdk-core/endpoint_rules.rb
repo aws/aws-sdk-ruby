@@ -7,19 +7,23 @@ module Aws
     # @api private
     module EndpointRules
       # aws.partition(region: string) Option<Partition>
-      def self.aws_partition(region) # rubocop:disable Metrics/CyclomaticComplexity
-        # TODO: aws-partitions gem or aws-sdk-core gem
-        path = File.expand_path('partitions.json', __dir__)
-        partitions = ::JSON.load_file(path)['partitions']
-
+      def self.aws_partition(region) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
+        partitions = Aws::Partitions.partitions
         partition =
-          partitions.find { |p| p['regions']&.fetch(region, nil) } ||
-          partitions.find { |p| region.match(p['regionRegex']) } ||
-          partitions.find { |p| p['id'] == 'aws' }
+          partitions.find { |p| p.regions.map(&:name).include?(region) } ||
+          partitions.find { |p| region =~ p.region_regex } ||
+          partitions.find { |p| p.id == 'aws' }
 
         return nil unless partition
 
-        partition['outputs']
+        {
+          'dnsSuffix' => partition.dns_suffix,
+          'dualStackDnsSuffix' => partition.dual_stack_dns_suffix,
+          'implicitGlobalRegion' => partition.implicit_global_region,
+          'name' => partition.id,
+          'supportsDualStack' => partition.supports_dual_stack,
+          'supportsFIPS' => partition.supports_fips
+        }
       end
     end
   end
