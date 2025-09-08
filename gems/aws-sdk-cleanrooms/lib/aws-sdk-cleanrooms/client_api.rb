@@ -77,6 +77,8 @@ module Aws::CleanRooms
     AthenaTableName = Shapes::StringShape.new(name: 'AthenaTableName')
     AthenaTableReference = Shapes::StructureShape.new(name: 'AthenaTableReference')
     AthenaWorkGroup = Shapes::StringShape.new(name: 'AthenaWorkGroup')
+    AutoApprovedChangeType = Shapes::StringShape.new(name: 'AutoApprovedChangeType')
+    AutoApprovedChangeTypeList = Shapes::ListShape.new(name: 'AutoApprovedChangeTypeList')
     BatchGetCollaborationAnalysisTemplateError = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateError')
     BatchGetCollaborationAnalysisTemplateErrorList = Shapes::ListShape.new(name: 'BatchGetCollaborationAnalysisTemplateErrorList')
     BatchGetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateInput')
@@ -92,6 +94,15 @@ module Aws::CleanRooms
     BilledJobResourceUtilization = Shapes::StructureShape.new(name: 'BilledJobResourceUtilization')
     BilledResourceUtilization = Shapes::StructureShape.new(name: 'BilledResourceUtilization')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    Change = Shapes::StructureShape.new(name: 'Change')
+    ChangeInput = Shapes::StructureShape.new(name: 'ChangeInput')
+    ChangeInputList = Shapes::ListShape.new(name: 'ChangeInputList')
+    ChangeList = Shapes::ListShape.new(name: 'ChangeList')
+    ChangeRequestStatus = Shapes::StringShape.new(name: 'ChangeRequestStatus')
+    ChangeSpecification = Shapes::UnionShape.new(name: 'ChangeSpecification')
+    ChangeSpecificationType = Shapes::StringShape.new(name: 'ChangeSpecificationType')
+    ChangeType = Shapes::StringShape.new(name: 'ChangeType')
+    ChangeTypeList = Shapes::ListShape.new(name: 'ChangeTypeList')
     CleanroomsArn = Shapes::StringShape.new(name: 'CleanroomsArn')
     Collaboration = Shapes::StructureShape.new(name: 'Collaboration')
     CollaborationAnalysisTemplate = Shapes::StructureShape.new(name: 'CollaborationAnalysisTemplate')
@@ -99,6 +110,10 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplateSummary = Shapes::StructureShape.new(name: 'CollaborationAnalysisTemplateSummary')
     CollaborationAnalysisTemplateSummaryList = Shapes::ListShape.new(name: 'CollaborationAnalysisTemplateSummaryList')
     CollaborationArn = Shapes::StringShape.new(name: 'CollaborationArn')
+    CollaborationChangeRequest = Shapes::StructureShape.new(name: 'CollaborationChangeRequest')
+    CollaborationChangeRequestIdentifier = Shapes::StringShape.new(name: 'CollaborationChangeRequestIdentifier')
+    CollaborationChangeRequestSummary = Shapes::StructureShape.new(name: 'CollaborationChangeRequestSummary')
+    CollaborationChangeRequestSummaryList = Shapes::ListShape.new(name: 'CollaborationChangeRequestSummaryList')
     CollaborationConfiguredAudienceModelAssociation = Shapes::StructureShape.new(name: 'CollaborationConfiguredAudienceModelAssociation')
     CollaborationConfiguredAudienceModelAssociationSummary = Shapes::StructureShape.new(name: 'CollaborationConfiguredAudienceModelAssociationSummary')
     CollaborationConfiguredAudienceModelAssociationSummaryList = Shapes::ListShape.new(name: 'CollaborationConfiguredAudienceModelAssociationSummaryList')
@@ -166,6 +181,8 @@ module Aws::CleanRooms
     ConsolidatedPolicyV1 = Shapes::UnionShape.new(name: 'ConsolidatedPolicyV1')
     CreateAnalysisTemplateInput = Shapes::StructureShape.new(name: 'CreateAnalysisTemplateInput')
     CreateAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'CreateAnalysisTemplateOutput')
+    CreateCollaborationChangeRequestInput = Shapes::StructureShape.new(name: 'CreateCollaborationChangeRequestInput')
+    CreateCollaborationChangeRequestOutput = Shapes::StructureShape.new(name: 'CreateCollaborationChangeRequestOutput')
     CreateCollaborationInput = Shapes::StructureShape.new(name: 'CreateCollaborationInput')
     CreateCollaborationOutput = Shapes::StructureShape.new(name: 'CreateCollaborationOutput')
     CreateConfiguredAudienceModelAssociationInput = Shapes::StructureShape.new(name: 'CreateConfiguredAudienceModelAssociationInput')
@@ -249,6 +266,8 @@ module Aws::CleanRooms
     GetAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'GetAnalysisTemplateOutput')
     GetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'GetCollaborationAnalysisTemplateInput')
     GetCollaborationAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'GetCollaborationAnalysisTemplateOutput')
+    GetCollaborationChangeRequestInput = Shapes::StructureShape.new(name: 'GetCollaborationChangeRequestInput')
+    GetCollaborationChangeRequestOutput = Shapes::StructureShape.new(name: 'GetCollaborationChangeRequestOutput')
     GetCollaborationConfiguredAudienceModelAssociationInput = Shapes::StructureShape.new(name: 'GetCollaborationConfiguredAudienceModelAssociationInput')
     GetCollaborationConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'GetCollaborationConfiguredAudienceModelAssociationOutput')
     GetCollaborationIdNamespaceAssociationInput = Shapes::StructureShape.new(name: 'GetCollaborationIdNamespaceAssociationInput')
@@ -321,6 +340,8 @@ module Aws::CleanRooms
     ListAnalysisTemplatesOutput = Shapes::StructureShape.new(name: 'ListAnalysisTemplatesOutput')
     ListCollaborationAnalysisTemplatesInput = Shapes::StructureShape.new(name: 'ListCollaborationAnalysisTemplatesInput')
     ListCollaborationAnalysisTemplatesOutput = Shapes::StructureShape.new(name: 'ListCollaborationAnalysisTemplatesOutput')
+    ListCollaborationChangeRequestsInput = Shapes::StructureShape.new(name: 'ListCollaborationChangeRequestsInput')
+    ListCollaborationChangeRequestsOutput = Shapes::StructureShape.new(name: 'ListCollaborationChangeRequestsOutput')
     ListCollaborationConfiguredAudienceModelAssociationsInput = Shapes::StructureShape.new(name: 'ListCollaborationConfiguredAudienceModelAssociationsInput')
     ListCollaborationConfiguredAudienceModelAssociationsOutput = Shapes::StructureShape.new(name: 'ListCollaborationConfiguredAudienceModelAssociationsOutput')
     ListCollaborationIdNamespaceAssociationsInput = Shapes::StructureShape.new(name: 'ListCollaborationIdNamespaceAssociationsInput')
@@ -363,6 +384,7 @@ module Aws::CleanRooms
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MemberAbilities = Shapes::ListShape.new(name: 'MemberAbilities')
     MemberAbility = Shapes::StringShape.new(name: 'MemberAbility')
+    MemberChangeSpecification = Shapes::StructureShape.new(name: 'MemberChangeSpecification')
     MemberList = Shapes::ListShape.new(name: 'MemberList')
     MemberSpecification = Shapes::StructureShape.new(name: 'MemberSpecification')
     MemberStatus = Shapes::StringShape.new(name: 'MemberStatus')
@@ -415,6 +437,7 @@ module Aws::CleanRooms
     PrivacyImpact = Shapes::UnionShape.new(name: 'PrivacyImpact')
     ProtectedJob = Shapes::StructureShape.new(name: 'ProtectedJob')
     ProtectedJobAnalysisType = Shapes::StringShape.new(name: 'ProtectedJobAnalysisType')
+    ProtectedJobComputeConfiguration = Shapes::UnionShape.new(name: 'ProtectedJobComputeConfiguration')
     ProtectedJobConfigurationDetails = Shapes::UnionShape.new(name: 'ProtectedJobConfigurationDetails')
     ProtectedJobDirectAnalysisConfigurationDetails = Shapes::StructureShape.new(name: 'ProtectedJobDirectAnalysisConfigurationDetails')
     ProtectedJobError = Shapes::StructureShape.new(name: 'ProtectedJobError')
@@ -443,6 +466,9 @@ module Aws::CleanRooms
     ProtectedJobSummary = Shapes::StructureShape.new(name: 'ProtectedJobSummary')
     ProtectedJobSummaryList = Shapes::ListShape.new(name: 'ProtectedJobSummaryList')
     ProtectedJobType = Shapes::StringShape.new(name: 'ProtectedJobType')
+    ProtectedJobWorkerComputeConfiguration = Shapes::StructureShape.new(name: 'ProtectedJobWorkerComputeConfiguration')
+    ProtectedJobWorkerComputeConfigurationNumberInteger = Shapes::IntegerShape.new(name: 'ProtectedJobWorkerComputeConfigurationNumberInteger')
+    ProtectedJobWorkerComputeType = Shapes::StringShape.new(name: 'ProtectedJobWorkerComputeType')
     ProtectedQuery = Shapes::StructureShape.new(name: 'ProtectedQuery')
     ProtectedQueryDistributeOutput = Shapes::StructureShape.new(name: 'ProtectedQueryDistributeOutput')
     ProtectedQueryDistributeOutputConfiguration = Shapes::StructureShape.new(name: 'ProtectedQueryDistributeOutputConfiguration')
@@ -756,6 +782,8 @@ module Aws::CleanRooms
     AthenaTableReference.add_member(:table_name, Shapes::ShapeRef.new(shape: AthenaTableName, required: true, location_name: "tableName"))
     AthenaTableReference.struct_class = Types::AthenaTableReference
 
+    AutoApprovedChangeTypeList.member = Shapes::ShapeRef.new(shape: AutoApprovedChangeType)
+
     BatchGetCollaborationAnalysisTemplateError.add_member(:arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, required: true, location_name: "arn"))
     BatchGetCollaborationAnalysisTemplateError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
     BatchGetCollaborationAnalysisTemplateError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -808,6 +836,27 @@ module Aws::CleanRooms
     BilledResourceUtilization.add_member(:units, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "units"))
     BilledResourceUtilization.struct_class = Types::BilledResourceUtilization
 
+    Change.add_member(:specification_type, Shapes::ShapeRef.new(shape: ChangeSpecificationType, required: true, location_name: "specificationType"))
+    Change.add_member(:specification, Shapes::ShapeRef.new(shape: ChangeSpecification, required: true, location_name: "specification"))
+    Change.add_member(:types, Shapes::ShapeRef.new(shape: ChangeTypeList, required: true, location_name: "types"))
+    Change.struct_class = Types::Change
+
+    ChangeInput.add_member(:specification_type, Shapes::ShapeRef.new(shape: ChangeSpecificationType, required: true, location_name: "specificationType"))
+    ChangeInput.add_member(:specification, Shapes::ShapeRef.new(shape: ChangeSpecification, required: true, location_name: "specification"))
+    ChangeInput.struct_class = Types::ChangeInput
+
+    ChangeInputList.member = Shapes::ShapeRef.new(shape: ChangeInput)
+
+    ChangeList.member = Shapes::ShapeRef.new(shape: Change)
+
+    ChangeSpecification.add_member(:member, Shapes::ShapeRef.new(shape: MemberChangeSpecification, location_name: "member"))
+    ChangeSpecification.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ChangeSpecification.add_member_subclass(:member, Types::ChangeSpecification::Member)
+    ChangeSpecification.add_member_subclass(:unknown, Types::ChangeSpecification::Unknown)
+    ChangeSpecification.struct_class = Types::ChangeSpecification
+
+    ChangeTypeList.member = Shapes::ShapeRef.new(shape: ChangeType)
+
     Collaboration.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     Collaboration.add_member(:arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "arn"))
     Collaboration.add_member(:name, Shapes::ShapeRef.new(shape: CollaborationName, required: true, location_name: "name"))
@@ -823,6 +872,7 @@ module Aws::CleanRooms
     Collaboration.add_member(:query_log_status, Shapes::ShapeRef.new(shape: CollaborationQueryLogStatus, required: true, location_name: "queryLogStatus"))
     Collaboration.add_member(:job_log_status, Shapes::ShapeRef.new(shape: CollaborationJobLogStatus, location_name: "jobLogStatus"))
     Collaboration.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
+    Collaboration.add_member(:auto_approved_change_types, Shapes::ShapeRef.new(shape: AutoApprovedChangeTypeList, location_name: "autoApprovedChangeTypes"))
     Collaboration.struct_class = Types::Collaboration
 
     CollaborationAnalysisTemplate.add_member(:id, Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, required: true, location_name: "id"))
@@ -857,6 +907,26 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplateSummary.struct_class = Types::CollaborationAnalysisTemplateSummary
 
     CollaborationAnalysisTemplateSummaryList.member = Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplateSummary)
+
+    CollaborationChangeRequest.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    CollaborationChangeRequest.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    CollaborationChangeRequest.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    CollaborationChangeRequest.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    CollaborationChangeRequest.add_member(:status, Shapes::ShapeRef.new(shape: ChangeRequestStatus, required: true, location_name: "status"))
+    CollaborationChangeRequest.add_member(:is_auto_approved, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isAutoApproved"))
+    CollaborationChangeRequest.add_member(:changes, Shapes::ShapeRef.new(shape: ChangeList, required: true, location_name: "changes"))
+    CollaborationChangeRequest.struct_class = Types::CollaborationChangeRequest
+
+    CollaborationChangeRequestSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    CollaborationChangeRequestSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    CollaborationChangeRequestSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    CollaborationChangeRequestSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    CollaborationChangeRequestSummary.add_member(:status, Shapes::ShapeRef.new(shape: ChangeRequestStatus, required: true, location_name: "status"))
+    CollaborationChangeRequestSummary.add_member(:is_auto_approved, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isAutoApproved"))
+    CollaborationChangeRequestSummary.add_member(:changes, Shapes::ShapeRef.new(shape: ChangeList, required: true, location_name: "changes"))
+    CollaborationChangeRequestSummary.struct_class = Types::CollaborationChangeRequestSummary
+
+    CollaborationChangeRequestSummaryList.member = Shapes::ShapeRef.new(shape: CollaborationChangeRequestSummary)
 
     CollaborationConfiguredAudienceModelAssociation.add_member(:id, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, required: true, location_name: "id"))
     CollaborationConfiguredAudienceModelAssociation.add_member(:arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationArn, required: true, location_name: "arn"))
@@ -1202,6 +1272,13 @@ module Aws::CleanRooms
     CreateAnalysisTemplateOutput.add_member(:analysis_template, Shapes::ShapeRef.new(shape: AnalysisTemplate, required: true, location_name: "analysisTemplate"))
     CreateAnalysisTemplateOutput.struct_class = Types::CreateAnalysisTemplateOutput
 
+    CreateCollaborationChangeRequestInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    CreateCollaborationChangeRequestInput.add_member(:changes, Shapes::ShapeRef.new(shape: ChangeInputList, required: true, location_name: "changes"))
+    CreateCollaborationChangeRequestInput.struct_class = Types::CreateCollaborationChangeRequestInput
+
+    CreateCollaborationChangeRequestOutput.add_member(:collaboration_change_request, Shapes::ShapeRef.new(shape: CollaborationChangeRequest, required: true, location_name: "collaborationChangeRequest"))
+    CreateCollaborationChangeRequestOutput.struct_class = Types::CreateCollaborationChangeRequestOutput
+
     CreateCollaborationInput.add_member(:members, Shapes::ShapeRef.new(shape: MemberList, required: true, location_name: "members"))
     CreateCollaborationInput.add_member(:name, Shapes::ShapeRef.new(shape: CollaborationName, required: true, location_name: "name"))
     CreateCollaborationInput.add_member(:description, Shapes::ShapeRef.new(shape: CollaborationDescription, required: true, location_name: "description"))
@@ -1214,6 +1291,7 @@ module Aws::CleanRooms
     CreateCollaborationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateCollaborationInput.add_member(:creator_payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, location_name: "creatorPaymentConfiguration"))
     CreateCollaborationInput.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
+    CreateCollaborationInput.add_member(:auto_approved_change_request_types, Shapes::ShapeRef.new(shape: AutoApprovedChangeTypeList, location_name: "autoApprovedChangeRequestTypes"))
     CreateCollaborationInput.struct_class = Types::CreateCollaborationInput
 
     CreateCollaborationOutput.add_member(:collaboration, Shapes::ShapeRef.new(shape: Collaboration, required: true, location_name: "collaboration"))
@@ -1468,6 +1546,13 @@ module Aws::CleanRooms
     GetCollaborationAnalysisTemplateOutput.add_member(:collaboration_analysis_template, Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplate, required: true, location_name: "collaborationAnalysisTemplate"))
     GetCollaborationAnalysisTemplateOutput.struct_class = Types::GetCollaborationAnalysisTemplateOutput
 
+    GetCollaborationChangeRequestInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    GetCollaborationChangeRequestInput.add_member(:change_request_identifier, Shapes::ShapeRef.new(shape: CollaborationChangeRequestIdentifier, required: true, location: "uri", location_name: "changeRequestIdentifier"))
+    GetCollaborationChangeRequestInput.struct_class = Types::GetCollaborationChangeRequestInput
+
+    GetCollaborationChangeRequestOutput.add_member(:collaboration_change_request, Shapes::ShapeRef.new(shape: CollaborationChangeRequest, required: true, location_name: "collaborationChangeRequest"))
+    GetCollaborationChangeRequestOutput.struct_class = Types::GetCollaborationChangeRequestOutput
+
     GetCollaborationConfiguredAudienceModelAssociationInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
     GetCollaborationConfiguredAudienceModelAssociationInput.add_member(:configured_audience_model_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, required: true, location: "uri", location_name: "configuredAudienceModelAssociationIdentifier"))
     GetCollaborationConfiguredAudienceModelAssociationInput.struct_class = Types::GetCollaborationConfiguredAudienceModelAssociationInput
@@ -1714,6 +1799,16 @@ module Aws::CleanRooms
     ListCollaborationAnalysisTemplatesOutput.add_member(:collaboration_analysis_template_summaries, Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplateSummaryList, required: true, location_name: "collaborationAnalysisTemplateSummaries"))
     ListCollaborationAnalysisTemplatesOutput.struct_class = Types::ListCollaborationAnalysisTemplatesOutput
 
+    ListCollaborationChangeRequestsInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    ListCollaborationChangeRequestsInput.add_member(:status, Shapes::ShapeRef.new(shape: ChangeRequestStatus, location: "querystring", location_name: "status"))
+    ListCollaborationChangeRequestsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListCollaborationChangeRequestsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCollaborationChangeRequestsInput.struct_class = Types::ListCollaborationChangeRequestsInput
+
+    ListCollaborationChangeRequestsOutput.add_member(:collaboration_change_request_summaries, Shapes::ShapeRef.new(shape: CollaborationChangeRequestSummaryList, required: true, location_name: "collaborationChangeRequestSummaries"))
+    ListCollaborationChangeRequestsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCollaborationChangeRequestsOutput.struct_class = Types::ListCollaborationChangeRequestsOutput
+
     ListCollaborationConfiguredAudienceModelAssociationsInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
     ListCollaborationConfiguredAudienceModelAssociationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListCollaborationConfiguredAudienceModelAssociationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1885,6 +1980,11 @@ module Aws::CleanRooms
     MLPaymentConfig.struct_class = Types::MLPaymentConfig
 
     MemberAbilities.member = Shapes::ShapeRef.new(shape: MemberAbility)
+
+    MemberChangeSpecification.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    MemberChangeSpecification.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
+    MemberChangeSpecification.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    MemberChangeSpecification.struct_class = Types::MemberChangeSpecification
 
     MemberList.member = Shapes::ShapeRef.new(shape: MemberSpecification)
 
@@ -2101,7 +2201,14 @@ module Aws::CleanRooms
     ProtectedJob.add_member(:statistics, Shapes::ShapeRef.new(shape: ProtectedJobStatistics, location_name: "statistics"))
     ProtectedJob.add_member(:result, Shapes::ShapeRef.new(shape: ProtectedJobResult, location_name: "result"))
     ProtectedJob.add_member(:error, Shapes::ShapeRef.new(shape: ProtectedJobError, location_name: "error"))
+    ProtectedJob.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ProtectedJobComputeConfiguration, location_name: "computeConfiguration"))
     ProtectedJob.struct_class = Types::ProtectedJob
+
+    ProtectedJobComputeConfiguration.add_member(:worker, Shapes::ShapeRef.new(shape: ProtectedJobWorkerComputeConfiguration, location_name: "worker"))
+    ProtectedJobComputeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProtectedJobComputeConfiguration.add_member_subclass(:worker, Types::ProtectedJobComputeConfiguration::Worker)
+    ProtectedJobComputeConfiguration.add_member_subclass(:unknown, Types::ProtectedJobComputeConfiguration::Unknown)
+    ProtectedJobComputeConfiguration.struct_class = Types::ProtectedJobComputeConfiguration
 
     ProtectedJobConfigurationDetails.add_member(:direct_analysis_configuration_details, Shapes::ShapeRef.new(shape: ProtectedJobDirectAnalysisConfigurationDetails, location_name: "directAnalysisConfigurationDetails"))
     ProtectedJobConfigurationDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -2193,6 +2300,10 @@ module Aws::CleanRooms
     ProtectedJobSummary.struct_class = Types::ProtectedJobSummary
 
     ProtectedJobSummaryList.member = Shapes::ShapeRef.new(shape: ProtectedJobSummary)
+
+    ProtectedJobWorkerComputeConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ProtectedJobWorkerComputeType, required: true, location_name: "type"))
+    ProtectedJobWorkerComputeConfiguration.add_member(:number, Shapes::ShapeRef.new(shape: ProtectedJobWorkerComputeConfigurationNumberInteger, required: true, location_name: "number"))
+    ProtectedJobWorkerComputeConfiguration.struct_class = Types::ProtectedJobWorkerComputeConfiguration
 
     ProtectedQuery.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     ProtectedQuery.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
@@ -2421,6 +2532,7 @@ module Aws::CleanRooms
     StartProtectedJobInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     StartProtectedJobInput.add_member(:job_parameters, Shapes::ShapeRef.new(shape: ProtectedJobParameters, required: true, location_name: "jobParameters"))
     StartProtectedJobInput.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ProtectedJobResultConfigurationInput, location_name: "resultConfiguration"))
+    StartProtectedJobInput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ProtectedJobComputeConfiguration, location_name: "computeConfiguration"))
     StartProtectedJobInput.struct_class = Types::StartProtectedJobInput
 
     StartProtectedJobOutput.add_member(:protected_job, Shapes::ShapeRef.new(shape: ProtectedJob, required: true, location_name: "protectedJob"))
@@ -2681,6 +2793,21 @@ module Aws::CleanRooms
         o.input = Shapes::ShapeRef.new(shape: CreateCollaborationInput)
         o.output = Shapes::ShapeRef.new(shape: CreateCollaborationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_collaboration_change_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCollaborationChangeRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/changeRequests"
+        o.input = Shapes::ShapeRef.new(shape: CreateCollaborationChangeRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateCollaborationChangeRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -3019,6 +3146,19 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_collaboration_change_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCollaborationChangeRequest"
+        o.http_method = "GET"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/changeRequests/{changeRequestIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetCollaborationChangeRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: GetCollaborationChangeRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_collaboration_configured_audience_model_association, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCollaborationConfiguredAudienceModelAssociation"
         o.http_method = "GET"
@@ -3252,6 +3392,25 @@ module Aws::CleanRooms
         o.http_request_uri = "/collaborations/{collaborationIdentifier}/analysistemplates"
         o.input = Shapes::ShapeRef.new(shape: ListCollaborationAnalysisTemplatesInput)
         o.output = Shapes::ShapeRef.new(shape: ListCollaborationAnalysisTemplatesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_collaboration_change_requests, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCollaborationChangeRequests"
+        o.http_method = "GET"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/changeRequests"
+        o.input = Shapes::ShapeRef.new(shape: ListCollaborationChangeRequestsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCollaborationChangeRequestsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

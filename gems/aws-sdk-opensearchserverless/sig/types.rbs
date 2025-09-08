@@ -103,6 +103,7 @@ module Aws::OpenSearchServerless
       attr_accessor last_modified_date: ::Integer
       attr_accessor collection_endpoint: ::String
       attr_accessor dashboard_endpoint: ::String
+      attr_accessor fips_endpoints: Types::FipsEndpoints
       attr_accessor failure_code: ::String
       attr_accessor failure_message: ::String
       SENSITIVE: []
@@ -359,6 +360,12 @@ module Aws::OpenSearchServerless
       attr_accessor resource: ::String
       attr_accessor error_message: ::String
       attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class FipsEndpoints
+      attr_accessor collection_endpoint: ::String
+      attr_accessor dashboard_endpoint: ::String
       SENSITIVE: []
     end
 

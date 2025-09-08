@@ -976,6 +976,76 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Represents a single change within a collaboration change request,
+    # containing the change identifier and specification.
+    #
+    # @!attribute [rw] specification_type
+    #   The type of specification for this change.
+    #   @return [String]
+    #
+    # @!attribute [rw] specification
+    #   The specification details for this change.
+    #   @return [Types::ChangeSpecification]
+    #
+    # @!attribute [rw] types
+    #   The list of change types that were applied.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Change AWS API Documentation
+    #
+    class Change < Struct.new(
+      :specification_type,
+      :specification,
+      :types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a change to apply to a collaboration.
+    #
+    # @!attribute [rw] specification_type
+    #   The type of specification for the change. Currently supports
+    #   `MEMBER` for member-related changes.
+    #   @return [String]
+    #
+    # @!attribute [rw] specification
+    #   The specification details for the change. The structure depends on
+    #   the specification type.
+    #   @return [Types::ChangeSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ChangeInput AWS API Documentation
+    #
+    class ChangeInput < Struct.new(
+      :specification_type,
+      :specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A union that contains the specification details for different types of
+    # changes.
+    #
+    # @note ChangeSpecification is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ChangeSpecification is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ChangeSpecification corresponding to the set member.
+    #
+    # @!attribute [rw] member
+    #   The member change specification when the change type is `MEMBER`.
+    #   @return [Types::MemberChangeSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ChangeSpecification AWS API Documentation
+    #
+    class ChangeSpecification < Struct.new(
+      :member,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Member < ChangeSpecification; end
+      class Unknown < ChangeSpecification; end
+    end
+
     # The multi-party data share environment. The collaboration contains
     # metadata about its purpose and participants.
     #
@@ -1057,6 +1127,11 @@ module Aws::CleanRooms
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] auto_approved_change_types
+    #   The types of change requests that are automatically approved for
+    #   this collaboration.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Collaboration AWS API Documentation
     #
     class Collaboration < Struct.new(
@@ -1074,7 +1149,8 @@ module Aws::CleanRooms
       :data_encryption_metadata,
       :query_log_status,
       :job_log_status,
-      :analytics_engine)
+      :analytics_engine,
+      :auto_approved_change_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1232,6 +1308,98 @@ module Aws::CleanRooms
       :collaboration_id,
       :creator_account_id,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a request to modify a collaboration. Change requests enable
+    # structured modifications to collaborations after they have been
+    # created.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the change request.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier for the collaboration being modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time when the change request was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time when the change request was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the change request. Valid values are
+    #   `PENDING`, `APPROVED`, `DENIED`, `COMMITTED`, and `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_auto_approved
+    #   Whether the change request was automatically approved based on the
+    #   collaboration's auto-approval settings.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] changes
+    #   The list of changes specified in this change request.
+    #   @return [Array<Types::Change>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationChangeRequest AWS API Documentation
+    #
+    class CollaborationChangeRequest < Struct.new(
+      :id,
+      :collaboration_id,
+      :create_time,
+      :update_time,
+      :status,
+      :is_auto_approved,
+      :changes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a collaboration change request.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the change request.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier for the collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time when the change request was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time when the change request was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the change request.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_auto_approved
+    #   Whether the change request was automatically approved.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] changes
+    #   Summary of the changes in this change request.
+    #   @return [Array<Types::Change>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationChangeRequestSummary AWS API Documentation
+    #
+    class CollaborationChangeRequestSummary < Struct.new(
+      :id,
+      :collaboration_id,
+      :create_time,
+      :update_time,
+      :status,
+      :is_auto_approved,
+      :changes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2851,6 +3019,40 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] collaboration_identifier
+    #   The identifier of the collaboration that the change request is made
+    #   against.
+    #   @return [String]
+    #
+    # @!attribute [rw] changes
+    #   The list of changes to apply to the collaboration. Each change
+    #   specifies the type of modification and the details of what should be
+    #   changed.
+    #   @return [Array<Types::ChangeInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationChangeRequestInput AWS API Documentation
+    #
+    class CreateCollaborationChangeRequestInput < Struct.new(
+      :collaboration_identifier,
+      :changes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_change_request
+    #   Represents a request to modify a collaboration. Change requests
+    #   enable structured modifications to collaborations after they have
+    #   been created.
+    #   @return [Types::CollaborationChangeRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationChangeRequestOutput AWS API Documentation
+    #
+    class CreateCollaborationChangeRequestOutput < Struct.new(
+      :collaboration_change_request)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] members
     #   A list of initial members, not including the creator. This list is
     #   immutable.
@@ -2924,6 +3126,11 @@ module Aws::CleanRooms
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] auto_approved_change_request_types
+    #   The types of change requests that are automatically approved for
+    #   this collaboration.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationInput AWS API Documentation
     #
     class CreateCollaborationInput < Struct.new(
@@ -2938,7 +3145,8 @@ module Aws::CleanRooms
       :job_log_status,
       :tags,
       :creator_payment_configuration,
-      :analytics_engine)
+      :analytics_engine,
+      :auto_approved_change_request_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4118,6 +4326,36 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] collaboration_identifier
+    #   The identifier of the collaboration that the change request is made
+    #   against.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_request_identifier
+    #   A unique identifier for the change request to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationChangeRequestInput AWS API Documentation
+    #
+    class GetCollaborationChangeRequestInput < Struct.new(
+      :collaboration_identifier,
+      :change_request_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_change_request
+    #   The collaboration change request that was requested.
+    #   @return [Types::CollaborationChangeRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationChangeRequestOutput AWS API Documentation
+    #
+    class GetCollaborationChangeRequestOutput < Struct.new(
+      :collaboration_change_request)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
     #   A unique identifier for the collaboration that the configured
     #   audience model association belongs to. Accepts a collaboration ID.
     #   @return [String]
@@ -5244,6 +5482,52 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] collaboration_identifier
+    #   The identifier of the collaboration that the change request is made
+    #   against.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A filter to only return change requests with the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned for an API request
+    #   call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationChangeRequestsInput AWS API Documentation
+    #
+    class ListCollaborationChangeRequestsInput < Struct.new(
+      :collaboration_identifier,
+      :status,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_change_request_summaries
+    #   The list of collaboration change request summaries.
+    #   @return [Array<Types::CollaborationChangeRequestSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationChangeRequestsOutput AWS API Documentation
+    #
+    class ListCollaborationChangeRequestsOutput < Struct.new(
+      :collaboration_change_request_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
     #   A unique identifier for the collaboration that the configured
     #   audience model association belongs to. Accepts a collaboration ID.
     #   @return [String]
@@ -6052,6 +6336,44 @@ module Aws::CleanRooms
     class MLPaymentConfig < Struct.new(
       :model_training,
       :model_inference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies changes to collaboration membership, including adding new
+    # members with their abilities and display names.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the member to add to the
+    #   collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_abilities
+    #   The abilities granted to the collaboration member. These determine
+    #   what actions the member can perform within the collaboration.
+    #
+    #   <note markdown="1"> The following values are currently not supported: `CAN_QUERY`,
+    #   `CAN_RECEIVE_RESULTS,` and `CAN_RUN_JOB`.
+    #
+    #    Set the value of `memberAbilities` to `[]` to allow a member to
+    #   contribute data.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] display_name
+    #   Specifies the display name that will be shown for this member in the
+    #   collaboration. While this field is required when inviting new
+    #   members, it becomes optional when modifying abilities of existing
+    #   collaboration members.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MemberChangeSpecification AWS API Documentation
+    #
+    class MemberChangeSpecification < Struct.new(
+      :account_id,
+      :member_abilities,
+      :display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7121,6 +7443,10 @@ module Aws::CleanRooms
     #   The error from the protected job.
     #   @return [Types::ProtectedJobError]
     #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration for the protected job.
+    #   @return [Types::ProtectedJobComputeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJob AWS API Documentation
     #
     class ProtectedJob < Struct.new(
@@ -7133,9 +7459,33 @@ module Aws::CleanRooms
       :result_configuration,
       :statistics,
       :result,
-      :error)
+      :error,
+      :compute_configuration)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration of the compute resources for a PySpark job.
+    #
+    # @note ProtectedJobComputeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ProtectedJobComputeConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProtectedJobComputeConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] worker
+    #   The worker configuration for the compute environment.
+    #   @return [Types::ProtectedJobWorkerComputeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobComputeConfiguration AWS API Documentation
+    #
+    class ProtectedJobComputeConfiguration < Struct.new(
+      :worker,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Worker < ProtectedJobComputeConfiguration; end
+      class Unknown < ProtectedJobComputeConfiguration; end
     end
 
     # The protected job configuration details.
@@ -7495,6 +7845,25 @@ module Aws::CleanRooms
       :create_time,
       :status,
       :receiver_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the compute resources for a PySpark job.
+    #
+    # @!attribute [rw] type
+    #   The worker compute configuration type.
+    #   @return [String]
+    #
+    # @!attribute [rw] number
+    #   The number of workers for a PySpark job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobWorkerComputeConfiguration AWS API Documentation
+    #
+    class ProtectedJobWorkerComputeConfiguration < Struct.new(
+      :type,
+      :number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8464,13 +8833,18 @@ module Aws::CleanRooms
     #   The details needed to write the job results.
     #   @return [Types::ProtectedJobResultConfigurationInput]
     #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration for the protected job.
+    #   @return [Types::ProtectedJobComputeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/StartProtectedJobInput AWS API Documentation
     #
     class StartProtectedJobInput < Struct.new(
       :type,
       :membership_identifier,
       :job_parameters,
-      :result_configuration)
+      :result_configuration,
+      :compute_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9239,6 +9613,11 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] number
     #   The number of workers.
+    #
+    #   SQL queries support a minimum value of 2 and a maximum value of 400.
+    #
+    #   PySpark jobs support a minimum value of 4 and a maximum value of
+    #   128.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/WorkerComputeConfiguration AWS API Documentation

@@ -400,6 +400,7 @@ module Aws::RDS
     EnableHttpEndpointResponse = Shapes::StructureShape.new(name: 'EnableHttpEndpointResponse')
     EncryptionContextMap = Shapes::MapShape.new(name: 'EncryptionContextMap')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
+    EndpointNetworkType = Shapes::StringShape.new(name: 'EndpointNetworkType')
     Engine = Shapes::StringShape.new(name: 'Engine')
     EngineDefaults = Shapes::StructureShape.new(name: 'EngineDefaults')
     EngineFamily = Shapes::StringShape.new(name: 'EngineFamily')
@@ -510,6 +511,7 @@ module Aws::RDS
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
     MajorEngineVersion = Shapes::StringShape.new(name: 'MajorEngineVersion')
     Marker = Shapes::StringShape.new(name: 'Marker')
+    MasterUserAuthenticationType = Shapes::StringShape.new(name: 'MasterUserAuthenticationType')
     MasterUserSecret = Shapes::StructureShape.new(name: 'MasterUserSecret')
     MaxDBShardGroupLimitReached = Shapes::StructureShape.new(name: 'MaxDBShardGroupLimitReached', error: {"code" => "MaxDBShardGroupLimitReached", "httpStatusCode" => 400, "senderFault" => true})
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
@@ -738,6 +740,7 @@ module Aws::RDS
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagListMessage = Shapes::StructureShape.new(name: 'TagListMessage')
+    TargetConnectionNetworkType = Shapes::StringShape.new(name: 'TargetConnectionNetworkType')
     TargetDBClusterParameterGroupName = Shapes::StringShape.new(name: 'TargetDBClusterParameterGroupName')
     TargetDBInstanceClass = Shapes::StringShape.new(name: 'TargetDBInstanceClass')
     TargetDBParameterGroupName = Shapes::StringShape.new(name: 'TargetDBParameterGroupName')
@@ -1100,6 +1103,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:enable_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLocalWriteForwarding"))
     CreateDBClusterMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     CreateDBClusterMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
+    CreateDBClusterMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
     CreateDBClusterMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
 
@@ -1187,6 +1191,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     CreateDBInstanceMessage.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     CreateDBInstanceMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
+    CreateDBInstanceMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -1260,6 +1265,7 @@ module Aws::RDS
     CreateDBProxyEndpointRequest.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "VpcSecurityGroupIds"))
     CreateDBProxyEndpointRequest.add_member(:target_role, Shapes::ShapeRef.new(shape: DBProxyEndpointTargetRole, location_name: "TargetRole"))
     CreateDBProxyEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDBProxyEndpointRequest.add_member(:endpoint_network_type, Shapes::ShapeRef.new(shape: EndpointNetworkType, location_name: "EndpointNetworkType"))
     CreateDBProxyEndpointRequest.struct_class = Types::CreateDBProxyEndpointRequest
 
     CreateDBProxyEndpointResponse.add_member(:db_proxy_endpoint, Shapes::ShapeRef.new(shape: DBProxyEndpoint, location_name: "DBProxyEndpoint"))
@@ -1275,6 +1281,8 @@ module Aws::RDS
     CreateDBProxyRequest.add_member(:idle_client_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IdleClientTimeout"))
     CreateDBProxyRequest.add_member(:debug_logging, Shapes::ShapeRef.new(shape: Boolean, location_name: "DebugLogging"))
     CreateDBProxyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDBProxyRequest.add_member(:endpoint_network_type, Shapes::ShapeRef.new(shape: EndpointNetworkType, location_name: "EndpointNetworkType"))
+    CreateDBProxyRequest.add_member(:target_connection_network_type, Shapes::ShapeRef.new(shape: TargetConnectionNetworkType, location_name: "TargetConnectionNetworkType"))
     CreateDBProxyRequest.struct_class = Types::CreateDBProxyRequest
 
     CreateDBProxyResponse.add_member(:db_proxy, Shapes::ShapeRef.new(shape: DBProxy, location_name: "DBProxy"))
@@ -1940,6 +1948,8 @@ module Aws::RDS
     DBProxy.add_member(:debug_logging, Shapes::ShapeRef.new(shape: Boolean, location_name: "DebugLogging"))
     DBProxy.add_member(:created_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedDate"))
     DBProxy.add_member(:updated_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "UpdatedDate"))
+    DBProxy.add_member(:endpoint_network_type, Shapes::ShapeRef.new(shape: EndpointNetworkType, location_name: "EndpointNetworkType"))
+    DBProxy.add_member(:target_connection_network_type, Shapes::ShapeRef.new(shape: TargetConnectionNetworkType, location_name: "TargetConnectionNetworkType"))
     DBProxy.struct_class = Types::DBProxy
 
     DBProxyAlreadyExistsFault.struct_class = Types::DBProxyAlreadyExistsFault
@@ -1955,6 +1965,7 @@ module Aws::RDS
     DBProxyEndpoint.add_member(:created_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedDate"))
     DBProxyEndpoint.add_member(:target_role, Shapes::ShapeRef.new(shape: DBProxyEndpointTargetRole, location_name: "TargetRole"))
     DBProxyEndpoint.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
+    DBProxyEndpoint.add_member(:endpoint_network_type, Shapes::ShapeRef.new(shape: EndpointNetworkType, location_name: "EndpointNetworkType"))
     DBProxyEndpoint.struct_class = Types::DBProxyEndpoint
 
     DBProxyEndpointAlreadyExistsFault.struct_class = Types::DBProxyEndpointAlreadyExistsFault
@@ -3147,6 +3158,7 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointArn, location_name: "AwsBackupRecoveryPointArn"))
     ModifyDBClusterMessage.add_member(:enable_limitless_database, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLimitlessDatabase"))
     ModifyDBClusterMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
+    ModifyDBClusterMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
     ModifyDBClusterMessage.struct_class = Types::ModifyDBClusterMessage
 
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))
@@ -3226,6 +3238,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     ModifyDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     ModifyDBInstanceMessage.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
+    ModifyDBInstanceMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))

@@ -380,6 +380,7 @@ module Aws::CloudFront
     InvalidationList = Shapes::StructureShape.new(name: 'InvalidationList')
     InvalidationSummary = Shapes::StructureShape.new(name: 'InvalidationSummary')
     InvalidationSummaryList = Shapes::ListShape.new(name: 'InvalidationSummaryList')
+    IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     ItemSelection = Shapes::StringShape.new(name: 'ItemSelection')
     KGKeyPairIds = Shapes::StructureShape.new(name: 'KGKeyPairIds')
     KGKeyPairIdsList = Shapes::ListShape.new(name: 'KGKeyPairIdsList')
@@ -1422,6 +1423,7 @@ module Aws::CloudFront
     CustomOriginConfig.add_member(:origin_ssl_protocols, Shapes::ShapeRef.new(shape: OriginSslProtocols, location_name: "OriginSslProtocols"))
     CustomOriginConfig.add_member(:origin_read_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "OriginReadTimeout"))
     CustomOriginConfig.add_member(:origin_keepalive_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "OriginKeepaliveTimeout"))
+    CustomOriginConfig.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     CustomOriginConfig.struct_class = Types::CustomOriginConfig
 
     Customizations.add_member(:web_acl, Shapes::ShapeRef.new(shape: WebAclCustomization, location_name: "WebAcl"))

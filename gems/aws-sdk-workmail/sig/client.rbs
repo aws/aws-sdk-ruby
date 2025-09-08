@@ -1056,7 +1056,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#put_email_monitoring_configuration-instance_method
       def put_email_monitoring_configuration: (
                                                 organization_id: ::String,
-                                                role_arn: ::String,
+                                                ?role_arn: ::String,
                                                 log_group_arn: ::String
                                               ) -> _PutEmailMonitoringConfigurationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailMonitoringConfigurationResponseSuccess

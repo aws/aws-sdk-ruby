@@ -102,8 +102,8 @@ module Aws::Notifications
     #   The Amazon Resource Name (ARN) of the Channel to associate with the
     #   `NotificationConfiguration`.
     #
-    #   Supported ARNs include Chatbot, the Console Mobile Application, and
-    #   notifications-contacts.
+    #   Supported ARNs include Amazon Q Developer in chat applications, the
+    #   Console Mobile Application, and notifications-contacts.
     #   @return [String]
     #
     # @!attribute [rw] notification_configuration_arn
@@ -152,8 +152,8 @@ module Aws::Notifications
     #   The Amazon Resource Name (ARN) of the Channel to associate with the
     #   `ManagedNotificationConfiguration`.
     #
-    #   Supported ARNs include Chatbot, the Console Mobile Application, and
-    #   email (notifications-contacts).
+    #   Supported ARNs include Amazon Q Developer in chat applications, the
+    #   Console Mobile Application, and email (notifications-contacts).
     #   @return [String]
     #
     # @!attribute [rw] managed_notification_configuration_arn
@@ -174,6 +174,28 @@ module Aws::Notifications
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/AssociateManagedNotificationAdditionalChannelResponse AWS API Documentation
     #
     class AssociateManagedNotificationAdditionalChannelResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] organizational_unit_id
+    #   The unique identifier of the organizational unit to associate.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the notification configuration to
+    #   associate with the organizational unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/AssociateOrganizationalUnitRequest AWS API Documentation
+    #
+    class AssociateOrganizationalUnitRequest < Struct.new(
+      :organizational_unit_id,
+      :notification_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/AssociateOrganizationalUnitResponse AWS API Documentation
+    #
+    class AssociateOrganizationalUnitResponse < Aws::EmptyStructure; end
 
     # Updating or deleting a resource can cause an inconsistent state.
     #
@@ -500,6 +522,28 @@ module Aws::Notifications
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/DisassociateManagedNotificationAdditionalChannelResponse AWS API Documentation
     #
     class DisassociateManagedNotificationAdditionalChannelResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] organizational_unit_id
+    #   The unique identifier of the organizational unit to disassociate.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the notification configuration to
+    #   disassociate from the organizational unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/DisassociateOrganizationalUnitRequest AWS API Documentation
+    #
+    class DisassociateOrganizationalUnitRequest < Struct.new(
+      :organizational_unit_id,
+      :notification_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/DisassociateOrganizationalUnitResponse AWS API Documentation
+    #
+    class DisassociateOrganizationalUnitResponse < Aws::EmptyStructure; end
 
     # @api private
     #
@@ -944,6 +988,11 @@ module Aws::Notifications
     #       ^
     #   @return [String]
     #
+    # @!attribute [rw] subtype
+    #   The subtype of the notification configuration returned in the
+    #   response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/GetNotificationConfigurationResponse AWS API Documentation
     #
     class GetNotificationConfigurationResponse < Struct.new(
@@ -952,7 +1001,8 @@ module Aws::Notifications
       :description,
       :status,
       :creation_time,
-      :aggregation_duration)
+      :aggregation_duration,
+      :subtype)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1353,6 +1403,63 @@ module Aws::Notifications
       include Aws::Structure
     end
 
+    # @!attribute [rw] notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the notification configuration
+    #   used to filter the member accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   values are 1-100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. Use the value returned in
+    #   the previous response.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_account
+    #   The member account identifier used to filter the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status used to filter the member accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The organizational unit ID used to filter the member accounts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListMemberAccountsRequest AWS API Documentation
+    #
+    class ListMemberAccountsRequest < Struct.new(
+      :notification_configuration_arn,
+      :max_results,
+      :next_token,
+      :member_account,
+      :status,
+      :organizational_unit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] member_accounts
+    #   The list of member accounts that match the specified criteria.
+    #   @return [Array<Types::MemberAccount>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListMemberAccountsResponse AWS API Documentation
+    #
+    class ListMemberAccountsResponse < Struct.new(
+      :member_accounts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] event_rule_source
     #   The matched event source.
     #
@@ -1399,6 +1506,11 @@ module Aws::Notifications
     #       * Only `GET` and `LIST` calls can be run.
     #   @return [String]
     #
+    # @!attribute [rw] subtype
+    #   The subtype used to filter the notification configurations in the
+    #   request.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned in this call. Defaults
     #   to 20.
@@ -1415,6 +1527,7 @@ module Aws::Notifications
       :event_rule_source,
       :channel_arn,
       :status,
+      :subtype,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -1485,6 +1598,11 @@ module Aws::Notifications
     #   a previous `ListEventRules` call. Next token uses Base64 encoding.
     #   @return [String]
     #
+    # @!attribute [rw] organizational_unit_id
+    #   The unique identifier of the organizational unit used to filter
+    #   notification events.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListNotificationEventsRequest AWS API Documentation
     #
     class ListNotificationEventsRequest < Struct.new(
@@ -1495,7 +1613,8 @@ module Aws::Notifications
       :include_child_events,
       :aggregate_notification_event_arn,
       :max_results,
-      :next_token)
+      :next_token,
+      :organizational_unit_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1554,6 +1673,49 @@ module Aws::Notifications
       include Aws::Structure
     end
 
+    # @!attribute [rw] notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the notification configuration
+    #   used to filter the organizational units.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of organizational units to return in a single
+    #   call. Valid values are 1-100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. Use the value returned in
+    #   the previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListOrganizationalUnitsRequest AWS API Documentation
+    #
+    class ListOrganizationalUnitsRequest < Struct.new(
+      :notification_configuration_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organizational_units
+    #   The list of organizational units that match the specified criteria.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for the next page of results. If there are no
+    #   additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListOrganizationalUnitsResponse AWS API Documentation
+    #
+    class ListOrganizationalUnitsResponse < Struct.new(
+      :organizational_units,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) to use to list tags.
     #   @return [String]
@@ -1604,8 +1766,8 @@ module Aws::Notifications
     #       ^
     #     * `CHATBOT`
     #
-    #       * Delivers notifications through Chatbot to collaboration
-    #         platforms (Slack, Chime).
+    #       * Delivers notifications through Amazon Q Developer in chat
+    #         applications to collaboration platforms (Slack, Chime).
     #
     #       ^
     #     * `EMAIL`
@@ -2065,8 +2227,6 @@ module Aws::Notifications
     #   @return [Time]
     #
     # @!attribute [rw] notification_event
-    #   A short summary of a `ManagedNotificationEvent`. This is only used
-    #   when listing managed notification events.
     #   @return [Types::ManagedNotificationEventSummary]
     #
     # @!attribute [rw] aggregation_event_type
@@ -2264,6 +2424,42 @@ module Aws::Notifications
       include Aws::Structure
     end
 
+    # Contains information about a member account.
+    #
+    # @!attribute [rw] notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the notification configuration
+    #   associated with the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status of the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The unique identifier of the organizational unit containing the
+    #   member account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/MemberAccount AWS API Documentation
+    #
+    class MemberAccount < Struct.new(
+      :notification_configuration_arn,
+      :account_id,
+      :status,
+      :status_reason,
+      :organizational_unit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the components of a notification message.
     #
     # @!attribute [rw] headline
@@ -2272,8 +2468,8 @@ module Aws::Notifications
     #   @return [String]
     #
     # @!attribute [rw] paragraph_summary
-    #   A paragraph long or multiple sentence summary. For example, Chatbot
-    #   notifications.
+    #   A paragraph long or multiple sentence summary. For example, Amazon Q
+    #   Developer in chat applications notifications.
     #   @return [String]
     #
     # @!attribute [rw] complete_description
@@ -2362,6 +2558,10 @@ module Aws::Notifications
     #       ^
     #   @return [String]
     #
+    # @!attribute [rw] subtype
+    #   The subtype of the notification configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/NotificationConfigurationStructure AWS API Documentation
     #
     class NotificationConfigurationStructure < Struct.new(
@@ -2370,7 +2570,8 @@ module Aws::Notifications
       :description,
       :status,
       :creation_time,
-      :aggregation_duration)
+      :aggregation_duration,
+      :subtype)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2506,6 +2707,11 @@ module Aws::Notifications
     #   A list of media elements.
     #   @return [Array<Types::MediaElement>]
     #
+    # @!attribute [rw] organizational_unit_id
+    #   The unique identifier of the organizational unit associated with the
+    #   notification event.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/NotificationEvent AWS API Documentation
     #
     class NotificationEvent < Struct.new(
@@ -2523,7 +2729,8 @@ module Aws::Notifications
       :start_time,
       :end_time,
       :text_parts,
-      :media)
+      :media,
+      :organizational_unit_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2587,6 +2794,11 @@ module Aws::Notifications
     #   Provides an aggregated summary data for notification events.
     #   @return [Types::AggregationSummary]
     #
+    # @!attribute [rw] organizational_unit_id
+    #   The unique identifier of the organizational unit in the notification
+    #   event overview.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/NotificationEventOverview AWS API Documentation
     #
     class NotificationEventOverview < Struct.new(
@@ -2597,7 +2809,8 @@ module Aws::Notifications
       :notification_event,
       :aggregation_event_type,
       :aggregate_notification_event_arn,
-      :aggregation_summary)
+      :aggregation_summary,
+      :organizational_unit_id)
       SENSITIVE = []
       include Aws::Structure
     end

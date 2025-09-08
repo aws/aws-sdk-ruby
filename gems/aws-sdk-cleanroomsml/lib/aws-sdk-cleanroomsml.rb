@@ -55,7 +55,7 @@ module Aws::CleanRoomsML
   autoload :EndpointProvider, 'aws-sdk-cleanroomsml/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cleanroomsml/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

@@ -4029,7 +4029,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] device_name
-    #   The device name (for example, `/dev/sdh` or `xvdh`).
+    #   The device name. For available device names, see [Device names for
+    #   volumes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html
     #   @return [String]
     #
     # @!attribute [rw] virtual_name
@@ -23978,6 +23983,12 @@ module Aws::EC2
     #   * `dedicated-hosts-supported` - Indicates whether the instance type
     #     supports Dedicated Hosts. (`true` \| `false`)
     #
+    #   * `ebs-info.attachment-limit-type` - The type of Amazon EBS volume
+    #     attachment limit (`shared` \| `dedicated`).
+    #
+    #   * `ebs-info.maximum-ebs-attachments` - The maximum number of Amazon
+    #     EBS volumes that can be attached to the instance type.
+    #
     #   * `ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps` - The
     #     baseline bandwidth performance for an EBS-optimized instance type,
     #     in Mbps.
@@ -31984,9 +31995,6 @@ module Aws::EC2
     #
     #   * `resource-configuration-group-arn` - The Amazon Resource Name
     #     (ARN) of the resource configuration of type GROUP.
-    #
-    #   * `service-network-resource-association-id` - The ID of the
-    #     association.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -35249,13 +35257,37 @@ module Aws::EC2
     #   Indicates whether non-volatile memory express (NVMe) is supported.
     #   @return [String]
     #
+    # @!attribute [rw] maximum_ebs_attachments
+    #   Indicates the maximum number of Amazon EBS volumes that can be
+    #   attached to the instance type. For more information, see [Amazon EBS
+    #   volume limits for Amazon EC2 instances][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attachment_limit_type
+    #   Indicates whether the instance type features a shared or dedicated
+    #   Amazon EBS volume attachment limit. For more information, see
+    #   [Amazon EBS volume limits for Amazon EC2 instances][1] in the
+    #   *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInfo AWS API Documentation
     #
     class EbsInfo < Struct.new(
       :ebs_optimized_support,
       :encryption_support,
       :ebs_optimized_info,
-      :nvme_support)
+      :nvme_support,
+      :maximum_ebs_attachments,
+      :attachment_limit_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45763,7 +45795,7 @@ module Aws::EC2
     # Describes a block device mapping.
     #
     # @!attribute [rw] device_name
-    #   The device name (for example, `/dev/sdh` or `xvdh`).
+    #   The device name.
     #   @return [String]
     #
     # @!attribute [rw] ebs
@@ -45783,7 +45815,12 @@ module Aws::EC2
     # Describes a block device mapping entry.
     #
     # @!attribute [rw] device_name
-    #   The device name (for example, `/dev/sdh` or `xvdh`).
+    #   The device name. For available device names, see [Device names for
+    #   volumes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html
     #   @return [String]
     #
     # @!attribute [rw] ebs
@@ -57453,8 +57490,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] default_route_table_propagation
-    #   Enable or disable automatic propagation of routes to the default
-    #   propagation route table.
+    #   Indicates whether resource attachments automatically propagate
+    #   routes to the default propagation route table. Enabled by default.
+    #   If `defaultRouteTablePropagation` is set to `enable`, Amazon Web
+    #   Services Transit Gateway will create the default transit gateway
+    #   route table.
     #   @return [String]
     #
     # @!attribute [rw] propagation_default_route_table_id
@@ -62186,10 +62226,9 @@ module Aws::EC2
     # @!attribute [rw] availability_zone_id
     #   The ID of the Availability Zone of the instance.
     #
-    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
-    #   but not both. If neither is specified, Amazon EC2 automatically
-    #   selects an Availability Zone based on the load balancing criteria
-    #   for the Region.
+    #   On input, you can specify `AvailabilityZone` or
+    #   `AvailabilityZoneId`, but not both. If you specify neither one,
+    #   Amazon EC2 automatically selects an Availability Zone for you.
     #
     #   This parameter is not supported for [CreateFleet][1].
     #
@@ -62211,8 +62250,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   The name of the placement group that the instance is in. If you
-    #   specify `GroupName`, you can't specify `GroupId`.
+    #   The name of the placement group that the instance is in.
+    #
+    #   On input, you can specify `GroupId` or `GroupName`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] partition_number
@@ -62259,8 +62299,8 @@ module Aws::EC2
     # @!attribute [rw] host_resource_group_arn
     #   The ARN of the host resource group in which to launch the instances.
     #
-    #   If you specify this parameter, either omit the **Tenancy** parameter
-    #   or set it to `host`.
+    #   On input, if you specify this parameter, either omit the **Tenancy**
+    #   parameter or set it to `host`.
     #
     #   This parameter is not supported for [CreateFleet][1].
     #
@@ -62270,17 +62310,17 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] group_id
-    #   The ID of the placement group that the instance is in. If you
-    #   specify `GroupId`, you can't specify `GroupName`.
+    #   The ID of the placement group that the instance is in.
+    #
+    #   On input, you can specify `GroupId` or `GroupName`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone of the instance.
     #
-    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
-    #   but not both. If neither is specified, Amazon EC2 automatically
-    #   selects an Availability Zone based on the load balancing criteria
-    #   for the Region.
+    #   On input, you can specify `AvailabilityZone` or
+    #   `AvailabilityZoneId`, but not both. If you specify neither one,
+    #   Amazon EC2 automatically selects an Availability Zone for you.
     #
     #   This parameter is not supported for [CreateFleet][1].
     #
@@ -75077,10 +75117,10 @@ module Aws::EC2
     #
     # @!attribute [rw] default_route_table_association
     #   Indicates whether resource attachments are automatically associated
-    #   with the default association route table. Enabled by default. If
-    #   `defaultRouteTableAssociation` is set to `enable`, Amazon Web
-    #   Services Transit Gateway will create the default transit gateway
-    #   route table.
+    #   with the default association route table. Enabled by default. Either
+    #   `defaultRouteTableAssociation` or `defaultRouteTablePropagation`
+    #   must be set to `enable` for Amazon Web Services Transit Gateway to
+    #   create the default transit gateway route table.
     #   @return [String]
     #
     # @!attribute [rw] association_default_route_table_id
@@ -75091,8 +75131,8 @@ module Aws::EC2
     #   Indicates whether resource attachments automatically propagate
     #   routes to the default propagation route table. Enabled by default.
     #   If `defaultRouteTablePropagation` is set to `enable`, Amazon Web
-    #   Services Transit Gateway will create the default transit gateway
-    #   route table.
+    #   Services Transit Gateway creates the default transit gateway route
+    #   table.
     #   @return [String]
     #
     # @!attribute [rw] propagation_default_route_table_id

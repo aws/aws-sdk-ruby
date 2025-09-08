@@ -1339,7 +1339,7 @@ module Aws::WorkMail
     PutAccessControlRuleResponse.struct_class = Types::PutAccessControlRuleResponse
 
     PutEmailMonitoringConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
-    PutEmailMonitoringConfigurationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    PutEmailMonitoringConfigurationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     PutEmailMonitoringConfigurationRequest.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "LogGroupArn"))
     PutEmailMonitoringConfigurationRequest.struct_class = Types::PutEmailMonitoringConfigurationRequest
 
@@ -2669,6 +2669,7 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: MailDomainStateException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:reset_password, Seahorse::Model::Operation.new.tap do |o|

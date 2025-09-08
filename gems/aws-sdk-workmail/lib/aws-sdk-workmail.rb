@@ -54,7 +54,7 @@ module Aws::WorkMail
   autoload :EndpointProvider, 'aws-sdk-workmail/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workmail/endpoints'
 
-  GEM_VERSION = '1.89.0'
+  GEM_VERSION = '1.90.0'
 
 end
 

@@ -231,7 +231,7 @@ module Aws::CloudFormation
     # The detailed status of the resource or stack. If
     # `CONFIGURATION_COMPLETE` is present, the resource or resource
     # configuration phase has completed and the stabilization of the
-    # resources is in progress. The stack sets `CONFIGURATION_COMPLETE` when
+    # resources is in progress. The StackSets `CONFIGURATION_COMPLETE` when
     # all of the resources in the stack have reached that event. For more
     # information, see [Understand CloudFormation stack creation events][1]
     # in the *CloudFormation User Guide*.
@@ -654,6 +654,14 @@ module Aws::CloudFormation
     #   Determines what action will be taken if stack creation fails. This
     #   must be one of: `DO_NOTHING`, `ROLLBACK`, or `DELETE`. You can specify
     #   either `OnFailure` or `DisableRollback`, but not both.
+    #
+    #   <note markdown="1"> Although the default setting is `ROLLBACK`, there is one exception.
+    #   This exception occurs when a StackSet attempts to deploy a stack
+    #   instance and the stack instance fails to create successfully. In this
+    #   case, the `CreateStack` call overrides the default setting and sets
+    #   the value of `OnFailure` to `DELETE`.
+    #
+    #    </note>
     #
     #   Default: `ROLLBACK`
     # @option options [String] :stack_policy_body

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2025-09-03)
+------------------
+
+* Feature - Adding an optional field IpAddressType in CustomOriginConfig
+
 1.127.0 (2025-08-26)
 ------------------
 

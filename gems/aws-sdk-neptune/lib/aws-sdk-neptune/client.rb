@@ -1739,7 +1739,19 @@ module Aws::Neptune
     #   *(Not supported by Neptune)*
     #
     # @option params [Boolean] :publicly_accessible
-    #   This flag should no longer be used.
+    #   Indicates whether the DB instance is publicly accessible.
+    #
+    #   When the DB instance is publicly accessible and you connect from
+    #   outside of the DB instance's virtual private cloud (VPC), its Domain
+    #   Name System (DNS) endpoint resolves to the public IP address. When you
+    #   connect from within the same VPC as the DB instance, the endpoint
+    #   resolves to the private IP address. Access to the DB instance is
+    #   ultimately controlled by the security group it uses. That public
+    #   access isn't permitted if the security group assigned to the DB
+    #   cluster doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to assign to the new instance.
@@ -5853,7 +5865,19 @@ module Aws::Neptune
     #   Default: `8182`
     #
     # @option params [Boolean] :publicly_accessible
-    #   This flag should no longer be used.
+    #   Indicates whether the DB instance is publicly accessible.
+    #
+    #   When the DB instance is publicly accessible and you connect from
+    #   outside of the DB instance's virtual private cloud (VPC), its Domain
+    #   Name System (DNS) endpoint resolves to the public IP address. When you
+    #   connect from within the same VPC as the DB instance, the endpoint
+    #   resolves to the private IP address. Access to the DB instance is
+    #   ultimately controlled by the security group it uses. That public
+    #   access isn't permitted if the security group assigned to the DB
+    #   cluster doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
     #
     # @option params [String] :monitoring_role_arn
     #   The ARN for the IAM role that permits Neptune to send enhanced
@@ -7757,7 +7781,7 @@ module Aws::Neptune
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

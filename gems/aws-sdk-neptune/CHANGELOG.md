@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2025-09-02)
+------------------
+
+* Feature - Removed the deprecated marker from publiclyAccessible parameter from DbInstance, CreateDbInstance and ModifyDbInstance and added relevant usage information for the parameter.
+
 1.91.0 (2025-08-27)
 ------------------
 

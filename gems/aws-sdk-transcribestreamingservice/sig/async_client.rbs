@@ -79,6 +79,11 @@ module Aws
         def vocabulary_filter_name: () -> ::String
         def vocabulary_filter_method: () -> ("remove" | "mask" | "tag")
         def language_model_name: () -> ::String
+        def identify_language: () -> bool
+        def language_options: () -> ::String
+        def preferred_language: () -> ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
+        def vocabulary_names: () -> ::String
+        def vocabulary_filter_names: () -> ::String
         def enable_partial_results_stabilization: () -> bool
         def partial_results_stability: () -> ("high" | "medium" | "low")
         def content_identification_type: () -> ("PII")
@@ -87,7 +92,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeStreamingService/AsyncClient.html#start_call_analytics_stream_transcription-instance_method
       def start_call_analytics_stream_transcription: (
-                                                       language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR"),
+                                                       ?language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR"),
                                                        media_sample_rate_hertz: ::Integer,
                                                        media_encoding: ("pcm" | "ogg-opus" | "flac"),
                                                        ?vocabulary_name: ::String,
@@ -97,6 +102,11 @@ module Aws
                                                        ?vocabulary_filter_name: ::String,
                                                        ?vocabulary_filter_method: ("remove" | "mask" | "tag"),
                                                        ?language_model_name: ::String,
+                                                       ?identify_language: bool,
+                                                       ?language_options: ::String,
+                                                       ?preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR"),
+                                                       ?vocabulary_names: ::String,
+                                                       ?vocabulary_filter_names: ::String,
                                                        ?enable_partial_results_stabilization: bool,
                                                        ?partial_results_stability: ("high" | "medium" | "low"),
                                                        ?content_identification_type: ("PII"),

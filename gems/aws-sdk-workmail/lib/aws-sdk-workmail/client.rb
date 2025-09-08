@@ -3797,9 +3797,10 @@ module Aws::WorkMail
     #   The ID of the organization for which the email monitoring
     #   configuration is set.
     #
-    # @option params [required, String] :role_arn
+    # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM Role associated with the
-    #   email monitoring configuration.
+    #   email monitoring configuration. If absent, the IAM Role Arn of
+    #   AWSServiceRoleForAmazonWorkMailEvents will be used.
     #
     # @option params [required, String] :log_group_arn
     #   The Amazon Resource Name (ARN) of the CloudWatch Log group associated
@@ -3811,7 +3812,7 @@ module Aws::WorkMail
     #
     #   resp = client.put_email_monitoring_configuration({
     #     organization_id: "OrganizationId", # required
-    #     role_arn: "RoleArn", # required
+    #     role_arn: "RoleArn",
     #     log_group_arn: "LogGroupArn", # required
     #   })
     #
@@ -4898,7 +4899,7 @@ module Aws::WorkMail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -140,7 +140,11 @@ module Aws
                                     http_method: ::String,
                                     url_path: ::String,
                                     version: ::Integer,
-                                    attributes: Hash[::String, ::String]?
+                                    attributes: Hash[::String, ::String]?,
+                                    sampling_rate_boost: {
+                                      max_rate: ::Float,
+                                      cooldown_window_minutes: ::Integer
+                                    }?
                                   },
                                   ?tags: Array[
                                     {
@@ -323,6 +327,7 @@ module Aws
         def sampling_target_documents: () -> ::Array[Types::SamplingTargetDocument]
         def last_rule_modification: () -> ::Time
         def unprocessed_statistics: () -> ::Array[Types::UnprocessedStatistics]
+        def unprocessed_boost_statistics: () -> ::Array[Types::UnprocessedStatistics]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay/Client.html#get_sampling_targets-instance_method
       def get_sampling_targets: (
@@ -334,6 +339,16 @@ module Aws
                                       request_count: ::Integer,
                                       sampled_count: ::Integer,
                                       borrow_count: ::Integer?
+                                    },
+                                  ],
+                                  ?sampling_boost_statistics_documents: Array[
+                                    {
+                                      rule_name: ::String,
+                                      service_name: ::String,
+                                      timestamp: ::Time,
+                                      anomaly_count: ::Integer,
+                                      total_count: ::Integer,
+                                      sampled_anomaly_count: ::Integer
                                     },
                                   ]
                                 ) -> _GetSamplingTargetsResponseSuccess
@@ -606,7 +621,11 @@ module Aws
                                     service_type: ::String?,
                                     http_method: ::String?,
                                     url_path: ::String?,
-                                    attributes: Hash[::String, ::String]?
+                                    attributes: Hash[::String, ::String]?,
+                                    sampling_rate_boost: {
+                                      max_rate: ::Float,
+                                      cooldown_window_minutes: ::Integer
+                                    }?
                                   }
                                 ) -> _UpdateSamplingRuleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSamplingRuleResponseSuccess

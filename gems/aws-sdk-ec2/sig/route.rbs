@@ -54,10 +54,10 @@ module Aws
       def network_interface_id: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#origin-instance_method
-      def origin: () -> ("CreateRouteTable" | "CreateRoute" | "EnableVgwRoutePropagation")
+      def origin: () -> ("CreateRouteTable" | "CreateRoute" | "EnableVgwRoutePropagation" | "Advertisement")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#state-instance_method
-      def state: () -> ("active" | "blackhole")
+      def state: () -> ("active" | "blackhole" | "filtered")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#vpc_peering_connection_id-instance_method
       def vpc_peering_connection_id: () -> ::String

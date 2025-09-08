@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2025-09-05)
+------------------
+
+* Feature - Documentation-only update to add AccountingStorageEnforce to SlurmCustomSetting.
+
 1.29.0 (2025-08-28)
 ------------------
 

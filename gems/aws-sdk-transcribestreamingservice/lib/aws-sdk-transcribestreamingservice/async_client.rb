@@ -418,7 +418,7 @@ module Aws::TranscribeStreamingService
     #
     # The following parameters are required:
     #
-    # * `language-code`
+    # * `language-code` or `identify-language`
     #
     # * `media-encoding`
     #
@@ -432,7 +432,7 @@ module Aws::TranscribeStreamingService
     # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html
     # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html
     #
-    # @option params [required, String] :language_code
+    # @option params [String] :language_code
     #   Specify the language code that represents the language spoken in your
     #   audio.
     #
@@ -527,6 +527,88 @@ module Aws::TranscribeStreamingService
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html
     #
+    # @option params [Boolean] :identify_language
+    #   Enables automatic language identification for your Call Analytics
+    #   transcription.
+    #
+    #   If you include `IdentifyLanguage`, you must include a list of language
+    #   codes, using `LanguageOptions`, that you think may be present in your
+    #   audio stream. You must provide a minimum of two language selections.
+    #
+    #   You can also include a preferred language using `PreferredLanguage`.
+    #   Adding a preferred language can help Amazon Transcribe identify the
+    #   language faster than if you omit this parameter.
+    #
+    #   Note that you must include either `LanguageCode` or `IdentifyLanguage`
+    #   in your request. If you include both parameters, your transcription
+    #   job fails.
+    #
+    # @option params [String] :language_options
+    #   Specify two or more language codes that represent the languages you
+    #   think may be present in your media.
+    #
+    #   Including language options can improve the accuracy of language
+    #   identification.
+    #
+    #   If you include `LanguageOptions` in your request, you must also
+    #   include `IdentifyLanguage`.
+    #
+    #   For a list of languages supported with Call Analytics streaming, refer
+    #   to the [Supported languages][1] table.
+    #
+    #   You can only include one language dialect per language per stream. For
+    #   example, you cannot include `en-US` and `en-AU` in the same request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
+    #
+    # @option params [String] :preferred_language
+    #   Specify a preferred language from the subset of languages codes you
+    #   specified in `LanguageOptions`.
+    #
+    #   You can only use this parameter if you've included `IdentifyLanguage`
+    #   and `LanguageOptions` in your request.
+    #
+    # @option params [String] :vocabulary_names
+    #   Specify the names of the custom vocabularies that you want to use when
+    #   processing your Call Analytics transcription. Note that vocabulary
+    #   names are case sensitive.
+    #
+    #   If the custom vocabulary's language doesn't match the identified
+    #   media language, it won't be applied to the transcription.
+    #
+    #   This parameter is only intended for use **with** the
+    #   `IdentifyLanguage` parameter. If you're **not** including
+    #   `IdentifyLanguage` in your request and want to use a custom vocabulary
+    #   with your transcription, use the `VocabularyName` parameter instead.
+    #
+    #   For more information, see [Custom vocabularies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
+    #
+    # @option params [String] :vocabulary_filter_names
+    #   Specify the names of the custom vocabulary filters that you want to
+    #   use when processing your Call Analytics transcription. Note that
+    #   vocabulary filter names are case sensitive.
+    #
+    #   These filters serve to customize the transcript output.
+    #
+    #   This parameter is only intended for use **with** the
+    #   `IdentifyLanguage` parameter. If you're **not** including
+    #   `IdentifyLanguage` in your request and want to use a custom vocabulary
+    #   filter with your transcription, use the `VocabularyFilterName`
+    #   parameter instead.
+    #
+    #   For more information, see [Using vocabulary filtering with unwanted
+    #   words][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
+    #
     # @option params [Boolean] :enable_partial_results_stabilization
     #   Enables partial result stabilization for your transcription. Partial
     #   result stabilization can reduce latency in your output, but may impact
@@ -618,6 +700,11 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#vocabulary_filter_name #vocabulary_filter_name} => String
     #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#vocabulary_filter_method #vocabulary_filter_method} => String
     #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#language_model_name #language_model_name} => String
+    #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#identify_language #identify_language} => Boolean
+    #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#language_options #language_options} => String
+    #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#preferred_language #preferred_language} => String
+    #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#vocabulary_names #vocabulary_names} => String
+    #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#vocabulary_filter_names #vocabulary_filter_names} => String
     #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#enable_partial_results_stabilization #enable_partial_results_stabilization} => Boolean
     #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#partial_results_stability #partial_results_stability} => String
     #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#content_identification_type #content_identification_type} => String
@@ -730,7 +817,7 @@ module Aws::TranscribeStreamingService
     # @example Request syntax with placeholder values
     #
     #   async_resp = async_client.start_call_analytics_stream_transcription({
-    #     language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #     language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
     #     vocabulary_name: "VocabularyName",
@@ -739,6 +826,11 @@ module Aws::TranscribeStreamingService
     #     vocabulary_filter_name: "VocabularyFilterName",
     #     vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #     language_model_name: "ModelName",
+    #     identify_language: false,
+    #     language_options: "LanguageOptions",
+    #     preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #     vocabulary_names: "VocabularyNames",
+    #     vocabulary_filter_names: "VocabularyFilterNames",
     #     enable_partial_results_stabilization: false,
     #     partial_results_stability: "high", # accepts high, medium, low
     #     content_identification_type: "PII", # accepts PII
@@ -788,6 +880,10 @@ module Aws::TranscribeStreamingService
     #   event.issues_detected #=> Array
     #   event.issues_detected[0].character_offsets.begin #=> Integer
     #   event.issues_detected[0].character_offsets.end #=> Integer
+    #   event.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   event.language_identification #=> Array
+    #   event.language_identification[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   event.language_identification[0].score #=> Float
     #
     #   # For :category_event event available at #on_category_event_event callback and response eventstream enumerator:
     #   event.matched_categories #=> Array
@@ -815,6 +911,11 @@ module Aws::TranscribeStreamingService
     #   resp.vocabulary_filter_name #=> String
     #   resp.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
     #   resp.language_model_name #=> String
+    #   resp.identify_language #=> Boolean
+    #   resp.language_options #=> String
+    #   resp.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   resp.vocabulary_names #=> String
+    #   resp.vocabulary_filter_names #=> String
     #   resp.enable_partial_results_stabilization #=> Boolean
     #   resp.partial_results_stability #=> String, one of "high", "medium", "low"
     #   resp.content_identification_type #=> String, one of "PII"
@@ -2090,7 +2191,7 @@ module Aws::TranscribeStreamingService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

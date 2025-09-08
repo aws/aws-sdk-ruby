@@ -363,7 +363,8 @@ module Aws
                     ?db_system_id: ::String,
                     ?dedicated_log_volume: bool,
                     ?multi_tenant: bool,
-                    ?engine_lifecycle_support: ::String
+                    ?engine_lifecycle_support: ::String,
+                    ?master_user_authentication_type: ("password" | "iam-db-auth")
                   ) -> DBInstance
                 | (?Hash[Symbol, untyped]) -> DBInstance
 
@@ -518,7 +519,8 @@ module Aws
                     ?master_user_secret_kms_key_id: ::String,
                     ?engine: ::String,
                     ?dedicated_log_volume: bool,
-                    ?multi_tenant: bool
+                    ?multi_tenant: bool,
+                    ?master_user_authentication_type: ("password" | "iam-db-auth")
                   ) -> DBInstance
                 | (?Hash[Symbol, untyped]) -> DBInstance
 

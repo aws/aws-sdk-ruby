@@ -1,9 +1,26 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListNotificationHubsSuccess",
-    "operationName" : "ListNotificationHubs",
+    "id" : "ListNotificationConfigurationsSuccess",
+    "operationName" : "ListNotificationConfigurations",
     "input" : {
+      "status" : "ACTIVE",
+      "maxResults" : 3
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListNotificationEventsSuccess",
+    "operationName" : "ListNotificationEvents",
+    "input" : {
+      "includeChildEvents" : true,
       "maxResults" : 3
     },
     "expectation" : {
@@ -31,26 +48,9 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListNotificationConfigurationsSuccess",
-    "operationName" : "ListNotificationConfigurations",
+    "id" : "ListNotificationHubsSuccess",
+    "operationName" : "ListNotificationHubs",
     "input" : {
-      "status" : "ACTIVE",
-      "maxResults" : 3
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListNotificationEventsSuccess",
-    "operationName" : "ListNotificationEvents",
-    "input" : {
-      "includeChildEvents" : true,
       "maxResults" : 3
     },
     "expectation" : {

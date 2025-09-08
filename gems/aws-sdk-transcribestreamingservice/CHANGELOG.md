@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2025-09-03)
+------------------
+
+* Feature - This release adds support for automatic language identification in AWS Transcribe Call Analytics
+
 1.89.0 (2025-08-26)
 ------------------
 

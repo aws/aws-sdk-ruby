@@ -305,7 +305,8 @@ module Aws
                                              items: Array[("SSLv3" | "TLSv1" | "TLSv1.1" | "TLSv1.2")]
                                            }?,
                                            origin_read_timeout: ::Integer?,
-                                           origin_keepalive_timeout: ::Integer?
+                                           origin_keepalive_timeout: ::Integer?,
+                                           ip_address_type: ("ipv4" | "ipv6" | "dualstack")?
                                          }?,
                                          vpc_origin_config: {
                                            vpc_origin_id: ::String,
@@ -653,7 +654,8 @@ module Aws
                                                          items: Array[("SSLv3" | "TLSv1" | "TLSv1.1" | "TLSv1.2")]
                                                        }?,
                                                        origin_read_timeout: ::Integer?,
-                                                       origin_keepalive_timeout: ::Integer?
+                                                       origin_keepalive_timeout: ::Integer?,
+                                                       ip_address_type: ("ipv4" | "ipv6" | "dualstack")?
                                                      }?,
                                                      vpc_origin_config: {
                                                        vpc_origin_id: ::String,
@@ -2579,7 +2581,8 @@ module Aws
                                              items: Array[("SSLv3" | "TLSv1" | "TLSv1.1" | "TLSv1.2")]
                                            }?,
                                            origin_read_timeout: ::Integer?,
-                                           origin_keepalive_timeout: ::Integer?
+                                           origin_keepalive_timeout: ::Integer?,
+                                           ip_address_type: ("ipv4" | "ipv6" | "dualstack")?
                                          }?,
                                          vpc_origin_config: {
                                            vpc_origin_id: ::String,

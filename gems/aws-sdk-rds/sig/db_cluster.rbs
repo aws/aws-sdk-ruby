@@ -357,6 +357,7 @@ module Aws
                     ?enable_local_write_forwarding: bool,
                     ?ca_certificate_identifier: ::String,
                     ?engine_lifecycle_support: ::String,
+                    ?master_user_authentication_type: ("password" | "iam-db-auth"),
                     ?source_region: ::String
                   ) -> DBCluster
                 | (?Hash[Symbol, untyped]) -> DBCluster
@@ -447,7 +448,8 @@ module Aws
                     ?enable_local_write_forwarding: bool,
                     ?aws_backup_recovery_point_arn: ::String,
                     ?enable_limitless_database: bool,
-                    ?ca_certificate_identifier: ::String
+                    ?ca_certificate_identifier: ::String,
+                    ?master_user_authentication_type: ("password" | "iam-db-auth")
                   ) -> DBCluster
                 | (?Hash[Symbol, untyped]) -> DBCluster
 

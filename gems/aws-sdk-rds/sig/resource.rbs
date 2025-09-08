@@ -158,6 +158,7 @@ module Aws
                                ?enable_local_write_forwarding: bool,
                                ?ca_certificate_identifier: ::String,
                                ?engine_lifecycle_support: ::String,
+                               ?master_user_authentication_type: ("password" | "iam-db-auth"),
                                ?source_region: ::String
                              ) -> DBCluster
                            | (?Hash[Symbol, untyped]) -> DBCluster
@@ -251,7 +252,8 @@ module Aws
                                 ?db_system_id: ::String,
                                 ?dedicated_log_volume: bool,
                                 ?multi_tenant: bool,
-                                ?engine_lifecycle_support: ::String
+                                ?engine_lifecycle_support: ::String,
+                                ?master_user_authentication_type: ("password" | "iam-db-auth")
                               ) -> DBInstance
                             | (?Hash[Symbol, untyped]) -> DBInstance
 

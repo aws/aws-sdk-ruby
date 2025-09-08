@@ -346,6 +346,7 @@ module Aws::XRay
 
     class GetSamplingTargetsRequest
       attr_accessor sampling_statistics_documents: ::Array[Types::SamplingStatisticsDocument]
+      attr_accessor sampling_boost_statistics_documents: ::Array[Types::SamplingBoostStatisticsDocument]
       SENSITIVE: []
     end
 
@@ -353,6 +354,7 @@ module Aws::XRay
       attr_accessor sampling_target_documents: ::Array[Types::SamplingTargetDocument]
       attr_accessor last_rule_modification: ::Time
       attr_accessor unprocessed_statistics: ::Array[Types::UnprocessedStatistics]
+      attr_accessor unprocessed_boost_statistics: ::Array[Types::UnprocessedStatistics]
       SENSITIVE: []
     end
 
@@ -765,6 +767,28 @@ module Aws::XRay
       SENSITIVE: []
     end
 
+    class SamplingBoost
+      attr_accessor boost_rate: ::Float
+      attr_accessor boost_rate_ttl: ::Time
+      SENSITIVE: []
+    end
+
+    class SamplingBoostStatisticsDocument
+      attr_accessor rule_name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor anomaly_count: ::Integer
+      attr_accessor total_count: ::Integer
+      attr_accessor sampled_anomaly_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SamplingRateBoost
+      attr_accessor max_rate: ::Float
+      attr_accessor cooldown_window_minutes: ::Integer
+      SENSITIVE: []
+    end
+
     class SamplingRule
       attr_accessor rule_name: ::String
       attr_accessor rule_arn: ::String
@@ -779,6 +803,7 @@ module Aws::XRay
       attr_accessor url_path: ::String
       attr_accessor version: ::Integer
       attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor sampling_rate_boost: Types::SamplingRateBoost
       SENSITIVE: []
     end
 
@@ -802,6 +827,7 @@ module Aws::XRay
       attr_accessor http_method: ::String
       attr_accessor url_path: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor sampling_rate_boost: Types::SamplingRateBoost
       SENSITIVE: []
     end
 
@@ -836,6 +862,7 @@ module Aws::XRay
       attr_accessor reservoir_quota: ::Integer
       attr_accessor reservoir_quota_ttl: ::Time
       attr_accessor interval: ::Integer
+      attr_accessor sampling_boost: Types::SamplingBoost
       SENSITIVE: []
     end
 

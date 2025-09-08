@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.556.0 (2025-09-04)
+------------------
+
+* Feature - Add m8i, m8i-flex and i8ge instance types.
+
+1.555.0 (2025-09-02)
+------------------
+
+* Feature - MaximumEbsAttachments and AttachmentLimitType fields added to DescribeInstanceTypesResponse. G6f, Gr6f, R8i, R8i-flex and p5.4xlarge instance types added to InstanceTypes enum.
+
+1.554.0 (2025-08-29)
+------------------
+
+* Feature - Release shows new route types such as filtered and advertisement.
+
 1.553.0 (2025-08-28)
 ------------------
 

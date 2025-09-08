@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2025-09-02)
+------------------
+
+* Feature - Added Org support for notifications:  - `ListMemberAccounts` gets member accounts list, `AssociateOrganizationalUnit` links OU to notification configuration, `DisassociateOrganizationalUnit` removes OU from notification configuration, `ListOrganizationalUnits` shows OUs configured for notifications.
+
 1.12.0 (2025-08-26)
 ------------------
 

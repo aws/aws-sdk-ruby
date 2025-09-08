@@ -803,6 +803,7 @@ module Aws::CloudFormation
     end
 
     class HookResultSummary
+      attr_accessor hook_result_id: ::String
       attr_accessor invocation_point: ("PRE_PROVISION")
       attr_accessor failure_mode: ("FAIL" | "WARN")
       attr_accessor type_name: ::String
@@ -810,6 +811,11 @@ module Aws::CloudFormation
       attr_accessor type_configuration_version_id: ::String
       attr_accessor status: ("HOOK_IN_PROGRESS" | "HOOK_COMPLETE_SUCCEEDED" | "HOOK_COMPLETE_FAILED" | "HOOK_FAILED")
       attr_accessor hook_status_reason: ::String
+      attr_accessor invoked_at: ::Time
+      attr_accessor target_type: ("CHANGE_SET" | "STACK" | "RESOURCE" | "CLOUD_CONTROL")
+      attr_accessor target_id: ::String
+      attr_accessor type_arn: ::String
+      attr_accessor hook_execution_target: ::String
       SENSITIVE: []
     end
 
@@ -882,6 +888,8 @@ module Aws::CloudFormation
     class ListHookResultsInput
       attr_accessor target_type: ("CHANGE_SET" | "STACK" | "RESOURCE" | "CLOUD_CONTROL")
       attr_accessor target_id: ::String
+      attr_accessor type_arn: ::String
+      attr_accessor status: ("HOOK_IN_PROGRESS" | "HOOK_COMPLETE_SUCCEEDED" | "HOOK_COMPLETE_FAILED" | "HOOK_FAILED")
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1532,6 +1540,7 @@ module Aws::CloudFormation
       attr_accessor hook_status: ("HOOK_IN_PROGRESS" | "HOOK_COMPLETE_SUCCEEDED" | "HOOK_COMPLETE_FAILED" | "HOOK_FAILED")
       attr_accessor hook_status_reason: ::String
       attr_accessor hook_invocation_point: ("PRE_PROVISION")
+      attr_accessor hook_invocation_id: ::String
       attr_accessor hook_failure_mode: ("FAIL" | "WARN")
       attr_accessor detailed_status: ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
       SENSITIVE: []

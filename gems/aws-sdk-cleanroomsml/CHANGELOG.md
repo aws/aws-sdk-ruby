@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2025-09-03)
+------------------
+
+* Feature - AWS Clean Rooms ML adds log sanitization for privacy-enhanced error summaries, supports new instance types for custom models providing better performance and lower costs, and deprecates P3-series instances.
+
 1.33.0 (2025-08-27)
 ------------------
 

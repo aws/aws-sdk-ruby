@@ -92,6 +92,9 @@ module Aws::CleanRoomsML
     CreateTrainingDatasetRequest = Shapes::StructureShape.new(name: 'CreateTrainingDatasetRequest')
     CreateTrainingDatasetRequestTrainingDataList = Shapes::ListShape.new(name: 'CreateTrainingDatasetRequestTrainingDataList')
     CreateTrainingDatasetResponse = Shapes::StructureShape.new(name: 'CreateTrainingDatasetResponse')
+    CustomDataIdentifier = Shapes::StringShape.new(name: 'CustomDataIdentifier')
+    CustomDataIdentifierList = Shapes::ListShape.new(name: 'CustomDataIdentifierList')
+    CustomEntityConfig = Shapes::StructureShape.new(name: 'CustomEntityConfig')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     Dataset = Shapes::StructureShape.new(name: 'Dataset')
     DatasetInputConfig = Shapes::StructureShape.new(name: 'DatasetInputConfig')
@@ -109,6 +112,8 @@ module Aws::CleanRoomsML
     DeleteTrainedModelOutputRequest = Shapes::StructureShape.new(name: 'DeleteTrainedModelOutputRequest')
     DeleteTrainingDatasetRequest = Shapes::StructureShape.new(name: 'DeleteTrainingDatasetRequest')
     Destination = Shapes::StructureShape.new(name: 'Destination')
+    EntityType = Shapes::StringShape.new(name: 'EntityType')
+    EntityTypeList = Shapes::ListShape.new(name: 'EntityTypeList')
     Environment = Shapes::MapShape.new(name: 'Environment')
     EnvironmentKeyString = Shapes::StringShape.new(name: 'EnvironmentKeyString')
     EnvironmentValueString = Shapes::StringShape.new(name: 'EnvironmentValueString')
@@ -212,6 +217,8 @@ module Aws::CleanRoomsML
     ListTrainedModelsResponse = Shapes::StructureShape.new(name: 'ListTrainedModelsResponse')
     ListTrainingDatasetsRequest = Shapes::StructureShape.new(name: 'ListTrainingDatasetsRequest')
     ListTrainingDatasetsResponse = Shapes::StructureShape.new(name: 'ListTrainingDatasetsResponse')
+    LogRedactionConfiguration = Shapes::StructureShape.new(name: 'LogRedactionConfiguration')
+    LogType = Shapes::StringShape.new(name: 'LogType')
     LogsConfigurationPolicy = Shapes::StructureShape.new(name: 'LogsConfigurationPolicy')
     LogsConfigurationPolicyFilterPatternString = Shapes::StringShape.new(name: 'LogsConfigurationPolicyFilterPatternString')
     LogsConfigurationPolicyList = Shapes::ListShape.new(name: 'LogsConfigurationPolicyList')
@@ -640,6 +647,11 @@ module Aws::CleanRoomsML
     CreateTrainingDatasetResponse.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location_name: "trainingDatasetArn"))
     CreateTrainingDatasetResponse.struct_class = Types::CreateTrainingDatasetResponse
 
+    CustomDataIdentifierList.member = Shapes::ShapeRef.new(shape: CustomDataIdentifier)
+
+    CustomEntityConfig.add_member(:custom_data_identifiers, Shapes::ShapeRef.new(shape: CustomDataIdentifierList, required: true, location_name: "customDataIdentifiers"))
+    CustomEntityConfig.struct_class = Types::CustomEntityConfig
+
     DataSource.add_member(:glue_data_source, Shapes::ShapeRef.new(shape: GlueDataSource, required: true, location_name: "glueDataSource"))
     DataSource.struct_class = Types::DataSource
 
@@ -691,6 +703,8 @@ module Aws::CleanRoomsML
 
     Destination.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3ConfigMap, required: true, location_name: "s3Destination"))
     Destination.struct_class = Types::Destination
+
+    EntityTypeList.member = Shapes::ShapeRef.new(shape: EntityType)
 
     Environment.key = Shapes::ShapeRef.new(shape: EnvironmentKeyString)
     Environment.value = Shapes::ShapeRef.new(shape: EnvironmentValueString)
@@ -752,9 +766,6 @@ module Aws::CleanRoomsML
     GetCollaborationMLInputChannelRequest.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "collaborationIdentifier"))
     GetCollaborationMLInputChannelRequest.struct_class = Types::GetCollaborationMLInputChannelRequest
 
-    GetCollaborationMLInputChannelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
-    GetCollaborationMLInputChannelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
-    GetCollaborationMLInputChannelResponse.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
     GetCollaborationMLInputChannelResponse.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipIdentifier"))
     GetCollaborationMLInputChannelResponse.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationIdentifier"))
     GetCollaborationMLInputChannelResponse.add_member(:ml_input_channel_arn, Shapes::ShapeRef.new(shape: MLInputChannelArn, required: true, location_name: "mlInputChannelArn"))
@@ -765,6 +776,9 @@ module Aws::CleanRoomsML
     GetCollaborationMLInputChannelResponse.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: GetCollaborationMLInputChannelResponseRetentionInDaysInteger, required: true, location_name: "retentionInDays"))
     GetCollaborationMLInputChannelResponse.add_member(:number_of_records, Shapes::ShapeRef.new(shape: GetCollaborationMLInputChannelResponseNumberOfRecordsLong, location_name: "numberOfRecords"))
     GetCollaborationMLInputChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    GetCollaborationMLInputChannelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
+    GetCollaborationMLInputChannelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    GetCollaborationMLInputChannelResponse.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
     GetCollaborationMLInputChannelResponse.struct_class = Types::GetCollaborationMLInputChannelResponse
 
     GetCollaborationMLInputChannelResponseConfiguredModelAlgorithmAssociationsList.member = Shapes::ShapeRef.new(shape: ConfiguredModelAlgorithmAssociationArn)
@@ -867,12 +881,8 @@ module Aws::CleanRoomsML
     GetMLInputChannelRequest.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "membershipIdentifier"))
     GetMLInputChannelRequest.struct_class = Types::GetMLInputChannelRequest
 
-    GetMLInputChannelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
-    GetMLInputChannelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
     GetMLInputChannelResponse.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipIdentifier"))
     GetMLInputChannelResponse.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationIdentifier"))
-    GetMLInputChannelResponse.add_member(:input_channel, Shapes::ShapeRef.new(shape: InputChannel, required: true, location_name: "inputChannel"))
-    GetMLInputChannelResponse.add_member(:protected_query_identifier, Shapes::ShapeRef.new(shape: UUID, location_name: "protectedQueryIdentifier"))
     GetMLInputChannelResponse.add_member(:ml_input_channel_arn, Shapes::ShapeRef.new(shape: MLInputChannelArn, required: true, location_name: "mlInputChannelArn"))
     GetMLInputChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
     GetMLInputChannelResponse.add_member(:configured_model_algorithm_associations, Shapes::ShapeRef.new(shape: GetMLInputChannelResponseConfiguredModelAlgorithmAssociationsList, required: true, location_name: "configuredModelAlgorithmAssociations"))
@@ -880,9 +890,13 @@ module Aws::CleanRoomsML
     GetMLInputChannelResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
     GetMLInputChannelResponse.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: GetMLInputChannelResponseRetentionInDaysInteger, required: true, location_name: "retentionInDays"))
     GetMLInputChannelResponse.add_member(:number_of_records, Shapes::ShapeRef.new(shape: GetMLInputChannelResponseNumberOfRecordsLong, location_name: "numberOfRecords"))
+    GetMLInputChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    GetMLInputChannelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
+    GetMLInputChannelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    GetMLInputChannelResponse.add_member(:input_channel, Shapes::ShapeRef.new(shape: InputChannel, required: true, location_name: "inputChannel"))
+    GetMLInputChannelResponse.add_member(:protected_query_identifier, Shapes::ShapeRef.new(shape: UUID, location_name: "protectedQueryIdentifier"))
     GetMLInputChannelResponse.add_member(:number_of_files, Shapes::ShapeRef.new(shape: GetMLInputChannelResponseNumberOfFilesDouble, location_name: "numberOfFiles"))
     GetMLInputChannelResponse.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: GetMLInputChannelResponseSizeInGbDouble, location_name: "sizeInGb"))
-    GetMLInputChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     GetMLInputChannelResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     GetMLInputChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetMLInputChannelResponse.struct_class = Types::GetMLInputChannelResponse
@@ -1176,8 +1190,14 @@ module Aws::CleanRoomsML
     ListTrainingDatasetsResponse.add_member(:training_datasets, Shapes::ShapeRef.new(shape: TrainingDatasetList, required: true, location_name: "trainingDatasets"))
     ListTrainingDatasetsResponse.struct_class = Types::ListTrainingDatasetsResponse
 
+    LogRedactionConfiguration.add_member(:entities_to_redact, Shapes::ShapeRef.new(shape: EntityTypeList, required: true, location_name: "entitiesToRedact"))
+    LogRedactionConfiguration.add_member(:custom_entity_config, Shapes::ShapeRef.new(shape: CustomEntityConfig, location_name: "customEntityConfig"))
+    LogRedactionConfiguration.struct_class = Types::LogRedactionConfiguration
+
     LogsConfigurationPolicy.add_member(:allowed_account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "allowedAccountIds"))
     LogsConfigurationPolicy.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: LogsConfigurationPolicyFilterPatternString, location_name: "filterPattern"))
+    LogsConfigurationPolicy.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location_name: "logType"))
+    LogsConfigurationPolicy.add_member(:log_redaction_configuration, Shapes::ShapeRef.new(shape: LogRedactionConfiguration, location_name: "logRedactionConfiguration"))
     LogsConfigurationPolicy.struct_class = Types::LogsConfigurationPolicy
 
     LogsConfigurationPolicyList.member = Shapes::ShapeRef.new(shape: LogsConfigurationPolicy)

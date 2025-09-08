@@ -76,7 +76,7 @@ module Aws::MQ
 
     class Configuration
       attr_accessor arn: ::String
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor created: ::Time
       attr_accessor description: ::String
       attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
@@ -115,7 +115,7 @@ module Aws::MQ
     end
 
     class CreateBrokerInput
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor broker_name: ::String
       attr_accessor configuration: Types::ConfigurationId
@@ -146,7 +146,7 @@ module Aws::MQ
     end
 
     class CreateBrokerRequest
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor broker_name: ::String
       attr_accessor configuration: Types::ConfigurationId
@@ -177,7 +177,7 @@ module Aws::MQ
     end
 
     class CreateConfigurationInput
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
       attr_accessor engine_version: ::String
       attr_accessor name: ::String
@@ -187,7 +187,7 @@ module Aws::MQ
 
     class CreateConfigurationOutput
       attr_accessor arn: ::String
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor created: ::Time
       attr_accessor id: ::String
       attr_accessor latest_revision: Types::ConfigurationRevision
@@ -196,7 +196,7 @@ module Aws::MQ
     end
 
     class CreateConfigurationRequest
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
       attr_accessor engine_version: ::String
       attr_accessor name: ::String
@@ -206,7 +206,7 @@ module Aws::MQ
 
     class CreateConfigurationResponse
       attr_accessor arn: ::String
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor created: ::Time
       attr_accessor id: ::String
       attr_accessor latest_revision: Types::ConfigurationRevision
@@ -330,7 +330,7 @@ module Aws::MQ
 
     class DescribeBrokerOutput
       attr_accessor actions_required: ::Array[Types::ActionRequired]
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor broker_arn: ::String
       attr_accessor broker_id: ::String
@@ -349,7 +349,7 @@ module Aws::MQ
       attr_accessor ldap_server_metadata: Types::LdapServerMetadataOutput
       attr_accessor logs: Types::LogsSummary
       attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
-      attr_accessor pending_authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor pending_authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor pending_data_replication_metadata: Types::DataReplicationMetadataOutput
       attr_accessor pending_data_replication_mode: ("NONE" | "CRDR")
       attr_accessor pending_engine_version: ::String
@@ -372,7 +372,7 @@ module Aws::MQ
 
     class DescribeBrokerResponse
       attr_accessor actions_required: ::Array[Types::ActionRequired]
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor broker_arn: ::String
       attr_accessor broker_id: ::String
@@ -389,7 +389,7 @@ module Aws::MQ
       attr_accessor ldap_server_metadata: Types::LdapServerMetadataOutput
       attr_accessor logs: Types::LogsSummary
       attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
-      attr_accessor pending_authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor pending_authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor pending_engine_version: ::String
       attr_accessor pending_host_instance_type: ::String
       attr_accessor pending_ldap_server_metadata: Types::LdapServerMetadataOutput
@@ -414,7 +414,7 @@ module Aws::MQ
 
     class DescribeConfigurationResponse
       attr_accessor arn: ::String
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor created: ::Time
       attr_accessor description: ::String
       attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
@@ -701,7 +701,7 @@ module Aws::MQ
     end
 
     class UpdateBrokerInput
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor configuration: Types::ConfigurationId
       attr_accessor data_replication_mode: ("NONE" | "CRDR")
@@ -715,7 +715,7 @@ module Aws::MQ
     end
 
     class UpdateBrokerOutput
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor broker_id: ::String
       attr_accessor configuration: Types::ConfigurationId
@@ -733,7 +733,7 @@ module Aws::MQ
     end
 
     class UpdateBrokerRequest
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor broker_id: ::String
       attr_accessor configuration: Types::ConfigurationId
@@ -748,7 +748,7 @@ module Aws::MQ
     end
 
     class UpdateBrokerResponse
-      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor broker_id: ::String
       attr_accessor configuration: Types::ConfigurationId

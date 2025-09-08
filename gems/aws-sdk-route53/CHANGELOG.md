@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2025-09-03)
+------------------
+
+* Feature - Amazon Route 53 now supports the Asia Pacific (New Zealand) Region (ap-southeast-6) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 1.121.0 (2025-08-26)
 ------------------
 

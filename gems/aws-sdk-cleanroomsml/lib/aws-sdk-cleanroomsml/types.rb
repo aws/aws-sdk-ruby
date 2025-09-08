@@ -1713,6 +1713,24 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # The configuration for defining custom patterns to be redacted from
+    # logs and error messages. This is for the CUSTOM config under
+    # entitiesToRedact. Both CustomEntityConfig and entitiesToRedact need to
+    # be present or not present.
+    #
+    # @!attribute [rw] custom_data_identifiers
+    #   Defines data identifiers for the custom entity configuration.
+    #   Provide this only if CUSTOM redaction is configured.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CustomEntityConfig AWS API Documentation
+    #
+    class CustomEntityConfig < Struct.new(
+      :custom_data_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines information about the Glue data source that contains the
     # training data.
     #
@@ -2232,18 +2250,6 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
-    # @!attribute [rw] create_time
-    #   The time at which the ML input channel was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the ML input channel was updated.
-    #   @return [Time]
-    #
-    # @!attribute [rw] creator_account_id
-    #   The account ID of the member who created the ML input channel.
-    #   @return [String]
-    #
     # @!attribute [rw] membership_identifier
     #   The membership ID of the membership that contains the ML input
     #   channel.
@@ -2287,12 +2293,21 @@ module Aws::CleanRoomsML
     #   The description of the ML input channel.
     #   @return [String]
     #
+    # @!attribute [rw] create_time
+    #   The time at which the ML input channel was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the ML input channel was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The account ID of the member who created the ML input channel.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationMLInputChannelResponse AWS API Documentation
     #
     class GetCollaborationMLInputChannelResponse < Struct.new(
-      :create_time,
-      :update_time,
-      :creator_account_id,
       :membership_identifier,
       :collaboration_identifier,
       :ml_input_channel_arn,
@@ -2302,7 +2317,10 @@ module Aws::CleanRoomsML
       :status_details,
       :retention_in_days,
       :number_of_records,
-      :description)
+      :description,
+      :create_time,
+      :update_time,
+      :creator_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2862,14 +2880,6 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
-    # @!attribute [rw] create_time
-    #   The time at which the ML input channel was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the ML input channel was updated.
-    #   @return [Time]
-    #
     # @!attribute [rw] membership_identifier
     #   The membership ID of the membership that contains the ML input
     #   channel.
@@ -2877,15 +2887,6 @@ module Aws::CleanRoomsML
     #
     # @!attribute [rw] collaboration_identifier
     #   The collaboration ID of the collaboration that contains the ML input
-    #   channel.
-    #   @return [String]
-    #
-    # @!attribute [rw] input_channel
-    #   The input channel that was used to create the ML input channel.
-    #   @return [Types::InputChannel]
-    #
-    # @!attribute [rw] protected_query_identifier
-    #   The ID of the protected query that was used to create the ML input
     #   channel.
     #   @return [String]
     #
@@ -2918,6 +2919,27 @@ module Aws::CleanRoomsML
     #   The number of records in the ML input channel.
     #   @return [Integer]
     #
+    # @!attribute [rw] description
+    #   The description of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the ML input channel was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the ML input channel was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_channel
+    #   The input channel that was used to create the ML input channel.
+    #   @return [Types::InputChannel]
+    #
+    # @!attribute [rw] protected_query_identifier
+    #   The ID of the protected query that was used to create the ML input
+    #   channel.
+    #   @return [String]
+    #
     # @!attribute [rw] number_of_files
     #   The number of files in the ML input channel.
     #   @return [Float]
@@ -2925,10 +2947,6 @@ module Aws::CleanRoomsML
     # @!attribute [rw] size_in_gb
     #   The size, in GB, of the ML input channel.
     #   @return [Float]
-    #
-    # @!attribute [rw] description
-    #   The description of the ML input channel.
-    #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
     #   The Amazon Resource Name (ARN) of the KMS key that was used to
@@ -2971,12 +2989,8 @@ module Aws::CleanRoomsML
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetMLInputChannelResponse AWS API Documentation
     #
     class GetMLInputChannelResponse < Struct.new(
-      :create_time,
-      :update_time,
       :membership_identifier,
       :collaboration_identifier,
-      :input_channel,
-      :protected_query_identifier,
       :ml_input_channel_arn,
       :name,
       :configured_model_algorithm_associations,
@@ -2984,9 +2998,13 @@ module Aws::CleanRoomsML
       :status_details,
       :retention_in_days,
       :number_of_records,
+      :description,
+      :create_time,
+      :update_time,
+      :input_channel,
+      :protected_query_identifier,
       :number_of_files,
       :size_in_gb,
-      :description,
       :kms_key_arn,
       :tags)
       SENSITIVE = []
@@ -4401,6 +4419,30 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # The configuration for log redaction.
+    #
+    # @!attribute [rw] entities_to_redact
+    #   Specifies the entities to be redacted from logs. Entities to redact
+    #   are "ALL\_PERSONALLY\_IDENTIFIABLE\_INFORMATION",
+    #   "NUMBERS","CUSTOM". If CUSTOM is supplied or configured, custom
+    #   patterns (customDataIdentifiers) should be provided, and the
+    #   patterns will be redacted in logs or error messages.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] custom_entity_config
+    #   Specifies the configuration for custom entities in the context of
+    #   log redaction.
+    #   @return [Types::CustomEntityConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/LogRedactionConfiguration AWS API Documentation
+    #
+    class LogRedactionConfiguration < Struct.new(
+      :entities_to_redact,
+      :custom_entity_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the information necessary for a user to access the logs.
     #
     # @!attribute [rw] allowed_account_ids
@@ -4412,11 +4454,22 @@ module Aws::CleanRoomsML
     #   return information that matches the pattern.
     #   @return [String]
     #
+    # @!attribute [rw] log_type
+    #   Specifies the type of log this policy applies to. The currently
+    #   supported policies are ALL or ERROR\_SUMMARY.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_redaction_configuration
+    #   Specifies the log redaction configuration for this policy.
+    #   @return [Types::LogRedactionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/LogsConfigurationPolicy AWS API Documentation
     #
     class LogsConfigurationPolicy < Struct.new(
       :allowed_account_ids,
-      :filter_pattern)
+      :filter_pattern,
+      :log_type,
+      :log_redaction_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

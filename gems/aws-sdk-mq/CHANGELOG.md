@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2025-09-03)
+------------------
+
+* Feature - Add CONFIG_MANAGED as a supported AuthenticationStrategy for Amazon MQ for RabbitMQ brokers. Make username and password optional on broker creation for CONFIG_MANAGED brokers.
+
 1.85.0 (2025-08-26)
 ------------------
 

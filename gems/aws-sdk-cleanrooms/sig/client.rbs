@@ -230,9 +230,32 @@ module Aws
                                       is_responsible: bool
                                     }?
                                   },
-                                  ?analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
+                                  ?analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL"),
+                                  ?auto_approved_change_request_types: Array[("ADD_MEMBER")]
                                 ) -> _CreateCollaborationResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCollaborationResponseSuccess
+
+      interface _CreateCollaborationChangeRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCollaborationChangeRequestOutput]
+        def collaboration_change_request: () -> Types::CollaborationChangeRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_collaboration_change_request-instance_method
+      def create_collaboration_change_request: (
+                                                 collaboration_identifier: ::String,
+                                                 changes: Array[
+                                                   {
+                                                     specification_type: ("MEMBER"),
+                                                     specification: {
+                                                       member: {
+                                                         account_id: ::String,
+                                                         member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")],
+                                                         display_name: ::String?
+                                                       }?
+                                                     }
+                                                   },
+                                                 ]
+                                               ) -> _CreateCollaborationChangeRequestResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCollaborationChangeRequestResponseSuccess
 
       interface _CreateConfiguredAudienceModelAssociationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfiguredAudienceModelAssociationOutput]
@@ -645,6 +668,17 @@ module Aws
                                                ) -> _GetCollaborationAnalysisTemplateResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCollaborationAnalysisTemplateResponseSuccess
 
+      interface _GetCollaborationChangeRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCollaborationChangeRequestOutput]
+        def collaboration_change_request: () -> Types::CollaborationChangeRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_collaboration_change_request-instance_method
+      def get_collaboration_change_request: (
+                                              collaboration_identifier: ::String,
+                                              change_request_identifier: ::String
+                                            ) -> _GetCollaborationChangeRequestResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCollaborationChangeRequestResponseSuccess
+
       interface _GetCollaborationConfiguredAudienceModelAssociationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCollaborationConfiguredAudienceModelAssociationOutput]
         def collaboration_configured_audience_model_association: () -> Types::CollaborationConfiguredAudienceModelAssociation
@@ -846,6 +880,20 @@ module Aws
                                                    ?max_results: ::Integer
                                                  ) -> _ListCollaborationAnalysisTemplatesResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationAnalysisTemplatesResponseSuccess
+
+      interface _ListCollaborationChangeRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCollaborationChangeRequestsOutput]
+        def collaboration_change_request_summaries: () -> ::Array[Types::CollaborationChangeRequestSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_collaboration_change_requests-instance_method
+      def list_collaboration_change_requests: (
+                                                collaboration_identifier: ::String,
+                                                ?status: ("PENDING" | "APPROVED" | "CANCELLED" | "DENIED" | "COMMITTED"),
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListCollaborationChangeRequestsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationChangeRequestsResponseSuccess
 
       interface _ListCollaborationConfiguredAudienceModelAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCollaborationConfiguredAudienceModelAssociationsOutput]
@@ -1126,6 +1174,12 @@ module Aws
                                        account_id: ::String
                                      }?
                                    }
+                                 },
+                                 ?compute_configuration: {
+                                   worker: {
+                                     type: ("CR.1X" | "CR.4X"),
+                                     number: ::Integer
+                                   }?
                                  }
                                ) -> _StartProtectedJobResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartProtectedJobResponseSuccess

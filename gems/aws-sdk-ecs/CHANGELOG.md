@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.204.0 (2025-09-05)
+------------------
+
+* Feature - This is a documentation only release that adds additional information for Amazon ECS Availability Zone rebalancing.
+
 1.203.0 (2025-08-26)
 ------------------
 

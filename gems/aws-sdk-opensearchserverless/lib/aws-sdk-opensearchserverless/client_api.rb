@@ -87,6 +87,7 @@ module Aws::OpenSearchServerless
     EffectiveLifecyclePolicyDetails = Shapes::ListShape.new(name: 'EffectiveLifecyclePolicyDetails')
     EffectiveLifecyclePolicyErrorDetail = Shapes::StructureShape.new(name: 'EffectiveLifecyclePolicyErrorDetail')
     EffectiveLifecyclePolicyErrorDetails = Shapes::ListShape.new(name: 'EffectiveLifecyclePolicyErrorDetails')
+    FipsEndpoints = Shapes::StructureShape.new(name: 'FipsEndpoints')
     GetAccessPolicyRequest = Shapes::StructureShape.new(name: 'GetAccessPolicyRequest')
     GetAccessPolicyResponse = Shapes::StructureShape.new(name: 'GetAccessPolicyResponse')
     GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
@@ -295,6 +296,7 @@ module Aws::OpenSearchServerless
     CollectionDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
     CollectionDetail.add_member(:collection_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "collectionEndpoint"))
     CollectionDetail.add_member(:dashboard_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "dashboardEndpoint"))
+    CollectionDetail.add_member(:fips_endpoints, Shapes::ShapeRef.new(shape: FipsEndpoints, location_name: "fipsEndpoints"))
     CollectionDetail.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "failureCode"))
     CollectionDetail.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
     CollectionDetail.struct_class = Types::CollectionDetail
@@ -494,6 +496,10 @@ module Aws::OpenSearchServerless
     EffectiveLifecyclePolicyErrorDetail.struct_class = Types::EffectiveLifecyclePolicyErrorDetail
 
     EffectiveLifecyclePolicyErrorDetails.member = Shapes::ShapeRef.new(shape: EffectiveLifecyclePolicyErrorDetail)
+
+    FipsEndpoints.add_member(:collection_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "collectionEndpoint"))
+    FipsEndpoints.add_member(:dashboard_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "dashboardEndpoint"))
+    FipsEndpoints.struct_class = Types::FipsEndpoints
 
     GetAccessPolicyRequest.add_member(:type, Shapes::ShapeRef.new(shape: AccessPolicyType, required: true, location_name: "type"))
     GetAccessPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
@@ -968,8 +974,8 @@ module Aws::OpenSearchServerless
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCollectionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCollectionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: OcuLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: OcuLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -982,8 +988,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: CreateIndexRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateIndexResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1042,8 +1048,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: DeleteAccessPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAccessPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1054,8 +1060,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: DeleteCollectionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteCollectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1077,8 +1083,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1089,8 +1095,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: DeleteSecurityConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSecurityConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1101,8 +1107,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: DeleteSecurityPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSecurityPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1113,8 +1119,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: DeleteVpcEndpointRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteVpcEndpointResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1295,8 +1301,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
@@ -1308,8 +1314,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1320,8 +1326,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: UpdateAccessPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAccessPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1364,8 +1370,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: UpdateLifecyclePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateLifecyclePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
@@ -1377,8 +1383,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: UpdateSecurityConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSecurityConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1389,8 +1395,8 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: UpdateSecurityPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSecurityPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)

@@ -575,7 +575,7 @@ module Aws::MQ
     #
     # @option params [Hash<String,String>] :tags
     #
-    # @option params [required, Array<Types::User>] :users
+    # @option params [Array<Types::User>] :users
     #
     # @option params [String] :data_replication_mode
     #   Specifies whether a broker is a part of a data replication pair.
@@ -590,7 +590,7 @@ module Aws::MQ
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_broker({
-    #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
+    #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP, CONFIG_MANAGED
     #     auto_minor_version_upgrade: false,
     #     broker_name: "__string", # required
     #     configuration: {
@@ -635,7 +635,7 @@ module Aws::MQ
     #     tags: {
     #       "__string" => "__string",
     #     },
-    #     users: [ # required
+    #     users: [
     #       {
     #         console_access: false,
     #         groups: ["__string"],
@@ -691,7 +691,7 @@ module Aws::MQ
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_configuration({
-    #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
+    #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP, CONFIG_MANAGED
     #     engine_type: "ACTIVEMQ", # required, accepts ACTIVEMQ, RABBITMQ
     #     engine_version: "__string",
     #     name: "__string", # required
@@ -703,7 +703,7 @@ module Aws::MQ
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP"
+    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP", "CONFIG_MANAGED"
     #   resp.created #=> Time
     #   resp.id #=> String
     #   resp.latest_revision.created #=> Time
@@ -941,7 +941,7 @@ module Aws::MQ
     #   resp.actions_required #=> Array
     #   resp.actions_required[0].action_required_code #=> String
     #   resp.actions_required[0].action_required_info #=> String
-    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP"
+    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP", "CONFIG_MANAGED"
     #   resp.auto_minor_version_upgrade #=> Boolean
     #   resp.broker_arn #=> String
     #   resp.broker_id #=> String
@@ -986,7 +986,7 @@ module Aws::MQ
     #   resp.maintenance_window_start_time.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
     #   resp.maintenance_window_start_time.time_of_day #=> String
     #   resp.maintenance_window_start_time.time_zone #=> String
-    #   resp.pending_authentication_strategy #=> String, one of "SIMPLE", "LDAP"
+    #   resp.pending_authentication_strategy #=> String, one of "SIMPLE", "LDAP", "CONFIG_MANAGED"
     #   resp.pending_engine_version #=> String
     #   resp.pending_host_instance_type #=> String
     #   resp.pending_ldap_server_metadata.hosts #=> Array
@@ -1149,7 +1149,7 @@ module Aws::MQ
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP"
+    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP", "CONFIG_MANAGED"
     #   resp.created #=> Time
     #   resp.description #=> String
     #   resp.engine_type #=> String, one of "ACTIVEMQ", "RABBITMQ"
@@ -1359,7 +1359,7 @@ module Aws::MQ
     #
     #   resp.configurations #=> Array
     #   resp.configurations[0].arn #=> String
-    #   resp.configurations[0].authentication_strategy #=> String, one of "SIMPLE", "LDAP"
+    #   resp.configurations[0].authentication_strategy #=> String, one of "SIMPLE", "LDAP", "CONFIG_MANAGED"
     #   resp.configurations[0].created #=> Time
     #   resp.configurations[0].description #=> String
     #   resp.configurations[0].engine_type #=> String, one of "ACTIVEMQ", "RABBITMQ"
@@ -1560,7 +1560,7 @@ module Aws::MQ
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_broker({
-    #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
+    #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP, CONFIG_MANAGED
     #     auto_minor_version_upgrade: false,
     #     broker_id: "__string", # required
     #     configuration: {
@@ -1597,7 +1597,7 @@ module Aws::MQ
     #
     # @example Response structure
     #
-    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP"
+    #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP", "CONFIG_MANAGED"
     #   resp.auto_minor_version_upgrade #=> Boolean
     #   resp.broker_id #=> String
     #   resp.configuration.id #=> String
@@ -1742,7 +1742,7 @@ module Aws::MQ
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

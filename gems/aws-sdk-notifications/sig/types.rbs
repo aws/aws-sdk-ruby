@@ -61,6 +61,15 @@ module Aws::Notifications
     class AssociateManagedNotificationAdditionalChannelResponse < Aws::EmptyStructure
     end
 
+    class AssociateOrganizationalUnitRequest
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor notification_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateOrganizationalUnitResponse < Aws::EmptyStructure
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -163,6 +172,15 @@ module Aws::Notifications
     class DisassociateManagedNotificationAdditionalChannelResponse < Aws::EmptyStructure
     end
 
+    class DisassociateOrganizationalUnitRequest
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor notification_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateOrganizationalUnitResponse < Aws::EmptyStructure
+    end
+
     class EnableNotificationsAccessForOrganizationRequest < Aws::EmptyStructure
     end
 
@@ -260,6 +278,7 @@ module Aws::Notifications
       attr_accessor status: ("ACTIVE" | "PARTIALLY_ACTIVE" | "INACTIVE" | "DELETING")
       attr_accessor creation_time: ::Time
       attr_accessor aggregation_duration: ("LONG" | "SHORT" | "NONE")
+      attr_accessor subtype: ("ACCOUNT" | "ADMIN_MANAGED")
       SENSITIVE: []
     end
 
@@ -378,10 +397,27 @@ module Aws::Notifications
       SENSITIVE: []
     end
 
+    class ListMemberAccountsRequest
+      attr_accessor notification_configuration_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor member_account: ::String
+      attr_accessor status: ("ACTIVE" | "PENDING" | "INACTIVE" | "CREATING" | "DELETING")
+      attr_accessor organizational_unit_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListMemberAccountsResponse
+      attr_accessor member_accounts: ::Array[Types::MemberAccount]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListNotificationConfigurationsRequest
       attr_accessor event_rule_source: ::String
       attr_accessor channel_arn: ::String
       attr_accessor status: ("ACTIVE" | "PARTIALLY_ACTIVE" | "INACTIVE" | "DELETING")
+      attr_accessor subtype: ("ACCOUNT" | "ADMIN_MANAGED")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -402,6 +438,7 @@ module Aws::Notifications
       attr_accessor aggregate_notification_event_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor organizational_unit_id: ::String
       SENSITIVE: []
     end
 
@@ -419,6 +456,19 @@ module Aws::Notifications
 
     class ListNotificationHubsResponse
       attr_accessor notification_hubs: ::Array[Types::NotificationHubOverview]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationalUnitsRequest
+      attr_accessor notification_configuration_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationalUnitsResponse
+      attr_accessor organizational_units: ::Array[::String]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -539,6 +589,15 @@ module Aws::Notifications
       SENSITIVE: []
     end
 
+    class MemberAccount
+      attr_accessor notification_configuration_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor status: ("ACTIVE" | "PENDING" | "INACTIVE" | "CREATING" | "DELETING")
+      attr_accessor status_reason: ::String
+      attr_accessor organizational_unit_id: ::String
+      SENSITIVE: []
+    end
+
     class MessageComponents
       attr_accessor headline: ::String
       attr_accessor paragraph_summary: ::String
@@ -559,6 +618,7 @@ module Aws::Notifications
       attr_accessor status: ("ACTIVE" | "PARTIALLY_ACTIVE" | "INACTIVE" | "DELETING")
       attr_accessor creation_time: ::Time
       attr_accessor aggregation_duration: ("LONG" | "SHORT" | "NONE")
+      attr_accessor subtype: ("ACCOUNT" | "ADMIN_MANAGED")
       SENSITIVE: []
     end
 
@@ -578,6 +638,7 @@ module Aws::Notifications
       attr_accessor end_time: ::Time
       attr_accessor text_parts: ::Hash[::String, Types::TextPartValue]
       attr_accessor media: ::Array[Types::MediaElement]
+      attr_accessor organizational_unit_id: ::String
       SENSITIVE: []
     end
 
@@ -590,6 +651,7 @@ module Aws::Notifications
       attr_accessor aggregation_event_type: ("AGGREGATE" | "CHILD" | "NONE")
       attr_accessor aggregate_notification_event_arn: ::String
       attr_accessor aggregation_summary: Types::AggregationSummary
+      attr_accessor organizational_unit_id: ::String
       SENSITIVE: []
     end
 
@@ -617,7 +679,7 @@ module Aws::Notifications
     end
 
     class NotificationsAccessForOrganization
-      attr_accessor access_status: ("ENABLED" | "DISABLED" | "PENDING")
+      attr_accessor access_status: ("ENABLED" | "DISABLED" | "PENDING" | "FAILED")
       SENSITIVE: []
     end
 

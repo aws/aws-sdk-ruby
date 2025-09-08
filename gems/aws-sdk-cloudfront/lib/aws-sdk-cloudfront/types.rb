@@ -3429,6 +3429,12 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout
     #   @return [Integer]
     #
+    # @!attribute [rw] ip_address_type
+    #   Specifies which IP protocol CloudFront uses when connecting to your
+    #   origin. If your origin uses both IPv4 and IPv6 protocols, you can
+    #   choose `dualstack` to help optimize reliability.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CustomOriginConfig AWS API Documentation
     #
     class CustomOriginConfig < Struct.new(
@@ -3437,7 +3443,8 @@ module Aws::CloudFront
       :origin_protocol_policy,
       :origin_ssl_protocols,
       :origin_read_timeout,
-      :origin_keepalive_timeout)
+      :origin_keepalive_timeout,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

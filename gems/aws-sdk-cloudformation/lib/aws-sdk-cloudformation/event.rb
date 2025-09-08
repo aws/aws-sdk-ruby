@@ -116,32 +116,38 @@ module Aws::CloudFormation
       data[:client_request_token]
     end
 
-    # The name of the hook.
+    # The name of the Hook.
     # @return [String]
     def hook_type
       data[:hook_type]
     end
 
-    # Provides the status of the change set hook.
+    # Provides the status of the change set Hook.
     # @return [String]
     def hook_status
       data[:hook_status]
     end
 
-    # Provides the reason for the hook status.
+    # Provides the reason for the Hook status.
     # @return [String]
     def hook_status_reason
       data[:hook_status_reason]
     end
 
-    # Invocation points are points in provisioning logic where Hooks are
-    # initiated.
+    # The specific point in the provisioning process where the Hook is
+    # invoked.
     # @return [String]
     def hook_invocation_point
       data[:hook_invocation_point]
     end
 
-    # Specify the hook failure mode for non-compliant resources in the
+    # The unique identifier of the Hook invocation.
+    # @return [String]
+    def hook_invocation_id
+      data[:hook_invocation_id]
+    end
+
+    # Specify the Hook failure mode for non-compliant resources in the
     # followings ways.
     #
     # * `FAIL` Stops provisioning resources.

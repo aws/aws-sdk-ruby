@@ -249,7 +249,7 @@ module Aws::MQ
     CreateBrokerInput.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
     CreateBrokerInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
     CreateBrokerInput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
-    CreateBrokerInput.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUser, required: true, location_name: "users"))
+    CreateBrokerInput.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUser, location_name: "users"))
     CreateBrokerInput.struct_class = Types::CreateBrokerInput
 
     CreateBrokerOutput.add_member(:broker_arn, Shapes::ShapeRef.new(shape: __string, location_name: "brokerArn"))
@@ -274,7 +274,7 @@ module Aws::MQ
     CreateBrokerRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
     CreateBrokerRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
     CreateBrokerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
-    CreateBrokerRequest.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUser, required: true, location_name: "users"))
+    CreateBrokerRequest.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUser, location_name: "users"))
     CreateBrokerRequest.add_member(:data_replication_mode, Shapes::ShapeRef.new(shape: DataReplicationMode, location_name: "dataReplicationMode"))
     CreateBrokerRequest.add_member(:data_replication_primary_broker_arn, Shapes::ShapeRef.new(shape: __string, location_name: "dataReplicationPrimaryBrokerArn"))
     CreateBrokerRequest.struct_class = Types::CreateBrokerRequest

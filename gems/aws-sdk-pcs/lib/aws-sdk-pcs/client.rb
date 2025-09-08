@@ -483,16 +483,15 @@ module Aws::PCS
 
     # @!group API Operations
 
-    # Creates a cluster in your account. Amazon Web Services PCS creates the
-    # cluster controller in a service-owned account. The cluster controller
-    # communicates with the cluster resources in your account. The subnets
-    # and security groups for the cluster must already exist before you use
-    # this API action.
+    # Creates a cluster in your account. PCS creates the cluster controller
+    # in a service-owned account. The cluster controller communicates with
+    # the cluster resources in your account. The subnets and security groups
+    # for the cluster must already exist before you use this API action.
     #
-    # <note markdown="1"> It takes time for Amazon Web Services PCS to create the cluster. The
-    # cluster is in a `Creating` state until it is ready to use. There can
-    # only be 1 cluster in a `Creating` state per Amazon Web Services Region
-    # per Amazon Web Services account. `CreateCluster` fails with a
+    # <note markdown="1"> It takes time for PCS to create the cluster. The cluster is in a
+    # `Creating` state until it is ready to use. There can only be 1 cluster
+    # in a `Creating` state per Amazon Web Services Region per Amazon Web
+    # Services account. `CreateCluster` fails with a
     # `ServiceQuotaExceededException` if there is already a cluster in a
     # `Creating` state.
     #
@@ -619,17 +618,16 @@ module Aws::PCS
     end
 
     # Creates a managed set of compute nodes. You associate a compute node
-    # group with a cluster through 1 or more Amazon Web Services PCS queues
-    # or as part of the login fleet. A compute node group includes the
-    # definition of the compute properties and lifecycle management. Amazon
-    # Web Services PCS uses the information you provide to this API action
-    # to launch compute nodes in your account. You can only specify subnets
-    # in the same Amazon VPC as your cluster. You receive billing charges
-    # for the compute nodes that Amazon Web Services PCS launches in your
-    # account. You must already have a launch template before you call this
-    # API. For more information, see [Launch an instance from a launch
-    # template][1] in the *Amazon Elastic Compute Cloud User Guide for Linux
-    # Instances*.
+    # group with a cluster through 1 or more PCS queues or as part of the
+    # login fleet. A compute node group includes the definition of the
+    # compute properties and lifecycle management. PCS uses the information
+    # you provide to this API action to launch compute nodes in your
+    # account. You can only specify subnets in the same Amazon VPC as your
+    # cluster. You receive billing charges for the compute nodes that PCS
+    # launches in your account. You must already have a launch template
+    # before you call this API. For more information, see [Launch an
+    # instance from a launch template][1] in the *Amazon Elastic Compute
+    # Cloud User Guide for Linux Instances*.
     #
     #
     #
@@ -642,10 +640,9 @@ module Aws::PCS
     #   A name to identify the cluster. Example: `MyCluster`
     #
     # @option params [String] :ami_id
-    #   The ID of the Amazon Machine Image (AMI) that Amazon Web Services PCS
-    #   uses to launch compute nodes (Amazon EC2 instances). If you don't
-    #   provide this value, Amazon Web Services PCS uses the AMI ID specified
-    #   in the custom launch template.
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   compute nodes (Amazon EC2 instances). If you don't provide this
+    #   value, PCS uses the AMI ID specified in the custom launch template.
     #
     # @option params [required, Array<String>] :subnet_ids
     #   The list of subnet IDs where the compute node group launches
@@ -663,8 +660,7 @@ module Aws::PCS
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
     #
     # @option params [required, Types::CustomLaunchTemplate] :custom_launch_template
-    #   An Amazon EC2 launch template Amazon Web Services PCS uses to launch
-    #   compute nodes.
+    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
     #
     # @option params [required, String] :iam_instance_profile_arn
     #   The Amazon Resource Name (ARN) of the IAM instance profile used to
@@ -941,8 +937,8 @@ module Aws::PCS
     end
 
     # Deletes a job queue. If the compute node group associated with this
-    # queue isn't associated with any other queues, Amazon Web Services PCS
-    # terminates all the compute nodes for this queue.
+    # queue isn't associated with any other queues, PCS terminates all the
+    # compute nodes for this queue.
     #
     # @option params [required, String] :cluster_identifier
     #   The name or ID of the cluster of the queue.
@@ -1303,7 +1299,7 @@ module Aws::PCS
       req.send_request(options)
     end
 
-    # Returns a list of all tags on an Amazon Web Services PCS resource.
+    # Returns a list of all tags on an PCS resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which to list tags.
@@ -1334,8 +1330,8 @@ module Aws::PCS
 
     # This API action isn't intended for you to use.
     #
-    #  Amazon Web Services PCS uses this API action to register the compute
-    # nodes it launches in your account.
+    #  PCS uses this API action to register the compute nodes it launches in
+    # your account.
     #
     # @option params [required, String] :cluster_identifier
     #   The name or ID of the cluster to register the compute node group
@@ -1377,11 +1373,11 @@ module Aws::PCS
       req.send_request(options)
     end
 
-    # Adds or edits tags on an Amazon Web Services PCS resource. Each tag
-    # consists of a tag key and a tag value. The tag key and tag value are
-    # case-sensitive strings. The tag value can be an empty (null) string.
-    # To add a tag, specify a new tag key and a tag value. To edit a tag,
-    # specify an existing tag key and a new tag value.
+    # Adds or edits tags on an PCS resource. Each tag consists of a tag key
+    # and a tag value. The tag key and tag value are case-sensitive strings.
+    # The tag value can be an empty (null) string. To add a tag, specify a
+    # new tag key and a tag value. To edit a tag, specify an existing tag
+    # key and a new tag value.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -1410,9 +1406,8 @@ module Aws::PCS
       req.send_request(options)
     end
 
-    # Deletes tags from an Amazon Web Services PCS resource. To delete a
-    # tag, specify the tag key and the Amazon Resource Name (ARN) of the
-    # Amazon Web Services PCS resource.
+    # Deletes tags from an PCS resource. To delete a tag, specify the tag
+    # key and the Amazon Resource Name (ARN) of the PCS resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -1451,17 +1446,16 @@ module Aws::PCS
     #   The name or ID of the compute node group.
     #
     # @option params [String] :ami_id
-    #   The ID of the Amazon Machine Image (AMI) that Amazon Web Services PCS
-    #   uses to launch instances. If not provided, Amazon Web Services PCS
-    #   uses the AMI ID specified in the custom launch template.
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   instances. If not provided, PCS uses the AMI ID specified in the
+    #   custom launch template.
     #
     # @option params [Array<String>] :subnet_ids
     #   The list of subnet IDs where the compute node group provisions
     #   instances. The subnets must be in the same VPC as the cluster.
     #
     # @option params [Types::CustomLaunchTemplate] :custom_launch_template
-    #   An Amazon EC2 launch template Amazon Web Services PCS uses to launch
-    #   compute nodes.
+    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
     #
     # @option params [String] :purchase_option
     #   Specifies how EC2 instances are purchased on your behalf. Amazon Web
@@ -1665,7 +1659,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

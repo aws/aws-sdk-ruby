@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2025-09-03)
+------------------
+
+* Feature - Added new ExtraParams AU_ELIGIBILITY_TYPE, AU_POLICY_REASON, and AU_REGISTRANT_NAME
+
 1.84.0 (2025-08-28)
 ------------------
 

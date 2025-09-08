@@ -959,6 +959,10 @@ module Aws::CleanRooms
     #
     #    </note>
     #
+    # @option params [Array<String>] :auto_approved_change_request_types
+    #   The types of change requests that are automatically approved for this
+    #   collaboration.
+    #
     # @return [Types::CreateCollaborationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCollaborationOutput#collaboration #collaboration} => Types::Collaboration
@@ -1027,6 +1031,7 @@ module Aws::CleanRooms
     #       },
     #     },
     #     analytics_engine: "SPARK", # accepts SPARK, CLEAN_ROOMS_SQL
+    #     auto_approved_change_request_types: ["ADD_MEMBER"], # accepts ADD_MEMBER
     #   })
     #
     # @example Response structure
@@ -1049,6 +1054,8 @@ module Aws::CleanRooms
     #   resp.collaboration.query_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
+    #   resp.collaboration.auto_approved_change_types #=> Array
+    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaboration AWS API Documentation
     #
@@ -1056,6 +1063,67 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def create_collaboration(params = {}, options = {})
       req = build_request(:create_collaboration, params)
+      req.send_request(options)
+    end
+
+    # Creates a new change request to modify an existing collaboration. This
+    # enables post-creation modifications to collaborations through a
+    # structured API-driven approach.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The identifier of the collaboration that the change request is made
+    #   against.
+    #
+    # @option params [required, Array<Types::ChangeInput>] :changes
+    #   The list of changes to apply to the collaboration. Each change
+    #   specifies the type of modification and the details of what should be
+    #   changed.
+    #
+    # @return [Types::CreateCollaborationChangeRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCollaborationChangeRequestOutput#collaboration_change_request #collaboration_change_request} => Types::CollaborationChangeRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_collaboration_change_request({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     changes: [ # required
+    #       {
+    #         specification_type: "MEMBER", # required, accepts MEMBER
+    #         specification: { # required
+    #           member: {
+    #             account_id: "AccountId", # required
+    #             member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS, CAN_RUN_JOB
+    #             display_name: "DisplayName",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_change_request.id #=> String
+    #   resp.collaboration_change_request.collaboration_id #=> String
+    #   resp.collaboration_change_request.create_time #=> Time
+    #   resp.collaboration_change_request.update_time #=> Time
+    #   resp.collaboration_change_request.status #=> String, one of "PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"
+    #   resp.collaboration_change_request.is_auto_approved #=> Boolean
+    #   resp.collaboration_change_request.changes #=> Array
+    #   resp.collaboration_change_request.changes[0].specification_type #=> String, one of "MEMBER"
+    #   resp.collaboration_change_request.changes[0].specification.member.account_id #=> String
+    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities #=> Array
+    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.collaboration_change_request.changes[0].specification.member.display_name #=> String
+    #   resp.collaboration_change_request.changes[0].types #=> Array
+    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationChangeRequest AWS API Documentation
+    #
+    # @overload create_collaboration_change_request(params = {})
+    # @param [Hash] params ({})
+    def create_collaboration_change_request(params = {}, options = {})
+      req = build_request(:create_collaboration_change_request, params)
       req.send_request(options)
     end
 
@@ -2308,6 +2376,8 @@ module Aws::CleanRooms
     #   resp.collaboration.query_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
+    #   resp.collaboration.auto_approved_change_types #=> Array
+    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaboration AWS API Documentation
     #
@@ -2380,6 +2450,53 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def get_collaboration_analysis_template(params = {}, options = {})
       req = build_request(:get_collaboration_analysis_template, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific collaboration change
+    # request.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The identifier of the collaboration that the change request is made
+    #   against.
+    #
+    # @option params [required, String] :change_request_identifier
+    #   A unique identifier for the change request to retrieve.
+    #
+    # @return [Types::GetCollaborationChangeRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCollaborationChangeRequestOutput#collaboration_change_request #collaboration_change_request} => Types::CollaborationChangeRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_collaboration_change_request({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     change_request_identifier: "CollaborationChangeRequestIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_change_request.id #=> String
+    #   resp.collaboration_change_request.collaboration_id #=> String
+    #   resp.collaboration_change_request.create_time #=> Time
+    #   resp.collaboration_change_request.update_time #=> Time
+    #   resp.collaboration_change_request.status #=> String, one of "PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"
+    #   resp.collaboration_change_request.is_auto_approved #=> Boolean
+    #   resp.collaboration_change_request.changes #=> Array
+    #   resp.collaboration_change_request.changes[0].specification_type #=> String, one of "MEMBER"
+    #   resp.collaboration_change_request.changes[0].specification.member.account_id #=> String
+    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities #=> Array
+    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.collaboration_change_request.changes[0].specification.member.display_name #=> String
+    #   resp.collaboration_change_request.changes[0].types #=> Array
+    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationChangeRequest AWS API Documentation
+    #
+    # @overload get_collaboration_change_request(params = {})
+    # @param [Hash] params ({})
+    def get_collaboration_change_request(params = {}, options = {})
+      req = build_request(:get_collaboration_change_request, params)
       req.send_request(options)
     end
 
@@ -3023,6 +3140,8 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
+    #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetProtectedJob AWS API Documentation
     #
@@ -3410,6 +3529,67 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def list_collaboration_analysis_templates(params = {}, options = {})
       req = build_request(:list_collaboration_analysis_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists all change requests for a collaboration with pagination support.
+    # Returns change requests sorted by creation time.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The identifier of the collaboration that the change request is made
+    #   against.
+    #
+    # @option params [String] :status
+    #   A filter to only return change requests with the specified status.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned for an API request
+    #   call.
+    #
+    # @return [Types::ListCollaborationChangeRequestsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationChangeRequestsOutput#collaboration_change_request_summaries #collaboration_change_request_summaries} => Array&lt;Types::CollaborationChangeRequestSummary&gt;
+    #   * {Types::ListCollaborationChangeRequestsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_change_requests({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     status: "PENDING", # accepts PENDING, APPROVED, CANCELLED, DENIED, COMMITTED
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_change_request_summaries #=> Array
+    #   resp.collaboration_change_request_summaries[0].id #=> String
+    #   resp.collaboration_change_request_summaries[0].collaboration_id #=> String
+    #   resp.collaboration_change_request_summaries[0].create_time #=> Time
+    #   resp.collaboration_change_request_summaries[0].update_time #=> Time
+    #   resp.collaboration_change_request_summaries[0].status #=> String, one of "PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"
+    #   resp.collaboration_change_request_summaries[0].is_auto_approved #=> Boolean
+    #   resp.collaboration_change_request_summaries[0].changes #=> Array
+    #   resp.collaboration_change_request_summaries[0].changes[0].specification_type #=> String, one of "MEMBER"
+    #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.account_id #=> String
+    #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.member_abilities #=> Array
+    #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.display_name #=> String
+    #   resp.collaboration_change_request_summaries[0].changes[0].types #=> Array
+    #   resp.collaboration_change_request_summaries[0].changes[0].types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationChangeRequests AWS API Documentation
+    #
+    # @overload list_collaboration_change_requests(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_change_requests(params = {}, options = {})
+      req = build_request(:list_collaboration_change_requests, params)
       req.send_request(options)
     end
 
@@ -4493,6 +4673,9 @@ module Aws::CleanRooms
     # @option params [Types::ProtectedJobResultConfigurationInput] :result_configuration
     #   The details needed to write the job results.
     #
+    # @option params [Types::ProtectedJobComputeConfiguration] :compute_configuration
+    #   The compute configuration for the protected job.
+    #
     # @return [Types::StartProtectedJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartProtectedJobOutput#protected_job #protected_job} => Types::ProtectedJob
@@ -4510,6 +4693,12 @@ module Aws::CleanRooms
     #         member: {
     #           account_id: "AccountId", # required
     #         },
+    #       },
+    #     },
+    #     compute_configuration: {
+    #       worker: {
+    #         type: "CR.1X", # required, accepts CR.1X, CR.4X
+    #         number: 1, # required
     #       },
     #     },
     #   })
@@ -4532,6 +4721,8 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
+    #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/StartProtectedJob AWS API Documentation
     #
@@ -4840,6 +5031,8 @@ module Aws::CleanRooms
     #   resp.collaboration.query_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
+    #   resp.collaboration.auto_approved_change_types #=> Array
+    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaboration AWS API Documentation
     #
@@ -5586,6 +5779,8 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
+    #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateProtectedJob AWS API Documentation
     #
@@ -5688,7 +5883,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

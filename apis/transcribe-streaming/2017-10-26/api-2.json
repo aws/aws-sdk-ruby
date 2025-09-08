@@ -185,6 +185,17 @@
         "pt-BR"
       ]
     },
+    "CallAnalyticsLanguageIdentification":{
+      "type":"list",
+      "member":{"shape":"CallAnalyticsLanguageWithScore"}
+    },
+    "CallAnalyticsLanguageWithScore":{
+      "type":"structure",
+      "members":{
+        "LanguageCode":{"shape":"CallAnalyticsLanguageCode"},
+        "Score":{"shape":"Double"}
+      }
+    },
     "CallAnalyticsTranscriptResultStream":{
       "type":"structure",
       "members":{
@@ -942,7 +953,6 @@
     "StartCallAnalyticsStreamTranscriptionRequest":{
       "type":"structure",
       "required":[
-        "LanguageCode",
         "MediaSampleRateHertz",
         "MediaEncoding",
         "AudioStream"
@@ -988,6 +998,31 @@
           "shape":"ModelName",
           "location":"header",
           "locationName":"x-amzn-transcribe-language-model-name"
+        },
+        "IdentifyLanguage":{
+          "shape":"Boolean",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-identify-language"
+        },
+        "LanguageOptions":{
+          "shape":"LanguageOptions",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-language-options"
+        },
+        "PreferredLanguage":{
+          "shape":"CallAnalyticsLanguageCode",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-preferred-language"
+        },
+        "VocabularyNames":{
+          "shape":"VocabularyNames",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-vocabulary-names"
+        },
+        "VocabularyFilterNames":{
+          "shape":"VocabularyFilterNames",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-vocabulary-filter-names"
         },
         "EnablePartialResultsStabilization":{
           "shape":"Boolean",
@@ -1065,6 +1100,31 @@
           "shape":"ModelName",
           "location":"header",
           "locationName":"x-amzn-transcribe-language-model-name"
+        },
+        "IdentifyLanguage":{
+          "shape":"Boolean",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-identify-language"
+        },
+        "LanguageOptions":{
+          "shape":"LanguageOptions",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-language-options"
+        },
+        "PreferredLanguage":{
+          "shape":"CallAnalyticsLanguageCode",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-preferred-language"
+        },
+        "VocabularyNames":{
+          "shape":"VocabularyNames",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-vocabulary-names"
+        },
+        "VocabularyFilterNames":{
+          "shape":"VocabularyFilterNames",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-vocabulary-filter-names"
         },
         "EnablePartialResultsStabilization":{
           "shape":"Boolean",
@@ -1606,7 +1666,9 @@
         "Items":{"shape":"CallAnalyticsItemList"},
         "Entities":{"shape":"CallAnalyticsEntityList"},
         "Sentiment":{"shape":"Sentiment"},
-        "IssuesDetected":{"shape":"IssuesDetected"}
+        "IssuesDetected":{"shape":"IssuesDetected"},
+        "LanguageCode":{"shape":"CallAnalyticsLanguageCode"},
+        "LanguageIdentification":{"shape":"CallAnalyticsLanguageIdentification"}
       },
       "event":true
     },

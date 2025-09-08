@@ -71,6 +71,7 @@ module Aws::VerifiedPermissions
     CreatePolicyStoreOutput = Shapes::StructureShape.new(name: 'CreatePolicyStoreOutput')
     CreatePolicyTemplateInput = Shapes::StructureShape.new(name: 'CreatePolicyTemplateInput')
     CreatePolicyTemplateOutput = Shapes::StructureShape.new(name: 'CreatePolicyTemplateOutput')
+    DatetimeAttribute = Shapes::StringShape.new(name: 'DatetimeAttribute')
     Decimal = Shapes::StringShape.new(name: 'Decimal')
     Decision = Shapes::StringShape.new(name: 'Decision')
     DeleteIdentitySourceInput = Shapes::StructureShape.new(name: 'DeleteIdentitySourceInput')
@@ -85,6 +86,7 @@ module Aws::VerifiedPermissions
     DeterminingPolicyItem = Shapes::StructureShape.new(name: 'DeterminingPolicyItem')
     DeterminingPolicyList = Shapes::ListShape.new(name: 'DeterminingPolicyList')
     DiscoveryUrl = Shapes::StringShape.new(name: 'DiscoveryUrl')
+    Duration = Shapes::StringShape.new(name: 'Duration')
     EntitiesDefinition = Shapes::UnionShape.new(name: 'EntitiesDefinition')
     EntityAttributes = Shapes::MapShape.new(name: 'EntityAttributes')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
@@ -250,6 +252,8 @@ module Aws::VerifiedPermissions
     AttributeValue.add_member(:record, Shapes::ShapeRef.new(shape: RecordAttribute, location_name: "record"))
     AttributeValue.add_member(:ipaddr, Shapes::ShapeRef.new(shape: IpAddr, location_name: "ipaddr"))
     AttributeValue.add_member(:decimal, Shapes::ShapeRef.new(shape: Decimal, location_name: "decimal"))
+    AttributeValue.add_member(:datetime, Shapes::ShapeRef.new(shape: DatetimeAttribute, location_name: "datetime"))
+    AttributeValue.add_member(:duration, Shapes::ShapeRef.new(shape: Duration, location_name: "duration"))
     AttributeValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AttributeValue.add_member_subclass(:boolean, Types::AttributeValue::Boolean)
     AttributeValue.add_member_subclass(:entity_identifier, Types::AttributeValue::EntityIdentifier)
@@ -259,6 +263,8 @@ module Aws::VerifiedPermissions
     AttributeValue.add_member_subclass(:record, Types::AttributeValue::Record)
     AttributeValue.add_member_subclass(:ipaddr, Types::AttributeValue::Ipaddr)
     AttributeValue.add_member_subclass(:decimal, Types::AttributeValue::Decimal)
+    AttributeValue.add_member_subclass(:datetime, Types::AttributeValue::Datetime)
+    AttributeValue.add_member_subclass(:duration, Types::AttributeValue::Duration)
     AttributeValue.add_member_subclass(:unknown, Types::AttributeValue::Unknown)
     AttributeValue.struct_class = Types::AttributeValue
 

@@ -203,6 +203,28 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
+    # The language code that represents the language identified in your
+    # audio, including the associated confidence score.
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the identified language.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The confidence score associated with the identified language code.
+    #   Confidence scores are values between zero and one; larger values
+    #   indicate a higher confidence in the identified language.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/CallAnalyticsLanguageWithScore AWS API Documentation
+    #
+    class CallAnalyticsLanguageWithScore < Struct.new(
+      :language_code,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information on any `TranscriptFilterType` categories that
     # matched your transcription output. Matches are identified for each
     # segment upon completion of that segment.
@@ -1736,6 +1758,96 @@ module Aws::TranscribeStreamingService
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html
     #   @return [String]
     #
+    # @!attribute [rw] identify_language
+    #   Enables automatic language identification for your Call Analytics
+    #   transcription.
+    #
+    #   If you include `IdentifyLanguage`, you must include a list of
+    #   language codes, using `LanguageOptions`, that you think may be
+    #   present in your audio stream. You must provide a minimum of two
+    #   language selections.
+    #
+    #   You can also include a preferred language using `PreferredLanguage`.
+    #   Adding a preferred language can help Amazon Transcribe identify the
+    #   language faster than if you omit this parameter.
+    #
+    #   Note that you must include either `LanguageCode` or
+    #   `IdentifyLanguage` in your request. If you include both parameters,
+    #   your transcription job fails.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] language_options
+    #   Specify two or more language codes that represent the languages you
+    #   think may be present in your media.
+    #
+    #   Including language options can improve the accuracy of language
+    #   identification.
+    #
+    #   If you include `LanguageOptions` in your request, you must also
+    #   include `IdentifyLanguage`.
+    #
+    #   For a list of languages supported with Call Analytics streaming,
+    #   refer to the [Supported languages][1] table.
+    #
+    #   You can only include one language dialect per language per stream.
+    #   For example, you cannot include `en-US` and `en-AU` in the same
+    #   request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_language
+    #   Specify a preferred language from the subset of languages codes you
+    #   specified in `LanguageOptions`.
+    #
+    #   You can only use this parameter if you've included
+    #   `IdentifyLanguage` and `LanguageOptions` in your request.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_names
+    #   Specify the names of the custom vocabularies that you want to use
+    #   when processing your Call Analytics transcription. Note that
+    #   vocabulary names are case sensitive.
+    #
+    #   If the custom vocabulary's language doesn't match the identified
+    #   media language, it won't be applied to the transcription.
+    #
+    #   This parameter is only intended for use **with** the
+    #   `IdentifyLanguage` parameter. If you're **not** including
+    #   `IdentifyLanguage` in your request and want to use a custom
+    #   vocabulary with your transcription, use the `VocabularyName`
+    #   parameter instead.
+    #
+    #   For more information, see [Custom vocabularies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_names
+    #   Specify the names of the custom vocabulary filters that you want to
+    #   use when processing your Call Analytics transcription. Note that
+    #   vocabulary filter names are case sensitive.
+    #
+    #   These filters serve to customize the transcript output.
+    #
+    #   This parameter is only intended for use **with** the
+    #   `IdentifyLanguage` parameter. If you're **not** including
+    #   `IdentifyLanguage` in your request and want to use a custom
+    #   vocabulary filter with your transcription, use the
+    #   `VocabularyFilterName` parameter instead.
+    #
+    #   For more information, see [Using vocabulary filtering with unwanted
+    #   words][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
+    #   @return [String]
+    #
     # @!attribute [rw] enable_partial_results_stabilization
     #   Enables partial result stabilization for your transcription. Partial
     #   result stabilization can reduce latency in your output, but may
@@ -1833,6 +1945,11 @@ module Aws::TranscribeStreamingService
       :vocabulary_filter_name,
       :vocabulary_filter_method,
       :language_model_name,
+      :identify_language,
+      :language_options,
+      :preferred_language,
+      :vocabulary_names,
+      :vocabulary_filter_names,
       :enable_partial_results_stabilization,
       :partial_results_stability,
       :content_identification_type,
@@ -1891,6 +2008,31 @@ module Aws::TranscribeStreamingService
     #   your Call Analytics request.
     #   @return [String]
     #
+    # @!attribute [rw] identify_language
+    #   Shows whether automatic language identification was enabled for your
+    #   Call Analytics transcription.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] language_options
+    #   Provides the language codes that you specified in your Call
+    #   Analytics request.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_language
+    #   Provides the preferred language that you specified in your Call
+    #   Analytics request.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_names
+    #   Provides the names of the custom vocabularies that you specified in
+    #   your Call Analytics request.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_names
+    #   Provides the names of the custom vocabulary filters that you
+    #   specified in your Call Analytics request.
+    #   @return [String]
+    #
     # @!attribute [rw] enable_partial_results_stabilization
     #   Shows whether partial results stabilization was enabled for your
     #   Call Analytics transcription.
@@ -1928,6 +2070,11 @@ module Aws::TranscribeStreamingService
       :vocabulary_filter_name,
       :vocabulary_filter_method,
       :language_model_name,
+      :identify_language,
+      :language_options,
+      :preferred_language,
+      :vocabulary_names,
+      :vocabulary_filter_names,
       :enable_partial_results_stabilization,
       :partial_results_stability,
       :content_identification_type,
@@ -2919,6 +3066,16 @@ module Aws::TranscribeStreamingService
     #   Provides the issue that was detected in the specified segment.
     #   @return [Array<Types::IssueDetected>]
     #
+    # @!attribute [rw] language_code
+    #   The language code that represents the language spoken in your audio
+    #   stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_identification
+    #   The language code of the dominant language identified in your
+    #   stream.
+    #   @return [Array<Types::CallAnalyticsLanguageWithScore>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/UtteranceEvent AWS API Documentation
     #
     class UtteranceEvent < Struct.new(
@@ -2932,6 +3089,8 @@ module Aws::TranscribeStreamingService
       :entities,
       :sentiment,
       :issues_detected,
+      :language_code,
+      :language_identification,
       :event_type)
       SENSITIVE = []
       include Aws::Structure

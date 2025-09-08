@@ -8520,6 +8520,13 @@
         }
       }
     },
+    "AttachmentLimitType":{
+      "type":"string",
+      "enum":[
+        "shared",
+        "dedicated"
+      ]
+    },
     "AttachmentStatus":{
       "type":"string",
       "enum":[
@@ -23818,6 +23825,14 @@
         "NvmeSupport":{
           "shape":"EbsNvmeSupport",
           "locationName":"nvmeSupport"
+        },
+        "MaximumEbsAttachments":{
+          "shape":"MaximumEbsAttachments",
+          "locationName":"maximumEbsAttachments"
+        },
+        "AttachmentLimitType":{
+          "shape":"AttachmentLimitType",
+          "locationName":"attachmentLimitType"
         }
       }
     },
@@ -32738,7 +32753,64 @@
         "c8gn.metal-24xl",
         "c8gn.metal-48xl",
         "f2.6xlarge",
-        "p6e-gb200.36xlarge"
+        "p6e-gb200.36xlarge",
+        "g6f.large",
+        "g6f.xlarge",
+        "g6f.2xlarge",
+        "g6f.4xlarge",
+        "gr6f.4xlarge",
+        "p5.4xlarge",
+        "r8i.large",
+        "r8i.xlarge",
+        "r8i.2xlarge",
+        "r8i.4xlarge",
+        "r8i.8xlarge",
+        "r8i.12xlarge",
+        "r8i.16xlarge",
+        "r8i.24xlarge",
+        "r8i.32xlarge",
+        "r8i.48xlarge",
+        "r8i.96xlarge",
+        "r8i.metal-48xl",
+        "r8i.metal-96xl",
+        "r8i-flex.large",
+        "r8i-flex.xlarge",
+        "r8i-flex.2xlarge",
+        "r8i-flex.4xlarge",
+        "r8i-flex.8xlarge",
+        "r8i-flex.12xlarge",
+        "r8i-flex.16xlarge",
+        "m8i.large",
+        "m8i.xlarge",
+        "m8i.2xlarge",
+        "m8i.4xlarge",
+        "m8i.8xlarge",
+        "m8i.12xlarge",
+        "m8i.16xlarge",
+        "m8i.24xlarge",
+        "m8i.32xlarge",
+        "m8i.48xlarge",
+        "m8i.96xlarge",
+        "m8i.metal-48xl",
+        "m8i.metal-96xl",
+        "m8i-flex.large",
+        "m8i-flex.xlarge",
+        "m8i-flex.2xlarge",
+        "m8i-flex.4xlarge",
+        "m8i-flex.8xlarge",
+        "m8i-flex.12xlarge",
+        "m8i-flex.16xlarge",
+        "i8ge.large",
+        "i8ge.xlarge",
+        "i8ge.2xlarge",
+        "i8ge.3xlarge",
+        "i8ge.6xlarge",
+        "i8ge.12xlarge",
+        "i8ge.18xlarge",
+        "i8ge.24xlarge",
+        "i8ge.48xlarge",
+        "i8ge.metal-24xl",
+        "i8ge.metal-48xl"
       ]
     },
     "InstanceTypeHypervisor":{
@@ -36813,6 +36885,7 @@
       "min":0
     },
     "MaximumBandwidthInMbps":{"type":"integer"},
+    "MaximumEbsAttachments":{"type":"integer"},
     "MaximumEfaInterfaces":{"type":"integer"},
     "MaximumEnaQueueCount":{"type":"integer"},
     "MaximumEnaQueueCountPerInterface":{"type":"integer"},
@@ -44880,7 +44953,8 @@
       "enum":[
         "CreateRouteTable",
         "CreateRoute",
-        "EnableVgwRoutePropagation"
+        "EnableVgwRoutePropagation",
+        "Advertisement"
       ]
     },
     "RouteServer":{
@@ -45325,7 +45399,8 @@
       "type":"string",
       "enum":[
         "active",
-        "blackhole"
+        "blackhole",
+        "filtered"
       ]
     },
     "RouteTable":{

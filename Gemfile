@@ -19,6 +19,7 @@ gem 'json', '>= 2.4.0' # due to load_file support, see: https://github.com/ruby/
 gem 'nokogiri'
 gem 'oga'
 gem 'rexml'
+gem 'ruby-ll', '2.1.3' # temporary
 unless defined?(JRUBY_VERSION)
   gem 'libxml-ruby'
   gem 'oj'

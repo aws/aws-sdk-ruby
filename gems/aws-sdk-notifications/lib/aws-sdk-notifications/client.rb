@@ -477,8 +477,9 @@ module Aws::Notifications
     # @!group API Operations
 
     # Associates a delivery [Channel][1] with a particular
-    # `NotificationConfiguration`. Supported Channels include Chatbot, the
-    # Console Mobile Application, and emails (notifications-contacts).
+    # `NotificationConfiguration`. Supported Channels include Amazon Q
+    # Developer in chat applications, the Console Mobile Application, and
+    # emails (notifications-contacts).
     #
     #
     #
@@ -488,8 +489,8 @@ module Aws::Notifications
     #   The Amazon Resource Name (ARN) of the Channel to associate with the
     #   `NotificationConfiguration`.
     #
-    #   Supported ARNs include Chatbot, the Console Mobile Application, and
-    #   notifications-contacts.
+    #   Supported ARNs include Amazon Q Developer in chat applications, the
+    #   Console Mobile Application, and notifications-contacts.
     #
     # @option params [required, String] :notification_configuration_arn
     #   The ARN of the `NotificationConfiguration` to associate with the
@@ -546,15 +547,15 @@ module Aws::Notifications
     # Associates an additional Channel with a particular
     # `ManagedNotificationConfiguration`.
     #
-    # Supported Channels include Chatbot, the Console Mobile Application,
-    # and emails (notifications-contacts).
+    # Supported Channels include Amazon Q Developer in chat applications,
+    # the Console Mobile Application, and emails (notifications-contacts).
     #
     # @option params [required, String] :channel_arn
     #   The Amazon Resource Name (ARN) of the Channel to associate with the
     #   `ManagedNotificationConfiguration`.
     #
-    #   Supported ARNs include Chatbot, the Console Mobile Application, and
-    #   email (notifications-contacts).
+    #   Supported ARNs include Amazon Q Developer in chat applications, the
+    #   Console Mobile Application, and email (notifications-contacts).
     #
     # @option params [required, String] :managed_notification_configuration_arn
     #   The Amazon Resource Name (ARN) of the
@@ -576,6 +577,33 @@ module Aws::Notifications
     # @param [Hash] params ({})
     def associate_managed_notification_additional_channel(params = {}, options = {})
       req = build_request(:associate_managed_notification_additional_channel, params)
+      req.send_request(options)
+    end
+
+    # Associates an organizational unit with a notification configuration.
+    #
+    # @option params [required, String] :organizational_unit_id
+    #   The unique identifier of the organizational unit to associate.
+    #
+    # @option params [required, String] :notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the notification configuration to
+    #   associate with the organizational unit.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_organizational_unit({
+    #     organizational_unit_id: "OrganizationalUnitId", # required
+    #     notification_configuration_arn: "NotificationConfigurationArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/AssociateOrganizationalUnit AWS API Documentation
+    #
+    # @overload associate_organizational_unit(params = {})
+    # @param [Hash] params ({})
+    def associate_organizational_unit(params = {}, options = {})
+      req = build_request(:associate_organizational_unit, params)
       req.send_request(options)
     end
 
@@ -827,8 +855,8 @@ module Aws::Notifications
     end
 
     # Disassociates a Channel from a specified `NotificationConfiguration`.
-    # Supported Channels include Chatbot, the Console Mobile Application,
-    # and emails (notifications-contacts).
+    # Supported Channels include Amazon Q Developer in chat applications,
+    # the Console Mobile Application, and emails (notifications-contacts).
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the Channel to disassociate.
@@ -887,8 +915,8 @@ module Aws::Notifications
     # Disassociates an additional Channel from a particular
     # `ManagedNotificationConfiguration`.
     #
-    # Supported Channels include Chatbot, the Console Mobile Application,
-    # and emails (notifications-contacts).
+    # Supported Channels include Amazon Q Developer in chat applications,
+    # the Console Mobile Application, and emails (notifications-contacts).
     #
     # @option params [required, String] :channel_arn
     #   The Amazon Resource Name (ARN) of the Channel to associate with the
@@ -913,6 +941,34 @@ module Aws::Notifications
     # @param [Hash] params ({})
     def disassociate_managed_notification_additional_channel(params = {}, options = {})
       req = build_request(:disassociate_managed_notification_additional_channel, params)
+      req.send_request(options)
+    end
+
+    # Removes the association between an organizational unit and a
+    # notification configuration.
+    #
+    # @option params [required, String] :organizational_unit_id
+    #   The unique identifier of the organizational unit to disassociate.
+    #
+    # @option params [required, String] :notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the notification configuration to
+    #   disassociate from the organizational unit.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_organizational_unit({
+    #     organizational_unit_id: "OrganizationalUnitId", # required
+    #     notification_configuration_arn: "NotificationConfigurationArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/DisassociateOrganizationalUnit AWS API Documentation
+    #
+    # @overload disassociate_organizational_unit(params = {})
+    # @param [Hash] params ({})
+    def disassociate_organizational_unit(params = {}, options = {})
+      req = build_request(:disassociate_organizational_unit, params)
       req.send_request(options)
     end
 
@@ -1177,6 +1233,7 @@ module Aws::Notifications
     #   * {Types::GetNotificationConfigurationResponse#status #status} => String
     #   * {Types::GetNotificationConfigurationResponse#creation_time #creation_time} => Time
     #   * {Types::GetNotificationConfigurationResponse#aggregation_duration #aggregation_duration} => String
+    #   * {Types::GetNotificationConfigurationResponse#subtype #subtype} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1192,6 +1249,7 @@ module Aws::Notifications
     #   resp.status #=> String, one of "ACTIVE", "PARTIALLY_ACTIVE", "INACTIVE", "DELETING"
     #   resp.creation_time #=> Time
     #   resp.aggregation_duration #=> String, one of "LONG", "SHORT", "NONE"
+    #   resp.subtype #=> String, one of "ACCOUNT", "ADMIN_MANAGED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/GetNotificationConfiguration AWS API Documentation
     #
@@ -1304,6 +1362,7 @@ module Aws::Notifications
     #   resp.content.media[0].type #=> String, one of "IMAGE"
     #   resp.content.media[0].url #=> String
     #   resp.content.media[0].caption #=> String
+    #   resp.content.organizational_unit_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/GetNotificationEvent AWS API Documentation
     #
@@ -1323,7 +1382,7 @@ module Aws::Notifications
     #
     # @example Response structure
     #
-    #   resp.notifications_access_for_organization.access_status #=> String, one of "ENABLED", "DISABLED", "PENDING"
+    #   resp.notifications_access_for_organization.access_status #=> String, one of "ENABLED", "DISABLED", "PENDING", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/GetNotificationsAccessForOrganization AWS API Documentation
     #
@@ -1719,6 +1778,67 @@ module Aws::Notifications
       req.send_request(options)
     end
 
+    # Returns a list of member accounts associated with a notification
+    # configuration.
+    #
+    # @option params [required, String] :notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the notification configuration used
+    #   to filter the member accounts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Valid values
+    #   are 1-100.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results. Use the value returned in the
+    #   previous response.
+    #
+    # @option params [String] :member_account
+    #   The member account identifier used to filter the results.
+    #
+    # @option params [String] :status
+    #   The status used to filter the member accounts.
+    #
+    # @option params [String] :organizational_unit_id
+    #   The organizational unit ID used to filter the member accounts.
+    #
+    # @return [Types::ListMemberAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMemberAccountsResponse#member_accounts #member_accounts} => Array&lt;Types::MemberAccount&gt;
+    #   * {Types::ListMemberAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_member_accounts({
+    #     notification_configuration_arn: "NotificationConfigurationArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     member_account: "AccountId",
+    #     status: "ACTIVE", # accepts ACTIVE, PENDING, INACTIVE, CREATING, DELETING
+    #     organizational_unit_id: "OrganizationalUnitId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.member_accounts #=> Array
+    #   resp.member_accounts[0].notification_configuration_arn #=> String
+    #   resp.member_accounts[0].account_id #=> String
+    #   resp.member_accounts[0].status #=> String, one of "ACTIVE", "PENDING", "INACTIVE", "CREATING", "DELETING"
+    #   resp.member_accounts[0].status_reason #=> String
+    #   resp.member_accounts[0].organizational_unit_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListMemberAccounts AWS API Documentation
+    #
+    # @overload list_member_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_member_accounts(params = {}, options = {})
+      req = build_request(:list_member_accounts, params)
+      req.send_request(options)
+    end
+
     # Returns a list of abbreviated `NotificationConfigurations` according
     # to specified filters, in reverse chronological order (newest first).
     #
@@ -1765,6 +1885,10 @@ module Aws::Notifications
     #
     #       * Only `GET` and `LIST` calls can be run.
     #
+    # @option params [String] :subtype
+    #   The subtype used to filter the notification configurations in the
+    #   request.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned in this call. Defaults to
     #   20.
@@ -1786,6 +1910,7 @@ module Aws::Notifications
     #     event_rule_source: "Source",
     #     channel_arn: "ChannelArn",
     #     status: "ACTIVE", # accepts ACTIVE, PARTIALLY_ACTIVE, INACTIVE, DELETING
+    #     subtype: "ACCOUNT", # accepts ACCOUNT, ADMIN_MANAGED
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -1800,6 +1925,7 @@ module Aws::Notifications
     #   resp.notification_configurations[0].status #=> String, one of "ACTIVE", "PARTIALLY_ACTIVE", "INACTIVE", "DELETING"
     #   resp.notification_configurations[0].creation_time #=> Time
     #   resp.notification_configurations[0].aggregation_duration #=> String, one of "LONG", "SHORT", "NONE"
+    #   resp.notification_configurations[0].subtype #=> String, one of "ACCOUNT", "ADMIN_MANAGED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListNotificationConfigurations AWS API Documentation
     #
@@ -1864,6 +1990,10 @@ module Aws::Notifications
     #   The start token for paginated calls. Retrieved from the response of a
     #   previous `ListEventRules` call. Next token uses Base64 encoding.
     #
+    # @option params [String] :organizational_unit_id
+    #   The unique identifier of the organizational unit used to filter
+    #   notification events.
+    #
     # @return [Types::ListNotificationEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListNotificationEventsResponse#next_token #next_token} => String
@@ -1882,6 +2012,7 @@ module Aws::Notifications
     #     aggregate_notification_event_arn: "NotificationEventArn",
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     organizational_unit_id: "OrganizationalUnitId",
     #   })
     #
     # @example Response structure
@@ -1922,6 +2053,7 @@ module Aws::Notifications
     #   resp.notification_events[0].aggregation_summary.additional_summarization_dimensions[0].count #=> Integer
     #   resp.notification_events[0].aggregation_summary.additional_summarization_dimensions[0].sample_values #=> Array
     #   resp.notification_events[0].aggregation_summary.additional_summarization_dimensions[0].sample_values[0] #=> String
+    #   resp.notification_events[0].organizational_unit_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListNotificationEvents AWS API Documentation
     #
@@ -1971,6 +2103,51 @@ module Aws::Notifications
     # @param [Hash] params ({})
     def list_notification_hubs(params = {}, options = {})
       req = build_request(:list_notification_hubs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of organizational units associated with a notification
+    # configuration.
+    #
+    # @option params [required, String] :notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the notification configuration used
+    #   to filter the organizational units.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of organizational units to return in a single call.
+    #   Valid values are 1-100.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results. Use the value returned in the
+    #   previous response.
+    #
+    # @return [Types::ListOrganizationalUnitsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrganizationalUnitsResponse#organizational_units #organizational_units} => Array&lt;String&gt;
+    #   * {Types::ListOrganizationalUnitsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_organizational_units({
+    #     notification_configuration_arn: "NotificationConfigurationArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organizational_units #=> Array
+    #   resp.organizational_units[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListOrganizationalUnits AWS API Documentation
+    #
+    # @overload list_organizational_units(params = {})
+    # @param [Hash] params ({})
+    def list_organizational_units(params = {}, options = {})
+      req = build_request(:list_organizational_units, params)
       req.send_request(options)
     end
 
@@ -2256,7 +2433,7 @@ module Aws::Notifications
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-notifications'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

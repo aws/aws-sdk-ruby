@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2025-08-29)
+------------------
+
+* Feature - AWS X-Ray Features: Support Sampling Rate Boost On Anomaly
+
 1.89.0 (2025-08-28)
 ------------------
 

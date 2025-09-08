@@ -994,11 +994,13 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_hook_results-instance_method
       def list_hook_results: (
-                               target_type: ("CHANGE_SET" | "STACK" | "RESOURCE" | "CLOUD_CONTROL"),
-                               target_id: ::String,
+                               ?target_type: ("CHANGE_SET" | "STACK" | "RESOURCE" | "CLOUD_CONTROL"),
+                               ?target_id: ::String,
+                               ?type_arn: ::String,
+                               ?status: ("HOOK_IN_PROGRESS" | "HOOK_COMPLETE_SUCCEEDED" | "HOOK_COMPLETE_FAILED" | "HOOK_FAILED"),
                                ?next_token: ::String
                              ) -> _ListHookResultsResponseSuccess
-                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHookResultsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHookResultsResponseSuccess
 
       interface _ListImportsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListImportsOutput]

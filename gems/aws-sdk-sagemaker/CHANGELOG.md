@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.328.0 (2025-09-05)
+------------------
+
+* Feature - Release IPv6 support with dualstack in SageMaker Notebooks, Tiered Storage Checkpointing Support in SageMaker HyperPod and P5.4xlarge instance type for SageMaker Hosting.
+
 1.327.0 (2025-08-27)
 ------------------
 

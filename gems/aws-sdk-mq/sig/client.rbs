@@ -85,7 +85,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#create_broker-instance_method
       def create_broker: (
-                           ?authentication_strategy: ("SIMPLE" | "LDAP"),
+                           ?authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED"),
                            ?auto_minor_version_upgrade: bool,
                            broker_name: ::String,
                            ?configuration: {
@@ -128,7 +128,7 @@ module Aws
                            ?storage_type: ("EBS" | "EFS"),
                            ?subnet_ids: Array[::String],
                            ?tags: Hash[::String, ::String],
-                           users: Array[
+                           ?users: Array[
                              {
                                console_access: bool?,
                                groups: Array[::String]?,
@@ -145,7 +145,7 @@ module Aws
       interface _CreateConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationResponse]
         def arn: () -> ::String
-        def authentication_strategy: () -> ("SIMPLE" | "LDAP")
+        def authentication_strategy: () -> ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
         def created: () -> ::Time
         def id: () -> ::String
         def latest_revision: () -> Types::ConfigurationRevision
@@ -153,7 +153,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#create_configuration-instance_method
       def create_configuration: (
-                                  ?authentication_strategy: ("SIMPLE" | "LDAP"),
+                                  ?authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED"),
                                   engine_type: ("ACTIVEMQ" | "RABBITMQ"),
                                   ?engine_version: ::String,
                                   name: ::String,
@@ -222,7 +222,7 @@ module Aws
       interface _DescribeBrokerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBrokerResponse]
         def actions_required: () -> ::Array[Types::ActionRequired]
-        def authentication_strategy: () -> ("SIMPLE" | "LDAP")
+        def authentication_strategy: () -> ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
         def auto_minor_version_upgrade: () -> bool
         def broker_arn: () -> ::String
         def broker_id: () -> ::String
@@ -239,7 +239,7 @@ module Aws
         def ldap_server_metadata: () -> Types::LdapServerMetadataOutput
         def logs: () -> Types::LogsSummary
         def maintenance_window_start_time: () -> Types::WeeklyStartTime
-        def pending_authentication_strategy: () -> ("SIMPLE" | "LDAP")
+        def pending_authentication_strategy: () -> ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
         def pending_engine_version: () -> ::String
         def pending_host_instance_type: () -> ::String
         def pending_ldap_server_metadata: () -> Types::LdapServerMetadataOutput
@@ -294,7 +294,7 @@ module Aws
       interface _DescribeConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConfigurationResponse]
         def arn: () -> ::String
-        def authentication_strategy: () -> ("SIMPLE" | "LDAP")
+        def authentication_strategy: () -> ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
         def created: () -> ::Time
         def description: () -> ::String
         def engine_type: () -> ("ACTIVEMQ" | "RABBITMQ")
@@ -426,7 +426,7 @@ module Aws
 
       interface _UpdateBrokerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrokerResponse]
-        def authentication_strategy: () -> ("SIMPLE" | "LDAP")
+        def authentication_strategy: () -> ("SIMPLE" | "LDAP" | "CONFIG_MANAGED")
         def auto_minor_version_upgrade: () -> bool
         def broker_id: () -> ::String
         def configuration: () -> Types::ConfigurationId
@@ -443,7 +443,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#update_broker-instance_method
       def update_broker: (
-                           ?authentication_strategy: ("SIMPLE" | "LDAP"),
+                           ?authentication_strategy: ("SIMPLE" | "LDAP" | "CONFIG_MANAGED"),
                            ?auto_minor_version_upgrade: bool,
                            broker_id: ::String,
                            ?configuration: {

@@ -754,6 +754,7 @@ module Aws::CloudFront
       attr_accessor origin_ssl_protocols: Types::OriginSslProtocols
       attr_accessor origin_read_timeout: ::Integer
       attr_accessor origin_keepalive_timeout: ::Integer
+      attr_accessor ip_address_type: ("ipv4" | "ipv6" | "dualstack")
       SENSITIVE: []
     end
 

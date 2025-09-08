@@ -454,6 +454,7 @@ module Aws
                                ?enable_local_write_forwarding: bool,
                                ?ca_certificate_identifier: ::String,
                                ?engine_lifecycle_support: ::String,
+                               ?master_user_authentication_type: ("password" | "iam-db-auth"),
                                ?source_region: ::String
                              ) -> _CreateDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterResponseSuccess
@@ -601,7 +602,8 @@ module Aws
                                 ?db_system_id: ::String,
                                 ?dedicated_log_volume: bool,
                                 ?multi_tenant: bool,
-                                ?engine_lifecycle_support: ::String
+                                ?engine_lifecycle_support: ::String,
+                                ?master_user_authentication_type: ("password" | "iam-db-auth")
                               ) -> _CreateDBInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBInstanceResponseSuccess
 
@@ -719,7 +721,9 @@ module Aws
                                  key: ::String?,
                                  value: ::String?
                                },
-                             ]
+                             ],
+                             ?endpoint_network_type: ("IPV4" | "IPV6" | "DUAL"),
+                             ?target_connection_network_type: ("IPV4" | "IPV6")
                            ) -> _CreateDBProxyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBProxyResponseSuccess
 
@@ -739,7 +743,8 @@ module Aws
                                           key: ::String?,
                                           value: ::String?
                                         },
-                                      ]
+                                      ],
+                                      ?endpoint_network_type: ("IPV4" | "IPV6" | "DUAL")
                                     ) -> _CreateDBProxyEndpointResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBProxyEndpointResponseSuccess
 
@@ -2347,7 +2352,8 @@ module Aws
                                ?enable_local_write_forwarding: bool,
                                ?aws_backup_recovery_point_arn: ::String,
                                ?enable_limitless_database: bool,
-                               ?ca_certificate_identifier: ::String
+                               ?ca_certificate_identifier: ::String,
+                               ?master_user_authentication_type: ("password" | "iam-db-auth")
                              ) -> _ModifyDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBClusterResponseSuccess
 
@@ -2485,7 +2491,8 @@ module Aws
                                 ?master_user_secret_kms_key_id: ::String,
                                 ?engine: ::String,
                                 ?dedicated_log_volume: bool,
-                                ?multi_tenant: bool
+                                ?multi_tenant: bool,
+                                ?master_user_authentication_type: ("password" | "iam-db-auth")
                               ) -> _ModifyDBInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBInstanceResponseSuccess
 

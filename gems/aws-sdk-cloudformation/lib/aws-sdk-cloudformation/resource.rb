@@ -264,6 +264,14 @@ module Aws::CloudFormation
     #   must be one of: `DO_NOTHING`, `ROLLBACK`, or `DELETE`. You can specify
     #   either `OnFailure` or `DisableRollback`, but not both.
     #
+    #   <note markdown="1"> Although the default setting is `ROLLBACK`, there is one exception.
+    #   This exception occurs when a StackSet attempts to deploy a stack
+    #   instance and the stack instance fails to create successfully. In this
+    #   case, the `CreateStack` call overrides the default setting and sets
+    #   the value of `OnFailure` to `DELETE`.
+    #
+    #    </note>
+    #
     #   Default: `ROLLBACK`
     # @option options [String] :stack_policy_body
     #   Structure that contains the stack policy body. For more information,

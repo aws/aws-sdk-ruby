@@ -402,6 +402,7 @@ module Aws::RDS
       attr_accessor enable_local_write_forwarding: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       attr_accessor source_region: ::String
       SENSITIVE: []
     end
@@ -501,6 +502,7 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor multi_tenant: bool
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       SENSITIVE: []
     end
 
@@ -586,6 +588,7 @@ module Aws::RDS
       attr_accessor vpc_security_group_ids: ::Array[::String]
       attr_accessor target_role: ("READ_WRITE" | "READ_ONLY")
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor endpoint_network_type: ("IPV4" | "IPV6" | "DUAL")
       SENSITIVE: []
     end
 
@@ -605,6 +608,8 @@ module Aws::RDS
       attr_accessor idle_client_timeout: ::Integer
       attr_accessor debug_logging: bool
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor endpoint_network_type: ("IPV4" | "IPV6" | "DUAL")
+      attr_accessor target_connection_network_type: ("IPV4" | "IPV6")
       SENSITIVE: []
     end
 
@@ -1371,6 +1376,8 @@ module Aws::RDS
       attr_accessor debug_logging: bool
       attr_accessor created_date: ::Time
       attr_accessor updated_date: ::Time
+      attr_accessor endpoint_network_type: ("IPV4" | "IPV6" | "DUAL")
+      attr_accessor target_connection_network_type: ("IPV4" | "IPV6")
       SENSITIVE: []
     end
 
@@ -1389,6 +1396,7 @@ module Aws::RDS
       attr_accessor created_date: ::Time
       attr_accessor target_role: ("READ_WRITE" | "READ_ONLY")
       attr_accessor is_default: bool
+      attr_accessor endpoint_network_type: ("IPV4" | "IPV6" | "DUAL")
       SENSITIVE: []
     end
 
@@ -2903,6 +2911,7 @@ module Aws::RDS
       attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor enable_limitless_database: bool
       attr_accessor ca_certificate_identifier: ::String
+      attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       SENSITIVE: []
     end
 
@@ -2992,6 +3001,7 @@ module Aws::RDS
       attr_accessor engine: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor multi_tenant: bool
+      attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       SENSITIVE: []
     end
 

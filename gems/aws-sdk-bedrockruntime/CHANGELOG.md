@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2025-08-29)
+------------------
+
+* Feature - Fixed stop sequence limit for converse API.
+
 1.58.0 (2025-08-28)
 ------------------
 

@@ -60,6 +60,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Event.html#hook_invocation_point-instance_method
       def hook_invocation_point: () -> ("PRE_PROVISION")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Event.html#hook_invocation_id-instance_method
+      def hook_invocation_id: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Event.html#hook_failure_mode-instance_method
       def hook_failure_mode: () -> ("FAIL" | "WARN")
 

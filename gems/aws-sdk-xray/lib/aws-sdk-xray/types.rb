@@ -1158,10 +1158,16 @@ module Aws::XRay
     #   requests.
     #   @return [Array<Types::SamplingStatisticsDocument>]
     #
+    # @!attribute [rw] sampling_boost_statistics_documents
+    #   Information about rules that the service is using to boost sampling
+    #   rate.
+    #   @return [Array<Types::SamplingBoostStatisticsDocument>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargetsRequest AWS API Documentation
     #
     class GetSamplingTargetsRequest < Struct.new(
-      :sampling_statistics_documents)
+      :sampling_statistics_documents,
+      :sampling_boost_statistics_documents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1190,12 +1196,22 @@ module Aws::XRay
     #   [1]: https://docs.aws.amazon.com/xray/latest/api/API_SamplingStatisticsDocument.html
     #   @return [Array<Types::UnprocessedStatistics>]
     #
+    # @!attribute [rw] unprocessed_boost_statistics
+    #   Information about [SamplingBoostStatisticsDocument][1] that X-Ray
+    #   could not process.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/xray/latest/api/API_SamplingBoostStatisticsDocument.html
+    #   @return [Array<Types::UnprocessedStatistics>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargetsResult AWS API Documentation
     #
     class GetSamplingTargetsResult < Struct.new(
       :sampling_target_documents,
       :last_rule_modification,
-      :unprocessed_statistics)
+      :unprocessed_statistics,
+      :unprocessed_boost_statistics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2652,6 +2668,101 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # Temporary boost sampling rate. X-Ray calculates sampling boost for
+    # each service based on the recent sampling boost stats of all services
+    # that called [GetSamplingTargets][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html
+    #
+    # @!attribute [rw] boost_rate
+    #   The calculated sampling boost rate for this service
+    #   @return [Float]
+    #
+    # @!attribute [rw] boost_rate_ttl
+    #   When the sampling boost expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingBoost AWS API Documentation
+    #
+    class SamplingBoost < Struct.new(
+      :boost_rate,
+      :boost_rate_ttl)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request anomaly stats for a single rule from a service. Results are
+    # for the last 10 seconds unless the service has been assigned a longer
+    # reporting interval after a previous call to [GetSamplingTargets][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the sampling rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   Matches the `name` that the service uses to identify itself in
+    #   segments.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The current time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] anomaly_count
+    #   The number of requests with anomaly.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_count
+    #   The number of requests that associated to the rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sampled_anomaly_count
+    #   The number of requests with anomaly recorded.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingBoostStatisticsDocument AWS API Documentation
+    #
+    class SamplingBoostStatisticsDocument < Struct.new(
+      :rule_name,
+      :service_name,
+      :timestamp,
+      :anomaly_count,
+      :total_count,
+      :sampled_anomaly_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enable temporary sampling rate increases when you detect anomalies to
+    # improve visibility.
+    #
+    # @!attribute [rw] max_rate
+    #   Defines max temporary sampling rate to apply when a boost is
+    #   triggered. Calculated boost rate by X-Ray will be less than or equal
+    #   to this max rate.
+    #   @return [Float]
+    #
+    # @!attribute [rw] cooldown_window_minutes
+    #   Sets the time window (in minutes) in which only one sampling rate
+    #   boost can be triggered. After a boost occurs, no further boosts are
+    #   allowed until the next window.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRateBoost AWS API Documentation
+    #
+    class SamplingRateBoost < Struct.new(
+      :max_rate,
+      :cooldown_window_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A sampling rule that services use to decide whether to instrument a
     # request. Rule fields can match properties of the service, or
     # properties of a request. The service can ignore rules that don't
@@ -2717,6 +2828,12 @@ module Aws::XRay
     #   Matches attributes derived from the request.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] sampling_rate_boost
+    #   Specifies the multiplier applied to the base sampling rate. This
+    #   boost allows you to temporarily increase sampling without changing
+    #   the rule's configuration.
+    #   @return [Types::SamplingRateBoost]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRule AWS API Documentation
     #
     class SamplingRule < Struct.new(
@@ -2732,7 +2849,8 @@ module Aws::XRay
       :http_method,
       :url_path,
       :version,
-      :attributes)
+      :attributes,
+      :sampling_rate_boost)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2823,6 +2941,12 @@ module Aws::XRay
     #   Matches attributes derived from the request.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] sampling_rate_boost
+    #   Specifies the multiplier applied to the base sampling rate. This
+    #   boost allows you to temporarily increase sampling without changing
+    #   the rule's configuration.
+    #   @return [Types::SamplingRateBoost]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRuleUpdate AWS API Documentation
     #
     class SamplingRuleUpdate < Struct.new(
@@ -2837,7 +2961,8 @@ module Aws::XRay
       :service_type,
       :http_method,
       :url_path,
-      :attributes)
+      :attributes,
+      :sampling_rate_boost)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2973,6 +3098,10 @@ module Aws::XRay
     #   sampling targets again.
     #   @return [Integer]
     #
+    # @!attribute [rw] sampling_boost
+    #   The sampling boost that X-Ray allocated for this service.
+    #   @return [Types::SamplingBoost]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingTargetDocument AWS API Documentation
     #
     class SamplingTargetDocument < Struct.new(
@@ -2980,7 +3109,8 @@ module Aws::XRay
       :fixed_rate,
       :reservoir_quota,
       :reservoir_quota_ttl,
-      :interval)
+      :interval,
+      :sampling_boost)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3418,8 +3548,9 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] duration
-    #   The length of time in seconds between the start time of the root
-    #   segment and the end time of the last segment that completed.
+    #   The length of time in seconds between the start time of the earliest
+    #   segment that started and the end time of the last segment that
+    #   completed.
     #   @return [Float]
     #
     # @!attribute [rw] limit_exceeded
@@ -3462,8 +3593,9 @@ module Aws::XRay
     #   @return [Time]
     #
     # @!attribute [rw] duration
-    #   The length of time in seconds between the start time of the root
-    #   segment and the end time of the last segment that completed.
+    #   The length of time in seconds between the start time of the earliest
+    #   segment that started and the end time of the last segment that
+    #   completed.
     #   @return [Float]
     #
     # @!attribute [rw] response_time

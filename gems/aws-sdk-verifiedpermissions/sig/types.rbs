@@ -28,8 +28,10 @@ module Aws::VerifiedPermissions
       attr_accessor record: ::Hash[::String, Types::AttributeValue]
       attr_accessor ipaddr: ::String
       attr_accessor decimal: ::String
+      attr_accessor datetime: ::String
+      attr_accessor duration: ::String
       attr_accessor unknown: untyped
-      SENSITIVE: [:boolean, :long, :string, :ipaddr, :decimal]
+      SENSITIVE: [:boolean, :long, :string, :ipaddr, :decimal, :datetime, :duration]
 
       class Boolean < AttributeValue
       end
@@ -46,6 +48,10 @@ module Aws::VerifiedPermissions
       class Ipaddr < AttributeValue
       end
       class Decimal < AttributeValue
+      end
+      class Datetime < AttributeValue
+      end
+      class Duration < AttributeValue
       end
       class Unknown < AttributeValue
       end

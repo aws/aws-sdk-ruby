@@ -56,7 +56,7 @@ module Aws::TranscribeStreamingService
   autoload :AsyncClient, 'aws-sdk-transcribestreamingservice/async_client'
   autoload :EventStreams, 'aws-sdk-transcribestreamingservice/event_streams'
 
-  GEM_VERSION = '1.89.0'
+  GEM_VERSION = '1.90.0'
 
 end
 

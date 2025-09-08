@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2025-09-04)
+------------------
+
+* Feature - Amazon Verified Permissions / Features : Adds support for datetime and duration attribute values.
+
 1.51.0 (2025-08-26)
 ------------------
 

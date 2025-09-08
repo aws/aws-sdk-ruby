@@ -55,7 +55,7 @@ module Aws::Route53
   autoload :EndpointProvider, 'aws-sdk-route53/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-route53/endpoints'
 
-  GEM_VERSION = '1.121.0'
+  GEM_VERSION = '1.122.0'
 
 end
 

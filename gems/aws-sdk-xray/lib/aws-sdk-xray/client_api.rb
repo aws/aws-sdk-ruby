@@ -23,6 +23,7 @@ module Aws::XRay
     Annotations = Shapes::MapShape.new(name: 'Annotations')
     AnomalousService = Shapes::StructureShape.new(name: 'AnomalousService')
     AnomalousServiceList = Shapes::ListShape.new(name: 'AnomalousServiceList')
+    AnomalyCount = Shapes::IntegerShape.new(name: 'AnomalyCount')
     AttributeKey = Shapes::StringShape.new(name: 'AttributeKey')
     AttributeMap = Shapes::MapShape.new(name: 'AttributeMap')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
@@ -35,6 +36,7 @@ module Aws::XRay
     CancelTraceRetrievalRequest = Shapes::StructureShape.new(name: 'CancelTraceRetrievalRequest')
     CancelTraceRetrievalResult = Shapes::StructureShape.new(name: 'CancelTraceRetrievalResult')
     ClientID = Shapes::StringShape.new(name: 'ClientID')
+    CooldownWindowMinutes = Shapes::IntegerShape.new(name: 'CooldownWindowMinutes')
     CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
     CreateGroupResult = Shapes::StructureShape.new(name: 'CreateGroupResult')
     CreateSamplingRuleRequest = Shapes::StructureShape.new(name: 'CreateSamplingRuleRequest')
@@ -156,6 +158,7 @@ module Aws::XRay
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LockoutPreventionException = Shapes::StructureShape.new(name: 'LockoutPreventionException')
     MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException')
+    MaxRate = Shapes::FloatShape.new(name: 'MaxRate')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
@@ -200,7 +203,12 @@ module Aws::XRay
     RootCauseExceptions = Shapes::ListShape.new(name: 'RootCauseExceptions')
     RuleLimitExceededException = Shapes::StructureShape.new(name: 'RuleLimitExceededException')
     RuleName = Shapes::StringShape.new(name: 'RuleName')
+    SampledAnomalyCount = Shapes::IntegerShape.new(name: 'SampledAnomalyCount')
     SampledCount = Shapes::IntegerShape.new(name: 'SampledCount')
+    SamplingBoost = Shapes::StructureShape.new(name: 'SamplingBoost')
+    SamplingBoostStatisticsDocument = Shapes::StructureShape.new(name: 'SamplingBoostStatisticsDocument')
+    SamplingBoostStatisticsDocumentList = Shapes::ListShape.new(name: 'SamplingBoostStatisticsDocumentList')
+    SamplingRateBoost = Shapes::StructureShape.new(name: 'SamplingRateBoost')
     SamplingRule = Shapes::StructureShape.new(name: 'SamplingRule')
     SamplingRuleRecord = Shapes::StructureShape.new(name: 'SamplingRuleRecord')
     SamplingRuleRecordList = Shapes::ListShape.new(name: 'SamplingRuleRecordList')
@@ -248,6 +256,7 @@ module Aws::XRay
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     Trace = Shapes::StructureShape.new(name: 'Trace')
     TraceAvailabilityZones = Shapes::ListShape.new(name: 'TraceAvailabilityZones')
     TraceFormatType = Shapes::StringShape.new(name: 'TraceFormatType')
@@ -547,11 +556,13 @@ module Aws::XRay
     GetSamplingStatisticSummariesResult.struct_class = Types::GetSamplingStatisticSummariesResult
 
     GetSamplingTargetsRequest.add_member(:sampling_statistics_documents, Shapes::ShapeRef.new(shape: SamplingStatisticsDocumentList, required: true, location_name: "SamplingStatisticsDocuments"))
+    GetSamplingTargetsRequest.add_member(:sampling_boost_statistics_documents, Shapes::ShapeRef.new(shape: SamplingBoostStatisticsDocumentList, location_name: "SamplingBoostStatisticsDocuments"))
     GetSamplingTargetsRequest.struct_class = Types::GetSamplingTargetsRequest
 
     GetSamplingTargetsResult.add_member(:sampling_target_documents, Shapes::ShapeRef.new(shape: SamplingTargetDocumentList, location_name: "SamplingTargetDocuments"))
     GetSamplingTargetsResult.add_member(:last_rule_modification, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastRuleModification"))
     GetSamplingTargetsResult.add_member(:unprocessed_statistics, Shapes::ShapeRef.new(shape: UnprocessedStatisticsList, location_name: "UnprocessedStatistics"))
+    GetSamplingTargetsResult.add_member(:unprocessed_boost_statistics, Shapes::ShapeRef.new(shape: UnprocessedStatisticsList, location_name: "UnprocessedBoostStatistics"))
     GetSamplingTargetsResult.struct_class = Types::GetSamplingTargetsResult
 
     GetServiceGraphRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
@@ -875,6 +886,24 @@ module Aws::XRay
     RuleLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     RuleLimitExceededException.struct_class = Types::RuleLimitExceededException
 
+    SamplingBoost.add_member(:boost_rate, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "BoostRate"))
+    SamplingBoost.add_member(:boost_rate_ttl, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "BoostRateTTL"))
+    SamplingBoost.struct_class = Types::SamplingBoost
+
+    SamplingBoostStatisticsDocument.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "RuleName"))
+    SamplingBoostStatisticsDocument.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "ServiceName"))
+    SamplingBoostStatisticsDocument.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    SamplingBoostStatisticsDocument.add_member(:anomaly_count, Shapes::ShapeRef.new(shape: AnomalyCount, required: true, location_name: "AnomalyCount"))
+    SamplingBoostStatisticsDocument.add_member(:total_count, Shapes::ShapeRef.new(shape: TotalCount, required: true, location_name: "TotalCount"))
+    SamplingBoostStatisticsDocument.add_member(:sampled_anomaly_count, Shapes::ShapeRef.new(shape: SampledAnomalyCount, required: true, location_name: "SampledAnomalyCount"))
+    SamplingBoostStatisticsDocument.struct_class = Types::SamplingBoostStatisticsDocument
+
+    SamplingBoostStatisticsDocumentList.member = Shapes::ShapeRef.new(shape: SamplingBoostStatisticsDocument)
+
+    SamplingRateBoost.add_member(:max_rate, Shapes::ShapeRef.new(shape: MaxRate, required: true, location_name: "MaxRate"))
+    SamplingRateBoost.add_member(:cooldown_window_minutes, Shapes::ShapeRef.new(shape: CooldownWindowMinutes, required: true, location_name: "CooldownWindowMinutes"))
+    SamplingRateBoost.struct_class = Types::SamplingRateBoost
+
     SamplingRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, location_name: "RuleName"))
     SamplingRule.add_member(:rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "RuleARN"))
     SamplingRule.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
@@ -888,6 +917,7 @@ module Aws::XRay
     SamplingRule.add_member(:url_path, Shapes::ShapeRef.new(shape: URLPath, required: true, location_name: "URLPath"))
     SamplingRule.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "Version"))
     SamplingRule.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Attributes"))
+    SamplingRule.add_member(:sampling_rate_boost, Shapes::ShapeRef.new(shape: SamplingRateBoost, location_name: "SamplingRateBoost"))
     SamplingRule.struct_class = Types::SamplingRule
 
     SamplingRuleRecord.add_member(:sampling_rule, Shapes::ShapeRef.new(shape: SamplingRule, location_name: "SamplingRule"))
@@ -909,6 +939,7 @@ module Aws::XRay
     SamplingRuleUpdate.add_member(:http_method, Shapes::ShapeRef.new(shape: HTTPMethod, location_name: "HTTPMethod"))
     SamplingRuleUpdate.add_member(:url_path, Shapes::ShapeRef.new(shape: URLPath, location_name: "URLPath"))
     SamplingRuleUpdate.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Attributes"))
+    SamplingRuleUpdate.add_member(:sampling_rate_boost, Shapes::ShapeRef.new(shape: SamplingRateBoost, location_name: "SamplingRateBoost"))
     SamplingRuleUpdate.struct_class = Types::SamplingRuleUpdate
 
     SamplingStatisticSummary.add_member(:rule_name, Shapes::ShapeRef.new(shape: String, location_name: "RuleName"))
@@ -939,6 +970,7 @@ module Aws::XRay
     SamplingTargetDocument.add_member(:reservoir_quota, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "ReservoirQuota"))
     SamplingTargetDocument.add_member(:reservoir_quota_ttl, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReservoirQuotaTTL"))
     SamplingTargetDocument.add_member(:interval, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Interval"))
+    SamplingTargetDocument.add_member(:sampling_boost, Shapes::ShapeRef.new(shape: SamplingBoost, location_name: "SamplingBoost"))
     SamplingTargetDocument.struct_class = Types::SamplingTargetDocument
 
     SamplingTargetDocumentList.member = Shapes::ShapeRef.new(shape: SamplingTargetDocument)

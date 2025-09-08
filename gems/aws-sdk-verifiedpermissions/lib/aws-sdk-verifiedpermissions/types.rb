@@ -157,6 +157,26 @@ module Aws::VerifiedPermissions
     #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-decimal
     #   @return [String]
     #
+    # @!attribute [rw] datetime
+    #   An attribute value of [datetime][1] type.
+    #
+    #   Example: `{"datetime": "2024-10-15T11:35:00Z"}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-datetime
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   An attribute value of [duration][1] type.
+    #
+    #   Example: `{"duration": "1h30m"}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-duration
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/AttributeValue AWS API Documentation
     #
     class AttributeValue < Struct.new(
@@ -168,8 +188,10 @@ module Aws::VerifiedPermissions
       :record,
       :ipaddr,
       :decimal,
+      :datetime,
+      :duration,
       :unknown)
-      SENSITIVE = [:boolean, :long, :string, :ipaddr, :decimal]
+      SENSITIVE = [:boolean, :long, :string, :ipaddr, :decimal, :datetime, :duration]
       include Aws::Structure
       include Aws::Structure::Union
 
@@ -181,6 +203,8 @@ module Aws::VerifiedPermissions
       class Record < AttributeValue; end
       class Ipaddr < AttributeValue; end
       class Decimal < AttributeValue; end
+      class Datetime < AttributeValue; end
+      class Duration < AttributeValue; end
       class Unknown < AttributeValue; end
     end
 
@@ -3969,8 +3993,6 @@ module Aws::VerifiedPermissions
 
     # Contains information about a policy created by instantiating a policy
     # template.
-    #
-    # This
     #
     # @!attribute [rw] policy_template_id
     #   The unique identifier of the policy template used to create this

@@ -32,6 +32,8 @@ module Aws::Notifications
     AssociateManagedNotificationAccountContactResponse = Shapes::StructureShape.new(name: 'AssociateManagedNotificationAccountContactResponse')
     AssociateManagedNotificationAdditionalChannelRequest = Shapes::StructureShape.new(name: 'AssociateManagedNotificationAdditionalChannelRequest')
     AssociateManagedNotificationAdditionalChannelResponse = Shapes::StructureShape.new(name: 'AssociateManagedNotificationAdditionalChannelResponse')
+    AssociateOrganizationalUnitRequest = Shapes::StructureShape.new(name: 'AssociateOrganizationalUnitRequest')
+    AssociateOrganizationalUnitResponse = Shapes::StructureShape.new(name: 'AssociateOrganizationalUnitResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChannelArn = Shapes::StringShape.new(name: 'ChannelArn')
     ChannelAssociationOverrideOption = Shapes::StringShape.new(name: 'ChannelAssociationOverrideOption')
@@ -60,6 +62,8 @@ module Aws::Notifications
     DisassociateManagedNotificationAccountContactResponse = Shapes::StructureShape.new(name: 'DisassociateManagedNotificationAccountContactResponse')
     DisassociateManagedNotificationAdditionalChannelRequest = Shapes::StructureShape.new(name: 'DisassociateManagedNotificationAdditionalChannelRequest')
     DisassociateManagedNotificationAdditionalChannelResponse = Shapes::StructureShape.new(name: 'DisassociateManagedNotificationAdditionalChannelResponse')
+    DisassociateOrganizationalUnitRequest = Shapes::StructureShape.new(name: 'DisassociateOrganizationalUnitRequest')
+    DisassociateOrganizationalUnitResponse = Shapes::StructureShape.new(name: 'DisassociateOrganizationalUnitResponse')
     EnableNotificationsAccessForOrganizationRequest = Shapes::StructureShape.new(name: 'EnableNotificationsAccessForOrganizationRequest')
     EnableNotificationsAccessForOrganizationResponse = Shapes::StructureShape.new(name: 'EnableNotificationsAccessForOrganizationResponse')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -107,6 +111,9 @@ module Aws::Notifications
     ListManagedNotificationEventsRequest = Shapes::StructureShape.new(name: 'ListManagedNotificationEventsRequest')
     ListManagedNotificationEventsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListManagedNotificationEventsRequestMaxResultsInteger')
     ListManagedNotificationEventsResponse = Shapes::StructureShape.new(name: 'ListManagedNotificationEventsResponse')
+    ListMemberAccountsRequest = Shapes::StructureShape.new(name: 'ListMemberAccountsRequest')
+    ListMemberAccountsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListMemberAccountsRequestMaxResultsInteger')
+    ListMemberAccountsResponse = Shapes::StructureShape.new(name: 'ListMemberAccountsResponse')
     ListNotificationConfigurationsRequest = Shapes::StructureShape.new(name: 'ListNotificationConfigurationsRequest')
     ListNotificationConfigurationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListNotificationConfigurationsRequestMaxResultsInteger')
     ListNotificationConfigurationsResponse = Shapes::StructureShape.new(name: 'ListNotificationConfigurationsResponse')
@@ -116,6 +123,9 @@ module Aws::Notifications
     ListNotificationHubsRequest = Shapes::StructureShape.new(name: 'ListNotificationHubsRequest')
     ListNotificationHubsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListNotificationHubsRequestMaxResultsInteger')
     ListNotificationHubsResponse = Shapes::StructureShape.new(name: 'ListNotificationHubsResponse')
+    ListOrganizationalUnitsRequest = Shapes::StructureShape.new(name: 'ListOrganizationalUnitsRequest')
+    ListOrganizationalUnitsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListOrganizationalUnitsRequestMaxResultsInteger')
+    ListOrganizationalUnitsResponse = Shapes::StructureShape.new(name: 'ListOrganizationalUnitsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LocaleCode = Shapes::StringShape.new(name: 'LocaleCode')
@@ -145,6 +155,9 @@ module Aws::Notifications
     MediaElement = Shapes::StructureShape.new(name: 'MediaElement')
     MediaElementType = Shapes::StringShape.new(name: 'MediaElementType')
     MediaId = Shapes::StringShape.new(name: 'MediaId')
+    MemberAccount = Shapes::StructureShape.new(name: 'MemberAccount')
+    MemberAccountNotificationConfigurationStatus = Shapes::StringShape.new(name: 'MemberAccountNotificationConfigurationStatus')
+    MemberAccounts = Shapes::ListShape.new(name: 'MemberAccounts')
     MessageComponents = Shapes::StructureShape.new(name: 'MessageComponents')
     MessageComponentsSummary = Shapes::StructureShape.new(name: 'MessageComponentsSummary')
     MessageComponentsSummaryHeadlineString = Shapes::StringShape.new(name: 'MessageComponentsSummaryHeadlineString')
@@ -154,6 +167,7 @@ module Aws::Notifications
     NotificationConfigurationName = Shapes::StringShape.new(name: 'NotificationConfigurationName')
     NotificationConfigurationStatus = Shapes::StringShape.new(name: 'NotificationConfigurationStatus')
     NotificationConfigurationStructure = Shapes::StructureShape.new(name: 'NotificationConfigurationStructure')
+    NotificationConfigurationSubtype = Shapes::StringShape.new(name: 'NotificationConfigurationSubtype')
     NotificationConfigurations = Shapes::ListShape.new(name: 'NotificationConfigurations')
     NotificationEvent = Shapes::StructureShape.new(name: 'NotificationEvent')
     NotificationEventArn = Shapes::StringShape.new(name: 'NotificationEventArn')
@@ -169,6 +183,7 @@ module Aws::Notifications
     NotificationType = Shapes::StringShape.new(name: 'NotificationType')
     NotificationsAccessForOrganization = Shapes::StructureShape.new(name: 'NotificationsAccessForOrganization')
     OrganizationalUnitId = Shapes::StringShape.new(name: 'OrganizationalUnitId')
+    OrganizationalUnits = Shapes::ListShape.new(name: 'OrganizationalUnits')
     QuotaCode = Shapes::StringShape.new(name: 'QuotaCode')
     Region = Shapes::StringShape.new(name: 'Region')
     Regions = Shapes::ListShape.new(name: 'Regions')
@@ -268,6 +283,12 @@ module Aws::Notifications
 
     AssociateManagedNotificationAdditionalChannelResponse.struct_class = Types::AssociateManagedNotificationAdditionalChannelResponse
 
+    AssociateOrganizationalUnitRequest.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, required: true, location: "uri", location_name: "organizationalUnitId"))
+    AssociateOrganizationalUnitRequest.add_member(:notification_configuration_arn, Shapes::ShapeRef.new(shape: NotificationConfigurationArn, required: true, location_name: "notificationConfigurationArn"))
+    AssociateOrganizationalUnitRequest.struct_class = Types::AssociateOrganizationalUnitRequest
+
+    AssociateOrganizationalUnitResponse.struct_class = Types::AssociateOrganizationalUnitResponse
+
     Channels.member = Shapes::ShapeRef.new(shape: ChannelArn)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -340,6 +361,12 @@ module Aws::Notifications
     DisassociateManagedNotificationAdditionalChannelRequest.struct_class = Types::DisassociateManagedNotificationAdditionalChannelRequest
 
     DisassociateManagedNotificationAdditionalChannelResponse.struct_class = Types::DisassociateManagedNotificationAdditionalChannelResponse
+
+    DisassociateOrganizationalUnitRequest.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, required: true, location: "uri", location_name: "organizationalUnitId"))
+    DisassociateOrganizationalUnitRequest.add_member(:notification_configuration_arn, Shapes::ShapeRef.new(shape: NotificationConfigurationArn, required: true, location_name: "notificationConfigurationArn"))
+    DisassociateOrganizationalUnitRequest.struct_class = Types::DisassociateOrganizationalUnitRequest
+
+    DisassociateOrganizationalUnitResponse.struct_class = Types::DisassociateOrganizationalUnitResponse
 
     EnableNotificationsAccessForOrganizationRequest.struct_class = Types::EnableNotificationsAccessForOrganizationRequest
 
@@ -415,6 +442,7 @@ module Aws::Notifications
     GetNotificationConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: NotificationConfigurationStatus, required: true, location_name: "status"))
     GetNotificationConfigurationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
     GetNotificationConfigurationResponse.add_member(:aggregation_duration, Shapes::ShapeRef.new(shape: AggregationDuration, location_name: "aggregationDuration"))
+    GetNotificationConfigurationResponse.add_member(:subtype, Shapes::ShapeRef.new(shape: NotificationConfigurationSubtype, location_name: "subtype"))
     GetNotificationConfigurationResponse.struct_class = Types::GetNotificationConfigurationResponse
 
     GetNotificationEventRequest.add_member(:arn, Shapes::ShapeRef.new(shape: NotificationEventArn, required: true, location: "uri", location_name: "arn"))
@@ -499,9 +527,22 @@ module Aws::Notifications
     ListManagedNotificationEventsResponse.add_member(:managed_notification_events, Shapes::ShapeRef.new(shape: ManagedNotificationEvents, required: true, location_name: "managedNotificationEvents"))
     ListManagedNotificationEventsResponse.struct_class = Types::ListManagedNotificationEventsResponse
 
+    ListMemberAccountsRequest.add_member(:notification_configuration_arn, Shapes::ShapeRef.new(shape: NotificationConfigurationArn, required: true, location: "querystring", location_name: "notificationConfigurationArn"))
+    ListMemberAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMemberAccountsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListMemberAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListMemberAccountsRequest.add_member(:member_account, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "memberAccount"))
+    ListMemberAccountsRequest.add_member(:status, Shapes::ShapeRef.new(shape: MemberAccountNotificationConfigurationStatus, location: "querystring", location_name: "status"))
+    ListMemberAccountsRequest.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location: "querystring", location_name: "organizationalUnitId"))
+    ListMemberAccountsRequest.struct_class = Types::ListMemberAccountsRequest
+
+    ListMemberAccountsResponse.add_member(:member_accounts, Shapes::ShapeRef.new(shape: MemberAccounts, required: true, location_name: "memberAccounts"))
+    ListMemberAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListMemberAccountsResponse.struct_class = Types::ListMemberAccountsResponse
+
     ListNotificationConfigurationsRequest.add_member(:event_rule_source, Shapes::ShapeRef.new(shape: Source, location: "querystring", location_name: "eventRuleSource"))
     ListNotificationConfigurationsRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location: "querystring", location_name: "channelArn"))
     ListNotificationConfigurationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: NotificationConfigurationStatus, location: "querystring", location_name: "status"))
+    ListNotificationConfigurationsRequest.add_member(:subtype, Shapes::ShapeRef.new(shape: NotificationConfigurationSubtype, location: "querystring", location_name: "subtype"))
     ListNotificationConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNotificationConfigurationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListNotificationConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListNotificationConfigurationsRequest.struct_class = Types::ListNotificationConfigurationsRequest
@@ -518,6 +559,7 @@ module Aws::Notifications
     ListNotificationEventsRequest.add_member(:aggregate_notification_event_arn, Shapes::ShapeRef.new(shape: NotificationEventArn, location: "querystring", location_name: "aggregateNotificationEventArn"))
     ListNotificationEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNotificationEventsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListNotificationEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListNotificationEventsRequest.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location: "querystring", location_name: "organizationalUnitId"))
     ListNotificationEventsRequest.struct_class = Types::ListNotificationEventsRequest
 
     ListNotificationEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -531,6 +573,15 @@ module Aws::Notifications
     ListNotificationHubsResponse.add_member(:notification_hubs, Shapes::ShapeRef.new(shape: NotificationHubs, required: true, location_name: "notificationHubs"))
     ListNotificationHubsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListNotificationHubsResponse.struct_class = Types::ListNotificationHubsResponse
+
+    ListOrganizationalUnitsRequest.add_member(:notification_configuration_arn, Shapes::ShapeRef.new(shape: NotificationConfigurationArn, required: true, location: "querystring", location_name: "notificationConfigurationArn"))
+    ListOrganizationalUnitsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrganizationalUnitsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListOrganizationalUnitsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListOrganizationalUnitsRequest.struct_class = Types::ListOrganizationalUnitsRequest
+
+    ListOrganizationalUnitsResponse.add_member(:organizational_units, Shapes::ShapeRef.new(shape: OrganizationalUnits, required: true, location_name: "organizationalUnits"))
+    ListOrganizationalUnitsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListOrganizationalUnitsResponse.struct_class = Types::ListOrganizationalUnitsResponse
 
     ListTagsForResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: NotificationConfigurationArn, required: true, location: "uri", location_name: "arn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -636,6 +687,15 @@ module Aws::Notifications
     MediaElement.add_member(:caption, Shapes::ShapeRef.new(shape: TextPartReference, required: true, location_name: "caption"))
     MediaElement.struct_class = Types::MediaElement
 
+    MemberAccount.add_member(:notification_configuration_arn, Shapes::ShapeRef.new(shape: NotificationConfigurationArn, location_name: "notificationConfigurationArn"))
+    MemberAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    MemberAccount.add_member(:status, Shapes::ShapeRef.new(shape: MemberAccountNotificationConfigurationStatus, required: true, location_name: "status"))
+    MemberAccount.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "statusReason"))
+    MemberAccount.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, required: true, location_name: "organizationalUnitId"))
+    MemberAccount.struct_class = Types::MemberAccount
+
+    MemberAccounts.member = Shapes::ShapeRef.new(shape: MemberAccount)
+
     MessageComponents.add_member(:headline, Shapes::ShapeRef.new(shape: TextPartReference, location_name: "headline"))
     MessageComponents.add_member(:paragraph_summary, Shapes::ShapeRef.new(shape: TextPartReference, location_name: "paragraphSummary"))
     MessageComponents.add_member(:complete_description, Shapes::ShapeRef.new(shape: TextPartReference, location_name: "completeDescription"))
@@ -651,6 +711,7 @@ module Aws::Notifications
     NotificationConfigurationStructure.add_member(:status, Shapes::ShapeRef.new(shape: NotificationConfigurationStatus, required: true, location_name: "status"))
     NotificationConfigurationStructure.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
     NotificationConfigurationStructure.add_member(:aggregation_duration, Shapes::ShapeRef.new(shape: AggregationDuration, location_name: "aggregationDuration"))
+    NotificationConfigurationStructure.add_member(:subtype, Shapes::ShapeRef.new(shape: NotificationConfigurationSubtype, location_name: "subtype"))
     NotificationConfigurationStructure.struct_class = Types::NotificationConfigurationStructure
 
     NotificationConfigurations.member = Shapes::ShapeRef.new(shape: NotificationConfigurationStructure)
@@ -670,6 +731,7 @@ module Aws::Notifications
     NotificationEvent.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
     NotificationEvent.add_member(:text_parts, Shapes::ShapeRef.new(shape: TextParts, required: true, location_name: "textParts"))
     NotificationEvent.add_member(:media, Shapes::ShapeRef.new(shape: Media, required: true, location_name: "media"))
+    NotificationEvent.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "organizationalUnitId"))
     NotificationEvent.struct_class = Types::NotificationEvent
 
     NotificationEventOverview.add_member(:arn, Shapes::ShapeRef.new(shape: NotificationEventArn, required: true, location_name: "arn"))
@@ -680,6 +742,7 @@ module Aws::Notifications
     NotificationEventOverview.add_member(:aggregation_event_type, Shapes::ShapeRef.new(shape: AggregationEventType, location_name: "aggregationEventType"))
     NotificationEventOverview.add_member(:aggregate_notification_event_arn, Shapes::ShapeRef.new(shape: NotificationEventArn, location_name: "aggregateNotificationEventArn"))
     NotificationEventOverview.add_member(:aggregation_summary, Shapes::ShapeRef.new(shape: AggregationSummary, location_name: "aggregationSummary"))
+    NotificationEventOverview.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "organizationalUnitId"))
     NotificationEventOverview.struct_class = Types::NotificationEventOverview
 
     NotificationEventSummary.add_member(:schema_version, Shapes::ShapeRef.new(shape: SchemaVersion, required: true, location_name: "schemaVersion"))
@@ -705,6 +768,8 @@ module Aws::Notifications
 
     NotificationsAccessForOrganization.add_member(:access_status, Shapes::ShapeRef.new(shape: AccessStatus, required: true, location_name: "accessStatus"))
     NotificationsAccessForOrganization.struct_class = Types::NotificationsAccessForOrganization
+
+    OrganizationalUnits.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
 
     Regions.member = Shapes::ShapeRef.new(shape: Region)
 
@@ -865,9 +930,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:associate_managed_notification_account_contact, Seahorse::Model::Operation.new.tap do |o|
@@ -880,9 +945,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:associate_managed_notification_additional_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -895,9 +960,24 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:associate_organizational_unit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateOrganizationalUnit"
+        o.http_method = "POST"
+        o.http_request_uri = "/organizational-units/associate/{organizationalUnitId}"
+        o.input = Shapes::ShapeRef.new(shape: AssociateOrganizationalUnitRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateOrganizationalUnitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_event_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -910,9 +990,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -925,8 +1005,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_event_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -938,9 +1018,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -952,9 +1032,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:deregister_notification_hub, Seahorse::Model::Operation.new.tap do |o|
@@ -966,9 +1046,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disable_notifications_access_for_organization, Seahorse::Model::Operation.new.tap do |o|
@@ -981,9 +1061,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disassociate_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -995,8 +1075,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disassociate_managed_notification_account_contact, Seahorse::Model::Operation.new.tap do |o|
@@ -1008,9 +1088,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disassociate_managed_notification_additional_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -1022,8 +1102,21 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:disassociate_organizational_unit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateOrganizationalUnit"
+        o.http_method = "POST"
+        o.http_request_uri = "/organizational-units/disassociate/{organizationalUnitId}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateOrganizationalUnitRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateOrganizationalUnitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:enable_notifications_access_for_organization, Seahorse::Model::Operation.new.tap do |o|
@@ -1036,9 +1129,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_event_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1050,8 +1143,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_managed_notification_child_event, Seahorse::Model::Operation.new.tap do |o|
@@ -1063,8 +1156,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_managed_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1076,8 +1169,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_managed_notification_event, Seahorse::Model::Operation.new.tap do |o|
@@ -1089,8 +1182,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1102,8 +1195,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_notification_event, Seahorse::Model::Operation.new.tap do |o|
@@ -1115,8 +1208,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_notifications_access_for_organization, Seahorse::Model::Operation.new.tap do |o|
@@ -1140,8 +1233,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1159,8 +1252,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1178,8 +1271,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1242,6 +1335,25 @@ module Aws::Notifications
         )
       end)
 
+      api.add_operation(:list_member_accounts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMemberAccounts"
+        o.http_method = "GET"
+        o.http_request_uri = "/list-member-accounts"
+        o.input = Shapes::ShapeRef.new(shape: ListMemberAccountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMemberAccountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_notification_configurations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListNotificationConfigurations"
         o.http_method = "GET"
@@ -1296,6 +1408,25 @@ module Aws::Notifications
         )
       end)
 
+      api.add_operation(:list_organizational_units, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOrganizationalUnits"
+        o.http_method = "GET"
+        o.http_request_uri = "/organizational-units"
+        o.input = Shapes::ShapeRef.new(shape: ListOrganizationalUnitsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOrganizationalUnitsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -1305,8 +1436,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:register_notification_hub, Seahorse::Model::Operation.new.tap do |o|
@@ -1319,8 +1450,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1332,8 +1463,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1345,8 +1476,8 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_event_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1358,9 +1489,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1372,9 +1503,9 @@ module Aws::Notifications
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
     end
 

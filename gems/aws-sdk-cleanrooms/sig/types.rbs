@@ -284,6 +284,30 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class Change
+      attr_accessor specification_type: ("MEMBER")
+      attr_accessor specification: Types::ChangeSpecification
+      attr_accessor types: ::Array[("ADD_MEMBER")]
+      SENSITIVE: []
+    end
+
+    class ChangeInput
+      attr_accessor specification_type: ("MEMBER")
+      attr_accessor specification: Types::ChangeSpecification
+      SENSITIVE: []
+    end
+
+    class ChangeSpecification
+      attr_accessor member: Types::MemberChangeSpecification
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Member < ChangeSpecification
+      end
+      class Unknown < ChangeSpecification
+      end
+    end
+
     class Collaboration
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -300,6 +324,7 @@ module Aws::CleanRooms
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
       attr_accessor job_log_status: ("ENABLED" | "DISABLED")
       attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
+      attr_accessor auto_approved_change_types: ::Array[("ADD_MEMBER")]
       SENSITIVE: []
     end
 
@@ -333,6 +358,28 @@ module Aws::CleanRooms
       attr_accessor collaboration_id: ::String
       attr_accessor creator_account_id: ::String
       attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CollaborationChangeRequest
+      attr_accessor id: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor status: ("PENDING" | "APPROVED" | "CANCELLED" | "DENIED" | "COMMITTED")
+      attr_accessor is_auto_approved: bool
+      attr_accessor changes: ::Array[Types::Change]
+      SENSITIVE: []
+    end
+
+    class CollaborationChangeRequestSummary
+      attr_accessor id: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor status: ("PENDING" | "APPROVED" | "CANCELLED" | "DENIED" | "COMMITTED")
+      attr_accessor is_auto_approved: bool
+      attr_accessor changes: ::Array[Types::Change]
       SENSITIVE: []
     end
 
@@ -748,6 +795,17 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class CreateCollaborationChangeRequestInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor changes: ::Array[Types::ChangeInput]
+      SENSITIVE: []
+    end
+
+    class CreateCollaborationChangeRequestOutput
+      attr_accessor collaboration_change_request: Types::CollaborationChangeRequest
+      SENSITIVE: []
+    end
+
     class CreateCollaborationInput
       attr_accessor members: ::Array[Types::MemberSpecification]
       attr_accessor name: ::String
@@ -761,6 +819,7 @@ module Aws::CleanRooms
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor creator_payment_configuration: Types::PaymentConfiguration
       attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
+      attr_accessor auto_approved_change_request_types: ::Array[("ADD_MEMBER")]
       SENSITIVE: []
     end
 
@@ -1118,6 +1177,17 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class GetCollaborationChangeRequestInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor change_request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCollaborationChangeRequestOutput
+      attr_accessor collaboration_change_request: Types::CollaborationChangeRequest
+      SENSITIVE: []
+    end
+
     class GetCollaborationConfiguredAudienceModelAssociationInput
       attr_accessor collaboration_identifier: ::String
       attr_accessor configured_audience_model_association_identifier: ::String
@@ -1460,6 +1530,20 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class ListCollaborationChangeRequestsInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor status: ("PENDING" | "APPROVED" | "CANCELLED" | "DENIED" | "COMMITTED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCollaborationChangeRequestsOutput
+      attr_accessor collaboration_change_request_summaries: ::Array[Types::CollaborationChangeRequestSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListCollaborationConfiguredAudienceModelAssociationsInput
       attr_accessor collaboration_identifier: ::String
       attr_accessor next_token: ::String
@@ -1703,6 +1787,13 @@ module Aws::CleanRooms
     class MLPaymentConfig
       attr_accessor model_training: Types::ModelTrainingPaymentConfig
       attr_accessor model_inference: Types::ModelInferencePaymentConfig
+      SENSITIVE: []
+    end
+
+    class MemberChangeSpecification
+      attr_accessor account_id: ::String
+      attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")]
+      attr_accessor display_name: ::String
       SENSITIVE: []
     end
 
@@ -1993,7 +2084,19 @@ module Aws::CleanRooms
       attr_accessor statistics: Types::ProtectedJobStatistics
       attr_accessor result: Types::ProtectedJobResult
       attr_accessor error: Types::ProtectedJobError
+      attr_accessor compute_configuration: Types::ProtectedJobComputeConfiguration
       SENSITIVE: []
+    end
+
+    class ProtectedJobComputeConfiguration
+      attr_accessor worker: Types::ProtectedJobWorkerComputeConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Worker < ProtectedJobComputeConfiguration
+      end
+      class Unknown < ProtectedJobComputeConfiguration
+      end
     end
 
     class ProtectedJobConfigurationDetails
@@ -2128,6 +2231,12 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS")
       attr_accessor receiver_configurations: ::Array[Types::ProtectedJobReceiverConfiguration]
+      SENSITIVE: []
+    end
+
+    class ProtectedJobWorkerComputeConfiguration
+      attr_accessor type: ("CR.1X" | "CR.4X")
+      attr_accessor number: ::Integer
       SENSITIVE: []
     end
 
@@ -2412,6 +2521,7 @@ module Aws::CleanRooms
       attr_accessor membership_identifier: ::String
       attr_accessor job_parameters: Types::ProtectedJobParameters
       attr_accessor result_configuration: Types::ProtectedJobResultConfigurationInput
+      attr_accessor compute_configuration: Types::ProtectedJobComputeConfiguration
       SENSITIVE: []
     end
 

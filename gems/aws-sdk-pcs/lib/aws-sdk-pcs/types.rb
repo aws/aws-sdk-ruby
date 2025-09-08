@@ -366,9 +366,9 @@ module Aws::PCS
     #   @return [String]
     #
     # @!attribute [rw] ami_id
-    #   The ID of the Amazon Machine Image (AMI) that Amazon Web Services
-    #   PCS uses to launch instances. If not provided, Amazon Web Services
-    #   PCS uses the AMI ID specified in the custom launch template.
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   instances. If not provided, PCS uses the AMI ID specified in the
+    #   custom launch template.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -390,8 +390,7 @@ module Aws::PCS
     #   @return [String]
     #
     # @!attribute [rw] custom_launch_template
-    #   An Amazon EC2 launch template Amazon Web Services PCS uses to launch
-    #   compute nodes.
+    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
     #   @return [Types::CustomLaunchTemplate]
     #
     # @!attribute [rw] iam_instance_profile_arn
@@ -681,10 +680,9 @@ module Aws::PCS
     #   @return [String]
     #
     # @!attribute [rw] ami_id
-    #   The ID of the Amazon Machine Image (AMI) that Amazon Web Services
-    #   PCS uses to launch compute nodes (Amazon EC2 instances). If you
-    #   don't provide this value, Amazon Web Services PCS uses the AMI ID
-    #   specified in the custom launch template.
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   compute nodes (Amazon EC2 instances). If you don't provide this
+    #   value, PCS uses the AMI ID specified in the custom launch template.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -705,8 +703,7 @@ module Aws::PCS
     #   @return [String]
     #
     # @!attribute [rw] custom_launch_template
-    #   An Amazon EC2 launch template Amazon Web Services PCS uses to launch
-    #   compute nodes.
+    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
     #   @return [Types::CustomLaunchTemplate]
     #
     # @!attribute [rw] iam_instance_profile_arn
@@ -846,8 +843,7 @@ module Aws::PCS
       include Aws::Structure
     end
 
-    # An Amazon EC2 launch template Amazon Web Services PCS uses to launch
-    # compute nodes.
+    # An Amazon EC2 launch template PCS uses to launch compute nodes.
     #
     # @!attribute [rw] id
     #   The ID of the EC2 launch template to use to provision instances.
@@ -1115,12 +1111,11 @@ module Aws::PCS
       include Aws::Structure
     end
 
-    # An EC2 instance configuration Amazon Web Services PCS uses to launch
-    # compute nodes.
+    # An EC2 instance configuration PCS uses to launch compute nodes.
     #
     # @!attribute [rw] instance_type
-    #   The EC2 instance type that Amazon Web Services PCS can provision in
-    #   the compute node group.
+    #   The EC2 instance type that PCS can provision in the compute node
+    #   group.
     #
     #   Example: `t2.xlarge`
     #   @return [String]
@@ -1133,8 +1128,7 @@ module Aws::PCS
       include Aws::Structure
     end
 
-    # Amazon Web Services PCS can't process your request right now. Try
-    # again later.
+    # PCS can't process your request right now. Try again later.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1327,11 +1321,11 @@ module Aws::PCS
     # The networking configuration for the cluster's control plane.
     #
     # @!attribute [rw] subnet_ids
-    #   The ID of the subnet where Amazon Web Services PCS creates an
-    #   Elastic Network Interface (ENI) to enable communication between
-    #   managed controllers and Amazon Web Services PCS resources. The
-    #   subnet must have an available IP address, cannot reside in AWS
-    #   Outposts, AWS Wavelength, or an AWS Local Zone.
+    #   The ID of the subnet where PCS creates an Elastic Network Interface
+    #   (ENI) to enable communication between managed controllers and PCS
+    #   resources. The subnet must have an available IP address, cannot
+    #   reside in Outposts, Wavelength, or an Amazon Web Services Local
+    #   Zone.
     #
     #   Example: `subnet-abcd1234`
     #   @return [Array<String>]
@@ -1664,15 +1658,13 @@ module Aws::PCS
     # cluster.
     #
     # @!attribute [rw] type
-    #   The software Amazon Web Services PCS uses to manage cluster scaling
-    #   and job scheduling.
+    #   The software PCS uses to manage cluster scaling and job scheduling.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the specified scheduling software that Amazon Web
-    #   Services PCS uses to manage cluster scaling and job scheduling. For
-    #   more information, see [Slurm versions in Amazon Web Services PCS][1]
-    #   in the *Amazon Web Services PCS User Guide*.
+    #   The version of the specified scheduling software that PCS uses to
+    #   manage cluster scaling and job scheduling. For more information, see
+    #   [Slurm versions in PCS][1] in the *PCS User Guide*.
     #
     #   Valid Values: `23.11 | 24.05 | 24.11`
     #
@@ -1694,15 +1686,13 @@ module Aws::PCS
     # cluster.
     #
     # @!attribute [rw] type
-    #   The software Amazon Web Services PCS uses to manage cluster scaling
-    #   and job scheduling.
+    #   The software PCS uses to manage cluster scaling and job scheduling.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the specified scheduling software that Amazon Web
-    #   Services PCS uses to manage cluster scaling and job scheduling. For
-    #   more information, see [Slurm versions in Amazon Web Services PCS][1]
-    #   in the *Amazon Web Services PCS User Guide*.
+    #   The version of the specified scheduling software that PCS uses to
+    #   manage cluster scaling and job scheduling. For more information, see
+    #   [Slurm versions in PCS][1] in the *PCS User Guide*.
     #
     #   Valid Values: `23.11 | 24.05 | 24.11`
     #
@@ -1797,8 +1787,7 @@ module Aws::PCS
     # Additional settings that directly map to Slurm settings.
     #
     # @!attribute [rw] parameter_name
-    #   Amazon Web Services PCS supports configuration of the following
-    #   Slurm parameters:
+    #   PCS supports configuration of the following Slurm parameters:
     #
     #   * For **clusters**
     #
@@ -1807,18 +1796,26 @@ module Aws::PCS
     #     * [ `Epilog` ][2]
     #
     #     * [ `SelectTypeParameters` ][3]
+    #
+    #     * [ `AccountingStorageEnforce` ][4]
+    #
+    #       PCS supports a subset of the options for
+    #       `AccountingStorageEnforce`. For more information, see [Slurm
+    #       accounting in PCS][5] in the *PCS User Guide*.
     #   * For **compute node groups**
     #
-    #     * [ `Weight` ][4]
+    #     * [ `Weight` ][6]
     #
-    #     * [ `RealMemory` ][4]
+    #     * [ `RealMemory` ][6]
     #
     #
     #
     #   [1]: https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog_1
     #   [2]: https://slurm.schedmd.com/slurm.conf.html#OPT_Epilog_1
     #   [3]: https://slurm.schedmd.com/slurm.conf.html#OPT_SelectTypeParameters
-    #   [4]: https://slurm.schedmd.com/slurm.conf.html#OPT_Weight
+    #   [4]: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageEnforce
+    #   [5]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-accounting.html
+    #   [6]: https://slurm.schedmd.com/slurm.conf.html#OPT_Weight
     #   @return [String]
     #
     # @!attribute [rw] parameter_value
@@ -1923,9 +1920,9 @@ module Aws::PCS
     #   @return [String]
     #
     # @!attribute [rw] ami_id
-    #   The ID of the Amazon Machine Image (AMI) that Amazon Web Services
-    #   PCS uses to launch instances. If not provided, Amazon Web Services
-    #   PCS uses the AMI ID specified in the custom launch template.
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   instances. If not provided, PCS uses the AMI ID specified in the
+    #   custom launch template.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -1934,8 +1931,7 @@ module Aws::PCS
     #   @return [Array<String>]
     #
     # @!attribute [rw] custom_launch_template
-    #   An Amazon EC2 launch template Amazon Web Services PCS uses to launch
-    #   compute nodes.
+    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
     #   @return [Types::CustomLaunchTemplate]
     #
     # @!attribute [rw] purchase_option

@@ -3188,6 +3188,24 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] master_user_authentication_type
+    #   Specifies the authentication type for the master user. With IAM
+    #   master user authentication, you can configure the master DB user
+    #   with IAM database authentication when you create a DB cluster.
+    #
+    #   You can specify one of the following values:
+    #
+    #   * `password` - Use standard database authentication with a password.
+    #
+    #   * `iam-db-auth` - Use IAM database authentication for the master
+    #     user.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   This option is only valid for RDS for PostgreSQL and Aurora
+    #   PostgreSQL engines.
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3252,6 +3270,7 @@ module Aws::RDS
       :enable_local_write_forwarding,
       :ca_certificate_identifier,
       :engine_lifecycle_support,
+      :master_user_authentication_type,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -4843,6 +4862,22 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] master_user_authentication_type
+    #   Specifies the authentication type for the master user. With IAM
+    #   master user authentication, you can configure the master DB user
+    #   with IAM database authentication when you create a DB instance.
+    #
+    #   You can specify one of the following values:
+    #
+    #   * `password` - Use standard database authentication with a password.
+    #
+    #   * `iam-db-auth` - Use IAM database authentication for the master
+    #     user.
+    #
+    #   This option is only valid for RDS for PostgreSQL and Aurora
+    #   PostgreSQL engines.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -4909,7 +4944,8 @@ module Aws::RDS
       :db_system_id,
       :dedicated_log_volume,
       :multi_tenant,
-      :engine_lifecycle_support)
+      :engine_lifecycle_support,
+      :master_user_authentication_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5942,6 +5978,29 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] endpoint_network_type
+    #   The network type of the DB proxy endpoint. The network type
+    #   determines the IP version that the proxy endpoint supports.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4` - The proxy endpoint supports IPv4 only.
+    #
+    #   * `IPV6` - The proxy endpoint supports IPv6 only.
+    #
+    #   * `DUAL` - The proxy endpoint supports both IPv4 and IPv6.
+    #
+    #   Default: `IPV4`
+    #
+    #   Constraints:
+    #
+    #   * If you specify `IPV6` or `DUAL`, the VPC and all subnets must have
+    #     an IPv6 CIDR block.
+    #
+    #   * If you specify `IPV6` or `DUAL`, the VPC tenancy cannot be
+    #     `dedicated`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBProxyEndpointRequest AWS API Documentation
     #
     class CreateDBProxyEndpointRequest < Struct.new(
@@ -5950,7 +6009,8 @@ module Aws::RDS
       :vpc_subnet_ids,
       :vpc_security_group_ids,
       :target_role,
-      :tags)
+      :tags,
+      :endpoint_network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6031,6 +6091,51 @@ module Aws::RDS
     #   your choosing with the proxy.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] endpoint_network_type
+    #   The network type of the DB proxy endpoint. The network type
+    #   determines the IP version that the proxy endpoint supports.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4` - The proxy endpoint supports IPv4 only.
+    #
+    #   * `IPV6` - The proxy endpoint supports IPv6 only.
+    #
+    #   * `DUAL` - The proxy endpoint supports both IPv4 and IPv6.
+    #
+    #   Default: `IPV4`
+    #
+    #   Constraints:
+    #
+    #   * If you specify `IPV6` or `DUAL`, the VPC and all subnets must have
+    #     an IPv6 CIDR block.
+    #
+    #   * If you specify `IPV6` or `DUAL`, the VPC tenancy cannot be
+    #     `dedicated`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_connection_network_type
+    #   The network type that the proxy uses to connect to the target
+    #   database. The network type determines the IP version that the proxy
+    #   uses for connections to the database.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4` - The proxy connects to the database using IPv4 only.
+    #
+    #   * `IPV6` - The proxy connects to the database using IPv6 only.
+    #
+    #   Default: `IPV4`
+    #
+    #   Constraints:
+    #
+    #   * If you specify `IPV6`, the database must support dual-stack mode.
+    #     RDS doesn't support IPv6-only databases.
+    #
+    #   * All targets registered with the proxy must be compatible with the
+    #     specified network type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBProxyRequest AWS API Documentation
     #
     class CreateDBProxyRequest < Struct.new(
@@ -6043,7 +6148,9 @@ module Aws::RDS
       :require_tls,
       :idle_client_timeout,
       :debug_logging,
-      :tags)
+      :tags,
+      :endpoint_network_type,
+      :target_connection_network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10348,6 +10455,31 @@ module Aws::RDS
     #   The date and time when the proxy was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] endpoint_network_type
+    #   The network type of the DB proxy endpoint. The network type
+    #   determines the IP version that the proxy endpoint supports.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4` - The proxy endpoint supports IPv4 only.
+    #
+    #   * `IPV6` - The proxy endpoint supports IPv6 only.
+    #
+    #   * `DUAL` - The proxy endpoint supports both IPv4 and IPv6.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_connection_network_type
+    #   The network type that the proxy uses to connect to the target
+    #   database. The network type determines the IP version that the proxy
+    #   uses for connections to the database.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4` - The proxy connects to the database using IPv4 only.
+    #
+    #   * `IPV6` - The proxy connects to the database using IPv6 only.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxy AWS API Documentation
     #
     class DBProxy < Struct.new(
@@ -10365,7 +10497,9 @@ module Aws::RDS
       :idle_client_timeout,
       :debug_logging,
       :created_date,
-      :updated_date)
+      :updated_date,
+      :endpoint_network_type,
+      :target_connection_network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10444,6 +10578,19 @@ module Aws::RDS
     #   DB proxy can be either read/write or read-only.
     #   @return [Boolean]
     #
+    # @!attribute [rw] endpoint_network_type
+    #   The network type of the DB proxy endpoint. The network type
+    #   determines the IP version that the proxy endpoint supports.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4` - The proxy endpoint supports IPv4 only.
+    #
+    #   * `IPV6` - The proxy endpoint supports IPv6 only.
+    #
+    #   * `DUAL` - The proxy endpoint supports both IPv4 and IPv6.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyEndpoint AWS API Documentation
     #
     class DBProxyEndpoint < Struct.new(
@@ -10457,7 +10604,8 @@ module Aws::RDS
       :endpoint,
       :created_date,
       :target_role,
-      :is_default)
+      :is_default,
+      :endpoint_network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18171,8 +18319,9 @@ module Aws::RDS
     #   the `PerformanceInsightsEnabled` parameter to `true` and the
     #   `PerformanceInsightsRetentionPeriod` parameter to 465.
     #
-    #   If you change the value from `advanced` to `standard`, you must set
-    #   the `PerformanceInsightsEnabled` parameter to `false`.
+    #   If you change the value from `advanced` to `standard`, you can set
+    #   the `PerformanceInsightsEnabled` parameter to `true` to collect
+    #   detailed database counter and per-query metrics.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -18425,6 +18574,24 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   @return [String]
     #
+    # @!attribute [rw] master_user_authentication_type
+    #   Specifies the authentication type for the master user. With IAM
+    #   master user authentication, you can change the master DB user to use
+    #   IAM database authentication.
+    #
+    #   You can specify one of the following values:
+    #
+    #   * `password` - Use standard database authentication with a password.
+    #
+    #   * `iam-db-auth` - Use IAM database authentication for the master
+    #     user.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   This option is only valid for RDS for PostgreSQL and Aurora
+    #   PostgreSQL engines.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -18473,7 +18640,8 @@ module Aws::RDS
       :enable_local_write_forwarding,
       :aws_backup_recovery_point_arn,
       :enable_limitless_database,
-      :ca_certificate_identifier)
+      :ca_certificate_identifier,
+      :master_user_authentication_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19853,6 +20021,22 @@ module Aws::RDS
     #   specify `ApplyImmediately`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] master_user_authentication_type
+    #   Specifies the authentication type for the master user. With IAM
+    #   master user authentication, you can change the master DB user to use
+    #   IAM database authentication.
+    #
+    #   You can specify one of the following values:
+    #
+    #   * `password` - Use standard database authentication with a password.
+    #
+    #   * `iam-db-auth` - Use IAM database authentication for the master
+    #     user.
+    #
+    #   This option is only valid for RDS for PostgreSQL and Aurora
+    #   PostgreSQL engines.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -19916,7 +20100,8 @@ module Aws::RDS
       :master_user_secret_kms_key_id,
       :engine,
       :dedicated_log_volume,
-      :multi_tenant)
+      :multi_tenant,
+      :master_user_authentication_type)
       SENSITIVE = []
       include Aws::Structure
     end

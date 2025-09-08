@@ -27,6 +27,8 @@ module Aws::TranscribeStreamingService
     CallAnalyticsItem = Shapes::StructureShape.new(name: 'CallAnalyticsItem')
     CallAnalyticsItemList = Shapes::ListShape.new(name: 'CallAnalyticsItemList')
     CallAnalyticsLanguageCode = Shapes::StringShape.new(name: 'CallAnalyticsLanguageCode')
+    CallAnalyticsLanguageIdentification = Shapes::ListShape.new(name: 'CallAnalyticsLanguageIdentification')
+    CallAnalyticsLanguageWithScore = Shapes::StructureShape.new(name: 'CallAnalyticsLanguageWithScore')
     CallAnalyticsTranscriptResultStream = Shapes::StructureShape.new(name: 'CallAnalyticsTranscriptResultStream')
     CategoryEvent = Shapes::StructureShape.new(name: 'CategoryEvent')
     ChannelDefinition = Shapes::StructureShape.new(name: 'ChannelDefinition')
@@ -186,6 +188,12 @@ module Aws::TranscribeStreamingService
     CallAnalyticsItem.struct_class = Types::CallAnalyticsItem
 
     CallAnalyticsItemList.member = Shapes::ShapeRef.new(shape: CallAnalyticsItem)
+
+    CallAnalyticsLanguageIdentification.member = Shapes::ShapeRef.new(shape: CallAnalyticsLanguageWithScore)
+
+    CallAnalyticsLanguageWithScore.add_member(:language_code, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, location_name: "LanguageCode"))
+    CallAnalyticsLanguageWithScore.add_member(:score, Shapes::ShapeRef.new(shape: Double, location_name: "Score"))
+    CallAnalyticsLanguageWithScore.struct_class = Types::CallAnalyticsLanguageWithScore
 
     CallAnalyticsTranscriptResultStream.add_member(:utterance_event, Shapes::ShapeRef.new(shape: UtteranceEvent, event: true, location_name: "UtteranceEvent"))
     CallAnalyticsTranscriptResultStream.add_member(:category_event, Shapes::ShapeRef.new(shape: CategoryEvent, event: true, location_name: "CategoryEvent"))
@@ -446,7 +454,7 @@ module Aws::TranscribeStreamingService
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
-    StartCallAnalyticsStreamTranscriptionRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, required: true, location: "header", location_name: "x-amzn-transcribe-language-code"))
+    StartCallAnalyticsStreamTranscriptionRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, location: "header", location_name: "x-amzn-transcribe-language-code"))
     StartCallAnalyticsStreamTranscriptionRequest.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, required: true, location: "header", location_name: "x-amzn-transcribe-sample-rate"))
     StartCallAnalyticsStreamTranscriptionRequest.add_member(:media_encoding, Shapes::ShapeRef.new(shape: MediaEncoding, required: true, location: "header", location_name: "x-amzn-transcribe-media-encoding"))
     StartCallAnalyticsStreamTranscriptionRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location: "header", location_name: "x-amzn-transcribe-vocabulary-name"))
@@ -455,6 +463,11 @@ module Aws::TranscribeStreamingService
     StartCallAnalyticsStreamTranscriptionRequest.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location: "header", location_name: "x-amzn-transcribe-vocabulary-filter-name"))
     StartCallAnalyticsStreamTranscriptionRequest.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: VocabularyFilterMethod, location: "header", location_name: "x-amzn-transcribe-vocabulary-filter-method"))
     StartCallAnalyticsStreamTranscriptionRequest.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location: "header", location_name: "x-amzn-transcribe-language-model-name"))
+    StartCallAnalyticsStreamTranscriptionRequest.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-identify-language"))
+    StartCallAnalyticsStreamTranscriptionRequest.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location: "header", location_name: "x-amzn-transcribe-language-options"))
+    StartCallAnalyticsStreamTranscriptionRequest.add_member(:preferred_language, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, location: "header", location_name: "x-amzn-transcribe-preferred-language"))
+    StartCallAnalyticsStreamTranscriptionRequest.add_member(:vocabulary_names, Shapes::ShapeRef.new(shape: VocabularyNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-names"))
+    StartCallAnalyticsStreamTranscriptionRequest.add_member(:vocabulary_filter_names, Shapes::ShapeRef.new(shape: VocabularyFilterNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-filter-names"))
     StartCallAnalyticsStreamTranscriptionRequest.add_member(:enable_partial_results_stabilization, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-enable-partial-results-stabilization"))
     StartCallAnalyticsStreamTranscriptionRequest.add_member(:partial_results_stability, Shapes::ShapeRef.new(shape: PartialResultsStability, location: "header", location_name: "x-amzn-transcribe-partial-results-stability"))
     StartCallAnalyticsStreamTranscriptionRequest.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: ContentIdentificationType, location: "header", location_name: "x-amzn-transcribe-content-identification-type"))
@@ -474,6 +487,11 @@ module Aws::TranscribeStreamingService
     StartCallAnalyticsStreamTranscriptionResponse.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location: "header", location_name: "x-amzn-transcribe-vocabulary-filter-name"))
     StartCallAnalyticsStreamTranscriptionResponse.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: VocabularyFilterMethod, location: "header", location_name: "x-amzn-transcribe-vocabulary-filter-method"))
     StartCallAnalyticsStreamTranscriptionResponse.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location: "header", location_name: "x-amzn-transcribe-language-model-name"))
+    StartCallAnalyticsStreamTranscriptionResponse.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-identify-language"))
+    StartCallAnalyticsStreamTranscriptionResponse.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location: "header", location_name: "x-amzn-transcribe-language-options"))
+    StartCallAnalyticsStreamTranscriptionResponse.add_member(:preferred_language, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, location: "header", location_name: "x-amzn-transcribe-preferred-language"))
+    StartCallAnalyticsStreamTranscriptionResponse.add_member(:vocabulary_names, Shapes::ShapeRef.new(shape: VocabularyNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-names"))
+    StartCallAnalyticsStreamTranscriptionResponse.add_member(:vocabulary_filter_names, Shapes::ShapeRef.new(shape: VocabularyFilterNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-filter-names"))
     StartCallAnalyticsStreamTranscriptionResponse.add_member(:enable_partial_results_stabilization, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-enable-partial-results-stabilization"))
     StartCallAnalyticsStreamTranscriptionResponse.add_member(:partial_results_stability, Shapes::ShapeRef.new(shape: PartialResultsStability, location: "header", location_name: "x-amzn-transcribe-partial-results-stability"))
     StartCallAnalyticsStreamTranscriptionResponse.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: ContentIdentificationType, location: "header", location_name: "x-amzn-transcribe-content-identification-type"))
@@ -622,6 +640,8 @@ module Aws::TranscribeStreamingService
     UtteranceEvent.add_member(:entities, Shapes::ShapeRef.new(shape: CallAnalyticsEntityList, location_name: "Entities"))
     UtteranceEvent.add_member(:sentiment, Shapes::ShapeRef.new(shape: Sentiment, location_name: "Sentiment"))
     UtteranceEvent.add_member(:issues_detected, Shapes::ShapeRef.new(shape: IssuesDetected, location_name: "IssuesDetected"))
+    UtteranceEvent.add_member(:language_code, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, location_name: "LanguageCode"))
+    UtteranceEvent.add_member(:language_identification, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageIdentification, location_name: "LanguageIdentification"))
     UtteranceEvent.struct_class = Types::UtteranceEvent
 
 

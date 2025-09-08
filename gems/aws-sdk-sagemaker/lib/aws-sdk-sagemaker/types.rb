@@ -5848,6 +5848,36 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Defines the configuration for managed tier checkpointing in a HyperPod
+    # cluster. Managed tier checkpointing uses multiple storage tiers,
+    # including cluster CPU memory, to provide faster checkpoint operations
+    # and improved fault tolerance for large-scale model training. The
+    # system automatically saves checkpoints at high frequency to memory and
+    # periodically persists them to durable storage, like Amazon S3.
+    #
+    # @!attribute [rw] mode
+    #   Specifies whether managed tier checkpointing is enabled or disabled
+    #   for the HyperPod cluster. When set to `Enable`, the system installs
+    #   a memory management daemon that provides disaggregated memory as a
+    #   service for checkpoint storage. When set to `Disable`, the feature
+    #   is turned off and the memory management daemon is removed from the
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_memory_allocation_percentage
+    #   The percentage (int) of cluster memory to allocate for
+    #   checkpointing.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterTieredStorageConfig AWS API Documentation
+    #
+    class ClusterTieredStorageConfig < Struct.new(
+      :mode,
+      :instance_memory_allocation_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for the file system and kernels in a SageMaker image
     # running as a Code Editor app. The `FileSystemConfig` object is not
     # supported.
@@ -7366,6 +7396,13 @@ module Aws::SageMaker
     #   cluster instances.
     #   @return [String]
     #
+    # @!attribute [rw] tiered_storage_config
+    #   The configuration for managed tier checkpointing on the HyperPod
+    #   cluster. When enabled, this feature uses a multi-tier storage
+    #   approach for storing model checkpoints, providing faster checkpoint
+    #   operations and improved fault tolerance across cluster nodes.
+    #   @return [Types::ClusterTieredStorageConfig]
+    #
     # @!attribute [rw] node_provisioning_mode
     #   The mode for provisioning nodes in the cluster. You can specify the
     #   following modes:
@@ -7406,6 +7443,7 @@ module Aws::SageMaker
       :tags,
       :orchestrator,
       :node_recovery,
+      :tiered_storage_config,
       :node_provisioning_mode,
       :cluster_role,
       :auto_scaling)
@@ -9423,13 +9461,14 @@ module Aws::SageMaker
     #
     #   * The name can't end with "-metadata".
     #
-    #   * If you are using one of the following [built-in task types][1],
-    #     the attribute name *must* end with "-ref". If the task type you
-    #     are using is not listed below, the attribute name *must not* end
-    #     with "-ref".
+    #   * If you are using one of the [built-in task types][1] or one of the
+    #     following, the attribute name *must* end with "-ref".
     #
-    #     * Verification (`VerificationSemanticSegmentation`) labeling jobs
-    #       for this task type.
+    #     * Image semantic segmentation (`SemanticSegmentation)` and
+    #       adjustment (`AdjustmentSemanticSegmentation`) labeling jobs for
+    #       this task type. One exception is that verification
+    #       (`VerificationSemanticSegmentation`) *must not* end with
+    #       -"ref".
     #
     #     * Video frame object detection (`VideoObjectDetection`), and
     #       adjustment and verification (`AdjustmentVideoObjectDetection`)
@@ -10461,6 +10500,13 @@ module Aws::SageMaker
     #   groups must be for the same VPC as specified in the subnet.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the notebook instance. Specify `ipv4` for
+    #   IPv4-only connectivity or `dualstack` for both IPv4 and IPv6
+    #   connectivity. When you specify `dualstack`, the subnet must support
+    #   IPv6 CIDR blocks. If not specified, defaults to `ipv4`.
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   When you send any requests to Amazon Web Services resources from the
     #   notebook instance, SageMaker AI assumes this role to perform tasks
@@ -10603,6 +10649,7 @@ module Aws::SageMaker
       :instance_type,
       :subnet_id,
       :security_group_ids,
+      :ip_address_type,
       :role_arn,
       :kms_key_id,
       :tags,
@@ -15099,6 +15146,13 @@ module Aws::SageMaker
     #   The type of orchestrator used for the SageMaker HyperPod cluster.
     #   @return [Types::ClusterOrchestrator]
     #
+    # @!attribute [rw] tiered_storage_config
+    #   The current configuration for managed tier checkpointing on the
+    #   HyperPod cluster. For example, this shows whether the feature is
+    #   enabled and the percentage of cluster memory allocated for
+    #   checkpoint storage.
+    #   @return [Types::ClusterTieredStorageConfig]
+    #
     # @!attribute [rw] node_recovery
     #   The node recovery mode configured for the SageMaker HyperPod
     #   cluster.
@@ -15129,6 +15183,7 @@ module Aws::SageMaker
       :restricted_instance_groups,
       :vpc_config,
       :orchestrator,
+      :tiered_storage_config,
       :node_recovery,
       :node_provisioning_mode,
       :cluster_role,
@@ -19022,6 +19077,12 @@ module Aws::SageMaker
     #   The type of ML compute instance running on the notebook instance.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type configured for the notebook instance. Returns
+    #   `ipv4` for IPv4-only connectivity or `dualstack` for both IPv4 and
+    #   IPv6 connectivity.
+    #   @return [String]
+    #
     # @!attribute [rw] subnet_id
     #   The ID of the VPC subnet.
     #   @return [String]
@@ -19155,6 +19216,7 @@ module Aws::SageMaker
       :failure_reason,
       :url,
       :instance_type,
+      :ip_address_type,
       :subnet_id,
       :security_groups,
       :role_arn,
@@ -19331,6 +19393,27 @@ module Aws::SageMaker
     #
     # @!attribute [rw] status
     #   The status of the SageMaker Partner AI App.
+    #
+    #   * Creating: SageMaker AI is creating the partner AI app. The partner
+    #     AI app is not available during creation.
+    #
+    #   * Updating: SageMaker AI is updating the partner AI app. The partner
+    #     AI app is not available when updating.
+    #
+    #   * Deleting: SageMaker AI is deleting the partner AI app. The partner
+    #     AI app is not available during deletion.
+    #
+    #   * Available: The partner AI app is provisioned and accessible.
+    #
+    #   * Failed: The partner AI app is in a failed state and isn't
+    #     available. SageMaker AI is investigating the issue. For further
+    #     guidance, contact Amazon Web Services Support.
+    #
+    #   * UpdateFailed: The partner AI app couldn't be updated but is
+    #     available.
+    #
+    #   * Deleted: The partner AI app is permanently deleted and not
+    #     available.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -21565,8 +21648,7 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] rootless_docker
-    #   Indicates whether to use rootless Docker. Default value is
-    #   `DISABLED`.
+    #   Indicates whether to use rootless Docker.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DockerSettings AWS API Documentation
@@ -50623,6 +50705,13 @@ module Aws::SageMaker
     #   to be created in the SageMaker HyperPod cluster.
     #   @return [Array<Types::ClusterRestrictedInstanceGroupSpecification>]
     #
+    # @!attribute [rw] tiered_storage_config
+    #   Updates the configuration for managed tier checkpointing on the
+    #   HyperPod cluster. For example, you can enable or disable the feature
+    #   and modify the percentage of cluster memory allocated for checkpoint
+    #   storage.
+    #   @return [Types::ClusterTieredStorageConfig]
+    #
     # @!attribute [rw] node_recovery
     #   The node recovery mode to be applied to the SageMaker HyperPod
     #   cluster.
@@ -50650,6 +50739,7 @@ module Aws::SageMaker
       :cluster_name,
       :instance_groups,
       :restricted_instance_groups,
+      :tiered_storage_config,
       :node_recovery,
       :instance_groups_to_delete,
       :cluster_role,
@@ -52029,6 +52119,14 @@ module Aws::SageMaker
     #   The Amazon ML compute instance type.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the notebook instance. Specify `ipv4` for
+    #   IPv4-only connectivity or `dualstack` for both IPv4 and IPv6
+    #   connectivity. The notebook instance must be stopped before updating
+    #   this setting. When you specify `dualstack`, the subnet must support
+    #   IPv6 addressing.
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that SageMaker AI can
     #   assume to access the notebook instance. For more information, see
@@ -52155,6 +52253,7 @@ module Aws::SageMaker
     class UpdateNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
       :instance_type,
+      :ip_address_type,
       :role_arn,
       :lifecycle_config_name,
       :disassociate_lifecycle_config,

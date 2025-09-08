@@ -7757,8 +7757,9 @@ module Aws::Route53
     #   After you disable a health check, Route 53 considers the status of
     #   the health check to always be healthy. If you configured DNS
     #   failover, Route 53 continues to route traffic to the corresponding
-    #   resources. If you want to stop routing traffic to a resource, change
-    #   the value of [Inverted][1].
+    #   resources. Additionally, in disabled state, you can also invert the
+    #   status of the health check to route traffic differently. For more
+    #   information, see [Inverted][1].
     #
     #   Charges for a health check still apply when the health check is
     #   disabled. For more information, see [Amazon Route 53 Pricing][2].

@@ -288,7 +288,8 @@ module Aws::OpenSearchServerless
     end
 
     # Details about each OpenSearch Serverless collection, including the
-    # collection endpoint and the OpenSearch Dashboards endpoint.
+    # collection endpoint, the OpenSearch Dashboards endpoint, and
+    # FIPS-compliant endpoints for federal government workloads.
     #
     # @!attribute [rw] id
     #   A unique identifier for the collection.
@@ -340,6 +341,13 @@ module Aws::OpenSearchServerless
     #   Collection-specific endpoint used to access OpenSearch Dashboards.
     #   @return [String]
     #
+    # @!attribute [rw] fips_endpoints
+    #   FIPS-compliant endpoints for the collection. These endpoints use
+    #   FIPS 140-3 validated cryptographic modules and are required for
+    #   federal government workloads that must comply with FedRAMP security
+    #   standards.
+    #   @return [Types::FipsEndpoints]
+    #
     # @!attribute [rw] failure_code
     #   A failure code associated with the request.
     #   @return [String]
@@ -363,6 +371,7 @@ module Aws::OpenSearchServerless
       :last_modified_date,
       :collection_endpoint,
       :dashboard_endpoint,
+      :fips_endpoints,
       :failure_code,
       :failure_message)
       SENSITIVE = []
@@ -1256,6 +1265,34 @@ module Aws::OpenSearchServerless
       :resource,
       :error_message,
       :error_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # FIPS-compliant endpoint URLs for an OpenSearch Serverless collection.
+    # These endpoints ensure all data transmission uses FIPS 140-3 validated
+    # cryptographic implementations, meeting federal security requirements
+    # for government workloads.
+    #
+    # @!attribute [rw] collection_endpoint
+    #   FIPS-compliant collection endpoint used to submit index, search, and
+    #   data upload requests to an OpenSearch Serverless collection. This
+    #   endpoint uses FIPS 140-3 validated cryptography and is required for
+    #   federal government workloads.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_endpoint
+    #   FIPS-compliant endpoint used to access OpenSearch Dashboards. This
+    #   endpoint uses FIPS 140-3 validated cryptography and is required for
+    #   federal government workloads that need dashboard visualization
+    #   capabilities.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/FipsEndpoints AWS API Documentation
+    #
+    class FipsEndpoints < Struct.new(
+      :collection_endpoint,
+      :dashboard_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end

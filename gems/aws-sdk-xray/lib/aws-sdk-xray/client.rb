@@ -701,6 +701,10 @@ module Aws::XRay
     #       attributes: {
     #         "AttributeKey" => "AttributeValue",
     #       },
+    #       sampling_rate_boost: {
+    #         max_rate: 1.0, # required
+    #         cooldown_window_minutes: 1, # required
+    #       },
     #     },
     #     tags: [
     #       {
@@ -726,6 +730,8 @@ module Aws::XRay
     #   resp.sampling_rule_record.sampling_rule.version #=> Integer
     #   resp.sampling_rule_record.sampling_rule.attributes #=> Hash
     #   resp.sampling_rule_record.sampling_rule.attributes["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.sampling_rule_record.sampling_rule.sampling_rate_boost.max_rate #=> Float
+    #   resp.sampling_rule_record.sampling_rule.sampling_rate_boost.cooldown_window_minutes #=> Integer
     #   resp.sampling_rule_record.created_at #=> Time
     #   resp.sampling_rule_record.modified_at #=> Time
     #
@@ -830,6 +836,8 @@ module Aws::XRay
     #   resp.sampling_rule_record.sampling_rule.version #=> Integer
     #   resp.sampling_rule_record.sampling_rule.attributes #=> Hash
     #   resp.sampling_rule_record.sampling_rule.attributes["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.sampling_rule_record.sampling_rule.sampling_rate_boost.max_rate #=> Float
+    #   resp.sampling_rule_record.sampling_rule.sampling_rate_boost.cooldown_window_minutes #=> Integer
     #   resp.sampling_rule_record.created_at #=> Time
     #   resp.sampling_rule_record.modified_at #=> Time
     #
@@ -1398,6 +1406,8 @@ module Aws::XRay
     #   resp.sampling_rule_records[0].sampling_rule.version #=> Integer
     #   resp.sampling_rule_records[0].sampling_rule.attributes #=> Hash
     #   resp.sampling_rule_records[0].sampling_rule.attributes["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.sampling_rule_records[0].sampling_rule.sampling_rate_boost.max_rate #=> Float
+    #   resp.sampling_rule_records[0].sampling_rule.sampling_rate_boost.cooldown_window_minutes #=> Integer
     #   resp.sampling_rule_records[0].created_at #=> Time
     #   resp.sampling_rule_records[0].modified_at #=> Time
     #   resp.next_token #=> String
@@ -1455,11 +1465,16 @@ module Aws::XRay
     # @option params [required, Array<Types::SamplingStatisticsDocument>] :sampling_statistics_documents
     #   Information about rules that the service is using to sample requests.
     #
+    # @option params [Array<Types::SamplingBoostStatisticsDocument>] :sampling_boost_statistics_documents
+    #   Information about rules that the service is using to boost sampling
+    #   rate.
+    #
     # @return [Types::GetSamplingTargetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetSamplingTargetsResult#sampling_target_documents #sampling_target_documents} => Array&lt;Types::SamplingTargetDocument&gt;
     #   * {Types::GetSamplingTargetsResult#last_rule_modification #last_rule_modification} => Time
     #   * {Types::GetSamplingTargetsResult#unprocessed_statistics #unprocessed_statistics} => Array&lt;Types::UnprocessedStatistics&gt;
+    #   * {Types::GetSamplingTargetsResult#unprocessed_boost_statistics #unprocessed_boost_statistics} => Array&lt;Types::UnprocessedStatistics&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1474,6 +1489,16 @@ module Aws::XRay
     #         borrow_count: 1,
     #       },
     #     ],
+    #     sampling_boost_statistics_documents: [
+    #       {
+    #         rule_name: "RuleName", # required
+    #         service_name: "ServiceName", # required
+    #         timestamp: Time.now, # required
+    #         anomaly_count: 1, # required
+    #         total_count: 1, # required
+    #         sampled_anomaly_count: 1, # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1484,11 +1509,17 @@ module Aws::XRay
     #   resp.sampling_target_documents[0].reservoir_quota #=> Integer
     #   resp.sampling_target_documents[0].reservoir_quota_ttl #=> Time
     #   resp.sampling_target_documents[0].interval #=> Integer
+    #   resp.sampling_target_documents[0].sampling_boost.boost_rate #=> Float
+    #   resp.sampling_target_documents[0].sampling_boost.boost_rate_ttl #=> Time
     #   resp.last_rule_modification #=> Time
     #   resp.unprocessed_statistics #=> Array
     #   resp.unprocessed_statistics[0].rule_name #=> String
     #   resp.unprocessed_statistics[0].error_code #=> String
     #   resp.unprocessed_statistics[0].message #=> String
+    #   resp.unprocessed_boost_statistics #=> Array
+    #   resp.unprocessed_boost_statistics[0].rule_name #=> String
+    #   resp.unprocessed_boost_statistics[0].error_code #=> String
+    #   resp.unprocessed_boost_statistics[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargets AWS API Documentation
     #
@@ -1786,9 +1817,9 @@ module Aws::XRay
     end
 
     # Retrieves the current destination of data sent to `PutTraceSegments`
-    # and *OpenTelemetry* API. The Transaction Search feature requires a
-    # CloudWatchLogs destination. For more information, see [Transaction
-    # Search][1] and [OpenTelemetry][2].
+    # and *OpenTelemetry protocol (OTLP)* endpoint. The Transaction Search
+    # feature requires a CloudWatchLogs destination. For more information,
+    # see [Transaction Search][1] and [OpenTelemetry][2].
     #
     #
     #
@@ -2038,7 +2069,7 @@ module Aws::XRay
     # CloudWatch log group generated by Transaction Search. For information
     # on what each trace returns, see [BatchGetTraces][1].
     #
-    # This API does not initiate a retrieval job. To start a trace
+    # This API does not initiate a retrieval process. To start a trace
     # retrieval, use `StartTraceRetrieval`, which generates the required
     # `RetrievalToken`.
     #
@@ -2047,12 +2078,12 @@ module Aws::XRay
     # access the full list of traces.
     #
     # For cross-account observability, this API can retrieve traces from
-    # linked accounts when CloudWatch log is the destination across relevant
-    # accounts. For more details, see [CloudWatch cross-account
+    # linked accounts when CloudWatch log is set as the destination across
+    # relevant accounts. For more details, see [CloudWatch cross-account
     # observability][2].
     #
-    # For retrieving data from X-Ray directly as opposed to the
-    # Transaction-Search Log group, see [BatchGetTraces][1].
+    # For retrieving data from X-Ray directly as opposed to the Transaction
+    # Search generated log group, see [BatchGetTraces][1].
     #
     #
     #
@@ -2404,9 +2435,8 @@ module Aws::XRay
     end
 
     # Initiates a trace retrieval process using the specified time range and
-    # for the give trace IDs on Transaction Search generated by the
-    # CloudWatch log group. For more information, see [Transaction
-    # Search][1].
+    # for the given trace IDs in the Transaction Search generated CloudWatch
+    # log group. For more information, see [Transaction Search][1].
     #
     # API returns a `RetrievalToken`, which can be used with
     # `ListRetrievedTraces` or `GetRetrievedTracesGraph` to fetch results.
@@ -2678,6 +2708,10 @@ module Aws::XRay
     #       attributes: {
     #         "AttributeKey" => "AttributeValue",
     #       },
+    #       sampling_rate_boost: {
+    #         max_rate: 1.0, # required
+    #         cooldown_window_minutes: 1, # required
+    #       },
     #     },
     #   })
     #
@@ -2697,6 +2731,8 @@ module Aws::XRay
     #   resp.sampling_rule_record.sampling_rule.version #=> Integer
     #   resp.sampling_rule_record.sampling_rule.attributes #=> Hash
     #   resp.sampling_rule_record.sampling_rule.attributes["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.sampling_rule_record.sampling_rule.sampling_rate_boost.max_rate #=> Float
+    #   resp.sampling_rule_record.sampling_rule.sampling_rate_boost.cooldown_window_minutes #=> Integer
     #   resp.sampling_rule_record.created_at #=> Time
     #   resp.sampling_rule_record.modified_at #=> Time
     #
@@ -2763,7 +2799,7 @@ module Aws::XRay
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -334,7 +334,7 @@ module Aws::ECS
     end
 
     # Your Amazon Web Services account was blocked. For more information,
-    # contact [ Amazon Web ServicesSupport][1].
+    # contact [ Amazon Web Services Support][1].
     #
     #
     #
@@ -966,7 +966,7 @@ module Aws::ECS
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
     #
     # @!attribute [rw] name
-    #   The name of the cluster setting. The value is `containerInsights` .
+    #   The name of the cluster setting. The value is `containerInsights`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2725,6 +2725,19 @@ module Aws::ECS
     #   Availability Zones][1] in the <i> <i>Amazon Elastic Container
     #   Service Developer Guide</i> </i>.
     #
+    #   The default behavior of `AvailabilityZoneRebalancing` differs
+    #   between create and update requests:
+    #
+    #   * For create service requests, when when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to to
+    #     `ENABLED`.
+    #
+    #   * For update service requests, when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults to the existing
+    #     service’s `AvailabilityZoneRebalancing` value. If the service
+    #     never had an `AvailabilityZoneRebalancing` value set, Amazon ECS
+    #     treats this as `DISABLED`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
@@ -2735,13 +2748,13 @@ module Aws::ECS
     #   your service. For more information, see [Service load balancing][1]
     #   in the *Amazon Elastic Container Service Developer Guide*.
     #
-    #   If the service uses the rolling update (`ECS`) deployment controller
-    #   and using either an Application Load Balancer or Network Load
-    #   Balancer, you must specify one or more target group ARNs to attach
-    #   to the service. The service-linked role is required for services
-    #   that use multiple target groups. For more information, see [Using
-    #   service-linked roles for Amazon ECS][2] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   If the service uses the `ECS` deployment controller and using either
+    #   an Application Load Balancer or Network Load Balancer, you must
+    #   specify one or more target group ARNs to attach to the service. The
+    #   service-linked role is required for services that use multiple
+    #   target groups. For more information, see [Using service-linked roles
+    #   for Amazon ECS][2] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #   If the service uses the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
@@ -2937,19 +2950,12 @@ module Aws::ECS
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] health_check_grace_period_seconds
-    #   The period of time, in seconds, that the Amazon ECS service
+    #   The period of time, in seconds, that the Amazon Amazon ECS service
     #   scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and
-    #   container health checks after a task has first started. If you
-    #   don't specify a health check grace period value, the default value
-    #   of `0` is used. If you don't use any of the health checks, then
+    #   container health checks after a task has first started. If you do
+    #   not specify a health check grace period value, the default value of
+    #   0 is used. If you do not use any of the health checks, then
     #   `healthCheckGracePeriodSeconds` is unused.
-    #
-    #   If your service's tasks take a while to start and respond to health
-    #   checks, you can specify a health check grace period of up to
-    #   2,147,483,647 seconds (about 69 years). During that time, the Amazon
-    #   ECS service scheduler ignores health check status. This grace period
-    #   can prevent the service scheduler from marking tasks as unhealthy
-    #   and stopping them before they have time to come up.
     #   @return [Integer]
     #
     # @!attribute [rw] scheduling_strategy
@@ -3970,7 +3976,7 @@ module Aws::ECS
     #   stops the unhealthy tasks one-by-one — using the
     #   `minimumHealthyPercent` as a constraint — to clear up capacity to
     #   launch replacement tasks. For more information about how the
-    #   scheduler replaces unhealthy tasks, see [Amazon ECS services][1] .
+    #   scheduler replaces unhealthy tasks, see [Amazon ECS services][1].
     #
     #   For services that *do not* use a load balancer, the following should
     #   be noted:
@@ -9933,8 +9939,8 @@ module Aws::ECS
     #
     # @!attribute [rw] health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service
-    #   scheduler ignores unhealthy Elastic Load Balancing target health
-    #   checks after a task has first started.
+    #   scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and
+    #   container health checks after a task has first started.
     #   @return [Integer]
     #
     # @!attribute [rw] scheduling_strategy
@@ -10034,6 +10040,19 @@ module Aws::ECS
     #   For more information, see [Balancing an Amazon ECS service across
     #   Availability Zones][1] in the <i> <i>Amazon Elastic Container
     #   Service Developer Guide</i> </i>.
+    #
+    #   The default behavior of `AvailabilityZoneRebalancing` differs
+    #   between create and update requests:
+    #
+    #   * For create service requests, when when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to to
+    #     `ENABLED`.
+    #
+    #   * For update service requests, when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults to the existing
+    #     service’s `AvailabilityZoneRebalancing` value. If the service
+    #     never had an `AvailabilityZoneRebalancing` value set, Amazon ECS
+    #     treats this as `DISABLED`.
     #
     #
     #
@@ -13943,6 +13962,19 @@ module Aws::ECS
     #   For more information, see [Balancing an Amazon ECS service across
     #   Availability Zones][1] in the <i> <i>Amazon Elastic Container
     #   Service Developer Guide</i> </i>.
+    #
+    #   The default behavior of `AvailabilityZoneRebalancing` differs
+    #   between create and update requests:
+    #
+    #   * For create service requests, when when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to to
+    #     `ENABLED`.
+    #
+    #   * For update service requests, when no value is specified for
+    #     `AvailabilityZoneRebalancing`, Amazon ECS defaults to the existing
+    #     service’s `AvailabilityZoneRebalancing` value. If the service
+    #     never had an `AvailabilityZoneRebalancing` value set, Amazon ECS
+    #     treats this as `DISABLED`.
     #
     #   This parameter doesn't trigger a new service deployment.
     #

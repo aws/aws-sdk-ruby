@@ -114,6 +114,7 @@ module Aws::RDS
     #     enable_local_write_forwarding: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -990,6 +991,21 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [String] :master_user_authentication_type
+    #   Specifies the authentication type for the master user. With IAM master
+    #   user authentication, you can configure the master DB user with IAM
+    #   database authentication when you create a DB cluster.
+    #
+    #   You can specify one of the following values:
+    #
+    #   * `password` - Use standard database authentication with a password.
+    #
+    #   * `iam-db-auth` - Use IAM database authentication for the master user.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
+    #   engines.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1173,6 +1189,7 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     multi_tenant: false,
     #     engine_lifecycle_support: "String",
+    #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -2424,6 +2441,19 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [String] :master_user_authentication_type
+    #   Specifies the authentication type for the master user. With IAM master
+    #   user authentication, you can configure the master DB user with IAM
+    #   database authentication when you create a DB instance.
+    #
+    #   You can specify one of the following values:
+    #
+    #   * `password` - Use standard database authentication with a password.
+    #
+    #   * `iam-db-auth` - Use IAM database authentication for the master user.
+    #
+    #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
+    #   engines.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

@@ -195,6 +195,7 @@ module Aws::EC2
     AttachVpnGatewayResult = Shapes::StructureShape.new(name: 'AttachVpnGatewayResult')
     AttachmentEnaSrdSpecification = Shapes::StructureShape.new(name: 'AttachmentEnaSrdSpecification')
     AttachmentEnaSrdUdpSpecification = Shapes::StructureShape.new(name: 'AttachmentEnaSrdUdpSpecification')
+    AttachmentLimitType = Shapes::StringShape.new(name: 'AttachmentLimitType')
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
     AttributeBooleanValue = Shapes::StructureShape.new(name: 'AttributeBooleanValue')
     AttributeSummary = Shapes::StructureShape.new(name: 'AttributeSummary')
@@ -2337,6 +2338,7 @@ module Aws::EC2
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxResultsParam = Shapes::IntegerShape.new(name: 'MaxResultsParam')
     MaximumBandwidthInMbps = Shapes::IntegerShape.new(name: 'MaximumBandwidthInMbps')
+    MaximumEbsAttachments = Shapes::IntegerShape.new(name: 'MaximumEbsAttachments')
     MaximumEfaInterfaces = Shapes::IntegerShape.new(name: 'MaximumEfaInterfaces')
     MaximumEnaQueueCount = Shapes::IntegerShape.new(name: 'MaximumEnaQueueCount')
     MaximumEnaQueueCountPerInterface = Shapes::IntegerShape.new(name: 'MaximumEnaQueueCountPerInterface')
@@ -9491,6 +9493,8 @@ module Aws::EC2
     EbsInfo.add_member(:encryption_support, Shapes::ShapeRef.new(shape: EbsEncryptionSupport, location_name: "encryptionSupport"))
     EbsInfo.add_member(:ebs_optimized_info, Shapes::ShapeRef.new(shape: EbsOptimizedInfo, location_name: "ebsOptimizedInfo"))
     EbsInfo.add_member(:nvme_support, Shapes::ShapeRef.new(shape: EbsNvmeSupport, location_name: "nvmeSupport"))
+    EbsInfo.add_member(:maximum_ebs_attachments, Shapes::ShapeRef.new(shape: MaximumEbsAttachments, location_name: "maximumEbsAttachments"))
+    EbsInfo.add_member(:attachment_limit_type, Shapes::ShapeRef.new(shape: AttachmentLimitType, location_name: "attachmentLimitType"))
     EbsInfo.struct_class = Types::EbsInfo
 
     EbsInstanceBlockDevice.add_member(:attach_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "attachTime"))

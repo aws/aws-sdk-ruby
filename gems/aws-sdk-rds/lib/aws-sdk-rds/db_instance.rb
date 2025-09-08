@@ -1030,6 +1030,7 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     multi_tenant: false,
     #     engine_lifecycle_support: "String",
+    #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -2268,6 +2269,19 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [String] :master_user_authentication_type
+    #   Specifies the authentication type for the master user. With IAM master
+    #   user authentication, you can configure the master DB user with IAM
+    #   database authentication when you create a DB instance.
+    #
+    #   You can specify one of the following values:
+    #
+    #   * `password` - Use standard database authentication with a password.
+    #
+    #   * `iam-db-auth` - Use IAM database authentication for the master user.
+    #
+    #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
+    #   engines.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -3179,6 +3193,7 @@ module Aws::RDS
     #     engine: "String",
     #     dedicated_log_volume: false,
     #     multi_tenant: false,
+    #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -4265,6 +4280,19 @@ module Aws::RDS
     #   irreversible, so you can't later convert back to the single-tenant
     #   configuration. When you specify this parameter, you must also specify
     #   `ApplyImmediately`.
+    # @option options [String] :master_user_authentication_type
+    #   Specifies the authentication type for the master user. With IAM master
+    #   user authentication, you can change the master DB user to use IAM
+    #   database authentication.
+    #
+    #   You can specify one of the following values:
+    #
+    #   * `password` - Use standard database authentication with a password.
+    #
+    #   * `iam-db-auth` - Use IAM database authentication for the master user.
+    #
+    #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
+    #   engines.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)

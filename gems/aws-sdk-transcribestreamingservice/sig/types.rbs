@@ -48,6 +48,12 @@ module Aws::TranscribeStreamingService
       SENSITIVE: []
     end
 
+    class CallAnalyticsLanguageWithScore
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
     class CategoryEvent
       attr_accessor matched_categories: ::Array[::String]
       attr_accessor matched_details: ::Hash[::String, Types::PointsOfInterest]
@@ -346,6 +352,11 @@ module Aws::TranscribeStreamingService
       attr_accessor vocabulary_filter_name: ::String
       attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
       attr_accessor language_model_name: ::String
+      attr_accessor identify_language: bool
+      attr_accessor language_options: ::String
+      attr_accessor preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
+      attr_accessor vocabulary_names: ::String
+      attr_accessor vocabulary_filter_names: ::String
       attr_accessor enable_partial_results_stabilization: bool
       attr_accessor partial_results_stability: ("high" | "medium" | "low")
       attr_accessor content_identification_type: ("PII")
@@ -365,6 +376,11 @@ module Aws::TranscribeStreamingService
       attr_accessor vocabulary_filter_name: ::String
       attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
       attr_accessor language_model_name: ::String
+      attr_accessor identify_language: bool
+      attr_accessor language_options: ::String
+      attr_accessor preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
+      attr_accessor vocabulary_names: ::String
+      attr_accessor vocabulary_filter_names: ::String
       attr_accessor enable_partial_results_stabilization: bool
       attr_accessor partial_results_stability: ("high" | "medium" | "low")
       attr_accessor content_identification_type: ("PII")
@@ -508,6 +524,8 @@ module Aws::TranscribeStreamingService
       attr_accessor entities: ::Array[Types::CallAnalyticsEntity]
       attr_accessor sentiment: ("POSITIVE" | "NEGATIVE" | "MIXED" | "NEUTRAL")
       attr_accessor issues_detected: ::Array[Types::IssueDetected]
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
+      attr_accessor language_identification: ::Array[Types::CallAnalyticsLanguageWithScore]
       attr_accessor event_type: untyped
       SENSITIVE: []
     end

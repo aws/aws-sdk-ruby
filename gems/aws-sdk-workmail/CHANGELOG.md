@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2025-09-02)
+------------------
+
+* Feature - Make RoleArn an optional parameter for the PutEmailMonitoringConfiguration API, and add UnsupportedOperationException to RegisterToWorkMail.
+
 1.89.0 (2025-08-27)
 ------------------
 

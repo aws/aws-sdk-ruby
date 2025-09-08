@@ -484,9 +484,9 @@ module Aws::OpenSearchServerless
     # @!group API Operations
 
     # Returns attributes for one or more collections, including the
-    # collection endpoint and the OpenSearch Dashboards endpoint. For more
-    # information, see [Creating and managing Amazon OpenSearch Serverless
-    # collections][1].
+    # collection endpoint, the OpenSearch Dashboards endpoint, and
+    # FIPS-compliant endpoints. For more information, see [Creating and
+    # managing Amazon OpenSearch Serverless collections][1].
     #
     #
     #
@@ -532,6 +532,8 @@ module Aws::OpenSearchServerless
     #   resp.collection_details[0].last_modified_date #=> Integer
     #   resp.collection_details[0].collection_endpoint #=> String
     #   resp.collection_details[0].dashboard_endpoint #=> String
+    #   resp.collection_details[0].fips_endpoints.collection_endpoint #=> String
+    #   resp.collection_details[0].fips_endpoints.dashboard_endpoint #=> String
     #   resp.collection_details[0].failure_code #=> String
     #   resp.collection_details[0].failure_message #=> String
     #   resp.collection_error_details #=> Array
@@ -2645,7 +2647,7 @@ module Aws::OpenSearchServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

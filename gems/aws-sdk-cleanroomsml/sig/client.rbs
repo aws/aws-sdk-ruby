@@ -181,7 +181,14 @@ module Aws
                                                                  container_logs: Array[
                                                                    {
                                                                      allowed_account_ids: Array[::String],
-                                                                     filter_pattern: ::String?
+                                                                     filter_pattern: ::String?,
+                                                                     log_type: ("ALL" | "ERROR_SUMMARY")?,
+                                                                     log_redaction_configuration: {
+                                                                       entities_to_redact: Array[("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" | "NUMBERS" | "CUSTOM")],
+                                                                       custom_entity_config: {
+                                                                         custom_data_identifiers: Array[::String]
+                                                                       }?
+                                                                     }?
                                                                    },
                                                                  ]?,
                                                                  container_metrics: {
@@ -203,7 +210,14 @@ module Aws
                                                                  container_logs: Array[
                                                                    {
                                                                      allowed_account_ids: Array[::String],
-                                                                     filter_pattern: ::String?
+                                                                     filter_pattern: ::String?,
+                                                                     log_type: ("ALL" | "ERROR_SUMMARY")?,
+                                                                     log_redaction_configuration: {
+                                                                       entities_to_redact: Array[("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" | "NUMBERS" | "CUSTOM")],
+                                                                       custom_entity_config: {
+                                                                         custom_data_identifiers: Array[::String]
+                                                                       }?
+                                                                     }?
                                                                    },
                                                                  ]?,
                                                                  max_output_size: {
@@ -266,7 +280,7 @@ module Aws
                                   ?environment: Hash[::String, ::String],
                                   resource_config: {
                                     instance_count: ::Integer?,
-                                    instance_type: ("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.p3dn.24xlarge" | "ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.c5n.xlarge" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.16xlarge" | "ml.g5.12xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.8xlarge" | "ml.c6i.4xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.r5d.large" | "ml.r5d.xlarge" | "ml.r5d.2xlarge" | "ml.r5d.4xlarge" | "ml.r5d.8xlarge" | "ml.r5d.12xlarge" | "ml.r5d.16xlarge" | "ml.r5d.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.r5.large" | "ml.r5.xlarge" | "ml.r5.2xlarge" | "ml.r5.4xlarge" | "ml.r5.8xlarge" | "ml.r5.12xlarge" | "ml.r5.16xlarge" | "ml.r5.24xlarge"),
+                                    instance_type: ("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.c5n.xlarge" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.16xlarge" | "ml.g5.12xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.8xlarge" | "ml.c6i.4xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.r5d.large" | "ml.r5d.xlarge" | "ml.r5d.2xlarge" | "ml.r5d.4xlarge" | "ml.r5d.8xlarge" | "ml.r5d.12xlarge" | "ml.r5d.16xlarge" | "ml.r5d.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.r5.large" | "ml.r5.xlarge" | "ml.r5.2xlarge" | "ml.r5.4xlarge" | "ml.r5.8xlarge" | "ml.r5.12xlarge" | "ml.r5.16xlarge" | "ml.r5.24xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5en.48xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.p3dn.24xlarge"),
                                     volume_size_in_gb: ::Integer
                                   },
                                   ?stopping_condition: {
@@ -457,9 +471,6 @@ module Aws
 
       interface _GetCollaborationMLInputChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCollaborationMLInputChannelResponse]
-        def create_time: () -> ::Time
-        def update_time: () -> ::Time
-        def creator_account_id: () -> ::String
         def membership_identifier: () -> ::String
         def collaboration_identifier: () -> ::String
         def ml_input_channel_arn: () -> ::String
@@ -470,6 +481,9 @@ module Aws
         def retention_in_days: () -> ::Integer
         def number_of_records: () -> ::Integer
         def description: () -> ::String
+        def create_time: () -> ::Time
+        def update_time: () -> ::Time
+        def creator_account_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#get_collaboration_ml_input_channel-instance_method
       def get_collaboration_ml_input_channel: (
@@ -598,12 +612,8 @@ module Aws
 
       interface _GetMLInputChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMLInputChannelResponse]
-        def create_time: () -> ::Time
-        def update_time: () -> ::Time
         def membership_identifier: () -> ::String
         def collaboration_identifier: () -> ::String
-        def input_channel: () -> Types::InputChannel
-        def protected_query_identifier: () -> ::String
         def ml_input_channel_arn: () -> ::String
         def name: () -> ::String
         def configured_model_algorithm_associations: () -> ::Array[::String]
@@ -611,9 +621,13 @@ module Aws
         def status_details: () -> Types::StatusDetails
         def retention_in_days: () -> ::Integer
         def number_of_records: () -> ::Integer
+        def description: () -> ::String
+        def create_time: () -> ::Time
+        def update_time: () -> ::Time
+        def input_channel: () -> Types::InputChannel
+        def protected_query_identifier: () -> ::String
         def number_of_files: () -> ::Float
         def size_in_gb: () -> ::Float
-        def description: () -> ::String
         def kms_key_arn: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -1035,7 +1049,7 @@ module Aws
                                                ?trained_model_version_identifier: ::String,
                                                ?configured_model_algorithm_association_arn: ::String,
                                                resource_config: {
-                                                 instance_type: ("ml.r7i.48xlarge" | "ml.r6i.16xlarge" | "ml.m6i.xlarge" | "ml.m5.4xlarge" | "ml.p2.xlarge" | "ml.m4.16xlarge" | "ml.r7i.16xlarge" | "ml.m7i.xlarge" | "ml.m6i.12xlarge" | "ml.r7i.8xlarge" | "ml.r7i.large" | "ml.m7i.12xlarge" | "ml.m6i.24xlarge" | "ml.m7i.24xlarge" | "ml.r6i.8xlarge" | "ml.r6i.large" | "ml.g5.2xlarge" | "ml.m5.large" | "ml.p3.16xlarge" | "ml.m7i.48xlarge" | "ml.m6i.16xlarge" | "ml.p2.16xlarge" | "ml.g5.4xlarge" | "ml.m7i.16xlarge" | "ml.c4.2xlarge" | "ml.c5.2xlarge" | "ml.c6i.32xlarge" | "ml.c4.4xlarge" | "ml.g5.8xlarge" | "ml.c6i.xlarge" | "ml.c5.4xlarge" | "ml.g4dn.xlarge" | "ml.c7i.xlarge" | "ml.c6i.12xlarge" | "ml.g4dn.12xlarge" | "ml.c7i.12xlarge" | "ml.c6i.24xlarge" | "ml.g4dn.2xlarge" | "ml.c7i.24xlarge" | "ml.c7i.2xlarge" | "ml.c4.8xlarge" | "ml.c6i.2xlarge" | "ml.g4dn.4xlarge" | "ml.c7i.48xlarge" | "ml.c7i.4xlarge" | "ml.c6i.16xlarge" | "ml.c5.9xlarge" | "ml.g4dn.16xlarge" | "ml.c7i.16xlarge" | "ml.c6i.4xlarge" | "ml.c5.xlarge" | "ml.c4.xlarge" | "ml.g4dn.8xlarge" | "ml.c7i.8xlarge" | "ml.c7i.large" | "ml.g5.xlarge" | "ml.c6i.8xlarge" | "ml.c6i.large" | "ml.g5.12xlarge" | "ml.g5.24xlarge" | "ml.m7i.2xlarge" | "ml.c5.18xlarge" | "ml.g5.48xlarge" | "ml.m6i.2xlarge" | "ml.g5.16xlarge" | "ml.m7i.4xlarge" | "ml.p3.2xlarge" | "ml.r6i.32xlarge" | "ml.m6i.4xlarge" | "ml.m5.xlarge" | "ml.m4.10xlarge" | "ml.r6i.xlarge" | "ml.m5.12xlarge" | "ml.m4.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.xlarge" | "ml.r6i.12xlarge" | "ml.m5.24xlarge" | "ml.r7i.12xlarge" | "ml.m7i.8xlarge" | "ml.m7i.large" | "ml.r6i.24xlarge" | "ml.r6i.2xlarge" | "ml.m4.2xlarge" | "ml.r7i.24xlarge" | "ml.r7i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.large" | "ml.m5.2xlarge" | "ml.p2.8xlarge" | "ml.r6i.4xlarge" | "ml.m6i.32xlarge" | "ml.p3.8xlarge" | "ml.m4.4xlarge"),
+                                                 instance_type: ("ml.r7i.48xlarge" | "ml.r6i.16xlarge" | "ml.m6i.xlarge" | "ml.m5.4xlarge" | "ml.p2.xlarge" | "ml.m4.16xlarge" | "ml.r7i.16xlarge" | "ml.m7i.xlarge" | "ml.m6i.12xlarge" | "ml.r7i.8xlarge" | "ml.r7i.large" | "ml.m7i.12xlarge" | "ml.m6i.24xlarge" | "ml.m7i.24xlarge" | "ml.r6i.8xlarge" | "ml.r6i.large" | "ml.g5.2xlarge" | "ml.m5.large" | "ml.m7i.48xlarge" | "ml.m6i.16xlarge" | "ml.p2.16xlarge" | "ml.g5.4xlarge" | "ml.m7i.16xlarge" | "ml.c4.2xlarge" | "ml.c5.2xlarge" | "ml.c6i.32xlarge" | "ml.c4.4xlarge" | "ml.g5.8xlarge" | "ml.c6i.xlarge" | "ml.c5.4xlarge" | "ml.g4dn.xlarge" | "ml.c7i.xlarge" | "ml.c6i.12xlarge" | "ml.g4dn.12xlarge" | "ml.c7i.12xlarge" | "ml.c6i.24xlarge" | "ml.g4dn.2xlarge" | "ml.c7i.24xlarge" | "ml.c7i.2xlarge" | "ml.c4.8xlarge" | "ml.c6i.2xlarge" | "ml.g4dn.4xlarge" | "ml.c7i.48xlarge" | "ml.c7i.4xlarge" | "ml.c6i.16xlarge" | "ml.c5.9xlarge" | "ml.g4dn.16xlarge" | "ml.c7i.16xlarge" | "ml.c6i.4xlarge" | "ml.c5.xlarge" | "ml.c4.xlarge" | "ml.g4dn.8xlarge" | "ml.c7i.8xlarge" | "ml.c7i.large" | "ml.g5.xlarge" | "ml.c6i.8xlarge" | "ml.c6i.large" | "ml.g5.12xlarge" | "ml.g5.24xlarge" | "ml.m7i.2xlarge" | "ml.c5.18xlarge" | "ml.g5.48xlarge" | "ml.m6i.2xlarge" | "ml.g5.16xlarge" | "ml.m7i.4xlarge" | "ml.r6i.32xlarge" | "ml.m6i.4xlarge" | "ml.m5.xlarge" | "ml.m4.10xlarge" | "ml.r6i.xlarge" | "ml.m5.12xlarge" | "ml.m4.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.xlarge" | "ml.r6i.12xlarge" | "ml.m5.24xlarge" | "ml.r7i.12xlarge" | "ml.m7i.8xlarge" | "ml.m7i.large" | "ml.r6i.24xlarge" | "ml.r6i.2xlarge" | "ml.m4.2xlarge" | "ml.r7i.24xlarge" | "ml.r7i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.large" | "ml.m5.2xlarge" | "ml.p2.8xlarge" | "ml.r6i.4xlarge" | "ml.m6i.32xlarge" | "ml.m4.4xlarge" | "ml.p3.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge"),
                                                  instance_count: ::Integer?
                                                },
                                                output_configuration: {
