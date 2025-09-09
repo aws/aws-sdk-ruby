@@ -84,7 +84,7 @@ module Aws
         @client.abort_multipart_upload(bucket: options[:bucket], key: options[:key], upload_id: upload_id)
         msg = "multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors)
-      rescue MultipartUploadError => eq
+      rescue MultipartUploadError => e
         shutdown_executor
         raise e
       rescue StandardError => e
