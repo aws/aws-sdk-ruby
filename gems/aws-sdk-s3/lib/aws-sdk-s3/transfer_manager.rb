@@ -181,7 +181,8 @@ module Aws
         uploading_options = options.dup
         uploader = FileUploader.new(
           multipart_threshold: uploading_options.delete(:multipart_threshold),
-          client: @client
+          client: @client,
+          executor: @executor
         )
         response = uploader.upload(source, uploading_options.merge(bucket: bucket, key: key))
         yield response if block_given?

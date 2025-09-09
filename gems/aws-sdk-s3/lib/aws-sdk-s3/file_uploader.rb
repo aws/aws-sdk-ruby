@@ -41,6 +41,7 @@ module Aws
           else
             # remove multipart parameters not supported by put_object
             options.delete(:thread_count)
+            options.delete(:executor)
             put_object(source, options)
           end
         end
