@@ -7,7 +7,6 @@ module Aws
   module S3
     # @api private
     class MultipartFileUploader
-
       MIN_PART_SIZE = 5 * 1024 * 1024 # 5MB
       MAX_PARTS = 10_000
       DEFAULT_THREAD_COUNT = 10
@@ -24,12 +23,13 @@ module Aws
       # @option options [Integer] :thread_count (DEFAULT_THREAD_COUNT)
       def initialize(options = {})
         @client = options[:client] || Client.new
-        @executor = options[:executor]
         @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT
+        @custom_executor = !options[:executor].nil?
+        @executor = options[:executor] || DefaultExecutor.new(max_threads: @thread_count)
       end
 
       # @return [Client]
-      attr_reader :client
+      attr_reader :client, :executor
 
       # @param [String, Pathname, File, Tempfile] source The file to upload.
       # @option options [required, String] :bucket The bucket to upload to.
@@ -44,6 +44,7 @@ module Aws
         upload_id = initiate_upload(options)
         parts = upload_parts(upload_id, source, options)
         complete_upload(upload_id, parts, source, options)
+        shutdown_executor
       end
 
       private
@@ -67,13 +68,7 @@ module Aws
       def upload_parts(upload_id, source, options)
         completed = PartList.new
         pending = PartList.new(compute_parts(upload_id, source, options))
-        errors =
-          if @executor
-            upload_with_executor(pending, completed, options)
-          else
-            upload_in_threads(pending, completed, options)
-          end
-
+        errors = upload_with_executor(pending, completed, options)
         if errors.empty?
           completed.to_a.sort_by { |part| part[:part_number] }
         else
@@ -81,13 +76,19 @@ module Aws
         end
       end
 
+      def shutdown_executor
+        @executor.shutdown if @executor.running? && !@custom_executor
+      end
+
       def abort_upload(upload_id, options, errors)
         @client.abort_multipart_upload(bucket: options[:bucket], key: options[:key], upload_id: upload_id)
         msg = "multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors)
-      rescue MultipartUploadError => e
+      rescue MultipartUploadError => eq
+        shutdown_executor
         raise e
       rescue StandardError => e
+        shutdown_executor
         msg = "failed to abort multipart upload: #{e.message}. "\
           "Multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors + [e])
@@ -115,13 +116,13 @@ module Aws
         CHECKSUM_KEYS.include?(key)
       end
 
-      def has_checksum_key?(keys)
+      def checksum_keys?(keys)
         keys.any? { |key| checksum_key?(key) }
       end
 
       def create_opts(options)
         opts = { checksum_algorithm: Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM }
-        opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
+        opts[:checksum_type] = 'FULL_OBJECT' if checksum_keys?(options.keys)
         CREATE_OPTIONS.each_with_object(opts) do |key, hash|
           hash[key] = options[key] if options.key?(key)
         end
@@ -129,7 +130,7 @@ module Aws
 
       def complete_opts(options)
         opts = {}
-        opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
+        opts[:checksum_type] = 'FULL_OBJECT' if checksum_keys?(options.keys)
         COMPLETE_OPTIONS.each_with_object(opts) do |key, hash|
           hash[key] = options[key] if options.key?(key)
         end
@@ -142,21 +143,33 @@ module Aws
         end
       end
 
-      def upload_with_executor(pending, completed, _options)
-        max_parts = pending.count
+      def upload_with_executor(pending, completed, options)
+        upload_attempts = 0
         completion_queue = Queue.new
         abort_upload = false
         errors = []
 
+        if (callback = options[:progress_callback])
+          progress = MultipartProgress.new(pending, callback)
+        end
+
         while (part = pending.shift)
           break if abort_upload
 
+          upload_attempts += 1
           @executor.post(part) do |p|
+            if progress
+              p[:on_chunk_sent] =
+                proc do |_chunk, bytes, _total|
+                  progress.call(p[:part_number], bytes)
+                end
+            end
+
             resp = @client.upload_part(p)
             p[:body].close
             completed_part = { etag: resp.etag, part_number: p[:part_number] }
-            algorithm = resp.context.params[:checksum_algorithm]
-            k = "checksum_#{algorithm.downcase}".to_sym
+            algorithm = resp.context.params[:checksum_algorithm].downcase
+            k = "checksum_#{algorithm}".to_sym
             completed_part[k] = resp.send(k)
             completed.push(completed_part)
           rescue StandardError => e
@@ -167,43 +180,8 @@ module Aws
           end
         end
 
-        max_parts.times { completion_queue.pop }
+        upload_attempts.times { completion_queue.pop }
         errors
-      end
-
-      def upload_in_threads(pending, completed, options)
-        threads = []
-        if (callback = options[:progress_callback])
-          progress = MultipartProgress.new(pending, callback)
-        end
-        options.fetch(:thread_count, @thread_count).times do
-          thread = Thread.new do
-            begin
-              while (part = pending.shift)
-                if progress
-                  part[:on_chunk_sent] =
-                    proc do |_chunk, bytes, _total|
-                      progress.call(part[:part_number], bytes)
-                    end
-                end
-                resp = @client.upload_part(part)
-                part[:body].close
-                completed_part = { etag: resp.etag, part_number: part[:part_number] }
-                algorithm = resp.context.params[:checksum_algorithm]
-                k = "checksum_#{algorithm.downcase}".to_sym
-                completed_part[k] = resp.send(k)
-                completed.push(completed_part)
-              end
-              nil
-            rescue StandardError => e
-              # keep other threads from uploading other parts
-              pending.clear!
-              e
-            end
-          end
-          threads << thread
-        end
-        threads.map(&:value).compact
       end
 
       def compute_default_part_size(source_size)
