@@ -26,6 +26,10 @@ module Aws
         true
       end
 
+      def running?
+        @running
+      end
+
       private
 
       def monitor_pool
