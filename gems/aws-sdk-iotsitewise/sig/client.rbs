@@ -1070,7 +1070,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_computation_model-instance_method
       def describe_computation_model: (
-                                        computation_model_id: ::String
+                                        computation_model_id: ::String,
+                                        ?computation_model_version: ::String
                                       ) -> _DescribeComputationModelResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeComputationModelResponseSuccess
 

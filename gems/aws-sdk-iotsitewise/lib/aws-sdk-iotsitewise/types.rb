@@ -5442,8 +5442,13 @@ module Aws::IoTSiteWise
     #   The ID of the computation model.
     #   @return [String]
     #
+    # @!attribute [rw] computation_model_version
+    #   The version of the computation model.
+    #   @return [String]
+    #
     class DescribeComputationModelRequest < Struct.new(
-      :computation_model_id)
+      :computation_model_id,
+      :computation_model_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6509,7 +6514,7 @@ module Aws::IoTSiteWise
     #
     #   * Maximum is 20000
     #
-    #   * Default is 250
+    #   * Default is 20000
     #   @return [Integer]
     #
     # @!attribute [rw] client_token

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2025-09-08)
+------------------
+
+* Feature - Add ComputationModelVersion support in IoT SiteWise APIs
+
 1.93.0 (2025-08-26)
 ------------------
 

@@ -1269,6 +1269,7 @@ module Aws::IoTSiteWise
 
     class DescribeComputationModelRequest
       attr_accessor computation_model_id: ::String
+      attr_accessor computation_model_version: ::String
       SENSITIVE: []
     end
 

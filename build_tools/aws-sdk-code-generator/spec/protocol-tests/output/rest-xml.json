@@ -788,7 +788,8 @@
                     "output": {
                         "shape": "HttpEmptyPrefixHeadersOutput"
                     },
-                    "documentation": "<p>Clients that perform this test extract all headers from the response.</p>"
+                    "documentation": "<p>Clients that perform this test extract all headers from the response.</p>",
+                    "readonly": true
                 },
                 "result": {
                     "prefixHeaders": {
@@ -1501,7 +1502,8 @@
                     "output": {
                         "shape": "HttpPrefixHeadersInputOutput"
                     },
-                    "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>"
+                    "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>",
+                    "readonly": true
                 },
                 "result": {
                     "foo": "Foo",
@@ -1533,7 +1535,8 @@
                     "output": {
                         "shape": "HttpPrefixHeadersInputOutput"
                     },
-                    "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>"
+                    "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>",
+                    "readonly": true
                 },
                 "result": {
                     "foo": "Foo",
@@ -1717,7 +1720,8 @@
                     "output": {
                         "shape": "IgnoreQueryParamsInResponseOutput"
                     },
-                    "documentation": "<p>This example ensures that query string bound request parameters are serialized in the body of responses if the structure is used in both the request and response.</p>"
+                    "documentation": "<p>This example ensures that query string bound request parameters are serialized in the body of responses if the structure is used in both the request and response.</p>",
+                    "readonly": true
                 },
                 "result": {
                     "baz": "bam"

@@ -1031,6 +1031,11 @@ module Aws::IoTSiteWise
     # Identity Center user, IAM Identity Center group, or IAM user) access
     # to the specified IoT SiteWise Monitor portal or project resource.
     #
+    # <note markdown="1"> Support for access policies that use an SSO Group as the identity is
+    # not supported at this time.
+    #
+    #  </note>
+    #
     # @option params [required, Types::Identity] :access_policy_identity
     #   The identity for this access policy. Choose an IAM Identity Center
     #   user, an IAM Identity Center group, or an IAM user.
@@ -3795,6 +3800,9 @@ module Aws::IoTSiteWise
     # @option params [required, String] :computation_model_id
     #   The ID of the computation model.
     #
+    # @option params [String] :computation_model_version
+    #   The version of the computation model.
+    #
     # @return [Types::DescribeComputationModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeComputationModelResponse#computation_model_id #computation_model_id} => String
@@ -3813,6 +3821,7 @@ module Aws::IoTSiteWise
     #
     #   resp = client.describe_computation_model({
     #     computation_model_id: "ID", # required
+    #     computation_model_version: "ComputationModelVersionFilter",
     #   })
     #
     # @example Response structure
@@ -4591,7 +4600,7 @@ module Aws::IoTSiteWise
     #
     #   * Maximum is 20000
     #
-    #   * Default is 250
+    #   * Default is 20000
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -8337,7 +8346,7 @@ module Aws::IoTSiteWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

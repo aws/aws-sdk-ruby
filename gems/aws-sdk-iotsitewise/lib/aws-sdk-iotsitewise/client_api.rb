@@ -192,6 +192,7 @@ module Aws::IoTSiteWise
     ComputationModelSummaries = Shapes::ListShape.new(name: 'ComputationModelSummaries')
     ComputationModelSummary = Shapes::StructureShape.new(name: 'ComputationModelSummary')
     ComputationModelType = Shapes::StringShape.new(name: 'ComputationModelType')
+    ComputationModelVersionFilter = Shapes::StringShape.new(name: 'ComputationModelVersionFilter')
     ComputeLocation = Shapes::StringShape.new(name: 'ComputeLocation')
     ConfigurationErrorDetails = Shapes::StructureShape.new(name: 'ConfigurationErrorDetails')
     ConfigurationState = Shapes::StringShape.new(name: 'ConfigurationState')
@@ -1684,6 +1685,7 @@ module Aws::IoTSiteWise
     DescribeComputationModelExecutionSummaryResponse.struct_class = Types::DescribeComputationModelExecutionSummaryResponse
 
     DescribeComputationModelRequest.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "computationModelId"))
+    DescribeComputationModelRequest.add_member(:computation_model_version, Shapes::ShapeRef.new(shape: ComputationModelVersionFilter, location: "querystring", location_name: "computationModelVersion"))
     DescribeComputationModelRequest.struct_class = Types::DescribeComputationModelRequest
 
     DescribeComputationModelResponse.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "computationModelId"))

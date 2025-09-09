@@ -7394,21 +7394,21 @@ module Aws::SecurityHub
 
     class UnprocessedSecurityControl
       attr_accessor security_control_id: ::String
-      attr_accessor error_code: ("INVALID_INPUT" | "ACCESS_DENIED" | "NOT_FOUND" | "LIMIT_EXCEEDED")
+      attr_accessor error_code: ("INVALID_INPUT" | "ACCESS_DENIED" | "NOT_FOUND" | "RESOURCE_NOT_FOUND" | "LIMIT_EXCEEDED")
       attr_accessor error_reason: ::String
       SENSITIVE: []
     end
 
     class UnprocessedStandardsControlAssociation
       attr_accessor standards_control_association_id: Types::StandardsControlAssociationId
-      attr_accessor error_code: ("INVALID_INPUT" | "ACCESS_DENIED" | "NOT_FOUND" | "LIMIT_EXCEEDED")
+      attr_accessor error_code: ("INVALID_INPUT" | "ACCESS_DENIED" | "NOT_FOUND" | "RESOURCE_NOT_FOUND" | "LIMIT_EXCEEDED")
       attr_accessor error_reason: ::String
       SENSITIVE: []
     end
 
     class UnprocessedStandardsControlAssociationUpdate
       attr_accessor standards_control_association_update: Types::StandardsControlAssociationUpdate
-      attr_accessor error_code: ("INVALID_INPUT" | "ACCESS_DENIED" | "NOT_FOUND" | "LIMIT_EXCEEDED")
+      attr_accessor error_code: ("INVALID_INPUT" | "ACCESS_DENIED" | "NOT_FOUND" | "RESOURCE_NOT_FOUND" | "LIMIT_EXCEEDED")
       attr_accessor error_reason: ::String
       SENSITIVE: []
     end

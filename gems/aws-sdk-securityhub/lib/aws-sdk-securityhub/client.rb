@@ -1279,7 +1279,7 @@ module Aws::SecurityHub
     #   resp.security_controls[0].last_update_reason #=> String
     #   resp.unprocessed_ids #=> Array
     #   resp.unprocessed_ids[0].security_control_id #=> String
-    #   resp.unprocessed_ids[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "LIMIT_EXCEEDED"
+    #   resp.unprocessed_ids[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "RESOURCE_NOT_FOUND", "LIMIT_EXCEEDED"
     #   resp.unprocessed_ids[0].error_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetSecurityControls AWS API Documentation
@@ -1388,7 +1388,7 @@ module Aws::SecurityHub
     #   resp.unprocessed_associations #=> Array
     #   resp.unprocessed_associations[0].standards_control_association_id.security_control_id #=> String
     #   resp.unprocessed_associations[0].standards_control_association_id.standards_arn #=> String
-    #   resp.unprocessed_associations[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "LIMIT_EXCEEDED"
+    #   resp.unprocessed_associations[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "RESOURCE_NOT_FOUND", "LIMIT_EXCEEDED"
     #   resp.unprocessed_associations[0].error_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetStandardsControlAssociations AWS API Documentation
@@ -2286,7 +2286,7 @@ module Aws::SecurityHub
     #   resp.unprocessed_association_updates[0].standards_control_association_update.security_control_id #=> String
     #   resp.unprocessed_association_updates[0].standards_control_association_update.association_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.unprocessed_association_updates[0].standards_control_association_update.updated_reason #=> String
-    #   resp.unprocessed_association_updates[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "LIMIT_EXCEEDED"
+    #   resp.unprocessed_association_updates[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "RESOURCE_NOT_FOUND", "LIMIT_EXCEEDED"
     #   resp.unprocessed_association_updates[0].error_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateStandardsControlAssociations AWS API Documentation
@@ -12195,7 +12195,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2025-09-08)
+------------------
+
+* Feature - This release adds the RESOURCE_NOT_FOUND error code as a possible value in responses to the following operations: BatchGetStandardsControlAssociations, BatchUpdateStandardsControlAssociations, and BatchGetSecurityControls.
+
 1.142.0 (2025-08-26)
 ------------------
 
