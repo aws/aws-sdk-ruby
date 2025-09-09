@@ -6,6 +6,7 @@ module Aws
     autoload :BucketRegionCache, 'aws-sdk-s3/bucket_region_cache'
     autoload :Encryption, 'aws-sdk-s3/encryption'
     autoload :EncryptionV2, 'aws-sdk-s3/encryption_v2'
+    autoload :DefaultExecutor, 'aws-sdk-s3/default_executor'
     autoload :FilePart, 'aws-sdk-s3/file_part'
     autoload :FileUploader, 'aws-sdk-s3/file_uploader'
     autoload :FileDownloader, 'aws-sdk-s3/file_downloader'
