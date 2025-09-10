@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'rake', require: false
 
+gem 'aws-partitions', path: 'gems/aws-partitions'
 gem 'aws-sdk-core', path: 'gems/aws-sdk-core'
 gem 'aws-sigv4'
 gem 'base64'

@@ -3,7 +3,7 @@
 namespace :test do
   desc 'Execute every spec file'
   task 'spec' do
-    Dir.glob('**/spec').tap do |spec_file_list|
+    Dir.glob('gems/**/spec').tap do |spec_file_list|
       sh("bundle exec rspec #{spec_file_list.join(' ')}")
     end
   end
@@ -11,7 +11,7 @@ namespace :test do
   desc 'Executes every spec file, one at a time.'
   task 'spec:each' do
     failures = []
-    Dir.glob('**/spec/**/*_spec.rb').each do |spec_file|
+    Dir.glob('gems/**/spec/**/*_spec.rb').each do |spec_file|
       sh("bundle exec rspec #{spec_file}") do |ok, _|
         failures << spec_file unless ok
       end
