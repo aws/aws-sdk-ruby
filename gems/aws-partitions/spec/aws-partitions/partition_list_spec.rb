@@ -79,6 +79,15 @@ module Aws
           expect(partition_list.partitions.size).to eq(0)
         end
       end
+
+      describe '#empty?' do
+        it 'returns true if the list is empty' do
+          list = PartitionList.new
+          expect(list.empty?).to be(true)
+          list.add_partition(partition1)
+          expect(list.empty?).to be(false)
+        end
+      end
     end
   end
 end

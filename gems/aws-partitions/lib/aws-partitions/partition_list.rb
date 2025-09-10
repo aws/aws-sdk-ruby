@@ -43,6 +43,11 @@ module Aws
       def clear
         @partitions = {}
       end
+
+      # @return [Boolean]
+      def empty?
+        @partitions.empty?
+      end
     end
   end
 end

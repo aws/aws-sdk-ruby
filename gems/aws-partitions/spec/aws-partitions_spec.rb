@@ -69,10 +69,18 @@ module Aws
         expect(mars.dns_suffix).to eq('amazonaws.com')
         expect(mars.dual_stack_dns_suffix).to eq('api.aws')
         expect(mars.implicit_global_region).to eq('mars-east-1')
-        expect(mars.supports_dual_stack).to be true
-        expect(mars.supports_fips).to be true
+        expect(mars.supports_dual_stack?).to be true
+        expect(mars.supports_fips?).to be true
         # expect(mars.region_regex).to eq(Regexp.new('^mars\\-\\w+\\-\\d+$'))
         expect(mars.regions.map(&:name)).to eq(%w[mars-east-1])
+      end
+    end
+
+    describe '.clear' do
+      it 'removes all partitions' do
+        expect(Aws::Partitions.partitions).to_not be_empty
+        Aws::Partitions.clear
+        expect(Aws::Partitions.partitions).to be_empty
       end
     end
   end

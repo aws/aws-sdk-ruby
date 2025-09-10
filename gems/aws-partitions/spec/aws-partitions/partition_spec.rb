@@ -43,15 +43,15 @@ module Aws
         end
       end
 
-      describe '#supports_dual_stack' do
+      describe '#supports_dual_stack?' do
         it 'returns whether dual-stack is supported' do
-          expect(partition.supports_dual_stack).to be(true)
+          expect(partition.supports_dual_stack?).to be(true)
         end
       end
 
-      describe '#supports_fips' do
+      describe '#supports_fips?' do
         it 'returns whether FIPS is supported' do
-          expect(partition.supports_fips).to be(true)
+          expect(partition.supports_fips?).to be(true)
         end
       end
 

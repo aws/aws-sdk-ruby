@@ -21,8 +21,8 @@ module Aws
           'dualStackDnsSuffix' => partition.dual_stack_dns_suffix,
           'implicitGlobalRegion' => partition.implicit_global_region,
           'name' => partition.id,
-          'supportsDualStack' => partition.supports_dual_stack,
-          'supportsFIPS' => partition.supports_fips
+          'supportsDualStack' => partition.supports_dual_stack?,
+          'supportsFIPS' => partition.supports_fips?
         }
       end
     end

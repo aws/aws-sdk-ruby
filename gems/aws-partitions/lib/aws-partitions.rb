@@ -112,6 +112,12 @@ module Aws
         end
       end
 
+      # Removes all partitions.
+      def clear
+        default_partition_list.clear
+        defaults['partitions'].clear
+      end
+
       private
 
       def defaults
@@ -144,12 +150,12 @@ module Aws
           supports_fips: partition_data.dig('outputs', 'supportsFIPS'),
           region_regex: Regexp.new(partition_data['regionRegex'])
         )
-        build_regions(partition_data, partition)
+        build_regions(partition_data.fetch('regions', {}), partition)
         partition
       end
 
-      def build_regions(partition_data, partition)
-        partition_data.fetch('regions', {}).each do |name, region_data|
+      def build_regions(regions, partition)
+        regions.each do |name, region_data|
           partition.add_region(
             Region.new(
               name,

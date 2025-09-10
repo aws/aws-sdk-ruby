@@ -28,10 +28,14 @@ module Aws
       attr_reader :implicit_global_region
 
       # @return [Boolean] true if the partition supports dual-stack endpoints
-      attr_reader :supports_dual_stack
+      def supports_dual_stack?
+        @supports_dual_stack
+      end
 
       # @return [Boolean] true if the partition supports FIPS endpoints
-      attr_reader :supports_fips
+      def supports_fips?
+        @supports_fips
+      end
 
       # @return [Regexp] the regex pattern for matching region names in this partition
       attr_reader :region_regex
