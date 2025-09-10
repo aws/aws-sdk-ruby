@@ -431,8 +431,9 @@ module Aws::CloudWatch
     # @example Request syntax with placeholder values
     #
     #   alarm.describe_history({
+    #     alarm_contributor_id: "ContributorId",
     #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
-    #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action
+    #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action, AlarmContributorStateUpdate, AlarmContributorAction
     #     start_date: Time.now,
     #     end_date: Time.now,
     #     max_records: 1,
@@ -440,6 +441,9 @@ module Aws::CloudWatch
     #     scan_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :alarm_contributor_id
+    #   The unique identifier of a specific alarm contributor to filter the
+    #   alarm history results.
     # @option options [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
     #   metric alarms or composite alarms. If you omit this parameter, only

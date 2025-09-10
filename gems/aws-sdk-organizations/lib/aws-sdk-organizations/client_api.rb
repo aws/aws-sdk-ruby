@@ -30,6 +30,7 @@ module Aws::Organizations
     AccountNotFoundException = Shapes::StructureShape.new(name: 'AccountNotFoundException')
     AccountNotRegisteredException = Shapes::StructureShape.new(name: 'AccountNotRegisteredException')
     AccountOwnerNotVerifiedException = Shapes::StructureShape.new(name: 'AccountOwnerNotVerifiedException')
+    AccountState = Shapes::StringShape.new(name: 'AccountState')
     AccountStatus = Shapes::StringShape.new(name: 'AccountStatus')
     Accounts = Shapes::ListShape.new(name: 'Accounts')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
@@ -286,6 +287,7 @@ module Aws::Organizations
     Account.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
     Account.add_member(:name, Shapes::ShapeRef.new(shape: AccountName, location_name: "Name"))
     Account.add_member(:status, Shapes::ShapeRef.new(shape: AccountStatus, location_name: "Status"))
+    Account.add_member(:state, Shapes::ShapeRef.new(shape: AccountState, location_name: "State"))
     Account.add_member(:joined_method, Shapes::ShapeRef.new(shape: AccountJoinedMethod, location_name: "JoinedMethod"))
     Account.add_member(:joined_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "JoinedTimestamp"))
     Account.struct_class = Types::Account

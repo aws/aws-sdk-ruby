@@ -230,13 +230,13 @@ module Aws::NetworkFlowMonitor
     end
 
     class MonitorLocalResource
-      attr_accessor type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet")
+      attr_accessor type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region")
       attr_accessor identifier: ::String
       SENSITIVE: []
     end
 
     class MonitorRemoteResource
-      attr_accessor type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService")
+      attr_accessor type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService" | "AWS::Region")
       attr_accessor identifier: ::String
       SENSITIVE: []
     end
@@ -257,7 +257,7 @@ module Aws::NetworkFlowMonitor
       attr_accessor local_az: ::String
       attr_accessor local_subnet_id: ::String
       attr_accessor target_port: ::Integer
-      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB")
+      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION")
       attr_accessor remote_vpc_id: ::String
       attr_accessor remote_region: ::String
       attr_accessor remote_az: ::String
@@ -299,7 +299,7 @@ module Aws::NetworkFlowMonitor
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor metric_name: ("ROUND_TRIP_TIME" | "TIMEOUTS" | "RETRANSMISSIONS" | "DATA_TRANSFERRED")
-      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB")
+      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION")
       attr_accessor limit: ::Integer
       SENSITIVE: []
     end
@@ -314,7 +314,7 @@ module Aws::NetworkFlowMonitor
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor metric_name: ("TIMEOUTS" | "RETRANSMISSIONS" | "DATA_TRANSFERRED")
-      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB")
+      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION")
       SENSITIVE: []
     end
 
@@ -328,7 +328,7 @@ module Aws::NetworkFlowMonitor
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor metric_name: ("TIMEOUTS" | "RETRANSMISSIONS" | "DATA_TRANSFERRED")
-      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB")
+      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION")
       attr_accessor limit: ::Integer
       SENSITIVE: []
     end

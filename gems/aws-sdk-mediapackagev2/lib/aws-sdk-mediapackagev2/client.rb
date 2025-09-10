@@ -1869,7 +1869,7 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE", # accepts DATERANGE
+    #           ad_marker_hls: "DATERANGE", # accepts DATERANGE, SCTE35_ENHANCED
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -1892,7 +1892,7 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE", # accepts DATERANGE
+    #           ad_marker_hls: "DATERANGE", # accepts DATERANGE, SCTE35_ENHANCED
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -2030,7 +2030,7 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].child_manifest_name #=> String
     #   resp.hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
-    #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
@@ -2045,7 +2045,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].child_manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
-    #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
@@ -2969,7 +2969,7 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].child_manifest_name #=> String
     #   resp.hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
-    #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
@@ -2984,7 +2984,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].child_manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
-    #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
@@ -4908,7 +4908,7 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE", # accepts DATERANGE
+    #           ad_marker_hls: "DATERANGE", # accepts DATERANGE, SCTE35_ENHANCED
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -4931,7 +4931,7 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE", # accepts DATERANGE
+    #           ad_marker_hls: "DATERANGE", # accepts DATERANGE, SCTE35_ENHANCED
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -5067,7 +5067,7 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].child_manifest_name #=> String
     #   resp.hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
-    #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
@@ -5082,7 +5082,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].child_manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
-    #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
@@ -5173,7 +5173,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

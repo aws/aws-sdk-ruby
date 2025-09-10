@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.216.0 (2025-09-09)
+------------------
+
+* Feature - SDK release for user defined predefined attributes.
+
 1.215.0 (2025-08-28)
 ------------------
 

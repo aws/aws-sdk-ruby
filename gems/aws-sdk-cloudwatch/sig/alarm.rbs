@@ -129,8 +129,9 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#describe_history-instance_method
       def describe_history: (
+                              ?alarm_contributor_id: ::String,
                               ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
-                              ?history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action"),
+                              ?history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action" | "AlarmContributorStateUpdate" | "AlarmContributorAction"),
                               ?start_date: ::Time,
                               ?end_date: ::Time,
                               ?max_records: ::Integer,

@@ -996,6 +996,43 @@ module Aws
                                      ) -> _CreateEnvironmentActionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentActionResponseSuccess
 
+      interface _CreateEnvironmentBlueprintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentBlueprintOutput]
+        def created_at: () -> ::Time
+        def deployment_properties: () -> Types::DeploymentProperties
+        def description: () -> ::String
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def name: () -> ::String
+        def provider: () -> ::String
+        def provisioning_properties: () -> Types::ProvisioningProperties
+        def updated_at: () -> ::Time
+        def user_parameters: () -> ::Array[Types::CustomParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_environment_blueprint-instance_method
+      def create_environment_blueprint: (
+                                          ?description: ::String,
+                                          domain_identifier: ::String,
+                                          name: ::String,
+                                          provisioning_properties: {
+                                            cloud_formation: {
+                                              template_url: ::String
+                                            }?
+                                          },
+                                          ?user_parameters: Array[
+                                            {
+                                              default_value: ::String?,
+                                              description: ::String?,
+                                              field_type: ::String,
+                                              is_editable: bool?,
+                                              is_optional: bool?,
+                                              is_update_supported: bool?,
+                                              key_name: ::String
+                                            },
+                                          ]
+                                        ) -> _CreateEnvironmentBlueprintResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentBlueprintResponseSuccess
+
       interface _CreateEnvironmentProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentProfileOutput]
         def aws_account_id: () -> ::String
@@ -1568,6 +1605,13 @@ module Aws
                                        identifier: ::String
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_environment_blueprint-instance_method
+      def delete_environment_blueprint: (
+                                          domain_identifier: ::String,
+                                          identifier: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _DeleteEnvironmentBlueprintConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentBlueprintConfigurationOutput]
@@ -3097,6 +3141,7 @@ module Aws
                                                      enabled_regions: Array[::String],
                                                      environment_blueprint_identifier: ::String,
                                                      ?environment_role_permission_boundary: ::String,
+                                                     ?global_parameters: Hash[::String, ::String],
                                                      ?manage_access_role_arn: ::String,
                                                      ?provisioning_configurations: Array[
                                                        {
@@ -3887,6 +3932,43 @@ module Aws
                                        }
                                      ) -> _UpdateEnvironmentActionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentActionResponseSuccess
+
+      interface _UpdateEnvironmentBlueprintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentBlueprintOutput]
+        def created_at: () -> ::Time
+        def deployment_properties: () -> Types::DeploymentProperties
+        def description: () -> ::String
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def name: () -> ::String
+        def provider: () -> ::String
+        def provisioning_properties: () -> Types::ProvisioningProperties
+        def updated_at: () -> ::Time
+        def user_parameters: () -> ::Array[Types::CustomParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_environment_blueprint-instance_method
+      def update_environment_blueprint: (
+                                          ?description: ::String,
+                                          domain_identifier: ::String,
+                                          identifier: ::String,
+                                          ?provisioning_properties: {
+                                            cloud_formation: {
+                                              template_url: ::String
+                                            }?
+                                          },
+                                          ?user_parameters: Array[
+                                            {
+                                              default_value: ::String?,
+                                              description: ::String?,
+                                              field_type: ::String,
+                                              is_editable: bool?,
+                                              is_optional: bool?,
+                                              is_update_supported: bool?,
+                                              key_name: ::String
+                                            },
+                                          ]
+                                        ) -> _UpdateEnvironmentBlueprintResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentBlueprintResponseSuccess
 
       interface _UpdateEnvironmentProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentProfileOutput]

@@ -1938,6 +1938,12 @@ module Aws::Connect
     #           },
     #         },
     #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           },
+    #         ],
+    #         value_arn: "SegmentAttributeValueString",
     #       },
     #     },
     #     previous_contact_id: "ContactId",
@@ -2872,14 +2878,34 @@ module Aws::Connect
     end
 
     # Creates a new predefined attribute for the specified Amazon Connect
-    # instance. *Predefined attributes* are attributes in an Amazon Connect
-    # instance that can be used to route contacts to an agent or pools of
-    # agents within a queue. For more information, see [Create predefined
-    # attributes for routing contacts to agents][1].
+    # instance. A *predefined attribute* is made up of a name and a value.
+    #
+    # For the predefined attributes per instance quota, see [Amazon Connect
+    # quotas][1].
+    #
+    # **Use cases**
+    #
+    # Following are common uses cases for this API:
+    #
+    # * Create an attribute for routing proficiency (for example, agent
+    #   certification) that has predefined values (for example, a list of
+    #   possible certifications). For more information, see [Create
+    #   predefined attributes for routing contacts to agents][2].
+    #
+    # * Create an attribute for business unit name that has a list of
+    #   predefined business unit names used in your organization. This is a
+    #   use case where information for a contact varies between transfers or
+    #   conferences. For more information, see [Use contact segment
+    #   attributes][3].
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][4].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -2888,8 +2914,18 @@ module Aws::Connect
     # @option params [required, String] :name
     #   The name of the predefined attribute.
     #
-    # @option params [required, Types::PredefinedAttributeValues] :values
+    # @option params [Types::PredefinedAttributeValues] :values
     #   The values of the predefined attribute.
+    #
+    # @option params [Array<String>] :purposes
+    #   Values that enable you to categorize your predefined attributes. You
+    #   can use them in custom UI elements across the Amazon Connect admin
+    #   website.
+    #
+    # @option params [Types::InputPredefinedAttributeConfiguration] :attribute_configuration
+    #   Custom metadata that is associated to predefined attributes to control
+    #   behavior in upstream services, such as controlling how a predefined
+    #   attribute should be displayed in the Amazon Connect admin website.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2898,8 +2934,12 @@ module Aws::Connect
     #   resp = client.create_predefined_attribute({
     #     instance_id: "InstanceId", # required
     #     name: "PredefinedAttributeName", # required
-    #     values: { # required
+    #     values: {
     #       string_list: ["PredefinedAttributeStringValue"],
+    #     },
+    #     purposes: ["PredefinedAttributePurposeName"],
+    #     attribute_configuration: {
+    #       enable_value_validation_on_association: false,
     #     },
     #   })
     #
@@ -5543,6 +5583,9 @@ module Aws::Connect
     #   resp.contact.segment_attributes["SegmentAttributeName"].value_map #=> Hash
     #   resp.contact.segment_attributes["SegmentAttributeName"].value_map["SegmentAttributeName"] #=> Types::SegmentAttributeValue
     #   resp.contact.segment_attributes["SegmentAttributeName"].value_integer #=> Integer
+    #   resp.contact.segment_attributes["SegmentAttributeName"].value_list #=> Array
+    #   resp.contact.segment_attributes["SegmentAttributeName"].value_list[0] #=> Types::SegmentAttributeValue
+    #   resp.contact.segment_attributes["SegmentAttributeName"].value_arn #=> String
     #   resp.contact.recordings #=> Array
     #   resp.contact.recordings[0].storage_type #=> String, one of "S3", "KINESIS_VIDEO_STREAM", "KINESIS_STREAM", "KINESIS_FIREHOSE"
     #   resp.contact.recordings[0].location #=> String
@@ -6246,14 +6289,29 @@ module Aws::Connect
     end
 
     # Describes a predefined attribute for the specified Amazon Connect
-    # instance. *Predefined attributes* are attributes in an Amazon Connect
-    # instance that can be used to route contacts to an agent or pools of
-    # agents within a queue. For more information, see [Create predefined
-    # attributes for routing contacts to agents][1].
+    # instance. A *predefined attribute* is made up of a name and a value.
+    # You can use predefined attributes for:
+    #
+    # * Routing proficiency (for example, agent certification) that has
+    #   predefined values (for example, a list of possible certifications).
+    #   For more information, see [Create predefined attributes for routing
+    #   contacts to agents][1].
+    #
+    # * Contact information that varies between transfers or conferences,
+    #   such as the name of the business unit handling the contact. For more
+    #   information, see [Use contact segment attributes][2].
+    #
+    # For the predefined attributes per instance quota, see [Amazon Connect
+    # quotas][3].
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][4].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -6278,6 +6336,10 @@ module Aws::Connect
     #   resp.predefined_attribute.name #=> String
     #   resp.predefined_attribute.values.string_list #=> Array
     #   resp.predefined_attribute.values.string_list[0] #=> String
+    #   resp.predefined_attribute.purposes #=> Array
+    #   resp.predefined_attribute.purposes[0] #=> String
+    #   resp.predefined_attribute.attribute_configuration.enable_value_validation_on_association #=> Boolean
+    #   resp.predefined_attribute.attribute_configuration.is_read_only #=> Boolean
     #   resp.predefined_attribute.last_modified_time #=> Time
     #   resp.predefined_attribute.last_modified_region #=> String
     #
@@ -12489,14 +12551,29 @@ module Aws::Connect
     end
 
     # Lists predefined attributes for the specified Amazon Connect instance.
-    # *Predefined attributes* are attributes in an Amazon Connect instance
-    # that can be used to route contacts to an agent or pools of agents
-    # within a queue. For more information, see [Create predefined
-    # attributes for routing contacts to agents][1].
+    # A *predefined attribute* is made up of a name and a value. You can use
+    # predefined attributes for:
+    #
+    # * Routing proficiency (for example, agent certification) that has
+    #   predefined values (for example, a list of possible certifications).
+    #   For more information, see [Create predefined attributes for routing
+    #   contacts to agents][1].
+    #
+    # * Contact information that varies between transfers or conferences,
+    #   such as the name of the business unit handling the contact. For more
+    #   information, see [Use contact segment attributes][2].
+    #
+    # For the predefined attributes per instance quota, see [Amazon Connect
+    # quotas][3].
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][4].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -15070,15 +15147,30 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Searches predefined attributes that meet certain criteria. *Predefined
-    # attributes* are attributes in an Amazon Connect instance that can be
-    # used to route contacts to an agent or pools of agents within a queue.
-    # For more information, see [Create predefined attributes for routing
-    # contacts to agents][1].
+    # Searches predefined attributes that meet certain criteria. A
+    # *predefined attribute* is made up of a name and a value. You can use
+    # predefined attributes for:
+    #
+    # * Routing proficiency (for example, agent certification) that has
+    #   predefined values (for example, a list of possible certifications).
+    #   For more information, see [Create predefined attributes for routing
+    #   contacts to agents][1].
+    #
+    # * Contact information that varies between transfers or conferences,
+    #   such as the name of the business unit handling the contact. For more
+    #   information, see [Use contact segment attributes][2].
+    #
+    # For the predefined attributes per instance quota, see [Amazon Connect
+    # quotas][3].
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][4].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -15134,6 +15226,10 @@ module Aws::Connect
     #   resp.predefined_attributes[0].name #=> String
     #   resp.predefined_attributes[0].values.string_list #=> Array
     #   resp.predefined_attributes[0].values.string_list[0] #=> String
+    #   resp.predefined_attributes[0].purposes #=> Array
+    #   resp.predefined_attributes[0].purposes[0] #=> String
+    #   resp.predefined_attributes[0].attribute_configuration.enable_value_validation_on_association #=> Boolean
+    #   resp.predefined_attributes[0].attribute_configuration.is_read_only #=> Boolean
     #   resp.predefined_attributes[0].last_modified_time #=> Time
     #   resp.predefined_attributes[0].last_modified_region #=> String
     #   resp.next_token #=> String
@@ -16702,6 +16798,12 @@ module Aws::Connect
     #           },
     #         },
     #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           },
+    #         ],
+    #         value_arn: "SegmentAttributeValueString",
     #       },
     #     },
     #     customer_id: "CustomerIdNonEmpty",
@@ -17098,6 +17200,12 @@ module Aws::Connect
     #           },
     #         },
     #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           },
+    #         ],
+    #         value_arn: "SegmentAttributeValueString",
     #       },
     #     },
     #     client_token: "ClientToken",
@@ -17258,6 +17366,12 @@ module Aws::Connect
     #           },
     #         },
     #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           },
+    #         ],
+    #         value_arn: "SegmentAttributeValueString",
     #       },
     #     },
     #     attributes: {
@@ -17819,6 +17933,12 @@ module Aws::Connect
     #           },
     #         },
     #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           },
+    #         ],
+    #         value_arn: "SegmentAttributeValueString",
     #       },
     #     },
     #   })
@@ -18649,8 +18769,9 @@ module Aws::Connect
     #   This field can be used to show channel subtype, such as
     #   `connect:Guide`.
     #
-    #   Currently Contact Expiry is the only segment attribute which can be
-    #   updated by using the UpdateContact API.
+    #   Contact Expiry, and user-defined attributes (String - String) that are
+    #   defined in predefined attributes, can be updated by using the
+    #   UpdateContact API.
     #
     # @option params [Types::QueueInfoInput] :queue_info
     #   Information about the queue associated with a contact. This parameter
@@ -18723,6 +18844,12 @@ module Aws::Connect
     #           },
     #         },
     #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           },
+    #         ],
+    #         value_arn: "SegmentAttributeValueString",
     #       },
     #     },
     #     queue_info: {
@@ -20006,14 +20133,34 @@ module Aws::Connect
     end
 
     # Updates a predefined attribute for the specified Amazon Connect
-    # instance. *Predefined attributes* are attributes in an Amazon Connect
-    # instance that can be used to route contacts to an agent or pools of
-    # agents within a queue. For more information, see [Create predefined
-    # attributes for routing contacts to agents][1].
+    # instance. A *predefined attribute* is made up of a name and a value.
+    #
+    # For the predefined attributes per instance quota, see [Amazon Connect
+    # quotas][1].
+    #
+    # **Use cases**
+    #
+    # Following are common uses cases for this API:
+    #
+    # * Update routing proficiency (for example, agent certification) that
+    #   has predefined values (for example, a list of possible
+    #   certifications). For more information, see [Create predefined
+    #   attributes for routing contacts to agents][2].
+    #
+    # * Update an attribute for business unit name that has a list of
+    #   predefined business unit names used in your organization. This is a
+    #   use case where information for a contact varies between transfers or
+    #   conferences. For more information, see [Use contact segment
+    #   attributes][3].
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][4].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -20025,6 +20172,16 @@ module Aws::Connect
     # @option params [Types::PredefinedAttributeValues] :values
     #   The values of the predefined attribute.
     #
+    # @option params [Array<String>] :purposes
+    #   Values that enable you to categorize your predefined attributes. You
+    #   can use them in custom UI elements across the Amazon Connect admin
+    #   website.
+    #
+    # @option params [Types::InputPredefinedAttributeConfiguration] :attribute_configuration
+    #   Custom metadata that is associated to predefined attributes to control
+    #   behavior in upstream services, such as controlling how a predefined
+    #   attribute should be displayed in the Amazon Connect admin website.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -20034,6 +20191,10 @@ module Aws::Connect
     #     name: "PredefinedAttributeName", # required
     #     values: {
     #       string_list: ["PredefinedAttributeStringValue"],
+    #     },
+    #     purposes: ["PredefinedAttributePurposeName"],
+    #     attribute_configuration: {
+    #       enable_value_validation_on_association: false,
     #     },
     #   })
     #
@@ -21562,7 +21723,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.215.0'
+      context[:gem_version] = '1.216.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

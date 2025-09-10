@@ -433,7 +433,11 @@ module Aws
                             ?segment_attributes: Hash[::String, {
                                 value_string: ::String?,
                                 value_map: Hash[::String, untyped]?,
-                                value_integer: ::Integer?
+                                value_integer: ::Integer?,
+                                value_list: Array[
+                                  untyped,
+                                ]?,
+                                value_arn: ::String?
                               }],
                             ?previous_contact_id: ::String
                           ) -> _CreateContactResponseSuccess
@@ -714,8 +718,12 @@ module Aws
       def create_predefined_attribute: (
                                          instance_id: ::String,
                                          name: ::String,
-                                         values: {
+                                         ?values: {
                                            string_list: Array[::String]?
+                                         },
+                                         ?purposes: Array[::String],
+                                         ?attribute_configuration: {
+                                           enable_value_validation_on_association: bool?
                                          }
                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -3896,7 +3904,11 @@ module Aws
                                 ?segment_attributes: Hash[::String, {
                                     value_string: ::String?,
                                     value_map: Hash[::String, untyped]?,
-                                    value_integer: ::Integer?
+                                    value_integer: ::Integer?,
+                                    value_list: Array[
+                                      untyped,
+                                    ]?,
+                                    value_arn: ::String?
                                   }],
                                 ?customer_id: ::String
                               ) -> _StartChatContactResponseSuccess
@@ -4002,7 +4014,11 @@ module Aws
                                  ?segment_attributes: Hash[::String, {
                                      value_string: ::String?,
                                      value_map: Hash[::String, untyped]?,
-                                     value_integer: ::Integer?
+                                     value_integer: ::Integer?,
+                                     value_list: Array[
+                                       untyped,
+                                     ]?,
+                                     value_arn: ::String?
                                    }],
                                  ?client_token: ::String
                                ) -> _StartEmailContactResponseSuccess
@@ -4026,7 +4042,11 @@ module Aws
                                          segment_attributes: Hash[::String, {
                                              value_string: ::String?,
                                              value_map: Hash[::String, untyped]?,
-                                             value_integer: ::Integer?
+                                             value_integer: ::Integer?,
+                                             value_list: Array[
+                                               untyped,
+                                             ]?,
+                                             value_arn: ::String?
                                            }],
                                          ?attributes: Hash[::String, ::String],
                                          contact_flow_id: ::String,
@@ -4158,7 +4178,11 @@ module Aws
                                 ?segment_attributes: Hash[::String, {
                                     value_string: ::String?,
                                     value_map: Hash[::String, untyped]?,
-                                    value_integer: ::Integer?
+                                    value_integer: ::Integer?,
+                                    value_list: Array[
+                                      untyped,
+                                    ]?,
+                                    value_arn: ::String?
                                   }]
                               ) -> _StartTaskContactResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTaskContactResponseSuccess
@@ -4366,7 +4390,11 @@ module Aws
                             ?segment_attributes: Hash[::String, {
                                 value_string: ::String?,
                                 value_map: Hash[::String, untyped]?,
-                                value_integer: ::Integer?
+                                value_integer: ::Integer?,
+                                value_list: Array[
+                                  untyped,
+                                ]?,
+                                value_arn: ::String?
                               }],
                             ?queue_info: {
                               id: ::String?
@@ -4803,6 +4831,10 @@ module Aws
                                          name: ::String,
                                          ?values: {
                                            string_list: Array[::String]?
+                                         },
+                                         ?purposes: Array[::String],
+                                         ?attribute_configuration: {
+                                           enable_value_validation_on_association: bool?
                                          }
                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

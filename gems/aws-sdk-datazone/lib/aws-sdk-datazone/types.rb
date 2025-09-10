@@ -3515,6 +3515,95 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] description
+    #   The description of the Amazon DataZone blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the domain in which this blueprint is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of this Amazon DataZone blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_properties
+    #   The provisioning properties of this Amazon DataZone blueprint.
+    #   @return [Types::ProvisioningProperties]
+    #
+    # @!attribute [rw] user_parameters
+    #   The user parameters of this Amazon DataZone blueprint.
+    #   @return [Array<Types::CustomParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentBlueprintInput AWS API Documentation
+    #
+    class CreateEnvironmentBlueprintInput < Struct.new(
+      :description,
+      :domain_identifier,
+      :name,
+      :provisioning_properties,
+      :user_parameters)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp at which the environment blueprint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deployment_properties
+    #   The deployment properties of this Amazon DataZone blueprint.
+    #   @return [Types::DeploymentProperties]
+    #
+    # @!attribute [rw] description
+    #   The description of this Amazon DataZone blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms attached to this Amazon DataZone blueprint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   The ID of this Amazon DataZone blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of this Amazon DataZone blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider of this Amazon DataZone blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_properties
+    #   The provisioning properties of this Amazon DataZone blueprint.
+    #   @return [Types::ProvisioningProperties]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when this blueprint was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] user_parameters
+    #   The user parameters of this Amazon DataZone blueprint.
+    #   @return [Array<Types::CustomParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentBlueprintOutput AWS API Documentation
+    #
+    class CreateEnvironmentBlueprintOutput < Struct.new(
+      :created_at,
+      :deployment_properties,
+      :description,
+      :glossary_terms,
+      :id,
+      :name,
+      :provider,
+      :provisioning_properties,
+      :updated_at,
+      :user_parameters)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] deployment_order
     #   The deployment order of the environment.
     #   @return [Integer]
@@ -5162,6 +5251,10 @@ module Aws::DataZone
     #   Specifies whether the custom parameter is optional.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_update_supported
+    #   Specifies whether a parameter value can be updated after creation.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] key_name
     #   The key name of the parameter.
     #   @return [String]
@@ -5174,6 +5267,7 @@ module Aws::DataZone
       :field_type,
       :is_editable,
       :is_optional,
+      :is_update_supported,
       :key_name)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -6188,6 +6282,24 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteEnvironmentBlueprintConfigurationOutput AWS API Documentation
     #
     class DeleteEnvironmentBlueprintConfigurationOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the blueprint is
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the blueprint that is deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteEnvironmentBlueprintInput AWS API Documentation
+    #
+    class DeleteEnvironmentBlueprintInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] domain_identifier
     #   The ID of the Amazon DataZone domain in which the environment is
@@ -15813,6 +15925,8 @@ module Aws::DataZone
 
     # The provisioning properties of an environment blueprint.
     #
+    # @note ProvisioningProperties is a union - when making an API calls you must set exactly one of the members.
+    #
     # @note ProvisioningProperties is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProvisioningProperties corresponding to the set member.
     #
     # @!attribute [rw] cloud_formation
@@ -15849,6 +15963,10 @@ module Aws::DataZone
     #   The environment role permissions boundary.
     #   @return [String]
     #
+    # @!attribute [rw] global_parameters
+    #   Region-agnostic environment blueprint parameters.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] manage_access_role_arn
     #   The ARN of the manage access role.
     #   @return [String]
@@ -15872,6 +15990,7 @@ module Aws::DataZone
       :enabled_regions,
       :environment_blueprint_identifier,
       :environment_role_permission_boundary,
+      :global_parameters,
       :manage_access_role_arn,
       :provisioning_configurations,
       :provisioning_role_arn,
@@ -18754,7 +18873,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The timestampf of when the subscription grant was updated.
+    #   The timestamp of when the subscription grant was updated.
     #   @return [Time]
     #
     # @!attribute [rw] updated_by
@@ -20031,6 +20150,105 @@ module Aws::DataZone
       :name,
       :parameters)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description to be updated as part of the
+    #   `UpdateEnvironmentBlueprint` action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain in which an environment
+    #   blueprint is to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the environment blueprint to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_properties
+    #   The provisioning properties to be updated as part of the
+    #   `UpdateEnvironmentBlueprint` action.
+    #   @return [Types::ProvisioningProperties]
+    #
+    # @!attribute [rw] user_parameters
+    #   The user parameters to be updated as part of the
+    #   `UpdateEnvironmentBlueprint` action.
+    #   @return [Array<Types::CustomParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentBlueprintInput AWS API Documentation
+    #
+    class UpdateEnvironmentBlueprintInput < Struct.new(
+      :description,
+      :domain_identifier,
+      :identifier,
+      :provisioning_properties,
+      :user_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp of when the environment blueprint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deployment_properties
+    #   The deployment properties to be updated as part of the
+    #   `UpdateEnvironmentBlueprint` action.
+    #   @return [Types::DeploymentProperties]
+    #
+    # @!attribute [rw] description
+    #   The description to be updated as part of the
+    #   `UpdateEnvironmentBlueprint` action.
+    #   @return [String]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms to be updated as part of the
+    #   `UpdateEnvironmentBlueprint` action.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the blueprint to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name to be updated as part of the `UpdateEnvironmentBlueprint`
+    #   action.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider of the blueprint to be udpated.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_properties
+    #   The provisioning properties to be updated as part of the
+    #   `UpdateEnvironmentBlueprint` action.
+    #   @return [Types::ProvisioningProperties]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the blueprint was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] user_parameters
+    #   The user parameters to be updated as part of the
+    #   `UpdateEnvironmentBlueprint` action.
+    #   @return [Array<Types::CustomParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentBlueprintOutput AWS API Documentation
+    #
+    class UpdateEnvironmentBlueprintOutput < Struct.new(
+      :created_at,
+      :deployment_properties,
+      :description,
+      :glossary_terms,
+      :id,
+      :name,
+      :provider,
+      :provisioning_properties,
+      :updated_at,
+      :user_parameters)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 

@@ -744,6 +744,48 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Returns the information of the current alarm contributors that are in
+    # `ALARM` state. This operation returns details about the individual
+    # time series that contribute to the alarm's state.
+    #
+    # @option params [required, String] :alarm_name
+    #   The name of the alarm for which to retrieve contributor information.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to indicate that there is more
+    #   data available.
+    #
+    # @return [Types::DescribeAlarmContributorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAlarmContributorsOutput#alarm_contributors #alarm_contributors} => Array&lt;Types::AlarmContributor&gt;
+    #   * {Types::DescribeAlarmContributorsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_alarm_contributors({
+    #     alarm_name: "AlarmName", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alarm_contributors #=> Array
+    #   resp.alarm_contributors[0].contributor_id #=> String
+    #   resp.alarm_contributors[0].contributor_attributes #=> Hash
+    #   resp.alarm_contributors[0].contributor_attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.alarm_contributors[0].state_reason #=> String
+    #   resp.alarm_contributors[0].state_transitioned_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmContributors AWS API Documentation
+    #
+    # @overload describe_alarm_contributors(params = {})
+    # @param [Hash] params ({})
+    def describe_alarm_contributors(params = {}, options = {})
+      req = build_request(:describe_alarm_contributors, params)
+      req.send_request(options)
+    end
+
     # Retrieves the history for the specified alarm. You can filter the
     # results by date range or item type. If an alarm name is not specified,
     # the histories for either all metric alarms or all composite alarms are
@@ -760,6 +802,10 @@ module Aws::CloudWatch
     #
     # @option params [String] :alarm_name
     #   The name of the alarm.
+    #
+    # @option params [String] :alarm_contributor_id
+    #   The unique identifier of a specific alarm contributor to filter the
+    #   alarm history results.
     #
     # @option params [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
@@ -799,8 +845,9 @@ module Aws::CloudWatch
     #
     #   resp = client.describe_alarm_history({
     #     alarm_name: "AlarmName",
+    #     alarm_contributor_id: "ContributorId",
     #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
-    #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action
+    #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action, AlarmContributorStateUpdate, AlarmContributorAction
     #     start_date: Time.now,
     #     end_date: Time.now,
     #     max_records: 1,
@@ -812,11 +859,14 @@ module Aws::CloudWatch
     #
     #   resp.alarm_history_items #=> Array
     #   resp.alarm_history_items[0].alarm_name #=> String
+    #   resp.alarm_history_items[0].alarm_contributor_id #=> String
     #   resp.alarm_history_items[0].alarm_type #=> String, one of "CompositeAlarm", "MetricAlarm"
     #   resp.alarm_history_items[0].timestamp #=> Time
-    #   resp.alarm_history_items[0].history_item_type #=> String, one of "ConfigurationUpdate", "StateUpdate", "Action"
+    #   resp.alarm_history_items[0].history_item_type #=> String, one of "ConfigurationUpdate", "StateUpdate", "Action", "AlarmContributorStateUpdate", "AlarmContributorAction"
     #   resp.alarm_history_items[0].history_summary #=> String
     #   resp.alarm_history_items[0].history_data #=> String
+    #   resp.alarm_history_items[0].alarm_contributor_attributes #=> Hash
+    #   resp.alarm_history_items[0].alarm_contributor_attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistory AWS API Documentation
@@ -3057,7 +3107,7 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
     #
     # @option params [Boolean] :apply_on_transformed_logs
-    #   Specify `true` to have this rule evalute log events after they have
+    #   Specify `true` to have this rule evaluate log events after they have
     #   been transformed by [Log transformation][1]. If you specify `true`,
     #   then the log events in log groups that have transformers will be
     #   evaluated by Contributor Insights after being transformed. Log groups
@@ -4345,7 +4395,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

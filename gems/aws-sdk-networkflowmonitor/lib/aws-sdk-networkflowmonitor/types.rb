@@ -41,19 +41,40 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] local_resources
-    #   The local resources to monitor. A local resource, in a
-    #   bi-directional flow of a workload, is the host where the agent is
-    #   installed. For example, if a workload consists of an interaction
-    #   between a web service and a backend database (for example, Amazon
-    #   Relational Database Service (RDS)), the EC2 instance hosting the web
-    #   service, which also runs the agent, is the local resource.
+    #   The local resources to monitor. A local resource in a workload is
+    #   the location of the host, or hosts, where the Network Flow Monitor
+    #   agent is installed. For example, if a workload consists of an
+    #   interaction between a web service and a backend database (for
+    #   example, Amazon Dynamo DB), the subnet with the EC2 instance that
+    #   hosts the web service, which also runs the agent, is the local
+    #   resource.
+    #
+    #   Be aware that all local resources must belong to the current Region.
     #   @return [Array<Types::MonitorLocalResource>]
     #
     # @!attribute [rw] remote_resources
     #   The remote resources to monitor. A remote resource is the other
     #   endpoint in the bi-directional flow of a workload, with a local
-    #   resource. For example, Amazon Relational Database Service (RDS) can
-    #   be a remote resource.
+    #   resource. For example, Amazon Dynamo DB can be a remote resource.
+    #
+    #   When you specify remote resources, be aware that specific
+    #   combinations of resources are allowed and others are not, including
+    #   the following constraints:
+    #
+    #   * All remote resources that you specify must all belong to a single
+    #     Region.
+    #
+    #   * If you specify Amazon Web Services services as remote resources,
+    #     any other remote resources that you specify must be in the current
+    #     Region.
+    #
+    #   * When you specify a remote resource for another Region, you can
+    #     only specify the `Region` resource type. You cannot specify a
+    #     subnet, VPC, or Availability Zone in another Region.
+    #
+    #   * If you leave the `RemoteResources` parameter empty, the monitor
+    #     will include all network flows that terminate in the current
+    #     Region.
     #   @return [Array<Types::MonitorRemoteResource>]
     #
     # @!attribute [rw] scope_arn
@@ -109,17 +130,15 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] local_resources
-    #   The local resources to monitor. A local resource, in a
-    #   bi-directional flow of a workload, is the host where the agent is
+    #   The local resources to monitor. A local resource in a workload is
+    #   the location of hosts where the Network Flow Monitor agent is
     #   installed.
     #   @return [Array<Types::MonitorLocalResource>]
     #
     # @!attribute [rw] remote_resources
     #   The remote resources to monitor. A remote resource is the other
-    #   endpoint in the bi-directional flow of a workload, with a local
-    #   resource. For example, Amazon Relational Database Service (RDS) can
-    #   be a remote resource. The remote resource is identified by its ARN
-    #   or an identifier.
+    #   endpoint specified for the network flow of a workload, with a local
+    #   resource. For example, Amazon Dynamo DB can be a remote resource.
     #   @return [Array<Types::MonitorRemoteResource>]
     #
     # @!attribute [rw] created_at
@@ -150,8 +169,9 @@ module Aws::NetworkFlowMonitor
     end
 
     # @!attribute [rw] targets
-    #   The targets to define the scope to be monitored. Currently, a target
-    #   is an Amazon Web Services account.
+    #   The targets to define the scope to be monitored. A target is an
+    #   array of targetResources, which are currently Region-account pairs,
+    #   defined by targetResource constructs.
     #   @return [Array<Types::TargetResource>]
     #
     # @!attribute [rw] client_token
@@ -283,11 +303,15 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] local_resources
-    #   The local resources for this monitor.
+    #   The local resources to monitor. A local resource in a workload is
+    #   the location of the hosts where the Network Flow Monitor agent is
+    #   installed.
     #   @return [Array<Types::MonitorLocalResource>]
     #
     # @!attribute [rw] remote_resources
-    #   The remote resources for this monitor.
+    #   The remote resources to monitor. A remote resource is the other
+    #   endpoint specified for the network flow of a workload, with a local
+    #   resource. For example, Amazon Dynamo DB can be a remote resource.
     #   @return [Array<Types::MonitorRemoteResource>]
     #
     # @!attribute [rw] created_at
@@ -650,7 +674,9 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets for a scope
+    #   The targets to define the scope to be monitored. A target is an
+    #   array of targetResources, which are currently Region-account pairs,
+    #   defined by targetResource constructs.
     #   @return [Array<Types::TargetResource>]
     #
     # @!attribute [rw] tags
@@ -833,15 +859,19 @@ module Aws::NetworkFlowMonitor
     end
 
     # A local resource is the host where the agent is installed. Local
-    # resources can be a a subnet, a VPC, or an Availability Zone.
+    # resources can be a a subnet, a VPC, an Availability Zone, or an Amazon
+    # Web Services service.
     #
     # @!attribute [rw] type
     #   The type of the local resource. Valid values are `AWS::EC2::VPC`
-    #   `AWS::AvailabilityZone` or `AWS::EC2::Subnet`.
+    #   `AWS::AvailabilityZone`, `AWS::EC2::Subnet`, or `AWS::Region`.
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   The identifier of the local resource, such as an ARN.
+    #   The identifier of the local resource. For a VPC or subnet, this
+    #   identifier is the VPC Amazon Resource Name (ARN) or subnet ARN. For
+    #   an Availability Zone, this identifier is the AZ name, for example,
+    #   us-west-2b.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/MonitorLocalResource AWS API Documentation
@@ -856,15 +886,25 @@ module Aws::NetworkFlowMonitor
     # A remote resource is the other endpoint in a network flow. That is,
     # one endpoint is the local resource and the other is the remote
     # resource. Remote resources can be a a subnet, a VPC, an Availability
-    # Zone, or an Amazon Web Services service.
+    # Zone, an Amazon Web Services service, or an Amazon Web Services
+    # Region.
+    #
+    # When a remote resource is an Amazon Web Services Region, Network Flow
+    # Monitor provides network performance measurements up to the edge of
+    # the Region that you specify.
     #
     # @!attribute [rw] type
     #   The type of the remote resource. Valid values are `AWS::EC2::VPC`
-    #   `AWS::AvailabilityZone`, `AWS::EC2::Subnet`, or `AWS::AWSService`.
+    #   `AWS::AvailabilityZone`, `AWS::EC2::Subnet`, `AWS::AWSService`, or
+    #   `AWS::Region`.
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   The identifier of the remote resource, such as an ARN.
+    #   The identifier of the remote resource. For a VPC or subnet, this
+    #   identifier is the VPC Amazon Resource Name (ARN) or subnet ARN. For
+    #   an Availability Zone, this identifier is the AZ name, for example,
+    #   us-west-2b. For an Amazon Web Services Region , this identifier is
+    #   the Region name, for example, us-west-2.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/MonitorRemoteResource AWS API Documentation
@@ -876,7 +916,7 @@ module Aws::NetworkFlowMonitor
       include Aws::Structure
     end
 
-    # A summary of information about a monitor, includ the ARN, the name,
+    # A summary of information about a monitor, including the ARN, the name,
     # and the status.
     #
     # @!attribute [rw] monitor_arn
@@ -964,6 +1004,9 @@ module Aws::NetworkFlowMonitor
     #
     #   * `INTER_AZ`: Top contributor network flows between Availability
     #     Zones
+    #
+    #   * `INTER_REGION`: Top contributor network flows between Regions (to
+    #     the edge of another Region)
     #
     #   * `INTER_VPC`: Top contributor network flows between VPCs
     #
@@ -1094,10 +1137,10 @@ module Aws::NetworkFlowMonitor
     # and Amazon Web Services Region.
     #
     # @!attribute [rw] scope_id
-    #   The identifier for the scope that includes the resources you want to
-    #   get data results for. A scope ID is an internally-generated
-    #   identifier that includes all the resources for a specific root
-    #   account.
+    #   The identifier for the scope that includes the resources that you
+    #   want to get data results for. A scope ID is an internally-generated
+    #   identifier that includes all the resources for the accounts in a
+    #   scope.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1143,8 +1186,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The timestamp that is the date and time beginning of the period that
-    #   you want to retrieve results for with your query.
+    #   The timestamp that is the date and time that is the beginning of the
+    #   period that you want to retrieve results for with your query.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -1170,6 +1213,9 @@ module Aws::NetworkFlowMonitor
     #
     #   * `INTER_AZ`: Top contributor network flows between Availability
     #     Zones
+    #
+    #   * `INTER_REGION`: Top contributor network flows between Regions (to
+    #     the edge of another Region)
     #
     #   * `INTER_VPC`: Top contributor network flows between VPCs
     #
@@ -1221,8 +1267,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The timestamp that is the date and time beginning of the period that
-    #   you want to retrieve results for with your query.
+    #   The timestamp that is the date and time that is the beginning of the
+    #   period that you want to retrieve results for with your query.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -1246,6 +1292,9 @@ module Aws::NetworkFlowMonitor
     #
     #   * `INTER_AZ`: Top contributor network flows between Availability
     #     Zones
+    #
+    #   * `INTER_REGION`: Top contributor network flows between Regions (to
+    #     the edge of another Region)
     #
     #   * `INTER_VPC`: Top contributor network flows between VPCs
     #
@@ -1290,8 +1339,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The timestamp that is the date and time beginning of the period that
-    #   you want to retrieve results for with your query.
+    #   The timestamp that is the date and time that is the beginning of the
+    #   period that you want to retrieve results for with your query.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -1315,6 +1364,9 @@ module Aws::NetworkFlowMonitor
     #
     #   * `INTER_AZ`: Top contributor network flows between Availability
     #     Zones
+    #
+    #   * `INTER_REGION`: Top contributor network flows between Regions (to
+    #     the edge of another Region)
     #
     #   * `INTER_VPC`: Top contributor network flows between VPCs
     #
@@ -1478,17 +1530,18 @@ module Aws::NetworkFlowMonitor
       class Unknown < TargetId; end
     end
 
-    # A target identifier is a pair of identifying information for a
-    # resource that is included in a target. A target identifier includes
-    # the target ID and the target type.
+    # A target identifier is a pair of identifying information for a scope
+    # that is included in a target. A target identifier is made up of a
+    # target ID and a target type. Currently the target ID is always an
+    # account ID and the target type is always ACCOUNT.
     #
     # @!attribute [rw] target_id
-    #   The identifier for a target.
+    #   The identifier for a target, which is currently always an account ID
+    #   .
     #   @return [Types::TargetId]
     #
     # @!attribute [rw] target_type
-    #   The type of a target. A target type is currently always `ACCOUNT`
-    #   because a target is currently a single Amazon Web Services account.
+    #   The type of a target. A target type is currently always `ACCOUNT`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/TargetIdentifier AWS API Documentation
@@ -1501,16 +1554,19 @@ module Aws::NetworkFlowMonitor
     end
 
     # A target resource in a scope. The resource is identified by a Region
-    # and a target identifier, which includes a target ID and a target type.
+    # and an account, defined by a target identifier. A target identifier is
+    # made up of a target ID (currently always an account ID) and a target
+    # type (currently always `ACCOUNT`).
     #
     # @!attribute [rw] target_identifier
     #   A target identifier is a pair of identifying information for a
-    #   resource that is included in a target. A target identifier includes
-    #   the target ID and the target type.
+    #   scope. A target identifier is made up of a targetID (currently
+    #   always an account ID) and a targetType (currently always an
+    #   account).
     #   @return [Types::TargetIdentifier]
     #
     # @!attribute [rw] region
-    #   The Amazon Web Services Region where the target resource is located.
+    #   The Amazon Web Services Region for the scope.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/TargetResource AWS API Documentation
@@ -1546,7 +1602,7 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] component_arn
-    #   The Amazon Resource Name (ARN) of a tranversed component.
+    #   The Amazon Resource Name (ARN) of a traversed component.
     #   @return [String]
     #
     # @!attribute [rw] service_name
@@ -1590,8 +1646,10 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] local_resources_to_add
-    #   The local resources to add, as an array of resources with
-    #   identifiers and types.
+    #   Additional local resources to specify network flows for a monitor,
+    #   as an array of resources with identifiers and types. A local
+    #   resource in a workload is the location of hosts where the Network
+    #   Flow Monitor agent is installed.
     #   @return [Array<Types::MonitorLocalResource>]
     #
     # @!attribute [rw] local_resources_to_remove
@@ -1600,13 +1658,21 @@ module Aws::NetworkFlowMonitor
     #   @return [Array<Types::MonitorLocalResource>]
     #
     # @!attribute [rw] remote_resources_to_add
-    #   The remove resources to add, as an array of resources with
+    #   The remote resources to add, as an array of resources with
     #   identifiers and types.
+    #
+    #   A remote resource is the other endpoint in the flow of a workload,
+    #   with a local resource. For example, Amazon Dynamo DB can be a remote
+    #   resource.
     #   @return [Array<Types::MonitorRemoteResource>]
     #
     # @!attribute [rw] remote_resources_to_remove
-    #   The remove resources to remove, as an array of resources with
+    #   The remote resources to remove, as an array of resources with
     #   identifiers and types.
+    #
+    #   A remote resource is the other endpoint specified for the network
+    #   flow of a workload, with a local resource. For example, Amazon
+    #   Dynamo DB can be a remote resource.
     #   @return [Array<Types::MonitorRemoteResource>]
     #
     # @!attribute [rw] client_token
@@ -1654,13 +1720,18 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] local_resources
-    #   The local resources updated for a monitor, as an array of resources
-    #   with identifiers and types.
+    #   The local resources to monitor. A local resource in a workload is
+    #   the location of hosts where the Network Flow Monitor agent is
+    #   installed.
     #   @return [Array<Types::MonitorLocalResource>]
     #
     # @!attribute [rw] remote_resources
     #   The remote resources updated for a monitor, as an array of resources
     #   with identifiers and types.
+    #
+    #   A remote resource is the other endpoint specified for the network
+    #   flow of a workload, with a local resource. For example, Amazon
+    #   Dynamo DB can be a remote resource.
     #   @return [Array<Types::MonitorRemoteResource>]
     #
     # @!attribute [rw] created_at
@@ -1815,7 +1886,11 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] remote_identifier
-    #   The identifier of a remote resource.
+    #   The identifier of a remote resource. For a VPC or subnet, this
+    #   identifier is the VPC Amazon Resource Name (ARN) or subnet ARN. For
+    #   an Availability Zone, this identifier is the AZ name, for example,
+    #   us-west-2b. For an Amazon Web Services Region , this identifier is
+    #   the Region name, for example, us-west-2.
     #   @return [String]
     #
     # @!attribute [rw] value

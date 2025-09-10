@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - AWS Server Migration Service has been removed from the SDK because it has been discontinued.
+
 1.76.0 (2025-08-26)
 ------------------
 

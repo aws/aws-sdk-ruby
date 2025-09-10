@@ -21751,6 +21751,13 @@ module Aws::SageMaker
     #   Amazon SageMaker Unified Studio.
     #   @return [Types::UnifiedStudioSettings]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the domain. Specify `ipv4` for IPv4-only
+    #   connectivity or `dualstack` for both IPv4 and IPv6 connectivity.
+    #   When you specify `dualstack`, the subnet must support IPv6 CIDR
+    #   blocks. If not specified, defaults to `ipv4`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettings AWS API Documentation
     #
     class DomainSettings < Struct.new(
@@ -21760,7 +21767,8 @@ module Aws::SageMaker
       :trusted_identity_propagation_settings,
       :docker_settings,
       :amazon_q_settings,
-      :unified_studio_settings)
+      :unified_studio_settings,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21812,6 +21820,13 @@ module Aws::SageMaker
     #   Amazon SageMaker Unified Studio.
     #   @return [Types::UnifiedStudioSettings]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the domain. Specify `ipv4` for IPv4-only
+    #   connectivity or `dualstack` for both IPv4 and IPv6 connectivity.
+    #   When you specify `dualstack`, the subnet must support IPv6 CIDR
+    #   blocks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettingsForUpdate AWS API Documentation
     #
     class DomainSettingsForUpdate < Struct.new(
@@ -21821,7 +21836,8 @@ module Aws::SageMaker
       :trusted_identity_propagation_settings,
       :docker_settings,
       :amazon_q_settings,
-      :unified_studio_settings)
+      :unified_studio_settings,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2025-09-09)
+------------------
+
+* Feature - Documentation updates for AWS Organizations APIs.
+
 1.123.0 (2025-08-26)
 ------------------
 

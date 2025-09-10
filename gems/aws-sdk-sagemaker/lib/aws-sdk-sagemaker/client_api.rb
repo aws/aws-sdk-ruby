@@ -6403,6 +6403,7 @@ module Aws::SageMaker
     DomainSettings.add_member(:docker_settings, Shapes::ShapeRef.new(shape: DockerSettings, location_name: "DockerSettings"))
     DomainSettings.add_member(:amazon_q_settings, Shapes::ShapeRef.new(shape: AmazonQSettings, location_name: "AmazonQSettings"))
     DomainSettings.add_member(:unified_studio_settings, Shapes::ShapeRef.new(shape: UnifiedStudioSettings, location_name: "UnifiedStudioSettings"))
+    DomainSettings.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "IpAddressType"))
     DomainSettings.struct_class = Types::DomainSettings
 
     DomainSettingsForUpdate.add_member(:r_studio_server_pro_domain_settings_for_update, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettingsForUpdate, location_name: "RStudioServerProDomainSettingsForUpdate"))
@@ -6412,6 +6413,7 @@ module Aws::SageMaker
     DomainSettingsForUpdate.add_member(:docker_settings, Shapes::ShapeRef.new(shape: DockerSettings, location_name: "DockerSettings"))
     DomainSettingsForUpdate.add_member(:amazon_q_settings, Shapes::ShapeRef.new(shape: AmazonQSettings, location_name: "AmazonQSettings"))
     DomainSettingsForUpdate.add_member(:unified_studio_settings, Shapes::ShapeRef.new(shape: UnifiedStudioSettings, location_name: "UnifiedStudioSettings"))
+    DomainSettingsForUpdate.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "IpAddressType"))
     DomainSettingsForUpdate.struct_class = Types::DomainSettingsForUpdate
 
     DriftCheckBaselines.add_member(:bias, Shapes::ShapeRef.new(shape: DriftCheckBias, location_name: "Bias"))

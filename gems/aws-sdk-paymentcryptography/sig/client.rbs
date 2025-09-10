@@ -79,6 +79,17 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AddKeyReplicationRegionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddKeyReplicationRegionsOutput]
+        def key: () -> Types::Key
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#add_key_replication_regions-instance_method
+      def add_key_replication_regions: (
+                                         key_identifier: ::String,
+                                         replication_regions: Array[::String]
+                                       ) -> _AddKeyReplicationRegionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddKeyReplicationRegionsResponseSuccess
+
       interface _CreateAliasResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAliasOutput]
         def alias: () -> Types::Alias
@@ -112,7 +123,7 @@ module Aws
                             no_restrictions: bool?
                           }
                         },
-                        ?key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC"),
+                        ?key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1"),
                         exportable: bool,
                         ?enabled: bool,
                         ?tags: Array[
@@ -121,7 +132,8 @@ module Aws
                             value: ::String
                           },
                         ],
-                        ?derive_key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY")
+                        ?derive_key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY"),
+                        ?replication_regions: Array[::String]
                       ) -> _CreateKeyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKeyResponseSuccess
 
@@ -144,6 +156,26 @@ module Aws
                         ?delete_key_in_days: ::Integer
                       ) -> _DeleteKeyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKeyResponseSuccess
+
+      interface _DisableDefaultKeyReplicationRegionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableDefaultKeyReplicationRegionsOutput]
+        def enabled_replication_regions: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#disable_default_key_replication_regions-instance_method
+      def disable_default_key_replication_regions: (
+                                                     replication_regions: Array[::String]
+                                                   ) -> _DisableDefaultKeyReplicationRegionsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableDefaultKeyReplicationRegionsResponseSuccess
+
+      interface _EnableDefaultKeyReplicationRegionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableDefaultKeyReplicationRegionsOutput]
+        def enabled_replication_regions: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#enable_default_key_replication_regions-instance_method
+      def enable_default_key_replication_regions: (
+                                                    replication_regions: Array[::String]
+                                                  ) -> _EnableDefaultKeyReplicationRegionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableDefaultKeyReplicationRegionsResponseSuccess
 
       interface _ExportKeyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ExportKeyOutput]
@@ -232,7 +264,7 @@ module Aws
                           export_dukpt_initial_key: {
                             key_serial_number: ::String
                           }?,
-                          key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
+                          key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
                         }
                       ) -> _ExportKeyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportKeyResponseSuccess
@@ -246,6 +278,15 @@ module Aws
                        alias_name: ::String
                      ) -> _GetAliasResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAliasResponseSuccess
+
+      interface _GetDefaultKeyReplicationRegionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDefaultKeyReplicationRegionsOutput]
+        def enabled_replication_regions: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#get_default_key_replication_regions-instance_method
+      def get_default_key_replication_regions: (
+                                               ) -> _GetDefaultKeyReplicationRegionsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDefaultKeyReplicationRegionsResponseSuccess
 
       interface _GetKeyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetKeyOutput]
@@ -391,14 +432,15 @@ module Aws
                             wrapped_key_block: ::String
                           }?
                         },
-                        ?key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC"),
+                        ?key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1"),
                         ?enabled: bool,
                         ?tags: Array[
                           {
                             key: ::String,
                             value: ::String
                           },
-                        ]
+                        ],
+                        ?replication_regions: Array[::String]
                       ) -> _ImportKeyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportKeyResponseSuccess
 
@@ -440,6 +482,17 @@ module Aws
                                     ?max_results: ::Integer
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RemoveKeyReplicationRegionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveKeyReplicationRegionsOutput]
+        def key: () -> Types::Key
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#remove_key_replication_regions-instance_method
+      def remove_key_replication_regions: (
+                                            key_identifier: ::String,
+                                            replication_regions: Array[::String]
+                                          ) -> _RemoveKeyReplicationRegionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveKeyReplicationRegionsResponseSuccess
 
       interface _RestoreKeyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RestoreKeyOutput]

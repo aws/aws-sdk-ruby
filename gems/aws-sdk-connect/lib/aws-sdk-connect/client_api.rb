@@ -509,6 +509,7 @@ module Aws::Connect
     EmailRecipientsList = Shapes::ListShape.new(name: 'EmailRecipientsList')
     EmailReference = Shapes::StructureShape.new(name: 'EmailReference')
     EmptyFieldValue = Shapes::StructureShape.new(name: 'EmptyFieldValue')
+    EnableValueValidationOnAssociation = Shapes::BooleanShape.new(name: 'EnableValueValidationOnAssociation')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EndAssociatedTasksActionDefinition = Shapes::StructureShape.new(name: 'EndAssociatedTasksActionDefinition')
@@ -708,6 +709,7 @@ module Aws::Connect
     Index = Shapes::IntegerShape.new(name: 'Index')
     InitiateAs = Shapes::StringShape.new(name: 'InitiateAs')
     InitiationMethodList = Shapes::ListShape.new(name: 'InitiationMethodList')
+    InputPredefinedAttributeConfiguration = Shapes::StructureShape.new(name: 'InputPredefinedAttributeConfiguration')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InstanceAttributeType = Shapes::StringShape.new(name: 'InstanceAttributeType')
@@ -740,6 +742,7 @@ module Aws::Connect
     InvisibleTaskTemplateFields = Shapes::ListShape.new(name: 'InvisibleTaskTemplateFields')
     IpCidr = Shapes::StringShape.new(name: 'IpCidr')
     IpCidrList = Shapes::ListShape.new(name: 'IpCidrList')
+    IsReadOnly = Shapes::BooleanShape.new(name: 'IsReadOnly')
     IvrRecordingTrack = Shapes::StringShape.new(name: 'IvrRecordingTrack')
     JoinToken = Shapes::StringShape.new(name: 'JoinToken')
     KeyId = Shapes::StringShape.new(name: 'KeyId')
@@ -981,7 +984,10 @@ module Aws::Connect
     PotentialDisconnectIssue = Shapes::StringShape.new(name: 'PotentialDisconnectIssue')
     PreSignedAttachmentUrl = Shapes::StringShape.new(name: 'PreSignedAttachmentUrl')
     PredefinedAttribute = Shapes::StructureShape.new(name: 'PredefinedAttribute')
+    PredefinedAttributeConfiguration = Shapes::StructureShape.new(name: 'PredefinedAttributeConfiguration')
     PredefinedAttributeName = Shapes::StringShape.new(name: 'PredefinedAttributeName')
+    PredefinedAttributePurposeName = Shapes::StringShape.new(name: 'PredefinedAttributePurposeName')
+    PredefinedAttributePurposeNameList = Shapes::ListShape.new(name: 'PredefinedAttributePurposeNameList')
     PredefinedAttributeSearchConditionList = Shapes::ListShape.new(name: 'PredefinedAttributeSearchConditionList')
     PredefinedAttributeSearchCriteria = Shapes::StructureShape.new(name: 'PredefinedAttributeSearchCriteria')
     PredefinedAttributeSearchSummaryList = Shapes::ListShape.new(name: 'PredefinedAttributeSearchSummaryList')
@@ -1253,6 +1259,7 @@ module Aws::Connect
     SegmentAttributeName = Shapes::StringShape.new(name: 'SegmentAttributeName')
     SegmentAttributeValue = Shapes::StructureShape.new(name: 'SegmentAttributeValue')
     SegmentAttributeValueInteger = Shapes::IntegerShape.new(name: 'SegmentAttributeValueInteger')
+    SegmentAttributeValueList = Shapes::ListShape.new(name: 'SegmentAttributeValueList')
     SegmentAttributeValueMap = Shapes::MapShape.new(name: 'SegmentAttributeValueMap')
     SegmentAttributeValueString = Shapes::StringShape.new(name: 'SegmentAttributeValueString')
     SegmentAttributes = Shapes::MapShape.new(name: 'SegmentAttributes')
@@ -2486,7 +2493,9 @@ module Aws::Connect
 
     CreatePredefinedAttributeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreatePredefinedAttributeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, required: true, location_name: "Name"))
-    CreatePredefinedAttributeRequest.add_member(:values, Shapes::ShapeRef.new(shape: PredefinedAttributeValues, required: true, location_name: "Values"))
+    CreatePredefinedAttributeRequest.add_member(:values, Shapes::ShapeRef.new(shape: PredefinedAttributeValues, location_name: "Values"))
+    CreatePredefinedAttributeRequest.add_member(:purposes, Shapes::ShapeRef.new(shape: PredefinedAttributePurposeNameList, location_name: "Purposes"))
+    CreatePredefinedAttributeRequest.add_member(:attribute_configuration, Shapes::ShapeRef.new(shape: InputPredefinedAttributeConfiguration, location_name: "AttributeConfiguration"))
     CreatePredefinedAttributeRequest.struct_class = Types::CreatePredefinedAttributeRequest
 
     CreatePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -3910,6 +3919,9 @@ module Aws::Connect
 
     InitiationMethodList.member = Shapes::ShapeRef.new(shape: ContactInitiationMethod)
 
+    InputPredefinedAttributeConfiguration.add_member(:enable_value_validation_on_association, Shapes::ShapeRef.new(shape: EnableValueValidationOnAssociation, location_name: "EnableValueValidationOnAssociation"))
+    InputPredefinedAttributeConfiguration.struct_class = Types::InputPredefinedAttributeConfiguration
+
     Instance.add_member(:id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "Id"))
     Instance.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     Instance.add_member(:identity_management_type, Shapes::ShapeRef.new(shape: DirectoryType, location_name: "IdentityManagementType"))
@@ -4746,9 +4758,17 @@ module Aws::Connect
 
     PredefinedAttribute.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, location_name: "Name"))
     PredefinedAttribute.add_member(:values, Shapes::ShapeRef.new(shape: PredefinedAttributeValues, location_name: "Values"))
+    PredefinedAttribute.add_member(:purposes, Shapes::ShapeRef.new(shape: PredefinedAttributePurposeNameList, location_name: "Purposes"))
+    PredefinedAttribute.add_member(:attribute_configuration, Shapes::ShapeRef.new(shape: PredefinedAttributeConfiguration, location_name: "AttributeConfiguration"))
     PredefinedAttribute.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     PredefinedAttribute.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     PredefinedAttribute.struct_class = Types::PredefinedAttribute
+
+    PredefinedAttributeConfiguration.add_member(:enable_value_validation_on_association, Shapes::ShapeRef.new(shape: EnableValueValidationOnAssociation, location_name: "EnableValueValidationOnAssociation"))
+    PredefinedAttributeConfiguration.add_member(:is_read_only, Shapes::ShapeRef.new(shape: IsReadOnly, location_name: "IsReadOnly"))
+    PredefinedAttributeConfiguration.struct_class = Types::PredefinedAttributeConfiguration
+
+    PredefinedAttributePurposeNameList.member = Shapes::ShapeRef.new(shape: PredefinedAttributePurposeName)
 
     PredefinedAttributeSearchConditionList.member = Shapes::ShapeRef.new(shape: PredefinedAttributeSearchCriteria)
 
@@ -5604,7 +5624,11 @@ module Aws::Connect
     SegmentAttributeValue.add_member(:value_string, Shapes::ShapeRef.new(shape: SegmentAttributeValueString, location_name: "ValueString"))
     SegmentAttributeValue.add_member(:value_map, Shapes::ShapeRef.new(shape: SegmentAttributeValueMap, location_name: "ValueMap"))
     SegmentAttributeValue.add_member(:value_integer, Shapes::ShapeRef.new(shape: SegmentAttributeValueInteger, location_name: "ValueInteger"))
+    SegmentAttributeValue.add_member(:value_list, Shapes::ShapeRef.new(shape: SegmentAttributeValueList, location_name: "ValueList"))
+    SegmentAttributeValue.add_member(:value_arn, Shapes::ShapeRef.new(shape: SegmentAttributeValueString, location_name: "ValueArn"))
     SegmentAttributeValue.struct_class = Types::SegmentAttributeValue
+
+    SegmentAttributeValueList.member = Shapes::ShapeRef.new(shape: SegmentAttributeValue)
 
     SegmentAttributeValueMap.key = Shapes::ShapeRef.new(shape: SegmentAttributeName)
     SegmentAttributeValueMap.value = Shapes::ShapeRef.new(shape: SegmentAttributeValue)
@@ -6300,6 +6324,8 @@ module Aws::Connect
     UpdatePredefinedAttributeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdatePredefinedAttributeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, required: true, location: "uri", location_name: "Name"))
     UpdatePredefinedAttributeRequest.add_member(:values, Shapes::ShapeRef.new(shape: PredefinedAttributeValues, location_name: "Values"))
+    UpdatePredefinedAttributeRequest.add_member(:purposes, Shapes::ShapeRef.new(shape: PredefinedAttributePurposeNameList, location_name: "Purposes"))
+    UpdatePredefinedAttributeRequest.add_member(:attribute_configuration, Shapes::ShapeRef.new(shape: InputPredefinedAttributeConfiguration, location_name: "AttributeConfiguration"))
     UpdatePredefinedAttributeRequest.struct_class = Types::UpdatePredefinedAttributeRequest
 
     UpdatePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))

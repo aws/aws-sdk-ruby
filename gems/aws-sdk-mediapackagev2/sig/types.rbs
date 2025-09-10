@@ -802,7 +802,7 @@ module Aws::MediaPackageV2
     end
 
     class ScteHls
-      attr_accessor ad_marker_hls: ("DATERANGE")
+      attr_accessor ad_marker_hls: ("DATERANGE" | "SCTE35_ENHANCED")
       SENSITIVE: []
     end
 

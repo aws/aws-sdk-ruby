@@ -1126,7 +1126,8 @@
     "models": "sesv2/2019-09-27"
   },
   "SMS": {
-    "models": "sms/2016-10-24"
+    "models": "sms/2016-10-24",
+    "deprecated": true
   },
   "SNS": {
     "models": "sns/2010-03-31"

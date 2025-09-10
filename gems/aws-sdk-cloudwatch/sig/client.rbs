@@ -168,6 +168,18 @@ module Aws
                                 ) -> _DeleteMetricStreamResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMetricStreamResponseSuccess
 
+      interface _DescribeAlarmContributorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAlarmContributorsOutput]
+        def alarm_contributors: () -> ::Array[Types::AlarmContributor]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#describe_alarm_contributors-instance_method
+      def describe_alarm_contributors: (
+                                         alarm_name: ::String,
+                                         ?next_token: ::String
+                                       ) -> _DescribeAlarmContributorsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAlarmContributorsResponseSuccess
+
       interface _DescribeAlarmHistoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAlarmHistoryOutput]
         def alarm_history_items: () -> ::Array[Types::AlarmHistoryItem]
@@ -176,8 +188,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#describe_alarm_history-instance_method
       def describe_alarm_history: (
                                     ?alarm_name: ::String,
+                                    ?alarm_contributor_id: ::String,
                                     ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
-                                    ?history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action"),
+                                    ?history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action" | "AlarmContributorStateUpdate" | "AlarmContributorAction"),
                                     ?start_date: ::Time,
                                     ?end_date: ::Time,
                                     ?max_records: ::Integer,

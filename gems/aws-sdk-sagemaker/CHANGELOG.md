@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.329.0 (2025-09-09)
+------------------
+
+* Feature - Released IPv6 support with dual-stack domain options on SageMaker Studio and introduced support for p6-b200.48xlarge instance type on SageMaker Studio for JupyterLab and CodeEditor applications.
+
 1.328.0 (2025-09-05)
 ------------------
 

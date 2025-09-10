@@ -243,6 +243,7 @@ module Aws::AutoScaling
 
     class CancelInstanceRefreshType
       attr_accessor auto_scaling_group_name: ::String
+      attr_accessor wait_for_transitioning_instances: bool
       SENSITIVE: []
     end
 

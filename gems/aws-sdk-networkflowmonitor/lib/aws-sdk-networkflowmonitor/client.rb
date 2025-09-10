@@ -480,7 +480,7 @@ module Aws::NetworkFlowMonitor
     # resources, so that you can monitor network performance for one or
     # several of your workloads. For each monitor, Network Flow Monitor
     # publishes detailed end-to-end performance metrics and a network health
-    # indicators (NHI) that informs you whether there were Amazon Web
+    # indicator (NHI) that informs you whether there were Amazon Web
     # Services network issues for one or more of the network flows tracked
     # by a monitor, during a time period that you choose.
     #
@@ -488,18 +488,37 @@ module Aws::NetworkFlowMonitor
     #   The name of the monitor.
     #
     # @option params [required, Array<Types::MonitorLocalResource>] :local_resources
-    #   The local resources to monitor. A local resource, in a bi-directional
-    #   flow of a workload, is the host where the agent is installed. For
-    #   example, if a workload consists of an interaction between a web
-    #   service and a backend database (for example, Amazon Relational
-    #   Database Service (RDS)), the EC2 instance hosting the web service,
-    #   which also runs the agent, is the local resource.
+    #   The local resources to monitor. A local resource in a workload is the
+    #   location of the host, or hosts, where the Network Flow Monitor agent
+    #   is installed. For example, if a workload consists of an interaction
+    #   between a web service and a backend database (for example, Amazon
+    #   Dynamo DB), the subnet with the EC2 instance that hosts the web
+    #   service, which also runs the agent, is the local resource.
+    #
+    #   Be aware that all local resources must belong to the current Region.
     #
     # @option params [Array<Types::MonitorRemoteResource>] :remote_resources
     #   The remote resources to monitor. A remote resource is the other
     #   endpoint in the bi-directional flow of a workload, with a local
-    #   resource. For example, Amazon Relational Database Service (RDS) can be
-    #   a remote resource.
+    #   resource. For example, Amazon Dynamo DB can be a remote resource.
+    #
+    #   When you specify remote resources, be aware that specific combinations
+    #   of resources are allowed and others are not, including the following
+    #   constraints:
+    #
+    #   * All remote resources that you specify must all belong to a single
+    #     Region.
+    #
+    #   * If you specify Amazon Web Services services as remote resources, any
+    #     other remote resources that you specify must be in the current
+    #     Region.
+    #
+    #   * When you specify a remote resource for another Region, you can only
+    #     specify the `Region` resource type. You cannot specify a subnet,
+    #     VPC, or Availability Zone in another Region.
+    #
+    #   * If you leave the `RemoteResources` parameter empty, the monitor will
+    #     include all network flows that terminate in the current Region.
     #
     # @option params [required, String] :scope_arn
     #   The Amazon Resource Name (ARN) of the scope for the monitor.
@@ -532,13 +551,13 @@ module Aws::NetworkFlowMonitor
     #     monitor_name: "ResourceName", # required
     #     local_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::Region
     #         identifier: "String", # required
     #       },
     #     ],
     #     remote_resources: [
     #       {
-    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::AWSService
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::AWSService, AWS::Region
     #         identifier: "String", # required
     #       },
     #     ],
@@ -555,10 +574,10 @@ module Aws::NetworkFlowMonitor
     #   resp.monitor_name #=> String
     #   resp.monitor_status #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"
     #   resp.local_resources #=> Array
-    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet"
+    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"
     #   resp.local_resources[0].identifier #=> String
     #   resp.remote_resources #=> Array
-    #   resp.remote_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService"
+    #   resp.remote_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"
     #   resp.remote_resources[0].identifier #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -574,18 +593,34 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
-    # Create a scope of resources that you want to be available for Network
-    # Flow Monitor to generate metrics for, when you have active agents on
-    # those resources sending metrics reports to the Network Flow Monitor
-    # backend. This call returns a scope ID to identify the scope.
+    # In Network Flow Monitor, you specify a scope for the service to
+    # generate metrics for. By using the scope, Network Flow Monitor can
+    # generate a topology of all the resources to measure performance
+    # metrics for. When you create a scope, you enable permissions for
+    # Network Flow Monitor.
     #
-    # When you create a scope, you enable permissions for Network Flow
-    # Monitor. The scope is set to the resources for the Amazon Web Services
-    # that enables the feature.
+    # A scope is a Region-account pair or multiple Region-account pairs.
+    # Network Flow Monitor uses your scope to determine all the resources
+    # (the topology) where Network Flow Monitor will gather network flow
+    # performance metrics for you. To provide performance metrics, Network
+    # Flow Monitor uses the data that is sent by the Network Flow Monitor
+    # agents you install on the resources.
+    #
+    # To define the Region-account pairs for your scope, the Network Flow
+    # Monitor API uses the following constucts, which allow for future
+    # flexibility in defining scopes:
+    #
+    # * *Targets*, which are arrays of targetResources.
+    #
+    # * *Target resources*, which are Region-targetIdentifier pairs.
+    #
+    # * *Target identifiers*, made up of a targetID (currently always an
+    #   account ID) and a targetType (currently always an account).
     #
     # @option params [required, Array<Types::TargetResource>] :targets
-    #   The targets to define the scope to be monitored. Currently, a target
-    #   is an Amazon Web Services account.
+    #   The targets to define the scope to be monitored. A target is an array
+    #   of targetResources, which are currently Region-account pairs, defined
+    #   by targetResource constructs.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive string of up to 64 ASCII characters that you
@@ -719,10 +754,10 @@ module Aws::NetworkFlowMonitor
     #   resp.monitor_name #=> String
     #   resp.monitor_status #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"
     #   resp.local_resources #=> Array
-    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet"
+    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"
     #   resp.local_resources[0].identifier #=> String
     #   resp.remote_resources #=> Array
-    #   resp.remote_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService"
+    #   resp.remote_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"
     #   resp.remote_resources[0].identifier #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -797,7 +832,7 @@ module Aws::NetworkFlowMonitor
     #   resp.top_contributors[0].local_az #=> String
     #   resp.top_contributors[0].local_subnet_id #=> String
     #   resp.top_contributors[0].target_port #=> Integer
-    #   resp.top_contributors[0].destination_category #=> String, one of "INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB"
+    #   resp.top_contributors[0].destination_category #=> String, one of "INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB", "INTER_REGION"
     #   resp.top_contributors[0].remote_vpc_id #=> String
     #   resp.top_contributors[0].remote_region #=> String
     #   resp.top_contributors[0].remote_az #=> String
@@ -1327,8 +1362,8 @@ module Aws::NetworkFlowMonitor
     #   The name of the monitor.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   The timestamp that is the date and time beginning of the period that
-    #   you want to retrieve results for with your query.
+    #   The timestamp that is the date and time that is the beginning of the
+    #   period that you want to retrieve results for with your query.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The timestamp that is the date and time end of the period that you
@@ -1349,6 +1384,9 @@ module Aws::NetworkFlowMonitor
     #     Availability Zone
     #
     #   * `INTER_AZ`: Top contributor network flows between Availability Zones
+    #
+    #   * `INTER_REGION`: Top contributor network flows between Regions (to
+    #     the edge of another Region)
     #
     #   * `INTER_VPC`: Top contributor network flows between VPCs
     #
@@ -1374,7 +1412,7 @@ module Aws::NetworkFlowMonitor
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     metric_name: "ROUND_TRIP_TIME", # required, accepts ROUND_TRIP_TIME, TIMEOUTS, RETRANSMISSIONS, DATA_TRANSFERRED
-    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB
+    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB, INTER_REGION
     #     limit: 1,
     #   })
     #
@@ -1416,8 +1454,8 @@ module Aws::NetworkFlowMonitor
     #   ID is returned from a `CreateScope` API call.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   The timestamp that is the date and time beginning of the period that
-    #   you want to retrieve results for with your query.
+    #   The timestamp that is the date and time that is the beginning of the
+    #   period that you want to retrieve results for with your query.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The timestamp that is the date and time end of the period that you
@@ -1437,6 +1475,9 @@ module Aws::NetworkFlowMonitor
     #     Availability Zone
     #
     #   * `INTER_AZ`: Top contributor network flows between Availability Zones
+    #
+    #   * `INTER_REGION`: Top contributor network flows between Regions (to
+    #     the edge of another Region)
     #
     #   * `INTER_VPC`: Top contributor network flows between VPCs
     #
@@ -1460,7 +1501,7 @@ module Aws::NetworkFlowMonitor
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     metric_name: "TIMEOUTS", # required, accepts TIMEOUTS, RETRANSMISSIONS, DATA_TRANSFERRED
-    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB
+    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB, INTER_REGION
     #     limit: 1,
     #   })
     #
@@ -1502,8 +1543,8 @@ module Aws::NetworkFlowMonitor
     #   that includes all the resources for a specific root account.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   The timestamp that is the date and time beginning of the period that
-    #   you want to retrieve results for with your query.
+    #   The timestamp that is the date and time that is the beginning of the
+    #   period that you want to retrieve results for with your query.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The timestamp that is the date and time end of the period that you
@@ -1524,6 +1565,9 @@ module Aws::NetworkFlowMonitor
     #
     #   * `INTER_AZ`: Top contributor network flows between Availability Zones
     #
+    #   * `INTER_REGION`: Top contributor network flows between Regions (to
+    #     the edge of another Region)
+    #
     #   * `INTER_VPC`: Top contributor network flows between VPCs
     #
     #   * `AWS_SERVICES`: Top contributor network flows to or from Amazon Web
@@ -1543,7 +1587,7 @@ module Aws::NetworkFlowMonitor
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     metric_name: "TIMEOUTS", # required, accepts TIMEOUTS, RETRANSMISSIONS, DATA_TRANSFERRED
-    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB
+    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB, INTER_REGION
     #   })
     #
     # @example Response structure
@@ -1728,20 +1772,30 @@ module Aws::NetworkFlowMonitor
     #   The name of the monitor.
     #
     # @option params [Array<Types::MonitorLocalResource>] :local_resources_to_add
-    #   The local resources to add, as an array of resources with identifiers
-    #   and types.
+    #   Additional local resources to specify network flows for a monitor, as
+    #   an array of resources with identifiers and types. A local resource in
+    #   a workload is the location of hosts where the Network Flow Monitor
+    #   agent is installed.
     #
     # @option params [Array<Types::MonitorLocalResource>] :local_resources_to_remove
     #   The local resources to remove, as an array of resources with
     #   identifiers and types.
     #
     # @option params [Array<Types::MonitorRemoteResource>] :remote_resources_to_add
-    #   The remove resources to add, as an array of resources with identifiers
+    #   The remote resources to add, as an array of resources with identifiers
     #   and types.
     #
+    #   A remote resource is the other endpoint in the flow of a workload,
+    #   with a local resource. For example, Amazon Dynamo DB can be a remote
+    #   resource.
+    #
     # @option params [Array<Types::MonitorRemoteResource>] :remote_resources_to_remove
-    #   The remove resources to remove, as an array of resources with
+    #   The remote resources to remove, as an array of resources with
     #   identifiers and types.
+    #
+    #   A remote resource is the other endpoint specified for the network flow
+    #   of a workload, with a local resource. For example, Amazon Dynamo DB
+    #   can be a remote resource.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive string of up to 64 ASCII characters that you
@@ -1768,25 +1822,25 @@ module Aws::NetworkFlowMonitor
     #     monitor_name: "ResourceName", # required
     #     local_resources_to_add: [
     #       {
-    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::Region
     #         identifier: "String", # required
     #       },
     #     ],
     #     local_resources_to_remove: [
     #       {
-    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::Region
     #         identifier: "String", # required
     #       },
     #     ],
     #     remote_resources_to_add: [
     #       {
-    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::AWSService
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::AWSService, AWS::Region
     #         identifier: "String", # required
     #       },
     #     ],
     #     remote_resources_to_remove: [
     #       {
-    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::AWSService
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::AWSService, AWS::Region
     #         identifier: "String", # required
     #       },
     #     ],
@@ -1799,10 +1853,10 @@ module Aws::NetworkFlowMonitor
     #   resp.monitor_name #=> String
     #   resp.monitor_status #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"
     #   resp.local_resources #=> Array
-    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet"
+    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"
     #   resp.local_resources[0].identifier #=> String
     #   resp.remote_resources #=> Array
-    #   resp.remote_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService"
+    #   resp.remote_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"
     #   resp.remote_resources[0].identifier #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -1904,7 +1958,7 @@ module Aws::NetworkFlowMonitor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkflowmonitor'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

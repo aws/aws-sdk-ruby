@@ -566,6 +566,7 @@ module Aws::NetworkFlowMonitor
         o.input = Shapes::ShapeRef.new(shape: DeleteMonitorInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteMonitorOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

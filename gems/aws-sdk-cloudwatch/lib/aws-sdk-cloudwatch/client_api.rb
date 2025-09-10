@@ -20,6 +20,8 @@ module Aws::CloudWatch
     ActionsSuppressedBy = Shapes::StringShape.new(name: 'ActionsSuppressedBy')
     ActionsSuppressedReason = Shapes::StringShape.new(name: 'ActionsSuppressedReason')
     AlarmArn = Shapes::StringShape.new(name: 'AlarmArn')
+    AlarmContributor = Shapes::StructureShape.new(name: 'AlarmContributor')
+    AlarmContributors = Shapes::ListShape.new(name: 'AlarmContributors')
     AlarmDescription = Shapes::StringShape.new(name: 'AlarmDescription')
     AlarmHistoryItem = Shapes::StructureShape.new(name: 'AlarmHistoryItem')
     AlarmHistoryItems = Shapes::ListShape.new(name: 'AlarmHistoryItems')
@@ -39,6 +41,8 @@ module Aws::CloudWatch
     AnomalyDetectorType = Shapes::StringShape.new(name: 'AnomalyDetectorType')
     AnomalyDetectorTypes = Shapes::ListShape.new(name: 'AnomalyDetectorTypes')
     AnomalyDetectors = Shapes::ListShape.new(name: 'AnomalyDetectors')
+    AttributeName = Shapes::StringShape.new(name: 'AttributeName')
+    AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     AwsQueryErrorMessage = Shapes::StringShape.new(name: 'AwsQueryErrorMessage')
     BatchFailures = Shapes::ListShape.new(name: 'BatchFailures')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
@@ -46,6 +50,8 @@ module Aws::CloudWatch
     CompositeAlarms = Shapes::ListShape.new(name: 'CompositeAlarms')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException', error: {"code" => "ConcurrentModificationException", "httpStatusCode" => 429, "senderFault" => true})
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContributorAttributes = Shapes::MapShape.new(name: 'ContributorAttributes')
+    ContributorId = Shapes::StringShape.new(name: 'ContributorId')
     Counts = Shapes::ListShape.new(name: 'Counts')
     DashboardArn = Shapes::StringShape.new(name: 'DashboardArn')
     DashboardBody = Shapes::StringShape.new(name: 'DashboardBody')
@@ -75,6 +81,8 @@ module Aws::CloudWatch
     DeleteInsightRulesOutput = Shapes::StructureShape.new(name: 'DeleteInsightRulesOutput')
     DeleteMetricStreamInput = Shapes::StructureShape.new(name: 'DeleteMetricStreamInput')
     DeleteMetricStreamOutput = Shapes::StructureShape.new(name: 'DeleteMetricStreamOutput')
+    DescribeAlarmContributorsInput = Shapes::StructureShape.new(name: 'DescribeAlarmContributorsInput')
+    DescribeAlarmContributorsOutput = Shapes::StructureShape.new(name: 'DescribeAlarmContributorsOutput')
     DescribeAlarmHistoryInput = Shapes::StructureShape.new(name: 'DescribeAlarmHistoryInput')
     DescribeAlarmHistoryOutput = Shapes::StructureShape.new(name: 'DescribeAlarmHistoryOutput')
     DescribeAlarmsForMetricInput = Shapes::StructureShape.new(name: 'DescribeAlarmsForMetricInput')
@@ -295,12 +303,22 @@ module Aws::CloudWatch
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     Values = Shapes::ListShape.new(name: 'Values')
 
+    AlarmContributor.add_member(:contributor_id, Shapes::ShapeRef.new(shape: ContributorId, required: true, location_name: "ContributorId"))
+    AlarmContributor.add_member(:contributor_attributes, Shapes::ShapeRef.new(shape: ContributorAttributes, required: true, location_name: "ContributorAttributes"))
+    AlarmContributor.add_member(:state_reason, Shapes::ShapeRef.new(shape: StateReason, required: true, location_name: "StateReason"))
+    AlarmContributor.add_member(:state_transitioned_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StateTransitionedTimestamp"))
+    AlarmContributor.struct_class = Types::AlarmContributor
+
+    AlarmContributors.member = Shapes::ShapeRef.new(shape: AlarmContributor)
+
     AlarmHistoryItem.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
+    AlarmHistoryItem.add_member(:alarm_contributor_id, Shapes::ShapeRef.new(shape: ContributorId, location_name: "AlarmContributorId"))
     AlarmHistoryItem.add_member(:alarm_type, Shapes::ShapeRef.new(shape: AlarmType, location_name: "AlarmType"))
     AlarmHistoryItem.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     AlarmHistoryItem.add_member(:history_item_type, Shapes::ShapeRef.new(shape: HistoryItemType, location_name: "HistoryItemType"))
     AlarmHistoryItem.add_member(:history_summary, Shapes::ShapeRef.new(shape: HistorySummary, location_name: "HistorySummary"))
     AlarmHistoryItem.add_member(:history_data, Shapes::ShapeRef.new(shape: HistoryData, location_name: "HistoryData"))
+    AlarmHistoryItem.add_member(:alarm_contributor_attributes, Shapes::ShapeRef.new(shape: ContributorAttributes, location_name: "AlarmContributorAttributes"))
     AlarmHistoryItem.struct_class = Types::AlarmHistoryItem
 
     AlarmHistoryItems.member = Shapes::ShapeRef.new(shape: AlarmHistoryItem)
@@ -359,6 +377,9 @@ module Aws::CloudWatch
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
+
+    ContributorAttributes.key = Shapes::ShapeRef.new(shape: AttributeName)
+    ContributorAttributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     Counts.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
@@ -431,7 +452,16 @@ module Aws::CloudWatch
 
     DeleteMetricStreamOutput.struct_class = Types::DeleteMetricStreamOutput
 
+    DescribeAlarmContributorsInput.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "AlarmName"))
+    DescribeAlarmContributorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAlarmContributorsInput.struct_class = Types::DescribeAlarmContributorsInput
+
+    DescribeAlarmContributorsOutput.add_member(:alarm_contributors, Shapes::ShapeRef.new(shape: AlarmContributors, required: true, location_name: "AlarmContributors"))
+    DescribeAlarmContributorsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAlarmContributorsOutput.struct_class = Types::DescribeAlarmContributorsOutput
+
     DescribeAlarmHistoryInput.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
+    DescribeAlarmHistoryInput.add_member(:alarm_contributor_id, Shapes::ShapeRef.new(shape: ContributorId, location_name: "AlarmContributorId"))
     DescribeAlarmHistoryInput.add_member(:alarm_types, Shapes::ShapeRef.new(shape: AlarmTypes, location_name: "AlarmTypes"))
     DescribeAlarmHistoryInput.add_member(:history_item_type, Shapes::ShapeRef.new(shape: HistoryItemType, location_name: "HistoryItemType"))
     DescribeAlarmHistoryInput.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartDate"))
@@ -1118,6 +1148,16 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
+      end)
+
+      api.add_operation(:describe_alarm_contributors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAlarmContributors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAlarmContributorsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAlarmContributorsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_alarm_history, Seahorse::Model::Operation.new.tap do |o|

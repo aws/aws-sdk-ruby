@@ -179,6 +179,8 @@ module Aws::DataZone
     CreateDomainUnitPolicyGrantDetail = Shapes::StructureShape.new(name: 'CreateDomainUnitPolicyGrantDetail')
     CreateEnvironmentActionInput = Shapes::StructureShape.new(name: 'CreateEnvironmentActionInput')
     CreateEnvironmentActionOutput = Shapes::StructureShape.new(name: 'CreateEnvironmentActionOutput')
+    CreateEnvironmentBlueprintInput = Shapes::StructureShape.new(name: 'CreateEnvironmentBlueprintInput')
+    CreateEnvironmentBlueprintOutput = Shapes::StructureShape.new(name: 'CreateEnvironmentBlueprintOutput')
     CreateEnvironmentInput = Shapes::StructureShape.new(name: 'CreateEnvironmentInput')
     CreateEnvironmentOutput = Shapes::StructureShape.new(name: 'CreateEnvironmentOutput')
     CreateEnvironmentProfileInput = Shapes::StructureShape.new(name: 'CreateEnvironmentProfileInput')
@@ -282,6 +284,7 @@ module Aws::DataZone
     DeleteEnvironmentActionInput = Shapes::StructureShape.new(name: 'DeleteEnvironmentActionInput')
     DeleteEnvironmentBlueprintConfigurationInput = Shapes::StructureShape.new(name: 'DeleteEnvironmentBlueprintConfigurationInput')
     DeleteEnvironmentBlueprintConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteEnvironmentBlueprintConfigurationOutput')
+    DeleteEnvironmentBlueprintInput = Shapes::StructureShape.new(name: 'DeleteEnvironmentBlueprintInput')
     DeleteEnvironmentInput = Shapes::StructureShape.new(name: 'DeleteEnvironmentInput')
     DeleteEnvironmentProfileInput = Shapes::StructureShape.new(name: 'DeleteEnvironmentProfileInput')
     DeleteFormTypeInput = Shapes::StructureShape.new(name: 'DeleteFormTypeInput')
@@ -498,6 +501,7 @@ module Aws::DataZone
     GetTimeSeriesDataPointOutput = Shapes::StructureShape.new(name: 'GetTimeSeriesDataPointOutput')
     GetUserProfileInput = Shapes::StructureShape.new(name: 'GetUserProfileInput')
     GetUserProfileOutput = Shapes::StructureShape.new(name: 'GetUserProfileOutput')
+    GlobalParameterMap = Shapes::MapShape.new(name: 'GlobalParameterMap')
     GlossaryDescription = Shapes::StringShape.new(name: 'GlossaryDescription')
     GlossaryId = Shapes::StringShape.new(name: 'GlossaryId')
     GlossaryItem = Shapes::StructureShape.new(name: 'GlossaryItem')
@@ -1051,6 +1055,8 @@ module Aws::DataZone
     UpdateDomainUnitOutput = Shapes::StructureShape.new(name: 'UpdateDomainUnitOutput')
     UpdateEnvironmentActionInput = Shapes::StructureShape.new(name: 'UpdateEnvironmentActionInput')
     UpdateEnvironmentActionOutput = Shapes::StructureShape.new(name: 'UpdateEnvironmentActionOutput')
+    UpdateEnvironmentBlueprintInput = Shapes::StructureShape.new(name: 'UpdateEnvironmentBlueprintInput')
+    UpdateEnvironmentBlueprintOutput = Shapes::StructureShape.new(name: 'UpdateEnvironmentBlueprintOutput')
     UpdateEnvironmentInput = Shapes::StructureShape.new(name: 'UpdateEnvironmentInput')
     UpdateEnvironmentOutput = Shapes::StructureShape.new(name: 'UpdateEnvironmentOutput')
     UpdateEnvironmentProfileInput = Shapes::StructureShape.new(name: 'UpdateEnvironmentProfileInput')
@@ -1888,6 +1894,25 @@ module Aws::DataZone
     CreateEnvironmentActionOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: ActionParameters, required: true, location_name: "parameters"))
     CreateEnvironmentActionOutput.struct_class = Types::CreateEnvironmentActionOutput
 
+    CreateEnvironmentBlueprintInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateEnvironmentBlueprintInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    CreateEnvironmentBlueprintInput.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentBlueprintName, required: true, location_name: "name"))
+    CreateEnvironmentBlueprintInput.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, required: true, location_name: "provisioningProperties"))
+    CreateEnvironmentBlueprintInput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
+    CreateEnvironmentBlueprintInput.struct_class = Types::CreateEnvironmentBlueprintInput
+
+    CreateEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CreateEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
+    CreateEnvironmentBlueprintOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    CreateEnvironmentBlueprintOutput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "id"))
+    CreateEnvironmentBlueprintOutput.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentBlueprintName, required: true, location_name: "name"))
+    CreateEnvironmentBlueprintOutput.add_member(:provider, Shapes::ShapeRef.new(shape: String, required: true, location_name: "provider"))
+    CreateEnvironmentBlueprintOutput.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, required: true, location_name: "provisioningProperties"))
+    CreateEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    CreateEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
+    CreateEnvironmentBlueprintOutput.struct_class = Types::CreateEnvironmentBlueprintOutput
+
     CreateEnvironmentInput.add_member(:deployment_order, Shapes::ShapeRef.new(shape: Integer, location_name: "deploymentOrder"))
     CreateEnvironmentInput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateEnvironmentInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -2225,6 +2250,7 @@ module Aws::DataZone
     CustomParameter.add_member(:field_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fieldType"))
     CustomParameter.add_member(:is_editable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isEditable"))
     CustomParameter.add_member(:is_optional, Shapes::ShapeRef.new(shape: Boolean, location_name: "isOptional"))
+    CustomParameter.add_member(:is_update_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "isUpdateSupported"))
     CustomParameter.add_member(:key_name, Shapes::ShapeRef.new(shape: CustomParameterKeyNameString, required: true, location_name: "keyName"))
     CustomParameter.struct_class = Types::CustomParameter
 
@@ -2459,6 +2485,10 @@ module Aws::DataZone
     DeleteEnvironmentBlueprintConfigurationInput.struct_class = Types::DeleteEnvironmentBlueprintConfigurationInput
 
     DeleteEnvironmentBlueprintConfigurationOutput.struct_class = Types::DeleteEnvironmentBlueprintConfigurationOutput
+
+    DeleteEnvironmentBlueprintInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    DeleteEnvironmentBlueprintInput.add_member(:identifier, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location: "uri", location_name: "identifier"))
+    DeleteEnvironmentBlueprintInput.struct_class = Types::DeleteEnvironmentBlueprintInput
 
     DeleteEnvironmentInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     DeleteEnvironmentInput.add_member(:identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "identifier"))
@@ -3493,6 +3523,9 @@ module Aws::DataZone
     GetUserProfileOutput.add_member(:status, Shapes::ShapeRef.new(shape: UserProfileStatus, location_name: "status"))
     GetUserProfileOutput.add_member(:type, Shapes::ShapeRef.new(shape: UserProfileType, location_name: "type"))
     GetUserProfileOutput.struct_class = Types::GetUserProfileOutput
+
+    GlobalParameterMap.key = Shapes::ShapeRef.new(shape: String)
+    GlobalParameterMap.value = Shapes::ShapeRef.new(shape: String)
 
     GlossaryItem.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: GlossaryItemAdditionalAttributes, location_name: "additionalAttributes"))
     GlossaryItem.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
@@ -4568,6 +4601,7 @@ module Aws::DataZone
     PutEnvironmentBlueprintConfigurationInput.add_member(:enabled_regions, Shapes::ShapeRef.new(shape: EnabledRegionList, required: true, location_name: "enabledRegions"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:environment_blueprint_identifier, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location: "uri", location_name: "environmentBlueprintIdentifier"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:environment_role_permission_boundary, Shapes::ShapeRef.new(shape: PolicyArn, location_name: "environmentRolePermissionBoundary"))
+    PutEnvironmentBlueprintConfigurationInput.add_member(:global_parameters, Shapes::ShapeRef.new(shape: GlobalParameterMap, location_name: "globalParameters"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:manage_access_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "manageAccessRoleArn"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:provisioning_configurations, Shapes::ShapeRef.new(shape: ProvisioningConfigurationList, location_name: "provisioningConfigurations"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:provisioning_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "provisioningRoleArn"))
@@ -5535,6 +5569,25 @@ module Aws::DataZone
     UpdateEnvironmentActionOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: ActionParameters, required: true, location_name: "parameters"))
     UpdateEnvironmentActionOutput.struct_class = Types::UpdateEnvironmentActionOutput
 
+    UpdateEnvironmentBlueprintInput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    UpdateEnvironmentBlueprintInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    UpdateEnvironmentBlueprintInput.add_member(:identifier, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location: "uri", location_name: "identifier"))
+    UpdateEnvironmentBlueprintInput.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, location_name: "provisioningProperties"))
+    UpdateEnvironmentBlueprintInput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
+    UpdateEnvironmentBlueprintInput.struct_class = Types::UpdateEnvironmentBlueprintInput
+
+    UpdateEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    UpdateEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
+    UpdateEnvironmentBlueprintOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    UpdateEnvironmentBlueprintOutput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "id"))
+    UpdateEnvironmentBlueprintOutput.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentBlueprintName, required: true, location_name: "name"))
+    UpdateEnvironmentBlueprintOutput.add_member(:provider, Shapes::ShapeRef.new(shape: String, required: true, location_name: "provider"))
+    UpdateEnvironmentBlueprintOutput.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, required: true, location_name: "provisioningProperties"))
+    UpdateEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    UpdateEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
+    UpdateEnvironmentBlueprintOutput.struct_class = Types::UpdateEnvironmentBlueprintOutput
+
     UpdateEnvironmentInput.add_member(:blueprint_version, Shapes::ShapeRef.new(shape: String, location_name: "blueprintVersion"))
     UpdateEnvironmentInput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     UpdateEnvironmentInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -6180,6 +6233,22 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:create_environment_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEnvironmentBlueprint"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/environment-blueprints"
+        o.input = Shapes::ShapeRef.new(shape: CreateEnvironmentBlueprintInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateEnvironmentBlueprintOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:create_environment_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEnvironmentProfile"
         o.http_method = "POST"
@@ -6546,6 +6615,21 @@ module Aws::DataZone
         o.http_method = "DELETE"
         o.http_request_uri = "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/actions/{identifier}"
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentActionInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:delete_environment_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEnvironmentBlueprint"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/environment-blueprints/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentBlueprintInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -8331,6 +8415,22 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:update_environment_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEnvironmentBlueprint"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/environment-blueprints/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEnvironmentBlueprintInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEnvironmentBlueprintOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)

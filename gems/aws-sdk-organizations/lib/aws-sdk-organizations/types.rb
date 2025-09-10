@@ -146,6 +146,27 @@ module Aws::Organizations
     #
     # @!attribute [rw] status
     #   The status of the account in the organization.
+    #
+    #   The `Status` parameter in the `Account` object will be retired on
+    #   September 9, 2026. Although both the account `State` and account
+    #   `Status` parameters are currently available in the Organizations
+    #   APIs (`DescribeAccount`, `ListAccounts`, `ListAccountsForParent`),
+    #   we recommend that you update your scripts or other code to use the
+    #   `State` parameter instead of `Status` before September 9, 2026.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Each state represents a specific phase in the account lifecycle. Use
+    #   this information to manage account access, automate workflows, or
+    #   trigger actions based on account state changes.
+    #
+    #   For more information about account states and their implications,
+    #   see [Monitor the state of your Amazon Web Services accounts ][1] in
+    #   the *Organizations User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_account_state.html
     #   @return [String]
     #
     # @!attribute [rw] joined_method
@@ -164,6 +185,7 @@ module Aws::Organizations
       :email,
       :name,
       :status,
+      :state,
       :joined_method,
       :joined_timestamp)
       SENSITIVE = [:email, :name]
@@ -1497,6 +1519,13 @@ module Aws::Organizations
 
     # @!attribute [rw] account
     #   A structure that contains information about the requested account.
+    #
+    #   The `Status` parameter in the API response will be retired on
+    #   September 9, 2026. Although both the account `State` and account
+    #   `Status` parameters are currently available in the Organizations
+    #   APIs (`DescribeAccount`, `ListAccounts`, `ListAccountsForParent`),
+    #   we recommend that you update your scripts or other code to use the
+    #   `State` parameter instead of `Status` before September 9, 2026.
     #   @return [Types::Account]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccountResponse AWS API Documentation
@@ -2780,6 +2809,13 @@ module Aws::Organizations
 
     # @!attribute [rw] accounts
     #   A list of the accounts in the specified root or OU.
+    #
+    #   The `Status` parameter in the API response will be retired on
+    #   September 9, 2026. Although both the account `State` and account
+    #   `Status` parameters are currently available in the Organizations
+    #   APIs (`DescribeAccount`, `ListAccounts`, `ListAccountsForParent`),
+    #   we recommend that you update your scripts or other code to use the
+    #   `State` parameter instead of `Status` before September 9, 2026.
     #   @return [Array<Types::Account>]
     #
     # @!attribute [rw] next_token
@@ -2831,6 +2867,13 @@ module Aws::Organizations
 
     # @!attribute [rw] accounts
     #   A list of objects in the organization.
+    #
+    #   The `Status` parameter in the API response will be retired on
+    #   September 9, 2026. Although both the account `State` and account
+    #   `Status` parameters are currently available in the Organizations
+    #   APIs (`DescribeAccount`, `ListAccounts`, `ListAccountsForParent`),
+    #   we recommend that you update your scripts or other code to use the
+    #   `State` parameter instead of `Status` before September 9, 2026.
     #   @return [Array<Types::Account>]
     #
     # @!attribute [rw] next_token

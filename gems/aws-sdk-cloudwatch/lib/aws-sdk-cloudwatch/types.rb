@@ -10,10 +10,49 @@
 module Aws::CloudWatch
   module Types
 
+    # Represents an individual contributor to a multi-timeseries alarm,
+    # containing information about a specific time series and its
+    # contribution to the alarm's state.
+    #
+    # @!attribute [rw] contributor_id
+    #   The unique identifier for this alarm contributor.
+    #   @return [String]
+    #
+    # @!attribute [rw] contributor_attributes
+    #   A map of attributes that describe the contributor, such as metric
+    #   dimensions and other identifying characteristics.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] state_reason
+    #   An explanation for the contributor's current state, providing
+    #   context about why it is in its current condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transitioned_timestamp
+    #   The timestamp when the contributor last transitioned to its current
+    #   state.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AlarmContributor AWS API Documentation
+    #
+    class AlarmContributor < Struct.new(
+      :contributor_id,
+      :contributor_attributes,
+      :state_reason,
+      :state_transitioned_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the history of a specific alarm.
     #
     # @!attribute [rw] alarm_name
     #   The descriptive name for the alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_contributor_id
+    #   The unique identifier of the alarm contributor associated with this
+    #   history item, if applicable.
     #   @return [String]
     #
     # @!attribute [rw] alarm_type
@@ -36,15 +75,23 @@ module Aws::CloudWatch
     #   Data about the alarm, in JSON format.
     #   @return [String]
     #
+    # @!attribute [rw] alarm_contributor_attributes
+    #   A map of attributes that describe the alarm contributor associated
+    #   with this history item, providing context about the contributor's
+    #   characteristics at the time of the event.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AlarmHistoryItem AWS API Documentation
     #
     class AlarmHistoryItem < Struct.new(
       :alarm_name,
+      :alarm_contributor_id,
       :alarm_type,
       :timestamp,
       :history_item_type,
       :history_summary,
-      :history_data)
+      :history_data,
+      :alarm_contributor_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -586,7 +633,49 @@ module Aws::CloudWatch
     class DeleteMetricStreamOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] alarm_name
+    #   The name of the alarm for which to retrieve contributor information.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to indicate that there is more
+    #   data available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmContributorsInput AWS API Documentation
+    #
+    class DescribeAlarmContributorsInput < Struct.new(
+      :alarm_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alarm_contributors
+    #   A list of alarm contributors that provide details about the
+    #   individual time series contributing to the alarm's state.
+    #   @return [Array<Types::AlarmContributor>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that marks the start of the next batch of returned
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmContributorsOutput AWS API Documentation
+    #
+    class DescribeAlarmContributorsOutput < Struct.new(
+      :alarm_contributors,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alarm_name
     #   The name of the alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_contributor_id
+    #   The unique identifier of a specific alarm contributor to filter the
+    #   alarm history results.
     #   @return [String]
     #
     # @!attribute [rw] alarm_types
@@ -627,6 +716,7 @@ module Aws::CloudWatch
     #
     class DescribeAlarmHistoryInput < Struct.new(
       :alarm_name,
+      :alarm_contributor_id,
       :alarm_types,
       :history_item_type,
       :start_date,
@@ -3681,7 +3771,7 @@ module Aws::CloudWatch
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] apply_on_transformed_logs
-    #   Specify `true` to have this rule evalute log events after they have
+    #   Specify `true` to have this rule evaluate log events after they have
     #   been transformed by [Log transformation][1]. If you specify `true`,
     #   then the log events in log groups that have transformers will be
     #   evaluated by Contributor Insights after being transformed. Log

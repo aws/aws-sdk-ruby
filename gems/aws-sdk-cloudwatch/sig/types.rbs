@@ -8,13 +8,23 @@
 module Aws::CloudWatch
   module Types
 
+    class AlarmContributor
+      attr_accessor contributor_id: ::String
+      attr_accessor contributor_attributes: ::Hash[::String, ::String]
+      attr_accessor state_reason: ::String
+      attr_accessor state_transitioned_timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class AlarmHistoryItem
       attr_accessor alarm_name: ::String
+      attr_accessor alarm_contributor_id: ::String
       attr_accessor alarm_type: ("CompositeAlarm" | "MetricAlarm")
       attr_accessor timestamp: ::Time
-      attr_accessor history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action")
+      attr_accessor history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action" | "AlarmContributorStateUpdate" | "AlarmContributorAction")
       attr_accessor history_summary: ::String
       attr_accessor history_data: ::String
+      attr_accessor alarm_contributor_attributes: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -149,10 +159,23 @@ module Aws::CloudWatch
     class DeleteMetricStreamOutput < Aws::EmptyStructure
     end
 
+    class DescribeAlarmContributorsInput
+      attr_accessor alarm_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAlarmContributorsOutput
+      attr_accessor alarm_contributors: ::Array[Types::AlarmContributor]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeAlarmHistoryInput
       attr_accessor alarm_name: ::String
+      attr_accessor alarm_contributor_id: ::String
       attr_accessor alarm_types: ::Array[("CompositeAlarm" | "MetricAlarm")]
-      attr_accessor history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action")
+      attr_accessor history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action" | "AlarmContributorStateUpdate" | "AlarmContributorAction")
       attr_accessor start_date: ::Time
       attr_accessor end_date: ::Time
       attr_accessor max_records: ::Integer

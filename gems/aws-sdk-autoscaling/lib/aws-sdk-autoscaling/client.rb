@@ -878,6 +878,15 @@ module Aws::AutoScaling
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #
+    # @option params [Boolean] :wait_for_transitioning_instances
+    #   When cancelling an instance refresh, this indicates whether to wait
+    #   for in-flight launches and terminations to complete. The default is
+    #   true.
+    #
+    #   When set to false, Amazon EC2 Auto Scaling cancels the instance
+    #   refresh without waiting for any pending launches or terminations to
+    #   complete.
+    #
     # @return [Types::CancelInstanceRefreshAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CancelInstanceRefreshAnswer#instance_refresh_id #instance_refresh_id} => String
@@ -900,6 +909,7 @@ module Aws::AutoScaling
     #
     #   resp = client.cancel_instance_refresh({
     #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     wait_for_transitioning_instances: false,
     #   })
     #
     # @example Response structure
@@ -7483,7 +7493,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.143.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

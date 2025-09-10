@@ -834,7 +834,7 @@ module Aws::Connect
       attr_accessor disconnect_timestamp: ::Time
       attr_accessor scheduled_timestamp: ::Time
       attr_accessor segment_attributes: ::Hash[::String, Types::ContactSearchSummarySegmentAttributeValue]
-      SENSITIVE: []
+      SENSITIVE: [:segment_attributes]
     end
 
     class ContactSearchSummaryAgentInfo
@@ -1103,6 +1103,8 @@ module Aws::Connect
       attr_accessor instance_id: ::String
       attr_accessor name: ::String
       attr_accessor values: Types::PredefinedAttributeValues
+      attr_accessor purposes: ::Array[::String]
+      attr_accessor attribute_configuration: Types::InputPredefinedAttributeConfiguration
       SENSITIVE: []
     end
 
@@ -2957,6 +2959,11 @@ module Aws::Connect
       SENSITIVE: [:subject, :body]
     end
 
+    class InputPredefinedAttributeConfiguration
+      attr_accessor enable_value_validation_on_association: bool
+      SENSITIVE: []
+    end
+
     class Instance
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -4076,8 +4083,16 @@ module Aws::Connect
     class PredefinedAttribute
       attr_accessor name: ::String
       attr_accessor values: Types::PredefinedAttributeValues
+      attr_accessor purposes: ::Array[::String]
+      attr_accessor attribute_configuration: Types::PredefinedAttributeConfiguration
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class PredefinedAttributeConfiguration
+      attr_accessor enable_value_validation_on_association: bool
+      attr_accessor is_read_only: bool
       SENSITIVE: []
     end
 
@@ -5095,6 +5110,8 @@ module Aws::Connect
       attr_accessor value_string: ::String
       attr_accessor value_map: ::Hash[::String, Types::SegmentAttributeValue]
       attr_accessor value_integer: ::Integer
+      attr_accessor value_list: ::Array[Types::SegmentAttributeValue]
+      attr_accessor value_arn: ::String
       SENSITIVE: []
     end
 
@@ -5974,6 +5991,8 @@ module Aws::Connect
       attr_accessor instance_id: ::String
       attr_accessor name: ::String
       attr_accessor values: Types::PredefinedAttributeValues
+      attr_accessor purposes: ::Array[::String]
+      attr_accessor attribute_configuration: Types::InputPredefinedAttributeConfiguration
       SENSITIVE: []
     end
 

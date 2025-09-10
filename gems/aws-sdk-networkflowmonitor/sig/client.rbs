@@ -94,13 +94,13 @@ module Aws
                             monitor_name: ::String,
                             local_resources: Array[
                               {
-                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet"),
+                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region"),
                                 identifier: ::String
                               },
                             ],
                             ?remote_resources: Array[
                               {
-                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService"),
+                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService" | "AWS::Region"),
                                 identifier: ::String
                               },
                             ],
@@ -306,7 +306,7 @@ module Aws
                                                   start_time: ::Time,
                                                   end_time: ::Time,
                                                   metric_name: ("ROUND_TRIP_TIME" | "TIMEOUTS" | "RETRANSMISSIONS" | "DATA_TRANSFERRED"),
-                                                  destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB"),
+                                                  destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION"),
                                                   ?limit: ::Integer
                                                 ) -> _StartQueryMonitorTopContributorsResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryMonitorTopContributorsResponseSuccess
@@ -321,7 +321,7 @@ module Aws
                                                             start_time: ::Time,
                                                             end_time: ::Time,
                                                             metric_name: ("TIMEOUTS" | "RETRANSMISSIONS" | "DATA_TRANSFERRED"),
-                                                            destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB"),
+                                                            destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION"),
                                                             ?limit: ::Integer
                                                           ) -> _StartQueryWorkloadInsightsTopContributorsResponseSuccess
                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryWorkloadInsightsTopContributorsResponseSuccess
@@ -336,7 +336,7 @@ module Aws
                                                                  start_time: ::Time,
                                                                  end_time: ::Time,
                                                                  metric_name: ("TIMEOUTS" | "RETRANSMISSIONS" | "DATA_TRANSFERRED"),
-                                                                 destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB")
+                                                                 destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION")
                                                                ) -> _StartQueryWorkloadInsightsTopContributorsDataResponseSuccess
                                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryWorkloadInsightsTopContributorsDataResponseSuccess
 
@@ -406,25 +406,25 @@ module Aws
                             monitor_name: ::String,
                             ?local_resources_to_add: Array[
                               {
-                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet"),
+                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region"),
                                 identifier: ::String
                               },
                             ],
                             ?local_resources_to_remove: Array[
                               {
-                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet"),
+                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region"),
                                 identifier: ::String
                               },
                             ],
                             ?remote_resources_to_add: Array[
                               {
-                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService"),
+                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService" | "AWS::Region"),
                                 identifier: ::String
                               },
                             ],
                             ?remote_resources_to_remove: Array[
                               {
-                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService"),
+                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService" | "AWS::Region"),
                                 identifier: ::String
                               },
                             ],

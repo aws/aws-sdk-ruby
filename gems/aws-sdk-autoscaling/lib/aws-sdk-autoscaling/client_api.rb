@@ -81,6 +81,7 @@ module Aws::AutoScaling
     BlockDeviceEbsVolumeType = Shapes::StringShape.new(name: 'BlockDeviceEbsVolumeType')
     BlockDeviceMapping = Shapes::StructureShape.new(name: 'BlockDeviceMapping')
     BlockDeviceMappings = Shapes::ListShape.new(name: 'BlockDeviceMappings')
+    BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
     BurstablePerformance = Shapes::StringShape.new(name: 'BurstablePerformance')
     CancelInstanceRefreshAnswer = Shapes::StructureShape.new(name: 'CancelInstanceRefreshAnswer')
     CancelInstanceRefreshType = Shapes::StructureShape.new(name: 'CancelInstanceRefreshType')
@@ -619,6 +620,7 @@ module Aws::AutoScaling
     CancelInstanceRefreshAnswer.struct_class = Types::CancelInstanceRefreshAnswer
 
     CancelInstanceRefreshType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
+    CancelInstanceRefreshType.add_member(:wait_for_transitioning_instances, Shapes::ShapeRef.new(shape: BooleanType, location_name: "WaitForTransitioningInstances"))
     CancelInstanceRefreshType.struct_class = Types::CancelInstanceRefreshType
 
     CapacityForecast.add_member(:timestamps, Shapes::ShapeRef.new(shape: PredictiveScalingForecastTimestamps, required: true, location_name: "Timestamps"))

@@ -40,6 +40,7 @@ module Aws::Organizations
       attr_accessor email: ::String
       attr_accessor name: ::String
       attr_accessor status: ("ACTIVE" | "SUSPENDED" | "PENDING_CLOSURE")
+      attr_accessor state: ("PENDING_ACTIVATION" | "ACTIVE" | "SUSPENDED" | "PENDING_CLOSURE" | "CLOSED")
       attr_accessor joined_method: ("INVITED" | "CREATED")
       attr_accessor joined_timestamp: ::Time
       SENSITIVE: [:email, :name]

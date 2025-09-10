@@ -15,6 +15,8 @@ module Aws::PaymentCryptography
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AddKeyReplicationRegionsInput = Shapes::StructureShape.new(name: 'AddKeyReplicationRegionsInput')
+    AddKeyReplicationRegionsOutput = Shapes::StructureShape.new(name: 'AddKeyReplicationRegionsOutput')
     Alias = Shapes::StructureShape.new(name: 'Alias')
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     Aliases = Shapes::ListShape.new(name: 'Aliases')
@@ -32,6 +34,10 @@ module Aws::PaymentCryptography
     DeleteKeyOutput = Shapes::StructureShape.new(name: 'DeleteKeyOutput')
     DeriveKeyUsage = Shapes::StringShape.new(name: 'DeriveKeyUsage')
     DiffieHellmanDerivationData = Shapes::UnionShape.new(name: 'DiffieHellmanDerivationData')
+    DisableDefaultKeyReplicationRegionsInput = Shapes::StructureShape.new(name: 'DisableDefaultKeyReplicationRegionsInput')
+    DisableDefaultKeyReplicationRegionsOutput = Shapes::StructureShape.new(name: 'DisableDefaultKeyReplicationRegionsOutput')
+    EnableDefaultKeyReplicationRegionsInput = Shapes::StructureShape.new(name: 'EnableDefaultKeyReplicationRegionsInput')
+    EnableDefaultKeyReplicationRegionsOutput = Shapes::StructureShape.new(name: 'EnableDefaultKeyReplicationRegionsOutput')
     EvenHexLengthBetween16And32 = Shapes::StringShape.new(name: 'EvenHexLengthBetween16And32')
     ExportAttributes = Shapes::StructureShape.new(name: 'ExportAttributes')
     ExportDiffieHellmanTr31KeyBlock = Shapes::StructureShape.new(name: 'ExportDiffieHellmanTr31KeyBlock')
@@ -45,6 +51,8 @@ module Aws::PaymentCryptography
     ExportTr34KeyBlock = Shapes::StructureShape.new(name: 'ExportTr34KeyBlock')
     GetAliasInput = Shapes::StructureShape.new(name: 'GetAliasInput')
     GetAliasOutput = Shapes::StructureShape.new(name: 'GetAliasOutput')
+    GetDefaultKeyReplicationRegionsInput = Shapes::StructureShape.new(name: 'GetDefaultKeyReplicationRegionsInput')
+    GetDefaultKeyReplicationRegionsOutput = Shapes::StructureShape.new(name: 'GetDefaultKeyReplicationRegionsOutput')
     GetKeyInput = Shapes::StructureShape.new(name: 'GetKeyInput')
     GetKeyOutput = Shapes::StructureShape.new(name: 'GetKeyOutput')
     GetParametersForExportInput = Shapes::StructureShape.new(name: 'GetParametersForExportInput')
@@ -79,6 +87,7 @@ module Aws::PaymentCryptography
     KeyMaterialType = Shapes::StringShape.new(name: 'KeyMaterialType')
     KeyModesOfUse = Shapes::StructureShape.new(name: 'KeyModesOfUse')
     KeyOrigin = Shapes::StringShape.new(name: 'KeyOrigin')
+    KeyReplicationState = Shapes::StringShape.new(name: 'KeyReplicationState')
     KeyState = Shapes::StringShape.new(name: 'KeyState')
     KeySummary = Shapes::StructureShape.new(name: 'KeySummary')
     KeySummaryList = Shapes::ListShape.new(name: 'KeySummaryList')
@@ -91,11 +100,18 @@ module Aws::PaymentCryptography
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MultiRegionKeyType = Shapes::StringShape.new(name: 'MultiRegionKeyType')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OptionalBlockId = Shapes::StringShape.new(name: 'OptionalBlockId')
     OptionalBlockValue = Shapes::StringShape.new(name: 'OptionalBlockValue')
     OptionalBlocks = Shapes::MapShape.new(name: 'OptionalBlocks')
     PrimitiveBoolean = Shapes::BooleanShape.new(name: 'PrimitiveBoolean')
+    Region = Shapes::StringShape.new(name: 'Region')
+    Regions = Shapes::ListShape.new(name: 'Regions')
+    RemoveKeyReplicationRegionsInput = Shapes::StructureShape.new(name: 'RemoveKeyReplicationRegionsInput')
+    RemoveKeyReplicationRegionsOutput = Shapes::StructureShape.new(name: 'RemoveKeyReplicationRegionsOutput')
+    ReplicationStatus = Shapes::MapShape.new(name: 'ReplicationStatus')
+    ReplicationStatusType = Shapes::StructureShape.new(name: 'ReplicationStatusType')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RestoreKeyInput = Shapes::StructureShape.new(name: 'RestoreKeyInput')
@@ -136,6 +152,13 @@ module Aws::PaymentCryptography
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AddKeyReplicationRegionsInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
+    AddKeyReplicationRegionsInput.add_member(:replication_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "ReplicationRegions"))
+    AddKeyReplicationRegionsInput.struct_class = Types::AddKeyReplicationRegionsInput
+
+    AddKeyReplicationRegionsOutput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
+    AddKeyReplicationRegionsOutput.struct_class = Types::AddKeyReplicationRegionsOutput
+
     Alias.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, required: true, location_name: "AliasName"))
     Alias.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn"))
     Alias.struct_class = Types::Alias
@@ -158,6 +181,7 @@ module Aws::PaymentCryptography
     CreateKeyInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     CreateKeyInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateKeyInput.add_member(:derive_key_usage, Shapes::ShapeRef.new(shape: DeriveKeyUsage, location_name: "DeriveKeyUsage"))
+    CreateKeyInput.add_member(:replication_regions, Shapes::ShapeRef.new(shape: Regions, location_name: "ReplicationRegions"))
     CreateKeyInput.struct_class = Types::CreateKeyInput
 
     CreateKeyOutput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
@@ -180,6 +204,18 @@ module Aws::PaymentCryptography
     DiffieHellmanDerivationData.add_member_subclass(:shared_information, Types::DiffieHellmanDerivationData::SharedInformation)
     DiffieHellmanDerivationData.add_member_subclass(:unknown, Types::DiffieHellmanDerivationData::Unknown)
     DiffieHellmanDerivationData.struct_class = Types::DiffieHellmanDerivationData
+
+    DisableDefaultKeyReplicationRegionsInput.add_member(:replication_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "ReplicationRegions"))
+    DisableDefaultKeyReplicationRegionsInput.struct_class = Types::DisableDefaultKeyReplicationRegionsInput
+
+    DisableDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "EnabledReplicationRegions"))
+    DisableDefaultKeyReplicationRegionsOutput.struct_class = Types::DisableDefaultKeyReplicationRegionsOutput
+
+    EnableDefaultKeyReplicationRegionsInput.add_member(:replication_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "ReplicationRegions"))
+    EnableDefaultKeyReplicationRegionsInput.struct_class = Types::EnableDefaultKeyReplicationRegionsInput
+
+    EnableDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "EnabledReplicationRegions"))
+    EnableDefaultKeyReplicationRegionsOutput.struct_class = Types::EnableDefaultKeyReplicationRegionsOutput
 
     ExportAttributes.add_member(:export_dukpt_initial_key, Shapes::ShapeRef.new(shape: ExportDukptInitialKey, location_name: "ExportDukptInitialKey"))
     ExportAttributes.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
@@ -241,6 +277,11 @@ module Aws::PaymentCryptography
     GetAliasOutput.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "Alias"))
     GetAliasOutput.struct_class = Types::GetAliasOutput
 
+    GetDefaultKeyReplicationRegionsInput.struct_class = Types::GetDefaultKeyReplicationRegionsInput
+
+    GetDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "EnabledReplicationRegions"))
+    GetDefaultKeyReplicationRegionsOutput.struct_class = Types::GetDefaultKeyReplicationRegionsOutput
+
     GetKeyInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
     GetKeyInput.struct_class = Types::GetKeyInput
 
@@ -297,6 +338,7 @@ module Aws::PaymentCryptography
     ImportKeyInput.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
     ImportKeyInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     ImportKeyInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ImportKeyInput.add_member(:replication_regions, Shapes::ShapeRef.new(shape: Regions, location_name: "ReplicationRegions"))
     ImportKeyInput.struct_class = Types::ImportKeyInput
 
     ImportKeyMaterial.add_member(:root_certificate_public_key, Shapes::ShapeRef.new(shape: RootCertificatePublicKey, location_name: "RootCertificatePublicKey"))
@@ -347,6 +389,10 @@ module Aws::PaymentCryptography
     Key.add_member(:delete_pending_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeletePendingTimestamp"))
     Key.add_member(:delete_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeleteTimestamp"))
     Key.add_member(:derive_key_usage, Shapes::ShapeRef.new(shape: DeriveKeyUsage, location_name: "DeriveKeyUsage"))
+    Key.add_member(:multi_region_key_type, Shapes::ShapeRef.new(shape: MultiRegionKeyType, location_name: "MultiRegionKeyType"))
+    Key.add_member(:primary_region, Shapes::ShapeRef.new(shape: Region, location_name: "PrimaryRegion"))
+    Key.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "ReplicationStatus"))
+    Key.add_member(:using_default_replication_regions, Shapes::ShapeRef.new(shape: Boolean, location_name: "UsingDefaultReplicationRegions"))
     Key.struct_class = Types::Key
 
     KeyAttributes.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsage, required: true, location_name: "KeyUsage"))
@@ -378,6 +424,8 @@ module Aws::PaymentCryptography
     KeySummary.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "KeyCheckValue"))
     KeySummary.add_member(:exportable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Exportable"))
     KeySummary.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    KeySummary.add_member(:multi_region_key_type, Shapes::ShapeRef.new(shape: MultiRegionKeyType, location_name: "MultiRegionKeyType"))
+    KeySummary.add_member(:primary_region, Shapes::ShapeRef.new(shape: Region, location_name: "PrimaryRegion"))
     KeySummary.struct_class = Types::KeySummary
 
     KeySummaryList.member = Shapes::ShapeRef.new(shape: KeySummary)
@@ -411,6 +459,22 @@ module Aws::PaymentCryptography
 
     OptionalBlocks.key = Shapes::ShapeRef.new(shape: OptionalBlockId)
     OptionalBlocks.value = Shapes::ShapeRef.new(shape: OptionalBlockValue)
+
+    Regions.member = Shapes::ShapeRef.new(shape: Region)
+
+    RemoveKeyReplicationRegionsInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
+    RemoveKeyReplicationRegionsInput.add_member(:replication_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "ReplicationRegions"))
+    RemoveKeyReplicationRegionsInput.struct_class = Types::RemoveKeyReplicationRegionsInput
+
+    RemoveKeyReplicationRegionsOutput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
+    RemoveKeyReplicationRegionsOutput.struct_class = Types::RemoveKeyReplicationRegionsOutput
+
+    ReplicationStatus.key = Shapes::ShapeRef.new(shape: Region)
+    ReplicationStatus.value = Shapes::ShapeRef.new(shape: ReplicationStatusType)
+
+    ReplicationStatusType.add_member(:status, Shapes::ShapeRef.new(shape: KeyReplicationState, required: true, location_name: "Status"))
+    ReplicationStatusType.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    ReplicationStatusType.struct_class = Types::ReplicationStatusType
 
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -509,6 +573,21 @@ module Aws::PaymentCryptography
         "uid" => "payment-cryptography-2021-09-14",
       }
 
+      api.add_operation(:add_key_replication_regions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddKeyReplicationRegions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddKeyReplicationRegionsInput)
+        o.output = Shapes::ShapeRef.new(shape: AddKeyReplicationRegionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_alias, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAlias"
         o.http_method = "POST"
@@ -571,6 +650,36 @@ module Aws::PaymentCryptography
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:disable_default_key_replication_regions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableDefaultKeyReplicationRegions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableDefaultKeyReplicationRegionsInput)
+        o.output = Shapes::ShapeRef.new(shape: DisableDefaultKeyReplicationRegionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:enable_default_key_replication_regions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableDefaultKeyReplicationRegions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableDefaultKeyReplicationRegionsInput)
+        o.output = Shapes::ShapeRef.new(shape: EnableDefaultKeyReplicationRegionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:export_key, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ExportKey"
         o.http_method = "POST"
@@ -594,6 +703,21 @@ module Aws::PaymentCryptography
         o.output = Shapes::ShapeRef.new(shape: GetAliasOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_default_key_replication_regions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDefaultKeyReplicationRegions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDefaultKeyReplicationRegionsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDefaultKeyReplicationRegionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -734,6 +858,21 @@ module Aws::PaymentCryptography
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:remove_key_replication_regions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveKeyReplicationRegions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveKeyReplicationRegionsInput)
+        o.output = Shapes::ShapeRef.new(shape: RemoveKeyReplicationRegionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:restore_key, Seahorse::Model::Operation.new.tap do |o|

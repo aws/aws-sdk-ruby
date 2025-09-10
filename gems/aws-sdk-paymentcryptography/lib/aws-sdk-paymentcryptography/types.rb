@@ -12,6 +12,11 @@ module Aws::PaymentCryptography
 
     # You do not have sufficient access to perform this action.
     #
+    # This exception is thrown when the caller lacks the necessary IAM
+    # permissions to perform the requested operation. Verify that your IAM
+    # policy includes the required permissions for the specific Amazon Web
+    # Services Payment Cryptography action you're attempting.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -19,6 +24,52 @@ module Aws::PaymentCryptography
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input parameters for adding replication regions to a specific key.
+    #
+    # @!attribute [rw] key_identifier
+    #   The key identifier (ARN or alias) of the key for which to add
+    #   replication regions.
+    #
+    #   This key must exist and be in a valid state for replication
+    #   operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_regions
+    #   The list of Amazon Web Services Regions to add to the key's
+    #   replication configuration.
+    #
+    #   Each region must be a valid Amazon Web Services Region where Amazon
+    #   Web Services Payment Cryptography is available. The key will be
+    #   replicated to these regions, allowing cryptographic operations to be
+    #   performed closer to your applications.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/AddKeyReplicationRegionsInput AWS API Documentation
+    #
+    class AddKeyReplicationRegionsInput < Struct.new(
+      :key_identifier,
+      :replication_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output from adding replication regions to a key.
+    #
+    # @!attribute [rw] key
+    #   The updated key metadata after adding the replication regions.
+    #
+    #   This includes the current state of the key and its replication
+    #   configuration.
+    #   @return [Types::Key]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/AddKeyReplicationRegionsOutput AWS API Documentation
+    #
+    class AddKeyReplicationRegionsOutput < Struct.new(
+      :key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48,6 +99,10 @@ module Aws::PaymentCryptography
     end
 
     # This request can cause an inconsistent state for the resource.
+    #
+    # The requested operation conflicts with the current state of the
+    # resource. For example, attempting to delete a key that is currently
+    # being used, or trying to create a resource that already exists.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -158,6 +213,16 @@ module Aws::PaymentCryptography
     #   cryptographic usage of keys derived from it using ECDH.
     #   @return [String]
     #
+    # @!attribute [rw] replication_regions
+    #   A list of Amazon Web Services Regions for key replication
+    #   operations.
+    #
+    #   Each region in the list must be a valid Amazon Web Services Region
+    #   identifier where Amazon Web Services Payment Cryptography is
+    #   available. This list is used to specify which regions should be
+    #   added to or removed from a key's replication configuration.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/CreateKeyInput AWS API Documentation
     #
     class CreateKeyInput < Struct.new(
@@ -166,7 +231,8 @@ module Aws::PaymentCryptography
       :exportable,
       :enabled,
       :tags,
-      :derive_key_usage)
+      :derive_key_usage,
+      :replication_regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -260,6 +326,81 @@ module Aws::PaymentCryptography
       class Unknown < DiffieHellmanDerivationData; end
     end
 
+    # Input parameters for disabling default key replication regions for the
+    # account.
+    #
+    # @!attribute [rw] replication_regions
+    #   The list of Amazon Web Services Regions to remove from the
+    #   account's default replication regions.
+    #
+    #   New keys created after this operation will not automatically be
+    #   replicated to these regions, though existing keys with replication
+    #   to these regions will be unaffected.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/DisableDefaultKeyReplicationRegionsInput AWS API Documentation
+    #
+    class DisableDefaultKeyReplicationRegionsInput < Struct.new(
+      :replication_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output from disabling default key replication regions for the account.
+    #
+    # @!attribute [rw] enabled_replication_regions
+    #   The remaining list of regions where default key replication is still
+    #   enabled for the account.
+    #
+    #   This reflects the account's default replication configuration after
+    #   removing the specified regions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/DisableDefaultKeyReplicationRegionsOutput AWS API Documentation
+    #
+    class DisableDefaultKeyReplicationRegionsOutput < Struct.new(
+      :enabled_replication_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input parameters for enabling default key replication regions for the
+    # account.
+    #
+    # @!attribute [rw] replication_regions
+    #   The list of Amazon Web Services Regions to enable as default
+    #   replication regions for the account.
+    #
+    #   New keys created in this account will automatically be replicated to
+    #   these regions unless explicitly overridden during key creation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/EnableDefaultKeyReplicationRegionsInput AWS API Documentation
+    #
+    class EnableDefaultKeyReplicationRegionsInput < Struct.new(
+      :replication_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output from enabling default key replication regions for the account.
+    #
+    # @!attribute [rw] enabled_replication_regions
+    #   The complete list of regions where default key replication is now
+    #   enabled for the account.
+    #
+    #   This includes both previously enabled regions and the newly added
+    #   regions from this operation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/EnableDefaultKeyReplicationRegionsOutput AWS API Documentation
+    #
+    class EnableDefaultKeyReplicationRegionsOutput < Struct.new(
+      :enabled_replication_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The attributes for IPEK generation during export.
     #
     # @!attribute [rw] export_dukpt_initial_key
@@ -338,7 +479,7 @@ module Aws::PaymentCryptography
       :key_derivation_hash_algorithm,
       :derivation_data,
       :key_block_headers)
-      SENSITIVE = [:public_key_certificate]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -384,7 +525,7 @@ module Aws::PaymentCryptography
       :certificate_authority_public_key_identifier,
       :wrapping_key_certificate,
       :wrapping_spec)
-      SENSITIVE = [:wrapping_key_certificate]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -544,7 +685,7 @@ module Aws::PaymentCryptography
       :key_block_format,
       :random_nonce,
       :key_block_headers)
-      SENSITIVE = [:wrapping_key_certificate]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -572,6 +713,35 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
+    # Input parameters for retrieving the account's default key replication
+    # regions. This operation requires no input parameters.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetDefaultKeyReplicationRegionsInput AWS API Documentation
+    #
+    class GetDefaultKeyReplicationRegionsInput < Aws::EmptyStructure; end
+
+    # Output containing the account's current default key replication
+    # configuration.
+    #
+    # @!attribute [rw] enabled_replication_regions
+    #   The list of regions where default key replication is currently
+    #   enabled for the account.
+    #
+    #   New keys created in this account will automatically be replicated to
+    #   these regions unless explicitly configured otherwise during key
+    #   creation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetDefaultKeyReplicationRegionsOutput AWS API Documentation
+    #
+    class GetDefaultKeyReplicationRegionsOutput < Struct.new(
+      :enabled_replication_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] key_identifier
     #   The `KeyARN` of the Amazon Web Services Payment Cryptography key.
     #   @return [String]
@@ -585,8 +755,9 @@ module Aws::PaymentCryptography
     end
 
     # @!attribute [rw] key
-    #   The key material, including the immutable and mutable data for the
-    #   key.
+    #   Contains the key metadata, including both immutable and mutable
+    #   attributes for the key, but does not include actual cryptographic
+    #   key material.
     #   @return [Types::Key]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetKeyOutput AWS API Documentation
@@ -655,7 +826,7 @@ module Aws::PaymentCryptography
       :signing_key_algorithm,
       :export_token,
       :parameters_valid_until_timestamp)
-      SENSITIVE = [:signing_key_certificate, :signing_key_certificate_chain]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -723,7 +894,7 @@ module Aws::PaymentCryptography
       :wrapping_key_algorithm,
       :import_token,
       :parameters_valid_until_timestamp)
-      SENSITIVE = [:wrapping_key_certificate, :wrapping_key_certificate_chain]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -756,7 +927,7 @@ module Aws::PaymentCryptography
     class GetPublicKeyCertificateOutput < Struct.new(
       :key_certificate,
       :key_certificate_chain)
-      SENSITIVE = [:key_certificate, :key_certificate_chain]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -809,7 +980,7 @@ module Aws::PaymentCryptography
       :key_derivation_hash_algorithm,
       :derivation_data,
       :wrapped_key_block)
-      SENSITIVE = [:public_key_certificate, :wrapped_key_block]
+      SENSITIVE = [:wrapped_key_block]
       include Aws::Structure
     end
 
@@ -903,13 +1074,24 @@ module Aws::PaymentCryptography
     #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] replication_regions
+    #   A list of Amazon Web Services Regions for key replication
+    #   operations.
+    #
+    #   Each region in the list must be a valid Amazon Web Services Region
+    #   identifier where Amazon Web Services Payment Cryptography is
+    #   available. This list is used to specify which regions should be
+    #   added to or removed from a key's replication configuration.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportKeyInput AWS API Documentation
     #
     class ImportKeyInput < Struct.new(
       :key_material,
       :key_check_value_algorithm,
       :enabled,
-      :tags)
+      :tags,
+      :replication_regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1049,12 +1231,16 @@ module Aws::PaymentCryptography
       :wrapped_key_block,
       :key_block_format,
       :random_nonce)
-      SENSITIVE = [:signing_key_certificate, :wrapped_key_block]
+      SENSITIVE = [:wrapped_key_block]
       include Aws::Structure
     end
 
     # The request processing has failed because of an unknown error,
     # exception, or failure.
+    #
+    # This indicates a server-side error within the Amazon Web Services
+    # Payment Cryptography service. If this error persists, contact support
+    # for assistance.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1152,6 +1338,46 @@ module Aws::PaymentCryptography
     #   A.5.2 of the TR-31 spec.
     #   @return [String]
     #
+    # @!attribute [rw] multi_region_key_type
+    #   Indicates whether this key is a multi-region key and its role in the
+    #   multi-region key hierarchy.
+    #
+    #   Multi-region keys allow the same key material to be used across
+    #   multiple Amazon Web Services Regions. This field specifies whether
+    #   the key is a primary key (which can be replicated to other regions)
+    #   or a replica key (which is a copy of a primary key in another
+    #   region).
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_region
+    #   An Amazon Web Services Region identifier in the standard format
+    #   (e.g., `us-east-1`, `eu-west-1`).
+    #
+    #   Used to specify regions for key replication operations. The region
+    #   must be a valid Amazon Web Services Region where Amazon Web Services
+    #   Payment Cryptography is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_status
+    #   Information about the replication status of the key across different
+    #   regions.
+    #
+    #   This field provides details about the current state of key
+    #   replication, including any status messages or operational
+    #   information. It helps track the progress and health of key
+    #   replication operations.
+    #   @return [Hash<String,Types::ReplicationStatusType>]
+    #
+    # @!attribute [rw] using_default_replication_regions
+    #   Indicates whether this key is using the account's default
+    #   replication regions configuration.
+    #
+    #   When set to `true`, the key automatically replicates to the regions
+    #   specified in the account's default replication settings. When set
+    #   to `false`, the key has a custom replication configuration that
+    #   overrides the account defaults.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/Key AWS API Documentation
     #
     class Key < Struct.new(
@@ -1168,7 +1394,11 @@ module Aws::PaymentCryptography
       :usage_stop_timestamp,
       :delete_pending_timestamp,
       :delete_timestamp,
-      :derive_key_usage)
+      :derive_key_usage,
+      :multi_region_key_type,
+      :primary_region,
+      :replication_status,
+      :using_default_replication_regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1371,6 +1601,19 @@ module Aws::PaymentCryptography
     #   Specifies whether the key is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] multi_region_key_type
+    #   Defines the replication type of a key
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_region
+    #   An Amazon Web Services Region identifier in the standard format
+    #   (e.g., `us-east-1`, `eu-west-1`).
+    #
+    #   Used to specify regions for key replication operations. The region
+    #   must be a valid Amazon Web Services Region where Amazon Web Services
+    #   Payment Cryptography is available.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/KeySummary AWS API Documentation
     #
     class KeySummary < Struct.new(
@@ -1379,7 +1622,9 @@ module Aws::PaymentCryptography
       :key_attributes,
       :key_check_value,
       :exportable,
-      :enabled)
+      :enabled,
+      :multi_region_key_type,
+      :primary_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1534,10 +1779,92 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
-    # The request was denied due to an invalid resource error.
+    # Input parameters for removing replication regions from a specific key.
+    #
+    # @!attribute [rw] key_identifier
+    #   The key identifier (ARN or alias) of the key from which to remove
+    #   replication regions.
+    #
+    #   This key must exist and have replication enabled in the specified
+    #   regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_regions
+    #   The list of Amazon Web Services Regions to remove from the key's
+    #   replication configuration.
+    #
+    #   The key will no longer be available for cryptographic operations in
+    #   these regions after removal. Ensure no active operations depend on
+    #   the key in these regions before removal.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/RemoveKeyReplicationRegionsInput AWS API Documentation
+    #
+    class RemoveKeyReplicationRegionsInput < Struct.new(
+      :key_identifier,
+      :replication_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output from removing replication regions from a key.
+    #
+    # @!attribute [rw] key
+    #   The updated key metadata after removing the replication regions.
+    #
+    #   This reflects the current state of the key and its updated
+    #   replication configuration.
+    #   @return [Types::Key]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/RemoveKeyReplicationRegionsOutput AWS API Documentation
+    #
+    class RemoveKeyReplicationRegionsOutput < Struct.new(
+      :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the replication status information for a key in a
+    # replication region.
+    #
+    # This structure contains details about the current state of key
+    # replication, including any status messages and operational information
+    # about the replication process.
+    #
+    # @!attribute [rw] status
+    #   Defines the replication state of a key
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message that provides additional information about the current
+    #   replication status of the key.
+    #
+    #   This field contains details about any issues or progress updates
+    #   related to key replication operations. It may include information
+    #   about replication failures, synchronization status, or other
+    #   operational details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ReplicationStatusType AWS API Documentation
+    #
+    class ReplicationStatusType < Struct.new(
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was denied due to resource not found.
+    #
+    # The specified key, alias, or other resource does not exist in your
+    # account or region. Verify that the resource identifier is correct and
+    # that the resource exists in the expected region.
     #
     # @!attribute [rw] resource_id
-    #   The string for the exception.
+    #   The identifier of the resource that was not found.
+    #
+    #   This field contains the specific resource identifier (such as a key
+    #   ARN or alias name) that could not be located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ResourceNotFoundException AWS API Documentation
@@ -1592,11 +1919,15 @@ module Aws::PaymentCryptography
     class RootCertificatePublicKey < Struct.new(
       :key_attributes,
       :public_key_certificate)
-      SENSITIVE = [:public_key_certificate]
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # This request would cause a service quota to be exceeded.
+    #
+    # You have reached the maximum number of keys, aliases, or other
+    # resources allowed in your account. Review your current usage and
+    # consider deleting unused resources or requesting a quota increase.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1610,6 +1941,10 @@ module Aws::PaymentCryptography
     end
 
     # The service cannot complete the request.
+    #
+    # The Amazon Web Services Payment Cryptography service is temporarily
+    # unavailable. This is typically a temporary condition - retry your
+    # request after a brief delay.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1733,6 +2068,10 @@ module Aws::PaymentCryptography
 
     # The request was denied due to request throttling.
     #
+    # You have exceeded the rate limits for Amazon Web Services Payment
+    # Cryptography API calls. Implement exponential backoff and retry logic
+    # in your application to handle throttling gracefully.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1767,7 +2106,7 @@ module Aws::PaymentCryptography
       :key_attributes,
       :public_key_certificate,
       :certificate_authority_public_key_identifier)
-      SENSITIVE = [:public_key_certificate]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1832,6 +2171,10 @@ module Aws::PaymentCryptography
     end
 
     # The request was denied due to an invalid request error.
+    #
+    # One or more parameters in your request are invalid. Check the
+    # parameter values, formats, and constraints specified in the API
+    # documentation.
     #
     # @!attribute [rw] message
     #   @return [String]

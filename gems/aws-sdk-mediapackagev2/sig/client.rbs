@@ -265,7 +265,7 @@ module Aws
                                         manifest_name: ::String,
                                         child_manifest_name: ::String?,
                                         scte_hls: {
-                                          ad_marker_hls: ("DATERANGE")?
+                                          ad_marker_hls: ("DATERANGE" | "SCTE35_ENHANCED")?
                                         }?,
                                         start_tag: {
                                           time_offset: ::Float,
@@ -288,7 +288,7 @@ module Aws
                                         manifest_name: ::String,
                                         child_manifest_name: ::String?,
                                         scte_hls: {
-                                          ad_marker_hls: ("DATERANGE")?
+                                          ad_marker_hls: ("DATERANGE" | "SCTE35_ENHANCED")?
                                         }?,
                                         start_tag: {
                                           time_offset: ::Float,
@@ -813,7 +813,7 @@ module Aws
                                         manifest_name: ::String,
                                         child_manifest_name: ::String?,
                                         scte_hls: {
-                                          ad_marker_hls: ("DATERANGE")?
+                                          ad_marker_hls: ("DATERANGE" | "SCTE35_ENHANCED")?
                                         }?,
                                         start_tag: {
                                           time_offset: ::Float,
@@ -836,7 +836,7 @@ module Aws
                                         manifest_name: ::String,
                                         child_manifest_name: ::String?,
                                         scte_hls: {
-                                          ad_marker_hls: ("DATERANGE")?
+                                          ad_marker_hls: ("DATERANGE" | "SCTE35_ENHANCED")?
                                         }?,
                                         start_tag: {
                                           time_offset: ::Float,

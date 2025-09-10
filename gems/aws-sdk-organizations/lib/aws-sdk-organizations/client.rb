@@ -2183,6 +2183,7 @@ module Aws::Organizations
     #   resp.account.email #=> String
     #   resp.account.name #=> String
     #   resp.account.status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
+    #   resp.account.state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"
     #   resp.account.joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.account.joined_timestamp #=> Time
     #
@@ -2866,7 +2867,7 @@ module Aws::Organizations
     # account or by a member account that is a delegated administrator.
     #
     # To view the status of available policy types in the organization, use
-    # DescribeOrganization.
+    # ListRoots.
     #
     #
     #
@@ -3135,7 +3136,7 @@ module Aws::Organizations
     #
     # You can enable a policy type in a root only if that policy type is
     # available in the organization. To view the status of available policy
-    # types in the organization, use DescribeOrganization.
+    # types in the organization, use ListRoots.
     #
     # @option params [required, String] :root_id
     #   The unique identifier (ID) of the root in which you want to enable a
@@ -3660,6 +3661,7 @@ module Aws::Organizations
     #   resp.accounts[0].email #=> String
     #   resp.accounts[0].name #=> String
     #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
+    #   resp.accounts[0].state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.accounts[0].joined_timestamp #=> Time
     #   resp.next_token #=> String
@@ -3770,6 +3772,7 @@ module Aws::Organizations
     #   resp.accounts[0].email #=> String
     #   resp.accounts[0].name #=> String
     #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
+    #   resp.accounts[0].state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.accounts[0].joined_timestamp #=> Time
     #   resp.next_token #=> String
@@ -3900,6 +3903,7 @@ module Aws::Organizations
     #   resp.accounts[0].email #=> String
     #   resp.accounts[0].name #=> String
     #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
+    #   resp.accounts[0].state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.accounts[0].joined_timestamp #=> Time
     #   resp.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
@@ -6147,7 +6151,7 @@ module Aws::Organizations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.123.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

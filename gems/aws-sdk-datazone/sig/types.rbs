@@ -959,6 +959,29 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class CreateEnvironmentBlueprintInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor provisioning_properties: Types::ProvisioningProperties
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: [:description]
+    end
+
+    class CreateEnvironmentBlueprintOutput
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_properties: Types::DeploymentProperties
+      attr_accessor description: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ::String
+      attr_accessor provisioning_properties: Types::ProvisioningProperties
+      attr_accessor updated_at: ::Time
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: [:description]
+    end
+
     class CreateEnvironmentInput
       attr_accessor deployment_order: ::Integer
       attr_accessor description: ::String
@@ -1361,6 +1384,7 @@ module Aws::DataZone
       attr_accessor field_type: ::String
       attr_accessor is_editable: bool
       attr_accessor is_optional: bool
+      attr_accessor is_update_supported: bool
       attr_accessor key_name: ::String
       SENSITIVE: [:description]
     end
@@ -1655,6 +1679,12 @@ module Aws::DataZone
     end
 
     class DeleteEnvironmentBlueprintConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteEnvironmentBlueprintInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
     end
 
     class DeleteEnvironmentInput
@@ -4296,6 +4326,7 @@ module Aws::DataZone
       attr_accessor enabled_regions: ::Array[::String]
       attr_accessor environment_blueprint_identifier: ::String
       attr_accessor environment_role_permission_boundary: ::String
+      attr_accessor global_parameters: ::Hash[::String, ::String]
       attr_accessor manage_access_role_arn: ::String
       attr_accessor provisioning_configurations: ::Array[Types::ProvisioningConfiguration]
       attr_accessor provisioning_role_arn: ::String
@@ -5472,6 +5503,29 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor parameters: Types::ActionParameters
       SENSITIVE: []
+    end
+
+    class UpdateEnvironmentBlueprintInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor provisioning_properties: Types::ProvisioningProperties
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentBlueprintOutput
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_properties: Types::DeploymentProperties
+      attr_accessor description: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ::String
+      attr_accessor provisioning_properties: Types::ProvisioningProperties
+      attr_accessor updated_at: ::Time
+      attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      SENSITIVE: [:description]
     end
 
     class UpdateEnvironmentInput

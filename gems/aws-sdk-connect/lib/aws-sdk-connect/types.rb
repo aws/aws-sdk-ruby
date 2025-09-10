@@ -3570,7 +3570,7 @@ module Aws::Connect
       :disconnect_timestamp,
       :scheduled_timestamp,
       :segment_attributes)
-      SENSITIVE = []
+      SENSITIVE = [:segment_attributes]
       include Aws::Structure
     end
 
@@ -4802,12 +4802,27 @@ module Aws::Connect
     #   The values of the predefined attribute.
     #   @return [Types::PredefinedAttributeValues]
     #
+    # @!attribute [rw] purposes
+    #   Values that enable you to categorize your predefined attributes. You
+    #   can use them in custom UI elements across the Amazon Connect admin
+    #   website.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attribute_configuration
+    #   Custom metadata that is associated to predefined attributes to
+    #   control behavior in upstream services, such as controlling how a
+    #   predefined attribute should be displayed in the Amazon Connect admin
+    #   website.
+    #   @return [Types::InputPredefinedAttributeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePredefinedAttributeRequest AWS API Documentation
     #
     class CreatePredefinedAttributeRequest < Struct.new(
       :instance_id,
       :name,
-      :values)
+      :values,
+      :purposes,
+      :attribute_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14087,6 +14102,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Custom metadata that is associated to predefined attributes to control
+    # behavior in upstream services, such as controlling how a predefined
+    # attribute should be displayed in the Amazon Connect admin website.
+    #
+    # @!attribute [rw] enable_value_validation_on_association
+    #   When this parameter is set to true, Amazon Connect enforces strict
+    #   validation on the specific values, if the values are predefined in
+    #   attributes. The contact will store only valid and predefined values
+    #   for the predefined attribute key.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InputPredefinedAttributeConfiguration AWS API Documentation
+    #
+    class InputPredefinedAttributeConfiguration < Struct.new(
+      :enable_value_validation_on_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon Connect instance.
     #
     # @!attribute [rw] id
@@ -18412,6 +18446,19 @@ module Aws::Connect
     #   The values of the predefined attribute.
     #   @return [Types::PredefinedAttributeValues]
     #
+    # @!attribute [rw] purposes
+    #   Values that enable you to categorize your predefined attributes. You
+    #   can use them in custom UI elements across the Amazon Connect admin
+    #   website.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attribute_configuration
+    #   Custom metadata that is associated to predefined attributes to
+    #   control behavior in upstream services, such as controlling how a
+    #   predefined attribute should be displayed in the Amazon Connect admin
+    #   website.
+    #   @return [Types::PredefinedAttributeConfiguration]
+    #
     # @!attribute [rw] last_modified_time
     #   Last modified time.
     #   @return [Time]
@@ -18425,8 +18472,35 @@ module Aws::Connect
     class PredefinedAttribute < Struct.new(
       :name,
       :values,
+      :purposes,
+      :attribute_configuration,
       :last_modified_time,
       :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Custom metadata that is associated to predefined attributes to control
+    # behavior in upstream services, such as controlling how a predefined
+    # attribute should be displayed in the Amazon Connect admin website.
+    #
+    # @!attribute [rw] enable_value_validation_on_association
+    #   When this parameter is set to true, Amazon Connect enforces strict
+    #   validation on the specific values, if the values are predefined in
+    #   attributes. The contact will store only valid and predefined values
+    #   for teh predefined attribute key.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_read_only
+    #   A boolean flag used to indicate whether a predefined attribute
+    #   should be displayed in the Amazon Connect admin website.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttributeConfiguration AWS API Documentation
+    #
+    class PredefinedAttributeConfiguration < Struct.new(
+      :enable_value_validation_on_association,
+      :is_read_only)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22453,12 +22527,25 @@ module Aws::Connect
     #   The value of a segment attribute.
     #   @return [Integer]
     #
+    # @!attribute [rw] value_list
+    #   The value of a segment attribute. This is only supported for
+    #   system-defined attributes, not for user-defined attributes.
+    #   @return [Array<Types::SegmentAttributeValue>]
+    #
+    # @!attribute [rw] value_arn
+    #   The value of a segment attribute that has to be a valid ARN. This is
+    #   only supported for system-defined attributes, not for user-defined
+    #   attributes.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SegmentAttributeValue AWS API Documentation
     #
     class SegmentAttributeValue < Struct.new(
       :value_string,
       :value_map,
-      :value_integer)
+      :value_integer,
+      :value_list,
+      :value_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25624,8 +25711,9 @@ module Aws::Connect
     #   This field can be used to show channel subtype, such as
     #   `connect:Guide`.
     #
-    #   Currently Contact Expiry is the only segment attribute which can be
-    #   updated by using the UpdateContact API.
+    #   Contact Expiry, and user-defined attributes (String - String) that
+    #   are defined in predefined attributes, can be updated by using the
+    #   UpdateContact API.
     #   @return [Hash<String,Types::SegmentAttributeValue>]
     #
     # @!attribute [rw] queue_info
@@ -26328,12 +26416,27 @@ module Aws::Connect
     #   The values of the predefined attribute.
     #   @return [Types::PredefinedAttributeValues]
     #
+    # @!attribute [rw] purposes
+    #   Values that enable you to categorize your predefined attributes. You
+    #   can use them in custom UI elements across the Amazon Connect admin
+    #   website.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attribute_configuration
+    #   Custom metadata that is associated to predefined attributes to
+    #   control behavior in upstream services, such as controlling how a
+    #   predefined attribute should be displayed in the Amazon Connect admin
+    #   website.
+    #   @return [Types::InputPredefinedAttributeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePredefinedAttributeRequest AWS API Documentation
     #
     class UpdatePredefinedAttributeRequest < Struct.new(
       :instance_id,
       :name,
-      :values)
+      :values,
+      :purposes,
+      :attribute_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

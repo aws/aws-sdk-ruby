@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:paymentcryptography)
 # structure.
 #
 #     payment_cryptography = Aws::PaymentCryptography::Client.new
-#     resp = payment_cryptography.create_alias(params)
+#     resp = payment_cryptography.add_key_replication_regions(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::PaymentCryptography
   autoload :EndpointProvider, 'aws-sdk-paymentcryptography/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-paymentcryptography/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 
