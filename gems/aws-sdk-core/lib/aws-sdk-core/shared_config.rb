@@ -23,18 +23,16 @@ module Aws
         end
 
         def sso_session(profile, session_name)
-          sso_session = AWS::SDK::Core.shared_config.sso_sessions[session_name]
+          sso_session = Core.shared_config.sso_sessions[session_name]
 
           unless sso_session
             raise ArgumentError,
-                  "sso-session #{session_name} referenced by #{profile} must " \
-                  'be defined in the config file.'
+                  "sso-session #{session_name} referenced by #{profile} must be defined in the config file."
           end
 
           unless sso_session['sso_region']
             raise ArgumentError,
-                  "sso-session #{session_name} missing required " \
-                  'parameter: sso_region'
+                  "sso-session #{session_name} missing required parameter: sso_region"
           end
 
           sso_session

@@ -8,7 +8,7 @@ module Aws
     #     creds = Aws::Core::ContainerCredentials.new(retries: 3)
     #     ec2 = Aws::EC2::Client.new(credentials: creds)
     class ContainerCredentials
-      include CredentialsProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # @api private

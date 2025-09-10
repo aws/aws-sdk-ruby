@@ -4,7 +4,7 @@ module Aws
   module Core
     # Returns static credentials.
     class StaticCredentials
-      include CredentialsProvider
+      include IdentityProvider
 
       # @param [Hash] options
       # @options [String] :access_key_id

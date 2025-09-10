@@ -19,7 +19,7 @@ module Aws
     #
     # @see https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes
     class ProcessCredentials
-      include CredentialsProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # Creates a new ProcessCredentials object, which allows an
