@@ -108,14 +108,12 @@ module Aws
       def add(new_partitions)
         new_partitions['partitions'].each do |partition|
           default_partition_list.add_partition(build_partition(partition))
-          defaults['partitions'] << partition
         end
       end
 
       # Removes all partitions.
       def clear
         default_partition_list.clear
-        defaults['partitions'].clear
       end
 
       private
@@ -123,8 +121,7 @@ module Aws
       def defaults
         @defaults ||= begin
           path = File.expand_path('../partitions.json', __dir__)
-          defaults = JSON.parse(File.read(path), freeze: true)
-          defaults.merge('partitions' => defaults['partitions'].dup)
+          JSON.parse(File.read(path), freeze: true)
         end
       end
 
