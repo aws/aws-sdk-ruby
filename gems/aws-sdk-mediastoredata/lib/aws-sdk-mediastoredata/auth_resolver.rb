@@ -13,7 +13,7 @@ module Aws::MediaStoreData
       when :put_object
         options << 'aws.auth#sigv4'
       else
-        options << 'aws.auth#sigv4'
+      options << 'aws.auth#sigv4'
       end
       options
     end

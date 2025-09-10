@@ -11,15 +11,15 @@ module Aws::CognitoIdentity
       options = []
       case parameters.operation_name
       when :get_credentials_for_identity
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       when :get_id
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       when :get_open_id_token
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       when :unlink_identity
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       else
-        options << 'aws.auth#sigv4'
+      options << 'aws.auth#sigv4'
       end
       options
     end

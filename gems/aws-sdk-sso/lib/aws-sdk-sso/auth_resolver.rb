@@ -11,15 +11,15 @@ module Aws::SSO
       options = []
       case parameters.operation_name
       when :get_role_credentials
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       when :list_account_roles
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       when :list_accounts
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       when :logout
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       else
-        options << 'aws.auth#sigv4'
+      options << 'aws.auth#sigv4'
       end
       options
     end

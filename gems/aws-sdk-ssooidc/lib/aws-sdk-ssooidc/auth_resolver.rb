@@ -11,13 +11,13 @@ module Aws::SSOOIDC
       options = []
       case parameters.operation_name
       when :create_token
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       when :register_client
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       when :start_device_authorization
-        options << 'smithy.api#optionalAuth'
+        options << 'smithy.api#noAuth'
       else
-        options << 'aws.auth#sigv4'
+      options << 'aws.auth#sigv4'
       end
       options
     end

@@ -13,7 +13,7 @@ module Aws::LexRuntimeV2
       when :recognize_utterance
         options << 'aws.auth#sigv4'
       else
-        options << 'aws.auth#sigv4'
+      options << 'aws.auth#sigv4'
       end
       options
     end

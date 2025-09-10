@@ -13,7 +13,7 @@ module Aws::EBS
       when :put_snapshot_block
         options << 'aws.auth#sigv4'
       else
-        options << 'aws.auth#sigv4'
+      options << 'aws.auth#sigv4'
       end
       options
     end
