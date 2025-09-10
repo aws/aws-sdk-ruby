@@ -71,7 +71,7 @@ module Aws
         expect(mars.implicit_global_region).to eq('mars-east-1')
         expect(mars.supports_dual_stack?).to be true
         expect(mars.supports_fips?).to be true
-        # expect(mars.region_regex).to eq(Regexp.new('^mars\\-\\w+\\-\\d+$'))
+        expect(mars.region_regex).to eq(Regexp.new('^mars\\-\\w+\\-\\d+$'))
         expect(mars.regions.map(&:name)).to eq(%w[mars-east-1])
       end
     end
