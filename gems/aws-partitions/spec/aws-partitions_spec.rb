@@ -2,9 +2,15 @@
 
 require_relative 'spec_helper'
 
+require 'json'
+
 module Aws
   describe Partitions do
-    after { Aws::Partitions.reload_defaults! }
+    after do
+      original = JSON.load_file(File.expand_path('../partitions.json', __dir__))
+      Aws::Partitions.clear
+      Aws::Partitions.add(original)
+    end
 
     describe '.each' do
       it 'yields each partition' do
@@ -83,22 +89,6 @@ module Aws
         expect(Aws::Partitions.partitions).to_not be_empty
         Aws::Partitions.clear
         expect(Aws::Partitions.partitions).to be_empty
-      end
-    end
-
-    describe '.reload_defaults!' do
-      it 'reloads the default partitions' do
-        Aws::Partitions.clear
-        expect(Aws::Partitions.partitions).to be_empty
-        Aws::Partitions.reload_defaults!
-        expect(Aws::Partitions.partitions.map(&:id)).to include('aws', 'aws-cn', 'aws-us-gov')
-        partition = { 'partitions' => [{ 'id' => 'aws-mars', 'regionRegex' => '^mars\\-\\w+\\-\\d+$' }] }
-        Aws::Partitions.add(partition)
-        expect(Aws::Partitions.partition('aws-mars').id).to eq('aws-mars')
-        Aws::Partitions.reload_defaults!
-        expect do
-          Aws::Partitions.partition('aws-mars')
-        end.to raise_error(ArgumentError, /invalid partition name/)
       end
     end
   end
