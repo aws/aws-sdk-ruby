@@ -116,6 +116,12 @@ module Aws
         default_partition_list.clear
       end
 
+      # Reload the default partitions. Any partitions added with {#add} will be removed.
+      def reload_defaults!
+        @default_partition_list = nil
+        default_partition_list
+      end
+
       private
 
       def defaults
