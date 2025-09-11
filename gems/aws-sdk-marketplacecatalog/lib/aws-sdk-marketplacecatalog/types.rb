@@ -12,7 +12,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class AmiProductEntityIdFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +47,8 @@ module Aws::MarketplaceCatalog
       :last_modified_date,
       :product_title,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +58,8 @@ module Aws::MarketplaceCatalog
     #   @return [Types::AmiProductLastModifiedDateFilterDateRange]
     class AmiProductLastModifiedDateFilter < Struct.new(
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -69,7 +73,8 @@ module Aws::MarketplaceCatalog
     class AmiProductLastModifiedDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -83,7 +88,8 @@ module Aws::MarketplaceCatalog
     class AmiProductSort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +103,8 @@ module Aws::MarketplaceCatalog
     class AmiProductSummary < Struct.new(
       :product_title,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +118,8 @@ module Aws::MarketplaceCatalog
     class AmiProductTitleFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +129,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class AmiProductVisibilityFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +139,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<Types::EntityRequest>]
     class BatchDescribeEntitiesRequest < Struct.new(
       :entity_request_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +154,8 @@ module Aws::MarketplaceCatalog
     class BatchDescribeEntitiesResponse < Struct.new(
       :entity_details,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +169,8 @@ module Aws::MarketplaceCatalog
     class BatchDescribeErrorDetail < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +185,8 @@ module Aws::MarketplaceCatalog
     class CancelChangeSetRequest < Struct.new(
       :catalog,
       :change_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +199,8 @@ module Aws::MarketplaceCatalog
     class CancelChangeSetResponse < Struct.new(
       :change_set_id,
       :change_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +241,8 @@ module Aws::MarketplaceCatalog
       :details,
       :details_document,
       :change_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +289,8 @@ module Aws::MarketplaceCatalog
       :status,
       :entity_id_list,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +324,8 @@ module Aws::MarketplaceCatalog
       :details_document,
       :error_detail_list,
       :change_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +335,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class ContainerProductEntityIdFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +358,8 @@ module Aws::MarketplaceCatalog
       :last_modified_date,
       :product_title,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +369,8 @@ module Aws::MarketplaceCatalog
     #   @return [Types::ContainerProductLastModifiedDateFilterDateRange]
     class ContainerProductLastModifiedDateFilter < Struct.new(
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +384,8 @@ module Aws::MarketplaceCatalog
     class ContainerProductLastModifiedDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +399,8 @@ module Aws::MarketplaceCatalog
     class ContainerProductSort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +414,8 @@ module Aws::MarketplaceCatalog
     class ContainerProductSummary < Struct.new(
       :product_title,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -406,7 +429,8 @@ module Aws::MarketplaceCatalog
     class ContainerProductTitleFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +440,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class ContainerProductVisibilityFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +451,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class DataProductEntityIdFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +474,8 @@ module Aws::MarketplaceCatalog
       :product_title,
       :visibility,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +485,8 @@ module Aws::MarketplaceCatalog
     #   @return [Types::DataProductLastModifiedDateFilterDateRange]
     class DataProductLastModifiedDateFilter < Struct.new(
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +500,8 @@ module Aws::MarketplaceCatalog
     class DataProductLastModifiedDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -486,7 +515,8 @@ module Aws::MarketplaceCatalog
     class DataProductSort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +530,8 @@ module Aws::MarketplaceCatalog
     class DataProductSummary < Struct.new(
       :product_title,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +545,8 @@ module Aws::MarketplaceCatalog
     class DataProductTitleFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +556,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class DataProductVisibilityFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,12 +567,14 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +590,8 @@ module Aws::MarketplaceCatalog
     class DescribeChangeSetRequest < Struct.new(
       :catalog,
       :change_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +646,8 @@ module Aws::MarketplaceCatalog
       :failure_code,
       :failure_description,
       :change_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -625,7 +662,8 @@ module Aws::MarketplaceCatalog
     class DescribeEntityRequest < Struct.new(
       :catalog,
       :entity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -659,7 +697,8 @@ module Aws::MarketplaceCatalog
       :last_modified_date,
       :details,
       :details_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +713,8 @@ module Aws::MarketplaceCatalog
     class Entity < Struct.new(
       :type,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +741,8 @@ module Aws::MarketplaceCatalog
       :entity_identifier,
       :last_modified_date,
       :details_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -716,7 +757,8 @@ module Aws::MarketplaceCatalog
     class EntityRequest < Struct.new(
       :catalog,
       :entity_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +822,8 @@ module Aws::MarketplaceCatalog
       :offer_summary,
       :resale_authorization_summary,
       :machine_learning_product_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +858,8 @@ module Aws::MarketplaceCatalog
       :resale_authorization_filters,
       :machine_learning_product_filters,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DataProductFilters < EntityTypeFilters; end
@@ -859,7 +903,8 @@ module Aws::MarketplaceCatalog
       :resale_authorization_sort,
       :machine_learning_product_sort,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DataProductSort < EntityTypeSort; end
@@ -882,7 +927,8 @@ module Aws::MarketplaceCatalog
     class ErrorDetail < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -941,7 +987,8 @@ module Aws::MarketplaceCatalog
     class Filter < Struct.new(
       :name,
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +998,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,7 +1008,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class GetResourcePolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1019,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1050,8 @@ module Aws::MarketplaceCatalog
       :sort,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1013,7 +1064,8 @@ module Aws::MarketplaceCatalog
     class ListChangeSetsResponse < Struct.new(
       :change_set_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1125,8 @@ module Aws::MarketplaceCatalog
       :ownership_type,
       :entity_type_filters,
       :entity_type_sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1139,8 @@ module Aws::MarketplaceCatalog
     class ListEntitiesResponse < Struct.new(
       :entity_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1150,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1165,8 @@ module Aws::MarketplaceCatalog
     class ListTagsForResourceResponse < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,7 +1176,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class MachineLearningProductEntityIdFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1142,7 +1199,8 @@ module Aws::MarketplaceCatalog
       :last_modified_date,
       :product_title,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1152,7 +1210,8 @@ module Aws::MarketplaceCatalog
     #   @return [Types::MachineLearningProductLastModifiedDateFilterDateRange]
     class MachineLearningProductLastModifiedDateFilter < Struct.new(
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1166,7 +1225,8 @@ module Aws::MarketplaceCatalog
     class MachineLearningProductLastModifiedDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1180,7 +1240,8 @@ module Aws::MarketplaceCatalog
     class MachineLearningProductSort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1194,7 +1255,8 @@ module Aws::MarketplaceCatalog
     class MachineLearningProductSummary < Struct.new(
       :product_title,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1208,7 +1270,8 @@ module Aws::MarketplaceCatalog
     class MachineLearningProductTitleFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1281,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class MachineLearningProductVisibilityFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1292,8 @@ module Aws::MarketplaceCatalog
     #   @return [Types::OfferAvailabilityEndDateFilterDateRange]
     class OfferAvailabilityEndDateFilter < Struct.new(
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1242,7 +1307,8 @@ module Aws::MarketplaceCatalog
     class OfferAvailabilityEndDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1252,7 +1318,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class OfferBuyerAccountsFilter < Struct.new(
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1262,7 +1329,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class OfferEntityIdFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1380,8 @@ module Aws::MarketplaceCatalog
       :state,
       :targeting,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1322,7 +1391,8 @@ module Aws::MarketplaceCatalog
     #   @return [Types::OfferLastModifiedDateFilterDateRange]
     class OfferLastModifiedDateFilter < Struct.new(
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1336,7 +1406,8 @@ module Aws::MarketplaceCatalog
     class OfferLastModifiedDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1350,7 +1421,8 @@ module Aws::MarketplaceCatalog
     class OfferNameFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,7 +1432,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class OfferProductIdFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1370,7 +1443,8 @@ module Aws::MarketplaceCatalog
     #   @return [Types::OfferReleaseDateFilterDateRange]
     class OfferReleaseDateFilter < Struct.new(
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1384,7 +1458,8 @@ module Aws::MarketplaceCatalog
     class OfferReleaseDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1473,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class OfferResaleAuthorizationIdFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1412,7 +1488,8 @@ module Aws::MarketplaceCatalog
     class OfferSort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1422,7 +1499,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class OfferStateFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1538,8 @@ module Aws::MarketplaceCatalog
       :buyer_accounts,
       :state,
       :targeting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1549,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class OfferTargetingFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1484,12 +1564,14 @@ module Aws::MarketplaceCatalog
     class PutResourcePolicyRequest < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutResourcePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1585,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationAvailabilityEndDateFilter < Struct.new(
       :date_range,
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,7 +1600,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationAvailabilityEndDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1615,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationCreatedDateFilter < Struct.new(
       :date_range,
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1545,7 +1630,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationCreatedDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1641,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class ResaleAuthorizationEntityIdFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1613,7 +1700,8 @@ module Aws::MarketplaceCatalog
       :status,
       :offer_extended_status,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1623,7 +1711,8 @@ module Aws::MarketplaceCatalog
     #   @return [Types::ResaleAuthorizationLastModifiedDateFilterDateRange]
     class ResaleAuthorizationLastModifiedDateFilter < Struct.new(
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1637,7 +1726,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationLastModifiedDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1741,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationManufacturerAccountIdFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1665,7 +1756,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationManufacturerLegalNameFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1679,7 +1771,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationNameFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1689,7 +1782,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class ResaleAuthorizationOfferExtendedStatusFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1703,7 +1797,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationProductIdFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1717,7 +1812,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationProductNameFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1731,7 +1827,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationResellerAccountIDFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1842,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationResellerLegalNameFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1759,7 +1857,8 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationSort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1769,7 +1868,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class ResaleAuthorizationStatusFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1819,7 +1919,8 @@ module Aws::MarketplaceCatalog
       :offer_extended_status,
       :created_date,
       :availability_end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1828,7 +1929,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1838,7 +1940,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1847,7 +1950,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class ResourceNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1857,7 +1961,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class SaaSProductEntityIdFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1879,7 +1984,8 @@ module Aws::MarketplaceCatalog
       :product_title,
       :visibility,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1889,7 +1995,8 @@ module Aws::MarketplaceCatalog
     #   @return [Types::SaaSProductLastModifiedDateFilterDateRange]
     class SaaSProductLastModifiedDateFilter < Struct.new(
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +2010,8 @@ module Aws::MarketplaceCatalog
     class SaaSProductLastModifiedDateFilterDateRange < Struct.new(
       :after_value,
       :before_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +2025,8 @@ module Aws::MarketplaceCatalog
     class SaaSProductSort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1931,7 +2040,8 @@ module Aws::MarketplaceCatalog
     class SaaSProductSummary < Struct.new(
       :product_title,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1945,7 +2055,8 @@ module Aws::MarketplaceCatalog
     class SaaSProductTitleFilter < Struct.new(
       :value_list,
       :wild_card_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2066,8 @@ module Aws::MarketplaceCatalog
     #   @return [Array<String>]
     class SaaSProductVisibilityFilter < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1964,7 +2076,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1985,7 +2098,8 @@ module Aws::MarketplaceCatalog
     class Sort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2020,7 +2134,8 @@ module Aws::MarketplaceCatalog
       :client_request_token,
       :change_set_tags,
       :intent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2033,7 +2148,8 @@ module Aws::MarketplaceCatalog
     class StartChangeSetResponse < Struct.new(
       :change_set_id,
       :change_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2047,7 +2163,8 @@ module Aws::MarketplaceCatalog
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2062,12 +2179,14 @@ module Aws::MarketplaceCatalog
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2077,7 +2196,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2092,12 +2212,14 @@ module Aws::MarketplaceCatalog
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2107,7 +2229,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

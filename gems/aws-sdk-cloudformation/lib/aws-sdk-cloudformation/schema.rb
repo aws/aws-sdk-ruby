@@ -3130,7 +3130,6 @@ module Aws::CloudFormation
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidateTemplateOutput)
         operation.traits = {}
       end)
-
     end
 
     class << self

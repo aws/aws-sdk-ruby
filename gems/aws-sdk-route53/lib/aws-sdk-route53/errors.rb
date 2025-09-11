@@ -102,7 +102,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::CidrBlockInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::CidrCollectionAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::CidrCollectionInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::CidrCollectionVersionMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::ConcurrentModification] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -194,7 +194,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::ConflictingDomainExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -210,7 +210,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::ConflictingTypes] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -224,7 +224,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::DNSSECNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -238,7 +238,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::DelegationSetAlreadyCreated] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -252,7 +252,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::DelegationSetAlreadyReusable] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -267,7 +267,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::DelegationSetInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -284,7 +284,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::DelegationSetNotAvailable] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -298,7 +298,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::DelegationSetNotReusable] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -325,7 +325,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::HealthCheckAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -339,7 +339,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::HealthCheckInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -354,7 +354,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::HealthCheckVersionMismatch] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -369,7 +369,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::HostedZoneAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -383,7 +383,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::HostedZoneNotEmpty] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -397,7 +397,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::HostedZoneNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -411,7 +411,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::HostedZoneNotPrivate] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -426,7 +426,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::HostedZonePartiallyDelegated] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -440,7 +440,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::IncompatibleVersion] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -477,7 +477,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InsufficientCloudWatchLogsResourcePolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -490,7 +490,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidArgument] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -505,7 +505,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidChangeBatch] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -523,7 +523,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidDomainName] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -537,7 +537,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidInput] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -552,7 +552,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidKMSArn] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -565,7 +565,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidKeySigningKeyName] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -579,7 +579,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidKeySigningKeyStatus] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -593,7 +593,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidPaginationToken] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -607,7 +607,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidSigningStatus] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -621,7 +621,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidTrafficPolicyDocument] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -636,7 +636,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::InvalidVPCId] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -650,7 +650,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::KeySigningKeyAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -663,7 +663,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::KeySigningKeyInParentDSRecord] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -678,7 +678,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::KeySigningKeyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -691,7 +691,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::KeySigningKeyWithActiveStatusNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -706,7 +706,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::LastVPCAssociation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -722,7 +722,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::LimitsExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -736,7 +736,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchChange] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -749,7 +749,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchCidrCollectionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -762,7 +762,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchCidrLocationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -775,7 +775,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchCloudWatchLogsLogGroup] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -788,7 +788,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchDelegationSet] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -804,7 +804,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchGeoLocation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -818,7 +818,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchHealthCheck] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -832,7 +832,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchHostedZone] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -846,7 +846,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchKeySigningKey] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -859,7 +859,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchQueryLoggingConfig] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -872,7 +872,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchTrafficPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -886,7 +886,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NoSuchTrafficPolicyInstance] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -901,7 +901,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::NotAuthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -919,7 +919,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::PriorRequestNotComplete] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -933,7 +933,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::PublicZoneVPCAssociation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -948,7 +948,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::QueryLoggingConfigAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -961,7 +961,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -981,7 +981,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::TooManyHealthChecks] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1003,7 +1003,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::TooManyHostedZones] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -1018,7 +1018,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::TooManyKeySigningKeys] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1037,7 +1037,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::TooManyTrafficPolicies] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -1057,7 +1057,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::TooManyTrafficPolicyInstances] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -1076,7 +1076,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::TooManyTrafficPolicyVersionsForCurrentPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -1094,7 +1094,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::TooManyVPCAssociationAuthorizations] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -1108,7 +1108,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::TrafficPolicyAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -1123,7 +1123,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::TrafficPolicyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -1137,7 +1137,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::TrafficPolicyInstanceAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -1152,7 +1152,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::VPCAssociationAuthorizationNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p></p>
@@ -1166,7 +1166,7 @@ module Aws::Route53
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53::Types::VPCAssociationNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The specified VPC or hosted zone weren't found.</p>

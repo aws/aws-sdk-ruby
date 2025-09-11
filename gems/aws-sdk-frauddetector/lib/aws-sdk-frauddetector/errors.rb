@@ -40,7 +40,7 @@ module Aws::FraudDetector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FraudDetector::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::FraudDetector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FraudDetector::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::FraudDetector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FraudDetector::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::FraudDetector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FraudDetector::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::FraudDetector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FraudDetector::Types::ResourceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::FraudDetector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FraudDetector::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::FraudDetector
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FraudDetector::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

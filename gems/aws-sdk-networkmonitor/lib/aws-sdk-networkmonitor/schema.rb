@@ -408,7 +408,6 @@ module Aws::NetworkMonitor
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update a probe"}, "smithy.api#http" => {"uri" => "/monitors/{monitorName}/probes/{probeId}", "method" => "PATCH"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

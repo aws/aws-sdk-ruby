@@ -23,7 +23,8 @@ module Aws::Athena
     #   @return [String]
     class AclConfiguration < Struct.new(
       :s3_acl_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::Athena
     class ApplicationDPUSizes < Struct.new(
       :application_runtime_id,
       :supported_dpu_sizes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +76,8 @@ module Aws::Athena
       :error_type,
       :retryable,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -89,7 +92,8 @@ module Aws::Athena
     #   @return [Array<String>]
     class BatchGetNamedQueryInput < Struct.new(
       :named_query_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +106,8 @@ module Aws::Athena
     class BatchGetNamedQueryOutput < Struct.new(
       :named_queries,
       :unprocessed_named_query_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +120,8 @@ module Aws::Athena
     class BatchGetPreparedStatementInput < Struct.new(
       :prepared_statement_names,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,7 +135,8 @@ module Aws::Athena
     class BatchGetPreparedStatementOutput < Struct.new(
       :prepared_statements,
       :unprocessed_prepared_statement_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,7 +146,8 @@ module Aws::Athena
     #   @return [Array<String>]
     class BatchGetQueryExecutionInput < Struct.new(
       :query_execution_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +160,8 @@ module Aws::Athena
     class BatchGetQueryExecutionOutput < Struct.new(
       :query_executions,
       :unprocessed_query_execution_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +171,8 @@ module Aws::Athena
     #   @return [String]
     class CalculationConfiguration < Struct.new(
       :code_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +195,8 @@ module Aws::Athena
       :std_error_s3_uri,
       :result_s3_uri,
       :result_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +210,8 @@ module Aws::Athena
     class CalculationStatistics < Struct.new(
       :dpu_execution_in_millis,
       :progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +252,8 @@ module Aws::Athena
       :completion_date_time,
       :state,
       :state_change_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +271,8 @@ module Aws::Athena
       :calculation_execution_id,
       :description,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,12 +281,14 @@ module Aws::Athena
     #   @return [String]
     class CancelCapacityReservationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelCapacityReservationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -295,7 +311,8 @@ module Aws::Athena
       :status_message,
       :request_time,
       :request_completion_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -305,7 +322,8 @@ module Aws::Athena
     #   @return [Array<String>]
     class CapacityAssignment < Struct.new(
       :work_group_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +341,8 @@ module Aws::Athena
     class CapacityAssignmentConfiguration < Struct.new(
       :capacity_reservation_name,
       :capacity_assignments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +379,8 @@ module Aws::Athena
       :last_allocation,
       :last_successful_allocation_time,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +398,8 @@ module Aws::Athena
       :name,
       :type,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +447,8 @@ module Aws::Athena
       :scale,
       :nullable,
       :case_sensitive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -450,12 +472,14 @@ module Aws::Athena
       :target_dpus,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateCapacityReservationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +623,8 @@ module Aws::Athena
       :description,
       :parameters,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +637,8 @@ module Aws::Athena
     #   @return [Types::DataCatalog]
     class CreateDataCatalogOutput < Struct.new(
       :data_catalog,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +676,8 @@ module Aws::Athena
       :query_string,
       :client_request_token,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -659,7 +686,8 @@ module Aws::Athena
     #   @return [String]
     class CreateNamedQueryOutput < Struct.new(
       :named_query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +712,8 @@ module Aws::Athena
       :work_group,
       :name,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -693,7 +722,8 @@ module Aws::Athena
     #   @return [String]
     class CreateNotebookOutput < Struct.new(
       :notebook_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,12 +744,14 @@ module Aws::Athena
       :work_group,
       :query_statement,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreatePreparedStatementOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +760,8 @@ module Aws::Athena
     #   @return [String]
     class CreatePresignedNotebookUrlRequest < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +779,8 @@ module Aws::Athena
       :notebook_url,
       :auth_token,
       :auth_token_expiration_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,12 +808,14 @@ module Aws::Athena
       :configuration,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateWorkGroupOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +827,8 @@ module Aws::Athena
     #   @return [String]
     class CustomerContentEncryptionConfiguration < Struct.new(
       :kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +1018,8 @@ module Aws::Athena
       :status,
       :connection_type,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1070,7 +1108,8 @@ module Aws::Athena
       :status,
       :connection_type,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1088,7 +1127,8 @@ module Aws::Athena
       :name,
       :description,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1098,7 +1138,8 @@ module Aws::Athena
     #   @return [String]
     class Datum < Struct.new(
       :var_char_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1107,12 +1148,14 @@ module Aws::Athena
     #   @return [String]
     class DeleteCapacityReservationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCapacityReservationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1171,8 @@ module Aws::Athena
     class DeleteDataCatalogInput < Struct.new(
       :name,
       :delete_catalog_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,7 +1185,8 @@ module Aws::Athena
     #   @return [Types::DataCatalog]
     class DeleteDataCatalogOutput < Struct.new(
       :data_catalog,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1150,12 +1195,14 @@ module Aws::Athena
     #   @return [String]
     class DeleteNamedQueryInput < Struct.new(
       :named_query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteNamedQueryOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,12 +1211,14 @@ module Aws::Athena
     #   @return [String]
     class DeleteNotebookInput < Struct.new(
       :notebook_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteNotebookOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1182,12 +1231,14 @@ module Aws::Athena
     class DeletePreparedStatementInput < Struct.new(
       :statement_name,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePreparedStatementOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,12 +1252,14 @@ module Aws::Athena
     class DeleteWorkGroupInput < Struct.new(
       :work_group,
       :recursive_delete_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkGroupOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1281,8 @@ module Aws::Athena
     class EncryptionConfiguration < Struct.new(
       :encryption_option,
       :kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1318,8 @@ module Aws::Athena
       :default_executor_dpu_size,
       :additional_configs,
       :spark_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1285,7 +1340,8 @@ module Aws::Athena
     class EngineVersion < Struct.new(
       :selected_engine_version,
       :effective_engine_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1387,8 @@ module Aws::Athena
       :termination_date_time,
       :executor_state,
       :executor_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,7 +1397,8 @@ module Aws::Athena
     #   @return [String]
     class ExportNotebookInput < Struct.new(
       :notebook_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1354,7 +1412,8 @@ module Aws::Athena
     class ExportNotebookOutput < Struct.new(
       :notebook_metadata,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1423,8 @@ module Aws::Athena
     #   @return [String]
     class FilterDefinition < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1433,8 @@ module Aws::Athena
     #   @return [String]
     class GetCalculationExecutionCodeRequest < Struct.new(
       :calculation_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1382,7 +1443,8 @@ module Aws::Athena
     #   @return [String]
     class GetCalculationExecutionCodeResponse < Struct.new(
       :code_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1391,7 +1453,8 @@ module Aws::Athena
     #   @return [String]
     class GetCalculationExecutionRequest < Struct.new(
       :calculation_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,7 +1489,8 @@ module Aws::Athena
       :status,
       :statistics,
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1499,8 @@ module Aws::Athena
     #   @return [String]
     class GetCalculationExecutionStatusRequest < Struct.new(
       :calculation_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1448,7 +1513,8 @@ module Aws::Athena
     class GetCalculationExecutionStatusResponse < Struct.new(
       :status,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1458,7 +1524,8 @@ module Aws::Athena
     #   @return [String]
     class GetCapacityAssignmentConfigurationInput < Struct.new(
       :capacity_reservation_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1468,7 +1535,8 @@ module Aws::Athena
     #   @return [Types::CapacityAssignmentConfiguration]
     class GetCapacityAssignmentConfigurationOutput < Struct.new(
       :capacity_assignment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1477,7 +1545,8 @@ module Aws::Athena
     #   @return [String]
     class GetCapacityReservationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1486,7 +1555,8 @@ module Aws::Athena
     #   @return [Types::CapacityReservation]
     class GetCapacityReservationOutput < Struct.new(
       :capacity_reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1499,7 +1569,8 @@ module Aws::Athena
     class GetDataCatalogInput < Struct.new(
       :name,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1508,7 +1579,8 @@ module Aws::Athena
     #   @return [Types::DataCatalog]
     class GetDataCatalogOutput < Struct.new(
       :data_catalog,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1598,8 @@ module Aws::Athena
       :catalog_name,
       :database_name,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,7 +1608,8 @@ module Aws::Athena
     #   @return [Types::Database]
     class GetDatabaseOutput < Struct.new(
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1545,7 +1619,8 @@ module Aws::Athena
     #   @return [String]
     class GetNamedQueryInput < Struct.new(
       :named_query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1629,8 @@ module Aws::Athena
     #   @return [Types::NamedQuery]
     class GetNamedQueryOutput < Struct.new(
       :named_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1563,7 +1639,8 @@ module Aws::Athena
     #   @return [String]
     class GetNotebookMetadataInput < Struct.new(
       :notebook_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1572,7 +1649,8 @@ module Aws::Athena
     #   @return [Types::NotebookMetadata]
     class GetNotebookMetadataOutput < Struct.new(
       :notebook_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1585,7 +1663,8 @@ module Aws::Athena
     class GetPreparedStatementInput < Struct.new(
       :statement_name,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1594,7 +1673,8 @@ module Aws::Athena
     #   @return [Types::PreparedStatement]
     class GetPreparedStatementOutput < Struct.new(
       :prepared_statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1603,7 +1683,8 @@ module Aws::Athena
     #   @return [String]
     class GetQueryExecutionInput < Struct.new(
       :query_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1612,7 +1693,8 @@ module Aws::Athena
     #   @return [Types::QueryExecution]
     class GetQueryExecutionOutput < Struct.new(
       :query_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1721,8 @@ module Aws::Athena
       :next_token,
       :max_results,
       :query_result_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1659,7 +1742,8 @@ module Aws::Athena
       :update_count,
       :result_set,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1668,7 +1752,8 @@ module Aws::Athena
     #   @return [String]
     class GetQueryRuntimeStatisticsInput < Struct.new(
       :query_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1677,7 +1762,8 @@ module Aws::Athena
     #   @return [Types::QueryRuntimeStatistics]
     class GetQueryRuntimeStatisticsOutput < Struct.new(
       :query_runtime_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1686,7 +1772,8 @@ module Aws::Athena
     #   @return [String]
     class GetSessionRequest < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1728,7 +1815,8 @@ module Aws::Athena
       :session_configuration,
       :status,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1737,7 +1825,8 @@ module Aws::Athena
     #   @return [String]
     class GetSessionStatusRequest < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1750,7 +1839,8 @@ module Aws::Athena
     class GetSessionStatusResponse < Struct.new(
       :session_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1773,7 +1863,8 @@ module Aws::Athena
       :database_name,
       :table_name,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1782,7 +1873,8 @@ module Aws::Athena
     #   @return [Types::TableMetadata]
     class GetTableMetadataOutput < Struct.new(
       :table_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1791,7 +1883,8 @@ module Aws::Athena
     #   @return [String]
     class GetWorkGroupInput < Struct.new(
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1800,7 +1893,8 @@ module Aws::Athena
     #   @return [Types::WorkGroup]
     class GetWorkGroupOutput < Struct.new(
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1908,8 @@ module Aws::Athena
     class IdentityCenterConfiguration < Struct.new(
       :enable_identity_center,
       :identity_center_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1853,7 +1948,8 @@ module Aws::Athena
       :type,
       :notebook_s3_location_uri,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1862,7 +1958,8 @@ module Aws::Athena
     #   @return [String]
     class ImportNotebookOutput < Struct.new(
       :notebook_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1872,7 +1969,8 @@ module Aws::Athena
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1887,7 +1985,8 @@ module Aws::Athena
     class InvalidRequestException < Struct.new(
       :athena_error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1901,7 +2000,8 @@ module Aws::Athena
     class ListApplicationDPUSizesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1916,7 +2016,8 @@ module Aws::Athena
     class ListApplicationDPUSizesOutput < Struct.new(
       :application_dpu_sizes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1958,7 +2059,8 @@ module Aws::Athena
       :state_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1973,7 +2075,8 @@ module Aws::Athena
     class ListCalculationExecutionsResponse < Struct.new(
       :next_token,
       :calculations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1987,7 +2090,8 @@ module Aws::Athena
     class ListCapacityReservationsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2106,8 @@ module Aws::Athena
     class ListCapacityReservationsOutput < Struct.new(
       :next_token,
       :capacity_reservations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2021,7 +2126,8 @@ module Aws::Athena
       :next_token,
       :max_results,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2036,7 +2142,8 @@ module Aws::Athena
     class ListDataCatalogsOutput < Struct.new(
       :data_catalogs_summary,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2060,7 +2167,8 @@ module Aws::Athena
       :next_token,
       :max_results,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2075,7 +2183,8 @@ module Aws::Athena
     class ListDatabasesOutput < Struct.new(
       :database_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2090,7 +2199,8 @@ module Aws::Athena
     class ListEngineVersionsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2105,7 +2215,8 @@ module Aws::Athena
     class ListEngineVersionsOutput < Struct.new(
       :engine_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2141,7 +2252,8 @@ module Aws::Athena
       :executor_state_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2160,7 +2272,8 @@ module Aws::Athena
       :session_id,
       :next_token,
       :executors_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2181,7 +2294,8 @@ module Aws::Athena
       :next_token,
       :max_results,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2196,7 +2310,8 @@ module Aws::Athena
     class ListNamedQueriesOutput < Struct.new(
       :named_query_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2218,7 +2333,8 @@ module Aws::Athena
       :next_token,
       :max_results,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2233,7 +2349,8 @@ module Aws::Athena
     class ListNotebookMetadataOutput < Struct.new(
       :next_token,
       :notebook_metadata_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2252,7 +2369,8 @@ module Aws::Athena
       :notebook_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2267,7 +2385,8 @@ module Aws::Athena
     class ListNotebookSessionsResponse < Struct.new(
       :notebook_sessions_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2286,7 +2405,8 @@ module Aws::Athena
       :work_group,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2301,7 +2421,8 @@ module Aws::Athena
     class ListPreparedStatementsOutput < Struct.new(
       :prepared_statements,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2322,7 +2443,8 @@ module Aws::Athena
       :next_token,
       :max_results,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2335,7 +2457,8 @@ module Aws::Athena
     class ListQueryExecutionsOutput < Struct.new(
       :query_execution_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2377,7 +2500,8 @@ module Aws::Athena
       :state_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2392,7 +2516,8 @@ module Aws::Athena
     class ListSessionsResponse < Struct.new(
       :next_token,
       :sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2425,7 +2550,8 @@ module Aws::Athena
       :next_token,
       :max_results,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2440,7 +2566,8 @@ module Aws::Athena
     class ListTableMetadataOutput < Struct.new(
       :table_metadata_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2460,7 +2587,8 @@ module Aws::Athena
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2473,7 +2601,8 @@ module Aws::Athena
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2488,7 +2617,8 @@ module Aws::Athena
     class ListWorkGroupsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2504,7 +2634,8 @@ module Aws::Athena
     class ListWorkGroupsOutput < Struct.new(
       :work_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2526,7 +2657,8 @@ module Aws::Athena
     class ManagedQueryResultsConfiguration < Struct.new(
       :enabled,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2554,7 +2686,8 @@ module Aws::Athena
       :enabled,
       :encryption_configuration,
       :remove_encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2566,7 +2699,8 @@ module Aws::Athena
     #   @return [String]
     class ManagedQueryResultsEncryptionConfiguration < Struct.new(
       :kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2580,7 +2714,8 @@ module Aws::Athena
     #   @return [String]
     class MetadataException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2611,7 +2746,8 @@ module Aws::Athena
       :query_string,
       :named_query_id,
       :work_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2642,7 +2778,8 @@ module Aws::Athena
       :creation_time,
       :type,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2656,7 +2793,8 @@ module Aws::Athena
     class NotebookSessionSummary < Struct.new(
       :session_id,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2682,7 +2820,8 @@ module Aws::Athena
       :work_group_name,
       :description,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2696,7 +2835,8 @@ module Aws::Athena
     class PreparedStatementSummary < Struct.new(
       :statement_name,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2710,12 +2850,14 @@ module Aws::Athena
     class PutCapacityAssignmentConfigurationInput < Struct.new(
       :capacity_reservation_name,
       :capacity_assignments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutCapacityAssignmentConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2792,7 +2934,8 @@ module Aws::Athena
       :execution_parameters,
       :substatement_type,
       :query_results_s3_access_grants_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2950,8 @@ module Aws::Athena
     class QueryExecutionContext < Struct.new(
       :database,
       :catalog,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +3008,8 @@ module Aws::Athena
       :query_planning_time_in_millis,
       :service_processing_time_in_millis,
       :result_reuse_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2902,7 +3047,8 @@ module Aws::Athena
       :submission_date_time,
       :completion_date_time,
       :athena_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2924,7 +3070,8 @@ module Aws::Athena
       :enable_s3_access_grants,
       :create_user_level_prefix,
       :authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2946,7 +3093,8 @@ module Aws::Athena
       :timeline,
       :rows,
       :output_stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2969,7 +3117,8 @@ module Aws::Athena
       :input_bytes,
       :output_bytes,
       :output_rows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3007,7 +3156,8 @@ module Aws::Athena
       :engine_execution_time_in_millis,
       :service_processing_time_in_millis,
       :total_execution_time_in_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3050,7 +3200,8 @@ module Aws::Athena
       :execution_time,
       :query_stage_plan,
       :sub_stages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3074,7 +3225,8 @@ module Aws::Athena
       :identifier,
       :children,
       :remote_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3087,7 +3239,8 @@ module Aws::Athena
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3139,7 +3292,8 @@ module Aws::Athena
       :encryption_configuration,
       :expected_bucket_owner,
       :acl_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3217,7 +3371,8 @@ module Aws::Athena
       :remove_expected_bucket_owner,
       :acl_configuration,
       :remove_acl_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3233,7 +3388,8 @@ module Aws::Athena
     class ResultReuseByAgeConfiguration < Struct.new(
       :enabled,
       :max_age_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3249,7 +3405,8 @@ module Aws::Athena
     #   @return [Types::ResultReuseByAgeConfiguration]
     class ResultReuseConfiguration < Struct.new(
       :result_reuse_by_age_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3260,7 +3417,8 @@ module Aws::Athena
     #   @return [Boolean]
     class ResultReuseInformation < Struct.new(
       :reused_previous_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3281,7 +3439,8 @@ module Aws::Athena
     class ResultSet < Struct.new(
       :rows,
       :result_set_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3292,7 +3451,8 @@ module Aws::Athena
     #   @return [Array<Types::ColumnInfo>]
     class ResultSetMetadata < Struct.new(
       :column_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3302,7 +3462,8 @@ module Aws::Athena
     #   @return [Array<Types::Datum>]
     class Row < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3311,7 +3472,8 @@ module Aws::Athena
     #   @return [String]
     class SessionAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3337,7 +3499,8 @@ module Aws::Athena
       :working_directory,
       :idle_timeout_seconds,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3347,7 +3510,8 @@ module Aws::Athena
     #   @return [Integer]
     class SessionStatistics < Struct.new(
       :dpu_execution_in_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3398,7 +3562,8 @@ module Aws::Athena
       :idle_since_date_time,
       :state,
       :state_change_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3425,7 +3590,8 @@ module Aws::Athena
       :engine_version,
       :notebook_version,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3463,7 +3629,8 @@ module Aws::Athena
       :calculation_configuration,
       :code_block,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3493,7 +3660,8 @@ module Aws::Athena
     class StartCalculationExecutionResponse < Struct.new(
       :calculation_execution_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3542,7 +3710,8 @@ module Aws::Athena
       :work_group,
       :execution_parameters,
       :result_reuse_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3551,7 +3720,8 @@ module Aws::Athena
     #   @return [String]
     class StartQueryExecutionOutput < Struct.new(
       :query_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3594,7 +3764,8 @@ module Aws::Athena
       :notebook_version,
       :session_idle_timeout_in_minutes,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3626,7 +3797,8 @@ module Aws::Athena
     class StartSessionResponse < Struct.new(
       :session_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3635,7 +3807,8 @@ module Aws::Athena
     #   @return [String]
     class StopCalculationExecutionRequest < Struct.new(
       :calculation_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3661,7 +3834,8 @@ module Aws::Athena
     #   @return [String]
     class StopCalculationExecutionResponse < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3670,12 +3844,14 @@ module Aws::Athena
     #   @return [String]
     class StopQueryExecutionInput < Struct.new(
       :query_execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopQueryExecutionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3710,7 +3886,8 @@ module Aws::Athena
       :columns,
       :partition_keys,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3738,7 +3915,8 @@ module Aws::Athena
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3752,12 +3930,14 @@ module Aws::Athena
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3766,7 +3946,8 @@ module Aws::Athena
     #   @return [String]
     class TerminateSessionRequest < Struct.new(
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3794,7 +3975,8 @@ module Aws::Athena
     #   @return [String]
     class TerminateSessionResponse < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3808,7 +3990,8 @@ module Aws::Athena
     class TooManyRequestsException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3828,7 +4011,8 @@ module Aws::Athena
       :named_query_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3864,7 +4048,8 @@ module Aws::Athena
       :statement_name,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3884,7 +4069,8 @@ module Aws::Athena
       :query_execution_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3898,12 +4084,14 @@ module Aws::Athena
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3916,12 +4104,14 @@ module Aws::Athena
     class UpdateCapacityReservationInput < Struct.new(
       :target_dpus,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateCapacityReservationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3985,12 +4175,14 @@ module Aws::Athena
       :type,
       :description,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDataCatalogOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4011,12 +4203,14 @@ module Aws::Athena
       :name,
       :description,
       :query_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNamedQueryOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4049,7 +4243,8 @@ module Aws::Athena
       :type,
       :session_id,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4073,17 +4268,20 @@ module Aws::Athena
       :notebook_id,
       :client_request_token,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNotebookMetadataOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNotebookOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4104,12 +4302,14 @@ module Aws::Athena
       :work_group,
       :query_statement,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdatePreparedStatementOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4130,12 +4330,14 @@ module Aws::Athena
       :description,
       :configuration_updates,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateWorkGroupOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4179,7 +4381,8 @@ module Aws::Athena
       :description,
       :creation_time,
       :identity_center_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4271,7 +4474,8 @@ module Aws::Athena
       :enable_minimum_encryption_configuration,
       :identity_center_configuration,
       :query_results_s3_access_grants_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4363,7 +4567,8 @@ module Aws::Athena
       :customer_content_encryption_configuration,
       :enable_minimum_encryption_configuration,
       :query_results_s3_access_grants_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4397,7 +4602,8 @@ module Aws::Athena
       :creation_time,
       :engine_version,
       :identity_center_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

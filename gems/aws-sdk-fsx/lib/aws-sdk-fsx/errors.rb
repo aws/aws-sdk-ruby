@@ -73,7 +73,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::AccessPointAlreadyOwnedByYou] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error code indicating that an access point with that name already exists in the Amazon Web Services Region in your Amazon Web Services account.</p>
@@ -91,7 +91,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::ActiveDirectoryError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The directory ID of the directory that an error pertains to.</p>
@@ -114,7 +114,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::BackupBeingCopied] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -132,7 +132,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::BackupInProgress] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -145,7 +145,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::BackupNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::BackupRestoring] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -177,7 +177,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::BadRequest] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::DataRepositoryAssociationNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -203,7 +203,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::DataRepositoryTaskEnded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -217,7 +217,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::DataRepositoryTaskExecuting] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -230,7 +230,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::DataRepositoryTaskNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -243,7 +243,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::FileCacheNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -256,7 +256,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::FileSystemNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -271,7 +271,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::IncompatibleParameterError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A parameter that is incompatible with the earlier request.</p>
@@ -290,7 +290,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::IncompatibleRegionForMultiAZ] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -303,7 +303,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -316,7 +316,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InvalidAccessPoint] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error code indicating that the access point specified doesn't exist.</p>
@@ -334,7 +334,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InvalidDataRepositoryType] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -348,7 +348,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InvalidDestinationKmsKey] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -361,7 +361,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InvalidExportPath] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -374,7 +374,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InvalidImportPath] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -387,7 +387,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InvalidNetworkSettings] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error message explaining what's wrong with network settings.</p>
@@ -416,7 +416,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InvalidPerUnitStorageThroughput] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -430,7 +430,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InvalidRegion] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -443,7 +443,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InvalidRequest] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error code indicating that the action or operation requested is invalid.</p>
@@ -462,7 +462,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::InvalidSourceKmsKey] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -475,7 +475,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::MissingFileCacheConfiguration] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -488,7 +488,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::MissingFileSystemConfiguration] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -501,7 +501,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::MissingVolumeConfiguration] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -515,7 +515,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::NotServiceResourceError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon Resource Name (ARN) of the non-Amazon FSx resource.</p>
@@ -533,7 +533,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::ResourceDoesNotSupportTagging] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon Resource Name (ARN) of the resource that doesn't support
@@ -552,7 +552,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::ResourceNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The resource ARN of the resource that can't be found.</p>
@@ -570,7 +570,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::S3AccessPointAttachmentNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -584,7 +584,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::ServiceLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Enumeration of the service limit that was exceeded. </p>
@@ -602,7 +602,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::SnapshotNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -616,7 +616,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::SourceBackupUnavailable] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -633,7 +633,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::StorageVirtualMachineNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -647,7 +647,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::TooManyAccessPoints] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error code indicating that you have reached the maximum number of S3 access points attachments allowed for your account in this Amazon Web Services Region, or for the file system.</p>
@@ -665,7 +665,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::UnsupportedOperation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -678,7 +678,7 @@ module Aws::FSx
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::VolumeNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

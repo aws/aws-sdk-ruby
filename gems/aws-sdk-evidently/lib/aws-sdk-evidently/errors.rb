@@ -41,7 +41,7 @@ module Aws::Evidently
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evidently::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::Evidently
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evidently::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::Evidently
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evidently::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::Evidently
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evidently::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::Evidently
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evidently::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::Evidently
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evidently::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::Evidently
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evidently::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -182,7 +182,7 @@ module Aws::Evidently
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evidently::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -21,12 +21,14 @@ module Aws::GuardDuty
       :detector_id,
       :administrator_id,
       :invitation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AcceptAdministratorInvitationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,14 +51,16 @@ module Aws::GuardDuty
       :detector_id,
       :master_id,
       :invitation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   This output is deprecated, use AcceptAdministratorInvitationResponse instead
     class AcceptInvitationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +76,8 @@ module Aws::GuardDuty
     class AccessControlList < Struct.new(
       :allows_public_read_access,
       :allows_public_write_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +91,8 @@ module Aws::GuardDuty
     class AccessDeniedException < Struct.new(
       :message,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +110,8 @@ module Aws::GuardDuty
       :principal_id,
       :user_name,
       :user_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +133,8 @@ module Aws::GuardDuty
       :principal_id,
       :user_name,
       :user_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +148,8 @@ module Aws::GuardDuty
     class Account < Struct.new(
       :uid,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +191,8 @@ module Aws::GuardDuty
     class AccountDetail < Struct.new(
       :account_id,
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +212,8 @@ module Aws::GuardDuty
       :account_id,
       :data_sources,
       :features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +223,8 @@ module Aws::GuardDuty
     #   @return [Types::BlockPublicAccess]
     class AccountLevelPermissions < Struct.new(
       :block_public_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +242,8 @@ module Aws::GuardDuty
       :account_id,
       :last_generated_at,
       :total_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +289,8 @@ module Aws::GuardDuty
       :kubernetes_permission_checked_details,
       :kubernetes_role_binding_details,
       :kubernetes_role_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -300,7 +314,8 @@ module Aws::GuardDuty
       :user,
       :session,
       :process,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +335,8 @@ module Aws::GuardDuty
       :name,
       :path,
       :sha256,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +350,8 @@ module Aws::GuardDuty
     class AddonDetails < Struct.new(
       :addon_version,
       :addon_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -349,7 +366,8 @@ module Aws::GuardDuty
     class AdminAccount < Struct.new(
       :admin_account_id,
       :admin_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +390,8 @@ module Aws::GuardDuty
       :invitation_id,
       :relationship_status,
       :invited_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -382,7 +401,8 @@ module Aws::GuardDuty
     #   @return [String]
     class AgentDetails < Struct.new(
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +416,8 @@ module Aws::GuardDuty
     class Anomaly < Struct.new(
       :profiles,
       :unusual,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +435,8 @@ module Aws::GuardDuty
       :profile_type,
       :profile_subtype,
       :observations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +447,8 @@ module Aws::GuardDuty
     #   @return [Hash<String, Hash<String, Types::AnomalyObject>>]
     class AnomalyUnusual < Struct.new(
       :behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -441,12 +464,14 @@ module Aws::GuardDuty
     class ArchiveFindingsRequest < Struct.new(
       :detector_id,
       :finding_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ArchiveFindingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +486,8 @@ module Aws::GuardDuty
     class AutonomousSystem < Struct.new(
       :name,
       :number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +531,8 @@ module Aws::GuardDuty
       :service_name,
       :remote_account_details,
       :affected_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +546,8 @@ module Aws::GuardDuty
     class BadRequestException < Struct.new(
       :message,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +571,8 @@ module Aws::GuardDuty
       :restrict_public_buckets,
       :block_public_acls,
       :block_public_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,7 +591,8 @@ module Aws::GuardDuty
       :access_control_list,
       :bucket_policy,
       :block_public_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +608,8 @@ module Aws::GuardDuty
     class BucketPolicy < Struct.new(
       :allows_public_read_access,
       :allows_public_write_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +619,8 @@ module Aws::GuardDuty
     #   @return [String]
     class City < Struct.new(
       :city_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +630,8 @@ module Aws::GuardDuty
     #   @return [String]
     class CloudTrailConfigurationResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -672,7 +705,8 @@ module Aws::GuardDuty
       :greater_than_or_equal,
       :less_than,
       :less_than_or_equal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +720,8 @@ module Aws::GuardDuty
     class ConflictException < Struct.new(
       :message,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -722,7 +757,8 @@ module Aws::GuardDuty
       :image_prefix,
       :volume_mounts,
       :security_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -739,7 +775,8 @@ module Aws::GuardDuty
     class ContainerFindingResource < Struct.new(
       :image,
       :image_uid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +792,8 @@ module Aws::GuardDuty
     class ContainerInstanceDetails < Struct.new(
       :covered_container_instances,
       :compatible_container_instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +807,8 @@ module Aws::GuardDuty
     class Country < Struct.new(
       :country_code,
       :country_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -812,7 +851,8 @@ module Aws::GuardDuty
       :cluster_arn,
       :agent_details,
       :management_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +872,8 @@ module Aws::GuardDuty
       :cluster_name,
       :fargate_details,
       :container_instance_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +905,8 @@ module Aws::GuardDuty
       :compatible_nodes,
       :addon_details,
       :management_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +923,8 @@ module Aws::GuardDuty
     class CoverageFilterCondition < Struct.new(
       :equals,
       :not_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +935,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::CoverageFilterCriterion>]
     class CoverageFilterCriteria < Struct.new(
       :filter_criterion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +955,8 @@ module Aws::GuardDuty
     class CoverageFilterCriterion < Struct.new(
       :criterion_key,
       :filter_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +992,8 @@ module Aws::GuardDuty
       :coverage_status,
       :issue,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -971,7 +1017,8 @@ module Aws::GuardDuty
       :resource_type,
       :ecs_cluster_details,
       :ec2_instance_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -989,7 +1036,8 @@ module Aws::GuardDuty
     class CoverageSortCriteria < Struct.new(
       :attribute_name,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1051,8 @@ module Aws::GuardDuty
     class CoverageStatistics < Struct.new(
       :count_by_resource_type,
       :count_by_coverage_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1086,8 @@ module Aws::GuardDuty
       :data_sources,
       :tags,
       :features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1101,8 @@ module Aws::GuardDuty
     class CreateDetectorResponse < Struct.new(
       :detector_id,
       :unprocessed_data_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1415,7 +1466,8 @@ module Aws::GuardDuty
       :finding_criteria,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1424,7 +1476,8 @@ module Aws::GuardDuty
     #   @return [String]
     class CreateFilterResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1518,8 @@ module Aws::GuardDuty
       :client_token,
       :tags,
       :expected_bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1528,8 @@ module Aws::GuardDuty
     #   @return [String]
     class CreateIPSetResponse < Struct.new(
       :ip_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1502,7 +1557,8 @@ module Aws::GuardDuty
       :protected_resource,
       :actions,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1511,7 +1567,8 @@ module Aws::GuardDuty
     #   @return [String]
     class CreateMalwareProtectionPlanResponse < Struct.new(
       :malware_protection_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1528,7 +1585,8 @@ module Aws::GuardDuty
     class CreateMembersRequest < Struct.new(
       :detector_id,
       :account_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1538,7 +1596,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::UnprocessedAccount>]
     class CreateMembersResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1551,7 +1610,8 @@ module Aws::GuardDuty
     #   @return [Types::CreateS3BucketResource]
     class CreateProtectedResource < Struct.new(
       :s3_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1636,8 @@ module Aws::GuardDuty
       :destination_type,
       :destination_properties,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1585,7 +1646,8 @@ module Aws::GuardDuty
     #   @return [String]
     class CreatePublishingDestinationResponse < Struct.new(
       :destination_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1600,7 +1662,8 @@ module Aws::GuardDuty
     class CreateS3BucketResource < Struct.new(
       :bucket_name,
       :object_prefixes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,12 +1678,14 @@ module Aws::GuardDuty
     class CreateSampleFindingsRequest < Struct.new(
       :detector_id,
       :finding_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateSampleFindingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1727,8 @@ module Aws::GuardDuty
       :activate,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1671,7 +1737,8 @@ module Aws::GuardDuty
     #   @return [String]
     class CreateThreatEntitySetResponse < Struct.new(
       :threat_entity_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1713,7 +1780,8 @@ module Aws::GuardDuty
       :client_token,
       :tags,
       :expected_bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1722,7 +1790,8 @@ module Aws::GuardDuty
     #   @return [String]
     class CreateThreatIntelSetResponse < Struct.new(
       :threat_intel_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1765,7 +1834,8 @@ module Aws::GuardDuty
       :activate,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1774,7 +1844,8 @@ module Aws::GuardDuty
     #   @return [String]
     class CreateTrustedEntitySetResponse < Struct.new(
       :trusted_entity_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1784,7 +1855,8 @@ module Aws::GuardDuty
     #   @return [String]
     class DNSLogsConfigurationResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1802,7 +1874,8 @@ module Aws::GuardDuty
       :s3_logs,
       :kubernetes,
       :malware_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1907,8 @@ module Aws::GuardDuty
       :s3_logs,
       :kubernetes,
       :malware_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1919,8 @@ module Aws::GuardDuty
     #   @return [Integer]
     class DataSourceFreeTrial < Struct.new(
       :free_trial_days_remaining,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1876,7 +1951,8 @@ module Aws::GuardDuty
       :s3_logs,
       :kubernetes,
       :malware_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1900,7 +1976,8 @@ module Aws::GuardDuty
       :last_generated_at,
       :severity,
       :total_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1910,7 +1987,8 @@ module Aws::GuardDuty
     #   @return [Array<String>]
     class DeclineInvitationsRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1920,7 +1998,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::UnprocessedAccount>]
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1937,7 +2016,8 @@ module Aws::GuardDuty
     class DefaultServerSideEncryption < Struct.new(
       :encryption_type,
       :kms_master_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1948,12 +2028,14 @@ module Aws::GuardDuty
     #   @return [String]
     class DeleteDetectorRequest < Struct.new(
       :detector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDetectorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1968,12 +2050,14 @@ module Aws::GuardDuty
     class DeleteFilterRequest < Struct.new(
       :detector_id,
       :filter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFilterResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1988,12 +2072,14 @@ module Aws::GuardDuty
     class DeleteIPSetRequest < Struct.new(
       :detector_id,
       :ip_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIPSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2003,7 +2089,8 @@ module Aws::GuardDuty
     #   @return [Array<String>]
     class DeleteInvitationsRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2013,7 +2100,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::UnprocessedAccount>]
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2110,8 @@ module Aws::GuardDuty
     #   @return [String]
     class DeleteMalwareProtectionPlanRequest < Struct.new(
       :malware_protection_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2038,7 +2127,8 @@ module Aws::GuardDuty
     class DeleteMembersRequest < Struct.new(
       :detector_id,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2047,7 +2137,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::UnprocessedAccount>]
     class DeleteMembersResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2062,12 +2153,14 @@ module Aws::GuardDuty
     class DeletePublishingDestinationRequest < Struct.new(
       :detector_id,
       :destination_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePublishingDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2082,12 +2175,14 @@ module Aws::GuardDuty
     class DeleteThreatEntitySetRequest < Struct.new(
       :detector_id,
       :threat_entity_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteThreatEntitySetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2102,12 +2197,14 @@ module Aws::GuardDuty
     class DeleteThreatIntelSetRequest < Struct.new(
       :detector_id,
       :threat_intel_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteThreatIntelSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2122,12 +2219,14 @@ module Aws::GuardDuty
     class DeleteTrustedEntitySetRequest < Struct.new(
       :detector_id,
       :trusted_entity_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTrustedEntitySetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2161,7 +2260,8 @@ module Aws::GuardDuty
       :max_results,
       :filter_criteria,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2175,7 +2275,8 @@ module Aws::GuardDuty
     class DescribeMalwareScansResponse < Struct.new(
       :scans,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2198,7 +2299,8 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2262,7 +2364,8 @@ module Aws::GuardDuty
       :features,
       :next_token,
       :auto_enable_organization_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2381,8 @@ module Aws::GuardDuty
     class DescribePublishingDestinationRequest < Struct.new(
       :detector_id,
       :destination_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2306,7 +2410,8 @@ module Aws::GuardDuty
       :status,
       :publishing_failure_start_timestamp,
       :destination_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2326,7 +2431,8 @@ module Aws::GuardDuty
       :destination_id,
       :destination_type,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2344,7 +2450,8 @@ module Aws::GuardDuty
     class DestinationProperties < Struct.new(
       :destination_arn,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2359,7 +2466,8 @@ module Aws::GuardDuty
     class Detection < Struct.new(
       :anomaly,
       :sequence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2373,7 +2481,8 @@ module Aws::GuardDuty
     class DetectorAdditionalConfiguration < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2392,7 +2501,8 @@ module Aws::GuardDuty
       :name,
       :status,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2525,8 @@ module Aws::GuardDuty
       :name,
       :status,
       :additional_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2442,7 +2553,8 @@ module Aws::GuardDuty
       :status,
       :updated_at,
       :additional_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2452,12 +2564,14 @@ module Aws::GuardDuty
     #   @return [String]
     class DisableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableOrganizationAdminAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2466,12 +2580,14 @@ module Aws::GuardDuty
     #   @return [String]
     class DisassociateFromAdministratorAccountRequest < Struct.new(
       :detector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2482,14 +2598,16 @@ module Aws::GuardDuty
     #   @return [String]
     class DisassociateFromMasterAccountRequest < Struct.new(
       :detector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   This output is deprecated, use DisassociateFromAdministratorAccountResponse instead
     class DisassociateFromMasterAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2504,7 +2622,8 @@ module Aws::GuardDuty
     class DisassociateMembersRequest < Struct.new(
       :detector_id,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2514,7 +2633,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::UnprocessedAccount>]
     class DisassociateMembersResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2543,7 +2663,8 @@ module Aws::GuardDuty
       :blocked,
       :domain_with_suffix,
       :vpc_owner_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2553,7 +2674,8 @@ module Aws::GuardDuty
     #   @return [String]
     class DomainDetails < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2567,7 +2689,8 @@ module Aws::GuardDuty
     class EbsVolumeDetails < Struct.new(
       :scanned_volume_details,
       :skipped_volume_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2601,7 +2724,8 @@ module Aws::GuardDuty
       :sources,
       :scan_detections,
       :scan_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2616,7 +2740,8 @@ module Aws::GuardDuty
     class EbsVolumesResult < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2662,7 +2787,8 @@ module Aws::GuardDuty
       :platform,
       :product_codes,
       :ec2_network_interface_uids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2692,7 +2818,8 @@ module Aws::GuardDuty
       :security_groups,
       :sub_net_id,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2730,7 +2857,8 @@ module Aws::GuardDuty
       :running_tasks_count,
       :tags,
       :task_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2780,7 +2908,8 @@ module Aws::GuardDuty
       :containers,
       :group,
       :launch_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2936,8 @@ module Aws::GuardDuty
       :status,
       :vpc_id,
       :ec2_instance_uids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2837,7 +2967,8 @@ module Aws::GuardDuty
       :status,
       :tags,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2847,12 +2978,14 @@ module Aws::GuardDuty
     #   @return [String]
     class EnableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableOrganizationAdminAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2862,7 +2995,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::ThreatIntelligenceDetail>]
     class Evidence < Struct.new(
       :threat_intelligence_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2890,7 +3024,8 @@ module Aws::GuardDuty
     class FargateDetails < Struct.new(
       :issues,
       :management_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2912,7 +3047,8 @@ module Aws::GuardDuty
       :equals_value,
       :greater_than,
       :less_than,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2923,7 +3059,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::FilterCriterion>]
     class FilterCriteria < Struct.new(
       :filter_criterion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2941,7 +3078,8 @@ module Aws::GuardDuty
     class FilterCriterion < Struct.new(
       :criterion_key,
       :filter_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3017,7 +3155,8 @@ module Aws::GuardDuty
       :type,
       :updated_at,
       :associated_attack_sequence_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3028,7 +3167,8 @@ module Aws::GuardDuty
     #   @return [Hash<String, Types::Condition>]
     class FindingCriteria < Struct.new(
       :criterion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3065,7 +3205,8 @@ module Aws::GuardDuty
       :grouped_by_finding_type,
       :grouped_by_resource,
       :grouped_by_severity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3084,7 +3225,8 @@ module Aws::GuardDuty
       :finding_type,
       :last_generated_at,
       :total_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3094,7 +3236,8 @@ module Aws::GuardDuty
     #   @return [String]
     class FlowLogsConfigurationResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3108,7 +3251,8 @@ module Aws::GuardDuty
     class FreeTrialFeatureConfigurationResult < Struct.new(
       :name,
       :free_trial_days_remaining,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3123,7 +3267,8 @@ module Aws::GuardDuty
     class GeoLocation < Struct.new(
       :lat,
       :lon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3132,7 +3277,8 @@ module Aws::GuardDuty
     #   @return [String]
     class GetAdministratorAccountRequest < Struct.new(
       :detector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3141,7 +3287,8 @@ module Aws::GuardDuty
     #   @return [Types::Administrator]
     class GetAdministratorAccountResponse < Struct.new(
       :administrator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3160,7 +3307,8 @@ module Aws::GuardDuty
       :detector_id,
       :filter_criteria,
       :statistics_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3170,7 +3318,8 @@ module Aws::GuardDuty
     #   @return [Types::CoverageStatistics]
     class GetCoverageStatisticsResponse < Struct.new(
       :coverage_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3181,7 +3330,8 @@ module Aws::GuardDuty
     #   @return [String]
     class GetDetectorRequest < Struct.new(
       :detector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3220,7 +3370,8 @@ module Aws::GuardDuty
       :data_sources,
       :tags,
       :features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3235,7 +3386,8 @@ module Aws::GuardDuty
     class GetFilterRequest < Struct.new(
       :detector_id,
       :filter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3265,7 +3417,8 @@ module Aws::GuardDuty
       :rank,
       :finding_criteria,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3285,7 +3438,8 @@ module Aws::GuardDuty
       :detector_id,
       :finding_ids,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3294,7 +3448,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::Finding>]
     class GetFindingsResponse < Struct.new(
       :findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3331,7 +3486,8 @@ module Aws::GuardDuty
       :group_by,
       :order_by,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3345,7 +3501,8 @@ module Aws::GuardDuty
     class GetFindingsStatisticsResponse < Struct.new(
       :finding_statistics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3360,7 +3517,8 @@ module Aws::GuardDuty
     class GetIPSetRequest < Struct.new(
       :detector_id,
       :ip_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3390,12 +3548,14 @@ module Aws::GuardDuty
       :status,
       :tags,
       :expected_bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetInvitationsCountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3404,7 +3564,8 @@ module Aws::GuardDuty
     #   @return [Integer]
     class GetInvitationsCountResponse < Struct.new(
       :invitations_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3413,7 +3574,8 @@ module Aws::GuardDuty
     #   @return [String]
     class GetMalwareProtectionPlanRequest < Struct.new(
       :malware_protection_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3454,7 +3616,8 @@ module Aws::GuardDuty
       :status,
       :status_reasons,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3465,7 +3628,8 @@ module Aws::GuardDuty
     #   @return [String]
     class GetMalwareScanSettingsRequest < Struct.new(
       :detector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3478,7 +3642,8 @@ module Aws::GuardDuty
     class GetMalwareScanSettingsResponse < Struct.new(
       :scan_resource_criteria,
       :ebs_snapshot_preservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3491,7 +3656,8 @@ module Aws::GuardDuty
     #   @return [String]
     class GetMasterAccountRequest < Struct.new(
       :detector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3502,7 +3668,8 @@ module Aws::GuardDuty
     #   @return [Types::Master]
     class GetMasterAccountResponse < Struct.new(
       :master,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3517,7 +3684,8 @@ module Aws::GuardDuty
     class GetMemberDetectorsRequest < Struct.new(
       :detector_id,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3531,7 +3699,8 @@ module Aws::GuardDuty
     class GetMemberDetectorsResponse < Struct.new(
       :member_data_source_configurations,
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3547,7 +3716,8 @@ module Aws::GuardDuty
     class GetMembersRequest < Struct.new(
       :detector_id,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3561,7 +3731,8 @@ module Aws::GuardDuty
     class GetMembersResponse < Struct.new(
       :members,
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3570,7 +3741,8 @@ module Aws::GuardDuty
     #   @return [Types::OrganizationDetails]
     class GetOrganizationStatisticsResponse < Struct.new(
       :organization_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3585,7 +3757,8 @@ module Aws::GuardDuty
     class GetRemainingFreeTrialDaysRequest < Struct.new(
       :detector_id,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3600,7 +3773,8 @@ module Aws::GuardDuty
     class GetRemainingFreeTrialDaysResponse < Struct.new(
       :accounts,
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3615,7 +3789,8 @@ module Aws::GuardDuty
     class GetThreatEntitySetRequest < Struct.new(
       :detector_id,
       :threat_entity_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3657,7 +3832,8 @@ module Aws::GuardDuty
       :created_at,
       :updated_at,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3672,7 +3848,8 @@ module Aws::GuardDuty
     class GetThreatIntelSetRequest < Struct.new(
       :detector_id,
       :threat_intel_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3703,7 +3880,8 @@ module Aws::GuardDuty
       :status,
       :tags,
       :expected_bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3716,7 +3894,8 @@ module Aws::GuardDuty
     class GetTrustedEntitySetRequest < Struct.new(
       :detector_id,
       :trusted_entity_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3758,7 +3937,8 @@ module Aws::GuardDuty
       :created_at,
       :updated_at,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3794,7 +3974,8 @@ module Aws::GuardDuty
       :unit,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3809,7 +3990,8 @@ module Aws::GuardDuty
     class GetUsageStatisticsResponse < Struct.new(
       :usage_statistics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3828,7 +4010,8 @@ module Aws::GuardDuty
       :severity,
       :threat_name,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3839,7 +4022,8 @@ module Aws::GuardDuty
     #   @return [String]
     class HostPath < Struct.new(
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3853,7 +4037,8 @@ module Aws::GuardDuty
     class IamInstanceProfile < Struct.new(
       :arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3867,7 +4052,8 @@ module Aws::GuardDuty
     class ImpersonatedUser < Struct.new(
       :username,
       :groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3889,7 +4075,8 @@ module Aws::GuardDuty
       :key,
       :values,
       :title,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3948,7 +4135,8 @@ module Aws::GuardDuty
       :platform,
       :product_codes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3962,7 +4150,8 @@ module Aws::GuardDuty
     class InternalServerErrorException < Struct.new(
       :message,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3985,7 +4174,8 @@ module Aws::GuardDuty
       :invitation_id,
       :relationship_status,
       :invited_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4011,7 +4201,8 @@ module Aws::GuardDuty
       :account_ids,
       :disable_email_notification,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4021,7 +4212,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::UnprocessedAccount>]
     class InviteMembersResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4036,7 +4228,8 @@ module Aws::GuardDuty
     class ItemPath < Struct.new(
       :nested_item_path,
       :hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4087,7 +4280,8 @@ module Aws::GuardDuty
       :subresource,
       :namespace,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4097,7 +4291,8 @@ module Aws::GuardDuty
     #   @return [Boolean]
     class KubernetesAuditLogsConfiguration < Struct.new(
       :enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4107,7 +4302,8 @@ module Aws::GuardDuty
     #   @return [String]
     class KubernetesAuditLogsConfigurationResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4117,7 +4313,8 @@ module Aws::GuardDuty
     #   @return [Types::KubernetesAuditLogsConfiguration]
     class KubernetesConfiguration < Struct.new(
       :audit_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4127,7 +4324,8 @@ module Aws::GuardDuty
     #   @return [Types::KubernetesAuditLogsConfigurationResult]
     class KubernetesConfigurationResult < Struct.new(
       :audit_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4138,7 +4336,8 @@ module Aws::GuardDuty
     #   @return [Types::DataSourceFreeTrial]
     class KubernetesDataSourceFreeTrial < Struct.new(
       :audit_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4153,7 +4352,8 @@ module Aws::GuardDuty
     class KubernetesDetails < Struct.new(
       :kubernetes_user_details,
       :kubernetes_workload_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4176,7 +4376,8 @@ module Aws::GuardDuty
       :resource,
       :namespace,
       :allowed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4204,7 +4405,8 @@ module Aws::GuardDuty
       :uid,
       :role_ref_name,
       :role_ref_kind,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4222,7 +4424,8 @@ module Aws::GuardDuty
       :kind,
       :name,
       :uid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4249,7 +4452,8 @@ module Aws::GuardDuty
       :groups,
       :session_name,
       :impersonated_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4268,7 +4472,8 @@ module Aws::GuardDuty
       :container_uids,
       :namespace,
       :kubernetes_resources_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4314,7 +4519,8 @@ module Aws::GuardDuty
       :service_account_name,
       :host_ipc,
       :host_pid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4358,7 +4564,8 @@ module Aws::GuardDuty
       :role,
       :vpc_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4401,7 +4608,8 @@ module Aws::GuardDuty
       :executable_path,
       :euid,
       :parent_uuid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4431,7 +4639,8 @@ module Aws::GuardDuty
       :max_results,
       :filter_criteria,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4445,7 +4654,8 @@ module Aws::GuardDuty
     class ListCoverageResponse < Struct.new(
       :resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4462,7 +4672,8 @@ module Aws::GuardDuty
     class ListDetectorsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4476,7 +4687,8 @@ module Aws::GuardDuty
     class ListDetectorsResponse < Struct.new(
       :detector_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4499,7 +4711,8 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4513,7 +4726,8 @@ module Aws::GuardDuty
     class ListFiltersResponse < Struct.new(
       :filter_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4701,7 +4915,8 @@ module Aws::GuardDuty
       :sort_criteria,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4715,7 +4930,8 @@ module Aws::GuardDuty
     class ListFindingsResponse < Struct.new(
       :finding_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4738,7 +4954,8 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4752,7 +4969,8 @@ module Aws::GuardDuty
     class ListIPSetsResponse < Struct.new(
       :ip_set_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4769,7 +4987,8 @@ module Aws::GuardDuty
     class ListInvitationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4783,7 +5002,8 @@ module Aws::GuardDuty
     class ListInvitationsResponse < Struct.new(
       :invitations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4796,7 +5016,8 @@ module Aws::GuardDuty
     #   @return [String]
     class ListMalwareProtectionPlansRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4813,7 +5034,8 @@ module Aws::GuardDuty
     class ListMalwareProtectionPlansResponse < Struct.new(
       :malware_protection_plans,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4845,7 +5067,8 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       :only_associated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4863,7 +5086,8 @@ module Aws::GuardDuty
     class ListMembersResponse < Struct.new(
       :members,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4879,7 +5103,8 @@ module Aws::GuardDuty
     class ListOrganizationAdminAccountsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4893,7 +5118,8 @@ module Aws::GuardDuty
     class ListOrganizationAdminAccountsResponse < Struct.new(
       :admin_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4915,7 +5141,8 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4932,7 +5159,8 @@ module Aws::GuardDuty
     class ListPublishingDestinationsResponse < Struct.new(
       :destinations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4941,7 +5169,8 @@ module Aws::GuardDuty
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4950,7 +5179,8 @@ module Aws::GuardDuty
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4973,7 +5203,8 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4986,7 +5217,8 @@ module Aws::GuardDuty
     class ListThreatEntitySetsResponse < Struct.new(
       :threat_entity_set_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5009,7 +5241,8 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5023,7 +5256,8 @@ module Aws::GuardDuty
     class ListThreatIntelSetsResponse < Struct.new(
       :threat_intel_set_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5046,7 +5280,8 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5059,7 +5294,8 @@ module Aws::GuardDuty
     class ListTrustedEntitySetsResponse < Struct.new(
       :trusted_entity_set_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5073,7 +5309,8 @@ module Aws::GuardDuty
     class LocalIpDetails < Struct.new(
       :ip_address_v4,
       :ip_address_v6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5087,7 +5324,8 @@ module Aws::GuardDuty
     class LocalPortDetails < Struct.new(
       :port,
       :port_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5111,7 +5349,8 @@ module Aws::GuardDuty
       :application,
       :failed_login_attempts,
       :successful_login_attempts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5121,7 +5360,8 @@ module Aws::GuardDuty
     #   @return [Types::ScanEc2InstanceWithFindings]
     class MalwareProtectionConfiguration < Struct.new(
       :scan_ec2_instance_with_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5136,7 +5376,8 @@ module Aws::GuardDuty
     class MalwareProtectionConfigurationResult < Struct.new(
       :scan_ec2_instance_with_findings,
       :service_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5147,7 +5388,8 @@ module Aws::GuardDuty
     #   @return [Types::DataSourceFreeTrial]
     class MalwareProtectionDataSourceFreeTrial < Struct.new(
       :scan_ec2_instance_with_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5157,7 +5399,8 @@ module Aws::GuardDuty
     #   @return [Types::MalwareProtectionPlanTaggingAction]
     class MalwareProtectionPlanActions < Struct.new(
       :tagging,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5175,7 +5418,8 @@ module Aws::GuardDuty
     class MalwareProtectionPlanStatusReason < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5185,7 +5429,8 @@ module Aws::GuardDuty
     #   @return [String]
     class MalwareProtectionPlanSummary < Struct.new(
       :malware_protection_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5195,7 +5440,8 @@ module Aws::GuardDuty
     #   @return [String]
     class MalwareProtectionPlanTaggingAction < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5206,7 +5452,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::Threat>]
     class MalwareScanDetails < Struct.new(
       :threats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5228,7 +5475,8 @@ module Aws::GuardDuty
       :invitation_id,
       :relationship_status,
       :invited_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5266,7 +5514,8 @@ module Aws::GuardDuty
       :invited_at,
       :updated_at,
       :administrator_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5280,7 +5529,8 @@ module Aws::GuardDuty
     class MemberAdditionalConfiguration < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5301,7 +5551,8 @@ module Aws::GuardDuty
       :name,
       :status,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5321,7 +5572,8 @@ module Aws::GuardDuty
       :account_id,
       :data_sources,
       :features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5339,7 +5591,8 @@ module Aws::GuardDuty
       :name,
       :status,
       :additional_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5362,7 +5615,8 @@ module Aws::GuardDuty
       :status,
       :updated_at,
       :additional_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5372,7 +5626,8 @@ module Aws::GuardDuty
     #   @return [String]
     class NetworkConnection < Struct.new(
       :direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5410,7 +5665,8 @@ module Aws::GuardDuty
       :local_network_interface,
       :remote_ip_details,
       :remote_port_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5444,7 +5700,8 @@ module Aws::GuardDuty
       :location,
       :autonomous_system,
       :connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5466,7 +5723,8 @@ module Aws::GuardDuty
       :country,
       :latitude,
       :longitude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5512,7 +5770,8 @@ module Aws::GuardDuty
       :security_groups,
       :subnet_id,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5522,7 +5781,8 @@ module Aws::GuardDuty
     #   @return [Array<String>]
     class Observations < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5545,7 +5805,8 @@ module Aws::GuardDuty
       :asn_org,
       :isp,
       :org,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5586,7 +5847,8 @@ module Aws::GuardDuty
     class OrganizationAdditionalConfiguration < Struct.new(
       :name,
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5626,7 +5888,8 @@ module Aws::GuardDuty
     class OrganizationAdditionalConfigurationResult < Struct.new(
       :name,
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5648,7 +5911,8 @@ module Aws::GuardDuty
       :s3_logs,
       :kubernetes,
       :malware_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5667,7 +5931,8 @@ module Aws::GuardDuty
       :s3_logs,
       :kubernetes,
       :malware_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5685,7 +5950,8 @@ module Aws::GuardDuty
     class OrganizationDetails < Struct.new(
       :updated_at,
       :organization_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5696,7 +5962,8 @@ module Aws::GuardDuty
     #   @return [Boolean]
     class OrganizationEbsVolumes < Struct.new(
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5708,7 +5975,8 @@ module Aws::GuardDuty
     #   @return [Boolean]
     class OrganizationEbsVolumesResult < Struct.new(
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5750,7 +6018,8 @@ module Aws::GuardDuty
       :name,
       :auto_enable,
       :additional_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5792,7 +6061,8 @@ module Aws::GuardDuty
       :name,
       :auto_enable,
       :additional_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5812,7 +6082,8 @@ module Aws::GuardDuty
       :name,
       :enabled_accounts_count,
       :additional_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5829,7 +6100,8 @@ module Aws::GuardDuty
     class OrganizationFeatureStatisticsAdditionalConfiguration < Struct.new(
       :name,
       :enabled_accounts_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5840,7 +6112,8 @@ module Aws::GuardDuty
     #   @return [Boolean]
     class OrganizationKubernetesAuditLogsConfiguration < Struct.new(
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5852,7 +6125,8 @@ module Aws::GuardDuty
     #   @return [Boolean]
     class OrganizationKubernetesAuditLogsConfigurationResult < Struct.new(
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5863,7 +6137,8 @@ module Aws::GuardDuty
     #   @return [Types::OrganizationKubernetesAuditLogsConfiguration]
     class OrganizationKubernetesConfiguration < Struct.new(
       :audit_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5874,7 +6149,8 @@ module Aws::GuardDuty
     #   @return [Types::OrganizationKubernetesAuditLogsConfigurationResult]
     class OrganizationKubernetesConfigurationResult < Struct.new(
       :audit_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5885,7 +6161,8 @@ module Aws::GuardDuty
     #   @return [Types::OrganizationScanEc2InstanceWithFindings]
     class OrganizationMalwareProtectionConfiguration < Struct.new(
       :scan_ec2_instance_with_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5897,7 +6174,8 @@ module Aws::GuardDuty
     #   @return [Types::OrganizationScanEc2InstanceWithFindingsResult]
     class OrganizationMalwareProtectionConfigurationResult < Struct.new(
       :scan_ec2_instance_with_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5909,7 +6187,8 @@ module Aws::GuardDuty
     #   @return [Boolean]
     class OrganizationS3LogsConfiguration < Struct.new(
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5921,7 +6200,8 @@ module Aws::GuardDuty
     #   @return [Boolean]
     class OrganizationS3LogsConfigurationResult < Struct.new(
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5932,7 +6212,8 @@ module Aws::GuardDuty
     #   @return [Types::OrganizationEbsVolumes]
     class OrganizationScanEc2InstanceWithFindings < Struct.new(
       :ebs_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5943,7 +6224,8 @@ module Aws::GuardDuty
     #   @return [Types::OrganizationEbsVolumesResult]
     class OrganizationScanEc2InstanceWithFindingsResult < Struct.new(
       :ebs_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5977,7 +6259,8 @@ module Aws::GuardDuty
       :active_accounts_count,
       :enabled_accounts_count,
       :count_by_feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5990,7 +6273,8 @@ module Aws::GuardDuty
     #   @return [String]
     class Owner < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6004,7 +6288,8 @@ module Aws::GuardDuty
     class PermissionConfiguration < Struct.new(
       :bucket_level_permissions,
       :account_level_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6018,7 +6303,8 @@ module Aws::GuardDuty
     class PortProbeAction < Struct.new(
       :blocked,
       :port_probe_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6036,7 +6322,8 @@ module Aws::GuardDuty
       :local_port_details,
       :local_ip_details,
       :remote_ip_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6050,7 +6337,8 @@ module Aws::GuardDuty
     class PrivateIpAddressDetails < Struct.new(
       :private_dns_name,
       :private_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6109,7 +6397,8 @@ module Aws::GuardDuty
       :user_id,
       :euid,
       :lineage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6123,7 +6412,8 @@ module Aws::GuardDuty
     class ProductCode < Struct.new(
       :code,
       :product_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6138,7 +6428,8 @@ module Aws::GuardDuty
     class PublicAccess < Struct.new(
       :permission_configuration,
       :effective_permission,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6164,7 +6455,8 @@ module Aws::GuardDuty
       :public_policy_access,
       :public_acl_ignore_behavior,
       :public_bucket_restrict_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6198,7 +6490,8 @@ module Aws::GuardDuty
       :db_cluster_identifier,
       :db_instance_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6225,7 +6518,8 @@ module Aws::GuardDuty
       :database,
       :ssl,
       :auth_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6260,7 +6554,8 @@ module Aws::GuardDuty
       :engine_version,
       :db_cluster_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6275,7 +6570,8 @@ module Aws::GuardDuty
     class RdsLoginAttemptAction < Struct.new(
       :remote_ip_details,
       :login_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6292,7 +6588,8 @@ module Aws::GuardDuty
     class RemoteAccountDetails < Struct.new(
       :account_id,
       :affiliated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6322,7 +6619,8 @@ module Aws::GuardDuty
       :ip_address_v4,
       :ip_address_v6,
       :organization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6336,7 +6634,8 @@ module Aws::GuardDuty
     class RemotePortDetails < Struct.new(
       :port,
       :port_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6399,7 +6698,8 @@ module Aws::GuardDuty
       :rds_limitless_db_details,
       :rds_db_user_details,
       :lambda_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6441,7 +6741,8 @@ module Aws::GuardDuty
       :eks_cluster,
       :kubernetes_workload,
       :container,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6451,7 +6752,8 @@ module Aws::GuardDuty
     #   @return [String]
     class ResourceDetails < Struct.new(
       :instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6465,7 +6767,8 @@ module Aws::GuardDuty
     class ResourceNotFoundException < Struct.new(
       :message,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6538,7 +6841,8 @@ module Aws::GuardDuty
       :resource_id,
       :resource_type,
       :total_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6581,7 +6885,8 @@ module Aws::GuardDuty
       :cloud_partition,
       :tags,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6694,7 +6999,8 @@ module Aws::GuardDuty
       :service_name,
       :command_line_example,
       :threat_file_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6709,7 +7015,8 @@ module Aws::GuardDuty
     class RuntimeDetails < Struct.new(
       :process,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6757,7 +7064,8 @@ module Aws::GuardDuty
       :account_public_access,
       :bucket_public_access,
       :s3_object_uids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6799,7 +7107,8 @@ module Aws::GuardDuty
       :default_server_side_encryption,
       :public_access,
       :s3_object_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6809,7 +7118,8 @@ module Aws::GuardDuty
     #   @return [Boolean]
     class S3LogsConfiguration < Struct.new(
       :enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6820,7 +7130,8 @@ module Aws::GuardDuty
     #   @return [String]
     class S3LogsConfigurationResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6839,7 +7150,8 @@ module Aws::GuardDuty
       :e_tag,
       :key,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6866,7 +7178,8 @@ module Aws::GuardDuty
       :e_tag,
       :hash,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6938,7 +7251,8 @@ module Aws::GuardDuty
       :file_count,
       :attached_volumes,
       :scan_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6950,7 +7264,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::ScanConditionPair>]
     class ScanCondition < Struct.new(
       :map_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6966,7 +7281,8 @@ module Aws::GuardDuty
     class ScanConditionPair < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6989,7 +7305,8 @@ module Aws::GuardDuty
       :threats_detected_item_count,
       :highest_severity_threat_details,
       :threat_detected_by_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7000,7 +7317,8 @@ module Aws::GuardDuty
     #   @return [Boolean]
     class ScanEc2InstanceWithFindings < Struct.new(
       :ebs_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7011,7 +7329,8 @@ module Aws::GuardDuty
     #   @return [Types::EbsVolumesResult]
     class ScanEc2InstanceWithFindingsResult < Struct.new(
       :ebs_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7033,7 +7352,8 @@ module Aws::GuardDuty
       :volume_arn,
       :hash,
       :file_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7050,7 +7370,8 @@ module Aws::GuardDuty
     class ScanResourceCriteria < Struct.new(
       :include,
       :exclude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7060,7 +7381,8 @@ module Aws::GuardDuty
     #   @return [String]
     class ScanResultDetails < Struct.new(
       :scan_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7083,7 +7405,8 @@ module Aws::GuardDuty
       :severity,
       :item_count,
       :file_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7101,7 +7424,8 @@ module Aws::GuardDuty
       :total_gb,
       :files,
       :volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7115,7 +7439,8 @@ module Aws::GuardDuty
     class SecurityContext < Struct.new(
       :privileged,
       :allow_privilege_escalation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7129,7 +7454,8 @@ module Aws::GuardDuty
     class SecurityGroup < Struct.new(
       :group_id,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7168,7 +7494,8 @@ module Aws::GuardDuty
       :signals,
       :sequence_indicators,
       :additional_sequence_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7241,7 +7568,8 @@ module Aws::GuardDuty
       :runtime_details,
       :detection,
       :malware_scan_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7255,7 +7583,8 @@ module Aws::GuardDuty
     class ServiceAdditionalInfo < Struct.new(
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7280,7 +7609,8 @@ module Aws::GuardDuty
       :mfa_status,
       :created_time,
       :issuer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7298,7 +7628,8 @@ module Aws::GuardDuty
       :last_generated_at,
       :severity,
       :total_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7386,7 +7717,8 @@ module Aws::GuardDuty
       :actor_ids,
       :endpoint_ids,
       :signal_indicators,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7401,7 +7733,8 @@ module Aws::GuardDuty
     class SortCriteria < Struct.new(
       :attribute_name,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7410,7 +7743,8 @@ module Aws::GuardDuty
     #   @return [String]
     class StartMalwareScanRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7420,7 +7754,8 @@ module Aws::GuardDuty
     #   @return [String]
     class StartMalwareScanResponse < Struct.new(
       :scan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7436,7 +7771,8 @@ module Aws::GuardDuty
     class StartMonitoringMembersRequest < Struct.new(
       :detector_id,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7446,7 +7782,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::UnprocessedAccount>]
     class StartMonitoringMembersResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7462,7 +7799,8 @@ module Aws::GuardDuty
     class StopMonitoringMembersRequest < Struct.new(
       :detector_id,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7472,7 +7810,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::UnprocessedAccount>]
     class StopMonitoringMembersResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7486,7 +7825,8 @@ module Aws::GuardDuty
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7499,12 +7839,14 @@ module Aws::GuardDuty
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7524,7 +7866,8 @@ module Aws::GuardDuty
       :name,
       :source,
       :item_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7547,7 +7890,8 @@ module Aws::GuardDuty
       :unique_threat_name_count,
       :shortened,
       :threat_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7567,7 +7911,8 @@ module Aws::GuardDuty
       :threat_list_name,
       :threat_names,
       :threat_file_sha256,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7577,7 +7922,8 @@ module Aws::GuardDuty
     #   @return [Integer]
     class ThreatsDetectedItemCount < Struct.new(
       :files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7591,7 +7937,8 @@ module Aws::GuardDuty
     class Total < Struct.new(
       :amount,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7605,7 +7952,8 @@ module Aws::GuardDuty
     class TriggerDetails < Struct.new(
       :guard_duty_finding_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7620,12 +7968,14 @@ module Aws::GuardDuty
     class UnarchiveFindingsRequest < Struct.new(
       :detector_id,
       :finding_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UnarchiveFindingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7639,7 +7989,8 @@ module Aws::GuardDuty
     class UnprocessedAccount < Struct.new(
       :account_id,
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7650,7 +8001,8 @@ module Aws::GuardDuty
     #   @return [Types::MalwareProtectionConfigurationResult]
     class UnprocessedDataSourcesResult < Struct.new(
       :malware_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7663,12 +8015,14 @@ module Aws::GuardDuty
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7701,12 +8055,14 @@ module Aws::GuardDuty
       :finding_publishing_frequency,
       :data_sources,
       :features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDetectorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7742,7 +8098,8 @@ module Aws::GuardDuty
       :action,
       :rank,
       :finding_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7751,7 +8108,8 @@ module Aws::GuardDuty
     #   @return [String]
     class UpdateFilterResponse < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7775,12 +8133,14 @@ module Aws::GuardDuty
       :finding_ids,
       :feedback,
       :comments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateFindingsFeedbackResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7811,12 +8171,14 @@ module Aws::GuardDuty
       :location,
       :activate,
       :expected_bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateIPSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7840,7 +8202,8 @@ module Aws::GuardDuty
       :role,
       :actions,
       :protected_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7860,12 +8223,14 @@ module Aws::GuardDuty
       :detector_id,
       :scan_resource_criteria,
       :ebs_snapshot_preservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateMalwareScanSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7890,7 +8255,8 @@ module Aws::GuardDuty
       :account_ids,
       :data_sources,
       :features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7900,7 +8266,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::UnprocessedAccount>]
     class UpdateMemberDetectorsResponse < Struct.new(
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7963,12 +8330,14 @@ module Aws::GuardDuty
       :data_sources,
       :features,
       :auto_enable_organization_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateOrganizationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7980,7 +8349,8 @@ module Aws::GuardDuty
     #   @return [Types::UpdateS3BucketResource]
     class UpdateProtectedResource < Struct.new(
       :s3_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8000,12 +8370,14 @@ module Aws::GuardDuty
       :detector_id,
       :destination_id,
       :destination_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdatePublishingDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8016,7 +8388,8 @@ module Aws::GuardDuty
     #   @return [Array<String>]
     class UpdateS3BucketResource < Struct.new(
       :object_prefixes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8053,12 +8426,14 @@ module Aws::GuardDuty
       :location,
       :expected_bucket_owner,
       :activate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateThreatEntitySetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8091,12 +8466,14 @@ module Aws::GuardDuty
       :location,
       :activate,
       :expected_bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateThreatIntelSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8133,12 +8510,14 @@ module Aws::GuardDuty
       :location,
       :expected_bucket_owner,
       :activate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTrustedEntitySetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8152,7 +8531,8 @@ module Aws::GuardDuty
     class UsageAccountResult < Struct.new(
       :account_id,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8177,7 +8557,8 @@ module Aws::GuardDuty
       :data_sources,
       :resources,
       :features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8191,7 +8572,8 @@ module Aws::GuardDuty
     class UsageDataSourceResult < Struct.new(
       :data_source,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8205,7 +8587,8 @@ module Aws::GuardDuty
     class UsageFeatureResult < Struct.new(
       :feature,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8219,7 +8602,8 @@ module Aws::GuardDuty
     class UsageResourceResult < Struct.new(
       :resource,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8253,7 +8637,8 @@ module Aws::GuardDuty
       :sum_by_resource,
       :top_resources,
       :sum_by_feature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8268,7 +8653,8 @@ module Aws::GuardDuty
     class UsageTopAccountResult < Struct.new(
       :account_id,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8286,7 +8672,8 @@ module Aws::GuardDuty
     class UsageTopAccountsResult < Struct.new(
       :feature,
       :accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8312,7 +8699,8 @@ module Aws::GuardDuty
       :type,
       :credential_uid,
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8327,7 +8715,8 @@ module Aws::GuardDuty
     class Volume < Struct.new(
       :name,
       :host_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8361,7 +8750,8 @@ module Aws::GuardDuty
       :encryption_type,
       :snapshot_arn,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8375,7 +8765,8 @@ module Aws::GuardDuty
     class VolumeMount < Struct.new(
       :name,
       :mount_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8393,7 +8784,8 @@ module Aws::GuardDuty
       :subnet_ids,
       :vpc_id,
       :security_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

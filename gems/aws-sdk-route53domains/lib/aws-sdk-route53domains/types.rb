@@ -18,7 +18,8 @@ module Aws::Route53Domains
     class AcceptDomainTransferFromAnotherAwsAccountRequest < Struct.new(
       :domain_name,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +31,8 @@ module Aws::Route53Domains
     #   @return [String]
     class AcceptDomainTransferFromAnotherAwsAccountResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +46,8 @@ module Aws::Route53Domains
     class AssociateDelegationSignerToDomainRequest < Struct.new(
       :domain_name,
       :signing_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +57,8 @@ module Aws::Route53Domains
     #   @return [String]
     class AssociateDelegationSignerToDomainResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +89,8 @@ module Aws::Route53Domains
       :invoice_id,
       :bill_date,
       :price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -101,7 +106,8 @@ module Aws::Route53Domains
     #   @return [String]
     class CancelDomainTransferToAnotherAwsAccountRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +121,8 @@ module Aws::Route53Domains
     #   @return [String]
     class CancelDomainTransferToAnotherAwsAccountResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +161,8 @@ module Aws::Route53Domains
     class CheckDomainAvailabilityRequest < Struct.new(
       :domain_name,
       :idn_lang_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +224,8 @@ module Aws::Route53Domains
     #   @return [String]
     class CheckDomainAvailabilityResponse < Struct.new(
       :availability,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +262,8 @@ module Aws::Route53Domains
     class CheckDomainTransferabilityRequest < Struct.new(
       :domain_name,
       :auth_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +278,8 @@ module Aws::Route53Domains
     class CheckDomainTransferabilityResponse < Struct.new(
       :transferability,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +293,8 @@ module Aws::Route53Domains
     class Consent < Struct.new(
       :max_price,
       :currency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -376,7 +388,8 @@ module Aws::Route53Domains
       :email,
       :fax,
       :extra_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +398,8 @@ module Aws::Route53Domains
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +409,8 @@ module Aws::Route53Domains
     #   @return [String]
     class DeleteDomainResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -409,12 +424,14 @@ module Aws::Route53Domains
     class DeleteTagsForDomainRequest < Struct.new(
       :domain_name,
       :tags_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTagsForDomainResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,12 +440,14 @@ module Aws::Route53Domains
     #   @return [String]
     class DisableDomainAutoRenewRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableDomainAutoRenewResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +457,8 @@ module Aws::Route53Domains
     #   @return [String]
     class DisableDomainTransferLockRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +469,8 @@ module Aws::Route53Domains
     #   @return [String]
     class DisableDomainTransferLockResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -463,7 +484,8 @@ module Aws::Route53Domains
     class DisassociateDelegationSignerFromDomainRequest < Struct.new(
       :domain_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +495,8 @@ module Aws::Route53Domains
     #   @return [String]
     class DisassociateDelegationSignerFromDomainResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +545,8 @@ module Aws::Route53Domains
       :digest,
       :key_tag,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -533,7 +557,8 @@ module Aws::Route53Domains
     #   @return [String]
     class DnssecLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +582,8 @@ module Aws::Route53Domains
       :algorithm,
       :flags,
       :public_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -567,7 +593,8 @@ module Aws::Route53Domains
     #   @return [String]
     class DomainLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +624,8 @@ module Aws::Route53Domains
       :renewal_price,
       :change_ownership_price,
       :restoration_price,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +688,8 @@ module Aws::Route53Domains
     class DomainSuggestion < Struct.new(
       :domain_name,
       :availability,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +713,8 @@ module Aws::Route53Domains
       :auto_renew,
       :transfer_lock,
       :expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +756,8 @@ module Aws::Route53Domains
     #   @return [String]
     class DomainTransferability < Struct.new(
       :transferable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +771,8 @@ module Aws::Route53Domains
     class DuplicateRequest < Struct.new(
       :request_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,12 +781,14 @@ module Aws::Route53Domains
     #   @return [String]
     class EnableDomainAutoRenewRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableDomainAutoRenewResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -764,7 +798,8 @@ module Aws::Route53Domains
     #   @return [String]
     class EnableDomainTransferLockRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +810,8 @@ module Aws::Route53Domains
     #   @return [String]
     class EnableDomainTransferLockResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1605,7 +1641,8 @@ module Aws::Route53Domains
     class ExtraParam < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,7 +1675,8 @@ module Aws::Route53Domains
       :name,
       :operator,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1686,8 @@ module Aws::Route53Domains
     #   @return [String]
     class GetContactReachabilityStatusRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1714,8 @@ module Aws::Route53Domains
     class GetContactReachabilityStatusResponse < Struct.new(
       :domain_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1725,8 @@ module Aws::Route53Domains
     #   @return [String]
     class GetDomainDetailRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1820,7 +1861,8 @@ module Aws::Route53Domains
       :dnssec_keys,
       :billing_contact,
       :billing_privacy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1909,8 @@ module Aws::Route53Domains
       :domain_name,
       :suggestion_count,
       :only_available,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1878,7 +1921,8 @@ module Aws::Route53Domains
     #   @return [Array<Types::DomainSuggestion>]
     class GetDomainSuggestionsResponse < Struct.new(
       :suggestions_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1889,7 +1933,8 @@ module Aws::Route53Domains
     #   @return [String]
     class GetOperationDetailRequest < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2000,8 @@ module Aws::Route53Domains
       :submitted_date,
       :last_updated_date,
       :status_flag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1970,7 +2016,8 @@ module Aws::Route53Domains
     #   @return [String]
     class InvalidInput < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2049,8 @@ module Aws::Route53Domains
       :sort_condition,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2018,7 +2066,8 @@ module Aws::Route53Domains
     class ListDomainsResponse < Struct.new(
       :domains,
       :next_page_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2060,7 +2109,8 @@ module Aws::Route53Domains
       :type,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2076,7 +2126,8 @@ module Aws::Route53Domains
     class ListOperationsResponse < Struct.new(
       :operations,
       :next_page_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2105,7 +2156,8 @@ module Aws::Route53Domains
       :tld,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2123,7 +2175,8 @@ module Aws::Route53Domains
     class ListPricesResponse < Struct.new(
       :prices,
       :next_page_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2133,7 +2186,8 @@ module Aws::Route53Domains
     #   @return [String]
     class ListTagsForDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2143,7 +2197,8 @@ module Aws::Route53Domains
     #   @return [Array<Types::Tag>]
     class ListTagsForDomainResponse < Struct.new(
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2162,7 +2217,8 @@ module Aws::Route53Domains
     class Nameserver < Struct.new(
       :name,
       :glue_ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2174,7 +2230,8 @@ module Aws::Route53Domains
     #   @return [String]
     class OperationLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2299,8 @@ module Aws::Route53Domains
       :message,
       :status_flag,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2256,7 +2314,8 @@ module Aws::Route53Domains
     class PriceWithCurrency < Struct.new(
       :price,
       :currency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2274,7 +2333,8 @@ module Aws::Route53Domains
     class PushDomainRequest < Struct.new(
       :domain_name,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2402,7 +2462,8 @@ module Aws::Route53Domains
       :privacy_protect_tech_contact,
       :billing_contact,
       :privacy_protect_billing_contact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2413,7 +2474,8 @@ module Aws::Route53Domains
     #   @return [String]
     class RegisterDomainResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2425,7 +2487,8 @@ module Aws::Route53Domains
     #   @return [String]
     class RejectDomainTransferFromAnotherAwsAccountRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,7 +2502,8 @@ module Aws::Route53Domains
     #   @return [String]
     class RejectDomainTransferFromAnotherAwsAccountResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2464,7 +2528,8 @@ module Aws::Route53Domains
       :domain_name,
       :duration_in_years,
       :current_expiry_year,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2474,7 +2539,8 @@ module Aws::Route53Domains
     #   @return [String]
     class RenewDomainResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2484,7 +2550,8 @@ module Aws::Route53Domains
     #   @return [String]
     class ResendContactReachabilityEmailRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2505,7 +2572,8 @@ module Aws::Route53Domains
       :domain_name,
       :email_address,
       :is_already_verified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2514,7 +2582,8 @@ module Aws::Route53Domains
     #   @return [String]
     class ResendOperationAuthorizationRequest < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2525,7 +2594,8 @@ module Aws::Route53Domains
     #   @return [String]
     class RetrieveDomainAuthCodeRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2535,7 +2605,8 @@ module Aws::Route53Domains
     #   @return [String]
     class RetrieveDomainAuthCodeResponse < Struct.new(
       :auth_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2554,7 +2625,8 @@ module Aws::Route53Domains
     class SortCondition < Struct.new(
       :name,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2564,7 +2636,8 @@ module Aws::Route53Domains
     #   @return [String]
     class TLDRulesViolation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2582,7 +2655,8 @@ module Aws::Route53Domains
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2709,7 +2783,8 @@ module Aws::Route53Domains
       :privacy_protect_tech_contact,
       :billing_contact,
       :privacy_protect_billing_contact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2720,7 +2795,8 @@ module Aws::Route53Domains
     #   @return [String]
     class TransferDomainResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2735,7 +2811,8 @@ module Aws::Route53Domains
     class TransferDomainToAnotherAwsAccountRequest < Struct.new(
       :domain_name,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2754,7 +2831,8 @@ module Aws::Route53Domains
     class TransferDomainToAnotherAwsAccountResponse < Struct.new(
       :operation_id,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2764,7 +2842,8 @@ module Aws::Route53Domains
     #   @return [String]
     class UnsupportedTLD < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2824,7 +2903,8 @@ module Aws::Route53Domains
       :registrant_privacy,
       :tech_privacy,
       :billing_privacy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2835,7 +2915,8 @@ module Aws::Route53Domains
     #   @return [String]
     class UpdateDomainContactPrivacyResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2865,7 +2946,8 @@ module Aws::Route53Domains
       :tech_contact,
       :consent,
       :billing_contact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2876,7 +2958,8 @@ module Aws::Route53Domains
     #   @return [String]
     class UpdateDomainContactResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2900,7 +2983,8 @@ module Aws::Route53Domains
       :domain_name,
       :fi_auth_key,
       :nameservers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2911,7 +2995,8 @@ module Aws::Route53Domains
     #   @return [String]
     class UpdateDomainNameserversResponse < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2926,12 +3011,14 @@ module Aws::Route53Domains
     class UpdateTagsForDomainRequest < Struct.new(
       :domain_name,
       :tags_to_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTagsForDomainResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2966,7 +3053,8 @@ module Aws::Route53Domains
       :end,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2982,7 +3070,8 @@ module Aws::Route53Domains
     class ViewBillingResponse < Struct.new(
       :next_page_marker,
       :billing_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -760,7 +760,6 @@ module Aws::ECRPUBLIC
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadNotFoundException)
         operation.traits = {}
       end)
-
     end
 
     class << self

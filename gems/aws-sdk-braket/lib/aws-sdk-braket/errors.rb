@@ -42,7 +42,7 @@ module Aws::Braket
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Braket::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::Braket
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Braket::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::Braket
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Braket::Types::DeviceOfflineException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::Braket
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Braket::Types::DeviceRetiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -94,7 +94,7 @@ module Aws::Braket
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Braket::Types::InternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -107,7 +107,7 @@ module Aws::Braket
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Braket::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::Braket
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Braket::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::Braket
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Braket::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::Braket
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Braket::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

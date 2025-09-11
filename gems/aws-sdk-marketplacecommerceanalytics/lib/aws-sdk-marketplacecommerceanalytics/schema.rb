@@ -98,7 +98,6 @@ module Aws::MarketplaceCommerceAnalytics
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MarketplaceCommerceAnalyticsException)
         operation.traits = {"smithy.api#deprecated" => {"message" => "This target has been deprecated. As of December 2022 Product Support Connection is no longer supported."}}
       end)
-
     end
 
     class << self

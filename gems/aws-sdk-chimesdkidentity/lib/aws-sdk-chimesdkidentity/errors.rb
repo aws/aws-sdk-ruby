@@ -42,7 +42,7 @@ module Aws::ChimeSDKIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKIdentity::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -60,7 +60,7 @@ module Aws::ChimeSDKIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKIdentity::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -77,7 +77,7 @@ module Aws::ChimeSDKIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKIdentity::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -94,7 +94,7 @@ module Aws::ChimeSDKIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKIdentity::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -111,7 +111,7 @@ module Aws::ChimeSDKIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKIdentity::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -128,7 +128,7 @@ module Aws::ChimeSDKIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKIdentity::Types::ServiceFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -145,7 +145,7 @@ module Aws::ChimeSDKIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKIdentity::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -162,7 +162,7 @@ module Aws::ChimeSDKIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKIdentity::Types::ThrottledClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -179,7 +179,7 @@ module Aws::ChimeSDKIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ChimeSDKIdentity::Types::UnauthorizedClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code

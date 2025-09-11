@@ -40,7 +40,7 @@ module Aws::PinpointSMSVoiceV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoiceV2::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::PinpointSMSVoiceV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoiceV2::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::PinpointSMSVoiceV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoiceV2::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::PinpointSMSVoiceV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoiceV2::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -131,7 +131,7 @@ module Aws::PinpointSMSVoiceV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoiceV2::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::PinpointSMSVoiceV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoiceV2::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -170,7 +170,7 @@ module Aws::PinpointSMSVoiceV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PinpointSMSVoiceV2::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

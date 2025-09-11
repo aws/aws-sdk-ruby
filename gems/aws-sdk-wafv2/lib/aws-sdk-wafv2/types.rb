@@ -27,7 +27,8 @@ module Aws::WAFV2
       :api_key,
       :creation_timestamp,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -88,7 +89,8 @@ module Aws::WAFV2
       :request_inspection,
       :response_inspection,
       :enable_regex_in_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -127,7 +129,8 @@ module Aws::WAFV2
       :request_inspection,
       :response_inspection,
       :enable_regex_in_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -167,7 +170,8 @@ module Aws::WAFV2
     class AWSManagedRulesAntiDDoSRuleSet < Struct.new(
       :client_side_action_config,
       :sensitivity_to_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -195,7 +199,8 @@ module Aws::WAFV2
     class AWSManagedRulesBotControlRuleSet < Struct.new(
       :inspection_level,
       :enable_machine_learning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -213,7 +218,8 @@ module Aws::WAFV2
     #   @return [String]
     class ActionCondition < Struct.new(
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +247,8 @@ module Aws::WAFV2
     #   @return [String]
     class AddressField < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +258,8 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"All": {}</code>
     #          </p>
     class All < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -260,7 +268,8 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"AllQueryArguments": {}</code>
     #          </p>
     class AllQueryArguments < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -275,7 +284,8 @@ module Aws::WAFV2
     #   @return [Types::CustomRequestHandling]
     class AllowAction < Struct.new(
       :custom_request_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -286,7 +296,8 @@ module Aws::WAFV2
     #   @return [Array<Types::Statement>]
     class AndStatement < Struct.new(
       :statements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -300,7 +311,8 @@ module Aws::WAFV2
     class ApplicationAttribute < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +322,8 @@ module Aws::WAFV2
     #   @return [Array<Types::ApplicationAttribute>]
     class ApplicationConfig < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -329,7 +342,8 @@ module Aws::WAFV2
     class AsnMatchStatement < Struct.new(
       :asn_list,
       :forwarded_ip_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,12 +395,14 @@ module Aws::WAFV2
     class AssociateWebACLRequest < Struct.new(
       :web_acl_arn,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateWebACLResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +427,8 @@ module Aws::WAFV2
     #   @return [Hash<String, Types::RequestBodyAssociatedResourceTypeConfig>]
     class AssociationConfig < Struct.new(
       :request_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +443,8 @@ module Aws::WAFV2
     #   @return [Types::CustomResponse]
     class BlockAction < Struct.new(
       :custom_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +492,8 @@ module Aws::WAFV2
     #   @return [String]
     class Body < Struct.new(
       :oversize_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +605,8 @@ module Aws::WAFV2
       :field_to_match,
       :text_transformations,
       :positional_constraint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +646,8 @@ module Aws::WAFV2
     #   @return [Types::CustomRequestHandling]
     class CaptchaAction < Struct.new(
       :custom_request_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -638,7 +659,8 @@ module Aws::WAFV2
     #   @return [Types::ImmunityTimeProperty]
     class CaptchaConfig < Struct.new(
       :immunity_time_property,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -658,7 +680,8 @@ module Aws::WAFV2
       :response_code,
       :solve_timestamp,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +725,8 @@ module Aws::WAFV2
     #   @return [Types::CustomRequestHandling]
     class ChallengeAction < Struct.new(
       :custom_request_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +738,8 @@ module Aws::WAFV2
     #   @return [Types::ImmunityTimeProperty]
     class ChallengeConfig < Struct.new(
       :immunity_time_property,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -733,7 +758,8 @@ module Aws::WAFV2
       :response_code,
       :solve_timestamp,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +782,8 @@ module Aws::WAFV2
     class CheckCapacityRequest < Struct.new(
       :scope,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +792,8 @@ module Aws::WAFV2
     #   @return [Integer]
     class CheckCapacityResponse < Struct.new(
       :capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -855,7 +883,8 @@ module Aws::WAFV2
       :usage_of_action,
       :sensitivity,
       :exempt_uri_regular_expressions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -871,7 +900,8 @@ module Aws::WAFV2
     #   @return [Types::ClientSideAction]
     class ClientSideActionConfig < Struct.new(
       :challenge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +916,8 @@ module Aws::WAFV2
     class Condition < Struct.new(
       :action_condition,
       :label_name_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +940,8 @@ module Aws::WAFV2
       :all,
       :included_cookies,
       :excluded_cookies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +994,8 @@ module Aws::WAFV2
       :match_pattern,
       :match_scope,
       :oversize_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +1010,8 @@ module Aws::WAFV2
     #   @return [Types::CustomRequestHandling]
     class CountAction < Struct.new(
       :custom_request_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1036,8 @@ module Aws::WAFV2
     class CreateAPIKeyRequest < Struct.new(
       :scope,
       :token_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1046,8 @@ module Aws::WAFV2
     #   @return [String]
     class CreateAPIKeyResponse < Struct.new(
       :api_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1120,8 @@ module Aws::WAFV2
       :ip_address_version,
       :addresses,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1130,8 @@ module Aws::WAFV2
     #   @return [Types::IPSetSummary]
     class CreateIPSetResponse < Struct.new(
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1165,8 @@ module Aws::WAFV2
       :description,
       :regular_expression_list,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1175,8 @@ module Aws::WAFV2
     #   @return [Types::RegexPatternSetSummary]
     class CreateRegexPatternSetResponse < Struct.new(
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1241,8 @@ module Aws::WAFV2
       :visibility_config,
       :tags,
       :custom_response_bodies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,7 +1251,8 @@ module Aws::WAFV2
     #   @return [Types::RuleGroupSummary]
     class CreateRuleGroupResponse < Struct.new(
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1305,7 +1347,8 @@ module Aws::WAFV2
       :association_config,
       :on_source_d_do_s_protection_config,
       :application_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1357,8 @@ module Aws::WAFV2
     #   @return [Types::WebACLSummary]
     class CreateWebACLResponse < Struct.new(
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1376,8 @@ module Aws::WAFV2
     class CustomHTTPHeader < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1349,7 +1394,8 @@ module Aws::WAFV2
     #   @return [Array<Types::CustomHTTPHeader>]
     class CustomRequestHandling < Struct.new(
       :insert_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1380,7 +1426,8 @@ module Aws::WAFV2
       :response_code,
       :custom_response_body_key,
       :response_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1401,7 +1448,8 @@ module Aws::WAFV2
     class CustomResponseBody < Struct.new(
       :content_type,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1443,7 +1491,8 @@ module Aws::WAFV2
       :action,
       :exclude_rule_match_details,
       :exclude_rate_based_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1463,7 +1512,8 @@ module Aws::WAFV2
     #   @return [Array<Types::DataProtection>]
     class DataProtectionConfig < Struct.new(
       :data_protections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1479,7 +1529,8 @@ module Aws::WAFV2
     class DefaultAction < Struct.new(
       :block,
       :allow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1501,12 +1552,14 @@ module Aws::WAFV2
     class DeleteAPIKeyRequest < Struct.new(
       :scope,
       :api_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAPIKeyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1519,7 +1572,8 @@ module Aws::WAFV2
     class DeleteFirewallManagerRuleGroupsRequest < Struct.new(
       :web_acl_arn,
       :web_acl_lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1528,7 +1582,8 @@ module Aws::WAFV2
     #   @return [String]
     class DeleteFirewallManagerRuleGroupsResponse < Struct.new(
       :next_web_acl_lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1558,12 +1613,14 @@ module Aws::WAFV2
       :scope,
       :id,
       :lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIPSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,12 +1644,14 @@ module Aws::WAFV2
       :resource_arn,
       :log_type,
       :log_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLoggingConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1603,12 +1662,14 @@ module Aws::WAFV2
     #   @return [String]
     class DeletePermissionPolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePermissionPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,12 +1699,14 @@ module Aws::WAFV2
       :scope,
       :id,
       :lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRegexPatternSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1673,12 +1736,14 @@ module Aws::WAFV2
       :scope,
       :id,
       :lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1708,12 +1773,14 @@ module Aws::WAFV2
       :scope,
       :id,
       :lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWebACLResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1731,7 +1798,8 @@ module Aws::WAFV2
     #   @return [String]
     class DescribeAllManagedProductsRequest < Struct.new(
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1740,7 +1808,8 @@ module Aws::WAFV2
     #   @return [Array<Types::ManagedProductDescriptor>]
     class DescribeAllManagedProductsResponse < Struct.new(
       :managed_products,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1762,7 +1831,8 @@ module Aws::WAFV2
     class DescribeManagedProductsByVendorRequest < Struct.new(
       :vendor_name,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1771,7 +1841,8 @@ module Aws::WAFV2
     #   @return [Array<Types::ManagedProductDescriptor>]
     class DescribeManagedProductsByVendorResponse < Struct.new(
       :managed_products,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1802,7 +1873,8 @@ module Aws::WAFV2
       :name,
       :scope,
       :version_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1859,7 +1931,8 @@ module Aws::WAFV2
       :label_namespace,
       :available_labels,
       :consumed_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,12 +1979,14 @@ module Aws::WAFV2
     #   @return [String]
     class DisassociateWebACLRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateWebACLResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1939,7 +2014,8 @@ module Aws::WAFV2
     #   @return [String]
     class EmailField < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1952,7 +2028,8 @@ module Aws::WAFV2
     #   @return [String]
     class ExcludedRule < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2149,7 +2226,8 @@ module Aws::WAFV2
       :ja3_fingerprint,
       :ja4_fingerprint,
       :uri_fragment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2163,7 +2241,8 @@ module Aws::WAFV2
     class FieldToProtect < Struct.new(
       :field_type,
       :field_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2182,7 +2261,8 @@ module Aws::WAFV2
       :behavior,
       :requirement,
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2216,7 +2296,8 @@ module Aws::WAFV2
       :firewall_manager_statement,
       :override_action,
       :visibility_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2235,7 +2316,8 @@ module Aws::WAFV2
     class FirewallManagerStatement < Struct.new(
       :managed_rule_group_statement,
       :rule_group_reference_statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2273,7 +2355,8 @@ module Aws::WAFV2
     class ForwardedIPConfig < Struct.new(
       :header_name,
       :fallback_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2287,7 +2370,8 @@ module Aws::WAFV2
     class GenerateMobileSdkReleaseUrlRequest < Struct.new(
       :platform,
       :release_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2296,7 +2380,8 @@ module Aws::WAFV2
     #   @return [String]
     class GenerateMobileSdkReleaseUrlResponse < Struct.new(
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2327,7 +2412,8 @@ module Aws::WAFV2
     class GeoMatchStatement < Struct.new(
       :country_codes,
       :forwarded_ip_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2349,7 +2435,8 @@ module Aws::WAFV2
     class GetDecryptedAPIKeyRequest < Struct.new(
       :scope,
       :api_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2362,7 +2449,8 @@ module Aws::WAFV2
     class GetDecryptedAPIKeyResponse < Struct.new(
       :token_domains,
       :creation_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2388,7 +2476,8 @@ module Aws::WAFV2
       :name,
       :scope,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2401,7 +2490,8 @@ module Aws::WAFV2
     class GetIPSetResponse < Struct.new(
       :ip_set,
       :lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2425,7 +2515,8 @@ module Aws::WAFV2
       :resource_arn,
       :log_type,
       :log_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2434,7 +2525,8 @@ module Aws::WAFV2
     #   @return [Types::LoggingConfiguration]
     class GetLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2461,7 +2553,8 @@ module Aws::WAFV2
       :name,
       :scope,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2474,7 +2567,8 @@ module Aws::WAFV2
     class GetManagedRuleSetResponse < Struct.new(
       :managed_rule_set,
       :lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2488,7 +2582,8 @@ module Aws::WAFV2
     class GetMobileSdkReleaseRequest < Struct.new(
       :platform,
       :release_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2497,7 +2592,8 @@ module Aws::WAFV2
     #   @return [Types::MobileSdkRelease]
     class GetMobileSdkReleaseResponse < Struct.new(
       :mobile_sdk_release,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2507,7 +2603,8 @@ module Aws::WAFV2
     #   @return [String]
     class GetPermissionPolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2516,7 +2613,8 @@ module Aws::WAFV2
     #   @return [String]
     class GetPermissionPolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2553,7 +2651,8 @@ module Aws::WAFV2
       :web_acl_id,
       :rule_group_rule_name,
       :rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2566,7 +2665,8 @@ module Aws::WAFV2
     class GetRateBasedStatementManagedKeysResponse < Struct.new(
       :managed_keys_ipv4,
       :managed_keys_ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2592,7 +2692,8 @@ module Aws::WAFV2
       :name,
       :scope,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2605,7 +2706,8 @@ module Aws::WAFV2
     class GetRegexPatternSetResponse < Struct.new(
       :regex_pattern_set,
       :lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2635,7 +2737,8 @@ module Aws::WAFV2
       :scope,
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2648,7 +2751,8 @@ module Aws::WAFV2
     class GetRuleGroupResponse < Struct.new(
       :rule_group,
       :lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2692,7 +2796,8 @@ module Aws::WAFV2
       :scope,
       :time_window,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2717,7 +2822,8 @@ module Aws::WAFV2
       :sampled_requests,
       :population_size,
       :time_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2769,7 +2875,8 @@ module Aws::WAFV2
     #   @return [String]
     class GetWebACLForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2779,7 +2886,8 @@ module Aws::WAFV2
     #   @return [Types::WebACL]
     class GetWebACLForResourceResponse < Struct.new(
       :web_acl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2809,7 +2917,8 @@ module Aws::WAFV2
       :scope,
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2828,7 +2937,8 @@ module Aws::WAFV2
       :web_acl,
       :lock_token,
       :application_integration_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2845,7 +2955,8 @@ module Aws::WAFV2
     class HTTPHeader < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2896,7 +3007,8 @@ module Aws::WAFV2
       :method,
       :http_version,
       :headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2919,7 +3031,8 @@ module Aws::WAFV2
       :all,
       :included_headers,
       :excluded_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2952,7 +3065,8 @@ module Aws::WAFV2
     #   @return [String]
     class HeaderOrder < Struct.new(
       :oversize_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3008,7 +3122,8 @@ module Aws::WAFV2
       :match_pattern,
       :match_scope,
       :oversize_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3078,7 +3193,8 @@ module Aws::WAFV2
       :description,
       :ip_address_version,
       :addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3135,7 +3251,8 @@ module Aws::WAFV2
       :header_name,
       :fallback_behavior,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3154,7 +3271,8 @@ module Aws::WAFV2
     class IPSetReferenceStatement < Struct.new(
       :arn,
       :ip_set_forwarded_ip_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3180,7 +3298,8 @@ module Aws::WAFV2
       :description,
       :lock_token,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3193,7 +3312,8 @@ module Aws::WAFV2
     #   @return [Integer]
     class ImmunityTimeProperty < Struct.new(
       :immunity_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3226,7 +3346,8 @@ module Aws::WAFV2
     #   @return [String]
     class JA3Fingerprint < Struct.new(
       :fallback_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3259,7 +3380,8 @@ module Aws::WAFV2
     #   @return [String]
     class JA4Fingerprint < Struct.new(
       :fallback_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3361,7 +3483,8 @@ module Aws::WAFV2
       :match_scope,
       :invalid_fallback_behavior,
       :oversize_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3392,7 +3515,8 @@ module Aws::WAFV2
     class JsonMatchPattern < Struct.new(
       :all,
       :included_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3404,7 +3528,8 @@ module Aws::WAFV2
     #   @return [String]
     class Label < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3435,7 +3560,8 @@ module Aws::WAFV2
     class LabelMatchStatement < Struct.new(
       :scope,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3447,7 +3573,8 @@ module Aws::WAFV2
     #   @return [String]
     class LabelNameCondition < Struct.new(
       :label_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3470,7 +3597,8 @@ module Aws::WAFV2
     #   @return [String]
     class LabelSummary < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3500,7 +3628,8 @@ module Aws::WAFV2
       :scope,
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3519,7 +3648,8 @@ module Aws::WAFV2
       :next_marker,
       :api_key_summaries,
       :application_integration_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3557,7 +3687,8 @@ module Aws::WAFV2
       :scope,
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3576,7 +3707,8 @@ module Aws::WAFV2
       :next_marker,
       :versions,
       :current_default_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3606,7 +3738,8 @@ module Aws::WAFV2
       :scope,
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3621,7 +3754,8 @@ module Aws::WAFV2
     class ListAvailableManagedRuleGroupsResponse < Struct.new(
       :next_marker,
       :managed_rule_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3651,7 +3785,8 @@ module Aws::WAFV2
       :scope,
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3666,7 +3801,8 @@ module Aws::WAFV2
     class ListIPSetsResponse < Struct.new(
       :next_marker,
       :ip_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3705,7 +3841,8 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       :log_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3720,7 +3857,8 @@ module Aws::WAFV2
     class ListLoggingConfigurationsResponse < Struct.new(
       :logging_configurations,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3750,7 +3888,8 @@ module Aws::WAFV2
       :scope,
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3765,7 +3904,8 @@ module Aws::WAFV2
     class ListManagedRuleSetsResponse < Struct.new(
       :next_marker,
       :managed_rule_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3786,7 +3926,8 @@ module Aws::WAFV2
       :platform,
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3801,7 +3942,8 @@ module Aws::WAFV2
     class ListMobileSdkReleasesResponse < Struct.new(
       :release_summaries,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3831,7 +3973,8 @@ module Aws::WAFV2
       :scope,
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3846,7 +3989,8 @@ module Aws::WAFV2
     class ListRegexPatternSetsResponse < Struct.new(
       :next_marker,
       :regex_pattern_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3867,7 +4011,8 @@ module Aws::WAFV2
     class ListResourcesForWebACLRequest < Struct.new(
       :web_acl_arn,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3876,7 +4021,8 @@ module Aws::WAFV2
     #   @return [Array<String>]
     class ListResourcesForWebACLResponse < Struct.new(
       :resource_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3906,7 +4052,8 @@ module Aws::WAFV2
       :scope,
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3921,7 +4068,8 @@ module Aws::WAFV2
     class ListRuleGroupsResponse < Struct.new(
       :next_marker,
       :rule_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3942,7 +4090,8 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3957,7 +4106,8 @@ module Aws::WAFV2
     class ListTagsForResourceResponse < Struct.new(
       :next_marker,
       :tag_info_for_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3987,7 +4137,8 @@ module Aws::WAFV2
       :scope,
       :next_marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4002,7 +4153,8 @@ module Aws::WAFV2
     class ListWebACLsResponse < Struct.new(
       :next_marker,
       :web_ac_ls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4101,7 +4253,8 @@ module Aws::WAFV2
       :logging_filter,
       :log_type,
       :log_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4124,7 +4277,8 @@ module Aws::WAFV2
     class LoggingFilter < Struct.new(
       :filters,
       :default_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4170,7 +4324,8 @@ module Aws::WAFV2
       :sns_topic_arn,
       :is_versioning_supported,
       :is_advanced_managed_rule_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4269,7 +4424,8 @@ module Aws::WAFV2
       :aws_managed_rules_atp_rule_set,
       :aws_managed_rules_acfp_rule_set,
       :aws_managed_rules_anti_d_do_s_rule_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4338,7 +4494,8 @@ module Aws::WAFV2
       :scope_down_statement,
       :managed_rule_group_configs,
       :rule_action_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4361,7 +4518,8 @@ module Aws::WAFV2
       :name,
       :versioning_supported,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4381,7 +4539,8 @@ module Aws::WAFV2
     class ManagedRuleGroupVersion < Struct.new(
       :name,
       :last_update_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4434,7 +4593,8 @@ module Aws::WAFV2
       :published_versions,
       :recommended_version,
       :label_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4482,7 +4642,8 @@ module Aws::WAFV2
       :lock_token,
       :arn,
       :label_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4529,7 +4690,8 @@ module Aws::WAFV2
       :publish_timestamp,
       :last_update_timestamp,
       :expiry_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4539,7 +4701,8 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"Method": {}</code>
     #          </p>
     class Method < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4563,7 +4726,8 @@ module Aws::WAFV2
       :timestamp,
       :release_notes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4574,7 +4738,8 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"None": {}</code>
     #          </p>
     class NoneAction < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4584,7 +4749,8 @@ module Aws::WAFV2
     #   @return [Types::Statement]
     class NotStatement < Struct.new(
       :statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4596,7 +4762,8 @@ module Aws::WAFV2
     #   @return [String]
     class OnSourceDDoSProtectionConfig < Struct.new(
       :alb_low_reputation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4607,7 +4774,8 @@ module Aws::WAFV2
     #   @return [Array<Types::Statement>]
     class OrStatement < Struct.new(
       :statements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4630,7 +4798,8 @@ module Aws::WAFV2
     class OverrideAction < Struct.new(
       :count,
       :none,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4658,7 +4827,8 @@ module Aws::WAFV2
     #   @return [String]
     class PasswordField < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4686,7 +4856,8 @@ module Aws::WAFV2
     #   @return [String]
     class PhoneNumberField < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4695,7 +4866,8 @@ module Aws::WAFV2
     #   @return [Types::LoggingConfiguration]
     class PutLoggingConfigurationRequest < Struct.new(
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4704,7 +4876,8 @@ module Aws::WAFV2
     #   @return [Types::LoggingConfiguration]
     class PutLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4745,7 +4918,8 @@ module Aws::WAFV2
       :lock_token,
       :recommended_version,
       :versions_to_publish,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4754,7 +4928,8 @@ module Aws::WAFV2
     #   @return [String]
     class PutManagedRuleSetVersionsResponse < Struct.new(
       :next_lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4791,12 +4966,14 @@ module Aws::WAFV2
     class PutPermissionPolicyRequest < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutPermissionPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4806,7 +4983,8 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"QueryString": {}</code>
     #          </p>
     class QueryString < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4963,7 +5141,8 @@ module Aws::WAFV2
       :scope_down_statement,
       :forwarded_ip_config,
       :custom_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5045,7 +5224,8 @@ module Aws::WAFV2
       :ja3_fingerprint,
       :ja4_fingerprint,
       :asn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5062,7 +5242,8 @@ module Aws::WAFV2
     class RateBasedStatementManagedKeysIPSet < Struct.new(
       :ip_address_version,
       :addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5070,7 +5251,8 @@ module Aws::WAFV2
     #          Each distinct ASN contributes to the aggregation instance. 
     #          If you use a single ASN as your custom key, then each ASN fully defines an aggregation instance. </p>
     class RateLimitAsn < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5085,7 +5267,8 @@ module Aws::WAFV2
     class RateLimitCookie < Struct.new(
       :name,
       :text_transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5098,7 +5281,8 @@ module Aws::WAFV2
     #          </p>
     #          <p>When you use this specification, you must also configure the forwarded IP address in the rate-based statement's <code>ForwardedIPConfig</code>. </p>
     class RateLimitForwardedIP < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5107,7 +5291,8 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"RateLimitHTTPMethod": {}</code>
     #          </p>
     class RateLimitHTTPMethod < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5122,7 +5307,8 @@ module Aws::WAFV2
     class RateLimitHeader < Struct.new(
       :name,
       :text_transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5133,7 +5319,8 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"RateLimitIP": {}</code>
     #          </p>
     class RateLimitIP < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5157,7 +5344,8 @@ module Aws::WAFV2
     #   @return [String]
     class RateLimitJA3Fingerprint < Struct.new(
       :fallback_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5179,7 +5367,8 @@ module Aws::WAFV2
     #   @return [String]
     class RateLimitJA4Fingerprint < Struct.new(
       :fallback_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5192,7 +5381,8 @@ module Aws::WAFV2
     #   @return [String]
     class RateLimitLabelNamespace < Struct.new(
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5207,7 +5397,8 @@ module Aws::WAFV2
     class RateLimitQueryArgument < Struct.new(
       :name,
       :text_transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5218,7 +5409,8 @@ module Aws::WAFV2
     #   @return [Array<Types::TextTransformation>]
     class RateLimitQueryString < Struct.new(
       :text_transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5229,7 +5421,8 @@ module Aws::WAFV2
     #   @return [Array<Types::TextTransformation>]
     class RateLimitUriPath < Struct.new(
       :text_transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5240,7 +5433,8 @@ module Aws::WAFV2
     #   @return [String]
     class Regex < Struct.new(
       :regex_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5258,7 +5452,8 @@ module Aws::WAFV2
       :regex_string,
       :field_to_match,
       :text_transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5286,7 +5481,8 @@ module Aws::WAFV2
       :arn,
       :description,
       :regular_expression_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5306,7 +5502,8 @@ module Aws::WAFV2
       :arn,
       :field_to_match,
       :text_transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5332,7 +5529,8 @@ module Aws::WAFV2
       :description,
       :lock_token,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5346,7 +5544,8 @@ module Aws::WAFV2
     class ReleaseSummary < Struct.new(
       :release_version,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5368,7 +5567,8 @@ module Aws::WAFV2
     #   @return [String]
     class RequestBodyAssociatedResourceTypeConfig < Struct.new(
       :default_size_inspection_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5426,7 +5626,8 @@ module Aws::WAFV2
       :payload_type,
       :username_field,
       :password_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5549,7 +5750,8 @@ module Aws::WAFV2
       :email_field,
       :phone_number_fields,
       :address_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5578,7 +5780,8 @@ module Aws::WAFV2
       :header,
       :body_contains,
       :json,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5600,7 +5803,8 @@ module Aws::WAFV2
     class ResponseInspectionBodyContains < Struct.new(
       :success_strings,
       :failure_strings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5628,7 +5832,8 @@ module Aws::WAFV2
       :name,
       :success_values,
       :failure_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5656,7 +5861,8 @@ module Aws::WAFV2
       :identifier,
       :success_values,
       :failure_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5678,7 +5884,8 @@ module Aws::WAFV2
     class ResponseInspectionStatusCode < Struct.new(
       :success_codes,
       :failure_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5774,7 +5981,8 @@ module Aws::WAFV2
       :visibility_config,
       :captcha_config,
       :challenge_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5806,7 +6014,8 @@ module Aws::WAFV2
       :count,
       :captcha,
       :challenge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5827,7 +6036,8 @@ module Aws::WAFV2
     class RuleActionOverride < Struct.new(
       :name,
       :action_to_use,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5910,7 +6120,8 @@ module Aws::WAFV2
       :custom_response_bodies,
       :available_labels,
       :consumed_labels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5937,7 +6148,8 @@ module Aws::WAFV2
       :arn,
       :excluded_rules,
       :rule_action_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5963,7 +6175,8 @@ module Aws::WAFV2
       :description,
       :lock_token,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5978,7 +6191,8 @@ module Aws::WAFV2
     class RuleSummary < Struct.new(
       :name,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6045,7 +6259,8 @@ module Aws::WAFV2
       :captcha_response,
       :challenge_response,
       :overridden_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6066,7 +6281,8 @@ module Aws::WAFV2
     #   @return [String]
     class SingleHeader < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6081,7 +6297,8 @@ module Aws::WAFV2
     #   @return [String]
     class SingleQueryArgument < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6105,7 +6322,8 @@ module Aws::WAFV2
       :comparison_operator,
       :size,
       :text_transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6139,7 +6357,8 @@ module Aws::WAFV2
       :field_to_match,
       :text_transformations,
       :sensitivity_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6305,7 +6524,8 @@ module Aws::WAFV2
       :label_match_statement,
       :regex_match_statement,
       :asn_match_statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6331,7 +6551,8 @@ module Aws::WAFV2
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6354,7 +6575,8 @@ module Aws::WAFV2
     class TagInfoForResource < Struct.new(
       :resource_arn,
       :tag_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6367,12 +6589,14 @@ module Aws::WAFV2
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6391,7 +6615,8 @@ module Aws::WAFV2
     class TextTransformation < Struct.new(
       :priority,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6431,7 +6656,8 @@ module Aws::WAFV2
     class TimeWindow < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6444,12 +6670,14 @@ module Aws::WAFV2
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6522,7 +6750,8 @@ module Aws::WAFV2
       :description,
       :addresses,
       :lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6531,7 +6760,8 @@ module Aws::WAFV2
     #   @return [String]
     class UpdateIPSetResponse < Struct.new(
       :next_lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6572,7 +6802,8 @@ module Aws::WAFV2
       :lock_token,
       :version_to_expire,
       :expiry_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6590,7 +6821,8 @@ module Aws::WAFV2
       :expiring_version,
       :expiry_timestamp,
       :next_lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6628,7 +6860,8 @@ module Aws::WAFV2
       :description,
       :regular_expression_list,
       :lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6637,7 +6870,8 @@ module Aws::WAFV2
     #   @return [String]
     class UpdateRegexPatternSetResponse < Struct.new(
       :next_lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6691,7 +6925,8 @@ module Aws::WAFV2
       :visibility_config,
       :lock_token,
       :custom_response_bodies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6700,7 +6935,8 @@ module Aws::WAFV2
     #   @return [String]
     class UpdateRuleGroupResponse < Struct.new(
       :next_lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6809,7 +7045,8 @@ module Aws::WAFV2
       :association_config,
       :on_source_d_do_s_protection_config,
       :application_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6818,7 +7055,8 @@ module Aws::WAFV2
     #   @return [String]
     class UpdateWebACLResponse < Struct.new(
       :next_lock_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6864,7 +7102,8 @@ module Aws::WAFV2
     #   @return [String]
     class UriFragment < Struct.new(
       :fallback_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6874,7 +7113,8 @@ module Aws::WAFV2
     #          <p>JSON specification: <code>"UriPath": {}</code>
     #          </p>
     class UriPath < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6904,7 +7144,8 @@ module Aws::WAFV2
     #   @return [String]
     class UsernameField < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6925,7 +7166,8 @@ module Aws::WAFV2
     class VersionToPublish < Struct.new(
       :associated_rule_group_arn,
       :forecasted_lifetime,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6959,7 +7201,8 @@ module Aws::WAFV2
       :sampled_requests_enabled,
       :cloud_watch_metrics_enabled,
       :metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6975,7 +7218,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFAssociatedItemException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6994,7 +7238,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFConfigurationWarningException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7004,7 +7249,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFDuplicateItemException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7015,7 +7261,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFExpiredManagedRuleGroupVersionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7025,7 +7272,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFInternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7034,7 +7282,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFInvalidOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7073,7 +7322,8 @@ module Aws::WAFV2
       :field,
       :parameter,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7105,7 +7355,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFInvalidPermissionPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7115,7 +7366,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFInvalidResourceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7131,7 +7383,8 @@ module Aws::WAFV2
     class WAFLimitsExceededException < Struct.new(
       :message,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7142,7 +7395,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFLogDestinationPermissionIssueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7154,7 +7408,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFNonexistentItemException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7165,7 +7420,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFOptimisticLockException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7181,7 +7437,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFServiceLinkedRoleErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7191,7 +7448,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFSubscriptionNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7200,7 +7458,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFTagOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7210,7 +7469,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFTagOperationInternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7223,7 +7483,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFUnavailableEntityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7233,7 +7494,8 @@ module Aws::WAFV2
     #   @return [String]
     class WAFUnsupportedAggregateKeyTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7381,7 +7643,8 @@ module Aws::WAFV2
       :retrofitted_by_firewall_manager,
       :on_source_d_do_s_protection_config,
       :application_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7414,7 +7677,8 @@ module Aws::WAFV2
       :description,
       :lock_token,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7429,7 +7693,8 @@ module Aws::WAFV2
     class XssMatchStatement < Struct.new(
       :field_to_match,
       :text_transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -190,7 +190,6 @@ module Aws::ApplicationCostProfiler
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/reportDefinition/{reportId}", "code" => 200}}
       end)
-
     end
 
     class << self

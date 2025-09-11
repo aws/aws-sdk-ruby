@@ -12,7 +12,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26,7 +27,8 @@ module Aws::BedrockDataAutomation
     class AudioExtractionCategory < Struct.new(
       :state,
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +38,8 @@ module Aws::BedrockDataAutomation
     #   @return [Types::ModalityProcessingConfiguration]
     class AudioOverrideConfiguration < Struct.new(
       :modality_processing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +49,8 @@ module Aws::BedrockDataAutomation
     #   @return [Types::AudioExtractionCategory]
     class AudioStandardExtraction < Struct.new(
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +64,8 @@ module Aws::BedrockDataAutomation
     class AudioStandardGenerativeField < Struct.new(
       :state,
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +79,8 @@ module Aws::BedrockDataAutomation
     class AudioStandardOutputConfiguration < Struct.new(
       :extraction,
       :generative_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +126,8 @@ module Aws::BedrockDataAutomation
       :blueprint_stage,
       :kms_key_id,
       :kms_encryption_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -138,7 +145,8 @@ module Aws::BedrockDataAutomation
       :blueprint_arn,
       :blueprint_version,
       :blueprint_stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +164,8 @@ module Aws::BedrockDataAutomation
       :blueprint_arn,
       :blueprint_version,
       :blueprint_stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +195,8 @@ module Aws::BedrockDataAutomation
       :blueprint_name,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +206,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +241,8 @@ module Aws::BedrockDataAutomation
       :client_token,
       :encryption_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +252,8 @@ module Aws::BedrockDataAutomation
     #   @return [Types::Blueprint]
     class CreateBlueprintResponse < Struct.new(
       :blueprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +267,8 @@ module Aws::BedrockDataAutomation
     class CreateBlueprintVersionRequest < Struct.new(
       :blueprint_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +278,8 @@ module Aws::BedrockDataAutomation
     #   @return [Types::Blueprint]
     class CreateBlueprintVersionResponse < Struct.new(
       :blueprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +321,8 @@ module Aws::BedrockDataAutomation
       :client_token,
       :encryption_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +340,8 @@ module Aws::BedrockDataAutomation
       :project_arn,
       :project_stage,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +351,8 @@ module Aws::BedrockDataAutomation
     #   @return [Array<Types::BlueprintItem>]
     class CustomOutputConfiguration < Struct.new(
       :blueprints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -388,7 +406,8 @@ module Aws::BedrockDataAutomation
       :status,
       :kms_key_id,
       :kms_encryption_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +421,8 @@ module Aws::BedrockDataAutomation
     class DataAutomationProjectFilter < Struct.new(
       :project_arn,
       :project_stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +444,8 @@ module Aws::BedrockDataAutomation
       :project_stage,
       :project_name,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,13 +459,15 @@ module Aws::BedrockDataAutomation
     class DeleteBlueprintRequest < Struct.new(
       :blueprint_arn,
       :blueprint_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Delete Blueprint Response
     class DeleteBlueprintResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +477,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class DeleteDataAutomationProjectRequest < Struct.new(
       :project_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +492,8 @@ module Aws::BedrockDataAutomation
     class DeleteDataAutomationProjectResponse < Struct.new(
       :project_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +503,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class DocumentBoundingBox < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +514,8 @@ module Aws::BedrockDataAutomation
     #   @return [Array<String>]
     class DocumentExtractionGranularity < Struct.new(
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +525,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class DocumentOutputAdditionalFileFormat < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -512,7 +540,8 @@ module Aws::BedrockDataAutomation
     class DocumentOutputFormat < Struct.new(
       :text_format,
       :additional_file_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +551,8 @@ module Aws::BedrockDataAutomation
     #   @return [Array<String>]
     class DocumentOutputTextFormat < Struct.new(
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -536,7 +566,8 @@ module Aws::BedrockDataAutomation
     class DocumentOverrideConfiguration < Struct.new(
       :splitter,
       :modality_processing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +581,8 @@ module Aws::BedrockDataAutomation
     class DocumentStandardExtraction < Struct.new(
       :granularity,
       :bounding_box,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +592,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class DocumentStandardGenerativeField < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +611,8 @@ module Aws::BedrockDataAutomation
       :extraction,
       :generative_field,
       :output_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -592,7 +626,8 @@ module Aws::BedrockDataAutomation
     class EncryptionConfiguration < Struct.new(
       :kms_key_id,
       :kms_encryption_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +645,8 @@ module Aws::BedrockDataAutomation
       :blueprint_arn,
       :blueprint_version,
       :blueprint_stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +656,8 @@ module Aws::BedrockDataAutomation
     #   @return [Types::Blueprint]
     class GetBlueprintResponse < Struct.new(
       :blueprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +671,8 @@ module Aws::BedrockDataAutomation
     class GetDataAutomationProjectRequest < Struct.new(
       :project_arn,
       :project_stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +682,8 @@ module Aws::BedrockDataAutomation
     #   @return [Types::DataAutomationProject]
     class GetDataAutomationProjectResponse < Struct.new(
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +693,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class ImageBoundingBox < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +708,8 @@ module Aws::BedrockDataAutomation
     class ImageExtractionCategory < Struct.new(
       :state,
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +719,8 @@ module Aws::BedrockDataAutomation
     #   @return [Types::ModalityProcessingConfiguration]
     class ImageOverrideConfiguration < Struct.new(
       :modality_processing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +734,8 @@ module Aws::BedrockDataAutomation
     class ImageStandardExtraction < Struct.new(
       :category,
       :bounding_box,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +749,8 @@ module Aws::BedrockDataAutomation
     class ImageStandardGenerativeField < Struct.new(
       :state,
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +764,8 @@ module Aws::BedrockDataAutomation
     class ImageStandardOutputConfiguration < Struct.new(
       :extraction,
       :generative_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +775,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +806,8 @@ module Aws::BedrockDataAutomation
       :max_results,
       :next_token,
       :project_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +821,8 @@ module Aws::BedrockDataAutomation
     class ListBlueprintsResponse < Struct.new(
       :blueprints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -800,7 +848,8 @@ module Aws::BedrockDataAutomation
       :project_stage_filter,
       :blueprint_filter,
       :resource_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +863,8 @@ module Aws::BedrockDataAutomation
     class ListDataAutomationProjectsResponse < Struct.new(
       :projects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +873,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +883,8 @@ module Aws::BedrockDataAutomation
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +894,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class ModalityProcessingConfiguration < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +917,8 @@ module Aws::BedrockDataAutomation
       :png,
       :mp4,
       :mov,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +944,8 @@ module Aws::BedrockDataAutomation
       :video,
       :audio,
       :modality_routing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +955,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +966,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,7 +977,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class SplitterConfiguration < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +1000,8 @@ module Aws::BedrockDataAutomation
       :image,
       :video,
       :audio,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +1015,8 @@ module Aws::BedrockDataAutomation
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -969,12 +1029,14 @@ module Aws::BedrockDataAutomation
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1046,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -997,12 +1060,14 @@ module Aws::BedrockDataAutomation
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1024,7 +1089,8 @@ module Aws::BedrockDataAutomation
       :schema,
       :blueprint_stage,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1100,8 @@ module Aws::BedrockDataAutomation
     #   @return [Types::Blueprint]
     class UpdateBlueprintResponse < Struct.new(
       :blueprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1135,8 @@ module Aws::BedrockDataAutomation
       :custom_output_configuration,
       :override_configuration,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1154,8 @@ module Aws::BedrockDataAutomation
       :project_arn,
       :project_stage,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1169,8 @@ module Aws::BedrockDataAutomation
     class ValidationException < Struct.new(
       :message,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1184,8 @@ module Aws::BedrockDataAutomation
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1195,8 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class VideoBoundingBox < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1210,8 @@ module Aws::BedrockDataAutomation
     class VideoExtractionCategory < Struct.new(
       :state,
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1148,7 +1221,8 @@ module Aws::BedrockDataAutomation
     #   @return [Types::ModalityProcessingConfiguration]
     class VideoOverrideConfiguration < Struct.new(
       :modality_processing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1236,8 @@ module Aws::BedrockDataAutomation
     class VideoStandardExtraction < Struct.new(
       :category,
       :bounding_box,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1176,7 +1251,8 @@ module Aws::BedrockDataAutomation
     class VideoStandardGenerativeField < Struct.new(
       :state,
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1266,8 @@ module Aws::BedrockDataAutomation
     class VideoStandardOutputConfiguration < Struct.new(
       :extraction,
       :generative_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

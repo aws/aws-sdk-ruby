@@ -11,7 +11,8 @@ module Aws::BCMRecommendedActions
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::BCMRecommendedActions
       :key,
       :match_option,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::BCMRecommendedActions
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +58,8 @@ module Aws::BCMRecommendedActions
       :filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +72,8 @@ module Aws::BCMRecommendedActions
     class ListRecommendedActionsResponse < Struct.new(
       :recommended_actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +111,8 @@ module Aws::BCMRecommendedActions
       :context,
       :next_steps,
       :last_updated_time_stamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +122,8 @@ module Aws::BCMRecommendedActions
     #   @return [Array<Types::ActionFilter>]
     class RequestFilter < Struct.new(
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +132,8 @@ module Aws::BCMRecommendedActions
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +150,8 @@ module Aws::BCMRecommendedActions
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +165,8 @@ module Aws::BCMRecommendedActions
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

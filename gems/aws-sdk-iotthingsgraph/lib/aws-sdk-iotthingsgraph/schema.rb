@@ -942,7 +942,6 @@ module Aws::IoTThingsGraph
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#deprecated" => {"message" => "since: 2022-08-30"}}
       end)
-
     end
 
     class << self

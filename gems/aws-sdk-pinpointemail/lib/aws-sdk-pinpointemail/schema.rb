@@ -1122,7 +1122,6 @@ module Aws::PinpointEmail
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}", "code" => 200}}
       end)
-
     end
 
     class << self

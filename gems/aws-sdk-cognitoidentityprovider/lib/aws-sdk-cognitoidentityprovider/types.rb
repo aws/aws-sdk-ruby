@@ -17,7 +17,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::RecoveryOptionType>]
     class AccountRecoverySettingType < Struct.new(
       :recovery_mechanisms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +61,8 @@ module Aws::CognitoIdentityProvider
     class AccountTakeoverActionType < Struct.new(
       :notify,
       :event_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -84,7 +86,8 @@ module Aws::CognitoIdentityProvider
       :low_action,
       :medium_action,
       :high_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +106,8 @@ module Aws::CognitoIdentityProvider
     class AccountTakeoverRiskConfigurationType < Struct.new(
       :notify_configuration,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,14 +161,16 @@ module Aws::CognitoIdentityProvider
     class AddCustomAttributesRequest < Struct.new(
       :user_pool_id,
       :custom_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the request to add custom
     #             attributes.</p>
     class AddCustomAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +192,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,14 +246,16 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the request to confirm
     #             registration.</p>
     class AdminConfirmSignUpResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +285,8 @@ module Aws::CognitoIdentityProvider
       :allow_admin_create_user_only,
       :unused_account_validity_days,
       :invite_message_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -441,7 +451,8 @@ module Aws::CognitoIdentityProvider
       :message_action,
       :desired_delivery_mediums,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -451,7 +462,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserType]
     class AdminCreateUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,14 +487,16 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :user_attribute_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response received from the server for a request to delete user
     #             attributes.</p>
     class AdminDeleteUserAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +514,8 @@ module Aws::CognitoIdentityProvider
     class AdminDeleteUserRequest < Struct.new(
       :user_pool_id,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,12 +529,14 @@ module Aws::CognitoIdentityProvider
     class AdminDisableProviderForUserRequest < Struct.new(
       :user_pool_id,
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AdminDisableProviderForUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,14 +554,16 @@ module Aws::CognitoIdentityProvider
     class AdminDisableUserRequest < Struct.new(
       :user_pool_id,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response received from the server to disable the user as an
     #             administrator.</p>
     class AdminDisableUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,14 +581,16 @@ module Aws::CognitoIdentityProvider
     class AdminEnableUserRequest < Struct.new(
       :user_pool_id,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the request to enable a user as an
     #             administrator.</p>
     class AdminEnableUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -591,7 +612,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :device_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -613,7 +635,8 @@ module Aws::CognitoIdentityProvider
       :device_key,
       :user_pool_id,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +647,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::DeviceType]
     class AdminGetDeviceResponse < Struct.new(
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +666,8 @@ module Aws::CognitoIdentityProvider
     class AdminGetUserRequest < Struct.new(
       :user_pool_id,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +745,8 @@ module Aws::CognitoIdentityProvider
       :mfa_options,
       :preferred_mfa_setting,
       :user_mfa_setting_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -958,7 +984,8 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :context_data,
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1146,8 @@ module Aws::CognitoIdentityProvider
       :challenge_parameters,
       :authentication_result,
       :available_challenges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,12 +1211,14 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :destination_user,
       :source_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AdminLinkProviderForUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1248,8 @@ module Aws::CognitoIdentityProvider
       :username,
       :limit,
       :pagination_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1266,8 @@ module Aws::CognitoIdentityProvider
     class AdminListDevicesResponse < Struct.new(
       :devices,
       :pagination_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1296,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1312,8 @@ module Aws::CognitoIdentityProvider
     class AdminListGroupsForUserResponse < Struct.new(
       :groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1310,7 +1344,8 @@ module Aws::CognitoIdentityProvider
       :username,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1327,7 +1362,8 @@ module Aws::CognitoIdentityProvider
     class AdminListUserAuthEventsResponse < Struct.new(
       :auth_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1350,7 +1386,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,14 +1439,16 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to reset a user password as an
     #             administrator.</p>
     class AdminResetUserPasswordResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1824,7 +1863,8 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :context_data,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1965,7 +2005,8 @@ module Aws::CognitoIdentityProvider
       :session,
       :challenge_parameters,
       :authentication_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2001,12 +2042,14 @@ module Aws::CognitoIdentityProvider
       :email_mfa_settings,
       :username,
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AdminSetUserMFAPreferenceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2036,12 +2079,14 @@ module Aws::CognitoIdentityProvider
       :username,
       :password,
       :permanent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AdminSetUserPasswordResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2065,14 +2110,16 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :mfa_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to set user settings as an
     #             administrator.</p>
     class AdminSetUserSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2101,12 +2148,14 @@ module Aws::CognitoIdentityProvider
       :username,
       :event_id,
       :feedback_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AdminUpdateAuthEventFeedbackResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2134,13 +2183,15 @@ module Aws::CognitoIdentityProvider
       :username,
       :device_key,
       :device_remembered_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The status response to the request to update the device, as an administrator.</p>
     class AdminUpdateDeviceStatusResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2210,14 +2261,16 @@ module Aws::CognitoIdentityProvider
       :username,
       :user_attributes,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the request to update user attributes as
     #             an administrator.</p>
     class AdminUpdateUserAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2235,13 +2288,15 @@ module Aws::CognitoIdentityProvider
     class AdminUserGlobalSignOutRequest < Struct.new(
       :user_pool_id,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The global sign-out response, as an administrator.</p>
     class AdminUserGlobalSignOutResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2254,7 +2309,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class AdvancedSecurityAdditionalFlowsType < Struct.new(
       :custom_auth_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2269,7 +2325,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class AliasExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2307,7 +2364,8 @@ module Aws::CognitoIdentityProvider
       :role_arn,
       :external_id,
       :user_data_shared,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2327,7 +2385,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class AnalyticsMetadataType < Struct.new(
       :analytics_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2357,7 +2416,8 @@ module Aws::CognitoIdentityProvider
       :extension,
       :bytes,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2435,8 @@ module Aws::CognitoIdentityProvider
     class AssociateSoftwareTokenRequest < Struct.new(
       :access_token,
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2390,7 +2451,8 @@ module Aws::CognitoIdentityProvider
     class AssociateSoftwareTokenResponse < Struct.new(
       :secret_code,
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2404,7 +2466,8 @@ module Aws::CognitoIdentityProvider
     class AttributeType < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2454,7 +2517,8 @@ module Aws::CognitoIdentityProvider
       :challenge_responses,
       :event_context_data,
       :event_feedback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2485,7 +2549,8 @@ module Aws::CognitoIdentityProvider
       :refresh_token,
       :id_token,
       :new_device_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2701,7 +2766,8 @@ module Aws::CognitoIdentityProvider
     class ChallengeResponseType < Struct.new(
       :challenge_name,
       :challenge_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2722,13 +2788,15 @@ module Aws::CognitoIdentityProvider
       :previous_password,
       :proposed_password,
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the server to the change password request.</p>
     class ChangePasswordResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2745,7 +2813,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class CloudWatchLogsConfigurationType < Struct.new(
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2764,7 +2833,8 @@ module Aws::CognitoIdentityProvider
       :destination,
       :delivery_medium,
       :attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2775,7 +2845,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class CodeDeliveryFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2786,7 +2857,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class CodeMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2801,12 +2873,14 @@ module Aws::CognitoIdentityProvider
     class CompleteWebAuthnRegistrationRequest < Struct.new(
       :access_token,
       :credential,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CompleteWebAuthnRegistrationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2817,7 +2891,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class CompromisedCredentialsActionsType < Struct.new(
       :event_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2834,7 +2909,8 @@ module Aws::CognitoIdentityProvider
     class CompromisedCredentialsRiskConfigurationType < Struct.new(
       :event_filter,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2845,7 +2921,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2869,7 +2946,8 @@ module Aws::CognitoIdentityProvider
       :device_key,
       :device_secret_verifier_config,
       :device_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2886,7 +2964,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Boolean]
     class ConfirmDeviceResponse < Struct.new(
       :user_confirmation_necessary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2975,14 +3054,16 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :user_context_data,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the server that results from a user's request to retrieve a
     #             forgotten password.</p>
     class ConfirmForgotPasswordResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3081,7 +3162,8 @@ module Aws::CognitoIdentityProvider
       :user_context_data,
       :client_metadata,
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3093,7 +3175,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class ConfirmSignUpResponse < Struct.new(
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3121,7 +3204,8 @@ module Aws::CognitoIdentityProvider
       :server_path,
       :http_headers,
       :encoded_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3165,7 +3249,8 @@ module Aws::CognitoIdentityProvider
       :description,
       :role_arn,
       :precedence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3174,7 +3259,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::GroupType]
     class CreateGroupResponse < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3329,7 +3415,8 @@ module Aws::CognitoIdentityProvider
       :provider_details,
       :attribute_mapping,
       :idp_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3338,7 +3425,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::IdentityProviderType]
     class CreateIdentityProviderResponse < Struct.new(
       :identity_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3394,7 +3482,8 @@ module Aws::CognitoIdentityProvider
       :use_cognito_provided_values,
       :settings,
       :assets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3403,7 +3492,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::ManagedLoginBrandingType]
     class CreateManagedLoginBrandingResponse < Struct.new(
       :managed_login_branding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3432,7 +3522,8 @@ module Aws::CognitoIdentityProvider
       :identifier,
       :name,
       :scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3441,7 +3532,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::ResourceServerType]
     class CreateResourceServerResponse < Struct.new(
       :resource_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3478,7 +3570,8 @@ module Aws::CognitoIdentityProvider
       :terms_source,
       :enforcement,
       :links,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3488,7 +3581,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::TermsType]
     class CreateTermsResponse < Struct.new(
       :terms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3507,7 +3601,8 @@ module Aws::CognitoIdentityProvider
       :job_name,
       :user_pool_id,
       :cloud_watch_logs_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3519,7 +3614,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserImportJobType]
     class CreateUserImportJobResponse < Struct.new(
       :user_import_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3853,7 +3949,8 @@ module Aws::CognitoIdentityProvider
       :enable_propagate_additional_user_context_data,
       :auth_session_validity,
       :refresh_token_rotation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3863,7 +3960,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserPoolClientType]
     class CreateUserPoolClientResponse < Struct.new(
       :user_pool_client,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3898,7 +3996,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :managed_login_version,
       :custom_domain_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3917,7 +4016,8 @@ module Aws::CognitoIdentityProvider
     class CreateUserPoolDomainResponse < Struct.new(
       :managed_login_version,
       :cloud_front_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4097,7 +4197,8 @@ module Aws::CognitoIdentityProvider
       :username_configuration,
       :account_recovery_setting,
       :user_pool_tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4107,7 +4208,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserPoolType]
     class CreateUserPoolResponse < Struct.new(
       :user_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4118,7 +4220,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class CustomDomainConfigType < Struct.new(
       :certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4134,7 +4237,8 @@ module Aws::CognitoIdentityProvider
     class CustomEmailLambdaVersionConfigType < Struct.new(
       :lambda_version,
       :lambda_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4150,7 +4254,8 @@ module Aws::CognitoIdentityProvider
     class CustomSMSLambdaVersionConfigType < Struct.new(
       :lambda_version,
       :lambda_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4163,7 +4268,8 @@ module Aws::CognitoIdentityProvider
     class DeleteGroupRequest < Struct.new(
       :group_name,
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4176,7 +4282,8 @@ module Aws::CognitoIdentityProvider
     class DeleteIdentityProviderRequest < Struct.new(
       :user_pool_id,
       :provider_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4190,7 +4297,8 @@ module Aws::CognitoIdentityProvider
     class DeleteManagedLoginBrandingRequest < Struct.new(
       :managed_login_branding_id,
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4203,7 +4311,8 @@ module Aws::CognitoIdentityProvider
     class DeleteResourceServerRequest < Struct.new(
       :user_pool_id,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4217,7 +4326,8 @@ module Aws::CognitoIdentityProvider
     class DeleteTermsRequest < Struct.new(
       :terms_id,
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4234,13 +4344,15 @@ module Aws::CognitoIdentityProvider
     class DeleteUserAttributesRequest < Struct.new(
       :user_attribute_names,
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to delete user attributes.</p>
     class DeleteUserAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4254,7 +4366,8 @@ module Aws::CognitoIdentityProvider
     class DeleteUserPoolClientRequest < Struct.new(
       :user_pool_id,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4269,12 +4382,14 @@ module Aws::CognitoIdentityProvider
     class DeleteUserPoolDomainRequest < Struct.new(
       :domain,
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUserPoolDomainResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4284,7 +4399,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class DeleteUserPoolRequest < Struct.new(
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4295,7 +4411,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class DeleteUserRequest < Struct.new(
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4309,12 +4426,14 @@ module Aws::CognitoIdentityProvider
     class DeleteWebAuthnCredentialRequest < Struct.new(
       :access_token,
       :credential_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWebAuthnCredentialResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4327,7 +4446,8 @@ module Aws::CognitoIdentityProvider
     class DescribeIdentityProviderRequest < Struct.new(
       :user_pool_id,
       :provider_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4336,7 +4456,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::IdentityProviderType]
     class DescribeIdentityProviderResponse < Struct.new(
       :identity_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4357,7 +4478,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :client_id,
       :return_merged_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4366,7 +4488,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::ManagedLoginBrandingType]
     class DescribeManagedLoginBrandingByClientResponse < Struct.new(
       :managed_login_branding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4387,7 +4510,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :managed_login_branding_id,
       :return_merged_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4396,7 +4520,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::ManagedLoginBrandingType]
     class DescribeManagedLoginBrandingResponse < Struct.new(
       :managed_login_branding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4414,7 +4539,8 @@ module Aws::CognitoIdentityProvider
     class DescribeResourceServerRequest < Struct.new(
       :user_pool_id,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4423,7 +4549,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::ResourceServerType]
     class DescribeResourceServerResponse < Struct.new(
       :resource_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4444,7 +4571,8 @@ module Aws::CognitoIdentityProvider
     class DescribeRiskConfigurationRequest < Struct.new(
       :user_pool_id,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4453,7 +4581,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::RiskConfigurationType]
     class DescribeRiskConfigurationResponse < Struct.new(
       :risk_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4467,7 +4596,8 @@ module Aws::CognitoIdentityProvider
     class DescribeTermsRequest < Struct.new(
       :terms_id,
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4477,7 +4607,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::TermsType]
     class DescribeTermsResponse < Struct.new(
       :terms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4491,7 +4622,8 @@ module Aws::CognitoIdentityProvider
     class DescribeUserImportJobRequest < Struct.new(
       :user_pool_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4503,7 +4635,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserImportJobType]
     class DescribeUserImportJobResponse < Struct.new(
       :user_import_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4517,7 +4650,8 @@ module Aws::CognitoIdentityProvider
     class DescribeUserPoolClientRequest < Struct.new(
       :user_pool_id,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4528,7 +4662,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserPoolClientType]
     class DescribeUserPoolClientResponse < Struct.new(
       :user_pool_client,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4539,7 +4674,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class DescribeUserPoolDomainRequest < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4548,7 +4684,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::DomainDescriptionType]
     class DescribeUserPoolDomainResponse < Struct.new(
       :domain_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4558,7 +4695,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class DescribeUserPoolRequest < Struct.new(
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4568,7 +4706,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserPoolType]
     class DescribeUserPoolResponse < Struct.new(
       :user_pool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4599,7 +4738,8 @@ module Aws::CognitoIdentityProvider
     class DeviceConfigurationType < Struct.new(
       :challenge_required_on_new_device,
       :device_only_remembered_on_user_prompt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4615,7 +4755,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class DeviceKeyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4630,7 +4771,8 @@ module Aws::CognitoIdentityProvider
     class DeviceSecretVerifierConfigType < Struct.new(
       :password_verifier,
       :salt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4660,7 +4802,8 @@ module Aws::CognitoIdentityProvider
       :device_create_date,
       :device_last_modified_date,
       :device_last_authenticated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4709,7 +4852,8 @@ module Aws::CognitoIdentityProvider
       :status,
       :custom_domain_config,
       :managed_login_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4719,7 +4863,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class DuplicateProviderException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4830,7 +4975,8 @@ module Aws::CognitoIdentityProvider
       :email_sending_account,
       :from,
       :configuration_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4851,7 +4997,8 @@ module Aws::CognitoIdentityProvider
     class EmailMfaConfigType < Struct.new(
       :message,
       :subject,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4870,7 +5017,8 @@ module Aws::CognitoIdentityProvider
     class EmailMfaSettingsType < Struct.new(
       :enabled,
       :preferred_mfa,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4886,7 +5034,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class EnableSoftwareTokenMFAException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4914,7 +5063,8 @@ module Aws::CognitoIdentityProvider
       :timezone,
       :city,
       :country,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4938,7 +5088,8 @@ module Aws::CognitoIdentityProvider
       :feedback_value,
       :provider,
       :feedback_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4964,7 +5115,8 @@ module Aws::CognitoIdentityProvider
       :risk_decision,
       :risk_level,
       :compromised_credentials_detected,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4974,7 +5126,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class ExpiredCodeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4984,7 +5137,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class FeatureUnavailableInTierException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4996,7 +5150,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class FirehoseConfigurationType < Struct.new(
       :stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5008,7 +5163,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5024,7 +5180,8 @@ module Aws::CognitoIdentityProvider
     class ForgetDeviceRequest < Struct.new(
       :access_token,
       :device_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5098,7 +5255,8 @@ module Aws::CognitoIdentityProvider
       :username,
       :analytics_metadata,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5109,7 +5267,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::CodeDeliveryDetailsType]
     class ForgotPasswordResponse < Struct.new(
       :code_delivery_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5120,7 +5279,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class GetCSVHeaderRequest < Struct.new(
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5137,7 +5297,8 @@ module Aws::CognitoIdentityProvider
     class GetCSVHeaderResponse < Struct.new(
       :user_pool_id,
       :csv_header,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5152,7 +5313,8 @@ module Aws::CognitoIdentityProvider
     class GetDeviceRequest < Struct.new(
       :device_key,
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5163,7 +5325,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::DeviceType]
     class GetDeviceResponse < Struct.new(
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5176,7 +5339,8 @@ module Aws::CognitoIdentityProvider
     class GetGroupRequest < Struct.new(
       :group_name,
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5186,7 +5350,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::GroupType]
     class GetGroupResponse < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5202,7 +5367,8 @@ module Aws::CognitoIdentityProvider
     class GetIdentityProviderByIdentifierRequest < Struct.new(
       :user_pool_id,
       :idp_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5212,7 +5378,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::IdentityProviderType]
     class GetIdentityProviderByIdentifierResponse < Struct.new(
       :identity_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5222,7 +5389,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class GetLogDeliveryConfigurationRequest < Struct.new(
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5232,7 +5400,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::LogDeliveryConfigurationType]
     class GetLogDeliveryConfigurationResponse < Struct.new(
       :log_delivery_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5242,7 +5411,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class GetSigningCertificateRequest < Struct.new(
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5253,7 +5423,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class GetSigningCertificateResponse < Struct.new(
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5313,7 +5484,8 @@ module Aws::CognitoIdentityProvider
       :client_secret,
       :device_key,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5323,7 +5495,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::AuthenticationResultType]
     class GetTokensFromRefreshTokenResponse < Struct.new(
       :authentication_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5336,7 +5509,8 @@ module Aws::CognitoIdentityProvider
     class GetUICustomizationRequest < Struct.new(
       :user_pool_id,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5346,7 +5520,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UICustomizationType]
     class GetUICustomizationResponse < Struct.new(
       :ui_customization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5396,7 +5571,8 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :attribute_name,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5408,7 +5584,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::CodeDeliveryDetailsType]
     class GetUserAttributeVerificationCodeResponse < Struct.new(
       :code_delivery_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5418,7 +5595,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class GetUserAuthFactorsRequest < Struct.new(
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5444,7 +5622,8 @@ module Aws::CognitoIdentityProvider
       :preferred_mfa_setting,
       :user_mfa_setting_list,
       :configured_user_auth_factors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5453,7 +5632,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class GetUserPoolMfaConfigRequest < Struct.new(
       :user_pool_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5494,7 +5674,8 @@ module Aws::CognitoIdentityProvider
       :email_mfa_configuration,
       :mfa_configuration,
       :web_authn_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5505,7 +5686,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class GetUserRequest < Struct.new(
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5541,7 +5723,8 @@ module Aws::CognitoIdentityProvider
       :mfa_options,
       :preferred_mfa_setting,
       :user_mfa_setting_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5552,13 +5735,15 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class GlobalSignOutRequest < Struct.new(
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response to the request to sign out all devices.</p>
     class GlobalSignOutResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5568,7 +5753,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class GroupExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5622,7 +5808,8 @@ module Aws::CognitoIdentityProvider
       :precedence,
       :last_modified_date,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5636,7 +5823,8 @@ module Aws::CognitoIdentityProvider
     class HttpHeader < Struct.new(
       :header_name,
       :header_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5800,7 +5988,8 @@ module Aws::CognitoIdentityProvider
       :idp_identifiers,
       :last_modified_date,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6037,7 +6226,8 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :user_context_data,
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6186,7 +6376,8 @@ module Aws::CognitoIdentityProvider
       :challenge_parameters,
       :authentication_result,
       :available_challenges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6196,7 +6387,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class InternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6208,7 +6400,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class InvalidEmailRoleAccessPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6219,7 +6412,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class InvalidLambdaResponseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6228,7 +6422,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class InvalidOAuthFlowException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6244,7 +6439,8 @@ module Aws::CognitoIdentityProvider
     class InvalidParameterException < Struct.new(
       :message,
       :reason_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6254,7 +6450,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class InvalidPasswordException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6266,7 +6463,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class InvalidSmsRoleAccessPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6280,7 +6478,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class InvalidSmsRoleTrustRelationshipException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6290,7 +6489,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class InvalidUserPoolConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6380,7 +6580,8 @@ module Aws::CognitoIdentityProvider
       :custom_sms_sender,
       :custom_email_sender,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6391,7 +6592,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6414,7 +6616,8 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :limit,
       :pagination_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6431,7 +6634,8 @@ module Aws::CognitoIdentityProvider
     class ListDevicesResponse < Struct.new(
       :devices,
       :pagination_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6452,7 +6656,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6468,7 +6673,8 @@ module Aws::CognitoIdentityProvider
     class ListGroupsResponse < Struct.new(
       :groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6489,7 +6695,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6505,7 +6712,8 @@ module Aws::CognitoIdentityProvider
     class ListIdentityProvidersResponse < Struct.new(
       :providers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6527,7 +6735,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6543,7 +6752,8 @@ module Aws::CognitoIdentityProvider
     class ListResourceServersResponse < Struct.new(
       :resource_servers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6552,7 +6762,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6561,7 +6772,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6583,7 +6795,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6601,7 +6814,8 @@ module Aws::CognitoIdentityProvider
     class ListTermsResponse < Struct.new(
       :terms,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6624,7 +6838,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :max_results,
       :pagination_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6642,7 +6857,8 @@ module Aws::CognitoIdentityProvider
     class ListUserImportJobsResponse < Struct.new(
       :user_import_jobs,
       :pagination_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6665,7 +6881,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6681,7 +6898,8 @@ module Aws::CognitoIdentityProvider
     class ListUserPoolClientsResponse < Struct.new(
       :user_pool_clients,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6699,7 +6917,8 @@ module Aws::CognitoIdentityProvider
     class ListUserPoolsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6715,7 +6934,8 @@ module Aws::CognitoIdentityProvider
     class ListUserPoolsResponse < Struct.new(
       :user_pools,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6741,7 +6961,8 @@ module Aws::CognitoIdentityProvider
       :group_name,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6756,7 +6977,8 @@ module Aws::CognitoIdentityProvider
     class ListUsersInGroupResponse < Struct.new(
       :users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6884,7 +7106,8 @@ module Aws::CognitoIdentityProvider
       :limit,
       :pagination_token,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6900,7 +7123,8 @@ module Aws::CognitoIdentityProvider
     class ListUsersResponse < Struct.new(
       :users,
       :pagination_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6923,7 +7147,8 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6938,7 +7163,8 @@ module Aws::CognitoIdentityProvider
     class ListWebAuthnCredentialsResponse < Struct.new(
       :credentials,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6979,7 +7205,8 @@ module Aws::CognitoIdentityProvider
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :firehose_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6995,7 +7222,8 @@ module Aws::CognitoIdentityProvider
     class LogDeliveryConfigurationType < Struct.new(
       :user_pool_id,
       :log_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7007,7 +7235,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class MFAMethodNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7026,7 +7255,8 @@ module Aws::CognitoIdentityProvider
     class MFAOptionType < Struct.new(
       :delivery_medium,
       :attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7036,7 +7266,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class ManagedLoginBrandingExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7103,7 +7334,8 @@ module Aws::CognitoIdentityProvider
       :assets,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7126,7 +7358,8 @@ module Aws::CognitoIdentityProvider
       :sms_message,
       :email_message,
       :email_subject,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7145,7 +7378,8 @@ module Aws::CognitoIdentityProvider
     class NewDeviceMetadataType < Struct.new(
       :device_key,
       :device_group_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7155,7 +7389,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class NotAuthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7194,7 +7429,8 @@ module Aws::CognitoIdentityProvider
       :block_email,
       :no_action_email,
       :mfa_email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7217,7 +7453,8 @@ module Aws::CognitoIdentityProvider
       :subject,
       :html_body,
       :text_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7234,7 +7471,8 @@ module Aws::CognitoIdentityProvider
     class NumberAttributeConstraintsType < Struct.new(
       :min_value,
       :max_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7244,7 +7482,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class PasswordHistoryPolicyViolationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7294,7 +7533,8 @@ module Aws::CognitoIdentityProvider
       :require_symbols,
       :password_history_size,
       :temporary_password_validity_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7313,7 +7553,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class PasswordResetRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7330,7 +7571,8 @@ module Aws::CognitoIdentityProvider
     class PreTokenGenerationVersionConfigType < Struct.new(
       :lambda_version,
       :lambda_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7340,7 +7582,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class PreconditionNotMetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7366,7 +7609,8 @@ module Aws::CognitoIdentityProvider
       :provider_type,
       :last_modified_date,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7386,7 +7630,8 @@ module Aws::CognitoIdentityProvider
       :provider_name,
       :provider_attribute_name,
       :provider_attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7408,7 +7653,8 @@ module Aws::CognitoIdentityProvider
     class RecoveryOptionType < Struct.new(
       :priority,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7418,7 +7664,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class RefreshTokenReuseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7439,7 +7686,8 @@ module Aws::CognitoIdentityProvider
     class RefreshTokenRotationType < Struct.new(
       :feature,
       :retry_grace_period_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7511,7 +7759,8 @@ module Aws::CognitoIdentityProvider
       :username,
       :analytics_metadata,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7523,7 +7772,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::CodeDeliveryDetailsType]
     class ResendConfirmationCodeResponse < Struct.new(
       :code_delivery_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7535,7 +7785,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7555,7 +7806,8 @@ module Aws::CognitoIdentityProvider
     class ResourceServerScopeType < Struct.new(
       :scope_name,
       :scope_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7583,7 +7835,8 @@ module Aws::CognitoIdentityProvider
       :identifier,
       :name,
       :scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7974,7 +8227,8 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :user_context_data,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8115,7 +8369,8 @@ module Aws::CognitoIdentityProvider
       :session,
       :challenge_parameters,
       :authentication_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8132,12 +8387,14 @@ module Aws::CognitoIdentityProvider
       :token,
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RevokeTokenResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8174,7 +8431,8 @@ module Aws::CognitoIdentityProvider
       :account_takeover_risk_configuration,
       :risk_exception_configuration,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8191,7 +8449,8 @@ module Aws::CognitoIdentityProvider
     class RiskExceptionConfigurationType < Struct.new(
       :blocked_ip_range_list,
       :skipped_ip_range_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8203,7 +8462,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class S3ConfigurationType < Struct.new(
       :bucket_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8224,7 +8484,8 @@ module Aws::CognitoIdentityProvider
     class SMSMfaSettingsType < Struct.new(
       :enabled,
       :preferred_mfa,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8297,7 +8558,8 @@ module Aws::CognitoIdentityProvider
       :required,
       :number_attribute_constraints,
       :string_attribute_constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8313,7 +8575,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class ScopeDoesNotExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8326,7 +8589,8 @@ module Aws::CognitoIdentityProvider
     class SetLogDeliveryConfigurationRequest < Struct.new(
       :user_pool_id,
       :log_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8335,7 +8599,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::LogDeliveryConfigurationType]
     class SetLogDeliveryConfigurationResponse < Struct.new(
       :log_delivery_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8374,7 +8639,8 @@ module Aws::CognitoIdentityProvider
       :compromised_credentials_risk_configuration,
       :account_takeover_risk_configuration,
       :risk_exception_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8384,7 +8650,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::RiskConfigurationType]
     class SetRiskConfigurationResponse < Struct.new(
       :risk_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8413,7 +8680,8 @@ module Aws::CognitoIdentityProvider
       :client_id,
       :css,
       :image_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8422,7 +8690,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UICustomizationType]
     class SetUICustomizationResponse < Struct.new(
       :ui_customization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8451,12 +8720,14 @@ module Aws::CognitoIdentityProvider
       :software_token_mfa_settings,
       :email_mfa_settings,
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SetUserMFAPreferenceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8500,7 +8771,8 @@ module Aws::CognitoIdentityProvider
       :email_mfa_configuration,
       :mfa_configuration,
       :web_authn_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8541,7 +8813,8 @@ module Aws::CognitoIdentityProvider
       :email_mfa_configuration,
       :mfa_configuration,
       :web_authn_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8557,13 +8830,15 @@ module Aws::CognitoIdentityProvider
     class SetUserSettingsRequest < Struct.new(
       :access_token,
       :mfa_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the server for a set user settings request.</p>
     class SetUserSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8577,7 +8852,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     class SignInPolicyType < Struct.new(
       :allowed_first_auth_factors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8671,7 +8947,8 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :user_context_data,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8700,7 +8977,8 @@ module Aws::CognitoIdentityProvider
       :code_delivery_details,
       :user_sub,
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8743,7 +9021,8 @@ module Aws::CognitoIdentityProvider
       :sns_caller_arn,
       :external_id,
       :sns_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8765,7 +9044,8 @@ module Aws::CognitoIdentityProvider
     class SmsMfaConfigType < Struct.new(
       :sms_authentication_message,
       :sms_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8775,7 +9055,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class SoftwareTokenMFANotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8786,7 +9067,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Boolean]
     class SoftwareTokenMfaConfigType < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8810,7 +9092,8 @@ module Aws::CognitoIdentityProvider
     class SoftwareTokenMfaSettingsType < Struct.new(
       :enabled,
       :preferred_mfa,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8830,7 +9113,8 @@ module Aws::CognitoIdentityProvider
     class StartUserImportJobRequest < Struct.new(
       :user_pool_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8842,7 +9126,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserImportJobType]
     class StartUserImportJobResponse < Struct.new(
       :user_import_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8852,7 +9137,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class StartWebAuthnRegistrationRequest < Struct.new(
       :access_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8862,7 +9148,8 @@ module Aws::CognitoIdentityProvider
     #   @return [JSON]
     class StartWebAuthnRegistrationResponse < Struct.new(
       :credential_creation_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8876,7 +9163,8 @@ module Aws::CognitoIdentityProvider
     class StopUserImportJobRequest < Struct.new(
       :user_pool_id,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8888,7 +9176,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserImportJobType]
     class StopUserImportJobResponse < Struct.new(
       :user_import_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8905,7 +9194,8 @@ module Aws::CognitoIdentityProvider
     class StringAttributeConstraintsType < Struct.new(
       :min_length,
       :max_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8918,12 +9208,14 @@ module Aws::CognitoIdentityProvider
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8951,7 +9243,8 @@ module Aws::CognitoIdentityProvider
       :enforcement,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8961,7 +9254,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class TermsExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9009,7 +9303,8 @@ module Aws::CognitoIdentityProvider
       :links,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9019,7 +9314,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class TierChangeNotAllowedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9048,7 +9344,8 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :id_token,
       :refresh_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9060,7 +9357,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class TooManyFailedAttemptsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9072,7 +9370,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9111,7 +9410,8 @@ module Aws::CognitoIdentityProvider
       :css_version,
       :last_modified_date,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9121,7 +9421,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9132,7 +9433,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UnexpectedLambdaException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9141,7 +9443,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UnsupportedIdentityProviderException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9151,7 +9454,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9160,7 +9464,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UnsupportedTokenTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9170,7 +9475,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UnsupportedUserStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9183,12 +9489,14 @@ module Aws::CognitoIdentityProvider
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9222,12 +9530,14 @@ module Aws::CognitoIdentityProvider
       :event_id,
       :feedback_token,
       :feedback_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateAuthEventFeedbackResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9248,13 +9558,15 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :device_key,
       :device_remembered_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response to the request to update the device status.</p>
     class UpdateDeviceStatusResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9295,7 +9607,8 @@ module Aws::CognitoIdentityProvider
       :description,
       :role_arn,
       :precedence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9305,7 +9618,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::GroupType]
     class UpdateGroupResponse < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9455,7 +9769,8 @@ module Aws::CognitoIdentityProvider
       :provider_details,
       :attribute_mapping,
       :idp_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9464,7 +9779,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::IdentityProviderType]
     class UpdateIdentityProviderResponse < Struct.new(
       :identity_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9521,7 +9837,8 @@ module Aws::CognitoIdentityProvider
       :use_cognito_provided_values,
       :settings,
       :assets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9530,7 +9847,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::ManagedLoginBrandingType]
     class UpdateManagedLoginBrandingResponse < Struct.new(
       :managed_login_branding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9558,7 +9876,8 @@ module Aws::CognitoIdentityProvider
       :identifier,
       :name,
       :scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9567,7 +9886,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::ResourceServerType]
     class UpdateResourceServerResponse < Struct.new(
       :resource_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9600,7 +9920,8 @@ module Aws::CognitoIdentityProvider
       :terms_source,
       :enforcement,
       :links,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9609,7 +9930,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::TermsType]
     class UpdateTermsResponse < Struct.new(
       :terms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9665,7 +9987,8 @@ module Aws::CognitoIdentityProvider
       :user_attributes,
       :access_token,
       :client_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9682,7 +10005,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::CodeDeliveryDetailsType>]
     class UpdateUserAttributesResponse < Struct.new(
       :code_delivery_details_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10010,7 +10334,8 @@ module Aws::CognitoIdentityProvider
       :enable_propagate_additional_user_context_data,
       :auth_session_validity,
       :refresh_token_rotation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10021,7 +10346,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserPoolClientType]
     class UpdateUserPoolClientResponse < Struct.new(
       :user_pool_client,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10054,7 +10380,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :managed_login_version,
       :custom_domain_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10074,7 +10401,8 @@ module Aws::CognitoIdentityProvider
     class UpdateUserPoolDomainResponse < Struct.new(
       :managed_login_version,
       :cloud_front_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10223,14 +10551,16 @@ module Aws::CognitoIdentityProvider
       :account_recovery_setting,
       :pool_name,
       :user_pool_tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server when you make a request to update the user
     #             pool.</p>
     class UpdateUserPoolResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10252,7 +10582,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     class UserAttributeUpdateSettingsType < Struct.new(
       :attributes_require_verification_before_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10269,7 +10600,8 @@ module Aws::CognitoIdentityProvider
     class UserContextDataType < Struct.new(
       :ip_address,
       :encoded_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10280,7 +10612,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UserImportInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10382,7 +10715,8 @@ module Aws::CognitoIdentityProvider
       :skipped_users,
       :failed_users,
       :completion_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10401,7 +10735,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UserLambdaValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10411,7 +10746,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UserNotConfirmedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10421,7 +10757,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UserNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10430,7 +10767,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UserPoolAddOnNotEnabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10453,7 +10791,8 @@ module Aws::CognitoIdentityProvider
     class UserPoolAddOnsType < Struct.new(
       :advanced_security_mode,
       :advanced_security_additional_flows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10471,7 +10810,8 @@ module Aws::CognitoIdentityProvider
       :client_id,
       :user_pool_id,
       :client_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10827,7 +11167,8 @@ module Aws::CognitoIdentityProvider
       :enable_propagate_additional_user_context_data,
       :auth_session_validity,
       :refresh_token_rotation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10869,7 +11210,8 @@ module Aws::CognitoIdentityProvider
       :status,
       :last_modified_date,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10885,7 +11227,8 @@ module Aws::CognitoIdentityProvider
     class UserPoolPolicyType < Struct.new(
       :password_policy,
       :sign_in_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10894,7 +11237,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UserPoolTaggingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11133,7 +11477,8 @@ module Aws::CognitoIdentityProvider
       :arn,
       :account_recovery_setting,
       :user_pool_tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11201,7 +11546,8 @@ module Aws::CognitoIdentityProvider
       :enabled,
       :user_status,
       :mfa_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11238,7 +11584,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Boolean]
     class UsernameConfigurationType < Struct.new(
       :case_sensitive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11249,7 +11596,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class UsernameExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11293,7 +11641,8 @@ module Aws::CognitoIdentityProvider
       :email_message_by_link,
       :email_subject_by_link,
       :default_email_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11315,7 +11664,8 @@ module Aws::CognitoIdentityProvider
       :session,
       :user_code,
       :friendly_device_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11331,7 +11681,8 @@ module Aws::CognitoIdentityProvider
     class VerifySoftwareTokenResponse < Struct.new(
       :status,
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11351,14 +11702,16 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :attribute_name,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A container representing the response from the server from the request to verify user
     #             attributes.</p>
     class VerifyUserAttributeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11368,7 +11721,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class WebAuthnChallengeNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11378,7 +11732,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class WebAuthnClientMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11388,7 +11743,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class WebAuthnConfigurationMissingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11436,7 +11792,8 @@ module Aws::CognitoIdentityProvider
     class WebAuthnConfigurationType < Struct.new(
       :relying_party_id,
       :user_verification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11471,7 +11828,8 @@ module Aws::CognitoIdentityProvider
       :authenticator_attachment,
       :authenticator_transports,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11481,7 +11839,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class WebAuthnCredentialNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11491,7 +11850,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class WebAuthnNotEnabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11501,7 +11861,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class WebAuthnOriginNotAllowedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11511,7 +11872,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     class WebAuthnRelyingPartyMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

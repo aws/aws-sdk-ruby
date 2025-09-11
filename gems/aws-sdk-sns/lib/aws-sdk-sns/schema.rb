@@ -1066,7 +1066,6 @@ module Aws::SNS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerificationException)
         operation.traits = {}
       end)
-
     end
 
     class << self

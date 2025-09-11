@@ -12,7 +12,8 @@ module Aws::Organizations
     #   @return [String]
     class AWSOrganizationsNotInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23,7 +24,8 @@ module Aws::Organizations
     #   @return [String]
     class AcceptHandshakeRequest < Struct.new(
       :handshake_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +34,8 @@ module Aws::Organizations
     #   @return [Types::Handshake]
     class AcceptHandshakeResponse < Struct.new(
       :handshake,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +47,8 @@ module Aws::Organizations
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +63,8 @@ module Aws::Organizations
     class AccessDeniedForDependencyException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +108,8 @@ module Aws::Organizations
       :status,
       :joined_method,
       :joined_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +118,8 @@ module Aws::Organizations
     #   @return [String]
     class AccountAlreadyClosedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +129,8 @@ module Aws::Organizations
     #   @return [String]
     class AccountAlreadyRegisteredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -133,7 +141,8 @@ module Aws::Organizations
     #   @return [String]
     class AccountNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +151,8 @@ module Aws::Organizations
     #   @return [String]
     class AccountNotRegisteredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +164,8 @@ module Aws::Organizations
     #   @return [String]
     class AccountOwnerNotVerifiedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +175,8 @@ module Aws::Organizations
     #   @return [String]
     class AlreadyInOrganizationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +214,8 @@ module Aws::Organizations
     class AttachPolicyRequest < Struct.new(
       :policy_id,
       :target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +227,8 @@ module Aws::Organizations
     #   @return [String]
     class CancelHandshakeRequest < Struct.new(
       :handshake_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +237,8 @@ module Aws::Organizations
     #   @return [Types::Handshake]
     class CancelHandshakeResponse < Struct.new(
       :handshake,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +267,8 @@ module Aws::Organizations
     class Child < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +278,8 @@ module Aws::Organizations
     #   @return [String]
     class ChildNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +289,8 @@ module Aws::Organizations
     #   @return [String]
     class CloseAccountRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +300,8 @@ module Aws::Organizations
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +311,8 @@ module Aws::Organizations
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +538,8 @@ module Aws::Organizations
     class ConstraintViolationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +639,8 @@ module Aws::Organizations
       :role_name,
       :iam_user_access_to_billing,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +655,8 @@ module Aws::Organizations
     #   @return [Types::CreateAccountStatus]
     class CreateAccountResponse < Struct.new(
       :create_account_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +767,8 @@ module Aws::Organizations
       :account_id,
       :gov_cloud_account_id,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -754,7 +778,8 @@ module Aws::Organizations
     #   @return [String]
     class CreateAccountStatusNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +889,8 @@ module Aws::Organizations
       :role_name,
       :iam_user_access_to_billing,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,7 +900,8 @@ module Aws::Organizations
     #   @return [Types::CreateAccountStatus]
     class CreateGovCloudAccountResponse < Struct.new(
       :create_account_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +930,8 @@ module Aws::Organizations
     #   @return [String]
     class CreateOrganizationRequest < Struct.new(
       :feature_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -912,7 +940,8 @@ module Aws::Organizations
     #   @return [Types::Organization]
     class CreateOrganizationResponse < Struct.new(
       :organization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +982,8 @@ module Aws::Organizations
       :parent_id,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +992,8 @@ module Aws::Organizations
     #   @return [Types::OrganizationalUnit]
     class CreateOrganizationalUnitResponse < Struct.new(
       :organizational_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1044,7 +1075,8 @@ module Aws::Organizations
       :name,
       :type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1053,7 +1085,8 @@ module Aws::Organizations
     #   @return [Types::Policy]
     class CreatePolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1098,8 @@ module Aws::Organizations
     #   @return [String]
     class DeclineHandshakeRequest < Struct.new(
       :handshake_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1109,8 @@ module Aws::Organizations
     #   @return [Types::Handshake]
     class DeclineHandshakeResponse < Struct.new(
       :handshake,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1116,7 +1151,8 @@ module Aws::Organizations
       :joined_method,
       :joined_timestamp,
       :delegation_enabled_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1134,7 +1170,8 @@ module Aws::Organizations
     class DelegatedService < Struct.new(
       :service_principal,
       :delegation_enabled_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1148,7 +1185,8 @@ module Aws::Organizations
     #   @return [String]
     class DeleteOrganizationalUnitRequest < Struct.new(
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1161,7 +1199,8 @@ module Aws::Organizations
     #   @return [String]
     class DeletePolicyRequest < Struct.new(
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1180,7 +1219,8 @@ module Aws::Organizations
     class DeregisterDelegatedAdministratorRequest < Struct.new(
       :account_id,
       :service_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1192,7 +1232,8 @@ module Aws::Organizations
     #   @return [String]
     class DescribeAccountRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1242,8 @@ module Aws::Organizations
     #   @return [Types::Account]
     class DescribeAccountResponse < Struct.new(
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1214,7 +1256,8 @@ module Aws::Organizations
     #   @return [String]
     class DescribeCreateAccountStatusRequest < Struct.new(
       :create_account_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1223,7 +1266,8 @@ module Aws::Organizations
     #   @return [Types::CreateAccountStatus]
     class DescribeCreateAccountStatusResponse < Struct.new(
       :create_account_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1315,8 @@ module Aws::Organizations
     class DescribeEffectivePolicyRequest < Struct.new(
       :policy_type,
       :target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1325,8 @@ module Aws::Organizations
     #   @return [Types::EffectivePolicy]
     class DescribeEffectivePolicyResponse < Struct.new(
       :effective_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1339,8 @@ module Aws::Organizations
     #   @return [String]
     class DescribeHandshakeRequest < Struct.new(
       :handshake_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1349,8 @@ module Aws::Organizations
     #   @return [Types::Handshake]
     class DescribeHandshakeResponse < Struct.new(
       :handshake,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1368,8 @@ module Aws::Organizations
     #   @return [Types::Organization]
     class DescribeOrganizationResponse < Struct.new(
       :organization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1335,7 +1384,8 @@ module Aws::Organizations
     #   @return [String]
     class DescribeOrganizationalUnitRequest < Struct.new(
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1394,8 @@ module Aws::Organizations
     #   @return [Types::OrganizationalUnit]
     class DescribeOrganizationalUnitResponse < Struct.new(
       :organizational_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1357,7 +1408,8 @@ module Aws::Organizations
     #   @return [String]
     class DescribePolicyRequest < Struct.new(
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1366,7 +1418,8 @@ module Aws::Organizations
     #   @return [Types::Policy]
     class DescribePolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1375,7 +1428,8 @@ module Aws::Organizations
     #   @return [Types::ResourcePolicy]
     class DescribeResourcePolicyResponse < Struct.new(
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1385,7 +1439,8 @@ module Aws::Organizations
     #   @return [String]
     class DestinationParentNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1478,8 @@ module Aws::Organizations
     class DetachPolicyRequest < Struct.new(
       :policy_id,
       :target_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1491,8 @@ module Aws::Organizations
     #   @return [String]
     class DisableAWSServiceAccessRequest < Struct.new(
       :service_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1494,7 +1551,8 @@ module Aws::Organizations
     class DisablePolicyTypeRequest < Struct.new(
       :root_id,
       :policy_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1561,8 @@ module Aws::Organizations
     #   @return [Types::Root]
     class DisablePolicyTypeResponse < Struct.new(
       :root,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,7 +1571,8 @@ module Aws::Organizations
     #   @return [String]
     class DuplicateAccountException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1525,7 +1585,8 @@ module Aws::Organizations
     #   @return [String]
     class DuplicateHandshakeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1534,7 +1595,8 @@ module Aws::Organizations
     #   @return [String]
     class DuplicateOrganizationalUnitException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1605,8 @@ module Aws::Organizations
     #   @return [String]
     class DuplicatePolicyAttachmentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1552,7 +1615,8 @@ module Aws::Organizations
     #   @return [String]
     class DuplicatePolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1640,8 @@ module Aws::Organizations
       :last_updated_timestamp,
       :target_id,
       :policy_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1588,7 +1653,8 @@ module Aws::Organizations
     #   @return [String]
     class EffectivePolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1677,8 @@ module Aws::Organizations
       :error_message,
       :path_to_error,
       :contributing_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1623,12 +1690,14 @@ module Aws::Organizations
     #   @return [String]
     class EnableAWSServiceAccessRequest < Struct.new(
       :service_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableAllFeaturesRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,7 +1707,8 @@ module Aws::Organizations
     #   @return [Types::Handshake]
     class EnableAllFeaturesResponse < Struct.new(
       :handshake,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1697,7 +1767,8 @@ module Aws::Organizations
     class EnablePolicyTypeRequest < Struct.new(
       :root_id,
       :policy_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1706,7 +1777,8 @@ module Aws::Organizations
     #   @return [Types::Root]
     class EnablePolicyTypeResponse < Struct.new(
       :root,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1795,8 @@ module Aws::Organizations
     class EnabledServicePrincipal < Struct.new(
       :service_principal,
       :date_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1734,7 +1807,8 @@ module Aws::Organizations
     #   @return [String]
     class FinalizingOrganizationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1851,7 +1925,8 @@ module Aws::Organizations
       :expiration_timestamp,
       :action,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1861,7 +1936,8 @@ module Aws::Organizations
     #   @return [String]
     class HandshakeAlreadyInStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1928,7 +2004,8 @@ module Aws::Organizations
     class HandshakeConstraintViolationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1950,7 +2027,8 @@ module Aws::Organizations
     class HandshakeFilter < Struct.new(
       :action_type,
       :parent_handshake_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1959,7 +2037,8 @@ module Aws::Organizations
     #   @return [String]
     class HandshakeNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1975,7 +2054,8 @@ module Aws::Organizations
     class HandshakeParty < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2026,7 +2106,8 @@ module Aws::Organizations
       :value,
       :type,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2037,7 +2118,8 @@ module Aws::Organizations
     #   @return [String]
     class InvalidHandshakeTransitionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2157,7 +2239,8 @@ module Aws::Organizations
     class InvalidInputException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2212,7 +2295,8 @@ module Aws::Organizations
       :target,
       :notes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2222,7 +2306,8 @@ module Aws::Organizations
     #   @return [Types::Handshake]
     class InviteAccountToOrganizationResponse < Struct.new(
       :handshake,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2331,8 @@ module Aws::Organizations
     class ListAWSServiceAccessForOrganizationRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2264,7 +2350,8 @@ module Aws::Organizations
     class ListAWSServiceAccessForOrganizationResponse < Struct.new(
       :enabled_service_principals,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2293,7 +2380,8 @@ module Aws::Organizations
       :parent_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2309,7 +2397,8 @@ module Aws::Organizations
     class ListAccountsForParentResponse < Struct.new(
       :accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2333,7 +2422,8 @@ module Aws::Organizations
     class ListAccountsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2349,7 +2439,8 @@ module Aws::Organizations
     class ListAccountsResponse < Struct.new(
       :accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2410,7 +2501,8 @@ module Aws::Organizations
       :policy_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,7 +2555,8 @@ module Aws::Organizations
       :accounts,
       :policy_type,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2604,8 @@ module Aws::Organizations
       :child_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2527,7 +2621,8 @@ module Aws::Organizations
     class ListChildrenResponse < Struct.new(
       :children,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2556,7 +2651,8 @@ module Aws::Organizations
       :states,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2574,7 +2670,8 @@ module Aws::Organizations
     class ListCreateAccountStatusResponse < Struct.new(
       :create_account_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2605,7 +2702,8 @@ module Aws::Organizations
       :service_principal,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2621,7 +2719,8 @@ module Aws::Organizations
     class ListDelegatedAdministratorsResponse < Struct.new(
       :delegated_administrators,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2649,7 +2748,8 @@ module Aws::Organizations
       :account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2765,8 @@ module Aws::Organizations
     class ListDelegatedServicesForAccountResponse < Struct.new(
       :delegated_services,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2730,7 +2831,8 @@ module Aws::Organizations
       :policy_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2796,7 +2898,8 @@ module Aws::Organizations
       :evaluation_timestamp,
       :next_token,
       :effective_policy_validation_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2830,7 +2933,8 @@ module Aws::Organizations
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2847,7 +2951,8 @@ module Aws::Organizations
     class ListHandshakesForAccountResponse < Struct.new(
       :handshakes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2881,7 +2986,8 @@ module Aws::Organizations
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2898,7 +3004,8 @@ module Aws::Organizations
     class ListHandshakesForOrganizationResponse < Struct.new(
       :handshakes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2941,7 +3048,8 @@ module Aws::Organizations
       :parent_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2957,7 +3065,8 @@ module Aws::Organizations
     class ListOrganizationalUnitsForParentResponse < Struct.new(
       :organizational_units,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3001,7 +3110,8 @@ module Aws::Organizations
       :child_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3017,7 +3127,8 @@ module Aws::Organizations
     class ListParentsResponse < Struct.new(
       :parents,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3112,7 +3223,8 @@ module Aws::Organizations
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3128,7 +3240,8 @@ module Aws::Organizations
     class ListPoliciesForTargetResponse < Struct.new(
       :policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3199,7 +3312,8 @@ module Aws::Organizations
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3216,7 +3330,8 @@ module Aws::Organizations
     class ListPoliciesResponse < Struct.new(
       :policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3240,7 +3355,8 @@ module Aws::Organizations
     class ListRootsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3256,7 +3372,8 @@ module Aws::Organizations
     class ListRootsResponse < Struct.new(
       :roots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3297,7 +3414,8 @@ module Aws::Organizations
     class ListTagsForResourceRequest < Struct.new(
       :resource_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3313,7 +3431,8 @@ module Aws::Organizations
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3343,7 +3462,8 @@ module Aws::Organizations
       :policy_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3360,7 +3480,8 @@ module Aws::Organizations
     class ListTargetsForPolicyResponse < Struct.new(
       :targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3372,7 +3493,8 @@ module Aws::Organizations
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3383,7 +3505,8 @@ module Aws::Organizations
     #   @return [String]
     class MasterCannotLeaveOrganizationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3434,7 +3557,8 @@ module Aws::Organizations
       :account_id,
       :source_parent_id,
       :destination_parent_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3489,7 +3613,8 @@ module Aws::Organizations
       :master_account_id,
       :master_account_email,
       :available_policy_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3499,7 +3624,8 @@ module Aws::Organizations
     #   @return [String]
     class OrganizationNotEmptyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3528,7 +3654,8 @@ module Aws::Organizations
       :id,
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3538,7 +3665,8 @@ module Aws::Organizations
     #   @return [String]
     class OrganizationalUnitNotEmptyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3548,7 +3676,8 @@ module Aws::Organizations
     #   @return [String]
     class OrganizationalUnitNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3578,7 +3707,8 @@ module Aws::Organizations
     class Parent < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3587,7 +3717,8 @@ module Aws::Organizations
     #   @return [String]
     class ParentNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3603,7 +3734,8 @@ module Aws::Organizations
     class Policy < Struct.new(
       :policy_summary,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3613,7 +3745,8 @@ module Aws::Organizations
     #   @return [String]
     class PolicyChangesInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3623,7 +3756,8 @@ module Aws::Organizations
     #   @return [String]
     class PolicyInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3632,7 +3766,8 @@ module Aws::Organizations
     #   @return [String]
     class PolicyNotAttachedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3641,7 +3776,8 @@ module Aws::Organizations
     #   @return [String]
     class PolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3681,7 +3817,8 @@ module Aws::Organizations
       :description,
       :type,
       :aws_managed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3732,7 +3869,8 @@ module Aws::Organizations
       :arn,
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3741,7 +3879,8 @@ module Aws::Organizations
     #   @return [String]
     class PolicyTypeAlreadyEnabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3753,7 +3892,8 @@ module Aws::Organizations
     #   @return [String]
     class PolicyTypeNotAvailableForOrganizationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3765,7 +3905,8 @@ module Aws::Organizations
     #   @return [String]
     class PolicyTypeNotEnabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3781,7 +3922,8 @@ module Aws::Organizations
     class PolicyTypeSummary < Struct.new(
       :type,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3807,7 +3949,8 @@ module Aws::Organizations
     class PutResourcePolicyRequest < Struct.new(
       :content,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3816,7 +3959,8 @@ module Aws::Organizations
     #   @return [Types::ResourcePolicy]
     class PutResourcePolicyResponse < Struct.new(
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3831,7 +3975,8 @@ module Aws::Organizations
     class RegisterDelegatedAdministratorRequest < Struct.new(
       :account_id,
       :service_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3843,7 +3988,8 @@ module Aws::Organizations
     #   @return [String]
     class RemoveAccountFromOrganizationRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3857,7 +4003,8 @@ module Aws::Organizations
     class ResourcePolicy < Struct.new(
       :resource_policy_summary,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3866,7 +4013,8 @@ module Aws::Organizations
     #   @return [String]
     class ResourcePolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3880,7 +4028,8 @@ module Aws::Organizations
     class ResourcePolicySummary < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3918,7 +4067,8 @@ module Aws::Organizations
       :arn,
       :name,
       :policy_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3927,7 +4077,8 @@ module Aws::Organizations
     #   @return [String]
     class RootNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3937,7 +4088,8 @@ module Aws::Organizations
     #   @return [String]
     class ServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3947,7 +4099,8 @@ module Aws::Organizations
     #   @return [String]
     class SourceParentNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3977,7 +4130,8 @@ module Aws::Organizations
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4020,7 +4174,8 @@ module Aws::Organizations
     class TagResourceRequest < Struct.new(
       :resource_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4030,7 +4185,8 @@ module Aws::Organizations
     #   @return [String]
     class TargetNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4045,7 +4201,8 @@ module Aws::Organizations
     class TooManyRequestsException < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4054,7 +4211,8 @@ module Aws::Organizations
     #   @return [String]
     class UnsupportedAPIEndpointException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4091,7 +4249,8 @@ module Aws::Organizations
     class UntagResourceRequest < Struct.new(
       :resource_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4112,7 +4271,8 @@ module Aws::Organizations
     class UpdateOrganizationalUnitRequest < Struct.new(
       :organizational_unit_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4122,7 +4282,8 @@ module Aws::Organizations
     #   @return [Types::OrganizationalUnit]
     class UpdateOrganizationalUnitResponse < Struct.new(
       :organizational_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4153,7 +4314,8 @@ module Aws::Organizations
       :name,
       :description,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4163,7 +4325,8 @@ module Aws::Organizations
     #   @return [Types::Policy]
     class UpdatePolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

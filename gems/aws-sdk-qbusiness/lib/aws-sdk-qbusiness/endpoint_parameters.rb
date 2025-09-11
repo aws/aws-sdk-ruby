@@ -25,7 +25,6 @@ module Aws::QBusiness
     :endpoint,
     keyword_init: true
   ) do
-
     def initialize(options = {})
       self.region = options.fetch(:region, nil)
       self.use_fips = options.fetch(:use_fips, false)

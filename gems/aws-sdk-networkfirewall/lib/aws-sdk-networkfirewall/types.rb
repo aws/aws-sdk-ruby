@@ -22,7 +22,8 @@ module Aws::NetworkFirewall
     #   @return [Types::Attachment]
     class AZSyncState < Struct.new(
       :attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31,7 +32,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class AcceptNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +84,8 @@ module Aws::NetworkFirewall
     class AcceptNetworkFirewallTransitGatewayAttachmentResponse < Struct.new(
       :transit_gateway_attachment_id,
       :transit_gateway_attachment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +100,8 @@ module Aws::NetworkFirewall
     #   @return [Types::PublishMetricAction]
     class ActionDefinition < Struct.new(
       :publish_metric_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +128,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class Address < Struct.new(
       :address_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +154,8 @@ module Aws::NetworkFirewall
       :analysis_type,
       :report_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +198,8 @@ module Aws::NetworkFirewall
       :identified_rule_ids,
       :identified_type,
       :analysis_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +230,8 @@ module Aws::NetworkFirewall
       :domain,
       :hits,
       :unique_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +256,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :availability_zone_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +280,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :availability_zone_mappings,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +306,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :firewall_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -319,7 +330,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :firewall_policy_arn,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +356,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :subnet_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,7 +380,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :subnet_mappings,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +419,8 @@ module Aws::NetworkFirewall
       :endpoint_id,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +431,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class AvailabilityZoneMapping < Struct.new(
       :availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +442,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class AvailabilityZoneMetadata < Struct.new(
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +461,8 @@ module Aws::NetworkFirewall
       :available_cidr_count,
       :utilized_cidr_count,
       :ip_set_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +472,8 @@ module Aws::NetworkFirewall
     #   @return [Types::CIDRSummary]
     class CapacityUsageSummary < Struct.new(
       :cid_rs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +515,8 @@ module Aws::NetworkFirewall
     class CheckCertificateRevocationStatusActions < Struct.new(
       :revoked_status_action,
       :unknown_status_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -530,7 +550,8 @@ module Aws::NetworkFirewall
       :tags,
       :dry_run,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +565,8 @@ module Aws::NetworkFirewall
     class CreateFirewallPolicyResponse < Struct.new(
       :update_token,
       :firewall_policy_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +644,8 @@ module Aws::NetworkFirewall
       :transit_gateway_id,
       :availability_zone_mappings,
       :availability_zone_change_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +659,8 @@ module Aws::NetworkFirewall
     class CreateFirewallResponse < Struct.new(
       :firewall,
       :firewall_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +784,8 @@ module Aws::NetworkFirewall
       :source_metadata,
       :analyze_rule_group,
       :summary_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +799,8 @@ module Aws::NetworkFirewall
     class CreateRuleGroupResponse < Struct.new(
       :update_token,
       :rule_group_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +829,8 @@ module Aws::NetworkFirewall
       :description,
       :tags,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +844,8 @@ module Aws::NetworkFirewall
     class CreateTLSInspectionConfigurationResponse < Struct.new(
       :update_token,
       :tls_inspection_configuration_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +873,8 @@ module Aws::NetworkFirewall
       :subnet_mapping,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +888,8 @@ module Aws::NetworkFirewall
     class CreateVpcEndpointAssociationResponse < Struct.new(
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +923,8 @@ module Aws::NetworkFirewall
     class CustomAction < Struct.new(
       :action_name,
       :action_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +939,8 @@ module Aws::NetworkFirewall
     class DeleteFirewallPolicyRequest < Struct.new(
       :firewall_policy_name,
       :firewall_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +950,8 @@ module Aws::NetworkFirewall
     #   @return [Types::FirewallPolicyResponse]
     class DeleteFirewallPolicyResponse < Struct.new(
       :firewall_policy_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +966,8 @@ module Aws::NetworkFirewall
     class DeleteFirewallRequest < Struct.new(
       :firewall_name,
       :firewall_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +985,8 @@ module Aws::NetworkFirewall
     class DeleteFirewallResponse < Struct.new(
       :firewall,
       :firewall_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,7 +995,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class DeleteNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1012,7 +1048,8 @@ module Aws::NetworkFirewall
     class DeleteNetworkFirewallTransitGatewayAttachmentResponse < Struct.new(
       :transit_gateway_attachment_id,
       :transit_gateway_attachment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1021,12 +1058,14 @@ module Aws::NetworkFirewall
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1088,8 @@ module Aws::NetworkFirewall
       :rule_group_name,
       :rule_group_arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1058,7 +1098,8 @@ module Aws::NetworkFirewall
     #   @return [Types::RuleGroupResponse]
     class DeleteRuleGroupResponse < Struct.new(
       :rule_group_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1114,8 @@ module Aws::NetworkFirewall
     class DeleteTLSInspectionConfigurationRequest < Struct.new(
       :tls_inspection_configuration_arn,
       :tls_inspection_configuration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1124,8 @@ module Aws::NetworkFirewall
     #   @return [Types::TLSInspectionConfigurationResponse]
     class DeleteTLSInspectionConfigurationResponse < Struct.new(
       :tls_inspection_configuration_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1091,7 +1134,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class DeleteVpcEndpointAssociationRequest < Struct.new(
       :vpc_endpoint_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1149,8 @@ module Aws::NetworkFirewall
     class DeleteVpcEndpointAssociationResponse < Struct.new(
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1159,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class DescribeFirewallMetadataRequest < Struct.new(
       :firewall_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1195,8 @@ module Aws::NetworkFirewall
       :status,
       :supported_availability_zones,
       :transit_gateway_attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1211,8 @@ module Aws::NetworkFirewall
     class DescribeFirewallPolicyRequest < Struct.new(
       :firewall_policy_name,
       :firewall_policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1182,7 +1230,8 @@ module Aws::NetworkFirewall
       :update_token,
       :firewall_policy_response,
       :firewall_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1197,7 +1246,8 @@ module Aws::NetworkFirewall
     class DescribeFirewallRequest < Struct.new(
       :firewall_name,
       :firewall_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1217,7 +1267,8 @@ module Aws::NetworkFirewall
       :update_token,
       :firewall,
       :firewall_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1294,8 @@ module Aws::NetworkFirewall
       :vpc_endpoint_association_arn,
       :vpc_endpoint_id,
       :flow_operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1343,8 @@ module Aws::NetworkFirewall
       :status_message,
       :flow_request_timestamp,
       :flow_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1306,7 +1359,8 @@ module Aws::NetworkFirewall
     class DescribeLoggingConfigurationRequest < Struct.new(
       :firewall_arn,
       :firewall_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1327,7 +1381,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :logging_configuration,
       :enable_monitoring_dashboard,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1336,7 +1391,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class DescribeResourcePolicyRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1345,7 +1401,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class DescribeResourcePolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1425,8 @@ module Aws::NetworkFirewall
       :rule_group_name,
       :rule_group_arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1412,7 +1470,8 @@ module Aws::NetworkFirewall
       :capacity,
       :stateful_rule_options,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1439,7 +1498,8 @@ module Aws::NetworkFirewall
       :rule_group_arn,
       :type,
       :analyze_rule_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1462,7 +1522,8 @@ module Aws::NetworkFirewall
       :update_token,
       :rule_group,
       :rule_group_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1484,7 +1545,8 @@ module Aws::NetworkFirewall
       :rule_group_name,
       :rule_group_arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,7 +1574,8 @@ module Aws::NetworkFirewall
       :rule_group_name,
       :description,
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1527,7 +1590,8 @@ module Aws::NetworkFirewall
     class DescribeTLSInspectionConfigurationRequest < Struct.new(
       :tls_inspection_configuration_arn,
       :tls_inspection_configuration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,7 +1613,8 @@ module Aws::NetworkFirewall
       :update_token,
       :tls_inspection_configuration,
       :tls_inspection_configuration_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1558,7 +1623,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class DescribeVpcEndpointAssociationRequest < Struct.new(
       :vpc_endpoint_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1572,7 +1638,8 @@ module Aws::NetworkFirewall
     class DescribeVpcEndpointAssociationResponse < Struct.new(
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1656,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class Dimension < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1614,7 +1682,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :availability_zone_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1637,7 +1706,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :availability_zone_mappings,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1732,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1756,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :subnet_mappings,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,7 +1771,8 @@ module Aws::NetworkFirewall
     class EncryptionConfiguration < Struct.new(
       :key_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1865,8 @@ module Aws::NetworkFirewall
       :transit_gateway_owner_account_id,
       :availability_zone_mappings,
       :availability_zone_change_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1820,7 +1894,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :firewall_arn,
       :transit_gateway_attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1907,7 +1982,8 @@ module Aws::NetworkFirewall
       :stateful_engine_options,
       :tls_inspection_configuration_arn,
       :policy_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1923,7 +1999,8 @@ module Aws::NetworkFirewall
     class FirewallPolicyMetadata < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1980,7 +2057,8 @@ module Aws::NetworkFirewall
       :number_of_associations,
       :encryption_configuration,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2023,7 +2101,8 @@ module Aws::NetworkFirewall
       :sync_states,
       :capacity_usage_summary,
       :transit_gateway_attachment_sync_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2067,7 +2146,8 @@ module Aws::NetworkFirewall
       :age,
       :packet_count,
       :byte_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2103,7 +2183,8 @@ module Aws::NetworkFirewall
       :source_port,
       :destination_port,
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2202,8 @@ module Aws::NetworkFirewall
     class FlowOperation < Struct.new(
       :minimum_flow_age_in_seconds,
       :flow_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2145,7 +2227,8 @@ module Aws::NetworkFirewall
       :flow_operation_type,
       :flow_request_timestamp,
       :flow_operation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2162,7 +2245,8 @@ module Aws::NetworkFirewall
     #   @return [Integer]
     class FlowTimeouts < Struct.new(
       :tcp_idle_timeout_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2193,7 +2277,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2230,7 +2315,8 @@ module Aws::NetworkFirewall
       :analysis_type,
       :next_token,
       :analysis_report_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2307,7 +2393,8 @@ module Aws::NetworkFirewall
       :direction,
       :destination,
       :destination_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2317,7 +2404,8 @@ module Aws::NetworkFirewall
     #   @return [Integer]
     class Hits < Struct.new(
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2334,7 +2422,8 @@ module Aws::NetworkFirewall
     #   @return [Array<String>]
     class IPSet < Struct.new(
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2344,7 +2433,8 @@ module Aws::NetworkFirewall
     #   @return [Integer]
     class IPSetMetadata < Struct.new(
       :resolved_cidr_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2357,7 +2447,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class IPSetReference < Struct.new(
       :reference_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2367,7 +2458,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class InsufficientCapacityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2377,7 +2469,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class InternalServerError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2387,7 +2480,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class InvalidOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2409,7 +2503,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2418,7 +2513,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class InvalidResourcePolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2427,7 +2523,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class InvalidTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2436,7 +2533,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,7 +2561,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2478,7 +2577,8 @@ module Aws::NetworkFirewall
     class ListAnalysisReportsResponse < Struct.new(
       :analysis_reports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2495,7 +2595,8 @@ module Aws::NetworkFirewall
     class ListFirewallPoliciesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2612,8 @@ module Aws::NetworkFirewall
     class ListFirewallPoliciesResponse < Struct.new(
       :next_token,
       :firewall_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2533,7 +2635,8 @@ module Aws::NetworkFirewall
       :next_token,
       :vpc_ids,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2550,7 +2653,8 @@ module Aws::NetworkFirewall
     class ListFirewallsResponse < Struct.new(
       :next_token,
       :firewalls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2588,7 +2692,8 @@ module Aws::NetworkFirewall
       :availability_zone,
       :vpc_endpoint_id,
       :vpc_endpoint_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2640,7 +2745,8 @@ module Aws::NetworkFirewall
       :flow_request_timestamp,
       :flows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2678,7 +2784,8 @@ module Aws::NetworkFirewall
       :flow_operation_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2695,7 +2802,8 @@ module Aws::NetworkFirewall
     class ListFlowOperationsResponse < Struct.new(
       :flow_operations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2726,7 +2834,8 @@ module Aws::NetworkFirewall
       :scope,
       :managed_type,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2742,7 +2851,8 @@ module Aws::NetworkFirewall
     class ListRuleGroupsResponse < Struct.new(
       :next_token,
       :rule_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2759,7 +2869,8 @@ module Aws::NetworkFirewall
     class ListTLSInspectionConfigurationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2774,7 +2885,8 @@ module Aws::NetworkFirewall
     class ListTLSInspectionConfigurationsResponse < Struct.new(
       :next_token,
       :tls_inspection_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2795,7 +2907,8 @@ module Aws::NetworkFirewall
       :next_token,
       :max_results,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2810,7 +2923,8 @@ module Aws::NetworkFirewall
     class ListTagsForResourceResponse < Struct.new(
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2832,7 +2946,8 @@ module Aws::NetworkFirewall
       :next_token,
       :max_results,
       :firewall_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2851,7 +2966,8 @@ module Aws::NetworkFirewall
     class ListVpcEndpointAssociationsResponse < Struct.new(
       :next_token,
       :vpc_endpoint_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2918,7 +3034,8 @@ module Aws::NetworkFirewall
       :log_type,
       :log_destination_type,
       :log_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2927,7 +3044,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class LogDestinationPermissionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2938,7 +3056,8 @@ module Aws::NetworkFirewall
     #   @return [Array<Types::LogDestinationConfig>]
     class LoggingConfiguration < Struct.new(
       :log_destination_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2979,7 +3098,8 @@ module Aws::NetworkFirewall
       :destination_ports,
       :protocols,
       :tcp_flags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2996,7 +3116,8 @@ module Aws::NetworkFirewall
     class PerObjectStatus < Struct.new(
       :sync_status,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3006,7 +3127,8 @@ module Aws::NetworkFirewall
     #   @return [Hash<String, Types::IPSet>]
     class PolicyVariables < Struct.new(
       :rule_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3024,7 +3146,8 @@ module Aws::NetworkFirewall
     class PortRange < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3041,7 +3164,8 @@ module Aws::NetworkFirewall
     #   @return [Array<String>]
     class PortSet < Struct.new(
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3052,7 +3176,8 @@ module Aws::NetworkFirewall
     #   @return [Array<Types::Dimension>]
     class PublishMetricAction < Struct.new(
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3100,12 +3225,14 @@ module Aws::NetworkFirewall
     class PutResourcePolicyRequest < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutResourcePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3115,7 +3242,8 @@ module Aws::NetworkFirewall
     #   @return [Hash<String, Types::IPSetReference>]
     class ReferenceSets < Struct.new(
       :ip_set_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3124,7 +3252,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class RejectNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3176,7 +3305,8 @@ module Aws::NetworkFirewall
     class RejectNetworkFirewallTransitGatewayAttachmentResponse < Struct.new(
       :transit_gateway_attachment_id,
       :transit_gateway_attachment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3185,7 +3315,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3194,7 +3325,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class ResourceOwnerCheckException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3246,7 +3378,8 @@ module Aws::NetworkFirewall
     class RuleDefinition < Struct.new(
       :match_attributes,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3275,7 +3408,8 @@ module Aws::NetworkFirewall
       :reference_sets,
       :rules_source,
       :stateful_rule_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3291,7 +3425,8 @@ module Aws::NetworkFirewall
     class RuleGroupMetadata < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3383,7 +3518,8 @@ module Aws::NetworkFirewall
       :last_modified_time,
       :analysis_results,
       :summary_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3397,7 +3533,8 @@ module Aws::NetworkFirewall
     class RuleOption < Struct.new(
       :keyword,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3433,7 +3570,8 @@ module Aws::NetworkFirewall
       :sid,
       :msg,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3448,7 +3586,8 @@ module Aws::NetworkFirewall
     class RuleVariables < Struct.new(
       :ip_sets,
       :port_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3482,7 +3621,8 @@ module Aws::NetworkFirewall
       :rules_source_list,
       :stateful_rules,
       :stateless_rules_and_custom_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3511,7 +3651,8 @@ module Aws::NetworkFirewall
       :targets,
       :target_types,
       :generated_rules_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3521,7 +3662,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class ServerCertificate < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3557,7 +3699,8 @@ module Aws::NetworkFirewall
       :scopes,
       :certificate_authority_arn,
       :check_certificate_revocation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3589,7 +3732,8 @@ module Aws::NetworkFirewall
       :source_ports,
       :destination_ports,
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3603,7 +3747,8 @@ module Aws::NetworkFirewall
     class SourceMetadata < Struct.new(
       :source_arn,
       :source_update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3622,7 +3767,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :firewall_arn,
       :analysis_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3631,7 +3777,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class StartAnalysisReportResponse < Struct.new(
       :analysis_report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3665,7 +3812,8 @@ module Aws::NetworkFirewall
       :vpc_endpoint_id,
       :minimum_flow_age_in_seconds,
       :flow_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3684,7 +3832,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :flow_operation_id,
       :flow_operation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3715,7 +3864,8 @@ module Aws::NetworkFirewall
       :vpc_endpoint_id,
       :minimum_flow_age_in_seconds,
       :flow_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3734,7 +3884,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :flow_operation_id,
       :flow_operation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3777,7 +3928,8 @@ module Aws::NetworkFirewall
       :rule_order,
       :stream_exception_policy,
       :flow_timeouts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3827,7 +3979,8 @@ module Aws::NetworkFirewall
       :action,
       :header,
       :rule_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3838,7 +3991,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class StatefulRuleGroupOverride < Struct.new(
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3873,7 +4027,8 @@ module Aws::NetworkFirewall
       :priority,
       :override,
       :deep_threat_inspection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3887,7 +4042,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class StatefulRuleOptions < Struct.new(
       :rule_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3913,7 +4069,8 @@ module Aws::NetworkFirewall
     class StatelessRule < Struct.new(
       :rule_definition,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3931,7 +4088,8 @@ module Aws::NetworkFirewall
     class StatelessRuleGroupReference < Struct.new(
       :resource_arn,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3950,7 +4108,8 @@ module Aws::NetworkFirewall
     class StatelessRulesAndCustomActions < Struct.new(
       :stateless_rules,
       :custom_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3967,7 +4126,8 @@ module Aws::NetworkFirewall
     class SubnetMapping < Struct.new(
       :subnet_id,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3978,7 +4138,8 @@ module Aws::NetworkFirewall
     #   @return [Array<Types::RuleSummary>]
     class Summary < Struct.new(
       :rule_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3995,7 +4156,8 @@ module Aws::NetworkFirewall
     #   @return [Array<String>]
     class SummaryConfiguration < Struct.new(
       :rule_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4029,7 +4191,8 @@ module Aws::NetworkFirewall
     class SyncState < Struct.new(
       :attachment,
       :config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4052,7 +4215,8 @@ module Aws::NetworkFirewall
     class TCPFlagField < Struct.new(
       :flags,
       :masks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4066,7 +4230,8 @@ module Aws::NetworkFirewall
     #   @return [Array<Types::ServerCertificateConfiguration>]
     class TLSInspectionConfiguration < Struct.new(
       :server_certificate_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4080,7 +4245,8 @@ module Aws::NetworkFirewall
     class TLSInspectionConfigurationMetadata < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4130,7 +4296,8 @@ module Aws::NetworkFirewall
       :encryption_configuration,
       :certificates,
       :certificate_authority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4150,7 +4317,8 @@ module Aws::NetworkFirewall
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4163,12 +4331,14 @@ module Aws::NetworkFirewall
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4177,7 +4347,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4199,7 +4370,8 @@ module Aws::NetworkFirewall
       :certificate_serial,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4296,7 +4468,8 @@ module Aws::NetworkFirewall
       :attachment_id,
       :transit_gateway_attachment_status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4306,7 +4479,8 @@ module Aws::NetworkFirewall
     #   @return [Integer]
     class UniqueSources < Struct.new(
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4320,7 +4494,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4333,12 +4508,14 @@ module Aws::NetworkFirewall
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4365,7 +4542,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :availability_zone_change_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4390,7 +4568,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :availability_zone_change_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4420,7 +4599,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4445,7 +4625,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4472,7 +4653,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :delete_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4497,7 +4679,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :delete_protection,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4528,7 +4711,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4551,7 +4735,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :description,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4574,7 +4759,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4597,7 +4783,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :update_token,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4624,7 +4811,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :firewall_policy_change_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4649,7 +4837,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :firewall_policy_change_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4695,7 +4884,8 @@ module Aws::NetworkFirewall
       :description,
       :dry_run,
       :encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4709,7 +4899,8 @@ module Aws::NetworkFirewall
     class UpdateFirewallPolicyResponse < Struct.new(
       :update_token,
       :firewall_policy_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4739,7 +4930,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :logging_configuration,
       :enable_monitoring_dashboard,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4764,7 +4956,8 @@ module Aws::NetworkFirewall
       :firewall_name,
       :logging_configuration,
       :enable_monitoring_dashboard,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4839,7 +5032,8 @@ module Aws::NetworkFirewall
       :source_metadata,
       :analyze_rule_group,
       :summary_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4853,7 +5047,8 @@ module Aws::NetworkFirewall
     class UpdateRuleGroupResponse < Struct.new(
       :update_token,
       :rule_group_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4880,7 +5075,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :subnet_change_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4905,7 +5101,8 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :subnet_change_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4944,7 +5141,8 @@ module Aws::NetworkFirewall
       :description,
       :encryption_configuration,
       :update_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4958,7 +5156,8 @@ module Aws::NetworkFirewall
     class UpdateTLSInspectionConfigurationResponse < Struct.new(
       :update_token,
       :tls_inspection_configuration_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5021,7 +5220,8 @@ module Aws::NetworkFirewall
       :subnet_mapping,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5031,7 +5231,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     class VpcEndpointAssociationMetadata < Struct.new(
       :vpc_endpoint_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5046,7 +5247,8 @@ module Aws::NetworkFirewall
     class VpcEndpointAssociationStatus < Struct.new(
       :status,
       :association_sync_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

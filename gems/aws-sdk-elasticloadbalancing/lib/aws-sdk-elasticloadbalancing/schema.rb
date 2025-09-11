@@ -800,7 +800,6 @@ module Aws::ElasticLoadBalancing
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyNotFoundException)
         operation.traits = {}
       end)
-
     end
 
     class << self

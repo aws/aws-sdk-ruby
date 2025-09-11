@@ -73,7 +73,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::EmptyUploadException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -88,7 +88,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::ImageAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -103,7 +103,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::ImageDigestDoesNotMatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::ImageNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::ImageTagAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -144,7 +144,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::InvalidLayerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -159,7 +159,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::InvalidLayerPartException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The registry ID associated with the exception.</p>
@@ -195,7 +195,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -210,7 +210,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::InvalidTagParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -223,7 +223,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::KmsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -241,7 +241,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::LayerAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -256,7 +256,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::LayerInaccessibleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -270,7 +270,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::LayerPartTooSmallException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -285,7 +285,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::LayersNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -300,7 +300,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::LifecyclePolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -314,7 +314,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::LifecyclePolicyPreviewInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -327,7 +327,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::LifecyclePolicyPreviewNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -342,7 +342,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -357,7 +357,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::PullThroughCacheRuleAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -371,7 +371,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::PullThroughCacheRuleNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -384,7 +384,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::ReferencedImagesNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -397,7 +397,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::RegistryPolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -410,7 +410,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::RepositoryAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -425,7 +425,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::RepositoryNotEmptyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -440,7 +440,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::RepositoryNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -455,7 +455,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::RepositoryPolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -470,7 +470,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::ScanNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -484,7 +484,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::SecretNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -497,7 +497,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::ServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -512,7 +512,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::TemplateAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -526,7 +526,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::TemplateNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -540,7 +540,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -554,7 +554,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::UnableToAccessSecretException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -568,7 +568,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::UnableToDecryptSecretValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -583,7 +583,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::UnableToGetUpstreamImageException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -597,7 +597,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::UnableToGetUpstreamLayerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -610,7 +610,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::UnsupportedImageTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -623,7 +623,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::UnsupportedUpstreamRegistryException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -637,7 +637,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::UploadNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message associated with the exception.</p>
@@ -651,7 +651,7 @@ module Aws::ECR
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

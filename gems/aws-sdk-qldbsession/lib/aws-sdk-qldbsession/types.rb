@@ -8,7 +8,8 @@ module Aws::QLDBSession
 
     # <p>Contains the details of the transaction to abort.</p>
     class AbortTransactionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18,7 +19,8 @@ module Aws::QLDBSession
     #   @return [Types::TimingInformation]
     class AbortTransactionResult < Struct.new(
       :timing_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31,7 +33,8 @@ module Aws::QLDBSession
     class BadRequestException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,7 +43,8 @@ module Aws::QLDBSession
     #   @return [String]
     class CapacityExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +64,8 @@ module Aws::QLDBSession
     class CommitTransactionRequest < Struct.new(
       :transaction_id,
       :commit_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,13 +87,15 @@ module Aws::QLDBSession
       :commit_digest,
       :timing_information,
       :consumed_i_os,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a request to end the session.</p>
     class EndSessionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +105,8 @@ module Aws::QLDBSession
     #   @return [Types::TimingInformation]
     class EndSessionResult < Struct.new(
       :timing_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +124,8 @@ module Aws::QLDBSession
       :transaction_id,
       :statement,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +143,8 @@ module Aws::QLDBSession
       :first_page,
       :timing_information,
       :consumed_i_os,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +158,8 @@ module Aws::QLDBSession
     class FetchPageRequest < Struct.new(
       :transaction_id,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -166,7 +177,8 @@ module Aws::QLDBSession
       :page,
       :timing_information,
       :consumed_i_os,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +192,8 @@ module Aws::QLDBSession
     class IOUsage < Struct.new(
       :read_i_os,
       :write_i_os,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -198,7 +211,8 @@ module Aws::QLDBSession
     class InvalidSessionException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +221,8 @@ module Aws::QLDBSession
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +232,8 @@ module Aws::QLDBSession
     #   @return [String]
     class OccConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +247,8 @@ module Aws::QLDBSession
     class Page < Struct.new(
       :values,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +257,8 @@ module Aws::QLDBSession
     #   @return [String]
     class RateExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +300,8 @@ module Aws::QLDBSession
       :abort_transaction,
       :execute_statement,
       :fetch_page,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +336,8 @@ module Aws::QLDBSession
       :abort_transaction,
       :execute_statement,
       :fetch_page,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +347,8 @@ module Aws::QLDBSession
     #   @return [String]
     class StartSessionRequest < Struct.new(
       :ledger_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,13 +363,15 @@ module Aws::QLDBSession
     class StartSessionResult < Struct.new(
       :session_token,
       :timing_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a request to start a transaction.</p>
     class StartTransactionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +385,8 @@ module Aws::QLDBSession
     class StartTransactionResult < Struct.new(
       :transaction_id,
       :timing_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +399,8 @@ module Aws::QLDBSession
     #   @return [Integer]
     class TimingInformation < Struct.new(
       :processing_time_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -394,7 +419,8 @@ module Aws::QLDBSession
     class ValueHolder < Struct.new(
       :ion_binary,
       :ion_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

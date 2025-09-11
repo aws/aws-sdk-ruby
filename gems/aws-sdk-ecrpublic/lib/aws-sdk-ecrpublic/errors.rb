@@ -57,7 +57,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::EmptyUploadException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::ImageAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::ImageDigestDoesNotMatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::ImageNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::ImageTagAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::InvalidLayerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::InvalidLayerPartException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The Amazon Web Services account ID that's associated with the layer part.</p>
@@ -174,7 +174,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -187,7 +187,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::InvalidTagParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -200,7 +200,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::LayerAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -213,7 +213,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::LayerPartTooSmallException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -227,7 +227,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::LayersNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -242,7 +242,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -255,7 +255,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::ReferencedImagesNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -268,7 +268,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::RegistryNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -281,7 +281,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::RepositoryAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -294,7 +294,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::RepositoryCatalogDataNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -308,7 +308,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::RepositoryNotEmptyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -322,7 +322,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::RepositoryNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -336,7 +336,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::RepositoryPolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -349,7 +349,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::ServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -363,7 +363,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -376,7 +376,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::UnsupportedCommandException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -390,7 +390,7 @@ module Aws::ECRPUBLIC
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECRPUBLIC::Types::UploadNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

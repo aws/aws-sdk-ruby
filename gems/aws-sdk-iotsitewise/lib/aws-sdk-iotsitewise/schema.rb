@@ -3754,7 +3754,6 @@ module Aws::IoTSiteWise
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "monitor."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/projects/{projectId}", "code" => 200}}
       end)
-
     end
 
     class << self

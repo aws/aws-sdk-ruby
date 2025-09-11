@@ -11,7 +11,8 @@ module Aws::SSMGuiConnect
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::SSMGuiConnect
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +36,8 @@ module Aws::SSMGuiConnect
     class ConnectionRecordingPreferences < Struct.new(
       :recording_destinations,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +46,8 @@ module Aws::SSMGuiConnect
     #   @return [String]
     class DeleteConnectionRecordingPreferencesRequest < Struct.new(
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,7 +56,8 @@ module Aws::SSMGuiConnect
     #   @return [String]
     class DeleteConnectionRecordingPreferencesResponse < Struct.new(
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +70,8 @@ module Aws::SSMGuiConnect
     class GetConnectionRecordingPreferencesResponse < Struct.new(
       :client_token,
       :connection_recording_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -74,7 +80,8 @@ module Aws::SSMGuiConnect
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +91,8 @@ module Aws::SSMGuiConnect
     #   @return [Array<Types::S3Bucket>]
     class RecordingDestinations < Struct.new(
       :s3_buckets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +101,8 @@ module Aws::SSMGuiConnect
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +116,8 @@ module Aws::SSMGuiConnect
     class S3Bucket < Struct.new(
       :bucket_owner,
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +126,8 @@ module Aws::SSMGuiConnect
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +136,8 @@ module Aws::SSMGuiConnect
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -138,7 +150,8 @@ module Aws::SSMGuiConnect
     class UpdateConnectionRecordingPreferencesRequest < Struct.new(
       :connection_recording_preferences,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +164,8 @@ module Aws::SSMGuiConnect
     class UpdateConnectionRecordingPreferencesResponse < Struct.new(
       :client_token,
       :connection_recording_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -160,7 +174,8 @@ module Aws::SSMGuiConnect
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

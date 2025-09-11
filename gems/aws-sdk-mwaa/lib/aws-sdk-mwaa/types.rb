@@ -11,7 +11,8 @@ module Aws::MWAA
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::MWAA
     #   @return [String]
     class CreateCliTokenInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -33,7 +35,8 @@ module Aws::MWAA
     class CreateCliTokenOutput < Struct.new(
       :cli_token,
       :web_server_hostname,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +194,8 @@ module Aws::MWAA
       :endpoint_management,
       :min_webservers,
       :max_webservers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +204,8 @@ module Aws::MWAA
     #   @return [String]
     class CreateEnvironmentOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +214,8 @@ module Aws::MWAA
     #   @return [String]
     class CreateWebLoginTokenInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +236,8 @@ module Aws::MWAA
       :web_server_hostname,
       :iam_identity,
       :airflow_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,12 +246,14 @@ module Aws::MWAA
     #   @return [String]
     class DeleteEnvironmentOperationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +272,8 @@ module Aws::MWAA
     class Dimension < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +527,8 @@ module Aws::MWAA
       :endpoint_management,
       :min_webservers,
       :max_webservers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +537,8 @@ module Aws::MWAA
     #   @return [String]
     class GetEnvironmentOperationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +547,8 @@ module Aws::MWAA
     #   @return [Types::Environment]
     class GetEnvironmentOperationOutput < Struct.new(
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +557,8 @@ module Aws::MWAA
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +588,8 @@ module Aws::MWAA
       :method,
       :query_parameters,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +603,8 @@ module Aws::MWAA
     class InvokeRestApiResponse < Struct.new(
       :rest_api_status_code,
       :rest_api_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +630,8 @@ module Aws::MWAA
       :error,
       :source,
       :worker_replacement_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +644,8 @@ module Aws::MWAA
     class ListEnvironmentsOperationInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +658,8 @@ module Aws::MWAA
     class ListEnvironmentsOperationOutput < Struct.new(
       :environments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -649,7 +668,8 @@ module Aws::MWAA
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -658,7 +678,8 @@ module Aws::MWAA
     #   @return [Hash<String, String>]
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +705,8 @@ module Aws::MWAA
       :webserver_logs,
       :worker_logs,
       :task_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +732,8 @@ module Aws::MWAA
       :webserver_logs,
       :worker_logs,
       :task_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +772,8 @@ module Aws::MWAA
       :value,
       :unit,
       :statistic_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +791,8 @@ module Aws::MWAA
       :enabled,
       :log_level,
       :cloud_watch_log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -781,7 +806,8 @@ module Aws::MWAA
     class ModuleLoggingConfigurationInput < Struct.new(
       :enabled,
       :log_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -795,7 +821,8 @@ module Aws::MWAA
     class NetworkConfiguration < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -812,14 +839,16 @@ module Aws::MWAA
     class PublishMetricsOperationInput < Struct.new(
       :environment_name,
       :metric_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   This type is for internal use and not meant for public use. Data set for this type will be ignored.
     class PublishMetricsOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +857,8 @@ module Aws::MWAA
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +874,8 @@ module Aws::MWAA
     class RestApiClientException < Struct.new(
       :rest_api_status_code,
       :rest_api_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -860,7 +891,8 @@ module Aws::MWAA
     class RestApiServerException < Struct.new(
       :rest_api_status_code,
       :rest_api_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +921,8 @@ module Aws::MWAA
       :sum,
       :minimum,
       :maximum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,12 +935,14 @@ module Aws::MWAA
     class TagResourceOperationInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,12 +955,14 @@ module Aws::MWAA
     class UntagResourceOperationInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,7 +1116,8 @@ module Aws::MWAA
       :startup_script_s3_object_version,
       :webserver_access_mode,
       :weekly_maintenance_window_start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1088,7 +1126,8 @@ module Aws::MWAA
     #   @return [String]
     class UpdateEnvironmentOperationOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1102,7 +1141,8 @@ module Aws::MWAA
     class UpdateError < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1152,8 @@ module Aws::MWAA
     #   @return [Array<String>]
     class UpdateNetworkConfigurationInput < Struct.new(
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1162,8 @@ module Aws::MWAA
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

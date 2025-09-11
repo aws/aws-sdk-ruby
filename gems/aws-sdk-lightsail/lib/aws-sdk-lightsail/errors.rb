@@ -42,7 +42,7 @@ module Aws::Lightsail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lightsail::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -68,7 +68,7 @@ module Aws::Lightsail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lightsail::Types::AccountSetupInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -100,7 +100,7 @@ module Aws::Lightsail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lightsail::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -125,7 +125,7 @@ module Aws::Lightsail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lightsail::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -150,7 +150,7 @@ module Aws::Lightsail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lightsail::Types::OperationFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -176,7 +176,7 @@ module Aws::Lightsail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lightsail::Types::RegionSetupInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -206,7 +206,7 @@ module Aws::Lightsail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lightsail::Types::ServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -231,7 +231,7 @@ module Aws::Lightsail
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Lightsail::Types::UnauthenticatedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code

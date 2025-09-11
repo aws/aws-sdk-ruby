@@ -40,7 +40,7 @@ module Aws::WorkspacesInstances
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkspacesInstances::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Detailed explanation of the access denial.</p>
@@ -54,7 +54,7 @@ module Aws::WorkspacesInstances
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkspacesInstances::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the conflict encountered.</p>
@@ -78,7 +78,7 @@ module Aws::WorkspacesInstances
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkspacesInstances::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the internal server error.</p>
@@ -101,7 +101,7 @@ module Aws::WorkspacesInstances
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkspacesInstances::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Details about the missing resource.</p>
@@ -125,7 +125,7 @@ module Aws::WorkspacesInstances
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkspacesInstances::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the quota limitation.</p>
@@ -159,7 +159,7 @@ module Aws::WorkspacesInstances
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkspacesInstances::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the throttling event.</p>
@@ -196,7 +196,7 @@ module Aws::WorkspacesInstances
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WorkspacesInstances::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Overall description of validation failures.</p>

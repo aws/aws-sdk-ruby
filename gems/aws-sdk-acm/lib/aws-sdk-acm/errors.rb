@@ -49,7 +49,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::InvalidArgsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -88,7 +88,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::InvalidArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::InvalidDomainValidationOptionsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -127,7 +127,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::InvalidTagException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -166,7 +166,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::RequestInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -179,7 +179,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -192,7 +192,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -205,7 +205,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::TagPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -218,7 +218,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -231,7 +231,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -244,7 +244,7 @@ module Aws::ACM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACM::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

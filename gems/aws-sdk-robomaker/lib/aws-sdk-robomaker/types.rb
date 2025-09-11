@@ -11,7 +11,8 @@ module Aws::RoboMaker
     #   @return [Array<String>]
     class BatchDeleteWorldsRequest < Struct.new(
       :worlds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::RoboMaker
     #   @return [Array<String>]
     class BatchDeleteWorldsResponse < Struct.new(
       :unprocessed_worlds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +32,8 @@ module Aws::RoboMaker
     #   @return [Array<String>]
     class BatchDescribeSimulationJobRequest < Struct.new(
       :jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +46,8 @@ module Aws::RoboMaker
     class BatchDescribeSimulationJobResponse < Struct.new(
       :jobs,
       :unprocessed_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +72,8 @@ module Aws::RoboMaker
     class BatchPolicy < Struct.new(
       :timeout_in_seconds,
       :max_concurrency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,14 +84,16 @@ module Aws::RoboMaker
     #   @return [String]
     class CancelDeploymentJobRequest < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
     class CancelDeploymentJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -95,12 +102,14 @@ module Aws::RoboMaker
     #   @return [String]
     class CancelSimulationJobBatchRequest < Struct.new(
       :batch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelSimulationJobBatchResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -109,12 +118,14 @@ module Aws::RoboMaker
     #   @return [String]
     class CancelSimulationJobRequest < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelSimulationJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,12 +134,14 @@ module Aws::RoboMaker
     #   @return [String]
     class CancelWorldExportJobRequest < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelWorldExportJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,12 +150,14 @@ module Aws::RoboMaker
     #   @return [String]
     class CancelWorldGenerationJobRequest < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelWorldGenerationJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +179,8 @@ module Aws::RoboMaker
       :simulation_unit_limit,
       :compute_type,
       :gpu_unit_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +202,8 @@ module Aws::RoboMaker
       :simulation_unit_limit,
       :compute_type,
       :gpu_unit_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -195,7 +212,8 @@ module Aws::RoboMaker
     #   @return [String]
     class ConcurrentDeploymentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +242,8 @@ module Aws::RoboMaker
       :fleet,
       :deployment_application_configs,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +346,8 @@ module Aws::RoboMaker
       :created_at,
       :deployment_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +362,8 @@ module Aws::RoboMaker
     class CreateFleetRequest < Struct.new(
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +386,8 @@ module Aws::RoboMaker
       :name,
       :created_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +414,8 @@ module Aws::RoboMaker
       :robot_software_suite,
       :tags,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +458,8 @@ module Aws::RoboMaker
       :revision_id,
       :tags,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +482,8 @@ module Aws::RoboMaker
       :current_revision_id,
       :s3_etags,
       :image_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +522,8 @@ module Aws::RoboMaker
       :last_updated_at,
       :revision_id,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +546,8 @@ module Aws::RoboMaker
       :architecture,
       :greengrass_group_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -551,7 +578,8 @@ module Aws::RoboMaker
       :greengrass_group_id,
       :architecture,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +614,8 @@ module Aws::RoboMaker
       :rendering_engine,
       :tags,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -637,7 +666,8 @@ module Aws::RoboMaker
       :revision_id,
       :tags,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +691,8 @@ module Aws::RoboMaker
       :current_revision_id,
       :s3_etags,
       :image_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +739,8 @@ module Aws::RoboMaker
       :last_updated_at,
       :revision_id,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +817,8 @@ module Aws::RoboMaker
       :tags,
       :vpc_config,
       :compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +960,8 @@ module Aws::RoboMaker
       :tags,
       :vpc_config,
       :compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -961,7 +995,8 @@ module Aws::RoboMaker
       :output_location,
       :iam_role,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1092,8 @@ module Aws::RoboMaker
       :output_location,
       :iam_role,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1122,8 @@ module Aws::RoboMaker
       :world_count,
       :tags,
       :world_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,7 +1222,8 @@ module Aws::RoboMaker
       :world_count,
       :tags,
       :world_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1250,8 @@ module Aws::RoboMaker
       :template_body,
       :template_location,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1278,8 @@ module Aws::RoboMaker
       :created_at,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1276,7 +1316,8 @@ module Aws::RoboMaker
       :s3_keys,
       :type,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1313,7 +1354,8 @@ module Aws::RoboMaker
       :s3_keys,
       :type,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,14 +1366,16 @@ module Aws::RoboMaker
     #   @return [String]
     class DeleteFleetRequest < Struct.new(
       :fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
     class DeleteFleetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,12 +1388,14 @@ module Aws::RoboMaker
     class DeleteRobotApplicationRequest < Struct.new(
       :application,
       :application_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRobotApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,14 +1406,16 @@ module Aws::RoboMaker
     #   @return [String]
     class DeleteRobotRequest < Struct.new(
       :robot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
     class DeleteRobotResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1380,12 +1428,14 @@ module Aws::RoboMaker
     class DeleteSimulationApplicationRequest < Struct.new(
       :application,
       :application_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSimulationApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1394,12 +1444,14 @@ module Aws::RoboMaker
     #   @return [String]
     class DeleteWorldTemplateRequest < Struct.new(
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteWorldTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1417,7 +1469,8 @@ module Aws::RoboMaker
       :application,
       :application_version,
       :launch_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1493,8 @@ module Aws::RoboMaker
       :failure_threshold_percentage,
       :robot_deployment_timeout_in_seconds,
       :download_condition_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1532,8 @@ module Aws::RoboMaker
       :failure_reason,
       :failure_code,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1507,7 +1562,8 @@ module Aws::RoboMaker
       :launch_file,
       :post_launch_file,
       :environment_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1522,7 +1578,8 @@ module Aws::RoboMaker
     class DeregisterRobotRequest < Struct.new(
       :fleet,
       :robot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1594,8 @@ module Aws::RoboMaker
     class DeregisterRobotResponse < Struct.new(
       :fleet,
       :robot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1548,7 +1606,8 @@ module Aws::RoboMaker
     #   @return [String]
     class DescribeDeploymentJobRequest < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1595,7 +1654,8 @@ module Aws::RoboMaker
       :created_at,
       :robot_deployment_summary,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,7 +1666,8 @@ module Aws::RoboMaker
     #   @return [String]
     class DescribeFleetRequest < Struct.new(
       :fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1645,7 +1706,8 @@ module Aws::RoboMaker
       :last_deployment_job,
       :last_deployment_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1658,7 +1720,8 @@ module Aws::RoboMaker
     class DescribeRobotApplicationRequest < Struct.new(
       :application,
       :application_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1768,8 @@ module Aws::RoboMaker
       :tags,
       :environment,
       :image_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1780,8 @@ module Aws::RoboMaker
     #   @return [String]
     class DescribeRobotRequest < Struct.new(
       :robot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1763,7 +1828,8 @@ module Aws::RoboMaker
       :last_deployment_job,
       :last_deployment_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1776,7 +1842,8 @@ module Aws::RoboMaker
     class DescribeSimulationApplicationRequest < Struct.new(
       :application,
       :application_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1832,7 +1899,8 @@ module Aws::RoboMaker
       :tags,
       :environment,
       :image_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1841,7 +1909,8 @@ module Aws::RoboMaker
     #   @return [String]
     class DescribeSimulationJobBatchRequest < Struct.new(
       :batch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +2018,8 @@ module Aws::RoboMaker
       :pending_requests,
       :created_requests,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1958,7 +2028,8 @@ module Aws::RoboMaker
     #   @return [String]
     class DescribeSimulationJobRequest < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2114,7 +2185,8 @@ module Aws::RoboMaker
       :vpc_config,
       :network_interface,
       :compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2129,7 +2201,8 @@ module Aws::RoboMaker
     #   @return [String]
     class DescribeWorldExportJobRequest < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2227,7 +2300,8 @@ module Aws::RoboMaker
       :output_location,
       :iam_role,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2236,7 +2310,8 @@ module Aws::RoboMaker
     #   @return [String]
     class DescribeWorldGenerationJobRequest < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2343,7 +2418,8 @@ module Aws::RoboMaker
       :finished_worlds_summary,
       :tags,
       :world_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2352,7 +2428,8 @@ module Aws::RoboMaker
     #   @return [String]
     class DescribeWorldRequest < Struct.new(
       :world,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2382,7 +2459,8 @@ module Aws::RoboMaker
       :created_at,
       :tags,
       :world_description_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2391,7 +2469,8 @@ module Aws::RoboMaker
     #   @return [String]
     class DescribeWorldTemplateRequest < Struct.new(
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2427,7 +2506,8 @@ module Aws::RoboMaker
       :last_updated_at,
       :tags,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2438,7 +2518,8 @@ module Aws::RoboMaker
     #   @return [String]
     class Environment < Struct.new(
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2460,7 +2541,8 @@ module Aws::RoboMaker
       :failure_reason,
       :failure_code,
       :failed_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2474,7 +2556,8 @@ module Aws::RoboMaker
     class FailureSummary < Struct.new(
       :total_failure_count,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2493,7 +2576,8 @@ module Aws::RoboMaker
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2595,8 @@ module Aws::RoboMaker
       :finished_count,
       :succeeded_worlds,
       :failure_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2546,7 +2631,8 @@ module Aws::RoboMaker
       :last_deployment_status,
       :last_deployment_job,
       :last_deployment_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2559,7 +2645,8 @@ module Aws::RoboMaker
     class GetWorldTemplateBodyRequest < Struct.new(
       :template,
       :generation_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2568,7 +2655,8 @@ module Aws::RoboMaker
     #   @return [String]
     class GetWorldTemplateBodyResponse < Struct.new(
       :template_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2578,7 +2666,8 @@ module Aws::RoboMaker
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2587,7 +2676,8 @@ module Aws::RoboMaker
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2597,7 +2687,8 @@ module Aws::RoboMaker
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2631,7 +2722,8 @@ module Aws::RoboMaker
       :port_forwarding_config,
       :stream_ui,
       :command,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2646,7 +2738,8 @@ module Aws::RoboMaker
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2679,7 +2772,8 @@ module Aws::RoboMaker
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2698,7 +2792,8 @@ module Aws::RoboMaker
     class ListDeploymentJobsResponse < Struct.new(
       :deployment_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2733,7 +2828,8 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2752,7 +2848,8 @@ module Aws::RoboMaker
     class ListFleetsResponse < Struct.new(
       :fleet_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2785,7 +2882,8 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2802,7 +2900,8 @@ module Aws::RoboMaker
     class ListRobotApplicationsResponse < Struct.new(
       :robot_application_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2835,7 +2934,8 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2854,7 +2954,8 @@ module Aws::RoboMaker
     class ListRobotsResponse < Struct.new(
       :robots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2887,7 +2988,8 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2904,7 +3006,8 @@ module Aws::RoboMaker
     class ListSimulationApplicationsResponse < Struct.new(
       :simulation_application_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2929,7 +3032,8 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2946,7 +3050,8 @@ module Aws::RoboMaker
     class ListSimulationJobBatchesResponse < Struct.new(
       :simulation_job_batch_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2978,7 +3083,8 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2995,7 +3101,8 @@ module Aws::RoboMaker
     class ListSimulationJobsResponse < Struct.new(
       :simulation_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3004,7 +3111,8 @@ module Aws::RoboMaker
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3013,7 +3121,8 @@ module Aws::RoboMaker
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3041,7 +3150,8 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3058,7 +3168,8 @@ module Aws::RoboMaker
     class ListWorldExportJobsResponse < Struct.new(
       :world_export_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3086,7 +3197,8 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3103,7 +3215,8 @@ module Aws::RoboMaker
     class ListWorldGenerationJobsResponse < Struct.new(
       :world_generation_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3126,7 +3239,8 @@ module Aws::RoboMaker
     class ListWorldTemplatesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3143,7 +3257,8 @@ module Aws::RoboMaker
     class ListWorldTemplatesResponse < Struct.new(
       :template_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3170,7 +3285,8 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3187,7 +3303,8 @@ module Aws::RoboMaker
     class ListWorldsResponse < Struct.new(
       :world_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3202,7 +3319,8 @@ module Aws::RoboMaker
     #   @return [Boolean]
     class LoggingConfig < Struct.new(
       :record_all_ros_topics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3220,7 +3338,8 @@ module Aws::RoboMaker
       :network_interface_id,
       :private_ip_address,
       :public_ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3234,7 +3353,8 @@ module Aws::RoboMaker
     class OutputLocation < Struct.new(
       :s3_bucket,
       :s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3244,7 +3364,8 @@ module Aws::RoboMaker
     #   @return [Array<Types::PortMapping>]
     class PortForwardingConfig < Struct.new(
       :port_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3263,7 +3384,8 @@ module Aws::RoboMaker
       :job_port,
       :application_port,
       :enable_on_public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3320,7 +3442,8 @@ module Aws::RoboMaker
       :percent_done,
       :estimated_time_remaining_seconds,
       :target_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3335,7 +3458,8 @@ module Aws::RoboMaker
     class RegisterRobotRequest < Struct.new(
       :fleet,
       :robot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3350,7 +3474,8 @@ module Aws::RoboMaker
     class RegisterRobotResponse < Struct.new(
       :fleet,
       :robot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3364,7 +3489,8 @@ module Aws::RoboMaker
     class RenderingEngine < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3373,7 +3499,8 @@ module Aws::RoboMaker
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3382,7 +3509,8 @@ module Aws::RoboMaker
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3391,12 +3519,14 @@ module Aws::RoboMaker
     #   @return [String]
     class RestartSimulationJobRequest < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RestartSimulationJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3438,7 +3568,8 @@ module Aws::RoboMaker
       :architecture,
       :last_deployment_job,
       :last_deployment_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3486,7 +3617,8 @@ module Aws::RoboMaker
       :use_default_upload_configurations,
       :tools,
       :use_default_tools,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3513,7 +3645,8 @@ module Aws::RoboMaker
       :version,
       :last_updated_at,
       :robot_software_suite,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3547,7 +3680,8 @@ module Aws::RoboMaker
       :progress_detail,
       :failure_reason,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3561,7 +3695,8 @@ module Aws::RoboMaker
     class RobotSoftwareSuite < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3575,7 +3710,8 @@ module Aws::RoboMaker
     class S3KeyOutput < Struct.new(
       :s3_key,
       :etag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3593,7 +3729,8 @@ module Aws::RoboMaker
       :bucket,
       :key,
       :etag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3602,7 +3739,8 @@ module Aws::RoboMaker
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3657,7 +3795,8 @@ module Aws::RoboMaker
       :use_default_upload_configurations,
       :tools,
       :use_default_tools,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3688,7 +3827,8 @@ module Aws::RoboMaker
       :last_updated_at,
       :robot_software_suite,
       :simulation_software_suite,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3795,7 +3935,8 @@ module Aws::RoboMaker
       :vpc_config,
       :network_interface,
       :compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3886,7 +4027,8 @@ module Aws::RoboMaker
       :failed_request_count,
       :pending_request_count,
       :created_request_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3970,7 +4112,8 @@ module Aws::RoboMaker
       :vpc_config,
       :compute,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4014,7 +4157,8 @@ module Aws::RoboMaker
       :robot_application_names,
       :data_source_names,
       :compute_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4028,7 +4172,8 @@ module Aws::RoboMaker
     class SimulationSoftwareSuite < Struct.new(
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4050,7 +4195,8 @@ module Aws::RoboMaker
       :s3_key,
       :etag,
       :architecture,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4068,7 +4214,8 @@ module Aws::RoboMaker
       :s3_bucket,
       :s3_key,
       :architecture,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4091,7 +4238,8 @@ module Aws::RoboMaker
       :batch_policy,
       :create_simulation_job_requests,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4194,7 +4342,8 @@ module Aws::RoboMaker
       :pending_requests,
       :created_requests,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4210,7 +4359,8 @@ module Aws::RoboMaker
     class SyncDeploymentJobRequest < Struct.new(
       :client_request_token,
       :fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4310,7 +4460,8 @@ module Aws::RoboMaker
       :failure_reason,
       :failure_code,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4323,12 +4474,14 @@ module Aws::RoboMaker
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4342,7 +4495,8 @@ module Aws::RoboMaker
     class TemplateLocation < Struct.new(
       :s3_bucket,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4368,7 +4522,8 @@ module Aws::RoboMaker
       :last_updated_at,
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4377,7 +4532,8 @@ module Aws::RoboMaker
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4409,7 +4565,8 @@ module Aws::RoboMaker
       :command,
       :stream_output_to_cloud_watch,
       :exit_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4424,12 +4581,14 @@ module Aws::RoboMaker
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4454,7 +4613,8 @@ module Aws::RoboMaker
       :robot_software_suite,
       :current_revision_id,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4492,7 +4652,8 @@ module Aws::RoboMaker
       :last_updated_at,
       :revision_id,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4525,7 +4686,8 @@ module Aws::RoboMaker
       :rendering_engine,
       :current_revision_id,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4572,7 +4734,8 @@ module Aws::RoboMaker
       :last_updated_at,
       :revision_id,
       :environment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4593,7 +4756,8 @@ module Aws::RoboMaker
       :name,
       :template_body,
       :template_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4615,7 +4779,8 @@ module Aws::RoboMaker
       :name,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4657,7 +4822,8 @@ module Aws::RoboMaker
       :name,
       :path,
       :upload_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4677,7 +4843,8 @@ module Aws::RoboMaker
       :subnets,
       :security_groups,
       :assign_public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4704,7 +4871,8 @@ module Aws::RoboMaker
       :security_groups,
       :vpc_id,
       :assign_public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4719,7 +4887,8 @@ module Aws::RoboMaker
     #   @return [String]
     class WorldConfig < Struct.new(
       :world,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4739,7 +4908,8 @@ module Aws::RoboMaker
     class WorldCount < Struct.new(
       :floorplan_count,
       :interior_count_per_floorplan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4792,7 +4962,8 @@ module Aws::RoboMaker
       :created_at,
       :worlds,
       :output_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4834,7 +5005,8 @@ module Aws::RoboMaker
       :failure_code,
       :sample_failure_reason,
       :failure_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4905,7 +5077,8 @@ module Aws::RoboMaker
       :world_count,
       :succeeded_world_count,
       :failed_world_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4933,7 +5106,8 @@ module Aws::RoboMaker
       :created_at,
       :generation_job,
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -11,7 +11,8 @@ module Aws::SageMakerMetrics
     #   @return [Array<Types::MetricQuery>]
     class BatchGetMetricsRequest < Struct.new(
       :metric_queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::SageMakerMetrics
     #   @return [Array<Types::MetricQueryResult>]
     class BatchGetMetricsResponse < Struct.new(
       :metric_query_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +56,8 @@ module Aws::SageMakerMetrics
     class BatchPutMetricsError < Struct.new(
       :code,
       :metric_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +70,8 @@ module Aws::SageMakerMetrics
     class BatchPutMetricsRequest < Struct.new(
       :trial_component_name,
       :metric_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +80,8 @@ module Aws::SageMakerMetrics
     #   @return [Array<Types::BatchPutMetricsError>]
     class BatchPutMetricsResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +115,8 @@ module Aws::SageMakerMetrics
       :x_axis_type,
       :start,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +138,8 @@ module Aws::SageMakerMetrics
       :message,
       :x_axis_values,
       :metric_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +162,8 @@ module Aws::SageMakerMetrics
       :timestamp,
       :step,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

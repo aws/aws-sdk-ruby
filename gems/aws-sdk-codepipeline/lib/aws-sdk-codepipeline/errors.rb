@@ -74,7 +74,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::ActionExecutionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::ActionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -101,7 +101,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::ActionTypeNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -115,7 +115,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::ApprovalAlreadyCompletedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -129,7 +129,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::ConcurrentPipelineExecutionsLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -155,7 +155,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::ConditionNotOverridableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -169,7 +169,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -186,7 +186,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::DuplicatedStopRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -199,7 +199,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidActionDeclarationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -213,7 +213,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidApprovalTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -227,7 +227,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -240,7 +240,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidBlockerDeclarationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -254,7 +254,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidClientTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -268,7 +268,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidJobException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -282,7 +282,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidJobStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -297,7 +297,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -311,7 +311,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidNonceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -325,7 +325,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidStageDeclarationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -339,7 +339,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidStructureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -353,7 +353,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -366,7 +366,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidWebhookAuthenticationParametersException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -380,7 +380,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::InvalidWebhookFilterPatternException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -394,7 +394,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::JobNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -409,7 +409,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -425,7 +425,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::NotLatestPipelineExecutionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -439,7 +439,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::OutputVariablesSizeExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -453,7 +453,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::PipelineExecutionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -468,7 +468,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::PipelineExecutionNotStoppableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -482,7 +482,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::PipelineExecutionOutdatedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -495,7 +495,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::PipelineNameInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -509,7 +509,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::PipelineNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -524,7 +524,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::PipelineVersionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -538,7 +538,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::RequestFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -551,7 +551,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -565,7 +565,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::StageNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -581,7 +581,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::StageNotRetryableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -595,7 +595,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -610,7 +610,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::UnableToRollbackStageException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -623,7 +623,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message provided to the user in the event of an exception.</p>
@@ -638,7 +638,7 @@ module Aws::CodePipeline
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodePipeline::Types::WebhookNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
   end

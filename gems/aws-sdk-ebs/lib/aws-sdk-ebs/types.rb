@@ -15,7 +15,8 @@ module Aws::EBS
     class AccessDeniedException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::EBS
     class Block < Struct.new(
       :block_index,
       :block_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,7 +54,8 @@ module Aws::EBS
       :block_index,
       :first_block_token,
       :second_block_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +87,8 @@ module Aws::EBS
       :checksum,
       :checksum_algorithm,
       :checksum_aggregation_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +97,8 @@ module Aws::EBS
     #   @return [String]
     class CompleteSnapshotResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +109,8 @@ module Aws::EBS
     #   @return [String]
     class ConcurrentLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +120,8 @@ module Aws::EBS
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +150,8 @@ module Aws::EBS
       :snapshot_id,
       :block_index,
       :block_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +172,8 @@ module Aws::EBS
       :block_data,
       :checksum,
       :checksum_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -178,7 +187,8 @@ module Aws::EBS
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +234,8 @@ module Aws::EBS
       :next_token,
       :max_results,
       :starting_block_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +261,8 @@ module Aws::EBS
       :volume_size,
       :block_size,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +295,8 @@ module Aws::EBS
       :next_token,
       :max_results,
       :starting_block_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +322,8 @@ module Aws::EBS
       :volume_size,
       :block_size,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +382,8 @@ module Aws::EBS
       :progress,
       :checksum,
       :checksum_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +396,8 @@ module Aws::EBS
     class PutSnapshotBlockResponse < Struct.new(
       :checksum,
       :checksum_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +411,8 @@ module Aws::EBS
     class RequestThrottledException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +425,8 @@ module Aws::EBS
     class ResourceNotFoundException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -421,7 +439,8 @@ module Aws::EBS
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +539,8 @@ module Aws::EBS
       :encrypted,
       :kms_key_arn,
       :timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +591,8 @@ module Aws::EBS
       :parent_snapshot_id,
       :kms_key_arn,
       :sse_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +606,8 @@ module Aws::EBS
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +620,8 @@ module Aws::EBS
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

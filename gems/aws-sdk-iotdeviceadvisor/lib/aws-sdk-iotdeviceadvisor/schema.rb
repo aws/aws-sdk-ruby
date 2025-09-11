@@ -444,7 +444,6 @@ module Aws::IotDeviceAdvisor
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/suiteDefinitions/{suiteDefinitionId}", "code" => 200}}
       end)
-
     end
 
     class << self

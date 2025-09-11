@@ -2200,7 +2200,6 @@ module Aws::AppSync
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/apis/{apiId}/types/{typeName}", "code" => 200}}
       end)
-
     end
 
     class << self

@@ -904,7 +904,6 @@ module Aws::SsmSap
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/update-application-settings"}}
       end)
-
     end
 
     class << self

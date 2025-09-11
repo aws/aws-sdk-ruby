@@ -42,7 +42,7 @@ module Aws::AccessAnalyzer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AccessAnalyzer::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::AccessAnalyzer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AccessAnalyzer::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::AccessAnalyzer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AccessAnalyzer::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::AccessAnalyzer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AccessAnalyzer::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::AccessAnalyzer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AccessAnalyzer::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -136,7 +136,7 @@ module Aws::AccessAnalyzer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AccessAnalyzer::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::AccessAnalyzer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AccessAnalyzer::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -185,7 +185,7 @@ module Aws::AccessAnalyzer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AccessAnalyzer::Types::UnprocessableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -202,7 +202,7 @@ module Aws::AccessAnalyzer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AccessAnalyzer::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -11,7 +11,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class ActivateEventSourceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53,7 +54,8 @@ module Aws::CloudWatchEvents
       :invocation_rate_limit_per_second,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,7 +94,8 @@ module Aws::CloudWatchEvents
       :size_bytes,
       :event_count,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -123,7 +126,8 @@ module Aws::CloudWatchEvents
       :subnets,
       :security_groups,
       :assign_public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +140,8 @@ module Aws::CloudWatchEvents
     #   @return [Integer]
     class BatchArrayProperties < Struct.new(
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -169,7 +174,8 @@ module Aws::CloudWatchEvents
       :job_name,
       :array_properties,
       :retry_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +187,8 @@ module Aws::CloudWatchEvents
     #   @return [Integer]
     class BatchRetryStrategy < Struct.new(
       :attempts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -195,7 +202,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class CancelReplayRequest < Struct.new(
       :replay_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +220,8 @@ module Aws::CloudWatchEvents
       :replay_arn,
       :state,
       :state_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +243,8 @@ module Aws::CloudWatchEvents
       :capacity_provider,
       :weight,
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -249,7 +259,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +289,8 @@ module Aws::CloudWatchEvents
       :type,
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +328,8 @@ module Aws::CloudWatchEvents
       :creation_time,
       :last_modified_time,
       :last_authorized_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -328,7 +341,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class ConnectionApiKeyAuthResponseParameters < Struct.new(
       :api_key_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +365,8 @@ module Aws::CloudWatchEvents
       :o_auth_parameters,
       :api_key_auth_parameters,
       :invocation_http_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +377,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class ConnectionBasicAuthResponseParameters < Struct.new(
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +397,8 @@ module Aws::CloudWatchEvents
       :key,
       :value,
       :is_value_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -405,7 +422,8 @@ module Aws::CloudWatchEvents
       :key,
       :value,
       :is_value_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -428,7 +446,8 @@ module Aws::CloudWatchEvents
       :header_parameters,
       :query_string_parameters,
       :body_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -439,7 +458,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class ConnectionOAuthClientResponseParameters < Struct.new(
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +482,8 @@ module Aws::CloudWatchEvents
       :authorization_endpoint,
       :http_method,
       :o_auth_http_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +503,8 @@ module Aws::CloudWatchEvents
       :key,
       :value,
       :is_value_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -517,7 +539,8 @@ module Aws::CloudWatchEvents
       :invocation_endpoint,
       :http_method,
       :invocation_rate_limit_per_second,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +561,8 @@ module Aws::CloudWatchEvents
       :api_destination_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +588,8 @@ module Aws::CloudWatchEvents
       :description,
       :event_pattern,
       :retention_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +610,8 @@ module Aws::CloudWatchEvents
       :state,
       :state_reason,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +625,8 @@ module Aws::CloudWatchEvents
     class CreateConnectionApiKeyAuthRequestParameters < Struct.new(
       :api_key_name,
       :api_key_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +654,8 @@ module Aws::CloudWatchEvents
       :o_auth_parameters,
       :api_key_auth_parameters,
       :invocation_http_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +669,8 @@ module Aws::CloudWatchEvents
     class CreateConnectionBasicAuthRequestParameters < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +685,8 @@ module Aws::CloudWatchEvents
     class CreateConnectionOAuthClientRequestParameters < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -681,7 +711,8 @@ module Aws::CloudWatchEvents
       :authorization_endpoint,
       :http_method,
       :o_auth_http_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +734,8 @@ module Aws::CloudWatchEvents
       :description,
       :authorization_type,
       :auth_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -724,7 +756,8 @@ module Aws::CloudWatchEvents
       :connection_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,7 +780,8 @@ module Aws::CloudWatchEvents
       :name,
       :event_source_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +790,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class CreateEventBusResponse < Struct.new(
       :event_bus_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +810,8 @@ module Aws::CloudWatchEvents
     class CreatePartnerEventSourceRequest < Struct.new(
       :name,
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +820,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class CreatePartnerEventSourceResponse < Struct.new(
       :event_source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +830,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DeactivateEventSourceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +842,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DeadLetterConfig < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +852,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DeauthorizeConnectionRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,7 +878,8 @@ module Aws::CloudWatchEvents
       :creation_time,
       :last_modified_time,
       :last_authorized_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,12 +888,14 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DeleteApiDestinationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApiDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,12 +904,14 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DeleteArchiveRequest < Struct.new(
       :archive_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteArchiveResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +920,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +948,8 @@ module Aws::CloudWatchEvents
       :creation_time,
       :last_modified_time,
       :last_authorized_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +958,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DeleteEventBusRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +972,8 @@ module Aws::CloudWatchEvents
     class DeletePartnerEventSourceRequest < Struct.new(
       :name,
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -946,7 +995,8 @@ module Aws::CloudWatchEvents
       :name,
       :event_bus_name,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -955,7 +1005,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DescribeApiDestinationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1056,8 @@ module Aws::CloudWatchEvents
       :invocation_rate_limit_per_second,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1066,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DescribeArchiveRequest < Struct.new(
       :archive_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1063,7 +1116,8 @@ module Aws::CloudWatchEvents
       :size_bytes,
       :event_count,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1078,7 +1132,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DescribeConnectionRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1183,8 @@ module Aws::CloudWatchEvents
       :creation_time,
       :last_modified_time,
       :last_authorized_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1194,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DescribeEventBusRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1156,7 +1213,8 @@ module Aws::CloudWatchEvents
       :name,
       :arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1223,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DescribeEventSourceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1198,7 +1257,8 @@ module Aws::CloudWatchEvents
       :expiration_time,
       :name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1207,7 +1267,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DescribePartnerEventSourceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1281,8 @@ module Aws::CloudWatchEvents
     class DescribePartnerEventSourceResponse < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1229,7 +1291,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class DescribeReplayRequest < Struct.new(
       :replay_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1282,7 +1345,8 @@ module Aws::CloudWatchEvents
       :event_last_replayed_time,
       :replay_start_time,
       :replay_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1296,7 +1360,8 @@ module Aws::CloudWatchEvents
     class DescribeRuleRequest < Struct.new(
       :name,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1347,7 +1412,8 @@ module Aws::CloudWatchEvents
       :managed_by,
       :event_bus_name,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1361,7 +1427,8 @@ module Aws::CloudWatchEvents
     class DisableRuleRequest < Struct.new(
       :name,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1519,8 @@ module Aws::CloudWatchEvents
       :propagate_tags,
       :reference_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1472,7 +1540,8 @@ module Aws::CloudWatchEvents
     class EnableRuleRequest < Struct.new(
       :name,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1564,8 @@ module Aws::CloudWatchEvents
       :name,
       :arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1601,8 @@ module Aws::CloudWatchEvents
       :expiration_time,
       :name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1626,8 @@ module Aws::CloudWatchEvents
       :path_parameter_values,
       :header_parameters,
       :query_string_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1565,7 +1637,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class IllegalStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1652,7 +1725,8 @@ module Aws::CloudWatchEvents
     class InputTransformer < Struct.new(
       :input_paths_map,
       :input_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1661,7 +1735,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class InternalException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1745,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class InvalidEventPatternException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1679,7 +1755,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class InvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1694,7 +1771,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class KinesisParameters < Struct.new(
       :partition_key_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1704,7 +1782,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1726,7 +1805,8 @@ module Aws::CloudWatchEvents
       :connection_arn,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1740,7 +1820,8 @@ module Aws::CloudWatchEvents
     class ListApiDestinationsResponse < Struct.new(
       :api_destinations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1766,7 +1847,8 @@ module Aws::CloudWatchEvents
       :state,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1779,7 +1861,8 @@ module Aws::CloudWatchEvents
     class ListArchivesResponse < Struct.new(
       :archives,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1801,7 +1884,8 @@ module Aws::CloudWatchEvents
       :connection_state,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1898,8 @@ module Aws::CloudWatchEvents
     class ListConnectionsResponse < Struct.new(
       :connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1919,8 @@ module Aws::CloudWatchEvents
       :name_prefix,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1847,7 +1933,8 @@ module Aws::CloudWatchEvents
     class ListEventBusesResponse < Struct.new(
       :event_buses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1954,8 @@ module Aws::CloudWatchEvents
       :name_prefix,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1880,7 +1968,8 @@ module Aws::CloudWatchEvents
     class ListEventSourcesResponse < Struct.new(
       :event_sources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1900,7 +1989,8 @@ module Aws::CloudWatchEvents
       :event_source_name,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1913,7 +2003,8 @@ module Aws::CloudWatchEvents
     class ListPartnerEventSourceAccountsResponse < Struct.new(
       :partner_event_source_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1934,7 +2025,8 @@ module Aws::CloudWatchEvents
       :name_prefix,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2039,8 @@ module Aws::CloudWatchEvents
     class ListPartnerEventSourcesResponse < Struct.new(
       :partner_event_sources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1973,7 +2066,8 @@ module Aws::CloudWatchEvents
       :event_source_arn,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2080,8 @@ module Aws::CloudWatchEvents
     class ListReplaysResponse < Struct.new(
       :replays,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2008,7 +2103,8 @@ module Aws::CloudWatchEvents
       :event_bus_name,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2022,7 +2118,8 @@ module Aws::CloudWatchEvents
     class ListRuleNamesByTargetResponse < Struct.new(
       :rule_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2044,7 +2141,8 @@ module Aws::CloudWatchEvents
       :event_bus_name,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2058,7 +2156,8 @@ module Aws::CloudWatchEvents
     class ListRulesResponse < Struct.new(
       :rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2067,7 +2166,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2076,7 +2176,8 @@ module Aws::CloudWatchEvents
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2098,7 +2199,8 @@ module Aws::CloudWatchEvents
       :event_bus_name,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2112,7 +2214,8 @@ module Aws::CloudWatchEvents
     class ListTargetsByRuleResponse < Struct.new(
       :targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2126,7 +2229,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class ManagedRuleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2138,7 +2242,8 @@ module Aws::CloudWatchEvents
     #   @return [Types::AwsVpcConfiguration]
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2147,7 +2252,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class OperationDisabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2163,7 +2269,8 @@ module Aws::CloudWatchEvents
     class PartnerEventSource < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2189,7 +2296,8 @@ module Aws::CloudWatchEvents
       :creation_time,
       :expiration_time,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2208,7 +2316,8 @@ module Aws::CloudWatchEvents
     class PlacementConstraint < Struct.new(
       :type,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2232,7 +2341,8 @@ module Aws::CloudWatchEvents
     class PlacementStrategy < Struct.new(
       :type,
       :field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2241,7 +2351,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class PolicyLengthExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2252,7 +2363,8 @@ module Aws::CloudWatchEvents
     #   @return [Array<Types::PutEventsRequestEntry>]
     class PutEventsRequest < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2292,7 +2404,8 @@ module Aws::CloudWatchEvents
       :detail,
       :event_bus_name,
       :trace_header,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2307,7 +2420,8 @@ module Aws::CloudWatchEvents
     class PutEventsResponse < Struct.new(
       :failed_entry_count,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2330,7 +2444,8 @@ module Aws::CloudWatchEvents
       :event_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2339,7 +2454,8 @@ module Aws::CloudWatchEvents
     #   @return [Array<Types::PutPartnerEventsRequestEntry>]
     class PutPartnerEventsRequest < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2367,7 +2483,8 @@ module Aws::CloudWatchEvents
       :resources,
       :detail_type,
       :detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2382,7 +2499,8 @@ module Aws::CloudWatchEvents
     class PutPartnerEventsResponse < Struct.new(
       :failed_entry_count,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2405,7 +2523,8 @@ module Aws::CloudWatchEvents
       :event_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2453,7 +2572,8 @@ module Aws::CloudWatchEvents
       :statement_id,
       :condition,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2496,7 +2616,8 @@ module Aws::CloudWatchEvents
       :role_arn,
       :tags,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2505,7 +2626,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class PutRuleResponse < Struct.new(
       :rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2523,7 +2645,8 @@ module Aws::CloudWatchEvents
       :rule,
       :event_bus_name,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2536,7 +2659,8 @@ module Aws::CloudWatchEvents
     class PutTargetsResponse < Struct.new(
       :failed_entry_count,
       :failed_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2561,7 +2685,8 @@ module Aws::CloudWatchEvents
       :target_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2595,7 +2720,8 @@ module Aws::CloudWatchEvents
       :sql,
       :statement_name,
       :with_event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2619,7 +2745,8 @@ module Aws::CloudWatchEvents
       :statement_id,
       :remove_all_permissions,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2645,7 +2772,8 @@ module Aws::CloudWatchEvents
       :event_bus_name,
       :ids,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2658,7 +2786,8 @@ module Aws::CloudWatchEvents
     class RemoveTargetsResponse < Struct.new(
       :failed_entry_count,
       :failed_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2683,7 +2812,8 @@ module Aws::CloudWatchEvents
       :target_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2727,7 +2857,8 @@ module Aws::CloudWatchEvents
       :event_last_replayed_time,
       :replay_start_time,
       :replay_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2742,7 +2873,8 @@ module Aws::CloudWatchEvents
     class ReplayDestination < Struct.new(
       :arn,
       :filter_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2751,7 +2883,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2760,7 +2893,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2777,7 +2911,8 @@ module Aws::CloudWatchEvents
     class RetryPolicy < Struct.new(
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2826,7 +2961,8 @@ module Aws::CloudWatchEvents
       :role_arn,
       :managed_by,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2838,7 +2974,8 @@ module Aws::CloudWatchEvents
     #   @return [Array<Types::RunCommandTarget>]
     class RunCommandParameters < Struct.new(
       :run_command_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2859,7 +2996,8 @@ module Aws::CloudWatchEvents
     class RunCommandTarget < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2874,7 +3012,8 @@ module Aws::CloudWatchEvents
     class SageMakerPipelineParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2885,7 +3024,8 @@ module Aws::CloudWatchEvents
     #   @return [Array<Types::SageMakerPipelineParameter>]
     class SageMakerPipelineParameters < Struct.new(
       :pipeline_parameter_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2896,7 +3036,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     class SqsParameters < Struct.new(
       :message_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2928,7 +3069,8 @@ module Aws::CloudWatchEvents
       :event_start_time,
       :event_end_time,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2949,7 +3091,8 @@ module Aws::CloudWatchEvents
       :state,
       :state_reason,
       :replay_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2965,7 +3108,8 @@ module Aws::CloudWatchEvents
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2978,12 +3122,14 @@ module Aws::CloudWatchEvents
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3091,7 +3237,8 @@ module Aws::CloudWatchEvents
       :sage_maker_pipeline_parameters,
       :dead_letter_config,
       :retry_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3144,7 +3291,8 @@ module Aws::CloudWatchEvents
     class TestEventPatternRequest < Struct.new(
       :event_pattern,
       :event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3153,7 +3301,8 @@ module Aws::CloudWatchEvents
     #   @return [Boolean]
     class TestEventPatternResponse < Struct.new(
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3171,12 +3320,14 @@ module Aws::CloudWatchEvents
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3205,7 +3356,8 @@ module Aws::CloudWatchEvents
       :invocation_endpoint,
       :http_method,
       :invocation_rate_limit_per_second,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3226,7 +3378,8 @@ module Aws::CloudWatchEvents
       :api_destination_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3247,7 +3400,8 @@ module Aws::CloudWatchEvents
       :description,
       :event_pattern,
       :retention_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3268,7 +3422,8 @@ module Aws::CloudWatchEvents
       :state,
       :state_reason,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3282,7 +3437,8 @@ module Aws::CloudWatchEvents
     class UpdateConnectionApiKeyAuthRequestParameters < Struct.new(
       :api_key_name,
       :api_key_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3308,7 +3464,8 @@ module Aws::CloudWatchEvents
       :o_auth_parameters,
       :api_key_auth_parameters,
       :invocation_http_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3322,7 +3479,8 @@ module Aws::CloudWatchEvents
     class UpdateConnectionBasicAuthRequestParameters < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3336,7 +3494,8 @@ module Aws::CloudWatchEvents
     class UpdateConnectionOAuthClientRequestParameters < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3361,7 +3520,8 @@ module Aws::CloudWatchEvents
       :authorization_endpoint,
       :http_method,
       :o_auth_http_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3382,7 +3542,8 @@ module Aws::CloudWatchEvents
       :description,
       :authorization_type,
       :auth_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3407,7 +3568,8 @@ module Aws::CloudWatchEvents
       :creation_time,
       :last_modified_time,
       :last_authorized_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

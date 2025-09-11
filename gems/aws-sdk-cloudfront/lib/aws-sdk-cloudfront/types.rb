@@ -11,7 +11,8 @@ module Aws::CloudFront
     #   @return [String]
     class AccessDenied < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::CloudFront
       :enabled,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +49,8 @@ module Aws::CloudFront
       :enabled,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,7 +64,8 @@ module Aws::CloudFront
     class AliasICPRecordal < Struct.new(
       :cname,
       :icp_recordal_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +79,8 @@ module Aws::CloudFront
     class Aliases < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +98,8 @@ module Aws::CloudFront
       :quantity,
       :items,
       :cached_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +133,8 @@ module Aws::CloudFront
       :anycast_ips,
       :ip_count,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +164,8 @@ module Aws::CloudFront
       :max_items,
       :is_truncated,
       :quantity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +195,8 @@ module Aws::CloudFront
       :arn,
       :ip_count,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +209,8 @@ module Aws::CloudFront
     class AssociateAliasRequest < Struct.new(
       :target_distribution_id,
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +227,8 @@ module Aws::CloudFront
       :id,
       :web_acl_arn,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +245,8 @@ module Aws::CloudFront
       :id,
       :web_acl_arn,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +263,8 @@ module Aws::CloudFront
       :id,
       :web_acl_arn,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +281,8 @@ module Aws::CloudFront
       :id,
       :web_acl_arn,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,7 +291,8 @@ module Aws::CloudFront
     #   @return [String]
     class BatchTooLarge < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -286,7 +301,8 @@ module Aws::CloudFront
     #   @return [String]
     class CNAMEAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +392,8 @@ module Aws::CloudFront
       :min_ttl,
       :default_ttl,
       :max_ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -390,7 +407,8 @@ module Aws::CloudFront
     class CacheBehaviors < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +426,8 @@ module Aws::CloudFront
       :id,
       :last_modified_time,
       :cache_policy_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +436,8 @@ module Aws::CloudFront
     #   @return [String]
     class CachePolicyAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +467,8 @@ module Aws::CloudFront
       :max_ttl,
       :min_ttl,
       :parameters_in_cache_key_and_forwarded_to_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +482,8 @@ module Aws::CloudFront
     class CachePolicyCookiesConfig < Struct.new(
       :cookie_behavior,
       :cookies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +497,8 @@ module Aws::CloudFront
     class CachePolicyHeadersConfig < Struct.new(
       :header_behavior,
       :headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +507,8 @@ module Aws::CloudFront
     #   @return [String]
     class CachePolicyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +530,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +545,8 @@ module Aws::CloudFront
     class CachePolicyQueryStringsConfig < Struct.new(
       :query_string_behavior,
       :query_strings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +560,8 @@ module Aws::CloudFront
     class CachePolicySummary < Struct.new(
       :type,
       :cache_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +575,8 @@ module Aws::CloudFront
     class CachedMethods < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +585,8 @@ module Aws::CloudFront
     #   @return [String]
     class CannotChangeImmutablePublicKeyFields < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -566,7 +595,8 @@ module Aws::CloudFront
     #   @return [String]
     class CannotDeleteEntityWhileInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +605,8 @@ module Aws::CloudFront
     #   @return [String]
     class CannotUpdateEntityWhileInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +616,8 @@ module Aws::CloudFront
     #   @return [String]
     class Certificate < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +635,8 @@ module Aws::CloudFront
       :id,
       :s3_canonical_user_id,
       :cloud_front_origin_access_identity_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +645,8 @@ module Aws::CloudFront
     #   @return [String]
     class CloudFrontOriginAccessIdentityAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +660,8 @@ module Aws::CloudFront
     class CloudFrontOriginAccessIdentityConfig < Struct.new(
       :caller_reference,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +670,8 @@ module Aws::CloudFront
     #   @return [String]
     class CloudFrontOriginAccessIdentityInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +701,8 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +720,8 @@ module Aws::CloudFront
       :id,
       :s3_canonical_user_id,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +739,8 @@ module Aws::CloudFront
       :alias,
       :distribution_id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +762,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +817,8 @@ module Aws::CloudFront
       :status,
       :enabled,
       :is_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +828,8 @@ module Aws::CloudFront
     #   @return [String]
     class ConnectionGroupAssociationFilter < Struct.new(
       :anycast_ip_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +879,8 @@ module Aws::CloudFront
       :enabled,
       :status,
       :is_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +898,8 @@ module Aws::CloudFront
       :format,
       :profile_id,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +913,8 @@ module Aws::CloudFront
     class ContentTypeProfileConfig < Struct.new(
       :forward_when_content_type_is_unknown,
       :content_type_profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +928,8 @@ module Aws::CloudFront
     class ContentTypeProfiles < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -901,7 +947,8 @@ module Aws::CloudFront
       :id,
       :last_modified_time,
       :continuous_deployment_policy_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +957,8 @@ module Aws::CloudFront
     #   @return [String]
     class ContinuousDeploymentPolicyAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +976,8 @@ module Aws::CloudFront
       :staging_distribution_dns_names,
       :enabled,
       :traffic_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +986,8 @@ module Aws::CloudFront
     #   @return [String]
     class ContinuousDeploymentPolicyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +1009,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -969,7 +1020,8 @@ module Aws::CloudFront
     #   @return [Types::ContinuousDeploymentPolicy]
     class ContinuousDeploymentPolicySummary < Struct.new(
       :continuous_deployment_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1035,8 @@ module Aws::CloudFront
     class ContinuousDeploymentSingleHeaderConfig < Struct.new(
       :header,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -997,7 +1050,8 @@ module Aws::CloudFront
     class ContinuousDeploymentSingleWeightConfig < Struct.new(
       :weight,
       :session_stickiness_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1065,8 @@ module Aws::CloudFront
     class CookieNames < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1025,7 +1080,8 @@ module Aws::CloudFront
     class CookiePreference < Struct.new(
       :forward,
       :whitelisted_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1106,8 @@ module Aws::CloudFront
       :if_match,
       :caller_reference,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1067,7 +1124,8 @@ module Aws::CloudFront
       :distribution,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1142,8 @@ module Aws::CloudFront
       :name,
       :ip_count,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1097,7 +1156,8 @@ module Aws::CloudFront
     class CreateAnycastIpListResult < Struct.new(
       :anycast_ip_list,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1106,7 +1166,8 @@ module Aws::CloudFront
     #   @return [Types::CachePolicyConfig]
     class CreateCachePolicyRequest < Struct.new(
       :cache_policy_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1123,7 +1184,8 @@ module Aws::CloudFront
       :cache_policy,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1195,8 @@ module Aws::CloudFront
     #   @return [Types::CloudFrontOriginAccessIdentityConfig]
     class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
       :cloud_front_origin_access_identity_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1151,7 +1214,8 @@ module Aws::CloudFront
       :cloud_front_origin_access_identity,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1176,7 +1240,8 @@ module Aws::CloudFront
       :tags,
       :anycast_ip_list_id,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1189,7 +1254,8 @@ module Aws::CloudFront
     class CreateConnectionGroupResult < Struct.new(
       :connection_group,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1198,7 +1264,8 @@ module Aws::CloudFront
     #   @return [Types::ContinuousDeploymentPolicyConfig]
     class CreateContinuousDeploymentPolicyRequest < Struct.new(
       :continuous_deployment_policy_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1282,8 @@ module Aws::CloudFront
       :continuous_deployment_policy,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1225,7 +1293,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionConfig]
     class CreateDistributionRequest < Struct.new(
       :distribution_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1312,8 @@ module Aws::CloudFront
       :distribution,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,7 +1354,8 @@ module Aws::CloudFront
       :connection_group_id,
       :managed_certificate_request,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1297,7 +1368,8 @@ module Aws::CloudFront
     class CreateDistributionTenantResult < Struct.new(
       :distribution_tenant,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1307,7 +1379,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionConfigWithTags]
     class CreateDistributionWithTagsRequest < Struct.new(
       :distribution_config_with_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1325,7 +1398,8 @@ module Aws::CloudFront
       :distribution,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1408,8 @@ module Aws::CloudFront
     #   @return [Types::FieldLevelEncryptionConfig]
     class CreateFieldLevelEncryptionConfigRequest < Struct.new(
       :field_level_encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1351,7 +1426,8 @@ module Aws::CloudFront
       :field_level_encryption,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,7 +1436,8 @@ module Aws::CloudFront
     #   @return [Types::FieldLevelEncryptionProfileConfig]
     class CreateFieldLevelEncryptionProfileRequest < Struct.new(
       :field_level_encryption_profile_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1377,7 +1454,8 @@ module Aws::CloudFront
       :field_level_encryption_profile,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1394,7 +1472,8 @@ module Aws::CloudFront
       :name,
       :function_config,
       :function_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,7 +1490,8 @@ module Aws::CloudFront
       :function_summary,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1424,7 +1504,8 @@ module Aws::CloudFront
     class CreateInvalidationForDistributionTenantRequest < Struct.new(
       :id,
       :invalidation_batch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1437,7 +1518,8 @@ module Aws::CloudFront
     class CreateInvalidationForDistributionTenantResult < Struct.new(
       :location,
       :invalidation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1451,7 +1533,8 @@ module Aws::CloudFront
     class CreateInvalidationRequest < Struct.new(
       :distribution_id,
       :invalidation_batch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1548,8 @@ module Aws::CloudFront
     class CreateInvalidationResult < Struct.new(
       :location,
       :invalidation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1558,8 @@ module Aws::CloudFront
     #   @return [Types::KeyGroupConfig]
     class CreateKeyGroupRequest < Struct.new(
       :key_group_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1491,7 +1576,8 @@ module Aws::CloudFront
       :key_group,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1508,7 +1594,8 @@ module Aws::CloudFront
       :name,
       :comment,
       :import_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1525,7 +1612,8 @@ module Aws::CloudFront
       :key_value_store,
       :e_tag,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1538,7 +1626,8 @@ module Aws::CloudFront
     class CreateMonitoringSubscriptionRequest < Struct.new(
       :distribution_id,
       :monitoring_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1547,7 +1636,8 @@ module Aws::CloudFront
     #   @return [Types::MonitoringSubscription]
     class CreateMonitoringSubscriptionResult < Struct.new(
       :monitoring_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1556,7 +1646,8 @@ module Aws::CloudFront
     #   @return [Types::OriginAccessControlConfig]
     class CreateOriginAccessControlRequest < Struct.new(
       :origin_access_control_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1573,7 +1664,8 @@ module Aws::CloudFront
       :origin_access_control,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1582,7 +1674,8 @@ module Aws::CloudFront
     #   @return [Types::OriginRequestPolicyConfig]
     class CreateOriginRequestPolicyRequest < Struct.new(
       :origin_request_policy_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1692,8 @@ module Aws::CloudFront
       :origin_request_policy,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1608,7 +1702,8 @@ module Aws::CloudFront
     #   @return [Types::PublicKeyConfig]
     class CreatePublicKeyRequest < Struct.new(
       :public_key_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1720,8 @@ module Aws::CloudFront
       :public_key,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1646,7 +1742,8 @@ module Aws::CloudFront
       :fields,
       :name,
       :sampling_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1655,7 +1752,8 @@ module Aws::CloudFront
     #   @return [Types::RealtimeLogConfig]
     class CreateRealtimeLogConfigResult < Struct.new(
       :realtime_log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1664,7 +1762,8 @@ module Aws::CloudFront
     #   @return [Types::ResponseHeadersPolicyConfig]
     class CreateResponseHeadersPolicyRequest < Struct.new(
       :response_headers_policy_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1681,7 +1780,8 @@ module Aws::CloudFront
       :response_headers_policy,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1691,7 +1791,8 @@ module Aws::CloudFront
     #   @return [Types::StreamingDistributionConfig]
     class CreateStreamingDistributionRequest < Struct.new(
       :streaming_distribution_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1709,7 +1810,8 @@ module Aws::CloudFront
       :streaming_distribution,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1719,7 +1821,8 @@ module Aws::CloudFront
     #   @return [Types::StreamingDistributionConfigWithTags]
     class CreateStreamingDistributionWithTagsRequest < Struct.new(
       :streaming_distribution_config_with_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1737,7 +1840,8 @@ module Aws::CloudFront
       :streaming_distribution,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1750,7 +1854,8 @@ module Aws::CloudFront
     class CreateVpcOriginRequest < Struct.new(
       :vpc_origin_endpoint_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1767,7 +1872,8 @@ module Aws::CloudFront
       :vpc_origin,
       :location,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1789,7 +1895,8 @@ module Aws::CloudFront
       :response_page_path,
       :response_code,
       :error_caching_min_ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1803,7 +1910,8 @@ module Aws::CloudFront
     class CustomErrorResponses < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1817,7 +1925,8 @@ module Aws::CloudFront
     class CustomHeaders < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1851,7 +1960,8 @@ module Aws::CloudFront
       :origin_read_timeout,
       :origin_keepalive_timeout,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1979,8 @@ module Aws::CloudFront
       :web_acl,
       :certificate,
       :geo_restrictions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2066,8 @@ module Aws::CloudFront
       :min_ttl,
       :default_ttl,
       :max_ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1968,7 +2080,8 @@ module Aws::CloudFront
     class DeleteAnycastIpListRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1981,7 +2094,8 @@ module Aws::CloudFront
     class DeleteCachePolicyRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,7 +2109,8 @@ module Aws::CloudFront
     class DeleteCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2008,7 +2123,8 @@ module Aws::CloudFront
     class DeleteConnectionGroupRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2021,7 +2137,8 @@ module Aws::CloudFront
     class DeleteContinuousDeploymentPolicyRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2035,7 +2152,8 @@ module Aws::CloudFront
     class DeleteDistributionRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2048,7 +2166,8 @@ module Aws::CloudFront
     class DeleteDistributionTenantRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2061,7 +2180,8 @@ module Aws::CloudFront
     class DeleteFieldLevelEncryptionConfigRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2194,8 @@ module Aws::CloudFront
     class DeleteFieldLevelEncryptionProfileRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2087,7 +2208,8 @@ module Aws::CloudFront
     class DeleteFunctionRequest < Struct.new(
       :name,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2222,8 @@ module Aws::CloudFront
     class DeleteKeyGroupRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2113,7 +2236,8 @@ module Aws::CloudFront
     class DeleteKeyValueStoreRequest < Struct.new(
       :name,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2122,12 +2246,14 @@ module Aws::CloudFront
     #   @return [String]
     class DeleteMonitoringSubscriptionRequest < Struct.new(
       :distribution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMonitoringSubscriptionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2140,7 +2266,8 @@ module Aws::CloudFront
     class DeleteOriginAccessControlRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2153,7 +2280,8 @@ module Aws::CloudFront
     class DeleteOriginRequestPolicyRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2166,7 +2294,8 @@ module Aws::CloudFront
     class DeletePublicKeyRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2179,7 +2308,8 @@ module Aws::CloudFront
     class DeleteRealtimeLogConfigRequest < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2192,7 +2322,8 @@ module Aws::CloudFront
     class DeleteResponseHeadersPolicyRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2206,7 +2337,8 @@ module Aws::CloudFront
     class DeleteStreamingDistributionRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2219,7 +2351,8 @@ module Aws::CloudFront
     class DeleteVpcOriginRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2232,7 +2365,8 @@ module Aws::CloudFront
     class DeleteVpcOriginResult < Struct.new(
       :vpc_origin,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2245,7 +2379,8 @@ module Aws::CloudFront
     class DescribeFunctionRequest < Struct.new(
       :name,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2258,7 +2393,8 @@ module Aws::CloudFront
     class DescribeFunctionResult < Struct.new(
       :function_summary,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2267,7 +2403,8 @@ module Aws::CloudFront
     #   @return [String]
     class DescribeKeyValueStoreRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2280,7 +2417,8 @@ module Aws::CloudFront
     class DescribeKeyValueStoreResult < Struct.new(
       :key_value_store,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2293,7 +2431,8 @@ module Aws::CloudFront
     class DisassociateDistributionTenantWebACLRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2306,7 +2445,8 @@ module Aws::CloudFront
     class DisassociateDistributionTenantWebACLResult < Struct.new(
       :id,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2319,7 +2459,8 @@ module Aws::CloudFront
     class DisassociateDistributionWebACLRequest < Struct.new(
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2332,7 +2473,8 @@ module Aws::CloudFront
     class DisassociateDistributionWebACLResult < Struct.new(
       :id,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2378,7 +2520,8 @@ module Aws::CloudFront
       :active_trusted_key_groups,
       :distribution_config,
       :alias_icp_recordals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2387,7 +2530,8 @@ module Aws::CloudFront
     #   @return [String]
     class DistributionAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2481,7 +2625,8 @@ module Aws::CloudFront
       :anycast_ip_list_id,
       :tenant_config,
       :connection_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2495,7 +2640,8 @@ module Aws::CloudFront
     class DistributionConfigWithTags < Struct.new(
       :distribution_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2525,7 +2671,8 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2555,7 +2702,8 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2564,7 +2712,8 @@ module Aws::CloudFront
     #   @return [String]
     class DistributionNotDisabled < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2578,7 +2727,8 @@ module Aws::CloudFront
     class DistributionResourceId < Struct.new(
       :distribution_id,
       :distribution_tenant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2680,7 +2830,8 @@ module Aws::CloudFront
       :staging,
       :connection_mode,
       :anycast_ip_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2738,7 +2889,8 @@ module Aws::CloudFront
       :last_modified_time,
       :enabled,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2752,7 +2904,8 @@ module Aws::CloudFront
     class DistributionTenantAssociationFilter < Struct.new(
       :distribution_id,
       :connection_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2806,7 +2959,8 @@ module Aws::CloudFront
       :e_tag,
       :enabled,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2824,7 +2978,8 @@ module Aws::CloudFront
       :domain,
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2846,7 +3001,8 @@ module Aws::CloudFront
       :resource_type,
       :resource_id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2856,7 +3012,8 @@ module Aws::CloudFront
     #   @return [String]
     class DomainItem < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2870,7 +3027,8 @@ module Aws::CloudFront
     class DomainResult < Struct.new(
       :domain,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2884,7 +3042,8 @@ module Aws::CloudFront
     class EncryptionEntities < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2902,7 +3061,8 @@ module Aws::CloudFront
       :public_key_id,
       :provider_id,
       :field_patterns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2916,7 +3076,8 @@ module Aws::CloudFront
     class EndPoint < Struct.new(
       :stream_type,
       :kinesis_stream_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2925,7 +3086,8 @@ module Aws::CloudFront
     #   @return [String]
     class EntityAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2934,7 +3096,8 @@ module Aws::CloudFront
     #   @return [String]
     class EntityLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2943,7 +3106,8 @@ module Aws::CloudFront
     #   @return [String]
     class EntityNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2952,7 +3116,8 @@ module Aws::CloudFront
     #   @return [String]
     class EntitySizeLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2970,7 +3135,8 @@ module Aws::CloudFront
       :id,
       :last_modified_time,
       :field_level_encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2992,7 +3158,8 @@ module Aws::CloudFront
       :comment,
       :query_arg_profile_config,
       :content_type_profile_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3001,7 +3168,8 @@ module Aws::CloudFront
     #   @return [String]
     class FieldLevelEncryptionConfigAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3178,8 @@ module Aws::CloudFront
     #   @return [String]
     class FieldLevelEncryptionConfigInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3032,7 +3201,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3050,7 +3220,8 @@ module Aws::CloudFront
       :id,
       :last_modified_time,
       :field_level_encryption_profile_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3059,7 +3230,8 @@ module Aws::CloudFront
     #   @return [String]
     class FieldLevelEncryptionProfileAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3081,7 +3253,8 @@ module Aws::CloudFront
       :caller_reference,
       :comment,
       :encryption_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3090,7 +3263,8 @@ module Aws::CloudFront
     #   @return [String]
     class FieldLevelEncryptionProfileInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3112,7 +3286,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3121,7 +3296,8 @@ module Aws::CloudFront
     #   @return [String]
     class FieldLevelEncryptionProfileSizeExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3147,7 +3323,8 @@ module Aws::CloudFront
       :name,
       :encryption_entities,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3173,7 +3350,8 @@ module Aws::CloudFront
       :comment,
       :query_arg_profile_config,
       :content_type_profile_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3187,7 +3365,8 @@ module Aws::CloudFront
     class FieldPatterns < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3209,7 +3388,8 @@ module Aws::CloudFront
       :cookies,
       :headers,
       :query_string_cache_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3218,7 +3398,8 @@ module Aws::CloudFront
     #   @return [String]
     class FunctionAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3232,7 +3413,8 @@ module Aws::CloudFront
     class FunctionAssociation < Struct.new(
       :function_arn,
       :event_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3246,7 +3428,8 @@ module Aws::CloudFront
     class FunctionAssociations < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3264,7 +3447,8 @@ module Aws::CloudFront
       :comment,
       :runtime,
       :key_value_store_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3273,7 +3457,8 @@ module Aws::CloudFront
     #   @return [String]
     class FunctionInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3295,7 +3480,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3317,7 +3503,8 @@ module Aws::CloudFront
       :stage,
       :created_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3326,7 +3513,8 @@ module Aws::CloudFront
     #   @return [String]
     class FunctionSizeLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3348,7 +3536,8 @@ module Aws::CloudFront
       :status,
       :function_config,
       :function_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3366,7 +3555,8 @@ module Aws::CloudFront
       :restriction_type,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3380,7 +3570,8 @@ module Aws::CloudFront
     class GeoRestrictionCustomization < Struct.new(
       :restriction_type,
       :locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3389,7 +3580,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetAnycastIpListRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3402,7 +3594,8 @@ module Aws::CloudFront
     class GetAnycastIpListResult < Struct.new(
       :anycast_ip_list,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3411,7 +3604,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetCachePolicyConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3424,7 +3618,8 @@ module Aws::CloudFront
     class GetCachePolicyConfigResult < Struct.new(
       :cache_policy_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3433,7 +3628,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetCachePolicyRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3446,7 +3642,8 @@ module Aws::CloudFront
     class GetCachePolicyResult < Struct.new(
       :cache_policy,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3456,7 +3653,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3470,7 +3668,8 @@ module Aws::CloudFront
     class GetCloudFrontOriginAccessIdentityConfigResult < Struct.new(
       :cloud_front_origin_access_identity_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3480,7 +3679,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3494,7 +3694,8 @@ module Aws::CloudFront
     class GetCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3503,7 +3704,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetConnectionGroupByRoutingEndpointRequest < Struct.new(
       :routing_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3516,7 +3718,8 @@ module Aws::CloudFront
     class GetConnectionGroupByRoutingEndpointResult < Struct.new(
       :connection_group,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3525,7 +3728,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetConnectionGroupRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3538,7 +3742,8 @@ module Aws::CloudFront
     class GetConnectionGroupResult < Struct.new(
       :connection_group,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3547,7 +3752,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetContinuousDeploymentPolicyConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3560,7 +3766,8 @@ module Aws::CloudFront
     class GetContinuousDeploymentPolicyConfigResult < Struct.new(
       :continuous_deployment_policy_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3569,7 +3776,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetContinuousDeploymentPolicyRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3582,7 +3790,8 @@ module Aws::CloudFront
     class GetContinuousDeploymentPolicyResult < Struct.new(
       :continuous_deployment_policy,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3592,7 +3801,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetDistributionConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3606,7 +3816,8 @@ module Aws::CloudFront
     class GetDistributionConfigResult < Struct.new(
       :distribution_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3616,7 +3827,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetDistributionRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3630,7 +3842,8 @@ module Aws::CloudFront
     class GetDistributionResult < Struct.new(
       :distribution,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3639,7 +3852,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetDistributionTenantByDomainRequest < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3652,7 +3866,8 @@ module Aws::CloudFront
     class GetDistributionTenantByDomainResult < Struct.new(
       :distribution_tenant,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3661,7 +3876,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetDistributionTenantRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3674,7 +3890,8 @@ module Aws::CloudFront
     class GetDistributionTenantResult < Struct.new(
       :distribution_tenant,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3683,7 +3900,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetFieldLevelEncryptionConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3696,7 +3914,8 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionConfigResult < Struct.new(
       :field_level_encryption_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3705,7 +3924,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetFieldLevelEncryptionProfileConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3718,7 +3938,8 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionProfileConfigResult < Struct.new(
       :field_level_encryption_profile_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3727,7 +3948,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetFieldLevelEncryptionProfileRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3740,7 +3962,8 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3749,7 +3972,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetFieldLevelEncryptionRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3762,7 +3986,8 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionResult < Struct.new(
       :field_level_encryption,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3775,7 +4000,8 @@ module Aws::CloudFront
     class GetFunctionRequest < Struct.new(
       :name,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3792,7 +4018,8 @@ module Aws::CloudFront
       :function_code,
       :e_tag,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3805,7 +4032,8 @@ module Aws::CloudFront
     class GetInvalidationForDistributionTenantRequest < Struct.new(
       :distribution_tenant_id,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3814,7 +4042,8 @@ module Aws::CloudFront
     #   @return [Types::Invalidation]
     class GetInvalidationForDistributionTenantResult < Struct.new(
       :invalidation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3828,7 +4057,8 @@ module Aws::CloudFront
     class GetInvalidationRequest < Struct.new(
       :distribution_id,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3838,7 +4068,8 @@ module Aws::CloudFront
     #   @return [Types::Invalidation]
     class GetInvalidationResult < Struct.new(
       :invalidation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3847,7 +4078,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetKeyGroupConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3860,7 +4092,8 @@ module Aws::CloudFront
     class GetKeyGroupConfigResult < Struct.new(
       :key_group_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3869,7 +4102,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetKeyGroupRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3882,7 +4116,8 @@ module Aws::CloudFront
     class GetKeyGroupResult < Struct.new(
       :key_group,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3891,7 +4126,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetManagedCertificateDetailsRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3900,7 +4136,8 @@ module Aws::CloudFront
     #   @return [Types::ManagedCertificateDetails]
     class GetManagedCertificateDetailsResult < Struct.new(
       :managed_certificate_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3909,7 +4146,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetMonitoringSubscriptionRequest < Struct.new(
       :distribution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3918,7 +4156,8 @@ module Aws::CloudFront
     #   @return [Types::MonitoringSubscription]
     class GetMonitoringSubscriptionResult < Struct.new(
       :monitoring_subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3927,7 +4166,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetOriginAccessControlConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3940,7 +4180,8 @@ module Aws::CloudFront
     class GetOriginAccessControlConfigResult < Struct.new(
       :origin_access_control_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3949,7 +4190,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetOriginAccessControlRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3962,7 +4204,8 @@ module Aws::CloudFront
     class GetOriginAccessControlResult < Struct.new(
       :origin_access_control,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3971,7 +4214,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetOriginRequestPolicyConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3984,7 +4228,8 @@ module Aws::CloudFront
     class GetOriginRequestPolicyConfigResult < Struct.new(
       :origin_request_policy_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3993,7 +4238,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetOriginRequestPolicyRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4006,7 +4252,8 @@ module Aws::CloudFront
     class GetOriginRequestPolicyResult < Struct.new(
       :origin_request_policy,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4015,7 +4262,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetPublicKeyConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4028,7 +4276,8 @@ module Aws::CloudFront
     class GetPublicKeyConfigResult < Struct.new(
       :public_key_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4037,7 +4286,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetPublicKeyRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4050,7 +4300,8 @@ module Aws::CloudFront
     class GetPublicKeyResult < Struct.new(
       :public_key,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4063,7 +4314,8 @@ module Aws::CloudFront
     class GetRealtimeLogConfigRequest < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4072,7 +4324,8 @@ module Aws::CloudFront
     #   @return [Types::RealtimeLogConfig]
     class GetRealtimeLogConfigResult < Struct.new(
       :realtime_log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4081,7 +4334,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetResponseHeadersPolicyConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4094,7 +4348,8 @@ module Aws::CloudFront
     class GetResponseHeadersPolicyConfigResult < Struct.new(
       :response_headers_policy_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4103,7 +4358,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetResponseHeadersPolicyRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4116,7 +4372,8 @@ module Aws::CloudFront
     class GetResponseHeadersPolicyResult < Struct.new(
       :response_headers_policy,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4126,7 +4383,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetStreamingDistributionConfigRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4140,7 +4398,8 @@ module Aws::CloudFront
     class GetStreamingDistributionConfigResult < Struct.new(
       :streaming_distribution_config,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4150,7 +4409,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetStreamingDistributionRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4164,7 +4424,8 @@ module Aws::CloudFront
     class GetStreamingDistributionResult < Struct.new(
       :streaming_distribution,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4173,7 +4434,8 @@ module Aws::CloudFront
     #   @return [String]
     class GetVpcOriginRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4186,7 +4448,8 @@ module Aws::CloudFront
     class GetVpcOriginResult < Struct.new(
       :vpc_origin,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4196,7 +4459,8 @@ module Aws::CloudFront
     #   @return [Boolean]
     class GrpcConfig < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4210,7 +4474,8 @@ module Aws::CloudFront
     class Headers < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4219,7 +4484,8 @@ module Aws::CloudFront
     #   @return [String]
     class IllegalDelete < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4228,7 +4494,8 @@ module Aws::CloudFront
     #   @return [String]
     class IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4237,7 +4504,8 @@ module Aws::CloudFront
     #   @return [String]
     class IllegalOriginAccessConfiguration < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4246,7 +4514,8 @@ module Aws::CloudFront
     #   @return [String]
     class IllegalUpdate < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4260,7 +4529,8 @@ module Aws::CloudFront
     class ImportSource < Struct.new(
       :source_type,
       :source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4269,7 +4539,8 @@ module Aws::CloudFront
     #   @return [String]
     class InconsistentQuantities < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4278,7 +4549,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidArgument < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4287,7 +4559,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidAssociation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4296,7 +4569,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidDefaultRootObject < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4305,7 +4579,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidDomainNameForOriginAccessControl < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4314,7 +4589,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidErrorCode < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4323,7 +4599,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidForwardCookies < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4332,7 +4609,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidFunctionAssociation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4341,7 +4619,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidGeoRestrictionParameter < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4350,7 +4629,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidHeadersForS3Origin < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4359,7 +4639,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidIfMatchVersion < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4368,7 +4649,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidLambdaFunctionAssociation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4377,7 +4659,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidLocationCode < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4386,7 +4669,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidMinimumProtocolVersion < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4395,7 +4679,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidOrigin < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4404,7 +4689,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidOriginAccessControl < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4413,7 +4699,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidOriginAccessIdentity < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4422,7 +4709,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidOriginKeepaliveTimeout < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4431,7 +4719,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidOriginReadTimeout < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4440,7 +4729,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidProtocolSettings < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4449,7 +4739,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidQueryStringParameters < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4458,7 +4749,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidRelativePath < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4467,7 +4759,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidRequiredProtocol < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4476,7 +4769,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidResponseCode < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4485,7 +4779,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidTTLOrder < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4494,7 +4789,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidTagging < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4503,7 +4799,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidViewerCertificate < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4512,7 +4809,8 @@ module Aws::CloudFront
     #   @return [String]
     class InvalidWebACLId < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4534,7 +4832,8 @@ module Aws::CloudFront
       :status,
       :create_time,
       :invalidation_batch,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4548,7 +4847,8 @@ module Aws::CloudFront
     class InvalidationBatch < Struct.new(
       :paths,
       :caller_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4578,7 +4878,8 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4596,7 +4897,8 @@ module Aws::CloudFront
       :id,
       :create_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4610,7 +4912,8 @@ module Aws::CloudFront
     class KGKeyPairIds < Struct.new(
       :key_group_id,
       :key_pair_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4628,7 +4931,8 @@ module Aws::CloudFront
       :id,
       :last_modified_time,
       :key_group_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4637,7 +4941,8 @@ module Aws::CloudFront
     #   @return [String]
     class KeyGroupAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4655,7 +4960,8 @@ module Aws::CloudFront
       :name,
       :items,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4677,7 +4983,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4687,7 +4994,8 @@ module Aws::CloudFront
     #   @return [Types::KeyGroup]
     class KeyGroupSummary < Struct.new(
       :key_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4701,7 +5009,8 @@ module Aws::CloudFront
     class KeyPairIds < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4731,7 +5040,8 @@ module Aws::CloudFront
       :arn,
       :status,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4741,7 +5051,8 @@ module Aws::CloudFront
     #   @return [String]
     class KeyValueStoreAssociation < Struct.new(
       :key_value_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4755,7 +5066,8 @@ module Aws::CloudFront
     class KeyValueStoreAssociations < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4777,7 +5089,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4791,7 +5104,8 @@ module Aws::CloudFront
     class KinesisStreamConfig < Struct.new(
       :role_arn,
       :stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4809,7 +5123,8 @@ module Aws::CloudFront
       :lambda_function_arn,
       :event_type,
       :include_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4823,7 +5138,8 @@ module Aws::CloudFront
     class LambdaFunctionAssociations < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4836,7 +5152,8 @@ module Aws::CloudFront
     class ListAnycastIpListsRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4845,7 +5162,8 @@ module Aws::CloudFront
     #   @return [Types::AnycastIpListCollection]
     class ListAnycastIpListsResult < Struct.new(
       :anycast_ip_lists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4862,7 +5180,8 @@ module Aws::CloudFront
       :type,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4871,7 +5190,8 @@ module Aws::CloudFront
     #   @return [Types::CachePolicyList]
     class ListCachePoliciesResult < Struct.new(
       :cache_policy_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4885,7 +5205,8 @@ module Aws::CloudFront
     class ListCloudFrontOriginAccessIdentitiesRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4895,7 +5216,8 @@ module Aws::CloudFront
     #   @return [Types::CloudFrontOriginAccessIdentityList]
     class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
       :cloud_front_origin_access_identity_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4916,7 +5238,8 @@ module Aws::CloudFront
       :alias,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4925,7 +5248,8 @@ module Aws::CloudFront
     #   @return [Types::ConflictingAliasesList]
     class ListConflictingAliasesResult < Struct.new(
       :conflicting_aliases_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4942,7 +5266,8 @@ module Aws::CloudFront
       :association_filter,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4955,7 +5280,8 @@ module Aws::CloudFront
     class ListConnectionGroupsResult < Struct.new(
       :next_marker,
       :connection_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4968,7 +5294,8 @@ module Aws::CloudFront
     class ListContinuousDeploymentPoliciesRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4977,7 +5304,8 @@ module Aws::CloudFront
     #   @return [Types::ContinuousDeploymentPolicyList]
     class ListContinuousDeploymentPoliciesResult < Struct.new(
       :continuous_deployment_policy_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4998,7 +5326,8 @@ module Aws::CloudFront
       :certificate_arn,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5011,7 +5340,8 @@ module Aws::CloudFront
     class ListDistributionTenantsByCustomizationResult < Struct.new(
       :next_marker,
       :distribution_tenant_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5028,7 +5358,8 @@ module Aws::CloudFront
       :association_filter,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5041,7 +5372,8 @@ module Aws::CloudFront
     class ListDistributionTenantsResult < Struct.new(
       :next_marker,
       :distribution_tenant_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5058,7 +5390,8 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :anycast_ip_list_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5067,7 +5400,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionList]
     class ListDistributionsByAnycastIpListIdResult < Struct.new(
       :distribution_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5084,7 +5418,8 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :cache_policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5093,7 +5428,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionIdList]
     class ListDistributionsByCachePolicyIdResult < Struct.new(
       :distribution_id_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5110,7 +5446,8 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :connection_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5119,7 +5456,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionList]
     class ListDistributionsByConnectionModeResult < Struct.new(
       :distribution_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5136,7 +5474,8 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :key_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5145,7 +5484,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionIdList]
     class ListDistributionsByKeyGroupResult < Struct.new(
       :distribution_id_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5162,7 +5502,8 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :origin_request_policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5171,7 +5512,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionIdList]
     class ListDistributionsByOriginRequestPolicyIdResult < Struct.new(
       :distribution_id_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5192,7 +5534,8 @@ module Aws::CloudFront
       :max_items,
       :realtime_log_config_name,
       :realtime_log_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5201,7 +5544,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionList]
     class ListDistributionsByRealtimeLogConfigResult < Struct.new(
       :distribution_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5218,7 +5562,8 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :response_headers_policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5227,7 +5572,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionIdList]
     class ListDistributionsByResponseHeadersPolicyIdResult < Struct.new(
       :distribution_id_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5244,7 +5590,8 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :vpc_origin_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5253,7 +5600,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionIdList]
     class ListDistributionsByVpcOriginIdResult < Struct.new(
       :distribution_id_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5271,7 +5619,8 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :web_acl_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5281,7 +5630,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionList]
     class ListDistributionsByWebACLIdResult < Struct.new(
       :distribution_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5295,7 +5645,8 @@ module Aws::CloudFront
     class ListDistributionsRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5305,7 +5656,8 @@ module Aws::CloudFront
     #   @return [Types::DistributionList]
     class ListDistributionsResult < Struct.new(
       :distribution_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5326,7 +5678,8 @@ module Aws::CloudFront
       :domain_control_validation_resource,
       :max_items,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5339,7 +5692,8 @@ module Aws::CloudFront
     class ListDomainConflictsResult < Struct.new(
       :domain_conflicts,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5352,7 +5706,8 @@ module Aws::CloudFront
     class ListFieldLevelEncryptionConfigsRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5361,7 +5716,8 @@ module Aws::CloudFront
     #   @return [Types::FieldLevelEncryptionList]
     class ListFieldLevelEncryptionConfigsResult < Struct.new(
       :field_level_encryption_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5374,7 +5730,8 @@ module Aws::CloudFront
     class ListFieldLevelEncryptionProfilesRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5383,7 +5740,8 @@ module Aws::CloudFront
     #   @return [Types::FieldLevelEncryptionProfileList]
     class ListFieldLevelEncryptionProfilesResult < Struct.new(
       :field_level_encryption_profile_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5400,7 +5758,8 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5409,7 +5768,8 @@ module Aws::CloudFront
     #   @return [Types::FunctionList]
     class ListFunctionsResult < Struct.new(
       :function_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5426,7 +5786,8 @@ module Aws::CloudFront
       :id,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5435,7 +5796,8 @@ module Aws::CloudFront
     #   @return [Types::InvalidationList]
     class ListInvalidationsForDistributionTenantResult < Struct.new(
       :invalidation_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5453,7 +5815,8 @@ module Aws::CloudFront
       :distribution_id,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5463,7 +5826,8 @@ module Aws::CloudFront
     #   @return [Types::InvalidationList]
     class ListInvalidationsResult < Struct.new(
       :invalidation_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5476,7 +5840,8 @@ module Aws::CloudFront
     class ListKeyGroupsRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5485,7 +5850,8 @@ module Aws::CloudFront
     #   @return [Types::KeyGroupList]
     class ListKeyGroupsResult < Struct.new(
       :key_group_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5502,7 +5868,8 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5511,7 +5878,8 @@ module Aws::CloudFront
     #   @return [Types::KeyValueStoreList]
     class ListKeyValueStoresResult < Struct.new(
       :key_value_store_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5524,7 +5892,8 @@ module Aws::CloudFront
     class ListOriginAccessControlsRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5533,7 +5902,8 @@ module Aws::CloudFront
     #   @return [Types::OriginAccessControlList]
     class ListOriginAccessControlsResult < Struct.new(
       :origin_access_control_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5550,7 +5920,8 @@ module Aws::CloudFront
       :type,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5559,7 +5930,8 @@ module Aws::CloudFront
     #   @return [Types::OriginRequestPolicyList]
     class ListOriginRequestPoliciesResult < Struct.new(
       :origin_request_policy_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5572,7 +5944,8 @@ module Aws::CloudFront
     class ListPublicKeysRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5581,7 +5954,8 @@ module Aws::CloudFront
     #   @return [Types::PublicKeyList]
     class ListPublicKeysResult < Struct.new(
       :public_key_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5594,7 +5968,8 @@ module Aws::CloudFront
     class ListRealtimeLogConfigsRequest < Struct.new(
       :max_items,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5603,7 +5978,8 @@ module Aws::CloudFront
     #   @return [Types::RealtimeLogConfigs]
     class ListRealtimeLogConfigsResult < Struct.new(
       :realtime_log_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5620,7 +5996,8 @@ module Aws::CloudFront
       :type,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5629,7 +6006,8 @@ module Aws::CloudFront
     #   @return [Types::ResponseHeadersPolicyList]
     class ListResponseHeadersPoliciesResult < Struct.new(
       :response_headers_policy_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5643,7 +6021,8 @@ module Aws::CloudFront
     class ListStreamingDistributionsRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5653,7 +6032,8 @@ module Aws::CloudFront
     #   @return [Types::StreamingDistributionList]
     class ListStreamingDistributionsResult < Struct.new(
       :streaming_distribution_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5663,7 +6043,8 @@ module Aws::CloudFront
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5673,7 +6054,8 @@ module Aws::CloudFront
     #   @return [Types::Tags]
     class ListTagsForResourceResult < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5686,7 +6068,8 @@ module Aws::CloudFront
     class ListVpcOriginsRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5695,7 +6078,8 @@ module Aws::CloudFront
     #   @return [Types::VpcOriginList]
     class ListVpcOriginsResult < Struct.new(
       :vpc_origin_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5717,7 +6101,8 @@ module Aws::CloudFront
       :include_cookies,
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5747,7 +6132,8 @@ module Aws::CloudFront
       :certificate_status,
       :validation_token_host,
       :validation_token_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5765,7 +6151,8 @@ module Aws::CloudFront
       :validation_token_host,
       :primary_domain_name,
       :certificate_transparency_logging_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5774,7 +6161,8 @@ module Aws::CloudFront
     #   @return [String]
     class MissingBody < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5784,7 +6172,8 @@ module Aws::CloudFront
     #   @return [Types::RealtimeMetricsSubscriptionConfig]
     class MonitoringSubscription < Struct.new(
       :realtime_metrics_subscription_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5793,7 +6182,8 @@ module Aws::CloudFront
     #   @return [String]
     class MonitoringSubscriptionAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5802,7 +6192,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchCachePolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5811,7 +6202,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchCloudFrontOriginAccessIdentity < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5820,7 +6212,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchContinuousDeploymentPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5829,7 +6222,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchDistribution < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5838,7 +6232,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchFieldLevelEncryptionConfig < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5847,7 +6242,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchFieldLevelEncryptionProfile < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5856,7 +6252,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchFunctionExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5865,7 +6262,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchInvalidation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5874,7 +6272,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchMonitoringSubscription < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5883,7 +6282,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchOrigin < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5892,7 +6292,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchOriginAccessControl < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5901,7 +6302,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchOriginRequestPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5910,7 +6312,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchPublicKey < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5919,7 +6322,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchRealtimeLogConfig < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5928,7 +6332,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchResource < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5937,7 +6342,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchResponseHeadersPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5946,7 +6352,8 @@ module Aws::CloudFront
     #   @return [String]
     class NoSuchStreamingDistribution < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6000,7 +6407,8 @@ module Aws::CloudFront
       :response_completion_timeout,
       :origin_shield,
       :origin_access_control_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6014,7 +6422,8 @@ module Aws::CloudFront
     class OriginAccessControl < Struct.new(
       :id,
       :origin_access_control_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6023,7 +6432,8 @@ module Aws::CloudFront
     #   @return [String]
     class OriginAccessControlAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6049,7 +6459,8 @@ module Aws::CloudFront
       :signing_protocol,
       :signing_behavior,
       :origin_access_control_origin_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6058,7 +6469,8 @@ module Aws::CloudFront
     #   @return [String]
     class OriginAccessControlInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6088,7 +6500,8 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6118,7 +6531,8 @@ module Aws::CloudFront
       :signing_protocol,
       :signing_behavior,
       :origin_access_control_origin_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6132,7 +6546,8 @@ module Aws::CloudFront
     class OriginCustomHeader < Struct.new(
       :header_name,
       :header_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6154,7 +6569,8 @@ module Aws::CloudFront
       :failover_criteria,
       :members,
       :selection_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6164,7 +6580,8 @@ module Aws::CloudFront
     #   @return [Types::StatusCodes]
     class OriginGroupFailoverCriteria < Struct.new(
       :status_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6174,7 +6591,8 @@ module Aws::CloudFront
     #   @return [String]
     class OriginGroupMember < Struct.new(
       :origin_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6188,7 +6606,8 @@ module Aws::CloudFront
     class OriginGroupMembers < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6202,7 +6621,8 @@ module Aws::CloudFront
     class OriginGroups < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6220,7 +6640,8 @@ module Aws::CloudFront
       :id,
       :last_modified_time,
       :origin_request_policy_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6229,7 +6650,8 @@ module Aws::CloudFront
     #   @return [String]
     class OriginRequestPolicyAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6255,7 +6677,8 @@ module Aws::CloudFront
       :headers_config,
       :cookies_config,
       :query_strings_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6269,7 +6692,8 @@ module Aws::CloudFront
     class OriginRequestPolicyCookiesConfig < Struct.new(
       :cookie_behavior,
       :cookies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6283,7 +6707,8 @@ module Aws::CloudFront
     class OriginRequestPolicyHeadersConfig < Struct.new(
       :header_behavior,
       :headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6292,7 +6717,8 @@ module Aws::CloudFront
     #   @return [String]
     class OriginRequestPolicyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6314,7 +6740,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6328,7 +6755,8 @@ module Aws::CloudFront
     class OriginRequestPolicyQueryStringsConfig < Struct.new(
       :query_string_behavior,
       :query_strings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6342,7 +6770,8 @@ module Aws::CloudFront
     class OriginRequestPolicySummary < Struct.new(
       :type,
       :origin_request_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6356,7 +6785,8 @@ module Aws::CloudFront
     class OriginShield < Struct.new(
       :enabled,
       :origin_shield_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6370,7 +6800,8 @@ module Aws::CloudFront
     class OriginSslProtocols < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6384,7 +6815,8 @@ module Aws::CloudFront
     class Origins < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6398,7 +6830,8 @@ module Aws::CloudFront
     class Parameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6412,7 +6845,8 @@ module Aws::CloudFront
     class ParameterDefinition < Struct.new(
       :name,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6422,7 +6856,8 @@ module Aws::CloudFront
     #   @return [Types::StringSchemaConfig]
     class ParameterDefinitionSchema < Struct.new(
       :string_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6448,7 +6883,8 @@ module Aws::CloudFront
       :headers_config,
       :cookies_config,
       :query_strings_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6462,7 +6898,8 @@ module Aws::CloudFront
     class Paths < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6471,7 +6908,8 @@ module Aws::CloudFront
     #   @return [String]
     class PreconditionFailed < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6489,7 +6927,8 @@ module Aws::CloudFront
       :id,
       :created_time,
       :public_key_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6498,7 +6937,8 @@ module Aws::CloudFront
     #   @return [String]
     class PublicKeyAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6520,7 +6960,8 @@ module Aws::CloudFront
       :name,
       :encoded_key,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6529,7 +6970,8 @@ module Aws::CloudFront
     #   @return [String]
     class PublicKeyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6551,7 +6993,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6577,7 +7020,8 @@ module Aws::CloudFront
       :created_time,
       :encoded_key,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6590,7 +7034,8 @@ module Aws::CloudFront
     class PublishFunctionRequest < Struct.new(
       :name,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6599,7 +7044,8 @@ module Aws::CloudFront
     #   @return [Types::FunctionSummary]
     class PublishFunctionResult < Struct.new(
       :function_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6613,7 +7059,8 @@ module Aws::CloudFront
     class QueryArgProfile < Struct.new(
       :query_arg,
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6627,7 +7074,8 @@ module Aws::CloudFront
     class QueryArgProfileConfig < Struct.new(
       :forward_when_query_arg_profile_is_unknown,
       :query_arg_profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6636,7 +7084,8 @@ module Aws::CloudFront
     #   @return [String]
     class QueryArgProfileEmpty < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6650,7 +7099,8 @@ module Aws::CloudFront
     class QueryArgProfiles < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6664,7 +7114,8 @@ module Aws::CloudFront
     class QueryStringCacheKeys < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6678,7 +7129,8 @@ module Aws::CloudFront
     class QueryStringNames < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6704,7 +7156,8 @@ module Aws::CloudFront
       :sampling_rate,
       :end_points,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6713,7 +7166,8 @@ module Aws::CloudFront
     #   @return [String]
     class RealtimeLogConfigAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6722,7 +7176,8 @@ module Aws::CloudFront
     #   @return [String]
     class RealtimeLogConfigInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6731,7 +7186,8 @@ module Aws::CloudFront
     #   @return [String]
     class RealtimeLogConfigOwnerMismatch < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6757,7 +7213,8 @@ module Aws::CloudFront
       :is_truncated,
       :marker,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6767,7 +7224,8 @@ module Aws::CloudFront
     #   @return [String]
     class RealtimeMetricsSubscriptionConfig < Struct.new(
       :realtime_metrics_subscription_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6776,7 +7234,8 @@ module Aws::CloudFront
     #   @return [String]
     class ResourceInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6785,7 +7244,8 @@ module Aws::CloudFront
     #   @return [String]
     class ResourceNotDisabled < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6803,7 +7263,8 @@ module Aws::CloudFront
       :id,
       :last_modified_time,
       :response_headers_policy_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6817,7 +7278,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicyAccessControlAllowHeaders < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6831,7 +7293,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicyAccessControlAllowMethods < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6845,7 +7308,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicyAccessControlAllowOrigins < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6859,7 +7323,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicyAccessControlExposeHeaders < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6868,7 +7333,8 @@ module Aws::CloudFront
     #   @return [String]
     class ResponseHeadersPolicyAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6902,7 +7368,8 @@ module Aws::CloudFront
       :server_timing_headers_config,
       :custom_headers_config,
       :remove_headers_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6916,7 +7383,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicyContentSecurityPolicy < Struct.new(
       :override,
       :content_security_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6926,7 +7394,8 @@ module Aws::CloudFront
     #   @return [Boolean]
     class ResponseHeadersPolicyContentTypeOptions < Struct.new(
       :override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6960,7 +7429,8 @@ module Aws::CloudFront
       :access_control_expose_headers,
       :access_control_max_age_sec,
       :origin_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6978,7 +7448,8 @@ module Aws::CloudFront
       :header,
       :value,
       :override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6992,7 +7463,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicyCustomHeadersConfig < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7006,7 +7478,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicyFrameOptions < Struct.new(
       :override,
       :frame_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7015,7 +7488,8 @@ module Aws::CloudFront
     #   @return [String]
     class ResponseHeadersPolicyInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7037,7 +7511,8 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7051,7 +7526,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicyReferrerPolicy < Struct.new(
       :override,
       :referrer_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7061,7 +7537,8 @@ module Aws::CloudFront
     #   @return [String]
     class ResponseHeadersPolicyRemoveHeader < Struct.new(
       :header,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7075,7 +7552,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicyRemoveHeadersConfig < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7105,7 +7583,8 @@ module Aws::CloudFront
       :content_security_policy,
       :content_type_options,
       :strict_transport_security,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7119,7 +7598,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicyServerTimingHeadersConfig < Struct.new(
       :enabled,
       :sampling_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7141,7 +7621,8 @@ module Aws::CloudFront
       :include_subdomains,
       :preload,
       :access_control_max_age_sec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7155,7 +7636,8 @@ module Aws::CloudFront
     class ResponseHeadersPolicySummary < Struct.new(
       :type,
       :response_headers_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7177,7 +7659,8 @@ module Aws::CloudFront
       :protection,
       :mode_block,
       :report_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7187,7 +7670,8 @@ module Aws::CloudFront
     #   @return [Types::GeoRestriction]
     class Restrictions < Struct.new(
       :geo_restriction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7201,7 +7685,8 @@ module Aws::CloudFront
     class S3Origin < Struct.new(
       :domain_name,
       :origin_access_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7215,7 +7700,8 @@ module Aws::CloudFront
     class S3OriginConfig < Struct.new(
       :origin_access_identity,
       :origin_read_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7234,7 +7720,8 @@ module Aws::CloudFront
     class SessionStickinessConfig < Struct.new(
       :idle_ttl,
       :maximum_ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7248,7 +7735,8 @@ module Aws::CloudFront
     class Signer < Struct.new(
       :aws_account_number,
       :key_pair_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7262,7 +7750,8 @@ module Aws::CloudFront
     class StagingDistributionDnsNames < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7271,7 +7760,8 @@ module Aws::CloudFront
     #   @return [String]
     class StagingDistributionInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7285,7 +7775,8 @@ module Aws::CloudFront
     class StatusCodes < Struct.new(
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7319,7 +7810,8 @@ module Aws::CloudFront
       :domain_name,
       :active_trusted_signers,
       :streaming_distribution_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7328,7 +7820,8 @@ module Aws::CloudFront
     #   @return [String]
     class StreamingDistributionAlreadyExists < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7366,7 +7859,8 @@ module Aws::CloudFront
       :trusted_signers,
       :price_class,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7380,7 +7874,8 @@ module Aws::CloudFront
     class StreamingDistributionConfigWithTags < Struct.new(
       :streaming_distribution_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7410,7 +7905,8 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7419,7 +7915,8 @@ module Aws::CloudFront
     #   @return [String]
     class StreamingDistributionNotDisabled < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7469,7 +7966,8 @@ module Aws::CloudFront
       :comment,
       :price_class,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7487,7 +7985,8 @@ module Aws::CloudFront
       :enabled,
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7505,7 +8004,8 @@ module Aws::CloudFront
       :comment,
       :default_value,
       :required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7519,7 +8019,8 @@ module Aws::CloudFront
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7529,7 +8030,8 @@ module Aws::CloudFront
     #   @return [Array<String>]
     class TagKeys < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7543,7 +8045,8 @@ module Aws::CloudFront
     class TagResourceRequest < Struct.new(
       :resource,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7553,7 +8056,8 @@ module Aws::CloudFront
     #   @return [Array<Types::Tag>]
     class Tags < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7563,7 +8067,8 @@ module Aws::CloudFront
     #   @return [Array<Types::ParameterDefinition>]
     class TenantConfig < Struct.new(
       :parameter_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7572,7 +8077,8 @@ module Aws::CloudFront
     #   @return [String]
     class TestFunctionFailed < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7593,7 +8099,8 @@ module Aws::CloudFront
       :if_match,
       :stage,
       :event_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7602,7 +8109,8 @@ module Aws::CloudFront
     #   @return [Types::TestResult]
     class TestFunctionResult < Struct.new(
       :test_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7628,7 +8136,8 @@ module Aws::CloudFront
       :function_execution_logs,
       :function_error_message,
       :function_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7637,7 +8146,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooLongCSPInResponseHeadersPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7646,7 +8156,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyCacheBehaviors < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7655,7 +8166,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyCachePolicies < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7664,7 +8176,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyCertificates < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7673,7 +8186,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyCloudFrontOriginAccessIdentities < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7682,7 +8196,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyContinuousDeploymentPolicies < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7691,7 +8206,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyCookieNamesInWhiteList < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7700,7 +8216,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyCookiesInCachePolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7709,7 +8226,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyCookiesInOriginRequestPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7718,7 +8236,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyCustomHeadersInResponseHeadersPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7727,7 +8246,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributionCNAMEs < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7736,7 +8256,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributions < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7745,7 +8266,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributionsAssociatedToCachePolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7754,7 +8276,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributionsAssociatedToFieldLevelEncryptionConfig < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7763,7 +8286,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributionsAssociatedToKeyGroup < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7772,7 +8296,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributionsAssociatedToOriginAccessControl < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7781,7 +8306,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributionsAssociatedToOriginRequestPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7790,7 +8316,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributionsAssociatedToResponseHeadersPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7799,7 +8326,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributionsWithFunctionAssociations < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7808,7 +8336,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributionsWithLambdaAssociations < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7817,7 +8346,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyDistributionsWithSingleFunctionARN < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7826,7 +8356,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyFieldLevelEncryptionConfigs < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7835,7 +8366,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyFieldLevelEncryptionContentTypeProfiles < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7844,7 +8376,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyFieldLevelEncryptionEncryptionEntities < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7853,7 +8386,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyFieldLevelEncryptionFieldPatterns < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7862,7 +8396,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyFieldLevelEncryptionProfiles < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7871,7 +8406,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyFieldLevelEncryptionQueryArgProfiles < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7880,7 +8416,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyFunctionAssociations < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7889,7 +8426,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyFunctions < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7898,7 +8436,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyHeadersInCachePolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7907,7 +8446,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyHeadersInForwardedValues < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7916,7 +8456,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyHeadersInOriginRequestPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7925,7 +8466,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyInvalidationsInProgress < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7934,7 +8476,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyKeyGroups < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7943,7 +8486,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyKeyGroupsAssociatedToDistribution < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7952,7 +8496,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyLambdaFunctionAssociations < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7961,7 +8506,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyOriginAccessControls < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7970,7 +8516,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyOriginCustomHeaders < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7979,7 +8526,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyOriginGroupsPerDistribution < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7988,7 +8536,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyOriginRequestPolicies < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7997,7 +8546,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyOrigins < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8006,7 +8556,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyPublicKeys < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8015,7 +8566,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyPublicKeysInKeyGroup < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8024,7 +8576,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyQueryStringParameters < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8033,7 +8586,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyQueryStringsInCachePolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8042,7 +8596,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyQueryStringsInOriginRequestPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8051,7 +8606,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyRealtimeLogConfigs < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8060,7 +8616,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyRemoveHeadersInResponseHeadersPolicy < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8069,7 +8626,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyResponseHeadersPolicies < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8078,7 +8636,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyStreamingDistributionCNAMEs < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8087,7 +8646,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyStreamingDistributions < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8096,7 +8656,8 @@ module Aws::CloudFront
     #   @return [String]
     class TooManyTrustedSigners < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8114,7 +8675,8 @@ module Aws::CloudFront
       :single_weight_config,
       :single_header_config,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8123,7 +8685,8 @@ module Aws::CloudFront
     #   @return [String]
     class TrustedKeyGroupDoesNotExist < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8141,7 +8704,8 @@ module Aws::CloudFront
       :enabled,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8150,7 +8714,8 @@ module Aws::CloudFront
     #   @return [String]
     class TrustedSignerDoesNotExist < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8168,7 +8733,8 @@ module Aws::CloudFront
       :enabled,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8177,7 +8743,8 @@ module Aws::CloudFront
     #   @return [String]
     class UnsupportedOperation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8191,7 +8758,8 @@ module Aws::CloudFront
     class UntagResourceRequest < Struct.new(
       :resource,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8208,7 +8776,8 @@ module Aws::CloudFront
       :cache_policy_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8221,7 +8790,8 @@ module Aws::CloudFront
     class UpdateCachePolicyResult < Struct.new(
       :cache_policy,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8239,7 +8809,8 @@ module Aws::CloudFront
       :cloud_front_origin_access_identity_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8253,7 +8824,8 @@ module Aws::CloudFront
     class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8278,7 +8850,8 @@ module Aws::CloudFront
       :if_match,
       :anycast_ip_list_id,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8291,7 +8864,8 @@ module Aws::CloudFront
     class UpdateConnectionGroupResult < Struct.new(
       :connection_group,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8308,7 +8882,8 @@ module Aws::CloudFront
       :continuous_deployment_policy_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8321,7 +8896,8 @@ module Aws::CloudFront
     class UpdateContinuousDeploymentPolicyResult < Struct.new(
       :continuous_deployment_policy,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8339,7 +8915,8 @@ module Aws::CloudFront
       :distribution_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8353,7 +8930,8 @@ module Aws::CloudFront
     class UpdateDistributionResult < Struct.new(
       :distribution,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8394,7 +8972,8 @@ module Aws::CloudFront
       :if_match,
       :managed_certificate_request,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8407,7 +8986,8 @@ module Aws::CloudFront
     class UpdateDistributionTenantResult < Struct.new(
       :distribution_tenant,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8424,7 +9004,8 @@ module Aws::CloudFront
       :id,
       :staging_distribution_id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8437,7 +9018,8 @@ module Aws::CloudFront
     class UpdateDistributionWithStagingConfigResult < Struct.new(
       :distribution,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8454,7 +9036,8 @@ module Aws::CloudFront
       :domain,
       :target_resource,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8471,7 +9054,8 @@ module Aws::CloudFront
       :domain,
       :resource_id,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8488,7 +9072,8 @@ module Aws::CloudFront
       :field_level_encryption_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8501,7 +9086,8 @@ module Aws::CloudFront
     class UpdateFieldLevelEncryptionConfigResult < Struct.new(
       :field_level_encryption,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8518,7 +9104,8 @@ module Aws::CloudFront
       :field_level_encryption_profile_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8531,7 +9118,8 @@ module Aws::CloudFront
     class UpdateFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8552,7 +9140,8 @@ module Aws::CloudFront
       :if_match,
       :function_config,
       :function_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8565,7 +9154,8 @@ module Aws::CloudFront
     class UpdateFunctionResult < Struct.new(
       :function_summary,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8582,7 +9172,8 @@ module Aws::CloudFront
       :key_group_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8595,7 +9186,8 @@ module Aws::CloudFront
     class UpdateKeyGroupResult < Struct.new(
       :key_group,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8612,7 +9204,8 @@ module Aws::CloudFront
       :name,
       :comment,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8625,7 +9218,8 @@ module Aws::CloudFront
     class UpdateKeyValueStoreResult < Struct.new(
       :key_value_store,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8642,7 +9236,8 @@ module Aws::CloudFront
       :origin_access_control_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8655,7 +9250,8 @@ module Aws::CloudFront
     class UpdateOriginAccessControlResult < Struct.new(
       :origin_access_control,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8672,7 +9268,8 @@ module Aws::CloudFront
       :origin_request_policy_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8685,7 +9282,8 @@ module Aws::CloudFront
     class UpdateOriginRequestPolicyResult < Struct.new(
       :origin_request_policy,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8702,7 +9300,8 @@ module Aws::CloudFront
       :public_key_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8715,7 +9314,8 @@ module Aws::CloudFront
     class UpdatePublicKeyResult < Struct.new(
       :public_key,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8740,7 +9340,8 @@ module Aws::CloudFront
       :name,
       :arn,
       :sampling_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8749,7 +9350,8 @@ module Aws::CloudFront
     #   @return [Types::RealtimeLogConfig]
     class UpdateRealtimeLogConfigResult < Struct.new(
       :realtime_log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8766,7 +9368,8 @@ module Aws::CloudFront
       :response_headers_policy_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8779,7 +9382,8 @@ module Aws::CloudFront
     class UpdateResponseHeadersPolicyResult < Struct.new(
       :response_headers_policy,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8797,7 +9401,8 @@ module Aws::CloudFront
       :streaming_distribution_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8811,7 +9416,8 @@ module Aws::CloudFront
     class UpdateStreamingDistributionResult < Struct.new(
       :streaming_distribution,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8828,7 +9434,8 @@ module Aws::CloudFront
       :vpc_origin_endpoint_config,
       :id,
       :if_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8841,7 +9448,8 @@ module Aws::CloudFront
     class UpdateVpcOriginResult < Struct.new(
       :vpc_origin,
       :e_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8859,7 +9467,8 @@ module Aws::CloudFront
       :domain,
       :redirect_to,
       :redirect_from,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8872,7 +9481,8 @@ module Aws::CloudFront
     class VerifyDnsConfigurationRequest < Struct.new(
       :domain,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8881,7 +9491,8 @@ module Aws::CloudFront
     #   @return [Array<Types::DnsConfiguration>]
     class VerifyDnsConfigurationResult < Struct.new(
       :dns_configuration_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8917,7 +9528,8 @@ module Aws::CloudFront
       :minimum_protocol_version,
       :certificate,
       :certificate_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8947,7 +9559,8 @@ module Aws::CloudFront
       :created_time,
       :last_modified_time,
       :vpc_origin_endpoint_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8965,7 +9578,8 @@ module Aws::CloudFront
       :vpc_origin_id,
       :origin_read_timeout,
       :origin_keepalive_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8995,7 +9609,8 @@ module Aws::CloudFront
       :https_port,
       :origin_protocol_policy,
       :origin_ssl_protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9025,7 +9640,8 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9059,7 +9675,8 @@ module Aws::CloudFront
       :last_modified_time,
       :arn,
       :origin_endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9073,7 +9690,8 @@ module Aws::CloudFront
     class WebAclCustomization < Struct.new(
       :action,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -12,7 +12,8 @@ module Aws::Amp
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +35,8 @@ module Aws::Amp
       :data,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +50,8 @@ module Aws::Amp
     class AlertManagerDefinitionStatus < Struct.new(
       :status_code,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +61,8 @@ module Aws::Amp
     #   @return [String]
     class AmpConfiguration < Struct.new(
       :workspace_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +72,8 @@ module Aws::Amp
     #   @return [String]
     class CloudWatchLogDestination < Struct.new(
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +91,8 @@ module Aws::Amp
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +110,8 @@ module Aws::Amp
       :workspace_id,
       :data,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +121,8 @@ module Aws::Amp
     #   @return [Types::AlertManagerDefinitionStatus]
     class CreateAlertManagerDefinitionOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +140,8 @@ module Aws::Amp
       :workspace_id,
       :log_group_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +151,8 @@ module Aws::Amp
     #   @return [Types::LoggingConfigurationStatus]
     class CreateLoggingConfigurationOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -159,7 +169,8 @@ module Aws::Amp
       :workspace_id,
       :destinations,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +179,8 @@ module Aws::Amp
     #   @return [Types::QueryLoggingConfigurationStatus]
     class CreateQueryLoggingConfigurationResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,7 +206,8 @@ module Aws::Amp
       :data,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +229,8 @@ module Aws::Amp
       :arn,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +264,8 @@ module Aws::Amp
       :role_configuration,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +287,8 @@ module Aws::Amp
       :arn,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +310,8 @@ module Aws::Amp
       :client_token,
       :tags,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +337,8 @@ module Aws::Amp
       :status,
       :tags,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +352,8 @@ module Aws::Amp
     class DeleteAlertManagerDefinitionInput < Struct.new(
       :workspace_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +367,8 @@ module Aws::Amp
     class DeleteLoggingConfigurationInput < Struct.new(
       :workspace_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +381,8 @@ module Aws::Amp
     class DeleteQueryLoggingConfigurationRequest < Struct.new(
       :workspace_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +399,8 @@ module Aws::Amp
       :workspace_id,
       :client_token,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +418,8 @@ module Aws::Amp
       :workspace_id,
       :name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +433,8 @@ module Aws::Amp
     class DeleteScraperRequest < Struct.new(
       :scraper_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +448,8 @@ module Aws::Amp
     class DeleteScraperResponse < Struct.new(
       :scraper_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +463,8 @@ module Aws::Amp
     class DeleteWorkspaceInput < Struct.new(
       :workspace_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +474,8 @@ module Aws::Amp
     #   @return [String]
     class DescribeAlertManagerDefinitionInput < Struct.new(
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +485,8 @@ module Aws::Amp
     #   @return [Types::AlertManagerDefinitionDescription]
     class DescribeAlertManagerDefinitionOutput < Struct.new(
       :alert_manager_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +496,8 @@ module Aws::Amp
     #   @return [String]
     class DescribeLoggingConfigurationInput < Struct.new(
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +507,8 @@ module Aws::Amp
     #   @return [Types::LoggingConfigurationMetadata]
     class DescribeLoggingConfigurationOutput < Struct.new(
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +517,8 @@ module Aws::Amp
     #   @return [String]
     class DescribeQueryLoggingConfigurationRequest < Struct.new(
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +527,8 @@ module Aws::Amp
     #   @return [Types::QueryLoggingConfigurationMetadata]
     class DescribeQueryLoggingConfigurationResponse < Struct.new(
       :query_logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +537,8 @@ module Aws::Amp
     #   @return [String]
     class DescribeResourcePolicyRequest < Struct.new(
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +555,8 @@ module Aws::Amp
       :policy_document,
       :policy_status,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -536,7 +570,8 @@ module Aws::Amp
     class DescribeRuleGroupsNamespaceInput < Struct.new(
       :workspace_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +581,8 @@ module Aws::Amp
     #   @return [Types::RuleGroupsNamespaceDescription]
     class DescribeRuleGroupsNamespaceOutput < Struct.new(
       :rule_groups_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +592,8 @@ module Aws::Amp
     #   @return [String]
     class DescribeScraperRequest < Struct.new(
       :scraper_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -566,7 +603,8 @@ module Aws::Amp
     #   @return [Types::ScraperDescription]
     class DescribeScraperResponse < Struct.new(
       :scraper,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +613,8 @@ module Aws::Amp
     #   @return [String]
     class DescribeWorkspaceConfigurationRequest < Struct.new(
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +623,8 @@ module Aws::Amp
     #   @return [Types::WorkspaceConfigurationDescription]
     class DescribeWorkspaceConfigurationResponse < Struct.new(
       :workspace_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +634,8 @@ module Aws::Amp
     #   @return [String]
     class DescribeWorkspaceInput < Struct.new(
       :workspace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +645,8 @@ module Aws::Amp
     #   @return [Types::WorkspaceDescription]
     class DescribeWorkspaceOutput < Struct.new(
       :workspace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +657,8 @@ module Aws::Amp
     class Destination < Struct.new(
       :amp_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AmpConfiguration < Destination; end
@@ -636,13 +679,15 @@ module Aws::Amp
       :cluster_arn,
       :security_group_ids,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetDefaultScraperConfiguration</code> operation.</p>
     class GetDefaultScraperConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +697,8 @@ module Aws::Amp
     #   @return [String]
     class GetDefaultScraperConfigurationResponse < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +712,8 @@ module Aws::Amp
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +727,8 @@ module Aws::Amp
     class LimitsPerLabelSet < Struct.new(
       :limits,
       :label_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +738,8 @@ module Aws::Amp
     #   @return [Integer]
     class LimitsPerLabelSetEntry < Struct.new(
       :max_series,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +761,8 @@ module Aws::Amp
       :name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +776,8 @@ module Aws::Amp
     class ListRuleGroupsNamespacesOutput < Struct.new(
       :rule_groups_namespaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +795,8 @@ module Aws::Amp
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +810,8 @@ module Aws::Amp
     class ListScrapersResponse < Struct.new(
       :scrapers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +820,8 @@ module Aws::Amp
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -776,7 +830,8 @@ module Aws::Amp
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +849,8 @@ module Aws::Amp
       :next_token,
       :alias,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +864,8 @@ module Aws::Amp
     class ListWorkspacesOutput < Struct.new(
       :workspaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +891,8 @@ module Aws::Amp
       :log_group_arn,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +906,8 @@ module Aws::Amp
     class LoggingConfigurationStatus < Struct.new(
       :status_code,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +921,8 @@ module Aws::Amp
     class LoggingDestination < Struct.new(
       :cloud_watch_logs,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,7 +932,8 @@ module Aws::Amp
     #   @return [Integer]
     class LoggingFilter < Struct.new(
       :qsp_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +951,8 @@ module Aws::Amp
       :workspace_id,
       :data,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +962,8 @@ module Aws::Amp
     #   @return [Types::AlertManagerDefinitionStatus]
     class PutAlertManagerDefinitionOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -921,7 +984,8 @@ module Aws::Amp
       :policy_document,
       :client_token,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -934,7 +998,8 @@ module Aws::Amp
     class PutResourcePolicyResponse < Struct.new(
       :policy_status,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +1021,8 @@ module Aws::Amp
       :name,
       :data,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -978,7 +1044,8 @@ module Aws::Amp
       :arn,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1071,8 @@ module Aws::Amp
       :destinations,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1086,8 @@ module Aws::Amp
     class QueryLoggingConfigurationStatus < Struct.new(
       :status_code,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1036,7 +1105,8 @@ module Aws::Amp
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1120,8 @@ module Aws::Amp
     class RoleConfiguration < Struct.new(
       :source_role_arn,
       :target_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1155,8 @@ module Aws::Amp
       :created_at,
       :modified_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1098,7 +1170,8 @@ module Aws::Amp
     class RuleGroupsNamespaceStatus < Struct.new(
       :status_code,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1201,8 @@ module Aws::Amp
       :created_at,
       :modified_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1139,7 +1213,8 @@ module Aws::Amp
     class ScrapeConfiguration < Struct.new(
       :configuration_blob,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ConfigurationBlob < ScrapeConfiguration; end
@@ -1200,7 +1275,8 @@ module Aws::Amp
       :source,
       :destination,
       :role_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,7 +1286,8 @@ module Aws::Amp
     #   @return [String]
     class ScraperStatus < Struct.new(
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1341,8 @@ module Aws::Amp
       :source,
       :destination,
       :role_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1368,8 @@ module Aws::Amp
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1380,8 @@ module Aws::Amp
     class Source < Struct.new(
       :eks_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EksConfiguration < Source; end
@@ -1317,12 +1397,14 @@ module Aws::Amp
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1426,8 @@ module Aws::Amp
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1357,12 +1440,14 @@ module Aws::Amp
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1380,7 +1465,8 @@ module Aws::Amp
       :workspace_id,
       :log_group_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1476,8 @@ module Aws::Amp
     #   @return [Types::LoggingConfigurationStatus]
     class UpdateLoggingConfigurationOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1407,7 +1494,8 @@ module Aws::Amp
       :workspace_id,
       :destinations,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1416,7 +1504,8 @@ module Aws::Amp
     #   @return [Types::QueryLoggingConfigurationStatus]
     class UpdateQueryLoggingConfigurationResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1534,8 @@ module Aws::Amp
       :destination,
       :role_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1466,7 +1556,8 @@ module Aws::Amp
       :arn,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1484,7 +1575,8 @@ module Aws::Amp
       :workspace_id,
       :alias,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1597,8 @@ module Aws::Amp
       :client_token,
       :limits_per_label_set,
       :retention_period_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1514,7 +1607,8 @@ module Aws::Amp
     #   @return [Types::WorkspaceConfigurationStatus]
     class UpdateWorkspaceConfigurationResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1532,7 +1626,8 @@ module Aws::Amp
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1546,7 +1641,8 @@ module Aws::Amp
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,7 +1660,8 @@ module Aws::Amp
       :status,
       :limits_per_label_set,
       :retention_period_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1578,7 +1675,8 @@ module Aws::Amp
     class WorkspaceConfigurationStatus < Struct.new(
       :status_code,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1714,8 @@ module Aws::Amp
       :created_at,
       :tags,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1725,8 @@ module Aws::Amp
     #   @return [String]
     class WorkspaceStatus < Struct.new(
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,7 +1760,8 @@ module Aws::Amp
       :created_at,
       :tags,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

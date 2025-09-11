@@ -12,7 +12,8 @@ module Aws::IoT
     #   @return [Array<Types::AbortCriteria>]
     class AbortConfig < Struct.new(
       :criteria_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::IoT
       :action,
       :threshold_percentage,
       :min_number_of_executed_things,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53,7 +55,8 @@ module Aws::IoT
     class AcceptCertificateTransferRequest < Struct.new(
       :certificate_id,
       :set_as_active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +166,8 @@ module Aws::IoT
       :kafka,
       :open_search,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +215,8 @@ module Aws::IoT
       :verification_state_description,
       :last_violation_time,
       :violation_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,12 +240,14 @@ module Aws::IoT
       :billing_group_arn,
       :thing_name,
       :thing_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddThingToBillingGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,12 +275,14 @@ module Aws::IoT
       :thing_name,
       :thing_arn,
       :override_dynamic_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddThingToThingGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +296,8 @@ module Aws::IoT
     class AddThingsToThingGroupParams < Struct.new(
       :thing_group_names,
       :override_dynamic_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +311,8 @@ module Aws::IoT
     class AggregationType < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +327,8 @@ module Aws::IoT
     class AlertTarget < Struct.new(
       :alert_target_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +338,8 @@ module Aws::IoT
     #   @return [Array<Types::Policy>]
     class Allowed < Struct.new(
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +355,8 @@ module Aws::IoT
     class AssetPropertyTimestamp < Struct.new(
       :time_in_seconds,
       :offset_in_nanos,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +375,8 @@ module Aws::IoT
       :value,
       :timestamp,
       :quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -387,7 +402,8 @@ module Aws::IoT
       :double_value,
       :boolean_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringValue < AssetPropertyVariant; end
@@ -415,7 +431,8 @@ module Aws::IoT
       :version_name,
       :sbom,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +454,8 @@ module Aws::IoT
       :version_name,
       :sbom,
       :sbom_validation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +487,8 @@ module Aws::IoT
       :job_id,
       :comment,
       :namespace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -486,7 +505,8 @@ module Aws::IoT
       :job_arn,
       :job_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +519,8 @@ module Aws::IoT
     class AttachPolicyRequest < Struct.new(
       :policy_name,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +535,8 @@ module Aws::IoT
     class AttachPrincipalPolicyRequest < Struct.new(
       :policy_name,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,12 +549,14 @@ module Aws::IoT
     class AttachSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :security_profile_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AttachSecurityProfileResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -565,13 +589,15 @@ module Aws::IoT
       :thing_name,
       :principal,
       :thing_principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the AttachThingPrincipal operation.</p>
     class AttachThingPrincipalResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -593,7 +619,8 @@ module Aws::IoT
     class AttributePayload < Struct.new(
       :attributes,
       :merge,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -612,7 +639,8 @@ module Aws::IoT
     class AuditCheckConfiguration < Struct.new(
       :enabled,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -655,7 +683,8 @@ module Aws::IoT
       :suppressed_non_compliant_resources_count,
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +738,8 @@ module Aws::IoT
       :reason_for_non_compliance,
       :reason_for_non_compliance_code,
       :is_suppressed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -751,7 +781,8 @@ module Aws::IoT
       :end_time,
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +800,8 @@ module Aws::IoT
       :task_id,
       :start_time,
       :task_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +819,8 @@ module Aws::IoT
       :audit_task_id,
       :finding_ids,
       :audit_check_to_reason_code_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +838,8 @@ module Aws::IoT
       :target_arn,
       :role_arn,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -845,7 +879,8 @@ module Aws::IoT
       :expiration_date,
       :suppress_indefinitely,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +899,8 @@ module Aws::IoT
       :task_id,
       :task_status,
       :task_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,7 +915,8 @@ module Aws::IoT
     class AuthInfo < Struct.new(
       :action_type,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +944,8 @@ module Aws::IoT
       :denied,
       :auth_decision,
       :missing_context_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -921,7 +959,8 @@ module Aws::IoT
     class AuthorizerConfig < Struct.new(
       :default_authorizer_name,
       :allow_authorizer_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -975,7 +1014,8 @@ module Aws::IoT
       :last_modified_date,
       :signing_disabled,
       :enable_caching_for_http,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -989,7 +1029,8 @@ module Aws::IoT
     class AuthorizerSummary < Struct.new(
       :authorizer_name,
       :authorizer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1040,8 @@ module Aws::IoT
     #   @return [Array<Types::AwsJobAbortCriteria>]
     class AwsJobAbortConfig < Struct.new(
       :abort_criteria_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1023,7 +1065,8 @@ module Aws::IoT
       :action,
       :threshold_percentage,
       :min_number_of_executed_things,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1081,8 @@ module Aws::IoT
     class AwsJobExecutionsRolloutConfig < Struct.new(
       :maximum_per_minute,
       :exponential_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1104,8 @@ module Aws::IoT
       :base_rate_per_minute,
       :increment_factor,
       :rate_increase_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1077,7 +1122,8 @@ module Aws::IoT
     #   @return [Integer]
     class AwsJobPresignedUrlConfig < Struct.new(
       :expires_in_sec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1139,8 @@ module Aws::IoT
     class AwsJobRateIncreaseCriteria < Struct.new(
       :number_of_notified_things,
       :number_of_succeeded_things,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1157,8 @@ module Aws::IoT
     #   @return [Integer]
     class AwsJobTimeoutConfig < Struct.new(
       :in_progress_timeout_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1195,8 @@ module Aws::IoT
       :criteria,
       :suppress_alerts,
       :export_metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1216,7 +1265,8 @@ module Aws::IoT
       :consecutive_datapoints_to_clear,
       :statistical_threshold,
       :ml_detection_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1310,8 @@ module Aws::IoT
       :model_status,
       :datapoints_collection_percentage,
       :last_model_refresh_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1270,7 +1321,8 @@ module Aws::IoT
     #   @return [Time]
     class BillingGroupMetadata < Struct.new(
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1332,8 @@ module Aws::IoT
     #   @return [String]
     class BillingGroupProperties < Struct.new(
       :billing_group_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1294,7 +1347,8 @@ module Aws::IoT
     class Bucket < Struct.new(
       :key_value,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1309,7 +1363,8 @@ module Aws::IoT
     #   @return [Types::TermsAggregation]
     class BucketsAggregationType < Struct.new(
       :terms_aggregation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1387,8 @@ module Aws::IoT
       :certificate_id,
       :status,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1445,8 @@ module Aws::IoT
       :generation_id,
       :validity,
       :certificate_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,12 +1455,14 @@ module Aws::IoT
     #   @return [String]
     class CancelAuditMitigationActionsTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelAuditMitigationActionsTaskResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,12 +1472,14 @@ module Aws::IoT
     #   @return [String]
     class CancelAuditTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelAuditTaskResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,7 +1490,8 @@ module Aws::IoT
     #   @return [String]
     class CancelCertificateTransferRequest < Struct.new(
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,12 +1502,14 @@ module Aws::IoT
     #   @return [String]
     class CancelDetectMitigationActionsTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelDetectMitigationActionsTaskResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1485,7 +1549,8 @@ module Aws::IoT
       :force,
       :expected_version,
       :status_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1511,7 +1576,8 @@ module Aws::IoT
       :reason_code,
       :comment,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1528,7 +1594,8 @@ module Aws::IoT
       :job_arn,
       :job_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1633,8 @@ module Aws::IoT
       :status,
       :certificate_mode,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1578,7 +1646,8 @@ module Aws::IoT
     #   @return [String]
     class CertificateConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1720,8 @@ module Aws::IoT
       :generation_id,
       :validity,
       :certificate_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1665,7 +1735,8 @@ module Aws::IoT
     class CertificateProviderSummary < Struct.new(
       :certificate_provider_name,
       :certificate_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1746,8 @@ module Aws::IoT
     #   @return [String]
     class CertificateStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1757,8 @@ module Aws::IoT
     #   @return [String]
     class CertificateValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,17 +1772,20 @@ module Aws::IoT
     class CertificateValidity < Struct.new(
       :not_before,
       :not_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ClearDefaultAuthorizerRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ClearDefaultAuthorizerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1719,7 +1795,8 @@ module Aws::IoT
     #   @return [String]
     class ClientCertificateConfig < Struct.new(
       :client_certificate_callback_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1742,7 +1819,8 @@ module Aws::IoT
       :alarm_name,
       :state_reason,
       :state_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1761,7 +1839,8 @@ module Aws::IoT
       :role_arn,
       :log_group_name,
       :batch_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1871,8 @@ module Aws::IoT
       :metric_value,
       :metric_unit,
       :metric_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1890,8 @@ module Aws::IoT
       :aws_signer_job_id,
       :start_signing_job_parameter,
       :custom_code_signing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1824,7 +1905,8 @@ module Aws::IoT
     class CodeSigningCertificateChain < Struct.new(
       :certificate_name,
       :inline_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1916,8 @@ module Aws::IoT
     #   @return [String]
     class CodeSigningSignature < Struct.new(
       :inline_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1864,7 +1947,8 @@ module Aws::IoT
       :s,
       :b,
       :bin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1900,7 +1984,8 @@ module Aws::IoT
       :created_at,
       :started_at,
       :completed_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1924,7 +2009,8 @@ module Aws::IoT
       :value,
       :default_value,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1972,7 +2058,8 @@ module Aws::IoT
       :d,
       :bin,
       :ul,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2076,8 @@ module Aws::IoT
     class CommandPayload < Struct.new(
       :content,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2023,7 +2111,8 @@ module Aws::IoT
       :created_at,
       :last_updated_at,
       :pending_deletion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2033,7 +2122,8 @@ module Aws::IoT
     #   @return [Boolean]
     class Configuration < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2061,7 +2151,8 @@ module Aws::IoT
       :configuration_status,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2070,12 +2161,14 @@ module Aws::IoT
     #   @return [String]
     class ConfirmTopicRuleDestinationRequest < Struct.new(
       :confirmation_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ConfirmTopicRuleDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2088,7 +2181,8 @@ module Aws::IoT
     class ConflictException < Struct.new(
       :message,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2193,8 @@ module Aws::IoT
     #   @return [String]
     class ConflictingResourceUpdateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2140,12 +2235,14 @@ module Aws::IoT
       :suppress_indefinitely,
       :description,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateAuditSuppressionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2291,8 @@ module Aws::IoT
       :tags,
       :signing_disabled,
       :enable_caching_for_http,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2207,7 +2305,8 @@ module Aws::IoT
     class CreateAuthorizerResponse < Struct.new(
       :authorizer_name,
       :authorizer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2224,7 +2323,8 @@ module Aws::IoT
       :billing_group_name,
       :billing_group_properties,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2241,7 +2341,8 @@ module Aws::IoT
       :billing_group_name,
       :billing_group_arn,
       :billing_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2255,7 +2356,8 @@ module Aws::IoT
     class CreateCertificateFromCsrRequest < Struct.new(
       :certificate_signing_request,
       :set_as_active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2275,7 +2377,8 @@ module Aws::IoT
       :certificate_arn,
       :certificate_id,
       :certificate_pem,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,7 +2405,8 @@ module Aws::IoT
       :account_default_for_operations,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2315,7 +2419,8 @@ module Aws::IoT
     class CreateCertificateProviderResponse < Struct.new(
       :certificate_provider_name,
       :certificate_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2366,7 +2471,8 @@ module Aws::IoT
       :mandatory_parameters,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2381,7 +2487,8 @@ module Aws::IoT
     class CreateCommandResponse < Struct.new(
       :command_id,
       :command_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2421,7 +2528,8 @@ module Aws::IoT
       :metric_type,
       :tags,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,7 +2547,8 @@ module Aws::IoT
     class CreateCustomMetricResponse < Struct.new(
       :metric_name,
       :metric_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2466,7 +2575,8 @@ module Aws::IoT
       :string_values,
       :tags,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2482,7 +2592,8 @@ module Aws::IoT
     class CreateDimensionResponse < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2605,7 +2716,8 @@ module Aws::IoT
       :authentication_type,
       :application_protocol,
       :client_certificate_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2618,7 +2730,8 @@ module Aws::IoT
     class CreateDomainConfigurationResponse < Struct.new(
       :domain_configuration_name,
       :domain_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2655,7 +2768,8 @@ module Aws::IoT
       :query_string,
       :query_version,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2684,7 +2798,8 @@ module Aws::IoT
       :index_name,
       :query_string,
       :query_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2730,7 +2845,8 @@ module Aws::IoT
       :index_name,
       :unit,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2743,7 +2859,8 @@ module Aws::IoT
     class CreateFleetMetricResponse < Struct.new(
       :metric_name,
       :metric_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2859,7 +2976,8 @@ module Aws::IoT
       :document_parameters,
       :scheduling_config,
       :destination_package_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2876,7 +2994,8 @@ module Aws::IoT
       :job_arn,
       :job_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2950,7 +3069,8 @@ module Aws::IoT
       :job_executions_retry_config,
       :maintenance_windows,
       :destination_package_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2963,7 +3083,8 @@ module Aws::IoT
     class CreateJobTemplateResponse < Struct.new(
       :job_template_arn,
       :job_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2974,7 +3095,8 @@ module Aws::IoT
     #   @return [Boolean]
     class CreateKeysAndCertificateRequest < Struct.new(
       :set_as_active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2997,7 +3119,8 @@ module Aws::IoT
       :certificate_id,
       :certificate_pem,
       :key_pair,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3018,7 +3141,8 @@ module Aws::IoT
       :role_arn,
       :action_params,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3031,7 +3155,8 @@ module Aws::IoT
     class CreateMitigationActionResponse < Struct.new(
       :action_arn,
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3098,7 +3223,8 @@ module Aws::IoT
       :role_arn,
       :additional_parameters,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3123,7 +3249,8 @@ module Aws::IoT
       :ota_update_arn,
       :aws_iot_job_arn,
       :ota_update_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3145,7 +3272,8 @@ module Aws::IoT
       :description,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3162,7 +3290,8 @@ module Aws::IoT
       :package_name,
       :package_arn,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3203,7 +3332,8 @@ module Aws::IoT
       :recipe,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3236,7 +3366,8 @@ module Aws::IoT
       :attributes,
       :status,
       :error_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3262,7 +3393,8 @@ module Aws::IoT
       :policy_name,
       :policy_document,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3284,7 +3416,8 @@ module Aws::IoT
       :policy_arn,
       :policy_document,
       :policy_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3305,7 +3438,8 @@ module Aws::IoT
       :policy_name,
       :policy_document,
       :set_as_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3327,7 +3461,8 @@ module Aws::IoT
       :policy_document,
       :policy_version_id,
       :is_default_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3341,7 +3476,8 @@ module Aws::IoT
     #   @return [String]
     class CreateProvisioningClaimRequest < Struct.new(
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3362,7 +3498,8 @@ module Aws::IoT
       :certificate_pem,
       :key_pair,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3412,7 +3549,8 @@ module Aws::IoT
       :pre_provisioning_hook,
       :tags,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3429,7 +3567,8 @@ module Aws::IoT
       :template_arn,
       :template_name,
       :default_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3446,7 +3585,8 @@ module Aws::IoT
       :template_name,
       :template_body,
       :set_as_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3468,7 +3608,8 @@ module Aws::IoT
       :template_name,
       :version_id,
       :is_default_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3504,7 +3645,8 @@ module Aws::IoT
       :role_arn,
       :credential_duration_seconds,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3517,7 +3659,8 @@ module Aws::IoT
     class CreateRoleAliasResponse < Struct.new(
       :role_alias,
       :role_alias_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3565,7 +3708,8 @@ module Aws::IoT
       :target_check_names,
       :scheduled_audit_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3574,7 +3718,8 @@ module Aws::IoT
     #   @return [String]
     class CreateScheduledAuditResponse < Struct.new(
       :scheduled_audit_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3619,7 +3764,8 @@ module Aws::IoT
       :additional_metrics_to_retain_v2,
       :tags,
       :metrics_export_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3632,7 +3778,8 @@ module Aws::IoT
     class CreateSecurityProfileResponse < Struct.new(
       :security_profile_name,
       :security_profile_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3657,7 +3804,8 @@ module Aws::IoT
       :files,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3678,7 +3826,8 @@ module Aws::IoT
       :stream_arn,
       :description,
       :stream_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3699,7 +3848,8 @@ module Aws::IoT
       :parent_group_name,
       :thing_group_properties,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3716,7 +3866,8 @@ module Aws::IoT
       :thing_group_name,
       :thing_group_arn,
       :thing_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3744,7 +3895,8 @@ module Aws::IoT
       :thing_type_name,
       :attribute_payload,
       :billing_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3762,7 +3914,8 @@ module Aws::IoT
       :thing_name,
       :thing_arn,
       :thing_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3782,7 +3935,8 @@ module Aws::IoT
       :thing_type_name,
       :thing_type_properties,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3800,7 +3954,8 @@ module Aws::IoT
       :thing_type_name,
       :thing_type_arn,
       :thing_type_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3809,7 +3964,8 @@ module Aws::IoT
     #   @return [Types::TopicRuleDestinationConfiguration]
     class CreateTopicRuleDestinationRequest < Struct.new(
       :destination_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3818,7 +3974,8 @@ module Aws::IoT
     #   @return [Types::TopicRuleDestination]
     class CreateTopicRuleDestinationResponse < Struct.new(
       :topic_rule_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3843,7 +4000,8 @@ module Aws::IoT
       :rule_name,
       :topic_rule_payload,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3865,7 +4023,8 @@ module Aws::IoT
       :certificate_chain,
       :hash_algorithm,
       :signature_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3874,12 +4033,14 @@ module Aws::IoT
     #   @return [Boolean]
     class DeleteAccountAuditConfigurationRequest < Struct.new(
       :delete_scheduled_audits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountAuditConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3895,12 +4056,14 @@ module Aws::IoT
     class DeleteAuditSuppressionRequest < Struct.new(
       :check_name,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAuditSuppressionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3909,12 +4072,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteAuthorizerRequest < Struct.new(
       :authorizer_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAuthorizerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3930,12 +4095,14 @@ module Aws::IoT
     class DeleteBillingGroupRequest < Struct.new(
       :billing_group_name,
       :expected_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteBillingGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3946,13 +4113,15 @@ module Aws::IoT
     #   @return [String]
     class DeleteCACertificateRequest < Struct.new(
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the DeleteCACertificate operation.</p>
     class DeleteCACertificateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3961,12 +4130,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteCertificateProviderRequest < Struct.new(
       :certificate_provider_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCertificateProviderResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3982,7 +4153,8 @@ module Aws::IoT
     class DeleteCertificateRequest < Struct.new(
       :certificate_id,
       :force_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3997,12 +4169,14 @@ module Aws::IoT
     class DeleteCommandExecutionRequest < Struct.new(
       :execution_id,
       :target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCommandExecutionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4011,7 +4185,8 @@ module Aws::IoT
     #   @return [String]
     class DeleteCommandRequest < Struct.new(
       :command_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4036,7 +4211,8 @@ module Aws::IoT
     #   @return [Integer]
     class DeleteCommandResponse < Struct.new(
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4052,7 +4228,8 @@ module Aws::IoT
     #   @return [String]
     class DeleteConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4063,12 +4240,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteCustomMetricRequest < Struct.new(
       :metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomMetricResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4077,12 +4256,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteDimensionRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDimensionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4091,12 +4272,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDomainConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4109,12 +4292,14 @@ module Aws::IoT
     class DeleteDynamicThingGroupRequest < Struct.new(
       :thing_group_name,
       :expected_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDynamicThingGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4127,7 +4312,8 @@ module Aws::IoT
     class DeleteFleetMetricRequest < Struct.new(
       :metric_name,
       :expected_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4173,7 +4359,8 @@ module Aws::IoT
       :execution_number,
       :force,
       :namespace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4211,7 +4398,8 @@ module Aws::IoT
       :job_id,
       :force,
       :namespace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4220,7 +4408,8 @@ module Aws::IoT
     #   @return [String]
     class DeleteJobTemplateRequest < Struct.new(
       :job_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4229,12 +4418,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteMitigationActionRequest < Struct.new(
       :action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMitigationActionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4253,12 +4444,14 @@ module Aws::IoT
       :ota_update_id,
       :delete_stream,
       :force_delete_aws_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteOTAUpdateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4272,12 +4465,14 @@ module Aws::IoT
     class DeletePackageRequest < Struct.new(
       :package_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePackageResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4295,12 +4490,14 @@ module Aws::IoT
       :package_name,
       :version_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePackageVersionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4310,7 +4507,8 @@ module Aws::IoT
     #   @return [String]
     class DeletePolicyRequest < Struct.new(
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4324,7 +4522,8 @@ module Aws::IoT
     class DeletePolicyVersionRequest < Struct.new(
       :policy_name,
       :policy_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4333,12 +4532,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteProvisioningTemplateRequest < Struct.new(
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProvisioningTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4351,24 +4552,28 @@ module Aws::IoT
     class DeleteProvisioningTemplateVersionRequest < Struct.new(
       :template_name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProvisioningTemplateVersionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DeleteRegistrationCode operation.</p>
     class DeleteRegistrationCodeRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the DeleteRegistrationCode operation.</p>
     class DeleteRegistrationCodeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4377,12 +4582,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteRoleAliasRequest < Struct.new(
       :role_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRoleAliasResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4391,12 +4598,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteScheduledAuditRequest < Struct.new(
       :scheduled_audit_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteScheduledAuditResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4411,12 +4620,14 @@ module Aws::IoT
     class DeleteSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :expected_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSecurityProfileResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4425,12 +4636,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteStreamRequest < Struct.new(
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStreamResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4443,12 +4656,14 @@ module Aws::IoT
     class DeleteThingGroupRequest < Struct.new(
       :thing_group_name,
       :expected_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteThingGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4465,13 +4680,15 @@ module Aws::IoT
     class DeleteThingRequest < Struct.new(
       :thing_name,
       :expected_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output of the DeleteThing operation.</p>
     class DeleteThingResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4481,13 +4698,15 @@ module Aws::IoT
     #   @return [String]
     class DeleteThingTypeRequest < Struct.new(
       :thing_type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the DeleteThingType operation.</p>
     class DeleteThingTypeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4496,12 +4715,14 @@ module Aws::IoT
     #   @return [String]
     class DeleteTopicRuleDestinationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTopicRuleDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4511,7 +4732,8 @@ module Aws::IoT
     #   @return [String]
     class DeleteTopicRuleRequest < Struct.new(
       :rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4525,7 +4747,8 @@ module Aws::IoT
     class DeleteV2LoggingLevelRequest < Struct.new(
       :target_type,
       :target_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4541,7 +4764,8 @@ module Aws::IoT
     class Denied < Struct.new(
       :implicit_deny,
       :explicit_deny,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4556,18 +4780,21 @@ module Aws::IoT
     class DeprecateThingTypeRequest < Struct.new(
       :thing_type_name,
       :undo_deprecate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the DeprecateThingType operation.</p>
     class DeprecateThingTypeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountAuditConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4589,7 +4816,8 @@ module Aws::IoT
       :role_arn,
       :audit_notification_target_configurations,
       :audit_check_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4598,7 +4826,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeAuditFindingRequest < Struct.new(
       :finding_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4607,7 +4836,8 @@ module Aws::IoT
     #   @return [Types::AuditFinding]
     class DescribeAuditFindingResponse < Struct.new(
       :finding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4616,7 +4846,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeAuditMitigationActionsTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4649,7 +4880,8 @@ module Aws::IoT
       :target,
       :audit_check_to_actions_mapping,
       :actions_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4665,7 +4897,8 @@ module Aws::IoT
     class DescribeAuditSuppressionRequest < Struct.new(
       :check_name,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4699,7 +4932,8 @@ module Aws::IoT
       :expiration_date,
       :suppress_indefinitely,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4708,7 +4942,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeAuditTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4738,7 +4973,8 @@ module Aws::IoT
       :task_statistics,
       :scheduled_audit_name,
       :audit_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4747,7 +4983,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeAuthorizerRequest < Struct.new(
       :authorizer_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4756,7 +4993,8 @@ module Aws::IoT
     #   @return [Types::AuthorizerDescription]
     class DescribeAuthorizerResponse < Struct.new(
       :authorizer_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4765,7 +5003,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeBillingGroupRequest < Struct.new(
       :billing_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4794,7 +5033,8 @@ module Aws::IoT
       :version,
       :billing_group_properties,
       :billing_group_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4809,7 +5049,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeCACertificateRequest < Struct.new(
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4823,7 +5064,8 @@ module Aws::IoT
     class DescribeCACertificateResponse < Struct.new(
       :certificate_description,
       :registration_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4832,7 +5074,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeCertificateProviderRequest < Struct.new(
       :certificate_provider_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4862,7 +5105,8 @@ module Aws::IoT
       :account_default_for_operations,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4873,7 +5117,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeCertificateRequest < Struct.new(
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4883,7 +5128,8 @@ module Aws::IoT
     #   @return [Types::CertificateDescription]
     class DescribeCertificateResponse < Struct.new(
       :certificate_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4894,7 +5140,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeCustomMetricRequest < Struct.new(
       :metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4936,12 +5183,14 @@ module Aws::IoT
       :display_name,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeDefaultAuthorizerRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4950,7 +5199,8 @@ module Aws::IoT
     #   @return [Types::AuthorizerDescription]
     class DescribeDefaultAuthorizerResponse < Struct.new(
       :authorizer_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4961,7 +5211,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeDetectMitigationActionsTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4972,7 +5223,8 @@ module Aws::IoT
     #   @return [Types::DetectMitigationActionsTaskSummary]
     class DescribeDetectMitigationActionsTaskResponse < Struct.new(
       :task_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4981,7 +5233,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeDimensionRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5013,7 +5266,8 @@ module Aws::IoT
       :string_values,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5022,7 +5276,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5141,12 +5396,14 @@ module Aws::IoT
       :authentication_type,
       :application_protocol,
       :client_certificate_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeEncryptionConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5173,7 +5430,8 @@ module Aws::IoT
       :kms_access_role_arn,
       :configuration_details,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5212,7 +5470,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeEndpointRequest < Struct.new(
       :endpoint_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5223,12 +5482,14 @@ module Aws::IoT
     #   @return [String]
     class DescribeEndpointResponse < Struct.new(
       :endpoint_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeEventConfigurationsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5245,7 +5506,8 @@ module Aws::IoT
       :event_configurations,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5254,7 +5516,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeFleetMetricRequest < Struct.new(
       :metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5312,7 +5575,8 @@ module Aws::IoT
       :unit,
       :version,
       :metric_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5326,7 +5590,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeIndexRequest < Struct.new(
       :index_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5364,7 +5629,8 @@ module Aws::IoT
       :index_name,
       :index_status,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5382,7 +5648,8 @@ module Aws::IoT
       :job_id,
       :thing_name,
       :execution_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5391,7 +5658,8 @@ module Aws::IoT
     #   @return [Types::JobExecution]
     class DescribeJobExecutionResponse < Struct.new(
       :execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5404,7 +5672,8 @@ module Aws::IoT
     class DescribeJobRequest < Struct.new(
       :job_id,
       :before_substitution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5417,7 +5686,8 @@ module Aws::IoT
     class DescribeJobResponse < Struct.new(
       :document_source,
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5426,7 +5696,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeJobTemplateRequest < Struct.new(
       :job_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5493,7 +5764,8 @@ module Aws::IoT
       :job_executions_retry_config,
       :maintenance_windows,
       :destination_package_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5507,7 +5779,8 @@ module Aws::IoT
     class DescribeManagedJobTemplateRequest < Struct.new(
       :template_name,
       :template_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5547,7 +5820,8 @@ module Aws::IoT
       :environments,
       :document_parameters,
       :document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5556,7 +5830,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeMitigationActionRequest < Struct.new(
       :action_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5593,7 +5868,8 @@ module Aws::IoT
       :action_params,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5602,7 +5878,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeProvisioningTemplateRequest < Struct.new(
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5655,7 +5932,8 @@ module Aws::IoT
       :provisioning_role_arn,
       :pre_provisioning_hook,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5668,7 +5946,8 @@ module Aws::IoT
     class DescribeProvisioningTemplateVersionRequest < Struct.new(
       :template_name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5689,7 +5968,8 @@ module Aws::IoT
       :creation_date,
       :template_body,
       :is_default_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5703,7 +5983,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeRoleAliasRequest < Struct.new(
       :role_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5712,7 +5993,8 @@ module Aws::IoT
     #   @return [Types::RoleAliasDescription]
     class DescribeRoleAliasResponse < Struct.new(
       :role_alias_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5721,7 +6003,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeScheduledAuditRequest < Struct.new(
       :scheduled_audit_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5766,7 +6049,8 @@ module Aws::IoT
       :target_check_names,
       :scheduled_audit_name,
       :scheduled_audit_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5776,7 +6060,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeSecurityProfileRequest < Struct.new(
       :security_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5841,7 +6126,8 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       :metrics_export_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5855,7 +6141,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeStreamRequest < Struct.new(
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5864,7 +6151,8 @@ module Aws::IoT
     #   @return [Types::StreamInfo]
     class DescribeStreamResponse < Struct.new(
       :stream_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5873,7 +6161,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeThingGroupRequest < Struct.new(
       :thing_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5918,7 +6207,8 @@ module Aws::IoT
       :query_string,
       :query_version,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5932,7 +6222,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeThingRegistrationTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5985,7 +6276,8 @@ module Aws::IoT
       :success_count,
       :failure_count,
       :percentage_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6002,7 +6294,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeThingRequest < Struct.new(
       :thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6048,7 +6341,8 @@ module Aws::IoT
       :attributes,
       :version,
       :billing_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6063,7 +6357,8 @@ module Aws::IoT
     #   @return [String]
     class DescribeThingTypeRequest < Struct.new(
       :thing_type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6092,7 +6387,8 @@ module Aws::IoT
       :thing_type_arn,
       :thing_type_properties,
       :thing_type_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6102,7 +6398,8 @@ module Aws::IoT
     #   @return [Types::S3Destination]
     class Destination < Struct.new(
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6115,7 +6412,8 @@ module Aws::IoT
     class DetachPolicyRequest < Struct.new(
       :policy_name,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6130,7 +6428,8 @@ module Aws::IoT
     class DetachPrincipalPolicyRequest < Struct.new(
       :policy_name,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6143,12 +6442,14 @@ module Aws::IoT
     class DetachSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :security_profile_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DetachSecurityProfileResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6164,13 +6465,15 @@ module Aws::IoT
     class DetachThingPrincipalRequest < Struct.new(
       :thing_name,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the DetachThingPrincipal operation.</p>
     class DetachThingPrincipalResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6232,7 +6535,8 @@ module Aws::IoT
       :status,
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6258,7 +6562,8 @@ module Aws::IoT
       :actions_executed,
       :actions_skipped,
       :actions_failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6326,7 +6631,8 @@ module Aws::IoT
       :suppressed_alerts_included,
       :actions_definition,
       :task_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6358,7 +6664,8 @@ module Aws::IoT
       :violation_ids,
       :security_profile_name,
       :behavior_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6368,7 +6675,8 @@ module Aws::IoT
     #   @return [String]
     class DisableTopicRuleRequest < Struct.new(
       :rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6385,12 +6693,14 @@ module Aws::IoT
       :package_name,
       :version_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateSbomFromPackageVersionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6429,7 +6739,8 @@ module Aws::IoT
       :regex,
       :example,
       :optional,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6465,7 +6776,8 @@ module Aws::IoT
       :domain_configuration_name,
       :domain_configuration_arn,
       :service_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6528,7 +6840,8 @@ module Aws::IoT
       :range_key_value,
       :range_key_type,
       :payload_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6551,7 +6864,8 @@ module Aws::IoT
     class DynamoDBv2Action < Struct.new(
       :role_arn,
       :put_item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6569,7 +6883,8 @@ module Aws::IoT
       :policy_name,
       :policy_arn,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6601,7 +6916,8 @@ module Aws::IoT
       :index,
       :type,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6615,7 +6931,8 @@ module Aws::IoT
     class EnableIoTLoggingParams < Struct.new(
       :role_arn_for_logging,
       :log_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6625,7 +6942,8 @@ module Aws::IoT
     #   @return [String]
     class EnableTopicRuleRequest < Struct.new(
       :rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6639,7 +6957,8 @@ module Aws::IoT
     class ErrorInfo < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6649,7 +6968,8 @@ module Aws::IoT
     #   @return [Array<Types::Policy>]
     class ExplicitDeny < Struct.new(
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6671,7 +6991,8 @@ module Aws::IoT
       :base_rate_per_minute,
       :increment_factor,
       :rate_increase_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6685,7 +7006,8 @@ module Aws::IoT
     class Field < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6699,7 +7021,8 @@ module Aws::IoT
     class FileLocation < Struct.new(
       :stream,
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6731,7 +7054,8 @@ module Aws::IoT
       :delivery_stream_name,
       :separator,
       :batch_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6745,7 +7069,8 @@ module Aws::IoT
     class FleetMetricNameAndArn < Struct.new(
       :metric_name,
       :metric_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6763,7 +7088,8 @@ module Aws::IoT
     class GeoLocationTarget < Struct.new(
       :name,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6786,7 +7112,8 @@ module Aws::IoT
       :security_profile_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6803,7 +7130,8 @@ module Aws::IoT
     class GetBehaviorModelTrainingSummariesResponse < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6828,7 +7156,8 @@ module Aws::IoT
       :aggregation_field,
       :query_version,
       :buckets_aggregation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6845,7 +7174,8 @@ module Aws::IoT
     class GetBucketsAggregationResponse < Struct.new(
       :total_count,
       :buckets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6871,7 +7201,8 @@ module Aws::IoT
       :query_string,
       :aggregation_field,
       :query_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6880,7 +7211,8 @@ module Aws::IoT
     #   @return [Integer]
     class GetCardinalityResponse < Struct.new(
       :cardinality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6907,7 +7239,8 @@ module Aws::IoT
       :execution_id,
       :target_arn,
       :include_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6982,7 +7315,8 @@ module Aws::IoT
       :started_at,
       :completed_at,
       :time_to_live,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6992,7 +7326,8 @@ module Aws::IoT
     #   @return [String]
     class GetCommandRequest < Struct.new(
       :command_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7048,7 +7383,8 @@ module Aws::IoT
       :last_updated_at,
       :deprecated,
       :pending_deletion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7065,7 +7401,8 @@ module Aws::IoT
       :principal,
       :cognito_identity_pool_id,
       :thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7074,12 +7411,14 @@ module Aws::IoT
     #   @return [Array<Types::EffectivePolicy>]
     class GetEffectivePoliciesResponse < Struct.new(
       :effective_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetIndexingConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7092,7 +7431,8 @@ module Aws::IoT
     class GetIndexingConfigurationResponse < Struct.new(
       :thing_indexing_configuration,
       :thing_group_indexing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7105,7 +7445,8 @@ module Aws::IoT
     class GetJobDocumentRequest < Struct.new(
       :job_id,
       :before_substitution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7114,13 +7455,15 @@ module Aws::IoT
     #   @return [String]
     class GetJobDocumentResponse < Struct.new(
       :document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the GetLoggingOptions operation.</p>
     class GetLoggingOptionsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7134,7 +7477,8 @@ module Aws::IoT
     class GetLoggingOptionsResponse < Struct.new(
       :role_arn,
       :log_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7143,7 +7487,8 @@ module Aws::IoT
     #   @return [String]
     class GetOTAUpdateRequest < Struct.new(
       :ota_update_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7152,12 +7497,14 @@ module Aws::IoT
     #   @return [Types::OTAUpdateInfo]
     class GetOTAUpdateResponse < Struct.new(
       :ota_update_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetPackageConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7166,7 +7513,8 @@ module Aws::IoT
     #   @return [Types::VersionUpdateByJobsConfig]
     class GetPackageConfigurationResponse < Struct.new(
       :version_update_by_jobs_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7175,7 +7523,8 @@ module Aws::IoT
     #   @return [String]
     class GetPackageRequest < Struct.new(
       :package_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7204,7 +7553,8 @@ module Aws::IoT
       :default_version_name,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7217,7 +7567,8 @@ module Aws::IoT
     class GetPackageVersionRequest < Struct.new(
       :package_name,
       :version_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7276,7 +7627,8 @@ module Aws::IoT
       :sbom,
       :sbom_validation_status,
       :recipe,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7301,7 +7653,8 @@ module Aws::IoT
       :aggregation_field,
       :query_version,
       :percents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7310,7 +7663,8 @@ module Aws::IoT
     #   @return [Array<Types::PercentPair>]
     class GetPercentilesResponse < Struct.new(
       :percentiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7320,7 +7674,8 @@ module Aws::IoT
     #   @return [String]
     class GetPolicyRequest < Struct.new(
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7354,7 +7709,8 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       :generation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7368,7 +7724,8 @@ module Aws::IoT
     class GetPolicyVersionRequest < Struct.new(
       :policy_name,
       :policy_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7406,7 +7763,8 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       :generation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7417,7 +7775,8 @@ module Aws::IoT
 
     # <p>The input to the GetRegistrationCode operation.</p>
     class GetRegistrationCodeRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7427,7 +7786,8 @@ module Aws::IoT
     #   @return [String]
     class GetRegistrationCodeResponse < Struct.new(
       :registration_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7449,7 +7809,8 @@ module Aws::IoT
       :query_string,
       :aggregation_field,
       :query_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7459,7 +7820,8 @@ module Aws::IoT
     #   @return [Types::Statistics]
     class GetStatisticsResponse < Struct.new(
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7468,7 +7830,8 @@ module Aws::IoT
     #   @return [String]
     class GetThingConnectivityDataRequest < Struct.new(
       :thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7489,7 +7852,8 @@ module Aws::IoT
       :connected,
       :timestamp,
       :disconnect_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7498,7 +7862,8 @@ module Aws::IoT
     #   @return [String]
     class GetTopicRuleDestinationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7507,7 +7872,8 @@ module Aws::IoT
     #   @return [Types::TopicRuleDestination]
     class GetTopicRuleDestinationResponse < Struct.new(
       :topic_rule_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7517,7 +7883,8 @@ module Aws::IoT
     #   @return [String]
     class GetTopicRuleRequest < Struct.new(
       :rule_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7531,12 +7898,14 @@ module Aws::IoT
     class GetTopicRuleResponse < Struct.new(
       :rule_arn,
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetV2LoggingOptionsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7553,7 +7922,8 @@ module Aws::IoT
       :role_arn,
       :default_log_level,
       :disable_all_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7572,7 +7942,8 @@ module Aws::IoT
     class GroupNameAndArn < Struct.new(
       :group_name,
       :group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7601,7 +7972,8 @@ module Aws::IoT
       :confirmation_url,
       :headers,
       :auth,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7615,7 +7987,8 @@ module Aws::IoT
     class HttpActionHeader < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7626,7 +7999,8 @@ module Aws::IoT
     #   @return [Types::SigV4Authorization]
     class HttpAuthorization < Struct.new(
       :sigv4,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7640,7 +8014,8 @@ module Aws::IoT
     class HttpContext < Struct.new(
       :headers,
       :query_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7651,7 +8026,8 @@ module Aws::IoT
     #   @return [String]
     class HttpUrlDestinationConfiguration < Struct.new(
       :confirmation_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7661,7 +8037,8 @@ module Aws::IoT
     #   @return [String]
     class HttpUrlDestinationProperties < Struct.new(
       :confirmation_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7672,7 +8049,8 @@ module Aws::IoT
     #   @return [String]
     class HttpUrlDestinationSummary < Struct.new(
       :confirmation_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7684,7 +8062,8 @@ module Aws::IoT
     #   @return [Array<Types::Policy>]
     class ImplicitDeny < Struct.new(
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7694,7 +8073,8 @@ module Aws::IoT
     #   @return [String]
     class IndexNotReadyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7730,7 +8110,8 @@ module Aws::IoT
     class IndexingFilter < Struct.new(
       :named_shadow_names,
       :geo_locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7740,7 +8121,8 @@ module Aws::IoT
     #   @return [String]
     class InternalException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7750,7 +8132,8 @@ module Aws::IoT
     #   @return [String]
     class InternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7760,7 +8143,8 @@ module Aws::IoT
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7769,7 +8153,8 @@ module Aws::IoT
     #   @return [String]
     class InvalidAggregationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7779,7 +8164,8 @@ module Aws::IoT
     #   @return [String]
     class InvalidQueryException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7789,7 +8175,8 @@ module Aws::IoT
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7799,7 +8186,8 @@ module Aws::IoT
     #   @return [String]
     class InvalidResponseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7811,7 +8199,8 @@ module Aws::IoT
     #   @return [String]
     class InvalidStateTransitionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7841,7 +8230,8 @@ module Aws::IoT
       :channel_name,
       :batch_mode,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7877,7 +8267,8 @@ module Aws::IoT
       :message_id,
       :batch_mode,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7893,7 +8284,8 @@ module Aws::IoT
     class IotSiteWiseAction < Struct.new(
       :put_asset_property_value_entries,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7911,7 +8303,8 @@ module Aws::IoT
       :issuer_certificate_subject,
       :issuer_id,
       :issuer_certificate_serial_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8059,7 +8452,8 @@ module Aws::IoT
       :scheduling_config,
       :scheduled_job_rollouts,
       :destination_package_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8121,7 +8515,8 @@ module Aws::IoT
       :execution_number,
       :version_number,
       :approximate_seconds_before_timed_out,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8136,7 +8531,8 @@ module Aws::IoT
     #   @return [Hash<String, String>]
     class JobExecutionStatusDetails < Struct.new(
       :details_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8170,7 +8566,8 @@ module Aws::IoT
       :last_updated_at,
       :execution_number,
       :retry_attempt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8185,7 +8582,8 @@ module Aws::IoT
     class JobExecutionSummaryForJob < Struct.new(
       :thing_arn,
       :job_execution_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8199,7 +8597,8 @@ module Aws::IoT
     class JobExecutionSummaryForThing < Struct.new(
       :job_id,
       :job_execution_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8211,7 +8610,8 @@ module Aws::IoT
     #   @return [Array<Types::RetryCriteria>]
     class JobExecutionsRetryConfig < Struct.new(
       :criteria_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8227,7 +8627,8 @@ module Aws::IoT
     class JobExecutionsRolloutConfig < Struct.new(
       :maximum_per_minute,
       :exponential_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8273,7 +8674,8 @@ module Aws::IoT
       :number_of_in_progress_things,
       :number_of_removed_things,
       :number_of_timed_out_things,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8325,7 +8727,8 @@ module Aws::IoT
       :last_updated_at,
       :completed_at,
       :is_concurrent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8347,7 +8750,8 @@ module Aws::IoT
       :job_template_id,
       :description,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8377,7 +8781,8 @@ module Aws::IoT
       :partition,
       :client_properties,
       :headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8395,7 +8800,8 @@ module Aws::IoT
     class KafkaActionHeader < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8409,7 +8815,8 @@ module Aws::IoT
     class KeyPair < Struct.new(
       :public_key,
       :private_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8427,7 +8834,8 @@ module Aws::IoT
       :role_arn,
       :stream_name,
       :partition_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8437,7 +8845,8 @@ module Aws::IoT
     #   @return [String]
     class LambdaAction < Struct.new(
       :function_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8447,7 +8856,8 @@ module Aws::IoT
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8484,7 +8894,8 @@ module Aws::IoT
       :verification_state,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8498,7 +8909,8 @@ module Aws::IoT
     class ListActiveViolationsResponse < Struct.new(
       :active_violations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8519,7 +8931,8 @@ module Aws::IoT
       :recursive,
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8533,7 +8946,8 @@ module Aws::IoT
     class ListAttachedPoliciesResponse < Struct.new(
       :policies,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8575,7 +8989,8 @@ module Aws::IoT
       :start_time,
       :end_time,
       :list_suppressed_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8589,7 +9004,8 @@ module Aws::IoT
     class ListAuditFindingsResponse < Struct.new(
       :findings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8614,7 +9030,8 @@ module Aws::IoT
       :finding_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8627,7 +9044,8 @@ module Aws::IoT
     class ListAuditMitigationActionsExecutionsResponse < Struct.new(
       :actions_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8660,7 +9078,8 @@ module Aws::IoT
       :next_token,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8673,7 +9092,8 @@ module Aws::IoT
     class ListAuditMitigationActionsTasksResponse < Struct.new(
       :tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8707,7 +9127,8 @@ module Aws::IoT
       :ascending_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8724,7 +9145,8 @@ module Aws::IoT
     class ListAuditSuppressionsResponse < Struct.new(
       :suppressions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8757,7 +9179,8 @@ module Aws::IoT
       :task_status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8771,7 +9194,8 @@ module Aws::IoT
     class ListAuditTasksResponse < Struct.new(
       :tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8792,7 +9216,8 @@ module Aws::IoT
       :marker,
       :ascending_order,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8805,7 +9230,8 @@ module Aws::IoT
     class ListAuthorizersResponse < Struct.new(
       :authorizers,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8824,7 +9250,8 @@ module Aws::IoT
       :next_token,
       :max_results,
       :name_prefix_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8837,7 +9264,8 @@ module Aws::IoT
     class ListBillingGroupsResponse < Struct.new(
       :billing_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8859,7 +9287,8 @@ module Aws::IoT
       :marker,
       :ascending_order,
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8873,7 +9302,8 @@ module Aws::IoT
     class ListCACertificatesResponse < Struct.new(
       :certificates,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8886,7 +9316,8 @@ module Aws::IoT
     class ListCertificateProvidersRequest < Struct.new(
       :next_token,
       :ascending_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8899,7 +9330,8 @@ module Aws::IoT
     class ListCertificateProvidersResponse < Struct.new(
       :certificate_providers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8923,7 +9355,8 @@ module Aws::IoT
       :page_size,
       :marker,
       :ascending_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8938,7 +9371,8 @@ module Aws::IoT
     class ListCertificatesByCAResponse < Struct.new(
       :certificates,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8957,7 +9391,8 @@ module Aws::IoT
       :page_size,
       :marker,
       :ascending_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8972,7 +9407,8 @@ module Aws::IoT
     class ListCertificatesResponse < Struct.new(
       :certificates,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9026,7 +9462,8 @@ module Aws::IoT
       :completed_time_filter,
       :target_arn,
       :command_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9040,7 +9477,8 @@ module Aws::IoT
     class ListCommandExecutionsResponse < Struct.new(
       :command_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9074,7 +9512,8 @@ module Aws::IoT
       :namespace,
       :command_parameter_name,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9088,7 +9527,8 @@ module Aws::IoT
     class ListCommandsResponse < Struct.new(
       :commands,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9105,7 +9545,8 @@ module Aws::IoT
     class ListCustomMetricsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9123,7 +9564,8 @@ module Aws::IoT
     class ListCustomMetricsResponse < Struct.new(
       :metric_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9171,7 +9613,8 @@ module Aws::IoT
       :end_time,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9188,7 +9631,8 @@ module Aws::IoT
     class ListDetectMitigationActionsExecutionsResponse < Struct.new(
       :actions_executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9216,7 +9660,8 @@ module Aws::IoT
       :next_token,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9233,7 +9678,8 @@ module Aws::IoT
     class ListDetectMitigationActionsTasksResponse < Struct.new(
       :tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9246,7 +9692,8 @@ module Aws::IoT
     class ListDimensionsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9259,7 +9706,8 @@ module Aws::IoT
     class ListDimensionsResponse < Struct.new(
       :dimension_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9276,7 +9724,8 @@ module Aws::IoT
       :marker,
       :page_size,
       :service_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9289,7 +9738,8 @@ module Aws::IoT
     class ListDomainConfigurationsResponse < Struct.new(
       :domain_configurations,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9303,7 +9753,8 @@ module Aws::IoT
     class ListFleetMetricsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9317,7 +9768,8 @@ module Aws::IoT
     class ListFleetMetricsResponse < Struct.new(
       :fleet_metrics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9331,7 +9783,8 @@ module Aws::IoT
     class ListIndicesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9345,7 +9798,8 @@ module Aws::IoT
     class ListIndicesResponse < Struct.new(
       :index_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9366,7 +9820,8 @@ module Aws::IoT
       :status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9380,7 +9835,8 @@ module Aws::IoT
     class ListJobExecutionsForJobResponse < Struct.new(
       :execution_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9420,7 +9876,8 @@ module Aws::IoT
       :max_results,
       :next_token,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9434,7 +9891,8 @@ module Aws::IoT
     class ListJobExecutionsForThingResponse < Struct.new(
       :execution_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9447,7 +9905,8 @@ module Aws::IoT
     class ListJobTemplatesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9461,7 +9920,8 @@ module Aws::IoT
     class ListJobTemplatesResponse < Struct.new(
       :job_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9514,7 +9974,8 @@ module Aws::IoT
       :thing_group_name,
       :thing_group_id,
       :namespace_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9528,7 +9989,8 @@ module Aws::IoT
     class ListJobsResponse < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9546,7 +10008,8 @@ module Aws::IoT
       :template_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9559,7 +10022,8 @@ module Aws::IoT
     class ListManagedJobTemplatesResponse < Struct.new(
       :managed_job_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9596,7 +10060,8 @@ module Aws::IoT
       :end_time,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9610,7 +10075,8 @@ module Aws::IoT
     class ListMetricValuesResponse < Struct.new(
       :metric_datum_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9627,7 +10093,8 @@ module Aws::IoT
       :action_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9640,7 +10107,8 @@ module Aws::IoT
     class ListMitigationActionsResponse < Struct.new(
       :action_identifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9657,7 +10125,8 @@ module Aws::IoT
       :max_results,
       :next_token,
       :ota_update_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9670,7 +10139,8 @@ module Aws::IoT
     class ListOTAUpdatesResponse < Struct.new(
       :ota_updates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9689,7 +10159,8 @@ module Aws::IoT
       :page_size,
       :marker,
       :ascending_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9703,7 +10174,8 @@ module Aws::IoT
     class ListOutgoingCertificatesResponse < Struct.new(
       :outgoing_certificates,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9724,7 +10196,8 @@ module Aws::IoT
       :status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9737,7 +10210,8 @@ module Aws::IoT
     class ListPackageVersionsResponse < Struct.new(
       :package_version_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9750,7 +10224,8 @@ module Aws::IoT
     class ListPackagesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9763,7 +10238,8 @@ module Aws::IoT
     class ListPackagesResponse < Struct.new(
       :package_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9782,7 +10258,8 @@ module Aws::IoT
       :marker,
       :page_size,
       :ascending_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9797,7 +10274,8 @@ module Aws::IoT
     class ListPoliciesResponse < Struct.new(
       :policies,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9820,7 +10298,8 @@ module Aws::IoT
       :marker,
       :page_size,
       :ascending_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9835,7 +10314,8 @@ module Aws::IoT
     class ListPolicyPrincipalsResponse < Struct.new(
       :principals,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9845,7 +10325,8 @@ module Aws::IoT
     #   @return [String]
     class ListPolicyVersionsRequest < Struct.new(
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9855,7 +10336,8 @@ module Aws::IoT
     #   @return [Array<Types::PolicyVersion>]
     class ListPolicyVersionsResponse < Struct.new(
       :policy_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9878,7 +10360,8 @@ module Aws::IoT
       :marker,
       :page_size,
       :ascending_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9893,7 +10376,8 @@ module Aws::IoT
     class ListPrincipalPoliciesResponse < Struct.new(
       :policies,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9913,7 +10397,8 @@ module Aws::IoT
       :next_token,
       :max_results,
       :principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9927,7 +10412,8 @@ module Aws::IoT
     class ListPrincipalThingsResponse < Struct.new(
       :things,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9967,7 +10453,8 @@ module Aws::IoT
       :max_results,
       :principal,
       :thing_principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9980,7 +10467,8 @@ module Aws::IoT
     class ListPrincipalThingsV2Response < Struct.new(
       :principal_thing_objects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9997,7 +10485,8 @@ module Aws::IoT
       :template_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10010,7 +10499,8 @@ module Aws::IoT
     class ListProvisioningTemplateVersionsResponse < Struct.new(
       :versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10023,7 +10513,8 @@ module Aws::IoT
     class ListProvisioningTemplatesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10036,7 +10527,8 @@ module Aws::IoT
     class ListProvisioningTemplatesResponse < Struct.new(
       :templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10054,7 +10546,8 @@ module Aws::IoT
       :finding_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10068,7 +10561,8 @@ module Aws::IoT
     class ListRelatedResourcesForAuditFindingResponse < Struct.new(
       :related_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10085,7 +10579,8 @@ module Aws::IoT
       :page_size,
       :marker,
       :ascending_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10098,7 +10593,8 @@ module Aws::IoT
     class ListRoleAliasesResponse < Struct.new(
       :role_aliases,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10123,7 +10619,8 @@ module Aws::IoT
       :validation_result,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10136,7 +10633,8 @@ module Aws::IoT
     class ListSbomValidationResultsResponse < Struct.new(
       :validation_result_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10149,7 +10647,8 @@ module Aws::IoT
     class ListScheduledAuditsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10163,7 +10662,8 @@ module Aws::IoT
     class ListScheduledAuditsResponse < Struct.new(
       :scheduled_audits,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10184,7 +10684,8 @@ module Aws::IoT
       :max_results,
       :recursive,
       :security_profile_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10198,7 +10699,8 @@ module Aws::IoT
     class ListSecurityProfilesForTargetResponse < Struct.new(
       :security_profile_target_mappings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10222,7 +10724,8 @@ module Aws::IoT
       :max_results,
       :dimension_name,
       :metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10236,7 +10739,8 @@ module Aws::IoT
     class ListSecurityProfilesResponse < Struct.new(
       :security_profile_identifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10253,7 +10757,8 @@ module Aws::IoT
       :max_results,
       :next_token,
       :ascending_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10266,7 +10771,8 @@ module Aws::IoT
     class ListStreamsResponse < Struct.new(
       :streams,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10281,7 +10787,8 @@ module Aws::IoT
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10294,7 +10801,8 @@ module Aws::IoT
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10311,7 +10819,8 @@ module Aws::IoT
       :policy_name,
       :marker,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10324,7 +10833,8 @@ module Aws::IoT
     class ListTargetsForPolicyResponse < Struct.new(
       :targets,
       :next_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10341,7 +10851,8 @@ module Aws::IoT
       :security_profile_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10355,7 +10866,8 @@ module Aws::IoT
     class ListTargetsForSecurityProfileResponse < Struct.new(
       :security_profile_targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10374,7 +10886,8 @@ module Aws::IoT
       :thing_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10387,7 +10900,8 @@ module Aws::IoT
     class ListThingGroupsForThingResponse < Struct.new(
       :thing_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10414,7 +10928,8 @@ module Aws::IoT
       :parent_group,
       :name_prefix_filter,
       :recursive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10427,7 +10942,8 @@ module Aws::IoT
     class ListThingGroupsResponse < Struct.new(
       :thing_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10447,7 +10963,8 @@ module Aws::IoT
       :next_token,
       :max_results,
       :thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10461,7 +10978,8 @@ module Aws::IoT
     class ListThingPrincipalsResponse < Struct.new(
       :principals,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10501,7 +11019,8 @@ module Aws::IoT
       :max_results,
       :thing_name,
       :thing_principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10515,7 +11034,8 @@ module Aws::IoT
     class ListThingPrincipalsV2Response < Struct.new(
       :thing_principal_objects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10538,7 +11058,8 @@ module Aws::IoT
       :report_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10555,7 +11076,8 @@ module Aws::IoT
       :resource_links,
       :report_type,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10574,7 +11096,8 @@ module Aws::IoT
       :next_token,
       :max_results,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10587,7 +11110,8 @@ module Aws::IoT
     class ListThingRegistrationTasksResponse < Struct.new(
       :task_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10607,7 +11131,8 @@ module Aws::IoT
       :next_token,
       :max_results,
       :thing_type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10621,7 +11146,8 @@ module Aws::IoT
     class ListThingTypesResponse < Struct.new(
       :thing_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10640,7 +11166,8 @@ module Aws::IoT
       :billing_group_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10653,7 +11180,8 @@ module Aws::IoT
     class ListThingsInBillingGroupResponse < Struct.new(
       :things,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10677,7 +11205,8 @@ module Aws::IoT
       :recursive,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10690,7 +11219,8 @@ module Aws::IoT
     class ListThingsInThingGroupResponse < Struct.new(
       :things,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10726,7 +11256,8 @@ module Aws::IoT
       :attribute_value,
       :thing_type_name,
       :use_prefix_attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10740,7 +11271,8 @@ module Aws::IoT
     class ListThingsResponse < Struct.new(
       :things,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10755,7 +11287,8 @@ module Aws::IoT
     class ListTopicRuleDestinationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10768,7 +11301,8 @@ module Aws::IoT
     class ListTopicRuleDestinationsResponse < Struct.new(
       :destination_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10792,7 +11326,8 @@ module Aws::IoT
       :max_results,
       :next_token,
       :rule_disabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10806,7 +11341,8 @@ module Aws::IoT
     class ListTopicRulesResponse < Struct.new(
       :rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10826,7 +11362,8 @@ module Aws::IoT
       :target_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10839,7 +11376,8 @@ module Aws::IoT
     class ListV2LoggingLevelsResponse < Struct.new(
       :log_target_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10884,7 +11422,8 @@ module Aws::IoT
       :verification_state,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10899,7 +11438,8 @@ module Aws::IoT
     class ListViolationEventsResponse < Struct.new(
       :violation_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10933,7 +11473,8 @@ module Aws::IoT
       :timestamp,
       :latitude,
       :longitude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10952,7 +11493,8 @@ module Aws::IoT
     class LocationTimestamp < Struct.new(
       :value,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10966,7 +11508,8 @@ module Aws::IoT
     class LogTarget < Struct.new(
       :target_type,
       :target_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10980,7 +11523,8 @@ module Aws::IoT
     class LogTargetConfiguration < Struct.new(
       :log_target,
       :log_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10994,7 +11538,8 @@ module Aws::IoT
     class LoggingOptionsPayload < Struct.new(
       :role_arn,
       :log_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11008,7 +11553,8 @@ module Aws::IoT
     #   @return [String]
     class MachineLearningDetectionConfig < Struct.new(
       :confidence_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11024,7 +11570,8 @@ module Aws::IoT
     class MaintenanceWindow < Struct.new(
       :start_time,
       :duration_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11034,7 +11581,8 @@ module Aws::IoT
     #   @return [String]
     class MalformedPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11060,7 +11608,8 @@ module Aws::IoT
       :description,
       :environments,
       :template_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11074,7 +11623,8 @@ module Aws::IoT
     class MetricDatum < Struct.new(
       :timestamp,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11088,7 +11638,8 @@ module Aws::IoT
     class MetricDimension < Struct.new(
       :dimension_name,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11106,7 +11657,8 @@ module Aws::IoT
       :metric,
       :metric_dimension,
       :export_metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11145,7 +11697,8 @@ module Aws::IoT
       :number,
       :numbers,
       :strings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11161,7 +11714,8 @@ module Aws::IoT
     class MetricsExportConfig < Struct.new(
       :mqtt_topic,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11183,7 +11737,8 @@ module Aws::IoT
       :id,
       :role_arn,
       :action_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11201,7 +11756,8 @@ module Aws::IoT
       :action_name,
       :action_arn,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11231,7 +11787,8 @@ module Aws::IoT
       :replace_default_policy_version_params,
       :enable_io_t_logging_params,
       :publish_finding_to_sns_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11241,7 +11798,8 @@ module Aws::IoT
     #   @return [Array<Types::PropagatingAttribute>]
     class Mqtt5Configuration < Struct.new(
       :propagating_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11259,7 +11817,8 @@ module Aws::IoT
       :username,
       :password,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11322,7 +11881,8 @@ module Aws::IoT
       :correlation_data,
       :message_expiry,
       :user_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11340,7 +11900,8 @@ module Aws::IoT
       :resource_type,
       :resource_identifier,
       :additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11350,7 +11911,8 @@ module Aws::IoT
     #   @return [String]
     class NotConfiguredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11381,7 +11943,8 @@ module Aws::IoT
       :file_location,
       :code_signing,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11457,7 +12020,8 @@ module Aws::IoT
       :aws_iot_job_arn,
       :error_info,
       :additional_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11475,7 +12039,8 @@ module Aws::IoT
       :ota_update_id,
       :ota_update_arn,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11502,7 +12067,8 @@ module Aws::IoT
       :index,
       :type,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11532,7 +12098,8 @@ module Aws::IoT
       :transfer_date,
       :transfer_message,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11554,7 +12121,8 @@ module Aws::IoT
       :default_version_name,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11564,7 +12132,8 @@ module Aws::IoT
     #   @return [Types::S3Location]
     class PackageVersionArtifact < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11590,7 +12159,8 @@ module Aws::IoT
       :status,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11604,7 +12174,8 @@ module Aws::IoT
     class PercentPair < Struct.new(
       :percent,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11624,7 +12195,8 @@ module Aws::IoT
     class Policy < Struct.new(
       :policy_name,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11642,7 +12214,8 @@ module Aws::IoT
       :version_id,
       :is_default_version,
       :create_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11661,7 +12234,8 @@ module Aws::IoT
     class PolicyVersionIdentifier < Struct.new(
       :policy_name,
       :policy_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11683,7 +12257,8 @@ module Aws::IoT
     class PresignedUrlConfig < Struct.new(
       :role_arn,
       :expires_in_sec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11712,7 +12287,8 @@ module Aws::IoT
     class PrincipalThingObject < Struct.new(
       :thing_name,
       :thing_principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11730,7 +12306,8 @@ module Aws::IoT
       :user_property_key,
       :thing_attribute,
       :connection_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11749,7 +12326,8 @@ module Aws::IoT
     class ProvisioningHook < Struct.new(
       :payload_version,
       :target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11786,7 +12364,8 @@ module Aws::IoT
       :last_modified_date,
       :enabled,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11805,7 +12384,8 @@ module Aws::IoT
       :version_id,
       :creation_date,
       :is_default_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11820,7 +12400,8 @@ module Aws::IoT
     #   @return [String]
     class PublishFindingToSnsParams < Struct.new(
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11855,7 +12436,8 @@ module Aws::IoT
       :property_id,
       :property_alias,
       :property_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11866,7 +12448,8 @@ module Aws::IoT
     #   @return [String]
     class PutItemInput < Struct.new(
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11883,12 +12466,14 @@ module Aws::IoT
       :violation_id,
       :verification_state,
       :verification_state_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutVerificationStateOnViolationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11905,7 +12490,8 @@ module Aws::IoT
     class RateIncreaseCriteria < Struct.new(
       :number_of_notified_things,
       :number_of_succeeded_things,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11960,7 +12546,8 @@ module Aws::IoT
       :registration_config,
       :tags,
       :certificate_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11974,7 +12561,8 @@ module Aws::IoT
     class RegisterCACertificateResponse < Struct.new(
       :certificate_arn,
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12000,7 +12588,8 @@ module Aws::IoT
       :ca_certificate_pem,
       :set_as_active,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12014,7 +12603,8 @@ module Aws::IoT
     class RegisterCertificateResponse < Struct.new(
       :certificate_arn,
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12027,7 +12617,8 @@ module Aws::IoT
     class RegisterCertificateWithoutCARequest < Struct.new(
       :certificate_pem,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12041,7 +12632,8 @@ module Aws::IoT
     class RegisterCertificateWithoutCAResponse < Struct.new(
       :certificate_arn,
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12054,7 +12646,8 @@ module Aws::IoT
     class RegisterThingRequest < Struct.new(
       :template_body,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12067,7 +12660,8 @@ module Aws::IoT
     class RegisterThingResponse < Struct.new(
       :certificate_pem,
       :resource_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12077,7 +12671,8 @@ module Aws::IoT
     #   @return [String]
     class RegistrationCodeValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12095,7 +12690,8 @@ module Aws::IoT
       :template_body,
       :role_arn,
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12110,7 +12706,8 @@ module Aws::IoT
     class RejectCertificateTransferRequest < Struct.new(
       :certificate_id,
       :reject_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12128,7 +12725,8 @@ module Aws::IoT
       :resource_type,
       :resource_identifier,
       :additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12149,12 +12747,14 @@ module Aws::IoT
       :billing_group_arn,
       :thing_name,
       :thing_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveThingFromBillingGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12175,12 +12775,14 @@ module Aws::IoT
       :thing_group_arn,
       :thing_name,
       :thing_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveThingFromThingGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12190,7 +12792,8 @@ module Aws::IoT
     #   @return [String]
     class ReplaceDefaultPolicyVersionParams < Struct.new(
       :template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12204,7 +12807,8 @@ module Aws::IoT
     class ReplaceTopicRuleRequest < Struct.new(
       :rule_name,
       :topic_rule_payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12228,7 +12832,8 @@ module Aws::IoT
       :topic,
       :qos,
       :headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12246,7 +12851,8 @@ module Aws::IoT
       :message,
       :resource_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12292,7 +12898,8 @@ module Aws::IoT
       :role_alias_arn,
       :issuer_certificate_identifier,
       :device_certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12302,7 +12909,8 @@ module Aws::IoT
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12312,7 +12920,8 @@ module Aws::IoT
     #   @return [String]
     class ResourceRegistrationFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12327,7 +12936,8 @@ module Aws::IoT
     class RetryCriteria < Struct.new(
       :failure_type,
       :number_of_retries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12361,7 +12971,8 @@ module Aws::IoT
       :credential_duration_seconds,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12384,7 +12995,8 @@ module Aws::IoT
       :bucket_name,
       :key,
       :canned_acl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12398,7 +13010,8 @@ module Aws::IoT
     class S3Destination < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12416,7 +13029,8 @@ module Aws::IoT
       :bucket,
       :key,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12434,7 +13048,8 @@ module Aws::IoT
     class SalesforceAction < Struct.new(
       :token,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12445,7 +13060,8 @@ module Aws::IoT
     #   @return [Types::S3Location]
     class Sbom < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12469,7 +13085,8 @@ module Aws::IoT
       :validation_result,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12499,7 +13116,8 @@ module Aws::IoT
       :frequency,
       :day_of_month,
       :day_of_week,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12509,7 +13127,8 @@ module Aws::IoT
     #   @return [String]
     class ScheduledJobRollout < Struct.new(
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12551,7 +13170,8 @@ module Aws::IoT
       :end_time,
       :end_behavior,
       :maintenance_windows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12583,7 +13203,8 @@ module Aws::IoT
       :next_token,
       :max_results,
       :query_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12601,7 +13222,8 @@ module Aws::IoT
       :next_token,
       :things,
       :thing_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12615,7 +13237,8 @@ module Aws::IoT
     class SecurityProfileIdentifier < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12626,7 +13249,8 @@ module Aws::IoT
     #   @return [String]
     class SecurityProfileTarget < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12640,7 +13264,8 @@ module Aws::IoT
     class SecurityProfileTargetMapping < Struct.new(
       :security_profile_identifier,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12673,7 +13298,8 @@ module Aws::IoT
       :enable_ocsp_check,
       :ocsp_lambda_arn,
       :ocsp_authorized_responder_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12691,7 +13317,8 @@ module Aws::IoT
       :server_certificate_arn,
       :server_certificate_status,
       :server_certificate_status_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12700,7 +13327,8 @@ module Aws::IoT
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12710,7 +13338,8 @@ module Aws::IoT
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12719,7 +13348,8 @@ module Aws::IoT
     #   @return [String]
     class SetDefaultAuthorizerRequest < Struct.new(
       :authorizer_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12732,7 +13362,8 @@ module Aws::IoT
     class SetDefaultAuthorizerResponse < Struct.new(
       :authorizer_name,
       :authorizer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12746,7 +13377,8 @@ module Aws::IoT
     class SetDefaultPolicyVersionRequest < Struct.new(
       :policy_name,
       :policy_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12756,7 +13388,8 @@ module Aws::IoT
     #   @return [Types::LoggingOptionsPayload]
     class SetLoggingOptionsRequest < Struct.new(
       :logging_options_payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12769,7 +13402,8 @@ module Aws::IoT
     class SetV2LoggingLevelRequest < Struct.new(
       :log_target,
       :log_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12786,7 +13420,8 @@ module Aws::IoT
       :role_arn,
       :default_log_level,
       :disable_all_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12804,7 +13439,8 @@ module Aws::IoT
       :signing_region,
       :service_name,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12822,7 +13458,8 @@ module Aws::IoT
       :certificate_arn,
       :platform,
       :certificate_path_on_device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12843,7 +13480,8 @@ module Aws::IoT
       :target_arn,
       :role_arn,
       :message_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12853,7 +13491,8 @@ module Aws::IoT
     #   @return [String]
     class SqlParseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12871,7 +13510,8 @@ module Aws::IoT
       :role_arn,
       :queue_url,
       :use_base64,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12895,7 +13535,8 @@ module Aws::IoT
       :target,
       :audit_check_to_actions_mapping,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12904,7 +13545,8 @@ module Aws::IoT
     #   @return [String]
     class StartAuditMitigationActionsTaskResponse < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12951,7 +13593,8 @@ module Aws::IoT
       :include_only_active_violations,
       :include_suppressed_alerts,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12962,7 +13605,8 @@ module Aws::IoT
     #   @return [String]
     class StartDetectMitigationActionsTaskResponse < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12974,7 +13618,8 @@ module Aws::IoT
     #   @return [Array<String>]
     class StartOnDemandAuditTaskRequest < Struct.new(
       :target_check_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12983,7 +13628,8 @@ module Aws::IoT
     #   @return [String]
     class StartOnDemandAuditTaskResponse < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13001,7 +13647,8 @@ module Aws::IoT
       :signing_profile_parameter,
       :signing_profile_name,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13024,7 +13671,8 @@ module Aws::IoT
       :input_file_bucket,
       :input_file_key,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13033,7 +13681,8 @@ module Aws::IoT
     #   @return [String]
     class StartThingRegistrationTaskResponse < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13052,7 +13701,8 @@ module Aws::IoT
     #   @return [String]
     class StatisticalThreshold < Struct.new(
       :statistic,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13092,7 +13742,8 @@ module Aws::IoT
       :sum_of_squares,
       :variance,
       :std_deviation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13120,7 +13771,8 @@ module Aws::IoT
     class StatusReason < Struct.new(
       :reason_code,
       :reason_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13141,7 +13793,8 @@ module Aws::IoT
       :execution_name_prefix,
       :state_machine_name,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13150,12 +13803,14 @@ module Aws::IoT
     #   @return [String]
     class StopThingRegistrationTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopThingRegistrationTaskResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13169,7 +13824,8 @@ module Aws::IoT
     class Stream < Struct.new(
       :stream_id,
       :file_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13183,7 +13839,8 @@ module Aws::IoT
     class StreamFile < Struct.new(
       :file_id,
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13221,7 +13878,8 @@ module Aws::IoT
       :created_at,
       :last_updated_at,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13243,7 +13901,8 @@ module Aws::IoT
       :stream_arn,
       :stream_version,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13257,7 +13916,8 @@ module Aws::IoT
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13270,12 +13930,14 @@ module Aws::IoT
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13286,7 +13948,8 @@ module Aws::IoT
     #   @return [String]
     class TaskAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13320,7 +13983,8 @@ module Aws::IoT
       :non_compliant_checks,
       :failed_checks,
       :canceled_checks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13346,7 +14010,8 @@ module Aws::IoT
       :succeeded_findings_count,
       :skipped_findings_count,
       :canceled_findings_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13356,7 +14021,8 @@ module Aws::IoT
     #   @return [Integer]
     class TermsAggregation < Struct.new(
       :max_buckets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13388,7 +14054,8 @@ module Aws::IoT
       :client_id,
       :policy_names_to_add,
       :policy_names_to_skip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13397,7 +14064,8 @@ module Aws::IoT
     #   @return [Array<Types::AuthResult>]
     class TestAuthorizationResponse < Struct.new(
       :auth_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13427,7 +14095,8 @@ module Aws::IoT
       :http_context,
       :mqtt_context,
       :tls_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13452,7 +14121,8 @@ module Aws::IoT
       :policy_documents,
       :refresh_after_in_seconds,
       :disconnect_after_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13479,7 +14149,8 @@ module Aws::IoT
       :thing_arn,
       :attributes,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13504,7 +14175,8 @@ module Aws::IoT
       :connected,
       :timestamp,
       :disconnect_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13545,7 +14217,8 @@ module Aws::IoT
       :shadow,
       :device_defender,
       :connectivity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13571,7 +14244,8 @@ module Aws::IoT
       :thing_group_description,
       :attributes,
       :parent_group_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13595,7 +14269,8 @@ module Aws::IoT
       :thing_group_indexing_mode,
       :managed_fields,
       :custom_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13613,7 +14288,8 @@ module Aws::IoT
       :parent_group_name,
       :root_to_parent_thing_groups,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13627,7 +14303,8 @@ module Aws::IoT
     class ThingGroupProperties < Struct.new(
       :thing_group_description,
       :attribute_payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13727,7 +14404,8 @@ module Aws::IoT
       :managed_fields,
       :custom_fields,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13756,7 +14434,8 @@ module Aws::IoT
     class ThingPrincipalObject < Struct.new(
       :principal,
       :thing_principal_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13780,7 +14459,8 @@ module Aws::IoT
       :thing_type_arn,
       :thing_type_properties,
       :thing_type_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13801,7 +14481,8 @@ module Aws::IoT
       :deprecated,
       :deprecation_date,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13825,7 +14506,8 @@ module Aws::IoT
       :thing_type_description,
       :searchable_attributes,
       :mqtt5_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13835,7 +14517,8 @@ module Aws::IoT
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13852,7 +14535,8 @@ module Aws::IoT
     class TimeFilter < Struct.new(
       :after,
       :before,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13870,7 +14554,8 @@ module Aws::IoT
     #   @return [Integer]
     class TimeoutConfig < Struct.new(
       :in_progress_timeout_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13905,7 +14590,8 @@ module Aws::IoT
       :table_name,
       :dimensions,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13926,7 +14612,8 @@ module Aws::IoT
     class TimestreamDimension < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13945,7 +14632,8 @@ module Aws::IoT
     class TimestreamTimestamp < Struct.new(
       :value,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13957,7 +14645,8 @@ module Aws::IoT
     #   @return [String]
     class TlsConfig < Struct.new(
       :security_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13967,7 +14656,8 @@ module Aws::IoT
     #   @return [String]
     class TlsContext < Struct.new(
       :server_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14006,7 +14696,8 @@ module Aws::IoT
       :rule_disabled,
       :aws_iot_sql_version,
       :error_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14072,7 +14763,8 @@ module Aws::IoT
       :status_reason,
       :http_url_properties,
       :vpc_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14086,7 +14778,8 @@ module Aws::IoT
     class TopicRuleDestinationConfiguration < Struct.new(
       :http_url_configuration,
       :vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14151,7 +14844,8 @@ module Aws::IoT
       :status_reason,
       :http_url_summary,
       :vpc_destination_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14177,7 +14871,8 @@ module Aws::IoT
       :topic_pattern,
       :created_at,
       :rule_disabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14208,7 +14903,8 @@ module Aws::IoT
       :rule_disabled,
       :aws_iot_sql_version,
       :error_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14219,7 +14915,8 @@ module Aws::IoT
     #   @return [String]
     class TransferAlreadyCompletedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14238,7 +14935,8 @@ module Aws::IoT
       :certificate_id,
       :target_aws_account,
       :transfer_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14248,7 +14946,8 @@ module Aws::IoT
     #   @return [String]
     class TransferCertificateResponse < Struct.new(
       :transferred_certificate_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14259,7 +14958,8 @@ module Aws::IoT
     #   @return [String]
     class TransferConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14285,7 +14985,8 @@ module Aws::IoT
       :transfer_date,
       :accept_date,
       :reject_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14295,7 +14996,8 @@ module Aws::IoT
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14308,12 +15010,14 @@ module Aws::IoT
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14349,12 +15053,14 @@ module Aws::IoT
       :role_arn,
       :audit_notification_target_configurations,
       :audit_check_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateAccountAuditConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14388,12 +15094,14 @@ module Aws::IoT
       :expiration_date,
       :suppress_indefinitely,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateAuditSuppressionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14424,7 +15132,8 @@ module Aws::IoT
       :token_signing_public_keys,
       :status,
       :enable_caching_for_http,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14437,7 +15146,8 @@ module Aws::IoT
     class UpdateAuthorizerResponse < Struct.new(
       :authorizer_name,
       :authorizer_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14457,7 +15167,8 @@ module Aws::IoT
       :billing_group_name,
       :billing_group_properties,
       :expected_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14466,7 +15177,8 @@ module Aws::IoT
     #   @return [Integer]
     class UpdateBillingGroupResponse < Struct.new(
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14481,7 +15193,8 @@ module Aws::IoT
     #   @return [String]
     class UpdateCACertificateParams < Struct.new(
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14511,7 +15224,8 @@ module Aws::IoT
       :new_auto_registration_status,
       :registration_config,
       :remove_auto_registration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14529,7 +15243,8 @@ module Aws::IoT
       :certificate_provider_name,
       :lambda_function_arn,
       :account_default_for_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14542,7 +15257,8 @@ module Aws::IoT
     class UpdateCertificateProviderResponse < Struct.new(
       :certificate_provider_name,
       :certificate_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14564,7 +15280,8 @@ module Aws::IoT
     class UpdateCertificateRequest < Struct.new(
       :certificate_id,
       :new_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14585,7 +15302,8 @@ module Aws::IoT
       :display_name,
       :description,
       :deprecated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14611,7 +15329,8 @@ module Aws::IoT
       :description,
       :deprecated,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14632,7 +15351,8 @@ module Aws::IoT
     class UpdateCustomMetricRequest < Struct.new(
       :metric_name,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14674,7 +15394,8 @@ module Aws::IoT
       :display_name,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14684,7 +15405,8 @@ module Aws::IoT
     #   @return [String]
     class UpdateDeviceCertificateParams < Struct.new(
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14697,7 +15419,8 @@ module Aws::IoT
     class UpdateDimensionRequest < Struct.new(
       :name,
       :string_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14728,7 +15451,8 @@ module Aws::IoT
       :string_values,
       :creation_date,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14827,7 +15551,8 @@ module Aws::IoT
       :authentication_type,
       :application_protocol,
       :client_certificate_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14840,7 +15565,8 @@ module Aws::IoT
     class UpdateDomainConfigurationResponse < Struct.new(
       :domain_configuration_name,
       :domain_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14876,7 +15602,8 @@ module Aws::IoT
       :index_name,
       :query_string,
       :query_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14885,7 +15612,8 @@ module Aws::IoT
     #   @return [Integer]
     class UpdateDynamicThingGroupResponse < Struct.new(
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14908,12 +15636,14 @@ module Aws::IoT
       :encryption_type,
       :kms_key_arn,
       :kms_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateEncryptionConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14922,12 +15652,14 @@ module Aws::IoT
     #   @return [Hash<String, Types::Configuration>]
     class UpdateEventConfigurationsRequest < Struct.new(
       :event_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateEventConfigurationsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14973,7 +15705,8 @@ module Aws::IoT
       :index_name,
       :unit,
       :expected_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14986,12 +15719,14 @@ module Aws::IoT
     class UpdateIndexingConfigurationRequest < Struct.new(
       :thing_indexing_configuration,
       :thing_group_indexing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateIndexingConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15041,7 +15776,8 @@ module Aws::IoT
       :timeout_config,
       :namespace_id,
       :job_executions_retry_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15061,7 +15797,8 @@ module Aws::IoT
       :action_name,
       :role_arn,
       :action_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15074,7 +15811,8 @@ module Aws::IoT
     class UpdateMitigationActionResponse < Struct.new(
       :action_arn,
       :action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15088,12 +15826,14 @@ module Aws::IoT
     class UpdatePackageConfigurationRequest < Struct.new(
       :version_update_by_jobs_config,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdatePackageConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15126,12 +15866,14 @@ module Aws::IoT
       :default_version_name,
       :unset_default_version,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdatePackageResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15174,12 +15916,14 @@ module Aws::IoT
       :action,
       :recipe,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdatePackageVersionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15215,12 +15959,14 @@ module Aws::IoT
       :provisioning_role_arn,
       :pre_provisioning_hook,
       :remove_pre_provisioning_hook,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateProvisioningTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15239,7 +15985,8 @@ module Aws::IoT
       :role_alias,
       :role_arn,
       :credential_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15252,7 +15999,8 @@ module Aws::IoT
     class UpdateRoleAliasResponse < Struct.new(
       :role_alias,
       :role_alias_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15293,7 +16041,8 @@ module Aws::IoT
       :day_of_week,
       :target_check_names,
       :scheduled_audit_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15302,7 +16051,8 @@ module Aws::IoT
     #   @return [String]
     class UpdateScheduledAuditResponse < Struct.new(
       :scheduled_audit_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15372,7 +16122,8 @@ module Aws::IoT
       :expected_version,
       :metrics_export_config,
       :delete_metrics_export_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15432,7 +16183,8 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       :metrics_export_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15458,7 +16210,8 @@ module Aws::IoT
       :description,
       :files,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15479,7 +16232,8 @@ module Aws::IoT
       :stream_arn,
       :description,
       :stream_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15497,7 +16251,8 @@ module Aws::IoT
       :thing_group_name,
       :thing_group_properties,
       :expected_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15506,7 +16261,8 @@ module Aws::IoT
     #   @return [Integer]
     class UpdateThingGroupResponse < Struct.new(
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15535,12 +16291,14 @@ module Aws::IoT
       :thing_groups_to_add,
       :thing_groups_to_remove,
       :override_dynamic_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateThingGroupsForThingResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15577,13 +16335,15 @@ module Aws::IoT
       :attribute_payload,
       :expected_version,
       :remove_thing_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the UpdateThing operation.</p>
     class UpdateThingResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15597,12 +16357,14 @@ module Aws::IoT
     class UpdateThingTypeRequest < Struct.new(
       :thing_type_name,
       :thing_type_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateThingTypeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15646,12 +16408,14 @@ module Aws::IoT
     class UpdateTopicRuleDestinationRequest < Struct.new(
       :arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTopicRuleDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15667,7 +16431,8 @@ module Aws::IoT
     class UserProperty < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15676,7 +16441,8 @@ module Aws::IoT
     #   @return [Array<Types::Behavior>]
     class ValidateSecurityProfileBehaviorsRequest < Struct.new(
       :behaviors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15689,7 +16455,8 @@ module Aws::IoT
     class ValidateSecurityProfileBehaviorsResponse < Struct.new(
       :valid,
       :validation_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15704,7 +16471,8 @@ module Aws::IoT
     #   @return [String]
     class ValidationError < Struct.new(
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15713,7 +16481,8 @@ module Aws::IoT
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15725,7 +16494,8 @@ module Aws::IoT
     #   @return [String]
     class VersionConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15743,7 +16513,8 @@ module Aws::IoT
     class VersionUpdateByJobsConfig < Struct.new(
       :enabled,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15753,7 +16524,8 @@ module Aws::IoT
     #   @return [String]
     class VersionsLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15801,7 +16573,8 @@ module Aws::IoT
       :verification_state,
       :verification_state_description,
       :violation_event_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15815,7 +16588,8 @@ module Aws::IoT
     #   @return [String]
     class ViolationEventAdditionalInfo < Struct.new(
       :confidence_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15835,7 +16609,8 @@ module Aws::IoT
     class ViolationEventOccurrenceRange < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15857,7 +16632,8 @@ module Aws::IoT
       :security_groups,
       :vpc_id,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15879,7 +16655,8 @@ module Aws::IoT
       :security_groups,
       :vpc_id,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15901,7 +16678,8 @@ module Aws::IoT
       :security_groups,
       :vpc_id,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

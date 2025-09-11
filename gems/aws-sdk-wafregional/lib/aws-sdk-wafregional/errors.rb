@@ -53,7 +53,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFBadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFDisallowedNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFEntityMigrationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFInternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -143,7 +143,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFInvalidAccountException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -172,7 +172,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFInvalidOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -222,7 +222,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFInvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def field
@@ -272,7 +272,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFInvalidPermissionPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -285,7 +285,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFInvalidRegexPatternException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -300,7 +300,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFLimitsExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -328,7 +328,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFNonEmptyEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -356,7 +356,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFNonexistentContainerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -369,7 +369,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFNonexistentItemException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -390,7 +390,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFReferencedItemException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -403,7 +403,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFServiceLinkedRoleErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -416,7 +416,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFStaleDataException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -429,7 +429,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFSubscriptionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -442,7 +442,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFTagOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -455,7 +455,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFTagOperationInternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -469,7 +469,7 @@ module Aws::WAFRegional
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::WAFRegional::Types::WAFUnavailableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

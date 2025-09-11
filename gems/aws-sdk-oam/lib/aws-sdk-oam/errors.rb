@@ -41,7 +41,7 @@ module Aws::OAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OAM::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -59,7 +59,7 @@ module Aws::OAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OAM::Types::InternalServiceFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::OAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OAM::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::OAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OAM::Types::MissingRequiredParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::OAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OAM::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -131,7 +131,7 @@ module Aws::OAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OAM::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::OAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OAM::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -162,7 +162,7 @@ module Aws::OAM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OAM::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

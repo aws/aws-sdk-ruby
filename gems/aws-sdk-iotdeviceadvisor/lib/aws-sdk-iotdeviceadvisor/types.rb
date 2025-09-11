@@ -12,7 +12,8 @@ module Aws::IotDeviceAdvisor
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31,7 +32,8 @@ module Aws::IotDeviceAdvisor
       :suite_definition_configuration,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,7 +54,8 @@ module Aws::IotDeviceAdvisor
       :suite_definition_arn,
       :suite_definition_name,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -61,12 +64,14 @@ module Aws::IotDeviceAdvisor
     #   @return [String]
     class DeleteSuiteDefinitionRequest < Struct.new(
       :suite_definition_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSuiteDefinitionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +90,8 @@ module Aws::IotDeviceAdvisor
       :thing_arn,
       :certificate_arn,
       :device_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +112,8 @@ module Aws::IotDeviceAdvisor
       :certificate_arn,
       :device_role_arn,
       :authentication_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +122,8 @@ module Aws::IotDeviceAdvisor
     #   @return [String]
     class GetEndpointResponse < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +136,8 @@ module Aws::IotDeviceAdvisor
     class GetSuiteDefinitionRequest < Struct.new(
       :suite_definition_id,
       :suite_definition_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,7 +174,8 @@ module Aws::IotDeviceAdvisor
       :created_at,
       :last_modified_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +188,8 @@ module Aws::IotDeviceAdvisor
     class GetSuiteRunReportRequest < Struct.new(
       :suite_definition_id,
       :suite_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +198,8 @@ module Aws::IotDeviceAdvisor
     #   @return [String]
     class GetSuiteRunReportResponse < Struct.new(
       :qualification_report_download_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +212,8 @@ module Aws::IotDeviceAdvisor
     class GetSuiteRunRequest < Struct.new(
       :suite_definition_id,
       :suite_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +262,8 @@ module Aws::IotDeviceAdvisor
       :status,
       :error_reason,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +281,8 @@ module Aws::IotDeviceAdvisor
       :group_id,
       :group_name,
       :tests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,7 +292,8 @@ module Aws::IotDeviceAdvisor
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -290,7 +306,8 @@ module Aws::IotDeviceAdvisor
     class ListSuiteDefinitionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +321,8 @@ module Aws::IotDeviceAdvisor
     class ListSuiteDefinitionsResponse < Struct.new(
       :suite_definition_information_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +345,8 @@ module Aws::IotDeviceAdvisor
       :suite_definition_version,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +360,8 @@ module Aws::IotDeviceAdvisor
     class ListSuiteRunsResponse < Struct.new(
       :suite_runs_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +371,8 @@ module Aws::IotDeviceAdvisor
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +381,8 @@ module Aws::IotDeviceAdvisor
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -370,7 +392,8 @@ module Aws::IotDeviceAdvisor
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -391,7 +414,8 @@ module Aws::IotDeviceAdvisor
       :suite_definition_version,
       :suite_run_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +436,8 @@ module Aws::IotDeviceAdvisor
       :suite_run_arn,
       :created_at,
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,12 +450,14 @@ module Aws::IotDeviceAdvisor
     class StopSuiteRunRequest < Struct.new(
       :suite_definition_id,
       :suite_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopSuiteRunResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +502,8 @@ module Aws::IotDeviceAdvisor
       :root_group,
       :device_permission_role_arn,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +537,8 @@ module Aws::IotDeviceAdvisor
       :is_long_duration_test,
       :protocol,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +557,8 @@ module Aws::IotDeviceAdvisor
       :primary_device,
       :selected_test_list,
       :parallel_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +605,8 @@ module Aws::IotDeviceAdvisor
       :status,
       :passed,
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -589,12 +620,14 @@ module Aws::IotDeviceAdvisor
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +710,8 @@ module Aws::IotDeviceAdvisor
       :warnings,
       :failure,
       :test_scenarios,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +782,8 @@ module Aws::IotDeviceAdvisor
       :status,
       :failure,
       :system_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +793,8 @@ module Aws::IotDeviceAdvisor
     #   @return [Array<Types::GroupResult>]
     class TestResult < Struct.new(
       :groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,12 +808,14 @@ module Aws::IotDeviceAdvisor
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -790,7 +828,8 @@ module Aws::IotDeviceAdvisor
     class UpdateSuiteDefinitionRequest < Struct.new(
       :suite_definition_id,
       :suite_definition_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +858,8 @@ module Aws::IotDeviceAdvisor
       :suite_definition_version,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +869,8 @@ module Aws::IotDeviceAdvisor
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

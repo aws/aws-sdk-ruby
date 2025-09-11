@@ -11,7 +11,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class AuthException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class EC2InstanceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31,7 +33,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class EC2InstanceStateInvalidException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +44,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class EC2InstanceTypeInvalidException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,7 +54,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class EC2InstanceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +64,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class InvalidArgsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +86,8 @@ module Aws::EC2InstanceConnect
       :instance_os_user,
       :ssh_public_key,
       :availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +100,8 @@ module Aws::EC2InstanceConnect
     class SendSSHPublicKeyResponse < Struct.new(
       :request_id,
       :success,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -118,7 +126,8 @@ module Aws::EC2InstanceConnect
       :instance_id,
       :serial_port,
       :ssh_public_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -131,7 +140,8 @@ module Aws::EC2InstanceConnect
     class SendSerialConsoleSSHPublicKeyResponse < Struct.new(
       :request_id,
       :success,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -147,7 +157,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class SerialConsoleAccessDisabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +167,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class SerialConsoleSessionLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,7 +177,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class SerialConsoleSessionUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +187,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class SerialConsoleSessionUnsupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +197,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class ServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,7 +208,8 @@ module Aws::EC2InstanceConnect
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

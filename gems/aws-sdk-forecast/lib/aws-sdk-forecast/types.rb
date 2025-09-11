@@ -38,7 +38,8 @@ module Aws::Forecast
       :attribute_name,
       :operation,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -281,7 +282,8 @@ module Aws::Forecast
     class AdditionalDataset < Struct.new(
       :name,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -373,7 +375,8 @@ module Aws::Forecast
     class AttributeConfig < Struct.new(
       :attribute_name,
       :transformations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +387,8 @@ module Aws::Forecast
     #   @return [Types::PredictorBaseline]
     class Baseline < Struct.new(
       :predictor_baseline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +402,8 @@ module Aws::Forecast
     class BaselineMetric < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +418,8 @@ module Aws::Forecast
     class CategoricalParameterRange < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +470,8 @@ module Aws::Forecast
       :max_value,
       :min_value,
       :scaling_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,7 +612,8 @@ module Aws::Forecast
       :tags,
       :monitor_config,
       :time_alignment_boundary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +622,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateAutoPredictorResponse < Struct.new(
       :predictor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -679,7 +688,8 @@ module Aws::Forecast
       :domain,
       :dataset_arns,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +698,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateDatasetGroupResponse < Struct.new(
       :dataset_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +819,8 @@ module Aws::Forecast
       :tags,
       :format,
       :import_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +829,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateDatasetImportJobResponse < Struct.new(
       :dataset_import_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,7 +933,8 @@ module Aws::Forecast
       :schema,
       :encryption_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +943,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateDatasetResponse < Struct.new(
       :dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1001,8 @@ module Aws::Forecast
       :destination,
       :tags,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1011,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateExplainabilityExportResponse < Struct.new(
       :explainability_export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1076,7 +1093,8 @@ module Aws::Forecast
       :start_date_time,
       :end_date_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1103,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateExplainabilityResponse < Struct.new(
       :explainability_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1168,8 @@ module Aws::Forecast
       :destination,
       :tags,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,7 +1178,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateForecastExportJobResponse < Struct.new(
       :forecast_export_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1264,8 @@ module Aws::Forecast
       :forecast_types,
       :tags,
       :time_series_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1252,7 +1274,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateForecastResponse < Struct.new(
       :forecast_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1269,7 +1292,8 @@ module Aws::Forecast
       :monitor_name,
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1278,7 +1302,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateMonitorResponse < Struct.new(
       :monitor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1335,7 +1360,8 @@ module Aws::Forecast
       :destination,
       :tags,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1345,7 +1371,8 @@ module Aws::Forecast
     #   @return [String]
     class CreatePredictorBacktestExportJobResponse < Struct.new(
       :predictor_backtest_export_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1557,8 @@ module Aws::Forecast
       :encryption_config,
       :tags,
       :optimization_metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1539,7 +1567,8 @@ module Aws::Forecast
     #   @return [String]
     class CreatePredictorResponse < Struct.new(
       :predictor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1579,7 +1608,8 @@ module Aws::Forecast
       :forecast_arn,
       :time_series_selector,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1588,7 +1618,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateWhatIfAnalysisResponse < Struct.new(
       :what_if_analysis_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1617,7 +1648,8 @@ module Aws::Forecast
       :destination,
       :tags,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1658,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateWhatIfForecastExportResponse < Struct.new(
       :what_if_forecast_export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1658,7 +1691,8 @@ module Aws::Forecast
       :time_series_transformations,
       :time_series_replacements_data_source,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1667,7 +1701,8 @@ module Aws::Forecast
     #   @return [String]
     class CreateWhatIfForecastResponse < Struct.new(
       :what_if_forecast_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1720,8 @@ module Aws::Forecast
       :dataset_group_arn,
       :attribute_configs,
       :additional_datasets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1697,7 +1733,8 @@ module Aws::Forecast
     #   @return [Types::S3Config]
     class DataDestination < Struct.new(
       :s3_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1709,7 +1746,8 @@ module Aws::Forecast
     #   @return [Types::S3Config]
     class DataSource < Struct.new(
       :s3_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1735,7 +1773,8 @@ module Aws::Forecast
       :dataset_group_name,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1825,7 +1864,8 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       :import_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1861,7 +1901,8 @@ module Aws::Forecast
       :domain,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1911,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteDatasetGroupRequest < Struct.new(
       :dataset_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1879,7 +1921,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteDatasetImportJobRequest < Struct.new(
       :dataset_import_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1931,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
       :dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1897,7 +1941,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteExplainabilityExportRequest < Struct.new(
       :explainability_export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,7 +1951,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteExplainabilityRequest < Struct.new(
       :explainability_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1915,7 +1961,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteForecastExportJobRequest < Struct.new(
       :forecast_export_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1924,7 +1971,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteForecastRequest < Struct.new(
       :forecast_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1933,7 +1981,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteMonitorRequest < Struct.new(
       :monitor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1942,7 +1991,8 @@ module Aws::Forecast
     #   @return [String]
     class DeletePredictorBacktestExportJobRequest < Struct.new(
       :predictor_backtest_export_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1951,7 +2001,8 @@ module Aws::Forecast
     #   @return [String]
     class DeletePredictorRequest < Struct.new(
       :predictor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1961,7 +2012,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteResourceTreeRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1970,7 +2022,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteWhatIfAnalysisRequest < Struct.new(
       :what_if_analysis_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1979,7 +2032,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteWhatIfForecastExportRequest < Struct.new(
       :what_if_forecast_export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1988,7 +2042,8 @@ module Aws::Forecast
     #   @return [String]
     class DeleteWhatIfForecastRequest < Struct.new(
       :what_if_forecast_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1997,7 +2052,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeAutoPredictorRequest < Struct.new(
       :predictor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2137,7 +2193,8 @@ module Aws::Forecast
       :explainability_info,
       :monitor_info,
       :time_alignment_boundary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2146,7 +2203,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeDatasetGroupRequest < Struct.new(
       :dataset_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2213,7 +2271,8 @@ module Aws::Forecast
       :status,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2222,7 +2281,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeDatasetImportJobRequest < Struct.new(
       :dataset_import_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2361,7 +2421,8 @@ module Aws::Forecast
       :last_modification_time,
       :format,
       :import_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2375,7 +2436,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
       :dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,7 +2525,8 @@ module Aws::Forecast
       :status,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2472,7 +2535,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeExplainabilityExportRequest < Struct.new(
       :explainability_export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2562,7 +2626,8 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2571,7 +2636,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeExplainabilityRequest < Struct.new(
       :explainability_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2686,7 +2752,8 @@ module Aws::Forecast
       :status,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2695,7 +2762,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeForecastExportJobRequest < Struct.new(
       :forecast_export_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2787,7 +2855,8 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2796,7 +2865,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeForecastRequest < Struct.new(
       :forecast_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2896,7 +2966,8 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       :time_series_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2905,7 +2976,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeMonitorRequest < Struct.new(
       :monitor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2954,7 +3026,8 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       :estimated_evaluation_time_remaining_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2963,7 +3036,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribePredictorBacktestExportJobRequest < Struct.new(
       :predictor_backtest_export_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3053,7 +3127,8 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3062,7 +3137,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribePredictorRequest < Struct.new(
       :predictor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3232,7 +3308,8 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       :optimization_metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3241,7 +3318,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeWhatIfAnalysisRequest < Struct.new(
       :what_if_analysis_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3351,7 +3429,8 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       :time_series_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3360,7 +3439,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeWhatIfForecastExportRequest < Struct.new(
       :what_if_forecast_export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3458,7 +3538,8 @@ module Aws::Forecast
       :estimated_time_remaining_in_minutes,
       :last_modification_time,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3467,7 +3548,8 @@ module Aws::Forecast
     #   @return [String]
     class DescribeWhatIfForecastRequest < Struct.new(
       :what_if_forecast_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3569,7 +3651,8 @@ module Aws::Forecast
       :time_series_transformations,
       :time_series_replacements_data_source,
       :forecast_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3587,7 +3670,8 @@ module Aws::Forecast
     class EncryptionConfig < Struct.new(
       :role_arn,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3614,7 +3698,8 @@ module Aws::Forecast
       :rmse,
       :mase,
       :mape,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3638,7 +3723,8 @@ module Aws::Forecast
     class EvaluationParameters < Struct.new(
       :number_of_backtest_windows,
       :back_test_window_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3654,7 +3740,8 @@ module Aws::Forecast
     class EvaluationResult < Struct.new(
       :algorithm_arn,
       :test_windows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3684,7 +3771,8 @@ module Aws::Forecast
     class ExplainabilityConfig < Struct.new(
       :time_series_granularity,
       :time_point_granularity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3770,7 +3858,8 @@ module Aws::Forecast
       :message,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3808,7 +3897,8 @@ module Aws::Forecast
     class ExplainabilityInfo < Struct.new(
       :explainability_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3899,7 +3989,8 @@ module Aws::Forecast
       :message,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3946,7 +4037,8 @@ module Aws::Forecast
     class Featurization < Struct.new(
       :attribute_name,
       :featurization_pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4015,7 +4107,8 @@ module Aws::Forecast
       :forecast_frequency,
       :forecast_dimensions,
       :featurizations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4102,7 +4195,8 @@ module Aws::Forecast
     class FeaturizationMethod < Struct.new(
       :featurization_method_name,
       :featurization_method_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4125,7 +4219,8 @@ module Aws::Forecast
       :key,
       :value,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4212,7 +4307,8 @@ module Aws::Forecast
       :message,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4308,7 +4404,8 @@ module Aws::Forecast
       :message,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4317,7 +4414,8 @@ module Aws::Forecast
     #   @return [String]
     class GetAccuracyMetricsRequest < Struct.new(
       :predictor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4345,7 +4443,8 @@ module Aws::Forecast
       :is_auto_predictor,
       :auto_ml_override_strategy,
       :optimization_metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4363,7 +4462,8 @@ module Aws::Forecast
     #   @return [Types::ParameterRanges]
     class HyperParameterTuningJobConfig < Struct.new(
       :parameter_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4384,7 +4484,8 @@ module Aws::Forecast
     class InputDataConfig < Struct.new(
       :dataset_group_arn,
       :supplementary_features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4434,7 +4535,8 @@ module Aws::Forecast
       :max_value,
       :min_value,
       :scaling_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4444,7 +4546,8 @@ module Aws::Forecast
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4453,7 +4556,8 @@ module Aws::Forecast
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4462,7 +4566,8 @@ module Aws::Forecast
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4477,7 +4582,8 @@ module Aws::Forecast
     class ListDatasetGroupsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4491,7 +4597,8 @@ module Aws::Forecast
     class ListDatasetGroupsResponse < Struct.new(
       :dataset_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4538,7 +4645,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4552,7 +4660,8 @@ module Aws::Forecast
     class ListDatasetImportJobsResponse < Struct.new(
       :dataset_import_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4567,7 +4676,8 @@ module Aws::Forecast
     class ListDatasetsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4581,7 +4691,8 @@ module Aws::Forecast
     class ListDatasetsResponse < Struct.new(
       :datasets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4622,7 +4733,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4637,7 +4749,8 @@ module Aws::Forecast
     class ListExplainabilitiesResponse < Struct.new(
       :explainabilities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4678,7 +4791,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4693,7 +4807,8 @@ module Aws::Forecast
     class ListExplainabilityExportsResponse < Struct.new(
       :explainability_exports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4742,7 +4857,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4756,7 +4872,8 @@ module Aws::Forecast
     class ListForecastExportJobsResponse < Struct.new(
       :forecast_export_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4803,7 +4920,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4817,7 +4935,8 @@ module Aws::Forecast
     class ListForecastsResponse < Struct.new(
       :forecasts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4866,7 +4985,8 @@ module Aws::Forecast
       :max_results,
       :monitor_arn,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4881,7 +5001,8 @@ module Aws::Forecast
     class ListMonitorEvaluationsResponse < Struct.new(
       :next_token,
       :predictor_monitor_evaluations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4926,7 +5047,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4940,7 +5062,8 @@ module Aws::Forecast
     class ListMonitorsResponse < Struct.new(
       :monitors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4983,7 +5106,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4998,7 +5122,8 @@ module Aws::Forecast
     class ListPredictorBacktestExportJobsResponse < Struct.new(
       :predictor_backtest_export_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5045,7 +5170,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5059,7 +5185,8 @@ module Aws::Forecast
     class ListPredictorsResponse < Struct.new(
       :predictors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5069,7 +5196,8 @@ module Aws::Forecast
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5078,7 +5206,8 @@ module Aws::Forecast
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5125,7 +5254,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5138,7 +5268,8 @@ module Aws::Forecast
     class ListWhatIfAnalysesResponse < Struct.new(
       :what_if_analyses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5185,7 +5316,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5198,7 +5330,8 @@ module Aws::Forecast
     class ListWhatIfForecastExportsResponse < Struct.new(
       :what_if_forecast_exports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5245,7 +5378,8 @@ module Aws::Forecast
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5258,7 +5392,8 @@ module Aws::Forecast
     class ListWhatIfForecastsResponse < Struct.new(
       :what_if_forecasts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5274,7 +5409,8 @@ module Aws::Forecast
     class MetricResult < Struct.new(
       :metric_name,
       :metric_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5302,7 +5438,8 @@ module Aws::Forecast
       :weighted_quantile_losses,
       :error_metrics,
       :average_weighted_quantile_loss,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5312,7 +5449,8 @@ module Aws::Forecast
     #   @return [String]
     class MonitorConfig < Struct.new(
       :monitor_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5330,7 +5468,8 @@ module Aws::Forecast
       :dataset_import_job_arn,
       :forecast_arn,
       :predictor_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5371,7 +5510,8 @@ module Aws::Forecast
     class MonitorInfo < Struct.new(
       :monitor_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5450,7 +5590,8 @@ module Aws::Forecast
       :status,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5471,7 +5612,8 @@ module Aws::Forecast
       :categorical_parameter_ranges,
       :continuous_parameter_ranges,
       :integer_parameter_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5556,7 +5698,8 @@ module Aws::Forecast
       :message,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5567,7 +5710,8 @@ module Aws::Forecast
     #   @return [Array<Types::BaselineMetric>]
     class PredictorBaseline < Struct.new(
       :baseline_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5581,7 +5725,8 @@ module Aws::Forecast
     class PredictorEvent < Struct.new(
       :detail,
       :datetime,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5597,7 +5742,8 @@ module Aws::Forecast
     class PredictorExecution < Struct.new(
       :algorithm_arn,
       :test_windows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5611,7 +5757,8 @@ module Aws::Forecast
     #   @return [Array<Types::PredictorExecution>]
     class PredictorExecutionDetails < Struct.new(
       :predictor_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5661,7 +5808,8 @@ module Aws::Forecast
       :metric_results,
       :num_items_evaluated,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5758,7 +5906,8 @@ module Aws::Forecast
       :message,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5773,7 +5922,8 @@ module Aws::Forecast
     class ReferencePredictorSummary < Struct.new(
       :arn,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5782,7 +5932,8 @@ module Aws::Forecast
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5791,7 +5942,8 @@ module Aws::Forecast
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5801,7 +5953,8 @@ module Aws::Forecast
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5810,7 +5963,8 @@ module Aws::Forecast
     #   @return [String]
     class ResumeResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5834,7 +5988,8 @@ module Aws::Forecast
       :path,
       :role_arn,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5844,7 +5999,8 @@ module Aws::Forecast
     #   @return [Array<Types::SchemaAttribute>]
     class Schema < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5861,7 +6017,8 @@ module Aws::Forecast
     class SchemaAttribute < Struct.new(
       :attribute_name,
       :attribute_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5924,7 +6081,8 @@ module Aws::Forecast
       :count_distinct_long,
       :count_null_long,
       :count_nan_long,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5937,7 +6095,8 @@ module Aws::Forecast
     #   @return [String]
     class StopResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6181,7 +6340,8 @@ module Aws::Forecast
     class SupplementaryFeature < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6231,7 +6391,8 @@ module Aws::Forecast
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6278,12 +6439,14 @@ module Aws::Forecast
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6323,7 +6486,8 @@ module Aws::Forecast
       :test_window_end,
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6353,7 +6517,8 @@ module Aws::Forecast
       :day_of_month,
       :day_of_week,
       :hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6372,7 +6537,8 @@ module Aws::Forecast
       :attribute_name,
       :attribute_value,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6391,7 +6557,8 @@ module Aws::Forecast
       :data_source,
       :schema,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6419,7 +6586,8 @@ module Aws::Forecast
       :schema,
       :format,
       :timestamp_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6447,7 +6615,8 @@ module Aws::Forecast
     #   @return [Types::TimeSeriesIdentifiers]
     class TimeSeriesSelector < Struct.new(
       :time_series_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6462,7 +6631,8 @@ module Aws::Forecast
     class TimeSeriesTransformation < Struct.new(
       :action,
       :time_series_conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6476,12 +6646,14 @@ module Aws::Forecast
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6495,12 +6667,14 @@ module Aws::Forecast
     class UpdateDatasetGroupRequest < Struct.new(
       :dataset_group_arn,
       :dataset_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDatasetGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6517,7 +6691,8 @@ module Aws::Forecast
     class WeightedQuantileLoss < Struct.new(
       :quantile,
       :loss_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6602,7 +6777,8 @@ module Aws::Forecast
       :message,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6691,7 +6867,8 @@ module Aws::Forecast
       :message,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6776,7 +6953,8 @@ module Aws::Forecast
       :message,
       :creation_time,
       :last_modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6815,7 +6993,8 @@ module Aws::Forecast
       :item_count,
       :evaluation_type,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

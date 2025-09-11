@@ -711,7 +711,6 @@ module Aws::TimestreamInfluxDB
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update a Timestream InfluxDB instance"}, "smithy.api#idempotent" => {}, "smithy.api#tags" => ["DbInstance"]}
       end)
-
     end
 
     class << self

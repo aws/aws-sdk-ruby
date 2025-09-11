@@ -30,7 +30,8 @@ module Aws::KMS
       :target_key_id,
       :creation_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,7 +41,8 @@ module Aws::KMS
     #   @return [String]
     class AlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +64,8 @@ module Aws::KMS
     #   @return [String]
     class CancelKeyDeletionRequest < Struct.new(
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +74,8 @@ module Aws::KMS
     #   @return [String]
     class CancelKeyDeletionResponse < Struct.new(
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +89,8 @@ module Aws::KMS
     #   @return [String]
     class CloudHsmClusterInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +130,8 @@ module Aws::KMS
     #   @return [String]
     class CloudHsmClusterInvalidConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,7 +143,8 @@ module Aws::KMS
     #   @return [String]
     class CloudHsmClusterNotActiveException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +154,8 @@ module Aws::KMS
     #   @return [String]
     class CloudHsmClusterNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +171,8 @@ module Aws::KMS
     #   @return [String]
     class CloudHsmClusterNotRelatedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +182,8 @@ module Aws::KMS
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,12 +193,14 @@ module Aws::KMS
     #   @return [String]
     class ConnectCustomKeyStoreRequest < Struct.new(
       :custom_key_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ConnectCustomKeyStoreResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +242,8 @@ module Aws::KMS
     class CreateAliasRequest < Struct.new(
       :alias_name,
       :target_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +405,8 @@ module Aws::KMS
       :xks_proxy_vpc_endpoint_service_name,
       :xks_proxy_authentication_credential,
       :xks_proxy_connectivity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +415,8 @@ module Aws::KMS
     #   @return [String]
     class CreateCustomKeyStoreResponse < Struct.new(
       :custom_key_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +531,8 @@ module Aws::KMS
       :grant_tokens,
       :name,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +548,8 @@ module Aws::KMS
     class CreateGrantResponse < Struct.new(
       :grant_token,
       :grant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -878,7 +895,8 @@ module Aws::KMS
       :tags,
       :multi_region,
       :xks_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +905,8 @@ module Aws::KMS
     #   @return [Types::KeyMetadata]
     class CreateKeyResponse < Struct.new(
       :key_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -899,7 +918,8 @@ module Aws::KMS
     #   @return [String]
     class CustomKeyStoreHasCMKsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -941,7 +961,8 @@ module Aws::KMS
     #   @return [String]
     class CustomKeyStoreInvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +973,8 @@ module Aws::KMS
     #   @return [String]
     class CustomKeyStoreNameInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +984,8 @@ module Aws::KMS
     #   @return [String]
     class CustomKeyStoreNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1217,7 +1240,8 @@ module Aws::KMS
       :creation_date,
       :custom_key_store_type,
       :xks_proxy_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1326,8 @@ module Aws::KMS
       :encryption_algorithm,
       :recipient,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1359,8 @@ module Aws::KMS
       :encryption_algorithm,
       :ciphertext_for_recipient,
       :key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1370,8 @@ module Aws::KMS
     #   @return [String]
     class DeleteAliasRequest < Struct.new(
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,12 +1380,14 @@ module Aws::KMS
     #   @return [String]
     class DeleteCustomKeyStoreRequest < Struct.new(
       :custom_key_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomKeyStoreResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1418,8 @@ module Aws::KMS
     class DeleteImportedKeyMaterialRequest < Struct.new(
       :key_id,
       :key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1432,8 @@ module Aws::KMS
     class DeleteImportedKeyMaterialResponse < Struct.new(
       :key_id,
       :key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1412,7 +1443,8 @@ module Aws::KMS
     #   @return [String]
     class DependencyTimeoutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1497,7 +1529,8 @@ module Aws::KMS
       :grant_tokens,
       :dry_run,
       :recipient,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1536,7 +1569,8 @@ module Aws::KMS
       :ciphertext_for_recipient,
       :key_agreement_algorithm,
       :key_origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1570,7 +1604,8 @@ module Aws::KMS
       :custom_key_store_name,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1591,7 +1626,8 @@ module Aws::KMS
       :custom_key_stores,
       :next_marker,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1635,7 +1671,8 @@ module Aws::KMS
     class DescribeKeyRequest < Struct.new(
       :key_id,
       :grant_tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1644,7 +1681,8 @@ module Aws::KMS
     #   @return [Types::KeyMetadata]
     class DescribeKeyResponse < Struct.new(
       :key_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1704,8 @@ module Aws::KMS
     #   @return [String]
     class DisableKeyRequest < Struct.new(
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1691,7 +1730,8 @@ module Aws::KMS
     #   @return [String]
     class DisableKeyRotationRequest < Struct.new(
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1700,7 +1740,8 @@ module Aws::KMS
     #   @return [String]
     class DisabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1709,12 +1750,14 @@ module Aws::KMS
     #   @return [String]
     class DisconnectCustomKeyStoreRequest < Struct.new(
       :custom_key_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisconnectCustomKeyStoreResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1766,8 @@ module Aws::KMS
     #   @return [String]
     class DryRunOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1789,8 @@ module Aws::KMS
     #   @return [String]
     class EnableKeyRequest < Struct.new(
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1780,7 +1825,8 @@ module Aws::KMS
     class EnableKeyRotationRequest < Struct.new(
       :key_id,
       :rotation_period_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1895,8 @@ module Aws::KMS
       :grant_tokens,
       :encryption_algorithm,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1866,7 +1913,8 @@ module Aws::KMS
       :ciphertext_blob,
       :key_id,
       :encryption_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1876,7 +1924,8 @@ module Aws::KMS
     #   @return [String]
     class ExpiredImportTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1955,7 +2004,8 @@ module Aws::KMS
       :grant_tokens,
       :recipient,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1994,7 +2044,8 @@ module Aws::KMS
       :key_pair_spec,
       :ciphertext_for_recipient,
       :key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2055,7 +2106,8 @@ module Aws::KMS
       :key_pair_spec,
       :grant_tokens,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2080,7 +2132,8 @@ module Aws::KMS
       :key_id,
       :key_pair_spec,
       :key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2166,7 +2219,8 @@ module Aws::KMS
       :grant_tokens,
       :recipient,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2199,7 +2253,8 @@ module Aws::KMS
       :key_id,
       :ciphertext_for_recipient,
       :key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2265,7 +2320,8 @@ module Aws::KMS
       :number_of_bytes,
       :grant_tokens,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2282,7 +2338,8 @@ module Aws::KMS
       :ciphertext_blob,
       :key_id,
       :key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2320,7 +2377,8 @@ module Aws::KMS
       :mac_algorithm,
       :grant_tokens,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2339,7 +2397,8 @@ module Aws::KMS
       :mac,
       :mac_algorithm,
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2370,7 +2429,8 @@ module Aws::KMS
       :number_of_bytes,
       :custom_key_store_id,
       :recipient,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2389,7 +2449,8 @@ module Aws::KMS
     class GenerateRandomResponse < Struct.new(
       :plaintext,
       :ciphertext_for_recipient,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2417,7 +2478,8 @@ module Aws::KMS
     class GetKeyPolicyRequest < Struct.new(
       :key_id,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2430,7 +2492,8 @@ module Aws::KMS
     class GetKeyPolicyResponse < Struct.new(
       :policy,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2453,7 +2516,8 @@ module Aws::KMS
     #   @return [String]
     class GetKeyRotationStatusRequest < Struct.new(
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2481,7 +2545,8 @@ module Aws::KMS
       :rotation_period_in_days,
       :next_rotation_date,
       :on_demand_rotation_start_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2560,7 +2625,8 @@ module Aws::KMS
       :key_id,
       :wrapping_algorithm,
       :wrapping_key_spec,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2585,7 +2651,8 @@ module Aws::KMS
       :import_token,
       :public_key,
       :parameters_valid_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2621,7 +2688,8 @@ module Aws::KMS
     class GetPublicKeyRequest < Struct.new(
       :key_id,
       :grant_tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2678,7 +2746,8 @@ module Aws::KMS
       :encryption_algorithms,
       :signing_algorithms,
       :key_agreement_algorithms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2716,7 +2785,8 @@ module Aws::KMS
     class GrantConstraints < Struct.new(
       :encryption_context_subset,
       :encryption_context_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2764,7 +2834,8 @@ module Aws::KMS
       :issuing_account,
       :operations,
       :constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2868,7 +2939,8 @@ module Aws::KMS
       :import_type,
       :key_material_description,
       :key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2881,7 +2953,8 @@ module Aws::KMS
     class ImportKeyMaterialResponse < Struct.new(
       :key_id,
       :key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2893,7 +2966,8 @@ module Aws::KMS
     #   @return [String]
     class IncorrectKeyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2905,7 +2979,8 @@ module Aws::KMS
     #   @return [String]
     class IncorrectKeyMaterialException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2917,7 +2992,8 @@ module Aws::KMS
     #   @return [String]
     class IncorrectTrustAnchorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2926,7 +3002,8 @@ module Aws::KMS
     #   @return [String]
     class InvalidAliasNameException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2936,7 +3013,8 @@ module Aws::KMS
     #   @return [String]
     class InvalidArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2950,7 +3028,8 @@ module Aws::KMS
     #   @return [String]
     class InvalidCiphertextException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2959,7 +3038,8 @@ module Aws::KMS
     #   @return [String]
     class InvalidGrantIdException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2968,7 +3048,8 @@ module Aws::KMS
     #   @return [String]
     class InvalidGrantTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2978,7 +3059,8 @@ module Aws::KMS
     #   @return [String]
     class InvalidImportTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3006,7 +3088,8 @@ module Aws::KMS
     #   @return [String]
     class InvalidKeyUsageException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3016,7 +3099,8 @@ module Aws::KMS
     #   @return [String]
     class InvalidMarkerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3026,7 +3110,8 @@ module Aws::KMS
     #   @return [String]
     class KMSInternalException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3037,7 +3122,8 @@ module Aws::KMS
     #   @return [String]
     class KMSInvalidMacException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3048,7 +3134,8 @@ module Aws::KMS
     #   @return [String]
     class KMSInvalidSignatureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3074,7 +3161,8 @@ module Aws::KMS
     #   @return [String]
     class KMSInvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3088,7 +3176,8 @@ module Aws::KMS
     class KeyListEntry < Struct.new(
       :key_id,
       :key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3277,7 +3366,8 @@ module Aws::KMS
       :mac_algorithms,
       :xks_key_configuration,
       :current_key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3292,7 +3382,8 @@ module Aws::KMS
     #   @return [String]
     class KeyUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3303,7 +3394,8 @@ module Aws::KMS
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3342,7 +3434,8 @@ module Aws::KMS
       :key_id,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3363,7 +3456,8 @@ module Aws::KMS
       :aliases,
       :next_marker,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3389,7 +3483,8 @@ module Aws::KMS
       :grants,
       :next_marker,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3441,7 +3536,8 @@ module Aws::KMS
       :key_id,
       :grant_id,
       :grantee_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3478,7 +3574,8 @@ module Aws::KMS
       :key_id,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3499,7 +3596,8 @@ module Aws::KMS
       :policy_names,
       :next_marker,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3550,7 +3648,8 @@ module Aws::KMS
       :include_key_material,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3574,7 +3673,8 @@ module Aws::KMS
       :rotations,
       :next_marker,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3598,7 +3698,8 @@ module Aws::KMS
     class ListKeysRequest < Struct.new(
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3619,7 +3720,8 @@ module Aws::KMS
       :keys,
       :next_marker,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3662,7 +3764,8 @@ module Aws::KMS
       :key_id,
       :limit,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3687,7 +3790,8 @@ module Aws::KMS
       :tags,
       :next_marker,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3713,7 +3817,8 @@ module Aws::KMS
       :grants,
       :next_marker,
       :truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3748,7 +3853,8 @@ module Aws::KMS
       :limit,
       :marker,
       :retiring_principal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3758,7 +3864,8 @@ module Aws::KMS
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3782,7 +3889,8 @@ module Aws::KMS
       :multi_region_key_type,
       :primary_key,
       :replica_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3796,7 +3904,8 @@ module Aws::KMS
     class MultiRegionKey < Struct.new(
       :arn,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3806,7 +3915,8 @@ module Aws::KMS
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3895,7 +4005,8 @@ module Aws::KMS
       :policy_name,
       :policy,
       :bypass_policy_lockout_safety_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4019,7 +4130,8 @@ module Aws::KMS
       :destination_encryption_algorithm,
       :grant_tokens,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4055,7 +4167,8 @@ module Aws::KMS
       :destination_encryption_algorithm,
       :source_key_material_id,
       :destination_key_material_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4075,7 +4188,8 @@ module Aws::KMS
     class RecipientInfo < Struct.new(
       :key_encryption_algorithm,
       :attestation_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4200,7 +4314,8 @@ module Aws::KMS
       :bypass_policy_lockout_safety_check,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4221,7 +4336,8 @@ module Aws::KMS
       :replica_key_metadata,
       :replica_policy,
       :replica_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4256,7 +4372,8 @@ module Aws::KMS
       :key_id,
       :grant_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4290,7 +4407,8 @@ module Aws::KMS
       :key_id,
       :grant_id,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4316,7 +4434,8 @@ module Aws::KMS
     #   @return [String]
     class RotateKeyOnDemandRequest < Struct.new(
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4326,7 +4445,8 @@ module Aws::KMS
     #   @return [String]
     class RotateKeyOnDemandResponse < Struct.new(
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4391,7 +4511,8 @@ module Aws::KMS
       :valid_to,
       :rotation_date,
       :rotation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4427,7 +4548,8 @@ module Aws::KMS
     class ScheduleKeyDeletionRequest < Struct.new(
       :key_id,
       :pending_window_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4456,7 +4578,8 @@ module Aws::KMS
       :deletion_date,
       :key_state,
       :pending_window_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4560,7 +4683,8 @@ module Aws::KMS
       :grant_tokens,
       :signing_algorithm,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4592,7 +4716,8 @@ module Aws::KMS
       :key_id,
       :signature,
       :signing_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4612,7 +4737,8 @@ module Aws::KMS
     class Tag < Struct.new(
       :tag_key,
       :tag_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4621,7 +4747,8 @@ module Aws::KMS
     #   @return [String]
     class TagException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4654,7 +4781,8 @@ module Aws::KMS
     class TagResourceRequest < Struct.new(
       :key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4664,7 +4792,8 @@ module Aws::KMS
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4690,7 +4819,8 @@ module Aws::KMS
     class UntagResourceRequest < Struct.new(
       :key_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4726,7 +4856,8 @@ module Aws::KMS
     class UpdateAliasRequest < Struct.new(
       :alias_name,
       :target_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4831,12 +4962,14 @@ module Aws::KMS
       :xks_proxy_vpc_endpoint_service_name,
       :xks_proxy_authentication_credential,
       :xks_proxy_connectivity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateCustomKeyStoreResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4865,7 +4998,8 @@ module Aws::KMS
     class UpdateKeyDescriptionRequest < Struct.new(
       :key_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4896,7 +5030,8 @@ module Aws::KMS
     class UpdatePrimaryRegionRequest < Struct.new(
       :key_id,
       :primary_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4939,7 +5074,8 @@ module Aws::KMS
       :mac,
       :grant_tokens,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4962,7 +5098,8 @@ module Aws::KMS
       :key_id,
       :mac_valid,
       :mac_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5076,7 +5213,8 @@ module Aws::KMS
       :signing_algorithm,
       :grant_tokens,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5097,7 +5235,8 @@ module Aws::KMS
       :key_id,
       :signature_valid,
       :signing_algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5113,7 +5252,8 @@ module Aws::KMS
     #   @return [String]
     class XksKeyAlreadyInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5132,7 +5272,8 @@ module Aws::KMS
     #   @return [String]
     class XksKeyConfigurationType < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5144,7 +5285,8 @@ module Aws::KMS
     #   @return [String]
     class XksKeyInvalidConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5159,7 +5301,8 @@ module Aws::KMS
     #   @return [String]
     class XksKeyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5177,7 +5320,8 @@ module Aws::KMS
     class XksProxyAuthenticationCredentialType < Struct.new(
       :access_key_id,
       :raw_secret_access_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5213,7 +5357,8 @@ module Aws::KMS
       :uri_endpoint,
       :uri_path,
       :vpc_endpoint_service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5225,7 +5370,8 @@ module Aws::KMS
     #   @return [String]
     class XksProxyIncorrectAuthenticationCredentialException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5235,7 +5381,8 @@ module Aws::KMS
     #   @return [String]
     class XksProxyInvalidConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5247,7 +5394,8 @@ module Aws::KMS
     #   @return [String]
     class XksProxyInvalidResponseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5258,7 +5406,8 @@ module Aws::KMS
     #   @return [String]
     class XksProxyUriEndpointInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5270,7 +5419,8 @@ module Aws::KMS
     #   @return [String]
     class XksProxyUriInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5283,7 +5433,8 @@ module Aws::KMS
     #   @return [String]
     class XksProxyUriUnreachableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5294,7 +5445,8 @@ module Aws::KMS
     #   @return [String]
     class XksProxyVpcEndpointServiceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5307,7 +5459,8 @@ module Aws::KMS
     #   @return [String]
     class XksProxyVpcEndpointServiceInvalidConfigurationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5320,7 +5473,8 @@ module Aws::KMS
     #   @return [String]
     class XksProxyVpcEndpointServiceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -54,7 +54,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::ClientTokenConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::ConcurrentOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::GeneralServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::HandlerFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::HandlerInternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::InvalidCredentialsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -165,7 +165,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -179,7 +179,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::NetworkFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -193,7 +193,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::NotStabilizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -207,7 +207,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::NotUpdatableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -222,7 +222,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::PrivateTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -235,7 +235,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::RequestTokenNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -250,7 +250,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::ResourceConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -263,7 +263,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -277,7 +277,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::ServiceInternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -291,7 +291,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::ServiceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -304,7 +304,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -317,7 +317,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::TypeNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -330,7 +330,7 @@ module Aws::CloudControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudControl::Types::UnsupportedActionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

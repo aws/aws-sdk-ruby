@@ -3101,7 +3101,6 @@ module Aws::SESv2
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v2/email/reputation/entities/{ReputationEntityType}/{ReputationEntityReference}/policy", "code" => 200}}
       end)
-
     end
 
     class << self

@@ -72,7 +72,8 @@ module Aws::AppConfig
       :description,
       :uri,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +109,8 @@ module Aws::AppConfig
       :error_message,
       :error_code,
       :invocation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +127,8 @@ module Aws::AppConfig
       :id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +150,8 @@ module Aws::AppConfig
       :extension_association_id,
       :version_number,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -165,7 +169,8 @@ module Aws::AppConfig
     class BadRequestDetails < Struct.new(
       :invalid_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class InvalidConfiguration < BadRequestDetails; end
@@ -185,7 +190,8 @@ module Aws::AppConfig
       :message,
       :reason,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +231,8 @@ module Aws::AppConfig
       :location_uri,
       :validator_types,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +242,8 @@ module Aws::AppConfig
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +260,8 @@ module Aws::AppConfig
       :id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +279,8 @@ module Aws::AppConfig
       :name,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -331,7 +341,8 @@ module Aws::AppConfig
       :type,
       :kms_key_arn,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +434,8 @@ module Aws::AppConfig
       :tags,
       :type,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +474,8 @@ module Aws::AppConfig
       :growth_factor,
       :final_bake_time_in_minutes,
       :replicate_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -541,7 +554,8 @@ module Aws::AppConfig
       :growth_type,
       :replicate_to,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +587,8 @@ module Aws::AppConfig
       :description,
       :state,
       :monitors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +614,8 @@ module Aws::AppConfig
       :description,
       :monitors,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +645,8 @@ module Aws::AppConfig
       :arn,
       :parameters,
       :extension_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -664,7 +681,8 @@ module Aws::AppConfig
       :resource_identifier,
       :parameters,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +718,8 @@ module Aws::AppConfig
       :description,
       :actions,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -742,7 +761,8 @@ module Aws::AppConfig
       :parameters,
       :tags,
       :latest_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +802,8 @@ module Aws::AppConfig
       :content_type,
       :version_label,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -830,7 +851,8 @@ module Aws::AppConfig
       :content_type,
       :latest_version_number,
       :version_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -839,7 +861,8 @@ module Aws::AppConfig
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,7 +902,8 @@ module Aws::AppConfig
       :application_id,
       :configuration_profile_id,
       :deletion_protection_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +912,8 @@ module Aws::AppConfig
     #   @return [String]
     class DeleteDeploymentStrategyRequest < Struct.new(
       :deployment_strategy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +953,8 @@ module Aws::AppConfig
       :environment_id,
       :application_id,
       :deletion_protection_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +963,8 @@ module Aws::AppConfig
     #   @return [String]
     class DeleteExtensionAssociationRequest < Struct.new(
       :extension_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +978,8 @@ module Aws::AppConfig
     class DeleteExtensionRequest < Struct.new(
       :extension_identifier,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +996,8 @@ module Aws::AppConfig
       :application_id,
       :configuration_profile_id,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,7 +1022,8 @@ module Aws::AppConfig
     class DeletionProtectionSettings < Struct.new(
       :enabled,
       :protection_period_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1040,7 +1070,8 @@ module Aws::AppConfig
       :description,
       :action_invocations,
       :occurred_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,7 +1110,8 @@ module Aws::AppConfig
       :growth_factor,
       :final_bake_time_in_minutes,
       :replicate_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1141,7 +1173,8 @@ module Aws::AppConfig
       :started_at,
       :completed_at,
       :version_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1180,7 +1213,8 @@ module Aws::AppConfig
       :description,
       :state,
       :monitors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,7 +1238,8 @@ module Aws::AppConfig
       :id,
       :extension_arn,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1231,7 +1266,8 @@ module Aws::AppConfig
       :version_number,
       :arn,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1249,7 +1285,8 @@ module Aws::AppConfig
     #   @return [Types::DeletionProtectionSettings]
     class GetAccountSettingsOutput < Struct.new(
       :deletion_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1266,7 +1303,8 @@ module Aws::AppConfig
       :id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1275,7 +1313,8 @@ module Aws::AppConfig
     #   @return [String]
     class GetApplicationRequest < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1300,7 +1339,8 @@ module Aws::AppConfig
       :content,
       :configuration_version,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1361,7 +1401,8 @@ module Aws::AppConfig
       :type,
       :kms_key_arn,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1375,7 +1416,8 @@ module Aws::AppConfig
     class GetConfigurationProfileRequest < Struct.new(
       :application_id,
       :configuration_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1422,7 +1464,8 @@ module Aws::AppConfig
       :configuration,
       :client_id,
       :client_configuration_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1524,7 +1567,8 @@ module Aws::AppConfig
       :kms_key_arn,
       :kms_key_identifier,
       :version_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1548,7 +1592,8 @@ module Aws::AppConfig
       :application_id,
       :environment_id,
       :deployment_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1632,8 @@ module Aws::AppConfig
       :growth_factor,
       :final_bake_time_in_minutes,
       :replicate_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1602,7 +1648,8 @@ module Aws::AppConfig
     #   @return [String]
     class GetDeploymentStrategyRequest < Struct.new(
       :deployment_strategy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1634,7 +1681,8 @@ module Aws::AppConfig
       :description,
       :state,
       :monitors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1647,7 +1695,8 @@ module Aws::AppConfig
     class GetEnvironmentRequest < Struct.new(
       :application_id,
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1677,7 +1726,8 @@ module Aws::AppConfig
       :arn,
       :parameters,
       :extension_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1691,7 +1741,8 @@ module Aws::AppConfig
     #   @return [String]
     class GetExtensionAssociationRequest < Struct.new(
       :extension_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1727,7 +1778,8 @@ module Aws::AppConfig
       :description,
       :actions,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1746,7 +1798,8 @@ module Aws::AppConfig
     class GetExtensionRequest < Struct.new(
       :extension_identifier,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1786,7 +1839,8 @@ module Aws::AppConfig
       :content_type,
       :version_label,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1808,7 +1862,8 @@ module Aws::AppConfig
       :application_id,
       :configuration_profile_id,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1900,8 @@ module Aws::AppConfig
       :content_type,
       :version_label,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1859,7 +1915,8 @@ module Aws::AppConfig
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1889,7 +1946,8 @@ module Aws::AppConfig
       :reason,
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +1961,8 @@ module Aws::AppConfig
     class ListApplicationsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1920,7 +1979,8 @@ module Aws::AppConfig
     class ListApplicationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1934,7 +1994,8 @@ module Aws::AppConfig
     class ListConfigurationProfilesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1957,7 +2018,8 @@ module Aws::AppConfig
       :max_results,
       :next_token,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1971,7 +2033,8 @@ module Aws::AppConfig
     class ListDeploymentStrategiesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1985,7 +2048,8 @@ module Aws::AppConfig
     class ListDeploymentStrategiesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1999,7 +2063,8 @@ module Aws::AppConfig
     class ListDeploymentsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2024,7 +2089,8 @@ module Aws::AppConfig
       :environment_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2038,7 +2104,8 @@ module Aws::AppConfig
     class ListEnvironmentsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2056,7 +2123,8 @@ module Aws::AppConfig
       :application_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2071,7 +2139,8 @@ module Aws::AppConfig
     class ListExtensionAssociationsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2098,7 +2167,8 @@ module Aws::AppConfig
       :extension_version_number,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2113,7 +2183,8 @@ module Aws::AppConfig
     class ListExtensionsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2131,7 +2202,8 @@ module Aws::AppConfig
       :max_results,
       :next_token,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2145,7 +2217,8 @@ module Aws::AppConfig
     class ListHostedConfigurationVersionsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2174,7 +2247,8 @@ module Aws::AppConfig
       :max_results,
       :next_token,
       :version_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2185,7 +2259,8 @@ module Aws::AppConfig
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2269,8 @@ module Aws::AppConfig
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2209,7 +2285,8 @@ module Aws::AppConfig
     class Monitor < Struct.new(
       :alarm_arn,
       :alarm_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2232,7 +2309,8 @@ module Aws::AppConfig
       :description,
       :required,
       :dynamic,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2256,7 +2334,8 @@ module Aws::AppConfig
       :measure,
       :limit,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2274,7 +2353,8 @@ module Aws::AppConfig
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2291,7 +2371,8 @@ module Aws::AppConfig
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2393,7 +2474,8 @@ module Aws::AppConfig
       :kms_key_arn,
       :kms_key_identifier,
       :version_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2445,7 +2527,8 @@ module Aws::AppConfig
       :tags,
       :kms_key_identifier,
       :dynamic_extension_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2547,7 +2630,8 @@ module Aws::AppConfig
       :kms_key_arn,
       :kms_key_identifier,
       :version_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2577,7 +2661,8 @@ module Aws::AppConfig
       :environment_id,
       :deployment_number,
       :allow_revert,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2592,7 +2677,8 @@ module Aws::AppConfig
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2605,7 +2691,8 @@ module Aws::AppConfig
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2618,7 +2705,8 @@ module Aws::AppConfig
     #   @return [Types::DeletionProtectionSettings]
     class UpdateAccountSettingsOutput < Struct.new(
       :deletion_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2631,7 +2719,8 @@ module Aws::AppConfig
     #   @return [Types::DeletionProtectionSettings]
     class UpdateAccountSettingsRequest < Struct.new(
       :deletion_protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2648,7 +2737,8 @@ module Aws::AppConfig
       :id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2665,7 +2755,8 @@ module Aws::AppConfig
       :application_id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2726,7 +2817,8 @@ module Aws::AppConfig
       :type,
       :kms_key_arn,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2768,7 +2860,8 @@ module Aws::AppConfig
       :retrieval_role_arn,
       :validators,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2900,8 @@ module Aws::AppConfig
       :growth_factor,
       :final_bake_time_in_minutes,
       :replicate_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2871,7 +2965,8 @@ module Aws::AppConfig
       :final_bake_time_in_minutes,
       :growth_factor,
       :growth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2903,7 +2998,8 @@ module Aws::AppConfig
       :description,
       :state,
       :monitors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2928,7 +3024,8 @@ module Aws::AppConfig
       :name,
       :description,
       :monitors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2958,7 +3055,8 @@ module Aws::AppConfig
       :arn,
       :parameters,
       :extension_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2976,7 +3074,8 @@ module Aws::AppConfig
     class UpdateExtensionAssociationRequest < Struct.new(
       :extension_association_id,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3012,7 +3111,8 @@ module Aws::AppConfig
       :description,
       :actions,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3042,7 +3142,8 @@ module Aws::AppConfig
       :actions,
       :parameters,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3059,7 +3160,8 @@ module Aws::AppConfig
       :application_id,
       :configuration_profile_id,
       :configuration_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3080,7 +3182,8 @@ module Aws::AppConfig
     class Validator < Struct.new(
       :type,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

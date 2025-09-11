@@ -1889,7 +1889,6 @@ module Aws::MailManager
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

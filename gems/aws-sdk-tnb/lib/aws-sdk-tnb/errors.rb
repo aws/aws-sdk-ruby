@@ -39,7 +39,7 @@ module Aws::Tnb
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Tnb::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::Tnb
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Tnb::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::Tnb
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Tnb::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::Tnb
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Tnb::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::Tnb
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Tnb::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::Tnb
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Tnb::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -1726,7 +1726,6 @@ module Aws::LicenseManager
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerInternalException)
         operation.traits = {}
       end)
-
     end
 
     class << self

@@ -81,7 +81,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::ADAssessmentLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::AuthenticationFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The textual message for the exception.</p>
@@ -134,7 +134,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::CertificateAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::CertificateDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -169,7 +169,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::CertificateInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -186,7 +186,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::CertificateLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -203,7 +203,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::ClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -221,7 +221,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::DirectoryAlreadyInRegionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -238,7 +238,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::DirectoryAlreadySharedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -255,7 +255,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::DirectoryDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -272,7 +272,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::DirectoryInDesiredStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -291,7 +291,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::DirectoryLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -308,7 +308,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::DirectoryNotSharedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -325,7 +325,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::DirectoryUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -342,7 +342,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::DisableAlreadyInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -360,7 +360,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::DomainControllerLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -377,7 +377,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::EnableAlreadyInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -394,7 +394,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::EntityAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -411,7 +411,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::EntityDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -428,7 +428,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::IncompatibleSettingsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -445,7 +445,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::InsufficientPermissionsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -462,7 +462,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::InvalidCertificateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -479,7 +479,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::InvalidClientAuthStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -497,7 +497,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::InvalidLDAPSStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -514,7 +514,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -531,7 +531,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -549,7 +549,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::InvalidPasswordException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -566,7 +566,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::InvalidTargetException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -584,7 +584,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::IpRouteLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -602,7 +602,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::NoAvailableCertificateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -619,7 +619,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::OrganizationsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -637,7 +637,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::RegionLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -654,7 +654,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::ServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -672,7 +672,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::ShareLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -691,7 +691,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::SnapshotLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -708,7 +708,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::TagLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -725,7 +725,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -742,7 +742,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::UnsupportedSettingsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -759,7 +759,7 @@ module Aws::DirectoryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::UserDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

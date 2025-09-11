@@ -39,7 +39,7 @@ module Aws::MediaPackageVod
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaPackageVod::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::MediaPackageVod
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaPackageVod::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::MediaPackageVod
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaPackageVod::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::MediaPackageVod
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaPackageVod::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::MediaPackageVod
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaPackageVod::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::MediaPackageVod
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaPackageVod::Types::UnprocessableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

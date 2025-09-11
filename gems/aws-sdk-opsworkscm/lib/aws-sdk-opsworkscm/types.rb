@@ -42,7 +42,8 @@ module Aws::OpsWorksCM
       :name,
       :maximum,
       :used,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +90,8 @@ module Aws::OpsWorksCM
       :server_name,
       :node_name,
       :engine_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -99,7 +101,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     class AssociateNodeResponse < Struct.new(
       :node_association_status_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +254,8 @@ module Aws::OpsWorksCM
       :subnet_ids,
       :tools_version,
       :user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +296,8 @@ module Aws::OpsWorksCM
       :server_name,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +306,8 @@ module Aws::OpsWorksCM
     #   @return [Types::Backup]
     class CreateBackupResponse < Struct.new(
       :backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +556,8 @@ module Aws::OpsWorksCM
       :subnet_ids,
       :tags,
       :backup_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +567,8 @@ module Aws::OpsWorksCM
     #   @return [Types::Server]
     class CreateServerResponse < Struct.new(
       :server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,12 +579,14 @@ module Aws::OpsWorksCM
     #   @return [String]
     class DeleteBackupRequest < Struct.new(
       :backup_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteBackupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,17 +595,20 @@ module Aws::OpsWorksCM
     #   @return [String]
     class DeleteServerRequest < Struct.new(
       :server_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteServerResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountAttributesRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +619,8 @@ module Aws::OpsWorksCM
     #   @return [Array<Types::AccountAttribute>]
     class DescribeAccountAttributesResponse < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +643,8 @@ module Aws::OpsWorksCM
       :server_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +658,8 @@ module Aws::OpsWorksCM
     class DescribeBackupsResponse < Struct.new(
       :backups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +687,8 @@ module Aws::OpsWorksCM
       :server_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +709,8 @@ module Aws::OpsWorksCM
     class DescribeEventsResponse < Struct.new(
       :server_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -707,7 +725,8 @@ module Aws::OpsWorksCM
     class DescribeNodeAssociationStatusRequest < Struct.new(
       :node_association_status_token,
       :server_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -743,7 +762,8 @@ module Aws::OpsWorksCM
     class DescribeNodeAssociationStatusResponse < Struct.new(
       :node_association_status,
       :engine_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +782,8 @@ module Aws::OpsWorksCM
       :server_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,7 +818,8 @@ module Aws::OpsWorksCM
     class DescribeServersResponse < Struct.new(
       :servers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +851,8 @@ module Aws::OpsWorksCM
       :server_name,
       :node_name,
       :engine_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +864,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     class DisassociateNodeResponse < Struct.new(
       :node_association_status_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,7 +882,8 @@ module Aws::OpsWorksCM
     class EngineAttribute < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -901,7 +926,8 @@ module Aws::OpsWorksCM
       :export_attribute_name,
       :server_name,
       :input_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +940,8 @@ module Aws::OpsWorksCM
     class ExportServerEngineAttributeResponse < Struct.new(
       :engine_attribute,
       :server_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -926,7 +953,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +967,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     class InvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +980,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -978,7 +1008,8 @@ module Aws::OpsWorksCM
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1022,8 @@ module Aws::OpsWorksCM
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1035,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1015,7 +1048,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1043,7 +1077,8 @@ module Aws::OpsWorksCM
       :server_name,
       :instance_type,
       :key_pair,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1053,7 +1088,8 @@ module Aws::OpsWorksCM
     #   @return [Types::Server]
     class RestoreServerResponse < Struct.new(
       :server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1230,7 +1266,8 @@ module Aws::OpsWorksCM
       :status_reason,
       :subnet_ids,
       :server_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1292,8 @@ module Aws::OpsWorksCM
       :server_name,
       :message,
       :log_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1319,8 @@ module Aws::OpsWorksCM
     class StartMaintenanceRequest < Struct.new(
       :server_name,
       :engine_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1330,8 @@ module Aws::OpsWorksCM
     #   @return [Types::Server]
     class StartMaintenanceResponse < Struct.new(
       :server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,7 +1351,8 @@ module Aws::OpsWorksCM
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,12 +1385,14 @@ module Aws::OpsWorksCM
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1363,12 +1406,14 @@ module Aws::OpsWorksCM
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1388,7 +1433,8 @@ module Aws::OpsWorksCM
       :server_name,
       :attribute_name,
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1444,8 @@ module Aws::OpsWorksCM
     #   @return [Types::Server]
     class UpdateServerEngineAttributesResponse < Struct.new(
       :server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1439,7 +1486,8 @@ module Aws::OpsWorksCM
       :server_name,
       :preferred_maintenance_window,
       :preferred_backup_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1497,8 @@ module Aws::OpsWorksCM
     #   @return [Types::Server]
     class UpdateServerResponse < Struct.new(
       :server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1461,7 +1510,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

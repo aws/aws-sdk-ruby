@@ -32,7 +32,8 @@ module Aws::CloudWatch
       :history_item_type,
       :history_summary,
       :history_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +91,8 @@ module Aws::CloudWatch
       :metric_characteristics,
       :single_metric_anomaly_detector,
       :metric_math_anomaly_detector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +114,8 @@ module Aws::CloudWatch
     class AnomalyDetectorConfiguration < Struct.new(
       :excluded_time_ranges,
       :metric_timezone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +228,8 @@ module Aws::CloudWatch
       :actions_suppressor,
       :actions_suppressor_wait_period,
       :actions_suppressor_extension_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +238,8 @@ module Aws::CloudWatch
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -243,7 +248,8 @@ module Aws::CloudWatch
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +273,8 @@ module Aws::CloudWatch
       :dashboard_arn,
       :last_modified,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +286,8 @@ module Aws::CloudWatch
     class DashboardInvalidInputError < Struct.new(
       :message,
       :dashboard_validation_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +296,8 @@ module Aws::CloudWatch
     #   @return [String]
     class DashboardNotFoundError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +311,8 @@ module Aws::CloudWatch
     class DashboardValidationMessage < Struct.new(
       :data_path,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +352,8 @@ module Aws::CloudWatch
       :maximum,
       :unit,
       :extended_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +362,8 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     class DeleteAlarmsInput < Struct.new(
       :alarm_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,12 +460,14 @@ module Aws::CloudWatch
       :stat,
       :single_metric_anomaly_detector,
       :metric_math_anomaly_detector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAnomalyDetectorOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,12 +476,14 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     class DeleteDashboardsInput < Struct.new(
       :dashboard_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDashboardsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -477,7 +493,8 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     class DeleteInsightRulesInput < Struct.new(
       :rule_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +504,8 @@ module Aws::CloudWatch
     #   @return [Array<Types::PartialFailure>]
     class DeleteInsightRulesOutput < Struct.new(
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,12 +514,14 @@ module Aws::CloudWatch
     #   @return [String]
     class DeleteMetricStreamInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMetricStreamOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +563,8 @@ module Aws::CloudWatch
       :max_records,
       :next_token,
       :scan_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +577,8 @@ module Aws::CloudWatch
     class DescribeAlarmHistoryOutput < Struct.new(
       :alarm_history_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -592,7 +614,8 @@ module Aws::CloudWatch
       :dimensions,
       :period,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +624,8 @@ module Aws::CloudWatch
     #   @return [Array<Types::MetricAlarm>]
     class DescribeAlarmsForMetricOutput < Struct.new(
       :metric_alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +708,8 @@ module Aws::CloudWatch
       :action_prefix,
       :max_records,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +726,8 @@ module Aws::CloudWatch
       :composite_alarms,
       :metric_alarms,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +767,8 @@ module Aws::CloudWatch
       :metric_name,
       :dimensions,
       :anomaly_detector_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +782,8 @@ module Aws::CloudWatch
     class DescribeAnomalyDetectorsOutput < Struct.new(
       :anomaly_detectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +798,8 @@ module Aws::CloudWatch
     class DescribeInsightRulesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +813,8 @@ module Aws::CloudWatch
     class DescribeInsightRulesOutput < Struct.new(
       :next_token,
       :insight_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +838,8 @@ module Aws::CloudWatch
     class Dimension < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +853,8 @@ module Aws::CloudWatch
     class DimensionFilter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +863,8 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     class DisableAlarmActionsInput < Struct.new(
       :alarm_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +874,8 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     class DisableInsightRulesInput < Struct.new(
       :rule_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +885,8 @@ module Aws::CloudWatch
     #   @return [Array<Types::PartialFailure>]
     class DisableInsightRulesOutput < Struct.new(
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -860,7 +895,8 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     class EnableAlarmActionsInput < Struct.new(
       :alarm_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +906,8 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     class EnableInsightRulesInput < Struct.new(
       :rule_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -880,7 +917,8 @@ module Aws::CloudWatch
     #   @return [Array<Types::PartialFailure>]
     class EnableInsightRulesOutput < Struct.new(
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -912,7 +950,8 @@ module Aws::CloudWatch
     class Entity < Struct.new(
       :key_attributes,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +966,8 @@ module Aws::CloudWatch
     class EntityMetricData < Struct.new(
       :entity,
       :metric_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -936,7 +976,8 @@ module Aws::CloudWatch
     #   @return [String]
     class GetDashboardInput < Struct.new(
       :dashboard_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -955,7 +996,8 @@ module Aws::CloudWatch
       :dashboard_arn,
       :dashboard_body,
       :dashboard_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1080,8 @@ module Aws::CloudWatch
       :max_contributor_count,
       :metrics,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1116,8 @@ module Aws::CloudWatch
       :approximate_unique_count,
       :contributors,
       :metric_datapoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1198,8 @@ module Aws::CloudWatch
       :scan_by,
       :max_datapoints,
       :label_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1178,7 +1223,8 @@ module Aws::CloudWatch
       :metric_data_results,
       :next_token,
       :messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1287,7 +1333,8 @@ module Aws::CloudWatch
       :statistics,
       :extended_statistics,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1300,7 +1347,8 @@ module Aws::CloudWatch
     class GetMetricStatisticsOutput < Struct.new(
       :label,
       :datapoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1357,8 @@ module Aws::CloudWatch
     #   @return [String]
     class GetMetricStreamInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1423,8 @@ module Aws::CloudWatch
       :output_format,
       :statistics_configurations,
       :include_linked_accounts_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1482,8 @@ module Aws::CloudWatch
     class GetMetricWidgetImageInput < Struct.new(
       :metric_widget,
       :output_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1442,7 +1493,8 @@ module Aws::CloudWatch
     #   @return [String]
     class GetMetricWidgetImageOutput < Struct.new(
       :metric_widget_image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1480,7 +1532,8 @@ module Aws::CloudWatch
       :definition,
       :managed_rule,
       :apply_on_transformed_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1558,8 @@ module Aws::CloudWatch
       :keys,
       :approximate_aggregate_value,
       :datapoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1520,7 +1574,8 @@ module Aws::CloudWatch
     class InsightRuleContributorDatapoint < Struct.new(
       :timestamp,
       :approximate_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1580,7 +1635,8 @@ module Aws::CloudWatch
       :sum,
       :minimum,
       :maximum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1591,7 +1647,8 @@ module Aws::CloudWatch
     #   @return [String]
     class InternalServiceFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1658,8 @@ module Aws::CloudWatch
     #   @return [String]
     class InvalidFormatFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1669,8 @@ module Aws::CloudWatch
     #   @return [String]
     class InvalidNextToken < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,7 +1680,8 @@ module Aws::CloudWatch
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1631,7 +1691,8 @@ module Aws::CloudWatch
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1712,8 @@ module Aws::CloudWatch
     #   @return [String]
     class LabelOptions < Struct.new(
       :timezone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,7 +1722,8 @@ module Aws::CloudWatch
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1733,8 @@ module Aws::CloudWatch
     #   @return [String]
     class LimitExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1686,7 +1750,8 @@ module Aws::CloudWatch
     class ListDashboardsInput < Struct.new(
       :dashboard_name_prefix,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,7 +1764,8 @@ module Aws::CloudWatch
     class ListDashboardsOutput < Struct.new(
       :dashboard_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1719,7 +1785,8 @@ module Aws::CloudWatch
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1734,7 +1801,8 @@ module Aws::CloudWatch
     class ListManagedInsightRulesOutput < Struct.new(
       :managed_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1748,7 +1816,8 @@ module Aws::CloudWatch
     class ListMetricStreamsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1762,7 +1831,8 @@ module Aws::CloudWatch
     class ListMetricStreamsOutput < Struct.new(
       :next_token,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1808,7 +1878,8 @@ module Aws::CloudWatch
       :recently_active,
       :include_linked_accounts,
       :owning_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1829,7 +1900,8 @@ module Aws::CloudWatch
       :metrics,
       :next_token,
       :owning_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1848,7 +1920,8 @@ module Aws::CloudWatch
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1857,7 +1930,8 @@ module Aws::CloudWatch
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1962,8 @@ module Aws::CloudWatch
       :template_name,
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1912,7 +1987,8 @@ module Aws::CloudWatch
       :template_name,
       :resource_arn,
       :rule_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +2003,8 @@ module Aws::CloudWatch
     class ManagedRuleState < Struct.new(
       :rule_name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2024,8 @@ module Aws::CloudWatch
     class MessageData < Struct.new(
       :code,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1965,7 +2043,8 @@ module Aws::CloudWatch
       :namespace,
       :metric_name,
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2116,7 +2195,8 @@ module Aws::CloudWatch
       :threshold_metric_id,
       :evaluation_state,
       :state_transitioned_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2130,7 +2210,8 @@ module Aws::CloudWatch
     #   @return [Boolean]
     class MetricCharacteristics < Struct.new(
       :periodic_spikes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2229,7 +2310,8 @@ module Aws::CloudWatch
       :return_data,
       :period,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2271,7 +2353,8 @@ module Aws::CloudWatch
       :values,
       :status_code,
       :messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2343,7 +2426,8 @@ module Aws::CloudWatch
       :counts,
       :unit,
       :storage_resolution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2362,7 +2446,8 @@ module Aws::CloudWatch
     #   @return [Array<Types::MetricDataQuery>]
     class MetricMathAnomalyDetector < Struct.new(
       :metric_data_queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2500,8 @@ module Aws::CloudWatch
       :period,
       :stat,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2453,7 +2539,8 @@ module Aws::CloudWatch
       :firehose_arn,
       :state,
       :output_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2479,7 +2566,8 @@ module Aws::CloudWatch
     class MetricStreamFilter < Struct.new(
       :namespace,
       :metric_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2514,7 +2602,8 @@ module Aws::CloudWatch
     class MetricStreamStatisticsConfiguration < Struct.new(
       :include_metrics,
       :additional_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2529,7 +2618,8 @@ module Aws::CloudWatch
     class MetricStreamStatisticsMetric < Struct.new(
       :namespace,
       :metric_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2539,7 +2629,8 @@ module Aws::CloudWatch
     #   @return [String]
     class MissingRequiredParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2563,7 +2654,8 @@ module Aws::CloudWatch
       :exception_type,
       :failure_code,
       :failure_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2675,12 +2767,14 @@ module Aws::CloudWatch
       :metric_characteristics,
       :single_metric_anomaly_detector,
       :metric_math_anomaly_detector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutAnomalyDetectorOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2934,7 +3028,8 @@ module Aws::CloudWatch
       :actions_suppressor,
       :actions_suppressor_wait_period,
       :actions_suppressor_extension_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2952,7 +3047,8 @@ module Aws::CloudWatch
     class PutDashboardInput < Struct.new(
       :dashboard_name,
       :dashboard_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2967,7 +3063,8 @@ module Aws::CloudWatch
     #   @return [Array<Types::DashboardValidationMessage>]
     class PutDashboardOutput < Struct.new(
       :dashboard_validation_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3013,12 +3110,14 @@ module Aws::CloudWatch
       :rule_definition,
       :tags,
       :apply_on_transformed_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutInsightRuleOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3027,7 +3126,8 @@ module Aws::CloudWatch
     #   @return [Array<Types::ManagedRule>]
     class PutManagedInsightRulesInput < Struct.new(
       :managed_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3036,7 +3136,8 @@ module Aws::CloudWatch
     #   @return [Array<Types::PartialFailure>]
     class PutManagedInsightRulesOutput < Struct.new(
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3628,7 +3729,8 @@ module Aws::CloudWatch
       :metrics,
       :tags,
       :threshold_metric_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3716,7 +3818,8 @@ module Aws::CloudWatch
       :metric_data,
       :entity_metric_data,
       :strict_entity_validation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3801,7 +3904,8 @@ module Aws::CloudWatch
       :tags,
       :statistics_configurations,
       :include_linked_accounts_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3810,7 +3914,8 @@ module Aws::CloudWatch
     #   @return [String]
     class PutMetricStreamOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3829,7 +3934,8 @@ module Aws::CloudWatch
     class Range < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3839,7 +3945,8 @@ module Aws::CloudWatch
     #   @return [String]
     class ResourceNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3854,7 +3961,8 @@ module Aws::CloudWatch
       :resource_type,
       :resource_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3878,7 +3986,8 @@ module Aws::CloudWatch
       :state_value,
       :state_reason,
       :state_reason_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3909,7 +4018,8 @@ module Aws::CloudWatch
       :metric_name,
       :dimensions,
       :stat,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3921,12 +4031,14 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     class StartMetricStreamsInput < Struct.new(
       :names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartMetricStreamsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3948,7 +4060,8 @@ module Aws::CloudWatch
       :sum,
       :minimum,
       :maximum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3960,12 +4073,14 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     class StopMetricStreamsInput < Struct.new(
       :names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopMetricStreamsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3980,7 +4095,8 @@ module Aws::CloudWatch
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4003,12 +4119,14 @@ module Aws::CloudWatch
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4031,12 +4149,14 @@ module Aws::CloudWatch
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

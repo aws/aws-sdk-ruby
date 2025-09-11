@@ -11,7 +11,8 @@ module Aws::AppSync
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +35,8 @@ module Aws::AppSync
       :open_id_connect_config,
       :user_pool_config,
       :lambda_authorizer_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +88,8 @@ module Aws::AppSync
       :xray_enabled,
       :waf_web_acl_arn,
       :event_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -130,7 +133,8 @@ module Aws::AppSync
       :api_id,
       :association_status,
       :deployment_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +302,8 @@ module Aws::AppSync
       :type,
       :status,
       :health_metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -396,7 +401,8 @@ module Aws::AppSync
       :description,
       :expires,
       :deletes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -411,7 +417,8 @@ module Aws::AppSync
     #   @return [String]
     class ApiKeyLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -421,7 +428,8 @@ module Aws::AppSync
     #   @return [String]
     class ApiKeyValidityOutOfBoundsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -430,7 +438,8 @@ module Aws::AppSync
     #   @return [String]
     class ApiLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +456,8 @@ module Aws::AppSync
     class AppSyncRuntime < Struct.new(
       :name,
       :runtime_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +470,8 @@ module Aws::AppSync
     class AssociateApiRequest < Struct.new(
       :domain_name,
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +480,8 @@ module Aws::AppSync
     #   @return [Types::ApiAssociation]
     class AssociateApiResponse < Struct.new(
       :api_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +508,8 @@ module Aws::AppSync
       :merged_api_identifier,
       :description,
       :source_api_association_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +518,8 @@ module Aws::AppSync
     #   @return [Types::SourceApiAssociation]
     class AssociateMergedGraphqlApiResponse < Struct.new(
       :source_api_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +546,8 @@ module Aws::AppSync
       :source_api_identifier,
       :description,
       :source_api_association_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -541,7 +556,8 @@ module Aws::AppSync
     #   @return [Types::SourceApiAssociation]
     class AssociateSourceGraphqlApiResponse < Struct.new(
       :source_api_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -552,7 +568,8 @@ module Aws::AppSync
     #   @return [String]
     class AuthMode < Struct.new(
       :auth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +593,8 @@ module Aws::AppSync
       :cognito_config,
       :open_id_connect_config,
       :lambda_authorizer_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +615,8 @@ module Aws::AppSync
     class AuthorizationConfig < Struct.new(
       :authorization_type,
       :aws_iam_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +630,8 @@ module Aws::AppSync
     class AwsIamConfig < Struct.new(
       :signing_region,
       :signing_service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +642,8 @@ module Aws::AppSync
     #   @return [Array<Types::CodeError>]
     class BadRequestDetail < Struct.new(
       :code_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +663,8 @@ module Aws::AppSync
       :message,
       :reason,
       :detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -659,7 +681,8 @@ module Aws::AppSync
     class CachingConfig < Struct.new(
       :ttl,
       :caching_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -717,7 +740,8 @@ module Aws::AppSync
       :created,
       :last_modified,
       :handler_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -739,7 +763,8 @@ module Aws::AppSync
       :error_type,
       :value,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +782,8 @@ module Aws::AppSync
       :line,
       :column,
       :span,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -783,7 +809,8 @@ module Aws::AppSync
       :user_pool_id,
       :aws_region,
       :app_id_client_regex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +829,8 @@ module Aws::AppSync
       :user_pool_id,
       :aws_region,
       :app_id_client_regex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -812,7 +840,8 @@ module Aws::AppSync
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +852,8 @@ module Aws::AppSync
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1000,8 @@ module Aws::AppSync
       :api_caching_behavior,
       :type,
       :health_metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1011,8 @@ module Aws::AppSync
     #   @return [Types::ApiCache]
     class CreateApiCacheResponse < Struct.new(
       :api_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1031,8 @@ module Aws::AppSync
       :api_id,
       :description,
       :expires,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1008,7 +1041,8 @@ module Aws::AppSync
     #   @return [Types::ApiKey]
     class CreateApiKeyResponse < Struct.new(
       :api_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,7 +1065,8 @@ module Aws::AppSync
       :owner_contact,
       :tags,
       :event_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1075,8 @@ module Aws::AppSync
     #   @return [Types::Api]
     class CreateApiResponse < Struct.new(
       :api,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1079,7 +1115,8 @@ module Aws::AppSync
       :code_handlers,
       :tags,
       :handler_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1088,7 +1125,8 @@ module Aws::AppSync
     #   @return [Types::ChannelNamespace]
     class CreateChannelNamespaceResponse < Struct.new(
       :channel_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1193,8 @@ module Aws::AppSync
       :relational_database_config,
       :event_bridge_config,
       :metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1203,8 @@ module Aws::AppSync
     #   @return [Types::DataSource]
     class CreateDataSourceResponse < Struct.new(
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1188,7 +1228,8 @@ module Aws::AppSync
       :certificate_arn,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1197,7 +1238,8 @@ module Aws::AppSync
     #   @return [Types::DomainNameConfig]
     class CreateDomainNameResponse < Struct.new(
       :domain_name_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1297,8 @@ module Aws::AppSync
       :max_batch_size,
       :runtime,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,7 +1307,8 @@ module Aws::AppSync
     #   @return [Types::FunctionConfiguration]
     class CreateFunctionResponse < Struct.new(
       :function_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1363,7 +1407,8 @@ module Aws::AppSync
       :query_depth_limit,
       :resolver_count_limit,
       :enhanced_metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1372,7 +1417,8 @@ module Aws::AppSync
     #   @return [Types::GraphqlApi]
     class CreateGraphqlApiResponse < Struct.new(
       :graphql_api,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1464,7 +1510,8 @@ module Aws::AppSync
       :runtime,
       :code,
       :metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1473,7 +1520,8 @@ module Aws::AppSync
     #   @return [Types::Resolver]
     class CreateResolverResponse < Struct.new(
       :resolver,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1492,7 +1540,8 @@ module Aws::AppSync
       :api_id,
       :definition,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1501,7 +1550,8 @@ module Aws::AppSync
     #   @return [Types::Type]
     class CreateTypeResponse < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1614,7 +1664,8 @@ module Aws::AppSync
       :relational_database_config,
       :event_bridge_config,
       :metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1644,7 +1695,8 @@ module Aws::AppSync
       :primary_key,
       :indexes,
       :sdl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1714,8 @@ module Aws::AppSync
       :name,
       :type,
       :length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1718,7 +1771,8 @@ module Aws::AppSync
       :name,
       :type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1732,7 +1786,8 @@ module Aws::AppSync
     class DataSourceIntrospectionModelIndex < Struct.new(
       :name,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1749,7 +1804,8 @@ module Aws::AppSync
     class DataSourceIntrospectionResult < Struct.new(
       :models,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1759,13 +1815,15 @@ module Aws::AppSync
     #   @return [String]
     class DeleteApiCacheRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DeleteApiCache</code> operation.</p>
     class DeleteApiCacheResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,12 +1836,14 @@ module Aws::AppSync
     class DeleteApiKeyRequest < Struct.new(
       :api_id,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApiKeyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,12 +1852,14 @@ module Aws::AppSync
     #   @return [String]
     class DeleteApiRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApiResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,12 +1872,14 @@ module Aws::AppSync
     class DeleteChannelNamespaceRequest < Struct.new(
       :api_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelNamespaceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1828,12 +1892,14 @@ module Aws::AppSync
     class DeleteDataSourceRequest < Struct.new(
       :api_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataSourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1842,12 +1908,14 @@ module Aws::AppSync
     #   @return [String]
     class DeleteDomainNameRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDomainNameResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1860,12 +1928,14 @@ module Aws::AppSync
     class DeleteFunctionRequest < Struct.new(
       :api_id,
       :function_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFunctionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1874,12 +1944,14 @@ module Aws::AppSync
     #   @return [String]
     class DeleteGraphqlApiRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGraphqlApiResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1896,12 +1968,14 @@ module Aws::AppSync
       :api_id,
       :type_name,
       :field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResolverResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1914,12 +1988,14 @@ module Aws::AppSync
     class DeleteTypeRequest < Struct.new(
       :api_id,
       :type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTypeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1938,7 +2014,8 @@ module Aws::AppSync
       :base_table_ttl,
       :delta_sync_table_name,
       :delta_sync_table_ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1953,12 +2030,14 @@ module Aws::AppSync
     #   @return [String]
     class DisassociateApiRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateApiResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1974,7 +2053,8 @@ module Aws::AppSync
     class DisassociateMergedGraphqlApiRequest < Struct.new(
       :source_api_identifier,
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2063,8 @@ module Aws::AppSync
     #   @return [String]
     class DisassociateMergedGraphqlApiResponse < Struct.new(
       :source_api_association_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1999,7 +2080,8 @@ module Aws::AppSync
     class DisassociateSourceGraphqlApiRequest < Struct.new(
       :merged_api_identifier,
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2008,7 +2090,8 @@ module Aws::AppSync
     #   @return [String]
     class DisassociateSourceGraphqlApiResponse < Struct.new(
       :source_api_association_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2045,7 +2128,8 @@ module Aws::AppSync
       :hosted_zone_id,
       :tags,
       :domain_name_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2071,7 +2155,8 @@ module Aws::AppSync
       :use_caller_credentials,
       :delta_sync_config,
       :versioned,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2094,7 +2179,8 @@ module Aws::AppSync
     class ElasticsearchDataSourceConfig < Struct.new(
       :endpoint,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2288,7 +2374,8 @@ module Aws::AppSync
       :resolver_level_metrics_behavior,
       :data_source_level_metrics_behavior,
       :operation_level_metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2299,7 +2386,8 @@ module Aws::AppSync
     #   @return [String]
     class ErrorDetail < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2313,7 +2401,8 @@ module Aws::AppSync
     class EvaluateCodeErrorDetail < Struct.new(
       :message,
       :code_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2339,7 +2428,8 @@ module Aws::AppSync
       :code,
       :context,
       :function,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2365,7 +2455,8 @@ module Aws::AppSync
       :logs,
       :stash,
       :out_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2380,7 +2471,8 @@ module Aws::AppSync
     class EvaluateMappingTemplateRequest < Struct.new(
       :template,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2406,7 +2498,8 @@ module Aws::AppSync
       :logs,
       :stash,
       :out_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2417,7 +2510,8 @@ module Aws::AppSync
     #   @return [String]
     class EventBridgeDataSourceConfig < Struct.new(
       :event_bus_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2444,7 +2538,8 @@ module Aws::AppSync
       :default_publish_auth_modes,
       :default_subscribe_auth_modes,
       :log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2458,7 +2553,8 @@ module Aws::AppSync
     class EventLogConfig < Struct.new(
       :log_level,
       :cloud_watch_logs_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2468,13 +2564,15 @@ module Aws::AppSync
     #   @return [String]
     class FlushApiCacheRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>FlushApiCache</code> operation.</p>
     class FlushApiCacheResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2536,7 +2634,8 @@ module Aws::AppSync
       :max_batch_size,
       :runtime,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2550,7 +2649,8 @@ module Aws::AppSync
     #   @return [String]
     class GetApiAssociationRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2559,7 +2659,8 @@ module Aws::AppSync
     #   @return [Types::ApiAssociation]
     class GetApiAssociationResponse < Struct.new(
       :api_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2569,7 +2670,8 @@ module Aws::AppSync
     #   @return [String]
     class GetApiCacheRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2579,7 +2681,8 @@ module Aws::AppSync
     #   @return [Types::ApiCache]
     class GetApiCacheResponse < Struct.new(
       :api_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2588,7 +2691,8 @@ module Aws::AppSync
     #   @return [String]
     class GetApiRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2597,7 +2701,8 @@ module Aws::AppSync
     #   @return [Types::Api]
     class GetApiResponse < Struct.new(
       :api,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2610,7 +2715,8 @@ module Aws::AppSync
     class GetChannelNamespaceRequest < Struct.new(
       :api_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2619,7 +2725,8 @@ module Aws::AppSync
     #   @return [Types::ChannelNamespace]
     class GetChannelNamespaceResponse < Struct.new(
       :channel_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2647,7 +2754,8 @@ module Aws::AppSync
       :include_models_sdl,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2675,7 +2783,8 @@ module Aws::AppSync
       :introspection_status,
       :introspection_status_detail,
       :introspection_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2688,7 +2797,8 @@ module Aws::AppSync
     class GetDataSourceRequest < Struct.new(
       :api_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2697,7 +2807,8 @@ module Aws::AppSync
     #   @return [Types::DataSource]
     class GetDataSourceResponse < Struct.new(
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2706,7 +2817,8 @@ module Aws::AppSync
     #   @return [String]
     class GetDomainNameRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2715,7 +2827,8 @@ module Aws::AppSync
     #   @return [Types::DomainNameConfig]
     class GetDomainNameResponse < Struct.new(
       :domain_name_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2728,7 +2841,8 @@ module Aws::AppSync
     class GetFunctionRequest < Struct.new(
       :api_id,
       :function_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2737,7 +2851,8 @@ module Aws::AppSync
     #   @return [Types::FunctionConfiguration]
     class GetFunctionResponse < Struct.new(
       :function_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2746,7 +2861,8 @@ module Aws::AppSync
     #   @return [String]
     class GetGraphqlApiEnvironmentVariablesRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2756,7 +2872,8 @@ module Aws::AppSync
     #   @return [Hash<String, String>]
     class GetGraphqlApiEnvironmentVariablesResponse < Struct.new(
       :environment_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2765,7 +2882,8 @@ module Aws::AppSync
     #   @return [String]
     class GetGraphqlApiRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2774,7 +2892,8 @@ module Aws::AppSync
     #   @return [Types::GraphqlApi]
     class GetGraphqlApiResponse < Struct.new(
       :graphql_api,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2791,7 +2910,8 @@ module Aws::AppSync
       :api_id,
       :format,
       :include_directives,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2802,7 +2922,8 @@ module Aws::AppSync
     #   @return [String]
     class GetIntrospectionSchemaResponse < Struct.new(
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2819,7 +2940,8 @@ module Aws::AppSync
       :api_id,
       :type_name,
       :field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2828,7 +2950,8 @@ module Aws::AppSync
     #   @return [Types::Resolver]
     class GetResolverResponse < Struct.new(
       :resolver,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2837,7 +2960,8 @@ module Aws::AppSync
     #   @return [String]
     class GetSchemaCreationStatusRequest < Struct.new(
       :api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2851,7 +2975,8 @@ module Aws::AppSync
     class GetSchemaCreationStatusResponse < Struct.new(
       :status,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2867,7 +2992,8 @@ module Aws::AppSync
     class GetSourceApiAssociationRequest < Struct.new(
       :merged_api_identifier,
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2876,7 +3002,8 @@ module Aws::AppSync
     #   @return [Types::SourceApiAssociation]
     class GetSourceApiAssociationResponse < Struct.new(
       :source_api_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2893,7 +3020,8 @@ module Aws::AppSync
       :api_id,
       :type_name,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2902,7 +3030,8 @@ module Aws::AppSync
     #   @return [Types::Type]
     class GetTypeResponse < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2911,7 +3040,8 @@ module Aws::AppSync
     #   @return [String]
     class GraphQLSchemaException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3035,7 +3165,8 @@ module Aws::AppSync
       :query_depth_limit,
       :resolver_count_limit,
       :enhanced_metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3056,7 +3187,8 @@ module Aws::AppSync
     class HandlerConfig < Struct.new(
       :behavior,
       :integration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3070,7 +3202,8 @@ module Aws::AppSync
     class HandlerConfigs < Struct.new(
       :on_publish,
       :on_subscribe,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3087,7 +3220,8 @@ module Aws::AppSync
     class HttpDataSourceConfig < Struct.new(
       :endpoint,
       :authorization_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3101,7 +3235,8 @@ module Aws::AppSync
     class Integration < Struct.new(
       :data_source_name,
       :lambda_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3110,7 +3245,8 @@ module Aws::AppSync
     #   @return [String]
     class InternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3147,7 +3283,8 @@ module Aws::AppSync
       :authorizer_result_ttl_in_seconds,
       :authorizer_uri,
       :identity_validation_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3162,7 +3299,8 @@ module Aws::AppSync
     #   @return [String]
     class LambdaConfig < Struct.new(
       :invoke_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3174,7 +3312,8 @@ module Aws::AppSync
     #   @return [String]
     class LambdaConflictHandlerConfig < Struct.new(
       :lambda_conflict_handler_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3184,7 +3323,8 @@ module Aws::AppSync
     #   @return [String]
     class LambdaDataSourceConfig < Struct.new(
       :lambda_function_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3193,7 +3333,8 @@ module Aws::AppSync
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3211,7 +3352,8 @@ module Aws::AppSync
       :api_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3225,7 +3367,8 @@ module Aws::AppSync
     class ListApiKeysResponse < Struct.new(
       :api_keys,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3239,7 +3382,8 @@ module Aws::AppSync
     class ListApisRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3253,7 +3397,8 @@ module Aws::AppSync
     class ListApisResponse < Struct.new(
       :apis,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3271,7 +3416,8 @@ module Aws::AppSync
       :api_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3285,7 +3431,8 @@ module Aws::AppSync
     class ListChannelNamespacesResponse < Struct.new(
       :channel_namespaces,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3303,7 +3450,8 @@ module Aws::AppSync
       :api_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3317,7 +3465,8 @@ module Aws::AppSync
     class ListDataSourcesResponse < Struct.new(
       :data_sources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3331,7 +3480,8 @@ module Aws::AppSync
     class ListDomainNamesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3345,7 +3495,8 @@ module Aws::AppSync
     class ListDomainNamesResponse < Struct.new(
       :domain_name_configs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3363,7 +3514,8 @@ module Aws::AppSync
       :api_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3377,7 +3529,8 @@ module Aws::AppSync
     class ListFunctionsResponse < Struct.new(
       :functions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3400,7 +3553,8 @@ module Aws::AppSync
       :max_results,
       :api_type,
       :owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3414,7 +3568,8 @@ module Aws::AppSync
     class ListGraphqlApisResponse < Struct.new(
       :graphql_apis,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3436,7 +3591,8 @@ module Aws::AppSync
       :function_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3449,7 +3605,8 @@ module Aws::AppSync
     class ListResolversByFunctionResponse < Struct.new(
       :resolvers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3471,7 +3628,8 @@ module Aws::AppSync
       :type_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3485,7 +3643,8 @@ module Aws::AppSync
     class ListResolversResponse < Struct.new(
       :resolvers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3503,7 +3662,8 @@ module Aws::AppSync
       :api_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3517,7 +3677,8 @@ module Aws::AppSync
     class ListSourceApiAssociationsResponse < Struct.new(
       :source_api_association_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3526,7 +3687,8 @@ module Aws::AppSync
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3535,7 +3697,8 @@ module Aws::AppSync
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3564,7 +3727,8 @@ module Aws::AppSync
       :format,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3578,7 +3742,8 @@ module Aws::AppSync
     class ListTypesByAssociationResponse < Struct.new(
       :types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3600,7 +3765,8 @@ module Aws::AppSync
       :format,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3614,7 +3780,8 @@ module Aws::AppSync
     class ListTypesResponse < Struct.new(
       :types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3672,7 +3839,8 @@ module Aws::AppSync
       :field_log_level,
       :cloud_watch_logs_role_arn,
       :exclude_verbose_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3687,7 +3855,8 @@ module Aws::AppSync
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3713,7 +3882,8 @@ module Aws::AppSync
       :client_id,
       :iat_ttl,
       :auth_ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3733,7 +3903,8 @@ module Aws::AppSync
     class OpenSearchServiceDataSourceConfig < Struct.new(
       :endpoint,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3743,7 +3914,8 @@ module Aws::AppSync
     #   @return [Array<String>]
     class PipelineConfig < Struct.new(
       :functions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3783,7 +3955,8 @@ module Aws::AppSync
     class PutGraphqlApiEnvironmentVariablesRequest < Struct.new(
       :api_id,
       :environment_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3793,7 +3966,8 @@ module Aws::AppSync
     #   @return [Hash<String, String>]
     class PutGraphqlApiEnvironmentVariablesResponse < Struct.new(
       :environment_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3814,7 +3988,8 @@ module Aws::AppSync
       :resource_arn,
       :secret_arn,
       :database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3841,7 +4016,8 @@ module Aws::AppSync
       :database_name,
       :schema,
       :aws_secret_store_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3863,7 +4039,8 @@ module Aws::AppSync
     class RelationalDatabaseDataSourceConfig < Struct.new(
       :relational_database_source_type,
       :rds_http_endpoint_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3950,7 +4127,8 @@ module Aws::AppSync
       :runtime,
       :code,
       :metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3964,7 +4142,8 @@ module Aws::AppSync
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4020,7 +4199,8 @@ module Aws::AppSync
       :source_api_association_status,
       :source_api_association_status_detail,
       :last_successful_merge_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4037,7 +4217,8 @@ module Aws::AppSync
     #   @return [String]
     class SourceApiAssociationConfig < Struct.new(
       :merge_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4071,7 +4252,8 @@ module Aws::AppSync
       :merged_api_id,
       :merged_api_arn,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4080,7 +4262,8 @@ module Aws::AppSync
     #   @return [Types::RdsDataApiConfig]
     class StartDataSourceIntrospectionRequest < Struct.new(
       :rds_data_api_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4104,7 +4287,8 @@ module Aws::AppSync
       :introspection_id,
       :introspection_status,
       :introspection_status_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4117,7 +4301,8 @@ module Aws::AppSync
     class StartSchemaCreationRequest < Struct.new(
       :api_id,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4127,7 +4312,8 @@ module Aws::AppSync
     #   @return [String]
     class StartSchemaCreationResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4143,7 +4329,8 @@ module Aws::AppSync
     class StartSchemaMergeRequest < Struct.new(
       :association_id,
       :merged_api_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4152,7 +4339,8 @@ module Aws::AppSync
     #   @return [String]
     class StartSchemaMergeResponse < Struct.new(
       :source_api_association_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4203,7 +4391,8 @@ module Aws::AppSync
       :conflict_handler,
       :conflict_detection,
       :lambda_conflict_handler_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4216,12 +4405,14 @@ module Aws::AppSync
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4247,7 +4438,8 @@ module Aws::AppSync
       :arn,
       :definition,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4256,7 +4448,8 @@ module Aws::AppSync
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4269,12 +4462,14 @@ module Aws::AppSync
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4406,7 +4601,8 @@ module Aws::AppSync
       :api_caching_behavior,
       :type,
       :health_metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4416,7 +4612,8 @@ module Aws::AppSync
     #   @return [Types::ApiCache]
     class UpdateApiCacheResponse < Struct.new(
       :api_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4438,7 +4635,8 @@ module Aws::AppSync
       :id,
       :description,
       :expires,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4447,7 +4645,8 @@ module Aws::AppSync
     #   @return [Types::ApiKey]
     class UpdateApiKeyResponse < Struct.new(
       :api_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4469,7 +4668,8 @@ module Aws::AppSync
       :name,
       :owner_contact,
       :event_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4478,7 +4678,8 @@ module Aws::AppSync
     #   @return [Types::Api]
     class UpdateApiResponse < Struct.new(
       :api,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4510,7 +4711,8 @@ module Aws::AppSync
       :publish_auth_modes,
       :code_handlers,
       :handler_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4519,7 +4721,8 @@ module Aws::AppSync
     #   @return [Types::ChannelNamespace]
     class UpdateChannelNamespaceResponse < Struct.new(
       :channel_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4585,7 +4788,8 @@ module Aws::AppSync
       :relational_database_config,
       :event_bridge_config,
       :metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4594,7 +4798,8 @@ module Aws::AppSync
     #   @return [Types::DataSource]
     class UpdateDataSourceResponse < Struct.new(
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4607,7 +4812,8 @@ module Aws::AppSync
     class UpdateDomainNameRequest < Struct.new(
       :domain_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4616,7 +4822,8 @@ module Aws::AppSync
     #   @return [Types::DomainNameConfig]
     class UpdateDomainNameResponse < Struct.new(
       :domain_name_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4678,7 +4885,8 @@ module Aws::AppSync
       :max_batch_size,
       :runtime,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4687,7 +4895,8 @@ module Aws::AppSync
     #   @return [Types::FunctionConfiguration]
     class UpdateFunctionResponse < Struct.new(
       :function_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4774,7 +4983,8 @@ module Aws::AppSync
       :query_depth_limit,
       :resolver_count_limit,
       :enhanced_metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4783,7 +4993,8 @@ module Aws::AppSync
     #   @return [Types::GraphqlApi]
     class UpdateGraphqlApiResponse < Struct.new(
       :graphql_api,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4875,7 +5086,8 @@ module Aws::AppSync
       :runtime,
       :code,
       :metrics_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4884,7 +5096,8 @@ module Aws::AppSync
     #   @return [Types::Resolver]
     class UpdateResolverResponse < Struct.new(
       :resolver,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4908,7 +5121,8 @@ module Aws::AppSync
       :merged_api_identifier,
       :description,
       :source_api_association_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4917,7 +5131,8 @@ module Aws::AppSync
     #   @return [Types::SourceApiAssociation]
     class UpdateSourceApiAssociationResponse < Struct.new(
       :source_api_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4938,7 +5153,8 @@ module Aws::AppSync
       :type_name,
       :definition,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4947,7 +5163,8 @@ module Aws::AppSync
     #   @return [Types::Type]
     class UpdateTypeResponse < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4971,7 +5188,8 @@ module Aws::AppSync
       :aws_region,
       :default_action,
       :app_id_client_regex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

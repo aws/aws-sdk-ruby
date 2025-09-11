@@ -52,7 +52,8 @@ module Aws::PI
       :end_time,
       :status,
       :insights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +83,8 @@ module Aws::PI
       :end_time,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +112,8 @@ module Aws::PI
       :start_time,
       :end_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -119,7 +122,8 @@ module Aws::PI
     #   @return [String]
     class CreatePerformanceAnalysisReportResponse < Struct.new(
       :analysis_report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +139,8 @@ module Aws::PI
     #   @return [Types::PerformanceInsightsMetric]
     class Data < Struct.new(
       :performance_insights_metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +154,8 @@ module Aws::PI
     class DataPoint < Struct.new(
       :timestamp,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,12 +176,14 @@ module Aws::PI
       :service_type,
       :identifier,
       :analysis_report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePerformanceAnalysisReportResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +326,8 @@ module Aws::PI
       :filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -347,7 +356,8 @@ module Aws::PI
       :partition_keys,
       :keys,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -357,7 +367,8 @@ module Aws::PI
     #   @return [String]
     class DimensionDetail < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +679,8 @@ module Aws::PI
       :group,
       :dimensions,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +694,8 @@ module Aws::PI
     class DimensionGroupDetail < Struct.new(
       :group,
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,7 +718,8 @@ module Aws::PI
       :total,
       :additional_metrics,
       :partitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +773,8 @@ module Aws::PI
       :value,
       :dimension,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -796,7 +811,8 @@ module Aws::PI
     #   @return [String]
     class FeatureMetadata < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +899,8 @@ module Aws::PI
       :group,
       :group_identifier,
       :requested_dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +909,8 @@ module Aws::PI
     #   @return [Array<Types::DimensionKeyDetail>]
     class GetDimensionKeyDetailsResponse < Struct.new(
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +945,8 @@ module Aws::PI
       :analysis_report_id,
       :text_format,
       :accept_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -936,7 +955,8 @@ module Aws::PI
     #   @return [Types::AnalysisReport]
     class GetPerformanceAnalysisReportResponse < Struct.new(
       :analysis_report,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +972,8 @@ module Aws::PI
     class GetResourceMetadataRequest < Struct.new(
       :service_type,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +991,8 @@ module Aws::PI
     class GetResourceMetadataResponse < Struct.new(
       :identifier,
       :features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1086,8 @@ module Aws::PI
       :max_results,
       :next_token,
       :period_alignment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1119,8 @@ module Aws::PI
       :identifier,
       :metric_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1177,8 @@ module Aws::PI
       :recommendations,
       :insight_data,
       :baseline_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1187,8 @@ module Aws::PI
     #   @return [String]
     class InternalServiceError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1171,7 +1197,8 @@ module Aws::PI
     #   @return [String]
     class InvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1209,7 +1236,8 @@ module Aws::PI
       :max_results,
       :next_token,
       :authorized_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1223,7 +1251,8 @@ module Aws::PI
     class ListAvailableResourceDimensionsResponse < Struct.new(
       :metric_dimensions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1300,8 @@ module Aws::PI
       :metric_types,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1287,7 +1317,8 @@ module Aws::PI
     class ListAvailableResourceMetricsResponse < Struct.new(
       :metrics,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1351,8 @@ module Aws::PI
       :next_token,
       :max_results,
       :list_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1336,7 +1368,8 @@ module Aws::PI
     class ListPerformanceAnalysisReportsResponse < Struct.new(
       :analysis_reports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1352,7 +1385,8 @@ module Aws::PI
     class ListTagsForResourceRequest < Struct.new(
       :service_type,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1361,7 +1395,8 @@ module Aws::PI
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1375,7 +1410,8 @@ module Aws::PI
     class MetricDimensionGroups < Struct.new(
       :metric,
       :groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1426,8 @@ module Aws::PI
     class MetricKeyDataPoints < Struct.new(
       :key,
       :data_points,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1489,8 @@ module Aws::PI
       :metric,
       :group_by,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1461,7 +1499,8 @@ module Aws::PI
     #   @return [String]
     class NotAuthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1487,7 +1526,8 @@ module Aws::PI
       :dimensions,
       :filter,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1543,8 @@ module Aws::PI
     class Recommendation < Struct.new(
       :recommendation_id,
       :recommendation_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1515,7 +1556,8 @@ module Aws::PI
     #   @return [Hash<String, String>]
     class ResponsePartitionKey < Struct.new(
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1534,7 +1576,8 @@ module Aws::PI
       :metric,
       :description,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1573,7 +1616,8 @@ module Aws::PI
     class ResponseResourceMetricKey < Struct.new(
       :metric,
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1593,7 +1637,8 @@ module Aws::PI
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1612,12 +1657,14 @@ module Aws::PI
       :service_type,
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,12 +1683,14 @@ module Aws::PI
       :service_type,
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

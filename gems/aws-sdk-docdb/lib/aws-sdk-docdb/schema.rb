@@ -1731,7 +1731,6 @@ module Aws::DocDB
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
         operation.traits = {}
       end)
-
     end
 
     class << self

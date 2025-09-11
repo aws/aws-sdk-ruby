@@ -16,7 +16,8 @@ module Aws::CodeGuruProfiler
     class AddNotificationChannelsInput < Struct.new(
       :profiling_group_name,
       :channels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26,7 +27,8 @@ module Aws::CodeGuruProfiler
     #   @return [Types::NotificationConfiguration]
     class AddNotificationChannelsOutput < Struct.new(
       :notification_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +99,8 @@ module Aws::CodeGuruProfiler
       :should_profile,
       :period_in_seconds,
       :agent_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +119,8 @@ module Aws::CodeGuruProfiler
     #   @return [Boolean]
     class AgentOrchestrationConfig < Struct.new(
       :profiling_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,7 +169,8 @@ module Aws::CodeGuruProfiler
     class AggregatedProfileTime < Struct.new(
       :start,
       :period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +197,8 @@ module Aws::CodeGuruProfiler
       :metric,
       :reason,
       :instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +232,8 @@ module Aws::CodeGuruProfiler
       :start_time,
       :end_time,
       :user_feedback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +304,8 @@ module Aws::CodeGuruProfiler
       :period,
       :target_resolution,
       :frame_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +371,8 @@ module Aws::CodeGuruProfiler
       :end_times,
       :unprocessed_end_times,
       :frame_metric_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +390,8 @@ module Aws::CodeGuruProfiler
       :id,
       :uri,
       :event_publishers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -451,7 +461,8 @@ module Aws::CodeGuruProfiler
       :profiling_group_name,
       :fleet_instance_id,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +477,8 @@ module Aws::CodeGuruProfiler
     #   @return [Types::AgentConfiguration]
     class ConfigureAgentOutput < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +490,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +527,8 @@ module Aws::CodeGuruProfiler
       :client_token,
       :agent_orchestration_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +541,8 @@ module Aws::CodeGuruProfiler
     #   @return [Types::ProfilingGroupDescription]
     class CreateProfilingGroupOutput < Struct.new(
       :profiling_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,13 +552,15 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class DeleteProfilingGroupInput < Struct.new(
       :profiling_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the deleteProfilingGroupResponse.</p>
     class DeleteProfilingGroupOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +572,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class DescribeProfilingGroupInput < Struct.new(
       :profiling_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -570,7 +588,8 @@ module Aws::CodeGuruProfiler
     #   @return [Types::ProfilingGroupDescription]
     class DescribeProfilingGroupOutput < Struct.new(
       :profiling_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +626,8 @@ module Aws::CodeGuruProfiler
       :profile_start_time,
       :profile_end_time,
       :total_number_of_findings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -630,7 +650,8 @@ module Aws::CodeGuruProfiler
       :frame_name,
       :type,
       :thread_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +671,8 @@ module Aws::CodeGuruProfiler
     class FrameMetricDatum < Struct.new(
       :frame_metric,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -681,7 +703,8 @@ module Aws::CodeGuruProfiler
       :next_token,
       :max_results,
       :daily_reports_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +725,8 @@ module Aws::CodeGuruProfiler
     class GetFindingsReportAccountSummaryOutput < Struct.new(
       :report_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +736,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class GetNotificationConfigurationInput < Struct.new(
       :profiling_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -722,7 +747,8 @@ module Aws::CodeGuruProfiler
     #   @return [Types::NotificationConfiguration]
     class GetNotificationConfigurationOutput < Struct.new(
       :notification_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -734,7 +760,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class GetPolicyInput < Struct.new(
       :profiling_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +775,8 @@ module Aws::CodeGuruProfiler
     class GetPolicyOutput < Struct.new(
       :policy,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -827,7 +855,8 @@ module Aws::CodeGuruProfiler
       :end_time,
       :max_depth,
       :accept,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +876,8 @@ module Aws::CodeGuruProfiler
       :profile,
       :content_type,
       :content_encoding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -941,7 +971,8 @@ module Aws::CodeGuruProfiler
       :start_time,
       :end_time,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +1008,8 @@ module Aws::CodeGuruProfiler
       :profile_end_time,
       :recommendations,
       :anomalies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1018,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1073,8 @@ module Aws::CodeGuruProfiler
       :next_token,
       :max_results,
       :daily_reports_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1091,8 @@ module Aws::CodeGuruProfiler
     class ListFindingsReportsOutput < Struct.new(
       :findings_report_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1162,8 @@ module Aws::CodeGuruProfiler
       :order_by,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1182,8 @@ module Aws::CodeGuruProfiler
     class ListProfileTimesOutput < Struct.new(
       :profile_times,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1184,7 +1221,8 @@ module Aws::CodeGuruProfiler
       :next_token,
       :max_results,
       :include_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1222,7 +1260,8 @@ module Aws::CodeGuruProfiler
       :profiling_group_names,
       :profiling_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1233,7 +1272,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,7 +1285,8 @@ module Aws::CodeGuruProfiler
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1304,8 @@ module Aws::CodeGuruProfiler
       :target_frames_index,
       :frame_address,
       :threshold_breach_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1295,7 +1337,8 @@ module Aws::CodeGuruProfiler
       :frame_name,
       :type,
       :thread_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1307,7 +1350,8 @@ module Aws::CodeGuruProfiler
     #   @return [Array<Types::Channel>]
     class NotificationConfiguration < Struct.new(
       :channels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1397,8 @@ module Aws::CodeGuruProfiler
       :target_frames,
       :threshold_percent,
       :counters_to_aggregate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1405,13 +1450,15 @@ module Aws::CodeGuruProfiler
       :agent_profile,
       :profile_token,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the postAgentProfileResponse.</p>
     class PostAgentProfileOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1425,7 +1472,8 @@ module Aws::CodeGuruProfiler
     #   @return [Time]
     class ProfileTime < Struct.new(
       :start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1491,7 +1539,8 @@ module Aws::CodeGuruProfiler
       :profiling_status,
       :compute_platform,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1522,7 +1571,8 @@ module Aws::CodeGuruProfiler
       :latest_agent_profile_reported_at,
       :latest_aggregated_profile,
       :latest_agent_orchestrated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1557,7 +1607,8 @@ module Aws::CodeGuruProfiler
       :action_group,
       :principals,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1627,8 @@ module Aws::CodeGuruProfiler
     class PutPermissionOutput < Struct.new(
       :policy,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1612,7 +1664,8 @@ module Aws::CodeGuruProfiler
       :top_matches,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1679,8 @@ module Aws::CodeGuruProfiler
     class RemoveNotificationChannelInput < Struct.new(
       :profiling_group_name,
       :channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,7 +1690,8 @@ module Aws::CodeGuruProfiler
     #   @return [Types::NotificationConfiguration]
     class RemoveNotificationChannelOutput < Struct.new(
       :notification_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1663,7 +1718,8 @@ module Aws::CodeGuruProfiler
       :profiling_group_name,
       :action_group,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1682,7 +1738,8 @@ module Aws::CodeGuruProfiler
     class RemovePermissionOutput < Struct.new(
       :policy,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1691,7 +1748,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1703,7 +1761,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1731,13 +1790,15 @@ module Aws::CodeGuruProfiler
       :anomaly_instance_id,
       :type,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the SubmitFeedbackResponse.</p>
     class SubmitFeedbackOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1754,12 +1815,14 @@ module Aws::CodeGuruProfiler
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1768,7 +1831,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1786,7 +1850,8 @@ module Aws::CodeGuruProfiler
     #   @return [Time]
     class TimestampStructure < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1804,12 +1869,14 @@ module Aws::CodeGuruProfiler
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1825,7 +1892,8 @@ module Aws::CodeGuruProfiler
     class UpdateProfilingGroupInput < Struct.new(
       :profiling_group_name,
       :agent_orchestration_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,7 +1908,8 @@ module Aws::CodeGuruProfiler
     #   @return [Types::ProfilingGroupDescription]
     class UpdateProfilingGroupOutput < Struct.new(
       :profiling_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1852,7 +1921,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class UserFeedback < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1861,7 +1931,8 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

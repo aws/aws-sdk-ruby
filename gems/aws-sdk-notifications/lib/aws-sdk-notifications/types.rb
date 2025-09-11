@@ -11,7 +11,8 @@ module Aws::Notifications
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::Notifications
     #   @return [Array<Types::SummarizationDimensionDetail>]
     class AggregationDetail < Struct.new(
       :summarization_dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +37,8 @@ module Aws::Notifications
     class AggregationKey < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +68,8 @@ module Aws::Notifications
       :aggregated_regions,
       :aggregated_organizational_units,
       :additional_summarization_dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,12 +82,14 @@ module Aws::Notifications
     class AssociateChannelRequest < Struct.new(
       :arn,
       :notification_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateChannelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -96,12 +102,14 @@ module Aws::Notifications
     class AssociateManagedNotificationAccountContactRequest < Struct.new(
       :contact_identifier,
       :managed_notification_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateManagedNotificationAccountContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,12 +122,14 @@ module Aws::Notifications
     class AssociateManagedNotificationAdditionalChannelRequest < Struct.new(
       :channel_arn,
       :managed_notification_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateManagedNotificationAdditionalChannelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,12 +142,14 @@ module Aws::Notifications
     class AssociateOrganizationalUnitRequest < Struct.new(
       :organizational_unit_id,
       :notification_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateOrganizationalUnitResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +162,8 @@ module Aws::Notifications
     class ConflictException < Struct.new(
       :message,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +188,8 @@ module Aws::Notifications
       :event_type,
       :event_pattern,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +206,8 @@ module Aws::Notifications
       :arn,
       :notification_configuration_arn,
       :status_summary_by_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +228,8 @@ module Aws::Notifications
       :description,
       :aggregation_duration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +242,8 @@ module Aws::Notifications
     class CreateNotificationConfigurationResponse < Struct.new(
       :arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,12 +252,14 @@ module Aws::Notifications
     #   @return [String]
     class DeleteEventRuleRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEventRuleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,12 +268,14 @@ module Aws::Notifications
     #   @return [String]
     class DeleteNotificationConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteNotificationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +284,8 @@ module Aws::Notifications
     #   @return [String]
     class DeregisterNotificationHubRequest < Struct.new(
       :notification_hub_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +298,8 @@ module Aws::Notifications
     class DeregisterNotificationHubResponse < Struct.new(
       :notification_hub_region,
       :status_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -290,17 +313,20 @@ module Aws::Notifications
     class Dimension < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableNotificationsAccessForOrganizationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableNotificationsAccessForOrganizationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,12 +339,14 @@ module Aws::Notifications
     class DisassociateChannelRequest < Struct.new(
       :arn,
       :notification_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateChannelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -331,12 +359,14 @@ module Aws::Notifications
     class DisassociateManagedNotificationAccountContactRequest < Struct.new(
       :contact_identifier,
       :managed_notification_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateManagedNotificationAccountContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -349,12 +379,14 @@ module Aws::Notifications
     class DisassociateManagedNotificationAdditionalChannelRequest < Struct.new(
       :channel_arn,
       :managed_notification_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateManagedNotificationAdditionalChannelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -367,22 +399,26 @@ module Aws::Notifications
     class DisassociateOrganizationalUnitRequest < Struct.new(
       :organizational_unit_id,
       :notification_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateOrganizationalUnitResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableNotificationsAccessForOrganizationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableNotificationsAccessForOrganizationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +432,8 @@ module Aws::Notifications
     class EventRuleStatusSummary < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +475,8 @@ module Aws::Notifications
       :regions,
       :managed_rules,
       :status_summary_by_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +485,8 @@ module Aws::Notifications
     #   @return [String]
     class GetEventRuleRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +527,8 @@ module Aws::Notifications
       :regions,
       :managed_rules,
       :status_summary_by_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +541,8 @@ module Aws::Notifications
     class GetManagedNotificationChildEventRequest < Struct.new(
       :arn,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +563,8 @@ module Aws::Notifications
       :managed_notification_configuration_arn,
       :creation_time,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -531,7 +573,8 @@ module Aws::Notifications
     #   @return [String]
     class GetManagedNotificationConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +599,8 @@ module Aws::Notifications
       :description,
       :category,
       :sub_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +613,8 @@ module Aws::Notifications
     class GetManagedNotificationEventRequest < Struct.new(
       :arn,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +635,8 @@ module Aws::Notifications
       :managed_notification_configuration_arn,
       :creation_time,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +645,8 @@ module Aws::Notifications
     #   @return [String]
     class GetNotificationConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +679,8 @@ module Aws::Notifications
       :creation_time,
       :aggregation_duration,
       :subtype,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -645,7 +693,8 @@ module Aws::Notifications
     class GetNotificationEventRequest < Struct.new(
       :arn,
       :locale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,12 +715,14 @@ module Aws::Notifications
       :notification_configuration_arn,
       :creation_time,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetNotificationsAccessForOrganizationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +731,8 @@ module Aws::Notifications
     #   @return [Types::NotificationsAccessForOrganization]
     class GetNotificationsAccessForOrganizationResponse < Struct.new(
       :notifications_access_for_organization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -689,7 +741,8 @@ module Aws::Notifications
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +759,8 @@ module Aws::Notifications
       :notification_configuration_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +773,8 @@ module Aws::Notifications
     class ListChannelsResponse < Struct.new(
       :next_token,
       :channels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -736,7 +791,8 @@ module Aws::Notifications
       :notification_configuration_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +805,8 @@ module Aws::Notifications
     class ListEventRulesResponse < Struct.new(
       :next_token,
       :event_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +823,8 @@ module Aws::Notifications
       :managed_notification_configuration_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -779,7 +837,8 @@ module Aws::Notifications
     class ListManagedNotificationChannelAssociationsResponse < Struct.new(
       :next_token,
       :channel_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +875,8 @@ module Aws::Notifications
       :related_account,
       :organizational_unit_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +889,8 @@ module Aws::Notifications
     class ListManagedNotificationChildEventsResponse < Struct.new(
       :next_token,
       :managed_notification_child_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -846,7 +907,8 @@ module Aws::Notifications
       :channel_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +921,8 @@ module Aws::Notifications
     class ListManagedNotificationConfigurationsResponse < Struct.new(
       :next_token,
       :managed_notification_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -896,7 +959,8 @@ module Aws::Notifications
       :next_token,
       :organizational_unit_id,
       :related_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +973,8 @@ module Aws::Notifications
     class ListManagedNotificationEventsResponse < Struct.new(
       :next_token,
       :managed_notification_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,7 +1003,8 @@ module Aws::Notifications
       :member_account,
       :status,
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -951,7 +1017,8 @@ module Aws::Notifications
     class ListMemberAccountsResponse < Struct.new(
       :member_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1047,8 @@ module Aws::Notifications
       :subtype,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,7 +1061,8 @@ module Aws::Notifications
     class ListNotificationConfigurationsResponse < Struct.new(
       :next_token,
       :notification_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1103,8 @@ module Aws::Notifications
       :max_results,
       :next_token,
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1117,8 @@ module Aws::Notifications
     class ListNotificationEventsResponse < Struct.new(
       :next_token,
       :notification_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1131,8 @@ module Aws::Notifications
     class ListNotificationHubsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1145,8 @@ module Aws::Notifications
     class ListNotificationHubsResponse < Struct.new(
       :notification_hubs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1163,8 @@ module Aws::Notifications
       :notification_configuration_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1177,8 @@ module Aws::Notifications
     class ListOrganizationalUnitsResponse < Struct.new(
       :organizational_units,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1187,8 @@ module Aws::Notifications
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1197,8 @@ module Aws::Notifications
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1139,7 +1216,8 @@ module Aws::Notifications
       :channel_identifier,
       :channel_type,
       :override_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1197,7 +1275,8 @@ module Aws::Notifications
       :text_parts,
       :organizational_unit_id,
       :aggregation_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1231,7 +1310,8 @@ module Aws::Notifications
       :child_event,
       :aggregate_managed_notification_event_arn,
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1341,8 @@ module Aws::Notifications
       :aggregation_detail,
       :event_status,
       :notification_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1360,8 @@ module Aws::Notifications
       :arn,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1337,7 +1419,8 @@ module Aws::Notifications
       :end_time,
       :text_parts,
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1379,7 +1462,8 @@ module Aws::Notifications
       :organizational_unit_id,
       :aggregation_summary,
       :aggregated_notification_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1405,7 +1489,8 @@ module Aws::Notifications
       :message_components,
       :event_status,
       :notification_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1423,7 +1508,8 @@ module Aws::Notifications
       :event_origin_region,
       :source,
       :event_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1531,8 @@ module Aws::Notifications
       :type,
       :url,
       :caption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1471,7 +1558,8 @@ module Aws::Notifications
       :status,
       :status_reason,
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,7 +1581,8 @@ module Aws::Notifications
       :paragraph_summary,
       :complete_description,
       :dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1592,8 @@ module Aws::Notifications
     #   @return [String]
     class MessageComponentsSummary < Struct.new(
       :headline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1627,8 @@ module Aws::Notifications
       :creation_time,
       :aggregation_duration,
       :subtype,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1579,7 +1670,8 @@ module Aws::Notifications
       :aggregate_notification_event_arn,
       :aggregation_summary,
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1649,7 +1741,8 @@ module Aws::Notifications
       :text_parts,
       :media,
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1768,8 @@ module Aws::Notifications
       :message_components,
       :event_status,
       :notification_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1697,7 +1791,8 @@ module Aws::Notifications
       :status_summary,
       :creation_time,
       :last_activation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1711,7 +1806,8 @@ module Aws::Notifications
     class NotificationHubStatusSummary < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1721,7 +1817,8 @@ module Aws::Notifications
     #   @return [String]
     class NotificationsAccessForOrganization < Struct.new(
       :access_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1730,7 +1827,8 @@ module Aws::Notifications
     #   @return [String]
     class RegisterNotificationHubRequest < Struct.new(
       :notification_hub_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1751,7 +1849,8 @@ module Aws::Notifications
       :status_summary,
       :creation_time,
       :last_activation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1773,7 +1872,8 @@ module Aws::Notifications
       :arn,
       :detail_url,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1786,7 +1886,8 @@ module Aws::Notifications
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1811,7 +1912,8 @@ module Aws::Notifications
       :resource_id,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1951,8 @@ module Aws::Notifications
       :event_occurrence_time,
       :event_type,
       :related_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1970,8 @@ module Aws::Notifications
       :event_origin_region,
       :source,
       :event_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1881,7 +1985,8 @@ module Aws::Notifications
     class SummarizationDimensionDetail < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1899,7 +2004,8 @@ module Aws::Notifications
       :name,
       :count,
       :sample_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1912,12 +2018,14 @@ module Aws::Notifications
     class TagResourceRequest < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1939,7 +2047,8 @@ module Aws::Notifications
       :display_text,
       :text_by_locale,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1960,7 +2069,8 @@ module Aws::Notifications
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1973,12 +2083,14 @@ module Aws::Notifications
     class UntagResourceRequest < Struct.new(
       :arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,7 +2107,8 @@ module Aws::Notifications
       :arn,
       :event_pattern,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2012,7 +2125,8 @@ module Aws::Notifications
       :arn,
       :notification_configuration_arn,
       :status_summary_by_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2033,7 +2147,8 @@ module Aws::Notifications
       :name,
       :description,
       :aggregation_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2042,7 +2157,8 @@ module Aws::Notifications
     #   @return [String]
     class UpdateNotificationConfigurationResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2175,8 @@ module Aws::Notifications
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,7 +2190,8 @@ module Aws::Notifications
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

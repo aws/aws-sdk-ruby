@@ -15505,7 +15505,6 @@ module Aws::SageMaker
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         operation.traits = {}
       end)
-
     end
 
     class << self

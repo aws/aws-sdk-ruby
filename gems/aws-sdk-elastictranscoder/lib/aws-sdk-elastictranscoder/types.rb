@@ -11,7 +11,8 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +107,8 @@ module Aws::ElasticTranscoder
       :padding_policy,
       :album_art_format,
       :encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +170,8 @@ module Aws::ElasticTranscoder
       :bit_depth,
       :bit_order,
       :signed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +428,8 @@ module Aws::ElasticTranscoder
       :channels,
       :audio_packing_mode,
       :codec_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,14 +441,16 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class CancelJobRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response body contains a JSON object. If the job is successfully canceled, the value
     #             of <code>Success</code> is <code>true</code>.</p>
     class CancelJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +538,8 @@ module Aws::ElasticTranscoder
       :format,
       :pattern,
       :encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -573,7 +580,8 @@ module Aws::ElasticTranscoder
       :time_offset,
       :label,
       :encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +626,8 @@ module Aws::ElasticTranscoder
       :merge_policy,
       :caption_sources,
       :caption_formats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +638,8 @@ module Aws::ElasticTranscoder
     #   @return [Types::TimeSpan]
     class Clip < Struct.new(
       :time_span,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +801,8 @@ module Aws::ElasticTranscoder
       :composition,
       :captions,
       :encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +879,8 @@ module Aws::ElasticTranscoder
       :output_keys,
       :hls_content_protection,
       :play_ready_drm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +934,8 @@ module Aws::ElasticTranscoder
       :output_key_prefix,
       :playlists,
       :user_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -932,7 +945,8 @@ module Aws::ElasticTranscoder
     #   @return [Types::Job]
     class CreateJobResponse < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1229,7 +1243,8 @@ module Aws::ElasticTranscoder
       :notifications,
       :content_config,
       :thumbnail_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1246,7 +1261,8 @@ module Aws::ElasticTranscoder
     class CreatePipelineResponse < Struct.new(
       :pipeline,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1296,8 @@ module Aws::ElasticTranscoder
       :video,
       :audio,
       :thumbnails,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1297,7 +1314,8 @@ module Aws::ElasticTranscoder
     class CreatePresetResponse < Struct.new(
       :preset,
       :warning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1307,13 +1325,15 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class DeletePipelineRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>DeletePipelineResponse</code> structure.</p>
     class DeletePipelineResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1323,13 +1343,15 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class DeletePresetRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>DeletePresetResponse</code> structure.</p>
     class DeletePresetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1355,7 +1377,8 @@ module Aws::ElasticTranscoder
       :frame_rate,
       :file_size,
       :duration_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1446,7 +1469,8 @@ module Aws::ElasticTranscoder
       :key,
       :key_md5,
       :initialization_vector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1492,7 +1516,8 @@ module Aws::ElasticTranscoder
       :initialization_vector,
       :license_acquisition_url,
       :key_storage_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1500,7 +1525,8 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class IncompatibleVersionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1539,7 +1565,8 @@ module Aws::ElasticTranscoder
     class InputCaptions < Struct.new(
       :merge_policy,
       :caption_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1548,7 +1575,8 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1652,7 +1680,8 @@ module Aws::ElasticTranscoder
       :status,
       :user_metadata,
       :timing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1690,7 +1719,8 @@ module Aws::ElasticTranscoder
     class JobAlbumArt < Struct.new(
       :merge_policy,
       :artwork,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1811,7 +1841,8 @@ module Aws::ElasticTranscoder
       :time_span,
       :input_captions,
       :detected_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2063,7 +2094,8 @@ module Aws::ElasticTranscoder
       :captions,
       :encryption,
       :applied_color_space_conversion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2090,7 +2122,8 @@ module Aws::ElasticTranscoder
       :preset_watermark_id,
       :input_key,
       :encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2133,8 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2155,8 @@ module Aws::ElasticTranscoder
       :pipeline_id,
       :ascending,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2137,7 +2172,8 @@ module Aws::ElasticTranscoder
     class ListJobsByPipelineResponse < Struct.new(
       :jobs,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2161,7 +2197,8 @@ module Aws::ElasticTranscoder
       :status,
       :ascending,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2179,7 +2216,8 @@ module Aws::ElasticTranscoder
     class ListJobsByStatusResponse < Struct.new(
       :jobs,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2196,7 +2234,8 @@ module Aws::ElasticTranscoder
     class ListPipelinesRequest < Struct.new(
       :ascending,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2212,7 +2251,8 @@ module Aws::ElasticTranscoder
     class ListPipelinesResponse < Struct.new(
       :pipelines,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2229,7 +2269,8 @@ module Aws::ElasticTranscoder
     class ListPresetsRequest < Struct.new(
       :ascending,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2245,7 +2286,8 @@ module Aws::ElasticTranscoder
     class ListPresetsResponse < Struct.new(
       :presets,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2270,7 +2312,8 @@ module Aws::ElasticTranscoder
       :completed,
       :warning,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2336,7 +2379,8 @@ module Aws::ElasticTranscoder
       :grantee_type,
       :grantee,
       :access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2597,7 +2641,8 @@ module Aws::ElasticTranscoder
       :notifications,
       :content_config,
       :thumbnail_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2649,7 +2694,8 @@ module Aws::ElasticTranscoder
       :bucket,
       :storage_class,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2699,7 +2745,8 @@ module Aws::ElasticTranscoder
       :key_id,
       :initialization_vector,
       :license_acquisition_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2784,7 +2831,8 @@ module Aws::ElasticTranscoder
       :play_ready_drm,
       :status,
       :status_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2834,7 +2882,8 @@ module Aws::ElasticTranscoder
       :video,
       :thumbnails,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3052,7 +3101,8 @@ module Aws::ElasticTranscoder
       :vertical_offset,
       :opacity,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3062,7 +3112,8 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class ReadJobRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3072,7 +3123,8 @@ module Aws::ElasticTranscoder
     #   @return [Types::Job]
     class ReadJobResponse < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3082,7 +3134,8 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class ReadPipelineRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3099,7 +3152,8 @@ module Aws::ElasticTranscoder
     class ReadPipelineResponse < Struct.new(
       :pipeline,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3109,7 +3163,8 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class ReadPresetRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3119,7 +3174,8 @@ module Aws::ElasticTranscoder
     #   @return [Types::Preset]
     class ReadPresetResponse < Struct.new(
       :preset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3129,7 +3185,8 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3139,7 +3196,8 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3162,7 +3220,8 @@ module Aws::ElasticTranscoder
       :input_bucket,
       :output_bucket,
       :topics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3179,7 +3238,8 @@ module Aws::ElasticTranscoder
     class TestRoleResponse < Struct.new(
       :success,
       :messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3298,7 +3358,8 @@ module Aws::ElasticTranscoder
       :max_height,
       :sizing_policy,
       :padding_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3319,7 +3380,8 @@ module Aws::ElasticTranscoder
     class TimeSpan < Struct.new(
       :start_time,
       :duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3337,7 +3399,8 @@ module Aws::ElasticTranscoder
       :submit_time_millis,
       :start_time_millis,
       :finish_time_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3380,7 +3443,8 @@ module Aws::ElasticTranscoder
     class UpdatePipelineNotificationsRequest < Struct.new(
       :id,
       :notifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3391,7 +3455,8 @@ module Aws::ElasticTranscoder
     #   @return [Types::Pipeline]
     class UpdatePipelineNotificationsResponse < Struct.new(
       :pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3655,7 +3720,8 @@ module Aws::ElasticTranscoder
       :notifications,
       :content_config,
       :thumbnail_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3672,7 +3738,8 @@ module Aws::ElasticTranscoder
     class UpdatePipelineResponse < Struct.new(
       :pipeline,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3696,7 +3763,8 @@ module Aws::ElasticTranscoder
     class UpdatePipelineStatusRequest < Struct.new(
       :id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3707,7 +3775,8 @@ module Aws::ElasticTranscoder
     #   @return [Types::Pipeline]
     class UpdatePipelineStatusResponse < Struct.new(
       :pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3716,7 +3785,8 @@ module Aws::ElasticTranscoder
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4276,7 +4346,8 @@ module Aws::ElasticTranscoder
       :sizing_policy,
       :padding_policy,
       :watermarks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4296,7 +4367,8 @@ module Aws::ElasticTranscoder
     class Warning < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

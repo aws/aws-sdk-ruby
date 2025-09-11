@@ -11,7 +11,8 @@ module Aws::WorkMailMessageFlow
     #   @return [String]
     class GetRawMessageContentRequest < Struct.new(
       :message_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::WorkMailMessageFlow
     #   @return [String]
     class GetRawMessageContentResponse < Struct.new(
       :message_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +47,8 @@ module Aws::WorkMailMessageFlow
     #   @return [String]
     class InvalidContentLocation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +57,8 @@ module Aws::WorkMailMessageFlow
     #   @return [String]
     class MessageFrozen < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +68,8 @@ module Aws::WorkMailMessageFlow
     #   @return [String]
     class MessageRejected < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,12 +82,14 @@ module Aws::WorkMailMessageFlow
     class PutRawMessageContentRequest < Struct.new(
       :message_id,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutRawMessageContentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -118,7 +125,8 @@ module Aws::WorkMailMessageFlow
     #   @return [Types::S3Reference]
     class RawMessageContent < Struct.new(
       :s3_reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +135,8 @@ module Aws::WorkMailMessageFlow
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +160,8 @@ module Aws::WorkMailMessageFlow
       :bucket,
       :key,
       :object_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

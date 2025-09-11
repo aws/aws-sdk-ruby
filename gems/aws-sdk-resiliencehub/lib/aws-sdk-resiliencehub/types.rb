@@ -12,7 +12,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class AcceptGroupingRecommendationEntry < Struct.new(
       :grouping_recommendation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::Resiliencehub
     class AcceptResourceGroupingRecommendationsRequest < Struct.new(
       :app_arn,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +48,8 @@ module Aws::Resiliencehub
     class AcceptResourceGroupingRecommendationsResponse < Struct.new(
       :app_arn,
       :failed_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +60,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +82,8 @@ module Aws::Resiliencehub
     class AddDraftAppVersionResourceMappingsInput < Struct.new(
       :app_arn,
       :resource_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,7 +106,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :resource_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -117,7 +123,8 @@ module Aws::Resiliencehub
     class Alarm < Struct.new(
       :alarm_arn,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -166,7 +173,8 @@ module Aws::Resiliencehub
       :prerequisite,
       :app_component_names,
       :recommendation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +273,8 @@ module Aws::Resiliencehub
       :rto_in_secs,
       :rpo_in_secs,
       :aws_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -366,7 +375,8 @@ module Aws::Resiliencehub
       :version_name,
       :drift_status,
       :summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +447,8 @@ module Aws::Resiliencehub
       :resiliency_score,
       :version_name,
       :drift_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -471,7 +482,8 @@ module Aws::Resiliencehub
       :type,
       :id,
       :additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +513,8 @@ module Aws::Resiliencehub
       :message,
       :status,
       :resiliency_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +547,8 @@ module Aws::Resiliencehub
       :terraform_source,
       :resource_count,
       :eks_source_cluster_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -605,7 +619,8 @@ module Aws::Resiliencehub
       :rto_in_secs,
       :rpo_in_secs,
       :aws_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -632,7 +647,8 @@ module Aws::Resiliencehub
       :identifier,
       :creation_time,
       :version_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +686,8 @@ module Aws::Resiliencehub
       :risk,
       :recommendation,
       :app_components,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +711,8 @@ module Aws::Resiliencehub
     class AssessmentSummary < Struct.new(
       :summary,
       :risk_recommendations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -711,7 +729,8 @@ module Aws::Resiliencehub
     class BatchUpdateRecommendationStatusFailedEntry < Struct.new(
       :entry_id,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +748,8 @@ module Aws::Resiliencehub
     class BatchUpdateRecommendationStatusRequest < Struct.new(
       :app_arn,
       :request_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -751,7 +771,8 @@ module Aws::Resiliencehub
       :app_arn,
       :successful_entries,
       :failed_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +805,8 @@ module Aws::Resiliencehub
       :excluded,
       :app_component_id,
       :exclude_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -836,7 +858,8 @@ module Aws::Resiliencehub
       :actual_reference_id,
       :actual_value,
       :diff_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +879,8 @@ module Aws::Resiliencehub
       :app_component_name,
       :recommendation_status,
       :config_recommendations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,7 +898,8 @@ module Aws::Resiliencehub
       :field,
       :operator,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +947,8 @@ module Aws::Resiliencehub
       :suggested_changes,
       :ha_architecture,
       :reference_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +968,8 @@ module Aws::Resiliencehub
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,7 +987,8 @@ module Aws::Resiliencehub
       :amount,
       :currency,
       :frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1018,7 +1046,8 @@ module Aws::Resiliencehub
       :permission_model,
       :event_subscriptions,
       :aws_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1028,7 +1057,8 @@ module Aws::Resiliencehub
     #   @return [Types::App]
     class CreateAppOutput < Struct.new(
       :app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1062,7 +1092,8 @@ module Aws::Resiliencehub
       :type,
       :additional_info,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1083,7 +1114,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :app_component,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1165,8 @@ module Aws::Resiliencehub
       :app_components,
       :additional_info,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1187,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :physical_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1221,7 +1255,8 @@ module Aws::Resiliencehub
       :client_token,
       :tags,
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1231,7 +1266,8 @@ module Aws::Resiliencehub
     #   @return [Types::RecommendationTemplate]
     class CreateRecommendationTemplateOutput < Struct.new(
       :recommendation_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1269,7 +1305,8 @@ module Aws::Resiliencehub
       :policy,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1316,8 @@ module Aws::Resiliencehub
     #   @return [Types::ResiliencyPolicy]
     class CreateResiliencyPolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1297,7 +1335,8 @@ module Aws::Resiliencehub
     class DeleteAppAssessmentInput < Struct.new(
       :assessment_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1353,8 @@ module Aws::Resiliencehub
     class DeleteAppAssessmentOutput < Struct.new(
       :assessment_arn,
       :assessment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1336,7 +1376,8 @@ module Aws::Resiliencehub
       :app_arn,
       :force_delete,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1372,7 +1413,8 @@ module Aws::Resiliencehub
       :terraform_source,
       :client_token,
       :eks_source_cluster_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1431,8 @@ module Aws::Resiliencehub
     class DeleteAppInputSourceOutput < Struct.new(
       :app_arn,
       :app_input_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1445,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class DeleteAppOutput < Struct.new(
       :app_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1424,7 +1468,8 @@ module Aws::Resiliencehub
       :app_arn,
       :id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1490,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :app_component,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1483,7 +1529,8 @@ module Aws::Resiliencehub
       :aws_region,
       :aws_account_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,7 +1551,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :physical_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1518,7 +1566,8 @@ module Aws::Resiliencehub
     class DeleteRecommendationTemplateInput < Struct.new(
       :recommendation_template_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1580,8 @@ module Aws::Resiliencehub
     class DeleteRecommendationTemplateOutput < Struct.new(
       :recommendation_template_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,7 +1599,8 @@ module Aws::Resiliencehub
     class DeleteResiliencyPolicyInput < Struct.new(
       :policy_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1562,7 +1613,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class DeleteResiliencyPolicyOutput < Struct.new(
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1627,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class DescribeAppAssessmentInput < Struct.new(
       :assessment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1639,8 @@ module Aws::Resiliencehub
     #   @return [Types::AppAssessment]
     class DescribeAppAssessmentOutput < Struct.new(
       :assessment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1653,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class DescribeAppInput < Struct.new(
       :app_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1609,7 +1664,8 @@ module Aws::Resiliencehub
     #   @return [Types::App]
     class DescribeAppOutput < Struct.new(
       :app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1630,7 +1686,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1708,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :app_component,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1668,7 +1726,8 @@ module Aws::Resiliencehub
     class DescribeAppVersionInput < Struct.new(
       :app_arn,
       :app_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1692,7 +1751,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1789,8 @@ module Aws::Resiliencehub
       :physical_resource_id,
       :aws_region,
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1750,7 +1811,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :physical_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1771,7 +1833,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :resolution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1800,7 +1863,8 @@ module Aws::Resiliencehub
       :resolution_id,
       :status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1817,7 +1881,8 @@ module Aws::Resiliencehub
     class DescribeAppVersionTemplateInput < Struct.new(
       :app_arn,
       :app_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2097,7 +2162,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :app_template_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2110,7 +2176,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class DescribeDraftAppVersionResourcesImportStatusInput < Struct.new(
       :app_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2143,7 +2210,8 @@ module Aws::Resiliencehub
       :status_change_time,
       :error_message,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2152,7 +2220,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class DescribeMetricsExportRequest < Struct.new(
       :metrics_export_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2173,7 +2242,8 @@ module Aws::Resiliencehub
       :status,
       :export_location,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2186,7 +2256,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class DescribeResiliencyPolicyInput < Struct.new(
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2197,7 +2268,8 @@ module Aws::Resiliencehub
     #   @return [Types::ResiliencyPolicy]
     class DescribeResiliencyPolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2214,7 +2286,8 @@ module Aws::Resiliencehub
     class DescribeResourceGroupingRecommendationTaskRequest < Struct.new(
       :app_arn,
       :grouping_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2231,7 +2304,8 @@ module Aws::Resiliencehub
       :grouping_id,
       :status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2277,7 +2351,8 @@ module Aws::Resiliencehub
       :compliance_status,
       :achievable_rpo_in_secs,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2303,7 +2378,8 @@ module Aws::Resiliencehub
     class EksSource < Struct.new(
       :eks_cluster_arn,
       :namespaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2322,7 +2398,8 @@ module Aws::Resiliencehub
     class EksSourceClusterNamespace < Struct.new(
       :eks_cluster_arn,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2332,7 +2409,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class ErrorDetail < Struct.new(
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2359,7 +2437,8 @@ module Aws::Resiliencehub
       :name,
       :event_type,
       :sns_topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2373,7 +2452,8 @@ module Aws::Resiliencehub
     class Experiment < Struct.new(
       :experiment_arn,
       :experiment_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2387,7 +2467,8 @@ module Aws::Resiliencehub
     class FailedGroupingRecommendationEntry < Struct.new(
       :grouping_recommendation_id,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2401,7 +2482,8 @@ module Aws::Resiliencehub
     class FailurePolicy < Struct.new(
       :rto_in_secs,
       :rpo_in_secs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2421,7 +2503,8 @@ module Aws::Resiliencehub
     class Field < Struct.new(
       :name,
       :aggregation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,7 +2522,8 @@ module Aws::Resiliencehub
       :app_component_id,
       :app_component_type,
       :app_component_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2481,7 +2565,8 @@ module Aws::Resiliencehub
       :confidence_level,
       :creation_time,
       :rejection_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2512,7 +2597,8 @@ module Aws::Resiliencehub
       :physical_resource_id,
       :logical_resource_id,
       :source_app_component_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2542,7 +2628,8 @@ module Aws::Resiliencehub
       :terraform_sources,
       :import_strategy,
       :eks_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2575,7 +2662,8 @@ module Aws::Resiliencehub
       :status,
       :terraform_sources,
       :eks_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2585,7 +2673,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2607,7 +2696,8 @@ module Aws::Resiliencehub
       :assessment_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2622,7 +2712,8 @@ module Aws::Resiliencehub
     class ListAlarmRecommendationsOutput < Struct.new(
       :alarm_recommendations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2643,7 +2734,8 @@ module Aws::Resiliencehub
       :assessment_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2657,7 +2749,8 @@ module Aws::Resiliencehub
     class ListAppAssessmentComplianceDriftsResponse < Struct.new(
       :compliance_drifts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2680,7 +2773,8 @@ module Aws::Resiliencehub
       :assessment_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2693,7 +2787,8 @@ module Aws::Resiliencehub
     class ListAppAssessmentResourceDriftsResponse < Struct.new(
       :resource_drifts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2737,7 +2832,8 @@ module Aws::Resiliencehub
       :reverse_order,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2752,7 +2848,8 @@ module Aws::Resiliencehub
     class ListAppAssessmentsOutput < Struct.new(
       :next_token,
       :assessment_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2774,7 +2871,8 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       :assessment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2789,7 +2887,8 @@ module Aws::Resiliencehub
     class ListAppComponentCompliancesOutput < Struct.new(
       :component_compliances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2811,7 +2910,8 @@ module Aws::Resiliencehub
       :assessment_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2826,7 +2926,8 @@ module Aws::Resiliencehub
     class ListAppComponentRecommendationsOutput < Struct.new(
       :component_recommendations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2851,7 +2952,8 @@ module Aws::Resiliencehub
       :app_version,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +2966,8 @@ module Aws::Resiliencehub
     class ListAppInputSourcesOutput < Struct.new(
       :app_input_sources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2889,7 +2992,8 @@ module Aws::Resiliencehub
       :app_version,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2914,7 +3018,8 @@ module Aws::Resiliencehub
       :app_version,
       :app_components,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2940,7 +3045,8 @@ module Aws::Resiliencehub
       :app_version,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2957,7 +3063,8 @@ module Aws::Resiliencehub
     class ListAppVersionResourceMappingsOutput < Struct.new(
       :resource_mappings,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2987,7 +3094,8 @@ module Aws::Resiliencehub
       :resolution_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3004,7 +3112,8 @@ module Aws::Resiliencehub
       :physical_resources,
       :resolution_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3034,7 +3143,8 @@ module Aws::Resiliencehub
       :max_results,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3047,7 +3157,8 @@ module Aws::Resiliencehub
     class ListAppVersionsOutput < Struct.new(
       :app_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3097,7 +3208,8 @@ module Aws::Resiliencehub
       :to_last_assessment_time,
       :reverse_order,
       :aws_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3110,7 +3222,8 @@ module Aws::Resiliencehub
     class ListAppsOutput < Struct.new(
       :app_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3140,7 +3253,8 @@ module Aws::Resiliencehub
       :data_source,
       :conditions,
       :sorts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3153,7 +3267,8 @@ module Aws::Resiliencehub
     class ListMetricsResponse < Struct.new(
       :rows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3192,7 +3307,8 @@ module Aws::Resiliencehub
       :name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3205,7 +3321,8 @@ module Aws::Resiliencehub
     class ListRecommendationTemplatesOutput < Struct.new(
       :next_token,
       :recommendation_templates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3223,7 +3340,8 @@ module Aws::Resiliencehub
       :policy_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3236,7 +3354,8 @@ module Aws::Resiliencehub
     class ListResiliencyPoliciesOutput < Struct.new(
       :resiliency_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3257,7 +3376,8 @@ module Aws::Resiliencehub
       :app_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3270,7 +3390,8 @@ module Aws::Resiliencehub
     class ListResourceGroupingRecommendationsResponse < Struct.new(
       :grouping_recommendations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3292,7 +3413,8 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       :assessment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3306,7 +3428,8 @@ module Aws::Resiliencehub
     class ListSopRecommendationsOutput < Struct.new(
       :next_token,
       :sop_recommendations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3320,7 +3443,8 @@ module Aws::Resiliencehub
     class ListSuggestedResiliencyPoliciesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3333,7 +3457,8 @@ module Aws::Resiliencehub
     class ListSuggestedResiliencyPoliciesOutput < Struct.new(
       :resiliency_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3343,7 +3468,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3353,7 +3479,8 @@ module Aws::Resiliencehub
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3375,7 +3502,8 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       :assessment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3388,7 +3516,8 @@ module Aws::Resiliencehub
     class ListTestRecommendationsOutput < Struct.new(
       :next_token,
       :test_recommendations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3418,7 +3547,8 @@ module Aws::Resiliencehub
       :resolution_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3435,7 +3565,8 @@ module Aws::Resiliencehub
       :unsupported_resources,
       :resolution_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3464,7 +3595,8 @@ module Aws::Resiliencehub
       :resource_group_name,
       :terraform_source_name,
       :eks_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3518,7 +3650,8 @@ module Aws::Resiliencehub
       :type,
       :invoker_role_name,
       :cross_account_role_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3568,7 +3701,8 @@ module Aws::Resiliencehub
       :excluded,
       :source_type,
       :parent_resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3726,7 +3860,8 @@ module Aws::Resiliencehub
       :type,
       :aws_region,
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3743,7 +3878,8 @@ module Aws::Resiliencehub
     class PublishAppVersionInput < Struct.new(
       :app_arn,
       :version_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3768,7 +3904,8 @@ module Aws::Resiliencehub
       :app_version,
       :identifier,
       :version_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4044,7 +4181,8 @@ module Aws::Resiliencehub
     class PutDraftAppVersionTemplateInput < Struct.new(
       :app_arn,
       :app_template_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4061,7 +4199,8 @@ module Aws::Resiliencehub
     class PutDraftAppVersionTemplateOutput < Struct.new(
       :app_arn,
       :app_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4089,7 +4228,8 @@ module Aws::Resiliencehub
       :expected_rto_description,
       :expected_rpo_in_secs,
       :expected_rpo_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4133,7 +4273,8 @@ module Aws::Resiliencehub
       :exclude_reason,
       :latest_discovered_experiment,
       :discovered_alarm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4228,7 +4369,8 @@ module Aws::Resiliencehub
       :end_time,
       :tags,
       :needs_replacements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4242,7 +4384,8 @@ module Aws::Resiliencehub
     class RejectGroupingRecommendationEntry < Struct.new(
       :grouping_recommendation_id,
       :rejection_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4259,7 +4402,8 @@ module Aws::Resiliencehub
     class RejectResourceGroupingRecommendationsRequest < Struct.new(
       :app_arn,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4276,7 +4420,8 @@ module Aws::Resiliencehub
     class RejectResourceGroupingRecommendationsResponse < Struct.new(
       :app_arn,
       :failed_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4318,7 +4463,8 @@ module Aws::Resiliencehub
       :resource_group_names,
       :terraform_source_names,
       :eks_source_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4335,7 +4481,8 @@ module Aws::Resiliencehub
     class RemoveDraftAppVersionResourceMappingsOutput < Struct.new(
       :app_arn,
       :app_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4393,7 +4540,8 @@ module Aws::Resiliencehub
       :policy,
       :creation_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4415,7 +4563,8 @@ module Aws::Resiliencehub
       :score,
       :disruption_score,
       :component_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4437,7 +4586,8 @@ module Aws::Resiliencehub
     class ResolveAppVersionResourcesInput < Struct.new(
       :app_arn,
       :app_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4462,7 +4612,8 @@ module Aws::Resiliencehub
       :app_version,
       :resolution_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4492,7 +4643,8 @@ module Aws::Resiliencehub
       :reference_id,
       :resource_identifier,
       :diff_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4510,7 +4662,8 @@ module Aws::Resiliencehub
       :logical_resource_id,
       :physical_resource_id,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4525,7 +4678,8 @@ module Aws::Resiliencehub
     class ResourceErrorsDetails < Struct.new(
       :resource_errors,
       :has_more_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4539,7 +4693,8 @@ module Aws::Resiliencehub
     class ResourceIdentifier < Struct.new(
       :logical_resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4581,7 +4736,8 @@ module Aws::Resiliencehub
       :physical_resource_id,
       :terraform_source_name,
       :eks_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4598,7 +4754,8 @@ module Aws::Resiliencehub
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4612,7 +4769,8 @@ module Aws::Resiliencehub
     class S3Location < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4647,7 +4805,8 @@ module Aws::Resiliencehub
       :possible_score,
       :outstanding_count,
       :excluded_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4665,7 +4824,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4707,7 +4867,8 @@ module Aws::Resiliencehub
       :reference_id,
       :prerequisite,
       :recommendation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4721,7 +4882,8 @@ module Aws::Resiliencehub
     class Sort < Struct.new(
       :field,
       :ascending,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4752,7 +4914,8 @@ module Aws::Resiliencehub
       :assessment_name,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4761,7 +4924,8 @@ module Aws::Resiliencehub
     #   @return [Types::AppAssessment]
     class StartAppAssessmentOutput < Struct.new(
       :assessment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4775,7 +4939,8 @@ module Aws::Resiliencehub
     class StartMetricsExportRequest < Struct.new(
       :bucket_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4788,7 +4953,8 @@ module Aws::Resiliencehub
     class StartMetricsExportResponse < Struct.new(
       :metrics_export_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4801,7 +4967,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class StartResourceGroupingRecommendationTaskRequest < Struct.new(
       :app_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4826,7 +4993,8 @@ module Aws::Resiliencehub
       :grouping_id,
       :status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4839,12 +5007,14 @@ module Aws::Resiliencehub
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4854,7 +5024,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class TerraformSource < Struct.new(
       :s3_state_file_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4913,7 +5084,8 @@ module Aws::Resiliencehub
       :prerequisite,
       :depends_on_alarms,
       :recommendation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4926,7 +5098,8 @@ module Aws::Resiliencehub
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4948,7 +5121,8 @@ module Aws::Resiliencehub
       :physical_resource_id,
       :resource_type,
       :unsupported_resource_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4961,12 +5135,14 @@ module Aws::Resiliencehub
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5011,7 +5187,8 @@ module Aws::Resiliencehub
       :assessment_schedule,
       :permission_model,
       :event_subscriptions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5021,7 +5198,8 @@ module Aws::Resiliencehub
     #   @return [Types::App]
     class UpdateAppOutput < Struct.new(
       :app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5050,7 +5228,8 @@ module Aws::Resiliencehub
       :name,
       :type,
       :additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5071,7 +5250,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :app_component,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5095,7 +5275,8 @@ module Aws::Resiliencehub
     class UpdateAppVersionInput < Struct.new(
       :app_arn,
       :additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5119,7 +5300,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :additional_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5172,7 +5354,8 @@ module Aws::Resiliencehub
       :app_components,
       :additional_info,
       :excluded,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5193,7 +5376,8 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       :physical_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5211,7 +5395,8 @@ module Aws::Resiliencehub
       :resource_id,
       :target_account_id,
       :target_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5245,7 +5430,8 @@ module Aws::Resiliencehub
       :excluded,
       :app_component_id,
       :exclude_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5279,7 +5465,8 @@ module Aws::Resiliencehub
       :data_location_constraint,
       :tier,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5289,7 +5476,8 @@ module Aws::Resiliencehub
     #   @return [Types::ResiliencyPolicy]
     class UpdateResiliencyPolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5298,7 +5486,8 @@ module Aws::Resiliencehub
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -65,7 +65,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::CreateChimeWebhookConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::CreateSlackChannelConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::CreateTeamsChannelConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -117,7 +117,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DeleteChimeWebhookConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DeleteMicrosoftTeamsUserIdentityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -143,7 +143,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DeleteSlackChannelConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DeleteSlackUserIdentityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -169,7 +169,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DeleteSlackWorkspaceAuthorizationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -182,7 +182,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DeleteTeamsChannelConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -195,7 +195,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DeleteTeamsConfiguredTeamException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -208,7 +208,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DescribeChimeWebhookConfigurationsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -221,7 +221,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DescribeSlackChannelConfigurationsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -234,7 +234,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DescribeSlackUserIdentitiesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -247,7 +247,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::DescribeSlackWorkspacesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -260,7 +260,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::GetAccountPreferencesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -273,7 +273,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::GetTeamsChannelConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -286,7 +286,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::InternalServiceError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -299,7 +299,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -312,7 +312,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -325,7 +325,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -338,7 +338,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::ListMicrosoftTeamsConfiguredTeamsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -351,7 +351,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::ListMicrosoftTeamsUserIdentitiesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -364,7 +364,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::ListTeamsChannelConfigurationsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -377,7 +377,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -390,7 +390,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -403,7 +403,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -416,7 +416,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -429,7 +429,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::UpdateAccountPreferencesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -442,7 +442,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::UpdateChimeWebhookConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -455,7 +455,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::UpdateSlackChannelConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -468,7 +468,7 @@ module Aws::Chatbot
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Chatbot::Types::UpdateTeamsChannelConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

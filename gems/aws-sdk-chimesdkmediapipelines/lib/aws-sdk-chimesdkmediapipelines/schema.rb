@@ -1413,7 +1413,6 @@ module Aws::ChimeSDKMediaPipelines
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/media-pipeline-kinesis-video-stream-pools/{Identifier}", "code" => 200}}
       end)
-
     end
 
     class << self

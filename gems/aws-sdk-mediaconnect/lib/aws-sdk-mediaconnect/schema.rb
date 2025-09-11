@@ -2013,7 +2013,6 @@ module Aws::MediaConnect
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/gateway-instances/{GatewayInstanceArn}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

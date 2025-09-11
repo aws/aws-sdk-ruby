@@ -41,7 +41,7 @@ module Aws::NetworkManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkManager::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::NetworkManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkManager::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::NetworkManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkManager::Types::CoreNetworkPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::NetworkManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkManager::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::NetworkManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkManager::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::NetworkManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkManager::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The error message.</p>
@@ -176,7 +176,7 @@ module Aws::NetworkManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkManager::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -194,7 +194,7 @@ module Aws::NetworkManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkManager::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

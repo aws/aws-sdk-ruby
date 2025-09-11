@@ -39,7 +39,7 @@ module Aws::Evs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evs::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Describes the error encountered.</p>
@@ -63,7 +63,7 @@ module Aws::Evs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evs::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Describes the error encountered.</p>
@@ -77,7 +77,7 @@ module Aws::Evs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evs::Types::TagPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Describes the error encountered</p>
@@ -91,7 +91,7 @@ module Aws::Evs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evs::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Describes the error encountered.</p>
@@ -114,7 +114,7 @@ module Aws::Evs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evs::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Describes the error encountered.</p>
@@ -128,7 +128,7 @@ module Aws::Evs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evs::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Describes the error encountered.</p>

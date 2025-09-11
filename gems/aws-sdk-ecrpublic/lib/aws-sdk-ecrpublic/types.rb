@@ -19,7 +19,8 @@ module Aws::ECRPUBLIC
     class AuthorizationData < Struct.new(
       :authorization_token,
       :expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +38,8 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       :layer_digests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51,7 +53,8 @@ module Aws::ECRPUBLIC
     class BatchCheckLayerAvailabilityResponse < Struct.new(
       :layers,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +74,8 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       :image_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +88,8 @@ module Aws::ECRPUBLIC
     class BatchDeleteImageResponse < Struct.new(
       :image_ids,
       :failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +113,8 @@ module Aws::ECRPUBLIC
       :repository_name,
       :upload_id,
       :layer_digests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,7 +135,8 @@ module Aws::ECRPUBLIC
       :repository_name,
       :upload_id,
       :layer_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +159,8 @@ module Aws::ECRPUBLIC
       :repository_name,
       :catalog_data,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -166,7 +174,8 @@ module Aws::ECRPUBLIC
     class CreateRepositoryResponse < Struct.new(
       :repository,
       :catalog_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +190,8 @@ module Aws::ECRPUBLIC
     class DeleteRepositoryPolicyRequest < Struct.new(
       :registry_id,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +208,8 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +228,8 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -226,7 +238,8 @@ module Aws::ECRPUBLIC
     #   @return [Types::Repository]
     class DeleteRepositoryResponse < Struct.new(
       :repository,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +275,8 @@ module Aws::ECRPUBLIC
       :repository_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +292,8 @@ module Aws::ECRPUBLIC
     class DescribeImageTagsResponse < Struct.new(
       :image_tag_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +332,8 @@ module Aws::ECRPUBLIC
       :image_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +350,8 @@ module Aws::ECRPUBLIC
     class DescribeImagesResponse < Struct.new(
       :image_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +379,8 @@ module Aws::ECRPUBLIC
     class DescribeRegistriesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +397,8 @@ module Aws::ECRPUBLIC
     class DescribeRegistriesResponse < Struct.new(
       :registries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +438,8 @@ module Aws::ECRPUBLIC
       :repository_names,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -436,7 +456,8 @@ module Aws::ECRPUBLIC
     class DescribeRepositoriesResponse < Struct.new(
       :repositories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -445,12 +466,14 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class EmptyUploadException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAuthorizationTokenRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,12 +482,14 @@ module Aws::ECRPUBLIC
     #   @return [Types::AuthorizationData]
     class GetAuthorizationTokenResponse < Struct.new(
       :authorization_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetRegistryCatalogDataRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +498,8 @@ module Aws::ECRPUBLIC
     #   @return [Types::RegistryCatalogData]
     class GetRegistryCatalogDataResponse < Struct.new(
       :registry_catalog_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +513,8 @@ module Aws::ECRPUBLIC
     class GetRepositoryCatalogDataRequest < Struct.new(
       :registry_id,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +523,8 @@ module Aws::ECRPUBLIC
     #   @return [Types::RepositoryCatalogData]
     class GetRepositoryCatalogDataResponse < Struct.new(
       :catalog_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -510,7 +538,8 @@ module Aws::ECRPUBLIC
     class GetRepositoryPolicyRequest < Struct.new(
       :registry_id,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +557,8 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +584,8 @@ module Aws::ECRPUBLIC
       :image_id,
       :image_manifest,
       :image_manifest_media_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +595,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class ImageAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -613,7 +645,8 @@ module Aws::ECRPUBLIC
       :image_pushed_at,
       :image_manifest_media_type,
       :artifact_media_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -623,7 +656,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class ImageDigestDoesNotMatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +675,8 @@ module Aws::ECRPUBLIC
       :image_id,
       :failure_code,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -655,7 +690,8 @@ module Aws::ECRPUBLIC
     class ImageIdentifier < Struct.new(
       :image_digest,
       :image_tag,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +700,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class ImageNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +711,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class ImageTagAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +730,8 @@ module Aws::ECRPUBLIC
       :image_tag,
       :created_at,
       :image_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +745,8 @@ module Aws::ECRPUBLIC
     class InitiateLayerUploadRequest < Struct.new(
       :registry_id,
       :repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +759,8 @@ module Aws::ECRPUBLIC
     class InitiateLayerUploadResponse < Struct.new(
       :upload_id,
       :part_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +770,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class InvalidLayerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +797,8 @@ module Aws::ECRPUBLIC
       :upload_id,
       :last_valid_byte_received,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +808,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +818,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class InvalidTagParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +843,8 @@ module Aws::ECRPUBLIC
       :layer_availability,
       :layer_size,
       :media_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +853,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class LayerAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +872,8 @@ module Aws::ECRPUBLIC
       :layer_digest,
       :failure_code,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +882,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class LayerPartTooSmallException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +893,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class LayersNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +905,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -865,7 +916,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,7 +926,8 @@ module Aws::ECRPUBLIC
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +960,8 @@ module Aws::ECRPUBLIC
       :image_manifest_media_type,
       :image_tag,
       :image_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -916,7 +970,8 @@ module Aws::ECRPUBLIC
     #   @return [Types::Image]
     class PutImageResponse < Struct.new(
       :image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +985,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class PutRegistryCatalogDataRequest < Struct.new(
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +995,8 @@ module Aws::ECRPUBLIC
     #   @return [Types::RegistryCatalogData]
     class PutRegistryCatalogDataResponse < Struct.new(
       :registry_catalog_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -958,7 +1015,8 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       :catalog_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1025,8 @@ module Aws::ECRPUBLIC
     #   @return [Types::RepositoryCatalogData]
     class PutRepositoryCatalogDataResponse < Struct.new(
       :catalog_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1061,8 @@ module Aws::ECRPUBLIC
       :image_pushed_at,
       :image_manifest_media_type,
       :artifact_media_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1071,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class ReferencedImagesNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1041,7 +1102,8 @@ module Aws::ECRPUBLIC
       :registry_uri,
       :verified,
       :aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1074,7 +1136,8 @@ module Aws::ECRPUBLIC
       :status,
       :primary_registry_alias,
       :default_registry_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1094,7 +1157,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class RegistryCatalogData < Struct.new(
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1167,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class RegistryNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1131,7 +1196,8 @@ module Aws::ECRPUBLIC
       :repository_name,
       :repository_uri,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1206,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class RepositoryAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,7 +1252,8 @@ module Aws::ECRPUBLIC
       :about_text,
       :usage_text,
       :marketplace_certified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1341,8 @@ module Aws::ECRPUBLIC
       :logo_image_blob,
       :about_text,
       :usage_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1282,7 +1351,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class RepositoryCatalogDataNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1292,7 +1362,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class RepositoryNotEmptyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1373,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class RepositoryNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1384,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class RepositoryPolicyNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1321,7 +1394,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class ServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1347,7 +1421,8 @@ module Aws::ECRPUBLIC
       :repository_name,
       :policy_text,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1439,8 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       :policy_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1381,7 +1457,8 @@ module Aws::ECRPUBLIC
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1396,12 +1473,14 @@ module Aws::ECRPUBLIC
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,7 +1490,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class TooManyTagsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1500,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class UnsupportedCommandException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1434,12 +1515,14 @@ module Aws::ECRPUBLIC
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1553,8 @@ module Aws::ECRPUBLIC
       :part_first_byte,
       :part_last_byte,
       :layer_part_blob,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1491,7 +1575,8 @@ module Aws::ECRPUBLIC
       :repository_name,
       :upload_id,
       :last_byte_received,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1501,7 +1586,8 @@ module Aws::ECRPUBLIC
     #   @return [String]
     class UploadNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

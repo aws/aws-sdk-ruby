@@ -12,7 +12,8 @@ module Aws::Keyspaces
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::Keyspaces
     #   @return [Types::TargetTrackingScalingPolicyConfiguration]
     class AutoScalingPolicy < Struct.new(
       :target_tracking_scaling_policy_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +46,8 @@ module Aws::Keyspaces
       :minimum_units,
       :maximum_units,
       :scaling_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -63,7 +66,8 @@ module Aws::Keyspaces
     class AutoScalingSpecification < Struct.new(
       :write_capacity_auto_scaling,
       :read_capacity_auto_scaling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -81,7 +85,8 @@ module Aws::Keyspaces
       :throughput_mode,
       :read_capacity_units,
       :write_capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +108,8 @@ module Aws::Keyspaces
       :read_capacity_units,
       :write_capacity_units,
       :last_update_to_pay_per_request_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +131,8 @@ module Aws::Keyspaces
       :view_type,
       :tags,
       :propagate_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,7 +146,8 @@ module Aws::Keyspaces
     class CdcSpecificationSummary < Struct.new(
       :status,
       :view_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +157,8 @@ module Aws::Keyspaces
     #   @return [String]
     class ClientSideTimestamps < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +172,8 @@ module Aws::Keyspaces
     class ClusteringKey < Struct.new(
       :name,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +187,8 @@ module Aws::Keyspaces
     class ColumnDefinition < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +198,8 @@ module Aws::Keyspaces
     #   @return [String]
     class Comment < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -197,7 +209,8 @@ module Aws::Keyspaces
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +227,8 @@ module Aws::Keyspaces
       :keyspace_name,
       :tags,
       :replication_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +237,8 @@ module Aws::Keyspaces
     #   @return [String]
     class CreateKeyspaceOutput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +299,8 @@ module Aws::Keyspaces
       :auto_scaling_specification,
       :replica_specifications,
       :cdc_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +309,8 @@ module Aws::Keyspaces
     #   @return [String]
     class CreateTableOutput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +327,8 @@ module Aws::Keyspaces
       :keyspace_name,
       :type_name,
       :field_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +341,8 @@ module Aws::Keyspaces
     class CreateTypeResponse < Struct.new(
       :keyspace_arn,
       :type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,12 +351,14 @@ module Aws::Keyspaces
     #   @return [String]
     class DeleteKeyspaceInput < Struct.new(
       :keyspace_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKeyspaceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,12 +371,14 @@ module Aws::Keyspaces
     class DeleteTableInput < Struct.new(
       :keyspace_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTableOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +391,8 @@ module Aws::Keyspaces
     class DeleteTypeRequest < Struct.new(
       :keyspace_name,
       :type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +405,8 @@ module Aws::Keyspaces
     class DeleteTypeResponse < Struct.new(
       :keyspace_arn,
       :type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +420,8 @@ module Aws::Keyspaces
     class EncryptionSpecification < Struct.new(
       :type,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -409,7 +435,8 @@ module Aws::Keyspaces
     class FieldDefinition < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +445,8 @@ module Aws::Keyspaces
     #   @return [String]
     class GetKeyspaceInput < Struct.new(
       :keyspace_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -443,7 +471,8 @@ module Aws::Keyspaces
       :replication_strategy,
       :replication_regions,
       :replication_group_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +485,8 @@ module Aws::Keyspaces
     class GetTableAutoScalingSettingsRequest < Struct.new(
       :keyspace_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -481,7 +511,8 @@ module Aws::Keyspaces
       :resource_arn,
       :auto_scaling_specification,
       :replica_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +525,8 @@ module Aws::Keyspaces
     class GetTableInput < Struct.new(
       :keyspace_name,
       :table_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +595,8 @@ module Aws::Keyspaces
       :replica_specifications,
       :latest_stream_arn,
       :cdc_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +609,8 @@ module Aws::Keyspaces
     class GetTypeRequest < Struct.new(
       :keyspace_name,
       :type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,7 +651,8 @@ module Aws::Keyspaces
       :direct_parent_types,
       :max_nesting_depth,
       :keyspace_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -632,7 +667,8 @@ module Aws::Keyspaces
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +690,8 @@ module Aws::Keyspaces
       :resource_arn,
       :replication_strategy,
       :replication_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -667,7 +704,8 @@ module Aws::Keyspaces
     class ListKeyspacesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -680,7 +718,8 @@ module Aws::Keyspaces
     class ListKeyspacesOutput < Struct.new(
       :next_token,
       :keyspaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +736,8 @@ module Aws::Keyspaces
       :next_token,
       :max_results,
       :keyspace_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +750,8 @@ module Aws::Keyspaces
     class ListTablesOutput < Struct.new(
       :next_token,
       :tables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +768,8 @@ module Aws::Keyspaces
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +782,8 @@ module Aws::Keyspaces
     class ListTagsForResourceOutput < Struct.new(
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +800,8 @@ module Aws::Keyspaces
       :next_token,
       :max_results,
       :keyspace_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +814,8 @@ module Aws::Keyspaces
     class ListTypesResponse < Struct.new(
       :next_token,
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +825,8 @@ module Aws::Keyspaces
     #   @return [String]
     class PartitionKey < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -790,7 +836,8 @@ module Aws::Keyspaces
     #   @return [String]
     class PointInTimeRecovery < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +851,8 @@ module Aws::Keyspaces
     class PointInTimeRecoverySummary < Struct.new(
       :status,
       :earliest_restorable_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -818,7 +866,8 @@ module Aws::Keyspaces
     class ReplicaAutoScalingSpecification < Struct.new(
       :region,
       :auto_scaling_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -836,7 +885,8 @@ module Aws::Keyspaces
       :region,
       :read_capacity_units,
       :read_capacity_auto_scaling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -854,7 +904,8 @@ module Aws::Keyspaces
       :region,
       :status,
       :capacity_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,7 +923,8 @@ module Aws::Keyspaces
       :region,
       :keyspace_status,
       :tables_replication_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +938,8 @@ module Aws::Keyspaces
     class ReplicationSpecification < Struct.new(
       :replication_strategy,
       :region_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +953,8 @@ module Aws::Keyspaces
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -949,7 +1003,8 @@ module Aws::Keyspaces
       :tags_override,
       :auto_scaling_specification,
       :replica_specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -958,7 +1013,8 @@ module Aws::Keyspaces
     #   @return [String]
     class RestoreTableOutput < Struct.new(
       :restored_table_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1036,8 @@ module Aws::Keyspaces
       :partition_keys,
       :clustering_keys,
       :static_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1047,8 @@ module Aws::Keyspaces
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1058,8 @@ module Aws::Keyspaces
     #   @return [String]
     class StaticColumn < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1077,8 @@ module Aws::Keyspaces
       :keyspace_name,
       :table_name,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1032,7 +1092,8 @@ module Aws::Keyspaces
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1045,12 +1106,14 @@ module Aws::Keyspaces
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1135,8 @@ module Aws::Keyspaces
       :scale_in_cooldown,
       :scale_out_cooldown,
       :target_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1090,7 +1154,8 @@ module Aws::Keyspaces
     #   @return [String]
     class TimeToLive < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,12 +1168,14 @@ module Aws::Keyspaces
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1125,7 +1192,8 @@ module Aws::Keyspaces
       :keyspace_name,
       :replication_specification,
       :client_side_timestamps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1134,7 +1202,8 @@ module Aws::Keyspaces
     #   @return [String]
     class UpdateKeyspaceResponse < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1256,8 @@ module Aws::Keyspaces
       :auto_scaling_specification,
       :replica_specifications,
       :cdc_specification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1196,7 +1266,8 @@ module Aws::Keyspaces
     #   @return [String]
     class UpdateTableOutput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1206,7 +1277,8 @@ module Aws::Keyspaces
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

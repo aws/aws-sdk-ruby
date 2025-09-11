@@ -1798,7 +1798,6 @@ module Aws::ElasticLoadBalancingV2
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetNotFoundException)
         operation.traits = {}
       end)
-
     end
 
     class << self

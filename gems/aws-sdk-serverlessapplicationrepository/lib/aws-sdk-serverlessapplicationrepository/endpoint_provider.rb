@@ -45,7 +45,6 @@ module Aws::ServerlessApplicationRepository
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

@@ -37,7 +37,7 @@ module Aws::GroundStation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GroundStation::Types::DependencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::GroundStation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GroundStation::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::GroundStation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GroundStation::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::GroundStation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GroundStation::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

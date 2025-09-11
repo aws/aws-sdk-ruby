@@ -35,7 +35,8 @@ module Aws::PcaConnectorAd
       :template_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +69,8 @@ module Aws::PcaConnectorAd
       :template_arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -81,7 +83,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +101,8 @@ module Aws::PcaConnectorAd
     class AccessRights < Struct.new(
       :enroll,
       :auto_enroll,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +116,8 @@ module Aws::PcaConnectorAd
     class ApplicationPolicies < Struct.new(
       :critical,
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +132,8 @@ module Aws::PcaConnectorAd
       :policy_type,
       :policy_object_identifier,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PolicyType < ApplicationPolicy; end
@@ -160,7 +166,8 @@ module Aws::PcaConnectorAd
     class CertificateValidity < Struct.new(
       :validity_period,
       :renewal_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +185,8 @@ module Aws::PcaConnectorAd
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -223,7 +231,8 @@ module Aws::PcaConnectorAd
       :status_reason,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +276,8 @@ module Aws::PcaConnectorAd
       :status_reason,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +302,8 @@ module Aws::PcaConnectorAd
       :vpc_information,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +312,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class CreateConnectorResponse < Struct.new(
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +330,8 @@ module Aws::PcaConnectorAd
       :directory_id,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +340,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class CreateDirectoryRegistrationResponse < Struct.new(
       :directory_registration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +358,8 @@ module Aws::PcaConnectorAd
       :directory_registration_arn,
       :connector_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +386,8 @@ module Aws::PcaConnectorAd
       :group_display_name,
       :access_rights,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +414,8 @@ module Aws::PcaConnectorAd
       :definition,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,7 +424,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class CreateTemplateResponse < Struct.new(
       :template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +434,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class DeleteConnectorRequest < Struct.new(
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +444,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class DeleteDirectoryRegistrationRequest < Struct.new(
       :directory_registration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +458,8 @@ module Aws::PcaConnectorAd
     class DeleteServicePrincipalNameRequest < Struct.new(
       :directory_registration_arn,
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +473,8 @@ module Aws::PcaConnectorAd
     class DeleteTemplateGroupAccessControlEntryRequest < Struct.new(
       :template_arn,
       :group_security_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +483,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class DeleteTemplateRequest < Struct.new(
       :template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +517,8 @@ module Aws::PcaConnectorAd
       :status_reason,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +550,8 @@ module Aws::PcaConnectorAd
       :status_reason,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +581,8 @@ module Aws::PcaConnectorAd
       :remove_invalid_certificate_from_personal_store,
       :no_security_extension,
       :enable_key_reuse_on_nt_token_keyset_storage_full,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +612,8 @@ module Aws::PcaConnectorAd
       :remove_invalid_certificate_from_personal_store,
       :no_security_extension,
       :enable_key_reuse_on_nt_token_keyset_storage_full,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +643,8 @@ module Aws::PcaConnectorAd
       :remove_invalid_certificate_from_personal_store,
       :no_security_extension,
       :enable_key_reuse_on_nt_token_keyset_storage_full,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,7 +659,8 @@ module Aws::PcaConnectorAd
     class ExtensionsV2 < Struct.new(
       :key_usage,
       :application_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +675,8 @@ module Aws::PcaConnectorAd
     class ExtensionsV3 < Struct.new(
       :key_usage,
       :application_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +691,8 @@ module Aws::PcaConnectorAd
     class ExtensionsV4 < Struct.new(
       :key_usage,
       :application_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +709,8 @@ module Aws::PcaConnectorAd
     class GeneralFlagsV2 < Struct.new(
       :auto_enrollment,
       :machine_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +727,8 @@ module Aws::PcaConnectorAd
     class GeneralFlagsV3 < Struct.new(
       :auto_enrollment,
       :machine_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +745,8 @@ module Aws::PcaConnectorAd
     class GeneralFlagsV4 < Struct.new(
       :auto_enrollment,
       :machine_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +755,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class GetConnectorRequest < Struct.new(
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +765,8 @@ module Aws::PcaConnectorAd
     #   @return [Types::Connector]
     class GetConnectorResponse < Struct.new(
       :connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -739,7 +775,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class GetDirectoryRegistrationRequest < Struct.new(
       :directory_registration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +786,8 @@ module Aws::PcaConnectorAd
     #   @return [Types::DirectoryRegistration]
     class GetDirectoryRegistrationResponse < Struct.new(
       :directory_registration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +800,8 @@ module Aws::PcaConnectorAd
     class GetServicePrincipalNameRequest < Struct.new(
       :directory_registration_arn,
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +810,8 @@ module Aws::PcaConnectorAd
     #   @return [Types::ServicePrincipalName]
     class GetServicePrincipalNameResponse < Struct.new(
       :service_principal_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +825,8 @@ module Aws::PcaConnectorAd
     class GetTemplateGroupAccessControlEntryRequest < Struct.new(
       :template_arn,
       :group_security_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -795,7 +836,8 @@ module Aws::PcaConnectorAd
     #   @return [Types::AccessControlEntry]
     class GetTemplateGroupAccessControlEntryResponse < Struct.new(
       :access_control_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +846,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class GetTemplateRequest < Struct.new(
       :template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +857,8 @@ module Aws::PcaConnectorAd
     #   @return [Types::Template]
     class GetTemplateResponse < Struct.new(
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -824,7 +868,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +885,8 @@ module Aws::PcaConnectorAd
     class KeyUsage < Struct.new(
       :critical,
       :usage_flags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -871,7 +917,8 @@ module Aws::PcaConnectorAd
       :key_encipherment,
       :data_encipherment,
       :key_agreement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +937,8 @@ module Aws::PcaConnectorAd
       :property_type,
       :property_flags,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PropertyType < KeyUsageProperty; end
@@ -912,7 +960,8 @@ module Aws::PcaConnectorAd
       :decrypt,
       :key_agreement,
       :sign,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +980,8 @@ module Aws::PcaConnectorAd
     class ListConnectorsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -946,7 +996,8 @@ module Aws::PcaConnectorAd
     class ListConnectorsResponse < Struct.new(
       :connectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -965,7 +1016,8 @@ module Aws::PcaConnectorAd
     class ListDirectoryRegistrationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1032,8 @@ module Aws::PcaConnectorAd
     class ListDirectoryRegistrationsResponse < Struct.new(
       :directory_registrations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1056,8 @@ module Aws::PcaConnectorAd
       :max_results,
       :next_token,
       :directory_registration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1019,7 +1073,8 @@ module Aws::PcaConnectorAd
     class ListServicePrincipalNamesResponse < Struct.new(
       :service_principal_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1028,7 +1083,8 @@ module Aws::PcaConnectorAd
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1093,8 @@ module Aws::PcaConnectorAd
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1117,8 @@ module Aws::PcaConnectorAd
       :max_results,
       :next_token,
       :template_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1076,7 +1134,8 @@ module Aws::PcaConnectorAd
     class ListTemplateGroupAccessControlEntriesResponse < Struct.new(
       :access_control_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1099,7 +1158,8 @@ module Aws::PcaConnectorAd
       :max_results,
       :next_token,
       :connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1174,8 @@ module Aws::PcaConnectorAd
     class ListTemplatesResponse < Struct.new(
       :templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1194,8 @@ module Aws::PcaConnectorAd
       :minimal_key_length,
       :key_spec,
       :crypto_providers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1224,8 @@ module Aws::PcaConnectorAd
       :crypto_providers,
       :key_usage_property,
       :algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,7 +1254,8 @@ module Aws::PcaConnectorAd
       :crypto_providers,
       :key_usage_property,
       :algorithm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,7 +1274,8 @@ module Aws::PcaConnectorAd
       :exportable_key,
       :strong_key_protection_required,
       :client_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1300,8 @@ module Aws::PcaConnectorAd
       :strong_key_protection_required,
       :require_alternate_signature_algorithm,
       :client_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1337,8 @@ module Aws::PcaConnectorAd
       :require_same_key_renewal,
       :use_legacy_provider,
       :client_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1289,7 +1356,8 @@ module Aws::PcaConnectorAd
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1388,8 @@ module Aws::PcaConnectorAd
       :status_reason,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1351,7 +1420,8 @@ module Aws::PcaConnectorAd
       :status_reason,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1376,7 +1446,8 @@ module Aws::PcaConnectorAd
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1428,7 +1499,8 @@ module Aws::PcaConnectorAd
       :require_email,
       :require_common_name,
       :require_directory_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1480,7 +1552,8 @@ module Aws::PcaConnectorAd
       :require_email,
       :require_common_name,
       :require_directory_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1532,7 +1605,8 @@ module Aws::PcaConnectorAd
       :require_email,
       :require_common_name,
       :require_directory_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1545,7 +1619,8 @@ module Aws::PcaConnectorAd
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1596,7 +1671,8 @@ module Aws::PcaConnectorAd
       :revision,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1623,7 +1699,8 @@ module Aws::PcaConnectorAd
       :template_v3,
       :template_v4,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TemplateV2 < TemplateDefinition; end
@@ -1645,7 +1722,8 @@ module Aws::PcaConnectorAd
     class TemplateRevision < Struct.new(
       :major_revision,
       :minor_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1696,7 +1774,8 @@ module Aws::PcaConnectorAd
       :revision,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1741,7 +1820,8 @@ module Aws::PcaConnectorAd
       :subject_name_flags,
       :general_flags,
       :extensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1791,7 +1871,8 @@ module Aws::PcaConnectorAd
       :general_flags,
       :hash_algorithm,
       :extensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1926,8 @@ module Aws::PcaConnectorAd
       :general_flags,
       :hash_algorithm,
       :extensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1862,7 +1944,8 @@ module Aws::PcaConnectorAd
       :message,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1876,7 +1959,8 @@ module Aws::PcaConnectorAd
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1899,7 +1983,8 @@ module Aws::PcaConnectorAd
       :group_security_identifier,
       :group_display_name,
       :access_rights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1920,7 +2005,8 @@ module Aws::PcaConnectorAd
       :template_arn,
       :definition,
       :reenroll_all_certificate_holders,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1935,7 +2021,8 @@ module Aws::PcaConnectorAd
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1956,7 +2043,8 @@ module Aws::PcaConnectorAd
     class ValidityPeriod < Struct.new(
       :period_type,
       :period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1971,7 +2059,8 @@ module Aws::PcaConnectorAd
     class VpcInformation < Struct.new(
       :ip_address_type,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

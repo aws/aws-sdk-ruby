@@ -47,7 +47,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::DecryptionFailure] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::EncryptionFailure] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -138,7 +138,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::ServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -168,7 +168,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -181,7 +181,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::ThrottledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -211,7 +211,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -224,7 +224,7 @@ module Aws::BedrockAgentCoreControl
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCoreControl::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

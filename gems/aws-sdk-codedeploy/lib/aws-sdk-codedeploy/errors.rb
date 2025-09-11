@@ -143,7 +143,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::AlarmsLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -158,7 +158,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::ApplicationAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -172,7 +172,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::ApplicationDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -186,7 +186,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::ApplicationLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -200,7 +200,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::ApplicationNameRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -215,7 +215,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::ArnNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -229,7 +229,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::BatchLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -243,7 +243,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::BucketNameFilterRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -257,7 +257,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentAlreadyCompletedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -271,7 +271,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentConfigAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -285,7 +285,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentConfigDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -299,7 +299,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentConfigInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -313,7 +313,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentConfigLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -327,7 +327,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentConfigNameRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -341,7 +341,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -356,7 +356,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentGroupAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -371,7 +371,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentGroupDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -385,7 +385,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentGroupLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -399,7 +399,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentGroupNameRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -413,7 +413,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentIdRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -427,7 +427,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentIsNotInReadyStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -441,7 +441,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -455,7 +455,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentNotStartedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -469,7 +469,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentTargetDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -483,7 +483,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentTargetIdRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -500,7 +500,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DeploymentTargetListSizeExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -514,7 +514,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::DescriptionTooLongException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -529,7 +529,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::ECSServiceMappingLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -543,7 +543,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::GitHubAccountTokenDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -557,7 +557,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::GitHubAccountTokenNameRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -571,7 +571,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::IamArnRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -586,7 +586,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::IamSessionArnAlreadyRegisteredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -600,7 +600,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::IamUserArnAlreadyRegisteredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -614,7 +614,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::IamUserArnRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -628,7 +628,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InstanceDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -642,7 +642,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InstanceIdRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -657,7 +657,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InstanceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -671,7 +671,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InstanceNameAlreadyRegisteredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -685,7 +685,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InstanceNameRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -699,7 +699,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InstanceNotRegisteredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -730,7 +730,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidAlarmConfigException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -744,7 +744,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidApplicationNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -758,7 +758,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -774,7 +774,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidAutoRollbackConfigException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -789,7 +789,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidAutoScalingGroupException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -804,7 +804,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidBlueGreenDeploymentConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -818,7 +818,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidBucketNameFilterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -832,7 +832,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidComputePlatformException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -846,7 +846,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidDeployedStateFilterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -860,7 +860,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidDeploymentConfigNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -874,7 +874,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidDeploymentGroupNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -888,7 +888,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidDeploymentIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -903,7 +903,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidDeploymentInstanceTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -917,7 +917,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidDeploymentStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -933,7 +933,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidDeploymentStyleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -947,7 +947,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidDeploymentTargetIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -961,7 +961,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidDeploymentWaitTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -976,7 +976,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidEC2TagCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -990,7 +990,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidEC2TagException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1004,7 +1004,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidECSServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1018,7 +1018,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidExternalIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1034,7 +1034,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidFileExistsBehaviorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1048,7 +1048,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidGitHubAccountTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1062,7 +1062,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidGitHubAccountTokenNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1076,7 +1076,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidIamSessionArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1090,7 +1090,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidIamUserArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1106,7 +1106,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidIgnoreApplicationStopFailuresValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1120,7 +1120,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1134,7 +1134,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidInstanceNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1148,7 +1148,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidInstanceStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1164,7 +1164,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidInstanceTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1178,7 +1178,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidKeyPrefixFilterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1194,7 +1194,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidLifecycleEventHookExecutionIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1209,7 +1209,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidLifecycleEventHookExecutionStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1223,7 +1223,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidLoadBalancerInfoException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1237,7 +1237,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidMinimumHealthyHostValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1251,7 +1251,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1266,7 +1266,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidOnPremisesTagCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1280,7 +1280,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1294,7 +1294,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidRegistrationStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1308,7 +1308,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidRevisionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1324,7 +1324,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidRoleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1339,7 +1339,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidSortByException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1353,7 +1353,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidSortOrderException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1367,7 +1367,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidTagException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1381,7 +1381,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidTagFilterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1395,7 +1395,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidTagsToAddException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1409,7 +1409,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidTargetFilterNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1423,7 +1423,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidTargetGroupPairException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1452,7 +1452,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidTargetInstancesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1466,7 +1466,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidTimeRangeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1481,7 +1481,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidTrafficRoutingConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1495,7 +1495,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidTriggerConfigException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1511,7 +1511,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidUpdateOutdatedInstancesOnlyValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1525,7 +1525,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::InvalidZonalDeploymentConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1540,7 +1540,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::LifecycleEventAlreadyCompletedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1554,7 +1554,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::LifecycleHookLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1569,7 +1569,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::MultipleIamArnsProvidedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1583,7 +1583,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::OperationNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1597,7 +1597,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::ResourceArnRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1611,7 +1611,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::ResourceValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1625,7 +1625,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::RevisionDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1639,7 +1639,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::RevisionRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1653,7 +1653,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::RoleRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1667,7 +1667,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::TagLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1681,7 +1681,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::TagRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1696,7 +1696,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::TagSetListLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1710,7 +1710,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1724,7 +1724,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::TriggerTargetsLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>
@@ -1738,7 +1738,7 @@ module Aws::CodeDeploy
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeDeploy::Types::UnsupportedActionForDeploymentTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message that corresponds to the exception thrown by CodeDeploy.</p>

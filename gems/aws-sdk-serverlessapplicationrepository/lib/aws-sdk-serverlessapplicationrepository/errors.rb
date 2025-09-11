@@ -39,7 +39,7 @@ module Aws::ServerlessApplicationRepository
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServerlessApplicationRepository::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>400</p>
@@ -58,7 +58,7 @@ module Aws::ServerlessApplicationRepository
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServerlessApplicationRepository::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>409</p>
@@ -77,7 +77,7 @@ module Aws::ServerlessApplicationRepository
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServerlessApplicationRepository::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>403</p>
@@ -96,7 +96,7 @@ module Aws::ServerlessApplicationRepository
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServerlessApplicationRepository::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>500</p>
@@ -115,7 +115,7 @@ module Aws::ServerlessApplicationRepository
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServerlessApplicationRepository::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>404</p>
@@ -134,7 +134,7 @@ module Aws::ServerlessApplicationRepository
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ServerlessApplicationRepository::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>429</p>

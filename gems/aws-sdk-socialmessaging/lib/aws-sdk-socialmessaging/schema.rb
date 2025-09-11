@@ -721,7 +721,6 @@ module Aws::SocialMessaging
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledRequestException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/whatsapp/template", "code" => 200}}
       end)
-
     end
 
     class << self

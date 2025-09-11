@@ -39,7 +39,7 @@ module Aws::MWAA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MWAA::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::MWAA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MWAA::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::MWAA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MWAA::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::MWAA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MWAA::Types::RestApiClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The HTTP status code returned by the Apache Airflow REST API call.</p>
@@ -100,7 +100,7 @@ module Aws::MWAA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MWAA::Types::RestApiServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The HTTP status code returned by the Apache Airflow REST API call.</p>
@@ -120,7 +120,7 @@ module Aws::MWAA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MWAA::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

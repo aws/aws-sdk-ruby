@@ -42,7 +42,7 @@ module Aws::Transfer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transfer::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::Transfer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transfer::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::Transfer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transfer::Types::InternalServiceError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::Transfer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transfer::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -94,7 +94,7 @@ module Aws::Transfer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transfer::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -107,7 +107,7 @@ module Aws::Transfer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transfer::Types::ResourceExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::Transfer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transfer::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::Transfer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transfer::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -162,7 +162,7 @@ module Aws::Transfer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transfer::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def retry_after_seconds

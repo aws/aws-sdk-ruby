@@ -758,7 +758,6 @@ module Aws::TaxSettings
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants store permission"}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/PutTaxRegistration"}}
       end)
-
     end
 
     class << self

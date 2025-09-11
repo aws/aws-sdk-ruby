@@ -11,6 +11,7 @@ module Aws::ResourceGroupsTaggingAPI
       def next_tokens(data)
         next_token = data.pagination_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:pagination_token] = next_token
         tokens
@@ -19,6 +20,7 @@ module Aws::ResourceGroupsTaggingAPI
       def prev_tokens(params)
         prev_token = params[:pagination_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:pagination_token] = prev_token
         tokens
@@ -34,6 +36,7 @@ module Aws::ResourceGroupsTaggingAPI
       def next_tokens(data)
         next_token = data.pagination_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:pagination_token] = next_token
         tokens
@@ -42,6 +45,7 @@ module Aws::ResourceGroupsTaggingAPI
       def prev_tokens(params)
         prev_token = params[:pagination_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:pagination_token] = prev_token
         tokens
@@ -57,6 +61,7 @@ module Aws::ResourceGroupsTaggingAPI
       def next_tokens(data)
         next_token = data.pagination_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:pagination_token] = next_token
         tokens
@@ -65,6 +70,7 @@ module Aws::ResourceGroupsTaggingAPI
       def prev_tokens(params)
         prev_token = params[:pagination_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:pagination_token] = prev_token
         tokens
@@ -80,6 +86,7 @@ module Aws::ResourceGroupsTaggingAPI
       def next_tokens(data)
         next_token = data.pagination_token
         return {} if next_token.nil? || next_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:pagination_token] = next_token
         tokens
@@ -88,6 +95,7 @@ module Aws::ResourceGroupsTaggingAPI
       def prev_tokens(params)
         prev_token = params[:pagination_token]
         return {} if prev_token.nil? || prev_token.empty?
+
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:pagination_token] = prev_token
         tokens

@@ -35,7 +35,8 @@ module Aws::GroundStation
       :reserved_cpu_cores,
       :agent_cpu_cores,
       :component_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +50,8 @@ module Aws::GroundStation
     class AggregateStatus < Struct.new(
       :status,
       :signature_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +61,8 @@ module Aws::GroundStation
     #   @return [String]
     class AntennaDemodDecodeDetails < Struct.new(
       :output_node,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -70,7 +73,8 @@ module Aws::GroundStation
     #   @return [Types::SpectrumConfig]
     class AntennaDownlinkConfig < Struct.new(
       :spectrum_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +92,8 @@ module Aws::GroundStation
       :spectrum_config,
       :demodulation_config,
       :decode_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +111,8 @@ module Aws::GroundStation
       :transmit_disabled,
       :spectrum_config,
       :target_eirp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +138,8 @@ module Aws::GroundStation
       :ingress_address,
       :agent_status,
       :audit_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +149,8 @@ module Aws::GroundStation
     #   @return [String]
     class CancelContactInput < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +160,8 @@ module Aws::GroundStation
     #   @return [String]
     class CancelContactOutput < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +195,8 @@ module Aws::GroundStation
       :bytes_received,
       :packets_dropped,
       :dataflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +210,8 @@ module Aws::GroundStation
     class ComponentVersion < Struct.new(
       :component_type,
       :versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +230,8 @@ module Aws::GroundStation
       :antenna_demod_decode_details,
       :s3_recording_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class EndpointDetails < ConfigDetails; end
@@ -246,7 +258,8 @@ module Aws::GroundStation
       :config_type,
       :config_arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +296,8 @@ module Aws::GroundStation
       :uplink_echo_config,
       :s3_recording_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AntennaDownlinkConfig < ConfigTypeData; end
@@ -306,7 +320,8 @@ module Aws::GroundStation
     class ConnectionDetails < Struct.new(
       :socket_address,
       :mtu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +399,8 @@ module Aws::GroundStation
       :tags,
       :visibility_start_time,
       :visibility_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +418,8 @@ module Aws::GroundStation
       :name,
       :config_data,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +437,8 @@ module Aws::GroundStation
       :config_id,
       :config_type,
       :config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -450,7 +468,8 @@ module Aws::GroundStation
       :tags,
       :contact_pre_pass_duration_seconds,
       :contact_post_pass_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +479,8 @@ module Aws::GroundStation
     #   @return [String]
     class CreateDataflowEndpointGroupOutput < Struct.new(
       :dataflow_endpoint_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +520,8 @@ module Aws::GroundStation
       :kms_key_arn,
       :ephemeris,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +530,8 @@ module Aws::GroundStation
     #   @return [String]
     class CreateEphemerisOutput < Struct.new(
       :ephemeris_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -553,7 +575,8 @@ module Aws::GroundStation
       :tags,
       :streams_kms_key,
       :streams_kms_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +586,8 @@ module Aws::GroundStation
     #   @return [String]
     class CreateMissionProfileOutput < Struct.new(
       :mission_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +605,8 @@ module Aws::GroundStation
       :source,
       :destination,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +628,8 @@ module Aws::GroundStation
       :address,
       :status,
       :mtu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,7 +643,8 @@ module Aws::GroundStation
     class DataflowEndpointConfig < Struct.new(
       :dataflow_endpoint_name,
       :dataflow_endpoint_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,7 +658,8 @@ module Aws::GroundStation
     class DataflowEndpointListItem < Struct.new(
       :dataflow_endpoint_group_id,
       :dataflow_endpoint_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +669,8 @@ module Aws::GroundStation
     #   @return [String]
     class DecodeConfig < Struct.new(
       :unvalidated_json,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -655,7 +684,8 @@ module Aws::GroundStation
     class DeleteConfigInput < Struct.new(
       :config_id,
       :config_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -673,7 +703,8 @@ module Aws::GroundStation
       :config_id,
       :config_type,
       :config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +714,8 @@ module Aws::GroundStation
     #   @return [String]
     class DeleteDataflowEndpointGroupInput < Struct.new(
       :dataflow_endpoint_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -693,7 +725,8 @@ module Aws::GroundStation
     #   @return [String]
     class DeleteDataflowEndpointGroupOutput < Struct.new(
       :dataflow_endpoint_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +735,8 @@ module Aws::GroundStation
     #   @return [String]
     class DeleteEphemerisInput < Struct.new(
       :ephemeris_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -711,7 +745,8 @@ module Aws::GroundStation
     #   @return [String]
     class DeleteEphemerisOutput < Struct.new(
       :ephemeris_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +756,8 @@ module Aws::GroundStation
     #   @return [String]
     class DeleteMissionProfileInput < Struct.new(
       :mission_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +767,8 @@ module Aws::GroundStation
     #   @return [String]
     class DeleteMissionProfileOutput < Struct.new(
       :mission_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +778,8 @@ module Aws::GroundStation
     #   @return [String]
     class DemodulationConfig < Struct.new(
       :unvalidated_json,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -754,7 +792,8 @@ module Aws::GroundStation
     class DependencyException < Struct.new(
       :message,
       :parameter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -764,7 +803,8 @@ module Aws::GroundStation
     #   @return [String]
     class DescribeContactInput < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +884,8 @@ module Aws::GroundStation
       :dataflow_list,
       :visibility_start_time,
       :visibility_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -853,7 +894,8 @@ module Aws::GroundStation
     #   @return [String]
     class DescribeEphemerisInput < Struct.new(
       :ephemeris_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +942,8 @@ module Aws::GroundStation
       :tags,
       :supplied_data,
       :invalid_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +965,8 @@ module Aws::GroundStation
       :config_id,
       :config_details,
       :dataflow_destination_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +984,8 @@ module Aws::GroundStation
       :public_ip_addresses,
       :private_ip_addresses,
       :capability_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -954,7 +999,8 @@ module Aws::GroundStation
     class Eirp < Struct.new(
       :value,
       :units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1014,8 @@ module Aws::GroundStation
     class Elevation < Struct.new(
       :value,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -994,7 +1041,8 @@ module Aws::GroundStation
       :aws_ground_station_agent_endpoint,
       :health_status,
       :health_reasons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1062,8 @@ module Aws::GroundStation
       :tle,
       :oem,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Tle < EphemerisData; end
@@ -1032,7 +1081,8 @@ module Aws::GroundStation
     class EphemerisDescription < Struct.new(
       :source_s3_object,
       :ephemeris_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1118,8 @@ module Aws::GroundStation
       :creation_time,
       :name,
       :source_s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1144,8 @@ module Aws::GroundStation
       :ephemeris_id,
       :epoch,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1160,8 @@ module Aws::GroundStation
       :tle,
       :oem,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Tle < EphemerisTypeDescription; end
@@ -1126,7 +1179,8 @@ module Aws::GroundStation
     class Frequency < Struct.new(
       :value,
       :units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1151,7 +1205,8 @@ module Aws::GroundStation
     class FrequencyBandwidth < Struct.new(
       :value,
       :units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1160,7 +1215,8 @@ module Aws::GroundStation
     #   @return [String]
     class GetAgentConfigurationInput < Struct.new(
       :agent_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1229,8 @@ module Aws::GroundStation
     class GetAgentConfigurationOutput < Struct.new(
       :agent_id,
       :tasking_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1244,8 @@ module Aws::GroundStation
     class GetConfigInput < Struct.new(
       :config_id,
       :config_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1276,8 @@ module Aws::GroundStation
       :config_type,
       :config_data,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1228,7 +1287,8 @@ module Aws::GroundStation
     #   @return [String]
     class GetDataflowEndpointGroupInput < Struct.new(
       :dataflow_endpoint_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1258,7 +1318,8 @@ module Aws::GroundStation
       :tags,
       :contact_pre_pass_duration_seconds,
       :contact_post_pass_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1272,7 +1333,8 @@ module Aws::GroundStation
     class GetMinuteUsageInput < Struct.new(
       :month,
       :year,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1298,7 +1360,8 @@ module Aws::GroundStation
       :upcoming_minutes_scheduled,
       :total_scheduled_minutes,
       :estimated_minutes_remaining,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1308,7 +1371,8 @@ module Aws::GroundStation
     #   @return [String]
     class GetMissionProfileInput < Struct.new(
       :mission_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1428,8 @@ module Aws::GroundStation
       :tags,
       :streams_kms_key,
       :streams_kms_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1439,8 @@ module Aws::GroundStation
     #   @return [String]
     class GetSatelliteInput < Struct.new(
       :satellite_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1400,7 +1466,8 @@ module Aws::GroundStation
       :norad_satellite_id,
       :ground_stations,
       :current_ephemeris,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1423,7 +1490,8 @@ module Aws::GroundStation
       :ground_station_id,
       :ground_station_name,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1437,7 +1505,8 @@ module Aws::GroundStation
     class IntegerRange < Struct.new(
       :minimum,
       :maximum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1519,8 @@ module Aws::GroundStation
     class InvalidParameterException < Struct.new(
       :message,
       :parameter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1469,7 +1539,8 @@ module Aws::GroundStation
       :kms_alias_arn,
       :kms_alias_name,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class KmsKeyArn < KmsKey; end
@@ -1488,7 +1559,8 @@ module Aws::GroundStation
     class ListConfigsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1502,7 +1574,8 @@ module Aws::GroundStation
     class ListConfigsOutput < Struct.new(
       :next_token,
       :config_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1540,7 +1613,8 @@ module Aws::GroundStation
       :ground_station,
       :satellite_arn,
       :mission_profile_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1628,8 @@ module Aws::GroundStation
     class ListContactsOutput < Struct.new(
       :next_token,
       :contact_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1643,8 @@ module Aws::GroundStation
     class ListDataflowEndpointGroupsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1582,7 +1658,8 @@ module Aws::GroundStation
     class ListDataflowEndpointGroupsOutput < Struct.new(
       :next_token,
       :dataflow_endpoint_group_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1688,8 @@ module Aws::GroundStation
       :status_list,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1624,7 +1702,8 @@ module Aws::GroundStation
     class ListEphemeridesOutput < Struct.new(
       :next_token,
       :ephemerides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1721,8 @@ module Aws::GroundStation
       :satellite_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1736,8 @@ module Aws::GroundStation
     class ListGroundStationsOutput < Struct.new(
       :next_token,
       :ground_station_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1751,8 @@ module Aws::GroundStation
     class ListMissionProfilesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1684,7 +1766,8 @@ module Aws::GroundStation
     class ListMissionProfilesOutput < Struct.new(
       :next_token,
       :mission_profile_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1698,7 +1781,8 @@ module Aws::GroundStation
     class ListSatellitesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1712,7 +1796,8 @@ module Aws::GroundStation
     class ListSatellitesOutput < Struct.new(
       :next_token,
       :satellites,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1722,7 +1807,8 @@ module Aws::GroundStation
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1732,7 +1818,8 @@ module Aws::GroundStation
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1754,7 +1841,8 @@ module Aws::GroundStation
       :mission_profile_arn,
       :region,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1773,7 +1861,8 @@ module Aws::GroundStation
     class OEMEphemeris < Struct.new(
       :s3_object,
       :oem_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1787,7 +1876,8 @@ module Aws::GroundStation
     class RangedConnectionDetails < Struct.new(
       :socket_address,
       :mtu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1801,7 +1891,8 @@ module Aws::GroundStation
     class RangedSocketAddress < Struct.new(
       :name,
       :port_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1818,7 +1909,8 @@ module Aws::GroundStation
       :discovery_data,
       :agent_details,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1827,7 +1919,8 @@ module Aws::GroundStation
     #   @return [String]
     class RegisterAgentOutput < Struct.new(
       :agent_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1857,7 +1950,8 @@ module Aws::GroundStation
       :end_time,
       :ground_station,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1961,8 @@ module Aws::GroundStation
     #   @return [String]
     class ReserveContactOutput < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1880,7 +1975,8 @@ module Aws::GroundStation
     class ResourceLimitExceededException < Struct.new(
       :message,
       :parameter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1889,7 +1985,8 @@ module Aws::GroundStation
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1907,7 +2004,8 @@ module Aws::GroundStation
       :bucket,
       :key,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1925,7 +2023,8 @@ module Aws::GroundStation
       :bucket_arn,
       :role_arn,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1939,7 +2038,8 @@ module Aws::GroundStation
     class S3RecordingDetails < Struct.new(
       :bucket_arn,
       :key_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1965,7 +2065,8 @@ module Aws::GroundStation
       :norad_satellite_id,
       :ground_stations,
       :current_ephemeris,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1988,7 +2089,8 @@ module Aws::GroundStation
       :subnet_ids,
       :security_group_ids,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2104,8 @@ module Aws::GroundStation
     class SocketAddress < Struct.new(
       :name,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2025,7 +2128,8 @@ module Aws::GroundStation
       :config_id,
       :config_details,
       :dataflow_source_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2054,7 +2158,8 @@ module Aws::GroundStation
       :center_frequency,
       :bandwidth,
       :polarization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2072,7 +2177,8 @@ module Aws::GroundStation
       :tle_line1,
       :tle_line2,
       :valid_time_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2086,7 +2192,8 @@ module Aws::GroundStation
     class TLEEphemeris < Struct.new(
       :s3_object,
       :tle_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,13 +2207,15 @@ module Aws::GroundStation
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p/>
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2120,7 +2229,8 @@ module Aws::GroundStation
     class TimeRange < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2131,7 +2241,8 @@ module Aws::GroundStation
     #   @return [String]
     class TrackingConfig < Struct.new(
       :autotrack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2145,13 +2256,15 @@ module Aws::GroundStation
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p/>
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2172,7 +2285,8 @@ module Aws::GroundStation
       :task_id,
       :aggregate_status,
       :component_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2181,7 +2295,8 @@ module Aws::GroundStation
     #   @return [String]
     class UpdateAgentStatusOutput < Struct.new(
       :agent_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2203,7 +2318,8 @@ module Aws::GroundStation
       :name,
       :config_type,
       :config_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2221,7 +2337,8 @@ module Aws::GroundStation
       :config_id,
       :config_type,
       :config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2244,7 +2361,8 @@ module Aws::GroundStation
       :enabled,
       :name,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2253,7 +2371,8 @@ module Aws::GroundStation
     #   @return [String]
     class UpdateEphemerisOutput < Struct.new(
       :ephemeris_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2297,7 +2416,8 @@ module Aws::GroundStation
       :tracking_config_arn,
       :streams_kms_key,
       :streams_kms_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2307,7 +2427,8 @@ module Aws::GroundStation
     #   @return [String]
     class UpdateMissionProfileOutput < Struct.new(
       :mission_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2324,7 +2445,8 @@ module Aws::GroundStation
     class UplinkEchoConfig < Struct.new(
       :enabled,
       :antenna_uplink_config_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2338,7 +2460,8 @@ module Aws::GroundStation
     class UplinkSpectrumConfig < Struct.new(
       :center_frequency,
       :polarization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

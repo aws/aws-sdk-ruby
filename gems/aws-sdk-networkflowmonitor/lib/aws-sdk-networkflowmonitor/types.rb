@@ -11,7 +11,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +51,8 @@ module Aws::NetworkFlowMonitor
       :scope_arn,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +89,8 @@ module Aws::NetworkFlowMonitor
       :created_at,
       :modified_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +107,8 @@ module Aws::NetworkFlowMonitor
       :targets,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +129,8 @@ module Aws::NetworkFlowMonitor
       :status,
       :scope_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -133,12 +139,14 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class DeleteMonitorInput < Struct.new(
       :monitor_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMonitorOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,12 +155,14 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class DeleteScopeInput < Struct.new(
       :scope_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteScopeOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +171,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class GetMonitorInput < Struct.new(
       :monitor_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +209,8 @@ module Aws::NetworkFlowMonitor
       :created_at,
       :modified_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +231,8 @@ module Aws::NetworkFlowMonitor
       :query_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +249,8 @@ module Aws::NetworkFlowMonitor
       :unit,
       :top_contributors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -257,7 +271,8 @@ module Aws::NetworkFlowMonitor
       :query_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +289,8 @@ module Aws::NetworkFlowMonitor
       :unit,
       :datapoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -295,7 +311,8 @@ module Aws::NetworkFlowMonitor
       :query_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +325,8 @@ module Aws::NetworkFlowMonitor
     class GetQueryResultsWorkloadInsightsTopContributorsOutput < Struct.new(
       :top_contributors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +339,8 @@ module Aws::NetworkFlowMonitor
     class GetQueryStatusMonitorTopContributorsInput < Struct.new(
       :monitor_name,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +349,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class GetQueryStatusMonitorTopContributorsOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,7 +363,8 @@ module Aws::NetworkFlowMonitor
     class GetQueryStatusWorkloadInsightsTopContributorsDataInput < Struct.new(
       :scope_id,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -352,7 +373,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class GetQueryStatusWorkloadInsightsTopContributorsDataOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +387,8 @@ module Aws::NetworkFlowMonitor
     class GetQueryStatusWorkloadInsightsTopContributorsInput < Struct.new(
       :scope_id,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -374,7 +397,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class GetQueryStatusWorkloadInsightsTopContributorsOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -383,7 +407,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class GetScopeInput < Struct.new(
       :scope_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +433,8 @@ module Aws::NetworkFlowMonitor
       :scope_arn,
       :targets,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +443,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +474,8 @@ module Aws::NetworkFlowMonitor
       :remote_service_name,
       :remote_pod_name,
       :remote_pod_namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +492,8 @@ module Aws::NetworkFlowMonitor
       :next_token,
       :max_results,
       :monitor_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -477,7 +506,8 @@ module Aws::NetworkFlowMonitor
     class ListMonitorsOutput < Struct.new(
       :monitors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -490,7 +520,8 @@ module Aws::NetworkFlowMonitor
     class ListScopesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +534,8 @@ module Aws::NetworkFlowMonitor
     class ListScopesOutput < Struct.new(
       :scopes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -512,7 +544,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +554,8 @@ module Aws::NetworkFlowMonitor
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +569,8 @@ module Aws::NetworkFlowMonitor
     class MonitorLocalResource < Struct.new(
       :type,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -549,7 +584,8 @@ module Aws::NetworkFlowMonitor
     class MonitorRemoteResource < Struct.new(
       :type,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -567,7 +603,8 @@ module Aws::NetworkFlowMonitor
       :monitor_arn,
       :monitor_name,
       :monitor_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -673,7 +710,8 @@ module Aws::NetworkFlowMonitor
       :remote_instance_arn,
       :remote_subnet_arn,
       :remote_vpc_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +720,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +739,8 @@ module Aws::NetworkFlowMonitor
       :scope_id,
       :status,
       :scope_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +749,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +779,8 @@ module Aws::NetworkFlowMonitor
       :metric_name,
       :destination_category,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,7 +789,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class StartQueryMonitorTopContributorsOutput < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +815,8 @@ module Aws::NetworkFlowMonitor
       :end_time,
       :metric_name,
       :destination_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -781,7 +825,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class StartQueryWorkloadInsightsTopContributorsDataOutput < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -810,7 +855,8 @@ module Aws::NetworkFlowMonitor
       :metric_name,
       :destination_category,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +865,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class StartQueryWorkloadInsightsTopContributorsOutput < Struct.new(
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,12 +879,14 @@ module Aws::NetworkFlowMonitor
     class StopQueryMonitorTopContributorsInput < Struct.new(
       :monitor_name,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopQueryMonitorTopContributorsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,12 +899,14 @@ module Aws::NetworkFlowMonitor
     class StopQueryWorkloadInsightsTopContributorsDataInput < Struct.new(
       :scope_id,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopQueryWorkloadInsightsTopContributorsDataOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,12 +919,14 @@ module Aws::NetworkFlowMonitor
     class StopQueryWorkloadInsightsTopContributorsInput < Struct.new(
       :scope_id,
       :query_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopQueryWorkloadInsightsTopContributorsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,12 +939,14 @@ module Aws::NetworkFlowMonitor
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +957,8 @@ module Aws::NetworkFlowMonitor
     class TargetId < Struct.new(
       :account_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AccountId < TargetId; end
@@ -919,7 +975,8 @@ module Aws::NetworkFlowMonitor
     class TargetIdentifier < Struct.new(
       :target_id,
       :target_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +990,8 @@ module Aws::NetworkFlowMonitor
     class TargetResource < Struct.new(
       :target_identifier,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +1000,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +1023,8 @@ module Aws::NetworkFlowMonitor
       :component_type,
       :component_arn,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,12 +1037,14 @@ module Aws::NetworkFlowMonitor
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1073,8 @@ module Aws::NetworkFlowMonitor
       :remote_resources_to_add,
       :remote_resources_to_remove,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1111,8 @@ module Aws::NetworkFlowMonitor
       :created_at,
       :modified_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1129,8 @@ module Aws::NetworkFlowMonitor
       :scope_id,
       :resources_to_add,
       :resources_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1151,8 @@ module Aws::NetworkFlowMonitor
       :status,
       :scope_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1095,7 +1161,8 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1113,7 +1180,8 @@ module Aws::NetworkFlowMonitor
       :timestamps,
       :values,
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1223,8 @@ module Aws::NetworkFlowMonitor
       :value,
       :local_subnet_arn,
       :local_vpc_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

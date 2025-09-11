@@ -44,7 +44,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -58,7 +58,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -85,7 +85,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -99,7 +99,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::MethodNotAllowedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -113,7 +113,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::RequestEntityTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -127,7 +127,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -141,7 +141,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -155,7 +155,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -169,7 +169,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -183,7 +183,7 @@ module Aws::IoTDataPlane
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTDataPlane::Types::UnsupportedDocumentEncodingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>

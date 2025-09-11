@@ -171,7 +171,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -185,7 +185,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AssociatedInstances] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -207,7 +207,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AssociationAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -216,7 +216,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AssociationDoesNotExist] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -229,7 +229,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AssociationExecutionDoesNotExist] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -242,7 +242,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AssociationLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -252,7 +252,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AssociationVersionLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -266,7 +266,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AutomationDefinitionNotApprovedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -279,7 +279,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AutomationDefinitionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -292,7 +292,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AutomationDefinitionVersionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -306,7 +306,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AutomationExecutionLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -320,7 +320,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AutomationExecutionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -334,7 +334,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::AutomationStepNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -348,7 +348,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ComplianceTypeCountLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -362,7 +362,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::CustomSchemaCountLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -375,7 +375,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::DocumentAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -388,7 +388,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::DocumentLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -406,7 +406,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::DocumentPermissionLimit] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -420,7 +420,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::DocumentVersionLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -436,7 +436,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::DoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -450,7 +450,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::DuplicateDocumentContent] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -464,7 +464,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::DuplicateDocumentVersionName] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -477,7 +477,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::DuplicateInstanceId] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -487,7 +487,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::FeatureNotAvailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -501,7 +501,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::HierarchyLevelLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A hierarchy can have a maximum of 15 levels. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html#sysman-parameter-name-constraints">About requirements and constraints for parameter names</a> in the
@@ -518,7 +518,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::HierarchyTypeMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Parameter Store doesn't support changing a parameter type in a hierarchy. For example, you
@@ -535,7 +535,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::IdempotentParameterMismatch] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -549,7 +549,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::IncompatiblePolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -562,7 +562,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -576,7 +576,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidActivation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -590,7 +590,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidActivationId] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -604,7 +604,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidAggregatorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -617,7 +617,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidAllowedPatternException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The request doesn't meet the regular expression requirement.</p>
@@ -631,7 +631,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidAssociation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -646,7 +646,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidAssociationVersion] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -661,7 +661,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidAutomationExecutionParametersException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -674,7 +674,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidAutomationSignalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -687,7 +687,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidAutomationStatusUpdateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -700,7 +700,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidCommandId] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -710,7 +710,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidDeleteInventoryParametersException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -724,7 +724,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidDeletionIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -737,7 +737,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidDocument] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The SSM document doesn't exist or the document isn't available to the user. This exception
@@ -752,7 +752,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidDocumentContent] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of the validation error.</p>
@@ -767,7 +767,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidDocumentOperation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -780,7 +780,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidDocumentSchemaVersion] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -794,7 +794,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidDocumentType] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -807,7 +807,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidDocumentVersion] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -820,7 +820,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidFilter] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -833,7 +833,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidFilterKey] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -843,7 +843,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidFilterOption] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The specified filter option isn't valid. Valid options are Equals and BeginsWith. For Path
@@ -858,7 +858,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidFilterValue] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -888,7 +888,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidInstanceId] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -901,7 +901,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidInstanceInformationFilterValue] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -914,7 +914,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidInstancePropertyFilterValue] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -927,7 +927,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidInventoryGroupException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -941,7 +941,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidInventoryItemContextException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -954,7 +954,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidInventoryRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -967,7 +967,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidItemContentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type_name
@@ -984,7 +984,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidKeyId] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -997,7 +997,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidNextToken] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1011,7 +1011,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidNotificationConfig] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1024,7 +1024,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidOptionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1037,7 +1037,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidOutputFolder] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -1046,7 +1046,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidOutputLocation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -1056,7 +1056,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidParameters] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1070,7 +1070,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidPermissionType] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1083,7 +1083,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidPluginName] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -1092,7 +1092,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidPolicyAttributeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1106,7 +1106,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidPolicyTypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1119,7 +1119,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidResourceId] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -1129,7 +1129,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidResourceType] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -1138,7 +1138,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidResultAttributeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1153,7 +1153,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidRole] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1166,7 +1166,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidSchedule] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1179,7 +1179,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidTag] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1193,7 +1193,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidTarget] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1206,7 +1206,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidTargetMaps] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1219,7 +1219,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidTypeNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1232,7 +1232,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvalidUpdate] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1246,7 +1246,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::InvocationDoesNotExist] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -1255,7 +1255,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ItemContentMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type_name
@@ -1272,7 +1272,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ItemSizeLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type_name
@@ -1290,7 +1290,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::MalformedResourcePolicyDocumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1303,7 +1303,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::MaxDocumentSizeExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1318,7 +1318,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsItemAccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1331,7 +1331,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsItemAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1348,7 +1348,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsItemConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1362,7 +1362,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsItemInvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def parameter_names
@@ -1379,7 +1379,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsItemLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def resource_types
@@ -1404,7 +1404,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsItemNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1417,7 +1417,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsItemRelatedItemAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1439,7 +1439,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsItemRelatedItemAssociationNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1452,7 +1452,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsMetadataAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1465,7 +1465,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsMetadataInvalidArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1479,7 +1479,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsMetadataKeyLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1493,7 +1493,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsMetadataLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1506,7 +1506,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsMetadataNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1520,7 +1520,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::OpsMetadataTooManyUpdatesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1533,7 +1533,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ParameterAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1547,7 +1547,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ParameterLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1575,7 +1575,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ParameterMaxVersionLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1593,7 +1593,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ParameterNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1606,7 +1606,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ParameterPatternMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The parameter name isn't valid.</p>
@@ -1620,7 +1620,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ParameterVersionLabelLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1634,7 +1634,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ParameterVersionNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1648,7 +1648,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::PoliciesLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1661,7 +1661,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourceDataSyncAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def sync_name
@@ -1675,7 +1675,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourceDataSyncConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1688,7 +1688,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourceDataSyncCountExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1701,7 +1701,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourceDataSyncInvalidConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1714,7 +1714,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourceDataSyncNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def sync_name
@@ -1736,7 +1736,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1752,7 +1752,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1765,7 +1765,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1780,7 +1780,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourcePolicyConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1794,7 +1794,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourcePolicyInvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def parameter_names
@@ -1813,7 +1813,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourcePolicyLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def limit
@@ -1834,7 +1834,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ResourcePolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1848,7 +1848,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1882,7 +1882,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ServiceSettingNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1895,7 +1895,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::StatusUnchanged] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -1904,7 +1904,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::SubTypeCountLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1918,7 +1918,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::TargetInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1935,7 +1935,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::TargetNotConnected] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1949,7 +1949,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1973,7 +1973,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::TooManyTagsError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -1982,7 +1982,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::TooManyUpdates] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1995,7 +1995,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::TotalSizeLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2008,7 +2008,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::UnsupportedCalendarException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2024,7 +2024,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::UnsupportedFeatureRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2039,7 +2039,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::UnsupportedInventoryItemContextException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type_name
@@ -2057,7 +2057,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::UnsupportedInventorySchemaVersionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2071,7 +2071,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::UnsupportedOperatingSystem] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2084,7 +2084,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2097,7 +2097,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::UnsupportedParameterType] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2111,7 +2111,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::UnsupportedPlatformType] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2125,7 +2125,7 @@ module Aws::SSM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

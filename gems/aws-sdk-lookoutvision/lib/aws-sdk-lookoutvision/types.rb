@@ -11,7 +11,8 @@ module Aws::LookoutVision
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28,7 +29,8 @@ module Aws::LookoutVision
     class Anomaly < Struct.new(
       :name,
       :pixel_anomaly,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +47,8 @@ module Aws::LookoutVision
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +88,8 @@ module Aws::LookoutVision
       :dataset_type,
       :dataset_source,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +98,8 @@ module Aws::LookoutVision
     #   @return [Types::DatasetMetadata]
     class CreateDatasetResponse < Struct.new(
       :dataset_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +141,8 @@ module Aws::LookoutVision
       :output_config,
       :kms_key_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +151,8 @@ module Aws::LookoutVision
     #   @return [Types::ModelMetadata]
     class CreateModelResponse < Struct.new(
       :model_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,7 +176,8 @@ module Aws::LookoutVision
     class CreateProjectRequest < Struct.new(
       :project_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +186,8 @@ module Aws::LookoutVision
     #   @return [Types::ProjectMetadata]
     class CreateProjectResponse < Struct.new(
       :project_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +222,8 @@ module Aws::LookoutVision
       :status,
       :status_message,
       :image_stats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +234,8 @@ module Aws::LookoutVision
     #   @return [Types::InputS3Object]
     class DatasetGroundTruthManifest < Struct.new(
       :s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -246,7 +257,8 @@ module Aws::LookoutVision
       :labeled,
       :normal,
       :anomaly,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -269,7 +281,8 @@ module Aws::LookoutVision
       :creation_timestamp,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +292,8 @@ module Aws::LookoutVision
     #   @return [Types::DatasetGroundTruthManifest]
     class DatasetSource < Struct.new(
       :ground_truth_manifest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,12 +321,14 @@ module Aws::LookoutVision
       :project_name,
       :dataset_type,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDatasetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +355,8 @@ module Aws::LookoutVision
       :project_name,
       :model_version,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +365,8 @@ module Aws::LookoutVision
     #   @return [String]
     class DeleteModelResponse < Struct.new(
       :model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +389,8 @@ module Aws::LookoutVision
     class DeleteProjectRequest < Struct.new(
       :project_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -380,7 +399,8 @@ module Aws::LookoutVision
     #   @return [String]
     class DeleteProjectResponse < Struct.new(
       :project_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +416,8 @@ module Aws::LookoutVision
     class DescribeDatasetRequest < Struct.new(
       :project_name,
       :dataset_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +426,8 @@ module Aws::LookoutVision
     #   @return [Types::DatasetDescription]
     class DescribeDatasetResponse < Struct.new(
       :dataset_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -421,7 +443,8 @@ module Aws::LookoutVision
     class DescribeModelPackagingJobRequest < Struct.new(
       :project_name,
       :job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +454,8 @@ module Aws::LookoutVision
     #   @return [Types::ModelPackagingDescription]
     class DescribeModelPackagingJobResponse < Struct.new(
       :model_packaging_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +468,8 @@ module Aws::LookoutVision
     class DescribeModelRequest < Struct.new(
       :project_name,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +478,8 @@ module Aws::LookoutVision
     #   @return [Types::ModelDescription]
     class DescribeModelResponse < Struct.new(
       :model_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +488,8 @@ module Aws::LookoutVision
     #   @return [String]
     class DescribeProjectRequest < Struct.new(
       :project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +498,8 @@ module Aws::LookoutVision
     #   @return [Types::ProjectDescription]
     class DescribeProjectResponse < Struct.new(
       :project_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +521,8 @@ module Aws::LookoutVision
       :model_version,
       :body,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -502,7 +531,8 @@ module Aws::LookoutVision
     #   @return [Types::DetectAnomalyResult]
     class DetectAnomaliesResponse < Struct.new(
       :detect_anomaly_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +575,8 @@ module Aws::LookoutVision
       :confidence,
       :anomalies,
       :anomaly_mask,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +641,8 @@ module Aws::LookoutVision
       :component_version,
       :component_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +668,8 @@ module Aws::LookoutVision
       :component_version_arn,
       :component_name,
       :component_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +679,8 @@ module Aws::LookoutVision
     #   @return [String]
     class ImageSource < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +698,8 @@ module Aws::LookoutVision
       :bucket,
       :key,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +712,8 @@ module Aws::LookoutVision
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +763,8 @@ module Aws::LookoutVision
       :next_token,
       :max_results,
       :source_ref_contains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +778,8 @@ module Aws::LookoutVision
     class ListDatasetEntriesResponse < Struct.new(
       :dataset_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -764,7 +802,8 @@ module Aws::LookoutVision
       :project_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +821,8 @@ module Aws::LookoutVision
     class ListModelPackagingJobsResponse < Struct.new(
       :model_packaging_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +843,8 @@ module Aws::LookoutVision
       :project_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +858,8 @@ module Aws::LookoutVision
     class ListModelsResponse < Struct.new(
       :models,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +876,8 @@ module Aws::LookoutVision
     class ListProjectsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +891,8 @@ module Aws::LookoutVision
     class ListProjectsResponse < Struct.new(
       :projects,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +901,8 @@ module Aws::LookoutVision
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +911,8 @@ module Aws::LookoutVision
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +979,8 @@ module Aws::LookoutVision
       :kms_key_id,
       :min_inference_units,
       :max_inference_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1014,8 @@ module Aws::LookoutVision
       :status,
       :status_message,
       :performance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -982,7 +1030,8 @@ module Aws::LookoutVision
     #   @return [Types::GreengrassConfiguration]
     class ModelPackagingConfiguration < Struct.new(
       :greengrass,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1106,8 @@ module Aws::LookoutVision
       :status_message,
       :creation_timestamp,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1164,8 @@ module Aws::LookoutVision
       :status_message,
       :creation_timestamp,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1179,8 @@ module Aws::LookoutVision
     #   @return [Types::GreengrassOutputDetails]
     class ModelPackagingOutputDetails < Struct.new(
       :greengrass,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1198,8 @@ module Aws::LookoutVision
       :f1_score,
       :recall,
       :precision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1156,7 +1209,8 @@ module Aws::LookoutVision
     #   @return [Types::S3Location]
     class OutputConfig < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1170,7 +1224,8 @@ module Aws::LookoutVision
     class OutputS3Object < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1242,8 @@ module Aws::LookoutVision
     class PixelAnomaly < Struct.new(
       :total_percentage_area,
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1209,7 +1265,8 @@ module Aws::LookoutVision
       :project_name,
       :creation_timestamp,
       :datasets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1227,7 +1284,8 @@ module Aws::LookoutVision
       :project_arn,
       :project_name,
       :creation_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1244,7 +1302,8 @@ module Aws::LookoutVision
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1319,8 @@ module Aws::LookoutVision
     class S3Location < Struct.new(
       :bucket,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1286,7 +1346,8 @@ module Aws::LookoutVision
       :resource_type,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1395,8 @@ module Aws::LookoutVision
       :configuration,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1346,7 +1408,8 @@ module Aws::LookoutVision
     #   @return [String]
     class StartModelPackagingJobResponse < Struct.new(
       :job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1387,7 +1450,8 @@ module Aws::LookoutVision
       :min_inference_units,
       :client_token,
       :max_inference_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1396,7 +1460,8 @@ module Aws::LookoutVision
     #   @return [String]
     class StartModelResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,7 +1491,8 @@ module Aws::LookoutVision
       :project_name,
       :model_version,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1501,8 @@ module Aws::LookoutVision
     #   @return [String]
     class StopModelResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1516,8 @@ module Aws::LookoutVision
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1462,12 +1530,14 @@ module Aws::LookoutVision
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,7 +1574,8 @@ module Aws::LookoutVision
       :os,
       :arch,
       :accelerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1525,7 +1596,8 @@ module Aws::LookoutVision
       :quota_code,
       :service_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1538,12 +1610,14 @@ module Aws::LookoutVision
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1578,7 +1652,8 @@ module Aws::LookoutVision
       :dataset_type,
       :changes,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1662,8 @@ module Aws::LookoutVision
     #   @return [String]
     class UpdateDatasetEntriesResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1597,7 +1673,8 @@ module Aws::LookoutVision
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -38,7 +38,7 @@ module Aws::IoTEventsData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTEventsData::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -52,7 +52,7 @@ module Aws::IoTEventsData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTEventsData::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -66,7 +66,7 @@ module Aws::IoTEventsData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTEventsData::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -80,7 +80,7 @@ module Aws::IoTEventsData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTEventsData::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>
@@ -94,7 +94,7 @@ module Aws::IoTEventsData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTEventsData::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message for the exception.</p>

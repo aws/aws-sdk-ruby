@@ -37,7 +37,7 @@ module Aws::StorageGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::StorageGateway::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A human-readable message describing the error that occurred.</p>
@@ -58,7 +58,7 @@ module Aws::StorageGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::StorageGateway::Types::InvalidGatewayRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A human-readable message describing the error that occurred.</p>
@@ -79,7 +79,7 @@ module Aws::StorageGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::StorageGateway::Types::ServiceUnavailableError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A human-readable message describing the error that occurred.</p>

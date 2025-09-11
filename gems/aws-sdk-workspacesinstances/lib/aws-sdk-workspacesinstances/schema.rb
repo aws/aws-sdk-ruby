@@ -664,7 +664,6 @@ module Aws::WorkspacesInstances
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to remove user tags from resources in your account"}}
       end)
-
     end
 
     class << self

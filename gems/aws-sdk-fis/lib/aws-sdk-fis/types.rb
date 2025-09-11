@@ -33,7 +33,8 @@ module Aws::Fis
       :parameters,
       :targets,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +48,8 @@ module Aws::Fis
     class ActionParameter < Struct.new(
       :description,
       :required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -78,7 +80,8 @@ module Aws::Fis
       :description,
       :targets,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +91,8 @@ module Aws::Fis
     #   @return [String]
     class ActionTarget < Struct.new(
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +101,8 @@ module Aws::Fis
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +130,8 @@ module Aws::Fis
       :parameters,
       :targets,
       :start_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,7 +145,8 @@ module Aws::Fis
     class CreateExperimentTemplateExperimentOptionsInput < Struct.new(
       :account_targeting,
       :empty_target_resolution_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +164,8 @@ module Aws::Fis
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :log_schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,7 +187,8 @@ module Aws::Fis
       :data_sources,
       :pre_experiment_duration,
       :post_experiment_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +233,8 @@ module Aws::Fis
       :log_configuration,
       :experiment_options,
       :experiment_report_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +243,8 @@ module Aws::Fis
     #   @return [Types::ExperimentTemplate]
     class CreateExperimentTemplateResponse < Struct.new(
       :experiment_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +261,8 @@ module Aws::Fis
     class CreateExperimentTemplateStopConditionInput < Struct.new(
       :source,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +308,8 @@ module Aws::Fis
       :filters,
       :selection_mode,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +334,8 @@ module Aws::Fis
       :account_id,
       :role_arn,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +344,8 @@ module Aws::Fis
     #   @return [Types::TargetAccountConfiguration]
     class CreateTargetAccountConfigurationResponse < Struct.new(
       :target_account_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +354,8 @@ module Aws::Fis
     #   @return [String]
     class DeleteExperimentTemplateRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +364,8 @@ module Aws::Fis
     #   @return [Types::ExperimentTemplate]
     class DeleteExperimentTemplateResponse < Struct.new(
       :experiment_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +378,8 @@ module Aws::Fis
     class DeleteTargetAccountConfigurationRequest < Struct.new(
       :experiment_template_id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -370,7 +388,8 @@ module Aws::Fis
     #   @return [Types::TargetAccountConfiguration]
     class DeleteTargetAccountConfigurationResponse < Struct.new(
       :target_account_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +463,8 @@ module Aws::Fis
       :target_account_configurations_count,
       :experiment_report_configuration,
       :experiment_report,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +502,8 @@ module Aws::Fis
       :state,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +517,8 @@ module Aws::Fis
     class ExperimentActionState < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +528,8 @@ module Aws::Fis
     #   @return [String]
     class ExperimentCloudWatchLogsLogConfiguration < Struct.new(
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +547,8 @@ module Aws::Fis
       :account_id,
       :code,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -542,7 +566,8 @@ module Aws::Fis
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :log_schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +585,8 @@ module Aws::Fis
       :account_targeting,
       :empty_target_resolution_mode,
       :actions_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +600,8 @@ module Aws::Fis
     class ExperimentReport < Struct.new(
       :state,
       :s3_reports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,7 +623,8 @@ module Aws::Fis
       :data_sources,
       :pre_experiment_duration,
       :post_experiment_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +634,8 @@ module Aws::Fis
     #   @return [String]
     class ExperimentReportConfigurationCloudWatchDashboard < Struct.new(
       :dashboard_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +645,8 @@ module Aws::Fis
     #   @return [Array<Types::ExperimentReportConfigurationCloudWatchDashboard>]
     class ExperimentReportConfigurationDataSources < Struct.new(
       :cloud_watch_dashboards,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +656,8 @@ module Aws::Fis
     #   @return [Types::ExperimentReportConfigurationOutputsS3Configuration]
     class ExperimentReportConfigurationOutputs < Struct.new(
       :s3_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +671,8 @@ module Aws::Fis
     class ExperimentReportConfigurationOutputsS3Configuration < Struct.new(
       :bucket_name,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +682,8 @@ module Aws::Fis
     #   @return [String]
     class ExperimentReportError < Struct.new(
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +697,8 @@ module Aws::Fis
     class ExperimentReportS3Report < Struct.new(
       :arn,
       :report_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +716,8 @@ module Aws::Fis
       :status,
       :reason,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -696,7 +731,8 @@ module Aws::Fis
     class ExperimentS3LogConfiguration < Struct.new(
       :bucket_name,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +750,8 @@ module Aws::Fis
       :status,
       :reason,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +765,8 @@ module Aws::Fis
     class ExperimentStopCondition < Struct.new(
       :source,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +800,8 @@ module Aws::Fis
       :creation_time,
       :tags,
       :experiment_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +831,8 @@ module Aws::Fis
       :filters,
       :selection_mode,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -810,7 +850,8 @@ module Aws::Fis
       :role_arn,
       :account_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +869,8 @@ module Aws::Fis
       :role_arn,
       :account_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -842,7 +884,8 @@ module Aws::Fis
     class ExperimentTargetFilter < Struct.new(
       :path,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +947,8 @@ module Aws::Fis
       :experiment_options,
       :target_account_configurations_count,
       :experiment_report_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +974,8 @@ module Aws::Fis
       :parameters,
       :targets,
       :start_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +985,8 @@ module Aws::Fis
     #   @return [String]
     class ExperimentTemplateCloudWatchLogsLogConfiguration < Struct.new(
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,7 +996,8 @@ module Aws::Fis
     #   @return [String]
     class ExperimentTemplateCloudWatchLogsLogConfigurationInput < Struct.new(
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +1011,8 @@ module Aws::Fis
     class ExperimentTemplateExperimentOptions < Struct.new(
       :account_targeting,
       :empty_target_resolution_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -982,7 +1030,8 @@ module Aws::Fis
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :log_schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1053,8 @@ module Aws::Fis
       :data_sources,
       :pre_experiment_duration,
       :post_experiment_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1064,8 @@ module Aws::Fis
     #   @return [String]
     class ExperimentTemplateReportConfigurationCloudWatchDashboard < Struct.new(
       :dashboard_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1024,7 +1075,8 @@ module Aws::Fis
     #   @return [Array<Types::ExperimentTemplateReportConfigurationCloudWatchDashboard>]
     class ExperimentTemplateReportConfigurationDataSources < Struct.new(
       :cloud_watch_dashboards,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1086,8 @@ module Aws::Fis
     #   @return [Array<Types::ReportConfigurationCloudWatchDashboardInput>]
     class ExperimentTemplateReportConfigurationDataSourcesInput < Struct.new(
       :cloud_watch_dashboards,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1044,7 +1097,8 @@ module Aws::Fis
     #   @return [Types::ReportConfigurationS3Output]
     class ExperimentTemplateReportConfigurationOutputs < Struct.new(
       :s3_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1054,7 +1108,8 @@ module Aws::Fis
     #   @return [Types::ReportConfigurationS3OutputInput]
     class ExperimentTemplateReportConfigurationOutputsInput < Struct.new(
       :s3_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1123,8 @@ module Aws::Fis
     class ExperimentTemplateS3LogConfiguration < Struct.new(
       :bucket_name,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1138,8 @@ module Aws::Fis
     class ExperimentTemplateS3LogConfigurationInput < Struct.new(
       :bucket_name,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1153,8 @@ module Aws::Fis
     class ExperimentTemplateStopCondition < Struct.new(
       :source,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1126,7 +1184,8 @@ module Aws::Fis
       :creation_time,
       :last_update_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1156,7 +1215,8 @@ module Aws::Fis
       :filters,
       :selection_mode,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1170,7 +1230,8 @@ module Aws::Fis
     class ExperimentTemplateTargetFilter < Struct.new(
       :path,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1186,7 +1247,8 @@ module Aws::Fis
     class ExperimentTemplateTargetInputFilter < Struct.new(
       :path,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1195,7 +1257,8 @@ module Aws::Fis
     #   @return [String]
     class GetActionRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,7 +1267,8 @@ module Aws::Fis
     #   @return [Types::Action]
     class GetActionResponse < Struct.new(
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1213,7 +1277,8 @@ module Aws::Fis
     #   @return [String]
     class GetExperimentRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1222,7 +1287,8 @@ module Aws::Fis
     #   @return [Types::Experiment]
     class GetExperimentResponse < Struct.new(
       :experiment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1301,8 @@ module Aws::Fis
     class GetExperimentTargetAccountConfigurationRequest < Struct.new(
       :experiment_id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1244,7 +1311,8 @@ module Aws::Fis
     #   @return [Types::ExperimentTargetAccountConfiguration]
     class GetExperimentTargetAccountConfigurationResponse < Struct.new(
       :target_account_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1253,7 +1321,8 @@ module Aws::Fis
     #   @return [String]
     class GetExperimentTemplateRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1262,7 +1331,8 @@ module Aws::Fis
     #   @return [Types::ExperimentTemplate]
     class GetExperimentTemplateResponse < Struct.new(
       :experiment_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1343,8 @@ module Aws::Fis
     #   @return [String]
     class GetSafetyLeverRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,7 +1355,8 @@ module Aws::Fis
     #   @return [Types::SafetyLever]
     class GetSafetyLeverResponse < Struct.new(
       :safety_lever,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1297,7 +1369,8 @@ module Aws::Fis
     class GetTargetAccountConfigurationRequest < Struct.new(
       :experiment_template_id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1306,7 +1379,8 @@ module Aws::Fis
     #   @return [Types::TargetAccountConfiguration]
     class GetTargetAccountConfigurationResponse < Struct.new(
       :target_account_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1315,7 +1389,8 @@ module Aws::Fis
     #   @return [String]
     class GetTargetResourceTypeRequest < Struct.new(
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,7 +1399,8 @@ module Aws::Fis
     #   @return [Types::TargetResourceType]
     class GetTargetResourceTypeResponse < Struct.new(
       :target_resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1337,7 +1413,8 @@ module Aws::Fis
     class ListActionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1350,7 +1427,8 @@ module Aws::Fis
     class ListActionsResponse < Struct.new(
       :actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1372,7 +1450,8 @@ module Aws::Fis
       :max_results,
       :next_token,
       :target_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1386,7 +1465,8 @@ module Aws::Fis
     class ListExperimentResolvedTargetsResponse < Struct.new(
       :resolved_targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1479,8 @@ module Aws::Fis
     class ListExperimentTargetAccountConfigurationsRequest < Struct.new(
       :experiment_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,7 +1494,8 @@ module Aws::Fis
     class ListExperimentTargetAccountConfigurationsResponse < Struct.new(
       :target_account_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,7 +1508,8 @@ module Aws::Fis
     class ListExperimentTemplatesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1439,7 +1522,8 @@ module Aws::Fis
     class ListExperimentTemplatesResponse < Struct.new(
       :experiment_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1456,7 +1540,8 @@ module Aws::Fis
       :max_results,
       :next_token,
       :experiment_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1469,7 +1554,8 @@ module Aws::Fis
     class ListExperimentsResponse < Struct.new(
       :experiments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1564,8 @@ module Aws::Fis
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1487,7 +1574,8 @@ module Aws::Fis
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1593,8 @@ module Aws::Fis
       :experiment_template_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1519,7 +1608,8 @@ module Aws::Fis
     class ListTargetAccountConfigurationsResponse < Struct.new(
       :target_account_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1532,7 +1622,8 @@ module Aws::Fis
     class ListTargetResourceTypesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1545,7 +1636,8 @@ module Aws::Fis
     class ListTargetResourceTypesResponse < Struct.new(
       :target_resource_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1647,8 @@ module Aws::Fis
     #   @return [String]
     class ReportConfigurationCloudWatchDashboardInput < Struct.new(
       :dashboard_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1569,7 +1662,8 @@ module Aws::Fis
     class ReportConfigurationS3Output < Struct.new(
       :bucket_name,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1583,7 +1677,8 @@ module Aws::Fis
     class ReportConfigurationS3OutputInput < Struct.new(
       :bucket_name,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1696,8 @@ module Aws::Fis
       :resource_type,
       :target_name,
       :target_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1610,7 +1706,8 @@ module Aws::Fis
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,7 +1733,8 @@ module Aws::Fis
       :id,
       :arn,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1754,8 @@ module Aws::Fis
     class SafetyLeverState < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1665,7 +1764,8 @@ module Aws::Fis
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1775,8 @@ module Aws::Fis
     #   @return [String]
     class StartExperimentExperimentOptionsInput < Struct.new(
       :actions_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1696,7 +1797,8 @@ module Aws::Fis
       :experiment_template_id,
       :experiment_options,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1807,8 @@ module Aws::Fis
     #   @return [Types::Experiment]
     class StartExperimentResponse < Struct.new(
       :experiment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1714,7 +1817,8 @@ module Aws::Fis
     #   @return [String]
     class StopExperimentRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1827,8 @@ module Aws::Fis
     #   @return [Types::Experiment]
     class StopExperimentResponse < Struct.new(
       :experiment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1736,12 +1841,14 @@ module Aws::Fis
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1759,7 +1866,8 @@ module Aws::Fis
       :role_arn,
       :account_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1777,7 +1885,8 @@ module Aws::Fis
       :role_arn,
       :account_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1795,7 +1904,8 @@ module Aws::Fis
       :resource_type,
       :description,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1920,8 @@ module Aws::Fis
     class TargetResourceTypeParameter < Struct.new(
       :description,
       :required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1829,7 +1940,8 @@ module Aws::Fis
     class TargetResourceTypeSummary < Struct.new(
       :resource_type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1842,12 +1954,14 @@ module Aws::Fis
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1873,7 +1987,8 @@ module Aws::Fis
       :parameters,
       :targets,
       :start_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1883,7 +1998,8 @@ module Aws::Fis
     #   @return [String]
     class UpdateExperimentTemplateExperimentOptionsInput < Struct.new(
       :empty_target_resolution_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1901,7 +2017,8 @@ module Aws::Fis
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :log_schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1924,7 +2041,8 @@ module Aws::Fis
       :data_sources,
       :pre_experiment_duration,
       :post_experiment_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1965,7 +2083,8 @@ module Aws::Fis
       :log_configuration,
       :experiment_options,
       :experiment_report_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1974,7 +2093,8 @@ module Aws::Fis
     #   @return [Types::ExperimentTemplate]
     class UpdateExperimentTemplateResponse < Struct.new(
       :experiment_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1990,7 +2110,8 @@ module Aws::Fis
     class UpdateExperimentTemplateStopConditionInput < Struct.new(
       :source,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2020,7 +2141,8 @@ module Aws::Fis
       :filters,
       :selection_mode,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2040,7 +2162,8 @@ module Aws::Fis
     class UpdateSafetyLeverStateInput < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2057,7 +2180,8 @@ module Aws::Fis
     class UpdateSafetyLeverStateRequest < Struct.new(
       :id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2068,7 +2192,8 @@ module Aws::Fis
     #   @return [Types::SafetyLever]
     class UpdateSafetyLeverStateResponse < Struct.new(
       :safety_lever,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2089,7 +2214,8 @@ module Aws::Fis
       :account_id,
       :role_arn,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2098,7 +2224,8 @@ module Aws::Fis
     #   @return [Types::TargetAccountConfiguration]
     class UpdateTargetAccountConfigurationResponse < Struct.new(
       :target_account_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2107,7 +2234,8 @@ module Aws::Fis
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

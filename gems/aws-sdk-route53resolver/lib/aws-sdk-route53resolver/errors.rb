@@ -52,7 +52,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::InternalServiceErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -124,7 +124,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::InvalidPolicyDocument] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -150,7 +150,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::InvalidTagException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -163,7 +163,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -181,7 +181,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::ResourceExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -199,7 +199,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -217,7 +217,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -235,7 +235,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::ResourceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -253,7 +253,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -266,7 +266,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -279,7 +279,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::UnknownResourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -293,7 +293,7 @@ module Aws::Route53Resolver
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Route53Resolver::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

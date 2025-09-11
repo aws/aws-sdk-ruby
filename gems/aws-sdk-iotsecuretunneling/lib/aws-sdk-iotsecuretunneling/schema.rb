@@ -213,7 +213,6 @@ module Aws::IoTSecureTunneling
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/untag", "code" => 200}}
       end)
-
     end
 
     class << self

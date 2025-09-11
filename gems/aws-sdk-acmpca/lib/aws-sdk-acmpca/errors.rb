@@ -52,7 +52,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::CertificateMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -78,7 +78,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::InvalidArgsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::InvalidArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -117,7 +117,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::InvalidPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -143,7 +143,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::InvalidTagException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -169,7 +169,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -182,7 +182,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::LockoutPreventedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -195,7 +195,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::MalformedCSRException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -208,7 +208,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::MalformedCertificateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -221,7 +221,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::PermissionAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -234,7 +234,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::RequestAlreadyProcessedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -247,7 +247,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::RequestFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -260,7 +260,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::RequestInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -273,7 +273,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -286,7 +286,7 @@ module Aws::ACMPCA
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ACMPCA::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

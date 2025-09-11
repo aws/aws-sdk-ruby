@@ -200,7 +200,6 @@ module Aws::S3Outposts
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/S3Outposts/ListSharedEndpoints", "code" => 200}}
         operation[:paginator] = Paginators::ListSharedEndpoints.new
       end)
-
     end
 
     class << self

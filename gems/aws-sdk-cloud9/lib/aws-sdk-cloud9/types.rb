@@ -17,7 +17,8 @@ module Aws::Cloud9
       :message,
       :class_name,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -37,7 +38,8 @@ module Aws::Cloud9
       :message,
       :class_name,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -57,7 +59,8 @@ module Aws::Cloud9
       :message,
       :class_name,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -182,7 +185,8 @@ module Aws::Cloud9
       :tags,
       :connection_type,
       :dry_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +195,8 @@ module Aws::Cloud9
     #   @return [String]
     class CreateEnvironmentEC2Result < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +224,8 @@ module Aws::Cloud9
       :environment_id,
       :user_arn,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +234,8 @@ module Aws::Cloud9
     #   @return [Types::EnvironmentMember]
     class CreateEnvironmentMembershipResult < Struct.new(
       :membership,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,12 +249,14 @@ module Aws::Cloud9
     class DeleteEnvironmentMembershipRequest < Struct.new(
       :environment_id,
       :user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentMembershipResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,12 +265,14 @@ module Aws::Cloud9
     #   @return [String]
     class DeleteEnvironmentRequest < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +319,8 @@ module Aws::Cloud9
       :permissions,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +335,8 @@ module Aws::Cloud9
     class DescribeEnvironmentMembershipsResult < Struct.new(
       :memberships,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +345,8 @@ module Aws::Cloud9
     #   @return [String]
     class DescribeEnvironmentStatusRequest < Struct.new(
       :environment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +389,8 @@ module Aws::Cloud9
     class DescribeEnvironmentStatusResult < Struct.new(
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +399,8 @@ module Aws::Cloud9
     #   @return [Array<String>]
     class DescribeEnvironmentsRequest < Struct.new(
       :environment_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +409,8 @@ module Aws::Cloud9
     #   @return [Array<Types::Environment>]
     class DescribeEnvironmentsResult < Struct.new(
       :environments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +516,8 @@ module Aws::Cloud9
       :owner_arn,
       :lifecycle,
       :managed_credentials_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -541,7 +559,8 @@ module Aws::Cloud9
       :status,
       :reason,
       :failure_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +602,8 @@ module Aws::Cloud9
       :user_arn,
       :environment_id,
       :last_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +618,8 @@ module Aws::Cloud9
       :message,
       :class_name,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -618,7 +639,8 @@ module Aws::Cloud9
       :message,
       :class_name,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -638,7 +660,8 @@ module Aws::Cloud9
       :message,
       :class_name,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -660,7 +683,8 @@ module Aws::Cloud9
     class ListEnvironmentsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -675,7 +699,8 @@ module Aws::Cloud9
     class ListEnvironmentsResult < Struct.new(
       :next_token,
       :environment_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +710,8 @@ module Aws::Cloud9
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +720,8 @@ module Aws::Cloud9
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +736,8 @@ module Aws::Cloud9
       :message,
       :class_name,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -733,7 +761,8 @@ module Aws::Cloud9
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,12 +776,14 @@ module Aws::Cloud9
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +798,8 @@ module Aws::Cloud9
       :message,
       :class_name,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -787,12 +819,14 @@ module Aws::Cloud9
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +856,8 @@ module Aws::Cloud9
       :environment_id,
       :user_arn,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +866,8 @@ module Aws::Cloud9
     #   @return [Types::EnvironmentMember]
     class UpdateEnvironmentMembershipResult < Struct.new(
       :membership,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,12 +905,14 @@ module Aws::Cloud9
       :name,
       :description,
       :managed_credentials_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateEnvironmentResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -54,7 +54,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::DefaultUndefinedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::DomainAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description that may help with diagnosing the cause of the fault.</p>
@@ -81,7 +81,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::DomainDeprecatedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description that may help with diagnosing the cause of the fault.</p>
@@ -95,7 +95,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::LimitExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description that may help with diagnosing the cause of the fault.</p>
@@ -109,7 +109,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::OperationNotPermittedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description that may help with diagnosing the cause of the fault.</p>
@@ -123,7 +123,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::TooManyTagsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -136,7 +136,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::TypeAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description that may help with diagnosing the cause of the fault.</p>
@@ -150,7 +150,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::TypeDeprecatedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description that may help with diagnosing the cause of the fault.</p>
@@ -164,7 +164,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::TypeNotDeprecatedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -177,7 +177,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::UnknownResourceFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description that may help with diagnosing the cause of the fault.</p>
@@ -192,7 +192,7 @@ module Aws::SWF
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SWF::Types::WorkflowExecutionAlreadyStartedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description that may help with diagnosing the cause of the fault.</p>

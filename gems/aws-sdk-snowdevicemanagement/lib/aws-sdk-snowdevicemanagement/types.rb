@@ -11,7 +11,8 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class CancelTaskOperationInput < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +32,8 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class CancelTaskOperationOutput < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +59,8 @@ module Aws::SnowDeviceManagement
       :total,
       :used,
       :available,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +75,8 @@ module Aws::SnowDeviceManagement
       :unlock,
       :reboot,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Unlock < Command; end
@@ -89,7 +94,8 @@ module Aws::SnowDeviceManagement
     class CpuOptions < Struct.new(
       :core_count,
       :threads_per_core,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +121,8 @@ module Aws::SnowDeviceManagement
       :description,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +135,8 @@ module Aws::SnowDeviceManagement
     class CreateTaskOperationOutput < Struct.new(
       :task_id,
       :task_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +149,8 @@ module Aws::SnowDeviceManagement
     class DescribeDeviceEc2InstancesInput < Struct.new(
       :managed_device_id,
       :instance_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +159,8 @@ module Aws::SnowDeviceManagement
     #   @return [Array<Types::InstanceSummary>]
     class DescribeDeviceEc2InstancesOutput < Struct.new(
       :instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -159,7 +169,8 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class DescribeDeviceOperationInput < Struct.new(
       :managed_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +222,8 @@ module Aws::SnowDeviceManagement
       :physical_network_interfaces,
       :device_capacities,
       :software,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +236,8 @@ module Aws::SnowDeviceManagement
     class DescribeExecutionOperationInput < Struct.new(
       :task_id,
       :managed_device_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +266,8 @@ module Aws::SnowDeviceManagement
       :state,
       :started_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +276,8 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class DescribeTaskOperationInput < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +319,8 @@ module Aws::SnowDeviceManagement
       :completed_at,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +343,8 @@ module Aws::SnowDeviceManagement
       :managed_device_arn,
       :associated_with_job,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +367,8 @@ module Aws::SnowDeviceManagement
       :delete_on_termination,
       :status,
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +390,8 @@ module Aws::SnowDeviceManagement
       :execution_id,
       :managed_device_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -433,7 +452,8 @@ module Aws::SnowDeviceManagement
       :security_groups,
       :cpu_options,
       :root_device_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +468,8 @@ module Aws::SnowDeviceManagement
     class InstanceBlockDeviceMapping < Struct.new(
       :device_name,
       :ebs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +526,8 @@ module Aws::SnowDeviceManagement
     class InstanceState < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +541,8 @@ module Aws::SnowDeviceManagement
     class InstanceSummary < Struct.new(
       :instance,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +551,8 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -549,7 +573,8 @@ module Aws::SnowDeviceManagement
       :type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,7 +587,8 @@ module Aws::SnowDeviceManagement
     class ListDeviceResourcesOperationOutput < Struct.new(
       :resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,7 +605,8 @@ module Aws::SnowDeviceManagement
       :job_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -592,7 +619,8 @@ module Aws::SnowDeviceManagement
     class ListDevicesOperationOutput < Struct.new(
       :devices,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -613,7 +641,8 @@ module Aws::SnowDeviceManagement
       :state,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +656,8 @@ module Aws::SnowDeviceManagement
     class ListExecutionsOperationOutput < Struct.new(
       :executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +666,8 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -645,7 +676,8 @@ module Aws::SnowDeviceManagement
     #   @return [Hash<String, String>]
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +694,8 @@ module Aws::SnowDeviceManagement
       :state,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -675,7 +708,8 @@ module Aws::SnowDeviceManagement
     class ListTasksOperationOutput < Struct.new(
       :tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -711,13 +745,15 @@ module Aws::SnowDeviceManagement
       :netmask,
       :default_gateway,
       :mac_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A structure used to reboot the device.</p>
     class Reboot < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +762,8 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,7 +781,8 @@ module Aws::SnowDeviceManagement
       :resource_type,
       :arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +796,8 @@ module Aws::SnowDeviceManagement
     class SecurityGroupIdentifier < Struct.new(
       :group_id,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +806,8 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +826,8 @@ module Aws::SnowDeviceManagement
       :installed_version,
       :installing_version,
       :install_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -800,7 +841,8 @@ module Aws::SnowDeviceManagement
     class TagResourceOperationInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +865,8 @@ module Aws::SnowDeviceManagement
       :task_arn,
       :state,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,13 +875,15 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A structure used to unlock a device.</p>
     class Unlock < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -852,7 +897,8 @@ module Aws::SnowDeviceManagement
     class UntagResourceOperationInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +907,8 @@ module Aws::SnowDeviceManagement
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

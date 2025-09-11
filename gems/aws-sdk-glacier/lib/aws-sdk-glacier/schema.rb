@@ -937,7 +937,6 @@ module Aws::Glacier
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}", "code" => 204}}
       end)
-
     end
 
     class << self

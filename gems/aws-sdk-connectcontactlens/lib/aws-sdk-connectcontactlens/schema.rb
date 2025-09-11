@@ -126,7 +126,6 @@ module Aws::ConnectContactLens
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/realtime-contact-analysis/analysis-segments", "code" => 200}}
         operation[:paginator] = Paginators::ListRealtimeContactAnalysisSegments.new
       end)
-
     end
 
     class << self

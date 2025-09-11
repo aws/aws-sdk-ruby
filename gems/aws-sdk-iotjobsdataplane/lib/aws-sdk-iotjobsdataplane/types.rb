@@ -12,7 +12,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class CertificateValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,7 +53,8 @@ module Aws::IoTJobsDataPlane
       :d,
       :bin,
       :ul,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -65,7 +67,8 @@ module Aws::IoTJobsDataPlane
     class ConflictException < Struct.new(
       :message,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +91,8 @@ module Aws::IoTJobsDataPlane
       :thing_name,
       :include_job_document,
       :execution_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +101,8 @@ module Aws::IoTJobsDataPlane
     #   @return [Types::JobExecution]
     class DescribeJobExecutionResponse < Struct.new(
       :execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +111,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class GetPendingJobExecutionsRequest < Struct.new(
       :thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -119,7 +125,8 @@ module Aws::IoTJobsDataPlane
     class GetPendingJobExecutionsResponse < Struct.new(
       :in_progress_jobs,
       :queued_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +135,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -138,7 +146,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +159,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class InvalidStateTransitionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +218,8 @@ module Aws::IoTJobsDataPlane
       :version_number,
       :execution_number,
       :job_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -237,7 +248,8 @@ module Aws::IoTJobsDataPlane
       :status,
       :status_details,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -274,7 +286,8 @@ module Aws::IoTJobsDataPlane
       :last_updated_at,
       :version_number,
       :execution_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -291,7 +304,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -300,7 +314,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +325,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +362,8 @@ module Aws::IoTJobsDataPlane
       :parameters,
       :execution_timeout_seconds,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +372,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class StartCommandExecutionResponse < Struct.new(
       :execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -382,7 +400,8 @@ module Aws::IoTJobsDataPlane
       :thing_name,
       :status_details,
       :step_timeout_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -391,7 +410,8 @@ module Aws::IoTJobsDataPlane
     #   @return [Types::JobExecution]
     class StartNextPendingJobExecutionResponse < Struct.new(
       :execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -400,7 +420,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class TerminalStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +435,8 @@ module Aws::IoTJobsDataPlane
     class ThrottlingException < Struct.new(
       :message,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -476,7 +498,8 @@ module Aws::IoTJobsDataPlane
       :include_job_execution_state,
       :include_job_document,
       :execution_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +512,8 @@ module Aws::IoTJobsDataPlane
     class UpdateJobExecutionResponse < Struct.new(
       :execution_state,
       :job_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +522,8 @@ module Aws::IoTJobsDataPlane
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

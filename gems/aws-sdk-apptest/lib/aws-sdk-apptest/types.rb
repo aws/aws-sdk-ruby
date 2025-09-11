@@ -11,7 +11,8 @@ module Aws::AppTest
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::AppTest
       :batch_job_name,
       :batch_job_parameters,
       :export_data_set_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +57,8 @@ module Aws::AppTest
       :batch_job_parameters,
       :export_data_set_names,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -73,7 +76,8 @@ module Aws::AppTest
       :data_set_export_location,
       :dms_output_location,
       :data_set_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -87,7 +91,8 @@ module Aws::AppTest
     class BatchSummary < Struct.new(
       :step_input,
       :step_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,7 +106,8 @@ module Aws::AppTest
     class CloudFormation < Struct.new(
       :template_location,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +121,8 @@ module Aws::AppTest
     class CloudFormationAction < Struct.new(
       :resource,
       :action_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +137,8 @@ module Aws::AppTest
       :create_cloudformation,
       :delete_cloudformation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CreateCloudformation < CloudFormationStepSummary; end
@@ -148,7 +156,8 @@ module Aws::AppTest
     class CompareAction < Struct.new(
       :input,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +167,8 @@ module Aws::AppTest
     #   @return [Types::File]
     class CompareActionSummary < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +190,8 @@ module Aws::AppTest
       :target_location,
       :source_data_sets,
       :target_data_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,7 +205,8 @@ module Aws::AppTest
     class CompareDataSetsStepOutput < Struct.new(
       :comparison_output_location,
       :comparison_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +220,8 @@ module Aws::AppTest
     class CompareDataSetsSummary < Struct.new(
       :step_input,
       :step_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +247,8 @@ module Aws::AppTest
       :output_location,
       :source_metadata,
       :target_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +262,8 @@ module Aws::AppTest
     class CompareDatabaseCDCStepOutput < Struct.new(
       :comparison_output_location,
       :comparison_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +277,8 @@ module Aws::AppTest
     class CompareDatabaseCDCSummary < Struct.new(
       :step_input,
       :step_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,7 +293,8 @@ module Aws::AppTest
       :datasets,
       :database_cdc,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Datasets < CompareFileType; end
@@ -298,7 +315,8 @@ module Aws::AppTest
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -312,7 +330,8 @@ module Aws::AppTest
     class CreateCloudFormationStepInput < Struct.new(
       :template_location,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +345,8 @@ module Aws::AppTest
     class CreateCloudFormationStepOutput < Struct.new(
       :stack_id,
       :exports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +360,8 @@ module Aws::AppTest
     class CreateCloudFormationSummary < Struct.new(
       :step_input,
       :step_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +386,8 @@ module Aws::AppTest
       :steps,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +400,8 @@ module Aws::AppTest
     class CreateTestCaseResponse < Struct.new(
       :test_case_id,
       :test_case_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +434,8 @@ module Aws::AppTest
       :client_token,
       :tags,
       :service_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +448,8 @@ module Aws::AppTest
     class CreateTestConfigurationResponse < Struct.new(
       :test_configuration_id,
       :test_configuration_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -457,7 +482,8 @@ module Aws::AppTest
       :test_cases,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,7 +496,8 @@ module Aws::AppTest
     class CreateTestSuiteResponse < Struct.new(
       :test_suite_id,
       :test_suite_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +523,8 @@ module Aws::AppTest
       :ccsid,
       :format,
       :length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -510,7 +538,8 @@ module Aws::AppTest
     class DatabaseCDC < Struct.new(
       :source_metadata,
       :target_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,13 +549,15 @@ module Aws::AppTest
     #   @return [String]
     class DeleteCloudFormationStepInput < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes the CloudFormation summary step output.</p>
     class DeleteCloudFormationStepOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +571,8 @@ module Aws::AppTest
     class DeleteCloudFormationSummary < Struct.new(
       :step_input,
       :step_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -549,12 +581,14 @@ module Aws::AppTest
     #   @return [String]
     class DeleteTestCaseRequest < Struct.new(
       :test_case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTestCaseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,12 +597,14 @@ module Aws::AppTest
     #   @return [String]
     class DeleteTestConfigurationRequest < Struct.new(
       :test_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTestConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -577,12 +613,14 @@ module Aws::AppTest
     #   @return [String]
     class DeleteTestRunRequest < Struct.new(
       :test_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTestRunResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -591,12 +629,14 @@ module Aws::AppTest
     #   @return [String]
     class DeleteTestSuiteRequest < Struct.new(
       :test_suite_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTestSuiteResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +647,8 @@ module Aws::AppTest
     class File < Struct.new(
       :file_type,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class FileType < File; end
@@ -625,7 +666,8 @@ module Aws::AppTest
       :data_sets,
       :database_cdc,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DataSets < FileMetadata; end
@@ -642,7 +684,8 @@ module Aws::AppTest
     class GetTestCaseRequest < Struct.new(
       :test_case_id,
       :test_case_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +738,8 @@ module Aws::AppTest
       :last_update_time,
       :steps,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +752,8 @@ module Aws::AppTest
     class GetTestConfigurationRequest < Struct.new(
       :test_configuration_id,
       :test_configuration_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +814,8 @@ module Aws::AppTest
       :properties,
       :tags,
       :service_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -790,7 +836,8 @@ module Aws::AppTest
       :step_name,
       :test_case_id,
       :test_suite_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +894,8 @@ module Aws::AppTest
       :run_start_time,
       :run_end_time,
       :step_run_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -860,7 +908,8 @@ module Aws::AppTest
     class GetTestSuiteRequest < Struct.new(
       :test_suite_id,
       :test_suite_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -921,7 +970,8 @@ module Aws::AppTest
       :after_steps,
       :test_cases,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -932,7 +982,8 @@ module Aws::AppTest
     class Input < Struct.new(
       :file,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class File < Input; end
@@ -953,7 +1004,8 @@ module Aws::AppTest
       :source_location,
       :target_location,
       :file_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -966,7 +1018,8 @@ module Aws::AppTest
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1028,8 @@ module Aws::AppTest
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1038,8 @@ module Aws::AppTest
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1001,7 +1056,8 @@ module Aws::AppTest
       :test_case_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1070,8 @@ module Aws::AppTest
     class ListTestCasesResponse < Struct.new(
       :test_cases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,7 +1088,8 @@ module Aws::AppTest
       :test_configuration_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1044,7 +1102,8 @@ module Aws::AppTest
     class ListTestConfigurationsResponse < Struct.new(
       :test_configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1069,7 +1128,8 @@ module Aws::AppTest
       :test_suite_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1142,8 @@ module Aws::AppTest
     class ListTestRunStepsResponse < Struct.new(
       :test_run_steps,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1099,7 +1160,8 @@ module Aws::AppTest
       :test_run_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1174,8 @@ module Aws::AppTest
     class ListTestRunTestCasesResponse < Struct.new(
       :test_run_test_cases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1196,8 @@ module Aws::AppTest
       :test_run_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1210,8 @@ module Aws::AppTest
     class ListTestRunsResponse < Struct.new(
       :test_runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1228,8 @@ module Aws::AppTest
       :test_suite_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1176,7 +1242,8 @@ module Aws::AppTest
     class ListTestSuitesResponse < Struct.new(
       :test_suites,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1257,8 @@ module Aws::AppTest
     class M2ManagedActionProperties < Struct.new(
       :force_stop,
       :import_data_set_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1280,8 @@ module Aws::AppTest
       :runtime,
       :vpc_endpoint_service_name,
       :listener_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1230,7 +1299,8 @@ module Aws::AppTest
       :resource,
       :action_type,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1330,8 @@ module Aws::AppTest
       :listener_port,
       :action_type,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1270,7 +1341,8 @@ module Aws::AppTest
     #   @return [Hash<String, String>]
     class M2ManagedApplicationStepOutput < Struct.new(
       :import_data_set_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,7 +1356,8 @@ module Aws::AppTest
     class M2ManagedApplicationStepSummary < Struct.new(
       :step_input,
       :step_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1375,8 @@ module Aws::AppTest
       :application_id,
       :runtime,
       :listener_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,7 +1398,8 @@ module Aws::AppTest
       :listener_port,
       :runtime,
       :web_app_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1338,7 +1413,8 @@ module Aws::AppTest
     class M2NonManagedApplicationAction < Struct.new(
       :resource,
       :action_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,13 +1440,15 @@ module Aws::AppTest
       :runtime,
       :web_app_name,
       :action_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization non-managed application step output.</p>
     class M2NonManagedApplicationStepOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1384,7 +1462,8 @@ module Aws::AppTest
     class M2NonManagedApplicationStepSummary < Struct.new(
       :step_input,
       :step_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1406,7 +1485,8 @@ module Aws::AppTest
       :listener_port,
       :runtime,
       :web_app_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1424,7 +1504,8 @@ module Aws::AppTest
       :resource,
       :action_type,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1434,7 +1515,8 @@ module Aws::AppTest
     #   @return [String]
     class MainframeActionProperties < Struct.new(
       :dms_task_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1531,8 @@ module Aws::AppTest
       :batch,
       :tn3270,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Batch < MainframeActionSummary; end
@@ -1468,7 +1551,8 @@ module Aws::AppTest
       :batch,
       :tn3270,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Batch < MainframeActionType; end
@@ -1487,7 +1571,8 @@ module Aws::AppTest
       :m2_managed_application,
       :m2_non_managed_application,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class M2ManagedApplication < MainframeResourceSummary; end
@@ -1502,7 +1587,8 @@ module Aws::AppTest
     class Output < Struct.new(
       :file,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class File < Output; end
@@ -1515,7 +1601,8 @@ module Aws::AppTest
     #   @return [String]
     class OutputFile < Struct.new(
       :file_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1529,7 +1616,8 @@ module Aws::AppTest
     class Resource < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1548,7 +1636,8 @@ module Aws::AppTest
       :m2_non_managed_application_action,
       :cloud_formation_action,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class M2ManagedApplicationAction < ResourceAction; end
@@ -1572,7 +1661,8 @@ module Aws::AppTest
       :m2_managed_application,
       :m2_non_managed_application,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CloudFormation < ResourceActionSummary; end
@@ -1594,7 +1684,8 @@ module Aws::AppTest
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1613,7 +1704,8 @@ module Aws::AppTest
       :m2_managed_application,
       :m2_non_managed_application,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CloudFormation < ResourceType; end
@@ -1632,7 +1724,8 @@ module Aws::AppTest
     class Script < Struct.new(
       :script_location,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1646,7 +1739,8 @@ module Aws::AppTest
     class ScriptSummary < Struct.new(
       :script_location,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1671,7 +1765,8 @@ module Aws::AppTest
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1681,7 +1776,8 @@ module Aws::AppTest
     #   @return [String]
     class ServiceSettings < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1695,7 +1791,8 @@ module Aws::AppTest
     class SourceDatabaseMetadata < Struct.new(
       :type,
       :capture_tool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1813,8 @@ module Aws::AppTest
       :test_configuration_id,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1827,8 @@ module Aws::AppTest
     class StartTestRunResponse < Struct.new(
       :test_run_id,
       :test_run_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1747,7 +1846,8 @@ module Aws::AppTest
       :name,
       :description,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1766,7 +1866,8 @@ module Aws::AppTest
       :mainframe_action,
       :compare_action,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ResourceAction < StepAction; end
@@ -1790,7 +1891,8 @@ module Aws::AppTest
       :compare_action,
       :resource_action,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class MainframeAction < StepRunSummary; end
@@ -1809,7 +1911,8 @@ module Aws::AppTest
     class TN3270 < Struct.new(
       :script,
       :export_data_set_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1831,7 +1934,8 @@ module Aws::AppTest
       :script,
       :export_data_set_names,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1853,7 +1957,8 @@ module Aws::AppTest
       :dms_output_location,
       :data_set_details,
       :script_output_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1972,8 @@ module Aws::AppTest
     class TN3270Summary < Struct.new(
       :step_input,
       :step_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1880,12 +1986,14 @@ module Aws::AppTest
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1899,7 +2007,8 @@ module Aws::AppTest
     class TargetDatabaseMetadata < Struct.new(
       :type,
       :capture_tool,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +2026,8 @@ module Aws::AppTest
       :version,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1951,7 +2061,8 @@ module Aws::AppTest
       :status_reason,
       :run_start_time,
       :run_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2100,8 @@ module Aws::AppTest
       :status,
       :creation_time,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2000,7 +2112,8 @@ module Aws::AppTest
     class TestCases < Struct.new(
       :sequential,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Sequential < TestCases; end
@@ -2021,7 +2134,8 @@ module Aws::AppTest
       :version,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2173,8 @@ module Aws::AppTest
       :status,
       :creation_time,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2113,7 +2228,8 @@ module Aws::AppTest
       :status_reason,
       :run_start_time,
       :run_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2159,7 +2275,8 @@ module Aws::AppTest
       :status_reason,
       :run_start_time,
       :run_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2177,7 +2294,8 @@ module Aws::AppTest
       :version,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2215,7 +2333,8 @@ module Aws::AppTest
       :status,
       :creation_time,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2236,7 +2355,8 @@ module Aws::AppTest
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2249,12 +2369,14 @@ module Aws::AppTest
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2271,7 +2393,8 @@ module Aws::AppTest
       :test_case_id,
       :description,
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2284,7 +2407,8 @@ module Aws::AppTest
     class UpdateTestCaseResponse < Struct.new(
       :test_case_id,
       :test_case_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2309,7 +2433,8 @@ module Aws::AppTest
       :resources,
       :properties,
       :service_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2322,7 +2447,8 @@ module Aws::AppTest
     class UpdateTestConfigurationResponse < Struct.new(
       :test_configuration_id,
       :test_configuration_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2347,7 +2473,8 @@ module Aws::AppTest
       :before_steps,
       :after_steps,
       :test_cases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2360,7 +2487,8 @@ module Aws::AppTest
     class UpdateTestSuiteResponse < Struct.new(
       :test_suite_id,
       :test_suite_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2377,7 +2505,8 @@ module Aws::AppTest
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2391,7 +2520,8 @@ module Aws::AppTest
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

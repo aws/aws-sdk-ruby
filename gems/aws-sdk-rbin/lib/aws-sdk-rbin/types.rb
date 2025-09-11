@@ -15,7 +15,8 @@ module Aws::Rbin
     class ConflictException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +61,8 @@ module Aws::Rbin
       :resource_tags,
       :lock_configuration,
       :exclude_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +137,8 @@ module Aws::Rbin
       :lock_state,
       :rule_arn,
       :exclude_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,12 +147,14 @@ module Aws::Rbin
     #   @return [String]
     class DeleteRuleRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +163,8 @@ module Aws::Rbin
     #   @return [String]
     class GetRuleRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +241,8 @@ module Aws::Rbin
       :lock_end_time,
       :rule_arn,
       :exclude_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -244,7 +251,8 @@ module Aws::Rbin
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -281,7 +289,8 @@ module Aws::Rbin
       :resource_tags,
       :lock_state,
       :exclude_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +303,8 @@ module Aws::Rbin
     class ListRulesResponse < Struct.new(
       :rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +313,8 @@ module Aws::Rbin
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -312,7 +323,8 @@ module Aws::Rbin
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -322,7 +334,8 @@ module Aws::Rbin
     #   @return [Types::UnlockDelay]
     class LockConfiguration < Struct.new(
       :unlock_delay,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +348,8 @@ module Aws::Rbin
     class LockRuleRequest < Struct.new(
       :identifier,
       :lock_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -406,7 +420,8 @@ module Aws::Rbin
       :lock_state,
       :rule_arn,
       :exclude_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +434,8 @@ module Aws::Rbin
     class ResourceNotFoundException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +450,8 @@ module Aws::Rbin
     class ResourceTag < Struct.new(
       :resource_tag_key,
       :resource_tag_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -450,7 +467,8 @@ module Aws::Rbin
     class RetentionPeriod < Struct.new(
       :retention_period_value,
       :retention_period_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +517,8 @@ module Aws::Rbin
       :retention_period,
       :lock_state,
       :rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -512,7 +531,8 @@ module Aws::Rbin
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +546,8 @@ module Aws::Rbin
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,12 +560,14 @@ module Aws::Rbin
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,7 +585,8 @@ module Aws::Rbin
     class UnlockDelay < Struct.new(
       :unlock_delay_value,
       :unlock_delay_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +595,8 @@ module Aws::Rbin
     #   @return [String]
     class UnlockRuleRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -648,7 +673,8 @@ module Aws::Rbin
       :lock_end_time,
       :rule_arn,
       :exclude_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,12 +687,14 @@ module Aws::Rbin
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +736,8 @@ module Aws::Rbin
       :resource_type,
       :resource_tags,
       :exclude_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -781,7 +810,8 @@ module Aws::Rbin
       :lock_end_time,
       :rule_arn,
       :exclude_resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +824,8 @@ module Aws::Rbin
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

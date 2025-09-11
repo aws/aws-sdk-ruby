@@ -15,7 +15,8 @@ module Aws::Invoicing
     class AccessDeniedException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +38,8 @@ module Aws::Invoicing
       :discounts,
       :taxes,
       :fees,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +48,8 @@ module Aws::Invoicing
     #   @return [Array<String>]
     class BatchGetInvoiceProfileRequest < Struct.new(
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +58,8 @@ module Aws::Invoicing
     #   @return [Array<Types::InvoiceProfile>]
     class BatchGetInvoiceProfileResponse < Struct.new(
       :profiles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -69,7 +73,8 @@ module Aws::Invoicing
     class BillingPeriod < Struct.new(
       :month,
       :year,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +103,8 @@ module Aws::Invoicing
       :tax_inheritance_disabled,
       :rule,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +113,8 @@ module Aws::Invoicing
     #   @return [String]
     class CreateInvoiceUnitResponse < Struct.new(
       :invoice_unit_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +132,8 @@ module Aws::Invoicing
       :source_currency_code,
       :target_currency_code,
       :rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -139,7 +147,8 @@ module Aws::Invoicing
     class DateInterval < Struct.new(
       :start_date,
       :end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +157,8 @@ module Aws::Invoicing
     #   @return [String]
     class DeleteInvoiceUnitRequest < Struct.new(
       :invoice_unit_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +167,8 @@ module Aws::Invoicing
     #   @return [String]
     class DeleteInvoiceUnitResponse < Struct.new(
       :invoice_unit_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -171,7 +182,8 @@ module Aws::Invoicing
     class DiscountsBreakdown < Struct.new(
       :breakdown,
       :total_amount,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +201,8 @@ module Aws::Invoicing
       :description,
       :amount,
       :rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +212,8 @@ module Aws::Invoicing
     #   @return [String]
     class Entity < Struct.new(
       :invoicing_entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +227,8 @@ module Aws::Invoicing
     class FeesBreakdown < Struct.new(
       :breakdown,
       :total_amount,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +246,8 @@ module Aws::Invoicing
       :description,
       :amount,
       :rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +265,8 @@ module Aws::Invoicing
       :names,
       :invoice_receivers,
       :accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +279,8 @@ module Aws::Invoicing
     class GetInvoiceUnitRequest < Struct.new(
       :invoice_unit_arn,
       :as_of,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -295,7 +313,8 @@ module Aws::Invoicing
       :tax_inheritance_disabled,
       :rule,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -313,7 +332,8 @@ module Aws::Invoicing
     class InternalServerException < Struct.new(
       :retry_after_seconds,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +359,8 @@ module Aws::Invoicing
       :currency_code,
       :amount_breakdown,
       :currency_exchange_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -369,7 +390,8 @@ module Aws::Invoicing
       :receiver_email,
       :issuer,
       :tax_registration_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -387,7 +409,8 @@ module Aws::Invoicing
       :time_interval,
       :billing_period,
       :invoicing_entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +424,8 @@ module Aws::Invoicing
     class InvoiceSummariesSelector < Struct.new(
       :resource_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +479,8 @@ module Aws::Invoicing
       :base_currency_amount,
       :tax_currency_amount,
       :payment_currency_amount,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +514,8 @@ module Aws::Invoicing
       :tax_inheritance_disabled,
       :rule,
       :last_modified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -504,7 +530,8 @@ module Aws::Invoicing
     #   @return [Array<String>]
     class InvoiceUnitRule < Struct.new(
       :linked_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +552,8 @@ module Aws::Invoicing
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +566,8 @@ module Aws::Invoicing
     class ListInvoiceSummariesResponse < Struct.new(
       :invoice_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -559,7 +588,8 @@ module Aws::Invoicing
       :next_token,
       :max_results,
       :as_of,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +602,8 @@ module Aws::Invoicing
     class ListInvoiceUnitsResponse < Struct.new(
       :invoice_units,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +612,8 @@ module Aws::Invoicing
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +622,8 @@ module Aws::Invoicing
     #   @return [Array<Types::ResourceTag>]
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +666,8 @@ module Aws::Invoicing
       :country_code,
       :company_name,
       :postal_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +680,8 @@ module Aws::Invoicing
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +695,8 @@ module Aws::Invoicing
     class ResourceTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +705,8 @@ module Aws::Invoicing
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,12 +719,14 @@ module Aws::Invoicing
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +740,8 @@ module Aws::Invoicing
     class TaxesBreakdown < Struct.new(
       :breakdown,
       :total_amount,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +759,8 @@ module Aws::Invoicing
       :description,
       :amount,
       :rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +769,8 @@ module Aws::Invoicing
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,12 +783,14 @@ module Aws::Invoicing
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :resource_tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +811,8 @@ module Aws::Invoicing
       :description,
       :tax_inheritance_disabled,
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -776,7 +821,8 @@ module Aws::Invoicing
     #   @return [String]
     class UpdateInvoiceUnitResponse < Struct.new(
       :invoice_unit_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,7 +843,8 @@ module Aws::Invoicing
       :resource_name,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,7 +858,8 @@ module Aws::Invoicing
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

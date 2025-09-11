@@ -36,7 +36,7 @@ module Aws::PersonalizeEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PersonalizeEvents::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -49,7 +49,7 @@ module Aws::PersonalizeEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PersonalizeEvents::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::PersonalizeEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PersonalizeEvents::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

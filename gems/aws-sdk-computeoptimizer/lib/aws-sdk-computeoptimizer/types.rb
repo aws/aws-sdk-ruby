@@ -11,7 +11,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +37,8 @@ module Aws::ComputeOptimizer
       :status,
       :status_reason,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +86,8 @@ module Aws::ComputeOptimizer
       :estimated_instance_hour_reduction_percentage,
       :type,
       :mixed_instance_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -112,7 +115,8 @@ module Aws::ComputeOptimizer
     class AutoScalingGroupEstimatedMonthlySavings < Struct.new(
       :currency,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -253,7 +257,8 @@ module Aws::ComputeOptimizer
       :current_performance_risk,
       :effective_recommendation_preferences,
       :inferred_workload_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -332,7 +337,8 @@ module Aws::ComputeOptimizer
       :savings_opportunity,
       :savings_opportunity_after_discounts,
       :migration_effort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -361,7 +367,8 @@ module Aws::ComputeOptimizer
     class AutoScalingGroupSavingsOpportunityAfterDiscounts < Struct.new(
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -392,7 +399,8 @@ module Aws::ComputeOptimizer
       :container_name,
       :memory_size_configuration,
       :cpu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +426,8 @@ module Aws::ComputeOptimizer
       :container_name,
       :memory_size_configuration,
       :cpu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +453,8 @@ module Aws::ComputeOptimizer
       :medium,
       :low,
       :very_low,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -486,7 +496,8 @@ module Aws::ComputeOptimizer
     class CustomizableMetricParameters < Struct.new(
       :threshold,
       :headroom,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +535,8 @@ module Aws::ComputeOptimizer
       :iops,
       :max_allocated_storage,
       :storage_throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -554,12 +566,14 @@ module Aws::ComputeOptimizer
       :resource_type,
       :scope,
       :recommendation_preference_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRecommendationPreferencesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +600,8 @@ module Aws::ComputeOptimizer
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,7 +615,8 @@ module Aws::ComputeOptimizer
     class DescribeRecommendationExportJobsResponse < Struct.new(
       :recommendation_export_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +630,8 @@ module Aws::ComputeOptimizer
     #   @return [Types::EBSSavingsEstimationMode]
     class EBSEffectiveRecommendationPreferences < Struct.new(
       :savings_estimation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +652,8 @@ module Aws::ComputeOptimizer
     class EBSEstimatedMonthlySavings < Struct.new(
       :currency,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -673,7 +691,8 @@ module Aws::ComputeOptimizer
     class EBSFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +706,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class EBSSavingsEstimationMode < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +729,8 @@ module Aws::ComputeOptimizer
     class EBSSavingsOpportunityAfterDiscounts < Struct.new(
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -774,7 +795,8 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -793,7 +815,8 @@ module Aws::ComputeOptimizer
     #   @return [Types::ECSSavingsEstimationMode]
     class ECSEffectiveRecommendationPreferences < Struct.new(
       :savings_estimation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +837,8 @@ module Aws::ComputeOptimizer
     class ECSEstimatedMonthlySavings < Struct.new(
       :currency,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -833,7 +857,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class ECSSavingsEstimationMode < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +882,8 @@ module Aws::ComputeOptimizer
     class ECSSavingsOpportunityAfterDiscounts < Struct.new(
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -909,7 +935,8 @@ module Aws::ComputeOptimizer
       :timestamps,
       :upper_bound_values,
       :lower_bound_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -965,7 +992,8 @@ module Aws::ComputeOptimizer
       :statistic,
       :lower_bound_value,
       :upper_bound_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1136,7 +1164,8 @@ module Aws::ComputeOptimizer
       :current_performance_risk,
       :effective_recommendation_preferences,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1192,7 +1221,8 @@ module Aws::ComputeOptimizer
     class ECSServiceRecommendationFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1251,7 +1281,8 @@ module Aws::ComputeOptimizer
       :savings_opportunity_after_discounts,
       :projected_utilization_metrics,
       :container_recommendations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1310,8 @@ module Aws::ComputeOptimizer
       :recommended_cpu_units,
       :recommended_memory_size,
       :projected_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1333,7 +1365,8 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1373,7 +1406,8 @@ module Aws::ComputeOptimizer
       :include_list,
       :effective_include_list,
       :exclude_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1486,8 @@ module Aws::ComputeOptimizer
       :utilization_preferences,
       :preferred_resources,
       :savings_estimation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1472,7 +1507,8 @@ module Aws::ComputeOptimizer
     class EnrollmentFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1490,7 +1526,8 @@ module Aws::ComputeOptimizer
     class EstimatedMonthlySavings < Struct.new(
       :currency,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1559,7 +1596,8 @@ module Aws::ComputeOptimizer
       :file_format,
       :include_member_accounts,
       :recommendation_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1613,8 @@ module Aws::ComputeOptimizer
     class ExportAutoScalingGroupRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1626,8 @@ module Aws::ComputeOptimizer
     #   @return [Types::S3Destination]
     class ExportDestination < Struct.new(
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1646,7 +1686,8 @@ module Aws::ComputeOptimizer
       :s3_destination_config,
       :file_format,
       :include_member_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1703,8 @@ module Aws::ComputeOptimizer
     class ExportEBSVolumeRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1726,7 +1768,8 @@ module Aws::ComputeOptimizer
       :file_format,
       :include_member_accounts,
       :recommendation_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1742,7 +1785,8 @@ module Aws::ComputeOptimizer
     class ExportEC2InstanceRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1807,7 +1851,8 @@ module Aws::ComputeOptimizer
       :s3_destination_config,
       :file_format,
       :include_member_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1826,7 +1871,8 @@ module Aws::ComputeOptimizer
     class ExportECSServiceRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1885,7 +1931,8 @@ module Aws::ComputeOptimizer
       :s3_destination_config,
       :file_format,
       :include_member_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1904,7 +1951,8 @@ module Aws::ComputeOptimizer
     class ExportIdleRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1963,7 +2011,8 @@ module Aws::ComputeOptimizer
       :s3_destination_config,
       :file_format,
       :include_member_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1979,7 +2028,8 @@ module Aws::ComputeOptimizer
     class ExportLambdaFunctionRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2038,7 +2088,8 @@ module Aws::ComputeOptimizer
       :s3_destination_config,
       :file_format,
       :include_member_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2056,7 +2107,8 @@ module Aws::ComputeOptimizer
     class ExportLicenseRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2125,7 +2177,8 @@ module Aws::ComputeOptimizer
       :file_format,
       :include_member_accounts,
       :recommendation_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2144,7 +2197,8 @@ module Aws::ComputeOptimizer
     class ExportRDSDatabaseRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2164,7 +2218,8 @@ module Aws::ComputeOptimizer
     class ExternalMetricStatus < Struct.new(
       :status_code,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2175,7 +2230,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class ExternalMetricsPreference < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2377,7 +2433,8 @@ module Aws::ComputeOptimizer
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2417,7 +2474,8 @@ module Aws::ComputeOptimizer
       :max_results,
       :filters,
       :recommendation_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,7 +2497,8 @@ module Aws::ComputeOptimizer
       :next_token,
       :auto_scaling_group_recommendations,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2472,7 +2531,8 @@ module Aws::ComputeOptimizer
       :max_results,
       :filters,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2493,7 +2553,8 @@ module Aws::ComputeOptimizer
       :next_token,
       :volume_recommendations,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2531,7 +2592,8 @@ module Aws::ComputeOptimizer
       :filters,
       :account_ids,
       :recommendation_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2552,7 +2614,8 @@ module Aws::ComputeOptimizer
       :next_token,
       :instance_recommendations,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2583,7 +2646,8 @@ module Aws::ComputeOptimizer
       :start_time,
       :end_time,
       :recommendation_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2592,7 +2656,8 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::RecommendedOptionProjectedMetric>]
     class GetEC2RecommendationProjectedMetricsResponse < Struct.new(
       :recommended_option_projected_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2633,7 +2698,8 @@ module Aws::ComputeOptimizer
       :period,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2644,7 +2710,8 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::ECSServiceRecommendedOptionProjectedMetric>]
     class GetECSServiceRecommendationProjectedMetricsResponse < Struct.new(
       :recommended_option_projected_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2691,7 +2758,8 @@ module Aws::ComputeOptimizer
       :max_results,
       :filters,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2714,7 +2782,8 @@ module Aws::ComputeOptimizer
       :next_token,
       :ecs_service_recommendations,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2725,7 +2794,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class GetEffectiveRecommendationPreferencesRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2792,12 +2862,14 @@ module Aws::ComputeOptimizer
       :look_back_period,
       :utilization_preferences,
       :preferred_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetEnrollmentStatusRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2827,7 +2899,8 @@ module Aws::ComputeOptimizer
       :member_accounts_enrolled,
       :last_updated_timestamp,
       :number_of_member_accounts_opted_in,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2853,7 +2926,8 @@ module Aws::ComputeOptimizer
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2869,7 +2943,8 @@ module Aws::ComputeOptimizer
     class GetEnrollmentStatusesForOrganizationResponse < Struct.new(
       :account_enrollment_statuses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2904,7 +2979,8 @@ module Aws::ComputeOptimizer
       :filters,
       :account_ids,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2921,7 +2997,8 @@ module Aws::ComputeOptimizer
       :next_token,
       :idle_recommendations,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2961,7 +3038,8 @@ module Aws::ComputeOptimizer
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2976,7 +3054,8 @@ module Aws::ComputeOptimizer
     class GetLambdaFunctionRecommendationsResponse < Struct.new(
       :next_token,
       :lambda_function_recommendations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3022,7 +3101,8 @@ module Aws::ComputeOptimizer
       :max_results,
       :filters,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3045,7 +3125,8 @@ module Aws::ComputeOptimizer
       :next_token,
       :license_recommendations,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3090,7 +3171,8 @@ module Aws::ComputeOptimizer
       :start_time,
       :end_time,
       :recommendation_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3101,7 +3183,8 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::RDSDatabaseRecommendedOptionProjectedMetric>]
     class GetRDSDatabaseRecommendationProjectedMetricsResponse < Struct.new(
       :recommended_option_projected_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3155,7 +3238,8 @@ module Aws::ComputeOptimizer
       :filters,
       :account_ids,
       :recommendation_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3178,7 +3262,8 @@ module Aws::ComputeOptimizer
       :next_token,
       :rds_db_recommendations,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3199,7 +3284,8 @@ module Aws::ComputeOptimizer
       :identifier,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3232,7 +3318,8 @@ module Aws::ComputeOptimizer
       :scope,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3247,7 +3334,8 @@ module Aws::ComputeOptimizer
     class GetRecommendationPreferencesResponse < Struct.new(
       :next_token,
       :recommendation_preferences_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3270,7 +3358,8 @@ module Aws::ComputeOptimizer
       :account_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3285,7 +3374,8 @@ module Aws::ComputeOptimizer
     class GetRecommendationSummariesResponse < Struct.new(
       :next_token,
       :recommendation_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3305,7 +3395,8 @@ module Aws::ComputeOptimizer
     class Gpu < Struct.new(
       :gpu_count,
       :gpu_memory_size_in_mi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3325,7 +3416,8 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::Gpu>]
     class GpuInfo < Struct.new(
       :gpus,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3339,7 +3431,8 @@ module Aws::ComputeOptimizer
     class IdleEstimatedMonthlySavings < Struct.new(
       :currency,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3398,7 +3491,8 @@ module Aws::ComputeOptimizer
       :look_back_period_in_days,
       :last_refresh_timestamp,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3425,7 +3519,8 @@ module Aws::ComputeOptimizer
       :code,
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3456,7 +3551,8 @@ module Aws::ComputeOptimizer
     class IdleRecommendationFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3470,7 +3566,8 @@ module Aws::ComputeOptimizer
     class IdleSavingsOpportunity < Struct.new(
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3490,7 +3587,8 @@ module Aws::ComputeOptimizer
     class IdleSavingsOpportunityAfterDiscounts < Struct.new(
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3509,7 +3607,8 @@ module Aws::ComputeOptimizer
     class IdleSummary < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3545,7 +3644,8 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3619,7 +3719,8 @@ module Aws::ComputeOptimizer
     class InferredWorkloadSaving < Struct.new(
       :inferred_workload_types,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3640,7 +3741,8 @@ module Aws::ComputeOptimizer
     class InstanceEstimatedMonthlySavings < Struct.new(
       :currency,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4021,7 +4123,8 @@ module Aws::ComputeOptimizer
       :external_metric_status,
       :current_instance_gpu_info,
       :idle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4199,7 +4302,8 @@ module Aws::ComputeOptimizer
       :savings_opportunity,
       :savings_opportunity_after_discounts,
       :migration_effort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4219,7 +4323,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class InstanceSavingsEstimationMode < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4243,7 +4348,8 @@ module Aws::ComputeOptimizer
     class InstanceSavingsOpportunityAfterDiscounts < Struct.new(
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4257,7 +4363,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4266,7 +4373,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4304,7 +4412,8 @@ module Aws::ComputeOptimizer
     class JobFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4318,7 +4427,8 @@ module Aws::ComputeOptimizer
     #   @return [Types::LambdaSavingsEstimationMode]
     class LambdaEffectiveRecommendationPreferences < Struct.new(
       :savings_estimation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4339,7 +4449,8 @@ module Aws::ComputeOptimizer
     class LambdaEstimatedMonthlySavings < Struct.new(
       :currency,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4363,7 +4474,8 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4401,7 +4513,8 @@ module Aws::ComputeOptimizer
       :projected_utilization_metrics,
       :savings_opportunity,
       :savings_opportunity_after_discounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4567,7 +4680,8 @@ module Aws::ComputeOptimizer
       :current_performance_risk,
       :effective_recommendation_preferences,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4623,7 +4737,8 @@ module Aws::ComputeOptimizer
     class LambdaFunctionRecommendationFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4664,7 +4779,8 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4683,7 +4799,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class LambdaSavingsEstimationMode < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4707,7 +4824,8 @@ module Aws::ComputeOptimizer
     class LambdaSavingsOpportunityAfterDiscounts < Struct.new(
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4768,7 +4886,8 @@ module Aws::ComputeOptimizer
       :license_model,
       :license_version,
       :metrics_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4877,7 +4996,8 @@ module Aws::ComputeOptimizer
       :finding_reason_codes,
       :license_recommendation_options,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4930,7 +5050,8 @@ module Aws::ComputeOptimizer
     class LicenseRecommendationFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4984,7 +5105,8 @@ module Aws::ComputeOptimizer
       :license_edition,
       :license_model,
       :savings_opportunity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4998,7 +5120,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5018,7 +5141,8 @@ module Aws::ComputeOptimizer
     class MemorySizeConfiguration < Struct.new(
       :memory,
       :memory_reservation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5038,7 +5162,8 @@ module Aws::ComputeOptimizer
     class MetricSource < Struct.new(
       :provider,
       :provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5048,7 +5173,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class MissingAuthenticationToken < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5057,7 +5183,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class OptInRequiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5071,7 +5198,8 @@ module Aws::ComputeOptimizer
     class OrderBy < Struct.new(
       :dimension,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5118,7 +5246,8 @@ module Aws::ComputeOptimizer
       :name,
       :include_list,
       :exclude_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5192,7 +5321,8 @@ module Aws::ComputeOptimizer
       :name,
       :timestamps,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5334,12 +5464,14 @@ module Aws::ComputeOptimizer
       :utilization_preferences,
       :preferred_resources,
       :savings_estimation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutRecommendationPreferencesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5398,7 +5530,8 @@ module Aws::ComputeOptimizer
       :rank,
       :savings_opportunity,
       :savings_opportunity_after_discounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5550,7 +5683,8 @@ module Aws::ComputeOptimizer
       :lookback_period_in_days,
       :last_refresh_timestamp,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5591,7 +5725,8 @@ module Aws::ComputeOptimizer
     class RDSDBRecommendationFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5646,7 +5781,8 @@ module Aws::ComputeOptimizer
       :savings_opportunity,
       :savings_opportunity_after_discounts,
       :estimated_monthly_volume_io_ps_cost_variation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5692,7 +5828,8 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5728,7 +5865,8 @@ module Aws::ComputeOptimizer
       :name,
       :timestamps,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5758,7 +5896,8 @@ module Aws::ComputeOptimizer
       :recommended_db_instance_class,
       :rank,
       :projected_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5803,7 +5942,8 @@ module Aws::ComputeOptimizer
       :enhanced_infrastructure_metrics,
       :look_back_period,
       :savings_estimation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5825,7 +5965,8 @@ module Aws::ComputeOptimizer
     class RDSInstanceEstimatedMonthlySavings < Struct.new(
       :currency,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5856,7 +5997,8 @@ module Aws::ComputeOptimizer
     class RDSInstanceSavingsOpportunityAfterDiscounts < Struct.new(
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5875,7 +6017,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class RDSSavingsEstimationMode < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5896,7 +6039,8 @@ module Aws::ComputeOptimizer
     class RDSStorageEstimatedMonthlySavings < Struct.new(
       :currency,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5926,7 +6070,8 @@ module Aws::ComputeOptimizer
     class RDSStorageSavingsOpportunityAfterDiscounts < Struct.new(
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5945,7 +6090,8 @@ module Aws::ComputeOptimizer
     class ReasonCodeSummary < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5988,7 +6134,8 @@ module Aws::ComputeOptimizer
       :creation_timestamp,
       :last_updated_timestamp,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6013,7 +6160,8 @@ module Aws::ComputeOptimizer
     #   @return [Array<String>]
     class RecommendationPreferences < Struct.new(
       :cpu_vendor_architectures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6093,7 +6241,8 @@ module Aws::ComputeOptimizer
       :utilization_preferences,
       :preferred_resources,
       :savings_estimation_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6108,7 +6257,8 @@ module Aws::ComputeOptimizer
     class RecommendationSource < Struct.new(
       :recommendation_source_arn,
       :recommendation_source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6188,7 +6338,8 @@ module Aws::ComputeOptimizer
       :aggregated_savings_opportunity,
       :current_performance_risk_ratings,
       :inferred_workload_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6216,7 +6367,8 @@ module Aws::ComputeOptimizer
       :recommended_instance_type,
       :rank,
       :projected_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6230,7 +6382,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6252,7 +6405,8 @@ module Aws::ComputeOptimizer
       :bucket,
       :key,
       :metadata_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6275,7 +6429,8 @@ module Aws::ComputeOptimizer
     class S3DestinationConfig < Struct.new(
       :bucket,
       :key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6306,7 +6461,8 @@ module Aws::ComputeOptimizer
     class SavingsOpportunity < Struct.new(
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6378,7 +6534,8 @@ module Aws::ComputeOptimizer
     class Scope < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6437,7 +6594,8 @@ module Aws::ComputeOptimizer
       :container_configurations,
       :auto_scaling_configuration,
       :task_definition_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6446,7 +6604,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6464,7 +6623,8 @@ module Aws::ComputeOptimizer
       :name,
       :value,
       :reason_code_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6491,7 +6651,8 @@ module Aws::ComputeOptimizer
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6500,7 +6661,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6535,7 +6697,8 @@ module Aws::ComputeOptimizer
     class UpdateEnrollmentStatusRequest < Struct.new(
       :status,
       :include_member_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6550,7 +6713,8 @@ module Aws::ComputeOptimizer
     class UpdateEnrollmentStatusResponse < Struct.new(
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6707,7 +6871,8 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6735,7 +6900,8 @@ module Aws::ComputeOptimizer
     class UtilizationPreference < Struct.new(
       :metric_name,
       :metric_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6795,7 +6961,8 @@ module Aws::ComputeOptimizer
       :volume_baseline_throughput,
       :volume_burst_throughput,
       :root_volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6881,7 +7048,8 @@ module Aws::ComputeOptimizer
       :current_performance_risk,
       :effective_recommendation_preferences,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6926,7 +7094,8 @@ module Aws::ComputeOptimizer
       :rank,
       :savings_opportunity,
       :savings_opportunity_after_discounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

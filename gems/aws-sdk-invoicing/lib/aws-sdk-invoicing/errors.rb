@@ -39,7 +39,7 @@ module Aws::Invoicing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Invoicing::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::Invoicing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Invoicing::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The processing request failed because of an unknown error, exception, or failure.</p>
@@ -75,7 +75,7 @@ module Aws::Invoicing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Invoicing::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::Invoicing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Invoicing::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::Invoicing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Invoicing::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::Invoicing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Invoicing::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

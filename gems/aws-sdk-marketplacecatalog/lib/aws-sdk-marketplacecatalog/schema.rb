@@ -991,7 +991,6 @@ module Aws::MarketplaceCatalog
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UntagResource", "code" => 200}}
       end)
-
     end
 
     class << self

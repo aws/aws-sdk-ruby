@@ -11,7 +11,8 @@ module Aws::Connect
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::Connect
     #   @return [String]
     class ActionSummary < Struct.new(
       :action_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +41,8 @@ module Aws::Connect
       :instance_id,
       :evaluation_form_id,
       :evaluation_form_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +59,8 @@ module Aws::Connect
       :evaluation_form_id,
       :evaluation_form_arn,
       :evaluation_form_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -75,7 +79,8 @@ module Aws::Connect
     class AdditionalEmailRecipients < Struct.new(
       :to_list,
       :cc_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +90,8 @@ module Aws::Connect
     #   @return [Array<Types::Distribution>]
     class AgentConfig < Struct.new(
       :distributions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +131,8 @@ module Aws::Connect
       :state_start_timestamp,
       :connected_to_agent_timestamp,
       :queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +142,8 @@ module Aws::Connect
     #   @return [String]
     class AgentHierarchyGroup < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +171,8 @@ module Aws::Connect
       :l3_ids,
       :l4_ids,
       :l5_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +230,8 @@ module Aws::Connect
       :after_contact_work_end_timestamp,
       :agent_initiated_hold_duration,
       :state_transitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +241,8 @@ module Aws::Connect
     #   @return [Types::AudioQualityMetricsInfo]
     class AgentQualityMetrics < Struct.new(
       :audio,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,7 +288,8 @@ module Aws::Connect
       :tags,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -291,7 +303,8 @@ module Aws::Connect
     class AgentStatusIdentifier < Struct.new(
       :arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +322,8 @@ module Aws::Connect
       :status_start_timestamp,
       :status_arn,
       :status_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +352,8 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :string_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +374,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneAttributeFilter]
     class AgentStatusSearchFilter < Struct.new(
       :attribute_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +405,8 @@ module Aws::Connect
       :type,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +418,8 @@ module Aws::Connect
     #   @return [Array<String>]
     class AgentsCriteria < Struct.new(
       :agent_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +433,8 @@ module Aws::Connect
     class AllowedCapabilities < Struct.new(
       :customer,
       :agent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -444,7 +463,8 @@ module Aws::Connect
       :resource_share_id,
       :resource_share_arn,
       :resource_share_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +479,8 @@ module Aws::Connect
     class AnalyticsDataSetsResult < Struct.new(
       :data_set_id,
       :data_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +496,8 @@ module Aws::Connect
     class AnswerMachineDetectionConfig < Struct.new(
       :enable_answer_machine_detection,
       :await_answer_machine_prompt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -497,7 +519,8 @@ module Aws::Connect
     class Application < Struct.new(
       :namespace,
       :application_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +531,8 @@ module Aws::Connect
     #          <p>
     #             <code>RuleName</code> is used as <code>ContactCategory</code>.</p>
     class AssignContactCategoryActionDefinition < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +546,8 @@ module Aws::Connect
     class AssignSlaActionDefinition < Struct.new(
       :sla_assignment_type,
       :case_sla_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +565,8 @@ module Aws::Connect
       :instance_id,
       :data_set_id,
       :target_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +587,8 @@ module Aws::Connect
       :target_account_id,
       :resource_share_id,
       :resource_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +608,8 @@ module Aws::Connect
       :instance_id,
       :origin,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,7 +633,8 @@ module Aws::Connect
       :lex_bot,
       :lex_v2_bot,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,12 +653,14 @@ module Aws::Connect
       :instance_id,
       :language_code,
       :vocabulary_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateDefaultVocabularyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,12 +693,14 @@ module Aws::Connect
       :resource_id,
       :flow_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateFlowResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +743,8 @@ module Aws::Connect
       :resource_type,
       :storage_config,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +753,8 @@ module Aws::Connect
     #   @return [String]
     class AssociateInstanceStorageConfigResponse < Struct.new(
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +775,8 @@ module Aws::Connect
       :instance_id,
       :function_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +796,8 @@ module Aws::Connect
       :instance_id,
       :lex_bot,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +814,8 @@ module Aws::Connect
       :phone_number_id,
       :instance_id,
       :contact_flow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +832,8 @@ module Aws::Connect
       :instance_id,
       :queue_id,
       :quick_connect_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,7 +850,8 @@ module Aws::Connect
       :instance_id,
       :routing_profile_id,
       :queue_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +871,8 @@ module Aws::Connect
       :instance_id,
       :key,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +881,8 @@ module Aws::Connect
     #   @return [String]
     class AssociateSecurityKeyResponse < Struct.new(
       :association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,12 +900,14 @@ module Aws::Connect
       :traffic_distribution_group_id,
       :user_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateTrafficDistributionGroupUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +925,8 @@ module Aws::Connect
       :instance_id,
       :user_id,
       :user_proficiencies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +970,8 @@ module Aws::Connect
       :related_contact_id,
       :initiation_method,
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -978,7 +1024,8 @@ module Aws::Connect
       :file_use_case_type,
       :associated_resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -997,7 +1044,8 @@ module Aws::Connect
       :error_code,
       :error_message,
       :file_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1068,8 @@ module Aws::Connect
       :value,
       :status,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1083,8 @@ module Aws::Connect
     class Attendee < Struct.new(
       :attendee_id,
       :join_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1098,8 @@ module Aws::Connect
     class Attribute < Struct.new(
       :attribute_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1063,7 +1114,8 @@ module Aws::Connect
     class AttributeAndCondition < Struct.new(
       :tag_conditions,
       :hierarchy_group_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1145,8 @@ module Aws::Connect
       :range,
       :match_criteria,
       :comparison_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1156,8 @@ module Aws::Connect
     #   @return [String]
     class AudioFeatures < Struct.new(
       :echo_reduction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1175,8 @@ module Aws::Connect
     class AudioQualityMetricsInfo < Struct.new(
       :quality_score,
       :potential_quality_issues,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1199,7 +1254,8 @@ module Aws::Connect
       :last_modified_region,
       :periodic_session_duration,
       :max_session_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1239,7 +1295,8 @@ module Aws::Connect
       :is_default,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1262,7 +1319,8 @@ module Aws::Connect
       :phone_number,
       :phone_number_country_code,
       :phone_number_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1280,7 +1338,8 @@ module Aws::Connect
       :instance_id,
       :data_set_ids,
       :target_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1296,7 +1355,8 @@ module Aws::Connect
     class BatchAssociateAnalyticsDataSetResponse < Struct.new(
       :created,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1314,7 +1374,8 @@ module Aws::Connect
       :instance_id,
       :data_set_ids,
       :target_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1327,7 +1388,8 @@ module Aws::Connect
     class BatchDisassociateAnalyticsDataSetResponse < Struct.new(
       :deleted,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1410,8 @@ module Aws::Connect
       :file_ids,
       :instance_id,
       :associated_resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1361,7 +1424,8 @@ module Aws::Connect
     class BatchGetAttachedFileMetadataResponse < Struct.new(
       :files,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1454,8 @@ module Aws::Connect
       :instance_id,
       :resource_ids,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1464,8 @@ module Aws::Connect
     #   @return [Array<Types::FlowAssociationSummary>]
     class BatchGetFlowAssociationResponse < Struct.new(
       :flow_association_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1419,7 +1485,8 @@ module Aws::Connect
       :client_token,
       :instance_id,
       :contact_data_request_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1499,8 @@ module Aws::Connect
     class BatchPutContactResponse < Struct.new(
       :successful_request_list,
       :failed_request_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1442,7 +1510,8 @@ module Aws::Connect
     #   @return [String]
     class Campaign < Struct.new(
       :campaign_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1470,7 +1539,8 @@ module Aws::Connect
       :field_id,
       :target_field_values,
       :target_sla_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1580,8 @@ module Aws::Connect
       :conversation_turn_count,
       :agent_first_response_timestamp,
       :agent_first_response_time_in_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1563,7 +1634,8 @@ module Aws::Connect
       :type,
       :content_type,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1593,7 +1665,8 @@ module Aws::Connect
     class ChatMessage < Struct.new(
       :content_type,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1684,8 @@ module Aws::Connect
       :chat_contact_metrics,
       :agent_metrics,
       :customer_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1622,7 +1696,8 @@ module Aws::Connect
     #   @return [Array<Types::ParticipantTimerConfiguration>]
     class ChatParticipantRoleConfig < Struct.new(
       :participant_timer_config_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1633,7 +1708,8 @@ module Aws::Connect
     #   @return [String]
     class ChatStreamingConfiguration < Struct.new(
       :streaming_endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1746,8 @@ module Aws::Connect
       :phone_number_description,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1683,7 +1760,8 @@ module Aws::Connect
     class ClaimPhoneNumberResponse < Struct.new(
       :phone_number_id,
       :phone_number_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1842,8 @@ module Aws::Connect
       :tags,
       :phone_number_status,
       :source_phone_number_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1775,7 +1854,8 @@ module Aws::Connect
     #   @return [Array<Types::TagCondition>]
     class CommonAttributeAndCondition < Struct.new(
       :tag_conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1797,13 +1877,15 @@ module Aws::Connect
       :instance_id,
       :file_id,
       :associated_resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Response from CompleteAttachedFileUpload API
     class CompleteAttachedFileUploadResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1822,7 +1904,8 @@ module Aws::Connect
     class Condition < Struct.new(
       :string_condition,
       :number_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1831,7 +1914,8 @@ module Aws::Connect
     #   @return [String]
     class ConditionalOperationFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1841,7 +1925,8 @@ module Aws::Connect
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1855,7 +1940,8 @@ module Aws::Connect
     class ConnectionData < Struct.new(
       :attendee,
       :meeting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2063,7 +2149,8 @@ module Aws::Connect
       :contact_evaluations,
       :contact_details,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,7 +2160,8 @@ module Aws::Connect
     #   @return [Types::Transcript]
     class ContactAnalysis < Struct.new(
       :transcript,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2096,7 +2184,8 @@ module Aws::Connect
       :contact_id,
       :participant_role,
       :include_raw_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2133,7 +2222,8 @@ module Aws::Connect
       :queue_id,
       :attributes,
       :campaign,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2148,7 +2238,8 @@ module Aws::Connect
     class ContactDetails < Struct.new(
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2183,7 +2274,8 @@ module Aws::Connect
       :end_timestamp,
       :delete_timestamp,
       :export_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2286,8 @@ module Aws::Connect
     #   @return [Array<String>]
     class ContactFilter < Struct.new(
       :contact_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2259,7 +2352,8 @@ module Aws::Connect
       :version_description,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2298,7 +2392,8 @@ module Aws::Connect
       :state,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2326,7 +2421,8 @@ module Aws::Connect
       :string_condition,
       :state_condition,
       :status_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2347,7 +2443,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneTagFilter]
     class ContactFlowModuleSearchFilter < Struct.new(
       :tag_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2369,7 +2466,8 @@ module Aws::Connect
       :arn,
       :name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2378,7 +2476,8 @@ module Aws::Connect
     #   @return [String]
     class ContactFlowNotPublishedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2410,7 +2509,8 @@ module Aws::Connect
       :type_condition,
       :state_condition,
       :status_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2431,7 +2531,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneTagFilter]
     class ContactFlowSearchFilter < Struct.new(
       :tag_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,7 +2564,8 @@ module Aws::Connect
       :contact_flow_type,
       :contact_flow_state,
       :contact_flow_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2481,7 +2583,8 @@ module Aws::Connect
       :arn,
       :version_description,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2491,7 +2594,8 @@ module Aws::Connect
     #   @return [String]
     class ContactMetricInfo < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2505,7 +2609,8 @@ module Aws::Connect
     class ContactMetricResult < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2516,7 +2621,8 @@ module Aws::Connect
     class ContactMetricValue < Struct.new(
       :number,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Number < ContactMetricValue; end
@@ -2530,7 +2636,8 @@ module Aws::Connect
     #   @return [String]
     class ContactNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2590,7 +2697,8 @@ module Aws::Connect
       :disconnect_timestamp,
       :scheduled_timestamp,
       :segment_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2604,7 +2712,8 @@ module Aws::Connect
     class ContactSearchSummaryAgentInfo < Struct.new(
       :id,
       :connected_to_agent_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2618,7 +2727,8 @@ module Aws::Connect
     class ContactSearchSummaryQueueInfo < Struct.new(
       :id,
       :enqueue_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2630,7 +2740,8 @@ module Aws::Connect
     #   @return [String]
     class ContactSearchSummarySegmentAttributeValue < Struct.new(
       :value_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2662,7 +2773,8 @@ module Aws::Connect
       :or_conditions,
       :and_condition,
       :tag_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2693,7 +2805,8 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :tag_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2734,7 +2847,8 @@ module Aws::Connect
       :and_condition,
       :tag_condition,
       :hierarchy_group_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2763,7 +2877,8 @@ module Aws::Connect
       :state,
       :display_order,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2776,7 +2891,8 @@ module Aws::Connect
     class CreateAgentStatusResponse < Struct.new(
       :agent_status_arn,
       :agent_status_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2790,7 +2906,8 @@ module Aws::Connect
     class CreateCaseActionDefinition < Struct.new(
       :fields,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2823,7 +2940,8 @@ module Aws::Connect
       :content,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2836,7 +2954,8 @@ module Aws::Connect
     class CreateContactFlowModuleResponse < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2875,7 +2994,8 @@ module Aws::Connect
       :content,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2892,7 +3012,8 @@ module Aws::Connect
       :contact_flow_id,
       :contact_flow_arn,
       :flow_content_sha256,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2925,7 +3046,8 @@ module Aws::Connect
       :contact_flow_version,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2938,7 +3060,8 @@ module Aws::Connect
     class CreateContactFlowVersionResponse < Struct.new(
       :contact_flow_arn,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3047,7 +3170,8 @@ module Aws::Connect
       :description,
       :segment_attributes,
       :previous_contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3060,7 +3184,8 @@ module Aws::Connect
     class CreateContactResponse < Struct.new(
       :contact_id,
       :contact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3092,7 +3217,8 @@ module Aws::Connect
       :display_name,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3105,7 +3231,8 @@ module Aws::Connect
     class CreateEmailAddressResponse < Struct.new(
       :email_address_id,
       :email_address_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3137,7 +3264,8 @@ module Aws::Connect
       :items,
       :scoring_strategy,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3150,7 +3278,8 @@ module Aws::Connect
     class CreateEvaluationFormResponse < Struct.new(
       :evaluation_form_id,
       :evaluation_form_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3184,7 +3313,8 @@ module Aws::Connect
       :config,
       :effective_from,
       :effective_till,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3193,7 +3323,8 @@ module Aws::Connect
     #   @return [String]
     class CreateHoursOfOperationOverrideResponse < Struct.new(
       :hours_of_operation_override_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3222,7 +3353,8 @@ module Aws::Connect
       :time_zone,
       :config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3235,7 +3367,8 @@ module Aws::Connect
     class CreateHoursOfOperationResponse < Struct.new(
       :hours_of_operation_id,
       :hours_of_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3269,7 +3402,8 @@ module Aws::Connect
       :inbound_calls_enabled,
       :outbound_calls_enabled,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3282,7 +3416,8 @@ module Aws::Connect
     class CreateInstanceResponse < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3319,7 +3454,8 @@ module Aws::Connect
       :source_application_name,
       :source_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3332,7 +3468,8 @@ module Aws::Connect
     class CreateIntegrationAssociationResponse < Struct.new(
       :integration_association_id,
       :integration_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3362,7 +3499,8 @@ module Aws::Connect
       :contact_id,
       :client_token,
       :participant_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3377,7 +3515,8 @@ module Aws::Connect
     class CreateParticipantResponse < Struct.new(
       :participant_credentials,
       :participant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3498,7 +3637,8 @@ module Aws::Connect
       :rehydration_type,
       :source_contact_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3508,7 +3648,8 @@ module Aws::Connect
     #   @return [String]
     class CreatePersistentContactAssociationResponse < Struct.new(
       :continued_from_contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3526,7 +3667,8 @@ module Aws::Connect
       :instance_id,
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3553,7 +3695,8 @@ module Aws::Connect
       :description,
       :s3_uri,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3566,7 +3709,8 @@ module Aws::Connect
     class CreatePromptResponse < Struct.new(
       :prompt_arn,
       :prompt_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3599,7 +3743,8 @@ module Aws::Connect
       :device_token,
       :device_type,
       :contact_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3608,7 +3753,8 @@ module Aws::Connect
     #   @return [String]
     class CreatePushNotificationRegistrationResponse < Struct.new(
       :registration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3649,7 +3795,8 @@ module Aws::Connect
       :max_contacts,
       :quick_connect_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3662,7 +3809,8 @@ module Aws::Connect
     class CreateQueueResponse < Struct.new(
       :queue_arn,
       :queue_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3687,7 +3835,8 @@ module Aws::Connect
       :description,
       :quick_connect_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3700,7 +3849,8 @@ module Aws::Connect
     class CreateQuickConnectResponse < Struct.new(
       :quick_connect_arn,
       :quick_connect_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3746,7 +3896,8 @@ module Aws::Connect
       :media_concurrencies,
       :tags,
       :agent_availability_timer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3759,7 +3910,8 @@ module Aws::Connect
     class CreateRoutingProfileResponse < Struct.new(
       :routing_profile_arn,
       :routing_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3795,7 +3947,8 @@ module Aws::Connect
       :actions,
       :publish_status,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3808,7 +3961,8 @@ module Aws::Connect
     class CreateRuleResponse < Struct.new(
       :rule_arn,
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3858,7 +4012,8 @@ module Aws::Connect
       :applications,
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3871,7 +4026,8 @@ module Aws::Connect
     class CreateSecurityProfileResponse < Struct.new(
       :security_profile_id,
       :security_profile_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3922,7 +4078,8 @@ module Aws::Connect
       :status,
       :fields,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3935,7 +4092,8 @@ module Aws::Connect
     class CreateTaskTemplateResponse < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3964,7 +4122,8 @@ module Aws::Connect
       :instance_id,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3978,7 +4137,8 @@ module Aws::Connect
     class CreateTrafficDistributionGroupResponse < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4000,7 +4160,8 @@ module Aws::Connect
       :integration_association_id,
       :use_case_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4013,7 +4174,8 @@ module Aws::Connect
     class CreateUseCaseResponse < Struct.new(
       :use_case_id,
       :use_case_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4035,7 +4197,8 @@ module Aws::Connect
       :parent_group_id,
       :instance_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4048,7 +4211,8 @@ module Aws::Connect
     class CreateUserHierarchyGroupResponse < Struct.new(
       :hierarchy_group_id,
       :hierarchy_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4113,7 +4277,8 @@ module Aws::Connect
       :hierarchy_group_id,
       :instance_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4126,7 +4291,8 @@ module Aws::Connect
     class CreateUserResponse < Struct.new(
       :user_id,
       :user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4166,7 +4332,8 @@ module Aws::Connect
       :description,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4175,7 +4342,8 @@ module Aws::Connect
     #   @return [Types::View]
     class CreateViewResponse < Struct.new(
       :view,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4198,7 +4366,8 @@ module Aws::Connect
       :view_id,
       :version_description,
       :view_content_sha256,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4207,7 +4376,8 @@ module Aws::Connect
     #   @return [Types::View]
     class CreateViewVersionResponse < Struct.new(
       :view,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4246,7 +4416,8 @@ module Aws::Connect
       :language_code,
       :content,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4263,7 +4434,8 @@ module Aws::Connect
       :vocabulary_arn,
       :vocabulary_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4279,7 +4451,8 @@ module Aws::Connect
       :connect_user_arn,
       :aws_identity_arn,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ConnectUserArn < CreatedByInfo; end
@@ -4306,7 +4479,8 @@ module Aws::Connect
       :access_token_expiration,
       :refresh_token,
       :refresh_token_expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4318,7 +4492,8 @@ module Aws::Connect
     #   @return [String]
     class CrossChannelBehavior < Struct.new(
       :behavior_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4333,7 +4508,8 @@ module Aws::Connect
     class CurrentMetric < Struct.new(
       :name,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4347,7 +4523,8 @@ module Aws::Connect
     class CurrentMetricData < Struct.new(
       :metric,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4361,7 +4538,8 @@ module Aws::Connect
     class CurrentMetricResult < Struct.new(
       :dimensions,
       :collections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4377,7 +4555,8 @@ module Aws::Connect
     class CurrentMetricSortCriteria < Struct.new(
       :sort_by_metric,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4393,7 +4572,8 @@ module Aws::Connect
     class Customer < Struct.new(
       :device_info,
       :capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4403,7 +4583,8 @@ module Aws::Connect
     #   @return [Types::AudioQualityMetricsInfo]
     class CustomerQualityMetrics < Struct.new(
       :audio,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4418,7 +4599,8 @@ module Aws::Connect
     class CustomerVoiceActivity < Struct.new(
       :greeting_start_timestamp,
       :greeting_end_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4437,7 +4619,8 @@ module Aws::Connect
       :field_name,
       :value,
       :comparison_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4452,7 +4635,8 @@ module Aws::Connect
     class DateReference < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4470,7 +4654,8 @@ module Aws::Connect
       :instance_id,
       :evaluation_form_id,
       :evaluation_form_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4487,7 +4672,8 @@ module Aws::Connect
       :evaluation_form_id,
       :evaluation_form_arn,
       :evaluation_form_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4516,7 +4702,8 @@ module Aws::Connect
       :language_code,
       :vocabulary_id,
       :vocabulary_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4538,13 +4725,15 @@ module Aws::Connect
       :instance_id,
       :file_id,
       :associated_resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # Response from DeleteAttachedFile API
     class DeleteAttachedFileResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4557,7 +4746,8 @@ module Aws::Connect
     class DeleteContactEvaluationRequest < Struct.new(
       :instance_id,
       :evaluation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4570,12 +4760,14 @@ module Aws::Connect
     class DeleteContactFlowModuleRequest < Struct.new(
       :instance_id,
       :contact_flow_module_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContactFlowModuleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4588,12 +4780,14 @@ module Aws::Connect
     class DeleteContactFlowRequest < Struct.new(
       :instance_id,
       :contact_flow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContactFlowResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4610,12 +4804,14 @@ module Aws::Connect
       :instance_id,
       :contact_flow_id,
       :contact_flow_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContactFlowVersionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4628,12 +4824,14 @@ module Aws::Connect
     class DeleteEmailAddressRequest < Struct.new(
       :instance_id,
       :email_address_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEmailAddressResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4650,7 +4848,8 @@ module Aws::Connect
       :instance_id,
       :evaluation_form_id,
       :evaluation_form_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4667,7 +4866,8 @@ module Aws::Connect
       :instance_id,
       :hours_of_operation_id,
       :hours_of_operation_override_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4680,7 +4880,8 @@ module Aws::Connect
     class DeleteHoursOfOperationRequest < Struct.new(
       :instance_id,
       :hours_of_operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4696,7 +4897,8 @@ module Aws::Connect
     class DeleteInstanceRequest < Struct.new(
       :instance_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4709,7 +4911,8 @@ module Aws::Connect
     class DeleteIntegrationAssociationRequest < Struct.new(
       :instance_id,
       :integration_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4723,7 +4926,8 @@ module Aws::Connect
     class DeletePredefinedAttributeRequest < Struct.new(
       :instance_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4736,7 +4940,8 @@ module Aws::Connect
     class DeletePromptRequest < Struct.new(
       :instance_id,
       :prompt_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4754,12 +4959,14 @@ module Aws::Connect
       :instance_id,
       :registration_id,
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePushNotificationRegistrationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4772,7 +4979,8 @@ module Aws::Connect
     class DeleteQueueRequest < Struct.new(
       :instance_id,
       :queue_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4785,7 +4993,8 @@ module Aws::Connect
     class DeleteQuickConnectRequest < Struct.new(
       :instance_id,
       :quick_connect_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4798,7 +5007,8 @@ module Aws::Connect
     class DeleteRoutingProfileRequest < Struct.new(
       :instance_id,
       :routing_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4811,7 +5021,8 @@ module Aws::Connect
     class DeleteRuleRequest < Struct.new(
       :instance_id,
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4824,7 +5035,8 @@ module Aws::Connect
     class DeleteSecurityProfileRequest < Struct.new(
       :instance_id,
       :security_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4837,12 +5049,14 @@ module Aws::Connect
     class DeleteTaskTemplateRequest < Struct.new(
       :instance_id,
       :task_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTaskTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4852,12 +5066,14 @@ module Aws::Connect
     #   @return [String]
     class DeleteTrafficDistributionGroupRequest < Struct.new(
       :traffic_distribution_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTrafficDistributionGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4874,7 +5090,8 @@ module Aws::Connect
       :instance_id,
       :integration_association_id,
       :use_case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4887,7 +5104,8 @@ module Aws::Connect
     class DeleteUserHierarchyGroupRequest < Struct.new(
       :hierarchy_group_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4900,7 +5118,8 @@ module Aws::Connect
     class DeleteUserRequest < Struct.new(
       :instance_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4915,12 +5134,14 @@ module Aws::Connect
     class DeleteViewRequest < Struct.new(
       :instance_id,
       :view_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteViewResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4939,12 +5160,14 @@ module Aws::Connect
       :instance_id,
       :view_id,
       :view_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteViewVersionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4957,7 +5180,8 @@ module Aws::Connect
     class DeleteVocabularyRequest < Struct.new(
       :instance_id,
       :vocabulary_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4974,7 +5198,8 @@ module Aws::Connect
       :vocabulary_arn,
       :vocabulary_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4987,7 +5212,8 @@ module Aws::Connect
     class DescribeAgentStatusRequest < Struct.new(
       :instance_id,
       :agent_status_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4996,7 +5222,8 @@ module Aws::Connect
     #   @return [Types::AgentStatus]
     class DescribeAgentStatusResponse < Struct.new(
       :agent_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5009,7 +5236,8 @@ module Aws::Connect
     class DescribeAuthenticationProfileRequest < Struct.new(
       :authentication_profile_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5018,7 +5246,8 @@ module Aws::Connect
     #   @return [Types::AuthenticationProfile]
     class DescribeAuthenticationProfileResponse < Struct.new(
       :authentication_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5031,7 +5260,8 @@ module Aws::Connect
     class DescribeContactEvaluationRequest < Struct.new(
       :instance_id,
       :evaluation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5044,7 +5274,8 @@ module Aws::Connect
     class DescribeContactEvaluationResponse < Struct.new(
       :evaluation,
       :evaluation_form,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5057,7 +5288,8 @@ module Aws::Connect
     class DescribeContactFlowModuleRequest < Struct.new(
       :instance_id,
       :contact_flow_module_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5066,7 +5298,8 @@ module Aws::Connect
     #   @return [Types::ContactFlowModule]
     class DescribeContactFlowModuleResponse < Struct.new(
       :contact_flow_module,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5079,7 +5312,8 @@ module Aws::Connect
     class DescribeContactFlowRequest < Struct.new(
       :instance_id,
       :contact_flow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5088,7 +5322,8 @@ module Aws::Connect
     #   @return [Types::ContactFlow]
     class DescribeContactFlowResponse < Struct.new(
       :contact_flow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5101,7 +5336,8 @@ module Aws::Connect
     class DescribeContactRequest < Struct.new(
       :instance_id,
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5110,7 +5346,8 @@ module Aws::Connect
     #   @return [Types::Contact]
     class DescribeContactResponse < Struct.new(
       :contact,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5123,7 +5360,8 @@ module Aws::Connect
     class DescribeEmailAddressRequest < Struct.new(
       :instance_id,
       :email_address_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5160,7 +5398,8 @@ module Aws::Connect
       :create_timestamp,
       :modified_timestamp,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5177,7 +5416,8 @@ module Aws::Connect
       :instance_id,
       :evaluation_form_id,
       :evaluation_form_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5186,7 +5426,8 @@ module Aws::Connect
     #   @return [Types::EvaluationForm]
     class DescribeEvaluationFormResponse < Struct.new(
       :evaluation_form,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5203,7 +5444,8 @@ module Aws::Connect
       :instance_id,
       :hours_of_operation_id,
       :hours_of_operation_override_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5212,7 +5454,8 @@ module Aws::Connect
     #   @return [Types::HoursOfOperationOverride]
     class DescribeHoursOfOperationOverrideResponse < Struct.new(
       :hours_of_operation_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5225,7 +5468,8 @@ module Aws::Connect
     class DescribeHoursOfOperationRequest < Struct.new(
       :instance_id,
       :hours_of_operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5234,7 +5478,8 @@ module Aws::Connect
     #   @return [Types::HoursOfOperation]
     class DescribeHoursOfOperationResponse < Struct.new(
       :hours_of_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5247,7 +5492,8 @@ module Aws::Connect
     class DescribeInstanceAttributeRequest < Struct.new(
       :instance_id,
       :attribute_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5258,7 +5504,8 @@ module Aws::Connect
     #   @return [Types::Attribute]
     class DescribeInstanceAttributeResponse < Struct.new(
       :attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5267,7 +5514,8 @@ module Aws::Connect
     #   @return [String]
     class DescribeInstanceRequest < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5285,7 +5533,8 @@ module Aws::Connect
     class DescribeInstanceResponse < Struct.new(
       :instance,
       :replication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5302,7 +5551,8 @@ module Aws::Connect
       :instance_id,
       :association_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5311,7 +5561,8 @@ module Aws::Connect
     #   @return [Types::InstanceStorageConfig]
     class DescribeInstanceStorageConfigResponse < Struct.new(
       :storage_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5320,7 +5571,8 @@ module Aws::Connect
     #   @return [String]
     class DescribePhoneNumberRequest < Struct.new(
       :phone_number_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5330,7 +5582,8 @@ module Aws::Connect
     #   @return [Types::ClaimedPhoneNumberSummary]
     class DescribePhoneNumberResponse < Struct.new(
       :claimed_phone_number_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5344,7 +5597,8 @@ module Aws::Connect
     class DescribePredefinedAttributeRequest < Struct.new(
       :instance_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5353,7 +5607,8 @@ module Aws::Connect
     #   @return [Types::PredefinedAttribute]
     class DescribePredefinedAttributeResponse < Struct.new(
       :predefined_attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5366,7 +5621,8 @@ module Aws::Connect
     class DescribePromptRequest < Struct.new(
       :instance_id,
       :prompt_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5375,7 +5631,8 @@ module Aws::Connect
     #   @return [Types::Prompt]
     class DescribePromptResponse < Struct.new(
       :prompt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5388,7 +5645,8 @@ module Aws::Connect
     class DescribeQueueRequest < Struct.new(
       :instance_id,
       :queue_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5397,7 +5655,8 @@ module Aws::Connect
     #   @return [Types::Queue]
     class DescribeQueueResponse < Struct.new(
       :queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5410,7 +5669,8 @@ module Aws::Connect
     class DescribeQuickConnectRequest < Struct.new(
       :instance_id,
       :quick_connect_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5419,7 +5679,8 @@ module Aws::Connect
     #   @return [Types::QuickConnect]
     class DescribeQuickConnectResponse < Struct.new(
       :quick_connect,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5432,7 +5693,8 @@ module Aws::Connect
     class DescribeRoutingProfileRequest < Struct.new(
       :instance_id,
       :routing_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5441,7 +5703,8 @@ module Aws::Connect
     #   @return [Types::RoutingProfile]
     class DescribeRoutingProfileResponse < Struct.new(
       :routing_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5454,7 +5717,8 @@ module Aws::Connect
     class DescribeRuleRequest < Struct.new(
       :instance_id,
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5463,7 +5727,8 @@ module Aws::Connect
     #   @return [Types::Rule]
     class DescribeRuleResponse < Struct.new(
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5476,7 +5741,8 @@ module Aws::Connect
     class DescribeSecurityProfileRequest < Struct.new(
       :security_profile_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5485,7 +5751,8 @@ module Aws::Connect
     #   @return [Types::SecurityProfile]
     class DescribeSecurityProfileResponse < Struct.new(
       :security_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5496,7 +5763,8 @@ module Aws::Connect
     #   @return [String]
     class DescribeTrafficDistributionGroupRequest < Struct.new(
       :traffic_distribution_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5505,7 +5773,8 @@ module Aws::Connect
     #   @return [Types::TrafficDistributionGroup]
     class DescribeTrafficDistributionGroupResponse < Struct.new(
       :traffic_distribution_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5518,7 +5787,8 @@ module Aws::Connect
     class DescribeUserHierarchyGroupRequest < Struct.new(
       :hierarchy_group_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5527,7 +5797,8 @@ module Aws::Connect
     #   @return [Types::HierarchyGroup]
     class DescribeUserHierarchyGroupResponse < Struct.new(
       :hierarchy_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5536,7 +5807,8 @@ module Aws::Connect
     #   @return [String]
     class DescribeUserHierarchyStructureRequest < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5545,7 +5817,8 @@ module Aws::Connect
     #   @return [Types::HierarchyStructure]
     class DescribeUserHierarchyStructureResponse < Struct.new(
       :hierarchy_structure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5558,7 +5831,8 @@ module Aws::Connect
     class DescribeUserRequest < Struct.new(
       :user_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5567,7 +5841,8 @@ module Aws::Connect
     #   @return [Types::User]
     class DescribeUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5581,7 +5856,8 @@ module Aws::Connect
     class DescribeViewRequest < Struct.new(
       :instance_id,
       :view_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5590,7 +5866,8 @@ module Aws::Connect
     #   @return [Types::View]
     class DescribeViewResponse < Struct.new(
       :view,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5603,7 +5880,8 @@ module Aws::Connect
     class DescribeVocabularyRequest < Struct.new(
       :instance_id,
       :vocabulary_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5614,7 +5892,8 @@ module Aws::Connect
     #   @return [Types::Vocabulary]
     class DescribeVocabularyResponse < Struct.new(
       :vocabulary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5624,7 +5903,8 @@ module Aws::Connect
     #   @return [String]
     class DestinationNotAllowedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5642,7 +5922,8 @@ module Aws::Connect
       :platform_name,
       :platform_version,
       :operating_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5668,7 +5949,8 @@ module Aws::Connect
       :routing_profile,
       :routing_step_expression,
       :agent_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5686,7 +5968,8 @@ module Aws::Connect
       :instance_id,
       :data_set_id,
       :target_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5706,7 +5989,8 @@ module Aws::Connect
       :instance_id,
       :origin,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5730,7 +6014,8 @@ module Aws::Connect
       :lex_bot,
       :lex_v2_bot,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5759,12 +6044,14 @@ module Aws::Connect
       :instance_id,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateFlowResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5788,7 +6075,8 @@ module Aws::Connect
       :association_id,
       :resource_type,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5808,7 +6096,8 @@ module Aws::Connect
       :instance_id,
       :function_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5832,7 +6121,8 @@ module Aws::Connect
       :bot_name,
       :lex_region,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5845,7 +6135,8 @@ module Aws::Connect
     class DisassociatePhoneNumberContactFlowRequest < Struct.new(
       :phone_number_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5862,7 +6153,8 @@ module Aws::Connect
       :instance_id,
       :queue_id,
       :quick_connect_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5879,7 +6171,8 @@ module Aws::Connect
       :instance_id,
       :routing_profile_id,
       :queue_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5899,7 +6192,8 @@ module Aws::Connect
       :instance_id,
       :association_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5917,12 +6211,14 @@ module Aws::Connect
       :traffic_distribution_group_id,
       :user_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateTrafficDistributionGroupUserResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5940,7 +6236,8 @@ module Aws::Connect
       :instance_id,
       :user_id,
       :user_proficiencies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5951,7 +6248,8 @@ module Aws::Connect
     #   @return [String]
     class DisconnectDetails < Struct.new(
       :potential_disconnect_issue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5962,7 +6260,8 @@ module Aws::Connect
     #   @return [String]
     class DisconnectReason < Struct.new(
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5980,12 +6279,14 @@ module Aws::Connect
       :user_id,
       :instance_id,
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DismissUserContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5999,7 +6300,8 @@ module Aws::Connect
     class Distribution < Struct.new(
       :region,
       :percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6019,7 +6321,8 @@ module Aws::Connect
     class DownloadUrlMetadata < Struct.new(
       :url,
       :url_expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6028,7 +6331,8 @@ module Aws::Connect
     #   @return [String]
     class DuplicateResourceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6042,7 +6346,8 @@ module Aws::Connect
     class EffectiveHoursOfOperations < Struct.new(
       :date,
       :operational_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6056,7 +6361,8 @@ module Aws::Connect
     class EmailAddressInfo < Struct.new(
       :email_address,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6082,7 +6388,8 @@ module Aws::Connect
       :email_address,
       :description,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6100,7 +6407,8 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :string_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6121,7 +6429,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneTagFilter]
     class EmailAddressSearchFilter < Struct.new(
       :tag_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6135,7 +6444,8 @@ module Aws::Connect
     class EmailAttachment < Struct.new(
       :file_name,
       :s3_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6150,7 +6460,8 @@ module Aws::Connect
     class EmailMessageReference < Struct.new(
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6164,7 +6475,8 @@ module Aws::Connect
     class EmailRecipient < Struct.new(
       :address,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6179,13 +6491,15 @@ module Aws::Connect
     class EmailReference < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An empty value.</p>
     class EmptyFieldValue < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6206,13 +6520,15 @@ module Aws::Connect
     class EncryptionConfig < Struct.new(
       :encryption_type,
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>End associated tasks related to a case.</p>
     class EndAssociatedTasksActionDefinition < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6226,7 +6542,8 @@ module Aws::Connect
     class Endpoint < Struct.new(
       :type,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6244,7 +6561,8 @@ module Aws::Connect
       :type,
       :address,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6259,7 +6577,8 @@ module Aws::Connect
     class ErrorResult < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6305,7 +6624,8 @@ module Aws::Connect
       :created_time,
       :last_modified_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6325,7 +6645,8 @@ module Aws::Connect
       :numeric_value,
       :not_applicable,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringValue < EvaluationAnswerData; end
@@ -6340,7 +6661,8 @@ module Aws::Connect
     #   @return [Types::EvaluationAnswerData]
     class EvaluationAnswerInput < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6354,7 +6676,8 @@ module Aws::Connect
     class EvaluationAnswerOutput < Struct.new(
       :value,
       :system_suggested_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6416,7 +6739,8 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_by,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6456,7 +6780,8 @@ module Aws::Connect
       :description,
       :items,
       :scoring_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6477,7 +6802,8 @@ module Aws::Connect
       :section,
       :question,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Section < EvaluationFormItem; end
@@ -6492,7 +6818,8 @@ module Aws::Connect
     class EvaluationFormNumericQuestionAutomation < Struct.new(
       :property_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PropertyValue < EvaluationFormNumericQuestionAutomation; end
@@ -6518,7 +6845,8 @@ module Aws::Connect
       :max_value,
       :score,
       :automatic_fail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6548,7 +6876,8 @@ module Aws::Connect
       :max_value,
       :options,
       :automation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6590,7 +6919,8 @@ module Aws::Connect
       :question_type,
       :question_type_properties,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6612,7 +6942,8 @@ module Aws::Connect
       :numeric,
       :single_select,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Numeric < EvaluationFormQuestionTypeProperties; end
@@ -6630,7 +6961,8 @@ module Aws::Connect
     class EvaluationFormScoringStrategy < Struct.new(
       :mode,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6658,7 +6990,8 @@ module Aws::Connect
       :instructions,
       :items,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6680,7 +7013,8 @@ module Aws::Connect
     class EvaluationFormSingleSelectQuestionAutomation < Struct.new(
       :options,
       :default_option_ref_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6691,7 +7025,8 @@ module Aws::Connect
     class EvaluationFormSingleSelectQuestionAutomationOption < Struct.new(
       :rule_category,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RuleCategory < EvaluationFormSingleSelectQuestionAutomationOption; end
@@ -6718,7 +7053,8 @@ module Aws::Connect
       :text,
       :score,
       :automatic_fail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6742,7 +7078,8 @@ module Aws::Connect
       :options,
       :display_as,
       :automation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6792,7 +7129,8 @@ module Aws::Connect
       :last_activated_by,
       :latest_version,
       :active_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6840,7 +7178,8 @@ module Aws::Connect
       :created_by,
       :last_modified_time,
       :last_modified_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6868,7 +7207,8 @@ module Aws::Connect
       :evaluator_arn,
       :contact_agent_id,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6884,7 +7224,8 @@ module Aws::Connect
     #   @return [String]
     class EvaluationNote < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6903,7 +7244,8 @@ module Aws::Connect
       :percentage,
       :not_applicable,
       :automatic_fail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6952,7 +7294,8 @@ module Aws::Connect
       :score,
       :created_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6962,7 +7305,8 @@ module Aws::Connect
     #   @return [String]
     class EventBridgeActionDefinition < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6976,7 +7320,8 @@ module Aws::Connect
     class Expiry < Struct.new(
       :duration_in_seconds,
       :expiry_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6998,7 +7343,8 @@ module Aws::Connect
       :and_expression,
       :or_expression,
       :not_attribute_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7017,7 +7363,8 @@ module Aws::Connect
       :request_identifier,
       :failure_reason_code,
       :failure_reason_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7031,7 +7378,8 @@ module Aws::Connect
     class FieldValue < Struct.new(
       :id,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7053,7 +7401,8 @@ module Aws::Connect
       :double_value,
       :empty_value,
       :string_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7077,7 +7426,8 @@ module Aws::Connect
     class FilterV2 < Struct.new(
       :filter_key,
       :filter_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7106,7 +7456,8 @@ module Aws::Connect
       :routing_profiles,
       :routing_step_expressions,
       :agent_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7124,7 +7475,8 @@ module Aws::Connect
       :resource_id,
       :flow_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7151,7 +7503,8 @@ module Aws::Connect
       :file_id,
       :url_expiry_in_seconds,
       :associated_resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7205,7 +7558,8 @@ module Aws::Connect
       :created_by,
       :download_url_metadata,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7218,7 +7572,8 @@ module Aws::Connect
     class GetContactAttributesRequest < Struct.new(
       :instance_id,
       :initial_contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7227,7 +7582,8 @@ module Aws::Connect
     #   @return [Hash<String, String>]
     class GetContactAttributesResponse < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7244,7 +7600,8 @@ module Aws::Connect
       :instance_id,
       :contact_id,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7262,7 +7619,8 @@ module Aws::Connect
       :metric_results,
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7459,7 +7817,8 @@ module Aws::Connect
       :next_token,
       :max_results,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7482,7 +7841,8 @@ module Aws::Connect
       :metric_results,
       :data_snapshot_time,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7525,7 +7885,8 @@ module Aws::Connect
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7542,7 +7903,8 @@ module Aws::Connect
       :next_token,
       :user_data_list,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7563,7 +7925,8 @@ module Aws::Connect
       :hours_of_operation_id,
       :from_date,
       :to_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7576,7 +7939,8 @@ module Aws::Connect
     class GetEffectiveHoursOfOperationsResponse < Struct.new(
       :effective_hours_of_operation_list,
       :time_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7585,7 +7949,8 @@ module Aws::Connect
     #   @return [String]
     class GetFederationTokenRequest < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7606,7 +7971,8 @@ module Aws::Connect
       :sign_in_url,
       :user_arn,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7635,7 +8001,8 @@ module Aws::Connect
       :instance_id,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7652,7 +8019,8 @@ module Aws::Connect
       :resource_id,
       :flow_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7915,7 +8283,8 @@ module Aws::Connect
       :historical_metrics,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7931,7 +8300,8 @@ module Aws::Connect
     class GetMetricDataResponse < Struct.new(
       :next_token,
       :metric_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9366,7 +9736,8 @@ module Aws::Connect
       :metrics,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9380,7 +9751,8 @@ module Aws::Connect
     class GetMetricDataV2Response < Struct.new(
       :next_token,
       :metric_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9393,7 +9765,8 @@ module Aws::Connect
     class GetPromptFileRequest < Struct.new(
       :instance_id,
       :prompt_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9411,7 +9784,8 @@ module Aws::Connect
       :prompt_presigned_url,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9429,7 +9803,8 @@ module Aws::Connect
       :instance_id,
       :task_template_id,
       :snapshot_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9493,7 +9868,8 @@ module Aws::Connect
       :last_modified_time,
       :created_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9504,7 +9880,8 @@ module Aws::Connect
     #   @return [String]
     class GetTrafficDistributionRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9532,7 +9909,8 @@ module Aws::Connect
       :arn,
       :sign_in_config,
       :agent_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9570,7 +9948,8 @@ module Aws::Connect
       :tags,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9584,7 +9963,8 @@ module Aws::Connect
     class HierarchyGroupCondition < Struct.new(
       :value,
       :hierarchy_group_match_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9610,7 +9990,8 @@ module Aws::Connect
       :name,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9624,7 +10005,8 @@ module Aws::Connect
     class HierarchyGroupSummaryReference < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9651,7 +10033,8 @@ module Aws::Connect
       :level3,
       :level4,
       :level5,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9677,7 +10060,8 @@ module Aws::Connect
       :name,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9687,7 +10071,8 @@ module Aws::Connect
     #   @return [String]
     class HierarchyLevelUpdate < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9713,7 +10098,8 @@ module Aws::Connect
       :level_three,
       :level_four,
       :level_five,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9739,7 +10125,8 @@ module Aws::Connect
       :level_three,
       :level_four,
       :level_five,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9765,7 +10152,8 @@ module Aws::Connect
       :level_three,
       :level_four,
       :level_five,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9793,7 +10181,8 @@ module Aws::Connect
       :level_three,
       :level_four,
       :level_five,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10016,7 +10405,8 @@ module Aws::Connect
       :threshold,
       :statistic,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10030,7 +10420,8 @@ module Aws::Connect
     class HistoricalMetricData < Struct.new(
       :metric,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10044,7 +10435,8 @@ module Aws::Connect
     class HistoricalMetricResult < Struct.new(
       :dimensions,
       :collections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10086,7 +10478,8 @@ module Aws::Connect
       :tags,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10104,7 +10497,8 @@ module Aws::Connect
       :day,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10143,7 +10537,8 @@ module Aws::Connect
       :config,
       :effective_from,
       :effective_till,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10162,7 +10557,8 @@ module Aws::Connect
       :day,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10184,7 +10580,8 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       :date_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10206,7 +10603,8 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :string_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10227,7 +10625,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneTagFilter]
     class HoursOfOperationSearchFilter < Struct.new(
       :tag_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10253,7 +10652,8 @@ module Aws::Connect
       :name,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10267,7 +10667,8 @@ module Aws::Connect
     class HoursOfOperationTimeSlice < Struct.new(
       :hours,
       :minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10282,7 +10683,8 @@ module Aws::Connect
     #   @return [String]
     class IdempotencyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10311,7 +10713,8 @@ module Aws::Connect
       :phone_number_description,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10324,7 +10727,8 @@ module Aws::Connect
     class ImportPhoneNumberResponse < Struct.new(
       :phone_number_id,
       :phone_number_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10350,7 +10754,8 @@ module Aws::Connect
     class InboundAdditionalRecipients < Struct.new(
       :to_addresses,
       :cc_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10364,7 +10769,8 @@ module Aws::Connect
     class InboundEmailContent < Struct.new(
       :message_source_type,
       :raw_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10386,7 +10792,8 @@ module Aws::Connect
       :body,
       :content_type,
       :headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10441,7 +10848,8 @@ module Aws::Connect
       :outbound_calls_enabled,
       :instance_access_url,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10452,7 +10860,8 @@ module Aws::Connect
     #   @return [String]
     class InstanceStatusReason < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10483,7 +10892,8 @@ module Aws::Connect
       :kinesis_video_stream_config,
       :kinesis_stream_config,
       :kinesis_firehose_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10529,7 +10939,8 @@ module Aws::Connect
       :inbound_calls_enabled,
       :outbound_calls_enabled,
       :instance_access_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10567,7 +10978,8 @@ module Aws::Connect
       :source_application_url,
       :source_application_name,
       :source_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10577,7 +10989,8 @@ module Aws::Connect
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10632,7 +11045,8 @@ module Aws::Connect
     class IntervalDetails < Struct.new(
       :time_zone,
       :interval_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10642,7 +11056,8 @@ module Aws::Connect
     #   @return [Array<Types::ProblemDetail>]
     class InvalidContactFlowException < Struct.new(
       :problems,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10651,7 +11066,8 @@ module Aws::Connect
     #   @return [Array<Types::ProblemDetail>]
     class InvalidContactFlowModuleException < Struct.new(
       :problems,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10661,7 +11077,8 @@ module Aws::Connect
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10675,7 +11092,8 @@ module Aws::Connect
     class InvalidRequestException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10686,7 +11104,8 @@ module Aws::Connect
     class InvalidRequestExceptionReason < Struct.new(
       :attached_file_invalid_request_exception_reason,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AttachedFileInvalidRequestExceptionReason < InvalidRequestExceptionReason; end
@@ -10699,7 +11118,8 @@ module Aws::Connect
     #   @return [Types::TaskTemplateFieldIdentifier]
     class InvisibleFieldInfo < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10709,7 +11129,8 @@ module Aws::Connect
     #   @return [String]
     class KinesisFirehoseConfig < Struct.new(
       :firehose_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10719,7 +11140,8 @@ module Aws::Connect
     #   @return [String]
     class KinesisStreamConfig < Struct.new(
       :stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10739,7 +11161,8 @@ module Aws::Connect
       :prefix,
       :retention_period_hours,
       :encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10758,7 +11181,8 @@ module Aws::Connect
     class LexBot < Struct.new(
       :name,
       :lex_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10772,7 +11196,8 @@ module Aws::Connect
     class LexBotConfig < Struct.new(
       :lex_bot,
       :lex_v2_bot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10782,7 +11207,8 @@ module Aws::Connect
     #   @return [String]
     class LexV2Bot < Struct.new(
       :alias_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10792,7 +11218,8 @@ module Aws::Connect
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10814,7 +11241,8 @@ module Aws::Connect
       :next_token,
       :max_results,
       :agent_status_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10827,7 +11255,8 @@ module Aws::Connect
     class ListAgentStatusResponse < Struct.new(
       :next_token,
       :agent_status_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10849,7 +11278,8 @@ module Aws::Connect
       :data_set_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10864,7 +11294,8 @@ module Aws::Connect
     class ListAnalyticsDataAssociationsResponse < Struct.new(
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10882,7 +11313,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10897,7 +11329,8 @@ module Aws::Connect
     class ListAnalyticsDataLakeDataSetsResponse < Struct.new(
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10915,7 +11348,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10928,7 +11362,8 @@ module Aws::Connect
     class ListApprovedOriginsResponse < Struct.new(
       :origins,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10950,7 +11385,8 @@ module Aws::Connect
       :contact_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10964,7 +11400,8 @@ module Aws::Connect
     class ListAssociatedContactsResponse < Struct.new(
       :contact_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10982,7 +11419,8 @@ module Aws::Connect
       :instance_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10995,7 +11433,8 @@ module Aws::Connect
     class ListAuthenticationProfilesResponse < Struct.new(
       :authentication_profile_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11017,7 +11456,8 @@ module Aws::Connect
       :next_token,
       :max_results,
       :lex_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11031,7 +11471,8 @@ module Aws::Connect
     class ListBotsResponse < Struct.new(
       :lex_bots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11046,7 +11487,8 @@ module Aws::Connect
     class ListCondition < Struct.new(
       :target_list_type,
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11068,7 +11510,8 @@ module Aws::Connect
       :instance_id,
       :contact_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11084,7 +11527,8 @@ module Aws::Connect
     class ListContactEvaluationsResponse < Struct.new(
       :evaluation_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11106,7 +11550,8 @@ module Aws::Connect
       :next_token,
       :max_results,
       :contact_flow_module_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11119,7 +11564,8 @@ module Aws::Connect
     class ListContactFlowModulesResponse < Struct.new(
       :contact_flow_modules_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11141,7 +11587,8 @@ module Aws::Connect
       :contact_flow_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11154,7 +11601,8 @@ module Aws::Connect
     class ListContactFlowVersionsResponse < Struct.new(
       :contact_flow_version_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11176,7 +11624,8 @@ module Aws::Connect
       :contact_flow_types,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11189,7 +11638,8 @@ module Aws::Connect
     class ListContactFlowsResponse < Struct.new(
       :contact_flow_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11215,7 +11665,8 @@ module Aws::Connect
       :contact_id,
       :reference_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11231,7 +11682,8 @@ module Aws::Connect
     class ListContactReferencesResponse < Struct.new(
       :reference_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11255,7 +11707,8 @@ module Aws::Connect
       :language_code,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11268,7 +11721,8 @@ module Aws::Connect
     class ListDefaultVocabulariesResponse < Struct.new(
       :default_vocabulary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11290,7 +11744,8 @@ module Aws::Connect
       :evaluation_form_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11303,7 +11758,8 @@ module Aws::Connect
     class ListEvaluationFormVersionsResponse < Struct.new(
       :evaluation_form_version_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11321,7 +11777,8 @@ module Aws::Connect
       :instance_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11334,7 +11791,8 @@ module Aws::Connect
     class ListEvaluationFormsResponse < Struct.new(
       :evaluation_form_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11356,7 +11814,8 @@ module Aws::Connect
       :resource_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11369,7 +11828,8 @@ module Aws::Connect
     class ListFlowAssociationsResponse < Struct.new(
       :flow_association_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11391,7 +11851,8 @@ module Aws::Connect
       :hours_of_operation_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11413,7 +11874,8 @@ module Aws::Connect
       :hours_of_operation_override_list,
       :last_modified_region,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11431,7 +11893,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11444,7 +11907,8 @@ module Aws::Connect
     class ListHoursOfOperationsResponse < Struct.new(
       :hours_of_operation_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11462,7 +11926,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11475,7 +11940,8 @@ module Aws::Connect
     class ListInstanceAttributesResponse < Struct.new(
       :attributes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11497,7 +11963,8 @@ module Aws::Connect
       :resource_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11510,7 +11977,8 @@ module Aws::Connect
     class ListInstanceStorageConfigsResponse < Struct.new(
       :storage_configs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11524,7 +11992,8 @@ module Aws::Connect
     class ListInstancesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11537,7 +12006,8 @@ module Aws::Connect
     class ListInstancesResponse < Struct.new(
       :instance_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11563,7 +12033,8 @@ module Aws::Connect
       :next_token,
       :max_results,
       :integration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11576,7 +12047,8 @@ module Aws::Connect
     class ListIntegrationAssociationsResponse < Struct.new(
       :integration_association_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11594,7 +12066,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11607,7 +12080,8 @@ module Aws::Connect
     class ListLambdaFunctionsResponse < Struct.new(
       :lambda_functions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11626,7 +12100,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11640,7 +12115,8 @@ module Aws::Connect
     class ListLexBotsResponse < Struct.new(
       :lex_bots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11672,7 +12148,8 @@ module Aws::Connect
       :phone_number_country_codes,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11685,7 +12162,8 @@ module Aws::Connect
     class ListPhoneNumbersResponse < Struct.new(
       :phone_number_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11733,7 +12211,8 @@ module Aws::Connect
       :instance_id,
       :phone_number_description,
       :source_phone_number_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11773,7 +12252,8 @@ module Aws::Connect
       :phone_number_country_codes,
       :phone_number_types,
       :phone_number_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11787,7 +12267,8 @@ module Aws::Connect
     class ListPhoneNumbersV2Response < Struct.new(
       :next_token,
       :list_phone_numbers_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11806,7 +12287,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11819,7 +12301,8 @@ module Aws::Connect
     class ListPredefinedAttributesResponse < Struct.new(
       :next_token,
       :predefined_attribute_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11837,7 +12320,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11850,7 +12334,8 @@ module Aws::Connect
     class ListPromptsResponse < Struct.new(
       :prompt_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11872,7 +12357,8 @@ module Aws::Connect
       :queue_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11893,7 +12379,8 @@ module Aws::Connect
       :quick_connect_summary_list,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11915,7 +12402,8 @@ module Aws::Connect
       :queue_types,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11928,7 +12416,8 @@ module Aws::Connect
     class ListQueuesResponse < Struct.new(
       :queue_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11951,7 +12440,8 @@ module Aws::Connect
       :next_token,
       :max_results,
       :quick_connect_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11964,7 +12454,8 @@ module Aws::Connect
     class ListQuickConnectsResponse < Struct.new(
       :quick_connect_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11996,7 +12487,8 @@ module Aws::Connect
       :next_token,
       :output_type,
       :segment_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12022,7 +12514,8 @@ module Aws::Connect
       :status,
       :segments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12044,7 +12537,8 @@ module Aws::Connect
       :routing_profile_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12065,7 +12559,8 @@ module Aws::Connect
       :routing_profile_queue_config_summary_list,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12083,7 +12578,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12096,7 +12592,8 @@ module Aws::Connect
     class ListRoutingProfilesResponse < Struct.new(
       :routing_profile_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12122,7 +12619,8 @@ module Aws::Connect
       :event_source_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12135,7 +12633,8 @@ module Aws::Connect
     class ListRulesResponse < Struct.new(
       :rule_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12153,7 +12652,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12166,7 +12666,8 @@ module Aws::Connect
     class ListSecurityKeysResponse < Struct.new(
       :security_keys,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12188,7 +12689,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12209,7 +12711,8 @@ module Aws::Connect
       :next_token,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12231,7 +12734,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12254,7 +12758,8 @@ module Aws::Connect
       :next_token,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12272,7 +12777,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12285,7 +12791,8 @@ module Aws::Connect
     class ListSecurityProfilesResponse < Struct.new(
       :security_profile_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12295,7 +12802,8 @@ module Aws::Connect
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12304,7 +12812,8 @@ module Aws::Connect
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12339,7 +12848,8 @@ module Aws::Connect
       :max_results,
       :status,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12355,7 +12865,8 @@ module Aws::Connect
     class ListTaskTemplatesResponse < Struct.new(
       :task_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12375,7 +12886,8 @@ module Aws::Connect
       :traffic_distribution_group_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12388,7 +12900,8 @@ module Aws::Connect
     class ListTrafficDistributionGroupUsersResponse < Struct.new(
       :next_token,
       :traffic_distribution_group_user_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12406,7 +12919,8 @@ module Aws::Connect
       :max_results,
       :next_token,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12419,7 +12933,8 @@ module Aws::Connect
     class ListTrafficDistributionGroupsResponse < Struct.new(
       :next_token,
       :traffic_distribution_group_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12443,7 +12958,8 @@ module Aws::Connect
       :integration_association_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12456,7 +12972,8 @@ module Aws::Connect
     class ListUseCasesResponse < Struct.new(
       :use_case_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12474,7 +12991,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12487,7 +13005,8 @@ module Aws::Connect
     class ListUserHierarchyGroupsResponse < Struct.new(
       :user_hierarchy_group_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12510,7 +13029,8 @@ module Aws::Connect
       :user_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12531,7 +13051,8 @@ module Aws::Connect
       :user_proficiency_list,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12549,7 +13070,8 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12562,7 +13084,8 @@ module Aws::Connect
     class ListUsersResponse < Struct.new(
       :user_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12586,7 +13109,8 @@ module Aws::Connect
       :view_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12600,7 +13124,8 @@ module Aws::Connect
     class ListViewVersionsResponse < Struct.new(
       :view_version_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12623,7 +13148,8 @@ module Aws::Connect
       :type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12637,7 +13163,8 @@ module Aws::Connect
     class ListViewsResponse < Struct.new(
       :views_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12647,7 +13174,8 @@ module Aws::Connect
     #   @return [Types::AgentsCriteria]
     class MatchCriteria < Struct.new(
       :agents_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12657,7 +13185,8 @@ module Aws::Connect
     #   @return [String]
     class MaximumResultReturnedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12681,7 +13210,8 @@ module Aws::Connect
       :channel,
       :concurrency,
       :cross_channel_behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12707,7 +13237,8 @@ module Aws::Connect
       :signaling_url,
       :turn_control_url,
       :event_ingestion_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12729,7 +13260,8 @@ module Aws::Connect
       :media_placement,
       :meeting_features,
       :meeting_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12739,7 +13271,8 @@ module Aws::Connect
     #   @return [Types::AudioFeatures]
     class MeetingFeaturesConfiguration < Struct.new(
       :audio,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12753,7 +13286,8 @@ module Aws::Connect
     class MetricDataV2 < Struct.new(
       :metric,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12817,7 +13351,8 @@ module Aws::Connect
       :metric_filter_key,
       :metric_filter_values,
       :negate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12845,7 +13380,8 @@ module Aws::Connect
       :interval,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12863,7 +13399,8 @@ module Aws::Connect
       :dimensions,
       :metric_interval,
       :collections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12884,7 +13421,8 @@ module Aws::Connect
       :name,
       :threshold,
       :metric_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12915,7 +13453,8 @@ module Aws::Connect
       :user_id,
       :allowed_monitor_capabilities,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12928,7 +13467,8 @@ module Aws::Connect
     class MonitorContactResponse < Struct.new(
       :contact_id,
       :contact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12960,7 +13500,8 @@ module Aws::Connect
       :participant_details,
       :attributes,
       :streaming_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12976,7 +13517,8 @@ module Aws::Connect
     class NotificationRecipientType < Struct.new(
       :user_tags,
       :user_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13001,7 +13543,8 @@ module Aws::Connect
       :min_value,
       :max_value,
       :comparison_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13016,7 +13559,8 @@ module Aws::Connect
     class NumberReference < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13045,7 +13589,8 @@ module Aws::Connect
     #   @return [String]
     class NumericQuestionPropertyValueAutomation < Struct.new(
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13059,7 +13604,8 @@ module Aws::Connect
     class OperationalHour < Struct.new(
       :start,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13072,7 +13618,8 @@ module Aws::Connect
     #   @return [Array<Types::EmailAddressInfo>]
     class OutboundAdditionalRecipients < Struct.new(
       :cc_email_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13090,7 +13637,8 @@ module Aws::Connect
       :outbound_caller_id_name,
       :outbound_caller_id_number_id,
       :outbound_flow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13100,7 +13648,8 @@ module Aws::Connect
     #   @return [String]
     class OutboundContactNotPermittedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13110,7 +13659,8 @@ module Aws::Connect
     #   @return [String]
     class OutboundEmailConfig < Struct.new(
       :outbound_email_address_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13128,7 +13678,8 @@ module Aws::Connect
       :message_source_type,
       :templated_message_config,
       :raw_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13146,7 +13697,8 @@ module Aws::Connect
       :subject,
       :body,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13157,7 +13709,8 @@ module Aws::Connect
     #   @return [String]
     class OutputTypeNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13171,7 +13724,8 @@ module Aws::Connect
     class OverrideTimeSlice < Struct.new(
       :hours,
       :minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13195,7 +13749,8 @@ module Aws::Connect
     class ParticipantCapabilities < Struct.new(
       :video,
       :screen_share,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13205,7 +13760,8 @@ module Aws::Connect
     #   @return [String]
     class ParticipantDetails < Struct.new(
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13225,7 +13781,8 @@ module Aws::Connect
       :participant_role,
       :display_name,
       :participant_capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13269,7 +13826,8 @@ module Aws::Connect
       :total_response_time_in_millis,
       :max_response_time_in_millis,
       :last_message_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13294,7 +13852,8 @@ module Aws::Connect
       :participant_role,
       :timer_type,
       :timer_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13313,7 +13872,8 @@ module Aws::Connect
       :participant_timer_action,
       :participant_timer_duration_in_minutes,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ParticipantTimerAction < ParticipantTimerValue; end
@@ -13333,7 +13893,8 @@ module Aws::Connect
     class ParticipantTokenCredentials < Struct.new(
       :participant_token,
       :expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13351,12 +13912,14 @@ module Aws::Connect
       :contact_id,
       :instance_id,
       :contact_flow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PauseContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13389,7 +13952,8 @@ module Aws::Connect
     class PersistentChat < Struct.new(
       :rehydration_type,
       :source_contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13399,7 +13963,8 @@ module Aws::Connect
     #   @return [String]
     class PhoneNumberQuickConnectConfig < Struct.new(
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13434,7 +13999,8 @@ module Aws::Connect
     class PhoneNumberStatus < Struct.new(
       :status,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13460,7 +14026,8 @@ module Aws::Connect
       :phone_number,
       :phone_number_type,
       :phone_number_country_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13482,7 +14049,8 @@ module Aws::Connect
       :values,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13502,7 +14070,8 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :string_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13520,7 +14089,8 @@ module Aws::Connect
       :name,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13531,7 +14101,8 @@ module Aws::Connect
     class PredefinedAttributeValues < Struct.new(
       :string_list,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringList < PredefinedAttributeValues; end
@@ -13544,7 +14115,8 @@ module Aws::Connect
     #   @return [String]
     class ProblemDetail < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13578,7 +14150,8 @@ module Aws::Connect
       :tags,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13600,7 +14173,8 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :string_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13621,7 +14195,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneTagFilter]
     class PromptSearchFilter < Struct.new(
       :tag_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13647,7 +14222,8 @@ module Aws::Connect
       :name,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13659,7 +14235,8 @@ module Aws::Connect
     class PropertyValidationException < Struct.new(
       :message,
       :property_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13677,7 +14254,8 @@ module Aws::Connect
       :property_path,
       :reason,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13694,12 +14272,14 @@ module Aws::Connect
       :user_id,
       :instance_id,
       :agent_status_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutUserStatusResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13713,7 +14293,8 @@ module Aws::Connect
     class QualityMetrics < Struct.new(
       :agent,
       :customer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13767,7 +14348,8 @@ module Aws::Connect
       :tags,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13786,7 +14368,8 @@ module Aws::Connect
     class QueueInfo < Struct.new(
       :id,
       :enqueue_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13796,7 +14379,8 @@ module Aws::Connect
     #   @return [String]
     class QueueInfoInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13811,7 +14395,8 @@ module Aws::Connect
     class QueueQuickConnectConfig < Struct.new(
       :queue_id,
       :contact_flow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13825,7 +14410,8 @@ module Aws::Connect
     class QueueReference < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13856,7 +14442,8 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       :queue_type_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13877,7 +14464,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneTagFilter]
     class QueueSearchFilter < Struct.new(
       :tag_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13907,7 +14495,8 @@ module Aws::Connect
       :queue_type,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13945,7 +14534,8 @@ module Aws::Connect
       :tags,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13968,7 +14558,8 @@ module Aws::Connect
       :user_config,
       :queue_config,
       :phone_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13990,7 +14581,8 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :string_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14011,7 +14603,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneTagFilter]
     class QuickConnectSearchFilter < Struct.new(
       :tag_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14042,7 +14635,8 @@ module Aws::Connect
       :quick_connect_type,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14056,7 +14650,8 @@ module Aws::Connect
     class Range < Struct.new(
       :min_proficiency_level,
       :max_proficiency_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14066,7 +14661,8 @@ module Aws::Connect
     #   @return [Types::TaskTemplateFieldIdentifier]
     class ReadOnlyFieldInfo < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14091,7 +14687,8 @@ module Aws::Connect
       :content_type,
       :attachment_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14101,7 +14698,8 @@ module Aws::Connect
     #   @return [Array<Types::RealTimeContactAnalysisPointOfInterest>]
     class RealTimeContactAnalysisCategoryDetails < Struct.new(
       :points_of_interest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14115,7 +14713,8 @@ module Aws::Connect
     class RealTimeContactAnalysisCharacterInterval < Struct.new(
       :begin_offset_char,
       :end_offset_char,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14132,7 +14731,8 @@ module Aws::Connect
     #   @return [Array<Types::RealTimeContactAnalysisTranscriptItemWithContent>]
     class RealTimeContactAnalysisIssueDetected < Struct.new(
       :transcript_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14143,7 +14743,8 @@ module Aws::Connect
     #   @return [Array<Types::RealTimeContactAnalysisTranscriptItemWithCharacterOffsets>]
     class RealTimeContactAnalysisPointOfInterest < Struct.new(
       :transcript_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14173,7 +14774,8 @@ module Aws::Connect
       :display_name,
       :attachments,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14183,7 +14785,8 @@ module Aws::Connect
     #   @return [Hash<String, Types::RealTimeContactAnalysisCategoryDetails>]
     class RealTimeContactAnalysisSegmentCategories < Struct.new(
       :matched_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14214,7 +14817,8 @@ module Aws::Connect
       :display_name,
       :event_type,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14224,7 +14828,8 @@ module Aws::Connect
     #   @return [Array<Types::RealTimeContactAnalysisIssueDetected>]
     class RealTimeContactAnalysisSegmentIssues < Struct.new(
       :issues_detected,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14269,7 +14874,8 @@ module Aws::Connect
       :content,
       :status,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14312,7 +14918,8 @@ module Aws::Connect
       :time,
       :redaction,
       :sentiment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14325,7 +14932,8 @@ module Aws::Connect
     class RealTimeContactAnalysisTimeData < Struct.new(
       :absolute_time,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AbsoluteTime < RealTimeContactAnalysisTimeData; end
@@ -14340,7 +14948,8 @@ module Aws::Connect
     #   @return [Array<Types::RealTimeContactAnalysisCharacterInterval>]
     class RealTimeContactAnalysisTranscriptItemRedaction < Struct.new(
       :character_offsets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14357,7 +14966,8 @@ module Aws::Connect
     class RealTimeContactAnalysisTranscriptItemWithCharacterOffsets < Struct.new(
       :id,
       :character_offsets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14378,7 +14988,8 @@ module Aws::Connect
       :content,
       :id,
       :character_offsets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14409,7 +15020,8 @@ module Aws::Connect
       :attachments,
       :post_contact_summary,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Transcript < RealtimeContactAnalysisSegment; end
@@ -14486,7 +15098,8 @@ module Aws::Connect
       :stop_timestamp,
       :status,
       :deletion_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14515,7 +15128,8 @@ module Aws::Connect
       :status,
       :arn,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14563,7 +15177,8 @@ module Aws::Connect
       :date,
       :email,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Url < ReferenceSummary; end
@@ -14588,7 +15203,8 @@ module Aws::Connect
     class ReleasePhoneNumberRequest < Struct.new(
       :phone_number_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14612,7 +15228,8 @@ module Aws::Connect
       :replica_region,
       :client_token,
       :replica_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14627,7 +15244,8 @@ module Aws::Connect
     class ReplicateInstanceResponse < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14657,7 +15275,8 @@ module Aws::Connect
       :replication_status_summary_list,
       :source_region,
       :global_sign_in_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14681,7 +15300,8 @@ module Aws::Connect
       :region,
       :replication_status,
       :replication_status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14691,7 +15311,8 @@ module Aws::Connect
     #   @return [Types::TaskTemplateFieldIdentifier]
     class RequiredFieldInfo < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14700,7 +15321,8 @@ module Aws::Connect
     #   @return [String]
     class ResourceConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14720,7 +15342,8 @@ module Aws::Connect
       :message,
       :resource_type,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14730,7 +15353,8 @@ module Aws::Connect
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14739,7 +15363,8 @@ module Aws::Connect
     #   @return [String]
     class ResourceNotReadyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14749,7 +15374,8 @@ module Aws::Connect
     #   @return [Types::TagSearchCondition]
     class ResourceTagsSearchCriteria < Struct.new(
       :tag_search_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14771,12 +15397,14 @@ module Aws::Connect
       :contact_id,
       :initial_contact_id,
       :contact_recording_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ResumeContactRecordingResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14794,12 +15422,14 @@ module Aws::Connect
       :contact_id,
       :instance_id,
       :contact_flow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ResumeContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14823,7 +15453,8 @@ module Aws::Connect
       :steps,
       :activation_timestamp,
       :index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14836,7 +15467,8 @@ module Aws::Connect
     #   @return [Array<Types::RoutingCriteriaInputStep>]
     class RoutingCriteriaInput < Struct.new(
       :steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14851,7 +15483,8 @@ module Aws::Connect
     class RoutingCriteriaInputStep < Struct.new(
       :expiry,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14863,7 +15496,8 @@ module Aws::Connect
     #   @return [Integer]
     class RoutingCriteriaInputStepExpiry < Struct.new(
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14932,7 +15566,8 @@ module Aws::Connect
       :last_modified_region,
       :is_default,
       :associated_queue_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14960,7 +15595,8 @@ module Aws::Connect
       :queue_reference,
       :priority,
       :delay,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14999,7 +15635,8 @@ module Aws::Connect
       :priority,
       :delay,
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15019,7 +15656,8 @@ module Aws::Connect
     class RoutingProfileQueueReference < Struct.new(
       :queue_id,
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15033,7 +15671,8 @@ module Aws::Connect
     class RoutingProfileReference < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15061,7 +15700,8 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :string_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15082,7 +15722,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneTagFilter]
     class RoutingProfileSearchFilter < Struct.new(
       :tag_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15108,7 +15749,8 @@ module Aws::Connect
       :name,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15158,7 +15800,8 @@ module Aws::Connect
       :last_updated_time,
       :last_updated_by,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15228,7 +15871,8 @@ module Aws::Connect
       :assign_sla_action,
       :end_associated_tasks_action,
       :submit_auto_evaluation_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15266,7 +15910,8 @@ module Aws::Connect
       :action_summaries,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15283,7 +15928,8 @@ module Aws::Connect
     class RuleTriggerEventSource < Struct.new(
       :event_source_name,
       :integration_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15301,7 +15947,8 @@ module Aws::Connect
       :bucket_name,
       :bucket_prefix,
       :encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15328,7 +15975,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15345,7 +15993,8 @@ module Aws::Connect
       :agent_statuses,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15381,7 +16030,8 @@ module Aws::Connect
       :phone_number_prefix,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15394,7 +16044,8 @@ module Aws::Connect
     class SearchAvailablePhoneNumbersResponse < Struct.new(
       :next_token,
       :available_numbers_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15426,7 +16077,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15443,7 +16095,8 @@ module Aws::Connect
       :contact_flow_modules,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15475,7 +16128,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15492,7 +16146,8 @@ module Aws::Connect
       :contact_flows,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15523,7 +16178,8 @@ module Aws::Connect
       :max_results,
       :next_token,
       :sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15540,7 +16196,8 @@ module Aws::Connect
       :contacts,
       :next_token,
       :total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15558,7 +16215,8 @@ module Aws::Connect
       :type,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15603,7 +16261,8 @@ module Aws::Connect
       :queue_ids,
       :searchable_contact_attributes,
       :searchable_segment_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15629,7 +16288,8 @@ module Aws::Connect
       :next_token,
       :search_criteria,
       :search_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15646,7 +16306,8 @@ module Aws::Connect
       :next_token,
       :email_addresses,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15672,7 +16333,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15690,7 +16352,8 @@ module Aws::Connect
       :hours_of_operation_overrides,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15716,7 +16379,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15733,7 +16397,8 @@ module Aws::Connect
       :hours_of_operations,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15756,7 +16421,8 @@ module Aws::Connect
       :next_token,
       :max_results,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15774,7 +16440,8 @@ module Aws::Connect
       :predefined_attributes,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15800,7 +16467,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15817,7 +16485,8 @@ module Aws::Connect
       :prompts,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15848,7 +16517,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15865,7 +16535,8 @@ module Aws::Connect
       :queues,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15891,7 +16562,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15908,7 +16580,8 @@ module Aws::Connect
       :quick_connects,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15972,7 +16645,8 @@ module Aws::Connect
       :next_token,
       :max_results,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15985,7 +16659,8 @@ module Aws::Connect
     class SearchResourceTagsResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16016,7 +16691,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16033,7 +16709,8 @@ module Aws::Connect
       :routing_profiles,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16068,7 +16745,8 @@ module Aws::Connect
       :max_results,
       :search_criteria,
       :search_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16085,7 +16763,8 @@ module Aws::Connect
       :security_profiles,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16112,7 +16791,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16129,7 +16809,8 @@ module Aws::Connect
       :user_hierarchy_groups,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16160,7 +16841,8 @@ module Aws::Connect
       :max_results,
       :search_filter,
       :search_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16177,7 +16859,8 @@ module Aws::Connect
       :users,
       :next_token,
       :approximate_total_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16209,7 +16892,8 @@ module Aws::Connect
       :state,
       :name_starts_with,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16222,7 +16906,8 @@ module Aws::Connect
     class SearchVocabulariesResponse < Struct.new(
       :vocabulary_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16239,7 +16924,8 @@ module Aws::Connect
     class SearchableContactAttributes < Struct.new(
       :criteria,
       :match_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16254,7 +16940,8 @@ module Aws::Connect
     class SearchableContactAttributesCriteria < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16269,7 +16956,8 @@ module Aws::Connect
     class SearchableSegmentAttributes < Struct.new(
       :criteria,
       :match_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16284,7 +16972,8 @@ module Aws::Connect
     class SearchableSegmentAttributesCriteria < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16302,7 +16991,8 @@ module Aws::Connect
       :association_id,
       :key,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16357,7 +17047,8 @@ module Aws::Connect
       :last_modified_region,
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16380,7 +17071,8 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :string_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16410,7 +17102,8 @@ module Aws::Connect
       :security_profile_name,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16436,7 +17129,8 @@ module Aws::Connect
       :name,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16457,7 +17151,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneTagFilter]
     class SecurityProfilesSearchFilter < Struct.new(
       :tag_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16476,7 +17171,8 @@ module Aws::Connect
       :value_string,
       :value_map,
       :value_integer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16507,7 +17203,8 @@ module Aws::Connect
       :subtype,
       :event,
       :new_session_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16522,7 +17219,8 @@ module Aws::Connect
     class SendChatIntegrationEventResponse < Struct.new(
       :initial_contact_id,
       :new_chat_created,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16553,7 +17251,8 @@ module Aws::Connect
       :content,
       :content_type,
       :recipient,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16596,12 +17295,14 @@ module Aws::Connect
       :traffic_type,
       :source_campaign,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SendOutboundEmailResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16614,7 +17315,8 @@ module Aws::Connect
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16625,7 +17327,8 @@ module Aws::Connect
     class ServiceQuotaExceededExceptionReason < Struct.new(
       :attached_file_service_quota_exceeded_exception_reason,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AttachedFileServiceQuotaExceededExceptionReason < ServiceQuotaExceededExceptionReason; end
@@ -16639,7 +17342,8 @@ module Aws::Connect
     #   @return [Array<Types::SignInDistribution>]
     class SignInConfig < Struct.new(
       :distributions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16653,7 +17357,8 @@ module Aws::Connect
     class SignInDistribution < Struct.new(
       :region,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -16680,7 +17385,8 @@ module Aws::Connect
       :category,
       :condition,
       :option_ref_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16694,7 +17400,8 @@ module Aws::Connect
     class Sort < Struct.new(
       :field_name,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16708,7 +17415,8 @@ module Aws::Connect
     class SourceCampaign < Struct.new(
       :campaign_id,
       :outbound_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16761,7 +17469,8 @@ module Aws::Connect
       :associated_resource_arn,
       :created_by,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16793,7 +17502,8 @@ module Aws::Connect
       :file_status,
       :created_by,
       :upload_url_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16889,7 +17599,8 @@ module Aws::Connect
       :related_contact_id,
       :segment_attributes,
       :customer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16913,7 +17624,8 @@ module Aws::Connect
       :participant_id,
       :participant_token,
       :continued_from_contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16937,7 +17649,8 @@ module Aws::Connect
       :contact_id,
       :evaluation_form_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16950,7 +17663,8 @@ module Aws::Connect
     class StartContactEvaluationResponse < Struct.new(
       :evaluation_id,
       :evaluation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16972,12 +17686,14 @@ module Aws::Connect
       :contact_id,
       :initial_contact_id,
       :voice_recording_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartContactRecordingResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17002,7 +17718,8 @@ module Aws::Connect
       :contact_id,
       :chat_streaming_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17011,7 +17728,8 @@ module Aws::Connect
     #   @return [String]
     class StartContactStreamingResponse < Struct.new(
       :streaming_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17100,7 +17818,8 @@ module Aws::Connect
       :attributes,
       :segment_attributes,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17109,7 +17828,8 @@ module Aws::Connect
     #   @return [String]
     class StartEmailContactResponse < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17235,7 +17955,8 @@ module Aws::Connect
       :related_contact_id,
       :supported_messaging_content_types,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17244,7 +17965,8 @@ module Aws::Connect
     #   @return [String]
     class StartOutboundChatContactResponse < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17280,7 +18002,8 @@ module Aws::Connect
       :additional_recipients,
       :email_message,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17289,7 +18012,8 @@ module Aws::Connect
     #   @return [String]
     class StartOutboundEmailContactResponse < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17380,7 +18104,8 @@ module Aws::Connect
       :answer_machine_detection_config,
       :campaign_id,
       :traffic_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17389,7 +18114,8 @@ module Aws::Connect
     #   @return [String]
     class StartOutboundVoiceContactResponse < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17409,12 +18135,14 @@ module Aws::Connect
       :client_token,
       :instance_id,
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartScreenSharingResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17511,7 +18239,8 @@ module Aws::Connect
       :quick_connect_id,
       :related_contact_id,
       :segment_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17520,7 +18249,8 @@ module Aws::Connect
     #   @return [String]
     class StartTaskContactResponse < Struct.new(
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17579,7 +18309,8 @@ module Aws::Connect
       :related_contact_id,
       :references,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17603,7 +18334,8 @@ module Aws::Connect
       :contact_id,
       :participant_id,
       :participant_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17621,7 +18353,8 @@ module Aws::Connect
       :state,
       :state_start_timestamp,
       :state_end_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17639,7 +18372,8 @@ module Aws::Connect
       :expiry,
       :expression,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17661,12 +18395,14 @@ module Aws::Connect
       :contact_id,
       :initial_contact_id,
       :contact_recording_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopContactRecordingResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17684,12 +18420,14 @@ module Aws::Connect
       :contact_id,
       :instance_id,
       :disconnect_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17707,12 +18445,14 @@ module Aws::Connect
       :instance_id,
       :contact_id,
       :streaming_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopContactStreamingResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17730,7 +18470,8 @@ module Aws::Connect
       :field_name,
       :value,
       :comparison_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17745,7 +18486,8 @@ module Aws::Connect
     class StringReference < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17755,7 +18497,8 @@ module Aws::Connect
     #   @return [String]
     class SubmitAutoEvaluationActionDefinition < Struct.new(
       :evaluation_form_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17776,7 +18519,8 @@ module Aws::Connect
       :evaluation_id,
       :answers,
       :notes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17789,7 +18533,8 @@ module Aws::Connect
     class SubmitContactEvaluationResponse < Struct.new(
       :evaluation_id,
       :evaluation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17804,7 +18549,8 @@ module Aws::Connect
     class SuccessfulRequest < Struct.new(
       :request_identifier,
       :contact_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17826,12 +18572,14 @@ module Aws::Connect
       :contact_id,
       :initial_contact_id,
       :contact_recording_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SuspendContactRecordingResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17846,7 +18594,8 @@ module Aws::Connect
     class TagCondition < Struct.new(
       :tag_key,
       :tag_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17867,12 +18616,14 @@ module Aws::Connect
       :contact_id,
       :instance_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17885,7 +18636,8 @@ module Aws::Connect
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17909,7 +18661,8 @@ module Aws::Connect
       :tag_value,
       :tag_key_comparison_type,
       :tag_value_comparison_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17923,7 +18676,8 @@ module Aws::Connect
     class TagSet < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17950,7 +18704,8 @@ module Aws::Connect
       :description,
       :contact_flow_id,
       :references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17968,7 +18723,8 @@ module Aws::Connect
       :required_fields,
       :read_only_fields,
       :invisible_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17982,7 +18738,8 @@ module Aws::Connect
     class TaskTemplateDefaultFieldValue < Struct.new(
       :id,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17992,7 +18749,8 @@ module Aws::Connect
     #   @return [Array<Types::TaskTemplateDefaultFieldValue>]
     class TaskTemplateDefaults < Struct.new(
       :default_field_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18014,7 +18772,8 @@ module Aws::Connect
       :description,
       :type,
       :single_select_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18024,7 +18783,8 @@ module Aws::Connect
     #   @return [String]
     class TaskTemplateFieldIdentifier < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18060,7 +18820,8 @@ module Aws::Connect
       :status,
       :last_modified_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18070,7 +18831,8 @@ module Aws::Connect
     #   @return [Array<Types::Distribution>]
     class TelephonyConfig < Struct.new(
       :distributions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18088,7 +18850,8 @@ module Aws::Connect
     class TemplateAttributes < Struct.new(
       :custom_attributes,
       :customer_profile_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18108,7 +18871,8 @@ module Aws::Connect
       :knowledge_base_id,
       :message_template_id,
       :template_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18122,7 +18886,8 @@ module Aws::Connect
     class Threshold < Struct.new(
       :comparison,
       :threshold_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18137,7 +18902,8 @@ module Aws::Connect
     class ThresholdV2 < Struct.new(
       :comparison,
       :threshold_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18146,7 +18912,8 @@ module Aws::Connect
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18155,7 +18922,8 @@ module Aws::Connect
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18235,7 +19003,8 @@ module Aws::Connect
       :status,
       :tags,
       :is_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18304,7 +19073,8 @@ module Aws::Connect
       :instance_arn,
       :status,
       :is_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18319,7 +19089,8 @@ module Aws::Connect
     #   @return [String]
     class TrafficDistributionGroupUserSummary < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18335,7 +19106,8 @@ module Aws::Connect
     class Transcript < Struct.new(
       :criteria,
       :match_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18355,7 +19127,8 @@ module Aws::Connect
       :participant_role,
       :search_text,
       :match_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18387,7 +19160,8 @@ module Aws::Connect
       :user_id,
       :contact_flow_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18400,7 +19174,8 @@ module Aws::Connect
     class TransferContactResponse < Struct.new(
       :contact_id,
       :contact_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18418,12 +19193,14 @@ module Aws::Connect
       :contact_id,
       :instance_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18436,7 +19213,8 @@ module Aws::Connect
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18469,7 +19247,8 @@ module Aws::Connect
       :state,
       :display_order,
       :reset_order_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18511,7 +19290,8 @@ module Aws::Connect
       :allowed_ips,
       :blocked_ips,
       :periodic_session_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18521,7 +19301,8 @@ module Aws::Connect
     #   @return [Array<Types::FieldValue>]
     class UpdateCaseActionDefinition < Struct.new(
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18557,12 +19338,14 @@ module Aws::Connect
       :initial_contact_id,
       :instance_id,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18583,7 +19366,8 @@ module Aws::Connect
       :evaluation_id,
       :answers,
       :notes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18596,7 +19380,8 @@ module Aws::Connect
     class UpdateContactEvaluationResponse < Struct.new(
       :evaluation_id,
       :evaluation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18615,12 +19400,14 @@ module Aws::Connect
       :instance_id,
       :contact_flow_id,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactFlowContentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18645,12 +19432,14 @@ module Aws::Connect
       :name,
       :description,
       :contact_flow_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactFlowMetadataResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18668,12 +19457,14 @@ module Aws::Connect
       :instance_id,
       :contact_flow_module_id,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactFlowModuleContentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18698,12 +19489,14 @@ module Aws::Connect
       :name,
       :description,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactFlowModuleMetadataResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18724,12 +19517,14 @@ module Aws::Connect
       :contact_flow_id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactFlowNameResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18795,12 +19590,14 @@ module Aws::Connect
       :user_info,
       :customer_endpoint,
       :system_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18830,12 +19627,14 @@ module Aws::Connect
       :queue_time_adjustment_seconds,
       :queue_priority,
       :routing_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactRoutingDataResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18852,12 +19651,14 @@ module Aws::Connect
       :instance_id,
       :contact_id,
       :scheduled_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateContactScheduleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18885,7 +19686,8 @@ module Aws::Connect
       :description,
       :display_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18898,7 +19700,8 @@ module Aws::Connect
     class UpdateEmailAddressMetadataResponse < Struct.new(
       :email_address_id,
       :email_address_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18942,7 +19745,8 @@ module Aws::Connect
       :items,
       :scoring_strategy,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18959,7 +19763,8 @@ module Aws::Connect
       :evaluation_form_id,
       :evaluation_form_arn,
       :evaluation_form_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19002,7 +19807,8 @@ module Aws::Connect
       :config,
       :effective_from,
       :effective_till,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19031,7 +19837,8 @@ module Aws::Connect
       :description,
       :time_zone,
       :config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19059,7 +19866,8 @@ module Aws::Connect
       :attribute_type,
       :value,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19087,7 +19895,8 @@ module Aws::Connect
       :resource_type,
       :storage_config,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19118,12 +19927,14 @@ module Aws::Connect
       :code,
       :error,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateParticipantAuthenticationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19134,7 +19945,8 @@ module Aws::Connect
     class UpdateParticipantRoleConfigChannelInfo < Struct.new(
       :chat,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Chat < UpdateParticipantRoleConfigChannelInfo; end
@@ -19154,12 +19966,14 @@ module Aws::Connect
       :instance_id,
       :contact_id,
       :channel_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateParticipantRoleConfigResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19179,7 +19993,8 @@ module Aws::Connect
       :phone_number_id,
       :phone_number_description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19205,7 +20020,8 @@ module Aws::Connect
       :target_arn,
       :instance_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19218,7 +20034,8 @@ module Aws::Connect
     class UpdatePhoneNumberResponse < Struct.new(
       :phone_number_id,
       :phone_number_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19236,7 +20053,8 @@ module Aws::Connect
       :instance_id,
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19263,7 +20081,8 @@ module Aws::Connect
       :name,
       :description,
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19276,7 +20095,8 @@ module Aws::Connect
     class UpdatePromptResponse < Struct.new(
       :prompt_arn,
       :prompt_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19293,7 +20113,8 @@ module Aws::Connect
       :instance_id,
       :queue_id,
       :hours_of_operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19310,7 +20131,8 @@ module Aws::Connect
       :instance_id,
       :queue_id,
       :max_contacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19331,7 +20153,8 @@ module Aws::Connect
       :queue_id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19348,7 +20171,8 @@ module Aws::Connect
       :instance_id,
       :queue_id,
       :outbound_caller_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19365,7 +20189,8 @@ module Aws::Connect
       :instance_id,
       :queue_id,
       :outbound_email_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19382,7 +20207,8 @@ module Aws::Connect
       :instance_id,
       :queue_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19399,7 +20225,8 @@ module Aws::Connect
       :instance_id,
       :quick_connect_id,
       :quick_connect_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19420,7 +20247,8 @@ module Aws::Connect
       :quick_connect_id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19439,7 +20267,8 @@ module Aws::Connect
       :instance_id,
       :routing_profile_id,
       :agent_availability_timer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19456,7 +20285,8 @@ module Aws::Connect
       :instance_id,
       :routing_profile_id,
       :media_concurrencies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19473,7 +20303,8 @@ module Aws::Connect
       :instance_id,
       :routing_profile_id,
       :default_outbound_queue_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19494,7 +20325,8 @@ module Aws::Connect
       :routing_profile_id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19513,7 +20345,8 @@ module Aws::Connect
       :instance_id,
       :routing_profile_id,
       :queue_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19545,7 +20378,8 @@ module Aws::Connect
       :function,
       :actions,
       :publish_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19588,7 +20422,8 @@ module Aws::Connect
       :applications,
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19636,7 +20471,8 @@ module Aws::Connect
       :defaults,
       :status,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19696,7 +20532,8 @@ module Aws::Connect
       :status,
       :last_modified_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19720,12 +20557,14 @@ module Aws::Connect
       :telephony_config,
       :sign_in_config,
       :agent_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateTrafficDistributionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19742,7 +20581,8 @@ module Aws::Connect
       :name,
       :hierarchy_group_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19759,7 +20599,8 @@ module Aws::Connect
       :hierarchy_group_id,
       :user_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19772,7 +20613,8 @@ module Aws::Connect
     class UpdateUserHierarchyStructureRequest < Struct.new(
       :hierarchy_structure,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19789,7 +20631,8 @@ module Aws::Connect
       :identity_info,
       :user_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19806,7 +20649,8 @@ module Aws::Connect
       :phone_config,
       :user_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19825,7 +20669,8 @@ module Aws::Connect
       :instance_id,
       :user_id,
       :user_proficiencies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19842,7 +20687,8 @@ module Aws::Connect
       :routing_profile_id,
       :user_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19859,7 +20705,8 @@ module Aws::Connect
       :security_profile_ids,
       :user_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19885,7 +20732,8 @@ module Aws::Connect
       :view_id,
       :status,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19894,7 +20742,8 @@ module Aws::Connect
     #   @return [Types::View]
     class UpdateViewContentResponse < Struct.new(
       :view,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19917,12 +20766,14 @@ module Aws::Connect
       :view_id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateViewMetadataResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19942,7 +20793,8 @@ module Aws::Connect
       :url,
       :url_expiry,
       :headers_to_include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19956,7 +20808,8 @@ module Aws::Connect
     class UrlReference < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19977,7 +20830,8 @@ module Aws::Connect
       :use_case_id,
       :use_case_arn,
       :use_case_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20032,7 +20886,8 @@ module Aws::Connect
       :tags,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20080,7 +20935,8 @@ module Aws::Connect
       :active_slots_by_channel,
       :contacts,
       :next_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20107,7 +20963,8 @@ module Aws::Connect
       :routing_profiles,
       :agents,
       :user_hierarchy_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20129,7 +20986,8 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :string_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20150,7 +21008,8 @@ module Aws::Connect
     #   @return [Types::ControlPlaneAttributeFilter]
     class UserHierarchyGroupSearchFilter < Struct.new(
       :attribute_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20197,7 +21056,8 @@ module Aws::Connect
       :email,
       :secondary_email,
       :mobile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20211,7 +21071,8 @@ module Aws::Connect
     class UserIdentityInfoLite < Struct.new(
       :first_name,
       :last_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20221,7 +21082,8 @@ module Aws::Connect
     #   @return [String]
     class UserInfo < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20230,7 +21092,8 @@ module Aws::Connect
     #   @return [String]
     class UserNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20259,7 +21122,8 @@ module Aws::Connect
       :auto_accept,
       :after_contact_work_time_limit,
       :desk_phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -20285,7 +21149,8 @@ module Aws::Connect
       :attribute_name,
       :attribute_value,
       :level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -20304,7 +21169,8 @@ module Aws::Connect
     class UserProficiencyDisassociate < Struct.new(
       :attribute_name,
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20319,7 +21185,8 @@ module Aws::Connect
     class UserQuickConnectConfig < Struct.new(
       :user_id,
       :contact_flow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20333,7 +21200,8 @@ module Aws::Connect
     class UserReference < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20370,7 +21238,8 @@ module Aws::Connect
       :string_condition,
       :list_condition,
       :hierarchy_group_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20412,7 +21281,8 @@ module Aws::Connect
     class UserSearchFilter < Struct.new(
       :tag_filter,
       :user_attribute_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20458,7 +21328,8 @@ module Aws::Connect
       :security_profile_ids,
       :tags,
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20484,7 +21355,8 @@ module Aws::Connect
       :username,
       :last_modified_time,
       :last_modified_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20545,7 +21417,8 @@ module Aws::Connect
       :created_time,
       :last_modified_time,
       :view_content_sha256,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -20569,7 +21442,8 @@ module Aws::Connect
       :input_schema,
       :template,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20584,7 +21458,8 @@ module Aws::Connect
     class ViewInputContent < Struct.new(
       :template,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20615,7 +21490,8 @@ module Aws::Connect
       :type,
       :status,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20649,7 +21525,8 @@ module Aws::Connect
       :type,
       :version,
       :version_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -20702,7 +21579,8 @@ module Aws::Connect
       :failure_reason,
       :content,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20738,7 +21616,8 @@ module Aws::Connect
       :state,
       :last_modified_time,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20753,7 +21632,8 @@ module Aws::Connect
     class VoiceRecordingConfiguration < Struct.new(
       :voice_recording_track,
       :ivr_recording_track,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20763,7 +21643,8 @@ module Aws::Connect
     #   @return [String]
     class WisdomInfo < Struct.new(
       :session_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

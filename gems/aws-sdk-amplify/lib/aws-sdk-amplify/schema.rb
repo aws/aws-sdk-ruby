@@ -1230,7 +1230,6 @@ module Aws::Amplify
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/webhooks/{webhookId}", "code" => 200}}
       end)
-
     end
 
     class << self

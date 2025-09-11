@@ -170,7 +170,6 @@ module Aws::SageMakerRuntime
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationError)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/endpoints/{EndpointName}/invocations-response-stream", "code" => 200}}
       end)
-
     end
 
     class << self

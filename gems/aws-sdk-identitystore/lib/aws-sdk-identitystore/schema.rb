@@ -605,7 +605,6 @@ module Aws::Identitystore
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {}
       end)
-
     end
 
     class << self

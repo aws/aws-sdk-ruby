@@ -40,7 +40,7 @@ module Aws::CleanRooms
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CleanRooms::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::CleanRooms
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CleanRooms::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::CleanRooms
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CleanRooms::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::CleanRooms
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CleanRooms::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -122,7 +122,7 @@ module Aws::CleanRooms
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CleanRooms::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -145,7 +145,7 @@ module Aws::CleanRooms
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CleanRooms::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -158,7 +158,7 @@ module Aws::CleanRooms
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CleanRooms::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

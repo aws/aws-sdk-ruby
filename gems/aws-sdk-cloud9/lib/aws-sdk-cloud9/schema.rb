@@ -428,7 +428,6 @@ module Aws::Cloud9
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

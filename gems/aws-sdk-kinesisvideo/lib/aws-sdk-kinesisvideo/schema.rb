@@ -912,7 +912,6 @@ module Aws::KinesisVideo
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionMismatchException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/updateStream", "code" => 200}}
       end)
-
     end
 
     class << self

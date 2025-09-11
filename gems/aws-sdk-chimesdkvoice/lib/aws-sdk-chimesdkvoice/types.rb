@@ -14,7 +14,8 @@ module Aws::ChimeSDKVoice
     class AccessDeniedException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +63,8 @@ module Aws::ChimeSDKVoice
       :postal_code,
       :postal_code_plus4,
       :country,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +82,8 @@ module Aws::ChimeSDKVoice
       :voice_connector_group_id,
       :e164_phone_numbers,
       :force_associate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +92,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<Types::PhoneNumberError>]
     class AssociatePhoneNumbersWithVoiceConnectorGroupResponse < Struct.new(
       :phone_number_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +110,8 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :e164_phone_numbers,
       :force_associate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +121,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<Types::PhoneNumberError>]
     class AssociatePhoneNumbersWithVoiceConnectorResponse < Struct.new(
       :phone_number_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +134,8 @@ module Aws::ChimeSDKVoice
     class BadRequestException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -137,7 +144,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<String>]
     class BatchDeletePhoneNumberRequest < Struct.new(
       :phone_number_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +154,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<Types::PhoneNumberError>]
     class BatchDeletePhoneNumberResponse < Struct.new(
       :phone_number_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +164,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<Types::UpdatePhoneNumberRequestItem>]
     class BatchUpdatePhoneNumberRequest < Struct.new(
       :update_phone_number_request_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +174,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<Types::PhoneNumberError>]
     class BatchUpdatePhoneNumberResponse < Struct.new(
       :phone_number_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +193,8 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :transaction_id,
       :is_caller,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +228,8 @@ module Aws::ChimeSDKVoice
       :postal_code,
       :postal_code_plus4,
       :country,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +241,8 @@ module Aws::ChimeSDKVoice
     class ConflictException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +259,8 @@ module Aws::ChimeSDKVoice
       :product_type,
       :e164_phone_numbers,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +269,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::PhoneNumberOrder]
     class CreatePhoneNumberOrderResponse < Struct.new(
       :phone_number_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +308,8 @@ module Aws::ChimeSDKVoice
       :number_selection_behavior,
       :geo_match_level,
       :geo_match_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +318,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::ProxySession]
     class CreateProxySessionResponse < Struct.new(
       :proxy_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -329,7 +347,8 @@ module Aws::ChimeSDKVoice
       :sip_media_application_id,
       :sip_headers,
       :arguments_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +357,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipMediaApplicationCall]
     class CreateSipMediaApplicationCallResponse < Struct.new(
       :sip_media_application_call,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -359,7 +379,8 @@ module Aws::ChimeSDKVoice
       :name,
       :endpoints,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +389,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipMediaApplication]
     class CreateSipMediaApplicationResponse < Struct.new(
       :sip_media_application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -403,7 +425,8 @@ module Aws::ChimeSDKVoice
       :trigger_value,
       :disabled,
       :target_applications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +435,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipRule]
     class CreateSipRuleResponse < Struct.new(
       :sip_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -425,7 +449,8 @@ module Aws::ChimeSDKVoice
     class CreateVoiceConnectorGroupRequest < Struct.new(
       :name,
       :voice_connector_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +459,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceConnectorGroup]
     class CreateVoiceConnectorGroupResponse < Struct.new(
       :voice_connector_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +514,8 @@ module Aws::ChimeSDKVoice
       :require_encryption,
       :tags,
       :integration_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +524,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceConnector]
     class CreateVoiceConnectorResponse < Struct.new(
       :voice_connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +550,8 @@ module Aws::ChimeSDKVoice
       :server_side_encryption_configuration,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -531,7 +560,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceProfileDomain]
     class CreateVoiceProfileDomainResponse < Struct.new(
       :voice_profile_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +570,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class CreateVoiceProfileRequest < Struct.new(
       :speaker_search_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -549,7 +580,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceProfile]
     class CreateVoiceProfileResponse < Struct.new(
       :voice_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +596,8 @@ module Aws::ChimeSDKVoice
     class Credential < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +617,8 @@ module Aws::ChimeSDKVoice
       :emergency_phone_number,
       :test_phone_number,
       :calling_country,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -593,7 +627,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeletePhoneNumberRequest < Struct.new(
       :phone_number_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +641,8 @@ module Aws::ChimeSDKVoice
     class DeleteProxySessionRequest < Struct.new(
       :voice_connector_id,
       :proxy_session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +651,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteSipMediaApplicationRequest < Struct.new(
       :sip_media_application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +661,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteSipRuleRequest < Struct.new(
       :sip_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +671,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +682,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteVoiceConnectorExternalSystemsConfigurationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +692,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +702,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteVoiceConnectorOriginationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +712,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteVoiceConnectorProxyRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -679,7 +722,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteVoiceConnectorRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +732,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteVoiceConnectorStreamingConfigurationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +747,8 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorTerminationCredentialsRequest < Struct.new(
       :voice_connector_id,
       :usernames,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -711,7 +757,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteVoiceConnectorTerminationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +767,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteVoiceProfileDomainRequest < Struct.new(
       :voice_profile_domain_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +777,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class DeleteVoiceProfileRequest < Struct.new(
       :voice_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -742,7 +791,8 @@ module Aws::ChimeSDKVoice
     class DisassociatePhoneNumbersFromVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id,
       :e164_phone_numbers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +802,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<Types::PhoneNumberError>]
     class DisassociatePhoneNumbersFromVoiceConnectorGroupResponse < Struct.new(
       :phone_number_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +816,8 @@ module Aws::ChimeSDKVoice
     class DisassociatePhoneNumbersFromVoiceConnectorRequest < Struct.new(
       :voice_connector_id,
       :e164_phone_numbers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +827,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<Types::PhoneNumberError>]
     class DisassociatePhoneNumbersFromVoiceConnectorResponse < Struct.new(
       :phone_number_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +840,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<Types::DNISEmergencyCallingConfiguration>]
     class EmergencyCallingConfiguration < Struct.new(
       :dnis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +856,8 @@ module Aws::ChimeSDKVoice
     class ExternalSystemsConfiguration < Struct.new(
       :session_border_controller_types,
       :contact_center_system_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,7 +869,8 @@ module Aws::ChimeSDKVoice
     class ForbiddenException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +884,8 @@ module Aws::ChimeSDKVoice
     class GeoMatchParams < Struct.new(
       :country,
       :area_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +894,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceConnectorSettings]
     class GetGlobalSettingsResponse < Struct.new(
       :voice_connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -846,7 +904,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetPhoneNumberOrderRequest < Struct.new(
       :phone_number_order_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +914,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::PhoneNumberOrder]
     class GetPhoneNumberOrderResponse < Struct.new(
       :phone_number_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +924,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetPhoneNumberRequest < Struct.new(
       :phone_number_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +934,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::PhoneNumber]
     class GetPhoneNumberResponse < Struct.new(
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +948,8 @@ module Aws::ChimeSDKVoice
     class GetPhoneNumberSettingsResponse < Struct.new(
       :calling_name,
       :calling_name_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -899,7 +962,8 @@ module Aws::ChimeSDKVoice
     class GetProxySessionRequest < Struct.new(
       :voice_connector_id,
       :proxy_session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +972,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::ProxySession]
     class GetProxySessionResponse < Struct.new(
       :proxy_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +982,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetSipMediaApplicationAlexaSkillConfigurationRequest < Struct.new(
       :sip_media_application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -926,7 +992,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipMediaApplicationAlexaSkillConfiguration]
     class GetSipMediaApplicationAlexaSkillConfigurationResponse < Struct.new(
       :sip_media_application_alexa_skill_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -935,7 +1002,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetSipMediaApplicationLoggingConfigurationRequest < Struct.new(
       :sip_media_application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -944,7 +1012,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipMediaApplicationLoggingConfiguration]
     class GetSipMediaApplicationLoggingConfigurationResponse < Struct.new(
       :sip_media_application_logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +1022,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetSipMediaApplicationRequest < Struct.new(
       :sip_media_application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1032,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipMediaApplication]
     class GetSipMediaApplicationResponse < Struct.new(
       :sip_media_application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -971,7 +1042,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetSipRuleRequest < Struct.new(
       :sip_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1052,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipRule]
     class GetSipRuleResponse < Struct.new(
       :sip_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,7 +1066,8 @@ module Aws::ChimeSDKVoice
     class GetSpeakerSearchTaskRequest < Struct.new(
       :voice_connector_id,
       :speaker_search_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1076,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SpeakerSearchTask]
     class GetSpeakerSearchTaskResponse < Struct.new(
       :speaker_search_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1086,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1096,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::EmergencyCallingConfiguration]
     class GetVoiceConnectorEmergencyCallingConfigurationResponse < Struct.new(
       :emergency_calling_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1107,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceConnectorExternalSystemsConfigurationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1117,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::ExternalSystemsConfiguration]
     class GetVoiceConnectorExternalSystemsConfigurationResponse < Struct.new(
       :external_systems_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1127,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1137,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceConnectorGroup]
     class GetVoiceConnectorGroupResponse < Struct.new(
       :voice_connector_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1066,7 +1147,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceConnectorLoggingConfigurationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1157,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::LoggingConfiguration]
     class GetVoiceConnectorLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1167,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceConnectorOriginationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,7 +1177,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::Origination]
     class GetVoiceConnectorOriginationResponse < Struct.new(
       :origination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1102,7 +1187,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceConnectorProxyRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1111,7 +1197,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::Proxy]
     class GetVoiceConnectorProxyResponse < Struct.new(
       :proxy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,7 +1207,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceConnectorRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1129,7 +1217,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceConnector]
     class GetVoiceConnectorResponse < Struct.new(
       :voice_connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1227,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceConnectorStreamingConfigurationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1237,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::StreamingConfiguration]
     class GetVoiceConnectorStreamingConfigurationResponse < Struct.new(
       :streaming_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1156,7 +1247,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceConnectorTerminationHealthRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1257,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::TerminationHealth]
     class GetVoiceConnectorTerminationHealthResponse < Struct.new(
       :termination_health,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1174,7 +1267,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceConnectorTerminationRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,7 +1277,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::Termination]
     class GetVoiceConnectorTerminationResponse < Struct.new(
       :termination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1192,7 +1287,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceProfileDomainRequest < Struct.new(
       :voice_profile_domain_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1201,7 +1297,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceProfileDomain]
     class GetVoiceProfileDomainResponse < Struct.new(
       :voice_profile_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,7 +1307,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class GetVoiceProfileRequest < Struct.new(
       :voice_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1219,7 +1317,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceProfile]
     class GetVoiceProfileResponse < Struct.new(
       :voice_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1236,7 +1335,8 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :voice_tone_analysis_task_id,
       :is_caller,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,7 +1345,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceToneAnalysisTask]
     class GetVoiceToneAnalysisTaskResponse < Struct.new(
       :voice_tone_analysis_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1257,7 +1358,8 @@ module Aws::ChimeSDKVoice
     class GoneException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1266,7 +1368,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<String>]
     class ListAvailableVoiceConnectorRegionsResponse < Struct.new(
       :voice_connector_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1382,8 @@ module Aws::ChimeSDKVoice
     class ListPhoneNumberOrdersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1292,7 +1396,8 @@ module Aws::ChimeSDKVoice
     class ListPhoneNumberOrdersResponse < Struct.new(
       :phone_number_orders,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1321,7 +1426,8 @@ module Aws::ChimeSDKVoice
       :filter_value,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1440,8 @@ module Aws::ChimeSDKVoice
     class ListPhoneNumbersResponse < Struct.new(
       :phone_numbers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1355,7 +1462,8 @@ module Aws::ChimeSDKVoice
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1476,8 @@ module Aws::ChimeSDKVoice
     class ListProxySessionsResponse < Struct.new(
       :proxy_sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1381,7 +1490,8 @@ module Aws::ChimeSDKVoice
     class ListSipMediaApplicationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1394,7 +1504,8 @@ module Aws::ChimeSDKVoice
     class ListSipMediaApplicationsResponse < Struct.new(
       :sip_media_applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,7 +1522,8 @@ module Aws::ChimeSDKVoice
       :sip_media_application_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1424,7 +1536,8 @@ module Aws::ChimeSDKVoice
     class ListSipRulesResponse < Struct.new(
       :sip_rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1433,7 +1546,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class ListSupportedPhoneNumberCountriesRequest < Struct.new(
       :product_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1442,7 +1556,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<Types::PhoneNumberCountry>]
     class ListSupportedPhoneNumberCountriesResponse < Struct.new(
       :phone_number_countries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1451,7 +1566,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1460,7 +1576,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1473,7 +1590,8 @@ module Aws::ChimeSDKVoice
     class ListVoiceConnectorGroupsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1486,7 +1604,8 @@ module Aws::ChimeSDKVoice
     class ListVoiceConnectorGroupsResponse < Struct.new(
       :voice_connector_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1614,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class ListVoiceConnectorTerminationCredentialsRequest < Struct.new(
       :voice_connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,7 +1624,8 @@ module Aws::ChimeSDKVoice
     #   @return [Array<String>]
     class ListVoiceConnectorTerminationCredentialsResponse < Struct.new(
       :usernames,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,7 +1638,8 @@ module Aws::ChimeSDKVoice
     class ListVoiceConnectorsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1652,8 @@ module Aws::ChimeSDKVoice
     class ListVoiceConnectorsResponse < Struct.new(
       :voice_connectors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1666,8 @@ module Aws::ChimeSDKVoice
     class ListVoiceProfileDomainsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1556,7 +1680,8 @@ module Aws::ChimeSDKVoice
     class ListVoiceProfileDomainsResponse < Struct.new(
       :voice_profile_domains,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1573,7 +1698,8 @@ module Aws::ChimeSDKVoice
       :voice_profile_domain_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1712,8 @@ module Aws::ChimeSDKVoice
     class ListVoiceProfilesResponse < Struct.new(
       :voice_profiles,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1728,8 @@ module Aws::ChimeSDKVoice
     class LoggingConfiguration < Struct.new(
       :enable_sip_logs,
       :enable_media_metric_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,7 +1743,8 @@ module Aws::ChimeSDKVoice
     class MediaInsightsConfiguration < Struct.new(
       :disabled,
       :configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1627,7 +1756,8 @@ module Aws::ChimeSDKVoice
     class NotFoundException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1641,7 +1771,8 @@ module Aws::ChimeSDKVoice
     class OrderedPhoneNumber < Struct.new(
       :e164_phone_number,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1665,7 +1796,8 @@ module Aws::ChimeSDKVoice
     class Origination < Struct.new(
       :routes,
       :disabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,7 +1831,8 @@ module Aws::ChimeSDKVoice
       :protocol,
       :priority,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1713,7 +1846,8 @@ module Aws::ChimeSDKVoice
     class Participant < Struct.new(
       :phone_number,
       :proxy_phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1780,7 +1914,8 @@ module Aws::ChimeSDKVoice
       :deletion_timestamp,
       :order_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1799,7 +1934,8 @@ module Aws::ChimeSDKVoice
       :value,
       :name,
       :associated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1830,7 +1966,8 @@ module Aws::ChimeSDKVoice
       :outbound_sms,
       :inbound_mms,
       :outbound_mms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1844,7 +1981,8 @@ module Aws::ChimeSDKVoice
     class PhoneNumberCountry < Struct.new(
       :country_code,
       :supported_phone_number_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +2001,8 @@ module Aws::ChimeSDKVoice
       :phone_number_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +2042,8 @@ module Aws::ChimeSDKVoice
       :created_timestamp,
       :updated_timestamp,
       :foc_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1925,7 +2065,8 @@ module Aws::ChimeSDKVoice
       :disabled,
       :fall_back_phone_number,
       :phone_number_countries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2124,8 @@ module Aws::ChimeSDKVoice
       :number_selection_behavior,
       :geo_match_level,
       :geo_match_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1996,7 +2138,8 @@ module Aws::ChimeSDKVoice
     class PutSipMediaApplicationAlexaSkillConfigurationRequest < Struct.new(
       :sip_media_application_id,
       :sip_media_application_alexa_skill_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2005,7 +2148,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipMediaApplicationAlexaSkillConfiguration]
     class PutSipMediaApplicationAlexaSkillConfigurationResponse < Struct.new(
       :sip_media_application_alexa_skill_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2018,7 +2162,8 @@ module Aws::ChimeSDKVoice
     class PutSipMediaApplicationLoggingConfigurationRequest < Struct.new(
       :sip_media_application_id,
       :sip_media_application_logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2027,7 +2172,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipMediaApplicationLoggingConfiguration]
     class PutSipMediaApplicationLoggingConfigurationResponse < Struct.new(
       :sip_media_application_logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2040,7 +2186,8 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
       :voice_connector_id,
       :emergency_calling_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2049,7 +2196,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::EmergencyCallingConfiguration]
     class PutVoiceConnectorEmergencyCallingConfigurationResponse < Struct.new(
       :emergency_calling_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2067,7 +2215,8 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :session_border_controller_types,
       :contact_center_system_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2076,7 +2225,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::ExternalSystemsConfiguration]
     class PutVoiceConnectorExternalSystemsConfigurationResponse < Struct.new(
       :external_systems_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2089,7 +2239,8 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorLoggingConfigurationRequest < Struct.new(
       :voice_connector_id,
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2098,7 +2249,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::LoggingConfiguration]
     class PutVoiceConnectorLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2111,7 +2263,8 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorOriginationRequest < Struct.new(
       :voice_connector_id,
       :origination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2120,7 +2273,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::Origination]
     class PutVoiceConnectorOriginationResponse < Struct.new(
       :origination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2145,7 +2299,8 @@ module Aws::ChimeSDKVoice
       :phone_number_pool_countries,
       :fall_back_phone_number,
       :disabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2154,7 +2309,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::Proxy]
     class PutVoiceConnectorProxyResponse < Struct.new(
       :proxy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2167,7 +2323,8 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorStreamingConfigurationRequest < Struct.new(
       :voice_connector_id,
       :streaming_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2176,7 +2333,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::StreamingConfiguration]
     class PutVoiceConnectorStreamingConfigurationResponse < Struct.new(
       :streaming_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2189,7 +2347,8 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorTerminationCredentialsRequest < Struct.new(
       :voice_connector_id,
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2202,7 +2361,8 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorTerminationRequest < Struct.new(
       :voice_connector_id,
       :termination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2211,7 +2371,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::Termination]
     class PutVoiceConnectorTerminationResponse < Struct.new(
       :termination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2223,7 +2384,8 @@ module Aws::ChimeSDKVoice
     class ResourceLimitExceededException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2232,7 +2394,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class RestorePhoneNumberRequest < Struct.new(
       :phone_number_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2241,7 +2404,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::PhoneNumber]
     class RestorePhoneNumberResponse < Struct.new(
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2442,8 @@ module Aws::ChimeSDKVoice
       :phone_number_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2291,7 +2456,8 @@ module Aws::ChimeSDKVoice
     class SearchAvailablePhoneNumbersResponse < Struct.new(
       :e164_phone_numbers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2305,7 +2471,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2317,7 +2484,8 @@ module Aws::ChimeSDKVoice
     class ServiceFailureException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2329,7 +2497,8 @@ module Aws::ChimeSDKVoice
     class ServiceUnavailableException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2365,7 +2534,8 @@ module Aws::ChimeSDKVoice
       :created_timestamp,
       :updated_timestamp,
       :sip_media_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2383,7 +2553,8 @@ module Aws::ChimeSDKVoice
     class SipMediaApplicationAlexaSkillConfiguration < Struct.new(
       :alexa_skill_status,
       :alexa_skill_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2393,7 +2564,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class SipMediaApplicationCall < Struct.new(
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2404,7 +2576,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class SipMediaApplicationEndpoint < Struct.new(
       :lambda_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2414,7 +2587,8 @@ module Aws::ChimeSDKVoice
     #   @return [Boolean]
     class SipMediaApplicationLoggingConfiguration < Struct.new(
       :enable_sip_media_application_message_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2454,7 +2628,8 @@ module Aws::ChimeSDKVoice
       :target_applications,
       :created_timestamp,
       :updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2473,7 +2648,8 @@ module Aws::ChimeSDKVoice
       :sip_media_application_id,
       :priority,
       :aws_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2487,7 +2663,8 @@ module Aws::ChimeSDKVoice
     class SpeakerSearchDetails < Struct.new(
       :results,
       :voiceprint_generation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2501,7 +2678,8 @@ module Aws::ChimeSDKVoice
     class SpeakerSearchResult < Struct.new(
       :confidence_score,
       :voice_profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2546,7 +2724,8 @@ module Aws::ChimeSDKVoice
       :updated_timestamp,
       :started_timestamp,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2571,7 +2750,8 @@ module Aws::ChimeSDKVoice
       :voice_profile_domain_id,
       :client_request_token,
       :call_leg,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2580,7 +2760,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SpeakerSearchTask]
     class StartSpeakerSearchTaskResponse < Struct.new(
       :speaker_search_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2602,7 +2783,8 @@ module Aws::ChimeSDKVoice
       :transaction_id,
       :language_code,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2611,7 +2793,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceToneAnalysisTask]
     class StartVoiceToneAnalysisTaskResponse < Struct.new(
       :voice_tone_analysis_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2624,7 +2807,8 @@ module Aws::ChimeSDKVoice
     class StopSpeakerSearchTaskRequest < Struct.new(
       :voice_connector_id,
       :speaker_search_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2637,7 +2821,8 @@ module Aws::ChimeSDKVoice
     class StopVoiceToneAnalysisTaskRequest < Struct.new(
       :voice_connector_id,
       :voice_tone_analysis_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2661,7 +2846,8 @@ module Aws::ChimeSDKVoice
       :disabled,
       :streaming_notification_targets,
       :media_insights_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2671,7 +2857,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class StreamingNotificationTarget < Struct.new(
       :notification_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2685,7 +2872,8 @@ module Aws::ChimeSDKVoice
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2698,7 +2886,8 @@ module Aws::ChimeSDKVoice
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2724,7 +2913,8 @@ module Aws::ChimeSDKVoice
       :calling_regions,
       :cidr_allowed_list,
       :disabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2738,7 +2928,8 @@ module Aws::ChimeSDKVoice
     class TerminationHealth < Struct.new(
       :timestamp,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2750,7 +2941,8 @@ module Aws::ChimeSDKVoice
     class ThrottledClientException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2762,7 +2954,8 @@ module Aws::ChimeSDKVoice
     class UnauthorizedClientException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2774,7 +2967,8 @@ module Aws::ChimeSDKVoice
     class UnprocessableEntityException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2787,7 +2981,8 @@ module Aws::ChimeSDKVoice
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2796,7 +2991,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceConnectorSettings]
     class UpdateGlobalSettingsRequest < Struct.new(
       :voice_connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2817,7 +3013,8 @@ module Aws::ChimeSDKVoice
       :product_type,
       :calling_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2840,7 +3037,8 @@ module Aws::ChimeSDKVoice
       :product_type,
       :calling_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2849,7 +3047,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::PhoneNumber]
     class UpdatePhoneNumberResponse < Struct.new(
       :phone_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2858,7 +3057,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class UpdatePhoneNumberSettingsRequest < Struct.new(
       :calling_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2879,7 +3079,8 @@ module Aws::ChimeSDKVoice
       :proxy_session_id,
       :capabilities,
       :expiry_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2888,7 +3089,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::ProxySession]
     class UpdateProxySessionResponse < Struct.new(
       :proxy_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2906,7 +3108,8 @@ module Aws::ChimeSDKVoice
       :sip_media_application_id,
       :transaction_id,
       :arguments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2915,7 +3118,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipMediaApplicationCall]
     class UpdateSipMediaApplicationCallResponse < Struct.new(
       :sip_media_application_call,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2932,7 +3136,8 @@ module Aws::ChimeSDKVoice
       :sip_media_application_id,
       :name,
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2941,7 +3146,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipMediaApplication]
     class UpdateSipMediaApplicationResponse < Struct.new(
       :sip_media_application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2962,7 +3168,8 @@ module Aws::ChimeSDKVoice
       :name,
       :disabled,
       :target_applications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2971,7 +3178,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::SipRule]
     class UpdateSipRuleResponse < Struct.new(
       :sip_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2989,7 +3197,8 @@ module Aws::ChimeSDKVoice
       :voice_connector_group_id,
       :name,
       :voice_connector_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2998,7 +3207,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceConnectorGroup]
     class UpdateVoiceConnectorGroupResponse < Struct.new(
       :voice_connector_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3015,7 +3225,8 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :name,
       :require_encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3024,7 +3235,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceConnector]
     class UpdateVoiceConnectorResponse < Struct.new(
       :voice_connector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3041,7 +3253,8 @@ module Aws::ChimeSDKVoice
       :voice_profile_domain_id,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3050,7 +3263,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceProfileDomain]
     class UpdateVoiceProfileDomainResponse < Struct.new(
       :voice_profile_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3063,7 +3277,8 @@ module Aws::ChimeSDKVoice
     class UpdateVoiceProfileRequest < Struct.new(
       :voice_profile_id,
       :speaker_search_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3072,7 +3287,8 @@ module Aws::ChimeSDKVoice
     #   @return [Types::VoiceProfile]
     class UpdateVoiceProfileResponse < Struct.new(
       :voice_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3107,7 +3323,8 @@ module Aws::ChimeSDKVoice
       :state,
       :country,
       :postal_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3146,7 +3363,8 @@ module Aws::ChimeSDKVoice
       :address_external_id,
       :address,
       :candidate_address_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3195,7 +3413,8 @@ module Aws::ChimeSDKVoice
       :updated_timestamp,
       :voice_connector_arn,
       :integration_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3228,7 +3447,8 @@ module Aws::ChimeSDKVoice
       :created_timestamp,
       :updated_timestamp,
       :voice_connector_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3246,7 +3466,8 @@ module Aws::ChimeSDKVoice
     class VoiceConnectorItem < Struct.new(
       :voice_connector_id,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3257,7 +3478,8 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     class VoiceConnectorSettings < Struct.new(
       :cdr_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3288,7 +3510,8 @@ module Aws::ChimeSDKVoice
       :created_timestamp,
       :updated_timestamp,
       :expiration_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3322,7 +3545,8 @@ module Aws::ChimeSDKVoice
       :server_side_encryption_configuration,
       :created_timestamp,
       :updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3352,7 +3576,8 @@ module Aws::ChimeSDKVoice
       :description,
       :created_timestamp,
       :updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3382,7 +3607,8 @@ module Aws::ChimeSDKVoice
       :created_timestamp,
       :updated_timestamp,
       :expiration_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3417,7 +3643,8 @@ module Aws::ChimeSDKVoice
       :updated_timestamp,
       :started_timestamp,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

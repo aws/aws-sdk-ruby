@@ -582,7 +582,6 @@ module Aws::WorkSpacesThinClient
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "PATCH", "uri" => "/softwaresets/{id}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

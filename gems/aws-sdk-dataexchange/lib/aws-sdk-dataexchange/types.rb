@@ -11,7 +11,8 @@ module Aws::DataExchange
     #   @return [String]
     class AcceptDataGrantRequest < Struct.new(
       :data_grant_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +69,8 @@ module Aws::DataExchange
       :arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +80,8 @@ module Aws::DataExchange
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +91,8 @@ module Aws::DataExchange
     #   @return [Types::AutoExportRevisionToS3RequestDetails]
     class Action < Struct.new(
       :export_revision_to_s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +134,8 @@ module Aws::DataExchange
       :api_specification_download_url_expires_at,
       :protocol_type,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +153,8 @@ module Aws::DataExchange
       :asset_id,
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +180,8 @@ module Aws::DataExchange
       :api_gateway_api_asset,
       :s3_data_access_asset,
       :lake_formation_data_permission_asset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +242,8 @@ module Aws::DataExchange
       :revision_id,
       :source_id,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +257,8 @@ module Aws::DataExchange
     class AssetSourceEntry < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +274,8 @@ module Aws::DataExchange
     class AutoExportRevisionDestinationEntry < Struct.new(
       :bucket,
       :key_pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +290,8 @@ module Aws::DataExchange
     class AutoExportRevisionToS3RequestDetails < Struct.new(
       :encryption,
       :revision_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,7 +300,8 @@ module Aws::DataExchange
     #   @return [String]
     class CancelJobInput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +321,8 @@ module Aws::DataExchange
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +355,8 @@ module Aws::DataExchange
       :ends_at,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,7 +421,8 @@ module Aws::DataExchange
       :created_at,
       :updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +446,8 @@ module Aws::DataExchange
       :description,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +500,8 @@ module Aws::DataExchange
       :source_id,
       :tags,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +518,8 @@ module Aws::DataExchange
       :action,
       :event,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +552,8 @@ module Aws::DataExchange
       :id,
       :tags,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +566,8 @@ module Aws::DataExchange
     class CreateJobInput < Struct.new(
       :details,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +604,8 @@ module Aws::DataExchange
       :state,
       :type,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +625,8 @@ module Aws::DataExchange
       :comment,
       :data_set_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -665,7 +687,8 @@ module Aws::DataExchange
       :revocation_comment,
       :revoked,
       :revoked_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -690,7 +713,8 @@ module Aws::DataExchange
       :asset_source,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +733,8 @@ module Aws::DataExchange
       :asset_source,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -763,7 +788,8 @@ module Aws::DataExchange
       :arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +839,8 @@ module Aws::DataExchange
       :origin_details,
       :source_id,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +852,8 @@ module Aws::DataExchange
     #   @return [Time]
     class DataUpdateRequestDetails < Struct.new(
       :data_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +863,8 @@ module Aws::DataExchange
     #   @return [Array<Types::LFTag>]
     class DatabaseLFTagPolicy < Struct.new(
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -849,7 +878,8 @@ module Aws::DataExchange
     class DatabaseLFTagPolicyAndPermissions < Struct.new(
       :expression,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +896,8 @@ module Aws::DataExchange
       :asset_id,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +906,8 @@ module Aws::DataExchange
     #   @return [String]
     class DeleteDataGrantRequest < Struct.new(
       :data_grant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +916,8 @@ module Aws::DataExchange
     #   @return [String]
     class DeleteDataSetInput < Struct.new(
       :data_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +926,8 @@ module Aws::DataExchange
     #   @return [String]
     class DeleteEventActionInput < Struct.new(
       :event_action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +940,8 @@ module Aws::DataExchange
     class DeleteRevisionInput < Struct.new(
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +952,8 @@ module Aws::DataExchange
     #   @return [Time]
     class DeprecationRequestDetails < Struct.new(
       :deprecation_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +967,8 @@ module Aws::DataExchange
     class Details < Struct.new(
       :import_asset_from_signed_url_job_error_details,
       :import_assets_from_s3_job_error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -941,7 +978,8 @@ module Aws::DataExchange
     #   @return [Types::RevisionPublished]
     class Event < Struct.new(
       :revision_published,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -972,7 +1010,8 @@ module Aws::DataExchange
       :event,
       :id,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1029,8 @@ module Aws::DataExchange
       :asset_id,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1056,8 @@ module Aws::DataExchange
       :revision_id,
       :signed_url,
       :signed_url_expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1079,8 @@ module Aws::DataExchange
       :data_set_id,
       :encryption,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1102,8 @@ module Aws::DataExchange
       :data_set_id,
       :encryption,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1078,7 +1121,8 @@ module Aws::DataExchange
       :data_set_id,
       :encryption,
       :revision_destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1144,8 @@ module Aws::DataExchange
       :encryption,
       :revision_destinations,
       :event_action_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1116,7 +1161,8 @@ module Aws::DataExchange
     class ExportServerSideEncryption < Struct.new(
       :kms_key_arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1179,8 @@ module Aws::DataExchange
       :asset_id,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1186,7 +1233,8 @@ module Aws::DataExchange
       :revision_id,
       :source_id,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1195,7 +1243,8 @@ module Aws::DataExchange
     #   @return [String]
     class GetDataGrantRequest < Struct.new(
       :data_grant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1309,8 @@ module Aws::DataExchange
       :created_at,
       :updated_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1269,7 +1319,8 @@ module Aws::DataExchange
     #   @return [String]
     class GetDataSetInput < Struct.new(
       :data_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1322,7 +1373,8 @@ module Aws::DataExchange
       :source_id,
       :tags,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1383,8 @@ module Aws::DataExchange
     #   @return [String]
     class GetEventActionInput < Struct.new(
       :event_action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1417,8 @@ module Aws::DataExchange
       :id,
       :tags,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1427,8 @@ module Aws::DataExchange
     #   @return [String]
     class GetJobInput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1410,7 +1465,8 @@ module Aws::DataExchange
       :state,
       :type,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1419,7 +1475,8 @@ module Aws::DataExchange
     #   @return [String]
     class GetReceivedDataGrantRequest < Struct.new(
       :data_grant_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1533,8 @@ module Aws::DataExchange
       :arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1489,7 +1547,8 @@ module Aws::DataExchange
     class GetRevisionInput < Struct.new(
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,7 +1609,8 @@ module Aws::DataExchange
       :revocation_comment,
       :revoked,
       :revoked_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1599,7 +1659,8 @@ module Aws::DataExchange
       :protocol_type,
       :revision_id,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1650,7 +1711,8 @@ module Aws::DataExchange
       :protocol_type,
       :revision_id,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,7 +1722,8 @@ module Aws::DataExchange
     #   @return [String]
     class ImportAssetFromSignedUrlJobErrorDetails < Struct.new(
       :asset_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1684,7 +1747,8 @@ module Aws::DataExchange
       :data_set_id,
       :md5_hash,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1780,8 @@ module Aws::DataExchange
       :revision_id,
       :signed_url,
       :signed_url_expires_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1747,7 +1812,8 @@ module Aws::DataExchange
       :role_arn,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1778,7 +1844,8 @@ module Aws::DataExchange
       :role_arn,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1863,8 @@ module Aws::DataExchange
       :asset_sources,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1814,7 +1882,8 @@ module Aws::DataExchange
       :asset_sources,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1832,7 +1901,8 @@ module Aws::DataExchange
       :asset_sources,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1850,7 +1920,8 @@ module Aws::DataExchange
       :asset_sources,
       :data_set_id,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1860,7 +1931,8 @@ module Aws::DataExchange
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1902,7 +1974,8 @@ module Aws::DataExchange
       :state,
       :type,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1936,7 +2009,8 @@ module Aws::DataExchange
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1955,7 +2029,8 @@ module Aws::DataExchange
     #   @return [String]
     class KmsKeyToGrant < Struct.new(
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1972,7 +2047,8 @@ module Aws::DataExchange
     class LFResourceDetails < Struct.new(
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2062,8 @@ module Aws::DataExchange
     class LFTag < Struct.new(
       :tag_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2004,7 +2081,8 @@ module Aws::DataExchange
       :catalog_id,
       :resource_type,
       :resource_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2027,7 +2105,8 @@ module Aws::DataExchange
       :lake_formation_data_permission_type,
       :permissions,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2037,7 +2116,8 @@ module Aws::DataExchange
     #   @return [Types::LFTagPolicyDetails]
     class LakeFormationDataPermissionDetails < Struct.new(
       :lf_tag_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2053,7 +2133,8 @@ module Aws::DataExchange
     class LakeFormationTagPolicyDetails < Struct.new(
       :database,
       :table,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2067,7 +2148,8 @@ module Aws::DataExchange
     class ListDataGrantsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2081,7 +2163,8 @@ module Aws::DataExchange
     class ListDataGrantsResponse < Struct.new(
       :data_grant_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2182,8 @@ module Aws::DataExchange
       :data_set_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2113,7 +2197,8 @@ module Aws::DataExchange
     class ListDataSetRevisionsOutput < Struct.new(
       :next_token,
       :revisions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2132,7 +2217,8 @@ module Aws::DataExchange
       :max_results,
       :next_token,
       :origin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2146,7 +2232,8 @@ module Aws::DataExchange
     class ListDataSetsOutput < Struct.new(
       :data_sets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2164,7 +2251,8 @@ module Aws::DataExchange
       :event_source_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2266,8 @@ module Aws::DataExchange
     class ListEventActionsOutput < Struct.new(
       :event_actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2200,7 +2289,8 @@ module Aws::DataExchange
       :max_results,
       :next_token,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2214,7 +2304,8 @@ module Aws::DataExchange
     class ListJobsOutput < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2232,7 +2323,8 @@ module Aws::DataExchange
       :max_results,
       :next_token,
       :acceptance_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2246,7 +2338,8 @@ module Aws::DataExchange
     class ListReceivedDataGrantsResponse < Struct.new(
       :data_grant_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2268,7 +2361,8 @@ module Aws::DataExchange
       :max_results,
       :next_token,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2282,7 +2376,8 @@ module Aws::DataExchange
     class ListRevisionAssetsOutput < Struct.new(
       :assets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2291,7 +2386,8 @@ module Aws::DataExchange
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2300,7 +2396,8 @@ module Aws::DataExchange
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2321,7 +2418,8 @@ module Aws::DataExchange
       :data_update,
       :deprecation,
       :schema_change,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2335,7 +2433,8 @@ module Aws::DataExchange
     class OriginDetails < Struct.new(
       :product_id,
       :data_grant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2385,7 +2484,8 @@ module Aws::DataExchange
       :arn,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2395,7 +2495,8 @@ module Aws::DataExchange
     #   @return [String]
     class RedshiftDataShareAsset < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2405,7 +2506,8 @@ module Aws::DataExchange
     #   @return [String]
     class RedshiftDataShareAssetSourceEntry < Struct.new(
       :data_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2443,7 +2545,8 @@ module Aws::DataExchange
       :table,
       :schema,
       :view,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2485,7 +2588,8 @@ module Aws::DataExchange
       :import_asset_from_api_gateway_api,
       :create_s3_data_access_from_s3_bucket,
       :import_assets_from_lake_formation_tag_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2503,7 +2607,8 @@ module Aws::DataExchange
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2545,7 +2650,8 @@ module Aws::DataExchange
       :import_asset_from_api_gateway_api,
       :create_s3_data_access_from_s3_bucket,
       :import_assets_from_lake_formation_tag_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2564,7 +2670,8 @@ module Aws::DataExchange
       :bucket,
       :key_pattern,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2622,7 +2729,8 @@ module Aws::DataExchange
       :revocation_comment,
       :revoked,
       :revoked_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2638,7 +2746,8 @@ module Aws::DataExchange
     #   @return [String]
     class RevisionPublished < Struct.new(
       :data_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2656,7 +2765,8 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       :revocation_comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2713,7 +2823,8 @@ module Aws::DataExchange
       :revocation_comment,
       :revoked,
       :revoked_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2753,7 +2864,8 @@ module Aws::DataExchange
       :s3_access_point_alias,
       :s3_access_point_arn,
       :kms_keys_to_grant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2776,7 +2888,8 @@ module Aws::DataExchange
       :key_prefixes,
       :keys,
       :kms_keys_to_grant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2796,7 +2909,8 @@ module Aws::DataExchange
     class S3DataAccessDetails < Struct.new(
       :key_prefixes,
       :keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2806,7 +2920,8 @@ module Aws::DataExchange
     #   @return [Float]
     class S3SnapshotAsset < Struct.new(
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2837,7 +2952,8 @@ module Aws::DataExchange
       :name,
       :type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2855,7 +2971,8 @@ module Aws::DataExchange
     class SchemaChangeRequestDetails < Struct.new(
       :changes,
       :schema_change_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2876,7 +2993,8 @@ module Aws::DataExchange
       :lake_formation_tag_policies,
       :redshift_data_shares,
       :s3_data_accesses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2919,7 +3037,8 @@ module Aws::DataExchange
       :method,
       :path,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2932,7 +3051,8 @@ module Aws::DataExchange
     class SendApiAssetOutput < Struct.new(
       :body,
       :response_headers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2970,12 +3090,14 @@ module Aws::DataExchange
       :data_set_id,
       :details,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SendDataSetNotificationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2993,7 +3115,8 @@ module Aws::DataExchange
       :limit_name,
       :limit_value,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3007,12 +3130,14 @@ module Aws::DataExchange
     #   @return [String]
     class StartJobInput < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartJobOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3022,7 +3147,8 @@ module Aws::DataExchange
     #   @return [Array<Types::LFTag>]
     class TableLFTagPolicy < Struct.new(
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3036,7 +3162,8 @@ module Aws::DataExchange
     class TableLFTagPolicyAndPermissions < Struct.new(
       :expression,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3049,7 +3176,8 @@ module Aws::DataExchange
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3059,7 +3187,8 @@ module Aws::DataExchange
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3072,7 +3201,8 @@ module Aws::DataExchange
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3099,7 +3229,8 @@ module Aws::DataExchange
       :data_set_id,
       :name,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3152,7 +3283,8 @@ module Aws::DataExchange
       :revision_id,
       :source_id,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3169,7 +3301,8 @@ module Aws::DataExchange
       :data_set_id,
       :description,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3218,7 +3351,8 @@ module Aws::DataExchange
       :origin_details,
       :source_id,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3231,7 +3365,8 @@ module Aws::DataExchange
     class UpdateEventActionInput < Struct.new(
       :action,
       :event_action_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3260,7 +3395,8 @@ module Aws::DataExchange
       :event,
       :id,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3283,7 +3419,8 @@ module Aws::DataExchange
       :data_set_id,
       :finalized,
       :revision_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3340,7 +3477,8 @@ module Aws::DataExchange
       :revocation_comment,
       :revoked,
       :revoked_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3360,7 +3498,8 @@ module Aws::DataExchange
     class ValidationException < Struct.new(
       :message,
       :exception_cause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

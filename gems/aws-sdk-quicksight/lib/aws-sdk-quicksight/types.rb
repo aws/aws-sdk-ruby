@@ -18,7 +18,8 @@ module Aws::QuickSight
     class AccessDeniedException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::QuickSight
     class AccountCustomization < Struct.new(
       :default_theme,
       :default_email_customization_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -83,7 +85,8 @@ module Aws::QuickSight
       :authentication_type,
       :account_subscription_status,
       :iam_identity_center_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +119,8 @@ module Aws::QuickSight
       :notification_email,
       :public_sharing_enabled,
       :termination_protection_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -136,7 +140,8 @@ module Aws::QuickSight
     class ActiveIAMPolicyAssignment < Struct.new(
       :assignment_name,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +151,8 @@ module Aws::QuickSight
     #   @return [String]
     class AdHocFilteringOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +174,8 @@ module Aws::QuickSight
       :aggregation_function_parameters,
       :period,
       :period_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +226,8 @@ module Aws::QuickSight
       :categorical_aggregation_function,
       :date_aggregation_function,
       :attribute_aggregation_function,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +241,8 @@ module Aws::QuickSight
     class AggregationPartitionBy < Struct.new(
       :field_name,
       :time_granularity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -261,14 +270,16 @@ module Aws::QuickSight
       :column,
       :sort_direction,
       :aggregation_function,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An empty object that represents that the <code>AllSheets</code> option is the chosen value for the <code>FilterScopeConfiguration</code> parameter. This structure applies the filter to all visuals on all sheets of an Analysis, Dashboard, or Template.</p>
     #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     class AllSheetsFilterScopeConfiguration < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +289,8 @@ module Aws::QuickSight
     #   @return [String]
     class AmazonElasticsearchParameters < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +300,8 @@ module Aws::QuickSight
     #   @return [String]
     class AmazonOpenSearchParameters < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +323,8 @@ module Aws::QuickSight
       :generative_authoring,
       :executive_summary,
       :data_stories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +334,8 @@ module Aws::QuickSight
     #   @return [Types::ExecutiveSummaryConfigurations]
     class AmazonQInQuickSightDashboardConfigurations < Struct.new(
       :executive_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +381,8 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       :sheets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +392,8 @@ module Aws::QuickSight
     #   @return [Types::DefaultNewSheetConfiguration]
     class AnalysisDefaults < Struct.new(
       :default_new_sheet_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -430,7 +447,8 @@ module Aws::QuickSight
       :options,
       :query_execution_options,
       :static_files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +466,8 @@ module Aws::QuickSight
       :type,
       :message,
       :violated_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +517,8 @@ module Aws::QuickSight
       :operator,
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +528,8 @@ module Aws::QuickSight
     #   @return [Types::AnalysisSourceTemplate]
     class AnalysisSourceEntity < Struct.new(
       :source_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +543,8 @@ module Aws::QuickSight
     class AnalysisSourceTemplate < Struct.new(
       :data_set_references,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -553,7 +575,8 @@ module Aws::QuickSight
       :status,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -571,7 +594,8 @@ module Aws::QuickSight
       :anchor_type,
       :time_granularity,
       :offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -597,7 +621,8 @@ module Aws::QuickSight
     class AnchorDateConfiguration < Struct.new(
       :anchor_option,
       :parameter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +645,8 @@ module Aws::QuickSight
       :enabled_features,
       :disabled_features,
       :feature_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -630,7 +656,8 @@ module Aws::QuickSight
     #   @return [Types::SharedViewConfigurations]
     class AnonymousUserDashboardFeatureConfigurations < Struct.new(
       :shared_view,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +668,8 @@ module Aws::QuickSight
     #   @return [Types::DashboardVisualId]
     class AnonymousUserDashboardVisualEmbeddingConfiguration < Struct.new(
       :initial_dashboard_visual_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -663,7 +691,8 @@ module Aws::QuickSight
       :dashboard_visual,
       :q_search_bar,
       :generative_qn_a,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +703,8 @@ module Aws::QuickSight
     #   @return [String]
     class AnonymousUserGenerativeQnAEmbeddingConfiguration < Struct.new(
       :initial_topic_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +715,8 @@ module Aws::QuickSight
     #   @return [String]
     class AnonymousUserQSearchBarEmbeddingConfiguration < Struct.new(
       :initial_topic_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -696,7 +727,8 @@ module Aws::QuickSight
     #   @return [Array<Types::SnapshotJobResultFileGroup>]
     class AnonymousUserSnapshotJobResult < Struct.new(
       :file_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +742,8 @@ module Aws::QuickSight
     class ApplicationTheme < Struct.new(
       :brand_color_palette,
       :brand_element_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -724,7 +757,8 @@ module Aws::QuickSight
     class ArcAxisConfiguration < Struct.new(
       :range,
       :reserve_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -743,7 +777,8 @@ module Aws::QuickSight
     class ArcAxisDisplayRange < Struct.new(
       :min,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -763,7 +798,8 @@ module Aws::QuickSight
     class ArcConfiguration < Struct.new(
       :arc_angle,
       :arc_thickness,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -778,7 +814,8 @@ module Aws::QuickSight
     #   @return [String]
     class ArcOptions < Struct.new(
       :arc_thickness,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +857,8 @@ module Aws::QuickSight
       :analyses,
       :dashboards,
       :folders,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +872,8 @@ module Aws::QuickSight
     class AssetBundleExportJobAnalysisOverrideProperties < Struct.new(
       :arn,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +887,8 @@ module Aws::QuickSight
     class AssetBundleExportJobDashboardOverrideProperties < Struct.new(
       :arn,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +902,8 @@ module Aws::QuickSight
     class AssetBundleExportJobDataSetOverrideProperties < Struct.new(
       :arn,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -876,7 +917,8 @@ module Aws::QuickSight
     class AssetBundleExportJobDataSourceOverrideProperties < Struct.new(
       :arn,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +936,8 @@ module Aws::QuickSight
       :arn,
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +951,8 @@ module Aws::QuickSight
     class AssetBundleExportJobFolderOverrideProperties < Struct.new(
       :arn,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +966,8 @@ module Aws::QuickSight
     class AssetBundleExportJobRefreshScheduleOverrideProperties < Struct.new(
       :arn,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -932,7 +977,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class AssetBundleExportJobResourceIdOverrideConfiguration < Struct.new(
       :prefix_for_all_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -975,7 +1021,8 @@ module Aws::QuickSight
       :export_format,
       :include_permissions,
       :include_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -996,7 +1043,8 @@ module Aws::QuickSight
     class AssetBundleExportJobThemeOverrideProperties < Struct.new(
       :arn,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1010,7 +1058,8 @@ module Aws::QuickSight
     class AssetBundleExportJobVPCConnectionOverrideProperties < Struct.new(
       :arn,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1069,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class AssetBundleExportJobValidationStrategy < Struct.new(
       :strict_mode_for_all_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1039,7 +1089,8 @@ module Aws::QuickSight
     class AssetBundleExportJobWarning < Struct.new(
       :arn,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1053,7 +1104,8 @@ module Aws::QuickSight
     class AssetBundleImportJobAnalysisOverrideParameters < Struct.new(
       :analysis_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1067,7 +1119,8 @@ module Aws::QuickSight
     class AssetBundleImportJobAnalysisOverridePermissions < Struct.new(
       :analysis_ids,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1134,8 @@ module Aws::QuickSight
     class AssetBundleImportJobAnalysisOverrideTags < Struct.new(
       :analysis_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1095,7 +1149,8 @@ module Aws::QuickSight
     class AssetBundleImportJobDashboardOverrideParameters < Struct.new(
       :dashboard_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1113,7 +1168,8 @@ module Aws::QuickSight
       :dashboard_ids,
       :permissions,
       :link_sharing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1183,8 @@ module Aws::QuickSight
     class AssetBundleImportJobDashboardOverrideTags < Struct.new(
       :dashboard_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1202,8 @@ module Aws::QuickSight
       :data_set_id,
       :name,
       :data_set_refresh_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1217,8 @@ module Aws::QuickSight
     class AssetBundleImportJobDataSetOverridePermissions < Struct.new(
       :data_set_ids,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1232,8 @@ module Aws::QuickSight
     class AssetBundleImportJobDataSetOverrideTags < Struct.new(
       :data_set_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1188,7 +1248,8 @@ module Aws::QuickSight
     class AssetBundleImportJobDataSourceCredentialPair < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1202,7 +1263,8 @@ module Aws::QuickSight
     class AssetBundleImportJobDataSourceCredentials < Struct.new(
       :credential_pair,
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1297,8 @@ module Aws::QuickSight
       :vpc_connection_properties,
       :ssl_properties,
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,7 +1312,8 @@ module Aws::QuickSight
     class AssetBundleImportJobDataSourceOverridePermissions < Struct.new(
       :data_source_ids,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1327,8 @@ module Aws::QuickSight
     class AssetBundleImportJobDataSourceOverrideTags < Struct.new(
       :data_source_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1346,8 @@ module Aws::QuickSight
       :arn,
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1299,7 +1365,8 @@ module Aws::QuickSight
       :folder_id,
       :name,
       :parent_folder_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1313,7 +1380,8 @@ module Aws::QuickSight
     class AssetBundleImportJobFolderOverridePermissions < Struct.new(
       :folder_ids,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1327,7 +1395,8 @@ module Aws::QuickSight
     class AssetBundleImportJobFolderOverrideTags < Struct.new(
       :folder_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1369,7 +1438,8 @@ module Aws::QuickSight
       :analyses,
       :dashboards,
       :folders,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1469,8 @@ module Aws::QuickSight
       :analyses,
       :dashboards,
       :folders,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1433,7 +1504,8 @@ module Aws::QuickSight
       :analyses,
       :dashboards,
       :folders,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1443,7 +1515,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class AssetBundleImportJobOverrideValidationStrategy < Struct.new(
       :strict_mode_for_all_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1468,7 +1541,8 @@ module Aws::QuickSight
       :data_set_id,
       :schedule_id,
       :start_after_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1552,8 @@ module Aws::QuickSight
     #   @return [String]
     class AssetBundleImportJobResourceIdOverrideConfiguration < Struct.new(
       :prefix_for_all_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,7 +1579,8 @@ module Aws::QuickSight
       :created_time,
       :asset_bundle_import_job_id,
       :failure_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1518,7 +1594,8 @@ module Aws::QuickSight
     class AssetBundleImportJobThemeOverrideParameters < Struct.new(
       :theme_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1532,7 +1609,8 @@ module Aws::QuickSight
     class AssetBundleImportJobThemeOverridePermissions < Struct.new(
       :theme_ids,
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1546,7 +1624,8 @@ module Aws::QuickSight
     class AssetBundleImportJobThemeOverrideTags < Struct.new(
       :theme_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1578,7 +1657,8 @@ module Aws::QuickSight
       :security_group_ids,
       :dns_resolvers,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1592,7 +1672,8 @@ module Aws::QuickSight
     class AssetBundleImportJobVPCConnectionOverrideTags < Struct.new(
       :vpc_connection_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,7 +1687,8 @@ module Aws::QuickSight
     class AssetBundleImportJobWarning < Struct.new(
       :arn,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,7 +1703,8 @@ module Aws::QuickSight
     class AssetBundleImportSource < Struct.new(
       :body,
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1718,8 @@ module Aws::QuickSight
     class AssetBundleImportSourceDescription < Struct.new(
       :body,
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1645,7 +1729,8 @@ module Aws::QuickSight
     #   @return [Types::AssetBundleResourcePermissions]
     class AssetBundleResourceLinkSharingConfiguration < Struct.new(
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1659,7 +1744,8 @@ module Aws::QuickSight
     class AssetBundleResourcePermissions < Struct.new(
       :principals,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1771,8 @@ module Aws::QuickSight
       :q_business_insights_status,
       :excluded_data_set_arns,
       :custom_action_defaults,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1704,7 +1791,8 @@ module Aws::QuickSight
       :work_group,
       :role_arn,
       :identity_center_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1724,7 +1812,8 @@ module Aws::QuickSight
     class AttributeAggregationFunction < Struct.new(
       :simple_attribute_aggregation,
       :value_for_multiple_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1742,7 +1831,8 @@ module Aws::QuickSight
       :host,
       :port,
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1760,7 +1850,8 @@ module Aws::QuickSight
       :host,
       :port,
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1774,7 +1865,8 @@ module Aws::QuickSight
     class AuthorizedTargetsByService < Struct.new(
       :service,
       :authorized_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1784,7 +1876,8 @@ module Aws::QuickSight
     #   @return [String]
     class AwsIotAnalyticsParameters < Struct.new(
       :data_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1799,13 +1892,15 @@ module Aws::QuickSight
     class AxisDataOptions < Struct.new(
       :numeric_axis_options,
       :date_axis_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The options that are saved for future extension.</p>
     class AxisDisplayDataDrivenRange < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1819,7 +1914,8 @@ module Aws::QuickSight
     class AxisDisplayMinMaxRange < Struct.new(
       :minimum,
       :maximum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1855,7 +1951,8 @@ module Aws::QuickSight
       :data_options,
       :scrollbar_options,
       :axis_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1967,8 @@ module Aws::QuickSight
     class AxisDisplayRange < Struct.new(
       :min_max,
       :data_driven,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1986,8 @@ module Aws::QuickSight
       :font_configuration,
       :custom_label,
       :apply_to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1902,7 +2001,8 @@ module Aws::QuickSight
     class AxisLabelReferenceOptions < Struct.new(
       :field_id,
       :column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +2017,8 @@ module Aws::QuickSight
     class AxisLinearScale < Struct.new(
       :step_count,
       :step_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1933,7 +2034,8 @@ module Aws::QuickSight
     #   @return [Float]
     class AxisLogarithmicScale < Struct.new(
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1954,7 +2056,8 @@ module Aws::QuickSight
     class AxisScale < Struct.new(
       :linear,
       :logarithmic,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1968,7 +2071,8 @@ module Aws::QuickSight
     class AxisTickLabelOptions < Struct.new(
       :label_options,
       :rotation_angle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1996,7 +2100,8 @@ module Aws::QuickSight
       :values,
       :colors,
       :small_multiples,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2080,7 +2185,8 @@ module Aws::QuickSight
       :reference_lines,
       :contribution_analysis_defaults,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2091,7 +2197,8 @@ module Aws::QuickSight
     #   @return [Types::BarChartAggregatedFieldWells]
     class BarChartFieldWells < Struct.new(
       :bar_chart_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2228,8 @@ module Aws::QuickSight
       :color_items_limit,
       :small_multiples_sort,
       :small_multiples_limit_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2177,7 +2285,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2303,8 @@ module Aws::QuickSight
       :aws_account_id,
       :topic_id,
       :answers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2224,7 +2334,8 @@ module Aws::QuickSight
       :invalid_answers,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2246,7 +2357,8 @@ module Aws::QuickSight
       :aws_account_id,
       :topic_id,
       :answer_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2275,7 +2387,8 @@ module Aws::QuickSight
       :invalid_answers,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2294,7 +2407,8 @@ module Aws::QuickSight
     class BigQueryParameters < Struct.new(
       :project_id,
       :data_set_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2304,7 +2418,8 @@ module Aws::QuickSight
     #   @return [Integer]
     class BinCountOptions < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2318,7 +2433,8 @@ module Aws::QuickSight
     class BinWidthOptions < Struct.new(
       :value,
       :bin_count_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2344,7 +2460,8 @@ module Aws::QuickSight
       :style,
       :page_break_configuration,
       :repeat_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2354,7 +2471,8 @@ module Aws::QuickSight
     #   @return [Types::SectionLayoutConfiguration]
     class BodySectionContent < Struct.new(
       :layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2372,7 +2490,8 @@ module Aws::QuickSight
       :column,
       :limit,
       :sort_by_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2390,7 +2509,8 @@ module Aws::QuickSight
       :column,
       :limit,
       :sort_by_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2408,7 +2528,8 @@ module Aws::QuickSight
       :dimension_configurations,
       :page_break_configuration,
       :non_repeating_visuals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2422,7 +2543,8 @@ module Aws::QuickSight
     class BodySectionRepeatDimensionConfiguration < Struct.new(
       :dynamic_category_dimension_configuration,
       :dynamic_numeric_dimension_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2432,7 +2554,8 @@ module Aws::QuickSight
     #   @return [Types::SectionAfterPageBreak]
     class BodySectionRepeatPageBreakConfiguration < Struct.new(
       :after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2443,7 +2566,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class BookmarksConfigurations < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2458,7 +2582,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class BorderStyle < Struct.new(
       :show,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2477,7 +2602,8 @@ module Aws::QuickSight
     class BoxPlotAggregatedFieldWells < Struct.new(
       :group_by,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2531,7 +2657,8 @@ module Aws::QuickSight
       :reference_lines,
       :visual_palette,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2542,7 +2669,8 @@ module Aws::QuickSight
     #   @return [Types::BoxPlotAggregatedFieldWells]
     class BoxPlotFieldWells < Struct.new(
       :box_plot_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2560,7 +2688,8 @@ module Aws::QuickSight
       :style_options,
       :outlier_visibility,
       :all_data_points_visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2574,7 +2703,8 @@ module Aws::QuickSight
     class BoxPlotSortConfiguration < Struct.new(
       :category_sort,
       :pagination_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2584,7 +2714,8 @@ module Aws::QuickSight
     #   @return [String]
     class BoxPlotStyleOptions < Struct.new(
       :fill_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2619,7 +2750,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2661,7 +2793,8 @@ module Aws::QuickSight
       :info,
       :warning,
       :danger,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2683,7 +2816,8 @@ module Aws::QuickSight
       :description,
       :application_theme,
       :logo_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2725,7 +2859,8 @@ module Aws::QuickSight
       :version_status,
       :errors,
       :logo,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2735,7 +2870,8 @@ module Aws::QuickSight
     #   @return [Types::NavbarStyle]
     class BrandElementStyle < Struct.new(
       :navbar_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2769,7 +2905,8 @@ module Aws::QuickSight
       :brand_status,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2789,7 +2926,8 @@ module Aws::QuickSight
       :column_name,
       :column_id,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2945,8 @@ module Aws::QuickSight
       :data_set_identifier,
       :name,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2821,7 +2960,8 @@ module Aws::QuickSight
     class CalculatedMeasureField < Struct.new(
       :field_id,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2838,7 +2978,8 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       :ingestion_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2859,7 +3000,8 @@ module Aws::QuickSight
       :ingestion_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2962,7 +3104,8 @@ module Aws::QuickSight
       :export_to_csv_in_scheduled_reports,
       :export_to_excel_in_scheduled_reports,
       :include_content_in_scheduled_reports_email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2972,7 +3115,8 @@ module Aws::QuickSight
     #   @return [Array<Types::CascadingControlSource>]
     class CascadingControlConfiguration < Struct.new(
       :source_controls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2986,7 +3130,8 @@ module Aws::QuickSight
     class CascadingControlSource < Struct.new(
       :source_sheet_control_id,
       :column_to_match,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3009,7 +3154,8 @@ module Aws::QuickSight
       :new_column_type,
       :sub_type,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3031,7 +3177,8 @@ module Aws::QuickSight
       :column,
       :hierarchy_id,
       :format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3053,7 +3200,8 @@ module Aws::QuickSight
       :column,
       :aggregation_function,
       :format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3067,7 +3215,8 @@ module Aws::QuickSight
     class CategoryDrillDownFilter < Struct.new(
       :column,
       :category_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3090,7 +3239,8 @@ module Aws::QuickSight
       :column,
       :configuration,
       :default_filter_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3109,7 +3259,8 @@ module Aws::QuickSight
       :filter_list_configuration,
       :custom_filter_list_configuration,
       :custom_filter_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3128,7 +3279,8 @@ module Aws::QuickSight
       :column,
       :configuration,
       :default_filter_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3142,7 +3294,8 @@ module Aws::QuickSight
     class CellValueSynonym < Struct.new(
       :cell_value,
       :synonyms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3170,7 +3323,8 @@ module Aws::QuickSight
       :visibility,
       :sort_icon_visibility,
       :axis_label_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3181,7 +3335,8 @@ module Aws::QuickSight
     #   @return [Types::SimpleClusterMarker]
     class ClusterMarker < Struct.new(
       :simple_cluster_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3191,7 +3346,8 @@ module Aws::QuickSight
     #   @return [Types::ClusterMarker]
     class ClusterMarkerConfiguration < Struct.new(
       :cluster_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3201,7 +3357,8 @@ module Aws::QuickSight
     #   @return [Array<String>]
     class CollectiveConstant < Struct.new(
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3215,7 +3372,8 @@ module Aws::QuickSight
     class CollectiveConstantEntry < Struct.new(
       :constant_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3233,7 +3391,8 @@ module Aws::QuickSight
       :colors,
       :color_fill_type,
       :null_value_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3243,7 +3402,8 @@ module Aws::QuickSight
     #   @return [Array<Types::CustomColor>]
     class ColorsConfiguration < Struct.new(
       :custom_colors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3265,7 +3425,8 @@ module Aws::QuickSight
       :format_configuration,
       :role,
       :colors_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3275,7 +3436,8 @@ module Aws::QuickSight
     #   @return [String]
     class ColumnDescription < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3287,7 +3449,8 @@ module Aws::QuickSight
     #   @return [Types::GeoSpatialColumnGroup]
     class ColumnGroup < Struct.new(
       :geo_spatial_column_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3297,7 +3460,8 @@ module Aws::QuickSight
     #   @return [String]
     class ColumnGroupColumnSchema < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3311,7 +3475,8 @@ module Aws::QuickSight
     class ColumnGroupSchema < Struct.new(
       :name,
       :column_group_column_schema_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3329,7 +3494,8 @@ module Aws::QuickSight
       :explicit_hierarchy,
       :date_time_hierarchy,
       :predefined_hierarchy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3343,7 +3509,8 @@ module Aws::QuickSight
     class ColumnIdentifier < Struct.new(
       :data_set_identifier,
       :column_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3362,7 +3529,8 @@ module Aws::QuickSight
     class ColumnLevelPermissionRule < Struct.new(
       :principals,
       :column_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3380,7 +3548,8 @@ module Aws::QuickSight
       :name,
       :data_type,
       :geographic_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3398,7 +3567,8 @@ module Aws::QuickSight
       :sort_by,
       :direction,
       :aggregation_function,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3418,7 +3588,8 @@ module Aws::QuickSight
     class ColumnTag < Struct.new(
       :column_geographic_role,
       :column_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3444,7 +3615,8 @@ module Aws::QuickSight
       :visibility,
       :aggregation,
       :tooltip_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3466,7 +3638,8 @@ module Aws::QuickSight
       :bar_values,
       :colors,
       :line_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3560,7 +3733,8 @@ module Aws::QuickSight
       :reference_lines,
       :visual_palette,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3571,7 +3745,8 @@ module Aws::QuickSight
     #   @return [Types::ComboChartAggregatedFieldWells]
     class ComboChartFieldWells < Struct.new(
       :combo_chart_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3593,7 +3768,8 @@ module Aws::QuickSight
       :category_items_limit,
       :color_sort,
       :color_items_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3629,7 +3805,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3647,7 +3824,8 @@ module Aws::QuickSight
       :use_ordering,
       :specifed_order,
       :treat_undefined_specified_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3678,7 +3856,8 @@ module Aws::QuickSight
     class ComparisonConfiguration < Struct.new(
       :comparison_method,
       :comparison_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3693,7 +3872,8 @@ module Aws::QuickSight
     class ComparisonFormatConfiguration < Struct.new(
       :number_display_format_configuration,
       :percentage_display_format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3740,7 +3920,8 @@ module Aws::QuickSight
       :growth_rate,
       :unique_values,
       :forecast,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3753,7 +3934,8 @@ module Aws::QuickSight
     class ConcurrentUpdatingException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3767,7 +3949,8 @@ module Aws::QuickSight
     class ConditionalFormattingColor < Struct.new(
       :solid,
       :gradient,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3789,7 +3972,8 @@ module Aws::QuickSight
       :icon_options,
       :color,
       :display_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3803,7 +3987,8 @@ module Aws::QuickSight
     class ConditionalFormattingCustomIconOptions < Struct.new(
       :icon,
       :unicode_icon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3817,7 +4002,8 @@ module Aws::QuickSight
     class ConditionalFormattingGradientColor < Struct.new(
       :expression,
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3831,7 +4017,8 @@ module Aws::QuickSight
     class ConditionalFormattingIcon < Struct.new(
       :icon_set,
       :custom_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3841,7 +4028,8 @@ module Aws::QuickSight
     #   @return [String]
     class ConditionalFormattingIconDisplayConfiguration < Struct.new(
       :icon_display_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3855,7 +4043,8 @@ module Aws::QuickSight
     class ConditionalFormattingIconSet < Struct.new(
       :expression,
       :icon_set_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3869,7 +4058,8 @@ module Aws::QuickSight
     class ConditionalFormattingSolidColor < Struct.new(
       :expression,
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3882,7 +4072,8 @@ module Aws::QuickSight
     class ConflictException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3892,7 +4083,8 @@ module Aws::QuickSight
     #   @return [String]
     class ContextMenuOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3907,7 +4099,8 @@ module Aws::QuickSight
     class ContributionAnalysisDefault < Struct.new(
       :measure_field_id,
       :contributor_dimensions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3917,7 +4110,8 @@ module Aws::QuickSight
     #   @return [String]
     class ContributionAnalysisFactor < Struct.new(
       :field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3931,7 +4125,8 @@ module Aws::QuickSight
     class ContributionAnalysisTimeRanges < Struct.new(
       :start_range,
       :end_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3959,7 +4154,8 @@ module Aws::QuickSight
       :namespace,
       :account_customization,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3988,7 +4184,8 @@ module Aws::QuickSight
       :account_customization,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4119,7 +4316,8 @@ module Aws::QuickSight
       :email_address,
       :contact_number,
       :iam_identity_center_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4136,7 +4334,8 @@ module Aws::QuickSight
       :signup_response,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4205,7 +4404,8 @@ module Aws::QuickSight
       :definition,
       :validation_strategy,
       :folder_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4230,7 +4430,8 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4256,7 +4457,8 @@ module Aws::QuickSight
       :brand_id,
       :brand_definition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4273,7 +4475,8 @@ module Aws::QuickSight
       :request_id,
       :brand_detail,
       :brand_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4284,7 +4487,8 @@ module Aws::QuickSight
     #   @return [Array<Types::CalculatedColumn>]
     class CreateColumnsOperation < Struct.new(
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4305,7 +4509,8 @@ module Aws::QuickSight
       :custom_permissions_name,
       :capabilities,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4322,7 +4527,8 @@ module Aws::QuickSight
       :status,
       :arn,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4442,7 +4648,8 @@ module Aws::QuickSight
       :folder_arns,
       :link_sharing_configuration,
       :link_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4472,7 +4679,8 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4556,7 +4764,8 @@ module Aws::QuickSight
       :folder_arns,
       :performance_configuration,
       :use_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4587,7 +4796,8 @@ module Aws::QuickSight
       :ingestion_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4645,7 +4855,8 @@ module Aws::QuickSight
       :ssl_properties,
       :tags,
       :folder_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4670,7 +4881,8 @@ module Aws::QuickSight
       :creation_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4696,7 +4908,8 @@ module Aws::QuickSight
       :folder_id,
       :member_id,
       :member_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4713,7 +4926,8 @@ module Aws::QuickSight
       :status,
       :folder_member,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4758,7 +4972,8 @@ module Aws::QuickSight
       :permissions,
       :tags,
       :sharing_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4779,7 +4994,8 @@ module Aws::QuickSight
       :arn,
       :folder_id,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4806,7 +5022,8 @@ module Aws::QuickSight
       :group_name,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4823,7 +5040,8 @@ module Aws::QuickSight
       :group_member,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4851,7 +5069,8 @@ module Aws::QuickSight
       :description,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4869,7 +5088,8 @@ module Aws::QuickSight
       :group,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4926,7 +5146,8 @@ module Aws::QuickSight
       :policy_arn,
       :identities,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4980,7 +5201,8 @@ module Aws::QuickSight
       :identities,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5006,7 +5228,8 @@ module Aws::QuickSight
       :ingestion_id,
       :aws_account_id,
       :ingestion_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5031,7 +5254,8 @@ module Aws::QuickSight
       :ingestion_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5058,7 +5282,8 @@ module Aws::QuickSight
       :namespace,
       :identity_store,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5097,7 +5322,8 @@ module Aws::QuickSight
       :identity_store,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5119,7 +5345,8 @@ module Aws::QuickSight
       :data_set_id,
       :aws_account_id,
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5140,7 +5367,8 @@ module Aws::QuickSight
       :request_id,
       :schedule_id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5166,7 +5394,8 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5179,7 +5408,8 @@ module Aws::QuickSight
     class CreateRoleMembershipResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5207,7 +5437,8 @@ module Aws::QuickSight
       :template_id,
       :alias_name,
       :template_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5224,7 +5455,8 @@ module Aws::QuickSight
       :template_alias,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5288,7 +5520,8 @@ module Aws::QuickSight
       :version_description,
       :definition,
       :validation_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5318,7 +5551,8 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5346,7 +5580,8 @@ module Aws::QuickSight
       :theme_id,
       :alias_name,
       :theme_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5363,7 +5598,8 @@ module Aws::QuickSight
       :theme_alias,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5414,7 +5650,8 @@ module Aws::QuickSight
       :configuration,
       :permissions,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5443,7 +5680,8 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5474,7 +5712,8 @@ module Aws::QuickSight
       :dataset_arn,
       :dataset_name,
       :refresh_schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5499,7 +5738,8 @@ module Aws::QuickSight
       :dataset_arn,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5534,7 +5774,8 @@ module Aws::QuickSight
       :tags,
       :folder_arns,
       :custom_instructions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5560,7 +5801,8 @@ module Aws::QuickSight
       :refresh_arn,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5595,7 +5837,8 @@ module Aws::QuickSight
       :mir,
       :primary_visual,
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5636,7 +5879,8 @@ module Aws::QuickSight
       :dns_resolvers,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5667,7 +5911,8 @@ module Aws::QuickSight
       :availability_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5698,7 +5943,8 @@ module Aws::QuickSight
       :username,
       :password,
       :alternate_data_source_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5736,7 +5982,8 @@ module Aws::QuickSight
       :number_scale,
       :negative_value_configuration,
       :null_value_format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5750,7 +5997,8 @@ module Aws::QuickSight
     class CustomActionFilterOperation < Struct.new(
       :selected_fields_configuration,
       :target_visuals_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5761,7 +6009,8 @@ module Aws::QuickSight
     #   @return [Types::LocalNavigationConfiguration]
     class CustomActionNavigationOperation < Struct.new(
       :local_navigation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5771,7 +6020,8 @@ module Aws::QuickSight
     #   @return [Array<Types::SetParameterValueConfiguration>]
     class CustomActionSetParametersOperation < Struct.new(
       :parameter_value_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5800,7 +6050,8 @@ module Aws::QuickSight
     class CustomActionURLOperation < Struct.new(
       :url_template,
       :url_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5818,7 +6069,8 @@ module Aws::QuickSight
       :field_value,
       :color,
       :special_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5840,7 +6092,8 @@ module Aws::QuickSight
       :content_type,
       :image_scaling,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5875,7 +6128,8 @@ module Aws::QuickSight
       :actions,
       :data_set_identifier,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5924,7 +6178,8 @@ module Aws::QuickSight
       :select_all_options,
       :parameter_name,
       :null_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5967,7 +6222,8 @@ module Aws::QuickSight
       :category_values,
       :select_all_options,
       :null_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5977,7 +6233,8 @@ module Aws::QuickSight
     #   @return [String]
     class CustomInstructions < Struct.new(
       :custom_instructions_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5987,7 +6244,8 @@ module Aws::QuickSight
     #   @return [String]
     class CustomNarrativeOptions < Struct.new(
       :narrative,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6010,7 +6268,8 @@ module Aws::QuickSight
       :integer_values,
       :decimal_values,
       :date_time_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6028,7 +6287,8 @@ module Aws::QuickSight
       :arn,
       :custom_permissions_name,
       :capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6050,7 +6310,8 @@ module Aws::QuickSight
       :name,
       :sql_query,
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6065,7 +6326,8 @@ module Aws::QuickSight
     class CustomValuesConfiguration < Struct.new(
       :include_null_value,
       :custom_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6078,7 +6340,8 @@ module Aws::QuickSight
     class CustomerManagedKeyUnavailableException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6116,7 +6379,8 @@ module Aws::QuickSight
       :last_published_time,
       :last_updated_time,
       :link_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6134,7 +6398,8 @@ module Aws::QuickSight
       :type,
       :message,
       :violated_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6190,7 +6455,8 @@ module Aws::QuickSight
       :data_point_menu_label_option,
       :data_point_tooltip_option,
       :data_qa_enabled_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6240,7 +6506,8 @@ module Aws::QuickSight
       :operator,
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6250,7 +6517,8 @@ module Aws::QuickSight
     #   @return [Types::DashboardSourceTemplate]
     class DashboardSourceEntity < Struct.new(
       :source_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6264,7 +6532,8 @@ module Aws::QuickSight
     class DashboardSourceTemplate < Struct.new(
       :data_set_references,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6298,7 +6567,8 @@ module Aws::QuickSight
       :last_updated_time,
       :published_version_number,
       :last_published_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6345,7 +6615,8 @@ module Aws::QuickSight
       :description,
       :theme_arn,
       :sheets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6392,7 +6663,8 @@ module Aws::QuickSight
       :analysis_defaults,
       :options,
       :static_files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6422,7 +6694,8 @@ module Aws::QuickSight
       :status,
       :source_entity_arn,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6452,7 +6725,8 @@ module Aws::QuickSight
       :dashboard_id,
       :sheet_id,
       :visual_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6462,7 +6736,8 @@ module Aws::QuickSight
     #   @return [Types::ExportHiddenFieldsOption]
     class DashboardVisualPublishOptions < Struct.new(
       :export_hidden_fields_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6500,7 +6775,8 @@ module Aws::QuickSight
       :visual_title,
       :visual_subtitle,
       :dashboard_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6514,7 +6790,8 @@ module Aws::QuickSight
     class DataAggregation < Struct.new(
       :dataset_row_date_granularity,
       :default_date_column_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6532,7 +6809,8 @@ module Aws::QuickSight
       :field_id,
       :positive_color,
       :negative_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6546,7 +6824,8 @@ module Aws::QuickSight
     class DataColor < Struct.new(
       :color,
       :data_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6572,7 +6851,8 @@ module Aws::QuickSight
       :colors,
       :min_max_gradient,
       :empty_fill_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6594,7 +6874,8 @@ module Aws::QuickSight
       :field_value,
       :axis_binding,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6640,7 +6921,8 @@ module Aws::QuickSight
       :label_color,
       :overlap,
       :totals_visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6667,7 +6949,8 @@ module Aws::QuickSight
       :range_ends_label_type,
       :minimum_label_type,
       :maximum_label_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6685,7 +6968,8 @@ module Aws::QuickSight
       :element,
       :color,
       :time_granularity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6703,7 +6987,8 @@ module Aws::QuickSight
       :field_id,
       :field_value,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6717,7 +7002,8 @@ module Aws::QuickSight
     class DataPathSort < Struct.new(
       :direction,
       :sort_paths,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6745,7 +7031,8 @@ module Aws::QuickSight
     #   @return [String]
     class DataPathType < Struct.new(
       :pivot_table_data_path_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6763,7 +7050,8 @@ module Aws::QuickSight
       :field_id,
       :field_value,
       :data_path_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6773,7 +7061,8 @@ module Aws::QuickSight
     #   @return [String]
     class DataPointDrillUpDownOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6783,7 +7072,8 @@ module Aws::QuickSight
     #   @return [String]
     class DataPointMenuLabelOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6793,7 +7083,8 @@ module Aws::QuickSight
     #   @return [String]
     class DataPointTooltipOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6803,7 +7094,8 @@ module Aws::QuickSight
     #   @return [String]
     class DataQAEnabledOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6813,7 +7105,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class DataQnAConfigurations < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6906,7 +7199,8 @@ module Aws::QuickSight
       :dataset_parameters,
       :performance_configuration,
       :use_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6929,7 +7223,8 @@ module Aws::QuickSight
       :placeholder,
       :data_set_schema,
       :column_group_schema_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6943,7 +7238,8 @@ module Aws::QuickSight
     class DataSetIdentifierDeclaration < Struct.new(
       :identifier,
       :data_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6957,7 +7253,8 @@ module Aws::QuickSight
     class DataSetReference < Struct.new(
       :data_set_placeholder,
       :data_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6971,7 +7268,8 @@ module Aws::QuickSight
     class DataSetRefreshProperties < Struct.new(
       :refresh_configuration,
       :failure_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6981,7 +7279,8 @@ module Aws::QuickSight
     #   @return [Array<Types::ColumnSchema>]
     class DataSetSchema < Struct.new(
       :column_schema_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7031,7 +7330,8 @@ module Aws::QuickSight
       :operator,
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7077,7 +7377,8 @@ module Aws::QuickSight
       :row_level_permission_tag_configuration_applied,
       :column_level_permission_rules_applied,
       :use_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7097,7 +7398,8 @@ module Aws::QuickSight
     class DataSetUsageConfiguration < Struct.new(
       :disable_use_as_direct_query_source,
       :disable_use_as_imported_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7175,7 +7477,8 @@ module Aws::QuickSight
       :ssl_properties,
       :error_info,
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7201,7 +7504,8 @@ module Aws::QuickSight
       :credential_pair,
       :copy_source_arn,
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7215,7 +7519,8 @@ module Aws::QuickSight
     class DataSourceErrorInfo < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7332,7 +7637,8 @@ module Aws::QuickSight
       :big_query_parameters,
       :impala_parameters,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AmazonElasticsearchParameters < DataSourceParameters; end
@@ -7403,7 +7709,8 @@ module Aws::QuickSight
       :operator,
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7433,7 +7740,8 @@ module Aws::QuickSight
       :type,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7443,7 +7751,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class DataStoriesConfigurations < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7466,7 +7775,8 @@ module Aws::QuickSight
       :host,
       :port,
       :sql_endpoint_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7504,7 +7814,8 @@ module Aws::QuickSight
       :columns,
       :calculated_fields,
       :named_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7526,7 +7837,8 @@ module Aws::QuickSight
       :decimal_dataset_parameter,
       :integer_dataset_parameter,
       :date_time_dataset_parameter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7536,7 +7848,8 @@ module Aws::QuickSight
     #   @return [String]
     class DateAxisOptions < Struct.new(
       :missing_date_visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7609,7 +7922,8 @@ module Aws::QuickSight
       :date_granularity,
       :hierarchy_id,
       :format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7631,7 +7945,8 @@ module Aws::QuickSight
       :column,
       :aggregation_function,
       :format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7657,7 +7972,8 @@ module Aws::QuickSight
       :value_type,
       :time_granularity,
       :default_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7667,7 +7983,8 @@ module Aws::QuickSight
     #   @return [Array<Time>]
     class DateTimeDatasetParameterDefaultValues < Struct.new(
       :static_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7685,7 +8002,8 @@ module Aws::QuickSight
       :dynamic_value,
       :static_values,
       :rolling_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7703,7 +8021,8 @@ module Aws::QuickSight
       :date_time_format,
       :null_value_format_configuration,
       :numeric_format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7718,7 +8037,8 @@ module Aws::QuickSight
     class DateTimeHierarchy < Struct.new(
       :hierarchy_id,
       :drill_down_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7732,7 +8052,8 @@ module Aws::QuickSight
     class DateTimeParameter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7758,7 +8079,8 @@ module Aws::QuickSight
       :time_granularity,
       :value_when_unset,
       :mapped_data_set_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7784,7 +8106,8 @@ module Aws::QuickSight
       :info_icon_label_options,
       :helper_text_visibility,
       :date_icon_visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7808,7 +8131,8 @@ module Aws::QuickSight
     class DateTimeValueWhenUnsetConfiguration < Struct.new(
       :value_when_unset_option,
       :custom_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7830,7 +8154,8 @@ module Aws::QuickSight
       :name,
       :value_type,
       :default_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7840,7 +8165,8 @@ module Aws::QuickSight
     #   @return [Array<Float>]
     class DecimalDatasetParameterDefaultValues < Struct.new(
       :static_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7854,7 +8180,8 @@ module Aws::QuickSight
     class DecimalDefaultValues < Struct.new(
       :dynamic_value,
       :static_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7868,7 +8195,8 @@ module Aws::QuickSight
     class DecimalParameter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7894,7 +8222,8 @@ module Aws::QuickSight
       :default_values,
       :value_when_unset,
       :mapped_data_set_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7904,7 +8233,8 @@ module Aws::QuickSight
     #   @return [Integer]
     class DecimalPlacesConfiguration < Struct.new(
       :decimal_places,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7928,7 +8258,8 @@ module Aws::QuickSight
     class DecimalValueWhenUnsetConfiguration < Struct.new(
       :value_when_unset_option,
       :custom_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7961,7 +8292,8 @@ module Aws::QuickSight
       :type,
       :display_options,
       :commit_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7975,7 +8307,8 @@ module Aws::QuickSight
     class DefaultFilterControlConfiguration < Struct.new(
       :title,
       :control_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8009,7 +8342,8 @@ module Aws::QuickSight
       :default_text_area_options,
       :default_slider_options,
       :default_relative_date_time_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8041,7 +8375,8 @@ module Aws::QuickSight
       :type,
       :selectable_values,
       :commit_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8069,7 +8404,8 @@ module Aws::QuickSight
       :display_options,
       :type,
       :selectable_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8085,7 +8421,8 @@ module Aws::QuickSight
     class DefaultFormatting < Struct.new(
       :display_format,
       :display_format_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8095,7 +8432,8 @@ module Aws::QuickSight
     #   @return [Types::FreeFormLayoutCanvasSizeOptions]
     class DefaultFreeFormLayoutConfiguration < Struct.new(
       :canvas_size_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8105,7 +8443,8 @@ module Aws::QuickSight
     #   @return [Types::GridLayoutCanvasSizeOptions]
     class DefaultGridLayoutConfiguration < Struct.new(
       :canvas_size_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8119,7 +8458,8 @@ module Aws::QuickSight
     class DefaultInteractiveLayoutConfiguration < Struct.new(
       :grid,
       :free_form,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8137,7 +8477,8 @@ module Aws::QuickSight
       :interactive_layout_configuration,
       :paginated_layout_configuration,
       :sheet_content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8147,7 +8488,8 @@ module Aws::QuickSight
     #   @return [Types::DefaultSectionBasedLayoutConfiguration]
     class DefaultPaginatedLayoutConfiguration < Struct.new(
       :section_based,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8161,7 +8503,8 @@ module Aws::QuickSight
     class DefaultRelativeDateTimeControlOptions < Struct.new(
       :display_options,
       :commit_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8171,7 +8514,8 @@ module Aws::QuickSight
     #   @return [Types::SectionBasedLayoutCanvasSizeOptions]
     class DefaultSectionBasedLayoutConfiguration < Struct.new(
       :canvas_size_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8207,7 +8551,8 @@ module Aws::QuickSight
       :maximum_value,
       :minimum_value,
       :step_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8228,7 +8573,8 @@ module Aws::QuickSight
     class DefaultTextAreaControlOptions < Struct.new(
       :delimiter,
       :display_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8238,7 +8584,8 @@ module Aws::QuickSight
     #   @return [Types::TextFieldControlDisplayOptions]
     class DefaultTextFieldControlOptions < Struct.new(
       :display_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8252,7 +8599,8 @@ module Aws::QuickSight
     class DeleteAccountCustomizationRequest < Struct.new(
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8265,7 +8613,8 @@ module Aws::QuickSight
     class DeleteAccountCustomizationResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8279,7 +8628,8 @@ module Aws::QuickSight
     #   @return [String]
     class DeleteAccountSubscriptionRequest < Struct.new(
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8292,7 +8642,8 @@ module Aws::QuickSight
     class DeleteAccountSubscriptionResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8322,7 +8673,8 @@ module Aws::QuickSight
       :analysis_id,
       :recovery_window_in_days,
       :force_delete_without_recovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8347,7 +8699,8 @@ module Aws::QuickSight
       :analysis_id,
       :deletion_time,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8361,7 +8714,8 @@ module Aws::QuickSight
     #   @return [String]
     class DeleteBrandAssignmentRequest < Struct.new(
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8370,7 +8724,8 @@ module Aws::QuickSight
     #   @return [String]
     class DeleteBrandAssignmentResponse < Struct.new(
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8383,7 +8738,8 @@ module Aws::QuickSight
     class DeleteBrandRequest < Struct.new(
       :aws_account_id,
       :brand_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8392,7 +8748,8 @@ module Aws::QuickSight
     #   @return [String]
     class DeleteBrandResponse < Struct.new(
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8405,7 +8762,8 @@ module Aws::QuickSight
     class DeleteCustomPermissionsRequest < Struct.new(
       :aws_account_id,
       :custom_permissions_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8422,7 +8780,8 @@ module Aws::QuickSight
       :status,
       :arn,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8446,7 +8805,8 @@ module Aws::QuickSight
       :aws_account_id,
       :dashboard_id,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8467,7 +8827,8 @@ module Aws::QuickSight
       :arn,
       :dashboard_id,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8485,7 +8846,8 @@ module Aws::QuickSight
     class DeleteDataSetRefreshPropertiesRequest < Struct.new(
       :aws_account_id,
       :data_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8498,7 +8860,8 @@ module Aws::QuickSight
     class DeleteDataSetRefreshPropertiesResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8516,7 +8879,8 @@ module Aws::QuickSight
     class DeleteDataSetRequest < Struct.new(
       :aws_account_id,
       :data_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8537,7 +8901,8 @@ module Aws::QuickSight
       :data_set_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8555,7 +8920,8 @@ module Aws::QuickSight
     class DeleteDataSourceRequest < Struct.new(
       :aws_account_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8576,7 +8942,8 @@ module Aws::QuickSight
       :data_source_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8594,7 +8961,8 @@ module Aws::QuickSight
     class DeleteDefaultQBusinessApplicationRequest < Struct.new(
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8607,7 +8975,8 @@ module Aws::QuickSight
     class DeleteDefaultQBusinessApplicationResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8633,7 +9002,8 @@ module Aws::QuickSight
       :folder_id,
       :member_id,
       :member_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8646,7 +9016,8 @@ module Aws::QuickSight
     class DeleteFolderMembershipResponse < Struct.new(
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8664,7 +9035,8 @@ module Aws::QuickSight
     class DeleteFolderRequest < Struct.new(
       :aws_account_id,
       :folder_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8685,7 +9057,8 @@ module Aws::QuickSight
       :arn,
       :folder_id,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8712,7 +9085,8 @@ module Aws::QuickSight
       :group_name,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8725,7 +9099,8 @@ module Aws::QuickSight
     class DeleteGroupMembershipResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8748,7 +9123,8 @@ module Aws::QuickSight
       :group_name,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8761,7 +9137,8 @@ module Aws::QuickSight
     class DeleteGroupResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8784,7 +9161,8 @@ module Aws::QuickSight
       :aws_account_id,
       :assignment_name,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8801,7 +9179,8 @@ module Aws::QuickSight
       :assignment_name,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8819,7 +9198,8 @@ module Aws::QuickSight
     class DeleteIdentityPropagationConfigRequest < Struct.new(
       :aws_account_id,
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8832,7 +9212,8 @@ module Aws::QuickSight
     class DeleteIdentityPropagationConfigResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8850,7 +9231,8 @@ module Aws::QuickSight
     class DeleteNamespaceRequest < Struct.new(
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8863,7 +9245,8 @@ module Aws::QuickSight
     class DeleteNamespaceResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8885,7 +9268,8 @@ module Aws::QuickSight
       :data_set_id,
       :aws_account_id,
       :schedule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8906,7 +9290,8 @@ module Aws::QuickSight
       :request_id,
       :schedule_id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8929,7 +9314,8 @@ module Aws::QuickSight
       :role,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8942,7 +9328,8 @@ module Aws::QuickSight
     class DeleteRoleCustomPermissionResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8968,7 +9355,8 @@ module Aws::QuickSight
       :role,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8981,7 +9369,8 @@ module Aws::QuickSight
     class DeleteRoleMembershipResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9006,7 +9395,8 @@ module Aws::QuickSight
       :aws_account_id,
       :template_id,
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9031,7 +9421,8 @@ module Aws::QuickSight
       :alias_name,
       :arn,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9055,7 +9446,8 @@ module Aws::QuickSight
       :aws_account_id,
       :template_id,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9076,7 +9468,8 @@ module Aws::QuickSight
       :arn,
       :template_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9098,7 +9491,8 @@ module Aws::QuickSight
       :aws_account_id,
       :theme_id,
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9123,7 +9517,8 @@ module Aws::QuickSight
       :request_id,
       :status,
       :theme_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9148,7 +9543,8 @@ module Aws::QuickSight
       :aws_account_id,
       :theme_id,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9169,7 +9565,8 @@ module Aws::QuickSight
       :request_id,
       :status,
       :theme_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9191,7 +9588,8 @@ module Aws::QuickSight
       :aws_account_id,
       :topic_id,
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9216,7 +9614,8 @@ module Aws::QuickSight
       :dataset_arn,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9235,7 +9634,8 @@ module Aws::QuickSight
     class DeleteTopicRequest < Struct.new(
       :aws_account_id,
       :topic_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9256,7 +9656,8 @@ module Aws::QuickSight
       :topic_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9280,7 +9681,8 @@ module Aws::QuickSight
       :principal_id,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9293,7 +9695,8 @@ module Aws::QuickSight
     class DeleteUserByPrincipalIdResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9315,7 +9718,8 @@ module Aws::QuickSight
       :user_name,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9328,7 +9732,8 @@ module Aws::QuickSight
     class DeleteUserCustomPermissionResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9351,7 +9756,8 @@ module Aws::QuickSight
       :user_name,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9364,7 +9770,8 @@ module Aws::QuickSight
     class DeleteUserResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9384,7 +9791,8 @@ module Aws::QuickSight
     class DeleteVPCConnectionRequest < Struct.new(
       :aws_account_id,
       :vpc_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9415,7 +9823,8 @@ module Aws::QuickSight
       :availability_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9443,7 +9852,8 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       :resolved,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9472,7 +9882,8 @@ module Aws::QuickSight
       :account_customization,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9486,7 +9897,8 @@ module Aws::QuickSight
     #   @return [String]
     class DescribeAccountSettingsRequest < Struct.new(
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9509,7 +9921,8 @@ module Aws::QuickSight
       :account_settings,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9523,7 +9936,8 @@ module Aws::QuickSight
     #   @return [String]
     class DescribeAccountSubscriptionRequest < Struct.new(
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9559,7 +9973,8 @@ module Aws::QuickSight
       :account_info,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9579,7 +9994,8 @@ module Aws::QuickSight
     class DescribeAnalysisDefinitionRequest < Struct.new(
       :aws_account_id,
       :analysis_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9654,7 +10070,8 @@ module Aws::QuickSight
       :definition,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9674,7 +10091,8 @@ module Aws::QuickSight
     class DescribeAnalysisPermissionsRequest < Struct.new(
       :aws_account_id,
       :analysis_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9701,7 +10119,8 @@ module Aws::QuickSight
       :permissions,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9721,7 +10140,8 @@ module Aws::QuickSight
     class DescribeAnalysisRequest < Struct.new(
       :aws_account_id,
       :analysis_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9739,7 +10159,8 @@ module Aws::QuickSight
       :analysis,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9757,7 +10178,8 @@ module Aws::QuickSight
     class DescribeAssetBundleExportJobRequest < Struct.new(
       :aws_account_id,
       :asset_bundle_export_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9844,7 +10266,8 @@ module Aws::QuickSight
       :warnings,
       :include_folder_memberships,
       :include_folder_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9866,7 +10289,8 @@ module Aws::QuickSight
     class DescribeAssetBundleImportJobRequest < Struct.new(
       :aws_account_id,
       :asset_bundle_import_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9960,7 +10384,8 @@ module Aws::QuickSight
       :override_tags,
       :override_validation_strategy,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -9974,7 +10399,8 @@ module Aws::QuickSight
     #   @return [String]
     class DescribeBrandAssignmentRequest < Struct.new(
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9987,7 +10413,8 @@ module Aws::QuickSight
     class DescribeBrandAssignmentResponse < Struct.new(
       :request_id,
       :brand_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10000,7 +10427,8 @@ module Aws::QuickSight
     class DescribeBrandPublishedVersionRequest < Struct.new(
       :aws_account_id,
       :brand_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10017,7 +10445,8 @@ module Aws::QuickSight
       :request_id,
       :brand_detail,
       :brand_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10034,7 +10463,8 @@ module Aws::QuickSight
       :aws_account_id,
       :brand_id,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10051,7 +10481,8 @@ module Aws::QuickSight
       :request_id,
       :brand_detail,
       :brand_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10064,7 +10495,8 @@ module Aws::QuickSight
     class DescribeCustomPermissionsRequest < Struct.new(
       :aws_account_id,
       :custom_permissions_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10081,7 +10513,8 @@ module Aws::QuickSight
       :status,
       :custom_permissions,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10109,7 +10542,8 @@ module Aws::QuickSight
       :dashboard_id,
       :version_number,
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10211,7 +10645,8 @@ module Aws::QuickSight
       :status,
       :request_id,
       :dashboard_publish_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10230,7 +10665,8 @@ module Aws::QuickSight
     class DescribeDashboardPermissionsRequest < Struct.new(
       :aws_account_id,
       :dashboard_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10262,7 +10698,8 @@ module Aws::QuickSight
       :status,
       :request_id,
       :link_sharing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10290,7 +10727,8 @@ module Aws::QuickSight
       :dashboard_id,
       :version_number,
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10307,7 +10745,8 @@ module Aws::QuickSight
       :dashboard,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10329,7 +10768,8 @@ module Aws::QuickSight
       :aws_account_id,
       :dashboard_id,
       :snapshot_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10404,7 +10844,8 @@ module Aws::QuickSight
       :last_updated_time,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10426,7 +10867,8 @@ module Aws::QuickSight
       :aws_account_id,
       :dashboard_id,
       :snapshot_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10463,7 +10905,8 @@ module Aws::QuickSight
       :error_info,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10477,7 +10920,8 @@ module Aws::QuickSight
     #   @return [String]
     class DescribeDashboardsQAConfigurationRequest < Struct.new(
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10494,7 +10938,8 @@ module Aws::QuickSight
       :dashboards_qa_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10512,7 +10957,8 @@ module Aws::QuickSight
     class DescribeDataSetPermissionsRequest < Struct.new(
       :aws_account_id,
       :data_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10537,7 +10983,8 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10555,7 +11002,8 @@ module Aws::QuickSight
     class DescribeDataSetRefreshPropertiesRequest < Struct.new(
       :aws_account_id,
       :data_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10572,7 +11020,8 @@ module Aws::QuickSight
       :request_id,
       :status,
       :data_set_refresh_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10590,7 +11039,8 @@ module Aws::QuickSight
     class DescribeDataSetRequest < Struct.new(
       :aws_account_id,
       :data_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10607,7 +11057,8 @@ module Aws::QuickSight
       :data_set,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10625,7 +11076,8 @@ module Aws::QuickSight
     class DescribeDataSourcePermissionsRequest < Struct.new(
       :aws_account_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10650,7 +11102,8 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10668,7 +11121,8 @@ module Aws::QuickSight
     class DescribeDataSourceRequest < Struct.new(
       :aws_account_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10685,7 +11139,8 @@ module Aws::QuickSight
       :data_source,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10703,7 +11158,8 @@ module Aws::QuickSight
     class DescribeDefaultQBusinessApplicationRequest < Struct.new(
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10720,7 +11176,8 @@ module Aws::QuickSight
       :request_id,
       :status,
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10750,7 +11207,8 @@ module Aws::QuickSight
       :namespace,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10779,7 +11237,8 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10797,7 +11256,8 @@ module Aws::QuickSight
     class DescribeFolderRequest < Struct.new(
       :aws_account_id,
       :folder_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10822,7 +11282,8 @@ module Aws::QuickSight
       :namespace,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10851,7 +11312,8 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10873,7 +11335,8 @@ module Aws::QuickSight
       :status,
       :folder,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10900,7 +11363,8 @@ module Aws::QuickSight
       :group_name,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10918,7 +11382,8 @@ module Aws::QuickSight
       :group_member,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10941,7 +11406,8 @@ module Aws::QuickSight
       :group_name,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10958,7 +11424,8 @@ module Aws::QuickSight
       :group,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10981,7 +11448,8 @@ module Aws::QuickSight
       :aws_account_id,
       :assignment_name,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10998,7 +11466,8 @@ module Aws::QuickSight
       :iam_policy_assignment,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11020,7 +11489,8 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       :ingestion_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11037,7 +11507,8 @@ module Aws::QuickSight
       :ingestion,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11051,7 +11522,8 @@ module Aws::QuickSight
     #   @return [String]
     class DescribeIpRestrictionRequest < Struct.new(
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11085,7 +11557,8 @@ module Aws::QuickSight
       :enabled,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11103,7 +11576,8 @@ module Aws::QuickSight
     class DescribeKeyRegistrationRequest < Struct.new(
       :aws_account_id,
       :default_key_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11124,7 +11598,8 @@ module Aws::QuickSight
       :key_registration,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11142,7 +11617,8 @@ module Aws::QuickSight
     class DescribeNamespaceRequest < Struct.new(
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11162,7 +11638,8 @@ module Aws::QuickSight
       :namespace,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11176,7 +11653,8 @@ module Aws::QuickSight
     #   @return [String]
     class DescribeQPersonalizationConfigurationRequest < Struct.new(
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11193,7 +11671,8 @@ module Aws::QuickSight
       :personalization_mode,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11207,7 +11686,8 @@ module Aws::QuickSight
     #   @return [String]
     class DescribeQuickSightQSearchConfigurationRequest < Struct.new(
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11224,7 +11704,8 @@ module Aws::QuickSight
       :q_search_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11246,7 +11727,8 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       :schedule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11267,7 +11749,8 @@ module Aws::QuickSight
       :status,
       :request_id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11289,7 +11772,8 @@ module Aws::QuickSight
       :role,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11306,7 +11790,8 @@ module Aws::QuickSight
       :custom_permissions_name,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11332,7 +11817,8 @@ module Aws::QuickSight
       :aws_account_id,
       :template_id,
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11349,7 +11835,8 @@ module Aws::QuickSight
       :template_alias,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11379,7 +11866,8 @@ module Aws::QuickSight
       :template_id,
       :version_number,
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11454,7 +11942,8 @@ module Aws::QuickSight
       :definition,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11472,7 +11961,8 @@ module Aws::QuickSight
     class DescribeTemplatePermissionsRequest < Struct.new(
       :aws_account_id,
       :template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11497,7 +11987,8 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11527,7 +12018,8 @@ module Aws::QuickSight
       :template_id,
       :version_number,
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11544,7 +12036,8 @@ module Aws::QuickSight
       :template,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11567,7 +12060,8 @@ module Aws::QuickSight
       :aws_account_id,
       :theme_id,
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11584,7 +12078,8 @@ module Aws::QuickSight
       :theme_alias,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11602,7 +12097,8 @@ module Aws::QuickSight
     class DescribeThemePermissionsRequest < Struct.new(
       :aws_account_id,
       :theme_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11627,7 +12123,8 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11657,7 +12154,8 @@ module Aws::QuickSight
       :theme_id,
       :version_number,
       :alias_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11674,7 +12172,8 @@ module Aws::QuickSight
       :theme,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11693,7 +12192,8 @@ module Aws::QuickSight
     class DescribeTopicPermissionsRequest < Struct.new(
       :aws_account_id,
       :topic_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11718,7 +12218,8 @@ module Aws::QuickSight
       :permissions,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11741,7 +12242,8 @@ module Aws::QuickSight
       :aws_account_id,
       :topic_id,
       :refresh_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11758,7 +12260,8 @@ module Aws::QuickSight
       :refresh_details,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11781,7 +12284,8 @@ module Aws::QuickSight
       :aws_account_id,
       :topic_id,
       :dataset_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11811,7 +12315,8 @@ module Aws::QuickSight
       :refresh_schedule,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11829,7 +12334,8 @@ module Aws::QuickSight
     class DescribeTopicRequest < Struct.new(
       :aws_account_id,
       :topic_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11858,7 +12364,8 @@ module Aws::QuickSight
       :request_id,
       :status,
       :custom_instructions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11881,7 +12388,8 @@ module Aws::QuickSight
       :user_name,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11898,7 +12406,8 @@ module Aws::QuickSight
       :user,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11918,7 +12427,8 @@ module Aws::QuickSight
     class DescribeVPCConnectionRequest < Struct.new(
       :aws_account_id,
       :vpc_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11935,7 +12445,8 @@ module Aws::QuickSight
       :vpc_connection,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -11967,7 +12478,8 @@ module Aws::QuickSight
       :source_parameter_name,
       :source_field,
       :source_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11985,7 +12497,8 @@ module Aws::QuickSight
       :numerical_dimension_field,
       :categorical_dimension_field,
       :date_dimension_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12042,7 +12555,8 @@ module Aws::QuickSight
       :unit_scaler,
       :negative_format,
       :currency_symbol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12063,7 +12577,8 @@ module Aws::QuickSight
     class DomainNotWhitelistedException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12073,7 +12588,8 @@ module Aws::QuickSight
     #   @return [String]
     class DonutCenterOptions < Struct.new(
       :label_visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12105,7 +12621,8 @@ module Aws::QuickSight
     class DonutOptions < Struct.new(
       :arc_options,
       :donut_center_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12124,7 +12641,8 @@ module Aws::QuickSight
       :numeric_equality_filter,
       :category_filter,
       :time_range_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12143,7 +12661,8 @@ module Aws::QuickSight
       :select_all_options,
       :title_options,
       :info_icon_label_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12161,7 +12680,8 @@ module Aws::QuickSight
       :user_name_column,
       :group_name_column,
       :default_value_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12180,7 +12700,8 @@ module Aws::QuickSight
       :visual_id,
       :data_set_identifier,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12190,7 +12711,8 @@ module Aws::QuickSight
     #   @return [String]
     class Entity < Struct.new(
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12204,7 +12726,8 @@ module Aws::QuickSight
     class ErrorInfo < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12218,7 +12741,8 @@ module Aws::QuickSight
     class ExasolParameters < Struct.new(
       :host,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12248,7 +12772,8 @@ module Aws::QuickSight
       :amount,
       :granularity,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12263,7 +12788,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class ExecutiveSummaryConfigurations < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12286,7 +12812,8 @@ module Aws::QuickSight
       :hierarchy_id,
       :columns,
       :drill_down_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12296,7 +12823,8 @@ module Aws::QuickSight
     #   @return [String]
     class ExportHiddenFieldsOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12306,7 +12834,8 @@ module Aws::QuickSight
     #   @return [String]
     class ExportToCSVOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12316,7 +12845,8 @@ module Aws::QuickSight
     #   @return [String]
     class ExportWithHiddenFieldsOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12339,7 +12869,8 @@ module Aws::QuickSight
       :message,
       :status_code,
       :sender_fault,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -12374,7 +12905,8 @@ module Aws::QuickSight
       :aggregation_visibility,
       :tooltip_title_type,
       :tooltip_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12388,7 +12920,8 @@ module Aws::QuickSight
     class FieldFolder < Struct.new(
       :description,
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12403,7 +12936,8 @@ module Aws::QuickSight
     class FieldLabelType < Struct.new(
       :field_id,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12421,7 +12955,8 @@ module Aws::QuickSight
       :field_id,
       :axis_binding,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12447,7 +12982,8 @@ module Aws::QuickSight
     class FieldSort < Struct.new(
       :field_id,
       :direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12461,7 +12997,8 @@ module Aws::QuickSight
     class FieldSortOptions < Struct.new(
       :field_sort,
       :column_sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12483,7 +13020,8 @@ module Aws::QuickSight
       :label,
       :visibility,
       :tooltip_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12497,7 +13035,8 @@ module Aws::QuickSight
     class FilledMapAggregatedFieldWells < Struct.new(
       :geospatial,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12507,7 +13046,8 @@ module Aws::QuickSight
     #   @return [Array<Types::FilledMapConditionalFormattingOption>]
     class FilledMapConditionalFormatting < Struct.new(
       :conditional_formatting_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12517,7 +13057,8 @@ module Aws::QuickSight
     #   @return [Types::FilledMapShapeConditionalFormatting]
     class FilledMapConditionalFormattingOption < Struct.new(
       :shape,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12551,7 +13092,8 @@ module Aws::QuickSight
       :window_options,
       :map_style_options,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12562,7 +13104,8 @@ module Aws::QuickSight
     #   @return [Types::FilledMapAggregatedFieldWells]
     class FilledMapFieldWells < Struct.new(
       :filled_map_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12576,7 +13119,8 @@ module Aws::QuickSight
     class FilledMapShapeConditionalFormatting < Struct.new(
       :field_id,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12586,7 +13130,8 @@ module Aws::QuickSight
     #   @return [Array<Types::FieldSortOptions>]
     class FilledMapSortConfiguration < Struct.new(
       :category_sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12625,7 +13170,8 @@ module Aws::QuickSight
       :column_hierarchies,
       :actions,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12666,7 +13212,8 @@ module Aws::QuickSight
       :relative_dates_filter,
       :top_bottom_filter,
       :nested_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12684,7 +13231,8 @@ module Aws::QuickSight
       :metric_operand,
       :function,
       :sort_direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12723,7 +13271,8 @@ module Aws::QuickSight
       :slider,
       :relative_date_time,
       :cross_sheet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12741,7 +13290,8 @@ module Aws::QuickSight
       :filter_control_id,
       :source_filter_id,
       :cascading_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12781,7 +13331,8 @@ module Aws::QuickSight
       :display_options,
       :type,
       :commit_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12829,7 +13380,8 @@ module Aws::QuickSight
       :selectable_values,
       :cascading_control_configuration,
       :commit_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12869,7 +13421,8 @@ module Aws::QuickSight
       :scope_configuration,
       :status,
       :cross_dataset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12912,7 +13465,8 @@ module Aws::QuickSight
       :category_values,
       :select_all_options,
       :null_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12956,7 +13510,8 @@ module Aws::QuickSight
       :type,
       :selectable_values,
       :cascading_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12967,7 +13522,8 @@ module Aws::QuickSight
     #   @return [String]
     class FilterOperation < Struct.new(
       :condition_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12993,7 +13549,8 @@ module Aws::QuickSight
       :selected_fields,
       :selected_field_options,
       :selected_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13004,7 +13561,8 @@ module Aws::QuickSight
     #   @return [Types::SameSheetTargetVisualConfiguration]
     class FilterOperationTargetVisualsConfiguration < Struct.new(
       :same_sheet_target_visual_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13030,7 +13588,8 @@ module Aws::QuickSight
       :source_filter_id,
       :display_options,
       :commit_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13045,7 +13604,8 @@ module Aws::QuickSight
     class FilterScopeConfiguration < Struct.new(
       :selected_sheets,
       :all_sheets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13055,7 +13615,8 @@ module Aws::QuickSight
     #   @return [Array<String>]
     class FilterSelectableValues < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13103,7 +13664,8 @@ module Aws::QuickSight
       :maximum_value,
       :minimum_value,
       :step_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13136,7 +13698,8 @@ module Aws::QuickSight
       :source_filter_id,
       :delimiter,
       :display_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13158,7 +13721,8 @@ module Aws::QuickSight
       :title,
       :source_filter_id,
       :display_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13196,7 +13760,8 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       :sharing_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13210,7 +13775,8 @@ module Aws::QuickSight
     class FolderMember < Struct.new(
       :member_id,
       :member_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13261,7 +13827,8 @@ module Aws::QuickSight
       :operator,
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13295,7 +13862,8 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       :sharing_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13305,7 +13873,8 @@ module Aws::QuickSight
     #   @return [String]
     class Font < Struct.new(
       :font_family,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13335,7 +13904,8 @@ module Aws::QuickSight
       :font_weight,
       :font_style,
       :font_family,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13349,7 +13919,8 @@ module Aws::QuickSight
     class FontSize < Struct.new(
       :relative,
       :absolute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13359,7 +13930,8 @@ module Aws::QuickSight
     #   @return [String]
     class FontWeight < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13420,7 +13992,8 @@ module Aws::QuickSight
       :prediction_interval,
       :seasonality,
       :custom_seasonality_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -13441,7 +14014,8 @@ module Aws::QuickSight
     class ForecastConfiguration < Struct.new(
       :forecast_properties,
       :scenario,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13455,7 +14029,8 @@ module Aws::QuickSight
     class ForecastScenario < Struct.new(
       :what_if_point_scenario,
       :what_if_range_scenario,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13473,7 +14048,8 @@ module Aws::QuickSight
       :string_format_configuration,
       :number_format_configuration,
       :date_time_format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13483,7 +14059,8 @@ module Aws::QuickSight
     #   @return [Types::FreeFormLayoutScreenCanvasSizeOptions]
     class FreeFormLayoutCanvasSizeOptions < Struct.new(
       :screen_canvas_size_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13497,7 +14074,8 @@ module Aws::QuickSight
     class FreeFormLayoutConfiguration < Struct.new(
       :elements,
       :canvas_size_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13551,7 +14129,8 @@ module Aws::QuickSight
       :selected_border_style,
       :background_style,
       :loading_animation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13565,7 +14144,8 @@ module Aws::QuickSight
     class FreeFormLayoutElementBackgroundStyle < Struct.new(
       :visibility,
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13579,7 +14159,8 @@ module Aws::QuickSight
     class FreeFormLayoutElementBorderStyle < Struct.new(
       :visibility,
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13589,7 +14170,8 @@ module Aws::QuickSight
     #   @return [String]
     class FreeFormLayoutScreenCanvasSizeOptions < Struct.new(
       :optimized_view_port_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13599,7 +14181,8 @@ module Aws::QuickSight
     #   @return [Array<Types::FreeFormLayoutElement>]
     class FreeFormSectionLayoutConfiguration < Struct.new(
       :elements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13613,7 +14196,8 @@ module Aws::QuickSight
     class FunnelChartAggregatedFieldWells < Struct.new(
       :category,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13651,7 +14235,8 @@ module Aws::QuickSight
       :data_label_options,
       :visual_palette,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13686,7 +14271,8 @@ module Aws::QuickSight
       :label_font_configuration,
       :label_color,
       :measure_data_label_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13697,7 +14283,8 @@ module Aws::QuickSight
     #   @return [Types::FunnelChartAggregatedFieldWells]
     class FunnelChartFieldWells < Struct.new(
       :funnel_chart_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13711,7 +14298,8 @@ module Aws::QuickSight
     class FunnelChartSortConfiguration < Struct.new(
       :category_sort,
       :category_items_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13746,7 +14334,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13756,7 +14345,8 @@ module Aws::QuickSight
     #   @return [Types::ConditionalFormattingColor]
     class GaugeChartArcConditionalFormatting < Struct.new(
       :foreground_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13770,7 +14360,8 @@ module Aws::QuickSight
     class GaugeChartColorConfiguration < Struct.new(
       :foreground_color,
       :background_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13780,7 +14371,8 @@ module Aws::QuickSight
     #   @return [Array<Types::GaugeChartConditionalFormattingOption>]
     class GaugeChartConditionalFormatting < Struct.new(
       :conditional_formatting_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13794,7 +14386,8 @@ module Aws::QuickSight
     class GaugeChartConditionalFormattingOption < Struct.new(
       :primary_value,
       :arc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13828,7 +14421,8 @@ module Aws::QuickSight
       :visual_palette,
       :color_configuration,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13842,7 +14436,8 @@ module Aws::QuickSight
     class GaugeChartFieldWells < Struct.new(
       :values,
       :target_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13868,7 +14463,8 @@ module Aws::QuickSight
       :arc_axis,
       :arc,
       :primary_value_font_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13882,7 +14478,8 @@ module Aws::QuickSight
     class GaugeChartPrimaryValueConditionalFormatting < Struct.new(
       :text_color,
       :icon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13917,7 +14514,8 @@ module Aws::QuickSight
       :conditional_formatting,
       :actions,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13963,7 +14561,8 @@ module Aws::QuickSight
       :authorized_resource_arns,
       :experience_configuration,
       :allowed_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -13984,7 +14583,8 @@ module Aws::QuickSight
       :status,
       :request_id,
       :anonymous_user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14021,7 +14621,8 @@ module Aws::QuickSight
       :user_arn,
       :experience_configuration,
       :allowed_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14038,7 +14639,8 @@ module Aws::QuickSight
       :embed_url,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14069,7 +14671,8 @@ module Aws::QuickSight
       :session_lifetime_in_minutes,
       :experience_configuration,
       :allowed_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14086,7 +14689,8 @@ module Aws::QuickSight
       :embed_url,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14129,7 +14733,8 @@ module Aws::QuickSight
       :question_id,
       :answer_id,
       :question_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14139,7 +14744,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class GenerativeAuthoringConfigurations < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14162,7 +14768,8 @@ module Aws::QuickSight
       :name,
       :country_code,
       :columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14184,7 +14791,8 @@ module Aws::QuickSight
       :null_data_visibility,
       :null_data_settings,
       :default_opacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14198,7 +14806,8 @@ module Aws::QuickSight
     class GeospatialCategoricalDataColor < Struct.new(
       :color,
       :data_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14208,7 +14817,8 @@ module Aws::QuickSight
     #   @return [Float]
     class GeospatialCircleRadius < Struct.new(
       :radius,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14230,7 +14840,8 @@ module Aws::QuickSight
       :stroke_color,
       :stroke_width,
       :circle_radius,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14248,7 +14859,8 @@ module Aws::QuickSight
       :solid,
       :gradient,
       :categorical,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14271,7 +14883,8 @@ module Aws::QuickSight
       :south,
       :west,
       :east,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14281,7 +14894,8 @@ module Aws::QuickSight
     #   @return [Types::GeospatialStaticFileSource]
     class GeospatialDataSourceItem < Struct.new(
       :static_file_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14303,7 +14917,8 @@ module Aws::QuickSight
       :null_data_visibility,
       :null_data_settings,
       :default_opacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14317,7 +14932,8 @@ module Aws::QuickSight
     class GeospatialGradientStepColor < Struct.new(
       :color,
       :data_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14332,7 +14948,8 @@ module Aws::QuickSight
     #   @return [Array<Types::GeospatialHeatmapDataColor>]
     class GeospatialHeatmapColorScale < Struct.new(
       :colors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14342,7 +14959,8 @@ module Aws::QuickSight
     #   @return [Types::GeospatialHeatmapColorScale]
     class GeospatialHeatmapConfiguration < Struct.new(
       :heatmap_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14352,7 +14970,8 @@ module Aws::QuickSight
     #   @return [String]
     class GeospatialHeatmapDataColor < Struct.new(
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14366,7 +14985,8 @@ module Aws::QuickSight
     class GeospatialLayerColorField < Struct.new(
       :color_dimensions_fields,
       :color_values_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14384,7 +15004,8 @@ module Aws::QuickSight
       :point_layer,
       :line_layer,
       :polygon_layer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14426,7 +15047,8 @@ module Aws::QuickSight
       :tooltip,
       :join_definition,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14444,7 +15066,8 @@ module Aws::QuickSight
       :shape_key_field,
       :dataset_key_field,
       :color_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14470,7 +15093,8 @@ module Aws::QuickSight
       :map_state,
       :map_style,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14480,7 +15104,8 @@ module Aws::QuickSight
     #   @return [Types::GeospatialLineStyle]
     class GeospatialLineLayer < Struct.new(
       :style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14490,7 +15115,8 @@ module Aws::QuickSight
     #   @return [Types::GeospatialLineSymbolStyle]
     class GeospatialLineStyle < Struct.new(
       :line_symbol_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14504,7 +15130,8 @@ module Aws::QuickSight
     class GeospatialLineSymbolStyle < Struct.new(
       :fill_color,
       :line_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14514,7 +15141,8 @@ module Aws::QuickSight
     #   @return [Float]
     class GeospatialLineWidth < Struct.new(
       :line_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14532,7 +15160,8 @@ module Aws::QuickSight
       :geospatial,
       :values,
       :colors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14570,7 +15199,8 @@ module Aws::QuickSight
       :point_style_options,
       :visual_palette,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14581,7 +15211,8 @@ module Aws::QuickSight
     #   @return [Types::GeospatialMapAggregatedFieldWells]
     class GeospatialMapFieldWells < Struct.new(
       :geospatial_map_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14596,7 +15227,8 @@ module Aws::QuickSight
     class GeospatialMapState < Struct.new(
       :bounds,
       :map_navigation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14614,7 +15246,8 @@ module Aws::QuickSight
       :base_map_style,
       :background_color,
       :base_map_visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14624,7 +15257,8 @@ module Aws::QuickSight
     #   @return [String]
     class GeospatialMapStyleOptions < Struct.new(
       :base_map_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14659,7 +15293,8 @@ module Aws::QuickSight
       :column_hierarchies,
       :actions,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14669,7 +15304,8 @@ module Aws::QuickSight
     #   @return [Types::GeospatialNullSymbolStyle]
     class GeospatialNullDataSettings < Struct.new(
       :symbol_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14687,7 +15323,8 @@ module Aws::QuickSight
       :fill_color,
       :stroke_color,
       :stroke_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14697,7 +15334,8 @@ module Aws::QuickSight
     #   @return [Types::GeospatialPointStyle]
     class GeospatialPointLayer < Struct.new(
       :style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14707,7 +15345,8 @@ module Aws::QuickSight
     #   @return [Types::GeospatialCircleSymbolStyle]
     class GeospatialPointStyle < Struct.new(
       :circle_symbol_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14725,7 +15364,8 @@ module Aws::QuickSight
       :selected_point_style,
       :cluster_marker_configuration,
       :heatmap_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14735,7 +15375,8 @@ module Aws::QuickSight
     #   @return [Types::GeospatialPolygonStyle]
     class GeospatialPolygonLayer < Struct.new(
       :style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14745,7 +15386,8 @@ module Aws::QuickSight
     #   @return [Types::GeospatialPolygonSymbolStyle]
     class GeospatialPolygonStyle < Struct.new(
       :polygon_symbol_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14763,7 +15405,8 @@ module Aws::QuickSight
       :fill_color,
       :stroke_color,
       :stroke_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14777,7 +15420,8 @@ module Aws::QuickSight
     class GeospatialSolidColor < Struct.new(
       :color,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14787,7 +15431,8 @@ module Aws::QuickSight
     #   @return [String]
     class GeospatialStaticFileSource < Struct.new(
       :static_file_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14801,7 +15446,8 @@ module Aws::QuickSight
     class GeospatialWindowOptions < Struct.new(
       :bounds,
       :map_zoom_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14872,7 +15518,8 @@ module Aws::QuickSight
       :user_arn,
       :namespace,
       :additional_dashboard_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14893,7 +15540,8 @@ module Aws::QuickSight
       :embed_url,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -14969,7 +15617,8 @@ module Aws::QuickSight
       :entry_point,
       :session_lifetime_in_minutes,
       :user_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -14989,7 +15638,8 @@ module Aws::QuickSight
       :embed_url,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15008,7 +15658,8 @@ module Aws::QuickSight
     class GlobalTableBorderOptions < Struct.new(
       :uniform_border,
       :side_specific_border,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15018,7 +15669,8 @@ module Aws::QuickSight
     #   @return [Array<Types::GradientStop>]
     class GradientColor < Struct.new(
       :stops,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15036,7 +15688,8 @@ module Aws::QuickSight
       :gradient_offset,
       :data_value,
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15052,7 +15705,8 @@ module Aws::QuickSight
     #   @return [Types::GridLayoutScreenCanvasSizeOptions]
     class GridLayoutCanvasSizeOptions < Struct.new(
       :screen_canvas_size_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15067,7 +15721,8 @@ module Aws::QuickSight
     class GridLayoutConfiguration < Struct.new(
       :elements,
       :canvas_size_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15097,7 +15752,8 @@ module Aws::QuickSight
       :column_span,
       :row_index,
       :row_span,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15123,7 +15779,8 @@ module Aws::QuickSight
     class GridLayoutScreenCanvasSizeOptions < Struct.new(
       :resize_option,
       :optimized_view_port_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15146,7 +15803,8 @@ module Aws::QuickSight
       :group_name,
       :description,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15161,7 +15819,8 @@ module Aws::QuickSight
     class GroupMember < Struct.new(
       :arn,
       :member_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15183,7 +15842,8 @@ module Aws::QuickSight
       :operator,
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15209,7 +15869,8 @@ module Aws::QuickSight
       :time,
       :value,
       :period_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15220,7 +15881,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class GutterStyle < Struct.new(
       :show,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15243,7 +15905,8 @@ module Aws::QuickSight
       :section_id,
       :layout,
       :style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15261,7 +15924,8 @@ module Aws::QuickSight
       :rows,
       :columns,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15311,7 +15975,8 @@ module Aws::QuickSight
       :data_labels,
       :tooltip,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15322,7 +15987,8 @@ module Aws::QuickSight
     #   @return [Types::HeatMapAggregatedFieldWells]
     class HeatMapFieldWells < Struct.new(
       :heat_map_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15344,7 +16010,8 @@ module Aws::QuickSight
       :heat_map_column_sort,
       :heat_map_row_items_limit_configuration,
       :heat_map_column_items_limit_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15379,7 +16046,8 @@ module Aws::QuickSight
       :column_hierarchies,
       :actions,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15389,7 +16057,8 @@ module Aws::QuickSight
     #   @return [Array<Types::MeasureField>]
     class HistogramAggregatedFieldWells < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15411,7 +16080,8 @@ module Aws::QuickSight
       :bin_count,
       :bin_width,
       :start_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15458,7 +16128,8 @@ module Aws::QuickSight
       :tooltip,
       :visual_palette,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15468,7 +16139,8 @@ module Aws::QuickSight
     #   @return [Types::HistogramAggregatedFieldWells]
     class HistogramFieldWells < Struct.new(
       :histogram_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15499,7 +16171,8 @@ module Aws::QuickSight
       :chart_configuration,
       :actions,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15529,7 +16202,8 @@ module Aws::QuickSight
       :policy_arn,
       :identities,
       :assignment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15543,7 +16217,8 @@ module Aws::QuickSight
     class IAMPolicyAssignmentSummary < Struct.new(
       :assignment_name,
       :assignment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15553,7 +16228,8 @@ module Aws::QuickSight
     #   @return [String]
     class Identifier < Struct.new(
       :identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15563,7 +16239,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class IdentityCenterConfiguration < Struct.new(
       :enable_identity_propagation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15582,7 +16259,8 @@ module Aws::QuickSight
     class IdentityTypeNotSupportedException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15596,7 +16274,8 @@ module Aws::QuickSight
     class Image < Struct.new(
       :source,
       :generated_image_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15606,7 +16285,8 @@ module Aws::QuickSight
     #   @return [Types::ImageSource]
     class ImageConfiguration < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15644,7 +16324,8 @@ module Aws::QuickSight
       :status,
       :trigger,
       :action_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15664,7 +16345,8 @@ module Aws::QuickSight
       :navigation_operation,
       :url_operation,
       :set_parameters_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15674,7 +16356,8 @@ module Aws::QuickSight
     #   @return [Types::ImageMenuOption]
     class ImageInteractionOptions < Struct.new(
       :image_menu_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15684,7 +16367,8 @@ module Aws::QuickSight
     #   @return [String]
     class ImageMenuOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15702,7 +16386,8 @@ module Aws::QuickSight
       :original,
       :height64,
       :height32,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15712,7 +16397,8 @@ module Aws::QuickSight
     #   @return [Types::ImageConfiguration]
     class ImageSetConfiguration < Struct.new(
       :original,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15727,7 +16413,8 @@ module Aws::QuickSight
       :public_url,
       :s3_uri,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PublicUrl < ImageSource; end
@@ -15745,7 +16432,8 @@ module Aws::QuickSight
     class ImageStaticFile < Struct.new(
       :static_file_id,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15767,7 +16455,8 @@ module Aws::QuickSight
       :port,
       :database,
       :sql_endpoint_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15777,7 +16466,8 @@ module Aws::QuickSight
     #   @return [Types::LookbackWindow]
     class IncrementalRefresh < Struct.new(
       :lookback_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15827,7 +16517,8 @@ module Aws::QuickSight
       :ingestion_size_in_bytes,
       :request_source,
       :request_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -15843,7 +16534,8 @@ module Aws::QuickSight
     #   @return [Types::CategoryInnerFilter]
     class InnerFilter < Struct.new(
       :category_inner_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15861,7 +16553,8 @@ module Aws::QuickSight
       :name,
       :type,
       :sub_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15879,7 +16572,8 @@ module Aws::QuickSight
       :computations,
       :custom_narrative,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15914,7 +16608,8 @@ module Aws::QuickSight
       :actions,
       :data_set_identifier,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15936,7 +16631,8 @@ module Aws::QuickSight
       :name,
       :value_type,
       :default_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15946,7 +16642,8 @@ module Aws::QuickSight
     #   @return [Array<Integer>]
     class IntegerDatasetParameterDefaultValues < Struct.new(
       :static_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15960,7 +16657,8 @@ module Aws::QuickSight
     class IntegerDefaultValues < Struct.new(
       :dynamic_value,
       :static_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -15974,7 +16672,8 @@ module Aws::QuickSight
     class IntegerParameter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16000,7 +16699,8 @@ module Aws::QuickSight
       :default_values,
       :value_when_unset,
       :mapped_data_set_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16025,7 +16725,8 @@ module Aws::QuickSight
     class IntegerValueWhenUnsetConfiguration < Struct.new(
       :value_when_unset_option,
       :custom_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -16043,7 +16744,8 @@ module Aws::QuickSight
     class InternalFailureException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16052,7 +16754,8 @@ module Aws::QuickSight
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16065,7 +16768,8 @@ module Aws::QuickSight
     class InvalidNextTokenException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16078,7 +16782,8 @@ module Aws::QuickSight
     class InvalidParameterValueException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16091,7 +16796,8 @@ module Aws::QuickSight
     class InvalidRequestException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16105,7 +16811,8 @@ module Aws::QuickSight
     class InvalidTopicReviewedAnswer < Struct.new(
       :answer_id,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16133,7 +16840,8 @@ module Aws::QuickSight
     class ItemsLimitConfiguration < Struct.new(
       :items_limit,
       :other_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -16148,7 +16856,8 @@ module Aws::QuickSight
     #   @return [String]
     class JiraParameters < Struct.new(
       :site_base_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16178,7 +16887,8 @@ module Aws::QuickSight
       :right_join_key_properties,
       :type,
       :on_clause,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16189,7 +16899,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class JoinKeyProperties < Struct.new(
       :unique_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -16208,7 +16919,8 @@ module Aws::QuickSight
     class KPIActualValueConditionalFormatting < Struct.new(
       :text_color,
       :icon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16222,7 +16934,8 @@ module Aws::QuickSight
     class KPIComparisonValueConditionalFormatting < Struct.new(
       :text_color,
       :icon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16232,7 +16945,8 @@ module Aws::QuickSight
     #   @return [Array<Types::KPIConditionalFormattingOption>]
     class KPIConditionalFormatting < Struct.new(
       :conditional_formatting_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16254,7 +16968,8 @@ module Aws::QuickSight
       :progress_bar,
       :actual_value,
       :comparison_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16276,7 +16991,8 @@ module Aws::QuickSight
       :sort_configuration,
       :kpi_options,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16294,7 +17010,8 @@ module Aws::QuickSight
       :values,
       :target_values,
       :trend_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16336,7 +17053,8 @@ module Aws::QuickSight
       :secondary_value_font_configuration,
       :sparkline,
       :visual_layout_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16350,7 +17068,8 @@ module Aws::QuickSight
     class KPIPrimaryValueConditionalFormatting < Struct.new(
       :text_color,
       :icon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16360,7 +17079,8 @@ module Aws::QuickSight
     #   @return [Types::ConditionalFormattingColor]
     class KPIProgressBarConditionalFormatting < Struct.new(
       :foreground_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16370,7 +17090,8 @@ module Aws::QuickSight
     #   @return [Array<Types::FieldSortOptions>]
     class KPISortConfiguration < Struct.new(
       :trend_group_sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16392,7 +17113,8 @@ module Aws::QuickSight
       :type,
       :color,
       :tooltip_visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16431,7 +17153,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16441,7 +17164,8 @@ module Aws::QuickSight
     #   @return [Types::KPIVisualStandardLayout]
     class KPIVisualLayoutOptions < Struct.new(
       :standard_layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16451,7 +17175,8 @@ module Aws::QuickSight
     #   @return [String]
     class KPIVisualStandardLayout < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16469,7 +17194,8 @@ module Aws::QuickSight
       :visibility,
       :font_configuration,
       :custom_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16507,7 +17233,8 @@ module Aws::QuickSight
       :status,
       :trigger,
       :action_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16531,7 +17258,8 @@ module Aws::QuickSight
       :navigation_operation,
       :url_operation,
       :set_parameters_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16561,7 +17289,8 @@ module Aws::QuickSight
       :chart_configuration,
       :data_set_identifier,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16573,7 +17302,8 @@ module Aws::QuickSight
     #   @return [Types::LayoutConfiguration]
     class Layout < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16592,7 +17322,8 @@ module Aws::QuickSight
       :grid_layout,
       :free_form_layout,
       :section_based_layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16646,7 +17377,8 @@ module Aws::QuickSight
       :width,
       :height,
       :value_font_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16663,7 +17395,8 @@ module Aws::QuickSight
       :message,
       :resource_type,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16685,7 +17418,8 @@ module Aws::QuickSight
       :values,
       :colors,
       :small_multiples,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16775,7 +17509,8 @@ module Aws::QuickSight
       :contribution_analysis_defaults,
       :visual_palette,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16793,7 +17528,8 @@ module Aws::QuickSight
       :axis_binding,
       :line_style_settings,
       :marker_style_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16803,7 +17539,8 @@ module Aws::QuickSight
     #   @return [Types::LineChartAggregatedFieldWells]
     class LineChartFieldWells < Struct.new(
       :line_chart_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16853,7 +17590,8 @@ module Aws::QuickSight
       :line_interpolation,
       :line_style,
       :line_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16897,7 +17635,8 @@ module Aws::QuickSight
       :marker_shape,
       :marker_size,
       :marker_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16911,7 +17650,8 @@ module Aws::QuickSight
     class LineChartSeriesSettings < Struct.new(
       :line_style_settings,
       :marker_style_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16937,7 +17677,8 @@ module Aws::QuickSight
       :color_items_limit_configuration,
       :small_multiples_sort,
       :small_multiples_limit_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16972,7 +17713,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16986,7 +17728,8 @@ module Aws::QuickSight
     class LineSeriesAxisDisplayOptions < Struct.new(
       :axis_options,
       :missing_data_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -16996,7 +17739,8 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     class LinkSharingConfiguration < Struct.new(
       :permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17013,7 +17757,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17034,7 +17779,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17056,7 +17802,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17077,7 +17824,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17099,7 +17847,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17120,7 +17869,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17142,7 +17892,8 @@ module Aws::QuickSight
       :aws_account_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17156,7 +17907,8 @@ module Aws::QuickSight
     class ListBrandsResponse < Struct.new(
       :next_token,
       :brands,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17178,7 +17930,8 @@ module Aws::QuickSight
       :select_all_options,
       :title_options,
       :info_icon_label_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17188,7 +17941,8 @@ module Aws::QuickSight
     #   @return [String]
     class ListControlSearchOptions < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17198,7 +17952,8 @@ module Aws::QuickSight
     #   @return [String]
     class ListControlSelectAllOptions < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17215,7 +17970,8 @@ module Aws::QuickSight
       :aws_account_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17236,7 +17992,8 @@ module Aws::QuickSight
       :custom_permissions_list,
       :next_token,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17263,7 +18020,8 @@ module Aws::QuickSight
       :dashboard_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17284,7 +18042,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17307,7 +18066,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17329,7 +18089,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17351,7 +18112,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17372,7 +18134,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17394,7 +18157,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17415,7 +18179,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17441,7 +18206,8 @@ module Aws::QuickSight
       :folder_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17462,7 +18228,8 @@ module Aws::QuickSight
       :folder_member_list,
       :next_token,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17488,7 +18255,8 @@ module Aws::QuickSight
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17509,7 +18277,8 @@ module Aws::QuickSight
       :folders,
       :next_token,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17531,7 +18300,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17552,7 +18322,8 @@ module Aws::QuickSight
       :folder_summary_list,
       :next_token,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17583,7 +18354,8 @@ module Aws::QuickSight
       :max_results,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17604,7 +18376,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17631,7 +18404,8 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17652,7 +18426,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17682,7 +18457,8 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17703,7 +18479,8 @@ module Aws::QuickSight
       :request_id,
       :next_token,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17734,7 +18511,8 @@ module Aws::QuickSight
       :namespace,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17755,7 +18533,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17777,7 +18556,8 @@ module Aws::QuickSight
       :aws_account_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17798,7 +18578,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17824,7 +18605,8 @@ module Aws::QuickSight
       :next_token,
       :aws_account_id,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17845,7 +18627,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17867,7 +18650,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17890,7 +18674,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17908,7 +18693,8 @@ module Aws::QuickSight
     class ListRefreshSchedulesRequest < Struct.new(
       :aws_account_id,
       :data_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17925,7 +18711,8 @@ module Aws::QuickSight
       :refresh_schedules,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17955,7 +18742,8 @@ module Aws::QuickSight
       :max_results,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -17976,7 +18764,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -17990,7 +18779,8 @@ module Aws::QuickSight
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18008,7 +18798,8 @@ module Aws::QuickSight
       :tags,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18034,7 +18825,8 @@ module Aws::QuickSight
       :template_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18055,7 +18847,8 @@ module Aws::QuickSight
       :status,
       :request_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18081,7 +18874,8 @@ module Aws::QuickSight
       :template_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18102,7 +18896,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18124,7 +18919,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18145,7 +18941,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18171,7 +18968,8 @@ module Aws::QuickSight
       :theme_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18192,7 +18990,8 @@ module Aws::QuickSight
       :status,
       :request_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18218,7 +19017,8 @@ module Aws::QuickSight
       :theme_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18239,7 +19039,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18279,7 +19080,8 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18300,7 +19102,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18319,7 +19122,8 @@ module Aws::QuickSight
     class ListTopicRefreshSchedulesRequest < Struct.new(
       :aws_account_id,
       :topic_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18344,7 +19148,8 @@ module Aws::QuickSight
       :refresh_schedules,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18362,7 +19167,8 @@ module Aws::QuickSight
     class ListTopicReviewedAnswersRequest < Struct.new(
       :aws_account_id,
       :topic_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18387,7 +19193,8 @@ module Aws::QuickSight
       :answers,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18410,7 +19217,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18431,7 +19239,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18462,7 +19271,8 @@ module Aws::QuickSight
       :namespace,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18483,7 +19293,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18510,7 +19321,8 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18531,7 +19343,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18554,7 +19367,8 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18577,7 +19391,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18592,7 +19407,8 @@ module Aws::QuickSight
     #   @return [String]
     class LoadingAnimation < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18602,7 +19418,8 @@ module Aws::QuickSight
     #   @return [String]
     class LocalNavigationConfiguration < Struct.new(
       :target_sheet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18623,7 +19440,8 @@ module Aws::QuickSight
       :alias,
       :data_transforms,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18642,7 +19460,8 @@ module Aws::QuickSight
       :join_instruction,
       :physical_table_id,
       :data_set_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18656,7 +19475,8 @@ module Aws::QuickSight
     class Logo < Struct.new(
       :alt_text,
       :logo_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18670,7 +19490,8 @@ module Aws::QuickSight
     class LogoConfiguration < Struct.new(
       :alt_text,
       :logo_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18684,7 +19505,8 @@ module Aws::QuickSight
     class LogoSet < Struct.new(
       :primary,
       :favicon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18698,7 +19520,8 @@ module Aws::QuickSight
     class LogoSetConfiguration < Struct.new(
       :primary,
       :favicon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18713,7 +19536,8 @@ module Aws::QuickSight
     class LongFormatText < Struct.new(
       :plain_text,
       :rich_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18731,7 +19555,8 @@ module Aws::QuickSight
       :column_name,
       :size,
       :size_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18745,7 +19570,8 @@ module Aws::QuickSight
     class ManifestFileLocation < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18759,7 +19585,8 @@ module Aws::QuickSight
     class MappedDataSetParameter < Struct.new(
       :data_set_identifier,
       :data_set_parameter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18769,7 +19596,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class MarginStyle < Struct.new(
       :show,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -18792,7 +19620,8 @@ module Aws::QuickSight
       :host,
       :port,
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18802,7 +19631,8 @@ module Aws::QuickSight
     #   @return [String]
     class MaximumLabelType < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18836,7 +19666,8 @@ module Aws::QuickSight
       :time,
       :value,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18858,7 +19689,8 @@ module Aws::QuickSight
       :categorical_measure_field,
       :date_measure_field,
       :calculated_measure_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18872,7 +19704,8 @@ module Aws::QuickSight
     class MemberIdArnPair < Struct.new(
       :member_id,
       :member_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18898,7 +19731,8 @@ module Aws::QuickSight
       :time,
       :from_value,
       :target_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18908,7 +19742,8 @@ module Aws::QuickSight
     #   @return [String]
     class MinimumLabelType < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18933,7 +19768,8 @@ module Aws::QuickSight
     #   @return [String]
     class MissingDataConfiguration < Struct.new(
       :treatment_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18951,7 +19787,8 @@ module Aws::QuickSight
       :host,
       :port,
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18979,7 +19816,8 @@ module Aws::QuickSight
       :property_role,
       :property_usage,
       :metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -18998,7 +19836,8 @@ module Aws::QuickSight
     class NamedEntityDefinitionMetric < Struct.new(
       :aggregation,
       :aggregation_function_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19008,7 +19847,8 @@ module Aws::QuickSight
     #   @return [String]
     class NamedEntityRef < Struct.new(
       :named_entity_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19022,7 +19862,8 @@ module Aws::QuickSight
     class NamespaceError < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19060,7 +19901,8 @@ module Aws::QuickSight
       :namespace_error,
       :iam_identity_center_application_arn,
       :iam_identity_center_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19074,7 +19916,8 @@ module Aws::QuickSight
     class NavbarStyle < Struct.new(
       :global_navbar,
       :contextual_navbar,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19088,7 +19931,8 @@ module Aws::QuickSight
     class NegativeFormat < Struct.new(
       :prefix,
       :suffix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19098,7 +19942,8 @@ module Aws::QuickSight
     #   @return [String]
     class NegativeValueConfiguration < Struct.new(
       :display_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19120,7 +19965,8 @@ module Aws::QuickSight
       :column,
       :include_inner_set,
       :inner_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19151,7 +19997,8 @@ module Aws::QuickSight
       :error_message,
       :status,
       :network_interface_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19173,7 +20020,8 @@ module Aws::QuickSight
       :decimal_static_values,
       :date_time_static_values,
       :integer_static_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19183,7 +20031,8 @@ module Aws::QuickSight
     #   @return [String]
     class NullValueFormatConfiguration < Struct.new(
       :null_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19217,7 +20066,8 @@ module Aws::QuickSight
       :number_scale,
       :negative_value_configuration,
       :null_value_format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19227,7 +20077,8 @@ module Aws::QuickSight
     #   @return [Types::NumericFormatConfiguration]
     class NumberFormatConfiguration < Struct.new(
       :format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19241,7 +20092,8 @@ module Aws::QuickSight
     class NumericAxisOptions < Struct.new(
       :scale,
       :range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19255,7 +20107,8 @@ module Aws::QuickSight
     class NumericEqualityDrillDownFilter < Struct.new(
       :column,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19323,7 +20176,8 @@ module Aws::QuickSight
       :parameter_name,
       :null_option,
       :default_filter_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19347,7 +20201,8 @@ module Aws::QuickSight
       :number_display_format_configuration,
       :currency_display_format_configuration,
       :percentage_display_format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19414,7 +20269,8 @@ module Aws::QuickSight
       :aggregation_function,
       :null_option,
       :default_filter_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19434,7 +20290,8 @@ module Aws::QuickSight
     class NumericRangeFilterValue < Struct.new(
       :static_value,
       :parameter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19453,7 +20310,8 @@ module Aws::QuickSight
     class NumericSeparatorConfiguration < Struct.new(
       :decimal_separator,
       :thousands_separator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19513,7 +20371,8 @@ module Aws::QuickSight
     class NumericalAggregationFunction < Struct.new(
       :simple_numerical_aggregation,
       :percentile_aggregation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19535,7 +20394,8 @@ module Aws::QuickSight
       :column,
       :hierarchy_id,
       :format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19557,7 +20417,8 @@ module Aws::QuickSight
       :column,
       :aggregation_function,
       :format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19579,7 +20440,8 @@ module Aws::QuickSight
       :o_auth_scope,
       :identity_provider_vpc_connection_properties,
       :identity_provider_resource_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19601,7 +20463,8 @@ module Aws::QuickSight
       :port,
       :database,
       :use_service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19628,7 +20491,8 @@ module Aws::QuickSight
       :description,
       :type,
       :sub_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19646,7 +20510,8 @@ module Aws::QuickSight
       :parameter_name,
       :new_parameter_name,
       :new_default_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19660,7 +20525,8 @@ module Aws::QuickSight
     class PaginationConfiguration < Struct.new(
       :page_size,
       :page_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19679,7 +20545,8 @@ module Aws::QuickSight
     class Palette < Struct.new(
       :foreground,
       :background,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19721,7 +20588,8 @@ module Aws::QuickSight
       :gutter_spacing,
       :background_visibility,
       :background_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19740,7 +20608,8 @@ module Aws::QuickSight
       :visibility,
       :font_configuration,
       :horizontal_text_alignment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19771,7 +20640,8 @@ module Aws::QuickSight
       :text_field,
       :text_area,
       :slider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19793,7 +20663,8 @@ module Aws::QuickSight
       :title,
       :source_parameter_name,
       :display_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19817,7 +20688,8 @@ module Aws::QuickSight
       :decimal_parameter_declaration,
       :integer_parameter_declaration,
       :date_time_parameter_declaration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19855,7 +20727,8 @@ module Aws::QuickSight
       :selectable_values,
       :cascading_control_configuration,
       :commit_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19889,7 +20762,8 @@ module Aws::QuickSight
       :type,
       :selectable_values,
       :cascading_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19903,7 +20777,8 @@ module Aws::QuickSight
     class ParameterSelectableValues < Struct.new(
       :values,
       :link_to_data_set_column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19937,7 +20812,8 @@ module Aws::QuickSight
       :maximum_value,
       :minimum_value,
       :step_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -19970,7 +20846,8 @@ module Aws::QuickSight
       :source_parameter_name,
       :delimiter,
       :display_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -19992,7 +20869,8 @@ module Aws::QuickSight
       :title,
       :source_parameter_name,
       :display_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20014,7 +20892,8 @@ module Aws::QuickSight
       :integer_parameters,
       :decimal_parameters,
       :date_time_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20028,7 +20907,8 @@ module Aws::QuickSight
     class PercentVisibleRange < Struct.new(
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -20064,7 +20944,8 @@ module Aws::QuickSight
       :decimal_places_configuration,
       :negative_value_configuration,
       :null_value_format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20074,7 +20955,8 @@ module Aws::QuickSight
     #   @return [Float]
     class PercentileAggregation < Struct.new(
       :percentile_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20084,7 +20966,8 @@ module Aws::QuickSight
     #   @return [Array<Types::UniqueKey>]
     class PerformanceConfiguration < Struct.new(
       :unique_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20106,7 +20989,8 @@ module Aws::QuickSight
       :name,
       :time,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20140,7 +21024,8 @@ module Aws::QuickSight
       :time,
       :value,
       :period_time_granularity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20161,7 +21046,8 @@ module Aws::QuickSight
       :custom_sql,
       :s3_source,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RelationalTable < PhysicalTable; end
@@ -20184,7 +21070,8 @@ module Aws::QuickSight
       :category,
       :values,
       :small_multiples,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20238,7 +21125,8 @@ module Aws::QuickSight
       :visual_palette,
       :contribution_analysis_defaults,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20249,7 +21137,8 @@ module Aws::QuickSight
     #   @return [Types::PieChartAggregatedFieldWells]
     class PieChartFieldWells < Struct.new(
       :pie_chart_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20271,7 +21160,8 @@ module Aws::QuickSight
       :category_items_limit,
       :small_multiples_sort,
       :small_multiples_limit_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20317,7 +21207,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20331,7 +21222,8 @@ module Aws::QuickSight
     class PivotFieldSortOptions < Struct.new(
       :field_id,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20349,7 +21241,8 @@ module Aws::QuickSight
       :rows,
       :columns,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20371,7 +21264,8 @@ module Aws::QuickSight
       :text_format,
       :scope,
       :scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20381,7 +21275,8 @@ module Aws::QuickSight
     #   @return [Array<Types::PivotTableConditionalFormattingOption>]
     class PivotTableConditionalFormatting < Struct.new(
       :conditional_formatting_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20391,7 +21286,8 @@ module Aws::QuickSight
     #   @return [Types::PivotTableCellConditionalFormatting]
     class PivotTableConditionalFormattingOption < Struct.new(
       :cell,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20401,7 +21297,8 @@ module Aws::QuickSight
     #   @return [String]
     class PivotTableConditionalFormattingScope < Struct.new(
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20435,7 +21332,8 @@ module Aws::QuickSight
       :field_options,
       :paginated_report_options,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20449,7 +21347,8 @@ module Aws::QuickSight
     class PivotTableDataPathOption < Struct.new(
       :data_path_list,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20475,7 +21374,8 @@ module Aws::QuickSight
     class PivotTableFieldCollapseStateOption < Struct.new(
       :target,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20489,7 +21389,8 @@ module Aws::QuickSight
     class PivotTableFieldCollapseStateTarget < Struct.new(
       :field_id,
       :field_data_path_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20507,7 +21408,8 @@ module Aws::QuickSight
       :field_id,
       :custom_label,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20525,7 +21427,8 @@ module Aws::QuickSight
       :selected_field_options,
       :data_path_options,
       :collapse_state_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20535,7 +21438,8 @@ module Aws::QuickSight
     #   @return [String]
     class PivotTableFieldSubtotalOptions < Struct.new(
       :field_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20546,7 +21450,8 @@ module Aws::QuickSight
     #   @return [Types::PivotTableAggregatedFieldWells]
     class PivotTableFieldWells < Struct.new(
       :pivot_table_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20614,7 +21519,8 @@ module Aws::QuickSight
       :rows_layout,
       :rows_label_options,
       :default_cell_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20628,7 +21534,8 @@ module Aws::QuickSight
     class PivotTablePaginatedReportOptions < Struct.new(
       :vertical_overflow_visibility,
       :overflow_column_header_visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20642,7 +21549,8 @@ module Aws::QuickSight
     class PivotTableRowsLabelOptions < Struct.new(
       :visibility,
       :custom_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20660,7 +21568,8 @@ module Aws::QuickSight
       :field,
       :column,
       :data_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20670,7 +21579,8 @@ module Aws::QuickSight
     #   @return [Array<Types::PivotFieldSortOptions>]
     class PivotTableSortConfiguration < Struct.new(
       :field_sort_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20692,7 +21602,8 @@ module Aws::QuickSight
       :column_subtotal_options,
       :row_total_options,
       :column_total_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20727,7 +21638,8 @@ module Aws::QuickSight
       :conditional_formatting,
       :actions,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20765,7 +21677,8 @@ module Aws::QuickSight
       :value_cell_style,
       :metric_header_cell_style,
       :total_aggregation_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20802,7 +21715,8 @@ module Aws::QuickSight
       :chart_configuration,
       :actions,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20820,7 +21734,8 @@ module Aws::QuickSight
       :field_wells,
       :visual_options,
       :sort_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20842,7 +21757,8 @@ module Aws::QuickSight
       :dimensions,
       :measures,
       :unaggregated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20852,7 +21768,8 @@ module Aws::QuickSight
     #   @return [Integer]
     class PluginVisualItemsLimitConfiguration < Struct.new(
       :items_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -20867,7 +21784,8 @@ module Aws::QuickSight
     #   @return [Array<Types::PluginVisualProperty>]
     class PluginVisualOptions < Struct.new(
       :visual_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20881,7 +21799,8 @@ module Aws::QuickSight
     class PluginVisualProperty < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20891,7 +21810,8 @@ module Aws::QuickSight
     #   @return [Types::PluginVisualTableQuerySort]
     class PluginVisualSortConfiguration < Struct.new(
       :plugin_visual_table_query_sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20905,7 +21825,8 @@ module Aws::QuickSight
     class PluginVisualTableQuerySort < Struct.new(
       :row_sort,
       :items_limit_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20923,7 +21844,8 @@ module Aws::QuickSight
       :host,
       :port,
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20936,7 +21858,8 @@ module Aws::QuickSight
     class PreconditionNotMetException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20954,7 +21877,8 @@ module Aws::QuickSight
       :hierarchy_id,
       :columns,
       :drill_down_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20979,7 +21903,8 @@ module Aws::QuickSight
       :include_quick_sight_q_index,
       :include_generated_answer,
       :max_topics_to_consider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21000,7 +21925,8 @@ module Aws::QuickSight
       :additional_results,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -21023,7 +21949,8 @@ module Aws::QuickSight
       :host,
       :port,
       :catalog,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21033,7 +21960,8 @@ module Aws::QuickSight
     #   @return [String]
     class ProgressBarOptions < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21044,7 +21972,8 @@ module Aws::QuickSight
     #   @return [Array<String>]
     class ProjectOperation < Struct.new(
       :projected_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21061,7 +21990,8 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       :data_set_refresh_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21074,7 +22004,8 @@ module Aws::QuickSight
     class PutDataSetRefreshPropertiesResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -21097,7 +22028,8 @@ module Aws::QuickSight
       :result_type,
       :dashboard_visual,
       :generated_answer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21107,7 +22039,8 @@ module Aws::QuickSight
     #   @return [String]
     class QueryExecutionOptions < Struct.new(
       :query_execution_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21122,7 +22055,8 @@ module Aws::QuickSight
     class QueueInfo < Struct.new(
       :waiting_on_ingestion,
       :queued_ingestion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21137,7 +22071,8 @@ module Aws::QuickSight
     class QuickSightUserNotFoundException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21155,7 +22090,8 @@ module Aws::QuickSight
       :category,
       :color,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21165,7 +22101,8 @@ module Aws::QuickSight
     #   @return [String]
     class RadarChartAreaStyleSettings < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21235,7 +22172,8 @@ module Aws::QuickSight
       :legend,
       :axes_range_scale,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21245,7 +22183,8 @@ module Aws::QuickSight
     #   @return [Types::RadarChartAggregatedFieldWells]
     class RadarChartFieldWells < Struct.new(
       :radar_chart_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21255,7 +22194,8 @@ module Aws::QuickSight
     #   @return [Types::RadarChartAreaStyleSettings]
     class RadarChartSeriesSettings < Struct.new(
       :area_style_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21277,7 +22217,8 @@ module Aws::QuickSight
       :category_items_limit,
       :color_sort,
       :color_items_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21311,7 +22252,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21325,7 +22267,8 @@ module Aws::QuickSight
     class RangeConstant < Struct.new(
       :minimum,
       :maximum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21335,7 +22278,8 @@ module Aws::QuickSight
     #   @return [String]
     class RangeEndsLabelType < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21349,7 +22293,8 @@ module Aws::QuickSight
     class RdsParameters < Struct.new(
       :instance_id,
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21359,7 +22304,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class RecentSnapshotsConfigurations < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -21388,7 +22334,8 @@ module Aws::QuickSight
       :database_user,
       :database_groups,
       :auto_create_database_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -21426,7 +22373,8 @@ module Aws::QuickSight
       :cluster_id,
       :iam_parameters,
       :identity_center_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -21465,7 +22413,8 @@ module Aws::QuickSight
       :data_configuration,
       :style_configuration,
       :label_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21475,7 +22424,8 @@ module Aws::QuickSight
     #   @return [String]
     class ReferenceLineCustomLabelConfiguration < Struct.new(
       :custom_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21521,7 +22471,8 @@ module Aws::QuickSight
       :dynamic_configuration,
       :axis_binding,
       :series_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21539,7 +22490,8 @@ module Aws::QuickSight
       :column,
       :measure_aggregation_function,
       :calculation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21599,7 +22551,8 @@ module Aws::QuickSight
       :font_color,
       :horizontal_position,
       :vertical_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21609,7 +22562,8 @@ module Aws::QuickSight
     #   @return [Float]
     class ReferenceLineStaticDataConfiguration < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -21646,7 +22600,8 @@ module Aws::QuickSight
     class ReferenceLineStyleConfiguration < Struct.new(
       :pattern,
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21672,7 +22627,8 @@ module Aws::QuickSight
     class ReferenceLineValueLabelConfiguration < Struct.new(
       :relative_position,
       :format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21682,7 +22638,8 @@ module Aws::QuickSight
     #   @return [Types::IncrementalRefresh]
     class RefreshConfiguration < Struct.new(
       :incremental_refresh,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21692,7 +22649,8 @@ module Aws::QuickSight
     #   @return [Types::RefreshFailureEmailAlert]
     class RefreshFailureConfiguration < Struct.new(
       :email_alert,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21702,7 +22660,8 @@ module Aws::QuickSight
     #   @return [String]
     class RefreshFailureEmailAlert < Struct.new(
       :alert_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21750,7 +22709,8 @@ module Aws::QuickSight
       :refresh_on_day,
       :timezone,
       :time_of_the_day,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21787,7 +22747,8 @@ module Aws::QuickSight
       :start_after_date_time,
       :refresh_type,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21931,7 +22892,8 @@ module Aws::QuickSight
       :custom_federation_provider_url,
       :external_login_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21953,7 +22915,8 @@ module Aws::QuickSight
       :user_invitation_url,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -21982,7 +22945,8 @@ module Aws::QuickSight
     class RegisteredCustomerManagedKey < Struct.new(
       :key_arn,
       :default_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -22017,7 +22981,8 @@ module Aws::QuickSight
       :schedules,
       :recent_snapshots,
       :threshold_alerts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22032,7 +22997,8 @@ module Aws::QuickSight
     class RegisteredUserDashboardEmbeddingConfiguration < Struct.new(
       :initial_dashboard_id,
       :feature_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22066,7 +23032,8 @@ module Aws::QuickSight
       :schedules,
       :recent_snapshots,
       :threshold_alerts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22077,7 +23044,8 @@ module Aws::QuickSight
     #   @return [Types::DashboardVisualId]
     class RegisteredUserDashboardVisualEmbeddingConfiguration < Struct.new(
       :initial_dashboard_visual_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22141,7 +23109,8 @@ module Aws::QuickSight
       :q_search_bar,
       :dashboard_visual,
       :generative_qn_a,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22154,7 +23123,8 @@ module Aws::QuickSight
     #   @return [String]
     class RegisteredUserGenerativeQnAEmbeddingConfiguration < Struct.new(
       :initial_topic_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22166,7 +23136,8 @@ module Aws::QuickSight
     #   @return [String]
     class RegisteredUserQSearchBarEmbeddingConfiguration < Struct.new(
       :initial_topic_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22211,7 +23182,8 @@ module Aws::QuickSight
     class RegisteredUserQuickSightConsoleEmbeddingConfiguration < Struct.new(
       :initial_path,
       :feature_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22237,7 +23209,8 @@ module Aws::QuickSight
       :schema,
       :name,
       :input_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22255,7 +23228,8 @@ module Aws::QuickSight
       :title_options,
       :date_time_format,
       :info_icon_label_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22346,7 +23320,8 @@ module Aws::QuickSight
       :null_option,
       :exclude_period_configuration,
       :default_filter_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -22365,7 +23340,8 @@ module Aws::QuickSight
     class RenameColumnOperation < Struct.new(
       :column_name,
       :new_column_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22382,7 +23358,8 @@ module Aws::QuickSight
       :message,
       :resource_type,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22399,7 +23376,8 @@ module Aws::QuickSight
       :message,
       :resource_type,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22427,7 +23405,8 @@ module Aws::QuickSight
     class ResourcePermission < Struct.new(
       :principal,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22444,7 +23423,8 @@ module Aws::QuickSight
       :message,
       :resource_type,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22461,7 +23441,8 @@ module Aws::QuickSight
       :aws_account_id,
       :analysis_id,
       :restore_to_folders,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22487,7 +23468,8 @@ module Aws::QuickSight
       :analysis_id,
       :request_id,
       :restoration_failed_folder_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -22506,7 +23488,8 @@ module Aws::QuickSight
     class RollingDateConfiguration < Struct.new(
       :data_set_identifier,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22524,7 +23507,8 @@ module Aws::QuickSight
       :status,
       :row_alternate_colors,
       :use_primary_background_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22542,7 +23526,8 @@ module Aws::QuickSight
       :rows_ingested,
       :rows_dropped,
       :total_rows_in_dataset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -22582,7 +23567,8 @@ module Aws::QuickSight
       :permission_policy,
       :format_version,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22600,7 +23586,8 @@ module Aws::QuickSight
       :status,
       :tag_rules,
       :tag_rule_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22622,7 +23609,8 @@ module Aws::QuickSight
       :column_name,
       :tag_multi_value_delimiter,
       :match_all_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22640,7 +23628,8 @@ module Aws::QuickSight
       :bucket_name,
       :bucket_prefix,
       :bucket_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22655,7 +23644,8 @@ module Aws::QuickSight
     class S3Parameters < Struct.new(
       :manifest_file_location,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22676,7 +23666,8 @@ module Aws::QuickSight
       :data_source_arn,
       :upload_settings,
       :input_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22698,7 +23689,8 @@ module Aws::QuickSight
     class SameSheetTargetVisualConfiguration < Struct.new(
       :target_visuals,
       :target_visual_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22716,7 +23708,8 @@ module Aws::QuickSight
       :source,
       :destination,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22738,7 +23731,8 @@ module Aws::QuickSight
       :sort_configuration,
       :data_labels,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22748,7 +23742,8 @@ module Aws::QuickSight
     #   @return [Types::SankeyDiagramAggregatedFieldWells]
     class SankeyDiagramFieldWells < Struct.new(
       :sankey_diagram_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22766,7 +23761,8 @@ module Aws::QuickSight
       :weight_sort,
       :source_items_limit,
       :destination_items_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22797,7 +23793,8 @@ module Aws::QuickSight
       :chart_configuration,
       :actions,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22825,7 +23822,8 @@ module Aws::QuickSight
       :category,
       :size,
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22875,7 +23873,8 @@ module Aws::QuickSight
       :tooltip,
       :visual_palette,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22891,7 +23890,8 @@ module Aws::QuickSight
     class ScatterPlotFieldWells < Struct.new(
       :scatter_plot_categorically_aggregated_field_wells,
       :scatter_plot_unaggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22901,7 +23901,8 @@ module Aws::QuickSight
     #   @return [Types::ItemsLimitConfiguration]
     class ScatterPlotSortConfiguration < Struct.new(
       :scatter_plot_limit_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22929,7 +23930,8 @@ module Aws::QuickSight
       :size,
       :category,
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22964,7 +23966,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22978,7 +23981,8 @@ module Aws::QuickSight
     class ScheduleRefreshOnEntity < Struct.new(
       :day_of_week,
       :day_of_month,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22988,7 +23992,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class SchedulesConfigurations < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -23007,7 +24012,8 @@ module Aws::QuickSight
     class ScrollBarOptions < Struct.new(
       :visibility,
       :visible_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23029,7 +24035,8 @@ module Aws::QuickSight
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23051,7 +24058,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -23081,7 +24089,8 @@ module Aws::QuickSight
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23103,7 +24112,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -23129,7 +24139,8 @@ module Aws::QuickSight
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23150,7 +24161,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -23176,7 +24188,8 @@ module Aws::QuickSight
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23197,7 +24210,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -23223,7 +24237,8 @@ module Aws::QuickSight
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23244,7 +24259,8 @@ module Aws::QuickSight
       :folder_summary_list,
       :next_token,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -23275,7 +24291,8 @@ module Aws::QuickSight
       :max_results,
       :namespace,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23296,7 +24313,8 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -23322,7 +24340,8 @@ module Aws::QuickSight
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23343,7 +24362,8 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -23358,7 +24378,8 @@ module Aws::QuickSight
     #   @return [String]
     class SecondaryValueOptions < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23368,7 +24389,8 @@ module Aws::QuickSight
     #   @return [String]
     class SectionAfterPageBreak < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23378,7 +24400,8 @@ module Aws::QuickSight
     #   @return [Types::SectionBasedLayoutPaperCanvasSizeOptions]
     class SectionBasedLayoutCanvasSizeOptions < Struct.new(
       :paper_canvas_size_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23401,7 +24424,8 @@ module Aws::QuickSight
       :body_sections,
       :footer_sections,
       :canvas_size_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23429,7 +24453,8 @@ module Aws::QuickSight
       :paper_size,
       :paper_orientation,
       :paper_margin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23439,7 +24464,8 @@ module Aws::QuickSight
     #   @return [Types::FreeFormSectionLayoutConfiguration]
     class SectionLayoutConfiguration < Struct.new(
       :free_form_layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23449,7 +24475,8 @@ module Aws::QuickSight
     #   @return [Types::SectionAfterPageBreak]
     class SectionPageBreakConfiguration < Struct.new(
       :after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23465,7 +24492,8 @@ module Aws::QuickSight
     class SectionStyle < Struct.new(
       :height,
       :padding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23476,7 +24504,8 @@ module Aws::QuickSight
     #   @return [Array<Types::SheetVisualScopingConfiguration>]
     class SelectedSheetsFilterScopeConfiguration < Struct.new(
       :sheet_visual_scoping_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23494,7 +24523,8 @@ module Aws::QuickSight
       :type_name,
       :sub_type_name,
       :type_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23528,7 +24558,8 @@ module Aws::QuickSight
       :truthy_cell_value_synonyms,
       :falsey_cell_value,
       :falsey_cell_value_synonyms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23543,7 +24574,8 @@ module Aws::QuickSight
     class SeriesItem < Struct.new(
       :field_series_item,
       :data_field_series_item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23553,7 +24585,8 @@ module Aws::QuickSight
     #   @return [String]
     class ServiceNowParameters < Struct.new(
       :site_base_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23567,7 +24600,8 @@ module Aws::QuickSight
     class SessionLifetimeInMinutesInvalidException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23581,7 +24615,8 @@ module Aws::QuickSight
     class SessionTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23596,7 +24631,8 @@ module Aws::QuickSight
     class SetParameterValueConfiguration < Struct.new(
       :destination_parameter_name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23606,7 +24642,8 @@ module Aws::QuickSight
     #   @return [Types::ConditionalFormattingColor]
     class ShapeConditionalFormat < Struct.new(
       :background_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23616,7 +24653,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class SharedViewConfigurations < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -23644,7 +24682,8 @@ module Aws::QuickSight
       :sheet_id,
       :name,
       :images,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23658,7 +24697,8 @@ module Aws::QuickSight
     class SheetControlInfoIconLabelOptions < Struct.new(
       :visibility,
       :info_icon_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23668,7 +24708,8 @@ module Aws::QuickSight
     #   @return [Types::SheetControlLayoutConfiguration]
     class SheetControlLayout < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23678,7 +24719,8 @@ module Aws::QuickSight
     #   @return [Types::GridLayoutConfiguration]
     class SheetControlLayoutConfiguration < Struct.new(
       :grid_layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23688,7 +24730,8 @@ module Aws::QuickSight
     #   @return [String]
     class SheetControlsOption < Struct.new(
       :visibility_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23761,7 +24804,8 @@ module Aws::QuickSight
       :sheet_control_layouts,
       :content_type,
       :custom_action_defaults,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23783,7 +24827,8 @@ module Aws::QuickSight
     #   @return [String]
     class SheetElementConfigurationOverrides < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23797,7 +24842,8 @@ module Aws::QuickSight
     class SheetElementRenderingRule < Struct.new(
       :expression,
       :configuration_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23831,7 +24877,8 @@ module Aws::QuickSight
       :image_content_alt_text,
       :interactions,
       :actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23860,7 +24907,8 @@ module Aws::QuickSight
     #   @return [String]
     class SheetImageScalingConfiguration < Struct.new(
       :scaling_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23870,7 +24918,8 @@ module Aws::QuickSight
     #   @return [Types::SheetImageStaticFileSource]
     class SheetImageSource < Struct.new(
       :sheet_image_static_file_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23880,7 +24929,8 @@ module Aws::QuickSight
     #   @return [String]
     class SheetImageStaticFileSource < Struct.new(
       :static_file_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23894,7 +24944,8 @@ module Aws::QuickSight
     class SheetImageTooltipConfiguration < Struct.new(
       :tooltip_text,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23904,7 +24955,8 @@ module Aws::QuickSight
     #   @return [String]
     class SheetImageTooltipText < Struct.new(
       :plain_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23914,7 +24966,8 @@ module Aws::QuickSight
     #   @return [String]
     class SheetLayoutElementMaximizationOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23928,7 +24981,8 @@ module Aws::QuickSight
     class SheetStyle < Struct.new(
       :tile,
       :tile_layout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23946,7 +25000,8 @@ module Aws::QuickSight
       :sheet_text_box_id,
       :content,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23976,7 +25031,8 @@ module Aws::QuickSight
       :sheet_id,
       :scope,
       :visual_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -23991,7 +25047,8 @@ module Aws::QuickSight
     class ShortFormatText < Struct.new(
       :plain_text,
       :rich_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24016,7 +25073,8 @@ module Aws::QuickSight
       :user_login_name,
       :account_name,
       :directory_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -24031,7 +25089,8 @@ module Aws::QuickSight
     #   @return [String]
     class SimpleClusterMarker < Struct.new(
       :color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24041,7 +25100,8 @@ module Aws::QuickSight
     #   @return [Types::YAxisOptions]
     class SingleAxisOptions < Struct.new(
       :y_axis_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24055,7 +25115,8 @@ module Aws::QuickSight
     class SliderControlDisplayOptions < Struct.new(
       :title_options,
       :info_icon_label_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24069,7 +25130,8 @@ module Aws::QuickSight
     class Slot < Struct.new(
       :slot_id,
       :visual_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24083,7 +25145,8 @@ module Aws::QuickSight
     class SmallMultiplesAxisProperties < Struct.new(
       :scale,
       :placement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24113,7 +25176,8 @@ module Aws::QuickSight
       :panel_configuration,
       :x_axis,
       :y_axis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24124,7 +25188,8 @@ module Aws::QuickSight
     #   @return [Array<Types::SessionTag>]
     class SnapshotAnonymousUser < Struct.new(
       :row_level_permission_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24134,7 +25199,8 @@ module Aws::QuickSight
     #   @return [Array<String>]
     class SnapshotAnonymousUserRedacted < Struct.new(
       :row_level_permission_tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24152,7 +25218,8 @@ module Aws::QuickSight
       :file_groups,
       :destination_configuration,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24164,7 +25231,8 @@ module Aws::QuickSight
     #   @return [Array<Types::SnapshotS3DestinationConfiguration>]
     class SnapshotDestinationConfiguration < Struct.new(
       :s3_destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24178,7 +25246,8 @@ module Aws::QuickSight
     class SnapshotFile < Struct.new(
       :sheet_selections,
       :format_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24188,7 +25257,8 @@ module Aws::QuickSight
     #   @return [Array<Types::SnapshotFile>]
     class SnapshotFileGroup < Struct.new(
       :files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24218,7 +25288,8 @@ module Aws::QuickSight
       :sheet_id,
       :selection_scope,
       :visual_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24232,7 +25303,8 @@ module Aws::QuickSight
     class SnapshotJobErrorInfo < Struct.new(
       :error_message,
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24242,7 +25314,8 @@ module Aws::QuickSight
     #   @return [Array<Types::AnonymousUserSnapshotJobResult>]
     class SnapshotJobResult < Struct.new(
       :anonymous_users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24256,7 +25329,8 @@ module Aws::QuickSight
     class SnapshotJobResultErrorInfo < Struct.new(
       :error_message,
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24270,7 +25344,8 @@ module Aws::QuickSight
     class SnapshotJobResultFileGroup < Struct.new(
       :files,
       :s3_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24289,7 +25364,8 @@ module Aws::QuickSight
       :s3_destination_configuration,
       :s3_uri,
       :error_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24299,7 +25375,8 @@ module Aws::QuickSight
     #   @return [Types::S3BucketConfiguration]
     class SnapshotS3DestinationConfiguration < Struct.new(
       :bucket_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24309,7 +25386,8 @@ module Aws::QuickSight
     #   @return [Array<Types::SnapshotAnonymousUser>]
     class SnapshotUserConfiguration < Struct.new(
       :anonymous_users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24322,7 +25400,8 @@ module Aws::QuickSight
     #   @return [Array<Types::SnapshotAnonymousUserRedacted>]
     class SnapshotUserConfigurationRedacted < Struct.new(
       :anonymous_users,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24352,7 +25431,8 @@ module Aws::QuickSight
       :authentication_type,
       :database_access_control_role,
       :o_auth_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24374,7 +25454,8 @@ module Aws::QuickSight
       :bottom,
       :left,
       :right,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24388,7 +25469,8 @@ module Aws::QuickSight
     class SparkParameters < Struct.new(
       :host,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24402,7 +25484,8 @@ module Aws::QuickSight
     class SpatialStaticFile < Struct.new(
       :static_file_id,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24420,7 +25503,8 @@ module Aws::QuickSight
       :host,
       :port,
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24431,7 +25515,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class SslProperties < Struct.new(
       :disable_ssl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -24470,7 +25555,8 @@ module Aws::QuickSight
       :database_access_control_role,
       :authentication_type,
       :o_auth_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24563,7 +25649,8 @@ module Aws::QuickSight
       :validation_strategy,
       :include_folder_memberships,
       :include_folder_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24584,7 +25671,8 @@ module Aws::QuickSight
       :asset_bundle_export_job_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -24630,7 +25718,8 @@ module Aws::QuickSight
       :override_permissions,
       :override_tags,
       :override_validation_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24651,7 +25740,8 @@ module Aws::QuickSight
       :asset_bundle_import_job_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -24683,7 +25773,8 @@ module Aws::QuickSight
       :snapshot_job_id,
       :user_configuration,
       :snapshot_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24706,7 +25797,8 @@ module Aws::QuickSight
       :snapshot_job_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -24729,7 +25821,8 @@ module Aws::QuickSight
       :aws_account_id,
       :dashboard_id,
       :schedule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24744,7 +25837,8 @@ module Aws::QuickSight
     class StartDashboardSnapshotJobScheduleResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -24759,7 +25853,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class StatePersistenceConfigurations < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -24778,7 +25873,8 @@ module Aws::QuickSight
     class StaticFile < Struct.new(
       :image_static_file,
       :spatial_static_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24796,7 +25892,8 @@ module Aws::QuickSight
       :bucket_name,
       :object_key,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24810,7 +25907,8 @@ module Aws::QuickSight
     class StaticFileSource < Struct.new(
       :url_options,
       :s3_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24820,7 +25918,8 @@ module Aws::QuickSight
     #   @return [String]
     class StaticFileUrlSourceOptions < Struct.new(
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24842,7 +25941,8 @@ module Aws::QuickSight
       :name,
       :value_type,
       :default_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24852,7 +25952,8 @@ module Aws::QuickSight
     #   @return [Array<String>]
     class StringDatasetParameterDefaultValues < Struct.new(
       :static_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24866,7 +25967,8 @@ module Aws::QuickSight
     class StringDefaultValues < Struct.new(
       :dynamic_value,
       :static_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24880,7 +25982,8 @@ module Aws::QuickSight
     class StringFormatConfiguration < Struct.new(
       :null_value_format_configuration,
       :numeric_format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24894,7 +25997,8 @@ module Aws::QuickSight
     class StringParameter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24920,7 +26024,8 @@ module Aws::QuickSight
       :default_values,
       :value_when_unset,
       :mapped_data_set_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24944,7 +26049,8 @@ module Aws::QuickSight
     class StringValueWhenUnsetConfiguration < Struct.new(
       :value_when_unset_option,
       :custom_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24982,7 +26088,8 @@ module Aws::QuickSight
       :value_cell_style,
       :metric_header_cell_style,
       :style_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24992,7 +26099,8 @@ module Aws::QuickSight
     #   @return [String]
     class SucceededTopicReviewedAnswer < Struct.new(
       :answer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25006,7 +26114,8 @@ module Aws::QuickSight
     class SuccessfulKeyRegistrationEntry < Struct.new(
       :key_arn,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -25025,7 +26134,8 @@ module Aws::QuickSight
     class TableAggregatedFieldWells < Struct.new(
       :group_by,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25043,7 +26153,8 @@ module Aws::QuickSight
       :color,
       :thickness,
       :style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25057,7 +26168,8 @@ module Aws::QuickSight
     class TableCellConditionalFormatting < Struct.new(
       :field_id,
       :text_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25067,7 +26179,8 @@ module Aws::QuickSight
     #   @return [String]
     class TableCellImageSizingConfiguration < Struct.new(
       :table_cell_image_scaling_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25105,7 +26218,8 @@ module Aws::QuickSight
       :background_color,
       :height,
       :border,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25115,7 +26229,8 @@ module Aws::QuickSight
     #   @return [Array<Types::TableConditionalFormattingOption>]
     class TableConditionalFormatting < Struct.new(
       :conditional_formatting_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25129,7 +26244,8 @@ module Aws::QuickSight
     class TableConditionalFormattingOption < Struct.new(
       :cell,
       :row,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25167,7 +26283,8 @@ module Aws::QuickSight
       :paginated_report_options,
       :table_inline_visualizations,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25177,7 +26294,8 @@ module Aws::QuickSight
     #   @return [String]
     class TableFieldCustomIconContent < Struct.new(
       :icon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25191,7 +26309,8 @@ module Aws::QuickSight
     class TableFieldCustomTextContent < Struct.new(
       :value,
       :font_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25201,7 +26320,8 @@ module Aws::QuickSight
     #   @return [Types::TableCellImageSizingConfiguration]
     class TableFieldImageConfiguration < Struct.new(
       :sizing_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25215,7 +26335,8 @@ module Aws::QuickSight
     class TableFieldLinkConfiguration < Struct.new(
       :target,
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25229,7 +26350,8 @@ module Aws::QuickSight
     class TableFieldLinkContentConfiguration < Struct.new(
       :custom_text_content,
       :custom_icon_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25255,7 +26377,8 @@ module Aws::QuickSight
       :custom_label,
       :visibility,
       :url_styling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25277,7 +26400,8 @@ module Aws::QuickSight
       :order,
       :pinned_field_options,
       :transposed_table_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25291,7 +26415,8 @@ module Aws::QuickSight
     class TableFieldURLConfiguration < Struct.new(
       :link_configuration,
       :image_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25306,7 +26431,8 @@ module Aws::QuickSight
     class TableFieldWells < Struct.new(
       :table_aggregated_field_wells,
       :table_unaggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25316,7 +26442,8 @@ module Aws::QuickSight
     #   @return [Types::DataBarsOptions]
     class TableInlineVisualization < Struct.new(
       :data_bars,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25338,7 +26465,8 @@ module Aws::QuickSight
       :header_style,
       :cell_style,
       :row_alternate_color_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25352,7 +26480,8 @@ module Aws::QuickSight
     class TablePaginatedReportOptions < Struct.new(
       :vertical_overflow_visibility,
       :overflow_column_header_visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25362,7 +26491,8 @@ module Aws::QuickSight
     #   @return [Array<String>]
     class TablePinnedFieldOptions < Struct.new(
       :pinned_left_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25376,7 +26506,8 @@ module Aws::QuickSight
     class TableRowConditionalFormatting < Struct.new(
       :background_color,
       :text_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25406,7 +26537,8 @@ module Aws::QuickSight
       :right,
       :top,
       :bottom,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25420,7 +26552,8 @@ module Aws::QuickSight
     class TableSortConfiguration < Struct.new(
       :row_sort,
       :pagination_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25430,7 +26563,8 @@ module Aws::QuickSight
     #   @return [String]
     class TableStyleTarget < Struct.new(
       :cell_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25440,7 +26574,8 @@ module Aws::QuickSight
     #   @return [Array<Types::UnaggregatedField>]
     class TableUnaggregatedFieldWells < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25475,7 +26610,8 @@ module Aws::QuickSight
       :conditional_formatting,
       :actions,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25490,7 +26626,8 @@ module Aws::QuickSight
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25507,7 +26644,8 @@ module Aws::QuickSight
     class TagColumnOperation < Struct.new(
       :column_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25520,7 +26658,8 @@ module Aws::QuickSight
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25533,7 +26672,8 @@ module Aws::QuickSight
     class TagResourceResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -25575,7 +26715,8 @@ module Aws::QuickSight
       :template_id,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25593,7 +26734,8 @@ module Aws::QuickSight
       :alias_name,
       :arn,
       :template_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25611,7 +26753,8 @@ module Aws::QuickSight
       :type,
       :message,
       :violated_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25626,7 +26769,8 @@ module Aws::QuickSight
     class TemplateSourceAnalysis < Struct.new(
       :arn,
       :data_set_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25640,7 +26784,8 @@ module Aws::QuickSight
     class TemplateSourceEntity < Struct.new(
       :source_analysis,
       :source_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25650,7 +26795,8 @@ module Aws::QuickSight
     #   @return [String]
     class TemplateSourceTemplate < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25680,7 +26826,8 @@ module Aws::QuickSight
       :latest_version_number,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25762,7 +26909,8 @@ module Aws::QuickSight
       :source_entity_arn,
       :theme_arn,
       :sheets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25816,7 +26964,8 @@ module Aws::QuickSight
       :options,
       :query_execution_options,
       :static_files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25842,7 +26991,8 @@ module Aws::QuickSight
       :created_time,
       :status,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25860,7 +27010,8 @@ module Aws::QuickSight
       :host,
       :port,
       :database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25878,7 +27029,8 @@ module Aws::QuickSight
       :title_options,
       :placeholder_options,
       :info_icon_label_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25888,7 +27040,8 @@ module Aws::QuickSight
     #   @return [Types::TextBoxMenuOption]
     class TextBoxInteractionOptions < Struct.new(
       :text_box_menu_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25898,7 +27051,8 @@ module Aws::QuickSight
     #   @return [String]
     class TextBoxMenuOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25916,7 +27070,8 @@ module Aws::QuickSight
       :background_color,
       :text_color,
       :icon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25926,7 +27081,8 @@ module Aws::QuickSight
     #   @return [String]
     class TextControlPlaceholderOptions < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25944,7 +27100,8 @@ module Aws::QuickSight
       :title_options,
       :placeholder_options,
       :info_icon_label_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25979,7 +27136,8 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25997,7 +27155,8 @@ module Aws::QuickSight
       :arn,
       :alias_name,
       :theme_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26021,7 +27180,8 @@ module Aws::QuickSight
       :ui_color_palette,
       :sheet,
       :typography,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26035,7 +27195,8 @@ module Aws::QuickSight
     class ThemeError < Struct.new(
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26065,7 +27226,8 @@ module Aws::QuickSight
       :latest_version_number,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26104,7 +27266,8 @@ module Aws::QuickSight
       :configuration,
       :errors,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26130,7 +27293,8 @@ module Aws::QuickSight
       :description,
       :created_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26148,7 +27312,8 @@ module Aws::QuickSight
       :symbol,
       :visibility,
       :grouping_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26158,7 +27323,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class ThresholdAlertsConfigurations < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -26176,7 +27342,8 @@ module Aws::QuickSight
     class ThrottlingException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26190,7 +27357,8 @@ module Aws::QuickSight
     class TileLayoutStyle < Struct.new(
       :gutter,
       :margin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26200,7 +27368,8 @@ module Aws::QuickSight
     #   @return [Types::BorderStyle]
     class TileStyle < Struct.new(
       :border,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26240,7 +27409,8 @@ module Aws::QuickSight
       :lower_boundary,
       :prediction_interval,
       :seasonality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -26283,7 +27453,8 @@ module Aws::QuickSight
       :time_granularity,
       :rolling_date,
       :default_filter_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26305,7 +27476,8 @@ module Aws::QuickSight
       :range_minimum,
       :range_maximum,
       :time_granularity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26365,7 +27537,8 @@ module Aws::QuickSight
       :exclude_period_configuration,
       :time_granularity,
       :default_filter_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -26390,7 +27563,8 @@ module Aws::QuickSight
       :static_value,
       :rolling_date,
       :parameter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26405,7 +27579,8 @@ module Aws::QuickSight
     class TooltipItem < Struct.new(
       :field_tooltip_item,
       :column_tooltip_item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26433,7 +27608,8 @@ module Aws::QuickSight
       :tooltip_visibility,
       :selected_tooltip_type,
       :field_based_tooltip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26467,7 +27643,8 @@ module Aws::QuickSight
       :time_granularity,
       :parameter_name,
       :default_filter_control_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -26518,7 +27695,8 @@ module Aws::QuickSight
       :mover_size,
       :sort_order,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26556,7 +27734,8 @@ module Aws::QuickSight
       :value,
       :result_size,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26643,7 +27822,8 @@ module Aws::QuickSight
       :never_aggregate_in_filter,
       :cell_value_synonyms,
       :non_additive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -26671,7 +27851,8 @@ module Aws::QuickSight
       :category_filter_type,
       :constant,
       :inverse,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -26695,7 +27876,8 @@ module Aws::QuickSight
       :constant_type,
       :singular_constant,
       :collective_constant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26783,7 +27965,8 @@ module Aws::QuickSight
       :never_aggregate_in_filter,
       :cell_value_synonyms,
       :non_additive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -26799,7 +27982,8 @@ module Aws::QuickSight
     #   @return [Boolean]
     class TopicConfigOptions < Struct.new(
       :q_business_insights_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26825,7 +28009,8 @@ module Aws::QuickSight
       :minimum,
       :maximum,
       :value_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26841,7 +28026,8 @@ module Aws::QuickSight
     class TopicDateRangeFilter < Struct.new(
       :inclusive,
       :constant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -26872,7 +28058,8 @@ module Aws::QuickSight
       :user_experience_version,
       :data_sets,
       :config_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26929,7 +28116,8 @@ module Aws::QuickSight
       :numeric_range_filter,
       :date_range_filter,
       :relative_date_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26959,7 +28147,8 @@ module Aws::QuickSight
       :sort,
       :contribution_analysis,
       :visual,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26977,7 +28166,8 @@ module Aws::QuickSight
       :type,
       :period,
       :window_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -27004,7 +28194,8 @@ module Aws::QuickSight
       :time_ranges,
       :direction,
       :sort_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27082,7 +28273,8 @@ module Aws::QuickSight
       :top_bottom_limit,
       :sort_direction,
       :anchor,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -27118,7 +28310,8 @@ module Aws::QuickSight
       :display_format,
       :display_format_options,
       :named_entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27160,7 +28353,8 @@ module Aws::QuickSight
       :display_format,
       :display_format_options,
       :named_entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27187,7 +28381,8 @@ module Aws::QuickSight
       :entity_synonyms,
       :semantic_entity_type,
       :definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27206,7 +28401,8 @@ module Aws::QuickSight
     class TopicNumericEqualityFilter < Struct.new(
       :constant,
       :aggregation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27233,7 +28429,8 @@ module Aws::QuickSight
       :inclusive,
       :constant,
       :aggregation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -27253,7 +28450,8 @@ module Aws::QuickSight
     class TopicRangeFilterConstant < Struct.new(
       :constant_type,
       :range_constant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27271,7 +28469,8 @@ module Aws::QuickSight
       :refresh_arn,
       :refresh_id,
       :refresh_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27306,7 +28505,8 @@ module Aws::QuickSight
       :timezone,
       :repeat_at,
       :topic_schedule_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -27333,7 +28533,8 @@ module Aws::QuickSight
       :dataset_arn,
       :dataset_name,
       :refresh_schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27352,7 +28553,8 @@ module Aws::QuickSight
       :time_granularity,
       :relative_date_filter_function,
       :constant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27386,7 +28588,8 @@ module Aws::QuickSight
       :mir,
       :primary_visual,
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27404,7 +28607,8 @@ module Aws::QuickSight
       :operator,
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27419,7 +28623,8 @@ module Aws::QuickSight
     class TopicSingularFilterConstant < Struct.new(
       :constant_type,
       :singular_constant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27433,7 +28638,8 @@ module Aws::QuickSight
     class TopicSortClause < Struct.new(
       :operand,
       :sort_direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27455,7 +28661,8 @@ module Aws::QuickSight
       :topic_id,
       :name,
       :user_experience_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27469,7 +28676,8 @@ module Aws::QuickSight
     class TopicTemplate < Struct.new(
       :template_type,
       :slots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27491,7 +28699,8 @@ module Aws::QuickSight
       :role,
       :ir,
       :supporting_visuals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27509,7 +28718,8 @@ module Aws::QuickSight
       :computation_id,
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27519,7 +28729,8 @@ module Aws::QuickSight
     #   @return [String]
     class TotalAggregationFunction < Struct.new(
       :simple_total_aggregation_function,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27533,7 +28744,8 @@ module Aws::QuickSight
     class TotalAggregationOption < Struct.new(
       :field_id,
       :total_aggregation_function,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27563,7 +28775,8 @@ module Aws::QuickSight
       :custom_label,
       :total_cell_style,
       :total_aggregation_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27605,7 +28818,8 @@ module Aws::QuickSight
       :untag_column_operation,
       :override_dataset_parameter_operation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ProjectOperation < TransformOperation; end
@@ -27643,7 +28857,8 @@ module Aws::QuickSight
       :column_index,
       :column_width,
       :column_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27661,7 +28876,8 @@ module Aws::QuickSight
       :groups,
       :sizes,
       :colors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27707,7 +28923,8 @@ module Aws::QuickSight
       :data_labels,
       :tooltip,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27718,7 +28935,8 @@ module Aws::QuickSight
     #   @return [Types::TreeMapAggregatedFieldWells]
     class TreeMapFieldWells < Struct.new(
       :tree_map_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27732,7 +28950,8 @@ module Aws::QuickSight
     class TreeMapSortConfiguration < Struct.new(
       :tree_map_sort,
       :tree_map_group_items_limit_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27767,7 +28986,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27777,7 +28997,8 @@ module Aws::QuickSight
     #   @return [String]
     class TrendArrowOptions < Struct.new(
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27795,7 +29016,8 @@ module Aws::QuickSight
       :host,
       :port,
       :catalog,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27809,7 +29031,8 @@ module Aws::QuickSight
     class TwitterParameters < Struct.new(
       :query,
       :max_rows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27819,7 +29042,8 @@ module Aws::QuickSight
     #   @return [Array<Types::Font>]
     class Typography < Struct.new(
       :font_families,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27903,7 +29127,8 @@ module Aws::QuickSight
       :dimension_foreground,
       :measure,
       :measure_foreground,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27921,7 +29146,8 @@ module Aws::QuickSight
       :field_id,
       :column,
       :format_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27931,7 +29157,8 @@ module Aws::QuickSight
     #   @return [Array<String>]
     class UniqueKey < Struct.new(
       :column_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27949,7 +29176,8 @@ module Aws::QuickSight
       :computation_id,
       :name,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27970,7 +29198,8 @@ module Aws::QuickSight
     class UnsupportedPricingPlanException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27986,7 +29215,8 @@ module Aws::QuickSight
     class UnsupportedUserEditionException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28000,7 +29230,8 @@ module Aws::QuickSight
     class UntagColumnOperation < Struct.new(
       :column_name,
       :tag_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28013,7 +29244,8 @@ module Aws::QuickSight
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28026,7 +29258,8 @@ module Aws::QuickSight
     class UntagResourceResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28049,7 +29282,8 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       :account_customization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28079,7 +29313,8 @@ module Aws::QuickSight
       :account_customization,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28111,7 +29346,8 @@ module Aws::QuickSight
       :default_namespace,
       :notification_email,
       :termination_protection_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28124,7 +29360,8 @@ module Aws::QuickSight
     class UpdateAccountSettingsResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28154,7 +29391,8 @@ module Aws::QuickSight
       :analysis_id,
       :grant_permissions,
       :revoke_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28180,7 +29418,8 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28229,7 +29468,8 @@ module Aws::QuickSight
       :theme_arn,
       :definition,
       :validation_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28254,7 +29494,8 @@ module Aws::QuickSight
       :update_status,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28272,7 +29513,8 @@ module Aws::QuickSight
     class UpdateApplicationWithTokenExchangeGrantRequest < Struct.new(
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28285,7 +29527,8 @@ module Aws::QuickSight
     class UpdateApplicationWithTokenExchangeGrantResponse < Struct.new(
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28303,7 +29546,8 @@ module Aws::QuickSight
     class UpdateBrandAssignmentRequest < Struct.new(
       :aws_account_id,
       :brand_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28316,7 +29560,8 @@ module Aws::QuickSight
     class UpdateBrandAssignmentResponse < Struct.new(
       :request_id,
       :brand_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28333,7 +29578,8 @@ module Aws::QuickSight
       :aws_account_id,
       :brand_id,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28346,7 +29592,8 @@ module Aws::QuickSight
     class UpdateBrandPublishedVersionResponse < Struct.new(
       :request_id,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28363,7 +29610,8 @@ module Aws::QuickSight
       :aws_account_id,
       :brand_id,
       :brand_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28380,7 +29628,8 @@ module Aws::QuickSight
       :request_id,
       :brand_detail,
       :brand_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28397,7 +29646,8 @@ module Aws::QuickSight
       :aws_account_id,
       :custom_permissions_name,
       :capabilities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28414,7 +29664,8 @@ module Aws::QuickSight
       :status,
       :arn,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28436,7 +29687,8 @@ module Aws::QuickSight
       :aws_account_id,
       :dashboard_id,
       :link_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28457,7 +29709,8 @@ module Aws::QuickSight
       :status,
       :dashboard_arn,
       :link_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28492,7 +29745,8 @@ module Aws::QuickSight
       :revoke_permissions,
       :grant_link_permissions,
       :revoke_link_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28521,7 +29775,8 @@ module Aws::QuickSight
       :request_id,
       :status,
       :link_sharing_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28544,7 +29799,8 @@ module Aws::QuickSight
       :aws_account_id,
       :dashboard_id,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28565,7 +29821,8 @@ module Aws::QuickSight
       :dashboard_arn,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28657,7 +29914,8 @@ module Aws::QuickSight
       :theme_arn,
       :definition,
       :validation_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28686,7 +29944,8 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28704,7 +29963,8 @@ module Aws::QuickSight
     class UpdateDashboardsQAConfigurationRequest < Struct.new(
       :aws_account_id,
       :dashboards_qa_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28721,7 +29981,8 @@ module Aws::QuickSight
       :dashboards_qa_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28748,7 +30009,8 @@ module Aws::QuickSight
       :data_set_id,
       :grant_permissions,
       :revoke_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28770,7 +30032,8 @@ module Aws::QuickSight
       :data_set_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28839,7 +30102,8 @@ module Aws::QuickSight
       :data_set_usage_configuration,
       :dataset_parameters,
       :performance_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28870,7 +30134,8 @@ module Aws::QuickSight
       :ingestion_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28896,7 +30161,8 @@ module Aws::QuickSight
       :data_source_id,
       :grant_permissions,
       :revoke_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28917,7 +30183,8 @@ module Aws::QuickSight
       :data_source_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -28958,7 +30225,8 @@ module Aws::QuickSight
       :credentials,
       :vpc_connection_properties,
       :ssl_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28983,7 +30251,8 @@ module Aws::QuickSight
       :update_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29005,7 +30274,8 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29018,7 +30288,8 @@ module Aws::QuickSight
     class UpdateDefaultQBusinessApplicationResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29044,7 +30315,8 @@ module Aws::QuickSight
       :folder_id,
       :grant_permissions,
       :revoke_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29069,7 +30341,8 @@ module Aws::QuickSight
       :folder_id,
       :permissions,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29091,7 +30364,8 @@ module Aws::QuickSight
       :aws_account_id,
       :folder_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29112,7 +30386,8 @@ module Aws::QuickSight
       :arn,
       :folder_id,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29139,7 +30414,8 @@ module Aws::QuickSight
       :description,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29156,7 +30432,8 @@ module Aws::QuickSight
       :group,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29213,7 +30490,8 @@ module Aws::QuickSight
       :assignment_status,
       :policy_arn,
       :identities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29265,7 +30543,8 @@ module Aws::QuickSight
       :assignment_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29287,7 +30566,8 @@ module Aws::QuickSight
       :aws_account_id,
       :service,
       :authorized_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29300,7 +30580,8 @@ module Aws::QuickSight
     class UpdateIdentityPropagationConfigResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29330,7 +30611,8 @@ module Aws::QuickSight
       :vpc_id_restriction_rule_map,
       :vpc_endpoint_id_restriction_rule_map,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29347,7 +30629,8 @@ module Aws::QuickSight
       :aws_account_id,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29365,7 +30648,8 @@ module Aws::QuickSight
     class UpdateKeyRegistrationRequest < Struct.new(
       :aws_account_id,
       :key_registration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29382,7 +30666,8 @@ module Aws::QuickSight
       :failed_key_registration,
       :successful_key_registration,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29395,7 +30680,8 @@ module Aws::QuickSight
     class UpdatePublicSharingSettingsRequest < Struct.new(
       :aws_account_id,
       :public_sharing_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29408,7 +30694,8 @@ module Aws::QuickSight
     class UpdatePublicSharingSettingsResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29426,7 +30713,8 @@ module Aws::QuickSight
     class UpdateQPersonalizationConfigurationRequest < Struct.new(
       :aws_account_id,
       :personalization_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29443,7 +30731,8 @@ module Aws::QuickSight
       :personalization_mode,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29461,7 +30750,8 @@ module Aws::QuickSight
     class UpdateQuickSightQSearchConfigurationRequest < Struct.new(
       :aws_account_id,
       :q_search_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29478,7 +30768,8 @@ module Aws::QuickSight
       :q_search_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29500,7 +30791,8 @@ module Aws::QuickSight
       :data_set_id,
       :aws_account_id,
       :schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29521,7 +30813,8 @@ module Aws::QuickSight
       :request_id,
       :schedule_id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29547,7 +30840,8 @@ module Aws::QuickSight
       :role,
       :aws_account_id,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29560,7 +30854,8 @@ module Aws::QuickSight
     class UpdateRoleCustomPermissionResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29588,7 +30883,8 @@ module Aws::QuickSight
     class UpdateSPICECapacityConfigurationRequest < Struct.new(
       :aws_account_id,
       :purchase_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29601,7 +30897,8 @@ module Aws::QuickSight
     class UpdateSPICECapacityConfigurationResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29630,7 +30927,8 @@ module Aws::QuickSight
       :template_id,
       :alias_name,
       :template_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29647,7 +30945,8 @@ module Aws::QuickSight
       :template_alias,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29673,7 +30972,8 @@ module Aws::QuickSight
       :template_id,
       :grant_permissions,
       :revoke_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29698,7 +30998,8 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29749,7 +31050,8 @@ module Aws::QuickSight
       :name,
       :definition,
       :validation_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29778,7 +31080,8 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29804,7 +31107,8 @@ module Aws::QuickSight
       :theme_id,
       :alias_name,
       :theme_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29821,7 +31125,8 @@ module Aws::QuickSight
       :theme_alias,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29847,7 +31152,8 @@ module Aws::QuickSight
       :theme_id,
       :grant_permissions,
       :revoke_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29872,7 +31178,8 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29909,7 +31216,8 @@ module Aws::QuickSight
       :base_theme_id,
       :version_description,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29938,7 +31246,8 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -29965,7 +31274,8 @@ module Aws::QuickSight
       :topic_id,
       :grant_permissions,
       :revoke_permissions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29990,7 +31300,8 @@ module Aws::QuickSight
       :permissions,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -30017,7 +31328,8 @@ module Aws::QuickSight
       :topic_id,
       :dataset_id,
       :refresh_schedule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30042,7 +31354,8 @@ module Aws::QuickSight
       :dataset_arn,
       :status,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -30069,7 +31382,8 @@ module Aws::QuickSight
       :topic_id,
       :topic,
       :custom_instructions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30094,7 +31408,8 @@ module Aws::QuickSight
       :refresh_arn,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -30120,7 +31435,8 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       :custom_permissions_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30133,7 +31449,8 @@ module Aws::QuickSight
     class UpdateUserCustomPermissionResponse < Struct.new(
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -30262,7 +31579,8 @@ module Aws::QuickSight
       :external_login_federation_provider_type,
       :custom_federation_provider_url,
       :external_login_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30279,7 +31597,8 @@ module Aws::QuickSight
       :user,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -30320,7 +31639,8 @@ module Aws::QuickSight
       :security_group_ids,
       :dns_resolvers,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30349,7 +31669,8 @@ module Aws::QuickSight
       :availability_status,
       :request_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -30380,7 +31701,8 @@ module Aws::QuickSight
       :contains_header,
       :text_qualifier,
       :delimiter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -30488,7 +31810,8 @@ module Aws::QuickSight
       :external_login_federation_provider_type,
       :external_login_federation_provider_url,
       :external_login_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -30550,7 +31873,8 @@ module Aws::QuickSight
       :role_arn,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30608,7 +31932,8 @@ module Aws::QuickSight
       :role_arn,
       :created_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30618,7 +31943,8 @@ module Aws::QuickSight
     #   @return [String]
     class ValidationStrategy < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30628,7 +31954,8 @@ module Aws::QuickSight
     #   @return [Types::PercentVisibleRange]
     class VisibleRangeOptions < Struct.new(
       :percent_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30757,7 +32084,8 @@ module Aws::QuickSight
       :empty_visual,
       :radar_chart_visual,
       :plugin_visual,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30767,7 +32095,8 @@ module Aws::QuickSight
     #   @return [String]
     class VisualAxisSortOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30805,7 +32134,8 @@ module Aws::QuickSight
       :status,
       :trigger,
       :action_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30815,7 +32145,8 @@ module Aws::QuickSight
     #   @return [Types::VisualHighlightOperation]
     class VisualCustomActionDefaults < Struct.new(
       :highlight_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30838,7 +32169,8 @@ module Aws::QuickSight
       :navigation_operation,
       :url_operation,
       :set_parameters_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30848,7 +32180,8 @@ module Aws::QuickSight
     #   @return [String]
     class VisualHighlightOperation < Struct.new(
       :trigger,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30862,7 +32195,8 @@ module Aws::QuickSight
     class VisualInteractionOptions < Struct.new(
       :visual_menu_option,
       :context_menu_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30872,7 +32206,8 @@ module Aws::QuickSight
     #   @return [String]
     class VisualMenuOption < Struct.new(
       :availability_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30882,7 +32217,8 @@ module Aws::QuickSight
     #   @return [String]
     class VisualOptions < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30896,7 +32232,8 @@ module Aws::QuickSight
     class VisualPalette < Struct.new(
       :chart_color,
       :color_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30910,7 +32247,8 @@ module Aws::QuickSight
     class VisualSubtitleLabelOptions < Struct.new(
       :visibility,
       :format_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30924,7 +32262,8 @@ module Aws::QuickSight
     class VisualTitleLabelOptions < Struct.new(
       :visibility,
       :format_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30934,7 +32273,8 @@ module Aws::QuickSight
     #   @return [String]
     class VpcConnectionProperties < Struct.new(
       :vpc_connection_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30952,7 +32292,8 @@ module Aws::QuickSight
       :categories,
       :values,
       :breakdowns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30962,7 +32303,8 @@ module Aws::QuickSight
     #   @return [Types::WaterfallChartGroupColorConfiguration]
     class WaterfallChartColorConfiguration < Struct.new(
       :group_color_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31016,7 +32358,8 @@ module Aws::QuickSight
       :visual_palette,
       :color_configuration,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31026,7 +32369,8 @@ module Aws::QuickSight
     #   @return [Types::WaterfallChartAggregatedFieldWells]
     class WaterfallChartFieldWells < Struct.new(
       :waterfall_chart_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31044,7 +32388,8 @@ module Aws::QuickSight
       :positive_bar_color,
       :negative_bar_color,
       :total_bar_color,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31054,7 +32399,8 @@ module Aws::QuickSight
     #   @return [String]
     class WaterfallChartOptions < Struct.new(
       :total_bar_label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31068,7 +32414,8 @@ module Aws::QuickSight
     class WaterfallChartSortConfiguration < Struct.new(
       :category_sort,
       :breakdown_items_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31103,7 +32450,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31117,7 +32465,8 @@ module Aws::QuickSight
     class WhatIfPointScenario < Struct.new(
       :date,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -31140,7 +32489,8 @@ module Aws::QuickSight
       :start_date,
       :end_date,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -31159,7 +32509,8 @@ module Aws::QuickSight
     class WordCloudAggregatedFieldWells < Struct.new(
       :group_by,
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31185,7 +32536,8 @@ module Aws::QuickSight
       :category_label_options,
       :word_cloud_options,
       :interactions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31196,7 +32548,8 @@ module Aws::QuickSight
     #   @return [Types::WordCloudAggregatedFieldWells]
     class WordCloudFieldWells < Struct.new(
       :word_cloud_aggregated_field_wells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31226,7 +32579,8 @@ module Aws::QuickSight
       :word_casing,
       :word_padding,
       :maximum_string_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31240,7 +32594,8 @@ module Aws::QuickSight
     class WordCloudSortConfiguration < Struct.new(
       :category_items_limit,
       :category_sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31275,7 +32630,8 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31286,7 +32642,8 @@ module Aws::QuickSight
     #   @return [String]
     class YAxisOptions < Struct.new(
       :y_axis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

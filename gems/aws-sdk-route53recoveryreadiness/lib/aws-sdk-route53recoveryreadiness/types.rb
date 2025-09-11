@@ -11,7 +11,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +38,8 @@ module Aws::Route53RecoveryReadiness
       :cells,
       :parent_readiness_scopes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +48,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -63,7 +66,8 @@ module Aws::Route53RecoveryReadiness
       :cell_name,
       :cells,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +92,8 @@ module Aws::Route53RecoveryReadiness
       :cells,
       :parent_readiness_scopes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +102,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class CreateCrossAccountAuthorizationRequest < Struct.new(
       :cross_account_authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +112,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class CreateCrossAccountAuthorizationResponse < Struct.new(
       :cross_account_authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +130,8 @@ module Aws::Route53RecoveryReadiness
       :readiness_check_name,
       :resource_set_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +152,8 @@ module Aws::Route53RecoveryReadiness
       :readiness_check_name,
       :resource_set,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +170,8 @@ module Aws::Route53RecoveryReadiness
       :cells,
       :recovery_group_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +192,8 @@ module Aws::Route53RecoveryReadiness
       :recovery_group_arn,
       :recovery_group_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -203,7 +214,8 @@ module Aws::Route53RecoveryReadiness
       :resource_set_type,
       :resources,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +240,8 @@ module Aws::Route53RecoveryReadiness
       :resource_set_type,
       :resources,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +267,8 @@ module Aws::Route53RecoveryReadiness
       :record_set_id,
       :record_type,
       :target_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +277,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class DeleteCellRequest < Struct.new(
       :cell_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,12 +287,14 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class DeleteCrossAccountAuthorizationRequest < Struct.new(
       :cross_account_authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCrossAccountAuthorizationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -286,7 +303,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class DeleteReadinessCheckRequest < Struct.new(
       :readiness_check_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -295,7 +313,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class DeleteRecoveryGroupRequest < Struct.new(
       :recovery_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +323,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class DeleteResourceSetRequest < Struct.new(
       :resource_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +341,8 @@ module Aws::Route53RecoveryReadiness
       :max_results,
       :next_token,
       :recovery_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +359,8 @@ module Aws::Route53RecoveryReadiness
       :last_audit_timestamp,
       :next_token,
       :recommendations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +377,8 @@ module Aws::Route53RecoveryReadiness
       :cell_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +395,8 @@ module Aws::Route53RecoveryReadiness
       :next_token,
       :readiness,
       :readiness_checks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +405,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class GetCellRequest < Struct.new(
       :cell_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -406,7 +431,8 @@ module Aws::Route53RecoveryReadiness
       :cells,
       :parent_readiness_scopes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +441,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class GetReadinessCheckRequest < Struct.new(
       :readiness_check_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -436,7 +463,8 @@ module Aws::Route53RecoveryReadiness
       :next_token,
       :readiness_check_name,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +481,8 @@ module Aws::Route53RecoveryReadiness
       :next_token,
       :readiness,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +503,8 @@ module Aws::Route53RecoveryReadiness
       :readiness_check_name,
       :resource_set,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,7 +521,8 @@ module Aws::Route53RecoveryReadiness
       :max_results,
       :next_token,
       :readiness_check_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -512,7 +543,8 @@ module Aws::Route53RecoveryReadiness
       :next_token,
       :readiness,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +561,8 @@ module Aws::Route53RecoveryReadiness
       :max_results,
       :next_token,
       :recovery_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +579,8 @@ module Aws::Route53RecoveryReadiness
       :next_token,
       :readiness,
       :readiness_checks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +589,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class GetRecoveryGroupRequest < Struct.new(
       :recovery_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +611,8 @@ module Aws::Route53RecoveryReadiness
       :recovery_group_arn,
       :recovery_group_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +621,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class GetResourceSetRequest < Struct.new(
       :resource_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +647,8 @@ module Aws::Route53RecoveryReadiness
       :resource_set_type,
       :resources,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -619,7 +657,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +671,8 @@ module Aws::Route53RecoveryReadiness
     class ListCellsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -645,7 +685,8 @@ module Aws::Route53RecoveryReadiness
     class ListCellsResponse < Struct.new(
       :cells,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -658,7 +699,8 @@ module Aws::Route53RecoveryReadiness
     class ListCrossAccountAuthorizationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +713,8 @@ module Aws::Route53RecoveryReadiness
     class ListCrossAccountAuthorizationsResponse < Struct.new(
       :cross_account_authorizations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +727,8 @@ module Aws::Route53RecoveryReadiness
     class ListReadinessChecksRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +741,8 @@ module Aws::Route53RecoveryReadiness
     class ListReadinessChecksResponse < Struct.new(
       :next_token,
       :readiness_checks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -710,7 +755,8 @@ module Aws::Route53RecoveryReadiness
     class ListRecoveryGroupsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +769,8 @@ module Aws::Route53RecoveryReadiness
     class ListRecoveryGroupsResponse < Struct.new(
       :next_token,
       :recovery_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -736,7 +783,8 @@ module Aws::Route53RecoveryReadiness
     class ListResourceSetsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +797,8 @@ module Aws::Route53RecoveryReadiness
     class ListResourceSetsResponse < Struct.new(
       :next_token,
       :resource_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +816,8 @@ module Aws::Route53RecoveryReadiness
       :resource_type,
       :rule_description,
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +834,8 @@ module Aws::Route53RecoveryReadiness
       :max_results,
       :next_token,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,7 +848,8 @@ module Aws::Route53RecoveryReadiness
     class ListRulesResponse < Struct.new(
       :next_token,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -806,7 +858,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class ListTagsForResourcesRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +868,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [Hash<String, String>]
     class ListTagsForResourcesResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +879,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class Message < Struct.new(
       :message_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +890,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class NLBResource < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -849,7 +905,8 @@ module Aws::Route53RecoveryReadiness
     class R53ResourceRecord < Struct.new(
       :domain_name,
       :record_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -871,7 +928,8 @@ module Aws::Route53RecoveryReadiness
       :readiness_check_name,
       :resource_set,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -885,7 +943,8 @@ module Aws::Route53RecoveryReadiness
     class ReadinessCheckSummary < Struct.new(
       :readiness,
       :readiness_check_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,7 +954,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class Recommendation < Struct.new(
       :recommendation_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +977,8 @@ module Aws::Route53RecoveryReadiness
       :recovery_group_arn,
       :recovery_group_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +1000,8 @@ module Aws::Route53RecoveryReadiness
       :dns_target_resource,
       :readiness_scopes,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,7 +1010,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1033,8 @@ module Aws::Route53RecoveryReadiness
       :last_checked_timestamp,
       :readiness,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -996,7 +1060,8 @@ module Aws::Route53RecoveryReadiness
       :resource_set_type,
       :resources,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1083,8 @@ module Aws::Route53RecoveryReadiness
       :messages,
       :readiness,
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,12 +1097,14 @@ module Aws::Route53RecoveryReadiness
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1118,8 @@ module Aws::Route53RecoveryReadiness
     class TargetResource < Struct.new(
       :nlb_resource,
       :r53_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,7 +1128,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1142,8 @@ module Aws::Route53RecoveryReadiness
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1156,8 @@ module Aws::Route53RecoveryReadiness
     class UpdateCellRequest < Struct.new(
       :cell_name,
       :cells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1182,8 @@ module Aws::Route53RecoveryReadiness
       :cells,
       :parent_readiness_scopes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1197,8 @@ module Aws::Route53RecoveryReadiness
     class UpdateReadinessCheckRequest < Struct.new(
       :readiness_check_name,
       :resource_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1219,8 @@ module Aws::Route53RecoveryReadiness
       :readiness_check_name,
       :resource_set,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1234,8 @@ module Aws::Route53RecoveryReadiness
     class UpdateRecoveryGroupRequest < Struct.new(
       :cells,
       :recovery_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1180,7 +1256,8 @@ module Aws::Route53RecoveryReadiness
       :recovery_group_arn,
       :recovery_group_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1198,7 +1275,8 @@ module Aws::Route53RecoveryReadiness
       :resource_set_name,
       :resource_set_type,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1223,7 +1301,8 @@ module Aws::Route53RecoveryReadiness
       :resource_set_type,
       :resources,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1232,7 +1311,8 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

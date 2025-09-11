@@ -39,7 +39,7 @@ module Aws::Mq
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mq::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The attribute which caused the error.</p>
@@ -58,7 +58,7 @@ module Aws::Mq
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mq::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The attribute which caused the error.</p>
@@ -77,7 +77,7 @@ module Aws::Mq
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mq::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The attribute which caused the error.</p>
@@ -96,7 +96,7 @@ module Aws::Mq
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mq::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The attribute which caused the error.</p>
@@ -115,7 +115,7 @@ module Aws::Mq
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mq::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The attribute which caused the error.</p>
@@ -134,7 +134,7 @@ module Aws::Mq
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mq::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The attribute which caused the error.</p>

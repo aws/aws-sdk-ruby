@@ -21,7 +21,8 @@ module Aws::BCMDataExports
       :name,
       :type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -36,7 +37,8 @@ module Aws::BCMDataExports
     class CreateExportRequest < Struct.new(
       :export,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -45,7 +47,8 @@ module Aws::BCMDataExports
     #   @return [String]
     class CreateExportResponse < Struct.new(
       :export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +62,8 @@ module Aws::BCMDataExports
     class DataQuery < Struct.new(
       :query_statement,
       :table_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +72,8 @@ module Aws::BCMDataExports
     #   @return [String]
     class DeleteExportRequest < Struct.new(
       :export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +82,8 @@ module Aws::BCMDataExports
     #   @return [String]
     class DeleteExportResponse < Struct.new(
       :export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -87,7 +93,8 @@ module Aws::BCMDataExports
     #   @return [Types::S3Destination]
     class DestinationConfigurations < Struct.new(
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -101,7 +108,8 @@ module Aws::BCMDataExports
     class ExecutionReference < Struct.new(
       :execution_id,
       :execution_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +135,8 @@ module Aws::BCMDataExports
       :created_at,
       :completed_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +166,8 @@ module Aws::BCMDataExports
       :data_query,
       :destination_configurations,
       :refresh_cadence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +185,8 @@ module Aws::BCMDataExports
       :export_arn,
       :export_name,
       :export_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +212,8 @@ module Aws::BCMDataExports
       :created_at,
       :last_updated_at,
       :last_refreshed_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -215,7 +227,8 @@ module Aws::BCMDataExports
     class GetExecutionRequest < Struct.new(
       :export_arn,
       :execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +247,8 @@ module Aws::BCMDataExports
       :execution_id,
       :export,
       :execution_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -243,7 +257,8 @@ module Aws::BCMDataExports
     #   @return [String]
     class GetExportRequest < Struct.new(
       :export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,7 +271,8 @@ module Aws::BCMDataExports
     class GetExportResponse < Struct.new(
       :export,
       :export_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +288,8 @@ module Aws::BCMDataExports
     class GetTableRequest < Struct.new(
       :table_name,
       :table_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +313,8 @@ module Aws::BCMDataExports
       :description,
       :table_properties,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +324,8 @@ module Aws::BCMDataExports
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +342,8 @@ module Aws::BCMDataExports
       :export_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -336,7 +356,8 @@ module Aws::BCMDataExports
     class ListExecutionsResponse < Struct.new(
       :executions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -349,7 +370,8 @@ module Aws::BCMDataExports
     class ListExportsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +384,8 @@ module Aws::BCMDataExports
     class ListExportsResponse < Struct.new(
       :exports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +398,8 @@ module Aws::BCMDataExports
     class ListTablesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -388,7 +412,8 @@ module Aws::BCMDataExports
     class ListTablesResponse < Struct.new(
       :tables,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +430,8 @@ module Aws::BCMDataExports
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +445,8 @@ module Aws::BCMDataExports
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -430,7 +457,8 @@ module Aws::BCMDataExports
     #   @return [String]
     class RefreshCadence < Struct.new(
       :frequency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +475,8 @@ module Aws::BCMDataExports
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +490,8 @@ module Aws::BCMDataExports
     class ResourceTag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +514,8 @@ module Aws::BCMDataExports
       :s3_prefix,
       :s3_region,
       :s3_output_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +540,8 @@ module Aws::BCMDataExports
       :format,
       :compression,
       :overwrite,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -536,7 +568,8 @@ module Aws::BCMDataExports
       :resource_type,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +587,8 @@ module Aws::BCMDataExports
       :table_name,
       :description,
       :table_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +610,8 @@ module Aws::BCMDataExports
       :valid_values,
       :default_value,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,12 +625,14 @@ module Aws::BCMDataExports
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -613,7 +650,8 @@ module Aws::BCMDataExports
       :message,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,12 +664,14 @@ module Aws::BCMDataExports
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :resource_tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +684,8 @@ module Aws::BCMDataExports
     class UpdateExportRequest < Struct.new(
       :export_arn,
       :export,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -653,7 +694,8 @@ module Aws::BCMDataExports
     #   @return [String]
     class UpdateExportResponse < Struct.new(
       :export_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +713,8 @@ module Aws::BCMDataExports
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +729,8 @@ module Aws::BCMDataExports
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

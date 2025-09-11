@@ -11,7 +11,8 @@ module Aws::NetworkMonitor
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::NetworkMonitor
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,7 +49,8 @@ module Aws::NetworkMonitor
       :aggregation_period,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -73,7 +76,8 @@ module Aws::NetworkMonitor
       :state,
       :aggregation_period,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -103,7 +107,8 @@ module Aws::NetworkMonitor
       :protocol,
       :packet_size,
       :probe_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +129,8 @@ module Aws::NetworkMonitor
       :probe,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +187,8 @@ module Aws::NetworkMonitor
       :created_at,
       :modified_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,12 +197,14 @@ module Aws::NetworkMonitor
     #   @return [String]
     class DeleteMonitorInput < Struct.new(
       :monitor_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMonitorOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,12 +217,14 @@ module Aws::NetworkMonitor
     class DeleteProbeInput < Struct.new(
       :monitor_name,
       :probe_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProbeOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -222,7 +233,8 @@ module Aws::NetworkMonitor
     #   @return [String]
     class GetMonitorInput < Struct.new(
       :monitor_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -259,7 +271,8 @@ module Aws::NetworkMonitor
       :probes,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +285,8 @@ module Aws::NetworkMonitor
     class GetProbeInput < Struct.new(
       :monitor_name,
       :probe_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -329,7 +343,8 @@ module Aws::NetworkMonitor
       :created_at,
       :modified_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +353,8 @@ module Aws::NetworkMonitor
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -358,7 +374,8 @@ module Aws::NetworkMonitor
       :next_token,
       :max_results,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +388,8 @@ module Aws::NetworkMonitor
     class ListMonitorsOutput < Struct.new(
       :monitors,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -380,7 +398,8 @@ module Aws::NetworkMonitor
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +408,8 @@ module Aws::NetworkMonitor
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -415,7 +435,8 @@ module Aws::NetworkMonitor
       :state,
       :aggregation_period,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -473,7 +494,8 @@ module Aws::NetworkMonitor
       :created_at,
       :modified_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +525,8 @@ module Aws::NetworkMonitor
       :protocol,
       :packet_size,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -512,7 +535,8 @@ module Aws::NetworkMonitor
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +545,8 @@ module Aws::NetworkMonitor
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,12 +559,14 @@ module Aws::NetworkMonitor
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -548,7 +575,8 @@ module Aws::NetworkMonitor
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,12 +589,14 @@ module Aws::NetworkMonitor
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,7 +609,8 @@ module Aws::NetworkMonitor
     class UpdateMonitorInput < Struct.new(
       :monitor_name,
       :aggregation_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +635,8 @@ module Aws::NetworkMonitor
       :state,
       :aggregation_period,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -637,7 +669,8 @@ module Aws::NetworkMonitor
       :destination_port,
       :protocol,
       :packet_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +727,8 @@ module Aws::NetworkMonitor
       :created_at,
       :modified_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +737,8 @@ module Aws::NetworkMonitor
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

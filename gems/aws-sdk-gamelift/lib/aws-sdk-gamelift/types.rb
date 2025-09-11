@@ -21,12 +21,14 @@ module Aws::GameLift
       :ticket_id,
       :player_ids,
       :acceptance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AcceptMatchOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +69,8 @@ module Aws::GameLift
       :routing_strategy,
       :creation_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +82,8 @@ module Aws::GameLift
     #   @return [String]
     class AnywhereConfiguration < Struct.new(
       :cost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +111,8 @@ module Aws::GameLift
       :n,
       :sl,
       :sdm,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +147,8 @@ module Aws::GameLift
       :access_key_id,
       :secret_access_key,
       :session_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -222,7 +228,8 @@ module Aws::GameLift
       :operating_system,
       :creation_time,
       :server_sdk_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +255,8 @@ module Aws::GameLift
     #   @return [String]
     class CertificateConfiguration < Struct.new(
       :certificate_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +272,8 @@ module Aws::GameLift
     #   @return [Array<String>]
     class ClaimFilterOption < Struct.new(
       :instance_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -288,7 +297,8 @@ module Aws::GameLift
       :game_server_id,
       :game_server_data,
       :filter_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +307,8 @@ module Aws::GameLift
     #   @return [Types::GameServer]
     class ClaimGameServerOutput < Struct.new(
       :game_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +409,8 @@ module Aws::GameLift
       :instance_id,
       :container_attributes,
       :game_server_container_group_definition_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +422,8 @@ module Aws::GameLift
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +440,8 @@ module Aws::GameLift
     class ConnectionPortRange < Struct.new(
       :from_port,
       :to_port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +460,8 @@ module Aws::GameLift
     class ContainerAttribute < Struct.new(
       :container_name,
       :container_runtime_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +509,8 @@ module Aws::GameLift
     class ContainerDependency < Struct.new(
       :container_name,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +532,8 @@ module Aws::GameLift
     class ContainerEnvironment < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +709,8 @@ module Aws::GameLift
       :deployment_details,
       :log_configuration,
       :location_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,7 +755,8 @@ module Aws::GameLift
     class ContainerFleetLocationAttributes < Struct.new(
       :location,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,7 +901,8 @@ module Aws::GameLift
       :version_description,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +948,8 @@ module Aws::GameLift
       :retries,
       :start_period,
       :timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -954,7 +975,8 @@ module Aws::GameLift
     class ContainerIdentifier < Struct.new(
       :container_name,
       :container_runtime_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +999,8 @@ module Aws::GameLift
       :instance_path,
       :container_path,
       :access_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1034,8 @@ module Aws::GameLift
     #   @return [Array<Types::ContainerPortRange>]
     class ContainerPortConfiguration < Struct.new(
       :container_port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1036,7 +1060,8 @@ module Aws::GameLift
       :from_port,
       :to_port,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1086,8 @@ module Aws::GameLift
       :description,
       :routing_strategy,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1070,7 +1096,8 @@ module Aws::GameLift
     #   @return [Types::Alias]
     class CreateAliasOutput < Struct.new(
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1155,8 @@ module Aws::GameLift
       :operating_system,
       :tags,
       :server_sdk_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1148,7 +1176,8 @@ module Aws::GameLift
       :build,
       :upload_credentials,
       :storage_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1347,7 +1376,8 @@ module Aws::GameLift
       :game_session_creation_limit_policy,
       :log_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1357,7 +1387,8 @@ module Aws::GameLift
     #   @return [Types::ContainerFleet]
     class CreateContainerFleetOutput < Struct.new(
       :container_fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,7 +1457,8 @@ module Aws::GameLift
       :operating_system,
       :version_description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1436,7 +1468,8 @@ module Aws::GameLift
     #   @return [Types::ContainerGroupDefinition]
     class CreateContainerGroupDefinitionOutput < Struct.new(
       :container_group_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1641,7 +1674,8 @@ module Aws::GameLift
       :compute_type,
       :anywhere_configuration,
       :instance_role_credentials_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1690,8 @@ module Aws::GameLift
     class CreateFleetLocationsInput < Struct.new(
       :fleet_id,
       :locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1677,7 +1712,8 @@ module Aws::GameLift
       :fleet_id,
       :fleet_arn,
       :location_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1695,7 +1731,8 @@ module Aws::GameLift
     class CreateFleetOutput < Struct.new(
       :fleet_attributes,
       :location_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1816,7 +1853,8 @@ module Aws::GameLift
       :game_server_protection_policy,
       :vpc_subnets,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1828,7 +1866,8 @@ module Aws::GameLift
     #   @return [Types::GameServerGroup]
     class CreateGameServerGroupOutput < Struct.new(
       :game_server_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,7 +1945,8 @@ module Aws::GameLift
       :idempotency_token,
       :game_session_data,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1915,7 +1955,8 @@ module Aws::GameLift
     #   @return [Types::GameSession]
     class CreateGameSessionOutput < Struct.new(
       :game_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1969,7 +2010,8 @@ module Aws::GameLift
       :custom_event_data,
       :notification_target,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1978,7 +2020,8 @@ module Aws::GameLift
     #   @return [Types::GameSessionQueue]
     class CreateGameSessionQueueOutput < Struct.new(
       :game_session_queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1994,7 +2037,8 @@ module Aws::GameLift
     class CreateLocationInput < Struct.new(
       :location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2003,7 +2047,8 @@ module Aws::GameLift
     #   @return [Types::LocationModel]
     class CreateLocationOutput < Struct.new(
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2112,7 +2157,8 @@ module Aws::GameLift
       :backfill_mode,
       :flex_match_mode,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2121,7 +2167,8 @@ module Aws::GameLift
     #   @return [Types::MatchmakingConfiguration]
     class CreateMatchmakingConfigurationOutput < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2144,7 +2191,8 @@ module Aws::GameLift
       :name,
       :rule_set_body,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2153,7 +2201,8 @@ module Aws::GameLift
     #   @return [Types::MatchmakingRuleSet]
     class CreateMatchmakingRuleSetOutput < Struct.new(
       :rule_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2170,7 +2219,8 @@ module Aws::GameLift
       :game_session_id,
       :player_id,
       :player_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2179,7 +2229,8 @@ module Aws::GameLift
     #   @return [Types::PlayerSession]
     class CreatePlayerSessionOutput < Struct.new(
       :player_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2199,7 +2250,8 @@ module Aws::GameLift
       :game_session_id,
       :player_ids,
       :player_data_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2208,7 +2260,8 @@ module Aws::GameLift
     #   @return [Array<Types::PlayerSession>]
     class CreatePlayerSessionsOutput < Struct.new(
       :player_sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2253,7 +2306,8 @@ module Aws::GameLift
       :storage_location,
       :zip_file,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2267,7 +2321,8 @@ module Aws::GameLift
     #   @return [Types::Script]
     class CreateScriptOutput < Struct.new(
       :script,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2284,7 +2339,8 @@ module Aws::GameLift
     class CreateVpcPeeringAuthorizationInput < Struct.new(
       :game_lift_aws_account_id,
       :peer_vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2293,7 +2349,8 @@ module Aws::GameLift
     #   @return [Types::VpcPeeringAuthorization]
     class CreateVpcPeeringAuthorizationOutput < Struct.new(
       :vpc_peering_authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2316,12 +2373,14 @@ module Aws::GameLift
       :fleet_id,
       :peer_vpc_aws_account_id,
       :peer_vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateVpcPeeringConnectionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2331,7 +2390,8 @@ module Aws::GameLift
     #   @return [String]
     class DeleteAliasInput < Struct.new(
       :alias_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2340,7 +2400,8 @@ module Aws::GameLift
     #   @return [String]
     class DeleteBuildInput < Struct.new(
       :build_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,12 +2411,14 @@ module Aws::GameLift
     #   @return [String]
     class DeleteContainerFleetInput < Struct.new(
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerFleetOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2373,12 +2436,14 @@ module Aws::GameLift
       :name,
       :version_number,
       :version_count_to_retain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerGroupDefinitionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2387,7 +2452,8 @@ module Aws::GameLift
     #   @return [String]
     class DeleteFleetInput < Struct.new(
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2401,7 +2467,8 @@ module Aws::GameLift
     class DeleteFleetLocationsInput < Struct.new(
       :fleet_id,
       :locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2419,7 +2486,8 @@ module Aws::GameLift
       :fleet_id,
       :fleet_arn,
       :location_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2451,7 +2519,8 @@ module Aws::GameLift
     class DeleteGameServerGroupInput < Struct.new(
       :game_server_group_name,
       :delete_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2461,7 +2530,8 @@ module Aws::GameLift
     #   @return [Types::GameServerGroup]
     class DeleteGameServerGroupOutput < Struct.new(
       :game_server_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2470,12 +2540,14 @@ module Aws::GameLift
     #   @return [String]
     class DeleteGameSessionQueueInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGameSessionQueueOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2484,12 +2556,14 @@ module Aws::GameLift
     #   @return [String]
     class DeleteLocationInput < Struct.new(
       :location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLocationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2498,12 +2572,14 @@ module Aws::GameLift
     #   @return [String]
     class DeleteMatchmakingConfigurationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMatchmakingConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2513,12 +2589,14 @@ module Aws::GameLift
     #   @return [String]
     class DeleteMatchmakingRuleSetInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMatchmakingRuleSetOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2531,7 +2609,8 @@ module Aws::GameLift
     class DeleteScalingPolicyInput < Struct.new(
       :name,
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2540,7 +2619,8 @@ module Aws::GameLift
     #   @return [String]
     class DeleteScriptInput < Struct.new(
       :script_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2557,12 +2637,14 @@ module Aws::GameLift
     class DeleteVpcPeeringAuthorizationInput < Struct.new(
       :game_lift_aws_account_id,
       :peer_vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteVpcPeeringAuthorizationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2576,12 +2658,14 @@ module Aws::GameLift
     class DeleteVpcPeeringConnectionInput < Struct.new(
       :fleet_id,
       :vpc_peering_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteVpcPeeringConnectionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2607,7 +2691,8 @@ module Aws::GameLift
       :protection_strategy,
       :minimum_healthy_percentage,
       :impairment_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2617,7 +2702,8 @@ module Aws::GameLift
     #   @return [String]
     class DeploymentDetails < Struct.new(
       :latest_deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2631,12 +2717,14 @@ module Aws::GameLift
     class DeregisterComputeInput < Struct.new(
       :fleet_id,
       :compute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterComputeOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2649,7 +2737,8 @@ module Aws::GameLift
     class DeregisterGameServerInput < Struct.new(
       :game_server_group_name,
       :game_server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2659,7 +2748,8 @@ module Aws::GameLift
     #   @return [String]
     class DescribeAliasInput < Struct.new(
       :alias_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2668,7 +2758,8 @@ module Aws::GameLift
     #   @return [Types::Alias]
     class DescribeAliasOutput < Struct.new(
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2678,7 +2769,8 @@ module Aws::GameLift
     #   @return [String]
     class DescribeBuildInput < Struct.new(
       :build_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2687,7 +2779,8 @@ module Aws::GameLift
     #   @return [Types::Build]
     class DescribeBuildOutput < Struct.new(
       :build,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2703,7 +2796,8 @@ module Aws::GameLift
     class DescribeComputeInput < Struct.new(
       :fleet_id,
       :compute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2712,7 +2806,8 @@ module Aws::GameLift
     #   @return [Types::Compute]
     class DescribeComputeOutput < Struct.new(
       :compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2722,7 +2817,8 @@ module Aws::GameLift
     #   @return [String]
     class DescribeContainerFleetInput < Struct.new(
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2731,7 +2827,8 @@ module Aws::GameLift
     #   @return [Types::ContainerFleet]
     class DescribeContainerFleetOutput < Struct.new(
       :container_fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2745,7 +2842,8 @@ module Aws::GameLift
     class DescribeContainerGroupDefinitionInput < Struct.new(
       :name,
       :version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2754,7 +2852,8 @@ module Aws::GameLift
     #   @return [Types::ContainerGroupDefinition]
     class DescribeContainerGroupDefinitionOutput < Struct.new(
       :container_group_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2771,7 +2870,8 @@ module Aws::GameLift
     class DescribeEC2InstanceLimitsInput < Struct.new(
       :ec2_instance_type,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2780,7 +2880,8 @@ module Aws::GameLift
     #   @return [Array<Types::EC2InstanceLimit>]
     class DescribeEC2InstanceLimitsOutput < Struct.new(
       :ec2_instance_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2801,7 +2902,8 @@ module Aws::GameLift
       :fleet_ids,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2815,7 +2917,8 @@ module Aws::GameLift
     class DescribeFleetAttributesOutput < Struct.new(
       :fleet_attributes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2836,7 +2939,8 @@ module Aws::GameLift
       :fleet_ids,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2851,7 +2955,8 @@ module Aws::GameLift
     class DescribeFleetCapacityOutput < Struct.new(
       :fleet_capacity,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2865,7 +2970,8 @@ module Aws::GameLift
     class DescribeFleetDeploymentInput < Struct.new(
       :fleet_id,
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2879,7 +2985,8 @@ module Aws::GameLift
     class DescribeFleetDeploymentOutput < Struct.new(
       :fleet_deployment,
       :locational_deployments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2908,7 +3015,8 @@ module Aws::GameLift
       :end_time,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2921,7 +3029,8 @@ module Aws::GameLift
     class DescribeFleetEventsOutput < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2944,7 +3053,8 @@ module Aws::GameLift
       :locations,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2965,7 +3075,8 @@ module Aws::GameLift
       :fleet_arn,
       :location_attributes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2980,7 +3091,8 @@ module Aws::GameLift
     class DescribeFleetLocationCapacityInput < Struct.new(
       :fleet_id,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2991,7 +3103,8 @@ module Aws::GameLift
     #   @return [Types::FleetCapacity]
     class DescribeFleetLocationCapacityOutput < Struct.new(
       :fleet_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3006,7 +3119,8 @@ module Aws::GameLift
     class DescribeFleetLocationUtilizationInput < Struct.new(
       :fleet_id,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3016,7 +3130,8 @@ module Aws::GameLift
     #   @return [Types::FleetUtilization]
     class DescribeFleetLocationUtilizationOutput < Struct.new(
       :fleet_utilization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3031,7 +3146,8 @@ module Aws::GameLift
     class DescribeFleetPortSettingsInput < Struct.new(
       :fleet_id,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3059,7 +3175,8 @@ module Aws::GameLift
       :inbound_permissions,
       :update_status,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3079,7 +3196,8 @@ module Aws::GameLift
       :fleet_ids,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3093,7 +3211,8 @@ module Aws::GameLift
     class DescribeFleetUtilizationOutput < Struct.new(
       :fleet_utilization,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3102,7 +3221,8 @@ module Aws::GameLift
     #   @return [String]
     class DescribeGameServerGroupInput < Struct.new(
       :game_server_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3112,7 +3232,8 @@ module Aws::GameLift
     #   @return [Types::GameServerGroup]
     class DescribeGameServerGroupOutput < Struct.new(
       :game_server_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3125,7 +3246,8 @@ module Aws::GameLift
     class DescribeGameServerInput < Struct.new(
       :game_server_group_name,
       :game_server_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3148,7 +3270,8 @@ module Aws::GameLift
       :instance_ids,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3161,7 +3284,8 @@ module Aws::GameLift
     class DescribeGameServerInstancesOutput < Struct.new(
       :game_server_instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3170,7 +3294,8 @@ module Aws::GameLift
     #   @return [Types::GameServer]
     class DescribeGameServerOutput < Struct.new(
       :game_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3209,7 +3334,8 @@ module Aws::GameLift
       :status_filter,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3222,7 +3348,8 @@ module Aws::GameLift
     class DescribeGameSessionDetailsOutput < Struct.new(
       :game_session_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3231,7 +3358,8 @@ module Aws::GameLift
     #   @return [String]
     class DescribeGameSessionPlacementInput < Struct.new(
       :placement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3240,7 +3368,8 @@ module Aws::GameLift
     #   @return [Types::GameSessionPlacement]
     class DescribeGameSessionPlacementOutput < Struct.new(
       :game_session_placement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3258,7 +3387,8 @@ module Aws::GameLift
       :names,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3271,7 +3401,8 @@ module Aws::GameLift
     class DescribeGameSessionQueuesOutput < Struct.new(
       :game_session_queues,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3311,7 +3442,8 @@ module Aws::GameLift
       :status_filter,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3324,7 +3456,8 @@ module Aws::GameLift
     class DescribeGameSessionsOutput < Struct.new(
       :game_sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3352,7 +3485,8 @@ module Aws::GameLift
       :limit,
       :next_token,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3365,7 +3499,8 @@ module Aws::GameLift
     class DescribeInstancesOutput < Struct.new(
       :instances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3388,7 +3523,8 @@ module Aws::GameLift
       :rule_set_name,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3401,7 +3537,8 @@ module Aws::GameLift
     class DescribeMatchmakingConfigurationsOutput < Struct.new(
       :configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3410,7 +3547,8 @@ module Aws::GameLift
     #   @return [Array<String>]
     class DescribeMatchmakingInput < Struct.new(
       :ticket_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3419,7 +3557,8 @@ module Aws::GameLift
     #   @return [Array<Types::MatchmakingTicket>]
     class DescribeMatchmakingOutput < Struct.new(
       :ticket_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3438,7 +3577,8 @@ module Aws::GameLift
       :names,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3451,7 +3591,8 @@ module Aws::GameLift
     class DescribeMatchmakingRuleSetsOutput < Struct.new(
       :rule_sets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3507,7 +3648,8 @@ module Aws::GameLift
       :player_session_status_filter,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3521,7 +3663,8 @@ module Aws::GameLift
     class DescribePlayerSessionsOutput < Struct.new(
       :player_sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3531,7 +3674,8 @@ module Aws::GameLift
     #   @return [String]
     class DescribeRuntimeConfigurationInput < Struct.new(
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3541,7 +3685,8 @@ module Aws::GameLift
     #   @return [Types::RuntimeConfiguration]
     class DescribeRuntimeConfigurationOutput < Struct.new(
       :runtime_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3606,7 +3751,8 @@ module Aws::GameLift
       :limit,
       :next_token,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3619,7 +3765,8 @@ module Aws::GameLift
     class DescribeScalingPoliciesOutput < Struct.new(
       :scaling_policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3629,7 +3776,8 @@ module Aws::GameLift
     #   @return [String]
     class DescribeScriptInput < Struct.new(
       :script_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3638,12 +3786,14 @@ module Aws::GameLift
     #   @return [Types::Script]
     class DescribeScriptOutput < Struct.new(
       :script,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeVpcPeeringAuthorizationsInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3653,7 +3803,8 @@ module Aws::GameLift
     #   @return [Array<Types::VpcPeeringAuthorization>]
     class DescribeVpcPeeringAuthorizationsOutput < Struct.new(
       :vpc_peering_authorizations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3662,7 +3813,8 @@ module Aws::GameLift
     #   @return [String]
     class DescribeVpcPeeringConnectionsInput < Struct.new(
       :fleet_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3671,7 +3823,8 @@ module Aws::GameLift
     #   @return [Array<Types::VpcPeeringConnection>]
     class DescribeVpcPeeringConnectionsOutput < Struct.new(
       :vpc_peering_connections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3686,7 +3839,8 @@ module Aws::GameLift
     class DesiredPlayerSession < Struct.new(
       :player_id,
       :player_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3725,7 +3879,8 @@ module Aws::GameLift
       :active,
       :idle,
       :terminating,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3754,7 +3909,8 @@ module Aws::GameLift
       :current_instances,
       :instance_limit,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4018,7 +4174,8 @@ module Aws::GameLift
       :event_time,
       :pre_signed_log_url,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4032,7 +4189,8 @@ module Aws::GameLift
     #   @return [Array<String>]
     class FilterConfiguration < Struct.new(
       :allowed_locations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4260,7 +4418,8 @@ module Aws::GameLift
       :compute_type,
       :anywhere_configuration,
       :instance_role_credentials_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4302,7 +4461,8 @@ module Aws::GameLift
       :instance_counts,
       :location,
       :game_server_container_group_counts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4313,7 +4473,8 @@ module Aws::GameLift
     #   @return [String]
     class FleetCapacityExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4391,7 +4552,8 @@ module Aws::GameLift
       :deployment_status,
       :deployment_configuration,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4431,7 +4593,8 @@ module Aws::GameLift
       :current_player_session_count,
       :maximum_player_session_count,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4452,7 +4615,8 @@ module Aws::GameLift
     class GameProperty < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4540,7 +4704,8 @@ module Aws::GameLift
       :registration_time,
       :last_claim_time,
       :last_health_check_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4606,7 +4771,8 @@ module Aws::GameLift
       :port_configuration,
       :resolved_image_digest,
       :server_sdk_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4691,7 +4857,8 @@ module Aws::GameLift
       :image_uri,
       :port_configuration,
       :server_sdk_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4725,7 +4892,8 @@ module Aws::GameLift
       :active,
       :idle,
       :terminating,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4864,7 +5032,8 @@ module Aws::GameLift
       :suspended_actions,
       :creation_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4893,7 +5062,8 @@ module Aws::GameLift
     class GameServerGroupAutoScalingPolicy < Struct.new(
       :estimated_instance_warmup,
       :target_tracking_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4928,7 +5098,8 @@ module Aws::GameLift
       :game_server_group_arn,
       :instance_id,
       :instance_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5060,7 +5231,8 @@ module Aws::GameLift
       :game_session_data,
       :matchmaker_data,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5102,7 +5274,8 @@ module Aws::GameLift
       :dns_name,
       :port,
       :matched_player_sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5128,7 +5301,8 @@ module Aws::GameLift
     class GameSessionCreationLimitPolicy < Struct.new(
       :new_game_sessions_per_creator,
       :policy_period_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5155,7 +5329,8 @@ module Aws::GameLift
     class GameSessionDetail < Struct.new(
       :game_session,
       :protection_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5165,7 +5340,8 @@ module Aws::GameLift
     #   @return [String]
     class GameSessionFullException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5317,7 +5493,8 @@ module Aws::GameLift
       :game_session_data,
       :matchmaker_data,
       :priority_configuration_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5372,7 +5549,8 @@ module Aws::GameLift
       :priority_configuration,
       :custom_event_data,
       :notification_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5385,7 +5563,8 @@ module Aws::GameLift
     #   @return [String]
     class GameSessionQueueDestination < Struct.new(
       :destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5401,7 +5580,8 @@ module Aws::GameLift
     class GetComputeAccessInput < Struct.new(
       :fleet_id,
       :compute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5439,7 +5619,8 @@ module Aws::GameLift
       :credentials,
       :target,
       :container_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5454,7 +5635,8 @@ module Aws::GameLift
     class GetComputeAuthTokenInput < Struct.new(
       :fleet_id,
       :compute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5485,7 +5667,8 @@ module Aws::GameLift
       :compute_arn,
       :auth_token,
       :expiration_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5494,7 +5677,8 @@ module Aws::GameLift
     #   @return [String]
     class GetGameSessionLogUrlInput < Struct.new(
       :game_session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5505,7 +5689,8 @@ module Aws::GameLift
     #   @return [String]
     class GetGameSessionLogUrlOutput < Struct.new(
       :pre_signed_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5523,7 +5708,8 @@ module Aws::GameLift
     class GetInstanceAccessInput < Struct.new(
       :fleet_id,
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5533,7 +5719,8 @@ module Aws::GameLift
     #   @return [Types::InstanceAccess]
     class GetInstanceAccessOutput < Struct.new(
       :instance_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5543,7 +5730,8 @@ module Aws::GameLift
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5633,7 +5821,8 @@ module Aws::GameLift
       :status,
       :creation_time,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5661,7 +5850,8 @@ module Aws::GameLift
       :ip_address,
       :operating_system,
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5680,7 +5870,8 @@ module Aws::GameLift
     class InstanceCredentials < Struct.new(
       :user_name,
       :secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5705,7 +5896,8 @@ module Aws::GameLift
     class InstanceDefinition < Struct.new(
       :instance_type,
       :weighted_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5715,7 +5907,8 @@ module Aws::GameLift
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5726,7 +5919,8 @@ module Aws::GameLift
     #   @return [String]
     class InvalidFleetStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5737,7 +5931,8 @@ module Aws::GameLift
     #   @return [String]
     class InvalidGameSessionStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5747,7 +5942,8 @@ module Aws::GameLift
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5781,7 +5977,8 @@ module Aws::GameLift
       :to_port,
       :ip_range,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5807,7 +6004,8 @@ module Aws::GameLift
       :launch_template_id,
       :launch_template_name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5817,7 +6015,8 @@ module Aws::GameLift
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5853,7 +6052,8 @@ module Aws::GameLift
       :name,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5866,7 +6066,8 @@ module Aws::GameLift
     class ListAliasesOutput < Struct.new(
       :aliases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5904,7 +6105,8 @@ module Aws::GameLift
       :status,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5917,7 +6119,8 @@ module Aws::GameLift
     class ListBuildsOutput < Struct.new(
       :builds,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5963,7 +6166,8 @@ module Aws::GameLift
       :compute_status,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5976,7 +6180,8 @@ module Aws::GameLift
     class ListComputeOutput < Struct.new(
       :compute_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5996,7 +6201,8 @@ module Aws::GameLift
       :container_group_definition_name,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6010,7 +6216,8 @@ module Aws::GameLift
     class ListContainerFleetsOutput < Struct.new(
       :container_fleets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6028,7 +6235,8 @@ module Aws::GameLift
       :name,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6041,7 +6249,8 @@ module Aws::GameLift
     class ListContainerGroupDefinitionVersionsOutput < Struct.new(
       :container_group_definitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6059,7 +6268,8 @@ module Aws::GameLift
       :container_group_type,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6072,7 +6282,8 @@ module Aws::GameLift
     class ListContainerGroupDefinitionsOutput < Struct.new(
       :container_group_definitions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6090,7 +6301,8 @@ module Aws::GameLift
       :fleet_id,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6103,7 +6315,8 @@ module Aws::GameLift
     class ListFleetDeploymentsOutput < Struct.new(
       :fleet_deployments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6126,7 +6339,8 @@ module Aws::GameLift
       :script_id,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6139,7 +6353,8 @@ module Aws::GameLift
     class ListFleetsOutput < Struct.new(
       :fleet_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6153,7 +6368,8 @@ module Aws::GameLift
     class ListGameServerGroupsInput < Struct.new(
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6167,7 +6383,8 @@ module Aws::GameLift
     class ListGameServerGroupsOutput < Struct.new(
       :game_server_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6192,7 +6409,8 @@ module Aws::GameLift
       :sort_order,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6205,7 +6423,8 @@ module Aws::GameLift
     class ListGameServersOutput < Struct.new(
       :game_servers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6224,7 +6443,8 @@ module Aws::GameLift
       :filters,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6239,7 +6459,8 @@ module Aws::GameLift
     class ListLocationsOutput < Struct.new(
       :locations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6252,7 +6473,8 @@ module Aws::GameLift
     class ListScriptsInput < Struct.new(
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6265,7 +6487,8 @@ module Aws::GameLift
     class ListScriptsOutput < Struct.new(
       :scripts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6277,7 +6500,8 @@ module Aws::GameLift
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6286,7 +6510,8 @@ module Aws::GameLift
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6307,7 +6532,8 @@ module Aws::GameLift
       :location_state,
       :stopped_actions,
       :update_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6320,7 +6546,8 @@ module Aws::GameLift
     #   @return [String]
     class LocationConfiguration < Struct.new(
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6341,7 +6568,8 @@ module Aws::GameLift
       :location_name,
       :location_arn,
       :ping_beacon,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6397,7 +6625,8 @@ module Aws::GameLift
     class LocationState < Struct.new(
       :location,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6437,7 +6666,8 @@ module Aws::GameLift
     #   @return [String]
     class LocationalDeployment < Struct.new(
       :deployment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6471,7 +6701,8 @@ module Aws::GameLift
       :log_destination,
       :s3_bucket_name,
       :log_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6489,7 +6720,8 @@ module Aws::GameLift
     class MatchedPlayerSession < Struct.new(
       :player_id,
       :player_session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6603,7 +6835,8 @@ module Aws::GameLift
       :game_session_data,
       :backfill_mode,
       :flex_match_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6663,7 +6896,8 @@ module Aws::GameLift
       :rule_set_arn,
       :rule_set_body,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6779,7 +7013,8 @@ module Aws::GameLift
       :players,
       :game_session_connection_info,
       :estimated_wait_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6788,7 +7023,8 @@ module Aws::GameLift
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6799,7 +7035,8 @@ module Aws::GameLift
     #   @return [String]
     class NotReadyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6810,7 +7047,8 @@ module Aws::GameLift
     #   @return [String]
     class OutOfCapacityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6821,7 +7059,8 @@ module Aws::GameLift
     #   @return [Types::UDPEndpoint]
     class PingBeacon < Struct.new(
       :udp_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6836,7 +7075,8 @@ module Aws::GameLift
     class PlacedPlayerSession < Struct.new(
       :player_id,
       :player_session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6869,7 +7109,8 @@ module Aws::GameLift
       :player_attributes,
       :team,
       :latency_in_ms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6892,7 +7133,8 @@ module Aws::GameLift
       :player_id,
       :region_identifier,
       :latency_in_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6913,7 +7155,8 @@ module Aws::GameLift
     class PlayerLatencyPolicy < Struct.new(
       :maximum_individual_player_latency_milliseconds,
       :policy_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7018,7 +7261,8 @@ module Aws::GameLift
       :dns_name,
       :port,
       :player_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7083,7 +7327,8 @@ module Aws::GameLift
     class PriorityConfiguration < Struct.new(
       :priority_order,
       :location_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7127,7 +7372,8 @@ module Aws::GameLift
     class PriorityConfigurationOverride < Struct.new(
       :placement_fallback_strategy,
       :location_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7267,7 +7513,8 @@ module Aws::GameLift
       :metric_name,
       :policy_type,
       :target_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7276,7 +7523,8 @@ module Aws::GameLift
     #   @return [String]
     class PutScalingPolicyOutput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7309,7 +7557,8 @@ module Aws::GameLift
       :dns_name,
       :ip_address,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7318,7 +7567,8 @@ module Aws::GameLift
     #   @return [Types::Compute]
     class RegisterComputeOutput < Struct.new(
       :compute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7348,7 +7598,8 @@ module Aws::GameLift
       :instance_id,
       :connection_info,
       :game_server_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7357,7 +7608,8 @@ module Aws::GameLift
     #   @return [Types::GameServer]
     class RegisterGameServerOutput < Struct.new(
       :game_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7366,7 +7618,8 @@ module Aws::GameLift
     #   @return [String]
     class RequestUploadCredentialsInput < Struct.new(
       :build_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7382,7 +7635,8 @@ module Aws::GameLift
     class RequestUploadCredentialsOutput < Struct.new(
       :upload_credentials,
       :storage_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7392,7 +7646,8 @@ module Aws::GameLift
     #   @return [String]
     class ResolveAliasInput < Struct.new(
       :alias_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7406,7 +7661,8 @@ module Aws::GameLift
     class ResolveAliasOutput < Struct.new(
       :fleet_id,
       :fleet_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7432,7 +7688,8 @@ module Aws::GameLift
     class ResourceCreationLimitPolicy < Struct.new(
       :new_game_sessions_per_creator,
       :policy_period_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7445,7 +7702,8 @@ module Aws::GameLift
     class ResumeGameServerGroupInput < Struct.new(
       :game_server_group_name,
       :resume_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7456,7 +7714,8 @@ module Aws::GameLift
     #   @return [Types::GameServerGroup]
     class ResumeGameServerGroupOutput < Struct.new(
       :game_server_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7494,7 +7753,8 @@ module Aws::GameLift
       :type,
       :fleet_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7527,7 +7787,8 @@ module Aws::GameLift
       :server_processes,
       :max_concurrent_game_session_activations,
       :game_session_activation_timeout_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7558,7 +7819,8 @@ module Aws::GameLift
       :key,
       :role_arn,
       :object_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7754,7 +8016,8 @@ module Aws::GameLift
       :target_configuration,
       :update_status,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7802,7 +8065,8 @@ module Aws::GameLift
       :size_on_disk,
       :creation_time,
       :storage_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7920,7 +8184,8 @@ module Aws::GameLift
       :sort_expression,
       :limit,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7934,7 +8199,8 @@ module Aws::GameLift
     class SearchGameSessionsOutput < Struct.new(
       :game_sessions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7974,7 +8240,8 @@ module Aws::GameLift
       :launch_path,
       :parameters,
       :concurrent_executions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7992,7 +8259,8 @@ module Aws::GameLift
       :fleet_id,
       :actions,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8005,7 +8273,8 @@ module Aws::GameLift
     class StartFleetActionsOutput < Struct.new(
       :fleet_id,
       :fleet_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8059,7 +8328,8 @@ module Aws::GameLift
       :desired_player_sessions,
       :game_session_data,
       :priority_configuration_override,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8070,7 +8340,8 @@ module Aws::GameLift
     #   @return [Types::GameSessionPlacement]
     class StartGameSessionPlacementOutput < Struct.new(
       :game_session_placement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8117,7 +8388,8 @@ module Aws::GameLift
       :configuration_name,
       :game_session_arn,
       :players,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8128,7 +8400,8 @@ module Aws::GameLift
     #   @return [Types::MatchmakingTicket]
     class StartMatchBackfillOutput < Struct.new(
       :matchmaking_ticket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8154,7 +8427,8 @@ module Aws::GameLift
       :ticket_id,
       :configuration_name,
       :players,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8165,7 +8439,8 @@ module Aws::GameLift
     #   @return [Types::MatchmakingTicket]
     class StartMatchmakingOutput < Struct.new(
       :matchmaking_ticket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8183,7 +8458,8 @@ module Aws::GameLift
       :fleet_id,
       :actions,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8196,7 +8472,8 @@ module Aws::GameLift
     class StopFleetActionsOutput < Struct.new(
       :fleet_id,
       :fleet_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8205,7 +8482,8 @@ module Aws::GameLift
     #   @return [String]
     class StopGameSessionPlacementInput < Struct.new(
       :placement_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8215,7 +8493,8 @@ module Aws::GameLift
     #   @return [Types::GameSessionPlacement]
     class StopGameSessionPlacementOutput < Struct.new(
       :game_session_placement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8224,12 +8503,14 @@ module Aws::GameLift
     #   @return [String]
     class StopMatchmakingInput < Struct.new(
       :ticket_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopMatchmakingOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8318,7 +8599,8 @@ module Aws::GameLift
       :port_configuration,
       :resolved_image_digest,
       :vcpu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8432,7 +8714,8 @@ module Aws::GameLift
       :memory_hard_limit_mebibytes,
       :port_configuration,
       :vcpu,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8445,7 +8728,8 @@ module Aws::GameLift
     class SuspendGameServerGroupInput < Struct.new(
       :game_server_group_name,
       :suspend_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8456,7 +8740,8 @@ module Aws::GameLift
     #   @return [Types::GameServerGroup]
     class SuspendGameServerGroupOutput < Struct.new(
       :game_server_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8487,7 +8772,8 @@ module Aws::GameLift
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8506,12 +8792,14 @@ module Aws::GameLift
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8522,7 +8810,8 @@ module Aws::GameLift
     #   @return [String]
     class TaggingFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8540,7 +8829,8 @@ module Aws::GameLift
     #   @return [Float]
     class TargetConfiguration < Struct.new(
       :target_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8558,7 +8848,8 @@ module Aws::GameLift
     #   @return [Float]
     class TargetTrackingConfiguration < Struct.new(
       :target_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8570,7 +8861,8 @@ module Aws::GameLift
     #   @return [String]
     class TerminalRoutingStrategyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8610,7 +8902,8 @@ module Aws::GameLift
     class TerminateGameSessionInput < Struct.new(
       :game_session_id,
       :termination_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8627,7 +8920,8 @@ module Aws::GameLift
     #   @return [Types::GameSession]
     class TerminateGameSessionOutput < Struct.new(
       :game_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8641,7 +8935,8 @@ module Aws::GameLift
     class UDPEndpoint < Struct.new(
       :domain,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8650,7 +8945,8 @@ module Aws::GameLift
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8659,7 +8955,8 @@ module Aws::GameLift
     #   @return [String]
     class UnsupportedRegionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8675,12 +8972,14 @@ module Aws::GameLift
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8703,7 +9002,8 @@ module Aws::GameLift
       :name,
       :description,
       :routing_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8712,7 +9012,8 @@ module Aws::GameLift
     #   @return [Types::Alias]
     class UpdateAliasOutput < Struct.new(
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8729,7 +9030,8 @@ module Aws::GameLift
       :build_id,
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8738,7 +9040,8 @@ module Aws::GameLift
     #   @return [Types::Build]
     class UpdateBuildOutput < Struct.new(
       :build,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8832,7 +9135,8 @@ module Aws::GameLift
       :game_session_creation_limit_policy,
       :log_configuration,
       :remove_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8842,7 +9146,8 @@ module Aws::GameLift
     #   @return [Types::ContainerFleet]
     class UpdateContainerFleetOutput < Struct.new(
       :container_fleet,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8897,7 +9202,8 @@ module Aws::GameLift
       :version_description,
       :source_version_number,
       :operating_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8906,7 +9212,8 @@ module Aws::GameLift
     #   @return [Types::ContainerGroupDefinition]
     class UpdateContainerGroupDefinitionOutput < Struct.new(
       :container_group_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8959,7 +9266,8 @@ module Aws::GameLift
       :resource_creation_limit_policy,
       :metric_groups,
       :anywhere_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8972,7 +9280,8 @@ module Aws::GameLift
     class UpdateFleetAttributesOutput < Struct.new(
       :fleet_id,
       :fleet_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9004,7 +9313,8 @@ module Aws::GameLift
       :min_size,
       :max_size,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9022,7 +9332,8 @@ module Aws::GameLift
       :fleet_id,
       :fleet_arn,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9040,7 +9351,8 @@ module Aws::GameLift
       :fleet_id,
       :inbound_permission_authorizations,
       :inbound_permission_revocations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9053,7 +9365,8 @@ module Aws::GameLift
     class UpdateFleetPortSettingsOutput < Struct.new(
       :fleet_id,
       :fleet_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9117,7 +9430,8 @@ module Aws::GameLift
       :instance_definitions,
       :game_server_protection_policy,
       :balancing_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9127,7 +9441,8 @@ module Aws::GameLift
     #   @return [Types::GameServerGroup]
     class UpdateGameServerGroupOutput < Struct.new(
       :game_server_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9157,7 +9472,8 @@ module Aws::GameLift
       :game_server_data,
       :utilization_status,
       :health_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9166,7 +9482,8 @@ module Aws::GameLift
     #   @return [Types::GameServer]
     class UpdateGameServerOutput < Struct.new(
       :game_server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9214,7 +9531,8 @@ module Aws::GameLift
       :player_session_creation_policy,
       :protection_policy,
       :game_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9223,7 +9541,8 @@ module Aws::GameLift
     #   @return [Types::GameSession]
     class UpdateGameSessionOutput < Struct.new(
       :game_session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9270,7 +9589,8 @@ module Aws::GameLift
       :priority_configuration,
       :custom_event_data,
       :notification_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9279,7 +9599,8 @@ module Aws::GameLift
     #   @return [Types::GameSessionQueue]
     class UpdateGameSessionQueueOutput < Struct.new(
       :game_session_queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9378,7 +9699,8 @@ module Aws::GameLift
       :game_session_data,
       :backfill_mode,
       :flex_match_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9387,7 +9709,8 @@ module Aws::GameLift
     #   @return [Types::MatchmakingConfiguration]
     class UpdateMatchmakingConfigurationOutput < Struct.new(
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9404,7 +9727,8 @@ module Aws::GameLift
     class UpdateRuntimeConfigurationInput < Struct.new(
       :fleet_id,
       :runtime_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9414,7 +9738,8 @@ module Aws::GameLift
     #   @return [Types::RuntimeConfiguration]
     class UpdateRuntimeConfigurationOutput < Struct.new(
       :runtime_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9450,7 +9775,8 @@ module Aws::GameLift
       :version,
       :storage_location,
       :zip_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9464,7 +9790,8 @@ module Aws::GameLift
     #   @return [Types::Script]
     class UpdateScriptOutput < Struct.new(
       :script,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9473,7 +9800,8 @@ module Aws::GameLift
     #   @return [String]
     class ValidateMatchmakingRuleSetInput < Struct.new(
       :rule_set_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9482,7 +9810,8 @@ module Aws::GameLift
     #   @return [Boolean]
     class ValidateMatchmakingRuleSetOutput < Struct.new(
       :valid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9522,7 +9851,8 @@ module Aws::GameLift
       :peer_vpc_id,
       :creation_time,
       :expiration_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9573,7 +9903,8 @@ module Aws::GameLift
       :status,
       :peer_vpc_id,
       :game_lift_vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9589,7 +9920,8 @@ module Aws::GameLift
     class VpcPeeringConnectionStatus < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

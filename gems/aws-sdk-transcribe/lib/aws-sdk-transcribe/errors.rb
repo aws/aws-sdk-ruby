@@ -41,7 +41,7 @@ module Aws::Transcribe
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transcribe::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::Transcribe
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transcribe::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::Transcribe
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transcribe::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::Transcribe
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transcribe::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::Transcribe
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Transcribe::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

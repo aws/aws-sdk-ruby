@@ -56,7 +56,8 @@ module Aws::MediaConvert
       :specification,
       :target_loudness_range,
       :vbr_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +103,8 @@ module Aws::MediaConvert
       :lfe_filter,
       :metadata_control,
       :sample_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +114,8 @@ module Aws::MediaConvert
     #   @return [String]
     class AccelerationSettings < Struct.new(
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +129,8 @@ module Aws::MediaConvert
     class AdvancedInputFilterSettings < Struct.new(
       :add_texture,
       :sharpening,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +148,8 @@ module Aws::MediaConvert
       :bit_depth,
       :channels,
       :sample_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +167,8 @@ module Aws::MediaConvert
       :height,
       :required,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +186,8 @@ module Aws::MediaConvert
       :convert608_to708,
       :source_ancillary_channel_number,
       :terminate_captions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,12 +196,14 @@ module Aws::MediaConvert
     #   @return [String]
     class AssociateCertificateRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateCertificateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +217,8 @@ module Aws::MediaConvert
     class AudioChannelTaggingSettings < Struct.new(
       :channel_tag,
       :channel_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +272,8 @@ module Aws::MediaConvert
       :opus_settings,
       :vorbis_settings,
       :wav_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -312,7 +323,8 @@ module Aws::MediaConvert
       :language_code_control,
       :remix_settings,
       :stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +358,8 @@ module Aws::MediaConvert
       :peak_calculation,
       :target_lkfs,
       :true_peak_limiter_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +389,8 @@ module Aws::MediaConvert
       :frame_rate,
       :language_code,
       :sample_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -432,7 +446,8 @@ module Aws::MediaConvert
       :remix_settings,
       :selector_type,
       :tracks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +457,8 @@ module Aws::MediaConvert
     #   @return [Array<String>]
     class AudioSelectorGroup < Struct.new(
       :audio_selector_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +484,8 @@ module Aws::MediaConvert
       :min_bottom_rendition_size,
       :min_top_rendition_size,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +511,8 @@ module Aws::MediaConvert
       :max_renditions,
       :min_abr_bitrate,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +522,8 @@ module Aws::MediaConvert
     #   @return [Types::AutomatedAbrSettings]
     class AutomatedEncodingSettings < Struct.new(
       :abr_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -518,7 +537,8 @@ module Aws::MediaConvert
     class Av1QvbrSettings < Struct.new(
       :qvbr_quality_level,
       :qvbr_quality_level_fine_tune,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +604,8 @@ module Aws::MediaConvert
       :rate_control_mode,
       :slices,
       :spatial_adaptive_quantization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +615,8 @@ module Aws::MediaConvert
     #   @return [String]
     class AvailBlanking < Struct.new(
       :avail_blanking_image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +666,8 @@ module Aws::MediaConvert
       :scan_type_conversion_mode,
       :slow_pal,
       :telecine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +677,8 @@ module Aws::MediaConvert
     #   @return [String]
     class AvcIntraUhdSettings < Struct.new(
       :quality_tuning_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -663,7 +687,8 @@ module Aws::MediaConvert
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +702,8 @@ module Aws::MediaConvert
     class BandwidthReductionFilter < Struct.new(
       :sharpening,
       :strength,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -789,7 +815,8 @@ module Aws::MediaConvert
       :teletext_spacing,
       :x_position,
       :y_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,12 +825,14 @@ module Aws::MediaConvert
     #   @return [String]
     class CancelJobRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +858,8 @@ module Aws::MediaConvert
       :destination_settings,
       :language_code,
       :language_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +881,8 @@ module Aws::MediaConvert
       :destination_settings,
       :language_code,
       :language_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -897,7 +928,8 @@ module Aws::MediaConvert
       :teletext_destination_settings,
       :ttml_destination_settings,
       :webvtt_destination_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,7 +947,8 @@ module Aws::MediaConvert
       :custom_language_code,
       :language_code,
       :source_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +962,8 @@ module Aws::MediaConvert
     class CaptionSourceFramerate < Struct.new(
       :framerate_denominator,
       :framerate_numerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1001,8 @@ module Aws::MediaConvert
       :teletext_source_settings,
       :track_source_settings,
       :webvtt_hls_source_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +1012,8 @@ module Aws::MediaConvert
     #   @return [Array<Types::OutputChannelMapping>]
     class ChannelMapping < Struct.new(
       :output_channels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1035,8 @@ module Aws::MediaConvert
       :maximum_yuv,
       :minimum_rgb_tolerance,
       :minimum_yuv,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1013,7 +1050,8 @@ module Aws::MediaConvert
     class CmafAdditionalManifest < Struct.new(
       :manifest_name_modifier,
       :selected_outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1043,7 +1081,8 @@ module Aws::MediaConvert
       :speke_key_provider,
       :static_key_provider,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1161,7 +1200,8 @@ module Aws::MediaConvert
       :write_dash_manifest,
       :write_hls_manifest,
       :write_segment_timeline_in_representation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,7 +1231,8 @@ module Aws::MediaConvert
       :thumbnail_width,
       :tile_height,
       :tile_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1256,7 +1297,8 @@ module Aws::MediaConvert
       :timed_metadata_box_version,
       :timed_metadata_scheme_id_uri,
       :timed_metadata_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1282,7 +1324,8 @@ module Aws::MediaConvert
       :input_mastering_luminance,
       :output_color_space,
       :output_mastering_luminance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1337,7 +1380,8 @@ module Aws::MediaConvert
       :sample_range_conversion,
       :saturation,
       :sdr_reference_white_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1346,7 +1390,8 @@ module Aws::MediaConvert
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1409,8 @@ module Aws::MediaConvert
       :duration,
       :format,
       :tracks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1406,7 +1452,8 @@ module Aws::MediaConvert
       :mp4_settings,
       :mpd_settings,
       :mxf_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1467,7 +1514,8 @@ module Aws::MediaConvert
       :status_update_interval,
       :tags,
       :user_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1524,8 @@ module Aws::MediaConvert
     #   @return [Types::Job]
     class CreateJobResponse < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1521,7 +1570,8 @@ module Aws::MediaConvert
       :settings,
       :status_update_interval,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1580,8 @@ module Aws::MediaConvert
     #   @return [Types::JobTemplate]
     class CreateJobTemplateResponse < Struct.new(
       :job_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,7 +1606,8 @@ module Aws::MediaConvert
       :name,
       :settings,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,7 +1616,8 @@ module Aws::MediaConvert
     #   @return [Types::Preset]
     class CreatePresetResponse < Struct.new(
       :preset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1597,7 +1650,8 @@ module Aws::MediaConvert
       :reservation_plan_settings,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,7 +1660,8 @@ module Aws::MediaConvert
     #   @return [Types::Queue]
     class CreateQueueResponse < Struct.new(
       :queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1619,12 +1674,14 @@ module Aws::MediaConvert
     class CreateResourceShareRequest < Struct.new(
       :job_id,
       :support_case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateResourceShareResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,7 +1695,8 @@ module Aws::MediaConvert
     class DashAdditionalManifest < Struct.new(
       :manifest_name_modifier,
       :selected_outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1652,7 +1710,8 @@ module Aws::MediaConvert
     class DashIsoEncryptionSettings < Struct.new(
       :playback_device_compatibility,
       :speke_key_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1746,7 +1805,8 @@ module Aws::MediaConvert
       :segment_length_control,
       :video_composition_offsets,
       :write_segment_timeline_in_representation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1776,7 +1836,8 @@ module Aws::MediaConvert
       :thumbnail_width,
       :tile_height,
       :tile_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1786,7 +1847,8 @@ module Aws::MediaConvert
     #   @return [String]
     class DataProperties < Struct.new(
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1807,7 +1869,8 @@ module Aws::MediaConvert
       :algorithm,
       :control,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1816,22 +1879,26 @@ module Aws::MediaConvert
     #   @return [String]
     class DeleteJobTemplateRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteJobTemplateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePolicyRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1840,12 +1907,14 @@ module Aws::MediaConvert
     #   @return [String]
     class DeletePresetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePresetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,12 +1923,14 @@ module Aws::MediaConvert
     #   @return [String]
     class DeleteQueueRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1878,7 +1949,8 @@ module Aws::MediaConvert
       :max_results,
       :mode,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1893,7 +1965,8 @@ module Aws::MediaConvert
     class DescribeEndpointsResponse < Struct.new(
       :endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +1976,8 @@ module Aws::MediaConvert
     #   @return [Types::S3DestinationSettings]
     class DestinationSettings < Struct.new(
       :s3_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1912,12 +1986,14 @@ module Aws::MediaConvert
     #   @return [String]
     class DisassociateCertificateRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateCertificateResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1939,7 +2015,8 @@ module Aws::MediaConvert
       :l6_mode,
       :mapping,
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2030,8 @@ module Aws::MediaConvert
     class DolbyVisionLevel6Metadata < Struct.new(
       :max_cll,
       :max_fall,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1971,7 +2049,8 @@ module Aws::MediaConvert
       :network_id,
       :network_name,
       :nit_interval,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1993,7 +2072,8 @@ module Aws::MediaConvert
       :sdt_interval,
       :service_name,
       :service_provider_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2127,7 +2207,8 @@ module Aws::MediaConvert
       :width,
       :x_position,
       :y_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2137,7 +2218,8 @@ module Aws::MediaConvert
     #   @return [Integer]
     class DvbSubSourceSettings < Struct.new(
       :pid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2147,7 +2229,8 @@ module Aws::MediaConvert
     #   @return [Integer]
     class DvbTdtSettings < Struct.new(
       :tdt_interval,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2175,7 +2258,8 @@ module Aws::MediaConvert
       :language_code,
       :offset,
       :selector_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2249,7 +2333,8 @@ module Aws::MediaConvert
       :speech_threshold,
       :stereo_downmix,
       :surround_ex_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2339,7 +2424,8 @@ module Aws::MediaConvert
       :stereo_downmix,
       :surround_ex_mode,
       :surround_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2353,7 +2439,8 @@ module Aws::MediaConvert
     class EmbeddedDestinationSettings < Struct.new(
       :destination608_channel_number,
       :destination708_service_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2462,8 @@ module Aws::MediaConvert
       :source608_channel_number,
       :source608_track_number,
       :terminate_captions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2389,7 +2477,8 @@ module Aws::MediaConvert
     class EncryptionContractConfiguration < Struct.new(
       :speke_audio_preset,
       :speke_video_preset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2399,7 +2488,8 @@ module Aws::MediaConvert
     #   @return [String]
     class Endpoint < Struct.new(
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2409,7 +2499,8 @@ module Aws::MediaConvert
     #   @return [String]
     class EsamManifestConfirmConditionNotification < Struct.new(
       :mcc_xml,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2427,7 +2518,8 @@ module Aws::MediaConvert
       :manifest_confirm_condition_notification,
       :response_signal_preroll,
       :signal_processing_notification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2437,7 +2529,8 @@ module Aws::MediaConvert
     #   @return [String]
     class EsamSignalProcessingNotification < Struct.new(
       :scc_xml,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2451,7 +2544,8 @@ module Aws::MediaConvert
     class ExtendedDataServices < Struct.new(
       :copy_protection_action,
       :vchip_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2461,7 +2555,8 @@ module Aws::MediaConvert
     #   @return [String]
     class F4vSettings < Struct.new(
       :moov_placement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2475,7 +2570,8 @@ module Aws::MediaConvert
     class FileGroupSettings < Struct.new(
       :destination,
       :destination_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2513,7 +2609,8 @@ module Aws::MediaConvert
       :time_delta,
       :time_delta_units,
       :upconvert_stl_to_teletext,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2531,7 +2628,8 @@ module Aws::MediaConvert
       :bit_depth,
       :channels,
       :sample_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2540,7 +2638,8 @@ module Aws::MediaConvert
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2554,7 +2653,8 @@ module Aws::MediaConvert
     class ForceIncludeRenditionSize < Struct.new(
       :height,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2576,7 +2676,8 @@ module Aws::MediaConvert
       :framerate_numerator,
       :max_captures,
       :quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2590,7 +2691,8 @@ module Aws::MediaConvert
     class FrameRate < Struct.new(
       :denominator,
       :numerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2599,7 +2701,8 @@ module Aws::MediaConvert
     #   @return [String]
     class GetJobRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2608,7 +2711,8 @@ module Aws::MediaConvert
     #   @return [Types::Job]
     class GetJobResponse < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2617,7 +2721,8 @@ module Aws::MediaConvert
     #   @return [String]
     class GetJobTemplateRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2626,12 +2731,14 @@ module Aws::MediaConvert
     #   @return [Types::JobTemplate]
     class GetJobTemplateResponse < Struct.new(
       :job_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetPolicyRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2640,7 +2747,8 @@ module Aws::MediaConvert
     #   @return [Types::Policy]
     class GetPolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2649,7 +2757,8 @@ module Aws::MediaConvert
     #   @return [String]
     class GetPresetRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2658,7 +2767,8 @@ module Aws::MediaConvert
     #   @return [Types::Preset]
     class GetPresetResponse < Struct.new(
       :preset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2667,7 +2777,8 @@ module Aws::MediaConvert
     #   @return [String]
     class GetQueueRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2676,7 +2787,8 @@ module Aws::MediaConvert
     #   @return [Types::Queue]
     class GetQueueResponse < Struct.new(
       :queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2698,7 +2810,8 @@ module Aws::MediaConvert
       :framerate_conversion_algorithm,
       :framerate_denominator,
       :framerate_numerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2716,7 +2829,8 @@ module Aws::MediaConvert
       :max_average_bitrate,
       :qvbr_quality_level,
       :qvbr_quality_level_fine_tune,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2906,7 +3020,8 @@ module Aws::MediaConvert
       :temporal_adaptive_quantization,
       :unregistered_sei_timecode,
       :write_mp4_packaging_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2924,7 +3039,8 @@ module Aws::MediaConvert
       :max_average_bitrate,
       :qvbr_quality_level,
       :qvbr_quality_level_fine_tune,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3110,7 +3226,8 @@ module Aws::MediaConvert
       :tiles,
       :unregistered_sei_timecode,
       :write_mp4_packaging_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3164,7 +3281,8 @@ module Aws::MediaConvert
       :red_primary_y,
       :white_point_x,
       :white_point_y,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3178,7 +3296,8 @@ module Aws::MediaConvert
     class Hdr10Plus < Struct.new(
       :mastering_monitor_nits,
       :target_monitor_nits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3192,7 +3311,8 @@ module Aws::MediaConvert
     class HlsAdditionalManifest < Struct.new(
       :manifest_name_modifier,
       :selected_outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3214,7 +3334,8 @@ module Aws::MediaConvert
       :custom_language_code,
       :language_code,
       :language_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3248,7 +3369,8 @@ module Aws::MediaConvert
       :speke_key_provider,
       :static_key_provider,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3382,7 +3504,8 @@ module Aws::MediaConvert
       :timed_metadata_id3_frame,
       :timed_metadata_id3_period,
       :timestamp_delta_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3412,7 +3535,8 @@ module Aws::MediaConvert
       :thumbnail_width,
       :tile_height,
       :tile_width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3430,7 +3554,8 @@ module Aws::MediaConvert
       :rendition_group_id,
       :rendition_language_code,
       :rendition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3464,7 +3589,8 @@ module Aws::MediaConvert
       :descriptive_video_service_flag,
       :i_frame_only_manifest,
       :segment_modifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3482,7 +3608,8 @@ module Aws::MediaConvert
       :priority,
       :queue,
       :wait_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3496,7 +3623,8 @@ module Aws::MediaConvert
     class Id3Insertion < Struct.new(
       :id3,
       :timecode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3510,7 +3638,8 @@ module Aws::MediaConvert
     class ImageInserter < Struct.new(
       :insertable_images,
       :sdr_reference_white_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3524,7 +3653,8 @@ module Aws::MediaConvert
     class ImscDestinationSettings < Struct.new(
       :accessibility,
       :style_passthrough,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3640,7 +3770,8 @@ module Aws::MediaConvert
       :video_generator,
       :video_overlays,
       :video_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3654,7 +3785,8 @@ module Aws::MediaConvert
     class InputClipping < Struct.new(
       :end_timecode,
       :start_timecode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3676,7 +3808,8 @@ module Aws::MediaConvert
       :encrypted_decryption_key,
       :initialization_vector,
       :kms_key_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3698,7 +3831,8 @@ module Aws::MediaConvert
       :gap_handling,
       :source_id,
       :timerange,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3794,7 +3928,8 @@ module Aws::MediaConvert
       :timecode_start,
       :video_overlays,
       :video_selector,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3822,7 +3957,8 @@ module Aws::MediaConvert
       :framerate_denominator,
       :framerate_numerator,
       :sample_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3872,7 +4008,8 @@ module Aws::MediaConvert
       :opacity,
       :start_time,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3881,7 +4018,8 @@ module Aws::MediaConvert
     #   @return [String]
     class InternalServerErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4011,7 +4149,8 @@ module Aws::MediaConvert
       :timing,
       :user_metadata,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4025,7 +4164,8 @@ module Aws::MediaConvert
     class JobEngineVersion < Struct.new(
       :expiration_date,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4039,7 +4179,8 @@ module Aws::MediaConvert
     class JobMessages < Struct.new(
       :info,
       :warning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4101,7 +4242,8 @@ module Aws::MediaConvert
       :output_groups,
       :timecode_config,
       :timed_metadata_insertion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4159,7 +4301,8 @@ module Aws::MediaConvert
       :settings,
       :status_update_interval,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4221,7 +4364,8 @@ module Aws::MediaConvert
       :output_groups,
       :timecode_config,
       :timed_metadata_insertion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4279,7 +4423,8 @@ module Aws::MediaConvert
       :metadata6,
       :metadata7,
       :metadata8,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4304,7 +4449,8 @@ module Aws::MediaConvert
       :max_results,
       :next_token,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4317,7 +4463,8 @@ module Aws::MediaConvert
     class ListJobTemplatesResponse < Struct.new(
       :job_templates,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4342,7 +4489,8 @@ module Aws::MediaConvert
       :order,
       :queue,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4355,7 +4503,8 @@ module Aws::MediaConvert
     class ListJobsResponse < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4380,7 +4529,8 @@ module Aws::MediaConvert
       :max_results,
       :next_token,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4393,7 +4543,8 @@ module Aws::MediaConvert
     class ListPresetsResponse < Struct.new(
       :next_token,
       :presets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4414,7 +4565,8 @@ module Aws::MediaConvert
       :max_results,
       :next_token,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4435,7 +4587,8 @@ module Aws::MediaConvert
       :queues,
       :total_concurrent_jobs,
       :unallocated_concurrent_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4444,7 +4597,8 @@ module Aws::MediaConvert
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4453,7 +4607,8 @@ module Aws::MediaConvert
     #   @return [Types::ResourceTags]
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4466,7 +4621,8 @@ module Aws::MediaConvert
     class ListVersionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4479,7 +4635,8 @@ module Aws::MediaConvert
     class ListVersionsResponse < Struct.new(
       :next_token,
       :versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4489,7 +4646,8 @@ module Aws::MediaConvert
     #   @return [Integer]
     class M2tsScte35Esam < Struct.new(
       :scte35_esam_pid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4667,7 +4825,8 @@ module Aws::MediaConvert
       :timed_metadata_pid,
       :transport_stream_id,
       :video_pid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4761,7 +4920,8 @@ module Aws::MediaConvert
       :timed_metadata_pid,
       :transport_stream_id,
       :video_pid,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4783,7 +4943,8 @@ module Aws::MediaConvert
       :file_size,
       :last_modified,
       :mime_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4797,7 +4958,8 @@ module Aws::MediaConvert
     class MinBottomRenditionSize < Struct.new(
       :height,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4811,7 +4973,8 @@ module Aws::MediaConvert
     class MinTopRenditionSize < Struct.new(
       :height,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4841,7 +5004,8 @@ module Aws::MediaConvert
       :offset,
       :playback,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4855,7 +5019,8 @@ module Aws::MediaConvert
     class MotionImageInsertionFramerate < Struct.new(
       :framerate_denominator,
       :framerate_numerator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4869,7 +5034,8 @@ module Aws::MediaConvert
     class MotionImageInsertionOffset < Struct.new(
       :image_x,
       :image_y,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4895,7 +5061,8 @@ module Aws::MediaConvert
       :mpeg2_four_cc_control,
       :padding_control,
       :reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4917,7 +5084,8 @@ module Aws::MediaConvert
       :bitrate,
       :channels,
       :sample_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4943,7 +5111,8 @@ module Aws::MediaConvert
       :rate_control_mode,
       :sample_rate,
       :vbr_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4985,7 +5154,8 @@ module Aws::MediaConvert
       :moov_placement,
       :mp4_major_brand,
       :signing_kms_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5038,7 +5208,8 @@ module Aws::MediaConvert
       :timed_metadata_box_version,
       :timed_metadata_scheme_id_uri,
       :timed_metadata_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5180,7 +5351,8 @@ module Aws::MediaConvert
       :syntax,
       :telecine,
       :temporal_adaptive_quantization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5194,7 +5366,8 @@ module Aws::MediaConvert
     class MsSmoothAdditionalManifest < Struct.new(
       :manifest_name_modifier,
       :selected_outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5204,7 +5377,8 @@ module Aws::MediaConvert
     #   @return [Types::SpekeKeyProvider]
     class MsSmoothEncryptionSettings < Struct.new(
       :speke_key_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5242,7 +5416,8 @@ module Aws::MediaConvert
       :fragment_length,
       :fragment_length_control,
       :manifest_encoding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5260,7 +5435,8 @@ module Aws::MediaConvert
       :afd_signaling,
       :profile,
       :xavc_profile_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5274,7 +5450,8 @@ module Aws::MediaConvert
     class MxfXavcProfileSettings < Struct.new(
       :duration_mode,
       :max_anc_data_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5296,7 +5473,8 @@ module Aws::MediaConvert
       :payload,
       :preset,
       :strength,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5310,7 +5488,8 @@ module Aws::MediaConvert
     class NielsenConfiguration < Struct.new(
       :breakout_code,
       :distributor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5360,7 +5539,8 @@ module Aws::MediaConvert
       :source_watermark_status,
       :tic_server_url,
       :unique_tic_per_audio_track,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5382,7 +5562,8 @@ module Aws::MediaConvert
       :filter_settings,
       :spatial_filter_settings,
       :temporal_filter_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5392,7 +5573,8 @@ module Aws::MediaConvert
     #   @return [Integer]
     class NoiseReducerFilterSettings < Struct.new(
       :strength,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5410,7 +5592,8 @@ module Aws::MediaConvert
       :post_filter_sharpen_strength,
       :speed,
       :strength,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5436,7 +5619,8 @@ module Aws::MediaConvert
       :post_temporal_sharpening_strength,
       :speed,
       :strength,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5445,7 +5629,8 @@ module Aws::MediaConvert
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5463,7 +5648,8 @@ module Aws::MediaConvert
       :bitrate,
       :channels,
       :sample_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5501,7 +5687,8 @@ module Aws::MediaConvert
       :output_settings,
       :preset,
       :video_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5515,7 +5702,8 @@ module Aws::MediaConvert
     class OutputChannelMapping < Struct.new(
       :input_channels,
       :input_channels_fine_tune,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5529,7 +5717,8 @@ module Aws::MediaConvert
     class OutputDetail < Struct.new(
       :duration_in_ms,
       :video_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5555,7 +5744,8 @@ module Aws::MediaConvert
       :name,
       :output_group_settings,
       :outputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5565,7 +5755,8 @@ module Aws::MediaConvert
     #   @return [Array<Types::OutputDetail>]
     class OutputGroupDetail < Struct.new(
       :output_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5599,7 +5790,8 @@ module Aws::MediaConvert
       :ms_smooth_group_settings,
       :per_frame_metrics,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5609,7 +5801,8 @@ module Aws::MediaConvert
     #   @return [Types::HlsSettings]
     class OutputSettings < Struct.new(
       :hls_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5619,7 +5812,8 @@ module Aws::MediaConvert
     #   @return [Types::NexGuardFileMarkerSettings]
     class PartnerWatermarking < Struct.new(
       :nexguard_file_marker_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5637,7 +5831,8 @@ module Aws::MediaConvert
       :http_inputs,
       :https_inputs,
       :s3_inputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5675,7 +5870,8 @@ module Aws::MediaConvert
       :name,
       :settings,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5697,7 +5893,8 @@ module Aws::MediaConvert
       :caption_descriptions,
       :container_settings,
       :video_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5707,7 +5904,8 @@ module Aws::MediaConvert
     #   @return [String]
     class ProbeInputFile < Struct.new(
       :file_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5716,7 +5914,8 @@ module Aws::MediaConvert
     #   @return [Array<Types::ProbeInputFile>]
     class ProbeRequest < Struct.new(
       :input_files,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5725,7 +5924,8 @@ module Aws::MediaConvert
     #   @return [Array<Types::ProbeResult>]
     class ProbeResponse < Struct.new(
       :probe_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5743,7 +5943,8 @@ module Aws::MediaConvert
       :container,
       :metadata,
       :track_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5805,7 +6006,8 @@ module Aws::MediaConvert
       :scan_type_conversion_mode,
       :slow_pal,
       :telecine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5814,7 +6016,8 @@ module Aws::MediaConvert
     #   @return [Types::Policy]
     class PutPolicyRequest < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5823,7 +6026,8 @@ module Aws::MediaConvert
     #   @return [Types::Policy]
     class PutPolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5881,7 +6085,8 @@ module Aws::MediaConvert
       :status,
       :submitted_jobs_count,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5899,7 +6104,8 @@ module Aws::MediaConvert
       :destination_queue,
       :source_queue,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5921,7 +6127,8 @@ module Aws::MediaConvert
       :width,
       :x,
       :y,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5947,7 +6154,8 @@ module Aws::MediaConvert
       :channel_mapping,
       :channels_in,
       :channels_out,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5977,7 +6185,8 @@ module Aws::MediaConvert
       :renewal_type,
       :reserved_slots,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5995,7 +6204,8 @@ module Aws::MediaConvert
       :commitment,
       :renewal_type,
       :reserved_slots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6009,7 +6219,8 @@ module Aws::MediaConvert
     class ResourceTags < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6019,7 +6230,8 @@ module Aws::MediaConvert
     #   @return [String]
     class S3DestinationAccessControl < Struct.new(
       :canned_acl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6037,7 +6249,8 @@ module Aws::MediaConvert
       :access_control,
       :encryption,
       :storage_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6055,7 +6268,8 @@ module Aws::MediaConvert
       :encryption_type,
       :kms_encryption_context,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6065,7 +6279,8 @@ module Aws::MediaConvert
     #   @return [String]
     class SccDestinationSettings < Struct.new(
       :framerate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6094,7 +6309,8 @@ module Aws::MediaConvert
       :order,
       :queue,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6107,7 +6323,8 @@ module Aws::MediaConvert
     class SearchJobsResponse < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6129,7 +6346,8 @@ module Aws::MediaConvert
       :name,
       :override_value,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6155,7 +6373,8 @@ module Aws::MediaConvert
       :resource_id,
       :system_ids,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6185,7 +6404,8 @@ module Aws::MediaConvert
       :hls_signaled_system_ids,
       :resource_id,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6195,7 +6415,8 @@ module Aws::MediaConvert
     #   @return [String]
     class SrtDestinationSettings < Struct.new(
       :style_passthrough,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6217,7 +6438,8 @@ module Aws::MediaConvert
       :key_format_versions,
       :static_key_value,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6230,12 +6452,14 @@ module Aws::MediaConvert
     class TagResourceRequest < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6249,7 +6473,8 @@ module Aws::MediaConvert
     class TeletextDestinationSettings < Struct.new(
       :page_number,
       :page_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6259,7 +6484,8 @@ module Aws::MediaConvert
     #   @return [String]
     class TeletextSourceSettings < Struct.new(
       :page_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6277,7 +6503,8 @@ module Aws::MediaConvert
       :font_size,
       :position,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6299,7 +6526,8 @@ module Aws::MediaConvert
       :source,
       :start,
       :timestamp_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6309,7 +6537,8 @@ module Aws::MediaConvert
     #   @return [Array<Types::Id3Insertion>]
     class TimedMetadataInsertion < Struct.new(
       :id3_insertions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6327,7 +6556,8 @@ module Aws::MediaConvert
       :finish_time,
       :start_time,
       :submit_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6336,7 +6566,8 @@ module Aws::MediaConvert
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6370,7 +6601,8 @@ module Aws::MediaConvert
       :index,
       :track_type,
       :video_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6388,7 +6620,8 @@ module Aws::MediaConvert
       :audio_track_indexes,
       :data_track_indexes,
       :video_track_indexes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6398,7 +6631,8 @@ module Aws::MediaConvert
     #   @return [Integer]
     class TrackSourceSettings < Struct.new(
       :track_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6408,7 +6642,8 @@ module Aws::MediaConvert
     #   @return [String]
     class TtmlDestinationSettings < Struct.new(
       :style_passthrough,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6450,7 +6685,8 @@ module Aws::MediaConvert
       :scan_type_conversion_mode,
       :slow_pal,
       :telecine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6463,12 +6699,14 @@ module Aws::MediaConvert
     class UntagResourceRequest < Struct.new(
       :arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6509,7 +6747,8 @@ module Aws::MediaConvert
       :queue,
       :settings,
       :status_update_interval,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6518,7 +6757,8 @@ module Aws::MediaConvert
     #   @return [Types::JobTemplate]
     class UpdateJobTemplateResponse < Struct.new(
       :job_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6539,7 +6779,8 @@ module Aws::MediaConvert
       :description,
       :name,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6548,7 +6789,8 @@ module Aws::MediaConvert
     #   @return [Types::Preset]
     class UpdatePresetResponse < Struct.new(
       :preset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6573,7 +6815,8 @@ module Aws::MediaConvert
       :name,
       :reservation_plan_settings,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6582,7 +6825,8 @@ module Aws::MediaConvert
     #   @return [Types::Queue]
     class UpdateQueueResponse < Struct.new(
       :queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6624,7 +6868,8 @@ module Aws::MediaConvert
       :slow_pal,
       :telecine,
       :vc3_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6686,7 +6931,8 @@ module Aws::MediaConvert
       :vp8_settings,
       :vp9_settings,
       :xavc_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6760,7 +7006,8 @@ module Aws::MediaConvert
       :timecode_track,
       :video_preprocessors,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6774,7 +7021,8 @@ module Aws::MediaConvert
     class VideoDetail < Struct.new(
       :height_in_px,
       :width_in_px,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6808,7 +7056,8 @@ module Aws::MediaConvert
       :playback,
       :start_timecode,
       :transitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6834,7 +7083,8 @@ module Aws::MediaConvert
       :width,
       :x,
       :y,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6857,7 +7107,8 @@ module Aws::MediaConvert
       :input_clippings,
       :timecode_source,
       :timecode_start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6871,7 +7122,8 @@ module Aws::MediaConvert
     class VideoOverlayInputClipping < Struct.new(
       :end_timecode,
       :start_timecode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6897,7 +7149,8 @@ module Aws::MediaConvert
       :width,
       :x_position,
       :y_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6915,7 +7168,8 @@ module Aws::MediaConvert
       :end_position,
       :end_timecode,
       :start_timecode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6953,7 +7207,8 @@ module Aws::MediaConvert
       :noise_reducer,
       :partner_watermarking,
       :timecode_burnin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6991,7 +7246,8 @@ module Aws::MediaConvert
       :matrix_coefficients,
       :transfer_characteristics,
       :width,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7054,7 +7310,8 @@ module Aws::MediaConvert
       :sample_range,
       :selector_type,
       :streams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7072,7 +7329,8 @@ module Aws::MediaConvert
       :channels,
       :sample_rate,
       :vbr_quality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7130,7 +7388,8 @@ module Aws::MediaConvert
       :par_numerator,
       :quality_tuning_level,
       :rate_control_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7188,7 +7447,8 @@ module Aws::MediaConvert
       :par_numerator,
       :quality_tuning_level,
       :rate_control_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7202,7 +7462,8 @@ module Aws::MediaConvert
     class WarningGroup < Struct.new(
       :code,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7224,7 +7485,8 @@ module Aws::MediaConvert
       :channels,
       :format,
       :sample_rate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7238,7 +7500,8 @@ module Aws::MediaConvert
     class WebvttDestinationSettings < Struct.new(
       :accessibility,
       :style_passthrough,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7256,7 +7519,8 @@ module Aws::MediaConvert
       :rendition_group_id,
       :rendition_language_code,
       :rendition_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7266,7 +7530,8 @@ module Aws::MediaConvert
     #   @return [String]
     class Xavc4kIntraCbgProfileSettings < Struct.new(
       :xavc_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7276,7 +7541,8 @@ module Aws::MediaConvert
     #   @return [String]
     class Xavc4kIntraVbrProfileSettings < Struct.new(
       :xavc_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7314,7 +7580,8 @@ module Aws::MediaConvert
       :hrd_buffer_size,
       :quality_tuning_level,
       :slices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7324,7 +7591,8 @@ module Aws::MediaConvert
     #   @return [String]
     class XavcHdIntraCbgProfileSettings < Struct.new(
       :xavc_class,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7366,7 +7634,8 @@ module Aws::MediaConvert
       :quality_tuning_level,
       :slices,
       :telecine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7440,7 +7709,8 @@ module Aws::MediaConvert
       :xavc4k_profile_settings,
       :xavc_hd_intra_cbg_profile_settings,
       :xavc_hd_profile_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

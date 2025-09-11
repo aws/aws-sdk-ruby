@@ -7992,7 +7992,6 @@ module Aws::SecurityHub
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/standards/control/{StandardsControlArn+}", "code" => 200}}
       end)
-
     end
 
     class << self

@@ -37,7 +37,7 @@ module Aws::Fis
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Fis::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -50,7 +50,7 @@ module Aws::Fis
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Fis::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -63,7 +63,7 @@ module Aws::Fis
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Fis::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::Fis
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Fis::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

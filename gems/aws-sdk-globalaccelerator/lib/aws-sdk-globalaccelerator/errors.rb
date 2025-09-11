@@ -53,7 +53,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::AcceleratorNotDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::AcceleratorNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::AssociatedEndpointGroupFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -107,7 +107,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::AssociatedListenerFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::AttachmentNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::ByoipCidrNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::EndpointAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -172,7 +172,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::EndpointGroupAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -185,7 +185,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::EndpointGroupNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::EndpointNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -212,7 +212,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::IncorrectCidrStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -225,7 +225,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::InternalServiceErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -238,7 +238,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::InvalidArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -251,7 +251,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -264,7 +264,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::InvalidPortRangeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -277,7 +277,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -290,7 +290,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::ListenerNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -303,7 +303,7 @@ module Aws::GlobalAccelerator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GlobalAccelerator::Types::TransactionInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

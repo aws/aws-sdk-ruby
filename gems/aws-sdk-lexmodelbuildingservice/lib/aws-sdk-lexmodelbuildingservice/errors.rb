@@ -42,7 +42,7 @@ module Aws::LexModelBuildingService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelBuildingService::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::LexModelBuildingService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelBuildingService::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::LexModelBuildingService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelBuildingService::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::LexModelBuildingService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelBuildingService::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::LexModelBuildingService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelBuildingService::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def retry_after_seconds
@@ -115,7 +115,7 @@ module Aws::LexModelBuildingService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelBuildingService::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::LexModelBuildingService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelBuildingService::Types::PreconditionFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -158,7 +158,7 @@ module Aws::LexModelBuildingService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LexModelBuildingService::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def reference_type

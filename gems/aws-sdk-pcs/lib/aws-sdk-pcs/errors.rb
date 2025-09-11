@@ -40,7 +40,7 @@ module Aws::PCS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PCS::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::PCS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PCS::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::PCS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PCS::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::PCS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PCS::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -116,7 +116,7 @@ module Aws::PCS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PCS::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::PCS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PCS::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -171,7 +171,7 @@ module Aws::PCS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PCS::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

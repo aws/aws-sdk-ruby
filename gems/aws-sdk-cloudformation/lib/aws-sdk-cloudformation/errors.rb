@@ -62,7 +62,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::CFNRegistryException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message with details about the error that occurred.</p>
@@ -90,7 +90,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::ChangeSetNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::ConcurrentResourcesLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::CreatedButModifiedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -131,7 +131,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::GeneratedTemplateNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -144,7 +144,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::HookResultNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -157,7 +157,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::InsufficientCapabilitiesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -171,7 +171,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::InvalidChangeSetStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -184,7 +184,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::InvalidOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::InvalidStateTransitionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -213,7 +213,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -226,7 +226,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::NameAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -239,7 +239,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::OperationIdAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -253,7 +253,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::OperationInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -266,7 +266,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::OperationNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -280,7 +280,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::OperationStatusCheckFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -293,7 +293,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::ResourceScanInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -318,7 +318,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::ResourceScanLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -331,7 +331,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::ResourceScanNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -344,7 +344,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::StackInstanceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -357,7 +357,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::StackNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -370,7 +370,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::StackRefactorNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -384,7 +384,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::StackSetNotEmptyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -397,7 +397,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::StackSetNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -410,7 +410,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::StaleRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -423,7 +423,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::TokenAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -436,7 +436,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::TypeConfigurationNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message with details about the error that occurred.</p>
@@ -450,7 +450,7 @@ module Aws::CloudFormation
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFormation::Types::TypeNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message with details about the error that occurred.</p>

@@ -11,7 +11,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::CodeCatalyst
       :id,
       :name,
       :expires_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +41,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,7 +55,8 @@ module Aws::CodeCatalyst
     class CreateAccessTokenRequest < Struct.new(
       :name,
       :expires_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -73,7 +77,8 @@ module Aws::CodeCatalyst
       :name,
       :expires_time,
       :access_token_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +135,8 @@ module Aws::CodeCatalyst
       :inactivity_timeout_minutes,
       :persistent_storage,
       :vpc_connection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +157,8 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       :vpc_connection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +175,8 @@ module Aws::CodeCatalyst
       :space_name,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +197,8 @@ module Aws::CodeCatalyst
       :name,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +223,8 @@ module Aws::CodeCatalyst
       :source_repository_name,
       :name,
       :head_commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +245,8 @@ module Aws::CodeCatalyst
       :name,
       :last_updated_time,
       :head_commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,7 +267,8 @@ module Aws::CodeCatalyst
       :project_name,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,7 +289,8 @@ module Aws::CodeCatalyst
       :project_name,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -286,12 +299,14 @@ module Aws::CodeCatalyst
     #   @return [String]
     class DeleteAccessTokenRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessTokenResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -308,7 +323,8 @@ module Aws::CodeCatalyst
       :space_name,
       :project_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +341,8 @@ module Aws::CodeCatalyst
       :space_name,
       :project_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +355,8 @@ module Aws::CodeCatalyst
     class DeleteProjectRequest < Struct.new(
       :space_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +373,8 @@ module Aws::CodeCatalyst
       :space_name,
       :name,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +391,8 @@ module Aws::CodeCatalyst
       :space_name,
       :project_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +409,8 @@ module Aws::CodeCatalyst
       :space_name,
       :project_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +419,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class DeleteSpaceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +433,8 @@ module Aws::CodeCatalyst
     class DeleteSpaceResponse < Struct.new(
       :name,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +449,8 @@ module Aws::CodeCatalyst
     class DevEnvironmentAccessDetails < Struct.new(
       :stream_url,
       :token_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +464,8 @@ module Aws::CodeCatalyst
     class DevEnvironmentRepositorySummary < Struct.new(
       :repository_name,
       :branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +479,8 @@ module Aws::CodeCatalyst
     class DevEnvironmentSessionConfiguration < Struct.new(
       :session_type,
       :execute_command_session_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -481,7 +507,8 @@ module Aws::CodeCatalyst
       :dev_environment_id,
       :started_time,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +570,8 @@ module Aws::CodeCatalyst
       :inactivity_timeout_minutes,
       :persistent_storage,
       :vpc_connection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -562,7 +590,8 @@ module Aws::CodeCatalyst
     class EmailAddress < Struct.new(
       :email,
       :verified,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -628,7 +657,8 @@ module Aws::CodeCatalyst
       :error_code,
       :source_ip_address,
       :user_agent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +672,8 @@ module Aws::CodeCatalyst
     class EventPayload < Struct.new(
       :content_type,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +687,8 @@ module Aws::CodeCatalyst
     class ExecuteCommandSessionConfiguration < Struct.new(
       :command,
       :arguments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,7 +706,8 @@ module Aws::CodeCatalyst
       :key,
       :values,
       :comparison_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +724,8 @@ module Aws::CodeCatalyst
       :space_name,
       :project_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +786,8 @@ module Aws::CodeCatalyst
       :inactivity_timeout_minutes,
       :persistent_storage,
       :vpc_connection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -770,7 +805,8 @@ module Aws::CodeCatalyst
     class GetProjectRequest < Struct.new(
       :space_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +827,8 @@ module Aws::CodeCatalyst
       :name,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +845,8 @@ module Aws::CodeCatalyst
       :space_name,
       :project_name,
       :source_repository_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +855,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class GetSourceRepositoryCloneUrlsResponse < Struct.new(
       :https,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +873,8 @@ module Aws::CodeCatalyst
       :space_name,
       :project_name,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -863,7 +903,8 @@ module Aws::CodeCatalyst
       :description,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,7 +913,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class GetSpaceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +935,8 @@ module Aws::CodeCatalyst
       :region_name,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +945,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class GetSubscriptionRequest < Struct.new(
       :space_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +969,8 @@ module Aws::CodeCatalyst
       :aws_account_name,
       :pending_subscription_type,
       :pending_subscription_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,7 +983,8 @@ module Aws::CodeCatalyst
     class GetUserDetailsRequest < Struct.new(
       :id,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -963,7 +1009,8 @@ module Aws::CodeCatalyst
       :display_name,
       :primary_email,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1027,8 @@ module Aws::CodeCatalyst
       :space_name,
       :id,
       :project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1032,7 +1080,8 @@ module Aws::CodeCatalyst
       :last_updated_time,
       :run_mode,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1098,8 @@ module Aws::CodeCatalyst
       :space_name,
       :id,
       :project_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1092,7 +1142,8 @@ module Aws::CodeCatalyst
       :start_time,
       :end_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1106,7 +1157,8 @@ module Aws::CodeCatalyst
     class Ide < Struct.new(
       :runtime,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1123,7 +1175,8 @@ module Aws::CodeCatalyst
     class IdeConfiguration < Struct.new(
       :runtime,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1189,8 @@ module Aws::CodeCatalyst
     class ListAccessTokensRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1203,8 @@ module Aws::CodeCatalyst
     class ListAccessTokensResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1174,7 +1229,8 @@ module Aws::CodeCatalyst
       :dev_environment_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,7 +1243,8 @@ module Aws::CodeCatalyst
     class ListDevEnvironmentSessionsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1269,8 @@ module Aws::CodeCatalyst
       :filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1225,7 +1283,8 @@ module Aws::CodeCatalyst
     class ListDevEnvironmentsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1254,7 +1313,8 @@ module Aws::CodeCatalyst
       :event_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1267,7 +1327,8 @@ module Aws::CodeCatalyst
     class ListEventLogsResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1288,7 +1349,8 @@ module Aws::CodeCatalyst
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1363,8 @@ module Aws::CodeCatalyst
     class ListProjectsResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1327,7 +1390,8 @@ module Aws::CodeCatalyst
       :description,
       :last_updated_time,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1412,8 @@ module Aws::CodeCatalyst
       :project_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1361,7 +1426,8 @@ module Aws::CodeCatalyst
     class ListSourceRepositoriesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1383,7 +1449,8 @@ module Aws::CodeCatalyst
       :name,
       :last_updated_time,
       :head_commit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1408,7 +1475,8 @@ module Aws::CodeCatalyst
       :source_repository_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1421,7 +1489,8 @@ module Aws::CodeCatalyst
     class ListSourceRepositoryBranchesResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1430,7 +1499,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class ListSpacesRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1443,7 +1513,8 @@ module Aws::CodeCatalyst
     class ListSpacesResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1472,7 +1543,8 @@ module Aws::CodeCatalyst
       :next_token,
       :max_results,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1485,7 +1557,8 @@ module Aws::CodeCatalyst
     class ListWorkflowRunsResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1583,8 @@ module Aws::CodeCatalyst
       :next_token,
       :max_results,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,7 +1597,8 @@ module Aws::CodeCatalyst
     class ListWorkflowsResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1612,8 @@ module Aws::CodeCatalyst
     #   @return [Integer]
     class PersistentStorage < Struct.new(
       :size_in_gi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1551,7 +1627,8 @@ module Aws::CodeCatalyst
     #   @return [Integer]
     class PersistentStorageConfiguration < Struct.new(
       :size_in_gi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1565,7 +1642,8 @@ module Aws::CodeCatalyst
     class ProjectInformation < Struct.new(
       :name,
       :project_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1583,7 +1661,8 @@ module Aws::CodeCatalyst
       :key,
       :values,
       :comparison_operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1601,7 +1680,8 @@ module Aws::CodeCatalyst
       :name,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,7 +1695,8 @@ module Aws::CodeCatalyst
     class RepositoryInput < Struct.new(
       :repository_name,
       :branch_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1624,7 +1705,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1634,7 +1716,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,7 +1740,8 @@ module Aws::CodeCatalyst
       :region_name,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1686,7 +1770,8 @@ module Aws::CodeCatalyst
       :ides,
       :instance_type,
       :inactivity_timeout_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1707,7 +1792,8 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1728,7 +1814,8 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       :session_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1753,7 +1840,8 @@ module Aws::CodeCatalyst
       :space_name,
       :project_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1775,7 +1863,8 @@ module Aws::CodeCatalyst
       :project_name,
       :workflow_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1885,8 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       :workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1813,7 +1903,8 @@ module Aws::CodeCatalyst
       :space_name,
       :project_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1925,8 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1855,7 +1947,8 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1876,7 +1969,8 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1885,7 +1979,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1930,7 +2025,8 @@ module Aws::CodeCatalyst
       :instance_type,
       :inactivity_timeout_minutes,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1968,7 +2064,8 @@ module Aws::CodeCatalyst
       :instance_type,
       :inactivity_timeout_minutes,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1990,7 +2087,8 @@ module Aws::CodeCatalyst
       :space_name,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2011,7 +2109,8 @@ module Aws::CodeCatalyst
       :name,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2024,7 +2123,8 @@ module Aws::CodeCatalyst
     class UpdateSpaceRequest < Struct.new(
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2041,7 +2141,8 @@ module Aws::CodeCatalyst
       :name,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2063,7 +2164,8 @@ module Aws::CodeCatalyst
       :principal_id,
       :user_name,
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2072,7 +2174,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2081,7 +2184,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class VerifySessionResponse < Struct.new(
       :identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2091,7 +2195,8 @@ module Aws::CodeCatalyst
     #   @return [String]
     class WorkflowDefinition < Struct.new(
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2101,19 +2206,22 @@ module Aws::CodeCatalyst
     #   @return [String]
     class WorkflowDefinitionSummary < Struct.new(
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Information used to sort workflow runs in the returned list.</p>
     class WorkflowRunSortCriteria < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the status of a workflow run.</p>
     class WorkflowRunStatusReason < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2153,13 +2261,15 @@ module Aws::CodeCatalyst
       :start_time,
       :end_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Information used to sort workflows in the returned list.</p>
     class WorkflowSortCriteria < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2203,7 +2313,8 @@ module Aws::CodeCatalyst
       :last_updated_time,
       :run_mode,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

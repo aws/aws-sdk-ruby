@@ -47,7 +47,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::EntitlementAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::EntitlementNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::IncompatibleImageException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::InvalidAccountStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::InvalidParameterCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::InvalidRoleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -138,7 +138,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::OperationNotPermittedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -164,7 +164,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::RequestLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -177,7 +177,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -203,7 +203,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::ResourceNotAvailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -216,7 +216,7 @@ module Aws::AppStream
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

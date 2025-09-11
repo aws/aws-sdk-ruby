@@ -13,7 +13,8 @@ module Aws::Detective
     #   @return [String]
     class AcceptInvitationRequest < Struct.new(
       :graph_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +40,8 @@ module Aws::Detective
       :error_code_reason,
       :sub_error_code,
       :sub_error_code_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +57,8 @@ module Aws::Detective
     class Account < Struct.new(
       :account_id,
       :email_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +80,8 @@ module Aws::Detective
       :account_id,
       :graph_arn,
       :delegation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -91,7 +95,8 @@ module Aws::Detective
     class BatchGetGraphMemberDatasourcesRequest < Struct.new(
       :graph_arn,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +109,8 @@ module Aws::Detective
     class BatchGetGraphMemberDatasourcesResponse < Struct.new(
       :member_datasources,
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +119,8 @@ module Aws::Detective
     #   @return [Array<String>]
     class BatchGetMembershipDatasourcesRequest < Struct.new(
       :graph_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +133,8 @@ module Aws::Detective
     class BatchGetMembershipDatasourcesResponse < Struct.new(
       :membership_datasources,
       :unprocessed_graphs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +143,8 @@ module Aws::Detective
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +155,8 @@ module Aws::Detective
     #   @return [Hash<String, String>]
     class CreateGraphRequest < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -155,7 +165,8 @@ module Aws::Detective
     #   @return [String]
     class CreateGraphResponse < Struct.new(
       :graph_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +196,8 @@ module Aws::Detective
       :message,
       :disable_email_notification,
       :accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -203,7 +215,8 @@ module Aws::Detective
     class CreateMembersResponse < Struct.new(
       :members,
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +230,8 @@ module Aws::Detective
     class DatasourcePackageIngestDetail < Struct.new(
       :datasource_package_ingest_state,
       :last_ingest_state_change,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +246,8 @@ module Aws::Detective
     class DatasourcePackageUsageInfo < Struct.new(
       :volume_usage_in_bytes,
       :volume_usage_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -246,7 +261,8 @@ module Aws::Detective
     class DateFilter < Struct.new(
       :start_inclusive,
       :end_inclusive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -255,7 +271,8 @@ module Aws::Detective
     #   @return [String]
     class DeleteGraphRequest < Struct.new(
       :graph_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -269,7 +286,8 @@ module Aws::Detective
     class DeleteMembersRequest < Struct.new(
       :graph_arn,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +302,8 @@ module Aws::Detective
     class DeleteMembersResponse < Struct.new(
       :account_ids,
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +312,8 @@ module Aws::Detective
     #   @return [String]
     class DescribeOrganizationConfigurationRequest < Struct.new(
       :graph_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +323,8 @@ module Aws::Detective
     #   @return [Boolean]
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -319,7 +340,8 @@ module Aws::Detective
     #   @return [String]
     class DisassociateMembershipRequest < Struct.new(
       :graph_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -328,7 +350,8 @@ module Aws::Detective
     #   @return [String]
     class EnableOrganizationAdminAccountRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -354,7 +377,8 @@ module Aws::Detective
       :state,
       :entity_arn,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +392,8 @@ module Aws::Detective
     class FlaggedIpAddressDetail < Struct.new(
       :ip_address,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +406,8 @@ module Aws::Detective
     class GetInvestigationRequest < Struct.new(
       :graph_arn,
       :investigation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -430,7 +456,8 @@ module Aws::Detective
       :status,
       :severity,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +474,8 @@ module Aws::Detective
     class GetMembersRequest < Struct.new(
       :graph_arn,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -463,7 +491,8 @@ module Aws::Detective
     class GetMembersResponse < Struct.new(
       :member_details,
       :unprocessed_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +507,8 @@ module Aws::Detective
     class Graph < Struct.new(
       :arn,
       :created_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,7 +534,8 @@ module Aws::Detective
       :starting_location,
       :ending_location,
       :hourly_time_delta,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +553,8 @@ module Aws::Detective
     class Indicator < Struct.new(
       :indicator_type,
       :indicator_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +592,8 @@ module Aws::Detective
       :new_user_agent_detail,
       :related_finding_detail,
       :related_finding_group_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +602,8 @@ module Aws::Detective
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +638,8 @@ module Aws::Detective
       :created_time,
       :entity_arn,
       :entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -623,7 +658,8 @@ module Aws::Detective
       :graph_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -638,7 +674,8 @@ module Aws::Detective
     class ListDatasourcePackagesResponse < Struct.new(
       :datasource_packages,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +691,8 @@ module Aws::Detective
     class ListGraphsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +706,8 @@ module Aws::Detective
     class ListGraphsResponse < Struct.new(
       :graph_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +733,8 @@ module Aws::Detective
       :indicator_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -716,7 +756,8 @@ module Aws::Detective
       :investigation_id,
       :next_token,
       :indicators,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -742,7 +783,8 @@ module Aws::Detective
       :max_results,
       :filter_criteria,
       :sort_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -756,7 +798,8 @@ module Aws::Detective
     class ListInvestigationsResponse < Struct.new(
       :investigation_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +816,8 @@ module Aws::Detective
     class ListInvitationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -788,7 +832,8 @@ module Aws::Detective
     class ListInvitationsResponse < Struct.new(
       :invitations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +853,8 @@ module Aws::Detective
       :graph_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +874,8 @@ module Aws::Detective
     class ListMembersResponse < Struct.new(
       :member_details,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +890,8 @@ module Aws::Detective
     class ListOrganizationAdminAccountsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +905,8 @@ module Aws::Detective
     class ListOrganizationAdminAccountsResponse < Struct.new(
       :administrators,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +915,8 @@ module Aws::Detective
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -876,7 +926,8 @@ module Aws::Detective
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1029,7 +1080,8 @@ module Aws::Detective
       :invitation_type,
       :volume_usage_by_datasource_package,
       :datasource_package_ingest_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1099,8 @@ module Aws::Detective
       :account_id,
       :graph_arn,
       :datasource_package_ingest_history,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1114,8 @@ module Aws::Detective
     class NewAsoDetail < Struct.new(
       :aso,
       :is_new_for_entire_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1084,7 +1138,8 @@ module Aws::Detective
       :location,
       :ip_address,
       :is_new_for_entire_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1103,7 +1158,8 @@ module Aws::Detective
     class NewUserAgentDetail < Struct.new(
       :user_agent,
       :is_new_for_entire_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1119,7 +1175,8 @@ module Aws::Detective
     #   @return [String]
     class RejectInvitationRequest < Struct.new(
       :graph_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1137,7 +1194,8 @@ module Aws::Detective
       :arn,
       :type,
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1147,7 +1205,8 @@ module Aws::Detective
     #   @return [String]
     class RelatedFindingGroupDetail < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1156,7 +1215,8 @@ module Aws::Detective
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1239,8 @@ module Aws::Detective
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1193,7 +1254,8 @@ module Aws::Detective
     class SortCriteria < Struct.new(
       :field,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1215,7 +1277,8 @@ module Aws::Detective
       :entity_arn,
       :scope_start_time,
       :scope_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1224,7 +1287,8 @@ module Aws::Detective
     #   @return [String]
     class StartInvestigationResponse < Struct.new(
       :investigation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1239,7 +1303,8 @@ module Aws::Detective
     class StartMonitoringMemberRequest < Struct.new(
       :graph_arn,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,7 +1314,8 @@ module Aws::Detective
     #   @return [String]
     class StringFilter < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,7 +1350,8 @@ module Aws::Detective
       :api_name,
       :api_success_count,
       :api_failure_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1305,12 +1372,14 @@ module Aws::Detective
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1321,7 +1390,8 @@ module Aws::Detective
     #   @return [Time]
     class TimestampForCollection < Struct.new(
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1401,8 @@ module Aws::Detective
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1347,7 +1418,8 @@ module Aws::Detective
     class UnprocessedAccount < Struct.new(
       :account_id,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1434,8 @@ module Aws::Detective
     class UnprocessedGraph < Struct.new(
       :graph_arn,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1376,12 +1449,14 @@ module Aws::Detective
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1394,7 +1469,8 @@ module Aws::Detective
     class UpdateDatasourcePackagesRequest < Struct.new(
       :graph_arn,
       :datasource_packages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,7 +1487,8 @@ module Aws::Detective
       :graph_arn,
       :investigation_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1425,7 +1502,8 @@ module Aws::Detective
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :graph_arn,
       :auto_enable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1442,7 +1520,8 @@ module Aws::Detective
       :message,
       :error_code,
       :error_code_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

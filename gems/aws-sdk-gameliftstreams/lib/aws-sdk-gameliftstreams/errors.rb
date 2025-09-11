@@ -40,7 +40,7 @@ module Aws::GameLiftStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLiftStreams::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -54,7 +54,7 @@ module Aws::GameLiftStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLiftStreams::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -68,7 +68,7 @@ module Aws::GameLiftStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLiftStreams::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -86,7 +86,7 @@ module Aws::GameLiftStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLiftStreams::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -100,7 +100,7 @@ module Aws::GameLiftStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLiftStreams::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -114,7 +114,7 @@ module Aws::GameLiftStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLiftStreams::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -136,7 +136,7 @@ module Aws::GameLiftStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLiftStreams::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>

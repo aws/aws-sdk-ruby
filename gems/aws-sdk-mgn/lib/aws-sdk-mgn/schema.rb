@@ -2406,7 +2406,6 @@ module Aws::Mgn
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UninitializedAccountException)
         operation.traits = {"smithy.api#http" => {"uri" => "/UpdateWave", "method" => "POST", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

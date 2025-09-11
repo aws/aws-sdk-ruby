@@ -38,7 +38,7 @@ module Aws::SSO
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSO::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -51,7 +51,7 @@ module Aws::SSO
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSO::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::SSO
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSO::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::SSO
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSO::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

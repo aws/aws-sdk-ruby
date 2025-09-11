@@ -39,7 +39,7 @@ module Aws::SSMQuickSetup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMQuickSetup::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::SSMQuickSetup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMQuickSetup::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -65,7 +65,7 @@ module Aws::SSMQuickSetup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMQuickSetup::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::SSMQuickSetup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMQuickSetup::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::SSMQuickSetup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMQuickSetup::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::SSMQuickSetup
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSMQuickSetup::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

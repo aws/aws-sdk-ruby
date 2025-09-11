@@ -323,7 +323,6 @@ module Aws::ControlCatalog
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/objectives"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListObjectives.new
       end)
-
     end
 
     class << self

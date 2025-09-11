@@ -511,7 +511,6 @@ module Aws::CognitoSync
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}", "code" => 200}}
       end)
-
     end
 
     class << self

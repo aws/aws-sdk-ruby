@@ -2176,7 +2176,6 @@ module Aws::CleanRoomsML
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/configured-audience-model/{configuredAudienceModelArn}"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

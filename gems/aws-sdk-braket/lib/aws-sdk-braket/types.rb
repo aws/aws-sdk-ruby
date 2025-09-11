@@ -11,7 +11,8 @@ module Aws::Braket
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::Braket
       :action_type,
       :program_count,
       :executable_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +45,8 @@ module Aws::Braket
     class AlgorithmSpecification < Struct.new(
       :script_mode_config,
       :container_image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +60,8 @@ module Aws::Braket
     class Association < Struct.new(
       :arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +70,8 @@ module Aws::Braket
     #   @return [String]
     class CancelJobInput < Struct.new(
       :job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -79,7 +84,8 @@ module Aws::Braket
     class CancelJobOutput < Struct.new(
       :job_arn,
       :cancellation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,7 +98,8 @@ module Aws::Braket
     class CancelQuantumTaskInput < Struct.new(
       :quantum_task_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,7 +112,8 @@ module Aws::Braket
     class CancelQuantumTaskOutput < Struct.new(
       :quantum_task_arn,
       :cancellation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +122,8 @@ module Aws::Braket
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +133,8 @@ module Aws::Braket
     #   @return [String]
     class ContainerImage < Struct.new(
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +191,8 @@ module Aws::Braket
       :device_config,
       :tags,
       :associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,7 +201,8 @@ module Aws::Braket
     #   @return [String]
     class CreateJobOutput < Struct.new(
       :job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +247,8 @@ module Aws::Braket
       :tags,
       :job_token,
       :associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -244,7 +257,8 @@ module Aws::Braket
     #   @return [String]
     class CreateQuantumTaskOutput < Struct.new(
       :quantum_task_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +268,8 @@ module Aws::Braket
     #   @return [Types::S3DataSource]
     class DataSource < Struct.new(
       :s3_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +279,8 @@ module Aws::Braket
     #   @return [String]
     class DeviceConfig < Struct.new(
       :device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -273,7 +289,8 @@ module Aws::Braket
     #   @return [String]
     class DeviceOfflineException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -291,7 +308,8 @@ module Aws::Braket
       :queue,
       :queue_size,
       :queue_priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -300,7 +318,8 @@ module Aws::Braket
     #   @return [String]
     class DeviceRetiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +345,8 @@ module Aws::Braket
       :provider_name,
       :device_type,
       :device_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +355,8 @@ module Aws::Braket
     #   @return [String]
     class GetDeviceInput < Struct.new(
       :device_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +389,8 @@ module Aws::Braket
       :device_status,
       :device_capabilities,
       :device_queue_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +403,8 @@ module Aws::Braket
     class GetJobInput < Struct.new(
       :job_arn,
       :additional_attribute_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,7 +493,8 @@ module Aws::Braket
       :tags,
       :queue_info,
       :associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +507,8 @@ module Aws::Braket
     class GetQuantumTaskInput < Struct.new(
       :quantum_task_arn,
       :additional_attribute_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -552,7 +577,8 @@ module Aws::Braket
       :associations,
       :num_successful_shots,
       :action_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -570,7 +596,8 @@ module Aws::Braket
       :queue,
       :position,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +615,8 @@ module Aws::Braket
       :channel_name,
       :content_type,
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +634,8 @@ module Aws::Braket
       :instance_type,
       :volume_size_in_gb,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +644,8 @@ module Aws::Braket
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +659,8 @@ module Aws::Braket
     class JobCheckpointConfig < Struct.new(
       :local_path,
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +678,8 @@ module Aws::Braket
       :event_type,
       :time_of_event,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +693,8 @@ module Aws::Braket
     class JobOutputDataConfig < Struct.new(
       :kms_key_id,
       :s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +704,8 @@ module Aws::Braket
     #   @return [Integer]
     class JobStoppingCondition < Struct.new(
       :max_runtime_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -709,7 +743,8 @@ module Aws::Braket
       :started_at,
       :ended_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +753,8 @@ module Aws::Braket
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -727,7 +763,8 @@ module Aws::Braket
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +782,8 @@ module Aws::Braket
       :program_index,
       :inputs_index,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +805,8 @@ module Aws::Braket
       :position,
       :queue_priority,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,7 +848,8 @@ module Aws::Braket
       :created_at,
       :ended_at,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -818,7 +858,8 @@ module Aws::Braket
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +869,8 @@ module Aws::Braket
     #   @return [String]
     class S3DataSource < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -846,7 +888,8 @@ module Aws::Braket
       :entry_point,
       :s3_uri,
       :compression_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -860,7 +903,8 @@ module Aws::Braket
     class SearchDevicesFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,7 +921,8 @@ module Aws::Braket
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +935,8 @@ module Aws::Braket
     class SearchDevicesOutput < Struct.new(
       :devices,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +954,8 @@ module Aws::Braket
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +972,8 @@ module Aws::Braket
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,7 +986,8 @@ module Aws::Braket
     class SearchJobsOutput < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +1005,8 @@ module Aws::Braket
       :name,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -973,7 +1023,8 @@ module Aws::Braket
       :next_token,
       :max_results,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1037,8 @@ module Aws::Braket
     class SearchQuantumTasksOutput < Struct.new(
       :quantum_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1047,8 @@ module Aws::Braket
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1008,12 +1061,14 @@ module Aws::Braket
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1022,7 +1077,8 @@ module Aws::Braket
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,12 +1091,14 @@ module Aws::Braket
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1115,8 @@ module Aws::Braket
       :message,
       :reason,
       :program_set_validation_failures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

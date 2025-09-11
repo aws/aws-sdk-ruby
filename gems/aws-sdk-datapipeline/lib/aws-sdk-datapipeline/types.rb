@@ -20,13 +20,15 @@ module Aws::DataPipeline
       :pipeline_id,
       :parameter_values,
       :start_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ActivatePipeline.</p>
     class ActivatePipelineOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,13 +42,15 @@ module Aws::DataPipeline
     class AddTagsInput < Struct.new(
       :pipeline_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of AddTags.</p>
     class AddTagsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +82,8 @@ module Aws::DataPipeline
       :unique_id,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +93,8 @@ module Aws::DataPipeline
     #   @return [String]
     class CreatePipelineOutput < Struct.new(
       :pipeline_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,13 +111,15 @@ module Aws::DataPipeline
     class DeactivatePipelineInput < Struct.new(
       :pipeline_id,
       :cancel_active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DeactivatePipeline.</p>
     class DeactivatePipelineOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +129,8 @@ module Aws::DataPipeline
     #   @return [String]
     class DeletePipelineInput < Struct.new(
       :pipeline_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +154,8 @@ module Aws::DataPipeline
       :object_ids,
       :evaluate_expressions,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +174,8 @@ module Aws::DataPipeline
       :pipeline_objects,
       :marker,
       :has_more_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -180,7 +191,8 @@ module Aws::DataPipeline
     #   @return [Array<String>]
     class DescribePipelinesInput < Struct.new(
       :pipeline_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,7 +202,8 @@ module Aws::DataPipeline
     #   @return [Array<Types::PipelineDescription>]
     class DescribePipelinesOutput < Struct.new(
       :pipeline_description_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +221,8 @@ module Aws::DataPipeline
       :pipeline_id,
       :object_id,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +232,8 @@ module Aws::DataPipeline
     #   @return [String]
     class EvaluateExpressionOutput < Struct.new(
       :evaluated_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -236,7 +251,8 @@ module Aws::DataPipeline
       :key,
       :string_value,
       :ref_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +268,8 @@ module Aws::DataPipeline
     class GetPipelineDefinitionInput < Struct.new(
       :pipeline_id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +287,8 @@ module Aws::DataPipeline
       :pipeline_objects,
       :parameter_objects,
       :parameter_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -286,7 +304,8 @@ module Aws::DataPipeline
     class InstanceIdentity < Struct.new(
       :document,
       :signature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +315,8 @@ module Aws::DataPipeline
     #   @return [String]
     class InternalServiceError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +326,8 @@ module Aws::DataPipeline
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +339,8 @@ module Aws::DataPipeline
     #   @return [String]
     class ListPipelinesInput < Struct.new(
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +360,8 @@ module Aws::DataPipeline
       :pipeline_id_list,
       :marker,
       :has_more_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -385,7 +408,8 @@ module Aws::DataPipeline
     class Operator < Struct.new(
       :type,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -399,7 +423,8 @@ module Aws::DataPipeline
     class ParameterAttribute < Struct.new(
       :key,
       :string_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +438,8 @@ module Aws::DataPipeline
     class ParameterObject < Struct.new(
       :id,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +453,8 @@ module Aws::DataPipeline
     class ParameterValue < Struct.new(
       :id,
       :string_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -437,7 +464,8 @@ module Aws::DataPipeline
     #   @return [String]
     class PipelineDeletedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +492,8 @@ module Aws::DataPipeline
       :fields,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +507,8 @@ module Aws::DataPipeline
     class PipelineIdName < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +518,8 @@ module Aws::DataPipeline
     #   @return [String]
     class PipelineNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -506,7 +537,8 @@ module Aws::DataPipeline
       :id,
       :name,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +558,8 @@ module Aws::DataPipeline
       :worker_group,
       :hostname,
       :instance_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +571,8 @@ module Aws::DataPipeline
     #   @return [Types::TaskObject]
     class PollForTaskOutput < Struct.new(
       :task_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +594,8 @@ module Aws::DataPipeline
       :pipeline_objects,
       :parameter_objects,
       :parameter_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,7 +614,8 @@ module Aws::DataPipeline
       :validation_errors,
       :validation_warnings,
       :errored,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -594,7 +630,8 @@ module Aws::DataPipeline
     #   @return [Array<Types::Selector>]
     class Query < Struct.new(
       :selectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -625,7 +662,8 @@ module Aws::DataPipeline
       :sphere,
       :marker,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +682,8 @@ module Aws::DataPipeline
       :ids,
       :marker,
       :has_more_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -663,13 +702,15 @@ module Aws::DataPipeline
     class RemoveTagsInput < Struct.new(
       :pipeline_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of RemoveTags.</p>
     class RemoveTagsOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +724,8 @@ module Aws::DataPipeline
     class ReportTaskProgressInput < Struct.new(
       :task_id,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -693,7 +735,8 @@ module Aws::DataPipeline
     #   @return [Boolean]
     class ReportTaskProgressOutput < Struct.new(
       :canceled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -720,7 +763,8 @@ module Aws::DataPipeline
       :taskrunner_id,
       :worker_group,
       :hostname,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +774,8 @@ module Aws::DataPipeline
     #   @return [Boolean]
     class ReportTaskRunnerHeartbeatOutput < Struct.new(
       :terminate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -749,7 +794,8 @@ module Aws::DataPipeline
     class Selector < Struct.new(
       :field_name,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +814,8 @@ module Aws::DataPipeline
       :pipeline_id,
       :object_ids,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,13 +844,15 @@ module Aws::DataPipeline
       :error_id,
       :error_message,
       :error_stack_trace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of SetTaskStatus.</p>
     class SetTaskStatusOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +869,8 @@ module Aws::DataPipeline
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +880,8 @@ module Aws::DataPipeline
     #   @return [String]
     class TaskNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -852,7 +903,8 @@ module Aws::DataPipeline
       :pipeline_id,
       :attempt_id,
       :objects,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -874,7 +926,8 @@ module Aws::DataPipeline
       :pipeline_objects,
       :parameter_objects,
       :parameter_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +945,8 @@ module Aws::DataPipeline
       :validation_errors,
       :validation_warnings,
       :errored,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -911,7 +965,8 @@ module Aws::DataPipeline
     class ValidationError < Struct.new(
       :id,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +980,8 @@ module Aws::DataPipeline
     class ValidationWarning < Struct.new(
       :id,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -42,7 +42,7 @@ module Aws::ComputeOptimizer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComputeOptimizer::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::ComputeOptimizer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComputeOptimizer::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::ComputeOptimizer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComputeOptimizer::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::ComputeOptimizer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComputeOptimizer::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::ComputeOptimizer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComputeOptimizer::Types::MissingAuthenticationToken] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::ComputeOptimizer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComputeOptimizer::Types::OptInRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::ComputeOptimizer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComputeOptimizer::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -134,7 +134,7 @@ module Aws::ComputeOptimizer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComputeOptimizer::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -147,7 +147,7 @@ module Aws::ComputeOptimizer
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComputeOptimizer::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

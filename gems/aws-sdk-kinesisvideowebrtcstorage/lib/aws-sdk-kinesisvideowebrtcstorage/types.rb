@@ -11,7 +11,8 @@ module Aws::KinesisVideoWebRTCStorage
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::KinesisVideoWebRTCStorage
     #   @return [String]
     class ClientLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -31,7 +33,8 @@ module Aws::KinesisVideoWebRTCStorage
     #   @return [String]
     class InvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +51,8 @@ module Aws::KinesisVideoWebRTCStorage
     class JoinStorageSessionAsViewerInput < Struct.new(
       :channel_arn,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +63,8 @@ module Aws::KinesisVideoWebRTCStorage
     #   @return [String]
     class JoinStorageSessionInput < Struct.new(
       :channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +73,8 @@ module Aws::KinesisVideoWebRTCStorage
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

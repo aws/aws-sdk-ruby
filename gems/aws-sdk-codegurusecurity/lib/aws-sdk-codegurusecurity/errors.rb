@@ -39,7 +39,7 @@ module Aws::CodeGuruSecurity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeGuruSecurity::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The identifier for the error.</p>
@@ -68,7 +68,7 @@ module Aws::CodeGuruSecurity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeGuruSecurity::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The identifier for the error.</p>
@@ -97,7 +97,7 @@ module Aws::CodeGuruSecurity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeGuruSecurity::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The internal error encountered by the server.</p>
@@ -120,7 +120,7 @@ module Aws::CodeGuruSecurity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeGuruSecurity::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The identifier for the error.</p>
@@ -149,7 +149,7 @@ module Aws::CodeGuruSecurity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeGuruSecurity::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The identifier for the error.</p>
@@ -186,7 +186,7 @@ module Aws::CodeGuruSecurity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeGuruSecurity::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The identifier for the error.</p>

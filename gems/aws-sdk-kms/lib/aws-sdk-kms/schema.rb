@@ -1789,7 +1789,6 @@ module Aws::KMS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
         operation.traits = {}
       end)
-
     end
 
     class << self

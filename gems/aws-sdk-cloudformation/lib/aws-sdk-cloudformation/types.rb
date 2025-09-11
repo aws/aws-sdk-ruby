@@ -62,7 +62,8 @@ module Aws::CloudFormation
     class AccountGateResult < Struct.new(
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,17 +94,20 @@ module Aws::CloudFormation
     class AccountLimit < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ActivateOrganizationsAccessInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ActivateOrganizationsAccessOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +187,8 @@ module Aws::CloudFormation
       :execution_role_arn,
       :version_bump,
       :major_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -193,7 +198,8 @@ module Aws::CloudFormation
     #   @return [String]
     class ActivateTypeOutput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -202,7 +208,8 @@ module Aws::CloudFormation
     #   @return [String]
     class AlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +231,8 @@ module Aws::CloudFormation
     class AutoDeployment < Struct.new(
       :enabled,
       :retain_stacks_on_account_removal,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -243,7 +251,8 @@ module Aws::CloudFormation
       :error_code,
       :error_message,
       :type_configuration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +261,8 @@ module Aws::CloudFormation
     #   @return [Array<Types::TypeConfigurationIdentifier>]
     class BatchDescribeTypeConfigurationsInput < Struct.new(
       :type_configuration_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +282,8 @@ module Aws::CloudFormation
       :errors,
       :unprocessed_type_configurations,
       :type_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +293,8 @@ module Aws::CloudFormation
     #   @return [String]
     class CFNRegistryException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +323,8 @@ module Aws::CloudFormation
     class CancelUpdateStackInput < Struct.new(
       :stack_name,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +351,8 @@ module Aws::CloudFormation
       :type,
       :hook_invocation_count,
       :resource_change,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -422,7 +436,8 @@ module Aws::CloudFormation
       :type_version_id,
       :type_configuration_version_id,
       :target_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +455,8 @@ module Aws::CloudFormation
       :logical_resource_id,
       :resource_type,
       :resource_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +470,8 @@ module Aws::CloudFormation
     class ChangeSetHookTargetDetails < Struct.new(
       :target_type,
       :resource_target_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -464,7 +481,8 @@ module Aws::CloudFormation
     #   @return [String]
     class ChangeSetNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +546,8 @@ module Aws::CloudFormation
       :parent_change_set_id,
       :root_change_set_id,
       :import_existing_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +558,8 @@ module Aws::CloudFormation
     #   @return [String]
     class ConcurrentResourcesLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,13 +625,15 @@ module Aws::CloudFormation
       :role_arn,
       :resources_to_skip,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output for a <a>ContinueUpdateRollback</a> operation.</p>
     class ContinueUpdateRollbackOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +905,8 @@ module Aws::CloudFormation
       :include_nested_stacks,
       :on_stack_failure,
       :import_existing_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -897,7 +920,8 @@ module Aws::CloudFormation
     class CreateChangeSetOutput < Struct.new(
       :id,
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -923,7 +947,8 @@ module Aws::CloudFormation
       :generated_template_name,
       :stack_name,
       :template_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -932,7 +957,8 @@ module Aws::CloudFormation
     #   @return [String]
     class CreateGeneratedTemplateOutput < Struct.new(
       :generated_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1202,7 +1228,8 @@ module Aws::CloudFormation
       :client_request_token,
       :enable_termination_protection,
       :retain_except_on_create,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1298,7 +1325,8 @@ module Aws::CloudFormation
       :operation_preferences,
       :operation_id,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1307,7 +1335,8 @@ module Aws::CloudFormation
     #   @return [String]
     class CreateStackInstancesOutput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1317,7 +1346,8 @@ module Aws::CloudFormation
     #   @return [String]
     class CreateStackOutput < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1369,8 @@ module Aws::CloudFormation
       :enable_stack_creation,
       :resource_mappings,
       :stack_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1379,8 @@ module Aws::CloudFormation
     #   @return [String]
     class CreateStackRefactorOutput < Struct.new(
       :stack_refactor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1598,8 @@ module Aws::CloudFormation
       :call_as,
       :client_request_token,
       :managed_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1608,8 @@ module Aws::CloudFormation
     #   @return [String]
     class CreateStackSetOutput < Struct.new(
       :stack_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,17 +1618,20 @@ module Aws::CloudFormation
     #   @return [String]
     class CreatedButModifiedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeactivateOrganizationsAccessInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeactivateOrganizationsAccessOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1618,12 +1655,14 @@ module Aws::CloudFormation
       :type_name,
       :type,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeactivateTypeOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,13 +1677,15 @@ module Aws::CloudFormation
     class DeleteChangeSetInput < Struct.new(
       :change_set_name,
       :stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>DeleteChangeSet</a> action.</p>
     class DeleteChangeSetOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1653,7 +1694,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DeleteGeneratedTemplateInput < Struct.new(
       :generated_template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1713,7 +1755,8 @@ module Aws::CloudFormation
       :role_arn,
       :client_request_token,
       :deletion_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1783,7 +1826,8 @@ module Aws::CloudFormation
       :retain_stacks,
       :operation_id,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1836,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DeleteStackInstancesOutput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1822,12 +1867,14 @@ module Aws::CloudFormation
     class DeleteStackSetInput < Struct.new(
       :stack_set_name,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteStackSetOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1894,7 +1941,8 @@ module Aws::CloudFormation
       :accounts_url,
       :organizational_unit_ids,
       :account_filter_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1922,12 +1970,14 @@ module Aws::CloudFormation
       :type,
       :type_name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterTypeOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1937,7 +1987,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DescribeAccountLimitsInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2004,8 @@ module Aws::CloudFormation
     class DescribeAccountLimitsOutput < Struct.new(
       :account_limits,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1977,7 +2029,8 @@ module Aws::CloudFormation
       :stack_name,
       :next_token,
       :logical_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2010,7 +2063,8 @@ module Aws::CloudFormation
       :next_token,
       :stack_id,
       :stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2035,7 +2089,8 @@ module Aws::CloudFormation
       :stack_name,
       :next_token,
       :include_property_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2166,7 +2221,8 @@ module Aws::CloudFormation
       :root_change_set_id,
       :on_stack_failure,
       :import_existing_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2175,7 +2231,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DescribeGeneratedTemplateInput < Struct.new(
       :generated_template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2267,7 +2324,8 @@ module Aws::CloudFormation
       :stack_id,
       :template_configuration,
       :total_warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2291,7 +2349,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DescribeOrganizationsAccessInput < Struct.new(
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2300,7 +2359,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DescribeOrganizationsAccessOutput < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2312,7 +2372,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DescribePublisherInput < Struct.new(
       :publisher_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2335,7 +2396,8 @@ module Aws::CloudFormation
       :publisher_status,
       :identity_provider,
       :publisher_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2344,7 +2406,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DescribeResourceScanInput < Struct.new(
       :resource_scan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2437,7 +2500,8 @@ module Aws::CloudFormation
       :resources_scanned,
       :resources_read,
       :scan_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2449,7 +2513,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DescribeStackDriftDetectionStatusInput < Struct.new(
       :stack_drift_detection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2531,7 +2596,8 @@ module Aws::CloudFormation
       :detection_status_reason,
       :drifted_stack_resource_count,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2554,7 +2620,8 @@ module Aws::CloudFormation
     class DescribeStackEventsInput < Struct.new(
       :stack_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2569,7 +2636,8 @@ module Aws::CloudFormation
     class DescribeStackEventsOutput < Struct.new(
       :stack_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2607,7 +2675,8 @@ module Aws::CloudFormation
       :stack_instance_account,
       :stack_instance_region,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2616,7 +2685,8 @@ module Aws::CloudFormation
     #   @return [Types::StackInstance]
     class DescribeStackInstanceOutput < Struct.new(
       :stack_instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2625,7 +2695,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DescribeStackRefactorInput < Struct.new(
       :stack_refactor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2658,7 +2729,8 @@ module Aws::CloudFormation
       :execution_status_reason,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2709,7 +2781,8 @@ module Aws::CloudFormation
       :stack_resource_drift_status_filters,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2732,7 +2805,8 @@ module Aws::CloudFormation
     class DescribeStackResourceDriftsOutput < Struct.new(
       :stack_resource_drifts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2755,7 +2829,8 @@ module Aws::CloudFormation
     class DescribeStackResourceInput < Struct.new(
       :stack_name,
       :logical_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2766,7 +2841,8 @@ module Aws::CloudFormation
     #   @return [Types::StackResourceDetail]
     class DescribeStackResourceOutput < Struct.new(
       :stack_resource_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2802,7 +2878,8 @@ module Aws::CloudFormation
       :stack_name,
       :logical_resource_id,
       :physical_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2812,7 +2889,8 @@ module Aws::CloudFormation
     #   @return [Array<Types::StackResource>]
     class DescribeStackResourcesOutput < Struct.new(
       :stack_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2841,7 +2919,8 @@ module Aws::CloudFormation
     class DescribeStackSetInput < Struct.new(
       :stack_set_name,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2874,7 +2953,8 @@ module Aws::CloudFormation
       :stack_set_name,
       :operation_id,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2883,7 +2963,8 @@ module Aws::CloudFormation
     #   @return [Types::StackSetOperation]
     class DescribeStackSetOperationOutput < Struct.new(
       :stack_set_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2892,7 +2973,8 @@ module Aws::CloudFormation
     #   @return [Types::StackSet]
     class DescribeStackSetOutput < Struct.new(
       :stack_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2928,7 +3010,8 @@ module Aws::CloudFormation
     class DescribeStacksInput < Struct.new(
       :stack_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2943,7 +3026,8 @@ module Aws::CloudFormation
     class DescribeStacksOutput < Struct.new(
       :stacks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2983,7 +3067,8 @@ module Aws::CloudFormation
       :version_id,
       :publisher_id,
       :public_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3243,7 +3328,8 @@ module Aws::CloudFormation
       :latest_public_version,
       :is_activated,
       :auto_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3254,7 +3340,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DescribeTypeRegistrationInput < Struct.new(
       :registration_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3280,7 +3367,8 @@ module Aws::CloudFormation
       :description,
       :type_arn,
       :type_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3293,7 +3381,8 @@ module Aws::CloudFormation
     class DetectStackDriftInput < Struct.new(
       :stack_name,
       :logical_resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3305,7 +3394,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DetectStackDriftOutput < Struct.new(
       :stack_drift_detection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3318,7 +3408,8 @@ module Aws::CloudFormation
     class DetectStackResourceDriftInput < Struct.new(
       :stack_name,
       :logical_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3329,7 +3420,8 @@ module Aws::CloudFormation
     #   @return [Types::StackResourceDrift]
     class DetectStackResourceDriftOutput < Struct.new(
       :stack_resource_drift,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3369,7 +3461,8 @@ module Aws::CloudFormation
       :operation_preferences,
       :operation_id,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3380,7 +3473,8 @@ module Aws::CloudFormation
     #   @return [String]
     class DetectStackSetDriftOutput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3405,7 +3499,8 @@ module Aws::CloudFormation
       :template_body,
       :template_url,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3416,7 +3511,8 @@ module Aws::CloudFormation
     #   @return [String]
     class EstimateTemplateCostOutput < Struct.new(
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3468,13 +3564,15 @@ module Aws::CloudFormation
       :client_request_token,
       :disable_rollback,
       :retain_except_on_create,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>ExecuteChangeSet</a> action.</p>
     class ExecuteChangeSetOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3483,7 +3581,8 @@ module Aws::CloudFormation
     #   @return [String]
     class ExecuteStackRefactorInput < Struct.new(
       :stack_refactor_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3506,7 +3605,8 @@ module Aws::CloudFormation
       :exporting_stack_id,
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3515,7 +3615,8 @@ module Aws::CloudFormation
     #   @return [String]
     class GeneratedTemplateNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3544,7 +3645,8 @@ module Aws::CloudFormation
     class GetGeneratedTemplateInput < Struct.new(
       :format,
       :generated_template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3592,7 +3694,8 @@ module Aws::CloudFormation
     class GetGeneratedTemplateOutput < Struct.new(
       :status,
       :template_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3603,7 +3706,8 @@ module Aws::CloudFormation
     #   @return [String]
     class GetStackPolicyInput < Struct.new(
       :stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3614,7 +3718,8 @@ module Aws::CloudFormation
     #   @return [String]
     class GetStackPolicyOutput < Struct.new(
       :stack_policy_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3648,7 +3753,8 @@ module Aws::CloudFormation
       :stack_name,
       :change_set_name,
       :template_stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3666,7 +3772,8 @@ module Aws::CloudFormation
     class GetTemplateOutput < Struct.new(
       :template_body,
       :stages_available,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3729,7 +3836,8 @@ module Aws::CloudFormation
       :stack_set_name,
       :call_as,
       :template_summary_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3788,7 +3896,8 @@ module Aws::CloudFormation
       :declared_transforms,
       :resource_identifier_summaries,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3797,7 +3906,8 @@ module Aws::CloudFormation
     #   @return [String]
     class HookResultNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3879,7 +3989,8 @@ module Aws::CloudFormation
       :target_id,
       :type_arn,
       :hook_execution_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3928,7 +4039,8 @@ module Aws::CloudFormation
       :operation_preferences,
       :operation_id,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3937,7 +4049,8 @@ module Aws::CloudFormation
     #   @return [String]
     class ImportStacksToStackSetOutput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3946,7 +4059,8 @@ module Aws::CloudFormation
     #   @return [String]
     class InsufficientCapabilitiesException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3956,7 +4070,8 @@ module Aws::CloudFormation
     #   @return [String]
     class InvalidChangeSetStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3965,7 +4080,8 @@ module Aws::CloudFormation
     #   @return [String]
     class InvalidOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3975,7 +4091,8 @@ module Aws::CloudFormation
     #   @return [String]
     class InvalidStateTransitionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3986,7 +4103,8 @@ module Aws::CloudFormation
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4002,7 +4120,8 @@ module Aws::CloudFormation
     class ListChangeSetsInput < Struct.new(
       :stack_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4018,7 +4137,8 @@ module Aws::CloudFormation
     class ListChangeSetsOutput < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4028,7 +4148,8 @@ module Aws::CloudFormation
     #   @return [String]
     class ListExportsInput < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4042,7 +4163,8 @@ module Aws::CloudFormation
     class ListExportsOutput < Struct.new(
       :exports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4058,7 +4180,8 @@ module Aws::CloudFormation
     class ListGeneratedTemplatesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4074,7 +4197,8 @@ module Aws::CloudFormation
     class ListGeneratedTemplatesOutput < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4129,7 +4253,8 @@ module Aws::CloudFormation
       :type_arn,
       :status,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4152,7 +4277,8 @@ module Aws::CloudFormation
       :target_id,
       :hook_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4167,7 +4293,8 @@ module Aws::CloudFormation
     class ListImportsInput < Struct.new(
       :export_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4181,7 +4308,8 @@ module Aws::CloudFormation
     class ListImportsOutput < Struct.new(
       :imports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4206,7 +4334,8 @@ module Aws::CloudFormation
       :resources,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4224,7 +4353,8 @@ module Aws::CloudFormation
     class ListResourceScanRelatedResourcesOutput < Struct.new(
       :related_resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4262,7 +4392,8 @@ module Aws::CloudFormation
       :tag_value,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4279,7 +4410,8 @@ module Aws::CloudFormation
     class ListResourceScanResourcesOutput < Struct.new(
       :resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4299,7 +4431,8 @@ module Aws::CloudFormation
       :next_token,
       :max_results,
       :scan_type_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4315,7 +4448,8 @@ module Aws::CloudFormation
     class ListResourceScansOutput < Struct.new(
       :resource_scan_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4396,7 +4530,8 @@ module Aws::CloudFormation
       :stack_instance_region,
       :operation_id,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4414,7 +4549,8 @@ module Aws::CloudFormation
     class ListStackInstanceResourceDriftsOutput < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4470,7 +4606,8 @@ module Aws::CloudFormation
       :stack_instance_account,
       :stack_instance_region,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4487,7 +4624,8 @@ module Aws::CloudFormation
     class ListStackInstancesOutput < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4510,7 +4648,8 @@ module Aws::CloudFormation
       :stack_refactor_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4526,7 +4665,8 @@ module Aws::CloudFormation
     class ListStackRefactorActionsOutput < Struct.new(
       :stack_refactor_actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4550,7 +4690,8 @@ module Aws::CloudFormation
       :execution_status_filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4598,7 +4739,8 @@ module Aws::CloudFormation
     class ListStackRefactorsOutput < Struct.new(
       :stack_refactor_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4622,7 +4764,8 @@ module Aws::CloudFormation
     class ListStackResourcesInput < Struct.new(
       :stack_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4637,7 +4780,8 @@ module Aws::CloudFormation
     class ListStackResourcesOutput < Struct.new(
       :stack_resource_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4677,7 +4821,8 @@ module Aws::CloudFormation
       :next_token,
       :max_results,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4693,7 +4838,8 @@ module Aws::CloudFormation
     class ListStackSetAutoDeploymentTargetsOutput < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4746,7 +4892,8 @@ module Aws::CloudFormation
       :max_results,
       :call_as,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4764,7 +4911,8 @@ module Aws::CloudFormation
     class ListStackSetOperationResultsOutput < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4808,7 +4956,8 @@ module Aws::CloudFormation
       :next_token,
       :max_results,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4825,7 +4974,8 @@ module Aws::CloudFormation
     class ListStackSetOperationsOutput < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4869,7 +5019,8 @@ module Aws::CloudFormation
       :max_results,
       :status,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4886,7 +5037,8 @@ module Aws::CloudFormation
     class ListStackSetsOutput < Struct.new(
       :summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4902,7 +5054,8 @@ module Aws::CloudFormation
     class ListStacksInput < Struct.new(
       :next_token,
       :stack_status_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4918,7 +5071,8 @@ module Aws::CloudFormation
     class ListStacksOutput < Struct.new(
       :stack_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4961,7 +5115,8 @@ module Aws::CloudFormation
       :registration_status_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4979,7 +5134,8 @@ module Aws::CloudFormation
     class ListTypeRegistrationsOutput < Struct.new(
       :registration_token_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5042,7 +5198,8 @@ module Aws::CloudFormation
       :next_token,
       :deprecated_status,
       :publisher_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5059,7 +5216,8 @@ module Aws::CloudFormation
     class ListTypeVersionsOutput < Struct.new(
       :type_version_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5161,7 +5319,8 @@ module Aws::CloudFormation
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5178,7 +5337,8 @@ module Aws::CloudFormation
     class ListTypesOutput < Struct.new(
       :type_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5194,7 +5354,8 @@ module Aws::CloudFormation
     class LoggingConfig < Struct.new(
       :log_role_arn,
       :log_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5215,7 +5376,8 @@ module Aws::CloudFormation
     #   @return [Boolean]
     class ManagedExecution < Struct.new(
       :active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5249,7 +5411,8 @@ module Aws::CloudFormation
     class ModuleInfo < Struct.new(
       :type_hierarchy,
       :logical_id_hierarchy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5258,7 +5421,8 @@ module Aws::CloudFormation
     #   @return [String]
     class NameAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5267,7 +5431,8 @@ module Aws::CloudFormation
     #   @return [String]
     class OperationIdAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5277,7 +5442,8 @@ module Aws::CloudFormation
     #   @return [String]
     class OperationInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5286,7 +5452,8 @@ module Aws::CloudFormation
     #   @return [String]
     class OperationNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5300,7 +5467,8 @@ module Aws::CloudFormation
     class OperationResultFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5310,7 +5478,8 @@ module Aws::CloudFormation
     #   @return [String]
     class OperationStatusCheckFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5332,7 +5501,8 @@ module Aws::CloudFormation
       :output_value,
       :description,
       :export_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5359,7 +5529,8 @@ module Aws::CloudFormation
       :parameter_value,
       :use_previous_value,
       :resolved_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5371,7 +5542,8 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     class ParameterConstraints < Struct.new(
       :allowed_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5402,7 +5574,8 @@ module Aws::CloudFormation
       :no_echo,
       :description,
       :parameter_constraints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5419,7 +5592,8 @@ module Aws::CloudFormation
     class PhysicalResourceIdContextKeyValuePair < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5463,7 +5637,8 @@ module Aws::CloudFormation
       :expected_value,
       :actual_value,
       :difference_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5501,7 +5676,8 @@ module Aws::CloudFormation
       :arn,
       :type_name,
       :public_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5510,7 +5686,8 @@ module Aws::CloudFormation
     #   @return [String]
     class PublishTypeOutput < Struct.new(
       :public_type_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5550,12 +5727,14 @@ module Aws::CloudFormation
       :error_code,
       :resource_model,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RecordHandlerProgressOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5574,7 +5753,8 @@ module Aws::CloudFormation
     class RegisterPublisherInput < Struct.new(
       :accept_terms_and_conditions,
       :connection_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5583,7 +5763,8 @@ module Aws::CloudFormation
     #   @return [String]
     class RegisterPublisherOutput < Struct.new(
       :publisher_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5688,7 +5869,8 @@ module Aws::CloudFormation
       :logging_config,
       :execution_role_arn,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5699,7 +5881,8 @@ module Aws::CloudFormation
     #   @return [String]
     class RegisterTypeOutput < Struct.new(
       :registration_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5731,7 +5914,8 @@ module Aws::CloudFormation
       :original_type_name,
       :publisher_id,
       :supported_major_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5835,7 +6019,8 @@ module Aws::CloudFormation
       :module_info,
       :before_context,
       :after_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5908,7 +6093,8 @@ module Aws::CloudFormation
       :evaluation,
       :change_source,
       :causing_entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5937,7 +6123,8 @@ module Aws::CloudFormation
       :resource_type,
       :logical_resource_id,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6010,7 +6197,8 @@ module Aws::CloudFormation
       :resource_status,
       :resource_status_reason,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6034,7 +6222,8 @@ module Aws::CloudFormation
       :resource_type,
       :logical_resource_ids,
       :resource_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6048,7 +6237,8 @@ module Aws::CloudFormation
     class ResourceLocation < Struct.new(
       :stack_name,
       :logical_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6065,7 +6255,8 @@ module Aws::CloudFormation
     class ResourceMapping < Struct.new(
       :source,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6074,7 +6265,8 @@ module Aws::CloudFormation
     #   @return [String]
     class ResourceScanInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6095,7 +6287,8 @@ module Aws::CloudFormation
     #   @return [String]
     class ResourceScanLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6104,7 +6297,8 @@ module Aws::CloudFormation
     #   @return [String]
     class ResourceScanNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6174,7 +6368,8 @@ module Aws::CloudFormation
       :end_time,
       :percentage_completed,
       :scan_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6231,7 +6426,8 @@ module Aws::CloudFormation
       :before_value,
       :after_value,
       :attribute_change_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6254,7 +6450,8 @@ module Aws::CloudFormation
       :resource_type,
       :logical_resource_id,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6303,7 +6500,8 @@ module Aws::CloudFormation
     class RollbackConfiguration < Struct.new(
       :rollback_triggers,
       :monitoring_time_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6329,7 +6527,8 @@ module Aws::CloudFormation
       :role_arn,
       :client_request_token,
       :retain_except_on_create,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6338,7 +6537,8 @@ module Aws::CloudFormation
     #   @return [String]
     class RollbackStackOutput < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6356,7 +6556,8 @@ module Aws::CloudFormation
     class RollbackTrigger < Struct.new(
       :arn,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6373,7 +6574,8 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     class ScanFilter < Struct.new(
       :types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6401,7 +6603,8 @@ module Aws::CloudFormation
       :resource_type,
       :resource_identifier,
       :managed_by_stack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6424,7 +6627,8 @@ module Aws::CloudFormation
     class ScannedResourceIdentifier < Struct.new(
       :resource_type,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6449,7 +6653,8 @@ module Aws::CloudFormation
       :stack_name,
       :stack_policy_body,
       :stack_policy_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6489,7 +6694,8 @@ module Aws::CloudFormation
       :configuration_alias,
       :type_name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6501,7 +6707,8 @@ module Aws::CloudFormation
     #   @return [String]
     class SetTypeConfigurationOutput < Struct.new(
       :configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6530,12 +6737,14 @@ module Aws::CloudFormation
       :type,
       :type_name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class SetTypeDefaultVersionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6563,7 +6772,8 @@ module Aws::CloudFormation
       :logical_resource_id,
       :unique_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6715,7 +6925,8 @@ module Aws::CloudFormation
       :retain_except_on_create,
       :deletion_mode,
       :detailed_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6733,7 +6944,8 @@ module Aws::CloudFormation
       :stack_name,
       :template_body,
       :template_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6774,7 +6986,8 @@ module Aws::CloudFormation
     class StackDriftInformation < Struct.new(
       :stack_drift_status,
       :last_check_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6815,7 +7028,8 @@ module Aws::CloudFormation
     class StackDriftInformationSummary < Struct.new(
       :stack_drift_status,
       :last_check_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6932,7 +7146,8 @@ module Aws::CloudFormation
       :hook_invocation_id,
       :hook_failure_mode,
       :detailed_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7054,7 +7269,8 @@ module Aws::CloudFormation
       :drift_status,
       :last_drift_check_timestamp,
       :last_operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7113,7 +7329,8 @@ module Aws::CloudFormation
     #   @return [String]
     class StackInstanceComprehensiveStatus < Struct.new(
       :detailed_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7127,7 +7344,8 @@ module Aws::CloudFormation
     class StackInstanceFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7136,7 +7354,8 @@ module Aws::CloudFormation
     #   @return [String]
     class StackInstanceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7203,7 +7422,8 @@ module Aws::CloudFormation
       :property_differences,
       :stack_resource_drift_status,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7315,7 +7535,8 @@ module Aws::CloudFormation
       :drift_status,
       :last_drift_check_timestamp,
       :last_operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7324,7 +7545,8 @@ module Aws::CloudFormation
     #   @return [String]
     class StackNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7396,7 +7618,8 @@ module Aws::CloudFormation
       :tag_resources,
       :untag_resources,
       :resource_mapping,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7405,7 +7628,8 @@ module Aws::CloudFormation
     #   @return [String]
     class StackRefactorNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7435,7 +7659,8 @@ module Aws::CloudFormation
       :execution_status_reason,
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7491,7 +7716,8 @@ module Aws::CloudFormation
       :description,
       :drift_information,
       :module_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7553,7 +7779,8 @@ module Aws::CloudFormation
       :metadata,
       :drift_information,
       :module_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7655,7 +7882,8 @@ module Aws::CloudFormation
       :timestamp,
       :module_info,
       :drift_status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7695,7 +7923,8 @@ module Aws::CloudFormation
     class StackResourceDriftInformation < Struct.new(
       :stack_resource_drift_status,
       :last_check_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7737,7 +7966,8 @@ module Aws::CloudFormation
     class StackResourceDriftInformationSummary < Struct.new(
       :stack_resource_drift_status,
       :last_check_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7781,7 +8011,8 @@ module Aws::CloudFormation
       :resource_status_reason,
       :drift_information,
       :module_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7889,7 +8120,8 @@ module Aws::CloudFormation
       :organizational_unit_ids,
       :managed_execution,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7904,7 +8136,8 @@ module Aws::CloudFormation
     class StackSetAutoDeploymentTargetSummary < Struct.new(
       :organizational_unit_id,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8013,7 +8246,8 @@ module Aws::CloudFormation
       :in_sync_stack_instances_count,
       :in_progress_stack_instances_count,
       :failed_stack_instances_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8023,7 +8257,8 @@ module Aws::CloudFormation
     #   @return [String]
     class StackSetNotEmptyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8032,7 +8267,8 @@ module Aws::CloudFormation
     #   @return [String]
     class StackSetNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8151,7 +8387,8 @@ module Aws::CloudFormation
       :stack_set_drift_detection_details,
       :status_reason,
       :status_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8243,7 +8480,8 @@ module Aws::CloudFormation
       :max_concurrent_count,
       :max_concurrent_percentage,
       :concurrency_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8306,7 +8544,8 @@ module Aws::CloudFormation
       :status_reason,
       :account_gate_result,
       :organizational_unit_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8316,7 +8555,8 @@ module Aws::CloudFormation
     #   @return [Integer]
     class StackSetOperationStatusDetails < Struct.new(
       :failed_stack_instances_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8399,7 +8639,8 @@ module Aws::CloudFormation
       :status_reason,
       :status_details,
       :operation_preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8480,7 +8721,8 @@ module Aws::CloudFormation
       :drift_status,
       :last_drift_check_timestamp,
       :managed_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8540,7 +8782,8 @@ module Aws::CloudFormation
       :parent_id,
       :root_id,
       :drift_information,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8549,7 +8792,8 @@ module Aws::CloudFormation
     #   @return [String]
     class StaleRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8564,7 +8808,8 @@ module Aws::CloudFormation
     class StartResourceScanInput < Struct.new(
       :client_request_token,
       :scan_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8577,7 +8822,8 @@ module Aws::CloudFormation
     #   @return [String]
     class StartResourceScanOutput < Struct.new(
       :resource_scan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8609,12 +8855,14 @@ module Aws::CloudFormation
       :stack_set_name,
       :operation_id,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopStackSetOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8634,7 +8882,8 @@ module Aws::CloudFormation
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8675,7 +8924,8 @@ module Aws::CloudFormation
     class TemplateConfiguration < Struct.new(
       :deletion_policy,
       :update_replace_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8698,7 +8948,8 @@ module Aws::CloudFormation
       :default_value,
       :no_echo,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8720,7 +8971,8 @@ module Aws::CloudFormation
       :resources_failed,
       :resources_processing,
       :resources_pending,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8794,7 +9046,8 @@ module Aws::CloudFormation
       :creation_time,
       :last_updated_time,
       :number_of_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8806,7 +9059,8 @@ module Aws::CloudFormation
     #   @return [Boolean]
     class TemplateSummaryConfig < Struct.new(
       :treat_unrecognized_resource_types_as_warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8859,7 +9113,8 @@ module Aws::CloudFormation
       :type_name,
       :version_id,
       :log_delivery_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8868,7 +9123,8 @@ module Aws::CloudFormation
     #   @return [String]
     class TestTypeOutput < Struct.new(
       :type_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8877,7 +9133,8 @@ module Aws::CloudFormation
     #   @return [String]
     class TokenAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8923,7 +9180,8 @@ module Aws::CloudFormation
       :type_arn,
       :type_name,
       :is_default_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8953,7 +9211,8 @@ module Aws::CloudFormation
       :type_configuration_arn,
       :type,
       :type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8963,7 +9222,8 @@ module Aws::CloudFormation
     #   @return [String]
     class TypeConfigurationNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9012,7 +9272,8 @@ module Aws::CloudFormation
       :category,
       :publisher_id,
       :type_name_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9022,7 +9283,8 @@ module Aws::CloudFormation
     #   @return [String]
     class TypeNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9119,7 +9381,8 @@ module Aws::CloudFormation
       :publisher_identity,
       :publisher_name,
       :is_activated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9168,7 +9431,8 @@ module Aws::CloudFormation
       :time_created,
       :description,
       :public_version_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9201,7 +9465,8 @@ module Aws::CloudFormation
       :remove_resources,
       :refresh_all_resources,
       :template_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9214,7 +9479,8 @@ module Aws::CloudFormation
     #   @return [String]
     class UpdateGeneratedTemplateOutput < Struct.new(
       :generated_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9481,7 +9747,8 @@ module Aws::CloudFormation
       :disable_rollback,
       :client_request_token,
       :retain_except_on_create,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9584,7 +9851,8 @@ module Aws::CloudFormation
       :operation_preferences,
       :operation_id,
       :call_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9593,7 +9861,8 @@ module Aws::CloudFormation
     #   @return [String]
     class UpdateStackInstancesOutput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9603,7 +9872,8 @@ module Aws::CloudFormation
     #   @return [String]
     class UpdateStackOutput < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9898,7 +10168,8 @@ module Aws::CloudFormation
       :regions,
       :call_as,
       :managed_execution,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9907,7 +10178,8 @@ module Aws::CloudFormation
     #   @return [String]
     class UpdateStackSetOutput < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9921,7 +10193,8 @@ module Aws::CloudFormation
     class UpdateTerminationProtectionInput < Struct.new(
       :enable_termination_protection,
       :stack_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9930,7 +10203,8 @@ module Aws::CloudFormation
     #   @return [String]
     class UpdateTerminationProtectionOutput < Struct.new(
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9951,7 +10225,8 @@ module Aws::CloudFormation
     class ValidateTemplateInput < Struct.new(
       :template_body,
       :template_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9982,7 +10257,8 @@ module Aws::CloudFormation
       :capabilities,
       :capabilities_reason,
       :declared_transforms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10024,7 +10300,8 @@ module Aws::CloudFormation
     class WarningDetail < Struct.new(
       :type,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10043,7 +10320,8 @@ module Aws::CloudFormation
       :property_path,
       :required,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10056,7 +10334,8 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     class Warnings < Struct.new(
       :unrecognized_resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

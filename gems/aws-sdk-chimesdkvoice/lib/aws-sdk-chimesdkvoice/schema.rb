@@ -2646,7 +2646,6 @@ module Aws::ChimeSDKVoice
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/emergency-calling/address", "code" => 202}}
       end)
-
     end
 
     class << self

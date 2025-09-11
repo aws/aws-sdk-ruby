@@ -335,7 +335,6 @@ module Aws::Rbin
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/rules/{Identifier}", "code" => 200}}
       end)
-
     end
 
     class << self

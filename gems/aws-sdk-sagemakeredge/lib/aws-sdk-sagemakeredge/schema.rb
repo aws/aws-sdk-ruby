@@ -148,7 +148,6 @@ module Aws::SagemakerEdge
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/SendHeartbeat", "code" => 200}}
       end)
-
     end
 
     class << self

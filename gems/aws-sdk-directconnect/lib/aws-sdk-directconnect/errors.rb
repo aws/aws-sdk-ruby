@@ -37,7 +37,7 @@ module Aws::DirectConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectConnect::Types::DirectConnectClientException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -50,7 +50,7 @@ module Aws::DirectConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectConnect::Types::DirectConnectServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -63,7 +63,7 @@ module Aws::DirectConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectConnect::Types::DuplicateTagKeysException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::DirectConnect
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectConnect::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

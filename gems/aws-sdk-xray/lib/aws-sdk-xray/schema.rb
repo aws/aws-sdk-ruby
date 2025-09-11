@@ -1358,7 +1358,6 @@ module Aws::XRay
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottledException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateTraceSegmentDestination", "code" => 200}}
       end)
-
     end
 
     class << self

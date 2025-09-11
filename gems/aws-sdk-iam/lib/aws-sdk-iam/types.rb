@@ -52,7 +52,8 @@ module Aws::IAM
       :entity_path,
       :last_authenticated_time,
       :total_authenticated_entities,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +87,8 @@ module Aws::IAM
       :status,
       :secret_access_key,
       :create_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +151,8 @@ module Aws::IAM
       :last_used_date,
       :service_name,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +177,8 @@ module Aws::IAM
       :access_key_id,
       :status,
       :create_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +189,8 @@ module Aws::IAM
     #   @return [String]
     class AccountNotManagementOrDelegatedAdministratorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +205,8 @@ module Aws::IAM
     class AddClientIDToOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +223,8 @@ module Aws::IAM
     class AddRoleToInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       :role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +241,8 @@ module Aws::IAM
     class AddUserToGroupRequest < Struct.new(
       :group_name,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -250,7 +258,8 @@ module Aws::IAM
     class AttachGroupPolicyRequest < Struct.new(
       :group_name,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -266,7 +275,8 @@ module Aws::IAM
     class AttachRolePolicyRequest < Struct.new(
       :role_name,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +292,8 @@ module Aws::IAM
     class AttachUserPolicyRequest < Struct.new(
       :user_name,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +313,8 @@ module Aws::IAM
     class AttachedPermissionsBoundary < Struct.new(
       :permissions_boundary_type,
       :permissions_boundary_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -322,7 +334,8 @@ module Aws::IAM
     class AttachedPolicy < Struct.new(
       :policy_name,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +345,8 @@ module Aws::IAM
     #   @return [String]
     class CallerIsNotManagementAccountException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +367,8 @@ module Aws::IAM
     class ChangePasswordRequest < Struct.new(
       :old_password,
       :new_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +378,8 @@ module Aws::IAM
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -390,7 +406,8 @@ module Aws::IAM
       :context_key_name,
       :context_key_values,
       :context_key_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +418,8 @@ module Aws::IAM
     #   @return [String]
     class CreateAccessKeyRequest < Struct.new(
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +430,8 @@ module Aws::IAM
     #   @return [Types::AccessKey]
     class CreateAccessKeyResponse < Struct.new(
       :access_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +443,8 @@ module Aws::IAM
     #   @return [String]
     class CreateAccountAliasRequest < Struct.new(
       :account_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +466,8 @@ module Aws::IAM
     class CreateGroupRequest < Struct.new(
       :path,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +477,8 @@ module Aws::IAM
     #   @return [Types::Group]
     class CreateGroupResponse < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +509,8 @@ module Aws::IAM
       :instance_profile_name,
       :path,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +521,8 @@ module Aws::IAM
     #   @return [Types::InstanceProfile]
     class CreateInstanceProfileResponse < Struct.new(
       :instance_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +553,8 @@ module Aws::IAM
       :user_name,
       :password,
       :password_reset_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +565,8 @@ module Aws::IAM
     #   @return [Types::LoginProfile]
     class CreateLoginProfileResponse < Struct.new(
       :login_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +627,8 @@ module Aws::IAM
       :client_id_list,
       :thumbprint_list,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +645,8 @@ module Aws::IAM
     class CreateOpenIDConnectProviderResponse < Struct.new(
       :open_id_connect_provider_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +718,8 @@ module Aws::IAM
       :policy_document,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +729,8 @@ module Aws::IAM
     #   @return [Types::Policy]
     class CreatePolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +776,8 @@ module Aws::IAM
       :policy_arn,
       :policy_document,
       :set_as_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +788,8 @@ module Aws::IAM
     #   @return [Types::PolicyVersion]
     class CreatePolicyVersionResponse < Struct.new(
       :policy_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -849,7 +881,8 @@ module Aws::IAM
       :max_session_duration,
       :permissions_boundary,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +892,8 @@ module Aws::IAM
     #   @return [Types::Role]
     class CreateRoleResponse < Struct.new(
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -901,7 +935,8 @@ module Aws::IAM
       :tags,
       :assertion_encryption_mode,
       :add_private_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +953,8 @@ module Aws::IAM
     class CreateSAMLProviderResponse < Struct.new(
       :saml_provider_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,7 +986,8 @@ module Aws::IAM
       :aws_service_name,
       :description,
       :custom_suffix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,7 +997,8 @@ module Aws::IAM
     #   @return [Types::Role]
     class CreateServiceLinkedRoleResponse < Struct.new(
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1023,8 @@ module Aws::IAM
       :user_name,
       :service_name,
       :credential_age_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1038,8 @@ module Aws::IAM
     #   @return [Types::ServiceSpecificCredential]
     class CreateServiceSpecificCredentialResponse < Struct.new(
       :service_specific_credential,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1043,7 +1083,8 @@ module Aws::IAM
       :user_name,
       :permissions_boundary,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1053,7 +1094,8 @@ module Aws::IAM
     #   @return [Types::User]
     class CreateUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1127,8 @@ module Aws::IAM
       :path,
       :virtual_mfa_device_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1139,8 @@ module Aws::IAM
     #   @return [Types::VirtualMFADevice]
     class CreateVirtualMFADeviceResponse < Struct.new(
       :virtual_mfa_device,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1108,7 +1152,8 @@ module Aws::IAM
     #   @return [String]
     class CredentialReportExpiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1118,7 +1163,8 @@ module Aws::IAM
     #   @return [String]
     class CredentialReportNotPresentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1173,8 @@ module Aws::IAM
     #   @return [String]
     class CredentialReportNotReadyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1196,8 @@ module Aws::IAM
     class DeactivateMFADeviceRequest < Struct.new(
       :user_name,
       :serial_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1167,7 +1215,8 @@ module Aws::IAM
     class DeleteAccessKeyRequest < Struct.new(
       :user_name,
       :access_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1228,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteAccountAliasRequest < Struct.new(
       :account_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1189,7 +1239,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1207,7 +1258,8 @@ module Aws::IAM
     class DeleteGroupPolicyRequest < Struct.new(
       :group_name,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1270,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1229,7 +1282,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteInstanceProfileRequest < Struct.new(
       :instance_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1297,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteLoginProfileRequest < Struct.new(
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1253,7 +1308,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1319,8 @@ module Aws::IAM
     #   @return [String]
     class DeletePolicyRequest < Struct.new(
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,7 +1340,8 @@ module Aws::IAM
     class DeletePolicyVersionRequest < Struct.new(
       :policy_arn,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1351,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteRolePermissionsBoundaryRequest < Struct.new(
       :role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,7 +1370,8 @@ module Aws::IAM
     class DeleteRolePolicyRequest < Struct.new(
       :role_name,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1322,7 +1382,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteRoleRequest < Struct.new(
       :role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1392,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteSAMLProviderRequest < Struct.new(
       :saml_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1410,8 @@ module Aws::IAM
     class DeleteSSHPublicKeyRequest < Struct.new(
       :user_name,
       :ssh_public_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1422,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteServerCertificateRequest < Struct.new(
       :server_certificate_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1432,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteServiceLinkedRoleRequest < Struct.new(
       :role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1379,7 +1444,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteServiceLinkedRoleResponse < Struct.new(
       :deletion_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1465,8 @@ module Aws::IAM
     class DeleteServiceSpecificCredentialRequest < Struct.new(
       :user_name,
       :service_specific_credential_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1416,7 +1483,8 @@ module Aws::IAM
     class DeleteSigningCertificateRequest < Struct.new(
       :user_name,
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,7 +1494,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteUserPermissionsBoundaryRequest < Struct.new(
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1444,7 +1513,8 @@ module Aws::IAM
     class DeleteUserPolicyRequest < Struct.new(
       :user_name,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1455,7 +1525,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteUserRequest < Struct.new(
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1468,7 +1539,8 @@ module Aws::IAM
     #   @return [String]
     class DeleteVirtualMFADeviceRequest < Struct.new(
       :serial_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1488,7 +1560,8 @@ module Aws::IAM
     class DeletionTaskFailureReasonType < Struct.new(
       :reason,
       :role_usage_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1504,7 +1577,8 @@ module Aws::IAM
     class DetachGroupPolicyRequest < Struct.new(
       :group_name,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1520,7 +1594,8 @@ module Aws::IAM
     class DetachRolePolicyRequest < Struct.new(
       :role_name,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1536,12 +1611,14 @@ module Aws::IAM
     class DetachUserPolicyRequest < Struct.new(
       :user_name,
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableOrganizationsRootCredentialsManagementRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,12 +1632,14 @@ module Aws::IAM
     class DisableOrganizationsRootCredentialsManagementResponse < Struct.new(
       :organization_id,
       :enabled_features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableOrganizationsRootSessionsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1574,7 +1653,8 @@ module Aws::IAM
     class DisableOrganizationsRootSessionsResponse < Struct.new(
       :organization_id,
       :enabled_features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,7 +1664,8 @@ module Aws::IAM
     #   @return [String]
     class DuplicateCertificateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1594,7 +1675,8 @@ module Aws::IAM
     #   @return [String]
     class DuplicateSSHPublicKeyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,12 +1721,14 @@ module Aws::IAM
       :serial_number,
       :authentication_code1,
       :authentication_code2,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableOrganizationsRootCredentialsManagementRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,12 +1741,14 @@ module Aws::IAM
     class EnableOrganizationsRootCredentialsManagementResponse < Struct.new(
       :organization_id,
       :enabled_features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableOrganizationsRootSessionsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1761,8 @@ module Aws::IAM
     class EnableOrganizationsRootSessionsResponse < Struct.new(
       :organization_id,
       :enabled_features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1772,8 @@ module Aws::IAM
     #   @return [String]
     class EntityAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1706,7 +1794,8 @@ module Aws::IAM
     class EntityDetails < Struct.new(
       :entity_info,
       :last_authenticated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1737,7 +1826,8 @@ module Aws::IAM
       :type,
       :id,
       :path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1749,7 +1839,8 @@ module Aws::IAM
     #   @return [String]
     class EntityTemporarilyUnmodifiableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1855,8 @@ module Aws::IAM
     class ErrorDetails < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1835,7 +1927,8 @@ module Aws::IAM
       :permissions_boundary_decision_detail,
       :eval_decision_details,
       :resource_specific_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1942,8 @@ module Aws::IAM
     class GenerateCredentialReportResponse < Struct.new(
       :state,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1964,8 @@ module Aws::IAM
     class GenerateOrganizationsAccessReportRequest < Struct.new(
       :entity_path,
       :organizations_policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1879,7 +1974,8 @@ module Aws::IAM
     #   @return [String]
     class GenerateOrganizationsAccessReportResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1898,7 +1994,8 @@ module Aws::IAM
     class GenerateServiceLastAccessedDetailsRequest < Struct.new(
       :arn,
       :granularity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1910,7 +2007,8 @@ module Aws::IAM
     #   @return [String]
     class GenerateServiceLastAccessedDetailsResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1921,7 +2019,8 @@ module Aws::IAM
     #   @return [String]
     class GetAccessKeyLastUsedRequest < Struct.new(
       :access_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1938,7 +2037,8 @@ module Aws::IAM
     class GetAccessKeyLastUsedResponse < Struct.new(
       :user_name,
       :access_key_last_used,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1969,7 +2069,8 @@ module Aws::IAM
       :filter,
       :max_items,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2006,7 +2107,8 @@ module Aws::IAM
       :policies,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2021,7 +2123,8 @@ module Aws::IAM
     #   @return [Types::PasswordPolicy]
     class GetAccountPasswordPolicyResponse < Struct.new(
       :password_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2033,7 +2136,8 @@ module Aws::IAM
     #   @return [Hash<String, Integer>]
     class GetAccountSummaryResponse < Struct.new(
       :summary_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2043,7 +2147,8 @@ module Aws::IAM
     #   @return [Array<String>]
     class GetContextKeysForCustomPolicyOutput < Struct.new(
       :context_key_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2070,7 +2175,8 @@ module Aws::IAM
     #   @return [Array<String>]
     class GetContextKeysForCustomPolicyRequest < Struct.new(
       :policy_input_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2080,7 +2186,8 @@ module Aws::IAM
     #   @return [Array<String>]
     class GetContextKeysForPrincipalPolicyOutput < Struct.new(
       :context_key_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2117,7 +2224,8 @@ module Aws::IAM
     class GetContextKeysForPrincipalPolicyRequest < Struct.new(
       :policy_source_arn,
       :policy_input_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2136,7 +2244,8 @@ module Aws::IAM
       :content,
       :report_format,
       :generated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2153,7 +2262,8 @@ module Aws::IAM
     class GetGroupPolicyRequest < Struct.new(
       :group_name,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2175,7 +2285,8 @@ module Aws::IAM
       :group_name,
       :policy_name,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2204,7 +2315,8 @@ module Aws::IAM
       :group_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2233,7 +2345,8 @@ module Aws::IAM
       :users,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2249,7 +2362,8 @@ module Aws::IAM
     #   @return [String]
     class GetInstanceProfileRequest < Struct.new(
       :instance_profile_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2260,7 +2374,8 @@ module Aws::IAM
     #   @return [Types::InstanceProfile]
     class GetInstanceProfileResponse < Struct.new(
       :instance_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2274,7 +2389,8 @@ module Aws::IAM
     #   @return [String]
     class GetLoginProfileRequest < Struct.new(
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2286,7 +2402,8 @@ module Aws::IAM
     #   @return [Types::LoginProfile]
     class GetLoginProfileResponse < Struct.new(
       :login_profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2300,7 +2417,8 @@ module Aws::IAM
     class GetMFADeviceRequest < Struct.new(
       :serial_number,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2324,7 +2442,8 @@ module Aws::IAM
       :serial_number,
       :enable_date,
       :certifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2335,7 +2454,8 @@ module Aws::IAM
     #   @return [String]
     class GetOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2367,7 +2487,8 @@ module Aws::IAM
       :thumbprint_list,
       :create_date,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2400,7 +2521,8 @@ module Aws::IAM
       :max_items,
       :marker,
       :sort_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2456,7 +2578,8 @@ module Aws::IAM
       :is_truncated,
       :marker,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2472,7 +2595,8 @@ module Aws::IAM
     #   @return [String]
     class GetPolicyRequest < Struct.new(
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2482,7 +2606,8 @@ module Aws::IAM
     #   @return [Types::Policy]
     class GetPolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2500,7 +2625,8 @@ module Aws::IAM
     class GetPolicyVersionRequest < Struct.new(
       :policy_arn,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2511,7 +2637,8 @@ module Aws::IAM
     #   @return [Types::PolicyVersion]
     class GetPolicyVersionResponse < Struct.new(
       :policy_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2528,7 +2655,8 @@ module Aws::IAM
     class GetRolePolicyRequest < Struct.new(
       :role_name,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2549,7 +2677,8 @@ module Aws::IAM
       :role_name,
       :policy_name,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2560,7 +2689,8 @@ module Aws::IAM
     #   @return [String]
     class GetRoleRequest < Struct.new(
       :role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2570,7 +2700,8 @@ module Aws::IAM
     #   @return [Types::Role]
     class GetRoleResponse < Struct.new(
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2581,7 +2712,8 @@ module Aws::IAM
     #   @return [String]
     class GetSAMLProviderRequest < Struct.new(
       :saml_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2618,7 +2750,8 @@ module Aws::IAM
       :tags,
       :assertion_encryption_mode,
       :private_key_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2641,7 +2774,8 @@ module Aws::IAM
       :user_name,
       :ssh_public_key_id,
       :encoding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2652,7 +2786,8 @@ module Aws::IAM
     #   @return [Types::SSHPublicKey]
     class GetSSHPublicKeyResponse < Struct.new(
       :ssh_public_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2663,7 +2798,8 @@ module Aws::IAM
     #   @return [String]
     class GetServerCertificateRequest < Struct.new(
       :server_certificate_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2674,7 +2810,8 @@ module Aws::IAM
     #   @return [Types::ServerCertificate]
     class GetServerCertificateResponse < Struct.new(
       :server_certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2704,7 +2841,8 @@ module Aws::IAM
       :job_id,
       :max_items,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2755,7 +2893,8 @@ module Aws::IAM
       :is_truncated,
       :marker,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2799,7 +2938,8 @@ module Aws::IAM
       :service_namespace,
       :max_items,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2845,7 +2985,8 @@ module Aws::IAM
       :is_truncated,
       :marker,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2860,7 +3001,8 @@ module Aws::IAM
     #   @return [String]
     class GetServiceLinkedRoleDeletionStatusRequest < Struct.new(
       :deletion_task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2873,7 +3015,8 @@ module Aws::IAM
     class GetServiceLinkedRoleDeletionStatusResponse < Struct.new(
       :status,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2890,7 +3033,8 @@ module Aws::IAM
     class GetUserPolicyRequest < Struct.new(
       :user_name,
       :policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2911,7 +3055,8 @@ module Aws::IAM
       :user_name,
       :policy_name,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2923,7 +3068,8 @@ module Aws::IAM
     #   @return [String]
     class GetUserRequest < Struct.new(
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2948,7 +3094,8 @@ module Aws::IAM
     #   @return [Types::User]
     class GetUserResponse < Struct.new(
       :user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2998,7 +3145,8 @@ module Aws::IAM
       :group_id,
       :arn,
       :create_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3039,7 +3187,8 @@ module Aws::IAM
       :create_date,
       :group_policy_list,
       :attached_managed_policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3101,7 +3250,8 @@ module Aws::IAM
       :create_date,
       :roles,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3111,7 +3261,8 @@ module Aws::IAM
     #   @return [String]
     class InvalidAuthenticationCodeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3120,7 +3271,8 @@ module Aws::IAM
     #   @return [String]
     class InvalidCertificateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3130,7 +3282,8 @@ module Aws::IAM
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3139,7 +3292,8 @@ module Aws::IAM
     #   @return [String]
     class InvalidPublicKeyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3149,7 +3303,8 @@ module Aws::IAM
     #   @return [String]
     class InvalidUserTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3159,7 +3314,8 @@ module Aws::IAM
     #   @return [String]
     class KeyPairMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3169,7 +3325,8 @@ module Aws::IAM
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3198,7 +3355,8 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3224,7 +3382,8 @@ module Aws::IAM
       :access_key_metadata,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3252,7 +3411,8 @@ module Aws::IAM
     class ListAccountAliasesRequest < Struct.new(
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3279,7 +3439,8 @@ module Aws::IAM
       :account_aliases,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3322,7 +3483,8 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3347,7 +3509,8 @@ module Aws::IAM
       :attached_policies,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3390,7 +3553,8 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3415,7 +3579,8 @@ module Aws::IAM
       :attached_policies,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3458,7 +3623,8 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3483,7 +3649,8 @@ module Aws::IAM
       :attached_policies,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3543,7 +3710,8 @@ module Aws::IAM
       :policy_usage_filter,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3577,7 +3745,8 @@ module Aws::IAM
       :policy_roles,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3611,7 +3780,8 @@ module Aws::IAM
       :group_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3639,7 +3809,8 @@ module Aws::IAM
       :policy_names,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3673,7 +3844,8 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3699,7 +3871,8 @@ module Aws::IAM
       :groups,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3738,7 +3911,8 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3763,7 +3937,8 @@ module Aws::IAM
       :groups,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3797,7 +3972,8 @@ module Aws::IAM
       :instance_profile_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3821,7 +3997,8 @@ module Aws::IAM
       :tags,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3855,7 +4032,8 @@ module Aws::IAM
       :role_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3880,7 +4058,8 @@ module Aws::IAM
       :instance_profiles,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3919,7 +4098,8 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3945,7 +4125,8 @@ module Aws::IAM
       :instance_profiles,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3980,7 +4161,8 @@ module Aws::IAM
       :serial_number,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4004,7 +4186,8 @@ module Aws::IAM
       :tags,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4038,7 +4221,8 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4064,7 +4248,8 @@ module Aws::IAM
       :mfa_devices,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4099,7 +4284,8 @@ module Aws::IAM
       :open_id_connect_provider_arn,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4124,7 +4310,8 @@ module Aws::IAM
       :tags,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4134,7 +4321,8 @@ module Aws::IAM
     end
 
     class ListOpenIDConnectProvidersRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4144,12 +4332,14 @@ module Aws::IAM
     #   @return [Array<Types::OpenIDConnectProviderListEntry>]
     class ListOpenIDConnectProvidersResponse < Struct.new(
       :open_id_connect_provider_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ListOrganizationsFeaturesRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4162,7 +4352,8 @@ module Aws::IAM
     class ListOrganizationsFeaturesResponse < Struct.new(
       :organization_id,
       :enabled_features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4185,7 +4376,8 @@ module Aws::IAM
     class ListPoliciesGrantingServiceAccessEntry < Struct.new(
       :service_namespace,
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4212,7 +4404,8 @@ module Aws::IAM
       :marker,
       :arn,
       :service_namespaces,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4237,7 +4430,8 @@ module Aws::IAM
       :policies_granting_service_access,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4299,7 +4493,8 @@ module Aws::IAM
       :policy_usage_filter,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4324,7 +4519,8 @@ module Aws::IAM
       :policies,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4358,7 +4554,8 @@ module Aws::IAM
       :policy_arn,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4383,7 +4580,8 @@ module Aws::IAM
       :tags,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4417,7 +4615,8 @@ module Aws::IAM
       :policy_arn,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4445,7 +4644,8 @@ module Aws::IAM
       :versions,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4479,7 +4679,8 @@ module Aws::IAM
       :role_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4505,7 +4706,8 @@ module Aws::IAM
       :policy_names,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4539,7 +4741,8 @@ module Aws::IAM
       :role_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4563,7 +4766,8 @@ module Aws::IAM
       :tags,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4602,7 +4806,8 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4627,7 +4832,8 @@ module Aws::IAM
       :roles,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4662,7 +4868,8 @@ module Aws::IAM
       :saml_provider_arn,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4687,7 +4894,8 @@ module Aws::IAM
       :tags,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4697,7 +4905,8 @@ module Aws::IAM
     end
 
     class ListSAMLProvidersRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4709,7 +4918,8 @@ module Aws::IAM
     #   @return [Array<Types::SAMLProviderListEntry>]
     class ListSAMLProvidersResponse < Struct.new(
       :saml_provider_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4740,7 +4950,8 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4766,7 +4977,8 @@ module Aws::IAM
       :ssh_public_keys,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4800,7 +5012,8 @@ module Aws::IAM
       :server_certificate_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4825,7 +5038,8 @@ module Aws::IAM
       :tags,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4864,7 +5078,8 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4890,7 +5105,8 @@ module Aws::IAM
       :server_certificate_metadata_list,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4931,7 +5147,8 @@ module Aws::IAM
       :all_users,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4952,7 +5169,8 @@ module Aws::IAM
       :service_specific_credentials,
       :marker,
       :is_truncated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4986,7 +5204,8 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5011,7 +5230,8 @@ module Aws::IAM
       :certificates,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5045,7 +5265,8 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5071,7 +5292,8 @@ module Aws::IAM
       :policy_names,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5105,7 +5327,8 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5129,7 +5352,8 @@ module Aws::IAM
       :tags,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5168,7 +5392,8 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5193,7 +5418,8 @@ module Aws::IAM
       :users,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5228,7 +5454,8 @@ module Aws::IAM
       :assignment_status,
       :marker,
       :max_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5255,7 +5482,8 @@ module Aws::IAM
       :virtual_mfa_devices,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5280,7 +5508,8 @@ module Aws::IAM
       :user_name,
       :create_date,
       :password_reset_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5306,7 +5535,8 @@ module Aws::IAM
       :user_name,
       :serial_number,
       :enable_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5316,7 +5546,8 @@ module Aws::IAM
     #   @return [String]
     class MalformedCertificateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5326,7 +5557,8 @@ module Aws::IAM
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5403,7 +5635,8 @@ module Aws::IAM
       :create_date,
       :update_date,
       :policy_version_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5418,7 +5651,8 @@ module Aws::IAM
     #   @return [String]
     class NoSuchEntityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5430,7 +5664,8 @@ module Aws::IAM
     #   @return [String]
     class OpenIDConnectProviderListEntry < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5440,7 +5675,8 @@ module Aws::IAM
     #   @return [String]
     class OpenIdIdpCommunicationErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5449,7 +5685,8 @@ module Aws::IAM
     #   @return [String]
     class OrganizationNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5460,7 +5697,8 @@ module Aws::IAM
     #   @return [String]
     class OrganizationNotInAllFeaturesModeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5471,7 +5709,8 @@ module Aws::IAM
     #   @return [Boolean]
     class OrganizationsDecisionDetail < Struct.new(
       :allowed_by_organizations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5539,7 +5778,8 @@ module Aws::IAM
       :max_password_age,
       :password_reuse_prevention,
       :hard_expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5559,7 +5799,8 @@ module Aws::IAM
     #   @return [String]
     class PasswordPolicyViolationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5577,7 +5818,8 @@ module Aws::IAM
     #   @return [Boolean]
     class PermissionsBoundaryDecisionDetail < Struct.new(
       :allowed_by_permissions_boundary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5658,7 +5900,8 @@ module Aws::IAM
       :create_date,
       :update_date,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5678,7 +5921,8 @@ module Aws::IAM
     class PolicyDetail < Struct.new(
       :policy_name,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5688,7 +5932,8 @@ module Aws::IAM
     #   @return [String]
     class PolicyEvaluationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5727,7 +5972,8 @@ module Aws::IAM
       :policy_arn,
       :entity_type,
       :entity_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5746,7 +5992,8 @@ module Aws::IAM
     class PolicyGroup < Struct.new(
       :group_name,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5756,7 +6003,8 @@ module Aws::IAM
     #   @return [String]
     class PolicyNotAttachableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5775,7 +6023,8 @@ module Aws::IAM
     class PolicyRole < Struct.new(
       :role_name,
       :role_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5794,7 +6043,8 @@ module Aws::IAM
     class PolicyUser < Struct.new(
       :user_name,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5832,7 +6082,8 @@ module Aws::IAM
       :version_id,
       :is_default_version,
       :create_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5855,7 +6106,8 @@ module Aws::IAM
     class Position < Struct.new(
       :line,
       :column,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5901,7 +6153,8 @@ module Aws::IAM
       :group_name,
       :policy_name,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5923,7 +6176,8 @@ module Aws::IAM
     class PutRolePermissionsBoundaryRequest < Struct.new(
       :role_name,
       :permissions_boundary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5963,7 +6217,8 @@ module Aws::IAM
       :role_name,
       :policy_name,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5985,7 +6240,8 @@ module Aws::IAM
     class PutUserPermissionsBoundaryRequest < Struct.new(
       :user_name,
       :permissions_boundary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6025,7 +6281,8 @@ module Aws::IAM
       :user_name,
       :policy_name,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6041,7 +6298,8 @@ module Aws::IAM
     class RemoveClientIDFromOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6058,7 +6316,8 @@ module Aws::IAM
     class RemoveRoleFromInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       :role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6075,7 +6334,8 @@ module Aws::IAM
     class RemoveUserFromGroupRequest < Struct.new(
       :group_name,
       :user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6085,7 +6345,8 @@ module Aws::IAM
     #   @return [String]
     class ReportGenerationLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6104,7 +6365,8 @@ module Aws::IAM
     class ResetServiceSpecificCredentialRequest < Struct.new(
       :user_name,
       :service_specific_credential_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6118,7 +6380,8 @@ module Aws::IAM
     #   @return [Types::ServiceSpecificCredential]
     class ResetServiceSpecificCredentialResponse < Struct.new(
       :service_specific_credential,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6165,7 +6428,8 @@ module Aws::IAM
       :missing_context_values,
       :eval_decision_details,
       :permissions_boundary_decision_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6192,7 +6456,8 @@ module Aws::IAM
       :serial_number,
       :authentication_code1,
       :authentication_code2,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6260,7 +6525,8 @@ module Aws::IAM
       :permissions_boundary,
       :tags,
       :role_last_used,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6331,7 +6597,8 @@ module Aws::IAM
       :permissions_boundary,
       :tags,
       :role_last_used,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6355,7 +6622,8 @@ module Aws::IAM
     class RoleLastUsed < Struct.new(
       :last_used_date,
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6371,7 +6639,8 @@ module Aws::IAM
     class RoleUsageType < Struct.new(
       :region,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6388,7 +6657,8 @@ module Aws::IAM
     class SAMLPrivateKey < Struct.new(
       :key_id,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6406,7 +6676,8 @@ module Aws::IAM
       :arn,
       :valid_until,
       :create_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6441,7 +6712,8 @@ module Aws::IAM
       :ssh_public_key_body,
       :status,
       :upload_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6469,7 +6741,8 @@ module Aws::IAM
       :ssh_public_key_id,
       :status,
       :upload_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6495,7 +6768,8 @@ module Aws::IAM
       :certificate_body,
       :certificate_chain,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6531,7 +6805,8 @@ module Aws::IAM
       :arn,
       :upload_date,
       :expiration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6540,7 +6815,8 @@ module Aws::IAM
     #   @return [String]
     class ServiceAccessNotEnabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6550,7 +6826,8 @@ module Aws::IAM
     #   @return [String]
     class ServiceFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6608,7 +6885,8 @@ module Aws::IAM
       :last_authenticated_region,
       :total_authenticated_entities,
       :tracked_actions_last_accessed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6617,7 +6895,8 @@ module Aws::IAM
     #   @return [String]
     class ServiceNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6672,7 +6951,8 @@ module Aws::IAM
       :service_specific_credential_id,
       :user_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6720,7 +7000,8 @@ module Aws::IAM
       :expiration_date,
       :service_specific_credential_id,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6742,7 +7023,8 @@ module Aws::IAM
     class SetDefaultPolicyVersionRequest < Struct.new(
       :policy_arn,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6757,7 +7039,8 @@ module Aws::IAM
     #   @return [String]
     class SetSecurityTokenServicePreferencesRequest < Struct.new(
       :global_endpoint_token_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6785,7 +7068,8 @@ module Aws::IAM
       :certificate_body,
       :status,
       :upload_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6811,7 +7095,8 @@ module Aws::IAM
       :evaluation_results,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7019,7 +7304,8 @@ module Aws::IAM
       :resource_handling_option,
       :max_items,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7045,7 +7331,8 @@ module Aws::IAM
       :evaluation_results,
       :is_truncated,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7263,7 +7550,8 @@ module Aws::IAM
       :resource_handling_option,
       :max_items,
       :marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7290,7 +7578,8 @@ module Aws::IAM
       :source_policy_type,
       :start_position,
       :end_position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7312,7 +7601,8 @@ module Aws::IAM
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7328,7 +7618,8 @@ module Aws::IAM
     class TagInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7345,7 +7636,8 @@ module Aws::IAM
     class TagMFADeviceRequest < Struct.new(
       :serial_number,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7361,7 +7653,8 @@ module Aws::IAM
     class TagOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7377,7 +7670,8 @@ module Aws::IAM
     class TagPolicyRequest < Struct.new(
       :policy_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7392,7 +7686,8 @@ module Aws::IAM
     class TagRoleRequest < Struct.new(
       :role_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7408,7 +7703,8 @@ module Aws::IAM
     class TagSAMLProviderRequest < Struct.new(
       :saml_provider_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7424,7 +7720,8 @@ module Aws::IAM
     class TagServerCertificateRequest < Struct.new(
       :server_certificate_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7439,7 +7736,8 @@ module Aws::IAM
     class TagUserRequest < Struct.new(
       :user_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7473,7 +7771,8 @@ module Aws::IAM
       :last_accessed_entity,
       :last_accessed_time,
       :last_accessed_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7485,7 +7784,8 @@ module Aws::IAM
     #   @return [String]
     class UnmodifiableEntityException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7495,7 +7795,8 @@ module Aws::IAM
     #   @return [String]
     class UnrecognizedPublicKeyEncodingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7511,7 +7812,8 @@ module Aws::IAM
     class UntagInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7528,7 +7830,8 @@ module Aws::IAM
     class UntagMFADeviceRequest < Struct.new(
       :serial_number,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7544,7 +7847,8 @@ module Aws::IAM
     class UntagOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7561,7 +7865,8 @@ module Aws::IAM
     class UntagPolicyRequest < Struct.new(
       :policy_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7577,7 +7882,8 @@ module Aws::IAM
     class UntagRoleRequest < Struct.new(
       :role_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7594,7 +7900,8 @@ module Aws::IAM
     class UntagSAMLProviderRequest < Struct.new(
       :saml_provider_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7610,7 +7917,8 @@ module Aws::IAM
     class UntagServerCertificateRequest < Struct.new(
       :server_certificate_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7626,7 +7934,8 @@ module Aws::IAM
     class UntagUserRequest < Struct.new(
       :user_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7649,7 +7958,8 @@ module Aws::IAM
       :user_name,
       :access_key_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7736,7 +8046,8 @@ module Aws::IAM
       :max_password_age,
       :password_reuse_prevention,
       :hard_expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7770,7 +8081,8 @@ module Aws::IAM
     class UpdateAssumeRolePolicyRequest < Struct.new(
       :role_name,
       :policy_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7797,7 +8109,8 @@ module Aws::IAM
       :group_name,
       :new_path,
       :new_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7835,7 +8148,8 @@ module Aws::IAM
       :user_name,
       :password,
       :password_reset_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7852,7 +8166,8 @@ module Aws::IAM
     class UpdateOpenIDConnectProviderThumbprintRequest < Struct.new(
       :open_id_connect_provider_arn,
       :thumbprint_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7865,7 +8180,8 @@ module Aws::IAM
     class UpdateRoleDescriptionRequest < Struct.new(
       :role_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7874,7 +8190,8 @@ module Aws::IAM
     #   @return [Types::Role]
     class UpdateRoleDescriptionResponse < Struct.new(
       :role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7907,12 +8224,14 @@ module Aws::IAM
       :role_name,
       :description,
       :max_session_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateRoleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7944,7 +8263,8 @@ module Aws::IAM
       :assertion_encryption_mode,
       :add_private_key,
       :remove_private_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7955,7 +8275,8 @@ module Aws::IAM
     #   @return [String]
     class UpdateSAMLProviderResponse < Struct.new(
       :saml_provider_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7978,7 +8299,8 @@ module Aws::IAM
       :user_name,
       :ssh_public_key_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8005,7 +8327,8 @@ module Aws::IAM
       :server_certificate_name,
       :new_path,
       :new_server_certificate_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8028,7 +8351,8 @@ module Aws::IAM
       :user_name,
       :service_specific_credential_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8051,7 +8375,8 @@ module Aws::IAM
       :user_name,
       :certificate_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8080,7 +8405,8 @@ module Aws::IAM
       :user_name,
       :new_path,
       :new_user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8113,7 +8439,8 @@ module Aws::IAM
     class UploadSSHPublicKeyRequest < Struct.new(
       :user_name,
       :ssh_public_key_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8124,7 +8451,8 @@ module Aws::IAM
     #   @return [Types::SSHPublicKey]
     class UploadSSHPublicKeyResponse < Struct.new(
       :ssh_public_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8223,7 +8551,8 @@ module Aws::IAM
       :private_key,
       :certificate_chain,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8240,7 +8569,8 @@ module Aws::IAM
     class UploadServerCertificateResponse < Struct.new(
       :server_certificate_metadata,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8271,7 +8601,8 @@ module Aws::IAM
     class UploadSigningCertificateRequest < Struct.new(
       :user_name,
       :certificate_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8281,7 +8612,8 @@ module Aws::IAM
     #   @return [Types::SigningCertificate]
     class UploadSigningCertificateResponse < Struct.new(
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8366,7 +8698,8 @@ module Aws::IAM
       :password_last_used,
       :permissions_boundary,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8423,7 +8756,8 @@ module Aws::IAM
       :attached_managed_policies,
       :permissions_boundary,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8459,7 +8793,8 @@ module Aws::IAM
       :user,
       :enable_date,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

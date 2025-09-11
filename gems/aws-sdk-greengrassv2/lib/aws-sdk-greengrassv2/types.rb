@@ -11,7 +11,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class AssociateClientDeviceWithCoreDeviceEntry < Struct.new(
       :thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42,7 +44,8 @@ module Aws::GreengrassV2
       :thing_name,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,7 +55,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class AssociateServiceRoleToAccountRequest < Struct.new(
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +66,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class AssociateServiceRoleToAccountResponse < Struct.new(
       :associated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +82,8 @@ module Aws::GreengrassV2
     class AssociatedClientDevice < Struct.new(
       :thing_name,
       :association_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -90,7 +96,8 @@ module Aws::GreengrassV2
     class BatchAssociateClientDeviceWithCoreDeviceRequest < Struct.new(
       :entries,
       :core_device_thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -100,7 +107,8 @@ module Aws::GreengrassV2
     #   @return [Array<Types::AssociateClientDeviceWithCoreDeviceErrorEntry>]
     class BatchAssociateClientDeviceWithCoreDeviceResponse < Struct.new(
       :error_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +121,8 @@ module Aws::GreengrassV2
     class BatchDisassociateClientDeviceFromCoreDeviceRequest < Struct.new(
       :entries,
       :core_device_thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +132,8 @@ module Aws::GreengrassV2
     #   @return [Array<Types::DisassociateClientDeviceFromCoreDeviceErrorEntry>]
     class BatchDisassociateClientDeviceFromCoreDeviceResponse < Struct.new(
       :error_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +142,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class CancelDeploymentRequest < Struct.new(
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +152,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class CancelDeploymentResponse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +201,8 @@ module Aws::GreengrassV2
       :errors,
       :vendor_guidance,
       :vendor_guidance_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +220,8 @@ module Aws::GreengrassV2
       :arn,
       :component_name,
       :latest_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +242,8 @@ module Aws::GreengrassV2
       :component_name,
       :component_version,
       :version_requirements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -255,7 +270,8 @@ module Aws::GreengrassV2
     class ComponentConfigurationUpdate < Struct.new(
       :merge,
       :reset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +300,8 @@ module Aws::GreengrassV2
     class ComponentDependencyRequirement < Struct.new(
       :version_requirement,
       :dependency_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +328,8 @@ module Aws::GreengrassV2
       :component_version,
       :configuration_update,
       :run_with,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +359,8 @@ module Aws::GreengrassV2
       :description,
       :publisher,
       :platforms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +380,8 @@ module Aws::GreengrassV2
     class ComponentPlatform < Struct.new(
       :name,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +414,8 @@ module Aws::GreengrassV2
       :posix_user,
       :system_resource_limits,
       :windows_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +433,8 @@ module Aws::GreengrassV2
       :component_name,
       :component_version,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -430,7 +452,8 @@ module Aws::GreengrassV2
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +478,8 @@ module Aws::GreengrassV2
       :host_address,
       :port_number,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -516,7 +540,8 @@ module Aws::GreengrassV2
       :platform,
       :architecture,
       :runtime,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +571,8 @@ module Aws::GreengrassV2
       :lambda_function,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +598,8 @@ module Aws::GreengrassV2
       :component_version,
       :creation_timestamp,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +645,8 @@ module Aws::GreengrassV2
       :parent_target_arn,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +663,8 @@ module Aws::GreengrassV2
       :deployment_id,
       :iot_job_id,
       :iot_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -644,7 +673,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class DeleteComponentRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -653,7 +683,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class DeleteCoreDeviceRequest < Struct.new(
       :core_device_thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +693,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class DeleteDeploymentRequest < Struct.new(
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +732,8 @@ module Aws::GreengrassV2
       :deployment_status,
       :is_latest_for_target,
       :parent_target_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -746,7 +779,8 @@ module Aws::GreengrassV2
     class DeploymentComponentUpdatePolicy < Struct.new(
       :timeout_in_seconds,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -767,7 +801,8 @@ module Aws::GreengrassV2
     #   @return [Integer]
     class DeploymentConfigurationValidationPolicy < Struct.new(
       :timeout_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -793,7 +828,8 @@ module Aws::GreengrassV2
       :job_executions_rollout_config,
       :abort_config,
       :timeout_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,7 +853,8 @@ module Aws::GreengrassV2
       :failure_handling_policy,
       :component_update_policy,
       :configuration_validation_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -826,7 +863,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class DescribeComponentRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +908,8 @@ module Aws::GreengrassV2
       :status,
       :platforms,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +920,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class DisassociateClientDeviceFromCoreDeviceEntry < Struct.new(
       :thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -901,12 +941,14 @@ module Aws::GreengrassV2
       :thing_name,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateServiceRoleFromAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -916,7 +958,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class DisassociateServiceRoleFromAccountResponse < Struct.new(
       :disassociated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1008,7 +1051,8 @@ module Aws::GreengrassV2
       :creation_timestamp,
       :modified_timestamp,
       :status_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1033,7 +1077,8 @@ module Aws::GreengrassV2
     class EffectiveDeploymentStatusDetails < Struct.new(
       :error_stack,
       :error_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1046,7 +1091,8 @@ module Aws::GreengrassV2
     class GetComponentRequest < Struct.new(
       :recipe_output_format,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1111,8 @@ module Aws::GreengrassV2
       :recipe_output_format,
       :recipe,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1096,7 +1143,8 @@ module Aws::GreengrassV2
       :artifact_name,
       :s3_endpoint_type,
       :iot_endpoint_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1153,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class GetComponentVersionArtifactResponse < Struct.new(
       :pre_signed_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1163,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class GetConnectivityInfoRequest < Struct.new(
       :thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1177,8 @@ module Aws::GreengrassV2
     class GetConnectivityInfoResponse < Struct.new(
       :connectivity_info,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1187,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class GetCoreDeviceRequest < Struct.new(
       :core_device_thing_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1202,7 +1254,8 @@ module Aws::GreengrassV2
       :status,
       :last_status_update_timestamp,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,7 +1264,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class GetDeploymentRequest < Struct.new(
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1331,8 @@ module Aws::GreengrassV2
       :is_latest_for_target,
       :parent_target_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1287,7 +1342,8 @@ module Aws::GreengrassV2
     end
 
     class GetServiceRoleForAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1358,8 @@ module Aws::GreengrassV2
     class GetServiceRoleForAccountResponse < Struct.new(
       :associated_at,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1419,8 @@ module Aws::GreengrassV2
       :last_reported_timestamp,
       :last_installation_source,
       :lifecycle_status_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1380,7 +1438,8 @@ module Aws::GreengrassV2
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1397,7 +1456,8 @@ module Aws::GreengrassV2
     #   @return [Array<Types::IoTJobAbortCriteria>]
     class IoTJobAbortConfig < Struct.new(
       :criteria_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1434,7 +1494,8 @@ module Aws::GreengrassV2
       :action,
       :threshold_percentage,
       :min_number_of_executed_things,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1454,7 +1515,8 @@ module Aws::GreengrassV2
     class IoTJobExecutionsRolloutConfig < Struct.new(
       :exponential_rate,
       :maximum_per_minute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1538,8 @@ module Aws::GreengrassV2
       :base_rate_per_minute,
       :increment_factor,
       :rate_increase_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1494,7 +1557,8 @@ module Aws::GreengrassV2
     class IoTJobRateIncreaseCriteria < Struct.new(
       :number_of_notified_things,
       :number_of_succeeded_things,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1508,7 +1572,8 @@ module Aws::GreengrassV2
     #   @return [Integer]
     class IoTJobTimeoutConfig < Struct.new(
       :in_progress_timeout_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1540,7 +1605,8 @@ module Aws::GreengrassV2
       :mount_ro_sysfs,
       :volumes,
       :devices,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1569,7 +1635,8 @@ module Aws::GreengrassV2
       :path,
       :permission,
       :add_group_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1604,7 +1671,8 @@ module Aws::GreengrassV2
     class LambdaEventSource < Struct.new(
       :topic,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1746,8 @@ module Aws::GreengrassV2
       :exec_args,
       :environment_variables,
       :linux_process_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1723,7 +1792,8 @@ module Aws::GreengrassV2
       :component_platforms,
       :component_dependencies,
       :component_lambda_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1741,7 +1811,8 @@ module Aws::GreengrassV2
     class LambdaLinuxProcessParams < Struct.new(
       :isolation_mode,
       :container_params,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1770,7 +1841,8 @@ module Aws::GreengrassV2
       :destination_path,
       :permission,
       :add_group_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1792,7 +1864,8 @@ module Aws::GreengrassV2
       :core_device_thing_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,7 +1878,8 @@ module Aws::GreengrassV2
     class ListClientDevicesAssociatedWithCoreDeviceResponse < Struct.new(
       :associated_client_devices,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1822,7 +1896,8 @@ module Aws::GreengrassV2
       :arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1835,7 +1910,8 @@ module Aws::GreengrassV2
     class ListComponentVersionsResponse < Struct.new(
       :component_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,7 +1930,8 @@ module Aws::GreengrassV2
       :scope,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1944,8 @@ module Aws::GreengrassV2
     class ListComponentsResponse < Struct.new(
       :components,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1919,7 +1997,8 @@ module Aws::GreengrassV2
       :max_results,
       :next_token,
       :runtime,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1932,7 +2011,8 @@ module Aws::GreengrassV2
     class ListCoreDevicesResponse < Struct.new(
       :core_devices,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1972,7 +2052,8 @@ module Aws::GreengrassV2
       :parent_target_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1985,7 +2066,8 @@ module Aws::GreengrassV2
     class ListDeploymentsResponse < Struct.new(
       :deployments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2084,8 @@ module Aws::GreengrassV2
       :core_device_thing_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2015,7 +2098,8 @@ module Aws::GreengrassV2
     class ListEffectiveDeploymentsResponse < Struct.new(
       :effective_deployments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2052,7 +2136,8 @@ module Aws::GreengrassV2
       :max_results,
       :next_token,
       :topology_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2075,7 +2160,8 @@ module Aws::GreengrassV2
     class ListInstalledComponentsResponse < Struct.new(
       :installed_components,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2084,7 +2170,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2095,7 +2182,8 @@ module Aws::GreengrassV2
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2106,7 +2194,8 @@ module Aws::GreengrassV2
     #   @return [String]
     class RequestAlreadyInProgressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2119,7 +2208,8 @@ module Aws::GreengrassV2
     class ResolveComponentCandidatesRequest < Struct.new(
       :platform,
       :component_candidates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2129,7 +2219,8 @@ module Aws::GreengrassV2
     #   @return [Array<Types::ResolvedComponentVersion>]
     class ResolveComponentCandidatesResponse < Struct.new(
       :resolved_component_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2269,8 @@ module Aws::GreengrassV2
       :recipe,
       :vendor_guidance,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2195,7 +2287,8 @@ module Aws::GreengrassV2
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2221,7 +2314,8 @@ module Aws::GreengrassV2
       :resource_type,
       :quota_code,
       :service_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2243,7 +2337,8 @@ module Aws::GreengrassV2
     class SystemResourceLimits < Struct.new(
       :memory,
       :cpus,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2264,12 +2359,14 @@ module Aws::GreengrassV2
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2291,7 +2388,8 @@ module Aws::GreengrassV2
       :quota_code,
       :service_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2309,12 +2407,14 @@ module Aws::GreengrassV2
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2327,7 +2427,8 @@ module Aws::GreengrassV2
     class UpdateConnectivityInfoRequest < Struct.new(
       :thing_name,
       :connectivity_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2340,7 +2441,8 @@ module Aws::GreengrassV2
     class UpdateConnectivityInfoResponse < Struct.new(
       :version,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2358,7 +2460,8 @@ module Aws::GreengrassV2
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2372,7 +2475,8 @@ module Aws::GreengrassV2
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

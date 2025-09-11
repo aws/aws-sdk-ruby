@@ -2359,7 +2359,6 @@ module Aws::WAFRegional
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: WAFStaleDataException)
         operation.traits = {}
       end)
-
     end
 
     class << self

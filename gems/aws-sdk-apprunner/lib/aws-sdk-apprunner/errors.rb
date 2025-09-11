@@ -38,7 +38,7 @@ module Aws::AppRunner
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppRunner::Types::InternalServiceErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -51,7 +51,7 @@ module Aws::AppRunner
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppRunner::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -64,7 +64,7 @@ module Aws::AppRunner
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppRunner::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::AppRunner
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppRunner::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -92,7 +92,7 @@ module Aws::AppRunner
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppRunner::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

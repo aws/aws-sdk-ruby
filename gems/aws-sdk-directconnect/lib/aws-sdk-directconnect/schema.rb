@@ -2043,7 +2043,6 @@ module Aws::DirectConnect
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectConnectServerException)
         operation.traits = {}
       end)
-
     end
 
     class << self

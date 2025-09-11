@@ -575,7 +575,6 @@ module Aws::InternetMonitor
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/v20210603/Monitors/{MonitorName}", "method" => "PATCH"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

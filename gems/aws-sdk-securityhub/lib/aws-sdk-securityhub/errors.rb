@@ -45,7 +45,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::InternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::InvalidAccessException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -168,7 +168,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::ResourceConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -188,7 +188,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -205,7 +205,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -224,7 +224,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -241,7 +241,7 @@ module Aws::SecurityHub
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

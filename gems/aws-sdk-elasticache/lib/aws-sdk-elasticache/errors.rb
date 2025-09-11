@@ -109,7 +109,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::APICallRateForCustomerExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::AuthorizationAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::AuthorizationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -150,7 +150,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -163,7 +163,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -176,7 +176,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheParameterGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -204,7 +204,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheParameterGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -217,7 +217,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheSecurityGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -231,7 +231,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheSecurityGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -245,7 +245,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheSecurityGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -259,7 +259,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheSubnetGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -272,7 +272,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheSubnetGroupInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -286,7 +286,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheSubnetGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -300,7 +300,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheSubnetGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -314,7 +314,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::CacheSubnetQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -328,7 +328,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ClusterQuotaForCustomerExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -341,7 +341,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::DefaultUserAssociatedToUserGroupFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -354,7 +354,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::DefaultUserRequired] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -367,7 +367,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::DuplicateUserNameFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -380,7 +380,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::GlobalReplicationGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -393,7 +393,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::GlobalReplicationGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -407,7 +407,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InsufficientCacheClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -421,7 +421,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidARNFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -434,7 +434,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidCacheClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -448,7 +448,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidCacheParameterGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -461,7 +461,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidCacheSecurityGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -474,7 +474,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidCredentialsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -487,7 +487,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidGlobalReplicationGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -500,7 +500,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidKMSKeyFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -513,7 +513,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidParameterCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Two or more parameters that must not be used together were used together.</p>
@@ -527,7 +527,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A parameter value is invalid.</p>
@@ -541,7 +541,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidReplicationGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -554,7 +554,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidServerlessCacheSnapshotStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -567,7 +567,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidServerlessCacheStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -581,7 +581,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidSnapshotStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -594,7 +594,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidSubnet] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -607,7 +607,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidUserGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -620,7 +620,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidUserStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -633,7 +633,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::InvalidVPCNetworkStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -646,7 +646,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::NoOperationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -661,7 +661,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::NodeGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -675,7 +675,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::NodeGroupsPerReplicationGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -689,7 +689,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::NodeQuotaForClusterExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -703,7 +703,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::NodeQuotaForCustomerExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -716,7 +716,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ReplicationGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -729,7 +729,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ReplicationGroupAlreadyUnderMigrationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -742,7 +742,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ReplicationGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -755,7 +755,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ReplicationGroupNotUnderMigrationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -768,7 +768,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ReservedCacheNodeAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -781,7 +781,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ReservedCacheNodeNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -795,7 +795,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ReservedCacheNodeQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -808,7 +808,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ReservedCacheNodesOfferingNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -821,7 +821,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ServerlessCacheAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -834,7 +834,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ServerlessCacheNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -847,7 +847,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ServerlessCacheQuotaForCustomerExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -860,7 +860,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ServerlessCacheSnapshotAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -873,7 +873,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ServerlessCacheSnapshotNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -886,7 +886,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ServerlessCacheSnapshotQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -899,7 +899,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ServiceLinkedRoleNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -912,7 +912,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::ServiceUpdateNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -925,7 +925,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::SnapshotAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -949,7 +949,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::SnapshotFeatureNotSupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -962,7 +962,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::SnapshotNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -976,7 +976,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::SnapshotQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -989,7 +989,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::SubnetInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1005,7 +1005,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::SubnetNotAllowedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1018,7 +1018,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::TagNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1033,7 +1033,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::TagQuotaPerResourceExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1046,7 +1046,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::TestFailoverNotAvailableFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1059,7 +1059,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::UserAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1072,7 +1072,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::UserGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1085,7 +1085,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::UserGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1098,7 +1098,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::UserGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1111,7 +1111,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::UserNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1124,7 +1124,7 @@ module Aws::ElastiCache
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElastiCache::Types::UserQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -16,7 +16,8 @@ module Aws::SagemakerEdge
     class Checksum < Struct.new(
       :type,
       :sum,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::SagemakerEdge
       :s3_url,
       :checksum,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +78,8 @@ module Aws::SagemakerEdge
       :status,
       :status_reason,
       :rollback_failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +109,8 @@ module Aws::SagemakerEdge
       :deployment_start_time,
       :deployment_end_time,
       :deployment_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +132,8 @@ module Aws::SagemakerEdge
       :type,
       :failure_handling_policy,
       :definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +155,8 @@ module Aws::SagemakerEdge
       :metric_name,
       :value,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +169,8 @@ module Aws::SagemakerEdge
     class GetDeploymentsRequest < Struct.new(
       :device_name,
       :device_fleet_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +179,8 @@ module Aws::SagemakerEdge
     #   @return [Array<Types::EdgeDeployment>]
     class GetDeploymentsResult < Struct.new(
       :deployments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +193,8 @@ module Aws::SagemakerEdge
     class GetDeviceRegistrationRequest < Struct.new(
       :device_name,
       :device_fleet_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +207,8 @@ module Aws::SagemakerEdge
     class GetDeviceRegistrationResult < Struct.new(
       :device_registration,
       :cache_ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +218,8 @@ module Aws::SagemakerEdge
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +245,8 @@ module Aws::SagemakerEdge
       :latest_sample_time,
       :latest_inference,
       :model_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +275,8 @@ module Aws::SagemakerEdge
       :device_name,
       :device_fleet_name,
       :deployment_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

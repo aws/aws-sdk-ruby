@@ -37,7 +37,7 @@ module Aws::MediaStoreData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaStoreData::Types::ContainerNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -50,7 +50,7 @@ module Aws::MediaStoreData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaStoreData::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -63,7 +63,7 @@ module Aws::MediaStoreData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaStoreData::Types::ObjectNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::MediaStoreData
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaStoreData::Types::RequestedRangeNotSatisfiableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

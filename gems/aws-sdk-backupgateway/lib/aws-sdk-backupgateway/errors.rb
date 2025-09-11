@@ -39,7 +39,7 @@ module Aws::BackupGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupGateway::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of why you have insufficient permissions.</p>
@@ -57,7 +57,7 @@ module Aws::BackupGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupGateway::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of why the operation is not supported.</p>
@@ -75,7 +75,7 @@ module Aws::BackupGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupGateway::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of which internal error occured.</p>
@@ -93,7 +93,7 @@ module Aws::BackupGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupGateway::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of which resource wasn't found.</p>
@@ -112,7 +112,7 @@ module Aws::BackupGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupGateway::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error: TPS has been limited to protect against intentional or unintentional 
@@ -131,7 +131,7 @@ module Aws::BackupGateway
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupGateway::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A description of what caused the validation error.</p>

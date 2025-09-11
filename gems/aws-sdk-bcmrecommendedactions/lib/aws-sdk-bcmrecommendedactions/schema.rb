@@ -134,7 +134,6 @@ module Aws::BCMRecommendedActions
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "ListRecommendedActionsSuccess", "params" => {"maxResults" => 10}, "expect" => {"failure" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams"}]}
         operation[:paginator] = Paginators::ListRecommendedActions.new
       end)
-
     end
 
     class << self

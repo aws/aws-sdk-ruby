@@ -11,7 +11,8 @@ module Aws::EventBridge
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::EventBridge
     #   @return [String]
     class ActivateEventSourceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +64,8 @@ module Aws::EventBridge
       :invocation_rate_limit_per_second,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +78,8 @@ module Aws::EventBridge
     #   @return [String]
     class AppSyncParameters < Struct.new(
       :graph_ql_operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +118,8 @@ module Aws::EventBridge
       :size_bytes,
       :event_count,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -145,7 +150,8 @@ module Aws::EventBridge
       :subnets,
       :security_groups,
       :assign_public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -158,7 +164,8 @@ module Aws::EventBridge
     #   @return [Integer]
     class BatchArrayProperties < Struct.new(
       :size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -191,7 +198,8 @@ module Aws::EventBridge
       :job_name,
       :array_properties,
       :retry_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -203,7 +211,8 @@ module Aws::EventBridge
     #   @return [Integer]
     class BatchRetryStrategy < Struct.new(
       :attempts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -217,7 +226,8 @@ module Aws::EventBridge
     #   @return [String]
     class CancelReplayRequest < Struct.new(
       :replay_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +244,8 @@ module Aws::EventBridge
       :replay_arn,
       :state,
       :state_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,7 +267,8 @@ module Aws::EventBridge
       :capacity_provider,
       :weight,
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -271,7 +283,8 @@ module Aws::EventBridge
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +314,8 @@ module Aws::EventBridge
       :type,
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -342,7 +356,8 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       :last_authorized_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -354,7 +369,8 @@ module Aws::EventBridge
     #   @return [String]
     class ConnectionApiKeyAuthResponseParameters < Struct.new(
       :api_key_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +400,8 @@ module Aws::EventBridge
       :api_key_auth_parameters,
       :invocation_http_parameters,
       :connectivity_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +412,8 @@ module Aws::EventBridge
     #   @return [String]
     class ConnectionBasicAuthResponseParameters < Struct.new(
       :username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +432,8 @@ module Aws::EventBridge
       :key,
       :value,
       :is_value_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -438,7 +457,8 @@ module Aws::EventBridge
       :key,
       :value,
       :is_value_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -461,7 +481,8 @@ module Aws::EventBridge
       :header_parameters,
       :query_string_parameters,
       :body_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +493,8 @@ module Aws::EventBridge
     #   @return [String]
     class ConnectionOAuthClientResponseParameters < Struct.new(
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +516,8 @@ module Aws::EventBridge
       :authorization_endpoint,
       :http_method,
       :o_auth_http_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +537,8 @@ module Aws::EventBridge
       :key,
       :value,
       :is_value_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -529,7 +553,8 @@ module Aws::EventBridge
     #   @return [String]
     class ConnectivityResourceConfigurationArn < Struct.new(
       :resource_configuration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,7 +564,8 @@ module Aws::EventBridge
     #   @return [Types::ConnectivityResourceConfigurationArn]
     class ConnectivityResourceParameters < Struct.new(
       :resource_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +595,8 @@ module Aws::EventBridge
       :invocation_endpoint,
       :http_method,
       :invocation_rate_limit_per_second,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +617,8 @@ module Aws::EventBridge
       :api_destination_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,7 +659,8 @@ module Aws::EventBridge
       :event_pattern,
       :retention_days,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +681,8 @@ module Aws::EventBridge
       :state,
       :state_reason,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +696,8 @@ module Aws::EventBridge
     class CreateConnectionApiKeyAuthRequestParameters < Struct.new(
       :api_key_name,
       :api_key_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +733,8 @@ module Aws::EventBridge
       :api_key_auth_parameters,
       :invocation_http_parameters,
       :connectivity_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -716,7 +748,8 @@ module Aws::EventBridge
     class CreateConnectionBasicAuthRequestParameters < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +764,8 @@ module Aws::EventBridge
     class CreateConnectionOAuthClientRequestParameters < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +789,8 @@ module Aws::EventBridge
       :authorization_endpoint,
       :http_method,
       :o_auth_http_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +833,8 @@ module Aws::EventBridge
       :auth_parameters,
       :invocation_connectivity_parameters,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +855,8 @@ module Aws::EventBridge
       :connection_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -854,7 +891,8 @@ module Aws::EventBridge
       :replication_config,
       :event_buses,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +925,8 @@ module Aws::EventBridge
       :event_buses,
       :role_arn,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,7 +999,8 @@ module Aws::EventBridge
       :dead_letter_config,
       :log_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1031,8 @@ module Aws::EventBridge
       :kms_key_identifier,
       :dead_letter_config,
       :log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1010,7 +1051,8 @@ module Aws::EventBridge
     class CreatePartnerEventSourceRequest < Struct.new(
       :name,
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1019,7 +1061,8 @@ module Aws::EventBridge
     #   @return [String]
     class CreatePartnerEventSourceResponse < Struct.new(
       :event_source_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1028,7 +1071,8 @@ module Aws::EventBridge
     #   @return [String]
     class DeactivateEventSourceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1041,7 +1085,8 @@ module Aws::EventBridge
     #   @return [String]
     class DeadLetterConfig < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1095,8 @@ module Aws::EventBridge
     #   @return [String]
     class DeauthorizeConnectionRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1121,8 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       :last_authorized_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,12 +1131,14 @@ module Aws::EventBridge
     #   @return [String]
     class DeleteApiDestinationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApiDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1098,12 +1147,14 @@ module Aws::EventBridge
     #   @return [String]
     class DeleteArchiveRequest < Struct.new(
       :archive_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteArchiveResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1163,8 @@ module Aws::EventBridge
     #   @return [String]
     class DeleteConnectionRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1139,7 +1191,8 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       :last_authorized_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,12 +1202,14 @@ module Aws::EventBridge
     #   @return [String]
     class DeleteEndpointRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEndpointResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1218,8 @@ module Aws::EventBridge
     #   @return [String]
     class DeleteEventBusRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1177,7 +1233,8 @@ module Aws::EventBridge
     class DeletePartnerEventSourceRequest < Struct.new(
       :name,
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1256,8 @@ module Aws::EventBridge
       :name,
       :event_bus_name,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1208,7 +1266,8 @@ module Aws::EventBridge
     #   @return [String]
     class DescribeApiDestinationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1258,7 +1317,8 @@ module Aws::EventBridge
       :invocation_rate_limit_per_second,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1267,7 +1327,8 @@ module Aws::EventBridge
     #   @return [String]
     class DescribeArchiveRequest < Struct.new(
       :archive_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1322,7 +1383,8 @@ module Aws::EventBridge
       :size_bytes,
       :event_count,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1341,7 +1403,8 @@ module Aws::EventBridge
     #   @return [Types::DescribeConnectionResourceParameters]
     class DescribeConnectionConnectivityParameters < Struct.new(
       :resource_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1350,7 +1413,8 @@ module Aws::EventBridge
     #   @return [String]
     class DescribeConnectionRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1432,8 @@ module Aws::EventBridge
     class DescribeConnectionResourceParameters < Struct.new(
       :resource_configuration_arn,
       :resource_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1497,8 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       :last_authorized_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1447,7 +1513,8 @@ module Aws::EventBridge
     class DescribeEndpointRequest < Struct.new(
       :name,
       :home_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1572,8 @@ module Aws::EventBridge
       :state_reason,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1515,7 +1583,8 @@ module Aws::EventBridge
     #   @return [String]
     class DescribeEventBusRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1562,7 +1631,8 @@ module Aws::EventBridge
       :log_config,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1571,7 +1641,8 @@ module Aws::EventBridge
     #   @return [String]
     class DescribeEventSourceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1604,7 +1675,8 @@ module Aws::EventBridge
       :expiration_time,
       :name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1613,7 +1685,8 @@ module Aws::EventBridge
     #   @return [String]
     class DescribePartnerEventSourceRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1699,8 @@ module Aws::EventBridge
     class DescribePartnerEventSourceResponse < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1709,8 @@ module Aws::EventBridge
     #   @return [String]
     class DescribeReplayRequest < Struct.new(
       :replay_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1688,7 +1763,8 @@ module Aws::EventBridge
       :event_last_replayed_time,
       :replay_start_time,
       :replay_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1702,7 +1778,8 @@ module Aws::EventBridge
     class DescribeRuleRequest < Struct.new(
       :name,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1756,7 +1833,8 @@ module Aws::EventBridge
       :managed_by,
       :event_bus_name,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1770,7 +1848,8 @@ module Aws::EventBridge
     class DisableRuleRequest < Struct.new(
       :name,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1861,7 +1940,8 @@ module Aws::EventBridge
       :propagate_tags,
       :reference_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1881,7 +1961,8 @@ module Aws::EventBridge
     class EnableRuleRequest < Struct.new(
       :name,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +2030,8 @@ module Aws::EventBridge
       :state_reason,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1959,7 +2041,8 @@ module Aws::EventBridge
     #   @return [String]
     class EndpointEventBus < Struct.new(
       :event_bus_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1995,7 +2078,8 @@ module Aws::EventBridge
       :policy,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2031,7 +2115,8 @@ module Aws::EventBridge
       :expiration_time,
       :name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2047,7 +2132,8 @@ module Aws::EventBridge
     class FailoverConfig < Struct.new(
       :primary,
       :secondary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2069,7 +2155,8 @@ module Aws::EventBridge
       :path_parameter_values,
       :header_parameters,
       :query_string_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2079,7 +2166,8 @@ module Aws::EventBridge
     #   @return [String]
     class IllegalStatusException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2165,7 +2253,8 @@ module Aws::EventBridge
     class InputTransformer < Struct.new(
       :input_paths_map,
       :input_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2174,7 +2263,8 @@ module Aws::EventBridge
     #   @return [String]
     class InternalException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2183,7 +2273,8 @@ module Aws::EventBridge
     #   @return [String]
     class InvalidEventPatternException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2192,7 +2283,8 @@ module Aws::EventBridge
     #   @return [String]
     class InvalidStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2207,7 +2299,8 @@ module Aws::EventBridge
     #   @return [String]
     class KinesisParameters < Struct.new(
       :partition_key_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2217,7 +2310,8 @@ module Aws::EventBridge
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2336,8 @@ module Aws::EventBridge
       :connection_arn,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2259,7 +2354,8 @@ module Aws::EventBridge
     class ListApiDestinationsResponse < Struct.new(
       :api_destinations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2288,7 +2384,8 @@ module Aws::EventBridge
       :state,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2304,7 +2401,8 @@ module Aws::EventBridge
     class ListArchivesResponse < Struct.new(
       :archives,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2329,7 +2427,8 @@ module Aws::EventBridge
       :connection_state,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2345,7 +2444,8 @@ module Aws::EventBridge
     class ListConnectionsResponse < Struct.new(
       :connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2372,7 +2472,8 @@ module Aws::EventBridge
       :home_region,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2388,7 +2489,8 @@ module Aws::EventBridge
     class ListEndpointsResponse < Struct.new(
       :endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2411,7 +2513,8 @@ module Aws::EventBridge
       :name_prefix,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2427,7 +2530,8 @@ module Aws::EventBridge
     class ListEventBusesResponse < Struct.new(
       :event_buses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2450,7 +2554,8 @@ module Aws::EventBridge
       :name_prefix,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2466,7 +2571,8 @@ module Aws::EventBridge
     class ListEventSourcesResponse < Struct.new(
       :event_sources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2488,7 +2594,8 @@ module Aws::EventBridge
       :event_source_name,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2504,7 +2611,8 @@ module Aws::EventBridge
     class ListPartnerEventSourceAccountsResponse < Struct.new(
       :partner_event_source_accounts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2527,7 +2635,8 @@ module Aws::EventBridge
       :name_prefix,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2543,7 +2652,8 @@ module Aws::EventBridge
     class ListPartnerEventSourcesResponse < Struct.new(
       :partner_event_sources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2572,7 +2682,8 @@ module Aws::EventBridge
       :event_source_arn,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2588,7 +2699,8 @@ module Aws::EventBridge
     class ListReplaysResponse < Struct.new(
       :replays,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2613,7 +2725,8 @@ module Aws::EventBridge
       :event_bus_name,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2629,7 +2742,8 @@ module Aws::EventBridge
     class ListRuleNamesByTargetResponse < Struct.new(
       :rule_names,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2654,7 +2768,8 @@ module Aws::EventBridge
       :event_bus_name,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2670,7 +2785,8 @@ module Aws::EventBridge
     class ListRulesResponse < Struct.new(
       :rules,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2679,7 +2795,8 @@ module Aws::EventBridge
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2688,7 +2805,8 @@ module Aws::EventBridge
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2713,7 +2831,8 @@ module Aws::EventBridge
       :event_bus_name,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2729,7 +2848,8 @@ module Aws::EventBridge
     class ListTargetsByRuleResponse < Struct.new(
       :targets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2747,7 +2867,8 @@ module Aws::EventBridge
     class LogConfig < Struct.new(
       :include_detail,
       :level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2761,7 +2882,8 @@ module Aws::EventBridge
     #   @return [String]
     class ManagedRuleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2773,7 +2895,8 @@ module Aws::EventBridge
     #   @return [Types::AwsVpcConfiguration]
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2782,7 +2905,8 @@ module Aws::EventBridge
     #   @return [String]
     class OperationDisabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2798,7 +2922,8 @@ module Aws::EventBridge
     class PartnerEventSource < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2824,7 +2949,8 @@ module Aws::EventBridge
       :creation_time,
       :expiration_time,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2841,7 +2967,8 @@ module Aws::EventBridge
     class PlacementConstraint < Struct.new(
       :type,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2865,7 +2992,8 @@ module Aws::EventBridge
     class PlacementStrategy < Struct.new(
       :type,
       :field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2874,7 +3002,8 @@ module Aws::EventBridge
     #   @return [String]
     class PolicyLengthExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2885,7 +3014,8 @@ module Aws::EventBridge
     #   @return [String]
     class Primary < Struct.new(
       :health_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2905,7 +3035,8 @@ module Aws::EventBridge
     class PutEventsRequest < Struct.new(
       :entries,
       :endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2974,7 +3105,8 @@ module Aws::EventBridge
       :detail,
       :event_bus_name,
       :trace_header,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2991,7 +3123,8 @@ module Aws::EventBridge
     class PutEventsResponse < Struct.new(
       :failed_entry_count,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3087,7 +3220,8 @@ module Aws::EventBridge
       :event_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3096,7 +3230,8 @@ module Aws::EventBridge
     #   @return [Array<Types::PutPartnerEventsRequestEntry>]
     class PutPartnerEventsRequest < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3146,7 +3281,8 @@ module Aws::EventBridge
       :resources,
       :detail_type,
       :detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3164,7 +3300,8 @@ module Aws::EventBridge
     class PutPartnerEventsResponse < Struct.new(
       :failed_entry_count,
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3189,7 +3326,8 @@ module Aws::EventBridge
       :event_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3242,7 +3380,8 @@ module Aws::EventBridge
       :statement_id,
       :condition,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3314,7 +3453,8 @@ module Aws::EventBridge
       :role_arn,
       :tags,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3323,7 +3463,8 @@ module Aws::EventBridge
     #   @return [String]
     class PutRuleResponse < Struct.new(
       :rule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3341,7 +3482,8 @@ module Aws::EventBridge
       :rule,
       :event_bus_name,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3354,7 +3496,8 @@ module Aws::EventBridge
     class PutTargetsResponse < Struct.new(
       :failed_entry_count,
       :failed_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3379,7 +3522,8 @@ module Aws::EventBridge
       :target_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3421,7 +3565,8 @@ module Aws::EventBridge
       :statement_name,
       :with_event,
       :sqls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3445,7 +3590,8 @@ module Aws::EventBridge
       :statement_id,
       :remove_all_permissions,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3471,7 +3617,8 @@ module Aws::EventBridge
       :event_bus_name,
       :ids,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3484,7 +3631,8 @@ module Aws::EventBridge
     class RemoveTargetsResponse < Struct.new(
       :failed_entry_count,
       :failed_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3509,7 +3657,8 @@ module Aws::EventBridge
       :target_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3553,7 +3702,8 @@ module Aws::EventBridge
       :event_last_replayed_time,
       :replay_start_time,
       :replay_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3568,7 +3718,8 @@ module Aws::EventBridge
     class ReplayDestination < Struct.new(
       :arn,
       :filter_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3578,7 +3729,8 @@ module Aws::EventBridge
     #   @return [String]
     class ReplicationConfig < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3587,7 +3739,8 @@ module Aws::EventBridge
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3596,7 +3749,8 @@ module Aws::EventBridge
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3613,7 +3767,8 @@ module Aws::EventBridge
     class RetryPolicy < Struct.new(
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3624,7 +3779,8 @@ module Aws::EventBridge
     #   @return [Types::FailoverConfig]
     class RoutingConfig < Struct.new(
       :failover_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3704,7 +3860,8 @@ module Aws::EventBridge
       :role_arn,
       :managed_by,
       :event_bus_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3716,7 +3873,8 @@ module Aws::EventBridge
     #   @return [Array<Types::RunCommandTarget>]
     class RunCommandParameters < Struct.new(
       :run_command_targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3737,7 +3895,8 @@ module Aws::EventBridge
     class RunCommandTarget < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3754,7 +3913,8 @@ module Aws::EventBridge
     class SageMakerPipelineParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3766,7 +3926,8 @@ module Aws::EventBridge
     #   @return [Array<Types::SageMakerPipelineParameter>]
     class SageMakerPipelineParameters < Struct.new(
       :pipeline_parameter_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3777,7 +3938,8 @@ module Aws::EventBridge
     #   @return [String]
     class Secondary < Struct.new(
       :route,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3788,7 +3950,8 @@ module Aws::EventBridge
     #   @return [String]
     class SqsParameters < Struct.new(
       :message_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3820,7 +3983,8 @@ module Aws::EventBridge
       :event_start_time,
       :event_end_time,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3841,7 +4005,8 @@ module Aws::EventBridge
       :state,
       :state_reason,
       :replay_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3857,7 +4022,8 @@ module Aws::EventBridge
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3870,12 +4036,14 @@ module Aws::EventBridge
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3986,7 +4154,8 @@ module Aws::EventBridge
       :dead_letter_config,
       :retry_policy,
       :app_sync_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4041,7 +4210,8 @@ module Aws::EventBridge
     class TestEventPatternRequest < Struct.new(
       :event_pattern,
       :event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4050,7 +4220,8 @@ module Aws::EventBridge
     #   @return [Boolean]
     class TestEventPatternResponse < Struct.new(
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4064,7 +4235,8 @@ module Aws::EventBridge
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4077,12 +4249,14 @@ module Aws::EventBridge
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4111,7 +4285,8 @@ module Aws::EventBridge
       :invocation_endpoint,
       :http_method,
       :invocation_rate_limit_per_second,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4132,7 +4307,8 @@ module Aws::EventBridge
       :api_destination_state,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4168,7 +4344,8 @@ module Aws::EventBridge
       :event_pattern,
       :retention_days,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4189,7 +4366,8 @@ module Aws::EventBridge
       :state,
       :state_reason,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4203,7 +4381,8 @@ module Aws::EventBridge
     class UpdateConnectionApiKeyAuthRequestParameters < Struct.new(
       :api_key_name,
       :api_key_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4236,7 +4415,8 @@ module Aws::EventBridge
       :api_key_auth_parameters,
       :invocation_http_parameters,
       :connectivity_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4250,7 +4430,8 @@ module Aws::EventBridge
     class UpdateConnectionBasicAuthRequestParameters < Struct.new(
       :username,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4264,7 +4445,8 @@ module Aws::EventBridge
     class UpdateConnectionOAuthClientRequestParameters < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4289,7 +4471,8 @@ module Aws::EventBridge
       :authorization_endpoint,
       :http_method,
       :o_auth_http_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4327,7 +4510,8 @@ module Aws::EventBridge
       :auth_parameters,
       :invocation_connectivity_parameters,
       :kms_key_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4352,7 +4536,8 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       :last_authorized_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4381,7 +4566,8 @@ module Aws::EventBridge
       :replication_config,
       :event_buses,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4424,7 +4610,8 @@ module Aws::EventBridge
       :endpoint_id,
       :endpoint_url,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4482,7 +4669,8 @@ module Aws::EventBridge
       :description,
       :dead_letter_config,
       :log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4517,7 +4705,8 @@ module Aws::EventBridge
       :description,
       :dead_letter_config,
       :log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

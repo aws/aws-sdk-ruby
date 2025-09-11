@@ -40,7 +40,7 @@ module Aws::DocDBElastic
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDBElastic::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error message explaining why access was denied.</p>
@@ -54,7 +54,7 @@ module Aws::DocDBElastic
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDBElastic::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::DocDBElastic
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDBElastic::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -94,7 +94,7 @@ module Aws::DocDBElastic
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDBElastic::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error message describing the failure.</p>
@@ -118,7 +118,7 @@ module Aws::DocDBElastic
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDBElastic::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -131,7 +131,7 @@ module Aws::DocDBElastic
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDBElastic::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::DocDBElastic
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDBElastic::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>An error message describing the validation exception.</p>

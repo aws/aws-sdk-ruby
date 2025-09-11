@@ -11,7 +11,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::AppIntegrations
       :application_association_arn,
       :application_arn,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +41,8 @@ module Aws::AppIntegrations
     #   @return [Types::ContactHandling]
     class ApplicationConfig < Struct.new(
       :contact_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +52,8 @@ module Aws::AppIntegrations
     #   @return [Types::ExternalUrlConfig]
     class ApplicationSourceConfig < Struct.new(
       :external_url_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -83,7 +87,8 @@ module Aws::AppIntegrations
       :created_time,
       :last_modified_time,
       :is_service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -98,7 +103,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class ContactHandling < Struct.new(
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +168,8 @@ module Aws::AppIntegrations
       :initialization_timeout,
       :application_config,
       :iframe_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +182,8 @@ module Aws::AppIntegrations
     class CreateApplicationResponse < Struct.new(
       :arn,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +220,8 @@ module Aws::AppIntegrations
       :client_association_metadata,
       :client_token,
       :execution_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +234,8 @@ module Aws::AppIntegrations
     class CreateDataIntegrationAssociationResponse < Struct.new(
       :data_integration_association_id,
       :data_integration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -269,7 +279,8 @@ module Aws::AppIntegrations
       :client_token,
       :file_configuration,
       :object_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +332,8 @@ module Aws::AppIntegrations
       :client_token,
       :file_configuration,
       :object_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +365,8 @@ module Aws::AppIntegrations
       :event_bridge_bus,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -362,7 +375,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class CreateEventIntegrationResponse < Struct.new(
       :event_integration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +407,8 @@ module Aws::AppIntegrations
       :destination_uri,
       :last_execution_status,
       :execution_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -411,7 +426,8 @@ module Aws::AppIntegrations
       :arn,
       :name,
       :source_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,12 +436,14 @@ module Aws::AppIntegrations
     #   @return [String]
     class DeleteApplicationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,12 +452,14 @@ module Aws::AppIntegrations
     #   @return [String]
     class DeleteDataIntegrationRequest < Struct.new(
       :data_integration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataIntegrationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,12 +468,14 @@ module Aws::AppIntegrations
     #   @return [String]
     class DeleteEventIntegrationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteEventIntegrationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +484,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class DuplicateResourceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +495,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class EventFilter < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -502,7 +526,8 @@ module Aws::AppIntegrations
       :event_filter,
       :event_bridge_bus,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +557,8 @@ module Aws::AppIntegrations
       :client_id,
       :event_bridge_rule_name,
       :client_association_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +576,8 @@ module Aws::AppIntegrations
       :execution_mode,
       :on_demand_configuration,
       :schedule_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +591,8 @@ module Aws::AppIntegrations
     class ExternalUrlConfig < Struct.new(
       :access_url,
       :approved_origins,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +606,8 @@ module Aws::AppIntegrations
     class FileConfiguration < Struct.new(
       :folders,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -587,7 +616,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class GetApplicationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +690,8 @@ module Aws::AppIntegrations
       :initialization_timeout,
       :application_config,
       :iframe_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -674,7 +705,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class GetDataIntegrationRequest < Struct.new(
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +751,8 @@ module Aws::AppIntegrations
       :tags,
       :file_configuration,
       :object_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +761,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class GetEventIntegrationRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +791,8 @@ module Aws::AppIntegrations
       :event_bridge_bus,
       :event_filter,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +806,8 @@ module Aws::AppIntegrations
     class IframeConfig < Struct.new(
       :allow,
       :sandbox,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +816,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class InternalServiceError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -789,7 +826,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +841,8 @@ module Aws::AppIntegrations
     class LastExecutionStatus < Struct.new(
       :execution_status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -821,7 +860,8 @@ module Aws::AppIntegrations
       :application_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +874,8 @@ module Aws::AppIntegrations
     class ListApplicationAssociationsResponse < Struct.new(
       :application_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +889,8 @@ module Aws::AppIntegrations
     class ListApplicationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +903,8 @@ module Aws::AppIntegrations
     class ListApplicationsResponse < Struct.new(
       :applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,7 +922,8 @@ module Aws::AppIntegrations
       :data_integration_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +936,8 @@ module Aws::AppIntegrations
     class ListDataIntegrationAssociationsResponse < Struct.new(
       :data_integration_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +951,8 @@ module Aws::AppIntegrations
     class ListDataIntegrationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -919,7 +965,8 @@ module Aws::AppIntegrations
     class ListDataIntegrationsResponse < Struct.new(
       :data_integrations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -937,7 +984,8 @@ module Aws::AppIntegrations
       :event_integration_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,7 +998,8 @@ module Aws::AppIntegrations
     class ListEventIntegrationAssociationsResponse < Struct.new(
       :event_integration_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +1013,8 @@ module Aws::AppIntegrations
     class ListEventIntegrationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +1027,8 @@ module Aws::AppIntegrations
     class ListEventIntegrationsResponse < Struct.new(
       :event_integrations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1037,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1047,8 @@ module Aws::AppIntegrations
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1064,8 @@ module Aws::AppIntegrations
     class OnDemandConfiguration < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1029,7 +1083,8 @@ module Aws::AppIntegrations
       :event,
       :schema,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1093,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1103,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class ResourceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1066,7 +1123,8 @@ module Aws::AppIntegrations
       :first_execution_from,
       :object,
       :schedule_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1138,8 @@ module Aws::AppIntegrations
     class Subscription < Struct.new(
       :event,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,12 +1152,14 @@ module Aws::AppIntegrations
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1107,7 +1168,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1116,7 +1178,8 @@ module Aws::AppIntegrations
     #   @return [String]
     class UnsupportedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1129,12 +1192,14 @@ module Aws::AppIntegrations
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1187,12 +1252,14 @@ module Aws::AppIntegrations
       :initialization_timeout,
       :application_config,
       :iframe_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1209,12 +1276,14 @@ module Aws::AppIntegrations
       :data_integration_identifier,
       :data_integration_association_identifier,
       :execution_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDataIntegrationAssociationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1231,12 +1300,14 @@ module Aws::AppIntegrations
       :identifier,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDataIntegrationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,12 +1320,14 @@ module Aws::AppIntegrations
     class UpdateEventIntegrationRequest < Struct.new(
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateEventIntegrationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

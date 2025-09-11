@@ -41,7 +41,7 @@ module Aws::AIOps
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AIOps::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::AIOps
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AIOps::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::AIOps
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AIOps::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::AIOps
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AIOps::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::AIOps
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AIOps::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::AIOps
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AIOps::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::AIOps
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AIOps::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::AIOps
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AIOps::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

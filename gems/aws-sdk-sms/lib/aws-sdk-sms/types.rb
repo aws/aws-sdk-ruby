@@ -84,7 +84,8 @@ module Aws::SMS
       :role_name,
       :total_server_groups,
       :total_servers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +107,8 @@ module Aws::SMS
       :name,
       :app_validation_strategy,
       :ssm_validation_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -116,7 +118,8 @@ module Aws::SMS
     #   @return [Types::SSMOutput]
     class AppValidationOutput < Struct.new(
       :ssm_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +165,8 @@ module Aws::SMS
       :ip_address,
       :mac_address,
       :associated_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +196,8 @@ module Aws::SMS
       :client_token,
       :server_groups,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +214,8 @@ module Aws::SMS
       :app_summary,
       :server_groups,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -273,7 +279,8 @@ module Aws::SMS
       :number_of_recent_amis_to_keep,
       :encrypted,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +289,8 @@ module Aws::SMS
     #   @return [String]
     class CreateReplicationJobResponse < Struct.new(
       :replication_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -291,12 +299,14 @@ module Aws::SMS
     #   @return [String]
     class DeleteAppLaunchConfigurationRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAppLaunchConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -305,12 +315,14 @@ module Aws::SMS
     #   @return [String]
     class DeleteAppReplicationConfigurationRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAppReplicationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -329,12 +341,14 @@ module Aws::SMS
       :app_id,
       :force_stop_app_replication,
       :force_terminate_app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAppResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,12 +357,14 @@ module Aws::SMS
     #   @return [String]
     class DeleteAppValidationConfigurationRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAppValidationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -357,22 +373,26 @@ module Aws::SMS
     #   @return [String]
     class DeleteReplicationJobRequest < Struct.new(
       :replication_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteReplicationJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteServerCatalogRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteServerCatalogResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,12 +401,14 @@ module Aws::SMS
     #   @return [String]
     class DisassociateConnectorRequest < Struct.new(
       :connector_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateConnectorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -396,7 +418,8 @@ module Aws::SMS
     #   @return [String]
     class DryRunOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -409,7 +432,8 @@ module Aws::SMS
     class GenerateChangeSetRequest < Struct.new(
       :app_id,
       :changeset_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -418,7 +442,8 @@ module Aws::SMS
     #   @return [Types::S3Location]
     class GenerateChangeSetResponse < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +456,8 @@ module Aws::SMS
     class GenerateTemplateRequest < Struct.new(
       :app_id,
       :template_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +466,8 @@ module Aws::SMS
     #   @return [Types::S3Location]
     class GenerateTemplateResponse < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +476,8 @@ module Aws::SMS
     #   @return [String]
     class GetAppLaunchConfigurationRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +499,8 @@ module Aws::SMS
       :role_name,
       :auto_launch,
       :server_group_launch_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -480,7 +509,8 @@ module Aws::SMS
     #   @return [String]
     class GetAppReplicationConfigurationRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +519,8 @@ module Aws::SMS
     #   @return [Array<Types::ServerGroupReplicationConfiguration>]
     class GetAppReplicationConfigurationResponse < Struct.new(
       :server_group_replication_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -498,7 +529,8 @@ module Aws::SMS
     #   @return [String]
     class GetAppRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +547,8 @@ module Aws::SMS
       :app_summary,
       :server_groups,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +557,8 @@ module Aws::SMS
     #   @return [String]
     class GetAppValidationConfigurationRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +571,8 @@ module Aws::SMS
     class GetAppValidationConfigurationResponse < Struct.new(
       :app_validation_configurations,
       :server_group_validation_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +581,8 @@ module Aws::SMS
     #   @return [String]
     class GetAppValidationOutputRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +591,8 @@ module Aws::SMS
     #   @return [Array<Types::ValidationOutput>]
     class GetAppValidationOutputResponse < Struct.new(
       :validation_output_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -570,7 +607,8 @@ module Aws::SMS
     class GetConnectorsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -584,7 +622,8 @@ module Aws::SMS
     class GetConnectorsResponse < Struct.new(
       :connector_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +642,8 @@ module Aws::SMS
       :replication_job_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,7 +657,8 @@ module Aws::SMS
     class GetReplicationJobsResponse < Struct.new(
       :replication_job_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +677,8 @@ module Aws::SMS
       :replication_job_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +696,8 @@ module Aws::SMS
       :replication_job,
       :replication_run_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -673,7 +716,8 @@ module Aws::SMS
       :next_token,
       :max_results,
       :vm_server_address_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +739,8 @@ module Aws::SMS
       :server_catalog_status,
       :server_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,22 +751,26 @@ module Aws::SMS
     #   @return [String]
     class ImportAppCatalogRequest < Struct.new(
       :role_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ImportAppCatalogResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ImportServerCatalogRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ImportServerCatalogResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +779,8 @@ module Aws::SMS
     #   @return [String]
     class InternalError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -739,7 +789,8 @@ module Aws::SMS
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,12 +799,14 @@ module Aws::SMS
     #   @return [String]
     class LaunchAppRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class LaunchAppResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +824,8 @@ module Aws::SMS
       :latest_launch_time,
       :stack_name,
       :stack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -790,7 +844,8 @@ module Aws::SMS
       :app_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +859,8 @@ module Aws::SMS
     class ListAppsResponse < Struct.new(
       :apps,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +869,8 @@ module Aws::SMS
     #   @return [String]
     class MissingRequiredParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +879,8 @@ module Aws::SMS
     #   @return [String]
     class NoConnectorsAvailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +898,8 @@ module Aws::SMS
       :validation_id,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -853,12 +912,14 @@ module Aws::SMS
     class NotifyAppValidationOutputRequest < Struct.new(
       :app_id,
       :notification_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class NotifyAppValidationOutputResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -867,7 +928,8 @@ module Aws::SMS
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,12 +951,14 @@ module Aws::SMS
       :role_name,
       :auto_launch,
       :server_group_launch_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutAppLaunchConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,12 +971,14 @@ module Aws::SMS
     class PutAppReplicationConfigurationRequest < Struct.new(
       :app_id,
       :server_group_replication_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutAppReplicationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,12 +995,14 @@ module Aws::SMS
       :app_id,
       :app_validation_configurations,
       :server_group_validation_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutAppValidationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,7 +1099,8 @@ module Aws::SMS
       :encrypted,
       :kms_key_id,
       :replication_run_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1109,8 @@ module Aws::SMS
     #   @return [String]
     class ReplicationJobAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1119,8 @@ module Aws::SMS
     #   @return [String]
     class ReplicationJobNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1117,7 +1188,8 @@ module Aws::SMS
       :description,
       :encrypted,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1199,8 @@ module Aws::SMS
     #   @return [String]
     class ReplicationRunLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,7 +1214,8 @@ module Aws::SMS
     class ReplicationRunStageDetails < Struct.new(
       :stage,
       :stage_progress,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1229,8 @@ module Aws::SMS
     class S3Location < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1240,8 @@ module Aws::SMS
     #   @return [Types::S3Location]
     class SSMOutput < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1195,7 +1271,8 @@ module Aws::SMS
       :command,
       :execution_timeout_seconds,
       :output_s3_bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1226,7 +1303,8 @@ module Aws::SMS
       :vm_server,
       :replication_job_id,
       :replication_job_terminated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1313,8 @@ module Aws::SMS
     #   @return [String]
     class ServerCannotBeReplicatedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1253,7 +1332,8 @@ module Aws::SMS
       :server_group_id,
       :name,
       :server_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1272,7 +1352,8 @@ module Aws::SMS
       :server_group_id,
       :launch_order,
       :server_launch_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1287,7 +1368,8 @@ module Aws::SMS
     class ServerGroupReplicationConfiguration < Struct.new(
       :server_group_id,
       :server_replication_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1383,8 @@ module Aws::SMS
     class ServerGroupValidationConfiguration < Struct.new(
       :server_group_id,
       :server_validation_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1355,7 +1438,8 @@ module Aws::SMS
       :iam_instance_profile_name,
       :configure_script,
       :configure_script_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1370,7 +1454,8 @@ module Aws::SMS
     class ServerReplicationConfiguration < Struct.new(
       :server,
       :server_replication_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1421,7 +1506,8 @@ module Aws::SMS
       :number_of_recent_amis_to_keep,
       :encrypted,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1447,7 +1533,8 @@ module Aws::SMS
       :name,
       :server_validation_strategy,
       :user_data_validation_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1457,7 +1544,8 @@ module Aws::SMS
     #   @return [Types::Server]
     class ServerValidationOutput < Struct.new(
       :server,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1467,7 +1555,8 @@ module Aws::SMS
     #   @return [Types::S3Location]
     class Source < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,12 +1565,14 @@ module Aws::SMS
     #   @return [String]
     class StartAppReplicationRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartAppReplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1494,12 +1585,14 @@ module Aws::SMS
     class StartOnDemandAppReplicationRequest < Struct.new(
       :app_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartOnDemandAppReplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,7 +1605,8 @@ module Aws::SMS
     class StartOnDemandReplicationRunRequest < Struct.new(
       :replication_job_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1521,7 +1615,8 @@ module Aws::SMS
     #   @return [String]
     class StartOnDemandReplicationRunResponse < Struct.new(
       :replication_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,12 +1625,14 @@ module Aws::SMS
     #   @return [String]
     class StopAppReplicationRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopAppReplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,13 +1646,15 @@ module Aws::SMS
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The service is temporarily unavailable.</p>
     class TemporarilyUnavailableException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,12 +1663,14 @@ module Aws::SMS
     #   @return [String]
     class TerminateAppRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TerminateAppResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1579,7 +1680,8 @@ module Aws::SMS
     #   @return [String]
     class UnauthorizedOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1608,7 +1710,8 @@ module Aws::SMS
       :role_name,
       :server_groups,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1728,8 @@ module Aws::SMS
       :app_summary,
       :server_groups,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1686,12 +1790,14 @@ module Aws::SMS
       :number_of_recent_amis_to_keep,
       :encrypted,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateReplicationJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1702,7 +1808,8 @@ module Aws::SMS
     #   @return [Types::S3Location]
     class UserData < Struct.new(
       :s3_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1823,8 @@ module Aws::SMS
     class UserDataValidationParameters < Struct.new(
       :source,
       :script_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1750,7 +1858,8 @@ module Aws::SMS
       :latest_validation_time,
       :app_validation_output,
       :server_validation_output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1776,7 +1885,8 @@ module Aws::SMS
       :vm_manager_name,
       :vm_manager_type,
       :vm_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1790,7 +1900,8 @@ module Aws::SMS
     class VmServerAddress < Struct.new(
       :vm_manager_id,
       :vm_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

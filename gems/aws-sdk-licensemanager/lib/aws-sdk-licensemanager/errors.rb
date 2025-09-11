@@ -50,7 +50,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -64,7 +64,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::AuthorizationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::EntitlementNotAllowedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -103,7 +103,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::FailedDependencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::FilterLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -133,7 +133,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -148,7 +148,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::InvalidResourceStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -161,7 +161,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::LicenseUsageException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -174,7 +174,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::NoEntitlementsAllowedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -187,7 +187,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::RateLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -200,7 +200,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::RedirectException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def location
@@ -217,7 +217,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -230,7 +230,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -243,7 +243,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::ServerInternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -256,7 +256,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::UnsupportedDigitalSignatureMethodException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -269,7 +269,7 @@ module Aws::LicenseManager
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManager::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

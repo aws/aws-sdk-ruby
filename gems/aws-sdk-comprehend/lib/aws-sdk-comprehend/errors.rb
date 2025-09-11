@@ -50,7 +50,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::BatchSizeLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -64,7 +64,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::InvalidFilterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -104,7 +104,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::JobNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::KmsKeyValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -153,7 +153,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::ResourceLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -180,7 +180,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -194,7 +194,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::ResourceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -207,7 +207,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::TextSizeLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -220,7 +220,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -234,7 +234,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::TooManyTagKeysException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -249,7 +249,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -264,7 +264,7 @@ module Aws::Comprehend
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Comprehend::Types::UnsupportedLanguageException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

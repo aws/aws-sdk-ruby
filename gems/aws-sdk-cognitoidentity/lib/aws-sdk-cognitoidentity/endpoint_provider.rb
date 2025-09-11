@@ -57,7 +57,6 @@ module Aws::CognitoIdentity
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
-
     end
   end
 end

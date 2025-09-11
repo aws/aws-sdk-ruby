@@ -81,7 +81,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::AWSOrganizationsNotInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -113,7 +113,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::AccessDeniedForDependencyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::AccountAlreadyClosedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -144,7 +144,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::AccountAlreadyRegisteredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::AccountNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -172,7 +172,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::AccountNotRegisteredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -188,7 +188,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::AccountOwnerNotVerifiedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -202,7 +202,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::AlreadyInOrganizationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -216,7 +216,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::ChildNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -230,7 +230,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -244,7 +244,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -471,7 +471,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::ConstraintViolationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -489,7 +489,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::CreateAccountStatusNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -503,7 +503,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::DestinationParentNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -516,7 +516,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::DuplicateAccountException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -533,7 +533,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::DuplicateHandshakeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -546,7 +546,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::DuplicateOrganizationalUnitException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -559,7 +559,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::DuplicatePolicyAttachmentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -572,7 +572,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::DuplicatePolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -588,7 +588,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::EffectivePolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -603,7 +603,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::FinalizingOrganizationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -617,7 +617,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::HandshakeAlreadyInStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -685,7 +685,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::HandshakeConstraintViolationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -702,7 +702,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::HandshakeNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -717,7 +717,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::InvalidHandshakeTransitionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -838,7 +838,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -858,7 +858,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::MalformedPolicyDocumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -873,7 +873,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::MasterCannotLeaveOrganizationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -887,7 +887,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::OrganizationNotEmptyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -901,7 +901,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::OrganizationalUnitNotEmptyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -915,7 +915,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::OrganizationalUnitNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -928,7 +928,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::ParentNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -942,7 +942,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::PolicyChangesInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -956,7 +956,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::PolicyInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -969,7 +969,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::PolicyNotAttachedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -982,7 +982,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::PolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -995,7 +995,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::PolicyTypeAlreadyEnabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1011,7 +1011,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::PolicyTypeNotAvailableForOrganizationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1027,7 +1027,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::PolicyTypeNotEnabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1040,7 +1040,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::ResourcePolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1053,7 +1053,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::RootNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1067,7 +1067,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::ServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1081,7 +1081,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::SourceParentNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1095,7 +1095,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::TargetNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1111,7 +1111,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def type
@@ -1128,7 +1128,7 @@ module Aws::Organizations
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::UnsupportedAPIEndpointException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

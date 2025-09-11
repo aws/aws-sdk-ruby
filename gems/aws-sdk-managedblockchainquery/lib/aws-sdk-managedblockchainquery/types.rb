@@ -12,7 +12,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [Array<String>]
     class AddressIdentifierFilter < Struct.new(
       :transaction_event_to_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +43,8 @@ module Aws::ManagedBlockchainQuery
       :contract_identifier,
       :token_standard,
       :deployer_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +78,8 @@ module Aws::ManagedBlockchainQuery
       :error_code,
       :error_message,
       :error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +88,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [Array<Types::BatchGetTokenBalanceInputItem>]
     class BatchGetTokenBalanceInput < Struct.new(
       :get_token_balance_inputs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -106,7 +111,8 @@ module Aws::ManagedBlockchainQuery
       :token_identifier,
       :owner_identifier,
       :at_blockchain_instant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -119,7 +125,8 @@ module Aws::ManagedBlockchainQuery
     class BatchGetTokenBalanceOutput < Struct.new(
       :token_balances,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +156,8 @@ module Aws::ManagedBlockchainQuery
       :balance,
       :at_blockchain_instant,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +171,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [Time]
     class BlockchainInstant < Struct.new(
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +187,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [Array<String>]
     class ConfirmationStatusFilter < Struct.new(
       :include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +206,8 @@ module Aws::ManagedBlockchainQuery
       :network,
       :token_standard,
       :deployer_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,7 +221,8 @@ module Aws::ManagedBlockchainQuery
     class ContractIdentifier < Struct.new(
       :network,
       :contract_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +240,8 @@ module Aws::ManagedBlockchainQuery
       :name,
       :symbol,
       :decimals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -237,7 +250,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [Types::ContractIdentifier]
     class GetAssetContractInput < Struct.new(
       :contract_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +272,8 @@ module Aws::ManagedBlockchainQuery
       :token_standard,
       :deployer_address,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +295,8 @@ module Aws::ManagedBlockchainQuery
       :token_identifier,
       :owner_identifier,
       :at_blockchain_instant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +325,8 @@ module Aws::ManagedBlockchainQuery
       :balance,
       :at_blockchain_instant,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +347,8 @@ module Aws::ManagedBlockchainQuery
       :transaction_hash,
       :transaction_id,
       :network,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +357,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [Types::Transaction]
     class GetTransactionOutput < Struct.new(
       :transaction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +372,8 @@ module Aws::ManagedBlockchainQuery
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +399,8 @@ module Aws::ManagedBlockchainQuery
       :contract_filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +413,8 @@ module Aws::ManagedBlockchainQuery
     class ListAssetContractsOutput < Struct.new(
       :contracts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +464,8 @@ module Aws::ManagedBlockchainQuery
       :sort,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +478,8 @@ module Aws::ManagedBlockchainQuery
     class ListFilteredTransactionEventsOutput < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +499,8 @@ module Aws::ManagedBlockchainQuery
     class ListFilteredTransactionEventsSort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -513,7 +538,8 @@ module Aws::ManagedBlockchainQuery
       :token_filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +553,8 @@ module Aws::ManagedBlockchainQuery
     class ListTokenBalancesOutput < Struct.new(
       :token_balances,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -565,7 +592,8 @@ module Aws::ManagedBlockchainQuery
       :network,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,7 +607,8 @@ module Aws::ManagedBlockchainQuery
     class ListTransactionEventsOutput < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -628,7 +657,8 @@ module Aws::ManagedBlockchainQuery
       :next_token,
       :max_results,
       :confirmation_status_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +671,8 @@ module Aws::ManagedBlockchainQuery
     class ListTransactionsOutput < Struct.new(
       :transactions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -659,7 +690,8 @@ module Aws::ManagedBlockchainQuery
     class ListTransactionsSort < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +701,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [String]
     class OwnerFilter < Struct.new(
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -679,7 +712,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [String]
     class OwnerIdentifier < Struct.new(
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +731,8 @@ module Aws::ManagedBlockchainQuery
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +758,8 @@ module Aws::ManagedBlockchainQuery
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +784,8 @@ module Aws::ManagedBlockchainQuery
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +799,8 @@ module Aws::ManagedBlockchainQuery
     class TimeFilter < Struct.new(
       :from,
       :to,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +830,8 @@ module Aws::ManagedBlockchainQuery
       :balance,
       :at_blockchain_instant,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +855,8 @@ module Aws::ManagedBlockchainQuery
       :network,
       :contract_address,
       :token_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +883,8 @@ module Aws::ManagedBlockchainQuery
       :network,
       :contract_address,
       :token_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -944,7 +985,8 @@ module Aws::ManagedBlockchainQuery
       :transaction_id,
       :confirmation_status,
       :execution_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1026,7 +1068,8 @@ module Aws::ManagedBlockchainQuery
       :spent_vout_index,
       :blockchain_instant,
       :confirmation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1095,8 @@ module Aws::ManagedBlockchainQuery
       :network,
       :transaction_timestamp,
       :confirmation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1070,7 +1114,8 @@ module Aws::ManagedBlockchainQuery
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1129,8 @@ module Aws::ManagedBlockchainQuery
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1140,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [Boolean]
     class VoutFilter < Struct.new(
       :vout_spent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

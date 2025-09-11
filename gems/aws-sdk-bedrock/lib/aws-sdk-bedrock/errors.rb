@@ -43,7 +43,7 @@ module Aws::Bedrock
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Bedrock::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -56,7 +56,7 @@ module Aws::Bedrock
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Bedrock::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::Bedrock
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Bedrock::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::Bedrock
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Bedrock::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::Bedrock
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Bedrock::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::Bedrock
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Bedrock::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::Bedrock
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Bedrock::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -134,7 +134,7 @@ module Aws::Bedrock
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Bedrock::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -147,7 +147,7 @@ module Aws::Bedrock
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Bedrock::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -165,7 +165,7 @@ module Aws::Bedrock
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Bedrock::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

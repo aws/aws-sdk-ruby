@@ -43,7 +43,8 @@ module Aws::Transcribe
       :end_time,
       :first,
       :last,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +56,8 @@ module Aws::Transcribe
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +219,8 @@ module Aws::Transcribe
       :settings,
       :channel_definitions,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +231,8 @@ module Aws::Transcribe
     #   @return [Array<Types::CallAnalyticsSkippedFeature>]
     class CallAnalyticsJobDetails < Struct.new(
       :skipped,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +321,8 @@ module Aws::Transcribe
       :language_options,
       :language_id_settings,
       :summarization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +377,8 @@ module Aws::Transcribe
       :call_analytics_job_status,
       :call_analytics_job_details,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +399,8 @@ module Aws::Transcribe
       :feature,
       :reason_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +442,8 @@ module Aws::Transcribe
       :last_update_time,
       :tags,
       :input_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +461,8 @@ module Aws::Transcribe
     class ChannelDefinition < Struct.new(
       :channel_id,
       :participant_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -493,7 +502,8 @@ module Aws::Transcribe
     #   @return [String]
     class ClinicalNoteGenerationSettings < Struct.new(
       :note_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +513,8 @@ module Aws::Transcribe
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +548,8 @@ module Aws::Transcribe
       :redaction_type,
       :redaction_output,
       :pii_entity_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +588,8 @@ module Aws::Transcribe
       :rules,
       :tags,
       :input_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +599,8 @@ module Aws::Transcribe
     #   @return [Types::CategoryProperties]
     class CreateCallAnalyticsCategoryResponse < Struct.new(
       :category_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +654,8 @@ module Aws::Transcribe
       :model_name,
       :input_data_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +684,8 @@ module Aws::Transcribe
       :model_name,
       :input_data_config,
       :model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +719,8 @@ module Aws::Transcribe
       :language_code,
       :vocabulary_file_uri,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -737,7 +754,8 @@ module Aws::Transcribe
       :vocabulary_state,
       :last_modified_time,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +823,8 @@ module Aws::Transcribe
       :vocabulary_filter_file_uri,
       :tags,
       :data_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +844,8 @@ module Aws::Transcribe
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +913,8 @@ module Aws::Transcribe
       :vocabulary_file_uri,
       :tags,
       :data_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +946,8 @@ module Aws::Transcribe
       :vocabulary_state,
       :last_modified_time,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -935,12 +957,14 @@ module Aws::Transcribe
     #   @return [String]
     class DeleteCallAnalyticsCategoryRequest < Struct.new(
       :category_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCallAnalyticsCategoryResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -950,12 +974,14 @@ module Aws::Transcribe
     #   @return [String]
     class DeleteCallAnalyticsJobRequest < Struct.new(
       :call_analytics_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCallAnalyticsJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -965,7 +991,8 @@ module Aws::Transcribe
     #   @return [String]
     class DeleteLanguageModelRequest < Struct.new(
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1002,8 @@ module Aws::Transcribe
     #   @return [String]
     class DeleteMedicalScribeJobRequest < Struct.new(
       :medical_scribe_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1013,8 @@ module Aws::Transcribe
     #   @return [String]
     class DeleteMedicalTranscriptionJobRequest < Struct.new(
       :medical_transcription_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1024,8 @@ module Aws::Transcribe
     #   @return [String]
     class DeleteMedicalVocabularyRequest < Struct.new(
       :vocabulary_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1035,8 @@ module Aws::Transcribe
     #   @return [String]
     class DeleteTranscriptionJobRequest < Struct.new(
       :transcription_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1015,7 +1046,8 @@ module Aws::Transcribe
     #   @return [String]
     class DeleteVocabularyFilterRequest < Struct.new(
       :vocabulary_filter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1025,7 +1057,8 @@ module Aws::Transcribe
     #   @return [String]
     class DeleteVocabularyRequest < Struct.new(
       :vocabulary_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,7 +1068,8 @@ module Aws::Transcribe
     #   @return [String]
     class DescribeLanguageModelRequest < Struct.new(
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1084,8 @@ module Aws::Transcribe
     #   @return [Types::LanguageModel]
     class DescribeLanguageModelResponse < Struct.new(
       :language_model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1095,8 @@ module Aws::Transcribe
     #   @return [String]
     class GetCallAnalyticsCategoryRequest < Struct.new(
       :category_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1070,7 +1106,8 @@ module Aws::Transcribe
     #   @return [Types::CategoryProperties]
     class GetCallAnalyticsCategoryResponse < Struct.new(
       :category_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1117,8 @@ module Aws::Transcribe
     #   @return [String]
     class GetCallAnalyticsJobRequest < Struct.new(
       :call_analytics_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1128,8 @@ module Aws::Transcribe
     #   @return [Types::CallAnalyticsJob]
     class GetCallAnalyticsJobResponse < Struct.new(
       :call_analytics_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1139,8 @@ module Aws::Transcribe
     #   @return [String]
     class GetMedicalScribeJobRequest < Struct.new(
       :medical_scribe_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1150,8 @@ module Aws::Transcribe
     #   @return [Types::MedicalScribeJob]
     class GetMedicalScribeJobResponse < Struct.new(
       :medical_scribe_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1120,7 +1161,8 @@ module Aws::Transcribe
     #   @return [String]
     class GetMedicalTranscriptionJobRequest < Struct.new(
       :medical_transcription_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1130,7 +1172,8 @@ module Aws::Transcribe
     #   @return [Types::MedicalTranscriptionJob]
     class GetMedicalTranscriptionJobResponse < Struct.new(
       :medical_transcription_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1183,8 @@ module Aws::Transcribe
     #   @return [String]
     class GetMedicalVocabularyRequest < Struct.new(
       :vocabulary_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1223,8 @@ module Aws::Transcribe
       :last_modified_time,
       :failure_reason,
       :download_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1189,7 +1234,8 @@ module Aws::Transcribe
     #   @return [String]
     class GetTranscriptionJobRequest < Struct.new(
       :transcription_job_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1245,8 @@ module Aws::Transcribe
     #   @return [Types::TranscriptionJob]
     class GetTranscriptionJobResponse < Struct.new(
       :transcription_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1209,7 +1256,8 @@ module Aws::Transcribe
     #   @return [String]
     class GetVocabularyFilterRequest < Struct.new(
       :vocabulary_filter_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1234,7 +1282,8 @@ module Aws::Transcribe
       :language_code,
       :last_modified_time,
       :download_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1244,7 +1293,8 @@ module Aws::Transcribe
     #   @return [String]
     class GetVocabularyRequest < Struct.new(
       :vocabulary_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1331,8 @@ module Aws::Transcribe
       :last_modified_time,
       :failure_reason,
       :download_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1370,8 @@ module Aws::Transcribe
       :s3_uri,
       :tuning_data_s3_uri,
       :data_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1381,8 @@ module Aws::Transcribe
     #   @return [String]
     class InternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1378,7 +1431,8 @@ module Aws::Transcribe
       :absolute_time_range,
       :relative_time_range,
       :negate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1413,7 +1467,8 @@ module Aws::Transcribe
     class JobExecutionSettings < Struct.new(
       :allow_deferred_execution,
       :data_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1431,7 +1486,8 @@ module Aws::Transcribe
     class LanguageCodeItem < Struct.new(
       :language_code,
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,7 +1549,8 @@ module Aws::Transcribe
       :vocabulary_name,
       :vocabulary_filter_name,
       :language_model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1588,7 +1645,8 @@ module Aws::Transcribe
       :upgrade_availability,
       :failure_reason,
       :input_data_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1598,7 +1656,8 @@ module Aws::Transcribe
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1617,7 +1676,8 @@ module Aws::Transcribe
     class ListCallAnalyticsCategoriesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1695,8 @@ module Aws::Transcribe
     class ListCallAnalyticsCategoriesResponse < Struct.new(
       :next_token,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1665,7 +1726,8 @@ module Aws::Transcribe
       :job_name_contains,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1687,7 +1749,8 @@ module Aws::Transcribe
       :status,
       :next_token,
       :call_analytics_job_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1717,7 +1780,8 @@ module Aws::Transcribe
       :name_contains,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1735,7 +1799,8 @@ module Aws::Transcribe
     class ListLanguageModelsResponse < Struct.new(
       :next_token,
       :models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1765,7 +1830,8 @@ module Aws::Transcribe
       :job_name_contains,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1787,7 +1853,8 @@ module Aws::Transcribe
       :status,
       :next_token,
       :medical_scribe_job_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1817,7 +1884,8 @@ module Aws::Transcribe
       :job_name_contains,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,7 +1907,8 @@ module Aws::Transcribe
       :status,
       :next_token,
       :medical_transcription_job_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1938,8 @@ module Aws::Transcribe
       :max_results,
       :state_equals,
       :name_contains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1893,7 +1963,8 @@ module Aws::Transcribe
       :status,
       :next_token,
       :vocabularies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1910,7 +1981,8 @@ module Aws::Transcribe
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1924,7 +1996,8 @@ module Aws::Transcribe
     class ListTagsForResourceResponse < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1954,7 +2027,8 @@ module Aws::Transcribe
       :job_name_contains,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1976,7 +2050,8 @@ module Aws::Transcribe
       :status,
       :next_token,
       :transcription_job_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2006,7 +2081,8 @@ module Aws::Transcribe
       :max_results,
       :state_equals,
       :name_contains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2029,7 +2105,8 @@ module Aws::Transcribe
       :status,
       :next_token,
       :vocabularies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2053,7 +2130,8 @@ module Aws::Transcribe
       :next_token,
       :max_results,
       :name_contains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2071,7 +2149,8 @@ module Aws::Transcribe
     class ListVocabularyFiltersResponse < Struct.new(
       :next_token,
       :vocabulary_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2127,7 +2206,8 @@ module Aws::Transcribe
     class Media < Struct.new(
       :media_file_uri,
       :redacted_media_file_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2145,7 +2225,8 @@ module Aws::Transcribe
     class MedicalScribeChannelDefinition < Struct.new(
       :channel_id,
       :participant_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2161,7 +2242,8 @@ module Aws::Transcribe
     #   @return [Types::MedicalScribePatientContext]
     class MedicalScribeContext < Struct.new(
       :patient_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2276,7 +2358,8 @@ module Aws::Transcribe
       :channel_definitions,
       :medical_scribe_context_provided,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2327,7 +2410,8 @@ module Aws::Transcribe
       :language_code,
       :medical_scribe_job_status,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2343,7 +2427,8 @@ module Aws::Transcribe
     class MedicalScribeOutput < Struct.new(
       :transcript_file_uri,
       :clinical_document_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2353,7 +2438,8 @@ module Aws::Transcribe
     #   @return [String]
     class MedicalScribePatientContext < Struct.new(
       :pronouns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2414,7 +2500,8 @@ module Aws::Transcribe
       :vocabulary_filter_name,
       :vocabulary_filter_method,
       :clinical_note_generation_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2515,8 @@ module Aws::Transcribe
     #   @return [String]
     class MedicalTranscript < Struct.new(
       :transcript_file_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2578,7 +2666,8 @@ module Aws::Transcribe
       :specialty,
       :type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2654,7 +2743,8 @@ module Aws::Transcribe
       :specialty,
       :content_identification_type,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2721,7 +2811,8 @@ module Aws::Transcribe
       :show_alternatives,
       :max_alternatives,
       :vocabulary_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2742,7 +2833,8 @@ module Aws::Transcribe
     #   @return [String]
     class ModelSettings < Struct.new(
       :language_model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2780,7 +2872,8 @@ module Aws::Transcribe
       :absolute_time_range,
       :relative_time_range,
       :negate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2790,7 +2883,8 @@ module Aws::Transcribe
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2829,7 +2923,8 @@ module Aws::Transcribe
       :end_percentage,
       :first,
       :last,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2866,7 +2961,8 @@ module Aws::Transcribe
       :transcript_filter,
       :sentiment_filter,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class NonTalkTimeFilter < Rule; end
@@ -2925,7 +3021,8 @@ module Aws::Transcribe
       :relative_time_range,
       :participant_role,
       :negate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3004,7 +3101,8 @@ module Aws::Transcribe
       :max_alternatives,
       :vocabulary_filter_name,
       :vocabulary_filter_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3122,7 +3220,8 @@ module Aws::Transcribe
       :settings,
       :tags,
       :channel_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3132,7 +3231,8 @@ module Aws::Transcribe
     #   @return [Types::CallAnalyticsJob]
     class StartCallAnalyticsJobResponse < Struct.new(
       :call_analytics_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3255,7 +3355,8 @@ module Aws::Transcribe
       :channel_definitions,
       :tags,
       :medical_scribe_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3265,7 +3366,8 @@ module Aws::Transcribe
     #   @return [Types::MedicalScribeJob]
     class StartMedicalScribeJobResponse < Struct.new(
       :medical_scribe_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3444,7 +3546,8 @@ module Aws::Transcribe
       :specialty,
       :type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3454,7 +3557,8 @@ module Aws::Transcribe
     #   @return [Types::MedicalTranscriptionJob]
     class StartMedicalTranscriptionJobResponse < Struct.new(
       :medical_transcription_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3754,7 +3858,8 @@ module Aws::Transcribe
       :tags,
       :language_id_settings,
       :toxicity_detection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3764,7 +3869,8 @@ module Aws::Transcribe
     #   @return [Types::TranscriptionJob]
     class StartTranscriptionJobResponse < Struct.new(
       :transcription_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3788,7 +3894,8 @@ module Aws::Transcribe
     class Subtitles < Struct.new(
       :formats,
       :output_start_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3826,7 +3933,8 @@ module Aws::Transcribe
       :formats,
       :subtitle_file_uris,
       :output_start_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3841,7 +3949,8 @@ module Aws::Transcribe
     #   @return [Boolean]
     class Summarization < Struct.new(
       :generate_abstractive_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3864,7 +3973,8 @@ module Aws::Transcribe
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3887,12 +3997,14 @@ module Aws::Transcribe
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3906,7 +4018,8 @@ module Aws::Transcribe
     #   @return [Array<String>]
     class ToxicityDetectionSettings < Struct.new(
       :toxicity_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3949,7 +4062,8 @@ module Aws::Transcribe
     class Transcript < Struct.new(
       :transcript_file_uri,
       :redacted_transcript_file_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4006,7 +4120,8 @@ module Aws::Transcribe
       :participant_role,
       :negate,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4196,7 +4311,8 @@ module Aws::Transcribe
       :subtitles,
       :language_id_settings,
       :toxicity_detection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4301,7 +4417,8 @@ module Aws::Transcribe
       :identified_language_score,
       :language_codes,
       :toxicity_detection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4322,12 +4439,14 @@ module Aws::Transcribe
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4349,7 +4468,8 @@ module Aws::Transcribe
       :category_name,
       :rules,
       :input_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4359,7 +4479,8 @@ module Aws::Transcribe
     #   @return [Types::CategoryProperties]
     class UpdateCallAnalyticsCategoryResponse < Struct.new(
       :category_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4384,7 +4505,8 @@ module Aws::Transcribe
       :vocabulary_name,
       :language_code,
       :vocabulary_file_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4412,7 +4534,8 @@ module Aws::Transcribe
       :language_code,
       :last_modified_time,
       :vocabulary_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4459,7 +4582,8 @@ module Aws::Transcribe
       :words,
       :vocabulary_filter_file_uri,
       :data_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4479,7 +4603,8 @@ module Aws::Transcribe
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4538,7 +4663,8 @@ module Aws::Transcribe
       :phrases,
       :vocabulary_file_uri,
       :data_access_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4564,7 +4690,8 @@ module Aws::Transcribe
       :language_code,
       :last_modified_time,
       :vocabulary_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4594,7 +4721,8 @@ module Aws::Transcribe
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4628,7 +4756,8 @@ module Aws::Transcribe
       :language_code,
       :last_modified_time,
       :vocabulary_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -893,7 +893,6 @@ module Aws::Snowball
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidResourceException)
         operation.traits = {}
       end)
-
     end
 
     class << self

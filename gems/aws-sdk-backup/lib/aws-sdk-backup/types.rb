@@ -30,7 +30,8 @@ module Aws::Backup
     class AdvancedBackupSetting < Struct.new(
       :resource_type,
       :backup_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +59,8 @@ module Aws::Backup
       :arn,
       :type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +77,8 @@ module Aws::Backup
       :backup_vault_name,
       :mpa_approval_team_arn,
       :requester_comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +268,8 @@ module Aws::Backup
       :resource_name,
       :initiation_date,
       :message_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -330,7 +334,8 @@ module Aws::Backup
       :count,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -360,7 +365,8 @@ module Aws::Backup
       :backup_plan_name,
       :rules,
       :advanced_backup_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -383,7 +389,8 @@ module Aws::Backup
       :backup_plan_name,
       :rules,
       :advanced_backup_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -397,7 +404,8 @@ module Aws::Backup
     class BackupPlanTemplatesListMember < Struct.new(
       :backup_plan_template_id,
       :backup_plan_template_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +460,8 @@ module Aws::Backup
       :creator_request_id,
       :last_execution_date,
       :advanced_backup_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +553,8 @@ module Aws::Backup
       :enable_continuous_backup,
       :schedule_expression_timezone,
       :index_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +645,8 @@ module Aws::Backup
       :enable_continuous_backup,
       :schedule_expression_timezone,
       :index_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +701,8 @@ module Aws::Backup
       :list_of_tags,
       :not_resources,
       :conditions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +738,8 @@ module Aws::Backup
       :creation_date,
       :creator_request_id,
       :iam_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +835,8 @@ module Aws::Backup
       :min_retention_days,
       :max_retention_days,
       :lock_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -851,7 +865,8 @@ module Aws::Backup
     class CalculatedLifecycle < Struct.new(
       :move_to_cold_storage_at,
       :delete_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,12 +883,14 @@ module Aws::Backup
       :legal_hold_id,
       :cancel_description,
       :retain_record_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelLegalHoldOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +917,8 @@ module Aws::Backup
       :condition_type,
       :condition_key,
       :condition_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -919,7 +937,8 @@ module Aws::Backup
     class ConditionParameter < Struct.new(
       :condition_key,
       :condition_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +966,8 @@ module Aws::Backup
       :string_not_equals,
       :string_like,
       :string_not_like,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +988,8 @@ module Aws::Backup
       :message,
       :type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1006,8 @@ module Aws::Backup
     class ControlInputParameter < Struct.new(
       :parameter_name,
       :parameter_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1042,8 @@ module Aws::Backup
       :compliance_resource_ids,
       :compliance_resource_types,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1046,7 +1069,8 @@ module Aws::Backup
     class CopyAction < Struct.new(
       :lifecycle,
       :destination_backup_vault_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1171,7 +1195,8 @@ module Aws::Backup
       :child_jobs_in_state,
       :resource_name,
       :message_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1236,7 +1261,8 @@ module Aws::Backup
       :count,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1262,7 +1288,8 @@ module Aws::Backup
       :backup_plan,
       :backup_plan_tags,
       :creator_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1320,8 @@ module Aws::Backup
       :creation_date,
       :version_id,
       :advanced_backup_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1340,8 @@ module Aws::Backup
       :backup_plan_id,
       :backup_selection,
       :creator_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1333,7 +1362,8 @@ module Aws::Backup
       :selection_id,
       :backup_plan_id,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1389,8 @@ module Aws::Backup
       :backup_vault_tags,
       :encryption_key_arn,
       :creator_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1382,7 +1413,8 @@ module Aws::Backup
       :backup_vault_name,
       :backup_vault_arn,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1412,7 +1444,8 @@ module Aws::Backup
       :framework_controls,
       :idempotency_token,
       :framework_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1428,7 +1461,8 @@ module Aws::Backup
     class CreateFrameworkOutput < Struct.new(
       :framework_name,
       :framework_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1457,7 +1491,8 @@ module Aws::Backup
       :idempotency_token,
       :recovery_point_selection,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1490,7 +1525,8 @@ module Aws::Backup
       :legal_hold_arn,
       :creation_date,
       :recovery_point_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1521,7 +1557,8 @@ module Aws::Backup
       :creator_request_id,
       :min_retention_days,
       :max_retention_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1547,7 +1584,8 @@ module Aws::Backup
       :backup_vault_arn,
       :creation_date,
       :vault_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1590,7 +1628,8 @@ module Aws::Backup
       :report_setting,
       :report_plan_tags,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1611,7 +1650,8 @@ module Aws::Backup
       :report_plan_name,
       :report_plan_arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,7 +1676,8 @@ module Aws::Backup
       :backup_vault_tags,
       :creator_request_id,
       :requester_comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,7 +1698,8 @@ module Aws::Backup
       :vault_state,
       :restore_access_backup_vault_name,
       :creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1683,7 +1725,8 @@ module Aws::Backup
       :creator_request_id,
       :restore_testing_plan,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1706,7 +1749,8 @@ module Aws::Backup
       :creation_time,
       :restore_testing_plan_arn,
       :restore_testing_plan_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1789,8 @@ module Aws::Backup
       :creator_request_id,
       :restore_testing_plan_name,
       :restore_testing_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1769,7 +1814,8 @@ module Aws::Backup
       :restore_testing_plan_arn,
       :restore_testing_plan_name,
       :restore_testing_selection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1842,8 @@ module Aws::Backup
     class DateRange < Struct.new(
       :from_date,
       :to_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,7 +1852,8 @@ module Aws::Backup
     #   @return [String]
     class DeleteBackupPlanInput < Struct.new(
       :backup_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1831,7 +1879,8 @@ module Aws::Backup
       :backup_plan_arn,
       :deletion_date,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1894,8 @@ module Aws::Backup
     class DeleteBackupSelectionInput < Struct.new(
       :backup_plan_id,
       :selection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1857,7 +1907,8 @@ module Aws::Backup
     #   @return [String]
     class DeleteBackupVaultAccessPolicyInput < Struct.new(
       :backup_vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1868,7 +1919,8 @@ module Aws::Backup
     #   @return [String]
     class DeleteBackupVaultInput < Struct.new(
       :backup_vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1877,7 +1929,8 @@ module Aws::Backup
     #   @return [String]
     class DeleteBackupVaultLockConfigurationInput < Struct.new(
       :backup_vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1941,8 @@ module Aws::Backup
     #   @return [String]
     class DeleteBackupVaultNotificationsInput < Struct.new(
       :backup_vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1897,7 +1951,8 @@ module Aws::Backup
     #   @return [String]
     class DeleteFrameworkInput < Struct.new(
       :framework_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1913,7 +1968,8 @@ module Aws::Backup
     class DeleteRecoveryPointInput < Struct.new(
       :backup_vault_name,
       :recovery_point_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1922,7 +1978,8 @@ module Aws::Backup
     #   @return [String]
     class DeleteReportPlanInput < Struct.new(
       :report_plan_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1932,7 +1989,8 @@ module Aws::Backup
     #   @return [String]
     class DeleteRestoreTestingPlanInput < Struct.new(
       :restore_testing_plan_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2005,8 @@ module Aws::Backup
     class DeleteRestoreTestingSelectionInput < Struct.new(
       :restore_testing_plan_name,
       :restore_testing_selection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1967,7 +2026,8 @@ module Aws::Backup
       :message,
       :type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1976,7 +2036,8 @@ module Aws::Backup
     #   @return [String]
     class DescribeBackupJobInput < Struct.new(
       :backup_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2158,7 +2219,8 @@ module Aws::Backup
       :resource_name,
       :initiation_date,
       :message_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2178,7 +2240,8 @@ module Aws::Backup
     class DescribeBackupVaultInput < Struct.new(
       :backup_vault_name,
       :backup_vault_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2286,7 +2349,8 @@ module Aws::Backup
       :mpa_approval_team_arn,
       :mpa_session_arn,
       :latest_mpa_approval_team_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2300,7 +2364,8 @@ module Aws::Backup
     #   @return [String]
     class DescribeCopyJobInput < Struct.new(
       :copy_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2309,7 +2374,8 @@ module Aws::Backup
     #   @return [Types::CopyJob]
     class DescribeCopyJobOutput < Struct.new(
       :copy_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2318,7 +2384,8 @@ module Aws::Backup
     #   @return [String]
     class DescribeFrameworkInput < Struct.new(
       :framework_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2389,12 +2456,14 @@ module Aws::Backup
       :deployment_status,
       :framework_status,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeGlobalSettingsInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2410,7 +2479,8 @@ module Aws::Backup
     class DescribeGlobalSettingsOutput < Struct.new(
       :global_settings,
       :last_update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2420,7 +2490,8 @@ module Aws::Backup
     #   @return [String]
     class DescribeProtectedResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2468,7 +2539,8 @@ module Aws::Backup
       :latest_restore_execution_time_minutes,
       :latest_restore_job_creation_date,
       :latest_restore_recovery_point_creation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2488,7 +2560,8 @@ module Aws::Backup
       :backup_vault_name,
       :recovery_point_arn,
       :backup_vault_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2695,7 +2768,8 @@ module Aws::Backup
       :vault_type,
       :index_status,
       :index_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2706,7 +2780,8 @@ module Aws::Backup
     end
 
     class DescribeRegionSettingsInput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2726,7 +2801,8 @@ module Aws::Backup
     class DescribeRegionSettingsOutput < Struct.new(
       :resource_type_opt_in_preference,
       :resource_type_management_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2736,7 +2812,8 @@ module Aws::Backup
     #   @return [String]
     class DescribeReportJobInput < Struct.new(
       :report_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2747,7 +2824,8 @@ module Aws::Backup
     #   @return [Types::ReportJob]
     class DescribeReportJobOutput < Struct.new(
       :report_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2756,7 +2834,8 @@ module Aws::Backup
     #   @return [String]
     class DescribeReportPlanInput < Struct.new(
       :report_plan_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2768,7 +2847,8 @@ module Aws::Backup
     #   @return [Types::ReportPlan]
     class DescribeReportPlanOutput < Struct.new(
       :report_plan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2777,7 +2857,8 @@ module Aws::Backup
     #   @return [String]
     class DescribeRestoreJobInput < Struct.new(
       :restore_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2873,7 +2954,8 @@ module Aws::Backup
       :validation_status_message,
       :deletion_status,
       :deletion_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2886,7 +2968,8 @@ module Aws::Backup
     class DisassociateBackupVaultMpaApprovalTeamInput < Struct.new(
       :backup_vault_name,
       :requester_comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2904,7 +2987,8 @@ module Aws::Backup
     class DisassociateRecoveryPointFromParentInput < Struct.new(
       :backup_vault_name,
       :recovery_point_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2918,7 +3002,8 @@ module Aws::Backup
     class DisassociateRecoveryPointInput < Struct.new(
       :backup_vault_name,
       :recovery_point_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2927,7 +3012,8 @@ module Aws::Backup
     #   @return [String]
     class ExportBackupPlanTemplateInput < Struct.new(
       :backup_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2941,7 +3027,8 @@ module Aws::Backup
     #   @return [String]
     class ExportBackupPlanTemplateOutput < Struct.new(
       :backup_plan_template_json,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2982,7 +3069,8 @@ module Aws::Backup
       :number_of_controls,
       :creation_time,
       :deployment_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3011,7 +3099,8 @@ module Aws::Backup
       :control_name,
       :control_input_parameters,
       :control_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3020,7 +3109,8 @@ module Aws::Backup
     #   @return [String]
     class GetBackupPlanFromJSONInput < Struct.new(
       :backup_plan_template_json,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3030,7 +3120,8 @@ module Aws::Backup
     #   @return [Types::BackupPlan]
     class GetBackupPlanFromJSONOutput < Struct.new(
       :backup_plan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3039,7 +3130,8 @@ module Aws::Backup
     #   @return [String]
     class GetBackupPlanFromTemplateInput < Struct.new(
       :backup_plan_template_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3049,7 +3141,8 @@ module Aws::Backup
     #   @return [Types::BackupPlan]
     class GetBackupPlanFromTemplateOutput < Struct.new(
       :backup_plan_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3063,7 +3156,8 @@ module Aws::Backup
     class GetBackupPlanInput < Struct.new(
       :backup_plan_id,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3118,7 +3212,8 @@ module Aws::Backup
       :deletion_date,
       :last_execution_date,
       :advanced_backup_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3132,7 +3227,8 @@ module Aws::Backup
     class GetBackupSelectionInput < Struct.new(
       :backup_plan_id,
       :selection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3162,7 +3258,8 @@ module Aws::Backup
       :backup_plan_id,
       :creation_date,
       :creator_request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3173,7 +3270,8 @@ module Aws::Backup
     #   @return [String]
     class GetBackupVaultAccessPolicyInput < Struct.new(
       :backup_vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3193,7 +3291,8 @@ module Aws::Backup
       :backup_vault_name,
       :backup_vault_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3204,7 +3303,8 @@ module Aws::Backup
     #   @return [String]
     class GetBackupVaultNotificationsInput < Struct.new(
       :backup_vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3230,7 +3330,8 @@ module Aws::Backup
       :backup_vault_arn,
       :sns_topic_arn,
       :backup_vault_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3239,7 +3340,8 @@ module Aws::Backup
     #   @return [String]
     class GetLegalHoldInput < Struct.new(
       :legal_hold_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3285,7 +3387,8 @@ module Aws::Backup
       :cancellation_date,
       :retain_record_until,
       :recovery_point_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3302,7 +3405,8 @@ module Aws::Backup
     class GetRecoveryPointIndexDetailsInput < Struct.new(
       :backup_vault_name,
       :recovery_point_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3364,7 +3468,8 @@ module Aws::Backup
       :index_status,
       :index_status_message,
       :total_items_indexed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3384,7 +3489,8 @@ module Aws::Backup
       :backup_vault_name,
       :recovery_point_arn,
       :backup_vault_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3409,7 +3515,8 @@ module Aws::Backup
       :recovery_point_arn,
       :restore_metadata,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3418,7 +3525,8 @@ module Aws::Backup
     #   @return [String]
     class GetRestoreJobMetadataInput < Struct.new(
       :restore_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3431,7 +3539,8 @@ module Aws::Backup
     class GetRestoreJobMetadataOutput < Struct.new(
       :restore_job_id,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3454,7 +3563,8 @@ module Aws::Backup
       :backup_vault_account_id,
       :backup_vault_name,
       :recovery_point_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3463,7 +3573,8 @@ module Aws::Backup
     #   @return [Hash<String, String>]
     class GetRestoreTestingInferredMetadataOutput < Struct.new(
       :inferred_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3472,7 +3583,8 @@ module Aws::Backup
     #   @return [String]
     class GetRestoreTestingPlanInput < Struct.new(
       :restore_testing_plan_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3482,7 +3594,8 @@ module Aws::Backup
     #   @return [Types::RestoreTestingPlanForGet]
     class GetRestoreTestingPlanOutput < Struct.new(
       :restore_testing_plan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3495,7 +3608,8 @@ module Aws::Backup
     class GetRestoreTestingSelectionInput < Struct.new(
       :restore_testing_plan_name,
       :restore_testing_selection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3504,7 +3618,8 @@ module Aws::Backup
     #   @return [Types::RestoreTestingSelectionForGet]
     class GetRestoreTestingSelectionOutput < Struct.new(
       :restore_testing_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3580,7 +3695,8 @@ module Aws::Backup
     #   @return [Array<String>]
     class GetSupportedResourceTypesOutput < Struct.new(
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3602,7 +3718,8 @@ module Aws::Backup
     #   @return [Array<String>]
     class IndexAction < Struct.new(
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3675,7 +3792,8 @@ module Aws::Backup
       :index_status,
       :index_status_message,
       :backup_vault_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3696,7 +3814,8 @@ module Aws::Backup
       :message,
       :type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3717,7 +3836,8 @@ module Aws::Backup
       :message,
       :type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3738,7 +3858,8 @@ module Aws::Backup
       :message,
       :type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3764,7 +3885,8 @@ module Aws::Backup
     class KeyValue < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3790,7 +3912,8 @@ module Aws::Backup
       :status_message,
       :initiation_date,
       :expiry_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3816,7 +3939,8 @@ module Aws::Backup
       :status_message,
       :initiation_date,
       :expiry_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3858,7 +3982,8 @@ module Aws::Backup
       :legal_hold_arn,
       :creation_date,
       :cancellation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3889,7 +4014,8 @@ module Aws::Backup
       :move_to_cold_storage_after_days,
       :delete_after_days,
       :opt_in_to_archive_for_supported_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3910,7 +4036,8 @@ module Aws::Backup
       :message,
       :type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4003,7 +4130,8 @@ module Aws::Backup
       :aggregation_period,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4037,7 +4165,8 @@ module Aws::Backup
       :backup_job_summaries,
       :aggregation_period,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4193,7 +4322,8 @@ module Aws::Backup
       :by_complete_before,
       :by_parent_job_id,
       :by_message_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4210,7 +4340,8 @@ module Aws::Backup
     class ListBackupJobsOutput < Struct.new(
       :backup_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4226,7 +4357,8 @@ module Aws::Backup
     class ListBackupPlanTemplatesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4242,7 +4374,8 @@ module Aws::Backup
     class ListBackupPlanTemplatesOutput < Struct.new(
       :next_token,
       :backup_plan_templates_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4262,7 +4395,8 @@ module Aws::Backup
       :backup_plan_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4278,7 +4412,8 @@ module Aws::Backup
     class ListBackupPlanVersionsOutput < Struct.new(
       :next_token,
       :backup_plan_versions_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4299,7 +4434,8 @@ module Aws::Backup
       :next_token,
       :max_results,
       :include_deleted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4315,7 +4451,8 @@ module Aws::Backup
     class ListBackupPlansOutput < Struct.new(
       :next_token,
       :backup_plans_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4335,7 +4472,8 @@ module Aws::Backup
       :backup_plan_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4352,7 +4490,8 @@ module Aws::Backup
     class ListBackupSelectionsOutput < Struct.new(
       :next_token,
       :backup_selections_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4376,7 +4515,8 @@ module Aws::Backup
       :by_shared,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4394,7 +4534,8 @@ module Aws::Backup
     class ListBackupVaultsOutput < Struct.new(
       :backup_vault_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4478,7 +4619,8 @@ module Aws::Backup
       :aggregation_period,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4514,7 +4656,8 @@ module Aws::Backup
       :copy_job_summaries,
       :aggregation_period,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4658,7 +4801,8 @@ module Aws::Backup
       :by_complete_after,
       :by_parent_job_id,
       :by_message_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4674,7 +4818,8 @@ module Aws::Backup
     class ListCopyJobsOutput < Struct.new(
       :copy_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4689,7 +4834,8 @@ module Aws::Backup
     class ListFrameworksInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4705,7 +4851,8 @@ module Aws::Backup
     class ListFrameworksOutput < Struct.new(
       :frameworks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4762,7 +4909,8 @@ module Aws::Backup
       :created_after,
       :resource_type,
       :index_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4780,7 +4928,8 @@ module Aws::Backup
     class ListIndexedRecoveryPointsOutput < Struct.new(
       :indexed_recovery_points,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4796,7 +4945,8 @@ module Aws::Backup
     class ListLegalHoldsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4812,7 +4962,8 @@ module Aws::Backup
     class ListLegalHoldsOutput < Struct.new(
       :next_token,
       :legal_holds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4836,7 +4987,8 @@ module Aws::Backup
       :backup_vault_account_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4852,7 +5004,8 @@ module Aws::Backup
     class ListProtectedResourcesByBackupVaultOutput < Struct.new(
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4868,7 +5021,8 @@ module Aws::Backup
     class ListProtectedResourcesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4886,7 +5040,8 @@ module Aws::Backup
     class ListProtectedResourcesOutput < Struct.new(
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5009,7 +5164,8 @@ module Aws::Backup
       :by_created_before,
       :by_created_after,
       :by_parent_recovery_point_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5026,7 +5182,8 @@ module Aws::Backup
     class ListRecoveryPointsByBackupVaultOutput < Struct.new(
       :next_token,
       :recovery_points,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5046,7 +5203,8 @@ module Aws::Backup
       :legal_hold_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5059,7 +5217,8 @@ module Aws::Backup
     class ListRecoveryPointsByLegalHoldOutput < Struct.new(
       :recovery_points,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5093,7 +5252,8 @@ module Aws::Backup
       :next_token,
       :max_results,
       :managed_by_aws_backup_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5114,7 +5274,8 @@ module Aws::Backup
     class ListRecoveryPointsByResourceOutput < Struct.new(
       :next_token,
       :recovery_points,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5152,7 +5313,8 @@ module Aws::Backup
       :by_status,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5166,7 +5328,8 @@ module Aws::Backup
     class ListReportJobsOutput < Struct.new(
       :report_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5181,7 +5344,8 @@ module Aws::Backup
     class ListReportPlansInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5198,7 +5362,8 @@ module Aws::Backup
     class ListReportPlansOutput < Struct.new(
       :report_plans,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5215,7 +5380,8 @@ module Aws::Backup
       :backup_vault_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5228,7 +5394,8 @@ module Aws::Backup
     class ListRestoreAccessBackupVaultsOutput < Struct.new(
       :next_token,
       :restore_access_backup_vaults,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5299,7 +5466,8 @@ module Aws::Backup
       :aggregation_period,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5335,7 +5503,8 @@ module Aws::Backup
       :restore_job_summaries,
       :aggregation_period,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5368,7 +5537,8 @@ module Aws::Backup
       :by_recovery_point_creation_date_before,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5385,7 +5555,8 @@ module Aws::Backup
     class ListRestoreJobsByProtectedResourceOutput < Struct.new(
       :restore_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5504,7 +5675,8 @@ module Aws::Backup
       :by_complete_before,
       :by_complete_after,
       :by_restore_testing_plan_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5521,7 +5693,8 @@ module Aws::Backup
     class ListRestoreJobsOutput < Struct.new(
       :restore_jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5537,7 +5710,8 @@ module Aws::Backup
     class ListRestoreTestingPlansInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5553,7 +5727,8 @@ module Aws::Backup
     class ListRestoreTestingPlansOutput < Struct.new(
       :next_token,
       :restore_testing_plans,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5574,7 +5749,8 @@ module Aws::Backup
       :max_results,
       :next_token,
       :restore_testing_plan_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5591,7 +5767,8 @@ module Aws::Backup
     class ListRestoreTestingSelectionsOutput < Struct.new(
       :next_token,
       :restore_testing_selections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5613,7 +5790,8 @@ module Aws::Backup
       :resource_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5629,7 +5807,8 @@ module Aws::Backup
     class ListTagsOutput < Struct.new(
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5649,7 +5828,8 @@ module Aws::Backup
       :message,
       :type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5688,7 +5868,8 @@ module Aws::Backup
       :resource_name,
       :last_backup_vault_arn,
       :last_recovery_point_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5707,7 +5888,8 @@ module Aws::Backup
     class ProtectedResourceConditions < Struct.new(
       :string_equals,
       :string_not_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5722,7 +5904,8 @@ module Aws::Backup
     class PutBackupVaultAccessPolicyInput < Struct.new(
       :backup_vault_name,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5783,7 +5966,8 @@ module Aws::Backup
       :min_retention_days,
       :max_retention_days,
       :changeable_for_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5805,7 +5989,8 @@ module Aws::Backup
       :backup_vault_name,
       :sns_topic_arn,
       :backup_vault_events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5823,7 +6008,8 @@ module Aws::Backup
       :restore_job_id,
       :validation_status,
       :validation_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5980,7 +6166,8 @@ module Aws::Backup
       :vault_type,
       :index_status,
       :index_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6061,7 +6248,8 @@ module Aws::Backup
       :vault_type,
       :index_status,
       :index_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6092,7 +6280,8 @@ module Aws::Backup
       :backup_plan_arn,
       :backup_plan_version,
       :backup_rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6121,7 +6310,8 @@ module Aws::Backup
       :resource_arn,
       :resource_type,
       :backup_vault_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6149,7 +6339,8 @@ module Aws::Backup
       :vault_names,
       :resource_identifiers,
       :date_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6172,7 +6363,8 @@ module Aws::Backup
       :s3_bucket_name,
       :s3_key_prefix,
       :formats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6186,7 +6378,8 @@ module Aws::Backup
     class ReportDestination < Struct.new(
       :s3_bucket_name,
       :s3_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6246,7 +6439,8 @@ module Aws::Backup
       :status,
       :status_message,
       :report_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6313,7 +6507,8 @@ module Aws::Backup
       :creation_time,
       :last_attempted_execution_time,
       :last_successful_execution_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6350,7 +6545,8 @@ module Aws::Backup
       :accounts,
       :organization_units,
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6375,7 +6571,8 @@ module Aws::Backup
       :message,
       :type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6401,7 +6598,8 @@ module Aws::Backup
       :approval_date,
       :vault_state,
       :latest_revoke_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6413,7 +6611,8 @@ module Aws::Backup
     #   @return [String]
     class RestoreJobCreator < Struct.new(
       :restore_testing_plan_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6460,7 +6659,8 @@ module Aws::Backup
       :count,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6567,7 +6767,8 @@ module Aws::Backup
       :validation_status_message,
       :deletion_status,
       :deletion_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6632,7 +6833,8 @@ module Aws::Backup
       :schedule_expression,
       :schedule_expression_timezone,
       :start_window_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6713,7 +6915,8 @@ module Aws::Backup
       :schedule_expression,
       :schedule_expression_timezone,
       :start_window_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6778,7 +6981,8 @@ module Aws::Backup
       :schedule_expression,
       :schedule_expression_timezone,
       :start_window_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6817,7 +7021,8 @@ module Aws::Backup
       :schedule_expression,
       :schedule_expression_timezone,
       :start_window_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6886,7 +7091,8 @@ module Aws::Backup
       :include_vaults,
       :recovery_point_types,
       :selection_window_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7010,7 +7216,8 @@ module Aws::Backup
       :restore_metadata_overrides,
       :restore_testing_selection_name,
       :validation_window_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7089,7 +7296,8 @@ module Aws::Backup
       :restore_testing_plan_name,
       :restore_testing_selection_name,
       :validation_window_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7139,7 +7347,8 @@ module Aws::Backup
       :restore_testing_plan_name,
       :restore_testing_selection_name,
       :validation_window_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7183,7 +7392,8 @@ module Aws::Backup
       :protected_resource_conditions,
       :restore_metadata_overrides,
       :validation_window_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7205,7 +7415,8 @@ module Aws::Backup
       :backup_vault_name,
       :restore_access_backup_vault_arn,
       :requester_comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7225,7 +7436,8 @@ module Aws::Backup
       :message,
       :type,
       :context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7323,7 +7535,8 @@ module Aws::Backup
       :recovery_point_tags,
       :backup_options,
       :index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7353,7 +7566,8 @@ module Aws::Backup
       :recovery_point_arn,
       :creation_date,
       :is_parent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7405,7 +7619,8 @@ module Aws::Backup
       :iam_role_arn,
       :idempotency_token,
       :lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7426,7 +7641,8 @@ module Aws::Backup
       :copy_job_id,
       :creation_date,
       :is_parent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7446,7 +7662,8 @@ module Aws::Backup
     class StartReportJobInput < Struct.new(
       :report_plan_name,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7456,7 +7673,8 @@ module Aws::Backup
     #   @return [String]
     class StartReportJobOutput < Struct.new(
       :report_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7638,7 +7856,8 @@ module Aws::Backup
       :idempotency_token,
       :resource_type,
       :copy_source_tags_to_restored_resource,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7647,7 +7866,8 @@ module Aws::Backup
     #   @return [String]
     class StartRestoreJobOutput < Struct.new(
       :restore_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7656,7 +7876,8 @@ module Aws::Backup
     #   @return [String]
     class StopBackupJobInput < Struct.new(
       :backup_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7671,7 +7892,8 @@ module Aws::Backup
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7690,7 +7912,8 @@ module Aws::Backup
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_key_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7704,7 +7927,8 @@ module Aws::Backup
     class UpdateBackupPlanInput < Struct.new(
       :backup_plan_id,
       :backup_plan,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7734,7 +7958,8 @@ module Aws::Backup
       :creation_date,
       :version_id,
       :advanced_backup_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7759,7 +7984,8 @@ module Aws::Backup
       :framework_description,
       :framework_controls,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7780,7 +8006,8 @@ module Aws::Backup
       :framework_name,
       :framework_arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7791,7 +8018,8 @@ module Aws::Backup
     #   @return [Hash<String, String>]
     class UpdateGlobalSettingsInput < Struct.new(
       :global_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7821,7 +8049,8 @@ module Aws::Backup
       :recovery_point_arn,
       :iam_role_arn,
       :index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7854,7 +8083,8 @@ module Aws::Backup
       :recovery_point_arn,
       :index_status,
       :index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7880,7 +8110,8 @@ module Aws::Backup
       :backup_vault_name,
       :recovery_point_arn,
       :lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7912,7 +8143,8 @@ module Aws::Backup
       :recovery_point_arn,
       :lifecycle,
       :calculated_lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7935,7 +8167,8 @@ module Aws::Backup
     class UpdateRegionSettingsInput < Struct.new(
       :resource_type_opt_in_preference,
       :resource_type_management_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7973,7 +8206,8 @@ module Aws::Backup
       :report_delivery_channel,
       :report_setting,
       :idempotency_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7994,7 +8228,8 @@ module Aws::Backup
       :report_plan_name,
       :report_plan_arn,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8007,7 +8242,8 @@ module Aws::Backup
     class UpdateRestoreTestingPlanInput < Struct.new(
       :restore_testing_plan,
       :restore_testing_plan_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8031,7 +8267,8 @@ module Aws::Backup
       :restore_testing_plan_arn,
       :restore_testing_plan_name,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8054,7 +8291,8 @@ module Aws::Backup
       :restore_testing_plan_name,
       :restore_testing_selection,
       :restore_testing_selection_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8082,7 +8320,8 @@ module Aws::Backup
       :restore_testing_plan_name,
       :restore_testing_selection_name,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

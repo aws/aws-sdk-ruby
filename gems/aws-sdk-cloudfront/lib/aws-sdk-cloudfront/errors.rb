@@ -185,7 +185,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::AccessDenied] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::BatchTooLarge] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -211,7 +211,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::CNAMEAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -224,7 +224,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::CachePolicyAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -237,7 +237,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::CachePolicyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -250,7 +250,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::CannotChangeImmutablePublicKeyFields] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -263,7 +263,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::CannotDeleteEntityWhileInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -276,7 +276,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::CannotUpdateEntityWhileInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -289,7 +289,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::CloudFrontOriginAccessIdentityAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -302,7 +302,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::CloudFrontOriginAccessIdentityInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -315,7 +315,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::ContinuousDeploymentPolicyAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -328,7 +328,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::ContinuousDeploymentPolicyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -341,7 +341,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::DistributionAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -354,7 +354,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::DistributionNotDisabled] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -367,7 +367,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::EntityAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -380,7 +380,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::EntityLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -393,7 +393,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::EntityNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -406,7 +406,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::EntitySizeLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -419,7 +419,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::FieldLevelEncryptionConfigAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -432,7 +432,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::FieldLevelEncryptionConfigInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -445,7 +445,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::FieldLevelEncryptionProfileAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -458,7 +458,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::FieldLevelEncryptionProfileInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -471,7 +471,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::FieldLevelEncryptionProfileSizeExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -484,7 +484,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::FunctionAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -497,7 +497,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::FunctionInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -510,7 +510,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::FunctionSizeLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -523,7 +523,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::IllegalDelete] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -536,7 +536,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -549,7 +549,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::IllegalOriginAccessConfiguration] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -562,7 +562,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::IllegalUpdate] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -575,7 +575,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InconsistentQuantities] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -588,7 +588,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidArgument] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -601,7 +601,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidAssociation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -614,7 +614,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidDefaultRootObject] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -627,7 +627,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidDomainNameForOriginAccessControl] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -640,7 +640,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidErrorCode] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -653,7 +653,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidForwardCookies] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -666,7 +666,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidFunctionAssociation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -679,7 +679,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidGeoRestrictionParameter] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -692,7 +692,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidHeadersForS3Origin] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -705,7 +705,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidIfMatchVersion] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -718,7 +718,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidLambdaFunctionAssociation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -731,7 +731,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidLocationCode] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -744,7 +744,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidMinimumProtocolVersion] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -757,7 +757,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidOrigin] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -770,7 +770,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidOriginAccessControl] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -783,7 +783,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidOriginAccessIdentity] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -796,7 +796,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidOriginKeepaliveTimeout] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -809,7 +809,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidOriginReadTimeout] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -822,7 +822,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidProtocolSettings] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -835,7 +835,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidQueryStringParameters] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -848,7 +848,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidRelativePath] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -861,7 +861,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidRequiredProtocol] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -874,7 +874,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidResponseCode] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -887,7 +887,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidTTLOrder] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -900,7 +900,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidTagging] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -913,7 +913,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidViewerCertificate] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -926,7 +926,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::InvalidWebACLId] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -939,7 +939,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::KeyGroupAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -952,7 +952,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::MissingBody] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -965,7 +965,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::MonitoringSubscriptionAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -978,7 +978,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchCachePolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -991,7 +991,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchCloudFrontOriginAccessIdentity] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1004,7 +1004,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchContinuousDeploymentPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1017,7 +1017,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchDistribution] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1030,7 +1030,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchFieldLevelEncryptionConfig] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1043,7 +1043,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchFieldLevelEncryptionProfile] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1056,7 +1056,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchFunctionExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1069,7 +1069,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchInvalidation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1082,7 +1082,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchMonitoringSubscription] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1095,7 +1095,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchOrigin] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1108,7 +1108,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchOriginAccessControl] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1121,7 +1121,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchOriginRequestPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1134,7 +1134,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchPublicKey] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1147,7 +1147,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchRealtimeLogConfig] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1160,7 +1160,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchResource] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1173,7 +1173,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchResponseHeadersPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1186,7 +1186,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::NoSuchStreamingDistribution] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1199,7 +1199,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::OriginAccessControlAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1212,7 +1212,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::OriginAccessControlInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1225,7 +1225,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::OriginRequestPolicyAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1238,7 +1238,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::OriginRequestPolicyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1251,7 +1251,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::PreconditionFailed] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1264,7 +1264,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::PublicKeyAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1277,7 +1277,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::PublicKeyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1290,7 +1290,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::QueryArgProfileEmpty] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1303,7 +1303,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::RealtimeLogConfigAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1316,7 +1316,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::RealtimeLogConfigInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1329,7 +1329,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::RealtimeLogConfigOwnerMismatch] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1342,7 +1342,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::ResourceInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1355,7 +1355,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::ResourceNotDisabled] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1368,7 +1368,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::ResponseHeadersPolicyAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1381,7 +1381,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::ResponseHeadersPolicyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1394,7 +1394,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::StagingDistributionInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1407,7 +1407,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::StreamingDistributionAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1420,7 +1420,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::StreamingDistributionNotDisabled] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1433,7 +1433,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TestFunctionFailed] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1446,7 +1446,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooLongCSPInResponseHeadersPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1459,7 +1459,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyCacheBehaviors] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1472,7 +1472,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyCachePolicies] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1485,7 +1485,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyCertificates] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1498,7 +1498,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyCloudFrontOriginAccessIdentities] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1511,7 +1511,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyContinuousDeploymentPolicies] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1524,7 +1524,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyCookieNamesInWhiteList] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1537,7 +1537,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyCookiesInCachePolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1550,7 +1550,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyCookiesInOriginRequestPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1563,7 +1563,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyCustomHeadersInResponseHeadersPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1576,7 +1576,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributionCNAMEs] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1589,7 +1589,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributions] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1602,7 +1602,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToCachePolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1615,7 +1615,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToFieldLevelEncryptionConfig] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1628,7 +1628,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToKeyGroup] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1641,7 +1641,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToOriginAccessControl] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1654,7 +1654,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToOriginRequestPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1667,7 +1667,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToResponseHeadersPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1680,7 +1680,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributionsWithFunctionAssociations] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1693,7 +1693,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributionsWithLambdaAssociations] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1706,7 +1706,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyDistributionsWithSingleFunctionARN] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1719,7 +1719,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyFieldLevelEncryptionConfigs] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1732,7 +1732,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyFieldLevelEncryptionContentTypeProfiles] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1745,7 +1745,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyFieldLevelEncryptionEncryptionEntities] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1758,7 +1758,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyFieldLevelEncryptionFieldPatterns] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1771,7 +1771,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyFieldLevelEncryptionProfiles] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1784,7 +1784,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyFieldLevelEncryptionQueryArgProfiles] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1797,7 +1797,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyFunctionAssociations] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1810,7 +1810,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyFunctions] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1823,7 +1823,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyHeadersInCachePolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1836,7 +1836,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyHeadersInForwardedValues] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1849,7 +1849,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyHeadersInOriginRequestPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1862,7 +1862,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyInvalidationsInProgress] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1875,7 +1875,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyKeyGroups] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1888,7 +1888,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyKeyGroupsAssociatedToDistribution] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1901,7 +1901,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyLambdaFunctionAssociations] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1914,7 +1914,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyOriginAccessControls] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1927,7 +1927,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyOriginCustomHeaders] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1940,7 +1940,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyOriginGroupsPerDistribution] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1953,7 +1953,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyOriginRequestPolicies] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1966,7 +1966,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyOrigins] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1979,7 +1979,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyPublicKeys] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -1992,7 +1992,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyPublicKeysInKeyGroup] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2005,7 +2005,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyQueryStringParameters] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2018,7 +2018,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyQueryStringsInCachePolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2031,7 +2031,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyQueryStringsInOriginRequestPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2044,7 +2044,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyRealtimeLogConfigs] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2057,7 +2057,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyRemoveHeadersInResponseHeadersPolicy] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2070,7 +2070,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyResponseHeadersPolicies] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2083,7 +2083,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyStreamingDistributionCNAMEs] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2096,7 +2096,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyStreamingDistributions] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2109,7 +2109,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TooManyTrustedSigners] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2122,7 +2122,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TrustedKeyGroupDoesNotExist] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2135,7 +2135,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::TrustedSignerDoesNotExist] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -2148,7 +2148,7 @@ module Aws::CloudFront
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudFront::Types::UnsupportedOperation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

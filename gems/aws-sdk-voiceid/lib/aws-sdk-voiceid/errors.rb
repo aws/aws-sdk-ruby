@@ -41,7 +41,7 @@ module Aws::VoiceID
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VoiceID::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::VoiceID
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VoiceID::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::VoiceID
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VoiceID::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -119,7 +119,7 @@ module Aws::VoiceID
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VoiceID::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::VoiceID
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VoiceID::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -155,7 +155,7 @@ module Aws::VoiceID
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VoiceID::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -169,7 +169,7 @@ module Aws::VoiceID
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VoiceID::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

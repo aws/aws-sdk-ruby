@@ -42,7 +42,7 @@ module Aws::TranscribeStreaming
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TranscribeStreaming::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::TranscribeStreaming
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TranscribeStreaming::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::TranscribeStreaming
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TranscribeStreaming::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::TranscribeStreaming
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TranscribeStreaming::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::TranscribeStreaming
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TranscribeStreaming::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::TranscribeStreaming
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TranscribeStreaming::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

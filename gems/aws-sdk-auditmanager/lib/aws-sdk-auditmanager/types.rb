@@ -21,7 +21,8 @@ module Aws::AuditManager
       :id,
       :email_address,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +47,8 @@ module Aws::AuditManager
     #   @return [String]
     class AWSService < Struct.new(
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +58,8 @@ module Aws::AuditManager
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -83,7 +86,8 @@ module Aws::AuditManager
       :metadata,
       :framework,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +132,8 @@ module Aws::AuditManager
       :evidence_sources,
       :evidence_count,
       :assessment_report_evidence_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -175,7 +180,8 @@ module Aws::AuditManager
       :delegations,
       :system_evidence_count,
       :manual_evidence_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -266,7 +272,8 @@ module Aws::AuditManager
       :evidence_by_type_compliance_check_issues_count,
       :evidence_by_type_user_activity_count,
       :evidence_aws_service_source_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -303,7 +310,8 @@ module Aws::AuditManager
       :arn,
       :metadata,
       :control_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -354,7 +362,8 @@ module Aws::AuditManager
       :control_sets_count,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -427,7 +436,8 @@ module Aws::AuditManager
       :standard_controls_count,
       :custom_controls_count,
       :compliance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +489,8 @@ module Aws::AuditManager
       :delegations,
       :creation_time,
       :last_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +530,8 @@ module Aws::AuditManager
       :delegations,
       :creation_time,
       :last_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +576,8 @@ module Aws::AuditManager
       :author,
       :status,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +596,8 @@ module Aws::AuditManager
       :evidence_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -621,7 +635,8 @@ module Aws::AuditManager
       :author,
       :status,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -637,7 +652,8 @@ module Aws::AuditManager
     class AssessmentReportsDestination < Struct.new(
       :destination_type,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,12 +666,14 @@ module Aws::AuditManager
     class AssociateAssessmentReportEvidenceFolderRequest < Struct.new(
       :assessment_id,
       :evidence_folder_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateAssessmentReportEvidenceFolderResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -672,7 +690,8 @@ module Aws::AuditManager
       :assessment_id,
       :evidence_folder_id,
       :evidence_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +705,8 @@ module Aws::AuditManager
     class BatchAssociateAssessmentReportEvidenceResponse < Struct.new(
       :evidence_ids,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -707,7 +727,8 @@ module Aws::AuditManager
       :create_delegation_request,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +741,8 @@ module Aws::AuditManager
     class BatchCreateDelegationByAssessmentRequest < Struct.new(
       :create_delegation_requests,
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -734,7 +756,8 @@ module Aws::AuditManager
     class BatchCreateDelegationByAssessmentResponse < Struct.new(
       :delegations,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -755,7 +778,8 @@ module Aws::AuditManager
       :delegation_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +792,8 @@ module Aws::AuditManager
     class BatchDeleteDelegationByAssessmentRequest < Struct.new(
       :delegation_ids,
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -778,7 +803,8 @@ module Aws::AuditManager
     #   @return [Array<Types::BatchDeleteDelegationByAssessmentError>]
     class BatchDeleteDelegationByAssessmentResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -795,7 +821,8 @@ module Aws::AuditManager
       :assessment_id,
       :evidence_folder_id,
       :evidence_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -809,7 +836,8 @@ module Aws::AuditManager
     class BatchDisassociateAssessmentReportEvidenceResponse < Struct.new(
       :evidence_ids,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +858,8 @@ module Aws::AuditManager
       :manual_evidence,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +880,8 @@ module Aws::AuditManager
       :control_set_id,
       :control_id,
       :manual_evidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -861,7 +891,8 @@ module Aws::AuditManager
     #   @return [Array<Types::BatchImportEvidenceToAssessmentControlError>]
     class BatchImportEvidenceToAssessmentControlResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +920,8 @@ module Aws::AuditManager
       :action,
       :created_at,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +996,8 @@ module Aws::AuditManager
       :last_updated_by,
       :tags,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1016,8 @@ module Aws::AuditManager
       :author_name,
       :comment_body,
       :posted_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1022,7 +1056,8 @@ module Aws::AuditManager
       :total_controls_count,
       :evidence_insights,
       :last_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1087,8 @@ module Aws::AuditManager
       :evidence_insights,
       :control_set_name,
       :last_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1078,7 +1114,8 @@ module Aws::AuditManager
       :id,
       :evidence_insights,
       :last_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1199,8 @@ module Aws::AuditManager
       :source_keyword,
       :source_frequency,
       :troubleshooting_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1193,7 +1231,8 @@ module Aws::AuditManager
       :control_sources,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1251,8 @@ module Aws::AuditManager
       :id,
       :name,
       :controls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1223,7 +1263,8 @@ module Aws::AuditManager
     #   @return [String]
     class CreateAssessmentFrameworkControl < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1238,7 +1279,8 @@ module Aws::AuditManager
     class CreateAssessmentFrameworkControlSet < Struct.new(
       :name,
       :controls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1268,7 +1310,8 @@ module Aws::AuditManager
       :compliance_type,
       :control_sets,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1320,8 @@ module Aws::AuditManager
     #   @return [Types::Framework]
     class CreateAssessmentFrameworkResponse < Struct.new(
       :framework,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1307,7 +1351,8 @@ module Aws::AuditManager
       :description,
       :assessment_id,
       :query_statement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1317,7 +1362,8 @@ module Aws::AuditManager
     #   @return [Types::AssessmentReport]
     class CreateAssessmentReportResponse < Struct.new(
       :assessment_report,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,7 +1408,8 @@ module Aws::AuditManager
       :roles,
       :framework_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1372,7 +1419,8 @@ module Aws::AuditManager
     #   @return [Types::Assessment]
     class CreateAssessmentResponse < Struct.new(
       :assessment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1453,7 +1501,8 @@ module Aws::AuditManager
       :source_keyword,
       :source_frequency,
       :troubleshooting_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1486,7 +1535,8 @@ module Aws::AuditManager
       :action_plan_instructions,
       :control_mapping_sources,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1545,8 @@ module Aws::AuditManager
     #   @return [Types::Control]
     class CreateControlResponse < Struct.new(
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1577,8 @@ module Aws::AuditManager
       :control_set_id,
       :role_arn,
       :role_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1540,7 +1592,8 @@ module Aws::AuditManager
     class DefaultExportDestination < Struct.new(
       :destination_type,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1652,8 @@ module Aws::AuditManager
       :control_set_id,
       :comment,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1633,7 +1687,8 @@ module Aws::AuditManager
       :role_arn,
       :creation_time,
       :control_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,12 +1697,14 @@ module Aws::AuditManager
     #   @return [String]
     class DeleteAssessmentFrameworkRequest < Struct.new(
       :framework_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAssessmentFrameworkResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1660,12 +1717,14 @@ module Aws::AuditManager
     class DeleteAssessmentFrameworkShareRequest < Struct.new(
       :request_id,
       :request_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAssessmentFrameworkShareResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,12 +1737,14 @@ module Aws::AuditManager
     class DeleteAssessmentReportRequest < Struct.new(
       :assessment_id,
       :assessment_report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAssessmentReportResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1692,12 +1753,14 @@ module Aws::AuditManager
     #   @return [String]
     class DeleteAssessmentRequest < Struct.new(
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAssessmentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1706,17 +1769,20 @@ module Aws::AuditManager
     #   @return [String]
     class DeleteControlRequest < Struct.new(
       :control_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteControlResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1791,8 @@ module Aws::AuditManager
     #   @return [String]
     class DeregisterAccountResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1734,12 +1801,14 @@ module Aws::AuditManager
     #   @return [String]
     class DeregisterOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterOrganizationAdminAccountResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1776,7 +1845,8 @@ module Aws::AuditManager
     #   @return [String]
     class DeregistrationPolicy < Struct.new(
       :delete_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1789,12 +1859,14 @@ module Aws::AuditManager
     class DisassociateAssessmentReportEvidenceFolderRequest < Struct.new(
       :assessment_id,
       :evidence_folder_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateAssessmentReportEvidenceFolderResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1887,7 +1959,8 @@ module Aws::AuditManager
       :evidence_folder_id,
       :id,
       :assessment_report_selection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1958,7 +2031,8 @@ module Aws::AuditManager
       :enablement_status,
       :backfill_status,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1990,7 +2064,8 @@ module Aws::AuditManager
       :noncompliant_evidence_count,
       :compliant_evidence_count,
       :inconclusive_evidence_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2064,7 +2139,8 @@ module Aws::AuditManager
       :created_by,
       :last_updated_by,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2087,12 +2163,14 @@ module Aws::AuditManager
       :description,
       :logo,
       :compliance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAccountStatusRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2101,7 +2179,8 @@ module Aws::AuditManager
     #   @return [String]
     class GetAccountStatusResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2110,7 +2189,8 @@ module Aws::AuditManager
     #   @return [String]
     class GetAssessmentFrameworkRequest < Struct.new(
       :framework_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2124,7 +2204,8 @@ module Aws::AuditManager
     #   @return [Types::Framework]
     class GetAssessmentFrameworkResponse < Struct.new(
       :framework,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2137,7 +2218,8 @@ module Aws::AuditManager
     class GetAssessmentReportUrlRequest < Struct.new(
       :assessment_report_id,
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2147,7 +2229,8 @@ module Aws::AuditManager
     #   @return [Types::URL]
     class GetAssessmentReportUrlResponse < Struct.new(
       :pre_signed_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2156,7 +2239,8 @@ module Aws::AuditManager
     #   @return [String]
     class GetAssessmentRequest < Struct.new(
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2171,7 +2255,8 @@ module Aws::AuditManager
     class GetAssessmentResponse < Struct.new(
       :assessment,
       :user_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2196,7 +2281,8 @@ module Aws::AuditManager
       :control_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2209,7 +2295,8 @@ module Aws::AuditManager
     class GetChangeLogsResponse < Struct.new(
       :change_logs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2218,7 +2305,8 @@ module Aws::AuditManager
     #   @return [String]
     class GetControlRequest < Struct.new(
       :control_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2227,7 +2315,8 @@ module Aws::AuditManager
     #   @return [Types::Control]
     class GetControlResponse < Struct.new(
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2240,7 +2329,8 @@ module Aws::AuditManager
     class GetDelegationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2253,7 +2343,8 @@ module Aws::AuditManager
     class GetDelegationsResponse < Struct.new(
       :delegations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2278,7 +2369,8 @@ module Aws::AuditManager
       :evidence_folder_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2292,7 +2384,8 @@ module Aws::AuditManager
     class GetEvidenceByEvidenceFolderResponse < Struct.new(
       :evidence,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2302,7 +2395,8 @@ module Aws::AuditManager
     #   @return [String]
     class GetEvidenceFileUploadUrlRequest < Struct.new(
       :file_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2317,7 +2411,8 @@ module Aws::AuditManager
     class GetEvidenceFileUploadUrlResponse < Struct.new(
       :evidence_file_name,
       :upload_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2334,7 +2429,8 @@ module Aws::AuditManager
       :assessment_id,
       :control_set_id,
       :evidence_folder_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2343,7 +2439,8 @@ module Aws::AuditManager
     #   @return [Types::AssessmentEvidenceFolder]
     class GetEvidenceFolderResponse < Struct.new(
       :evidence_folder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2368,7 +2465,8 @@ module Aws::AuditManager
       :control_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2382,7 +2480,8 @@ module Aws::AuditManager
     class GetEvidenceFoldersByAssessmentControlResponse < Struct.new(
       :evidence_folders,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2399,7 +2498,8 @@ module Aws::AuditManager
       :assessment_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2413,7 +2513,8 @@ module Aws::AuditManager
     class GetEvidenceFoldersByAssessmentResponse < Struct.new(
       :evidence_folders,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2434,7 +2535,8 @@ module Aws::AuditManager
       :control_set_id,
       :evidence_folder_id,
       :evidence_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2443,7 +2545,8 @@ module Aws::AuditManager
     #   @return [Types::Evidence]
     class GetEvidenceResponse < Struct.new(
       :evidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2452,7 +2555,8 @@ module Aws::AuditManager
     #   @return [String]
     class GetInsightsByAssessmentRequest < Struct.new(
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2462,12 +2566,14 @@ module Aws::AuditManager
     #   @return [Types::InsightsByAssessment]
     class GetInsightsByAssessmentResponse < Struct.new(
       :insights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetInsightsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2476,12 +2582,14 @@ module Aws::AuditManager
     #   @return [Types::Insights]
     class GetInsightsResponse < Struct.new(
       :insights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetOrganizationAdminAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2494,12 +2602,14 @@ module Aws::AuditManager
     class GetOrganizationAdminAccountResponse < Struct.new(
       :admin_account_id,
       :organization_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetServicesInScopeRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2508,7 +2618,8 @@ module Aws::AuditManager
     #   @return [Array<Types::ServiceMetadata>]
     class GetServicesInScopeResponse < Struct.new(
       :service_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2517,7 +2628,8 @@ module Aws::AuditManager
     #   @return [String]
     class GetSettingsRequest < Struct.new(
       :attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2526,7 +2638,8 @@ module Aws::AuditManager
     #   @return [Types::Settings]
     class GetSettingsResponse < Struct.new(
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2602,7 +2715,8 @@ module Aws::AuditManager
       :assessment_controls_count_by_noncompliant_evidence,
       :total_assessment_controls_count,
       :last_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2676,7 +2790,8 @@ module Aws::AuditManager
       :assessment_controls_count_by_noncompliant_evidence,
       :total_assessment_controls_count,
       :last_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2686,7 +2801,8 @@ module Aws::AuditManager
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2713,7 +2829,8 @@ module Aws::AuditManager
       :assessment_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2727,7 +2844,8 @@ module Aws::AuditManager
     class ListAssessmentControlInsightsByControlDomainResponse < Struct.new(
       :control_insights_by_assessment,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2744,7 +2862,8 @@ module Aws::AuditManager
       :request_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2758,7 +2877,8 @@ module Aws::AuditManager
     class ListAssessmentFrameworkShareRequestsResponse < Struct.new(
       :assessment_framework_share_requests,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2775,7 +2895,8 @@ module Aws::AuditManager
       :framework_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2789,7 +2910,8 @@ module Aws::AuditManager
     class ListAssessmentFrameworksResponse < Struct.new(
       :framework_metadata_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2802,7 +2924,8 @@ module Aws::AuditManager
     class ListAssessmentReportsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2816,7 +2939,8 @@ module Aws::AuditManager
     class ListAssessmentReportsResponse < Struct.new(
       :assessment_reports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2833,7 +2957,8 @@ module Aws::AuditManager
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2847,7 +2972,8 @@ module Aws::AuditManager
     class ListAssessmentsResponse < Struct.new(
       :assessment_metadata,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +2990,8 @@ module Aws::AuditManager
       :assessment_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2878,7 +3005,8 @@ module Aws::AuditManager
     class ListControlDomainInsightsByAssessmentResponse < Struct.new(
       :control_domain_insights,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2891,7 +3019,8 @@ module Aws::AuditManager
     class ListControlDomainInsightsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2905,7 +3034,8 @@ module Aws::AuditManager
     class ListControlDomainInsightsResponse < Struct.new(
       :control_domain_insights,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2928,7 +3058,8 @@ module Aws::AuditManager
       :control_domain_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2942,7 +3073,8 @@ module Aws::AuditManager
     class ListControlInsightsByControlDomainResponse < Struct.new(
       :control_insights_metadata,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2982,7 +3114,8 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       :control_catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2996,7 +3129,8 @@ module Aws::AuditManager
     class ListControlsResponse < Struct.new(
       :control_metadata_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3013,7 +3147,8 @@ module Aws::AuditManager
       :source,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3026,7 +3161,8 @@ module Aws::AuditManager
     class ListKeywordsForDataSourceResponse < Struct.new(
       :keywords,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3039,7 +3175,8 @@ module Aws::AuditManager
     class ListNotificationsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3052,7 +3189,8 @@ module Aws::AuditManager
     class ListNotificationsResponse < Struct.new(
       :notifications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3061,7 +3199,8 @@ module Aws::AuditManager
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3070,7 +3209,8 @@ module Aws::AuditManager
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3093,7 +3233,8 @@ module Aws::AuditManager
       :s3_resource_path,
       :text_response,
       :evidence_file_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3133,7 +3274,8 @@ module Aws::AuditManager
       :description,
       :event_time,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3146,7 +3288,8 @@ module Aws::AuditManager
     class RegisterAccountRequest < Struct.new(
       :kms_key,
       :delegated_admin_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3155,7 +3298,8 @@ module Aws::AuditManager
     #   @return [String]
     class RegisterAccountResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3164,7 +3308,8 @@ module Aws::AuditManager
     #   @return [String]
     class RegisterOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3177,7 +3322,8 @@ module Aws::AuditManager
     class RegisterOrganizationAdminAccountResponse < Struct.new(
       :admin_account_id,
       :organization_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3215,7 +3361,8 @@ module Aws::AuditManager
       :arn,
       :value,
       :compliance_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3232,7 +3379,8 @@ module Aws::AuditManager
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3255,7 +3403,8 @@ module Aws::AuditManager
     class Role < Struct.new(
       :role_type,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3290,7 +3439,8 @@ module Aws::AuditManager
     class Scope < Struct.new(
       :aws_accounts,
       :aws_services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3313,7 +3463,8 @@ module Aws::AuditManager
       :display_name,
       :description,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3325,7 +3476,8 @@ module Aws::AuditManager
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3364,7 +3516,8 @@ module Aws::AuditManager
       :evidence_finder_enablement,
       :deregistration_policy,
       :default_export_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3542,7 +3695,8 @@ module Aws::AuditManager
     class SourceKeyword < Struct.new(
       :keyword_input_type,
       :keyword_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3563,7 +3717,8 @@ module Aws::AuditManager
       :destination_account,
       :destination_region,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3573,7 +3728,8 @@ module Aws::AuditManager
     #   @return [Types::AssessmentFrameworkShareRequest]
     class StartAssessmentFrameworkShareResponse < Struct.new(
       :assessment_framework_share_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3586,12 +3742,14 @@ module Aws::AuditManager
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3600,7 +3758,8 @@ module Aws::AuditManager
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3615,7 +3774,8 @@ module Aws::AuditManager
     class URL < Struct.new(
       :hyperlink_name,
       :link,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3628,12 +3788,14 @@ module Aws::AuditManager
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3658,7 +3820,8 @@ module Aws::AuditManager
       :control_id,
       :control_status,
       :comment_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3668,7 +3831,8 @@ module Aws::AuditManager
     #   @return [Types::AssessmentControl]
     class UpdateAssessmentControlResponse < Struct.new(
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3689,7 +3853,8 @@ module Aws::AuditManager
       :control_set_id,
       :status,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3699,7 +3864,8 @@ module Aws::AuditManager
     #   @return [Types::AssessmentControlSet]
     class UpdateAssessmentControlSetStatusResponse < Struct.new(
       :control_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3717,7 +3883,8 @@ module Aws::AuditManager
       :id,
       :name,
       :controls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3747,7 +3914,8 @@ module Aws::AuditManager
       :description,
       :compliance_type,
       :control_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3756,7 +3924,8 @@ module Aws::AuditManager
     #   @return [Types::Framework]
     class UpdateAssessmentFrameworkResponse < Struct.new(
       :framework,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3773,7 +3942,8 @@ module Aws::AuditManager
       :request_id,
       :request_type,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3783,7 +3953,8 @@ module Aws::AuditManager
     #   @return [Types::AssessmentFrameworkShareRequest]
     class UpdateAssessmentFrameworkShareResponse < Struct.new(
       :assessment_framework_share_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3813,7 +3984,8 @@ module Aws::AuditManager
       :scope,
       :assessment_reports_destination,
       :roles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3823,7 +3995,8 @@ module Aws::AuditManager
     #   @return [Types::Assessment]
     class UpdateAssessmentResponse < Struct.new(
       :assessment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3836,7 +4009,8 @@ module Aws::AuditManager
     class UpdateAssessmentStatusRequest < Struct.new(
       :assessment_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3846,7 +4020,8 @@ module Aws::AuditManager
     #   @return [Types::Assessment]
     class UpdateAssessmentStatusResponse < Struct.new(
       :assessment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3879,7 +4054,8 @@ module Aws::AuditManager
       :action_plan_title,
       :action_plan_instructions,
       :control_mapping_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3889,7 +4065,8 @@ module Aws::AuditManager
     #   @return [Types::Control]
     class UpdateControlResponse < Struct.new(
       :control,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3931,7 +4108,8 @@ module Aws::AuditManager
       :evidence_finder_enabled,
       :deregistration_policy,
       :default_export_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3940,7 +4118,8 @@ module Aws::AuditManager
     #   @return [Types::Settings]
     class UpdateSettingsResponse < Struct.new(
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3950,7 +4129,8 @@ module Aws::AuditManager
     #   @return [String]
     class ValidateAssessmentReportIntegrityRequest < Struct.new(
       :s3_relative_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3976,7 +4156,8 @@ module Aws::AuditManager
       :signature_date_time,
       :signature_key_id,
       :validation_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3993,7 +4174,8 @@ module Aws::AuditManager
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4007,7 +4189,8 @@ module Aws::AuditManager
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

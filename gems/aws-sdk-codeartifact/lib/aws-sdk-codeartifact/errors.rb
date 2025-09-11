@@ -42,7 +42,7 @@ module Aws::Codeartifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codeartifact::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::Codeartifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codeartifact::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::Codeartifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codeartifact::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::Codeartifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codeartifact::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::Codeartifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codeartifact::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -157,7 +157,7 @@ module Aws::Codeartifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codeartifact::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -179,7 +179,7 @@ module Aws::Codeartifact
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Codeartifact::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

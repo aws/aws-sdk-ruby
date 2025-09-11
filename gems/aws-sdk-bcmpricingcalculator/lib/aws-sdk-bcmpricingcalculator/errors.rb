@@ -41,7 +41,7 @@ module Aws::BCMPricingCalculator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMPricingCalculator::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::BCMPricingCalculator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMPricingCalculator::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::BCMPricingCalculator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMPricingCalculator::Types::DataUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -90,7 +90,7 @@ module Aws::BCMPricingCalculator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMPricingCalculator::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::BCMPricingCalculator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMPricingCalculator::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -131,7 +131,7 @@ module Aws::BCMPricingCalculator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMPricingCalculator::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -164,7 +164,7 @@ module Aws::BCMPricingCalculator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMPricingCalculator::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -192,7 +192,7 @@ module Aws::BCMPricingCalculator
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMPricingCalculator::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

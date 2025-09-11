@@ -11,7 +11,8 @@ module Aws::RDSData
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::RDSData
       :string_values,
       :array_values,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class BooleanValues < ArrayValue; end
@@ -55,7 +57,8 @@ module Aws::RDSData
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +115,8 @@ module Aws::RDSData
       :schema,
       :parameter_sets,
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +127,8 @@ module Aws::RDSData
     #   @return [Array<Types::UpdateResult>]
     class BatchExecuteStatementOutput < Struct.new(
       :update_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +151,8 @@ module Aws::RDSData
       :secret_arn,
       :database,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +163,8 @@ module Aws::RDSData
     #   @return [String]
     class BeginTransactionOutput < Struct.new(
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +226,8 @@ module Aws::RDSData
       :precision,
       :scale,
       :array_base_column_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -250,7 +258,8 @@ module Aws::RDSData
       :resource_arn,
       :secret_arn,
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -260,7 +269,8 @@ module Aws::RDSData
     #   @return [String]
     class CommitTransactionOutput < Struct.new(
       :transaction_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -269,7 +279,8 @@ module Aws::RDSData
     #   @return [String]
     class DatabaseErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +289,8 @@ module Aws::RDSData
     #   @return [String]
     class DatabaseNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -289,13 +301,15 @@ module Aws::RDSData
     #   @return [String]
     class DatabaseResumingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The writer instance in the DB cluster isn't available.</p>
     class DatabaseUnavailableException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +341,8 @@ module Aws::RDSData
       :sql_statements,
       :database,
       :schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +353,8 @@ module Aws::RDSData
     #   @return [Array<Types::SqlStatementResult>]
     class ExecuteSqlOutput < Struct.new(
       :sql_statement_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +429,8 @@ module Aws::RDSData
       :continue_after_timeout,
       :result_set_options,
       :format_records_as,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +469,8 @@ module Aws::RDSData
       :number_of_records_updated,
       :generated_fields,
       :formatted_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -492,7 +510,8 @@ module Aws::RDSData
       :blob_value,
       :array_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IsNull < Field; end
@@ -511,7 +530,8 @@ module Aws::RDSData
     #   @return [String]
     class ForbiddenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,13 +540,15 @@ module Aws::RDSData
     #   @return [String]
     class HttpEndpointNotEnabledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred.</p>
     class InternalServerErrorException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -535,7 +557,8 @@ module Aws::RDSData
     #   @return [String]
     class InvalidResourceStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +567,8 @@ module Aws::RDSData
     #   @return [String]
     class InvalidSecretException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +578,8 @@ module Aws::RDSData
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +593,8 @@ module Aws::RDSData
     #   @return [Array<Types::Value>]
     class Record < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +612,8 @@ module Aws::RDSData
     class ResultFrame < Struct.new(
       :result_set_metadata,
       :records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,7 +627,8 @@ module Aws::RDSData
     class ResultSetMetadata < Struct.new(
       :column_count,
       :column_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -631,7 +659,8 @@ module Aws::RDSData
     class ResultSetOptions < Struct.new(
       :decimal_return_type,
       :long_return_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +679,8 @@ module Aws::RDSData
       :resource_arn,
       :secret_arn,
       :transaction_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +691,8 @@ module Aws::RDSData
     #   @return [String]
     class RollbackTransactionOutput < Struct.new(
       :transaction_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -681,14 +712,16 @@ module Aws::RDSData
     #   @return [String]
     class SecretsErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The service specified by the <code>resourceArn</code> parameter isn't
     #             available.</p>
     class ServiceUnavailableError < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +773,8 @@ module Aws::RDSData
       :name,
       :value,
       :type_hint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +792,8 @@ module Aws::RDSData
     class SqlStatementResult < Struct.new(
       :result_frame,
       :number_of_records_updated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -777,7 +812,8 @@ module Aws::RDSData
     class StatementTimeoutException < Struct.new(
       :message,
       :db_connection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -796,7 +832,8 @@ module Aws::RDSData
     #   @return [Array<Types::Value>]
     class StructValue < Struct.new(
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +842,8 @@ module Aws::RDSData
     #   @return [String]
     class TransactionNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,7 +863,8 @@ module Aws::RDSData
     #   @return [String]
     class UnsupportedResultException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +874,8 @@ module Aws::RDSData
     #   @return [Array<Types::Field>]
     class UpdateResult < Struct.new(
       :generated_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +926,8 @@ module Aws::RDSData
       :array_values,
       :struct_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class IsNull < Value; end

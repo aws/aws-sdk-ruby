@@ -40,7 +40,8 @@ module Aws::AmplifyBackend
       :open_id_iat_ttl,
       :open_id_issue_url,
       :open_id_provider_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +55,8 @@ module Aws::AmplifyBackend
     class BackendAPIAuthType < Struct.new(
       :mode,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +66,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     class BackendAPIConflictResolution < Struct.new(
       :resolution_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +97,8 @@ module Aws::AmplifyBackend
       :default_auth_type,
       :service,
       :transform_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -117,7 +121,8 @@ module Aws::AmplifyBackend
       :key_id,
       :private_key,
       :team_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +137,8 @@ module Aws::AmplifyBackend
     class BackendAuthSocialProviderConfig < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +176,8 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +191,8 @@ module Aws::AmplifyBackend
     class BackendStoragePermissions < Struct.new(
       :authenticated,
       :un_authenticated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,7 +202,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +221,8 @@ module Aws::AmplifyBackend
       :app_id,
       :backend_environment_name,
       :target_environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +251,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +274,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +304,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +323,8 @@ module Aws::AmplifyBackend
       :delivery_method,
       :email_settings,
       :sms_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +338,8 @@ module Aws::AmplifyBackend
     class CreateBackendAuthIdentityPoolConfig < Struct.new(
       :identity_pool_name,
       :unauthenticated_login,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +353,8 @@ module Aws::AmplifyBackend
     class CreateBackendAuthMFAConfig < Struct.new(
       :mfa_mode,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +384,8 @@ module Aws::AmplifyBackend
       :redirect_sign_in_ur_is,
       :redirect_sign_out_ur_is,
       :social_provider_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -382,7 +399,8 @@ module Aws::AmplifyBackend
     class CreateBackendAuthPasswordPolicyConfig < Struct.new(
       :additional_constraints,
       :minimum_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -404,7 +422,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +445,8 @@ module Aws::AmplifyBackend
       :identity_pool_configs,
       :service,
       :user_pool_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +475,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +514,8 @@ module Aws::AmplifyBackend
       :sign_in_method,
       :user_pool_name,
       :verification_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -511,7 +533,8 @@ module Aws::AmplifyBackend
       :delivery_method,
       :email_settings,
       :sms_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +548,8 @@ module Aws::AmplifyBackend
     class CreateBackendConfigRequest < Struct.new(
       :app_id,
       :backend_manager_app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +570,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :job_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +597,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +627,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -623,7 +650,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +669,8 @@ module Aws::AmplifyBackend
       :bucket_name,
       :permissions,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +691,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :job_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +701,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     class CreateTokenRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +723,8 @@ module Aws::AmplifyBackend
       :challenge_code,
       :session_id,
       :ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +746,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -743,7 +776,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -761,7 +795,8 @@ module Aws::AmplifyBackend
       :app_id,
       :backend_environment_name,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -790,7 +825,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +839,8 @@ module Aws::AmplifyBackend
     class DeleteBackendRequest < Struct.new(
       :app_id,
       :backend_environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +869,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -854,7 +892,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_name,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -875,7 +914,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :job_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +928,8 @@ module Aws::AmplifyBackend
     class DeleteTokenRequest < Struct.new(
       :app_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -897,7 +938,8 @@ module Aws::AmplifyBackend
     #   @return [Boolean]
     class DeleteTokenResponse < Struct.new(
       :is_success,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -912,7 +954,8 @@ module Aws::AmplifyBackend
     class EmailSettings < Struct.new(
       :email_message,
       :email_subject,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -922,7 +965,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     class GatewayTimeoutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -940,7 +984,8 @@ module Aws::AmplifyBackend
       :app_id,
       :backend_environment_name,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -969,7 +1014,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -987,7 +1033,8 @@ module Aws::AmplifyBackend
       :app_id,
       :backend_environment_name,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1004,7 +1051,8 @@ module Aws::AmplifyBackend
       :models,
       :status,
       :model_introspection_schema,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1026,7 +1074,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1100,8 @@ module Aws::AmplifyBackend
       :error,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1069,7 +1119,8 @@ module Aws::AmplifyBackend
       :app_id,
       :backend_environment_name,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1145,8 @@ module Aws::AmplifyBackend
       :error,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1111,7 +1163,8 @@ module Aws::AmplifyBackend
       :app_id,
       :backend_environment_name,
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1148,7 +1201,8 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1216,8 @@ module Aws::AmplifyBackend
     class GetBackendRequest < Struct.new(
       :app_id,
       :backend_environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1195,7 +1250,8 @@ module Aws::AmplifyBackend
       :backend_environment_list,
       :backend_environment_name,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1213,7 +1269,8 @@ module Aws::AmplifyBackend
       :app_id,
       :backend_environment_name,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1292,8 @@ module Aws::AmplifyBackend
       :imported,
       :permissions,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1256,7 +1314,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1269,7 +1328,8 @@ module Aws::AmplifyBackend
     class GetTokenRequest < Struct.new(
       :app_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1350,8 @@ module Aws::AmplifyBackend
       :challenge_code,
       :session_id,
       :ttl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1381,8 @@ module Aws::AmplifyBackend
       :native_client_id,
       :user_pool_id,
       :web_client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1349,7 +1411,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,7 +1434,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :bucket_name,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1392,7 +1456,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :job_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1426,7 +1491,8 @@ module Aws::AmplifyBackend
       :next_token,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1439,7 +1505,8 @@ module Aws::AmplifyBackend
     class ListBackendJobsResponse < Struct.new(
       :jobs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1516,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     class ListS3BucketsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1462,7 +1530,8 @@ module Aws::AmplifyBackend
     class ListS3BucketsResponse < Struct.new(
       :buckets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1484,7 +1553,8 @@ module Aws::AmplifyBackend
       :aws_cognito_region,
       :aws_user_pools_id,
       :aws_user_pools_web_client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1498,7 +1568,8 @@ module Aws::AmplifyBackend
     class NotFoundException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,7 +1583,8 @@ module Aws::AmplifyBackend
     class RemoveAllBackendsRequest < Struct.new(
       :app_id,
       :clean_amplify_app,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1537,7 +1609,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1546,7 +1619,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     class RemoveBackendConfigRequest < Struct.new(
       :app_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1555,13 +1629,15 @@ module Aws::AmplifyBackend
     #   @return [String]
     class RemoveBackendConfigResponse < Struct.new(
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the resource configuration for the data model in your Amplify project.</p>
     class ResourceConfig < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1651,8 @@ module Aws::AmplifyBackend
     class S3BucketInfo < Struct.new(
       :creation_date,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1589,7 +1666,8 @@ module Aws::AmplifyBackend
     class Settings < Struct.new(
       :mfa_types,
       :sms_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1600,7 +1678,8 @@ module Aws::AmplifyBackend
     #   @return [String]
     class SmsSettings < Struct.new(
       :sms_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1622,7 +1701,8 @@ module Aws::AmplifyBackend
       :google,
       :login_with_amazon,
       :sign_in_with_apple,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,7 +1716,8 @@ module Aws::AmplifyBackend
     class TooManyRequestsException < Struct.new(
       :limit_type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1658,7 +1739,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1687,7 +1769,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1788,8 @@ module Aws::AmplifyBackend
       :delivery_method,
       :email_settings,
       :sms_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1715,7 +1799,8 @@ module Aws::AmplifyBackend
     #   @return [Boolean]
     class UpdateBackendAuthIdentityPoolConfig < Struct.new(
       :unauthenticated_login,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1814,8 @@ module Aws::AmplifyBackend
     class UpdateBackendAuthMFAConfig < Struct.new(
       :mfa_mode,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1759,7 +1845,8 @@ module Aws::AmplifyBackend
       :redirect_sign_in_ur_is,
       :redirect_sign_out_ur_is,
       :social_provider_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1773,7 +1860,8 @@ module Aws::AmplifyBackend
     class UpdateBackendAuthPasswordPolicyConfig < Struct.new(
       :additional_constraints,
       :minimum_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1795,7 +1883,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1817,7 +1906,8 @@ module Aws::AmplifyBackend
       :identity_pool_configs,
       :service,
       :user_pool_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1846,7 +1936,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1872,7 +1963,8 @@ module Aws::AmplifyBackend
       :o_auth,
       :password_policy,
       :verification_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1890,7 +1982,8 @@ module Aws::AmplifyBackend
       :delivery_method,
       :email_settings,
       :sms_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1904,7 +1997,8 @@ module Aws::AmplifyBackend
     class UpdateBackendConfigRequest < Struct.new(
       :app_id,
       :login_auth_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1925,7 +2019,8 @@ module Aws::AmplifyBackend
       :backend_manager_app_id,
       :error,
       :login_auth_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1951,7 +2046,8 @@ module Aws::AmplifyBackend
       :job_id,
       :operation,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1988,7 +2084,8 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2010,7 +2107,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_config,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2024,7 +2122,8 @@ module Aws::AmplifyBackend
     class UpdateBackendStorageResourceConfig < Struct.new(
       :permissions,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2045,7 +2144,8 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :job_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

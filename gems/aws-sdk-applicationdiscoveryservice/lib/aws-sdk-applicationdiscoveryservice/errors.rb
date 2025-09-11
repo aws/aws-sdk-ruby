@@ -44,7 +44,7 @@ module Aws::ApplicationDiscoveryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationDiscoveryService::Types::AuthorizationErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::ApplicationDiscoveryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationDiscoveryService::Types::ConflictErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::ApplicationDiscoveryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationDiscoveryService::Types::HomeRegionNotSetException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::ApplicationDiscoveryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationDiscoveryService::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::ApplicationDiscoveryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationDiscoveryService::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::ApplicationDiscoveryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationDiscoveryService::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::ApplicationDiscoveryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationDiscoveryService::Types::OperationNotPermittedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::ApplicationDiscoveryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationDiscoveryService::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::ApplicationDiscoveryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationDiscoveryService::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -169,7 +169,7 @@ module Aws::ApplicationDiscoveryService
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ApplicationDiscoveryService::Types::ServerInternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

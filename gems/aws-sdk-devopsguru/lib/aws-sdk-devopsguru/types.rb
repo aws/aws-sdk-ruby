@@ -14,7 +14,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::DevOpsGuru
     class AccountHealth < Struct.new(
       :account_id,
       :insight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +51,8 @@ module Aws::DevOpsGuru
     class AccountInsightHealth < Struct.new(
       :open_proactive_insights,
       :open_reactive_insights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -66,7 +69,8 @@ module Aws::DevOpsGuru
     #   @return [Types::NotificationChannelConfig]
     class AddNotificationChannelRequest < Struct.new(
       :config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +79,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class AddNotificationChannelResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +93,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class AmazonCodeGuruProfilerIntegration < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +132,8 @@ module Aws::DevOpsGuru
       :impact_end_time,
       :number_of_log_lines_scanned,
       :log_anomaly_showcases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -147,7 +154,8 @@ module Aws::DevOpsGuru
     class AnomalyReportedTimeRange < Struct.new(
       :open_time,
       :close_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -164,7 +172,8 @@ module Aws::DevOpsGuru
     class AnomalyResource < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +190,8 @@ module Aws::DevOpsGuru
     class AnomalySourceDetails < Struct.new(
       :cloud_watch_metrics,
       :performance_insights_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -200,7 +210,8 @@ module Aws::DevOpsGuru
       :source,
       :source_resource_name,
       :source_resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +227,8 @@ module Aws::DevOpsGuru
     class AnomalyTimeRange < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -229,7 +241,8 @@ module Aws::DevOpsGuru
     #   @return [Array<String>]
     class CloudFormationCollection < Struct.new(
       :stack_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,7 +255,8 @@ module Aws::DevOpsGuru
     #   @return [Array<String>]
     class CloudFormationCollectionFilter < Struct.new(
       :stack_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,7 +270,8 @@ module Aws::DevOpsGuru
     #   @return [Array<String>]
     class CloudFormationCostEstimationResourceCollectionFilter < Struct.new(
       :stack_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +294,8 @@ module Aws::DevOpsGuru
       :stack_name,
       :insight,
       :analyzed_resource_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -295,7 +311,8 @@ module Aws::DevOpsGuru
     class CloudWatchMetricsDataSummary < Struct.new(
       :timestamp_metric_value_pair_list,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +349,8 @@ module Aws::DevOpsGuru
       :unit,
       :period,
       :metric_data_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -354,7 +372,8 @@ module Aws::DevOpsGuru
     class CloudWatchMetricsDimension < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +390,8 @@ module Aws::DevOpsGuru
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +444,8 @@ module Aws::DevOpsGuru
     class CostEstimationResourceCollectionFilter < Struct.new(
       :cloud_formation,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +459,8 @@ module Aws::DevOpsGuru
     class CostEstimationTimeRange < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,17 +469,20 @@ module Aws::DevOpsGuru
     #   @return [String]
     class DeleteInsightRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteInsightResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountHealthRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +513,8 @@ module Aws::DevOpsGuru
       :metrics_analyzed,
       :resource_hours,
       :analyzed_resource_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -512,7 +538,8 @@ module Aws::DevOpsGuru
     class DescribeAccountOverviewRequest < Struct.new(
       :from_time,
       :to_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +559,8 @@ module Aws::DevOpsGuru
       :reactive_insights,
       :proactive_insights,
       :mean_time_to_recover_in_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -551,7 +579,8 @@ module Aws::DevOpsGuru
     class DescribeAnomalyRequest < Struct.new(
       :id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,12 +593,14 @@ module Aws::DevOpsGuru
     class DescribeAnomalyResponse < Struct.new(
       :proactive_anomaly,
       :reactive_anomaly,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeEventSourcesConfigRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +609,8 @@ module Aws::DevOpsGuru
     #   @return [Types::EventSourcesConfig]
     class DescribeEventSourcesConfigResponse < Struct.new(
       :event_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -587,7 +619,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class DescribeFeedbackRequest < Struct.new(
       :insight_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,7 +629,8 @@ module Aws::DevOpsGuru
     #   @return [Types::InsightFeedback]
     class DescribeFeedbackResponse < Struct.new(
       :insight_feedback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -609,7 +643,8 @@ module Aws::DevOpsGuru
     class DescribeInsightRequest < Struct.new(
       :id,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +657,8 @@ module Aws::DevOpsGuru
     class DescribeInsightResponse < Struct.new(
       :proactive_insight,
       :reactive_insight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +671,8 @@ module Aws::DevOpsGuru
     class DescribeOrganizationHealthRequest < Struct.new(
       :account_ids,
       :organizational_unit_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +697,8 @@ module Aws::DevOpsGuru
       :open_proactive_insights,
       :metrics_analyzed,
       :resource_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -692,7 +730,8 @@ module Aws::DevOpsGuru
       :to_time,
       :account_ids,
       :organizational_unit_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -707,7 +746,8 @@ module Aws::DevOpsGuru
     class DescribeOrganizationOverviewResponse < Struct.new(
       :reactive_insights,
       :proactive_insights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -743,7 +783,8 @@ module Aws::DevOpsGuru
       :organizational_unit_ids,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +845,8 @@ module Aws::DevOpsGuru
       :account,
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -821,7 +863,8 @@ module Aws::DevOpsGuru
     class DescribeResourceCollectionHealthRequest < Struct.new(
       :resource_collection_type,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,12 +922,14 @@ module Aws::DevOpsGuru
       :service,
       :next_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeServiceIntegrationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +939,8 @@ module Aws::DevOpsGuru
     #   @return [Types::ServiceIntegrationConfig]
     class DescribeServiceIntegrationResponse < Struct.new(
       :service_integration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +955,8 @@ module Aws::DevOpsGuru
     class EndTimeRange < Struct.new(
       :from_time,
       :to_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -955,7 +1002,8 @@ module Aws::DevOpsGuru
       :data_source,
       :event_class,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1023,8 @@ module Aws::DevOpsGuru
       :type,
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -987,7 +1036,8 @@ module Aws::DevOpsGuru
     #   @return [Types::AmazonCodeGuruProfilerIntegration]
     class EventSourcesConfig < Struct.new(
       :amazon_code_guru_profiler,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1053,8 @@ module Aws::DevOpsGuru
     class EventTimeRange < Struct.new(
       :from_time,
       :to_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1013,7 +1064,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class GetCostEstimationRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1101,8 @@ module Aws::DevOpsGuru
       :time_range,
       :total_cost,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1069,7 +1122,8 @@ module Aws::DevOpsGuru
     class GetResourceCollectionRequest < Struct.new(
       :resource_collection_type,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1140,8 @@ module Aws::DevOpsGuru
     class GetResourceCollectionResponse < Struct.new(
       :resource_collection,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1155,8 @@ module Aws::DevOpsGuru
     class InsightFeedback < Struct.new(
       :id,
       :feedback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1175,8 @@ module Aws::DevOpsGuru
       :open_proactive_insights,
       :open_reactive_insights,
       :mean_time_to_recover_in_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1140,7 +1197,8 @@ module Aws::DevOpsGuru
     class InsightTimeRange < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1212,8 @@ module Aws::DevOpsGuru
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1196,7 +1255,8 @@ module Aws::DevOpsGuru
       :kms_key_id,
       :opt_in_status,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1232,7 +1292,8 @@ module Aws::DevOpsGuru
       :kms_key_id,
       :opt_in_status,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1244,7 +1305,8 @@ module Aws::DevOpsGuru
     #   @return [Types::ServiceCollection]
     class ListAnomaliesForInsightFilters < Struct.new(
       :service_collection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1278,7 +1340,8 @@ module Aws::DevOpsGuru
       :next_token,
       :account_id,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1298,7 +1361,8 @@ module Aws::DevOpsGuru
       :proactive_anomalies,
       :reactive_anomalies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1383,8 @@ module Aws::DevOpsGuru
       :insight_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1341,7 +1406,8 @@ module Aws::DevOpsGuru
       :insight_id,
       :anomalous_log_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1377,7 +1443,8 @@ module Aws::DevOpsGuru
       :event_source,
       :data_source,
       :resource_collection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1401,7 +1468,8 @@ module Aws::DevOpsGuru
       :max_results,
       :next_token,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1415,7 +1483,8 @@ module Aws::DevOpsGuru
     class ListEventsResponse < Struct.new(
       :events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1431,7 +1500,8 @@ module Aws::DevOpsGuru
     class ListInsightsAnyStatusFilter < Struct.new(
       :type,
       :start_time_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1447,7 +1517,8 @@ module Aws::DevOpsGuru
     class ListInsightsClosedStatusFilter < Struct.new(
       :type,
       :end_time_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1458,7 +1529,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class ListInsightsOngoingStatusFilter < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1550,8 @@ module Aws::DevOpsGuru
       :status_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1496,7 +1569,8 @@ module Aws::DevOpsGuru
       :proactive_insights,
       :reactive_insights,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1518,7 +1592,8 @@ module Aws::DevOpsGuru
       :ongoing,
       :closed,
       :any,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1538,7 +1613,8 @@ module Aws::DevOpsGuru
     class ListMonitoredResourcesFilters < Struct.new(
       :resource_permission,
       :resource_type_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1559,7 +1635,8 @@ module Aws::DevOpsGuru
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1652,8 @@ module Aws::DevOpsGuru
     class ListMonitoredResourcesResponse < Struct.new(
       :monitored_resource_identifiers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1585,7 +1663,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class ListNotificationChannelsRequest < Struct.new(
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1678,8 @@ module Aws::DevOpsGuru
     class ListNotificationChannelsResponse < Struct.new(
       :channels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1627,7 +1707,8 @@ module Aws::DevOpsGuru
       :account_ids,
       :organizational_unit_ids,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1647,7 +1728,8 @@ module Aws::DevOpsGuru
       :proactive_insights,
       :reactive_insights,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1669,7 +1751,8 @@ module Aws::DevOpsGuru
       :next_token,
       :locale,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1683,7 +1766,8 @@ module Aws::DevOpsGuru
     class ListRecommendationsResponse < Struct.new(
       :recommendations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1733,7 +1817,8 @@ module Aws::DevOpsGuru
       :explanation,
       :number_of_log_lines_occurrences,
       :log_event_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1752,7 +1837,8 @@ module Aws::DevOpsGuru
     #   @return [Array<Types::LogAnomalyClass>]
     class LogAnomalyShowcase < Struct.new(
       :log_anomaly_classes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1850,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class LogsAnomalyDetectionIntegration < Struct.new(
       :opt_in_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1776,7 +1863,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class LogsAnomalyDetectionIntegrationConfig < Struct.new(
       :opt_in_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1815,7 +1903,8 @@ module Aws::DevOpsGuru
       :resource_permission,
       :last_updated,
       :resource_collection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,7 +1928,8 @@ module Aws::DevOpsGuru
     class NotificationChannel < Struct.new(
       :id,
       :config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1866,7 +1956,8 @@ module Aws::DevOpsGuru
     class NotificationChannelConfig < Struct.new(
       :sns,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1979,8 @@ module Aws::DevOpsGuru
     class NotificationFilterConfig < Struct.new(
       :severities,
       :message_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1900,7 +1992,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class OpsCenterIntegration < Struct.new(
       :opt_in_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1912,7 +2005,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class OpsCenterIntegrationConfig < Struct.new(
       :opt_in_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2087,7 +2181,8 @@ module Aws::DevOpsGuru
       :group,
       :dimensions,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2162,7 +2257,8 @@ module Aws::DevOpsGuru
       :metric,
       :group_by,
       :filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2215,7 +2311,8 @@ module Aws::DevOpsGuru
       :reference_data,
       :stats_at_anomaly,
       :stats_at_baseline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2235,7 +2332,8 @@ module Aws::DevOpsGuru
     class PerformanceInsightsReferenceComparisonValues < Struct.new(
       :reference_scalar,
       :reference_metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2253,7 +2351,8 @@ module Aws::DevOpsGuru
     class PerformanceInsightsReferenceData < Struct.new(
       :name,
       :comparison_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2362,8 @@ module Aws::DevOpsGuru
     #   @return [Types::PerformanceInsightsMetricQuery]
     class PerformanceInsightsReferenceMetric < Struct.new(
       :metric_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2274,7 +2374,8 @@ module Aws::DevOpsGuru
     #   @return [Float]
     class PerformanceInsightsReferenceScalar < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2288,7 +2389,8 @@ module Aws::DevOpsGuru
     class PerformanceInsightsStat < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2304,7 +2406,8 @@ module Aws::DevOpsGuru
     class PredictionTimeRange < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2383,7 +2486,8 @@ module Aws::DevOpsGuru
       :source_metadata,
       :anomaly_resources,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,7 +2567,8 @@ module Aws::DevOpsGuru
       :source_metadata,
       :anomaly_resources,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2514,7 +2619,8 @@ module Aws::DevOpsGuru
       :resource_collection,
       :ssm_ops_item_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2566,7 +2672,8 @@ module Aws::DevOpsGuru
       :resource_collection,
       :service_collection,
       :associated_resource_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2621,7 +2728,8 @@ module Aws::DevOpsGuru
       :prediction_time_range,
       :resource_collection,
       :service_collection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2630,12 +2738,14 @@ module Aws::DevOpsGuru
     #   @return [Types::InsightFeedback]
     class PutFeedbackRequest < Struct.new(
       :insight_feedback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutFeedbackResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2717,7 +2827,8 @@ module Aws::DevOpsGuru
       :description,
       :causal_anomaly_id,
       :anomaly_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2800,7 +2911,8 @@ module Aws::DevOpsGuru
       :description,
       :causal_anomaly_id,
       :anomaly_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2846,7 +2958,8 @@ module Aws::DevOpsGuru
       :resource_collection,
       :ssm_ops_item_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2893,7 +3006,8 @@ module Aws::DevOpsGuru
       :resource_collection,
       :service_collection,
       :associated_resource_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2943,7 +3057,8 @@ module Aws::DevOpsGuru
       :insight_time_range,
       :resource_collection,
       :service_collection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2980,7 +3095,8 @@ module Aws::DevOpsGuru
       :related_events,
       :related_anomalies,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3000,7 +3116,8 @@ module Aws::DevOpsGuru
       :resources,
       :source_details,
       :anomaly_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3018,7 +3135,8 @@ module Aws::DevOpsGuru
     class RecommendationRelatedAnomalyResource < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3030,7 +3148,8 @@ module Aws::DevOpsGuru
     #   @return [Array<Types::RecommendationRelatedCloudWatchMetricsSourceDetail>]
     class RecommendationRelatedAnomalySourceDetail < Struct.new(
       :cloud_watch_metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3045,7 +3164,8 @@ module Aws::DevOpsGuru
     class RecommendationRelatedCloudWatchMetricsSourceDetail < Struct.new(
       :metric_name,
       :namespace,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3061,7 +3181,8 @@ module Aws::DevOpsGuru
     class RecommendationRelatedEvent < Struct.new(
       :name,
       :resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3078,7 +3199,8 @@ module Aws::DevOpsGuru
     class RecommendationRelatedEventResource < Struct.new(
       :name,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3087,12 +3209,14 @@ module Aws::DevOpsGuru
     #   @return [String]
     class RemoveNotificationChannelRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveNotificationChannelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3143,7 +3267,8 @@ module Aws::DevOpsGuru
     class ResourceCollection < Struct.new(
       :cloud_formation,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3194,7 +3319,8 @@ module Aws::DevOpsGuru
     class ResourceCollectionFilter < Struct.new(
       :cloud_formation,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3211,7 +3337,8 @@ module Aws::DevOpsGuru
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3239,7 +3366,8 @@ module Aws::DevOpsGuru
       :statuses,
       :resource_collection,
       :service_collection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3269,7 +3397,8 @@ module Aws::DevOpsGuru
       :max_results,
       :next_token,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3287,7 +3416,8 @@ module Aws::DevOpsGuru
       :proactive_insights,
       :reactive_insights,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3313,7 +3443,8 @@ module Aws::DevOpsGuru
       :statuses,
       :resource_collection,
       :service_collection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3347,7 +3478,8 @@ module Aws::DevOpsGuru
       :max_results,
       :next_token,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3367,7 +3499,8 @@ module Aws::DevOpsGuru
       :proactive_insights,
       :reactive_insights,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3377,7 +3510,8 @@ module Aws::DevOpsGuru
     #   @return [Array<String>]
     class ServiceCollection < Struct.new(
       :service_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3399,7 +3533,8 @@ module Aws::DevOpsGuru
       :service_name,
       :insight,
       :analyzed_resource_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3414,7 +3549,8 @@ module Aws::DevOpsGuru
     class ServiceInsightHealth < Struct.new(
       :open_proactive_insights,
       :open_reactive_insights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3444,7 +3580,8 @@ module Aws::DevOpsGuru
       :ops_center,
       :logs_anomaly_detection,
       :kms_server_side_encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3453,7 +3590,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3492,7 +3630,8 @@ module Aws::DevOpsGuru
       :count,
       :unit_cost,
       :cost,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3516,7 +3655,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     class SnsChannelConfig < Struct.new(
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3529,12 +3669,14 @@ module Aws::DevOpsGuru
     class StartCostEstimationRequest < Struct.new(
       :resource_collection,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartCostEstimationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3549,7 +3691,8 @@ module Aws::DevOpsGuru
     class StartTimeRange < Struct.new(
       :from_time,
       :to_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3615,7 +3758,8 @@ module Aws::DevOpsGuru
     class TagCollection < Struct.new(
       :app_boundary_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3649,7 +3793,8 @@ module Aws::DevOpsGuru
     class TagCollectionFilter < Struct.new(
       :app_boundary_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3687,7 +3832,8 @@ module Aws::DevOpsGuru
     class TagCostEstimationResourceCollectionFilter < Struct.new(
       :app_boundary_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3733,7 +3879,8 @@ module Aws::DevOpsGuru
       :tag_value,
       :insight,
       :analyzed_resource_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3755,7 +3902,8 @@ module Aws::DevOpsGuru
       :quota_code,
       :service_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3774,7 +3922,8 @@ module Aws::DevOpsGuru
     class TimestampMetricValuePair < Struct.new(
       :timestamp,
       :metric_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3786,7 +3935,8 @@ module Aws::DevOpsGuru
     #   @return [Array<String>]
     class UpdateCloudFormationCollectionFilter < Struct.new(
       :stack_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3796,12 +3946,14 @@ module Aws::DevOpsGuru
     #   @return [Types::EventSourcesConfig]
     class UpdateEventSourcesConfigRequest < Struct.new(
       :event_sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateEventSourcesConfigResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3848,7 +4000,8 @@ module Aws::DevOpsGuru
     class UpdateResourceCollectionFilter < Struct.new(
       :cloud_formation,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3862,12 +4015,14 @@ module Aws::DevOpsGuru
     class UpdateResourceCollectionRequest < Struct.new(
       :action,
       :resource_collection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceCollectionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3891,7 +4046,8 @@ module Aws::DevOpsGuru
       :ops_center,
       :logs_anomaly_detection,
       :kms_server_side_encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3901,12 +4057,14 @@ module Aws::DevOpsGuru
     #   @return [Types::UpdateServiceIntegrationConfig]
     class UpdateServiceIntegrationRequest < Struct.new(
       :service_integration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateServiceIntegrationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3940,7 +4098,8 @@ module Aws::DevOpsGuru
     class UpdateTagCollectionFilter < Struct.new(
       :app_boundary_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3959,7 +4118,8 @@ module Aws::DevOpsGuru
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3974,7 +4134,8 @@ module Aws::DevOpsGuru
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

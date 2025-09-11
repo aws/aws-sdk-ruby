@@ -11,7 +11,8 @@ module Aws::Bedrock
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::Bedrock
     class AgreementAvailability < Struct.new(
       :status,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +45,8 @@ module Aws::Bedrock
       :dataset_metric_configs,
       :evaluator_model_config,
       :custom_metric_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +60,8 @@ module Aws::Bedrock
     class AutomatedEvaluationCustomMetricConfig < Struct.new(
       :custom_metrics,
       :evaluator_model_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +72,8 @@ module Aws::Bedrock
     class AutomatedEvaluationCustomMetricSource < Struct.new(
       :custom_metric_definition,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomMetricDefinition < AutomatedEvaluationCustomMetricSource; end
@@ -106,7 +111,8 @@ module Aws::Bedrock
       :too_complex,
       :no_translations,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Valid < AutomatedReasoningCheckFinding; end
@@ -133,7 +139,8 @@ module Aws::Bedrock
       :translation,
       :contradicting_rules,
       :logic_warning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +150,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningCheckInputTextReference < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +169,8 @@ module Aws::Bedrock
       :translation,
       :contradicting_rules,
       :logic_warning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,13 +188,15 @@ module Aws::Bedrock
       :type,
       :premises,
       :claims,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that no relevant logical information could be extracted from the input for validation.</p>
     class AutomatedReasoningCheckNoTranslationsFinding < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +210,8 @@ module Aws::Bedrock
     class AutomatedReasoningCheckRule < Struct.new(
       :id,
       :policy_version_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +233,8 @@ module Aws::Bedrock
       :claims_true_scenario,
       :claims_false_scenario,
       :logic_warning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,13 +244,15 @@ module Aws::Bedrock
     #   @return [Array<Types::AutomatedReasoningLogicStatement>]
     class AutomatedReasoningCheckScenario < Struct.new(
       :statements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the input exceeds the processing capacity due to the volume or complexity of the logical information.</p>
     class AutomatedReasoningCheckTooComplexFinding < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +278,8 @@ module Aws::Bedrock
       :untranslated_premises,
       :untranslated_claims,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,7 +293,8 @@ module Aws::Bedrock
     class AutomatedReasoningCheckTranslationAmbiguousFinding < Struct.new(
       :options,
       :difference_scenarios,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +304,8 @@ module Aws::Bedrock
     #   @return [Array<Types::AutomatedReasoningCheckTranslation>]
     class AutomatedReasoningCheckTranslationOption < Struct.new(
       :translations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +327,8 @@ module Aws::Bedrock
       :claims_true_scenario,
       :supporting_rules,
       :logic_warning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +342,8 @@ module Aws::Bedrock
     class AutomatedReasoningLogicStatement < Struct.new(
       :logic,
       :natural_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +353,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningPolicyAddRuleAnnotation < Struct.new(
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -343,7 +364,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation < Struct.new(
       :natural_language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +375,8 @@ module Aws::Bedrock
     #   @return [Types::AutomatedReasoningPolicyDefinitionRule]
     class AutomatedReasoningPolicyAddRuleMutation < Struct.new(
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +394,8 @@ module Aws::Bedrock
       :name,
       :description,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -381,7 +405,8 @@ module Aws::Bedrock
     #   @return [Types::AutomatedReasoningPolicyDefinitionType]
     class AutomatedReasoningPolicyAddTypeMutation < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +420,8 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyAddTypeValue < Struct.new(
       :value,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -413,7 +439,8 @@ module Aws::Bedrock
       :name,
       :type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +450,8 @@ module Aws::Bedrock
     #   @return [Types::AutomatedReasoningPolicyDefinitionVariable]
     class AutomatedReasoningPolicyAddVariableMutation < Struct.new(
       :variable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +510,8 @@ module Aws::Bedrock
       :update_from_scenario_feedback,
       :ingest_content,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AddType < AutomatedReasoningPolicyAnnotation; end
@@ -507,7 +536,8 @@ module Aws::Bedrock
     #   @return [Array<Types::AutomatedReasoningPolicyBuildLogEntry>]
     class AutomatedReasoningPolicyBuildLog < Struct.new(
       :entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +555,8 @@ module Aws::Bedrock
       :annotation,
       :status,
       :build_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -544,7 +575,8 @@ module Aws::Bedrock
       :quality_report,
       :build_log,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PolicyDefinition < AutomatedReasoningPolicyBuildResultAssets; end
@@ -567,7 +599,8 @@ module Aws::Bedrock
       :context,
       :prior_element,
       :messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -582,7 +615,8 @@ module Aws::Bedrock
       :planning,
       :mutation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Planning < AutomatedReasoningPolicyBuildStepContext; end
@@ -600,7 +634,8 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyBuildStepMessage < Struct.new(
       :message,
       :message_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +657,8 @@ module Aws::Bedrock
       :document_content_type,
       :document_name,
       :document_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -632,7 +668,8 @@ module Aws::Bedrock
     #   @return [Array<Types::AutomatedReasoningPolicyAnnotation>]
     class AutomatedReasoningPolicyBuildWorkflowRepairContent < Struct.new(
       :annotations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +683,8 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyBuildWorkflowSource < Struct.new(
       :policy_definition,
       :workflow_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -676,7 +714,8 @@ module Aws::Bedrock
       :build_workflow_type,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,7 +737,8 @@ module Aws::Bedrock
       :types,
       :rules,
       :variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -722,7 +762,8 @@ module Aws::Bedrock
       :policy_definition_type,
       :policy_definition_rule,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class PolicyDefinitionVariable < AutomatedReasoningPolicyDefinitionElement; end
@@ -765,7 +806,8 @@ module Aws::Bedrock
       :unused_variables,
       :conflicting_rules,
       :disjoint_rule_sets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +825,8 @@ module Aws::Bedrock
       :id,
       :expression,
       :alternate_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +844,8 @@ module Aws::Bedrock
       :name,
       :description,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +859,8 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDefinitionTypeValue < Struct.new(
       :value,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +874,8 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDefinitionTypeValuePair < Struct.new(
       :type_name,
       :value_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +893,8 @@ module Aws::Bedrock
       :name,
       :type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +904,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningPolicyDeleteRuleAnnotation < Struct.new(
       :rule_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -867,7 +915,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningPolicyDeleteRuleMutation < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,7 +926,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningPolicyDeleteTypeAnnotation < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +937,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningPolicyDeleteTypeMutation < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -897,7 +948,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningPolicyDeleteTypeValue < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +959,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningPolicyDeleteVariableAnnotation < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +970,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningPolicyDeleteVariableMutation < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +985,8 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDisjointRuleSet < Struct.new(
       :variables,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -941,7 +996,8 @@ module Aws::Bedrock
     #   @return [String]
     class AutomatedReasoningPolicyIngestContentAnnotation < Struct.new(
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1040,8 @@ module Aws::Bedrock
       :update_rule,
       :delete_rule,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AddType < AutomatedReasoningPolicyMutation; end
@@ -1001,7 +1058,8 @@ module Aws::Bedrock
 
     # <p>Represents the planning phase of policy build workflow, where the system analyzes source content and determines what operations to perform.</p>
     class AutomatedReasoningPolicyPlanning < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1023,7 +1081,8 @@ module Aws::Bedrock
       :alternate_expression,
       :rule_ids,
       :expected_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1116,8 @@ module Aws::Bedrock
       :policy_id,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1091,7 +1151,8 @@ module Aws::Bedrock
       :created_at,
       :updated_at,
       :confidence_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1125,7 +1186,8 @@ module Aws::Bedrock
       :test_run_result,
       :aggregated_test_findings_result,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1144,7 +1206,8 @@ module Aws::Bedrock
       :update_type_value,
       :delete_type_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AddTypeValue < AutomatedReasoningPolicyTypeValueAnnotation; end
@@ -1163,7 +1226,8 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation < Struct.new(
       :rule_ids,
       :feedback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1181,7 +1245,8 @@ module Aws::Bedrock
       :rule_ids,
       :scenario_expression,
       :feedback,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1195,7 +1260,8 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyUpdateRuleAnnotation < Struct.new(
       :rule_id,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1205,7 +1271,8 @@ module Aws::Bedrock
     #   @return [Types::AutomatedReasoningPolicyDefinitionRule]
     class AutomatedReasoningPolicyUpdateRuleMutation < Struct.new(
       :rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1227,7 +1294,8 @@ module Aws::Bedrock
       :new_name,
       :description,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1237,7 +1305,8 @@ module Aws::Bedrock
     #   @return [Types::AutomatedReasoningPolicyDefinitionType]
     class AutomatedReasoningPolicyUpdateTypeMutation < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1324,8 @@ module Aws::Bedrock
       :value,
       :new_value,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1343,8 @@ module Aws::Bedrock
       :name,
       :new_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,7 +1354,8 @@ module Aws::Bedrock
     #   @return [Types::AutomatedReasoningPolicyDefinitionVariable]
     class AutomatedReasoningPolicyUpdateVariableMutation < Struct.new(
       :variable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1298,7 +1370,8 @@ module Aws::Bedrock
       :documents,
       :policy_repair_assets,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Documents < AutomatedReasoningPolicyWorkflowTypeContent; end
@@ -1320,7 +1393,8 @@ module Aws::Bedrock
       :job_identifier,
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1408,8 @@ module Aws::Bedrock
     class BatchDeleteEvaluationJobItem < Struct.new(
       :job_identifier,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1343,7 +1418,8 @@ module Aws::Bedrock
     #   @return [Array<String>]
     class BatchDeleteEvaluationJobRequest < Struct.new(
       :job_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1356,7 +1432,8 @@ module Aws::Bedrock
     class BatchDeleteEvaluationJobResponse < Struct.new(
       :errors,
       :evaluation_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1366,7 +1443,8 @@ module Aws::Bedrock
     #   @return [String]
     class BedrockEvaluatorModel < Struct.new(
       :model_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1384,7 +1462,8 @@ module Aws::Bedrock
       :identifier,
       :content_type,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1397,12 +1476,14 @@ module Aws::Bedrock
     class CancelAutomatedReasoningPolicyBuildWorkflowRequest < Struct.new(
       :policy_arn,
       :build_workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelAutomatedReasoningPolicyBuildWorkflowResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1501,8 @@ module Aws::Bedrock
       :log_group_name,
       :role_arn,
       :large_data_delivery_s3_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,7 +1511,8 @@ module Aws::Bedrock
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1454,7 +1537,8 @@ module Aws::Bedrock
       :client_request_token,
       :policy_definition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1487,7 +1571,8 @@ module Aws::Bedrock
       :definition_hash,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1516,7 +1601,8 @@ module Aws::Bedrock
       :expected_aggregated_findings_result,
       :client_request_token,
       :confidence_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1529,7 +1615,8 @@ module Aws::Bedrock
     class CreateAutomatedReasoningPolicyTestCaseResponse < Struct.new(
       :policy_arn,
       :test_case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,7 +1637,8 @@ module Aws::Bedrock
       :client_request_token,
       :last_updated_definition_hash,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1579,7 +1667,8 @@ module Aws::Bedrock
       :description,
       :definition_hash,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1604,7 +1693,8 @@ module Aws::Bedrock
       :description,
       :tags,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1613,7 +1703,8 @@ module Aws::Bedrock
     #   @return [String]
     class CreateCustomModelDeploymentResponse < Struct.new(
       :custom_model_deployment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1733,8 @@ module Aws::Bedrock
       :role_arn,
       :model_tags,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1743,8 @@ module Aws::Bedrock
     #   @return [String]
     class CreateCustomModelResponse < Struct.new(
       :model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1696,7 +1789,8 @@ module Aws::Bedrock
       :evaluation_config,
       :inference_config,
       :output_data_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1705,7 +1799,8 @@ module Aws::Bedrock
     #   @return [String]
     class CreateEvaluationJobResponse < Struct.new(
       :job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1718,7 +1813,8 @@ module Aws::Bedrock
     class CreateFoundationModelAgreementRequest < Struct.new(
       :offer_token,
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1727,7 +1823,8 @@ module Aws::Bedrock
     #   @return [String]
     class CreateFoundationModelAgreementResponse < Struct.new(
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1788,7 +1885,8 @@ module Aws::Bedrock
       :kms_key_id,
       :tags,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1809,7 +1907,8 @@ module Aws::Bedrock
       :guardrail_arn,
       :version,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1826,7 +1925,8 @@ module Aws::Bedrock
       :guardrail_identifier,
       :description,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1839,7 +1939,8 @@ module Aws::Bedrock
     class CreateGuardrailVersionResponse < Struct.new(
       :guardrail_id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1864,7 +1965,8 @@ module Aws::Bedrock
       :client_request_token,
       :model_source,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1877,7 +1979,8 @@ module Aws::Bedrock
     class CreateInferenceProfileResponse < Struct.new(
       :inference_profile_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,7 +2009,8 @@ module Aws::Bedrock
       :endpoint_name,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1915,7 +2019,8 @@ module Aws::Bedrock
     #   @return [Types::MarketplaceModelEndpoint]
     class CreateMarketplaceModelEndpointResponse < Struct.new(
       :marketplace_model_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1940,7 +2045,8 @@ module Aws::Bedrock
       :model_kms_key_id,
       :target_model_tags,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +2055,8 @@ module Aws::Bedrock
     #   @return [String]
     class CreateModelCopyJobResponse < Struct.new(
       :job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2014,7 +2121,8 @@ module Aws::Bedrock
       :hyper_parameters,
       :vpc_config,
       :customization_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2023,7 +2131,8 @@ module Aws::Bedrock
     #   @return [String]
     class CreateModelCustomizationJobResponse < Struct.new(
       :job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2064,7 +2173,8 @@ module Aws::Bedrock
       :client_request_token,
       :vpc_config,
       :imported_model_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,7 +2183,8 @@ module Aws::Bedrock
     #   @return [String]
     class CreateModelImportJobResponse < Struct.new(
       :job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2114,7 +2225,8 @@ module Aws::Bedrock
       :vpc_config,
       :timeout_duration_in_hours,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2123,7 +2235,8 @@ module Aws::Bedrock
     #   @return [String]
     class CreateModelInvocationJobResponse < Struct.new(
       :job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2156,7 +2269,8 @@ module Aws::Bedrock
       :routing_criteria,
       :fallback_model,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2165,7 +2279,8 @@ module Aws::Bedrock
     #   @return [String]
     class CreatePromptRouterResponse < Struct.new(
       :prompt_router_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2309,8 @@ module Aws::Bedrock
       :model_id,
       :commitment_duration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2203,7 +2319,8 @@ module Aws::Bedrock
     #   @return [String]
     class CreateProvisionedModelThroughputResponse < Struct.new(
       :provisioned_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2213,7 +2330,8 @@ module Aws::Bedrock
     #   @return [String]
     class CustomMetricBedrockEvaluatorModel < Struct.new(
       :model_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2232,7 +2350,8 @@ module Aws::Bedrock
       :name,
       :instructions,
       :rating_scale,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2242,7 +2361,8 @@ module Aws::Bedrock
     #   @return [Array<Types::CustomMetricBedrockEvaluatorModel>]
     class CustomMetricEvaluatorModelConfig < Struct.new(
       :bedrock_evaluator_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2276,7 +2396,8 @@ module Aws::Bedrock
       :status,
       :last_updated_at,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2314,7 +2435,8 @@ module Aws::Bedrock
       :customization_type,
       :owner_account_id,
       :model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2328,7 +2450,8 @@ module Aws::Bedrock
     class CustomModelUnits < Struct.new(
       :custom_model_units_per_model_copy,
       :custom_model_units_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2339,7 +2462,8 @@ module Aws::Bedrock
     class CustomizationConfig < Struct.new(
       :distillation_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DistillationConfig < CustomizationConfig; end
@@ -2360,7 +2484,8 @@ module Aws::Bedrock
       :status,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2377,12 +2502,14 @@ module Aws::Bedrock
       :policy_arn,
       :build_workflow_id,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAutomatedReasoningPolicyBuildWorkflowResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2391,12 +2518,14 @@ module Aws::Bedrock
     #   @return [String]
     class DeleteAutomatedReasoningPolicyRequest < Struct.new(
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAutomatedReasoningPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2413,12 +2542,14 @@ module Aws::Bedrock
       :policy_arn,
       :test_case_id,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAutomatedReasoningPolicyTestCaseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2427,12 +2558,14 @@ module Aws::Bedrock
     #   @return [String]
     class DeleteCustomModelDeploymentRequest < Struct.new(
       :custom_model_deployment_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomModelDeploymentResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2441,12 +2574,14 @@ module Aws::Bedrock
     #   @return [String]
     class DeleteCustomModelRequest < Struct.new(
       :model_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomModelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2455,12 +2590,14 @@ module Aws::Bedrock
     #   @return [String]
     class DeleteFoundationModelAgreementRequest < Struct.new(
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteFoundationModelAgreementResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2473,12 +2610,14 @@ module Aws::Bedrock
     class DeleteGuardrailRequest < Struct.new(
       :guardrail_identifier,
       :guardrail_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGuardrailResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2487,12 +2626,14 @@ module Aws::Bedrock
     #   @return [String]
     class DeleteImportedModelRequest < Struct.new(
       :model_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteImportedModelResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2501,12 +2642,14 @@ module Aws::Bedrock
     #   @return [String]
     class DeleteInferenceProfileRequest < Struct.new(
       :inference_profile_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteInferenceProfileResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2515,22 +2658,26 @@ module Aws::Bedrock
     #   @return [String]
     class DeleteMarketplaceModelEndpointRequest < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteMarketplaceModelEndpointResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteModelInvocationLoggingConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteModelInvocationLoggingConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2539,12 +2686,14 @@ module Aws::Bedrock
     #   @return [String]
     class DeletePromptRouterRequest < Struct.new(
       :prompt_router_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePromptRouterResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2553,12 +2702,14 @@ module Aws::Bedrock
     #   @return [String]
     class DeleteProvisionedModelThroughputRequest < Struct.new(
       :provisioned_model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProvisionedModelThroughputResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2567,12 +2718,14 @@ module Aws::Bedrock
     #   @return [String]
     class DeregisterMarketplaceModelEndpointRequest < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterMarketplaceModelEndpointResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2594,7 +2747,8 @@ module Aws::Bedrock
       :price,
       :description,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2604,7 +2758,8 @@ module Aws::Bedrock
     #   @return [Types::TeacherModelConfig]
     class DistillationConfig < Struct.new(
       :teacher_model_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2615,7 +2770,8 @@ module Aws::Bedrock
     class EndpointConfig < Struct.new(
       :sage_maker,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SageMaker < EndpointConfig; end
@@ -2636,7 +2792,8 @@ module Aws::Bedrock
       :model_identifier,
       :inference_params,
       :performance_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2656,7 +2813,8 @@ module Aws::Bedrock
       :automated,
       :human,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Automated < EvaluationConfig; end
@@ -2674,7 +2832,8 @@ module Aws::Bedrock
     class EvaluationDataset < Struct.new(
       :name,
       :dataset_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2685,7 +2844,8 @@ module Aws::Bedrock
     class EvaluationDatasetLocation < Struct.new(
       :s3_uri,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3Uri < EvaluationDatasetLocation; end
@@ -2706,7 +2866,8 @@ module Aws::Bedrock
       :task_type,
       :dataset,
       :metric_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2721,7 +2882,8 @@ module Aws::Bedrock
       :models,
       :rag_configs,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Models < EvaluationInferenceConfig; end
@@ -2739,7 +2901,8 @@ module Aws::Bedrock
     class EvaluationInferenceConfigSummary < Struct.new(
       :model_config_summary,
       :rag_config_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2754,7 +2917,8 @@ module Aws::Bedrock
       :bedrock_model,
       :precomputed_inference_source,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class BedrockModel < EvaluationModelConfig; end
@@ -2772,7 +2936,8 @@ module Aws::Bedrock
     class EvaluationModelConfigSummary < Struct.new(
       :bedrock_model_identifiers,
       :precomputed_inference_source_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2782,7 +2947,8 @@ module Aws::Bedrock
     #   @return [String]
     class EvaluationOutputDataConfig < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2792,7 +2958,8 @@ module Aws::Bedrock
     #   @return [String]
     class EvaluationPrecomputedInferenceSource < Struct.new(
       :inference_source_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2974,8 @@ module Aws::Bedrock
       :retrieve_source_config,
       :retrieve_and_generate_source_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RetrieveSourceConfig < EvaluationPrecomputedRagSourceConfig; end
@@ -2821,7 +2989,8 @@ module Aws::Bedrock
     #   @return [String]
     class EvaluationPrecomputedRetrieveAndGenerateSourceConfig < Struct.new(
       :rag_source_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2831,7 +3000,8 @@ module Aws::Bedrock
     #   @return [String]
     class EvaluationPrecomputedRetrieveSourceConfig < Struct.new(
       :rag_source_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2845,7 +3015,8 @@ module Aws::Bedrock
     class EvaluationRagConfigSummary < Struct.new(
       :bedrock_knowledge_base_identifiers,
       :precomputed_rag_source_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2905,7 +3076,8 @@ module Aws::Bedrock
       :custom_metrics_evaluator_model_identifiers,
       :inference_config_summary,
       :application_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2921,7 +3093,8 @@ module Aws::Bedrock
     class EvaluatorModelConfig < Struct.new(
       :bedrock_evaluator_models,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class BedrockEvaluatorModels < EvaluatorModelConfig; end
@@ -2933,7 +3106,8 @@ module Aws::Bedrock
     #   @return [String]
     class ExportAutomatedReasoningPolicyVersionRequest < Struct.new(
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2942,7 +3116,8 @@ module Aws::Bedrock
     #   @return [Types::AutomatedReasoningPolicyDefinition]
     class ExportAutomatedReasoningPolicyVersionResponse < Struct.new(
       :policy_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2960,7 +3135,8 @@ module Aws::Bedrock
       :source_type,
       :s3_location,
       :byte_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2982,7 +3158,8 @@ module Aws::Bedrock
       :guardrail_configuration,
       :kb_inference_config,
       :additional_model_request_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3000,7 +3177,8 @@ module Aws::Bedrock
       :model_arn,
       :sources,
       :generation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3010,7 +3188,8 @@ module Aws::Bedrock
     #   @return [String]
     class FieldForReranking < Struct.new(
       :field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3024,7 +3203,8 @@ module Aws::Bedrock
     class FilterAttribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3070,7 +3250,8 @@ module Aws::Bedrock
       :customizations_supported,
       :inference_types_supported,
       :model_lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3080,7 +3261,8 @@ module Aws::Bedrock
     #   @return [String]
     class FoundationModelLifecycle < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3126,7 +3308,8 @@ module Aws::Bedrock
       :customizations_supported,
       :inference_types_supported,
       :model_lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3148,7 +3331,8 @@ module Aws::Bedrock
       :guardrail_configuration,
       :kb_inference_config,
       :additional_model_request_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3161,7 +3345,8 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyAnnotationsRequest < Struct.new(
       :policy_arn,
       :build_workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3190,7 +3375,8 @@ module Aws::Bedrock
       :annotations,
       :annotation_set_hash,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3203,7 +3389,8 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyBuildWorkflowRequest < Struct.new(
       :policy_arn,
       :build_workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3244,7 +3431,8 @@ module Aws::Bedrock
       :document_description,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3261,7 +3449,8 @@ module Aws::Bedrock
       :policy_arn,
       :build_workflow_id,
       :asset_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3278,7 +3467,8 @@ module Aws::Bedrock
       :policy_arn,
       :build_workflow_id,
       :build_workflow_assets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3291,7 +3481,8 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyNextScenarioRequest < Struct.new(
       :policy_arn,
       :build_workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3304,7 +3495,8 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyNextScenarioResponse < Struct.new(
       :policy_arn,
       :scenario,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3313,7 +3505,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetAutomatedReasoningPolicyRequest < Struct.new(
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3350,7 +3543,8 @@ module Aws::Bedrock
       :definition_hash,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3363,7 +3557,8 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyTestCaseRequest < Struct.new(
       :policy_arn,
       :test_case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3376,7 +3571,8 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyTestCaseResponse < Struct.new(
       :policy_arn,
       :test_case,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3393,7 +3589,8 @@ module Aws::Bedrock
       :policy_arn,
       :build_workflow_id,
       :test_case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3402,7 +3599,8 @@ module Aws::Bedrock
     #   @return [Types::AutomatedReasoningPolicyTestResult]
     class GetAutomatedReasoningPolicyTestResultResponse < Struct.new(
       :test_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3411,7 +3609,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetCustomModelDeploymentRequest < Struct.new(
       :custom_model_deployment_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3448,7 +3647,8 @@ module Aws::Bedrock
       :description,
       :failure_message,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3457,7 +3657,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetCustomModelRequest < Struct.new(
       :model_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3530,7 +3731,8 @@ module Aws::Bedrock
       :customization_config,
       :model_status,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3539,7 +3741,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetEvaluationJobRequest < Struct.new(
       :job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3600,7 +3803,8 @@ module Aws::Bedrock
       :creation_time,
       :last_modified_time,
       :failure_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3609,7 +3813,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetFoundationModelAvailabilityRequest < Struct.new(
       :model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3634,7 +3839,8 @@ module Aws::Bedrock
       :authorization_status,
       :entitlement_availability,
       :region_availability,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3643,7 +3849,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetFoundationModelRequest < Struct.new(
       :model_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3652,7 +3859,8 @@ module Aws::Bedrock
     #   @return [Types::FoundationModelDetails]
     class GetFoundationModelResponse < Struct.new(
       :model_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3665,7 +3873,8 @@ module Aws::Bedrock
     class GetGuardrailRequest < Struct.new(
       :guardrail_identifier,
       :guardrail_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3750,7 +3959,8 @@ module Aws::Bedrock
       :blocked_input_messaging,
       :blocked_outputs_messaging,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3759,7 +3969,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetImportedModelRequest < Struct.new(
       :model_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3804,7 +4015,8 @@ module Aws::Bedrock
       :model_kms_key_arn,
       :instruct_supported,
       :custom_model_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3813,7 +4025,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetInferenceProfileRequest < Struct.new(
       :inference_profile_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3854,7 +4067,8 @@ module Aws::Bedrock
       :inference_profile_id,
       :status,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3863,7 +4077,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetMarketplaceModelEndpointRequest < Struct.new(
       :endpoint_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3872,7 +4087,8 @@ module Aws::Bedrock
     #   @return [Types::MarketplaceModelEndpoint]
     class GetMarketplaceModelEndpointResponse < Struct.new(
       :marketplace_model_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3881,7 +4097,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetModelCopyJobRequest < Struct.new(
       :job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3930,7 +4147,8 @@ module Aws::Bedrock
       :target_model_tags,
       :failure_message,
       :source_model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3939,7 +4157,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetModelCustomizationJobRequest < Struct.new(
       :job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4036,7 +4255,8 @@ module Aws::Bedrock
       :validation_metrics,
       :vpc_config,
       :customization_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4045,7 +4265,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetModelImportJobRequest < Struct.new(
       :job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4102,7 +4323,8 @@ module Aws::Bedrock
       :end_time,
       :vpc_config,
       :imported_model_kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4111,7 +4333,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetModelInvocationJobRequest < Struct.new(
       :job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4176,12 +4399,14 @@ module Aws::Bedrock
       :vpc_config,
       :timeout_duration_in_hours,
       :job_expiration_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetModelInvocationLoggingConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4190,7 +4415,8 @@ module Aws::Bedrock
     #   @return [Types::LoggingConfig]
     class GetModelInvocationLoggingConfigurationResponse < Struct.new(
       :logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4199,7 +4425,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetPromptRouterRequest < Struct.new(
       :prompt_router_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4244,7 +4471,8 @@ module Aws::Bedrock
       :fallback_model,
       :status,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4253,7 +4481,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetProvisionedModelThroughputRequest < Struct.new(
       :provisioned_model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4310,12 +4539,14 @@ module Aws::Bedrock
       :failure_message,
       :commitment_duration,
       :commitment_expiration_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetUseCaseForModelAccessRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4324,7 +4555,8 @@ module Aws::Bedrock
     #   @return [String]
     class GetUseCaseForModelAccessResponse < Struct.new(
       :form_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4338,7 +4570,8 @@ module Aws::Bedrock
     class GuardrailAutomatedReasoningPolicy < Struct.new(
       :policies,
       :confidence_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4352,7 +4585,8 @@ module Aws::Bedrock
     class GuardrailAutomatedReasoningPolicyConfig < Struct.new(
       :policies,
       :confidence_threshold,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4366,7 +4600,8 @@ module Aws::Bedrock
     class GuardrailConfiguration < Struct.new(
       :guardrail_id,
       :guardrail_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4408,7 +4643,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4450,7 +4686,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4460,7 +4697,8 @@ module Aws::Bedrock
     #   @return [String]
     class GuardrailContentFiltersTier < Struct.new(
       :tier_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4470,7 +4708,8 @@ module Aws::Bedrock
     #   @return [String]
     class GuardrailContentFiltersTierConfig < Struct.new(
       :tier_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4484,7 +4723,8 @@ module Aws::Bedrock
     class GuardrailContentPolicy < Struct.new(
       :filters,
       :tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4498,7 +4738,8 @@ module Aws::Bedrock
     class GuardrailContentPolicyConfig < Struct.new(
       :filters_config,
       :tier_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4520,7 +4761,8 @@ module Aws::Bedrock
       :threshold,
       :action,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4542,7 +4784,8 @@ module Aws::Bedrock
       :threshold,
       :action,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4552,7 +4795,8 @@ module Aws::Bedrock
     #   @return [Array<Types::GuardrailContextualGroundingFilter>]
     class GuardrailContextualGroundingPolicy < Struct.new(
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4562,7 +4806,8 @@ module Aws::Bedrock
     #   @return [Array<Types::GuardrailContextualGroundingFilterConfig>]
     class GuardrailContextualGroundingPolicyConfig < Struct.new(
       :filters_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4572,7 +4817,8 @@ module Aws::Bedrock
     #   @return [String]
     class GuardrailCrossRegionConfig < Struct.new(
       :guardrail_profile_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4586,7 +4832,8 @@ module Aws::Bedrock
     class GuardrailCrossRegionDetails < Struct.new(
       :guardrail_profile_id,
       :guardrail_profile_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4612,7 +4859,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4638,7 +4886,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4668,7 +4917,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4698,7 +4948,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4736,7 +4987,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4774,7 +5026,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4788,7 +5041,8 @@ module Aws::Bedrock
     class GuardrailSensitiveInformationPolicy < Struct.new(
       :pii_entities,
       :regexes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4802,7 +5056,8 @@ module Aws::Bedrock
     class GuardrailSensitiveInformationPolicyConfig < Struct.new(
       :pii_entities_config,
       :regexes_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4844,7 +5099,8 @@ module Aws::Bedrock
       :created_at,
       :updated_at,
       :cross_region_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4882,7 +5138,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4920,7 +5177,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4934,7 +5192,8 @@ module Aws::Bedrock
     class GuardrailTopicPolicy < Struct.new(
       :topics,
       :tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4948,7 +5207,8 @@ module Aws::Bedrock
     class GuardrailTopicPolicyConfig < Struct.new(
       :topics_config,
       :tier_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4958,7 +5218,8 @@ module Aws::Bedrock
     #   @return [String]
     class GuardrailTopicsTier < Struct.new(
       :tier_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4968,7 +5229,8 @@ module Aws::Bedrock
     #   @return [String]
     class GuardrailTopicsTierConfig < Struct.new(
       :tier_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4994,7 +5256,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5020,7 +5283,8 @@ module Aws::Bedrock
       :output_action,
       :input_enabled,
       :output_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5034,7 +5298,8 @@ module Aws::Bedrock
     class GuardrailWordPolicy < Struct.new(
       :words,
       :managed_word_lists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5048,7 +5313,8 @@ module Aws::Bedrock
     class GuardrailWordPolicyConfig < Struct.new(
       :words_config,
       :managed_word_lists_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5066,7 +5332,8 @@ module Aws::Bedrock
       :human_workflow_config,
       :custom_metrics,
       :dataset_metric_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5084,7 +5351,8 @@ module Aws::Bedrock
       :name,
       :description,
       :rating_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5098,7 +5366,8 @@ module Aws::Bedrock
     class HumanWorkflowConfig < Struct.new(
       :flow_definition_arn,
       :instructions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5112,7 +5381,8 @@ module Aws::Bedrock
     class ImplicitFilterConfiguration < Struct.new(
       :metadata_attributes,
       :model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5138,7 +5408,8 @@ module Aws::Bedrock
       :creation_time,
       :instruct_supported,
       :model_architecture,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5148,7 +5419,8 @@ module Aws::Bedrock
     #   @return [String]
     class InferenceProfileModel < Struct.new(
       :model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5159,7 +5431,8 @@ module Aws::Bedrock
     class InferenceProfileModelSource < Struct.new(
       :copy_from,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CopyFrom < InferenceProfileModelSource; end
@@ -5204,7 +5477,8 @@ module Aws::Bedrock
       :inference_profile_id,
       :status,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5213,7 +5487,8 @@ module Aws::Bedrock
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5224,7 +5499,8 @@ module Aws::Bedrock
     class InvocationLogSource < Struct.new(
       :s3_uri,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3Uri < InvocationLogSource; end
@@ -5245,7 +5521,8 @@ module Aws::Bedrock
       :use_prompt_response,
       :invocation_log_source,
       :request_metadata_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5260,7 +5537,8 @@ module Aws::Bedrock
     #   @return [Types::TextInferenceConfig]
     class KbInferenceConfig < Struct.new(
       :text_inference_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5275,7 +5553,8 @@ module Aws::Bedrock
       :retrieve_config,
       :retrieve_and_generate_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class RetrieveConfig < KnowledgeBaseConfig; end
@@ -5289,7 +5568,8 @@ module Aws::Bedrock
     #   @return [Types::KnowledgeBaseVectorSearchConfiguration]
     class KnowledgeBaseRetrievalConfiguration < Struct.new(
       :vector_search_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5315,7 +5595,8 @@ module Aws::Bedrock
       :retrieval_configuration,
       :generation_configuration,
       :orchestration_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5341,7 +5622,8 @@ module Aws::Bedrock
       :filter,
       :implicit_filter_configuration,
       :reranking_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5351,7 +5633,8 @@ module Aws::Bedrock
     #   @return [String]
     class LegalTerm < Struct.new(
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5368,7 +5651,8 @@ module Aws::Bedrock
       :policy_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5381,7 +5665,8 @@ module Aws::Bedrock
     class ListAutomatedReasoningPoliciesResponse < Struct.new(
       :automated_reasoning_policy_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5398,7 +5683,8 @@ module Aws::Bedrock
       :policy_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5411,7 +5697,8 @@ module Aws::Bedrock
     class ListAutomatedReasoningPolicyBuildWorkflowsResponse < Struct.new(
       :automated_reasoning_policy_build_workflow_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5428,7 +5715,8 @@ module Aws::Bedrock
       :policy_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5441,7 +5729,8 @@ module Aws::Bedrock
     class ListAutomatedReasoningPolicyTestCasesResponse < Struct.new(
       :test_cases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5462,7 +5751,8 @@ module Aws::Bedrock
       :build_workflow_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5475,7 +5765,8 @@ module Aws::Bedrock
     class ListAutomatedReasoningPolicyTestResultsResponse < Struct.new(
       :test_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5516,7 +5807,8 @@ module Aws::Bedrock
       :sort_order,
       :status_equals,
       :model_arn_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5529,7 +5821,8 @@ module Aws::Bedrock
     class ListCustomModelDeploymentsResponse < Struct.new(
       :next_token,
       :model_deployment_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5578,7 +5871,8 @@ module Aws::Bedrock
       :sort_order,
       :is_owned,
       :model_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5591,7 +5885,8 @@ module Aws::Bedrock
     class ListCustomModelsResponse < Struct.new(
       :next_token,
       :model_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5632,7 +5927,8 @@ module Aws::Bedrock
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5645,7 +5941,8 @@ module Aws::Bedrock
     class ListEvaluationJobsResponse < Struct.new(
       :next_token,
       :job_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5658,7 +5955,8 @@ module Aws::Bedrock
     class ListFoundationModelAgreementOffersRequest < Struct.new(
       :model_id,
       :offer_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5671,7 +5969,8 @@ module Aws::Bedrock
     class ListFoundationModelAgreementOffersResponse < Struct.new(
       :model_id,
       :offers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5692,7 +5991,8 @@ module Aws::Bedrock
       :by_customization_type,
       :by_output_modality,
       :by_inference_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5701,7 +6001,8 @@ module Aws::Bedrock
     #   @return [Array<Types::FoundationModelSummary>]
     class ListFoundationModelsResponse < Struct.new(
       :model_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5718,7 +6019,8 @@ module Aws::Bedrock
       :guardrail_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5731,7 +6033,8 @@ module Aws::Bedrock
     class ListGuardrailsResponse < Struct.new(
       :guardrails,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5764,7 +6067,8 @@ module Aws::Bedrock
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5777,7 +6081,8 @@ module Aws::Bedrock
     class ListImportedModelsResponse < Struct.new(
       :next_token,
       :model_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5794,7 +6099,8 @@ module Aws::Bedrock
       :max_results,
       :next_token,
       :type_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5807,7 +6113,8 @@ module Aws::Bedrock
     class ListInferenceProfilesResponse < Struct.new(
       :inference_profile_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5824,7 +6131,8 @@ module Aws::Bedrock
       :max_results,
       :next_token,
       :model_source_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5837,7 +6145,8 @@ module Aws::Bedrock
     class ListMarketplaceModelEndpointsResponse < Struct.new(
       :marketplace_model_endpoints,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5882,7 +6191,8 @@ module Aws::Bedrock
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5895,7 +6205,8 @@ module Aws::Bedrock
     class ListModelCopyJobsResponse < Struct.new(
       :next_token,
       :model_copy_job_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5932,7 +6243,8 @@ module Aws::Bedrock
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5945,7 +6257,8 @@ module Aws::Bedrock
     class ListModelCustomizationJobsResponse < Struct.new(
       :next_token,
       :model_customization_job_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5982,7 +6295,8 @@ module Aws::Bedrock
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5995,7 +6309,8 @@ module Aws::Bedrock
     class ListModelImportJobsResponse < Struct.new(
       :next_token,
       :model_import_job_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6032,7 +6347,8 @@ module Aws::Bedrock
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6045,7 +6361,8 @@ module Aws::Bedrock
     class ListModelInvocationJobsResponse < Struct.new(
       :next_token,
       :invocation_job_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6062,7 +6379,8 @@ module Aws::Bedrock
       :max_results,
       :next_token,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6075,7 +6393,8 @@ module Aws::Bedrock
     class ListPromptRoutersResponse < Struct.new(
       :prompt_router_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6116,7 +6435,8 @@ module Aws::Bedrock
       :next_token,
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6129,7 +6449,8 @@ module Aws::Bedrock
     class ListProvisionedModelThroughputsResponse < Struct.new(
       :next_token,
       :provisioned_model_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6138,7 +6459,8 @@ module Aws::Bedrock
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6147,7 +6469,8 @@ module Aws::Bedrock
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6177,7 +6500,8 @@ module Aws::Bedrock
       :image_data_delivery_enabled,
       :embedding_data_delivery_enabled,
       :video_data_delivery_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6219,7 +6543,8 @@ module Aws::Bedrock
       :endpoint_config,
       :endpoint_status,
       :endpoint_status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6249,7 +6574,8 @@ module Aws::Bedrock
       :status_message,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6268,7 +6594,8 @@ module Aws::Bedrock
       :key,
       :type,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6282,7 +6609,8 @@ module Aws::Bedrock
     class MetadataConfigurationForReranking < Struct.new(
       :selection_mode,
       :selective_mode_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6332,7 +6660,8 @@ module Aws::Bedrock
       :target_model_tags,
       :failure_message,
       :source_model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6382,7 +6711,8 @@ module Aws::Bedrock
       :custom_model_arn,
       :custom_model_name,
       :customization_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6393,7 +6723,8 @@ module Aws::Bedrock
     class ModelDataSource < Struct.new(
       :s3_data_source,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3DataSource < ModelDataSource; end
@@ -6434,7 +6765,8 @@ module Aws::Bedrock
       :end_time,
       :imported_model_arn,
       :imported_model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6445,7 +6777,8 @@ module Aws::Bedrock
     class ModelInvocationJobInputDataConfig < Struct.new(
       :s3_input_data_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3InputDataConfig < ModelInvocationJobInputDataConfig; end
@@ -6459,7 +6792,8 @@ module Aws::Bedrock
     class ModelInvocationJobOutputDataConfig < Struct.new(
       :s3_output_data_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3OutputDataConfig < ModelInvocationJobOutputDataConfig; end
@@ -6480,7 +6814,8 @@ module Aws::Bedrock
       :s3_input_format,
       :s3_uri,
       :s3_bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6498,7 +6833,8 @@ module Aws::Bedrock
       :s3_uri,
       :s3_encryption_key_id,
       :s3_bucket_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6564,7 +6900,8 @@ module Aws::Bedrock
       :vpc_config,
       :timeout_duration_in_hours,
       :job_expiration_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6582,7 +6919,8 @@ module Aws::Bedrock
       :offer_id,
       :offer_token,
       :term_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6592,7 +6930,8 @@ module Aws::Bedrock
     #   @return [Types::QueryTransformationConfiguration]
     class OrchestrationConfiguration < Struct.new(
       :query_transformation_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6602,7 +6941,8 @@ module Aws::Bedrock
     #   @return [String]
     class OutputDataConfig < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6612,7 +6952,8 @@ module Aws::Bedrock
     #   @return [String]
     class PerformanceConfiguration < Struct.new(
       :latency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6622,7 +6963,8 @@ module Aws::Bedrock
     #   @return [Array<Types::DimensionalPriceRate>]
     class PricingTerm < Struct.new(
       :rate_card,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6668,7 +7010,8 @@ module Aws::Bedrock
       :fallback_model,
       :status,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6678,7 +7021,8 @@ module Aws::Bedrock
     #   @return [String]
     class PromptRouterTargetModel < Struct.new(
       :model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6688,7 +7032,8 @@ module Aws::Bedrock
     #   @return [String]
     class PromptTemplate < Struct.new(
       :text_prompt_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6742,7 +7087,8 @@ module Aws::Bedrock
       :commitment_expiration_time,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6751,12 +7097,14 @@ module Aws::Bedrock
     #   @return [Types::LoggingConfig]
     class PutModelInvocationLoggingConfigurationRequest < Struct.new(
       :logging_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutModelInvocationLoggingConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6765,12 +7113,14 @@ module Aws::Bedrock
     #   @return [String]
     class PutUseCaseForModelAccessRequest < Struct.new(
       :form_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutUseCaseForModelAccessResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6780,7 +7130,8 @@ module Aws::Bedrock
     #   @return [String]
     class QueryTransformationConfiguration < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6795,7 +7146,8 @@ module Aws::Bedrock
       :knowledge_base_config,
       :precomputed_rag_source_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class KnowledgeBaseConfig < RAGConfig; end
@@ -6813,7 +7165,8 @@ module Aws::Bedrock
     class RatingScaleItem < Struct.new(
       :definition,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6828,7 +7181,8 @@ module Aws::Bedrock
       :string_value,
       :float_value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class StringValue < RatingScaleItemValue; end
@@ -6845,7 +7199,8 @@ module Aws::Bedrock
     class RegisterMarketplaceModelEndpointRequest < Struct.new(
       :endpoint_identifier,
       :model_source_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6854,7 +7209,8 @@ module Aws::Bedrock
     #   @return [Types::MarketplaceModelEndpoint]
     class RegisterMarketplaceModelEndpointResponse < Struct.new(
       :marketplace_model_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6868,7 +7224,8 @@ module Aws::Bedrock
     class RequestMetadataBaseFilters < Struct.new(
       :equals,
       :not_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6891,7 +7248,8 @@ module Aws::Bedrock
       :and_all,
       :or_all,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Equals < RequestMetadataFilters; end
@@ -6912,7 +7270,8 @@ module Aws::Bedrock
       :fields_to_include,
       :fields_to_exclude,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class FieldsToInclude < RerankingMetadataSelectiveModeConfiguration; end
@@ -6925,7 +7284,8 @@ module Aws::Bedrock
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6934,7 +7294,8 @@ module Aws::Bedrock
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6994,7 +7355,8 @@ module Aws::Bedrock
       :and_all,
       :or_all,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Equals < RetrievalFilter; end
@@ -7027,7 +7389,8 @@ module Aws::Bedrock
       :type,
       :knowledge_base_configuration,
       :external_sources_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7041,7 +7404,8 @@ module Aws::Bedrock
     class RetrieveConfig < Struct.new(
       :knowledge_base_id,
       :knowledge_base_retrieval_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7051,7 +7415,8 @@ module Aws::Bedrock
     #   @return [Float]
     class RoutingCriteria < Struct.new(
       :response_quality_difference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7065,7 +7430,8 @@ module Aws::Bedrock
     class S3Config < Struct.new(
       :bucket_name,
       :key_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7075,7 +7441,8 @@ module Aws::Bedrock
     #   @return [String]
     class S3DataSource < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7085,7 +7452,8 @@ module Aws::Bedrock
     #   @return [String]
     class S3ObjectDoc < Struct.new(
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7111,7 +7479,8 @@ module Aws::Bedrock
       :execution_role,
       :kms_encryption_key,
       :vpc,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7120,7 +7489,8 @@ module Aws::Bedrock
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7129,7 +7499,8 @@ module Aws::Bedrock
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7150,7 +7521,8 @@ module Aws::Bedrock
       :build_workflow_type,
       :client_request_token,
       :source_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7163,7 +7535,8 @@ module Aws::Bedrock
     class StartAutomatedReasoningPolicyBuildWorkflowResponse < Struct.new(
       :policy_arn,
       :build_workflow_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7184,7 +7557,8 @@ module Aws::Bedrock
       :build_workflow_id,
       :test_case_ids,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7193,7 +7567,8 @@ module Aws::Bedrock
     #   @return [String]
     class StartAutomatedReasoningPolicyTestWorkflowResponse < Struct.new(
       :policy_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7211,7 +7586,8 @@ module Aws::Bedrock
       :validation_details,
       :data_processing_details,
       :training_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7220,12 +7596,14 @@ module Aws::Bedrock
     #   @return [String]
     class StopEvaluationJobRequest < Struct.new(
       :job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopEvaluationJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7234,12 +7612,14 @@ module Aws::Bedrock
     #   @return [String]
     class StopModelCustomizationJobRequest < Struct.new(
       :job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopModelCustomizationJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7248,12 +7628,14 @@ module Aws::Bedrock
     #   @return [String]
     class StopModelInvocationJobRequest < Struct.new(
       :job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopModelInvocationJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7263,7 +7645,8 @@ module Aws::Bedrock
     #   @return [String]
     class SupportTerm < Struct.new(
       :refund_policy_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7277,7 +7660,8 @@ module Aws::Bedrock
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7290,12 +7674,14 @@ module Aws::Bedrock
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7309,7 +7695,8 @@ module Aws::Bedrock
     class TeacherModelConfig < Struct.new(
       :teacher_model_identifier,
       :max_response_length_for_inference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7331,7 +7718,8 @@ module Aws::Bedrock
       :legal_term,
       :support_term,
       :validity_term,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7353,7 +7741,8 @@ module Aws::Bedrock
       :top_p,
       :max_tokens,
       :stop_sequences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7362,7 +7751,8 @@ module Aws::Bedrock
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7375,7 +7765,8 @@ module Aws::Bedrock
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7389,7 +7780,8 @@ module Aws::Bedrock
     class TrainingDataConfig < Struct.new(
       :s3_uri,
       :invocation_logs_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7407,7 +7799,8 @@ module Aws::Bedrock
       :status,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7417,7 +7810,8 @@ module Aws::Bedrock
     #   @return [Float]
     class TrainingMetrics < Struct.new(
       :training_loss,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7430,12 +7824,14 @@ module Aws::Bedrock
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7456,7 +7852,8 @@ module Aws::Bedrock
       :build_workflow_id,
       :annotations,
       :last_updated_annotation_set_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7477,7 +7874,8 @@ module Aws::Bedrock
       :build_workflow_id,
       :annotation_set_hash,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7498,7 +7896,8 @@ module Aws::Bedrock
       :policy_definition,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7519,7 +7918,8 @@ module Aws::Bedrock
       :name,
       :definition_hash,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7560,7 +7960,8 @@ module Aws::Bedrock
       :confidence_threshold,
       :kms_key_arn,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7573,7 +7974,8 @@ module Aws::Bedrock
     class UpdateAutomatedReasoningPolicyTestCaseResponse < Struct.new(
       :policy_arn,
       :test_case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7630,7 +8032,8 @@ module Aws::Bedrock
       :blocked_input_messaging,
       :blocked_outputs_messaging,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7651,7 +8054,8 @@ module Aws::Bedrock
       :guardrail_arn,
       :version,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7668,7 +8072,8 @@ module Aws::Bedrock
       :endpoint_arn,
       :endpoint_config,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7677,7 +8082,8 @@ module Aws::Bedrock
     #   @return [Types::MarketplaceModelEndpoint]
     class UpdateMarketplaceModelEndpointResponse < Struct.new(
       :marketplace_model_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7694,12 +8100,14 @@ module Aws::Bedrock
       :provisioned_model_id,
       :desired_provisioned_model_name,
       :desired_model_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateProvisionedModelThroughputResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7709,7 +8117,8 @@ module Aws::Bedrock
     #   @return [Array<Types::Validator>]
     class ValidationDataConfig < Struct.new(
       :validators,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7727,7 +8136,8 @@ module Aws::Bedrock
       :status,
       :creation_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7736,7 +8146,8 @@ module Aws::Bedrock
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7746,7 +8157,8 @@ module Aws::Bedrock
     #   @return [String]
     class Validator < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7756,7 +8168,8 @@ module Aws::Bedrock
     #   @return [Float]
     class ValidatorMetric < Struct.new(
       :validation_loss,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7766,7 +8179,8 @@ module Aws::Bedrock
     #   @return [String]
     class ValidityTerm < Struct.new(
       :agreement_duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7784,7 +8198,8 @@ module Aws::Bedrock
       :model_configuration,
       :number_of_reranked_results,
       :metadata_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7798,7 +8213,8 @@ module Aws::Bedrock
     class VectorSearchBedrockRerankingModelConfiguration < Struct.new(
       :model_arn,
       :additional_model_request_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7812,7 +8228,8 @@ module Aws::Bedrock
     class VectorSearchRerankingConfiguration < Struct.new(
       :type,
       :bedrock_reranking_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7826,7 +8243,8 @@ module Aws::Bedrock
     class VpcConfig < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

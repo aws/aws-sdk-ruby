@@ -922,7 +922,6 @@ module Aws::Chatbot
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateSlackChannelConfigurationException)
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update an AWS Chatbot Slack Channel Configuration", "resources" => {"required" => {"ChatbotConfiguration" => {}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/update-slack-channel-configuration", "code" => 200}}
       end)
-
     end
 
     class << self

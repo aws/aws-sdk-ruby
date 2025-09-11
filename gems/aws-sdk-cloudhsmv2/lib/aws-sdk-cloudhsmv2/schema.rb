@@ -555,7 +555,6 @@ module Aws::CloudHSMV2
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudHsmTagException)
         operation.traits = {}
       end)
-
     end
 
     class << self

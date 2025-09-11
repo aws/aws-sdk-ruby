@@ -12,7 +12,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class AccountSuspendedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class AlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +32,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -50,7 +53,8 @@ module Aws::PinpointEmail
       :rbl_name,
       :listing_time,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -68,7 +72,8 @@ module Aws::PinpointEmail
     class Body < Struct.new(
       :text,
       :html,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +85,8 @@ module Aws::PinpointEmail
     #   @return [Array<Types::CloudWatchDimensionConfiguration>]
     class CloudWatchDestination < Struct.new(
       :dimension_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +130,8 @@ module Aws::PinpointEmail
       :dimension_name,
       :dimension_value_source,
       :default_dimension_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -133,7 +140,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +159,8 @@ module Aws::PinpointEmail
     class Content < Struct.new(
       :data,
       :charset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,14 +178,16 @@ module Aws::PinpointEmail
       :configuration_set_name,
       :event_destination_name,
       :event_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateConfigurationSetEventDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,14 +222,16 @@ module Aws::PinpointEmail
       :reputation_options,
       :sending_options,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateConfigurationSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,14 +246,16 @@ module Aws::PinpointEmail
     class CreateDedicatedIpPoolRequest < Struct.new(
       :pool_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateDedicatedIpPoolResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -270,7 +285,8 @@ module Aws::PinpointEmail
       :from_email_address,
       :content,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +303,8 @@ module Aws::PinpointEmail
     class CreateDeliverabilityTestReportResponse < Struct.new(
       :report_id,
       :deliverability_test_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +320,8 @@ module Aws::PinpointEmail
     class CreateEmailIdentityRequest < Struct.new(
       :email_identity,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -328,7 +346,8 @@ module Aws::PinpointEmail
       :identity_type,
       :verified_for_sending_status,
       :dkim_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -354,7 +373,8 @@ module Aws::PinpointEmail
       :start_date,
       :volume_statistics,
       :domain_isp_placements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +412,8 @@ module Aws::PinpointEmail
       :warmup_status,
       :warmup_percentage,
       :pool_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,14 +428,16 @@ module Aws::PinpointEmail
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteConfigurationSetEventDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,14 +447,16 @@ module Aws::PinpointEmail
     #   @return [String]
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteConfigurationSetResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -441,14 +466,16 @@ module Aws::PinpointEmail
     #   @return [String]
     class DeleteDedicatedIpPoolRequest < Struct.new(
       :pool_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteDedicatedIpPoolResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,14 +488,16 @@ module Aws::PinpointEmail
     #   @return [String]
     class DeleteEmailIdentityRequest < Struct.new(
       :email_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteEmailIdentityResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +530,8 @@ module Aws::PinpointEmail
       :from_email_address,
       :create_date,
       :deliverability_test_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +549,8 @@ module Aws::PinpointEmail
     class DeliveryOptions < Struct.new(
       :tls_policy,
       :sending_pool_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +571,8 @@ module Aws::PinpointEmail
       :to_addresses,
       :cc_addresses,
       :bcc_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -595,7 +627,8 @@ module Aws::PinpointEmail
       :signing_enabled,
       :status,
       :tokens,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -680,7 +713,8 @@ module Aws::PinpointEmail
       :read_delete_rate,
       :projected_volume,
       :esps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +738,8 @@ module Aws::PinpointEmail
       :domain,
       :subscription_start_date,
       :inbox_placement_tracking_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +770,8 @@ module Aws::PinpointEmail
       :spam_raw_count,
       :inbox_percentage,
       :spam_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +821,8 @@ module Aws::PinpointEmail
       :simple,
       :raw,
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +869,8 @@ module Aws::PinpointEmail
       :cloud_watch_destination,
       :sns_destination,
       :pinpoint_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -880,7 +918,8 @@ module Aws::PinpointEmail
       :cloud_watch_destination,
       :sns_destination,
       :pinpoint_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -892,7 +931,8 @@ module Aws::PinpointEmail
     # <p>A request to obtain information about the email-sending capabilities of your Amazon Pinpoint
     #             account.</p>
     class GetAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +992,8 @@ module Aws::PinpointEmail
       :dedicated_ip_auto_warmup_enabled,
       :enforcement_status,
       :production_access_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -972,7 +1013,8 @@ module Aws::PinpointEmail
     #   @return [Array<String>]
     class GetBlacklistReportsRequest < Struct.new(
       :blacklist_item_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1025,8 @@ module Aws::PinpointEmail
     #   @return [Hash<String, Array<Types::BlacklistEntry>>]
     class GetBlacklistReportsResponse < Struct.new(
       :blacklist_report,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -994,7 +1037,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1049,8 @@ module Aws::PinpointEmail
     #   @return [Array<Types::EventDestination>]
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
       :event_destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1061,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class GetConfigurationSetRequest < Struct.new(
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1097,8 @@ module Aws::PinpointEmail
       :reputation_options,
       :sending_options,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1062,7 +1109,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class GetDedicatedIpRequest < Struct.new(
       :ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1120,8 @@ module Aws::PinpointEmail
     #   @return [Types::DedicatedIp]
     class GetDedicatedIpResponse < Struct.new(
       :dedicated_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1143,8 @@ module Aws::PinpointEmail
       :pool_name,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1162,8 @@ module Aws::PinpointEmail
     class GetDedicatedIpsResponse < Struct.new(
       :dedicated_ips,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1175,8 @@ module Aws::PinpointEmail
     #             to any other fees that you accrue by using Amazon Pinpoint. For more information about the
     #             features and cost of a Deliverability dashboard subscription, see <a href="http://aws.amazon.com/pinpoint/pricing/">Amazon Pinpoint Pricing</a>.</p>
     class GetDeliverabilityDashboardOptionsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1160,7 +1212,8 @@ module Aws::PinpointEmail
       :account_status,
       :active_subscribed_domains,
       :pending_expiration_subscribed_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1175,7 +1228,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class GetDeliverabilityTestReportRequest < Struct.new(
       :report_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1206,7 +1260,8 @@ module Aws::PinpointEmail
       :isp_placements,
       :message,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1222,7 +1277,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class GetDomainDeliverabilityCampaignRequest < Struct.new(
       :campaign_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1291,8 @@ module Aws::PinpointEmail
     #   @return [Types::DomainDeliverabilityCampaign]
     class GetDomainDeliverabilityCampaignResponse < Struct.new(
       :domain_deliverability_campaign,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1256,7 +1313,8 @@ module Aws::PinpointEmail
       :domain,
       :start_date,
       :end_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1275,7 +1333,8 @@ module Aws::PinpointEmail
     class GetDomainStatisticsReportResponse < Struct.new(
       :overall_volume,
       :daily_volumes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1285,7 +1344,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class GetEmailIdentityRequest < Struct.new(
       :email_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1389,8 @@ module Aws::PinpointEmail
       :dkim_attributes,
       :mail_from_attributes,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1371,7 +1432,8 @@ module Aws::PinpointEmail
       :identity_type,
       :identity_name,
       :sending_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1394,7 +1456,8 @@ module Aws::PinpointEmail
     class InboxPlacementTrackingOption < Struct.new(
       :global,
       :tracked_isps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1414,7 +1477,8 @@ module Aws::PinpointEmail
     class IspPlacement < Struct.new(
       :isp_name,
       :placement_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1431,7 +1495,8 @@ module Aws::PinpointEmail
     class KinesisFirehoseDestination < Struct.new(
       :iam_role_arn,
       :delivery_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1505,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1459,7 +1525,8 @@ module Aws::PinpointEmail
     class ListConfigurationSetsRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1477,7 +1544,8 @@ module Aws::PinpointEmail
     class ListConfigurationSetsResponse < Struct.new(
       :configuration_sets,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1495,7 +1563,8 @@ module Aws::PinpointEmail
     class ListDedicatedIpPoolsRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,7 +1581,8 @@ module Aws::PinpointEmail
     class ListDedicatedIpPoolsResponse < Struct.new(
       :dedicated_ip_pools,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1532,7 +1602,8 @@ module Aws::PinpointEmail
     class ListDeliverabilityTestReportsRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1549,7 +1620,8 @@ module Aws::PinpointEmail
     class ListDeliverabilityTestReportsResponse < Struct.new(
       :deliverability_test_reports,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1659,8 @@ module Aws::PinpointEmail
       :subscribed_domain,
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1607,7 +1680,8 @@ module Aws::PinpointEmail
     class ListDomainDeliverabilityCampaignsResponse < Struct.new(
       :domain_deliverability_campaigns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1628,7 +1702,8 @@ module Aws::PinpointEmail
     class ListEmailIdentitiesRequest < Struct.new(
       :next_token,
       :page_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1647,7 +1722,8 @@ module Aws::PinpointEmail
     class ListEmailIdentitiesResponse < Struct.new(
       :email_identities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,7 +1733,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1668,7 +1745,8 @@ module Aws::PinpointEmail
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1715,7 +1793,8 @@ module Aws::PinpointEmail
       :mail_from_domain,
       :mail_from_domain_status,
       :behavior_on_mx_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1724,7 +1803,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class MailFromDomainNotVerifiedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1742,7 +1822,8 @@ module Aws::PinpointEmail
     class Message < Struct.new(
       :subject,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1751,7 +1832,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class MessageRejected < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1787,7 +1869,8 @@ module Aws::PinpointEmail
     class MessageTag < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1879,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1818,7 +1902,8 @@ module Aws::PinpointEmail
       :volume_statistics,
       :read_rate_percent,
       :domain_isp_placements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1831,7 +1916,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class PinpointDestination < Struct.new(
       :application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1861,7 +1947,8 @@ module Aws::PinpointEmail
       :missing_percentage,
       :spf_percentage,
       :dkim_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1874,14 +1961,16 @@ module Aws::PinpointEmail
     #   @return [Boolean]
     class PutAccountDedicatedIpWarmupAttributesRequest < Struct.new(
       :auto_warmup_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountDedicatedIpWarmupAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1896,14 +1985,16 @@ module Aws::PinpointEmail
     #   @return [Boolean]
     class PutAccountSendingAttributesRequest < Struct.new(
       :sending_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountSendingAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1926,14 +2017,16 @@ module Aws::PinpointEmail
       :configuration_set_name,
       :tls_policy,
       :sending_pool_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetDeliveryOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1951,14 +2044,16 @@ module Aws::PinpointEmail
     class PutConfigurationSetReputationOptionsRequest < Struct.new(
       :configuration_set_name,
       :reputation_metrics_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetReputationOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1975,14 +2070,16 @@ module Aws::PinpointEmail
     class PutConfigurationSetSendingOptionsRequest < Struct.new(
       :configuration_set_name,
       :sending_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetSendingOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1998,14 +2095,16 @@ module Aws::PinpointEmail
     class PutConfigurationSetTrackingOptionsRequest < Struct.new(
       :configuration_set_name,
       :custom_redirect_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetTrackingOptionsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2021,14 +2120,16 @@ module Aws::PinpointEmail
     class PutDedicatedIpInPoolRequest < Struct.new(
       :ip,
       :destination_pool_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpInPoolResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2044,14 +2145,16 @@ module Aws::PinpointEmail
     class PutDedicatedIpWarmupAttributesRequest < Struct.new(
       :ip,
       :warmup_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpWarmupAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,14 +2176,16 @@ module Aws::PinpointEmail
     class PutDeliverabilityDashboardOptionRequest < Struct.new(
       :dashboard_enabled,
       :subscribed_domains,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>A response that indicates whether the Deliverability dashboard is enabled for your Amazon Pinpoint
     #             account.</p>
     class PutDeliverabilityDashboardOptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2098,14 +2203,16 @@ module Aws::PinpointEmail
     class PutEmailIdentityDkimAttributesRequest < Struct.new(
       :email_identity,
       :signing_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityDkimAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2129,14 +2236,16 @@ module Aws::PinpointEmail
     class PutEmailIdentityFeedbackAttributesRequest < Struct.new(
       :email_identity,
       :email_forwarding_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityFeedbackAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2175,14 +2284,16 @@ module Aws::PinpointEmail
       :email_identity,
       :mail_from_domain,
       :behavior_on_mx_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityMailFromAttributesResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2220,7 +2331,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class RawMessage < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2239,7 +2351,8 @@ module Aws::PinpointEmail
     class ReputationOptions < Struct.new(
       :reputation_metrics_enabled,
       :last_fresh_start,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2284,7 +2397,8 @@ module Aws::PinpointEmail
       :content,
       :email_tags,
       :configuration_set_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2301,7 +2415,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class SendEmailResponse < Struct.new(
       :message_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2325,7 +2440,8 @@ module Aws::PinpointEmail
       :max24_hour_send,
       :max_send_rate,
       :sent_last24_hours,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2344,7 +2460,8 @@ module Aws::PinpointEmail
     #   @return [Boolean]
     class SendingOptions < Struct.new(
       :sending_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2359,7 +2476,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class SendingPausedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2372,7 +2490,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class SnsDestination < Struct.new(
       :topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2422,7 +2541,8 @@ module Aws::PinpointEmail
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,12 +2559,14 @@ module Aws::PinpointEmail
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2457,7 +2579,8 @@ module Aws::PinpointEmail
     class Template < Struct.new(
       :template_arn,
       :template_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2466,7 +2589,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2482,7 +2606,8 @@ module Aws::PinpointEmail
     #   @return [String]
     class TrackingOptions < Struct.new(
       :custom_redirect_domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2502,12 +2627,14 @@ module Aws::PinpointEmail
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2527,14 +2654,16 @@ module Aws::PinpointEmail
       :configuration_set_name,
       :event_destination_name,
       :event_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class UpdateConfigurationSetEventDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2560,7 +2689,8 @@ module Aws::PinpointEmail
       :spam_raw_count,
       :projected_inbox,
       :projected_spam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

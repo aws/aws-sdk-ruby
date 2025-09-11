@@ -11,7 +11,8 @@ module Aws::B2bi
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::B2bi
     #   @return [Types::X12AdvancedOptions]
     class AdvancedOptions < Struct.new(
       :x12,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +34,8 @@ module Aws::B2bi
     class CapabilityConfiguration < Struct.new(
       :edi,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Edi < CapabilityConfiguration; end
@@ -49,7 +52,8 @@ module Aws::B2bi
     class CapabilityOptions < Struct.new(
       :outbound_edi,
       :inbound_edi,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +79,8 @@ module Aws::B2bi
       :type,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +89,8 @@ module Aws::B2bi
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +104,8 @@ module Aws::B2bi
     class ConversionSource < Struct.new(
       :file_format,
       :input_file,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +128,8 @@ module Aws::B2bi
       :format_details,
       :output_sample_file,
       :advanced_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +140,8 @@ module Aws::B2bi
     class ConversionTargetFormatDetails < Struct.new(
       :x12,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class X12 < ConversionTargetFormatDetails; end
@@ -164,7 +173,8 @@ module Aws::B2bi
       :instructions_documents,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -197,7 +207,8 @@ module Aws::B2bi
       :configuration,
       :instructions_documents,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +245,8 @@ module Aws::B2bi
       :capability_options,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -279,7 +291,8 @@ module Aws::B2bi
       :capability_options,
       :trading_partner_id,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -312,7 +325,8 @@ module Aws::B2bi
       :logging,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +367,8 @@ module Aws::B2bi
       :logging,
       :log_group_name,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -370,7 +385,8 @@ module Aws::B2bi
       :output_sample_location,
       :mapping_type,
       :template_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +395,8 @@ module Aws::B2bi
     #   @return [String]
     class CreateStarterMappingTemplateResponse < Struct.new(
       :mapping_template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -436,7 +453,8 @@ module Aws::B2bi
       :mapping,
       :output_conversion,
       :sample_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +519,8 @@ module Aws::B2bi
       :mapping,
       :output_conversion,
       :sample_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -516,7 +535,8 @@ module Aws::B2bi
     #   @return [String]
     class DeleteCapabilityRequest < Struct.new(
       :capability_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +545,8 @@ module Aws::B2bi
     #   @return [String]
     class DeletePartnershipRequest < Struct.new(
       :partnership_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +555,8 @@ module Aws::B2bi
     #   @return [String]
     class DeleteProfileRequest < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +565,8 @@ module Aws::B2bi
     #   @return [String]
     class DeleteTransformerRequest < Struct.new(
       :transformer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -569,7 +592,8 @@ module Aws::B2bi
       :input_location,
       :output_location,
       :transformer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -580,7 +604,8 @@ module Aws::B2bi
     class EdiType < Struct.new(
       :x12_details,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class X12Details < EdiType; end
@@ -594,7 +619,8 @@ module Aws::B2bi
     class FormatOptions < Struct.new(
       :x12,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class X12 < FormatOptions; end
@@ -614,7 +640,8 @@ module Aws::B2bi
       :input_file_content,
       :output_file_content,
       :mapping_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +654,8 @@ module Aws::B2bi
     class GenerateMappingResponse < Struct.new(
       :mapping_template,
       :mapping_accuracy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +664,8 @@ module Aws::B2bi
     #   @return [String]
     class GetCapabilityRequest < Struct.new(
       :capability_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -673,7 +702,8 @@ module Aws::B2bi
       :instructions_documents,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +712,8 @@ module Aws::B2bi
     #   @return [String]
     class GetPartnershipRequest < Struct.new(
       :partnership_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +762,8 @@ module Aws::B2bi
       :trading_partner_id,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,7 +772,8 @@ module Aws::B2bi
     #   @return [String]
     class GetProfileRequest < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +818,8 @@ module Aws::B2bi
       :log_group_name,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +832,8 @@ module Aws::B2bi
     class GetTransformerJobRequest < Struct.new(
       :transformer_job_id,
       :transformer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -815,7 +850,8 @@ module Aws::B2bi
       :status,
       :output_files,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -824,7 +860,8 @@ module Aws::B2bi
     #   @return [String]
     class GetTransformerRequest < Struct.new(
       :transformer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -893,7 +930,8 @@ module Aws::B2bi
       :mapping,
       :output_conversion,
       :sample_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -909,7 +947,8 @@ module Aws::B2bi
     #   @return [Types::X12InboundEdiOptions]
     class InboundEdiOptions < Struct.new(
       :x12,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +966,8 @@ module Aws::B2bi
       :from_format,
       :format_options,
       :advanced_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,7 +978,8 @@ module Aws::B2bi
     class InputFileSource < Struct.new(
       :file_content,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class FileContent < InputFileSource; end
@@ -954,7 +995,8 @@ module Aws::B2bi
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1009,8 @@ module Aws::B2bi
     class ListCapabilitiesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -980,7 +1023,8 @@ module Aws::B2bi
     class ListCapabilitiesResponse < Struct.new(
       :capabilities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -997,7 +1041,8 @@ module Aws::B2bi
       :profile_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1010,7 +1055,8 @@ module Aws::B2bi
     class ListPartnershipsResponse < Struct.new(
       :partnerships,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1023,7 +1069,8 @@ module Aws::B2bi
     class ListProfilesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1036,7 +1083,8 @@ module Aws::B2bi
     class ListProfilesResponse < Struct.new(
       :profiles,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1045,7 +1093,8 @@ module Aws::B2bi
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1054,7 +1103,8 @@ module Aws::B2bi
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1067,7 +1117,8 @@ module Aws::B2bi
     class ListTransformersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1131,8 @@ module Aws::B2bi
     class ListTransformersResponse < Struct.new(
       :transformers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1146,8 @@ module Aws::B2bi
     class Mapping < Struct.new(
       :template_language,
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1105,7 +1158,8 @@ module Aws::B2bi
     class OutboundEdiOptions < Struct.new(
       :x12,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class X12 < OutboundEdiOptions; end
@@ -1126,7 +1180,8 @@ module Aws::B2bi
       :to_format,
       :format_options,
       :advanced_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1137,7 +1192,8 @@ module Aws::B2bi
     class OutputSampleFileSource < Struct.new(
       :file_location,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class FileLocation < OutputSampleFileSource; end
@@ -1178,7 +1234,8 @@ module Aws::B2bi
       :trading_partner_id,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1269,8 @@ module Aws::B2bi
       :log_group_name,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1221,7 +1279,8 @@ module Aws::B2bi
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1235,7 +1294,8 @@ module Aws::B2bi
     class S3Location < Struct.new(
       :bucket_name,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,7 +1309,8 @@ module Aws::B2bi
     class SampleDocumentKeys < Struct.new(
       :input,
       :output,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1263,7 +1324,8 @@ module Aws::B2bi
     class SampleDocuments < Struct.new(
       :bucket_name,
       :keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1288,7 +1350,8 @@ module Aws::B2bi
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1372,8 @@ module Aws::B2bi
       :output_location,
       :transformer_id,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1318,7 +1382,8 @@ module Aws::B2bi
     #   @return [String]
     class StartTransformerJobResponse < Struct.new(
       :transformer_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1397,8 @@ module Aws::B2bi
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1345,7 +1411,8 @@ module Aws::B2bi
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1356,7 +1423,8 @@ module Aws::B2bi
     class TemplateDetails < Struct.new(
       :x12,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class X12 < TemplateDetails; end
@@ -1372,7 +1440,8 @@ module Aws::B2bi
     class TestConversionRequest < Struct.new(
       :source,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1385,7 +1454,8 @@ module Aws::B2bi
     class TestConversionResponse < Struct.new(
       :converted_file_content,
       :validation_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1472,8 @@ module Aws::B2bi
       :input_file_content,
       :mapping_template,
       :file_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1411,7 +1482,8 @@ module Aws::B2bi
     #   @return [String]
     class TestMappingResponse < Struct.new(
       :mapped_file_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1504,8 @@ module Aws::B2bi
       :file_format,
       :edi_type,
       :advanced_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1522,8 @@ module Aws::B2bi
       :parsed_file_content,
       :parsed_split_file_contents,
       :validation_messages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1462,7 +1536,8 @@ module Aws::B2bi
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1528,7 +1603,8 @@ module Aws::B2bi
       :mapping,
       :output_conversion,
       :sample_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1547,7 +1623,8 @@ module Aws::B2bi
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1645,8 @@ module Aws::B2bi
       :name,
       :configuration,
       :instructions_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1605,7 +1683,8 @@ module Aws::B2bi
       :instructions_documents,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1705,8 @@ module Aws::B2bi
       :name,
       :capabilities,
       :capability_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1675,7 +1755,8 @@ module Aws::B2bi
       :trading_partner_id,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1700,7 +1781,8 @@ module Aws::B2bi
       :email,
       :phone,
       :business_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1745,7 +1827,8 @@ module Aws::B2bi
       :log_group_name,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1802,7 +1885,8 @@ module Aws::B2bi
       :mapping,
       :output_conversion,
       :sample_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1871,7 +1955,8 @@ module Aws::B2bi
       :mapping,
       :output_conversion,
       :sample_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1886,7 +1971,8 @@ module Aws::B2bi
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1904,7 +1990,8 @@ module Aws::B2bi
       :wrap_by,
       :line_terminator,
       :line_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1918,7 +2005,8 @@ module Aws::B2bi
     class X12AcknowledgmentOptions < Struct.new(
       :functional_acknowledgment,
       :technical_acknowledgment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1932,7 +2020,8 @@ module Aws::B2bi
     class X12AdvancedOptions < Struct.new(
       :split_options,
       :validation_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1950,7 +2039,8 @@ module Aws::B2bi
       :element_id,
       :codes_to_add,
       :codes_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1968,7 +2058,8 @@ module Aws::B2bi
       :starting_interchange_control_number,
       :starting_functional_group_control_number,
       :starting_transaction_set_control_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2077,8 @@ module Aws::B2bi
       :component_separator,
       :data_element_separator,
       :segment_terminator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2000,7 +2092,8 @@ module Aws::B2bi
     class X12Details < Struct.new(
       :transaction_set,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2018,7 +2111,8 @@ module Aws::B2bi
       :element_id,
       :max_length,
       :min_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2032,7 +2126,8 @@ module Aws::B2bi
     class X12ElementRequirementValidationRule < Struct.new(
       :element_position,
       :requirement,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2046,7 +2141,8 @@ module Aws::B2bi
     class X12Envelope < Struct.new(
       :common,
       :wrap_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2064,7 +2160,8 @@ module Aws::B2bi
       :application_sender_code,
       :application_receiver_code,
       :responsible_agency_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2171,8 @@ module Aws::B2bi
     #   @return [Types::X12AcknowledgmentOptions]
     class X12InboundEdiOptions < Struct.new(
       :acknowledgment_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2108,7 +2206,8 @@ module Aws::B2bi
       :repetition_separator,
       :acknowledgment_requested_code,
       :usage_indicator_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2138,7 +2237,8 @@ module Aws::B2bi
       :validate_edi,
       :control_numbers,
       :gs05_time_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2148,7 +2248,8 @@ module Aws::B2bi
     #   @return [String]
     class X12SplitOptions < Struct.new(
       :split_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2158,7 +2259,8 @@ module Aws::B2bi
     #   @return [Array<Types::X12ValidationRule>]
     class X12ValidationOptions < Struct.new(
       :validation_rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2177,7 +2279,8 @@ module Aws::B2bi
       :element_length_validation_rule,
       :element_requirement_validation_rule,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CodeListValidationRule < X12ValidationRule; end

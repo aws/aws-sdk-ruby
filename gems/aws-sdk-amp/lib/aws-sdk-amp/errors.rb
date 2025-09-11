@@ -40,7 +40,7 @@ module Aws::Amp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Amp::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -54,7 +54,7 @@ module Aws::Amp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Amp::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -78,7 +78,7 @@ module Aws::Amp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Amp::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -101,7 +101,7 @@ module Aws::Amp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Amp::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -125,7 +125,7 @@ module Aws::Amp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Amp::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -159,7 +159,7 @@ module Aws::Amp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Amp::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -192,7 +192,7 @@ module Aws::Amp
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Amp::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>

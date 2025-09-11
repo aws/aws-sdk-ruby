@@ -11,7 +11,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::CleanRoomsML
     #   @return [Types::S3ConfigMap]
     class AudienceDestination < Struct.new(
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -63,7 +65,8 @@ module Aws::CleanRoomsML
       :status,
       :status_details,
       :output_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +88,8 @@ module Aws::CleanRoomsML
       :role_arn,
       :sql_parameters,
       :sql_compute_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +131,8 @@ module Aws::CleanRoomsML
       :configured_audience_model_arn,
       :collaboration_id,
       :started_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +166,8 @@ module Aws::CleanRoomsML
       :training_dataset_arn,
       :status,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +181,8 @@ module Aws::CleanRoomsML
     class AudienceQualityMetrics < Struct.new(
       :relevance_metrics,
       :recall_metric,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +196,8 @@ module Aws::CleanRoomsML
     class AudienceSize < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -203,7 +211,8 @@ module Aws::CleanRoomsML
     class AudienceSizeConfig < Struct.new(
       :audience_size_type,
       :audience_size_bins,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +225,8 @@ module Aws::CleanRoomsML
     class CancelTrainedModelInferenceJobRequest < Struct.new(
       :membership_identifier,
       :trained_model_inference_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +243,8 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :trained_model_arn,
       :version_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -275,7 +286,8 @@ module Aws::CleanRoomsML
       :collaboration_identifier,
       :configured_model_algorithm_arn,
       :creator_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +333,8 @@ module Aws::CleanRoomsML
       :status,
       :creator_account_id,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +388,8 @@ module Aws::CleanRoomsML
       :trained_model_version_identifier,
       :membership_identifier,
       :collaboration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +463,8 @@ module Aws::CleanRoomsML
       :create_time,
       :update_time,
       :creator_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +518,8 @@ module Aws::CleanRoomsML
       :status,
       :configured_model_algorithm_association_arn,
       :creator_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -517,7 +533,8 @@ module Aws::CleanRoomsML
     class ColumnSchema < Struct.new(
       :column_name,
       :column_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -528,7 +545,8 @@ module Aws::CleanRoomsML
     class ComputeConfiguration < Struct.new(
       :worker,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Worker < ComputeConfiguration; end
@@ -545,7 +563,8 @@ module Aws::CleanRoomsML
     class ConfiguredAudienceModelOutputConfig < Struct.new(
       :destination,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +602,8 @@ module Aws::CleanRoomsML
       :description,
       :configured_audience_model_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -621,7 +641,8 @@ module Aws::CleanRoomsML
       :description,
       :membership_identifier,
       :collaboration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -647,7 +668,8 @@ module Aws::CleanRoomsML
       :configured_model_algorithm_arn,
       :name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +678,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +701,8 @@ module Aws::CleanRoomsML
       :entrypoint,
       :arguments,
       :metric_definitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -711,7 +735,8 @@ module Aws::CleanRoomsML
       :kms_key_arn,
       :tags,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -720,7 +745,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class CreateAudienceModelResponse < Struct.new(
       :audience_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -761,7 +787,8 @@ module Aws::CleanRoomsML
       :audience_size_config,
       :tags,
       :child_resource_tag_on_create_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +797,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class CreateConfiguredAudienceModelResponse < Struct.new(
       :configured_audience_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -799,7 +827,8 @@ module Aws::CleanRoomsML
       :description,
       :privacy_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +837,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class CreateConfiguredModelAlgorithmAssociationResponse < Struct.new(
       :configured_model_algorithm_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +871,8 @@ module Aws::CleanRoomsML
       :inference_container_config,
       :tags,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,7 +881,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class CreateConfiguredModelAlgorithmResponse < Struct.new(
       :configured_model_algorithm_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +919,8 @@ module Aws::CleanRoomsML
       :description,
       :kms_key_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -896,7 +929,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class CreateMLInputChannelResponse < Struct.new(
       :ml_input_channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +987,8 @@ module Aws::CleanRoomsML
       :description,
       :kms_key_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -966,7 +1001,8 @@ module Aws::CleanRoomsML
     class CreateTrainedModelResponse < Struct.new(
       :trained_model_arn,
       :version_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -991,7 +1027,8 @@ module Aws::CleanRoomsML
       :training_data,
       :tags,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1037,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class CreateTrainingDatasetResponse < Struct.new(
       :training_dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1010,7 +1048,8 @@ module Aws::CleanRoomsML
     #   @return [Array<String>]
     class CustomEntityConfig < Struct.new(
       :custom_data_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1059,8 @@ module Aws::CleanRoomsML
     #   @return [Types::GlueDataSource]
     class DataSource < Struct.new(
       :glue_data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1074,8 @@ module Aws::CleanRoomsML
     class Dataset < Struct.new(
       :type,
       :input_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1048,7 +1089,8 @@ module Aws::CleanRoomsML
     class DatasetInputConfig < Struct.new(
       :schema,
       :data_source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1099,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class DeleteAudienceGenerationJobRequest < Struct.new(
       :audience_generation_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1066,7 +1109,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class DeleteAudienceModelRequest < Struct.new(
       :audience_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1119,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class DeleteConfiguredAudienceModelPolicyRequest < Struct.new(
       :configured_audience_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1129,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class DeleteConfiguredAudienceModelRequest < Struct.new(
       :configured_audience_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1097,7 +1143,8 @@ module Aws::CleanRoomsML
     class DeleteConfiguredModelAlgorithmAssociationRequest < Struct.new(
       :configured_model_algorithm_association_arn,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1106,7 +1153,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class DeleteConfiguredModelAlgorithmRequest < Struct.new(
       :configured_model_algorithm_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1115,7 +1163,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class DeleteMLConfigurationRequest < Struct.new(
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1128,7 +1177,8 @@ module Aws::CleanRoomsML
     class DeleteMLInputChannelDataRequest < Struct.new(
       :ml_input_channel_arn,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1195,8 @@ module Aws::CleanRoomsML
       :trained_model_arn,
       :membership_identifier,
       :version_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1205,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class DeleteTrainingDatasetRequest < Struct.new(
       :training_dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1216,8 @@ module Aws::CleanRoomsML
     #   @return [Types::S3ConfigMap]
     class Destination < Struct.new(
       :s3_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1226,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class GetAudienceGenerationJobRequest < Struct.new(
       :audience_generation_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1238,7 +1292,8 @@ module Aws::CleanRoomsML
       :started_by,
       :tags,
       :protected_query_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1247,7 +1302,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class GetAudienceModelRequest < Struct.new(
       :audience_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1300,7 +1356,8 @@ module Aws::CleanRoomsML
       :kms_key_arn,
       :tags,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1313,7 +1370,8 @@ module Aws::CleanRoomsML
     class GetCollaborationConfiguredModelAlgorithmAssociationRequest < Struct.new(
       :configured_model_algorithm_association_arn,
       :collaboration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1358,7 +1416,8 @@ module Aws::CleanRoomsML
       :description,
       :creator_account_id,
       :privacy_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,7 +1430,8 @@ module Aws::CleanRoomsML
     class GetCollaborationMLInputChannelRequest < Struct.new(
       :ml_input_channel_arn,
       :collaboration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1428,7 +1488,8 @@ module Aws::CleanRoomsML
       :create_time,
       :update_time,
       :creator_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1506,8 @@ module Aws::CleanRoomsML
       :trained_model_arn,
       :collaboration_identifier,
       :version_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1534,7 +1596,8 @@ module Aws::CleanRoomsML
       :create_time,
       :update_time,
       :creator_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1606,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class GetConfiguredAudienceModelPolicyRequest < Struct.new(
       :configured_audience_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1560,7 +1624,8 @@ module Aws::CleanRoomsML
       :configured_audience_model_arn,
       :configured_audience_model_policy,
       :policy_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1569,7 +1634,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class GetConfiguredAudienceModelRequest < Struct.new(
       :configured_audience_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1692,8 @@ module Aws::CleanRoomsML
       :audience_size_config,
       :tags,
       :child_resource_tag_on_create_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1639,7 +1706,8 @@ module Aws::CleanRoomsML
     class GetConfiguredModelAlgorithmAssociationRequest < Struct.new(
       :configured_model_algorithm_association_arn,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1684,7 +1752,8 @@ module Aws::CleanRoomsML
       :privacy_configuration,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1693,7 +1762,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class GetConfiguredModelAlgorithmRequest < Struct.new(
       :configured_model_algorithm_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1738,7 +1808,8 @@ module Aws::CleanRoomsML
       :description,
       :tags,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1747,7 +1818,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class GetMLConfigurationRequest < Struct.new(
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1768,7 +1840,8 @@ module Aws::CleanRoomsML
       :default_output_location,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1781,7 +1854,8 @@ module Aws::CleanRoomsML
     class GetMLInputChannelRequest < Struct.new(
       :ml_input_channel_arn,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1858,7 +1932,8 @@ module Aws::CleanRoomsML
       :size_in_gb,
       :kms_key_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1871,7 +1946,8 @@ module Aws::CleanRoomsML
     class GetTrainedModelInferenceJobRequest < Struct.new(
       :membership_identifier,
       :trained_model_inference_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1968,7 +2044,8 @@ module Aws::CleanRoomsML
       :logs_status,
       :logs_status_details,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1985,7 +2062,8 @@ module Aws::CleanRoomsML
       :trained_model_arn,
       :membership_identifier,
       :version_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2090,7 +2168,8 @@ module Aws::CleanRoomsML
       :kms_key_arn,
       :tags,
       :data_channels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2178,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class GetTrainingDatasetRequest < Struct.new(
       :training_dataset_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2140,7 +2220,8 @@ module Aws::CleanRoomsML
       :role_arn,
       :tags,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2158,7 +2239,8 @@ module Aws::CleanRoomsML
       :table_name,
       :database_name,
       :catalog_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2176,7 +2258,8 @@ module Aws::CleanRoomsML
       :trained_model_arn,
       :version_identifier,
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2277,8 @@ module Aws::CleanRoomsML
       :channel_name,
       :version_identifier,
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2204,7 +2288,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class InferenceContainerConfig < Struct.new(
       :image_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2214,7 +2299,8 @@ module Aws::CleanRoomsML
     #   @return [Integer]
     class InferenceContainerExecutionParameters < Struct.new(
       :max_payload_in_mb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2228,7 +2314,8 @@ module Aws::CleanRoomsML
     class InferenceOutputConfiguration < Struct.new(
       :accept,
       :members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2243,7 +2330,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class InferenceReceiverMember < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2257,7 +2345,8 @@ module Aws::CleanRoomsML
     class InferenceResourceConfig < Struct.new(
       :instance_type,
       :instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2276,7 +2365,8 @@ module Aws::CleanRoomsML
     class InputChannel < Struct.new(
       :data_source,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2287,7 +2377,8 @@ module Aws::CleanRoomsML
     class InputChannelDataSource < Struct.new(
       :protected_query_input_parameters,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ProtectedQueryInputParameters < InputChannelDataSource; end
@@ -2299,7 +2390,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class InternalServiceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2316,7 +2408,8 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       :audience_generation_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2329,7 +2422,8 @@ module Aws::CleanRoomsML
     class ListAudienceExportJobsResponse < Struct.new(
       :next_token,
       :audience_export_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2350,7 +2444,8 @@ module Aws::CleanRoomsML
       :max_results,
       :configured_audience_model_arn,
       :collaboration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2363,7 +2458,8 @@ module Aws::CleanRoomsML
     class ListAudienceGenerationJobsResponse < Struct.new(
       :next_token,
       :audience_generation_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2376,7 +2472,8 @@ module Aws::CleanRoomsML
     class ListAudienceModelsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2389,7 +2486,8 @@ module Aws::CleanRoomsML
     class ListAudienceModelsResponse < Struct.new(
       :next_token,
       :audience_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2406,7 +2504,8 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       :collaboration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2419,7 +2518,8 @@ module Aws::CleanRoomsML
     class ListCollaborationConfiguredModelAlgorithmAssociationsResponse < Struct.new(
       :next_token,
       :collaboration_configured_model_algorithm_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2436,7 +2536,8 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       :collaboration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2449,7 +2550,8 @@ module Aws::CleanRoomsML
     class ListCollaborationMLInputChannelsResponse < Struct.new(
       :next_token,
       :collaboration_ml_input_channels_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2474,7 +2576,8 @@ module Aws::CleanRoomsML
       :collaboration_identifier,
       :trained_model_arn,
       :trained_model_version_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2487,7 +2590,8 @@ module Aws::CleanRoomsML
     class ListCollaborationTrainedModelExportJobsResponse < Struct.new(
       :next_token,
       :collaboration_trained_model_export_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2512,7 +2616,8 @@ module Aws::CleanRoomsML
       :collaboration_identifier,
       :trained_model_arn,
       :trained_model_version_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2525,7 +2630,8 @@ module Aws::CleanRoomsML
     class ListCollaborationTrainedModelInferenceJobsResponse < Struct.new(
       :next_token,
       :collaboration_trained_model_inference_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2542,7 +2648,8 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       :collaboration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2555,7 +2662,8 @@ module Aws::CleanRoomsML
     class ListCollaborationTrainedModelsResponse < Struct.new(
       :next_token,
       :collaboration_trained_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2568,7 +2676,8 @@ module Aws::CleanRoomsML
     class ListConfiguredAudienceModelsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2581,7 +2690,8 @@ module Aws::CleanRoomsML
     class ListConfiguredAudienceModelsResponse < Struct.new(
       :next_token,
       :configured_audience_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2598,7 +2708,8 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2611,7 +2722,8 @@ module Aws::CleanRoomsML
     class ListConfiguredModelAlgorithmAssociationsResponse < Struct.new(
       :next_token,
       :configured_model_algorithm_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2624,7 +2736,8 @@ module Aws::CleanRoomsML
     class ListConfiguredModelAlgorithmsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2637,7 +2750,8 @@ module Aws::CleanRoomsML
     class ListConfiguredModelAlgorithmsResponse < Struct.new(
       :next_token,
       :configured_model_algorithms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2654,7 +2768,8 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2667,7 +2782,8 @@ module Aws::CleanRoomsML
     class ListMLInputChannelsResponse < Struct.new(
       :next_token,
       :ml_input_channels_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2676,7 +2792,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2685,7 +2802,8 @@ module Aws::CleanRoomsML
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2710,7 +2828,8 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :trained_model_arn,
       :trained_model_version_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2723,7 +2842,8 @@ module Aws::CleanRoomsML
     class ListTrainedModelInferenceJobsResponse < Struct.new(
       :next_token,
       :trained_model_inference_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2748,7 +2868,8 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :trained_model_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2761,7 +2882,8 @@ module Aws::CleanRoomsML
     class ListTrainedModelVersionsResponse < Struct.new(
       :next_token,
       :trained_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2778,7 +2900,8 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       :membership_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2791,7 +2914,8 @@ module Aws::CleanRoomsML
     class ListTrainedModelsResponse < Struct.new(
       :next_token,
       :trained_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2804,7 +2928,8 @@ module Aws::CleanRoomsML
     class ListTrainingDatasetsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2817,7 +2942,8 @@ module Aws::CleanRoomsML
     class ListTrainingDatasetsResponse < Struct.new(
       :next_token,
       :training_datasets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2831,7 +2957,8 @@ module Aws::CleanRoomsML
     class LogRedactionConfiguration < Struct.new(
       :entities_to_redact,
       :custom_entity_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2853,7 +2980,8 @@ module Aws::CleanRoomsML
       :filter_pattern,
       :log_type,
       :log_redaction_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2904,7 +3032,8 @@ module Aws::CleanRoomsML
       :ml_input_channel_arn,
       :status,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2918,7 +3047,8 @@ module Aws::CleanRoomsML
     class MLOutputConfiguration < Struct.new(
       :destination,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2932,7 +3062,8 @@ module Aws::CleanRoomsML
     class MetricDefinition < Struct.new(
       :name,
       :regex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2942,7 +3073,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class MetricsConfigurationPolicy < Struct.new(
       :noise_level,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2952,7 +3084,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class ModelInferenceDataSource < Struct.new(
       :ml_input_channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2970,7 +3103,8 @@ module Aws::CleanRoomsML
       :ml_input_channel_arn,
       :channel_name,
       :s3_data_distribution_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2985,7 +3119,8 @@ module Aws::CleanRoomsML
     #   @return [Types::PrivacyConfigurationPolicies]
     class PrivacyConfiguration < Struct.new(
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3003,7 +3138,8 @@ module Aws::CleanRoomsML
       :trained_models,
       :trained_model_exports,
       :trained_model_inference_jobs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3021,7 +3157,8 @@ module Aws::CleanRoomsML
       :sql_parameters,
       :compute_configuration,
       :result_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3045,7 +3182,8 @@ module Aws::CleanRoomsML
       :query_string,
       :analysis_template_arn,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3066,7 +3204,8 @@ module Aws::CleanRoomsML
       :configured_audience_model_policy,
       :previous_policy_hash,
       :policy_existence_condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3079,7 +3218,8 @@ module Aws::CleanRoomsML
     class PutConfiguredAudienceModelPolicyResponse < Struct.new(
       :configured_audience_model_policy,
       :policy_hash,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3092,7 +3232,8 @@ module Aws::CleanRoomsML
     class PutMLConfigurationRequest < Struct.new(
       :membership_identifier,
       :default_output_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3106,7 +3247,8 @@ module Aws::CleanRoomsML
     class RelevanceMetric < Struct.new(
       :audience_size,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3124,7 +3266,8 @@ module Aws::CleanRoomsML
       :instance_count,
       :instance_type,
       :volume_size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3138,7 +3281,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3148,7 +3292,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class S3ConfigMap < Struct.new(
       :s3_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3165,7 +3310,8 @@ module Aws::CleanRoomsML
       :message,
       :quota_name,
       :quota_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3186,7 +3332,8 @@ module Aws::CleanRoomsML
       :audience_generation_job_arn,
       :audience_size,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3219,7 +3366,8 @@ module Aws::CleanRoomsML
       :collaboration_id,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3228,7 +3376,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class StartAudienceGenerationJobResponse < Struct.new(
       :audience_generation_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3257,7 +3406,8 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :output_configuration,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3314,7 +3464,8 @@ module Aws::CleanRoomsML
       :environment,
       :kms_key_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3323,7 +3474,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class StartTrainedModelInferenceJobResponse < Struct.new(
       :trained_model_inference_job_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3337,7 +3489,8 @@ module Aws::CleanRoomsML
     class StatusDetails < Struct.new(
       :status_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3347,7 +3500,8 @@ module Aws::CleanRoomsML
     #   @return [Integer]
     class StoppingCondition < Struct.new(
       :max_runtime_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3365,12 +3519,14 @@ module Aws::CleanRoomsML
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3379,7 +3535,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3393,7 +3550,8 @@ module Aws::CleanRoomsML
     class TrainedModelArtifactMaxSize < Struct.new(
       :unit,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3403,7 +3561,8 @@ module Aws::CleanRoomsML
     #   @return [Array<Types::TrainedModelExportReceiverMember>]
     class TrainedModelExportOutputConfiguration < Struct.new(
       :members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3413,7 +3572,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class TrainedModelExportReceiverMember < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3427,7 +3587,8 @@ module Aws::CleanRoomsML
     class TrainedModelExportsConfigurationPolicy < Struct.new(
       :max_size,
       :files_to_export,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3441,7 +3602,8 @@ module Aws::CleanRoomsML
     class TrainedModelExportsMaxSize < Struct.new(
       :unit,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3511,7 +3673,8 @@ module Aws::CleanRoomsML
       :logs_status_details,
       :create_time,
       :update_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3525,7 +3688,8 @@ module Aws::CleanRoomsML
     class TrainedModelInferenceJobsConfigurationPolicy < Struct.new(
       :container_logs,
       :max_output_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3539,7 +3703,8 @@ module Aws::CleanRoomsML
     class TrainedModelInferenceMaxOutputSize < Struct.new(
       :unit,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3589,7 +3754,8 @@ module Aws::CleanRoomsML
       :collaboration_identifier,
       :status,
       :configured_model_algorithm_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3607,7 +3773,8 @@ module Aws::CleanRoomsML
       :container_logs,
       :container_metrics,
       :max_artifact_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3637,7 +3804,8 @@ module Aws::CleanRoomsML
       :name,
       :status,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3650,12 +3818,14 @@ module Aws::CleanRoomsML
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3688,7 +3858,8 @@ module Aws::CleanRoomsML
       :min_matching_seed_size,
       :audience_size_config,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3697,7 +3868,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class UpdateConfiguredAudienceModelResponse < Struct.new(
       :configured_audience_model_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3706,7 +3878,8 @@ module Aws::CleanRoomsML
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3720,7 +3893,8 @@ module Aws::CleanRoomsML
     class WorkerComputeConfiguration < Struct.new(
       :type,
       :number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

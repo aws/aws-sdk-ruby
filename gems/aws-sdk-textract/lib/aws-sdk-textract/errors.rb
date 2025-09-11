@@ -52,7 +52,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::BadDocumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -87,7 +87,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::DocumentTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::HumanLoopQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The resource type.</p>
@@ -157,7 +157,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::IdempotentParameterMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -174,7 +174,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -191,7 +191,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::InvalidJobIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -209,7 +209,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::InvalidKMSKeyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -230,7 +230,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -250,7 +250,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::InvalidS3ObjectException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -271,7 +271,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -289,7 +289,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::ProvisionedThroughputExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -306,7 +306,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -323,7 +323,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -340,7 +340,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -358,7 +358,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::UnsupportedDocumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -375,7 +375,7 @@ module Aws::Textract
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Textract::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

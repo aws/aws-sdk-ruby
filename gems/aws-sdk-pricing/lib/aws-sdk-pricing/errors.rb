@@ -41,7 +41,7 @@ module Aws::Pricing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pricing::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::Pricing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pricing::Types::ExpiredNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::Pricing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pricing::Types::InternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::Pricing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pricing::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::Pricing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pricing::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -110,7 +110,7 @@ module Aws::Pricing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pricing::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -123,7 +123,7 @@ module Aws::Pricing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pricing::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::Pricing
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pricing::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -39,7 +39,7 @@ module Aws::Keyspaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Keyspaces::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -53,7 +53,7 @@ module Aws::Keyspaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Keyspaces::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -67,7 +67,7 @@ module Aws::Keyspaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Keyspaces::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -81,7 +81,7 @@ module Aws::Keyspaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Keyspaces::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -100,7 +100,7 @@ module Aws::Keyspaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Keyspaces::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>
@@ -114,7 +114,7 @@ module Aws::Keyspaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Keyspaces::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Description of the error.</p>

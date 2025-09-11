@@ -47,7 +47,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::CodeValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::InvalidApplicationConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -88,7 +88,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::InvalidArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -127,7 +127,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -154,7 +154,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::ResourceProvisionedThroughputExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -181,7 +181,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -195,7 +195,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::UnableToDetectSchemaException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -219,7 +219,7 @@ module Aws::KinesisAnalyticsV2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KinesisAnalyticsV2::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

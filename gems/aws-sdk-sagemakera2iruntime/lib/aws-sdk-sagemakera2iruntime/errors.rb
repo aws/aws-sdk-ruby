@@ -40,7 +40,7 @@ module Aws::SageMakerA2IRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerA2IRuntime::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -54,7 +54,7 @@ module Aws::SageMakerA2IRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerA2IRuntime::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::SageMakerA2IRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerA2IRuntime::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::SageMakerA2IRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerA2IRuntime::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::SageMakerA2IRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerA2IRuntime::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::SageMakerA2IRuntime
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerA2IRuntime::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

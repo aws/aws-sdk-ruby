@@ -46,7 +46,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::ClusterLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>You get this resource when you call <code>CreateReturnShippingLabel</code> more than once when other requests are not completed. .</p>
@@ -79,7 +79,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::Ec2RequestFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::InvalidAddressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -106,7 +106,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::InvalidInputCombinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -120,7 +120,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::InvalidJobStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::InvalidResourceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -168,7 +168,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::KMSRequestFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -183,7 +183,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::ReturnShippingLabelAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::Snowball
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Snowball::Types::UnsupportedAddressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

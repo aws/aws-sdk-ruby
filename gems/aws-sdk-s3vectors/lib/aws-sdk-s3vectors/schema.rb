@@ -547,7 +547,6 @@ module Aws::S3Vectors
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         operation.traits = {"smithy.api#http" => {"uri" => "/QueryVectors", "method" => "POST"}, "smithy.api#readonly" => {}}
       end)
-
     end
 
     class << self

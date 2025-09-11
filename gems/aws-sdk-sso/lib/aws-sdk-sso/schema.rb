@@ -131,7 +131,6 @@ module Aws::SSO
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
         operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "POST", "uri" => "/logout", "code" => 200}, "smithy.api#optionalAuth" => {}}
       end)
-
     end
 
     class << self

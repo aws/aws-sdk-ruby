@@ -998,7 +998,6 @@ module Aws::Budgets
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {}
       end)
-
     end
 
     class << self

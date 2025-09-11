@@ -1552,7 +1552,6 @@ module Aws::MemoryDB
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserNotFoundFault)
         operation.traits = {}
       end)
-
     end
 
     class << self

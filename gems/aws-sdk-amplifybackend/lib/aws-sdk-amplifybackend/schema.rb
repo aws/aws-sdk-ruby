@@ -1022,7 +1022,6 @@ module Aws::AmplifyBackend
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/backend/{AppId}/storage/{BackendEnvironmentName}", "code" => 200}}
       end)
-
     end
 
     class << self

@@ -19,7 +19,8 @@ module Aws::MarketplaceMetering
     class BatchMeterUsageRequest < Struct.new(
       :usage_records,
       :product_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +40,8 @@ module Aws::MarketplaceMetering
     class BatchMeterUsageResult < Struct.new(
       :results,
       :unprocessed_records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +51,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class CustomerNotEntitledException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +61,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class DisabledApiException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -69,7 +73,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class DuplicateRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -82,7 +87,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class ExpiredTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,7 +98,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -102,7 +109,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class InvalidCustomerIdentifierException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +121,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class InvalidEndpointRegionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +132,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class InvalidProductCodeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -132,7 +142,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class InvalidPublicKeyVersionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -144,7 +155,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class InvalidRegionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -153,7 +165,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class InvalidTagException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +175,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class InvalidTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -171,7 +185,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class InvalidUsageAllocationsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +196,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class InvalidUsageDimensionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +237,8 @@ module Aws::MarketplaceMetering
       :usage_quantity,
       :dry_run,
       :usage_allocations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +247,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class MeterUsageResult < Struct.new(
       :metering_record_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +257,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class PlatformNotSupportedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +277,8 @@ module Aws::MarketplaceMetering
       :product_code,
       :public_key_version,
       :nonce,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +291,8 @@ module Aws::MarketplaceMetering
     class RegisterUsageResult < Struct.new(
       :public_key_rotation_timestamp,
       :signature,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +305,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class ResolveCustomerRequest < Struct.new(
       :registration_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +331,8 @@ module Aws::MarketplaceMetering
       :customer_identifier,
       :product_code,
       :customer_aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +349,8 @@ module Aws::MarketplaceMetering
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +359,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -348,7 +373,8 @@ module Aws::MarketplaceMetering
     #   @return [String]
     class TimestampOutOfBoundsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +391,8 @@ module Aws::MarketplaceMetering
     class UsageAllocation < Struct.new(
       :allocated_usage_quantity,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +435,8 @@ module Aws::MarketplaceMetering
       :quantity,
       :usage_allocations,
       :customer_aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -470,7 +498,8 @@ module Aws::MarketplaceMetering
       :usage_record,
       :metering_record_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -58,7 +58,8 @@ module Aws::ComprehendMedical
       :text,
       :category,
       :traits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +73,8 @@ module Aws::ComprehendMedical
     #   @return [Integer]
     class Characters < Struct.new(
       :original_text_characters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -99,7 +101,8 @@ module Aws::ComprehendMedical
       :job_status,
       :submit_time_before,
       :submit_time_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -167,7 +170,8 @@ module Aws::ComprehendMedical
       :manifest_file_path,
       :kms_key,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -178,7 +182,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class DescribeEntitiesDetectionV2JobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +192,8 @@ module Aws::ComprehendMedical
     #   @return [Types::ComprehendMedicalAsyncJobProperties]
     class DescribeEntitiesDetectionV2JobResponse < Struct.new(
       :comprehend_medical_async_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -197,7 +203,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class DescribeICD10CMInferenceJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +213,8 @@ module Aws::ComprehendMedical
     #   @return [Types::ComprehendMedicalAsyncJobProperties]
     class DescribeICD10CMInferenceJobResponse < Struct.new(
       :comprehend_medical_async_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +224,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class DescribePHIDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +234,8 @@ module Aws::ComprehendMedical
     #   @return [Types::ComprehendMedicalAsyncJobProperties]
     class DescribePHIDetectionJobResponse < Struct.new(
       :comprehend_medical_async_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +245,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class DescribeRxNormInferenceJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -244,7 +255,8 @@ module Aws::ComprehendMedical
     #   @return [Types::ComprehendMedicalAsyncJobProperties]
     class DescribeRxNormInferenceJobResponse < Struct.new(
       :comprehend_medical_async_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -255,7 +267,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class DescribeSNOMEDCTInferenceJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +277,8 @@ module Aws::ComprehendMedical
     #   @return [Types::ComprehendMedicalAsyncJobProperties]
     class DescribeSNOMEDCTInferenceJobResponse < Struct.new(
       :comprehend_medical_async_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -273,7 +287,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class DetectEntitiesRequest < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +316,8 @@ module Aws::ComprehendMedical
       :unmapped_attributes,
       :pagination_token,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +326,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class DetectEntitiesV2Request < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,7 +354,8 @@ module Aws::ComprehendMedical
       :unmapped_attributes,
       :pagination_token,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +364,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class DetectPHIRequest < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -369,7 +388,8 @@ module Aws::ComprehendMedical
       :entities,
       :pagination_token,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +434,8 @@ module Aws::ComprehendMedical
       :type,
       :traits,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +493,8 @@ module Aws::ComprehendMedical
       :traits,
       :category,
       :relationship_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +515,8 @@ module Aws::ComprehendMedical
       :description,
       :code,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +578,8 @@ module Aws::ComprehendMedical
       :attributes,
       :traits,
       :icd10_cm_concepts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +596,8 @@ module Aws::ComprehendMedical
     class ICD10CMTrait < Struct.new(
       :name,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +606,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class InferICD10CMRequest < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +629,8 @@ module Aws::ComprehendMedical
       :entities,
       :pagination_token,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +639,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class InferRxNormRequest < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +662,8 @@ module Aws::ComprehendMedical
       :entities,
       :pagination_token,
       :model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +672,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class InferSNOMEDCTRequest < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,7 +708,8 @@ module Aws::ComprehendMedical
       :model_version,
       :snomedct_details,
       :characters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +725,8 @@ module Aws::ComprehendMedical
     class InputDataConfig < Struct.new(
       :s3_bucket,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +735,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +746,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class InvalidEncodingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -723,7 +757,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +776,8 @@ module Aws::ComprehendMedical
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -754,7 +790,8 @@ module Aws::ComprehendMedical
     class ListEntitiesDetectionV2JobsResponse < Struct.new(
       :comprehend_medical_async_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -772,7 +809,8 @@ module Aws::ComprehendMedical
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +823,8 @@ module Aws::ComprehendMedical
     class ListICD10CMInferenceJobsResponse < Struct.new(
       :comprehend_medical_async_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +842,8 @@ module Aws::ComprehendMedical
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +856,8 @@ module Aws::ComprehendMedical
     class ListPHIDetectionJobsResponse < Struct.new(
       :comprehend_medical_async_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +875,8 @@ module Aws::ComprehendMedical
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +889,8 @@ module Aws::ComprehendMedical
     class ListRxNormInferenceJobsResponse < Struct.new(
       :comprehend_medical_async_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +911,8 @@ module Aws::ComprehendMedical
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -885,7 +929,8 @@ module Aws::ComprehendMedical
     class ListSNOMEDCTInferenceJobsResponse < Struct.new(
       :comprehend_medical_async_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +949,8 @@ module Aws::ComprehendMedical
     class OutputDataConfig < Struct.new(
       :s3_bucket,
       :s3_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +960,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1009,8 @@ module Aws::ComprehendMedical
       :end_offset,
       :text,
       :traits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -982,7 +1030,8 @@ module Aws::ComprehendMedical
       :description,
       :code,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1091,8 @@ module Aws::ComprehendMedical
       :attributes,
       :traits,
       :rx_norm_concepts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,7 +1109,8 @@ module Aws::ComprehendMedical
     class RxNormTrait < Struct.new(
       :name,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1184,8 @@ module Aws::ComprehendMedical
       :text,
       :traits,
       :snomedct_concepts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1211,8 @@ module Aws::ComprehendMedical
       :description,
       :code,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1185,7 +1238,8 @@ module Aws::ComprehendMedical
       :edition,
       :language,
       :version_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1253,7 +1307,8 @@ module Aws::ComprehendMedical
       :attributes,
       :traits,
       :snomedct_concepts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1328,8 @@ module Aws::ComprehendMedical
     class SNOMEDCTTrait < Struct.new(
       :name,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,7 +1339,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1319,7 +1376,8 @@ module Aws::ComprehendMedical
       :client_request_token,
       :kms_key,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1387,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StartEntitiesDetectionV2JobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1364,7 +1423,8 @@ module Aws::ComprehendMedical
       :client_request_token,
       :kms_key,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1434,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StartICD10CMInferenceJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1410,7 +1471,8 @@ module Aws::ComprehendMedical
       :client_request_token,
       :kms_key,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1482,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StartPHIDetectionJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1456,7 +1519,8 @@ module Aws::ComprehendMedical
       :client_request_token,
       :kms_key,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1529,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StartRxNormInferenceJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1509,7 +1574,8 @@ module Aws::ComprehendMedical
       :client_request_token,
       :kms_key,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1520,7 +1586,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StartSNOMEDCTInferenceJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1529,7 +1596,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StopEntitiesDetectionV2JobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1538,7 +1606,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StopEntitiesDetectionV2JobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1547,7 +1616,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StopICD10CMInferenceJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1557,7 +1627,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StopICD10CMInferenceJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1566,7 +1637,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StopPHIDetectionJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1647,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StopPHIDetectionJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,7 +1657,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StopRxNormInferenceJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1594,7 +1668,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StopRxNormInferenceJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1605,7 +1680,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StopSNOMEDCTInferenceJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1692,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class StopSNOMEDCTInferenceJobResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1703,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class TextSizeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1637,7 +1715,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1651,7 +1730,8 @@ module Aws::ComprehendMedical
     class Trait < Struct.new(
       :name,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1667,7 +1747,8 @@ module Aws::ComprehendMedical
     class UnmappedAttribute < Struct.new(
       :type,
       :attribute,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1677,7 +1758,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

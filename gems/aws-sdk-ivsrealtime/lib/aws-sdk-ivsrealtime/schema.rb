@@ -1305,7 +1305,6 @@ module Aws::IVSRealTime
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateStage"}}
       end)
-
     end
 
     class << self

@@ -11,7 +11,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -29,7 +30,8 @@ module Aws::ARCZonalShift
       :applied_status,
       :away_from,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -51,7 +53,8 @@ module Aws::ARCZonalShift
       :end_time,
       :start_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +63,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class CancelPracticeRunRequest < Struct.new(
       :zonal_shift_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +97,8 @@ module Aws::ARCZonalShift
       :start_time,
       :status,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +131,8 @@ module Aws::ARCZonalShift
       :start_time,
       :status,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +141,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class CancelZonalShiftRequest < Struct.new(
       :zonal_shift_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +159,8 @@ module Aws::ARCZonalShift
       :message,
       :reason,
       :zonal_shift_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -166,7 +174,8 @@ module Aws::ARCZonalShift
     class ControlCondition < Struct.new(
       :type,
       :alarm_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -195,7 +204,8 @@ module Aws::ARCZonalShift
       :blocking_alarms,
       :allowed_windows,
       :outcome_alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +226,8 @@ module Aws::ARCZonalShift
       :name,
       :zonal_autoshift_status,
       :practice_run_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -225,7 +236,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class DeletePracticeRunConfigurationRequest < Struct.new(
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,12 +254,14 @@ module Aws::ARCZonalShift
       :arn,
       :name,
       :zonal_autoshift_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetAutoshiftObserverNotificationStatusRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,7 +270,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class GetAutoshiftObserverNotificationStatusResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +280,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class GetManagedResourceRequest < Struct.new(
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -298,7 +314,8 @@ module Aws::ARCZonalShift
       :autoshifts,
       :practice_run_configuration,
       :zonal_autoshift_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +324,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +342,8 @@ module Aws::ARCZonalShift
       :next_token,
       :status,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,7 +356,8 @@ module Aws::ARCZonalShift
     class ListAutoshiftsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -350,7 +370,8 @@ module Aws::ARCZonalShift
     class ListManagedResourcesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +384,8 @@ module Aws::ARCZonalShift
     class ListManagedResourcesResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +406,8 @@ module Aws::ARCZonalShift
       :status,
       :max_results,
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -397,7 +420,8 @@ module Aws::ARCZonalShift
     class ListZonalShiftsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -435,7 +459,8 @@ module Aws::ARCZonalShift
       :autoshifts,
       :zonal_autoshift_status,
       :practice_run_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +486,8 @@ module Aws::ARCZonalShift
       :blocked_windows,
       :allowed_windows,
       :blocked_dates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -475,7 +501,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -492,7 +519,8 @@ module Aws::ARCZonalShift
       :resource_identifier,
       :away_from,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -525,7 +553,8 @@ module Aws::ARCZonalShift
       :start_time,
       :status,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -558,7 +587,8 @@ module Aws::ARCZonalShift
       :start_time,
       :status,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,7 +609,8 @@ module Aws::ARCZonalShift
       :away_from,
       :expires_in,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -588,7 +619,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +629,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class UpdateAutoshiftObserverNotificationStatusRequest < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +639,8 @@ module Aws::ARCZonalShift
     #   @return [String]
     class UpdateAutoshiftObserverNotificationStatusResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -635,7 +669,8 @@ module Aws::ARCZonalShift
       :blocking_alarms,
       :allowed_windows,
       :outcome_alarms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +691,8 @@ module Aws::ARCZonalShift
       :name,
       :zonal_autoshift_status,
       :practice_run_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +705,8 @@ module Aws::ARCZonalShift
     class UpdateZonalAutoshiftConfigurationRequest < Struct.new(
       :resource_identifier,
       :zonal_autoshift_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +719,8 @@ module Aws::ARCZonalShift
     class UpdateZonalAutoshiftConfigurationResponse < Struct.new(
       :resource_identifier,
       :zonal_autoshift_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -715,7 +753,8 @@ module Aws::ARCZonalShift
       :start_time,
       :status,
       :comment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -732,7 +771,8 @@ module Aws::ARCZonalShift
       :zonal_shift_id,
       :comment,
       :expires_in,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +785,8 @@ module Aws::ARCZonalShift
     class ValidationException < Struct.new(
       :message,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +828,8 @@ module Aws::ARCZonalShift
       :comment,
       :shift_type,
       :practice_run_outcome,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +871,8 @@ module Aws::ARCZonalShift
       :comment,
       :shift_type,
       :practice_run_outcome,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

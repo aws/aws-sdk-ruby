@@ -2045,7 +2045,6 @@ module Aws::BedrockAgentCoreControl
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#http" => {"uri" => "/identities/UpdateWorkloadIdentity", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

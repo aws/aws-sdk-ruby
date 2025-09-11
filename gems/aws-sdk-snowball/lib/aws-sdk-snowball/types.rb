@@ -77,7 +77,8 @@ module Aws::Snowball
       :phone_number,
       :is_restricted,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -92,12 +93,14 @@ module Aws::Snowball
     #   @return [String]
     class CancelClusterRequest < Struct.new(
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelClusterResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,12 +110,14 @@ module Aws::Snowball
     #   @return [String]
     class CancelJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelJobResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +128,8 @@ module Aws::Snowball
     #   @return [String]
     class ClusterLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -148,7 +154,8 @@ module Aws::Snowball
       :cluster_state,
       :creation_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +252,8 @@ module Aws::Snowball
       :forwarding_address_id,
       :tax_documents,
       :on_device_service_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +270,8 @@ module Aws::Snowball
     class CompatibleImage < Struct.new(
       :ami_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,7 +285,8 @@ module Aws::Snowball
     class ConflictException < Struct.new(
       :conflict_resource,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +295,8 @@ module Aws::Snowball
     #   @return [Types::Address]
     class CreateAddressRequest < Struct.new(
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +307,8 @@ module Aws::Snowball
     #   @return [String]
     class CreateAddressResult < Struct.new(
       :address_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -443,7 +455,8 @@ module Aws::Snowball
       :force_create_jobs,
       :long_term_pricing_ids,
       :snowball_capacity_preference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +469,8 @@ module Aws::Snowball
     class CreateClusterResult < Struct.new(
       :cluster_id,
       :job_list_entries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,7 +619,8 @@ module Aws::Snowball
       :long_term_pricing_id,
       :impact_level,
       :pickup_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -615,7 +630,8 @@ module Aws::Snowball
     #   @return [String]
     class CreateJobResult < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +650,8 @@ module Aws::Snowball
       :long_term_pricing_type,
       :is_long_term_pricing_auto_renew,
       :snowball_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +660,8 @@ module Aws::Snowball
     #   @return [String]
     class CreateLongTermPricingResult < Struct.new(
       :long_term_pricing_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -659,7 +677,8 @@ module Aws::Snowball
     class CreateReturnShippingLabelRequest < Struct.new(
       :job_id,
       :shipping_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +687,8 @@ module Aws::Snowball
     #   @return [String]
     class CreateReturnShippingLabelResult < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +715,8 @@ module Aws::Snowball
       :objects_transferred,
       :total_bytes,
       :total_objects,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -717,7 +738,8 @@ module Aws::Snowball
     class DependentService < Struct.new(
       :service_name,
       :service_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +748,8 @@ module Aws::Snowball
     #   @return [String]
     class DescribeAddressRequest < Struct.new(
       :address_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -736,7 +759,8 @@ module Aws::Snowball
     #   @return [Types::Address]
     class DescribeAddressResult < Struct.new(
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -751,7 +775,8 @@ module Aws::Snowball
     class DescribeAddressesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +791,8 @@ module Aws::Snowball
     class DescribeAddressesResult < Struct.new(
       :addresses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +801,8 @@ module Aws::Snowball
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
       :cluster_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -785,7 +812,8 @@ module Aws::Snowball
     #   @return [Types::ClusterMetadata]
     class DescribeClusterResult < Struct.new(
       :cluster_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -795,7 +823,8 @@ module Aws::Snowball
     #   @return [String]
     class DescribeJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -810,7 +839,8 @@ module Aws::Snowball
     class DescribeJobResult < Struct.new(
       :job_metadata,
       :sub_job_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +850,8 @@ module Aws::Snowball
     #   @return [String]
     class DescribeReturnShippingLabelRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +868,8 @@ module Aws::Snowball
       :status,
       :expiration_date,
       :return_shipping_label_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +880,8 @@ module Aws::Snowball
     #   @return [Types::SnowconeDeviceConfiguration]
     class DeviceConfiguration < Struct.new(
       :snowcone_device_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +895,8 @@ module Aws::Snowball
     class EKSOnDeviceServiceConfiguration < Struct.new(
       :kubernetes_version,
       :eks_anywhere_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -878,7 +912,8 @@ module Aws::Snowball
     class Ec2AmiResource < Struct.new(
       :ami_id,
       :snowball_ami_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -888,7 +923,8 @@ module Aws::Snowball
     #   @return [String]
     class Ec2RequestFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -898,7 +934,8 @@ module Aws::Snowball
     #   @return [String]
     class EventTriggerDefinition < Struct.new(
       :event_resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -908,7 +945,8 @@ module Aws::Snowball
     #   @return [String]
     class GetJobManifestRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -918,7 +956,8 @@ module Aws::Snowball
     #   @return [String]
     class GetJobManifestResult < Struct.new(
       :manifest_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +967,8 @@ module Aws::Snowball
     #   @return [String]
     class GetJobUnlockCodeRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,12 +978,14 @@ module Aws::Snowball
     #   @return [String]
     class GetJobUnlockCodeResult < Struct.new(
       :unlock_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetSnowballUsageRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -957,7 +999,8 @@ module Aws::Snowball
     class GetSnowballUsageResult < Struct.new(
       :snowball_limit,
       :snowballs_in_use,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -967,7 +1010,8 @@ module Aws::Snowball
     #   @return [String]
     class GetSoftwareUpdatesRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -979,7 +1023,8 @@ module Aws::Snowball
     #   @return [String]
     class GetSoftwareUpdatesResult < Struct.new(
       :updates_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -990,7 +1035,8 @@ module Aws::Snowball
     #   @return [String]
     class INDTaxDocuments < Struct.new(
       :gstin,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1046,8 @@ module Aws::Snowball
     #   @return [String]
     class InvalidAddressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1009,7 +1056,8 @@ module Aws::Snowball
     #   @return [String]
     class InvalidInputCombinationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1019,7 +1067,8 @@ module Aws::Snowball
     #   @return [String]
     class InvalidJobStateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1030,7 +1079,8 @@ module Aws::Snowball
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1044,7 +1094,8 @@ module Aws::Snowball
     class InvalidResourceException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1136,8 @@ module Aws::Snowball
       :snowball_type,
       :creation_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1123,7 +1175,8 @@ module Aws::Snowball
       :job_completion_report_uri,
       :job_success_log_uri,
       :job_failure_log_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1259,7 +1312,8 @@ module Aws::Snowball
       :impact_level,
       :pickup_details,
       :snowball_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1333,8 @@ module Aws::Snowball
       :s3_resources,
       :lambda_resources,
       :ec2_ami_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1289,7 +1344,8 @@ module Aws::Snowball
     #   @return [String]
     class KMSRequestFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1308,7 +1364,8 @@ module Aws::Snowball
     class KeyRange < Struct.new(
       :begin_marker,
       :end_marker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1323,7 +1380,8 @@ module Aws::Snowball
     class LambdaResource < Struct.new(
       :lambda_arn,
       :event_triggers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1343,7 +1401,8 @@ module Aws::Snowball
       :cluster_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1418,8 @@ module Aws::Snowball
     class ListClusterJobsResult < Struct.new(
       :job_list_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,7 +1434,8 @@ module Aws::Snowball
     class ListClustersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1390,7 +1451,8 @@ module Aws::Snowball
     class ListClustersResult < Struct.new(
       :cluster_list_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1406,7 +1468,8 @@ module Aws::Snowball
     class ListCompatibleImagesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1421,7 +1484,8 @@ module Aws::Snowball
     class ListCompatibleImagesResult < Struct.new(
       :compatible_images,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1436,7 +1500,8 @@ module Aws::Snowball
     class ListJobsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1452,7 +1517,8 @@ module Aws::Snowball
     class ListJobsResult < Struct.new(
       :job_list_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1466,7 +1532,8 @@ module Aws::Snowball
     class ListLongTermPricingRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1481,7 +1548,8 @@ module Aws::Snowball
     class ListLongTermPricingResult < Struct.new(
       :long_term_pricing_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1494,7 +1562,8 @@ module Aws::Snowball
     class ListPickupLocationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1507,7 +1576,8 @@ module Aws::Snowball
     class ListPickupLocationsResult < Struct.new(
       :addresses,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1529,7 +1599,8 @@ module Aws::Snowball
       :dependent_services,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1551,7 +1622,8 @@ module Aws::Snowball
       :service_name,
       :dependent_services,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1671,8 @@ module Aws::Snowball
       :long_term_pricing_status,
       :snowball_type,
       :job_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1615,7 +1688,8 @@ module Aws::Snowball
     class NFSOnDeviceServiceConfiguration < Struct.new(
       :storage_limit,
       :storage_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1653,7 +1727,8 @@ module Aws::Snowball
       :job_states_to_notify,
       :notify_all,
       :device_pickup_sns_topic_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1681,7 +1756,8 @@ module Aws::Snowball
       :tgw_on_device_service,
       :eks_on_device_service,
       :s3_on_device_service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1715,7 +1791,8 @@ module Aws::Snowball
       :identification_expiration_date,
       :identification_issuing_org,
       :device_pickup_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1726,7 +1803,8 @@ module Aws::Snowball
     #   @return [String]
     class ReturnShippingLabelAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1750,7 +1828,8 @@ module Aws::Snowball
       :storage_unit,
       :service_size,
       :fault_tolerance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1777,7 +1856,8 @@ module Aws::Snowball
       :bucket_arn,
       :key_range,
       :target_on_device_services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1787,7 +1867,8 @@ module Aws::Snowball
     #   @return [String]
     class ServiceVersion < Struct.new(
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,7 +1886,8 @@ module Aws::Snowball
     class Shipment < Struct.new(
       :status,
       :tracking_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1847,7 +1929,8 @@ module Aws::Snowball
       :shipping_option,
       :inbound_shipment,
       :outbound_shipment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1857,7 +1940,8 @@ module Aws::Snowball
     #   @return [Types::WirelessConnection]
     class SnowconeDeviceConfiguration < Struct.new(
       :wireless_connection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1873,7 +1957,8 @@ module Aws::Snowball
     class TGWOnDeviceServiceConfiguration < Struct.new(
       :storage_limit,
       :storage_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1896,7 +1981,8 @@ module Aws::Snowball
     class TargetOnDeviceService < Struct.new(
       :service_name,
       :transfer_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,7 +1992,8 @@ module Aws::Snowball
     #   @return [Types::INDTaxDocuments]
     class TaxDocuments < Struct.new(
       :ind,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +2004,8 @@ module Aws::Snowball
     #   @return [String]
     class UnsupportedAddressException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1965,12 +2053,14 @@ module Aws::Snowball
       :shipping_option,
       :notification,
       :forwarding_address_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateClusterResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2032,12 +2122,14 @@ module Aws::Snowball
       :snowball_capacity_preference,
       :forwarding_address_id,
       :pickup_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateJobResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2053,12 +2145,14 @@ module Aws::Snowball
     class UpdateJobShipmentStateRequest < Struct.new(
       :job_id,
       :shipment_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateJobShipmentStateResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2077,12 +2171,14 @@ module Aws::Snowball
       :long_term_pricing_id,
       :replacement_job,
       :is_long_term_pricing_auto_renew,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateLongTermPricingResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2092,7 +2188,8 @@ module Aws::Snowball
     #   @return [Boolean]
     class WirelessConnection < Struct.new(
       :is_wifi_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

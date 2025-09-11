@@ -46,7 +46,8 @@ module Aws::LaunchWizard
       :specifications,
       :dry_run,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +56,8 @@ module Aws::LaunchWizard
     #   @return [String]
     class CreateDeploymentOutput < Struct.new(
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -64,7 +66,8 @@ module Aws::LaunchWizard
     #   @return [String]
     class DeleteDeploymentInput < Struct.new(
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +80,8 @@ module Aws::LaunchWizard
     class DeleteDeploymentOutput < Struct.new(
       :status,
       :status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +101,8 @@ module Aws::LaunchWizard
       :name,
       :value,
       :comparator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -153,7 +158,8 @@ module Aws::LaunchWizard
       :deleted_at,
       :tags,
       :deployment_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +189,8 @@ module Aws::LaunchWizard
       :pattern_name,
       :status,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +216,8 @@ module Aws::LaunchWizard
       :status,
       :status_reason,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -227,7 +235,8 @@ module Aws::LaunchWizard
     class DeploymentFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +262,8 @@ module Aws::LaunchWizard
       :allowed_values,
       :required,
       :conditionals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -262,7 +272,8 @@ module Aws::LaunchWizard
     #   @return [String]
     class GetDeploymentInput < Struct.new(
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +282,8 @@ module Aws::LaunchWizard
     #   @return [Types::DeploymentData]
     class GetDeploymentOutput < Struct.new(
       :deployment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +296,8 @@ module Aws::LaunchWizard
     class GetWorkloadDeploymentPatternInput < Struct.new(
       :workload_name,
       :deployment_pattern_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +306,8 @@ module Aws::LaunchWizard
     #   @return [Types::WorkloadDeploymentPatternData]
     class GetWorkloadDeploymentPatternOutput < Struct.new(
       :workload_deployment_pattern,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +316,8 @@ module Aws::LaunchWizard
     #   @return [String]
     class GetWorkloadInput < Struct.new(
       :workload_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +326,8 @@ module Aws::LaunchWizard
     #   @return [Types::WorkloadData]
     class GetWorkloadOutput < Struct.new(
       :workload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +337,8 @@ module Aws::LaunchWizard
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -340,7 +357,8 @@ module Aws::LaunchWizard
       :deployment_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -354,7 +372,8 @@ module Aws::LaunchWizard
     class ListDeploymentEventsOutput < Struct.new(
       :deployment_events,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -387,7 +406,8 @@ module Aws::LaunchWizard
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +421,8 @@ module Aws::LaunchWizard
     class ListDeploymentsOutput < Struct.new(
       :deployments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +431,8 @@ module Aws::LaunchWizard
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +441,8 @@ module Aws::LaunchWizard
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +461,8 @@ module Aws::LaunchWizard
       :workload_name,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -452,7 +476,8 @@ module Aws::LaunchWizard
     class ListWorkloadDeploymentPatternsOutput < Struct.new(
       :workload_deployment_patterns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +492,8 @@ module Aws::LaunchWizard
     class ListWorkloadsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -481,7 +507,8 @@ module Aws::LaunchWizard
     class ListWorkloadsOutput < Struct.new(
       :workloads,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,7 +518,8 @@ module Aws::LaunchWizard
     #   @return [String]
     class ResourceLimitException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +528,8 @@ module Aws::LaunchWizard
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -513,12 +542,14 @@ module Aws::LaunchWizard
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -531,12 +562,14 @@ module Aws::LaunchWizard
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +578,8 @@ module Aws::LaunchWizard
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,7 +613,8 @@ module Aws::LaunchWizard
       :icon_url,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -593,7 +628,8 @@ module Aws::LaunchWizard
     class WorkloadDataSummary < Struct.new(
       :workload_name,
       :display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -637,7 +673,8 @@ module Aws::LaunchWizard
       :status,
       :status_message,
       :specifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +708,8 @@ module Aws::LaunchWizard
       :description,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

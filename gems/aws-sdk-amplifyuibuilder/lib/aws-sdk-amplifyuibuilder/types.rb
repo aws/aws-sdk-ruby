@@ -52,7 +52,8 @@ module Aws::AmplifyUIBuilder
       :id,
       :fields,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -71,7 +72,8 @@ module Aws::AmplifyUIBuilder
       :data_store_config,
       :no_api_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class GraphQLConfig < ApiConfiguration; end
@@ -98,7 +100,8 @@ module Aws::AmplifyUIBuilder
       :supported_version,
       :is_sem_ver,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +115,8 @@ module Aws::AmplifyUIBuilder
     class CodegenFeatureFlags < Struct.new(
       :is_relationship_supported,
       :is_non_model_supported,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -122,7 +126,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Array<String>]
     class CodegenGenericDataEnum < Struct.new(
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +157,8 @@ module Aws::AmplifyUIBuilder
       :read_only,
       :is_array,
       :relationship,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +176,8 @@ module Aws::AmplifyUIBuilder
       :fields,
       :is_join_table,
       :primary_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +187,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Hash<String, Types::CodegenGenericDataField>]
     class CodegenGenericDataNonModel < Struct.new(
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -222,7 +230,8 @@ module Aws::AmplifyUIBuilder
       :belongs_to_field_on_related_model,
       :associated_fields,
       :is_has_many_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +293,8 @@ module Aws::AmplifyUIBuilder
       :created_at,
       :modified_at,
       :dependencies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +304,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class CodegenJobAsset < Struct.new(
       :download_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +327,8 @@ module Aws::AmplifyUIBuilder
       :models,
       :enums,
       :non_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +339,8 @@ module Aws::AmplifyUIBuilder
     class CodegenJobRenderConfig < Struct.new(
       :react,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class React < CodegenJobRenderConfig; end
@@ -356,7 +369,8 @@ module Aws::AmplifyUIBuilder
       :id,
       :created_at,
       :modified_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -445,7 +459,8 @@ module Aws::AmplifyUIBuilder
       :tags,
       :events,
       :schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +481,8 @@ module Aws::AmplifyUIBuilder
       :type,
       :binding_properties,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -507,7 +523,8 @@ module Aws::AmplifyUIBuilder
       :key,
       :default_value,
       :slot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +557,8 @@ module Aws::AmplifyUIBuilder
       :children,
       :events,
       :source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -577,7 +595,8 @@ module Aws::AmplifyUIBuilder
       :then,
       :else,
       :operand_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +620,8 @@ module Aws::AmplifyUIBuilder
       :sort,
       :predicate,
       :identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +642,8 @@ module Aws::AmplifyUIBuilder
       :action,
       :parameters,
       :binding_event,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -693,7 +714,8 @@ module Aws::AmplifyUIBuilder
       :imported_value,
       :component_name,
       :property,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +730,8 @@ module Aws::AmplifyUIBuilder
     class ComponentPropertyBindingProperties < Struct.new(
       :property,
       :field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -736,7 +759,8 @@ module Aws::AmplifyUIBuilder
       :id,
       :name,
       :component_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -753,7 +777,8 @@ module Aws::AmplifyUIBuilder
     class ComponentVariant < Struct.new(
       :variant_values,
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -810,7 +835,8 @@ module Aws::AmplifyUIBuilder
       :tags,
       :events,
       :schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -832,7 +858,8 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :client_token,
       :component_to_create,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +868,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::Component]
     class CreateComponentOutput < Struct.new(
       :entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +917,8 @@ module Aws::AmplifyUIBuilder
       :cta,
       :tags,
       :label_decorator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +939,8 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :client_token,
       :form_to_create,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -919,7 +949,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::Form]
     class CreateFormOutput < Struct.new(
       :entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +973,8 @@ module Aws::AmplifyUIBuilder
       :values,
       :overrides,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +996,8 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :client_token,
       :theme_to_create,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -973,13 +1006,15 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::Theme]
     class CreateThemeOutput < Struct.new(
       :entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the DataStore configuration for an API for a code generation job.</p>
     class DataStoreRenderConfig < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,7 +1033,8 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1015,7 +1051,8 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1071,8 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1085,8 @@ module Aws::AmplifyUIBuilder
     class ExchangeCodeForTokenInput < Struct.new(
       :provider,
       :request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1104,8 @@ module Aws::AmplifyUIBuilder
       :access_token,
       :expires_in,
       :refresh_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1083,7 +1123,8 @@ module Aws::AmplifyUIBuilder
       :code,
       :redirect_uri,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1101,7 +1142,8 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1156,8 @@ module Aws::AmplifyUIBuilder
     class ExportComponentsOutput < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1131,7 +1174,8 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1144,7 +1188,8 @@ module Aws::AmplifyUIBuilder
     class ExportFormsOutput < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1161,7 +1206,8 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1174,7 +1220,8 @@ module Aws::AmplifyUIBuilder
     class ExportThemesOutput < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1200,7 +1247,8 @@ module Aws::AmplifyUIBuilder
       :excluded,
       :input_type,
       :validations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1319,8 @@ module Aws::AmplifyUIBuilder
       :value,
       :is_array,
       :file_uploader_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1339,8 @@ module Aws::AmplifyUIBuilder
       :right_of,
       :below,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Fixed < FieldPosition; end
@@ -1318,7 +1368,8 @@ module Aws::AmplifyUIBuilder
       :str_values,
       :num_values,
       :validation_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,7 +1411,8 @@ module Aws::AmplifyUIBuilder
       :is_resumable,
       :max_file_count,
       :max_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1421,7 +1473,8 @@ module Aws::AmplifyUIBuilder
       :tags,
       :cta,
       :label_decorator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1435,7 +1488,8 @@ module Aws::AmplifyUIBuilder
     class FormBindingElement < Struct.new(
       :element,
       :property,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1453,7 +1507,8 @@ module Aws::AmplifyUIBuilder
       :excluded,
       :children,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1475,7 +1530,8 @@ module Aws::AmplifyUIBuilder
       :clear,
       :cancel,
       :submit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1489,7 +1545,8 @@ module Aws::AmplifyUIBuilder
     class FormDataTypeConfig < Struct.new(
       :data_source_type,
       :data_type_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1562,8 @@ module Aws::AmplifyUIBuilder
     class FormInputBindingPropertiesValue < Struct.new(
       :type,
       :binding_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1517,7 +1575,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class FormInputBindingPropertiesValueProperties < Struct.new(
       :model,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1538,7 +1597,8 @@ module Aws::AmplifyUIBuilder
       :value,
       :binding_properties,
       :concat,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1613,8 @@ module Aws::AmplifyUIBuilder
     class FormInputValuePropertyBindingProperties < Struct.new(
       :property,
       :field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1571,7 +1632,8 @@ module Aws::AmplifyUIBuilder
       :horizontal_gap,
       :vertical_gap,
       :outer_padding,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1587,7 +1649,8 @@ module Aws::AmplifyUIBuilder
       :token_reference,
       :value,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class TokenReference < FormStyleConfig; end
@@ -1621,7 +1684,8 @@ module Aws::AmplifyUIBuilder
       :form_action_type,
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,7 +1702,8 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1647,7 +1712,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::CodegenJob]
     class GetCodegenJobResponse < Struct.new(
       :job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1664,7 +1730,8 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1673,7 +1740,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::Component]
     class GetComponentOutput < Struct.new(
       :component,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1690,7 +1758,8 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1699,7 +1768,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::Form]
     class GetFormOutput < Struct.new(
       :form,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1712,7 +1782,8 @@ module Aws::AmplifyUIBuilder
     class GetMetadataInput < Struct.new(
       :app_id,
       :environment_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1721,7 +1792,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Hash<String, String>]
     class GetMetadataOutput < Struct.new(
       :features,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1738,7 +1810,8 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1747,7 +1820,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::Theme]
     class GetThemeOutput < Struct.new(
       :theme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1773,7 +1847,8 @@ module Aws::AmplifyUIBuilder
       :mutations_file_path,
       :subscriptions_file_path,
       :fragments_file_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1782,7 +1857,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1791,7 +1867,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1812,7 +1889,8 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1825,7 +1903,8 @@ module Aws::AmplifyUIBuilder
     class ListCodegenJobsResponse < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1847,7 +1926,8 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1860,7 +1940,8 @@ module Aws::AmplifyUIBuilder
     class ListComponentsOutput < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1881,7 +1962,8 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1894,7 +1976,8 @@ module Aws::AmplifyUIBuilder
     class ListFormsOutput < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1903,7 +1986,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1912,7 +1996,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1934,7 +2019,8 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2033,8 @@ module Aws::AmplifyUIBuilder
     class ListThemesOutput < Struct.new(
       :entities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1966,13 +2053,15 @@ module Aws::AmplifyUIBuilder
       :component_name,
       :property,
       :set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for an application with no API being used.</p>
     class NoApiRenderConfig < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2003,7 +2092,8 @@ module Aws::AmplifyUIBuilder
       :operator,
       :operand,
       :operand_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2013,7 +2103,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class PutMetadataFlagBody < Struct.new(
       :new_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2034,7 +2125,8 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :feature_name,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2068,7 +2160,8 @@ module Aws::AmplifyUIBuilder
       :inline_source_map,
       :api_configuration,
       :dependencies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2087,7 +2180,8 @@ module Aws::AmplifyUIBuilder
     class RefreshTokenInput < Struct.new(
       :provider,
       :refresh_token_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2194,8 @@ module Aws::AmplifyUIBuilder
     class RefreshTokenOutput < Struct.new(
       :access_token,
       :expires_in,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2115,7 +2210,8 @@ module Aws::AmplifyUIBuilder
     class RefreshTokenRequestBody < Struct.new(
       :token,
       :client_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2124,7 +2220,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class ResourceConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2133,7 +2230,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2170,7 +2268,8 @@ module Aws::AmplifyUIBuilder
       :level,
       :orientation,
       :excluded,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2180,7 +2279,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2294,8 @@ module Aws::AmplifyUIBuilder
     class SortProperty < Struct.new(
       :field,
       :direction,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2220,7 +2321,8 @@ module Aws::AmplifyUIBuilder
       :auto_generate_forms,
       :features,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2241,7 +2343,8 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :client_token,
       :codegen_job_to_create,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2250,7 +2353,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::CodegenJob]
     class StartCodegenJobResponse < Struct.new(
       :entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,12 +2367,14 @@ module Aws::AmplifyUIBuilder
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2312,7 +2418,8 @@ module Aws::AmplifyUIBuilder
       :values,
       :overrides,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2334,7 +2441,8 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2348,7 +2456,8 @@ module Aws::AmplifyUIBuilder
     class ThemeValue < Struct.new(
       :value,
       :children,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2362,7 +2471,8 @@ module Aws::AmplifyUIBuilder
     class ThemeValues < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2371,7 +2481,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2380,7 +2491,8 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2393,12 +2505,14 @@ module Aws::AmplifyUIBuilder
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2454,7 +2568,8 @@ module Aws::AmplifyUIBuilder
       :collection_properties,
       :events,
       :schema_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2479,7 +2594,8 @@ module Aws::AmplifyUIBuilder
       :id,
       :client_token,
       :updated_component,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2488,7 +2604,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::Component]
     class UpdateComponentOutput < Struct.new(
       :entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2532,7 +2649,8 @@ module Aws::AmplifyUIBuilder
       :schema_version,
       :cta,
       :label_decorator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2557,7 +2675,8 @@ module Aws::AmplifyUIBuilder
       :id,
       :client_token,
       :updated_form,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2566,7 +2685,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::Form]
     class UpdateFormOutput < Struct.new(
       :entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2588,7 +2708,8 @@ module Aws::AmplifyUIBuilder
       :name,
       :values,
       :overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2613,7 +2734,8 @@ module Aws::AmplifyUIBuilder
       :id,
       :client_token,
       :updated_theme,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2622,7 +2744,8 @@ module Aws::AmplifyUIBuilder
     #   @return [Types::Theme]
     class UpdateThemeOutput < Struct.new(
       :entity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2637,7 +2760,8 @@ module Aws::AmplifyUIBuilder
     class ValueMapping < Struct.new(
       :display_value,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2651,7 +2775,8 @@ module Aws::AmplifyUIBuilder
     class ValueMappings < Struct.new(
       :values,
       :binding_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

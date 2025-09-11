@@ -11,7 +11,8 @@ module Aws::GeoPlaces
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::GeoPlaces
     #   @return [Array<Float>]
     class AccessPoint < Struct.new(
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +37,8 @@ module Aws::GeoPlaces
     class AccessRestriction < Struct.new(
       :restricted,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,7 +108,8 @@ module Aws::GeoPlaces
       :address_number,
       :building,
       :secondary_address_components,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +167,8 @@ module Aws::GeoPlaces
       :address_number,
       :building,
       :secondary_address_components,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -220,7 +225,8 @@ module Aws::GeoPlaces
       :block,
       :sub_block,
       :street,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +288,8 @@ module Aws::GeoPlaces
       :postal_code,
       :address_number,
       :building,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +311,8 @@ module Aws::GeoPlaces
       :circle,
       :include_countries,
       :include_place_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +326,8 @@ module Aws::GeoPlaces
     class AutocompleteHighlights < Struct.new(
       :title,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -363,7 +372,8 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +386,8 @@ module Aws::GeoPlaces
     class AutocompleteResponse < Struct.new(
       :pricing_bucket,
       :result_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +425,8 @@ module Aws::GeoPlaces
       :language,
       :political_view,
       :highlights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -433,7 +445,8 @@ module Aws::GeoPlaces
     class BusinessChain < Struct.new(
       :name,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -455,7 +468,8 @@ module Aws::GeoPlaces
       :name,
       :localized_name,
       :primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -469,7 +483,8 @@ module Aws::GeoPlaces
     class ComponentMatchScores < Struct.new(
       :title,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -492,7 +507,8 @@ module Aws::GeoPlaces
       :label,
       :value,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -514,7 +530,8 @@ module Aws::GeoPlaces
       :faxes,
       :websites,
       :emails,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -532,7 +549,8 @@ module Aws::GeoPlaces
       :code2,
       :code3,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -546,7 +564,8 @@ module Aws::GeoPlaces
     class CountryHighlights < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +580,8 @@ module Aws::GeoPlaces
     class FilterCircle < Struct.new(
       :center,
       :radius,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -584,7 +604,8 @@ module Aws::GeoPlaces
       :localized_name,
       :id,
       :primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +619,8 @@ module Aws::GeoPlaces
     class GeocodeFilter < Struct.new(
       :include_countries,
       :include_place_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +634,8 @@ module Aws::GeoPlaces
     class GeocodeParsedQuery < Struct.new(
       :title,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +693,8 @@ module Aws::GeoPlaces
       :address_number,
       :building,
       :secondary_address_components,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -708,7 +732,8 @@ module Aws::GeoPlaces
       :street,
       :address_number,
       :postal_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -753,7 +778,8 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +792,8 @@ module Aws::GeoPlaces
     class GeocodeResponse < Struct.new(
       :pricing_bucket,
       :result_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +875,8 @@ module Aws::GeoPlaces
       :intersections,
       :main_address,
       :secondary_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -882,7 +910,8 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -971,7 +1000,8 @@ module Aws::GeoPlaces
       :phonemes,
       :main_address,
       :secondary_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -989,7 +1019,8 @@ module Aws::GeoPlaces
       :start_index,
       :end_index,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,7 +1029,8 @@ module Aws::GeoPlaces
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1036,7 +1068,8 @@ module Aws::GeoPlaces
       :route_distance,
       :map_view,
       :access_points,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1056,7 +1089,8 @@ module Aws::GeoPlaces
     class MatchScoreDetails < Struct.new(
       :overall,
       :components,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1083,7 +1117,8 @@ module Aws::GeoPlaces
       :open_now,
       :components,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1101,7 +1136,8 @@ module Aws::GeoPlaces
       :open_time,
       :open_duration,
       :recurrence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1123,7 +1159,8 @@ module Aws::GeoPlaces
       :end_index,
       :value,
       :query_component,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1149,7 +1186,8 @@ module Aws::GeoPlaces
       :value,
       :number,
       :designator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1201,8 @@ module Aws::GeoPlaces
     class PhonemeDetails < Struct.new(
       :title,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1181,7 +1220,8 @@ module Aws::GeoPlaces
       :value,
       :language,
       :preferred,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1207,7 +1247,8 @@ module Aws::GeoPlaces
       :postal_code_type,
       :usps_zip,
       :usps_zip_plus4,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1229,7 +1270,8 @@ module Aws::GeoPlaces
       :original_term,
       :start_index,
       :end_index,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1285,8 @@ module Aws::GeoPlaces
     class Region < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1257,7 +1300,8 @@ module Aws::GeoPlaces
     class RegionHighlights < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1287,7 +1331,8 @@ module Aws::GeoPlaces
       :address,
       :position,
       :access_points,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1297,7 +1342,8 @@ module Aws::GeoPlaces
     #   @return [Array<String>]
     class ReverseGeocodeFilter < Struct.new(
       :include_place_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1338,7 +1384,8 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1351,7 +1398,8 @@ module Aws::GeoPlaces
     class ReverseGeocodeResponse < Struct.new(
       :pricing_bucket,
       :result_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1417,7 +1465,8 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :intersections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1460,7 +1509,8 @@ module Aws::GeoPlaces
       :exclude_business_chains,
       :include_food_types,
       :exclude_food_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1505,7 +1555,8 @@ module Aws::GeoPlaces
       :intended_use,
       :next_token,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1522,7 +1573,8 @@ module Aws::GeoPlaces
       :pricing_bucket,
       :result_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1600,7 +1652,8 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :phonemes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1623,7 +1676,8 @@ module Aws::GeoPlaces
       :bounding_box,
       :circle,
       :include_countries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1672,7 +1726,8 @@ module Aws::GeoPlaces
       :intended_use,
       :next_token,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1689,7 +1744,8 @@ module Aws::GeoPlaces
       :pricing_bucket,
       :result_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1767,7 +1823,8 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :phonemes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1782,7 +1839,8 @@ module Aws::GeoPlaces
     #   @return [String]
     class SecondaryAddressComponent < Struct.new(
       :number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1792,7 +1850,8 @@ module Aws::GeoPlaces
     #   @return [Float]
     class SecondaryAddressComponentMatchScore < Struct.new(
       :number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1835,7 +1894,8 @@ module Aws::GeoPlaces
       :suffix,
       :direction,
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1909,8 @@ module Aws::GeoPlaces
     class SubRegion < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1924,8 @@ module Aws::GeoPlaces
     class SubRegionHighlights < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1873,7 +1935,8 @@ module Aws::GeoPlaces
     #   @return [Array<Types::Highlight>]
     class SuggestAddressHighlights < Struct.new(
       :label,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1891,7 +1954,8 @@ module Aws::GeoPlaces
       :bounding_box,
       :circle,
       :include_countries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1905,7 +1969,8 @@ module Aws::GeoPlaces
     class SuggestHighlights < Struct.new(
       :title,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1967,7 +2032,8 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :phonemes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1986,7 +2052,8 @@ module Aws::GeoPlaces
     class SuggestQueryResult < Struct.new(
       :query_id,
       :query_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2031,7 +2098,8 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2048,7 +2116,8 @@ module Aws::GeoPlaces
       :pricing_bucket,
       :result_items,
       :query_refinements,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2143,8 @@ module Aws::GeoPlaces
       :place,
       :query,
       :highlights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2083,7 +2153,8 @@ module Aws::GeoPlaces
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2101,7 +2172,8 @@ module Aws::GeoPlaces
       :name,
       :offset,
       :offset_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2116,7 +2188,8 @@ module Aws::GeoPlaces
     #   @return [String]
     class UspsZip < Struct.new(
       :zip_classification_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2126,7 +2199,8 @@ module Aws::GeoPlaces
     #   @return [String]
     class UspsZipPlus4 < Struct.new(
       :record_type_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2143,7 +2217,8 @@ module Aws::GeoPlaces
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2157,7 +2232,8 @@ module Aws::GeoPlaces
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -18,7 +18,8 @@ module Aws::SecurityLake
     class AccessDeniedException < Struct.new(
       :message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::SecurityLake
     class AwsIdentity < Struct.new(
       :principal,
       :external_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +57,8 @@ module Aws::SecurityLake
       :regions,
       :source_name,
       :source_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -75,7 +78,8 @@ module Aws::SecurityLake
     class AwsLogSourceResource < Struct.new(
       :source_name,
       :source_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +88,8 @@ module Aws::SecurityLake
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -104,7 +109,8 @@ module Aws::SecurityLake
       :message,
       :resource_name,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +119,8 @@ module Aws::SecurityLake
     #   @return [Array<Types::AwsLogSourceConfiguration>]
     class CreateAwsLogSourceRequest < Struct.new(
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +131,8 @@ module Aws::SecurityLake
     #   @return [Array<String>]
     class CreateAwsLogSourceResponse < Struct.new(
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -153,7 +161,8 @@ module Aws::SecurityLake
       :source_version,
       :event_classes,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +171,8 @@ module Aws::SecurityLake
     #   @return [Types::CustomLogSourceResource]
     class CreateCustomLogSourceResponse < Struct.new(
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,12 +189,14 @@ module Aws::SecurityLake
       :subscription_protocol,
       :notification_endpoint,
       :exception_time_to_live,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateDataLakeExceptionSubscriptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,12 +206,14 @@ module Aws::SecurityLake
     #   @return [Array<Types::DataLakeAutoEnableNewAccountConfiguration>]
     class CreateDataLakeOrganizationConfigurationRequest < Struct.new(
       :auto_enable_new_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateDataLakeOrganizationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -219,7 +233,8 @@ module Aws::SecurityLake
       :configurations,
       :meta_store_manager_role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +243,8 @@ module Aws::SecurityLake
     #   @return [Array<Types::DataLakeResource>]
     class CreateDataLakeResponse < Struct.new(
       :data_lakes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,7 +258,8 @@ module Aws::SecurityLake
     class CreateSubscriberNotificationRequest < Struct.new(
       :subscriber_id,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +268,8 @@ module Aws::SecurityLake
     #   @return [String]
     class CreateSubscriberNotificationResponse < Struct.new(
       :subscriber_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +300,8 @@ module Aws::SecurityLake
       :sources,
       :access_types,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +311,8 @@ module Aws::SecurityLake
     #   @return [Types::SubscriberResource]
     class CreateSubscriberResponse < Struct.new(
       :subscriber,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +331,8 @@ module Aws::SecurityLake
       :crawler_arn,
       :database_arn,
       :table_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +346,8 @@ module Aws::SecurityLake
     class CustomLogSourceConfiguration < Struct.new(
       :crawler_configuration,
       :provider_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +368,8 @@ module Aws::SecurityLake
     #   @return [String]
     class CustomLogSourceCrawlerConfiguration < Struct.new(
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +387,8 @@ module Aws::SecurityLake
     class CustomLogSourceProvider < Struct.new(
       :role_arn,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +410,8 @@ module Aws::SecurityLake
       :source_version,
       :provider,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -401,7 +426,8 @@ module Aws::SecurityLake
     class DataLakeAutoEnableNewAccountConfiguration < Struct.new(
       :region,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +449,8 @@ module Aws::SecurityLake
       :encryption_configuration,
       :lifecycle_configuration,
       :replication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +461,8 @@ module Aws::SecurityLake
     #   @return [String]
     class DataLakeEncryptionConfiguration < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -456,7 +484,8 @@ module Aws::SecurityLake
       :exception,
       :remediation,
       :timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,7 +499,8 @@ module Aws::SecurityLake
     class DataLakeLifecycleConfiguration < Struct.new(
       :expiration,
       :transitions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -480,7 +510,8 @@ module Aws::SecurityLake
     #   @return [Integer]
     class DataLakeLifecycleExpiration < Struct.new(
       :days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +526,8 @@ module Aws::SecurityLake
     class DataLakeLifecycleTransition < Struct.new(
       :storage_class,
       :days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +554,8 @@ module Aws::SecurityLake
     class DataLakeReplicationConfiguration < Struct.new(
       :regions,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +594,8 @@ module Aws::SecurityLake
       :replication_configuration,
       :create_status,
       :update_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +620,8 @@ module Aws::SecurityLake
       :source_name,
       :event_classes,
       :source_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +636,8 @@ module Aws::SecurityLake
     class DataLakeSourceStatus < Struct.new(
       :resource,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +654,8 @@ module Aws::SecurityLake
     class DataLakeUpdateException < Struct.new(
       :reason,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +678,8 @@ module Aws::SecurityLake
       :request_id,
       :status,
       :exception,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,7 +689,8 @@ module Aws::SecurityLake
     #   @return [Array<Types::AwsLogSourceConfiguration>]
     class DeleteAwsLogSourceRequest < Struct.new(
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -660,7 +699,8 @@ module Aws::SecurityLake
     #   @return [Array<String>]
     class DeleteAwsLogSourceResponse < Struct.new(
       :failed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -674,22 +714,26 @@ module Aws::SecurityLake
     class DeleteCustomLogSourceRequest < Struct.new(
       :source_name,
       :source_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomLogSourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataLakeExceptionSubscriptionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataLakeExceptionSubscriptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,12 +742,14 @@ module Aws::SecurityLake
     #   @return [Array<Types::DataLakeAutoEnableNewAccountConfiguration>]
     class DeleteDataLakeOrganizationConfigurationRequest < Struct.new(
       :auto_enable_new_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataLakeOrganizationConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,12 +758,14 @@ module Aws::SecurityLake
     #   @return [Array<String>]
     class DeleteDataLakeRequest < Struct.new(
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDataLakeResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,12 +774,14 @@ module Aws::SecurityLake
     #   @return [String]
     class DeleteSubscriberNotificationRequest < Struct.new(
       :subscriber_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSubscriberNotificationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -740,27 +790,32 @@ module Aws::SecurityLake
     #   @return [String]
     class DeleteSubscriberRequest < Struct.new(
       :subscriber_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSubscriberResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterDataLakeDelegatedAdministratorRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterDataLakeDelegatedAdministratorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetDataLakeExceptionSubscriptionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,12 +832,14 @@ module Aws::SecurityLake
       :subscription_protocol,
       :notification_endpoint,
       :exception_time_to_live,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetDataLakeOrganizationConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +848,8 @@ module Aws::SecurityLake
     #   @return [Array<Types::DataLakeAutoEnableNewAccountConfiguration>]
     class GetDataLakeOrganizationConfigurationResponse < Struct.new(
       :auto_enable_new_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +871,8 @@ module Aws::SecurityLake
       :accounts,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +893,8 @@ module Aws::SecurityLake
       :data_lake_arn,
       :data_lake_sources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +904,8 @@ module Aws::SecurityLake
     #   @return [String]
     class GetSubscriberRequest < Struct.new(
       :subscriber_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -853,7 +914,8 @@ module Aws::SecurityLake
     #   @return [Types::SubscriberResource]
     class GetSubscriberResponse < Struct.new(
       :subscriber,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,7 +944,8 @@ module Aws::SecurityLake
       :authorization_api_key_value,
       :http_method,
       :target_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +955,8 @@ module Aws::SecurityLake
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -913,7 +977,8 @@ module Aws::SecurityLake
       :regions,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +995,8 @@ module Aws::SecurityLake
     class ListDataLakeExceptionsResponse < Struct.new(
       :exceptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +1005,8 @@ module Aws::SecurityLake
     #   @return [Array<String>]
     class ListDataLakesRequest < Struct.new(
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,7 +1015,8 @@ module Aws::SecurityLake
     #   @return [Array<Types::DataLakeResource>]
     class ListDataLakesResponse < Struct.new(
       :data_lakes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,7 +1042,8 @@ module Aws::SecurityLake
       :sources,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1057,8 @@ module Aws::SecurityLake
     class ListLogSourcesResponse < Struct.new(
       :sources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1072,8 @@ module Aws::SecurityLake
     class ListSubscribersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1087,8 @@ module Aws::SecurityLake
     class ListSubscribersResponse < Struct.new(
       :subscribers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1025,7 +1097,8 @@ module Aws::SecurityLake
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1107,8 @@ module Aws::SecurityLake
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1126,8 @@ module Aws::SecurityLake
       :account,
       :region,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1143,8 @@ module Aws::SecurityLake
       :aws_log_source,
       :custom_log_source,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AwsLogSource < LogSourceResource; end
@@ -1089,7 +1165,8 @@ module Aws::SecurityLake
       :sqs_notification_configuration,
       :https_notification_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SqsNotificationConfiguration < NotificationConfiguration; end
@@ -1102,12 +1179,14 @@ module Aws::SecurityLake
     #   @return [String]
     class RegisterDataLakeDelegatedAdministratorRequest < Struct.new(
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RegisterDataLakeDelegatedAdministratorResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,13 +1203,15 @@ module Aws::SecurityLake
       :message,
       :resource_name,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The configurations used for EventBridge subscriber notification.</p>
     class SqsNotificationConfiguration < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1208,7 +1289,8 @@ module Aws::SecurityLake
       :resource_share_name,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1231,7 +1313,8 @@ module Aws::SecurityLake
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1245,12 +1328,14 @@ module Aws::SecurityLake
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1356,8 @@ module Aws::SecurityLake
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1284,12 +1370,14 @@ module Aws::SecurityLake
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1306,12 +1394,14 @@ module Aws::SecurityLake
       :subscription_protocol,
       :notification_endpoint,
       :exception_time_to_live,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDataLakeExceptionSubscriptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1326,7 +1416,8 @@ module Aws::SecurityLake
     class UpdateDataLakeRequest < Struct.new(
       :configurations,
       :meta_store_manager_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1335,7 +1426,8 @@ module Aws::SecurityLake
     #   @return [Array<Types::DataLakeResource>]
     class UpdateDataLakeResponse < Struct.new(
       :data_lakes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1440,8 @@ module Aws::SecurityLake
     class UpdateSubscriberNotificationRequest < Struct.new(
       :subscriber_id,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1357,7 +1450,8 @@ module Aws::SecurityLake
     #   @return [String]
     class UpdateSubscriberNotificationResponse < Struct.new(
       :subscriber_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1383,7 +1477,8 @@ module Aws::SecurityLake
       :subscriber_name,
       :subscriber_description,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1392,7 +1487,8 @@ module Aws::SecurityLake
     #   @return [Types::SubscriberResource]
     class UpdateSubscriberResponse < Struct.new(
       :subscriber,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

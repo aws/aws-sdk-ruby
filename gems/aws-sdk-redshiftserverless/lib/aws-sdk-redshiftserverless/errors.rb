@@ -44,7 +44,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -61,7 +61,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -74,7 +74,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::InsufficientCapacityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::InvalidPaginationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::Ipv6CidrBlockNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -134,7 +134,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -165,7 +165,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def code
@@ -186,7 +186,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -204,7 +204,7 @@ module Aws::RedshiftServerless
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

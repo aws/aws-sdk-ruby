@@ -13,7 +13,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -42,7 +43,8 @@ module Aws::Route53Profiles
       :resource_id,
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53,7 +55,8 @@ module Aws::Route53Profiles
     #   @return [Types::ProfileAssociation]
     class AssociateProfileResponse < Struct.new(
       :profile_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -83,7 +86,8 @@ module Aws::Route53Profiles
       :resource_arn,
       :name,
       :resource_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +98,8 @@ module Aws::Route53Profiles
     #   @return [Types::ProfileResourceAssociation]
     class AssociateResourceToProfileResponse < Struct.new(
       :profile_resource_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -105,7 +110,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +136,8 @@ module Aws::Route53Profiles
       :name,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -141,7 +148,8 @@ module Aws::Route53Profiles
     #   @return [Types::Profile]
     class CreateProfileResponse < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +160,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class DeleteProfileRequest < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +172,8 @@ module Aws::Route53Profiles
     #   @return [Types::Profile]
     class DeleteProfileResponse < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +190,8 @@ module Aws::Route53Profiles
     class DisassociateProfileRequest < Struct.new(
       :profile_id,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +202,8 @@ module Aws::Route53Profiles
     #   @return [Types::ProfileAssociation]
     class DisassociateProfileResponse < Struct.new(
       :profile_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +219,8 @@ module Aws::Route53Profiles
     class DisassociateResourceFromProfileRequest < Struct.new(
       :profile_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -218,7 +231,8 @@ module Aws::Route53Profiles
     #   @return [Types::ProfileResourceAssociation]
     class DisassociateResourceFromProfileResponse < Struct.new(
       :profile_resource_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -229,7 +243,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class GetProfileAssociationRequest < Struct.new(
       :profile_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +255,8 @@ module Aws::Route53Profiles
     #   @return [Types::ProfileAssociation]
     class GetProfileAssociationResponse < Struct.new(
       :profile_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -251,7 +267,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class GetProfileRequest < Struct.new(
       :profile_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +280,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class GetProfileResourceAssociationRequest < Struct.new(
       :profile_resource_association_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +292,8 @@ module Aws::Route53Profiles
     #   @return [Types::ProfileResourceAssociation]
     class GetProfileResourceAssociationResponse < Struct.new(
       :profile_resource_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +304,8 @@ module Aws::Route53Profiles
     #   @return [Types::Profile]
     class GetProfileResponse < Struct.new(
       :profile,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -296,7 +316,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class InternalServiceErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +328,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +346,8 @@ module Aws::Route53Profiles
     class InvalidParameterException < Struct.new(
       :message,
       :field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -341,7 +364,8 @@ module Aws::Route53Profiles
     class LimitExceededException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -376,7 +400,8 @@ module Aws::Route53Profiles
       :profile_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -394,7 +419,8 @@ module Aws::Route53Profiles
     class ListProfileAssociationsResponse < Struct.new(
       :profile_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -429,7 +455,8 @@ module Aws::Route53Profiles
       :resource_type,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -447,7 +474,8 @@ module Aws::Route53Profiles
     class ListProfileResourceAssociationsResponse < Struct.new(
       :profile_resource_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,7 +498,8 @@ module Aws::Route53Profiles
     class ListProfilesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +517,8 @@ module Aws::Route53Profiles
     class ListProfilesResponse < Struct.new(
       :profile_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -499,7 +529,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -510,7 +541,8 @@ module Aws::Route53Profiles
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +610,8 @@ module Aws::Route53Profiles
       :creation_time,
       :modification_time,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +673,8 @@ module Aws::Route53Profiles
       :status_message,
       :creation_time,
       :modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +748,8 @@ module Aws::Route53Profiles
       :status_message,
       :creation_time,
       :modification_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -746,7 +781,8 @@ module Aws::Route53Profiles
       :arn,
       :name,
       :share_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -763,7 +799,8 @@ module Aws::Route53Profiles
     class ResourceExistsException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -780,7 +817,8 @@ module Aws::Route53Profiles
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -800,7 +838,8 @@ module Aws::Route53Profiles
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -817,12 +856,14 @@ module Aws::Route53Profiles
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -833,7 +874,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -850,12 +892,14 @@ module Aws::Route53Profiles
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -879,7 +923,8 @@ module Aws::Route53Profiles
       :profile_resource_association_id,
       :name,
       :resource_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -890,7 +935,8 @@ module Aws::Route53Profiles
     #   @return [Types::ProfileResourceAssociation]
     class UpdateProfileResourceAssociationResponse < Struct.new(
       :profile_resource_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -901,7 +947,8 @@ module Aws::Route53Profiles
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

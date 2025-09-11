@@ -39,7 +39,7 @@ module Aws::Outposts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Outposts::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::Outposts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Outposts::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -75,7 +75,7 @@ module Aws::Outposts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Outposts::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -88,7 +88,7 @@ module Aws::Outposts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Outposts::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::Outposts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Outposts::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -114,7 +114,7 @@ module Aws::Outposts
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Outposts::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

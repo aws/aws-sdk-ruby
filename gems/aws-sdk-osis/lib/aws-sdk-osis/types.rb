@@ -11,7 +11,8 @@ module Aws::OSIS
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -22,7 +23,8 @@ module Aws::OSIS
     #   @return [Boolean]
     class BufferOptions < Struct.new(
       :persistent_buffer_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +46,8 @@ module Aws::OSIS
       :status,
       :description,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +69,8 @@ module Aws::OSIS
       :status,
       :total_number_of_stages,
       :change_progress_stages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -83,7 +87,8 @@ module Aws::OSIS
     #   @return [String]
     class CloudWatchLogDestination < Struct.new(
       :log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -92,7 +97,8 @@ module Aws::OSIS
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -143,7 +149,8 @@ module Aws::OSIS
       :encryption_at_rest_options,
       :tags,
       :pipeline_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +159,8 @@ module Aws::OSIS
     #   @return [Types::Pipeline]
     class CreatePipelineResponse < Struct.new(
       :pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,12 +169,14 @@ module Aws::OSIS
     #   @return [String]
     class DeletePipelineRequest < Struct.new(
       :pipeline_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePipelineResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -175,7 +185,8 @@ module Aws::OSIS
     #   @return [String]
     class DisabledOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -186,7 +197,8 @@ module Aws::OSIS
     #   @return [String]
     class EncryptionAtRestOptions < Struct.new(
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +211,8 @@ module Aws::OSIS
     class GetPipelineBlueprintRequest < Struct.new(
       :blueprint_name,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -212,7 +225,8 @@ module Aws::OSIS
     class GetPipelineBlueprintResponse < Struct.new(
       :blueprint,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -221,7 +235,8 @@ module Aws::OSIS
     #   @return [String]
     class GetPipelineChangeProgressRequest < Struct.new(
       :pipeline_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +245,8 @@ module Aws::OSIS
     #   @return [Array<Types::ChangeProgressStatus>]
     class GetPipelineChangeProgressResponse < Struct.new(
       :change_progress_statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +255,8 @@ module Aws::OSIS
     #   @return [String]
     class GetPipelineRequest < Struct.new(
       :pipeline_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +265,8 @@ module Aws::OSIS
     #   @return [Types::Pipeline]
     class GetPipelineResponse < Struct.new(
       :pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +276,8 @@ module Aws::OSIS
     #   @return [String]
     class InternalException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +286,8 @@ module Aws::OSIS
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -276,12 +296,14 @@ module Aws::OSIS
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ListPipelineBlueprintsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -290,7 +312,8 @@ module Aws::OSIS
     #   @return [Array<Types::PipelineBlueprintSummary>]
     class ListPipelineBlueprintsResponse < Struct.new(
       :blueprints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +329,8 @@ module Aws::OSIS
     class ListPipelinesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +345,8 @@ module Aws::OSIS
     class ListPipelinesResponse < Struct.new(
       :next_token,
       :pipelines,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,7 +355,8 @@ module Aws::OSIS
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -339,7 +365,8 @@ module Aws::OSIS
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -356,7 +383,8 @@ module Aws::OSIS
     class LogPublishingOptions < Struct.new(
       :is_logging_enabled,
       :cloud_watch_log_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +468,8 @@ module Aws::OSIS
       :destinations,
       :tags,
       :pipeline_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -476,7 +505,8 @@ module Aws::OSIS
       :display_description,
       :service,
       :use_case,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -502,7 +532,8 @@ module Aws::OSIS
       :display_description,
       :service,
       :use_case,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +547,8 @@ module Aws::OSIS
     class PipelineDestination < Struct.new(
       :service_name,
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +558,8 @@ module Aws::OSIS
     #   @return [String]
     class PipelineStatusReason < Struct.new(
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -572,7 +605,8 @@ module Aws::OSIS
       :last_updated_at,
       :destinations,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +615,8 @@ module Aws::OSIS
     #   @return [String]
     class ResourceAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +625,8 @@ module Aws::OSIS
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +640,8 @@ module Aws::OSIS
     class ServiceVpcEndpoint < Struct.new(
       :service_name,
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -613,7 +650,8 @@ module Aws::OSIS
     #   @return [String]
     class StartPipelineRequest < Struct.new(
       :pipeline_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +660,8 @@ module Aws::OSIS
     #   @return [Types::Pipeline]
     class StartPipelineResponse < Struct.new(
       :pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,7 +670,8 @@ module Aws::OSIS
     #   @return [String]
     class StopPipelineRequest < Struct.new(
       :pipeline_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +680,8 @@ module Aws::OSIS
     #   @return [Types::Pipeline]
     class StopPipelineResponse < Struct.new(
       :pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -657,7 +698,8 @@ module Aws::OSIS
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,12 +712,14 @@ module Aws::OSIS
     class TagResourceRequest < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,12 +732,14 @@ module Aws::OSIS
     class UntagResourceRequest < Struct.new(
       :arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -734,7 +780,8 @@ module Aws::OSIS
       :buffer_options,
       :encryption_at_rest_options,
       :pipeline_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -743,7 +790,8 @@ module Aws::OSIS
     #   @return [Types::Pipeline]
     class UpdatePipelineResponse < Struct.new(
       :pipeline,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -754,7 +802,8 @@ module Aws::OSIS
     #   @return [String]
     class ValidatePipelineRequest < Struct.new(
       :pipeline_configuration_body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +816,8 @@ module Aws::OSIS
     class ValidatePipelineResponse < Struct.new(
       :is_valid,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -776,7 +826,8 @@ module Aws::OSIS
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +838,8 @@ module Aws::OSIS
     #   @return [String]
     class ValidationMessage < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +853,8 @@ module Aws::OSIS
     class VpcAttachmentOptions < Struct.new(
       :attach_to_vpc,
       :cidr_block,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -821,7 +874,8 @@ module Aws::OSIS
       :vpc_endpoint_id,
       :vpc_id,
       :vpc_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,7 +898,8 @@ module Aws::OSIS
       :security_group_ids,
       :vpc_attachment_options,
       :vpc_endpoint_management,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

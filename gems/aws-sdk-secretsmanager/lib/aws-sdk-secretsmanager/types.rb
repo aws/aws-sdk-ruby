@@ -20,7 +20,8 @@ module Aws::SecretsManager
       :secret_id,
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +47,8 @@ module Aws::SecretsManager
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +69,8 @@ module Aws::SecretsManager
       :secret_values,
       :next_token,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +81,8 @@ module Aws::SecretsManager
     #   @return [String]
     class CancelRotateSecretRequest < Struct.new(
       :secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -99,7 +103,8 @@ module Aws::SecretsManager
       :arn,
       :name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -211,7 +216,8 @@ module Aws::SecretsManager
       :tags,
       :add_replica_regions,
       :force_overwrite_replica_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +255,8 @@ module Aws::SecretsManager
       :name,
       :version_id,
       :replication_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +265,8 @@ module Aws::SecretsManager
     #   @return [String]
     class DecryptionFailure < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -269,7 +277,8 @@ module Aws::SecretsManager
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
       :secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -282,7 +291,8 @@ module Aws::SecretsManager
     class DeleteResourcePolicyResponse < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +326,8 @@ module Aws::SecretsManager
       :secret_id,
       :recovery_window_in_days,
       :force_delete_without_recovery,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +346,8 @@ module Aws::SecretsManager
       :arn,
       :name,
       :deletion_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -346,7 +358,8 @@ module Aws::SecretsManager
     #   @return [String]
     class DescribeSecretRequest < Struct.new(
       :secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -476,7 +489,8 @@ module Aws::SecretsManager
       :created_date,
       :primary_region,
       :replication_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -492,7 +506,8 @@ module Aws::SecretsManager
     #   @return [String]
     class EncryptionFailure < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -537,7 +552,8 @@ module Aws::SecretsManager
     class Filter < Struct.new(
       :key,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -582,7 +598,8 @@ module Aws::SecretsManager
       :exclude_lowercase,
       :include_space,
       :require_each_included_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -591,7 +608,8 @@ module Aws::SecretsManager
     #   @return [String]
     class GetRandomPasswordResponse < Struct.new(
       :random_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -602,7 +620,8 @@ module Aws::SecretsManager
     #   @return [String]
     class GetResourcePolicyRequest < Struct.new(
       :secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -621,7 +640,8 @@ module Aws::SecretsManager
       :arn,
       :name,
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -649,7 +669,8 @@ module Aws::SecretsManager
       :secret_id,
       :version_id,
       :version_stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -694,7 +715,8 @@ module Aws::SecretsManager
       :secret_string,
       :version_stages,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -703,7 +725,8 @@ module Aws::SecretsManager
     #   @return [String]
     class InternalServiceError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +735,8 @@ module Aws::SecretsManager
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -721,7 +745,8 @@ module Aws::SecretsManager
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -745,7 +770,8 @@ module Aws::SecretsManager
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -754,7 +780,8 @@ module Aws::SecretsManager
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +810,8 @@ module Aws::SecretsManager
       :max_results,
       :next_token,
       :include_deprecated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +835,8 @@ module Aws::SecretsManager
       :next_token,
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +866,8 @@ module Aws::SecretsManager
       :next_token,
       :filters,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -854,7 +884,8 @@ module Aws::SecretsManager
     class ListSecretsResponse < Struct.new(
       :secret_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -863,7 +894,8 @@ module Aws::SecretsManager
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,7 +904,8 @@ module Aws::SecretsManager
     #   @return [String]
     class PreconditionNotMetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +914,8 @@ module Aws::SecretsManager
     #   @return [String]
     class PublicPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +948,8 @@ module Aws::SecretsManager
       :secret_id,
       :resource_policy,
       :block_public_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +962,8 @@ module Aws::SecretsManager
     class PutResourcePolicyResponse < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1001,7 +1037,8 @@ module Aws::SecretsManager
       :secret_string,
       :version_stages,
       :rotation_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1024,7 +1061,8 @@ module Aws::SecretsManager
       :name,
       :version_id,
       :version_stages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1075,8 @@ module Aws::SecretsManager
     class RemoveRegionsFromReplicationRequest < Struct.new(
       :secret_id,
       :remove_replica_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1089,8 @@ module Aws::SecretsManager
     class RemoveRegionsFromReplicationResponse < Struct.new(
       :arn,
       :replication_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1104,8 @@ module Aws::SecretsManager
     class ReplicaRegionType < Struct.new(
       :region,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1081,7 +1122,8 @@ module Aws::SecretsManager
       :secret_id,
       :add_replica_regions,
       :force_overwrite_replica_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1136,8 @@ module Aws::SecretsManager
     class ReplicateSecretToRegionsResponse < Struct.new(
       :arn,
       :replication_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1164,8 @@ module Aws::SecretsManager
       :status,
       :status_message,
       :last_accessed_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1130,7 +1174,8 @@ module Aws::SecretsManager
     #   @return [String]
     class ResourceExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1139,7 +1184,8 @@ module Aws::SecretsManager
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1150,7 +1196,8 @@ module Aws::SecretsManager
     #   @return [String]
     class RestoreSecretRequest < Struct.new(
       :secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1210,8 @@ module Aws::SecretsManager
     class RestoreSecretResponse < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,7 +1251,8 @@ module Aws::SecretsManager
       :rotation_lambda_arn,
       :rotation_rules,
       :rotate_immediately,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1269,8 @@ module Aws::SecretsManager
       :arn,
       :name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1271,7 +1321,8 @@ module Aws::SecretsManager
       :automatically_after_days,
       :duration,
       :schedule_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1419,8 @@ module Aws::SecretsManager
       :owning_service,
       :created_date,
       :primary_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1412,7 +1464,8 @@ module Aws::SecretsManager
       :secret_string,
       :version_stages,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1493,8 @@ module Aws::SecretsManager
       :last_accessed_date,
       :created_date,
       :kms_key_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1449,7 +1503,8 @@ module Aws::SecretsManager
     #   @return [String]
     class StopReplicationToReplicaRequest < Struct.new(
       :secret_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1458,7 +1513,8 @@ module Aws::SecretsManager
     #   @return [String]
     class StopReplicationToReplicaResponse < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1472,7 +1528,8 @@ module Aws::SecretsManager
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1492,7 +1549,8 @@ module Aws::SecretsManager
     class TagResourceRequest < Struct.new(
       :secret_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,7 +1570,8 @@ module Aws::SecretsManager
     class UntagResourceRequest < Struct.new(
       :secret_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1577,7 +1636,8 @@ module Aws::SecretsManager
       :kms_key_id,
       :secret_binary,
       :secret_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1595,7 +1655,8 @@ module Aws::SecretsManager
       :arn,
       :name,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1686,8 @@ module Aws::SecretsManager
       :version_stage,
       :remove_from_version_id,
       :move_to_version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,7 +1700,8 @@ module Aws::SecretsManager
     class UpdateSecretVersionStageResponse < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1653,7 +1716,8 @@ module Aws::SecretsManager
     class ValidateResourcePolicyRequest < Struct.new(
       :secret_id,
       :resource_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1730,8 @@ module Aws::SecretsManager
     class ValidateResourcePolicyResponse < Struct.new(
       :policy_validation_passed,
       :validation_errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1685,7 +1750,8 @@ module Aws::SecretsManager
     class ValidationErrorsEntry < Struct.new(
       :check_name,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

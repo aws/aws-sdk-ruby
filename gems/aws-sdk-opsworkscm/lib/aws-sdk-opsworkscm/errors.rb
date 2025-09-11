@@ -40,7 +40,7 @@ module Aws::OpsWorksCM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpsWorksCM::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error or informational message that can contain more detail about a nextToken failure.
@@ -56,7 +56,7 @@ module Aws::OpsWorksCM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpsWorksCM::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error or informational message that provides more detail if a resource is
@@ -73,7 +73,7 @@ module Aws::OpsWorksCM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpsWorksCM::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error or informational message that the maximum allowed number of servers or backups has been exceeded.
@@ -89,7 +89,7 @@ module Aws::OpsWorksCM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpsWorksCM::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error or informational message in response to a CreateServer request that a resource cannot be created because it already exists.
@@ -105,7 +105,7 @@ module Aws::OpsWorksCM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpsWorksCM::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error or informational message that can contain more detail about problems locating or accessing a resource.
@@ -121,7 +121,7 @@ module Aws::OpsWorksCM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpsWorksCM::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Error or informational message that can contain more detail about a validation failure.

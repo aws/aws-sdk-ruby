@@ -11,7 +11,8 @@ module Aws::Shield
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -20,7 +21,8 @@ module Aws::Shield
     #   @return [String]
     class AccessDeniedForDependencyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::Shield
     class ApplicationLayerAutomaticResponseConfiguration < Struct.new(
       :status,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -47,12 +50,14 @@ module Aws::Shield
     #   @return [String]
     class AssociateDRTLogBucketRequest < Struct.new(
       :log_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateDRTLogBucketResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,12 +67,14 @@ module Aws::Shield
     #   @return [String]
     class AssociateDRTRoleRequest < Struct.new(
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateDRTRoleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,12 +87,14 @@ module Aws::Shield
     class AssociateHealthCheckRequest < Struct.new(
       :protection_id,
       :health_check_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateHealthCheckResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,12 +107,14 @@ module Aws::Shield
     #   @return [Array<Types::EmergencyContact>]
     class AssociateProactiveEngagementDetailsRequest < Struct.new(
       :emergency_contact_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateProactiveEngagementDetailsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +156,8 @@ module Aws::Shield
       :attack_counters,
       :attack_properties,
       :mitigations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -179,7 +191,8 @@ module Aws::Shield
       :top_contributors,
       :unit,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -198,7 +211,8 @@ module Aws::Shield
     class AttackStatisticsDataItem < Struct.new(
       :attack_volume,
       :attack_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -229,7 +243,8 @@ module Aws::Shield
       :start_time,
       :end_time,
       :attack_vectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -295,7 +310,8 @@ module Aws::Shield
     #   @return [String]
     class AttackVectorDescription < Struct.new(
       :vector_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -313,7 +329,8 @@ module Aws::Shield
       :bits_per_second,
       :packets_per_second,
       :requests_per_second,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +340,8 @@ module Aws::Shield
     #   @return [Float]
     class AttackVolumeStatistics < Struct.new(
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -337,7 +355,8 @@ module Aws::Shield
     #          <p>JSON specification: <code>"Block": {}</code>
     #          </p>
     class BlockAction < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +370,8 @@ module Aws::Shield
     class Contributor < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -365,7 +385,8 @@ module Aws::Shield
     #          <p>JSON specification: <code>"Count": {}</code>
     #          </p>
     class CountAction < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -406,12 +427,14 @@ module Aws::Shield
       :resource_type,
       :members,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateProtectionGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -461,7 +484,8 @@ module Aws::Shield
       :name,
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -470,17 +494,20 @@ module Aws::Shield
     #   @return [String]
     class CreateProtectionResponse < Struct.new(
       :protection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateSubscriptionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateSubscriptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,12 +516,14 @@ module Aws::Shield
     #   @return [String]
     class DeleteProtectionGroupRequest < Struct.new(
       :protection_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProtectionGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -504,24 +533,28 @@ module Aws::Shield
     #   @return [String]
     class DeleteProtectionRequest < Struct.new(
       :protection_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProtectionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     class DeleteSubscriptionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     class DeleteSubscriptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -530,7 +563,8 @@ module Aws::Shield
     #   @return [String]
     class DescribeAttackRequest < Struct.new(
       :attack_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -539,12 +573,14 @@ module Aws::Shield
     #   @return [Types::AttackDetail]
     class DescribeAttackResponse < Struct.new(
       :attack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeAttackStatisticsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,12 +593,14 @@ module Aws::Shield
     class DescribeAttackStatisticsResponse < Struct.new(
       :time_range,
       :data_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeDRTAccessRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,12 +613,14 @@ module Aws::Shield
     class DescribeDRTAccessResponse < Struct.new(
       :role_arn,
       :log_bucket_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeEmergencyContactSettingsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -589,7 +629,8 @@ module Aws::Shield
     #   @return [Array<Types::EmergencyContact>]
     class DescribeEmergencyContactSettingsResponse < Struct.new(
       :emergency_contact_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +639,8 @@ module Aws::Shield
     #   @return [String]
     class DescribeProtectionGroupRequest < Struct.new(
       :protection_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +649,8 @@ module Aws::Shield
     #   @return [Types::ProtectionGroup]
     class DescribeProtectionGroupResponse < Struct.new(
       :protection_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +665,8 @@ module Aws::Shield
     class DescribeProtectionRequest < Struct.new(
       :protection_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,12 +675,14 @@ module Aws::Shield
     #   @return [Types::Protection]
     class DescribeProtectionResponse < Struct.new(
       :protection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeSubscriptionRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -645,7 +691,8 @@ module Aws::Shield
     #   @return [Types::Subscription]
     class DescribeSubscriptionResponse < Struct.new(
       :subscription,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,22 +701,26 @@ module Aws::Shield
     #   @return [String]
     class DisableApplicationLayerAutomaticResponseRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableApplicationLayerAutomaticResponseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableProactiveEngagementRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableProactiveEngagementResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -678,22 +729,26 @@ module Aws::Shield
     #   @return [String]
     class DisassociateDRTLogBucketRequest < Struct.new(
       :log_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateDRTLogBucketResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateDRTRoleRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateDRTRoleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,12 +761,14 @@ module Aws::Shield
     class DisassociateHealthCheckRequest < Struct.new(
       :protection_id,
       :health_check_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateHealthCheckResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +786,8 @@ module Aws::Shield
       :email_address,
       :phone_number,
       :contact_notes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -744,27 +802,32 @@ module Aws::Shield
     class EnableApplicationLayerAutomaticResponseRequest < Struct.new(
       :resource_arn,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableApplicationLayerAutomaticResponseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableProactiveEngagementRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableProactiveEngagementResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetSubscriptionStateRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +836,8 @@ module Aws::Shield
     #   @return [String]
     class GetSubscriptionStateResponse < Struct.new(
       :subscription_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -791,7 +855,8 @@ module Aws::Shield
       :resource_arns,
       :protection_names,
       :resource_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +878,8 @@ module Aws::Shield
       :patterns,
       :resource_types,
       :aggregations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +888,8 @@ module Aws::Shield
     #   @return [String]
     class InternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +898,8 @@ module Aws::Shield
     #   @return [String]
     class InvalidOperationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +908,8 @@ module Aws::Shield
     #   @return [String]
     class InvalidPaginationTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +926,8 @@ module Aws::Shield
       :message,
       :reason,
       :fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -866,7 +936,8 @@ module Aws::Shield
     #   @return [String]
     class InvalidResourceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -880,7 +951,8 @@ module Aws::Shield
     class Limit < Struct.new(
       :type,
       :max,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -902,7 +974,8 @@ module Aws::Shield
       :message,
       :type,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -944,7 +1017,8 @@ module Aws::Shield
       :end_time,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -962,7 +1036,8 @@ module Aws::Shield
     class ListAttacksResponse < Struct.new(
       :attack_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1063,8 @@ module Aws::Shield
       :next_token,
       :max_results,
       :inclusion_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1006,7 +1082,8 @@ module Aws::Shield
     class ListProtectionGroupsResponse < Struct.new(
       :protection_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1032,7 +1109,8 @@ module Aws::Shield
       :next_token,
       :max_results,
       :inclusion_filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1128,8 @@ module Aws::Shield
     class ListProtectionsResponse < Struct.new(
       :protections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1076,7 +1155,8 @@ module Aws::Shield
       :protection_group_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1174,8 @@ module Aws::Shield
     class ListResourcesInProtectionGroupResponse < Struct.new(
       :resource_arns,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1184,8 @@ module Aws::Shield
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1194,8 @@ module Aws::Shield
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1121,7 +1204,8 @@ module Aws::Shield
     #   @return [String]
     class LockedSubscriptionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1131,7 +1215,8 @@ module Aws::Shield
     #   @return [String]
     class Mitigation < Struct.new(
       :mitigation_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1225,8 @@ module Aws::Shield
     #   @return [String]
     class NoAssociatedRoleException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1150,7 +1236,8 @@ module Aws::Shield
     #   @return [String]
     class OptimisticLockException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1182,7 +1269,8 @@ module Aws::Shield
       :health_check_ids,
       :protection_arn,
       :application_layer_automatic_response_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1224,7 +1312,8 @@ module Aws::Shield
       :resource_type,
       :members,
       :protection_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1234,7 +1323,8 @@ module Aws::Shield
     #   @return [Integer]
     class ProtectionGroupArbitraryPatternLimits < Struct.new(
       :max_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1253,7 +1343,8 @@ module Aws::Shield
     class ProtectionGroupLimits < Struct.new(
       :max_protection_groups,
       :pattern_type_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1268,7 +1359,8 @@ module Aws::Shield
     #   @return [Types::ProtectionGroupArbitraryPatternLimits]
     class ProtectionGroupPatternTypeLimits < Struct.new(
       :arbitrary_pattern_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1278,7 +1370,8 @@ module Aws::Shield
     #   @return [Array<Types::Limit>]
     class ProtectionLimits < Struct.new(
       :protected_resource_type_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1384,8 @@ module Aws::Shield
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1304,7 +1398,8 @@ module Aws::Shield
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1322,7 +1417,8 @@ module Aws::Shield
     class ResponseAction < Struct.new(
       :block,
       :count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1440,8 @@ module Aws::Shield
       :id,
       :attack_vectors,
       :counters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1385,7 +1482,8 @@ module Aws::Shield
       :proactive_engagement_status,
       :subscription_limits,
       :subscription_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1404,7 +1502,8 @@ module Aws::Shield
     class SubscriptionLimits < Struct.new(
       :protection_limits,
       :protection_group_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1418,7 +1517,8 @@ module Aws::Shield
     class SummarizedAttackVector < Struct.new(
       :vector_type,
       :vector_counters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1448,7 +1548,8 @@ module Aws::Shield
       :sum,
       :n,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1470,7 +1571,8 @@ module Aws::Shield
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1483,12 +1585,14 @@ module Aws::Shield
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1502,7 +1606,8 @@ module Aws::Shield
     class TimeRange < Struct.new(
       :from_inclusive,
       :to_exclusive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1515,12 +1620,14 @@ module Aws::Shield
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1535,12 +1642,14 @@ module Aws::Shield
     class UpdateApplicationLayerAutomaticResponseRequest < Struct.new(
       :resource_arn,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationLayerAutomaticResponseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,12 +1659,14 @@ module Aws::Shield
     #   @return [Array<Types::EmergencyContact>]
     class UpdateEmergencyContactSettingsRequest < Struct.new(
       :emergency_contact_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateEmergencyContactSettingsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1592,12 +1703,14 @@ module Aws::Shield
       :pattern,
       :resource_type,
       :members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateProtectionGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1606,12 +1719,14 @@ module Aws::Shield
     #   @return [String]
     class UpdateSubscriptionRequest < Struct.new(
       :auto_renew,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateSubscriptionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1740,8 @@ module Aws::Shield
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

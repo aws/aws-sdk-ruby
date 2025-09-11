@@ -21,7 +21,8 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +67,8 @@ module Aws::Lightsail
       :status,
       :created_at,
       :last_used,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -91,7 +93,8 @@ module Aws::Lightsail
       :last_used_date,
       :region,
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +138,8 @@ module Aws::Lightsail
     class AccessRules < Struct.new(
       :get_object,
       :allow_public_overrides,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -233,7 +237,8 @@ module Aws::Lightsail
       :last_synced_at,
       :message,
       :bpa_impacts_lightsail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +257,8 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -297,7 +303,8 @@ module Aws::Lightsail
       :next_snapshot_time_of_day,
       :threshold,
       :duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -326,7 +333,8 @@ module Aws::Lightsail
       :add_on_type,
       :auto_snapshot_add_on_request,
       :stop_instance_on_idle_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +496,8 @@ module Aws::Lightsail
       :contact_protocols,
       :notification_triggers,
       :notification_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +506,8 @@ module Aws::Lightsail
     #   @return [String]
     class AllocateStaticIpRequest < Struct.new(
       :static_ip_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -507,7 +517,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class AllocateStaticIpResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -533,7 +544,8 @@ module Aws::Lightsail
     class AttachCertificateToDistributionRequest < Struct.new(
       :distribution_name,
       :certificate_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +555,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class AttachCertificateToDistributionResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +581,8 @@ module Aws::Lightsail
       :instance_name,
       :disk_path,
       :auto_mounting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +592,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class AttachDiskResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +612,8 @@ module Aws::Lightsail
     class AttachInstancesToLoadBalancerRequest < Struct.new(
       :load_balancer_name,
       :instance_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +623,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class AttachInstancesToLoadBalancerResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -621,7 +638,8 @@ module Aws::Lightsail
     class AttachLoadBalancerTlsCertificateRequest < Struct.new(
       :load_balancer_name,
       :certificate_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +651,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class AttachLoadBalancerTlsCertificateResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +665,8 @@ module Aws::Lightsail
     class AttachStaticIpRequest < Struct.new(
       :static_ip_name,
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +676,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class AttachStaticIpResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -671,7 +692,8 @@ module Aws::Lightsail
     class AttachedDisk < Struct.new(
       :path,
       :size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +748,8 @@ module Aws::Lightsail
     #   @return [String]
     class AutoSnapshotAddOnRequest < Struct.new(
       :snapshot_time_of_day,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +772,8 @@ module Aws::Lightsail
       :created_at,
       :status,
       :from_attached_disks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +789,8 @@ module Aws::Lightsail
     class AvailabilityZone < Struct.new(
       :zone_name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,7 +860,8 @@ module Aws::Lightsail
       :license_url,
       :platform,
       :app_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,7 +964,8 @@ module Aws::Lightsail
       :resources_receiving_access,
       :state,
       :access_log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -974,7 +1001,8 @@ module Aws::Lightsail
       :enabled,
       :destination,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1007,7 +1035,8 @@ module Aws::Lightsail
       :storage_per_month_in_gb,
       :transfer_per_month_in_gb,
       :is_active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1033,7 +1062,8 @@ module Aws::Lightsail
     class BucketState < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1133,8 @@ module Aws::Lightsail
       :supported_platforms,
       :supported_app_categories,
       :public_ipv4_address_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1138,7 +1169,8 @@ module Aws::Lightsail
     #   @return [String]
     class CacheBehavior < Struct.new(
       :behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1252,8 @@ module Aws::Lightsail
     class CacheBehaviorPerPath < Struct.new(
       :path,
       :behavior,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1316,7 +1349,8 @@ module Aws::Lightsail
       :forwarded_cookies,
       :forwarded_headers,
       :forwarded_query_strings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1481,7 +1515,8 @@ module Aws::Lightsail
       :revocation_reason,
       :tags,
       :support_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1513,7 +1548,8 @@ module Aws::Lightsail
       :domain_name,
       :certificate_detail,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1562,8 @@ module Aws::Lightsail
     class CloseInstancePublicPortsRequest < Struct.new(
       :port_info,
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1536,7 +1573,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class CloseInstancePublicPortsResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1580,7 +1618,8 @@ module Aws::Lightsail
       :state,
       :source_info,
       :destination_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1599,7 +1638,8 @@ module Aws::Lightsail
       :resource_type,
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1662,7 +1702,8 @@ module Aws::Lightsail
       :location,
       :resource_type,
       :support_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1696,7 +1737,8 @@ module Aws::Lightsail
       :command,
       :environment,
       :ports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1715,7 +1757,8 @@ module Aws::Lightsail
       :image,
       :digest,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1866,7 +1909,8 @@ module Aws::Lightsail
       :public_domain_names,
       :url,
       :private_registry_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1919,7 +1963,8 @@ module Aws::Lightsail
       :containers,
       :public_endpoint,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1936,7 +1981,8 @@ module Aws::Lightsail
     class ContainerServiceDeploymentRequest < Struct.new(
       :containers,
       :public_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1956,7 +2002,8 @@ module Aws::Lightsail
     class ContainerServiceECRImagePullerRole < Struct.new(
       :is_active,
       :principal_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1972,7 +2019,8 @@ module Aws::Lightsail
     #   @return [Boolean]
     class ContainerServiceECRImagePullerRoleRequest < Struct.new(
       :is_active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1992,7 +2040,8 @@ module Aws::Lightsail
       :container_name,
       :container_port,
       :health_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2030,7 +2079,8 @@ module Aws::Lightsail
       :interval_seconds,
       :path,
       :success_codes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2044,7 +2094,8 @@ module Aws::Lightsail
     class ContainerServiceLogEvent < Struct.new(
       :created_at,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2078,7 +2129,8 @@ module Aws::Lightsail
       :ram_size_in_gb,
       :name,
       :is_active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2107,7 +2159,8 @@ module Aws::Lightsail
       :password,
       :expires_at,
       :registry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2185,7 +2238,8 @@ module Aws::Lightsail
     class ContainerServiceStateDetail < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2194,7 +2248,8 @@ module Aws::Lightsail
     #   @return [Array<Types::ContainerService>]
     class ContainerServicesListResult < Struct.new(
       :container_services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2214,7 +2269,8 @@ module Aws::Lightsail
     class CookieObject < Struct.new(
       :option,
       :cookies_allow_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2288,7 +2344,8 @@ module Aws::Lightsail
       :use_latest_restorable_auto_snapshot,
       :target_snapshot_name,
       :source_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2298,7 +2355,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CopySnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2313,7 +2371,8 @@ module Aws::Lightsail
     class CostEstimate < Struct.new(
       :usage_type,
       :results_by_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2322,7 +2381,8 @@ module Aws::Lightsail
     #   @return [String]
     class CreateBucketAccessKeyRequest < Struct.new(
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2336,7 +2396,8 @@ module Aws::Lightsail
     class CreateBucketAccessKeyResult < Struct.new(
       :access_key,
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2370,7 +2431,8 @@ module Aws::Lightsail
       :bundle_id,
       :tags,
       :enable_object_versioning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2384,7 +2446,8 @@ module Aws::Lightsail
     class CreateBucketResult < Struct.new(
       :bucket,
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2410,7 +2473,8 @@ module Aws::Lightsail
       :domain_name,
       :subject_alternative_names,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2424,7 +2488,8 @@ module Aws::Lightsail
     class CreateCertificateResult < Struct.new(
       :certificate,
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2435,7 +2500,8 @@ module Aws::Lightsail
     #   @return [Array<Types::InstanceEntry>]
     class CreateCloudFormationStackRequest < Struct.new(
       :instances,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2445,7 +2511,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateCloudFormationStackResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2491,7 +2558,8 @@ module Aws::Lightsail
     class CreateContactMethodRequest < Struct.new(
       :protocol,
       :contact_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2501,7 +2569,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateContactMethodResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2520,7 +2589,8 @@ module Aws::Lightsail
       :service_name,
       :containers,
       :public_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2529,12 +2599,14 @@ module Aws::Lightsail
     #   @return [Types::ContainerService]
     class CreateContainerServiceDeploymentResult < Struct.new(
       :container_service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateContainerServiceRegistryLoginRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2544,7 +2616,8 @@ module Aws::Lightsail
     #   @return [Types::ContainerServiceRegistryLogin]
     class CreateContainerServiceRegistryLoginResult < Struct.new(
       :registry_login,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2636,7 +2709,8 @@ module Aws::Lightsail
       :public_domain_names,
       :deployment,
       :private_registry_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2645,7 +2719,8 @@ module Aws::Lightsail
     #   @return [Types::ContainerService]
     class CreateContainerServiceResult < Struct.new(
       :container_service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2741,7 +2816,8 @@ module Aws::Lightsail
       :source_disk_name,
       :restore_date,
       :use_latest_restorable_auto_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2751,7 +2827,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateDiskFromSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2781,7 +2858,8 @@ module Aws::Lightsail
       :size_in_gb,
       :tags,
       :add_ons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2791,7 +2869,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateDiskResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2825,7 +2904,8 @@ module Aws::Lightsail
       :disk_snapshot_name,
       :instance_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2835,7 +2915,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateDiskSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2892,7 +2973,8 @@ module Aws::Lightsail
       :tags,
       :certificate_name,
       :viewer_minimum_tls_protocol_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2906,7 +2988,8 @@ module Aws::Lightsail
     class CreateDistributionResult < Struct.new(
       :distribution,
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2920,7 +3003,8 @@ module Aws::Lightsail
     class CreateDomainEntryRequest < Struct.new(
       :domain_name,
       :domain_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2930,7 +3014,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class CreateDomainEntryResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2944,7 +3029,8 @@ module Aws::Lightsail
     class CreateDomainRequest < Struct.new(
       :domain_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2954,7 +3040,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class CreateDomainResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2963,7 +3050,8 @@ module Aws::Lightsail
     #   @return [String]
     class CreateGUISessionAccessDetailsRequest < Struct.new(
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2988,7 +3076,8 @@ module Aws::Lightsail
       :percentage_complete,
       :failure_reason,
       :sessions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3006,7 +3095,8 @@ module Aws::Lightsail
       :instance_snapshot_name,
       :instance_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3016,7 +3106,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateInstanceSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3140,7 +3231,8 @@ module Aws::Lightsail
       :source_instance_name,
       :restore_date,
       :use_latest_restorable_auto_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3150,7 +3242,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateInstancesFromSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3227,7 +3320,8 @@ module Aws::Lightsail
       :tags,
       :add_ons,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3237,7 +3331,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateInstancesResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3251,7 +3346,8 @@ module Aws::Lightsail
     class CreateKeyPairRequest < Struct.new(
       :key_pair_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3274,7 +3370,8 @@ module Aws::Lightsail
       :public_key_base64,
       :private_key_base64,
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3333,7 +3430,8 @@ module Aws::Lightsail
       :tags,
       :ip_address_type,
       :tls_policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3343,7 +3441,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateLoadBalancerResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3376,7 +3475,8 @@ module Aws::Lightsail
       :certificate_domain_name,
       :certificate_alternative_names,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3386,7 +3486,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateLoadBalancerTlsCertificateResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3472,7 +3573,8 @@ module Aws::Lightsail
       :restore_time,
       :use_latest_restorable_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3482,7 +3584,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateRelationalDatabaseFromSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3692,7 +3795,8 @@ module Aws::Lightsail
       :preferred_maintenance_window,
       :publicly_accessible,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3702,7 +3806,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateRelationalDatabaseResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3729,7 +3834,8 @@ module Aws::Lightsail
       :relational_database_name,
       :relational_database_snapshot_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3739,7 +3845,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class CreateRelationalDatabaseSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3748,7 +3855,8 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteAlarmRequest < Struct.new(
       :alarm_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3758,7 +3866,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteAlarmResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3774,7 +3883,8 @@ module Aws::Lightsail
     class DeleteAutoSnapshotRequest < Struct.new(
       :resource_name,
       :date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3784,7 +3894,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteAutoSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3799,7 +3910,8 @@ module Aws::Lightsail
     class DeleteBucketAccessKeyRequest < Struct.new(
       :bucket_name,
       :access_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3809,7 +3921,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteBucketAccessKeyResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3843,7 +3956,8 @@ module Aws::Lightsail
     class DeleteBucketRequest < Struct.new(
       :bucket_name,
       :force_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3853,7 +3967,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteBucketResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3864,7 +3979,8 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteCertificateRequest < Struct.new(
       :certificate_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3874,7 +3990,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteCertificateResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3889,7 +4006,8 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteContactMethodRequest < Struct.new(
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3899,7 +4017,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteContactMethodResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3921,12 +4040,14 @@ module Aws::Lightsail
     class DeleteContainerImageRequest < Struct.new(
       :service_name,
       :image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerImageResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3935,12 +4056,14 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteContainerServiceRequest < Struct.new(
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerServiceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3953,7 +4076,8 @@ module Aws::Lightsail
     class DeleteDiskRequest < Struct.new(
       :disk_name,
       :force_delete_add_ons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3963,7 +4087,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteDiskResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3972,7 +4097,8 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteDiskSnapshotRequest < Struct.new(
       :disk_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3982,7 +4108,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteDiskSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3993,7 +4120,8 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteDistributionRequest < Struct.new(
       :distribution_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4003,7 +4131,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class DeleteDistributionResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4016,7 +4145,8 @@ module Aws::Lightsail
     class DeleteDomainEntryRequest < Struct.new(
       :domain_name,
       :domain_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4026,7 +4156,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class DeleteDomainEntryResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4035,7 +4166,8 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4045,7 +4177,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class DeleteDomainResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4058,7 +4191,8 @@ module Aws::Lightsail
     class DeleteInstanceRequest < Struct.new(
       :instance_name,
       :force_delete_add_ons,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4068,7 +4202,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteInstanceResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4077,7 +4212,8 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteInstanceSnapshotRequest < Struct.new(
       :instance_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4087,7 +4223,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteInstanceSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4104,7 +4241,8 @@ module Aws::Lightsail
     class DeleteKeyPairRequest < Struct.new(
       :key_pair_name,
       :expected_fingerprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4114,7 +4252,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class DeleteKeyPairResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4123,7 +4262,8 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteKnownHostKeysRequest < Struct.new(
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4133,7 +4273,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteKnownHostKeysResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4142,7 +4283,8 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteLoadBalancerRequest < Struct.new(
       :load_balancer_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4152,7 +4294,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteLoadBalancerResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4172,7 +4315,8 @@ module Aws::Lightsail
       :load_balancer_name,
       :certificate_name,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4182,7 +4326,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteLoadBalancerTlsCertificateResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4219,7 +4364,8 @@ module Aws::Lightsail
       :relational_database_name,
       :skip_final_snapshot,
       :final_relational_database_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4229,7 +4375,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteRelationalDatabaseResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4238,7 +4385,8 @@ module Aws::Lightsail
     #   @return [String]
     class DeleteRelationalDatabaseSnapshotRequest < Struct.new(
       :relational_database_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4248,7 +4396,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DeleteRelationalDatabaseSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4262,7 +4411,8 @@ module Aws::Lightsail
     class DestinationInfo < Struct.new(
       :id,
       :service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4273,7 +4423,8 @@ module Aws::Lightsail
     #   @return [String]
     class DetachCertificateFromDistributionRequest < Struct.new(
       :distribution_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4283,7 +4434,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class DetachCertificateFromDistributionResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4293,7 +4445,8 @@ module Aws::Lightsail
     #   @return [String]
     class DetachDiskRequest < Struct.new(
       :disk_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4303,7 +4456,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DetachDiskResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4317,7 +4471,8 @@ module Aws::Lightsail
     class DetachInstancesFromLoadBalancerRequest < Struct.new(
       :load_balancer_name,
       :instance_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4327,7 +4482,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DetachInstancesFromLoadBalancerResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4336,7 +4492,8 @@ module Aws::Lightsail
     #   @return [String]
     class DetachStaticIpRequest < Struct.new(
       :static_ip_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4346,7 +4503,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DetachStaticIpResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4359,7 +4517,8 @@ module Aws::Lightsail
     class DisableAddOnRequest < Struct.new(
       :add_on_type,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4369,7 +4528,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class DisableAddOnResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4465,7 +4625,8 @@ module Aws::Lightsail
       :attachment_state,
       :gb_in_use,
       :auto_mount_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4488,7 +4649,8 @@ module Aws::Lightsail
       :path,
       :size_in_gb,
       :is_system_disk,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4503,7 +4665,8 @@ module Aws::Lightsail
     class DiskMap < Struct.new(
       :original_disk_path,
       :new_disk_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4576,7 +4739,8 @@ module Aws::Lightsail
       :from_instance_name,
       :from_instance_arn,
       :is_from_auto_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4586,7 +4750,8 @@ module Aws::Lightsail
     #   @return [Integer]
     class DiskSnapshotInfo < Struct.new(
       :size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4613,7 +4778,8 @@ module Aws::Lightsail
       :price,
       :transfer_per_month_in_gb,
       :is_active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4653,7 +4819,8 @@ module Aws::Lightsail
     class DnsRecordCreationState < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4700,7 +4867,8 @@ module Aws::Lightsail
       :tags,
       :domain_entries,
       :registered_domain_delegation_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4791,7 +4959,8 @@ module Aws::Lightsail
       :is_alias,
       :type,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4818,12 +4987,14 @@ module Aws::Lightsail
       :resource_record,
       :dns_record_creation_state,
       :validation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DownloadDefaultKeyPairRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4840,7 +5011,8 @@ module Aws::Lightsail
       :public_key_base64,
       :private_key_base64,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4853,7 +5025,8 @@ module Aws::Lightsail
     class EnableAddOnRequest < Struct.new(
       :resource_name,
       :add_on_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4863,7 +5036,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class EnableAddOnResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4882,7 +5056,8 @@ module Aws::Lightsail
       :container_name,
       :container_port,
       :health_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4910,7 +5085,8 @@ module Aws::Lightsail
       :unit,
       :currency,
       :time_period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4948,7 +5124,8 @@ module Aws::Lightsail
       :state,
       :source_info,
       :destination_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4987,7 +5164,8 @@ module Aws::Lightsail
       :from_resource_arn,
       :instance_snapshot_info,
       :disk_snapshot_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4996,7 +5174,8 @@ module Aws::Lightsail
     #   @return [String]
     class ExportSnapshotRequest < Struct.new(
       :source_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5006,7 +5185,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class ExportSnapshotResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5018,7 +5198,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetActiveNamesRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5034,7 +5215,8 @@ module Aws::Lightsail
     class GetActiveNamesResult < Struct.new(
       :active_names,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5057,7 +5239,8 @@ module Aws::Lightsail
       :alarm_name,
       :page_token,
       :monitored_resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5073,7 +5256,8 @@ module Aws::Lightsail
     class GetAlarmsResult < Struct.new(
       :alarms,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5083,7 +5267,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetAutoSnapshotsRequest < Struct.new(
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5102,7 +5287,8 @@ module Aws::Lightsail
       :resource_name,
       :resource_type,
       :auto_snapshots,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5126,7 +5312,8 @@ module Aws::Lightsail
       :include_inactive,
       :page_token,
       :app_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5143,7 +5330,8 @@ module Aws::Lightsail
     class GetBlueprintsResult < Struct.new(
       :blueprints,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5152,7 +5340,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetBucketAccessKeysRequest < Struct.new(
       :bucket_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5161,7 +5350,8 @@ module Aws::Lightsail
     #   @return [Array<Types::AccessKey>]
     class GetBucketAccessKeysResult < Struct.new(
       :access_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5171,7 +5361,8 @@ module Aws::Lightsail
     #   @return [Boolean]
     class GetBucketBundlesRequest < Struct.new(
       :include_inactive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5180,7 +5371,8 @@ module Aws::Lightsail
     #   @return [Array<Types::BucketBundle>]
     class GetBucketBundlesResult < Struct.new(
       :bundles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5279,7 +5471,8 @@ module Aws::Lightsail
       :period,
       :statistics,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5292,7 +5485,8 @@ module Aws::Lightsail
     class GetBucketMetricDataResult < Struct.new(
       :metric_name,
       :metric_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5316,7 +5510,8 @@ module Aws::Lightsail
       :bucket_name,
       :page_token,
       :include_connected_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5338,7 +5533,8 @@ module Aws::Lightsail
       :buckets,
       :next_page_token,
       :account_level_bpa_sync,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5362,7 +5558,8 @@ module Aws::Lightsail
       :include_inactive,
       :page_token,
       :app_category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5378,7 +5575,8 @@ module Aws::Lightsail
     class GetBundlesResult < Struct.new(
       :bundles,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5411,7 +5609,8 @@ module Aws::Lightsail
       :include_certificate_details,
       :certificate_name,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5426,7 +5625,8 @@ module Aws::Lightsail
     class GetCertificatesResult < Struct.new(
       :certificates,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5438,7 +5638,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetCloudFormationStackRecordsRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5455,7 +5656,8 @@ module Aws::Lightsail
     class GetCloudFormationStackRecordsResult < Struct.new(
       :cloud_formation_stack_records,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5467,7 +5669,8 @@ module Aws::Lightsail
     #   @return [Array<String>]
     class GetContactMethodsRequest < Struct.new(
       :protocols,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5476,12 +5679,14 @@ module Aws::Lightsail
     #   @return [Array<Types::ContactMethod>]
     class GetContactMethodsResult < Struct.new(
       :contact_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetContainerAPIMetadataRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5491,7 +5696,8 @@ module Aws::Lightsail
     #   @return [Array<Hash<String, String>>]
     class GetContainerAPIMetadataResult < Struct.new(
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5500,7 +5706,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetContainerImagesRequest < Struct.new(
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5510,7 +5717,8 @@ module Aws::Lightsail
     #   @return [Array<Types::ContainerImage>]
     class GetContainerImagesResult < Struct.new(
       :container_images,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5591,7 +5799,8 @@ module Aws::Lightsail
       :end_time,
       :filter_pattern,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5607,7 +5816,8 @@ module Aws::Lightsail
     class GetContainerLogResult < Struct.new(
       :log_events,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5616,7 +5826,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetContainerServiceDeploymentsRequest < Struct.new(
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5625,7 +5836,8 @@ module Aws::Lightsail
     #   @return [Array<Types::ContainerServiceDeployment>]
     class GetContainerServiceDeploymentsResult < Struct.new(
       :deployments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5709,7 +5921,8 @@ module Aws::Lightsail
       :end_time,
       :period,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5722,12 +5935,14 @@ module Aws::Lightsail
     class GetContainerServiceMetricDataResult < Struct.new(
       :metric_name,
       :metric_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetContainerServicePowersRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5737,7 +5952,8 @@ module Aws::Lightsail
     #   @return [Array<Types::ContainerServicePower>]
     class GetContainerServicePowersResult < Struct.new(
       :powers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5747,7 +5963,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetContainerServicesRequest < Struct.new(
       :service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5788,7 +6005,8 @@ module Aws::Lightsail
       :resource_name,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5797,7 +6015,8 @@ module Aws::Lightsail
     #   @return [Array<Types::ResourceBudgetEstimate>]
     class GetCostEstimateResult < Struct.new(
       :resources_budget_estimate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5806,7 +6025,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetDiskRequest < Struct.new(
       :disk_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5815,7 +6035,8 @@ module Aws::Lightsail
     #   @return [Types::Disk]
     class GetDiskResult < Struct.new(
       :disk,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5824,7 +6045,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetDiskSnapshotRequest < Struct.new(
       :disk_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5833,7 +6055,8 @@ module Aws::Lightsail
     #   @return [Types::DiskSnapshot]
     class GetDiskSnapshotResult < Struct.new(
       :disk_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5845,7 +6068,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetDiskSnapshotsRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5861,7 +6085,8 @@ module Aws::Lightsail
     class GetDiskSnapshotsResult < Struct.new(
       :disk_snapshots,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5873,7 +6098,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetDisksRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5889,12 +6115,14 @@ module Aws::Lightsail
     class GetDisksResult < Struct.new(
       :disks,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetDistributionBundlesRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5903,7 +6131,8 @@ module Aws::Lightsail
     #   @return [Array<Types::DistributionBundle>]
     class GetDistributionBundlesResult < Struct.new(
       :bundles,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5917,7 +6146,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetDistributionLatestCacheResetRequest < Struct.new(
       :distribution_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5931,7 +6161,8 @@ module Aws::Lightsail
     class GetDistributionLatestCacheResetResult < Struct.new(
       :status,
       :create_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6099,7 +6330,8 @@ module Aws::Lightsail
       :period,
       :unit,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6112,7 +6344,8 @@ module Aws::Lightsail
     class GetDistributionMetricDataResult < Struct.new(
       :metric_name,
       :metric_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6130,7 +6363,8 @@ module Aws::Lightsail
     class GetDistributionsRequest < Struct.new(
       :distribution_name,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6146,7 +6380,8 @@ module Aws::Lightsail
     class GetDistributionsResult < Struct.new(
       :distributions,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6155,7 +6390,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetDomainRequest < Struct.new(
       :domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6164,7 +6400,8 @@ module Aws::Lightsail
     #   @return [Types::Domain]
     class GetDomainResult < Struct.new(
       :domain,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6176,7 +6413,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetDomainsRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6193,7 +6431,8 @@ module Aws::Lightsail
     class GetDomainsResult < Struct.new(
       :domains,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6205,7 +6444,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetExportSnapshotRecordsRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6221,7 +6461,8 @@ module Aws::Lightsail
     class GetExportSnapshotRecordsResult < Struct.new(
       :export_snapshot_records,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6234,7 +6475,8 @@ module Aws::Lightsail
     class GetInstanceAccessDetailsRequest < Struct.new(
       :instance_name,
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6244,7 +6486,8 @@ module Aws::Lightsail
     #   @return [Types::InstanceAccessDetails]
     class GetInstanceAccessDetailsResult < Struct.new(
       :access_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6448,7 +6691,8 @@ module Aws::Lightsail
       :end_time,
       :unit,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6461,7 +6705,8 @@ module Aws::Lightsail
     class GetInstanceMetricDataResult < Struct.new(
       :metric_name,
       :metric_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6470,7 +6715,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetInstancePortStatesRequest < Struct.new(
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6480,7 +6726,8 @@ module Aws::Lightsail
     #   @return [Array<Types::InstancePortState>]
     class GetInstancePortStatesResult < Struct.new(
       :port_states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6489,7 +6736,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetInstanceRequest < Struct.new(
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6498,7 +6746,8 @@ module Aws::Lightsail
     #   @return [Types::Instance]
     class GetInstanceResult < Struct.new(
       :instance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6507,7 +6756,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetInstanceSnapshotRequest < Struct.new(
       :instance_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6517,7 +6767,8 @@ module Aws::Lightsail
     #   @return [Types::InstanceSnapshot]
     class GetInstanceSnapshotResult < Struct.new(
       :instance_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6529,7 +6780,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetInstanceSnapshotsRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6546,7 +6798,8 @@ module Aws::Lightsail
     class GetInstanceSnapshotsResult < Struct.new(
       :instance_snapshots,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6555,7 +6808,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetInstanceStateRequest < Struct.new(
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6564,7 +6818,8 @@ module Aws::Lightsail
     #   @return [Types::InstanceState]
     class GetInstanceStateResult < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6576,7 +6831,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetInstancesRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6592,7 +6848,8 @@ module Aws::Lightsail
     class GetInstancesResult < Struct.new(
       :instances,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6601,7 +6858,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetKeyPairRequest < Struct.new(
       :key_pair_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6610,7 +6868,8 @@ module Aws::Lightsail
     #   @return [Types::KeyPair]
     class GetKeyPairResult < Struct.new(
       :key_pair,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6627,7 +6886,8 @@ module Aws::Lightsail
     class GetKeyPairsRequest < Struct.new(
       :page_token,
       :include_default_key_pair,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6643,7 +6903,8 @@ module Aws::Lightsail
     class GetKeyPairsResult < Struct.new(
       :key_pairs,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6876,7 +7137,8 @@ module Aws::Lightsail
       :end_time,
       :unit,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6889,7 +7151,8 @@ module Aws::Lightsail
     class GetLoadBalancerMetricDataResult < Struct.new(
       :metric_name,
       :metric_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6898,7 +7161,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetLoadBalancerRequest < Struct.new(
       :load_balancer_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6907,7 +7171,8 @@ module Aws::Lightsail
     #   @return [Types::LoadBalancer]
     class GetLoadBalancerResult < Struct.new(
       :load_balancer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6916,7 +7181,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetLoadBalancerTlsCertificatesRequest < Struct.new(
       :load_balancer_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6926,7 +7192,8 @@ module Aws::Lightsail
     #   @return [Array<Types::LoadBalancerTlsCertificate>]
     class GetLoadBalancerTlsCertificatesResult < Struct.new(
       :tls_certificates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6938,7 +7205,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetLoadBalancerTlsPoliciesRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6954,7 +7222,8 @@ module Aws::Lightsail
     class GetLoadBalancerTlsPoliciesResult < Struct.new(
       :tls_policies,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6966,7 +7235,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetLoadBalancersRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6982,7 +7252,8 @@ module Aws::Lightsail
     class GetLoadBalancersResult < Struct.new(
       :load_balancers,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6991,7 +7262,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetOperationRequest < Struct.new(
       :operation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7001,7 +7273,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class GetOperationResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7017,7 +7290,8 @@ module Aws::Lightsail
     class GetOperationsForResourceRequest < Struct.new(
       :resource_name,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7044,7 +7318,8 @@ module Aws::Lightsail
       :operations,
       :next_page_count,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7056,7 +7331,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetOperationsRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7073,7 +7349,8 @@ module Aws::Lightsail
     class GetOperationsResult < Struct.new(
       :operations,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7089,7 +7366,8 @@ module Aws::Lightsail
     class GetRegionsRequest < Struct.new(
       :include_availability_zones,
       :include_relational_database_availability_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7098,7 +7376,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Region>]
     class GetRegionsResult < Struct.new(
       :regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7110,7 +7389,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetRelationalDatabaseBlueprintsRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7127,7 +7407,8 @@ module Aws::Lightsail
     class GetRelationalDatabaseBlueprintsResult < Struct.new(
       :blueprints,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7144,7 +7425,8 @@ module Aws::Lightsail
     class GetRelationalDatabaseBundlesRequest < Struct.new(
       :page_token,
       :include_inactive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7160,7 +7442,8 @@ module Aws::Lightsail
     class GetRelationalDatabaseBundlesResult < Struct.new(
       :bundles,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7184,7 +7467,8 @@ module Aws::Lightsail
       :relational_database_name,
       :duration_in_minutes,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7200,7 +7484,8 @@ module Aws::Lightsail
     class GetRelationalDatabaseEventsResult < Struct.new(
       :relational_database_events,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7262,7 +7547,8 @@ module Aws::Lightsail
       :end_time,
       :start_from_head,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7281,7 +7567,8 @@ module Aws::Lightsail
       :resource_log_events,
       :next_backward_token,
       :next_forward_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7290,7 +7577,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetRelationalDatabaseLogStreamsRequest < Struct.new(
       :relational_database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7300,7 +7588,8 @@ module Aws::Lightsail
     #   @return [Array<String>]
     class GetRelationalDatabaseLogStreamsResult < Struct.new(
       :log_streams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7320,7 +7609,8 @@ module Aws::Lightsail
     class GetRelationalDatabaseMasterUserPasswordRequest < Struct.new(
       :relational_database_name,
       :password_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7333,7 +7623,8 @@ module Aws::Lightsail
     class GetRelationalDatabaseMasterUserPasswordResult < Struct.new(
       :master_user_password,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7498,7 +7789,8 @@ module Aws::Lightsail
       :end_time,
       :unit,
       :statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7511,7 +7803,8 @@ module Aws::Lightsail
     class GetRelationalDatabaseMetricDataResult < Struct.new(
       :metric_name,
       :metric_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7527,7 +7820,8 @@ module Aws::Lightsail
     class GetRelationalDatabaseParametersRequest < Struct.new(
       :relational_database_name,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7544,7 +7838,8 @@ module Aws::Lightsail
     class GetRelationalDatabaseParametersResult < Struct.new(
       :parameters,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7553,7 +7848,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetRelationalDatabaseRequest < Struct.new(
       :relational_database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7562,7 +7858,8 @@ module Aws::Lightsail
     #   @return [Types::RelationalDatabase]
     class GetRelationalDatabaseResult < Struct.new(
       :relational_database,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7571,7 +7868,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetRelationalDatabaseSnapshotRequest < Struct.new(
       :relational_database_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7580,7 +7878,8 @@ module Aws::Lightsail
     #   @return [Types::RelationalDatabaseSnapshot]
     class GetRelationalDatabaseSnapshotResult < Struct.new(
       :relational_database_snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7592,7 +7891,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetRelationalDatabaseSnapshotsRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7609,7 +7909,8 @@ module Aws::Lightsail
     class GetRelationalDatabaseSnapshotsResult < Struct.new(
       :relational_database_snapshots,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7621,7 +7922,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetRelationalDatabasesRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7637,7 +7939,8 @@ module Aws::Lightsail
     class GetRelationalDatabasesResult < Struct.new(
       :relational_databases,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7653,7 +7956,8 @@ module Aws::Lightsail
     class GetSetupHistoryRequest < Struct.new(
       :resource_name,
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7669,7 +7973,8 @@ module Aws::Lightsail
     class GetSetupHistoryResult < Struct.new(
       :setup_history,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7678,7 +7983,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetStaticIpRequest < Struct.new(
       :static_ip_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7687,7 +7993,8 @@ module Aws::Lightsail
     #   @return [Types::StaticIp]
     class GetStaticIpResult < Struct.new(
       :static_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7699,7 +8006,8 @@ module Aws::Lightsail
     #   @return [String]
     class GetStaticIpsRequest < Struct.new(
       :page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7716,7 +8024,8 @@ module Aws::Lightsail
     class GetStaticIpsResult < Struct.new(
       :static_ips,
       :next_page_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7763,7 +8072,8 @@ module Aws::Lightsail
     class HeaderObject < Struct.new(
       :option,
       :headers_allow_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7830,7 +8140,8 @@ module Aws::Lightsail
       :fingerprint_sha256,
       :not_valid_before,
       :not_valid_after,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7843,7 +8154,8 @@ module Aws::Lightsail
     class ImportKeyPairRequest < Struct.new(
       :key_pair_name,
       :public_key_base64,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7853,7 +8165,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class ImportKeyPairResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7882,7 +8195,8 @@ module Aws::Lightsail
       :region_name,
       :protocol_policy,
       :response_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7985,7 +8299,8 @@ module Aws::Lightsail
       :username,
       :ssh_key_name,
       :metadata_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8051,7 +8366,8 @@ module Aws::Lightsail
       :instance_name,
       :username,
       :host_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8122,7 +8438,8 @@ module Aws::Lightsail
       :port_info_source,
       :user_data,
       :availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8140,7 +8457,8 @@ module Aws::Lightsail
       :cpu_count,
       :disks,
       :ram_size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8279,7 +8597,8 @@ module Aws::Lightsail
       :instance_name,
       :instance_health,
       :instance_health_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8336,7 +8655,8 @@ module Aws::Lightsail
       :http_endpoint,
       :http_put_response_hop_limit,
       :http_protocol_ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8350,7 +8670,8 @@ module Aws::Lightsail
     class InstanceNetworking < Struct.new(
       :monthly_transfer,
       :ports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8495,7 +8816,8 @@ module Aws::Lightsail
       :cidrs,
       :ipv6_cidrs,
       :cidr_list_aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8634,7 +8956,8 @@ module Aws::Lightsail
       :cidrs,
       :ipv6_cidrs,
       :cidr_list_aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -8722,7 +9045,8 @@ module Aws::Lightsail
       :from_bundle_id,
       :is_from_auto_snapshot,
       :size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8740,7 +9064,8 @@ module Aws::Lightsail
       :from_bundle_id,
       :from_blueprint_id,
       :from_disk_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8754,7 +9079,8 @@ module Aws::Lightsail
     class InstanceState < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8779,12 +9105,14 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class IsVpcPeeredRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8794,7 +9122,8 @@ module Aws::Lightsail
     #   @return [Boolean]
     class IsVpcPeeredResult < Struct.new(
       :is_peered,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8836,7 +9165,8 @@ module Aws::Lightsail
       :resource_type,
       :tags,
       :fingerprint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8943,7 +9273,8 @@ module Aws::Lightsail
       :ip_address_type,
       :tags,
       :viewer_minimum_tls_protocol_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9041,7 +9372,8 @@ module Aws::Lightsail
       :ip_address_type,
       :https_redirection_enabled,
       :tls_policy_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9290,7 +9622,8 @@ module Aws::Lightsail
       :signature_algorithm,
       :subject,
       :subject_alternative_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9321,7 +9654,8 @@ module Aws::Lightsail
     class LoadBalancerTlsCertificateDnsRecordCreationState < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9336,7 +9670,8 @@ module Aws::Lightsail
     class LoadBalancerTlsCertificateDomainValidationOption < Struct.new(
       :domain_name,
       :validation_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9370,7 +9705,8 @@ module Aws::Lightsail
       :validation_status,
       :domain_name,
       :dns_record_creation_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9464,7 +9800,8 @@ module Aws::Lightsail
     class LoadBalancerTlsCertificateRenewalSummary < Struct.new(
       :renewal_status,
       :domain_validation_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9479,7 +9816,8 @@ module Aws::Lightsail
     class LoadBalancerTlsCertificateSummary < Struct.new(
       :name,
       :is_attached,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9510,7 +9848,8 @@ module Aws::Lightsail
       :description,
       :protocols,
       :ciphers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9524,7 +9863,8 @@ module Aws::Lightsail
     class LogEvent < Struct.new(
       :created_at,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9558,7 +9898,8 @@ module Aws::Lightsail
       :sum,
       :timestamp,
       :unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9581,7 +9922,8 @@ module Aws::Lightsail
       :arn,
       :name,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9592,7 +9934,8 @@ module Aws::Lightsail
     #   @return [Integer]
     class MonthlyTransfer < Struct.new(
       :gb_per_month_allocated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9628,7 +9971,8 @@ module Aws::Lightsail
     class NameServersUpdateState < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9646,7 +9990,8 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9659,7 +10004,8 @@ module Aws::Lightsail
     class OpenInstancePublicPortsRequest < Struct.new(
       :port_info,
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9669,7 +10015,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class OpenInstancePublicPortsResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9723,7 +10070,8 @@ module Aws::Lightsail
       :status_changed_at,
       :error_code,
       :error_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9741,7 +10089,8 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9774,7 +10123,8 @@ module Aws::Lightsail
       :region_name,
       :protocol_policy,
       :response_timeout,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9804,12 +10154,14 @@ module Aws::Lightsail
     class PasswordData < Struct.new(
       :ciphertext,
       :key_pair_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PeerVpcRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9819,7 +10171,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class PeerVpcResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9837,7 +10190,8 @@ module Aws::Lightsail
       :action,
       :description,
       :current_apply_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9855,7 +10209,8 @@ module Aws::Lightsail
       :master_user_password,
       :engine_version,
       :backup_retention_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9992,7 +10347,8 @@ module Aws::Lightsail
       :cidrs,
       :ipv6_cidrs,
       :cidr_list_aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -10013,7 +10369,8 @@ module Aws::Lightsail
     #   @return [Types::ContainerServiceECRImagePullerRole]
     class PrivateRegistryAccess < Struct.new(
       :ecr_image_puller_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10027,7 +10384,8 @@ module Aws::Lightsail
     #   @return [Types::ContainerServiceECRImagePullerRoleRequest]
     class PrivateRegistryAccessRequest < Struct.new(
       :ecr_image_puller_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10190,7 +10548,8 @@ module Aws::Lightsail
       :contact_protocols,
       :notification_triggers,
       :notification_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10200,7 +10559,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class PutAlarmResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10213,7 +10573,8 @@ module Aws::Lightsail
     class PutInstancePublicPortsRequest < Struct.new(
       :port_infos,
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10223,7 +10584,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class PutInstancePublicPortsResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10245,7 +10607,8 @@ module Aws::Lightsail
     class QueryStringObject < Struct.new(
       :option,
       :query_strings_allow_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10279,7 +10642,8 @@ module Aws::Lightsail
     class R53HostedZoneDeletionState < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10288,7 +10652,8 @@ module Aws::Lightsail
     #   @return [String]
     class RebootInstanceRequest < Struct.new(
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10298,7 +10663,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class RebootInstanceResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10307,7 +10673,8 @@ module Aws::Lightsail
     #   @return [String]
     class RebootRelationalDatabaseRequest < Struct.new(
       :relational_database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10317,7 +10684,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class RebootRelationalDatabaseResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10350,7 +10718,8 @@ module Aws::Lightsail
       :name,
       :availability_zones,
       :relational_database_availability_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10374,7 +10743,8 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10411,7 +10781,8 @@ module Aws::Lightsail
       :service_name,
       :label,
       :digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10421,7 +10792,8 @@ module Aws::Lightsail
     #   @return [Types::ContainerImage]
     class RegisterContainerImageResult < Struct.new(
       :container_image,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10461,7 +10833,8 @@ module Aws::Lightsail
     class RegisteredDomainDelegationInfo < Struct.new(
       :name_servers_update_state,
       :r53_hosted_zone_deletion_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10585,7 +10958,8 @@ module Aws::Lightsail
       :master_endpoint,
       :pending_maintenance_actions,
       :ca_certificate_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10618,7 +10992,8 @@ module Aws::Lightsail
       :engine_description,
       :engine_version_description,
       :is_engine_default,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10661,7 +11036,8 @@ module Aws::Lightsail
       :cpu_count,
       :is_encrypted,
       :is_active,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10675,7 +11051,8 @@ module Aws::Lightsail
     class RelationalDatabaseEndpoint < Struct.new(
       :port,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10697,7 +11074,8 @@ module Aws::Lightsail
       :created_at,
       :message,
       :event_categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10715,7 +11093,8 @@ module Aws::Lightsail
       :cpu_count,
       :disk_size_in_gb,
       :ram_size_in_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10754,7 +11133,8 @@ module Aws::Lightsail
       :is_modifiable,
       :parameter_name,
       :parameter_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10827,7 +11207,8 @@ module Aws::Lightsail
       :from_relational_database_arn,
       :from_relational_database_bundle_id,
       :from_relational_database_blueprint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10836,7 +11217,8 @@ module Aws::Lightsail
     #   @return [String]
     class ReleaseStaticIpRequest < Struct.new(
       :static_ip_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10846,7 +11228,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class ReleaseStaticIpResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10906,7 +11289,8 @@ module Aws::Lightsail
       :renewal_status,
       :renewal_status_reason,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10917,7 +11301,8 @@ module Aws::Lightsail
     #   @return [String]
     class ResetDistributionCacheRequest < Struct.new(
       :distribution_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10936,7 +11321,8 @@ module Aws::Lightsail
       :status,
       :create_time,
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10962,7 +11348,8 @@ module Aws::Lightsail
       :cost_estimates,
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10976,7 +11363,8 @@ module Aws::Lightsail
     class ResourceLocation < Struct.new(
       :availability_zone,
       :region_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -10990,7 +11378,8 @@ module Aws::Lightsail
     class ResourceReceivingAccess < Struct.new(
       :name,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11009,7 +11398,8 @@ module Aws::Lightsail
       :name,
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11019,7 +11409,8 @@ module Aws::Lightsail
     #   @return [String]
     class SendContactMethodVerificationRequest < Struct.new(
       :protocol,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11029,7 +11420,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class SendContactMethodVerificationResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11047,7 +11439,8 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11067,7 +11460,8 @@ module Aws::Lightsail
       :name,
       :url,
       :is_primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11106,7 +11500,8 @@ module Aws::Lightsail
       :resource_name,
       :ip_address_type,
       :accept_bundle_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11116,7 +11511,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class SetIpAddressTypeResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11146,7 +11542,8 @@ module Aws::Lightsail
       :resource_name,
       :bucket_name,
       :access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11156,7 +11553,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class SetResourceAccessForBucketResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11190,7 +11588,8 @@ module Aws::Lightsail
       :standard_error,
       :standard_output,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11217,7 +11616,8 @@ module Aws::Lightsail
       :resource,
       :execution_details,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11243,7 +11643,8 @@ module Aws::Lightsail
       :created_at,
       :location,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11266,7 +11667,8 @@ module Aws::Lightsail
       :email_address,
       :domain_names,
       :certificate_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11275,7 +11677,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class SetupInstanceHttpsResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11294,7 +11697,8 @@ module Aws::Lightsail
       :instance_name,
       :domain_names,
       :certificate_provider,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11303,7 +11707,8 @@ module Aws::Lightsail
     #   @return [String]
     class StartGUISessionRequest < Struct.new(
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11312,7 +11717,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class StartGUISessionResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11321,7 +11727,8 @@ module Aws::Lightsail
     #   @return [String]
     class StartInstanceRequest < Struct.new(
       :instance_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11331,7 +11738,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class StartInstanceResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11340,7 +11748,8 @@ module Aws::Lightsail
     #   @return [String]
     class StartRelationalDatabaseRequest < Struct.new(
       :relational_database_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11350,7 +11759,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class StartRelationalDatabaseResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11396,7 +11806,8 @@ module Aws::Lightsail
       :ip_address,
       :attached_to,
       :is_attached,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11405,7 +11816,8 @@ module Aws::Lightsail
     #   @return [String]
     class StopGUISessionRequest < Struct.new(
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11414,7 +11826,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class StopGUISessionResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11432,7 +11845,8 @@ module Aws::Lightsail
     class StopInstanceOnIdleRequest < Struct.new(
       :threshold,
       :duration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11451,7 +11865,8 @@ module Aws::Lightsail
     class StopInstanceRequest < Struct.new(
       :instance_name,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11461,7 +11876,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class StopInstanceResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11474,7 +11890,8 @@ module Aws::Lightsail
     class StopRelationalDatabaseRequest < Struct.new(
       :relational_database_name,
       :relational_database_snapshot_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11484,7 +11901,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class StopRelationalDatabaseResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11503,7 +11921,8 @@ module Aws::Lightsail
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11520,7 +11939,8 @@ module Aws::Lightsail
       :resource_name,
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11530,7 +11950,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class TagResourceResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11560,7 +11981,8 @@ module Aws::Lightsail
     class TestAlarmRequest < Struct.new(
       :alarm_name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11570,7 +11992,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class TestAlarmResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11593,7 +12016,8 @@ module Aws::Lightsail
     class TimePeriod < Struct.new(
       :start,
       :end,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11611,12 +12035,14 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UnpeerVpcRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11626,7 +12052,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class UnpeerVpcResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11643,7 +12070,8 @@ module Aws::Lightsail
       :resource_name,
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11653,7 +12081,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class UntagResourceResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11668,7 +12097,8 @@ module Aws::Lightsail
     class UpdateBucketBundleRequest < Struct.new(
       :bucket_name,
       :bundle_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11678,7 +12108,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class UpdateBucketBundleResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11717,7 +12148,8 @@ module Aws::Lightsail
       :versioning,
       :readonly_access_accounts,
       :access_log_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11731,7 +12163,8 @@ module Aws::Lightsail
     class UpdateBucketResult < Struct.new(
       :bucket,
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11788,7 +12221,8 @@ module Aws::Lightsail
       :is_disabled,
       :public_domain_names,
       :private_registry_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11797,7 +12231,8 @@ module Aws::Lightsail
     #   @return [Types::ContainerService]
     class UpdateContainerServiceResult < Struct.new(
       :container_service,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11814,7 +12249,8 @@ module Aws::Lightsail
     class UpdateDistributionBundleRequest < Struct.new(
       :distribution_name,
       :bundle_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11824,7 +12260,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class UpdateDistributionBundleResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11883,7 +12320,8 @@ module Aws::Lightsail
       :viewer_minimum_tls_protocol_version,
       :certificate_name,
       :use_default_certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11893,7 +12331,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class UpdateDistributionResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11906,7 +12345,8 @@ module Aws::Lightsail
     class UpdateDomainEntryRequest < Struct.new(
       :domain_name,
       :domain_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11916,7 +12356,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class UpdateDomainEntryResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11959,7 +12400,8 @@ module Aws::Lightsail
       :http_endpoint,
       :http_put_response_hop_limit,
       :http_protocol_ipv6,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -11969,7 +12411,8 @@ module Aws::Lightsail
     #   @return [Types::Operation]
     class UpdateInstanceMetadataOptionsResult < Struct.new(
       :operation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12021,7 +12464,8 @@ module Aws::Lightsail
       :load_balancer_name,
       :attribute_name,
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12031,7 +12475,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class UpdateLoadBalancerAttributeResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12044,7 +12489,8 @@ module Aws::Lightsail
     class UpdateRelationalDatabaseParametersRequest < Struct.new(
       :relational_database_name,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12054,7 +12500,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class UpdateRelationalDatabaseParametersResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12169,7 +12616,8 @@ module Aws::Lightsail
       :apply_immediately,
       :ca_certificate_identifier,
       :relational_database_blueprint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -12179,7 +12627,8 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     class UpdateRelationalDatabaseResult < Struct.new(
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

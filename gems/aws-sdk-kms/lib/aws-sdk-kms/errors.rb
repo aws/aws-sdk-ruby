@@ -82,7 +82,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::CloudHsmClusterInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -144,7 +144,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::CloudHsmClusterInvalidConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -160,7 +160,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::CloudHsmClusterNotActiveException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -174,7 +174,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::CloudHsmClusterNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -194,7 +194,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::CloudHsmClusterNotRelatedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -208,7 +208,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -224,7 +224,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::CustomKeyStoreHasCMKsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -270,7 +270,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::CustomKeyStoreInvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -285,7 +285,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::CustomKeyStoreNameInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -299,7 +299,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::CustomKeyStoreNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -313,7 +313,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::DependencyTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -326,7 +326,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::DisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -339,7 +339,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::DryRunOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -353,7 +353,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::ExpiredImportTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -369,7 +369,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::IncorrectKeyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -385,7 +385,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::IncorrectKeyMaterialException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -401,7 +401,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::IncorrectTrustAnchorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -414,7 +414,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::InvalidAliasNameException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -428,7 +428,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::InvalidArnException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -446,7 +446,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::InvalidCiphertextException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -459,7 +459,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::InvalidGrantIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -472,7 +472,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::InvalidGrantTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -486,7 +486,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::InvalidImportTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -518,7 +518,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::InvalidKeyUsageException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -532,7 +532,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::InvalidMarkerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -546,7 +546,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::KMSInternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -561,7 +561,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::KMSInvalidMacException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -576,7 +576,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::KMSInvalidSignatureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -606,7 +606,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::KMSInvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -620,7 +620,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::KeyUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -635,7 +635,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -649,7 +649,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::MalformedPolicyDocumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -663,7 +663,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -676,7 +676,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::TagException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -690,7 +690,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::UnsupportedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -705,7 +705,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksKeyAlreadyInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -721,7 +721,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksKeyInvalidConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -740,7 +740,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksKeyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -756,7 +756,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksProxyIncorrectAuthenticationCredentialException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -770,7 +770,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksProxyInvalidConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -786,7 +786,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksProxyInvalidResponseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -801,7 +801,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksProxyUriEndpointInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -817,7 +817,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksProxyUriInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -834,7 +834,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksProxyUriUnreachableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -849,7 +849,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksProxyVpcEndpointServiceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -866,7 +866,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksProxyVpcEndpointServiceInvalidConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -883,7 +883,7 @@ module Aws::KMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KMS::Types::XksProxyVpcEndpointServiceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

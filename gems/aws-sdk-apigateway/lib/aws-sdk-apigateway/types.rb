@@ -16,7 +16,8 @@ module Aws::APIGateway
     class AccessLogSettings < Struct.new(
       :format,
       :destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -62,7 +63,8 @@ module Aws::APIGateway
       :last_updated_date,
       :stage_keys,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -85,7 +87,8 @@ module Aws::APIGateway
       :api_id,
       :stage,
       :throttle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -145,7 +148,8 @@ module Aws::APIGateway
       :identity_source,
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -154,7 +158,8 @@ module Aws::APIGateway
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -172,7 +177,8 @@ module Aws::APIGateway
       :base_path,
       :rest_api_id,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -194,7 +200,8 @@ module Aws::APIGateway
       :deployment_id,
       :stage_variable_overrides,
       :use_stage_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -230,7 +237,8 @@ module Aws::APIGateway
       :created_date,
       :expiration_date,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +247,8 @@ module Aws::APIGateway
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +294,8 @@ module Aws::APIGateway
       :last_updated_date,
       :stage_keys,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -328,7 +338,8 @@ module Aws::APIGateway
       :stage_keys,
       :customer_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -388,7 +399,8 @@ module Aws::APIGateway
       :identity_source,
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -450,7 +462,8 @@ module Aws::APIGateway
       :identity_source,
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +481,8 @@ module Aws::APIGateway
       :base_path,
       :rest_api_id,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +508,8 @@ module Aws::APIGateway
       :base_path,
       :rest_api_id,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -516,7 +531,8 @@ module Aws::APIGateway
       :description,
       :created_date,
       :api_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -560,7 +576,8 @@ module Aws::APIGateway
       :variables,
       :canary_settings,
       :tracing_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +595,8 @@ module Aws::APIGateway
       :id,
       :location,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -596,7 +614,8 @@ module Aws::APIGateway
       :rest_api_id,
       :location,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +633,8 @@ module Aws::APIGateway
       :version,
       :created_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +656,8 @@ module Aws::APIGateway
       :documentation_version,
       :stage_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +691,8 @@ module Aws::APIGateway
       :access_association_source_type,
       :access_association_source,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +719,8 @@ module Aws::APIGateway
       :access_association_source_type,
       :access_association_source,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -798,7 +821,8 @@ module Aws::APIGateway
       :management_policy,
       :policy,
       :routing_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,7 +896,8 @@ module Aws::APIGateway
       :ownership_verification_certificate_arn,
       :policy,
       :routing_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -898,7 +923,8 @@ module Aws::APIGateway
       :description,
       :schema,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -924,7 +950,8 @@ module Aws::APIGateway
       :description,
       :schema,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -946,7 +973,8 @@ module Aws::APIGateway
       :name,
       :validate_request_body,
       :validate_request_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -974,7 +1002,8 @@ module Aws::APIGateway
       :name,
       :validate_request_body,
       :validate_request_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1029,8 @@ module Aws::APIGateway
       :path_part,
       :path,
       :resource_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1018,7 +1048,8 @@ module Aws::APIGateway
       :rest_api_id,
       :parent_id,
       :path_part,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1117,8 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1147,7 +1179,8 @@ module Aws::APIGateway
       :policy,
       :tags,
       :disable_execute_api_endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1222,7 +1255,8 @@ module Aws::APIGateway
       :tags,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1280,7 +1314,8 @@ module Aws::APIGateway
       :canary_settings,
       :tracing_enabled,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1337,8 @@ module Aws::APIGateway
       :type,
       :value,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1356,8 @@ module Aws::APIGateway
       :usage_plan_id,
       :key_id,
       :key_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1361,7 +1398,8 @@ module Aws::APIGateway
       :quota,
       :product_code,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1391,7 +1429,8 @@ module Aws::APIGateway
       :throttle,
       :quota,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1425,7 +1464,8 @@ module Aws::APIGateway
       :status,
       :status_message,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1447,7 +1487,8 @@ module Aws::APIGateway
       :description,
       :target_arns,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1457,7 +1498,8 @@ module Aws::APIGateway
     #   @return [String]
     class DeleteApiKeyRequest < Struct.new(
       :api_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1471,7 +1513,8 @@ module Aws::APIGateway
     class DeleteAuthorizerRequest < Struct.new(
       :rest_api_id,
       :authorizer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1492,7 +1535,8 @@ module Aws::APIGateway
       :domain_name,
       :domain_name_id,
       :base_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1502,7 +1546,8 @@ module Aws::APIGateway
     #   @return [String]
     class DeleteClientCertificateRequest < Struct.new(
       :client_certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1516,7 +1561,8 @@ module Aws::APIGateway
     class DeleteDeploymentRequest < Struct.new(
       :rest_api_id,
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1576,8 @@ module Aws::APIGateway
     class DeleteDocumentationPartRequest < Struct.new(
       :rest_api_id,
       :documentation_part_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1544,7 +1591,8 @@ module Aws::APIGateway
     class DeleteDocumentationVersionRequest < Struct.new(
       :rest_api_id,
       :documentation_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1602,8 @@ module Aws::APIGateway
     #   @return [String]
     class DeleteDomainNameAccessAssociationRequest < Struct.new(
       :domain_name_access_association_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1570,7 +1619,8 @@ module Aws::APIGateway
     class DeleteDomainNameRequest < Struct.new(
       :domain_name,
       :domain_name_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1584,7 +1634,8 @@ module Aws::APIGateway
     class DeleteGatewayResponseRequest < Struct.new(
       :rest_api_id,
       :response_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1602,7 +1653,8 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :http_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1624,7 +1676,8 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1695,8 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :http_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1664,7 +1718,8 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1733,8 @@ module Aws::APIGateway
     class DeleteModelRequest < Struct.new(
       :rest_api_id,
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1692,7 +1748,8 @@ module Aws::APIGateway
     class DeleteRequestValidatorRequest < Struct.new(
       :rest_api_id,
       :request_validator_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1706,7 +1763,8 @@ module Aws::APIGateway
     class DeleteResourceRequest < Struct.new(
       :rest_api_id,
       :resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1774,8 @@ module Aws::APIGateway
     #   @return [String]
     class DeleteRestApiRequest < Struct.new(
       :rest_api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1730,7 +1789,8 @@ module Aws::APIGateway
     class DeleteStageRequest < Struct.new(
       :rest_api_id,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1744,7 +1804,8 @@ module Aws::APIGateway
     class DeleteUsagePlanKeyRequest < Struct.new(
       :usage_plan_id,
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1754,7 +1815,8 @@ module Aws::APIGateway
     #   @return [String]
     class DeleteUsagePlanRequest < Struct.new(
       :usage_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1764,7 +1826,8 @@ module Aws::APIGateway
     #   @return [String]
     class DeleteVpcLinkRequest < Struct.new(
       :vpc_link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1786,7 +1849,8 @@ module Aws::APIGateway
       :description,
       :created_date,
       :api_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1804,7 +1868,8 @@ module Aws::APIGateway
       :percent_traffic,
       :stage_variable_overrides,
       :use_stage_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1828,7 +1893,8 @@ module Aws::APIGateway
       :id,
       :location,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,7 +1920,8 @@ module Aws::APIGateway
       :method,
       :status_code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1872,7 +1939,8 @@ module Aws::APIGateway
       :version,
       :created_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1973,7 +2041,8 @@ module Aws::APIGateway
       :management_policy,
       :policy,
       :routing_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2007,7 +2076,8 @@ module Aws::APIGateway
       :access_association_source_type,
       :access_association_source,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2027,7 +2097,8 @@ module Aws::APIGateway
       :types,
       :ip_address_type,
       :vpc_endpoint_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2045,7 +2116,8 @@ module Aws::APIGateway
       :content_type,
       :content_disposition,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2131,8 @@ module Aws::APIGateway
     class FlushStageAuthorizersCacheRequest < Struct.new(
       :rest_api_id,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,7 +2146,8 @@ module Aws::APIGateway
     class FlushStageCacheRequest < Struct.new(
       :rest_api_id,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2100,7 +2174,8 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :default_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2135,7 +2210,8 @@ module Aws::APIGateway
       :created_date,
       :expiration_date,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2149,7 +2225,8 @@ module Aws::APIGateway
     class GenerateClientCertificateRequest < Struct.new(
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2171,13 +2248,15 @@ module Aws::APIGateway
       :throttle_settings,
       :features,
       :api_key_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to get information about the current Account resource.</p>
     class GetAccountRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2223,7 +2302,8 @@ module Aws::APIGateway
       :last_updated_date,
       :stage_keys,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2242,7 +2322,8 @@ module Aws::APIGateway
     class GetApiKeyRequest < Struct.new(
       :api_key,
       :include_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2260,7 +2341,8 @@ module Aws::APIGateway
       :warnings,
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2286,7 +2368,8 @@ module Aws::APIGateway
       :name_query,
       :customer_id,
       :include_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2346,7 +2429,8 @@ module Aws::APIGateway
       :identity_source,
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2360,7 +2444,8 @@ module Aws::APIGateway
     class GetAuthorizerRequest < Struct.new(
       :rest_api_id,
       :authorizer_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2374,7 +2459,8 @@ module Aws::APIGateway
     class GetAuthorizersOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2392,7 +2478,8 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2410,7 +2497,8 @@ module Aws::APIGateway
       :base_path,
       :rest_api_id,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2429,7 +2517,8 @@ module Aws::APIGateway
       :domain_name,
       :domain_name_id,
       :base_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2443,7 +2532,8 @@ module Aws::APIGateway
     class GetBasePathMappingsOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2467,7 +2557,8 @@ module Aws::APIGateway
       :domain_name_id,
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2497,7 +2588,8 @@ module Aws::APIGateway
       :created_date,
       :expiration_date,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2507,7 +2599,8 @@ module Aws::APIGateway
     #   @return [String]
     class GetClientCertificateRequest < Struct.new(
       :client_certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2521,7 +2614,8 @@ module Aws::APIGateway
     class GetClientCertificatesOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2535,7 +2629,8 @@ module Aws::APIGateway
     class GetClientCertificatesRequest < Struct.new(
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2557,7 +2652,8 @@ module Aws::APIGateway
       :description,
       :created_date,
       :api_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2575,7 +2671,8 @@ module Aws::APIGateway
       :rest_api_id,
       :deployment_id,
       :embed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2589,7 +2686,8 @@ module Aws::APIGateway
     class GetDeploymentsOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2607,7 +2705,8 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2625,7 +2724,8 @@ module Aws::APIGateway
       :id,
       :location,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2639,7 +2739,8 @@ module Aws::APIGateway
     class GetDocumentationPartRequest < Struct.new(
       :rest_api_id,
       :documentation_part_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2653,7 +2754,8 @@ module Aws::APIGateway
     class GetDocumentationPartsOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2687,7 +2789,8 @@ module Aws::APIGateway
       :position,
       :limit,
       :location_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2705,7 +2808,8 @@ module Aws::APIGateway
       :version,
       :created_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2719,7 +2823,8 @@ module Aws::APIGateway
     class GetDocumentationVersionRequest < Struct.new(
       :rest_api_id,
       :documentation_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2733,7 +2838,8 @@ module Aws::APIGateway
     class GetDocumentationVersionsOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2751,7 +2857,8 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2767,7 +2874,8 @@ module Aws::APIGateway
     class GetDomainNameAccessAssociationsOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2788,7 +2896,8 @@ module Aws::APIGateway
       :position,
       :limit,
       :resource_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2889,7 +2998,8 @@ module Aws::APIGateway
       :management_policy,
       :policy,
       :routing_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2905,7 +3015,8 @@ module Aws::APIGateway
     class GetDomainNameRequest < Struct.new(
       :domain_name,
       :domain_name_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2919,7 +3030,8 @@ module Aws::APIGateway
     class GetDomainNamesOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2938,7 +3050,8 @@ module Aws::APIGateway
       :position,
       :limit,
       :resource_owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2965,7 +3078,8 @@ module Aws::APIGateway
       :export_type,
       :parameters,
       :accepts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2992,7 +3106,8 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :default_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3011,7 +3126,8 @@ module Aws::APIGateway
     class GetGatewayResponseRequest < Struct.new(
       :rest_api_id,
       :response_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3025,7 +3141,8 @@ module Aws::APIGateway
     class GetGatewayResponsesOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3043,7 +3160,8 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3140,7 +3258,8 @@ module Aws::APIGateway
       :cache_key_parameters,
       :integration_responses,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3163,7 +3282,8 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :http_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3191,7 +3311,8 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :content_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3213,7 +3334,8 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3270,7 +3392,8 @@ module Aws::APIGateway
       :method_responses,
       :method_integration,
       :authorization_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3288,7 +3411,8 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :http_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3306,7 +3430,8 @@ module Aws::APIGateway
       :status_code,
       :response_parameters,
       :response_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3328,7 +3453,8 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3354,7 +3480,8 @@ module Aws::APIGateway
       :description,
       :schema,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3372,7 +3499,8 @@ module Aws::APIGateway
       :rest_api_id,
       :model_name,
       :flatten,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3382,7 +3510,8 @@ module Aws::APIGateway
     #   @return [String]
     class GetModelTemplateOutput < Struct.new(
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3396,7 +3525,8 @@ module Aws::APIGateway
     class GetModelTemplateRequest < Struct.new(
       :rest_api_id,
       :model_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3410,7 +3540,8 @@ module Aws::APIGateway
     class GetModelsOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3428,7 +3559,8 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3450,7 +3582,8 @@ module Aws::APIGateway
       :name,
       :validate_request_body,
       :validate_request_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3470,7 +3603,8 @@ module Aws::APIGateway
     class GetRequestValidatorRequest < Struct.new(
       :rest_api_id,
       :request_validator_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3484,7 +3618,8 @@ module Aws::APIGateway
     class GetRequestValidatorsOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3502,7 +3637,8 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3528,7 +3664,8 @@ module Aws::APIGateway
       :path_part,
       :path,
       :resource_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3546,7 +3683,8 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :embed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3560,7 +3698,8 @@ module Aws::APIGateway
     class GetResourcesOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3582,7 +3721,8 @@ module Aws::APIGateway
       :position,
       :limit,
       :embed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3650,7 +3790,8 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3665,7 +3806,8 @@ module Aws::APIGateway
     #   @return [String]
     class GetRestApiRequest < Struct.new(
       :rest_api_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3679,7 +3821,8 @@ module Aws::APIGateway
     class GetRestApisOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3693,7 +3836,8 @@ module Aws::APIGateway
     class GetRestApisRequest < Struct.new(
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3715,7 +3859,8 @@ module Aws::APIGateway
       :stage_name,
       :sdk_type,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3737,7 +3882,8 @@ module Aws::APIGateway
       :friendly_name,
       :description,
       :configuration_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3747,7 +3893,8 @@ module Aws::APIGateway
     #   @return [String]
     class GetSdkTypeRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3757,7 +3904,8 @@ module Aws::APIGateway
     #   @return [Array<Types::SdkType>]
     class GetSdkTypesOutput < Struct.new(
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3771,7 +3919,8 @@ module Aws::APIGateway
     class GetSdkTypesRequest < Struct.new(
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3846,7 +3995,8 @@ module Aws::APIGateway
       :tags,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3866,7 +4016,8 @@ module Aws::APIGateway
     class GetStageRequest < Struct.new(
       :rest_api_id,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3876,7 +4027,8 @@ module Aws::APIGateway
     #   @return [Array<Types::Stage>]
     class GetStagesOutput < Struct.new(
       :item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3890,7 +4042,8 @@ module Aws::APIGateway
     class GetStagesRequest < Struct.new(
       :rest_api_id,
       :deployment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3900,7 +4053,8 @@ module Aws::APIGateway
     #   @return [Hash<String, String>]
     class GetTagsOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3918,7 +4072,8 @@ module Aws::APIGateway
       :resource_arn,
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3944,7 +4099,8 @@ module Aws::APIGateway
       :end_date,
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3966,7 +4122,8 @@ module Aws::APIGateway
       :type,
       :value,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3980,7 +4137,8 @@ module Aws::APIGateway
     class GetUsagePlanKeyRequest < Struct.new(
       :usage_plan_id,
       :key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3994,7 +4152,8 @@ module Aws::APIGateway
     class GetUsagePlanKeysOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4016,7 +4175,8 @@ module Aws::APIGateway
       :position,
       :limit,
       :name_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4057,7 +4217,8 @@ module Aws::APIGateway
       :quota,
       :product_code,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4067,7 +4228,8 @@ module Aws::APIGateway
     #   @return [String]
     class GetUsagePlanRequest < Struct.new(
       :usage_plan_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4081,7 +4243,8 @@ module Aws::APIGateway
     class GetUsagePlansOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4099,7 +4262,8 @@ module Aws::APIGateway
       :position,
       :key_id,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4129,7 +4293,8 @@ module Aws::APIGateway
       :end_date,
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4163,7 +4328,8 @@ module Aws::APIGateway
       :status,
       :status_message,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4173,7 +4339,8 @@ module Aws::APIGateway
     #   @return [String]
     class GetVpcLinkRequest < Struct.new(
       :vpc_link_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4187,7 +4354,8 @@ module Aws::APIGateway
     class GetVpcLinksOutput < Struct.new(
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4201,7 +4369,8 @@ module Aws::APIGateway
     class GetVpcLinksRequest < Struct.new(
       :position,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4215,7 +4384,8 @@ module Aws::APIGateway
     class ImportApiKeysOutput < Struct.new(
       :ids,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4233,7 +4403,8 @@ module Aws::APIGateway
       :body,
       :format,
       :fail_on_warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4247,7 +4418,8 @@ module Aws::APIGateway
     class ImportDocumentationPartsOutput < Struct.new(
       :ids,
       :warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4269,7 +4441,8 @@ module Aws::APIGateway
       :mode,
       :fail_on_warnings,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4337,7 +4510,8 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4364,7 +4538,8 @@ module Aws::APIGateway
       :fail_on_warnings,
       :parameters,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4461,7 +4636,8 @@ module Aws::APIGateway
       :cache_key_parameters,
       :integration_responses,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4494,7 +4670,8 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :content_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4506,7 +4683,8 @@ module Aws::APIGateway
     class LimitExceededException < Struct.new(
       :retry_after_seconds,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4563,7 +4741,8 @@ module Aws::APIGateway
       :method_responses,
       :method_integration,
       :authorization_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4581,7 +4760,8 @@ module Aws::APIGateway
       :status_code,
       :response_parameters,
       :response_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4627,7 +4807,8 @@ module Aws::APIGateway
       :cache_data_encrypted,
       :require_authorization_for_cache_control,
       :unauthorized_cache_control_header_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4653,7 +4834,8 @@ module Aws::APIGateway
     class MethodSnapshot < Struct.new(
       :authorization_type,
       :api_key_required,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4684,7 +4866,8 @@ module Aws::APIGateway
       :description,
       :schema,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4711,7 +4894,8 @@ module Aws::APIGateway
       :truststore_uri,
       :truststore_version,
       :truststore_warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4731,7 +4915,8 @@ module Aws::APIGateway
     class MutualTlsAuthenticationInput < Struct.new(
       :truststore_uri,
       :truststore_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4740,7 +4925,8 @@ module Aws::APIGateway
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4777,7 +4963,8 @@ module Aws::APIGateway
       :path,
       :value,
       :from,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4804,7 +4991,8 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :default_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4835,7 +5023,8 @@ module Aws::APIGateway
       :status_code,
       :response_parameters,
       :response_templates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4932,7 +5121,8 @@ module Aws::APIGateway
       :cache_key_parameters,
       :integration_responses,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5028,7 +5218,8 @@ module Aws::APIGateway
       :content_handling,
       :timeout_in_millis,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5056,7 +5247,8 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :content_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5096,7 +5288,8 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :content_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5153,7 +5346,8 @@ module Aws::APIGateway
       :method_responses,
       :method_integration,
       :authorization_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5203,7 +5397,8 @@ module Aws::APIGateway
       :request_models,
       :request_validator_id,
       :authorization_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5221,7 +5416,8 @@ module Aws::APIGateway
       :status_code,
       :response_parameters,
       :response_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5251,7 +5447,8 @@ module Aws::APIGateway
       :status_code,
       :response_parameters,
       :response_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5319,7 +5516,8 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5352,7 +5550,8 @@ module Aws::APIGateway
       :fail_on_warnings,
       :parameters,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5370,7 +5569,8 @@ module Aws::APIGateway
       :limit,
       :offset,
       :period,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5392,7 +5592,8 @@ module Aws::APIGateway
     class RejectDomainNameAccessAssociationRequest < Struct.new(
       :domain_name_access_association_arn,
       :domain_name_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5414,7 +5615,8 @@ module Aws::APIGateway
       :name,
       :validate_request_body,
       :validate_request_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5446,7 +5648,8 @@ module Aws::APIGateway
       :path_part,
       :path,
       :resource_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5514,7 +5717,8 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5545,7 +5749,8 @@ module Aws::APIGateway
       :description,
       :required,
       :default_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5568,7 +5773,8 @@ module Aws::APIGateway
       :content_type,
       :content_disposition,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5590,7 +5796,8 @@ module Aws::APIGateway
       :friendly_name,
       :description,
       :configuration_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5602,7 +5809,8 @@ module Aws::APIGateway
     class ServiceUnavailableException < Struct.new(
       :retry_after_seconds,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5677,7 +5885,8 @@ module Aws::APIGateway
       :tags,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5697,7 +5906,8 @@ module Aws::APIGateway
     class StageKey < Struct.new(
       :rest_api_id,
       :stage_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5711,7 +5921,8 @@ module Aws::APIGateway
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5749,7 +5960,8 @@ module Aws::APIGateway
       :body,
       :stage_variables,
       :additional_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5783,7 +5995,8 @@ module Aws::APIGateway
       :policy,
       :authorization,
       :claims,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5831,7 +6044,8 @@ module Aws::APIGateway
       :multi_value_headers,
       :client_certificate_id,
       :stage_variables,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5861,7 +6075,8 @@ module Aws::APIGateway
       :multi_value_headers,
       :log,
       :latency,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5881,7 +6096,8 @@ module Aws::APIGateway
     class ThrottleSettings < Struct.new(
       :burst_limit,
       :rate_limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5907,7 +6123,8 @@ module Aws::APIGateway
     #   @return [Boolean]
     class TlsConfig < Struct.new(
       :insecure_skip_verification,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5924,7 +6141,8 @@ module Aws::APIGateway
     class TooManyRequestsException < Struct.new(
       :retry_after_seconds,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5933,7 +6151,8 @@ module Aws::APIGateway
     #   @return [String]
     class UnauthorizedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5947,7 +6166,8 @@ module Aws::APIGateway
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5969,7 +6189,8 @@ module Aws::APIGateway
       :throttle_settings,
       :features,
       :api_key_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5979,7 +6200,8 @@ module Aws::APIGateway
     #   @return [Array<Types::PatchOperation>]
     class UpdateAccountRequest < Struct.new(
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6025,7 +6247,8 @@ module Aws::APIGateway
       :last_updated_date,
       :stage_keys,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6044,7 +6267,8 @@ module Aws::APIGateway
     class UpdateApiKeyRequest < Struct.new(
       :api_key,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6104,7 +6328,8 @@ module Aws::APIGateway
       :identity_source,
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6122,7 +6347,8 @@ module Aws::APIGateway
       :rest_api_id,
       :authorizer_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6140,7 +6366,8 @@ module Aws::APIGateway
       :base_path,
       :rest_api_id,
       :stage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6165,7 +6392,8 @@ module Aws::APIGateway
       :domain_name_id,
       :base_path,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6195,7 +6423,8 @@ module Aws::APIGateway
       :created_date,
       :expiration_date,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6209,7 +6438,8 @@ module Aws::APIGateway
     class UpdateClientCertificateRequest < Struct.new(
       :client_certificate_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6231,7 +6461,8 @@ module Aws::APIGateway
       :description,
       :created_date,
       :api_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6249,7 +6480,8 @@ module Aws::APIGateway
       :rest_api_id,
       :deployment_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6267,7 +6499,8 @@ module Aws::APIGateway
       :id,
       :location,
       :properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6285,7 +6518,8 @@ module Aws::APIGateway
       :rest_api_id,
       :documentation_part_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6303,7 +6537,8 @@ module Aws::APIGateway
       :version,
       :created_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6321,7 +6556,8 @@ module Aws::APIGateway
       :rest_api_id,
       :documentation_version,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6422,7 +6658,8 @@ module Aws::APIGateway
       :management_policy,
       :policy,
       :routing_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6442,7 +6679,8 @@ module Aws::APIGateway
       :domain_name,
       :domain_name_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6469,7 +6707,8 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :default_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6492,7 +6731,8 @@ module Aws::APIGateway
       :rest_api_id,
       :response_type,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6589,7 +6829,8 @@ module Aws::APIGateway
       :cache_key_parameters,
       :integration_responses,
       :tls_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6616,7 +6857,8 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6644,7 +6886,8 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :content_handling,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6670,7 +6913,8 @@ module Aws::APIGateway
       :http_method,
       :status_code,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6727,7 +6971,8 @@ module Aws::APIGateway
       :method_responses,
       :method_integration,
       :authorization_scopes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6749,7 +6994,8 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6767,7 +7013,8 @@ module Aws::APIGateway
       :status_code,
       :response_parameters,
       :response_models,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6793,7 +7040,8 @@ module Aws::APIGateway
       :http_method,
       :status_code,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6819,7 +7067,8 @@ module Aws::APIGateway
       :description,
       :schema,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6837,7 +7086,8 @@ module Aws::APIGateway
       :rest_api_id,
       :model_name,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6859,7 +7109,8 @@ module Aws::APIGateway
       :name,
       :validate_request_body,
       :validate_request_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6883,7 +7134,8 @@ module Aws::APIGateway
       :rest_api_id,
       :request_validator_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6909,7 +7161,8 @@ module Aws::APIGateway
       :path_part,
       :path,
       :resource_methods,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6927,7 +7180,8 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6995,7 +7249,8 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7014,7 +7269,8 @@ module Aws::APIGateway
     class UpdateRestApiRequest < Struct.new(
       :rest_api_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7089,7 +7345,8 @@ module Aws::APIGateway
       :tags,
       :created_date,
       :last_updated_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7113,7 +7370,8 @@ module Aws::APIGateway
       :rest_api_id,
       :stage_name,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7139,7 +7397,8 @@ module Aws::APIGateway
       :end_date,
       :items,
       :position,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7180,7 +7439,8 @@ module Aws::APIGateway
       :quota,
       :product_code,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7194,7 +7454,8 @@ module Aws::APIGateway
     class UpdateUsagePlanRequest < Struct.new(
       :usage_plan_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7212,7 +7473,8 @@ module Aws::APIGateway
       :usage_plan_id,
       :key_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7246,7 +7508,8 @@ module Aws::APIGateway
       :status,
       :status_message,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7260,7 +7523,8 @@ module Aws::APIGateway
     class UpdateVpcLinkRequest < Struct.new(
       :vpc_link_id,
       :patch_operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7301,7 +7565,8 @@ module Aws::APIGateway
       :quota,
       :product_code,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7323,7 +7588,8 @@ module Aws::APIGateway
       :type,
       :value,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7357,7 +7623,8 @@ module Aws::APIGateway
       :status,
       :status_message,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

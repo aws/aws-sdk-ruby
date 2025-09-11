@@ -5375,7 +5375,6 @@ module Aws::Lightsail
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthenticatedException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ls/api/2016-11-28/UpdateRelationalDatabaseParameters", "code" => 200}}
       end)
-
     end
 
     class << self

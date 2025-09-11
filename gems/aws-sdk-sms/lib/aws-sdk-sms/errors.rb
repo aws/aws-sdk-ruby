@@ -46,7 +46,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::DryRunOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -59,7 +59,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::InternalError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -72,7 +72,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::MissingRequiredParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -98,7 +98,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::NoConnectorsAvailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -111,7 +111,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::OperationNotPermittedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -124,7 +124,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::ReplicationJobAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::ReplicationJobNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::ReplicationRunLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -164,7 +164,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::ServerCannotBeReplicatedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -177,7 +177,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::TemporarilyUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
     end
 
@@ -187,7 +187,7 @@ module Aws::SMS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SMS::Types::UnauthorizedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

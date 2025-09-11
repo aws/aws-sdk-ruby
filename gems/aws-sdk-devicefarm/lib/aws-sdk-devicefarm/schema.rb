@@ -2286,7 +2286,6 @@ module Aws::DeviceFarm
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceAccountException)
         operation.traits = {}
       end)
-
     end
 
     class << self

@@ -25,7 +25,8 @@ module Aws::RAM
     class AcceptResourceShareInvitationRequest < Struct.new(
       :resource_share_invitation_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +42,8 @@ module Aws::RAM
     class AcceptResourceShareInvitationResponse < Struct.new(
       :resource_share_invitation,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -97,7 +99,8 @@ module Aws::RAM
       :replace,
       :client_token,
       :permission_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -114,7 +117,8 @@ module Aws::RAM
     class AssociateResourceSharePermissionResponse < Struct.new(
       :return_value,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +191,8 @@ module Aws::RAM
       :principals,
       :client_token,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -203,7 +208,8 @@ module Aws::RAM
     class AssociateResourceShareResponse < Struct.new(
       :resource_share_associations,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +299,8 @@ module Aws::RAM
       :feature_set,
       :last_updated_time,
       :resource_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -368,7 +375,8 @@ module Aws::RAM
       :policy_template,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +392,8 @@ module Aws::RAM
     class CreatePermissionResponse < Struct.new(
       :permission,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +451,8 @@ module Aws::RAM
       :permission_arn,
       :policy_template,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +468,8 @@ module Aws::RAM
     class CreatePermissionVersionResponse < Struct.new(
       :permission,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +558,8 @@ module Aws::RAM
       :client_token,
       :permission_arns,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +575,8 @@ module Aws::RAM
     class CreateResourceShareResponse < Struct.new(
       :resource_share,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +599,8 @@ module Aws::RAM
     class DeletePermissionRequest < Struct.new(
       :permission_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +621,8 @@ module Aws::RAM
       :return_value,
       :client_token,
       :permission_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +656,8 @@ module Aws::RAM
       :permission_arn,
       :permission_version,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -662,7 +678,8 @@ module Aws::RAM
       :return_value,
       :client_token,
       :permission_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -685,7 +702,8 @@ module Aws::RAM
     class DeleteResourceShareRequest < Struct.new(
       :resource_share_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +720,8 @@ module Aws::RAM
     class DeleteResourceShareResponse < Struct.new(
       :return_value,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +749,8 @@ module Aws::RAM
       :resource_share_arn,
       :permission_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -747,7 +767,8 @@ module Aws::RAM
     class DisassociateResourceSharePermissionResponse < Struct.new(
       :return_value,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +840,8 @@ module Aws::RAM
       :principals,
       :client_token,
       :sources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -836,12 +858,14 @@ module Aws::RAM
     class DisassociateResourceShareResponse < Struct.new(
       :resource_share_associations,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableSharingWithAwsOrganizationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +875,8 @@ module Aws::RAM
     #   @return [Boolean]
     class EnableSharingWithAwsOrganizationResponse < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +893,8 @@ module Aws::RAM
     class GetPermissionRequest < Struct.new(
       :permission_arn,
       :permission_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,7 +903,8 @@ module Aws::RAM
     #   @return [Types::ResourceSharePermissionDetail]
     class GetPermissionResponse < Struct.new(
       :permission,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -910,7 +937,8 @@ module Aws::RAM
       :principal,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -927,7 +955,8 @@ module Aws::RAM
     class GetResourcePoliciesResponse < Struct.new(
       :policies,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -992,7 +1021,8 @@ module Aws::RAM
       :association_status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1009,7 +1039,8 @@ module Aws::RAM
     class GetResourceShareAssociationsResponse < Struct.new(
       :resource_share_associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1044,7 +1075,8 @@ module Aws::RAM
       :resource_share_arns,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1061,7 +1093,8 @@ module Aws::RAM
     class GetResourceShareInvitationsResponse < Struct.new(
       :resource_share_invitations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1169,8 @@ module Aws::RAM
       :max_results,
       :permission_arn,
       :permission_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1187,8 @@ module Aws::RAM
     class GetResourceSharesResponse < Struct.new(
       :resource_shares,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1164,7 +1199,8 @@ module Aws::RAM
     #   @return [String]
     class IdempotentParameterMismatchException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1209,8 @@ module Aws::RAM
     #   @return [String]
     class InvalidClientTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1183,7 +1220,8 @@ module Aws::RAM
     #   @return [String]
     class InvalidMaxResultsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1194,7 +1232,8 @@ module Aws::RAM
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,7 +1242,8 @@ module Aws::RAM
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1252,8 @@ module Aws::RAM
     #   @return [String]
     class InvalidPolicyException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1221,7 +1262,8 @@ module Aws::RAM
     #   @return [String]
     class InvalidResourceTypeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1231,7 +1273,8 @@ module Aws::RAM
     #   @return [String]
     class InvalidStateTransitionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,7 +1326,8 @@ module Aws::RAM
       :next_token,
       :max_results,
       :resource_region_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1345,8 @@ module Aws::RAM
     class ListPendingInvitationResourcesResponse < Struct.new(
       :resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1404,8 @@ module Aws::RAM
       :default_version,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1376,7 +1422,8 @@ module Aws::RAM
     class ListPermissionAssociationsResponse < Struct.new(
       :permissions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1407,7 +1454,8 @@ module Aws::RAM
       :permission_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1424,7 +1472,8 @@ module Aws::RAM
     class ListPermissionVersionsResponse < Struct.new(
       :permissions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1476,7 +1525,8 @@ module Aws::RAM
       :next_token,
       :max_results,
       :permission_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1493,7 +1543,8 @@ module Aws::RAM
     class ListPermissionsResponse < Struct.new(
       :permissions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1592,7 +1643,8 @@ module Aws::RAM
       :resource_share_arns,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1609,7 +1661,8 @@ module Aws::RAM
     class ListPrincipalsResponse < Struct.new(
       :principals,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1644,7 +1697,8 @@ module Aws::RAM
       :status,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1661,7 +1715,8 @@ module Aws::RAM
     class ListReplacePermissionAssociationsWorkResponse < Struct.new(
       :replace_permission_associations_works,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1691,7 +1746,8 @@ module Aws::RAM
       :resource_share_arn,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1708,7 +1764,8 @@ module Aws::RAM
     class ListResourceSharePermissionsResponse < Struct.new(
       :permissions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1756,7 +1813,8 @@ module Aws::RAM
       :next_token,
       :max_results,
       :resource_region_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1774,7 +1832,8 @@ module Aws::RAM
     class ListResourceTypesResponse < Struct.new(
       :resource_types,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1922,8 @@ module Aws::RAM
       :next_token,
       :max_results,
       :resource_region_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1880,7 +1940,8 @@ module Aws::RAM
     class ListResourcesResponse < Struct.new(
       :resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1890,7 +1951,8 @@ module Aws::RAM
     #   @return [String]
     class MalformedArnException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1899,7 +1961,8 @@ module Aws::RAM
     #   @return [String]
     class MalformedPolicyTemplateException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1908,7 +1971,8 @@ module Aws::RAM
     #   @return [String]
     class MissingRequiredParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +1981,8 @@ module Aws::RAM
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +1992,8 @@ module Aws::RAM
     #   @return [String]
     class PermissionAlreadyExistsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1938,7 +2004,8 @@ module Aws::RAM
     #   @return [String]
     class PermissionLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +2016,8 @@ module Aws::RAM
     #   @return [String]
     class PermissionVersionsLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1989,7 +2057,8 @@ module Aws::RAM
       :creation_time,
       :last_updated_time,
       :external,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2017,7 +2086,8 @@ module Aws::RAM
       :permission_arn,
       :name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2033,7 +2103,8 @@ module Aws::RAM
     class PromotePermissionCreatedFromPolicyResponse < Struct.new(
       :permission,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2042,7 +2113,8 @@ module Aws::RAM
     #   @return [String]
     class PromoteResourceShareCreatedFromPolicyRequest < Struct.new(
       :resource_share_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2052,7 +2124,8 @@ module Aws::RAM
     #   @return [Boolean]
     class PromoteResourceShareCreatedFromPolicyResponse < Struct.new(
       :return_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2075,7 +2148,8 @@ module Aws::RAM
     class RejectResourceShareInvitationRequest < Struct.new(
       :resource_share_invitation_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2091,7 +2165,8 @@ module Aws::RAM
     class RejectResourceShareInvitationResponse < Struct.new(
       :resource_share_invitation,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2127,7 +2202,8 @@ module Aws::RAM
       :from_permission_version,
       :to_permission_arn,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2145,7 +2221,8 @@ module Aws::RAM
     class ReplacePermissionAssociationsResponse < Struct.new(
       :replace_permission_associations_work,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2210,7 +2287,8 @@ module Aws::RAM
       :status_message,
       :creation_time,
       :last_updated_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2270,7 +2348,8 @@ module Aws::RAM
       :creation_time,
       :last_updated_time,
       :resource_region_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2279,7 +2358,8 @@ module Aws::RAM
     #   @return [String]
     class ResourceArnNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2367,7 +2447,8 @@ module Aws::RAM
       :creation_time,
       :last_updated_time,
       :feature_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2435,7 +2516,8 @@ module Aws::RAM
       :creation_time,
       :last_updated_time,
       :external,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2479,7 +2561,8 @@ module Aws::RAM
       :status,
       :resource_share_associations,
       :receiver_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2488,7 +2571,8 @@ module Aws::RAM
     #   @return [String]
     class ResourceShareInvitationAlreadyAcceptedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2497,7 +2581,8 @@ module Aws::RAM
     #   @return [String]
     class ResourceShareInvitationAlreadyRejectedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2507,7 +2592,8 @@ module Aws::RAM
     #   @return [String]
     class ResourceShareInvitationArnNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2517,7 +2603,8 @@ module Aws::RAM
     #   @return [String]
     class ResourceShareInvitationExpiredException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2528,7 +2615,8 @@ module Aws::RAM
     #   @return [String]
     class ResourceShareLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2653,7 +2741,8 @@ module Aws::RAM
       :feature_set,
       :status,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2753,7 +2842,8 @@ module Aws::RAM
       :permission_type,
       :feature_set,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2763,7 +2853,8 @@ module Aws::RAM
     #   @return [String]
     class ServerInternalException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2798,7 +2889,8 @@ module Aws::RAM
       :resource_type,
       :service_name,
       :resource_region_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2807,7 +2899,8 @@ module Aws::RAM
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2835,7 +2928,8 @@ module Aws::RAM
       :permission_arn,
       :permission_version,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2851,7 +2945,8 @@ module Aws::RAM
     class SetDefaultPermissionVersionResponse < Struct.new(
       :return_value,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2872,7 +2967,8 @@ module Aws::RAM
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2888,7 +2984,8 @@ module Aws::RAM
     class TagFilter < Struct.new(
       :tag_key,
       :tag_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2898,7 +2995,8 @@ module Aws::RAM
     #   @return [String]
     class TagLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2908,7 +3006,8 @@ module Aws::RAM
     #   @return [String]
     class TagPolicyViolationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2930,12 +3029,14 @@ module Aws::RAM
       :resource_share_arn,
       :tags,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2945,7 +3046,8 @@ module Aws::RAM
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2954,7 +3056,8 @@ module Aws::RAM
     #   @return [String]
     class UnknownResourceException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2964,7 +3067,8 @@ module Aws::RAM
     #   @return [String]
     class UnmatchedPolicyPermissionException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2985,12 +3089,14 @@ module Aws::RAM
       :resource_share_arn,
       :tag_keys,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3022,7 +3128,8 @@ module Aws::RAM
       :name,
       :allow_external_principals,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3038,7 +3145,8 @@ module Aws::RAM
     class UpdateResourceShareResponse < Struct.new(
       :resource_share,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -1525,7 +1525,6 @@ module Aws::AccessAnalyzer
         operation.traits = {"smithy.api#http" => {"uri" => "/policy/validation", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
         operation[:paginator] = Paginators::ValidatePolicy.new
       end)
-
     end
 
     class << self

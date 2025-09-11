@@ -24,7 +24,8 @@ module Aws::DirectoryService
     class ADAssessmentLimitExceededException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -34,7 +35,8 @@ module Aws::DirectoryService
     #   @return [String]
     class AcceptSharedDirectoryRequest < Struct.new(
       :shared_directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -43,7 +45,8 @@ module Aws::DirectoryService
     #   @return [Types::SharedDirectory]
     class AcceptSharedDirectoryResult < Struct.new(
       :shared_directory,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -57,7 +60,8 @@ module Aws::DirectoryService
     class AccessDeniedException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,12 +146,14 @@ module Aws::DirectoryService
       :directory_id,
       :ip_routes,
       :update_security_group_for_directory_controllers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddIpRoutesResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,12 +171,14 @@ module Aws::DirectoryService
       :directory_id,
       :region_name,
       :vpc_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddRegionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,12 +191,14 @@ module Aws::DirectoryService
     class AddTagsToResourceRequest < Struct.new(
       :resource_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AddTagsToResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +274,8 @@ module Aws::DirectoryService
       :self_managed_instance_ids,
       :report_type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -295,7 +306,8 @@ module Aws::DirectoryService
       :vpc_settings,
       :instance_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +323,8 @@ module Aws::DirectoryService
     class AssessmentReport < Struct.new(
       :domain_controller_ip,
       :validations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -354,7 +367,8 @@ module Aws::DirectoryService
       :status,
       :customer_dns_ips,
       :report_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +406,8 @@ module Aws::DirectoryService
       :status_reason,
       :start_time,
       :last_update_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -406,7 +421,8 @@ module Aws::DirectoryService
     class Attribute < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +436,8 @@ module Aws::DirectoryService
     class AuthenticationFailedException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -433,12 +450,14 @@ module Aws::DirectoryService
     class CancelSchemaExtensionRequest < Struct.new(
       :directory_id,
       :schema_extension_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CancelSchemaExtensionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +498,8 @@ module Aws::DirectoryService
       :expiry_date_time,
       :type,
       :client_cert_auth_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +513,8 @@ module Aws::DirectoryService
     class CertificateAlreadyExistsException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -507,7 +528,8 @@ module Aws::DirectoryService
     class CertificateDoesNotExistException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -522,7 +544,8 @@ module Aws::DirectoryService
     class CertificateInUseException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -550,7 +573,8 @@ module Aws::DirectoryService
       :state,
       :expiry_date_time,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +588,8 @@ module Aws::DirectoryService
     class CertificateLimitExceededException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -586,7 +611,8 @@ module Aws::DirectoryService
       :type,
       :status,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -598,7 +624,8 @@ module Aws::DirectoryService
     #   @return [String]
     class ClientCertAuthSettings < Struct.new(
       :ocsp_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +639,8 @@ module Aws::DirectoryService
     class ClientException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -631,7 +659,8 @@ module Aws::DirectoryService
       :computer_id,
       :computer_name,
       :computer_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -655,7 +684,8 @@ module Aws::DirectoryService
       :remote_domain_name,
       :dns_ip_addrs,
       :replication_scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -691,7 +721,8 @@ module Aws::DirectoryService
       :size,
       :connect_settings,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -701,7 +732,8 @@ module Aws::DirectoryService
     #   @return [String]
     class ConnectDirectoryResult < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -717,7 +749,8 @@ module Aws::DirectoryService
     class CreateAliasRequest < Struct.new(
       :directory_id,
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -731,7 +764,8 @@ module Aws::DirectoryService
     class CreateAliasResult < Struct.new(
       :directory_id,
       :alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +792,8 @@ module Aws::DirectoryService
       :password,
       :organizational_unit_distinguished_name,
       :computer_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +803,8 @@ module Aws::DirectoryService
     #   @return [Types::Computer]
     class CreateComputerResult < Struct.new(
       :computer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -790,13 +826,15 @@ module Aws::DirectoryService
       :directory_id,
       :remote_domain_name,
       :dns_ip_addrs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a CreateConditinalForwarder request.</p>
     class CreateConditionalForwarderResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +897,8 @@ module Aws::DirectoryService
       :size,
       :vpc_settings,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -869,7 +908,8 @@ module Aws::DirectoryService
     #   @return [String]
     class CreateDirectoryResult < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -895,7 +935,8 @@ module Aws::DirectoryService
       :secret_arn,
       :assessment_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +945,8 @@ module Aws::DirectoryService
     #   @return [String]
     class CreateHybridADResult < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -919,12 +961,14 @@ module Aws::DirectoryService
     class CreateLogSubscriptionRequest < Struct.new(
       :directory_id,
       :log_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateLogSubscriptionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -965,7 +1009,8 @@ module Aws::DirectoryService
       :vpc_settings,
       :edition,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1020,8 @@ module Aws::DirectoryService
     #   @return [String]
     class CreateMicrosoftADResult < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -989,7 +1035,8 @@ module Aws::DirectoryService
     class CreateSnapshotRequest < Struct.new(
       :directory_id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -999,7 +1046,8 @@ module Aws::DirectoryService
     #   @return [String]
     class CreateSnapshotResult < Struct.new(
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1041,7 +1089,8 @@ module Aws::DirectoryService
       :trust_type,
       :conditional_forwarder_ip_addrs,
       :selective_auth,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1100,8 @@ module Aws::DirectoryService
     #   @return [String]
     class CreateTrustResult < Struct.new(
       :trust_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1060,7 +1110,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DeleteADAssessmentRequest < Struct.new(
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1069,7 +1120,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DeleteADAssessmentResult < Struct.new(
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,13 +1136,15 @@ module Aws::DirectoryService
     class DeleteConditionalForwarderRequest < Struct.new(
       :directory_id,
       :remote_domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a DeleteConditionalForwarder request.</p>
     class DeleteConditionalForwarderResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1100,7 +1154,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DeleteDirectoryRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1165,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DeleteDirectoryResult < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,12 +1175,14 @@ module Aws::DirectoryService
     #   @return [String]
     class DeleteLogSubscriptionRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLogSubscriptionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1134,7 +1192,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DeleteSnapshotRequest < Struct.new(
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1144,7 +1203,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DeleteSnapshotResult < Struct.new(
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1219,8 @@ module Aws::DirectoryService
     class DeleteTrustRequest < Struct.new(
       :trust_id,
       :delete_associated_conditional_forwarder,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1169,7 +1230,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DeleteTrustResult < Struct.new(
       :trust_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1182,12 +1244,14 @@ module Aws::DirectoryService
     class DeregisterCertificateRequest < Struct.new(
       :directory_id,
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeregisterCertificateResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,13 +1267,15 @@ module Aws::DirectoryService
     class DeregisterEventTopicRequest < Struct.new(
       :directory_id,
       :topic_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a DeregisterEventTopic request.</p>
     class DeregisterEventTopicResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1218,7 +1284,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DescribeADAssessmentRequest < Struct.new(
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1233,7 +1300,8 @@ module Aws::DirectoryService
     class DescribeADAssessmentResult < Struct.new(
       :assessment,
       :assessment_reports,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1244,7 +1312,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DescribeCAEnrollmentPolicyRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1302,7 +1371,8 @@ module Aws::DirectoryService
       :ca_enrollment_policy_status,
       :last_updated_date_time,
       :ca_enrollment_policy_status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1315,7 +1385,8 @@ module Aws::DirectoryService
     class DescribeCertificateRequest < Struct.new(
       :directory_id,
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1325,7 +1396,8 @@ module Aws::DirectoryService
     #   @return [Types::Certificate]
     class DescribeCertificateResult < Struct.new(
       :certificate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1351,7 +1423,8 @@ module Aws::DirectoryService
       :type,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1441,8 @@ module Aws::DirectoryService
     class DescribeClientAuthenticationSettingsResult < Struct.new(
       :client_authentication_settings_info,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1385,7 +1459,8 @@ module Aws::DirectoryService
     class DescribeConditionalForwardersRequest < Struct.new(
       :directory_id,
       :remote_domain_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1395,7 +1470,8 @@ module Aws::DirectoryService
     #   @return [Array<Types::ConditionalForwarder>]
     class DescribeConditionalForwardersResult < Struct.new(
       :conditional_forwarders,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1416,7 +1492,8 @@ module Aws::DirectoryService
       :directory_ids,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1436,7 +1513,8 @@ module Aws::DirectoryService
     class DescribeDirectoriesResult < Struct.new(
       :directory_descriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1445,7 +1523,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DescribeDirectoryDataAccessRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1454,7 +1533,8 @@ module Aws::DirectoryService
     #   @return [String]
     class DescribeDirectoryDataAccessResult < Struct.new(
       :data_access_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1479,7 +1559,8 @@ module Aws::DirectoryService
       :domain_controller_ids,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1494,7 +1575,8 @@ module Aws::DirectoryService
     class DescribeDomainControllersResult < Struct.new(
       :domain_controllers,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,7 +1594,8 @@ module Aws::DirectoryService
     class DescribeEventTopicsRequest < Struct.new(
       :directory_id,
       :topic_names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,7 +1606,8 @@ module Aws::DirectoryService
     #   @return [Array<Types::EventTopic>]
     class DescribeEventTopicsResult < Struct.new(
       :event_topics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1627,8 @@ module Aws::DirectoryService
       :directory_id,
       :update_type,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1559,7 +1644,8 @@ module Aws::DirectoryService
     class DescribeHybridADUpdateResult < Struct.new(
       :update_activities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1581,7 +1667,8 @@ module Aws::DirectoryService
       :type,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1596,7 +1683,8 @@ module Aws::DirectoryService
     class DescribeLDAPSSettingsResult < Struct.new(
       :ldaps_settings_info,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1613,7 +1701,8 @@ module Aws::DirectoryService
       :directory_id,
       :region_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1628,7 +1717,8 @@ module Aws::DirectoryService
     class DescribeRegionsResult < Struct.new(
       :regions_description,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1645,7 +1735,8 @@ module Aws::DirectoryService
       :directory_id,
       :status,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1668,7 +1759,8 @@ module Aws::DirectoryService
       :directory_id,
       :setting_entries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1690,7 +1782,8 @@ module Aws::DirectoryService
       :shared_directory_ids,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1704,7 +1797,8 @@ module Aws::DirectoryService
     class DescribeSharedDirectoriesResult < Struct.new(
       :shared_directories,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1823,8 @@ module Aws::DirectoryService
       :snapshot_ids,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1748,7 +1843,8 @@ module Aws::DirectoryService
     class DescribeSnapshotsResult < Struct.new(
       :snapshots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1777,7 +1873,8 @@ module Aws::DirectoryService
       :trust_ids,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1796,7 +1893,8 @@ module Aws::DirectoryService
     class DescribeTrustsResult < Struct.new(
       :trusts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1818,7 +1916,8 @@ module Aws::DirectoryService
       :update_type,
       :region_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1832,7 +1931,8 @@ module Aws::DirectoryService
     class DescribeUpdateDirectoryResult < Struct.new(
       :update_activities,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1847,7 +1947,8 @@ module Aws::DirectoryService
     class DirectoryAlreadyInRegionException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1861,7 +1962,8 @@ module Aws::DirectoryService
     class DirectoryAlreadySharedException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1897,7 +1999,8 @@ module Aws::DirectoryService
       :subnet_ids,
       :customer_dns_ips,
       :customer_user_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +2030,8 @@ module Aws::DirectoryService
       :security_group_id,
       :availability_zones,
       :connect_ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2059,7 +2163,8 @@ module Aws::DirectoryService
       :regions_info,
       :os_version,
       :hybrid_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2078,7 +2183,8 @@ module Aws::DirectoryService
     class DirectoryDoesNotExistException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2092,7 +2198,8 @@ module Aws::DirectoryService
     class DirectoryInDesiredStateException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2108,7 +2215,8 @@ module Aws::DirectoryService
     class DirectoryLimitExceededException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2150,7 +2258,8 @@ module Aws::DirectoryService
       :connected_directories_limit,
       :connected_directories_current_count,
       :connected_directories_limit_reached,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2171,7 +2280,8 @@ module Aws::DirectoryService
     class DirectoryNotSharedException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2185,7 +2295,8 @@ module Aws::DirectoryService
     class DirectoryUnavailableException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2201,7 +2312,8 @@ module Aws::DirectoryService
     class DirectoryVpcSettings < Struct.new(
       :vpc_id,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2223,7 +2335,8 @@ module Aws::DirectoryService
       :subnet_ids,
       :security_group_id,
       :availability_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2237,7 +2350,8 @@ module Aws::DirectoryService
     class DisableAlreadyInProgressException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2247,13 +2361,15 @@ module Aws::DirectoryService
     #   @return [String]
     class DisableCAEnrollmentPolicyRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>DisableCAEnrollmentPolicy</a> operation.</p>
     class DisableCAEnrollmentPolicyResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2267,12 +2383,14 @@ module Aws::DirectoryService
     class DisableClientAuthenticationRequest < Struct.new(
       :directory_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableClientAuthenticationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2281,12 +2399,14 @@ module Aws::DirectoryService
     #   @return [String]
     class DisableDirectoryDataAccessRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableDirectoryDataAccessResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2300,12 +2420,14 @@ module Aws::DirectoryService
     class DisableLDAPSRequest < Struct.new(
       :directory_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisableLDAPSResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2315,13 +2437,15 @@ module Aws::DirectoryService
     #   @return [String]
     class DisableRadiusRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>DisableRadius</a> operation.</p>
     class DisableRadiusResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2348,13 +2472,15 @@ module Aws::DirectoryService
       :directory_id,
       :user_name,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>DisableSso</a> operation.</p>
     class DisableSsoResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2400,7 +2526,8 @@ module Aws::DirectoryService
       :status_reason,
       :launch_time,
       :status_last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2542,8 @@ module Aws::DirectoryService
     class DomainControllerLimitExceededException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2429,7 +2557,8 @@ module Aws::DirectoryService
     class EnableAlreadyInProgressException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2449,13 +2578,15 @@ module Aws::DirectoryService
     class EnableCAEnrollmentPolicyRequest < Struct.new(
       :directory_id,
       :pca_connector_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>EnableCAEnrollmentPolicy</a> operation.</p>
     class EnableCAEnrollmentPolicyResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2471,12 +2602,14 @@ module Aws::DirectoryService
     class EnableClientAuthenticationRequest < Struct.new(
       :directory_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableClientAuthenticationResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2485,12 +2618,14 @@ module Aws::DirectoryService
     #   @return [String]
     class EnableDirectoryDataAccessRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableDirectoryDataAccessResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2504,12 +2639,14 @@ module Aws::DirectoryService
     class EnableLDAPSRequest < Struct.new(
       :directory_id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class EnableLDAPSResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2524,13 +2661,15 @@ module Aws::DirectoryService
     class EnableRadiusRequest < Struct.new(
       :directory_id,
       :radius_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>EnableRadius</a> operation.</p>
     class EnableRadiusResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2557,13 +2696,15 @@ module Aws::DirectoryService
       :directory_id,
       :user_name,
       :password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>EnableSso</a> operation.</p>
     class EnableSsoResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2577,7 +2718,8 @@ module Aws::DirectoryService
     class EntityAlreadyExistsException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2591,7 +2733,8 @@ module Aws::DirectoryService
     class EntityDoesNotExistException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2618,13 +2761,15 @@ module Aws::DirectoryService
       :topic_arn,
       :created_date_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>GetDirectoryLimits</a> operation.</p>
     class GetDirectoryLimitsRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2635,7 +2780,8 @@ module Aws::DirectoryService
     #   @return [Types::DirectoryLimits]
     class GetDirectoryLimitsResult < Struct.new(
       :directory_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2645,7 +2791,8 @@ module Aws::DirectoryService
     #   @return [String]
     class GetSnapshotLimitsRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2656,7 +2803,8 @@ module Aws::DirectoryService
     #   @return [Types::SnapshotLimits]
     class GetSnapshotLimitsResult < Struct.new(
       :snapshot_limits,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2673,7 +2821,8 @@ module Aws::DirectoryService
     #   @return [String]
     class HybridAdministratorAccountUpdate < Struct.new(
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2690,7 +2839,8 @@ module Aws::DirectoryService
     class HybridCustomerInstancesSettings < Struct.new(
       :customer_dns_ips,
       :instance_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2705,7 +2855,8 @@ module Aws::DirectoryService
     class HybridSettingsDescription < Struct.new(
       :self_managed_dns_ip_addrs,
       :self_managed_instance_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2722,7 +2873,8 @@ module Aws::DirectoryService
     class HybridUpdateActivities < Struct.new(
       :self_managed_instances,
       :hybrid_administrator_account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2764,7 +2916,8 @@ module Aws::DirectoryService
       :start_time,
       :last_updated_date_time,
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2781,7 +2934,8 @@ module Aws::DirectoryService
     class HybridUpdateValue < Struct.new(
       :instance_ids,
       :dns_ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2795,7 +2949,8 @@ module Aws::DirectoryService
     class IncompatibleSettingsException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2809,7 +2964,8 @@ module Aws::DirectoryService
     class InsufficientPermissionsException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2823,7 +2979,8 @@ module Aws::DirectoryService
     class InvalidCertificateException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2837,7 +2994,8 @@ module Aws::DirectoryService
     class InvalidClientAuthStatusException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2852,7 +3010,8 @@ module Aws::DirectoryService
     class InvalidLDAPSStatusException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2866,7 +3025,8 @@ module Aws::DirectoryService
     class InvalidNextTokenException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2880,7 +3040,8 @@ module Aws::DirectoryService
     class InvalidParameterException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2895,7 +3056,8 @@ module Aws::DirectoryService
     class InvalidPasswordException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2909,7 +3071,8 @@ module Aws::DirectoryService
     class InvalidTargetException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2926,7 +3089,8 @@ module Aws::DirectoryService
     class IpRoute < Struct.new(
       :cidr_ip,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2956,7 +3120,8 @@ module Aws::DirectoryService
       :added_date_time,
       :ip_route_status_reason,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2971,7 +3136,8 @@ module Aws::DirectoryService
     class IpRouteLimitExceededException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2989,7 +3155,8 @@ module Aws::DirectoryService
       :ldaps_status,
       :ldaps_status_reason,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3008,7 +3175,8 @@ module Aws::DirectoryService
       :directory_id,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3024,7 +3192,8 @@ module Aws::DirectoryService
     class ListADAssessmentsResult < Struct.new(
       :assessments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3044,7 +3213,8 @@ module Aws::DirectoryService
       :directory_id,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3059,7 +3229,8 @@ module Aws::DirectoryService
     class ListCertificatesResult < Struct.new(
       :next_token,
       :certificates_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3078,7 +3249,8 @@ module Aws::DirectoryService
       :directory_id,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3092,7 +3264,8 @@ module Aws::DirectoryService
     class ListIpRoutesResult < Struct.new(
       :ip_routes_info,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3112,7 +3285,8 @@ module Aws::DirectoryService
       :directory_id,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3126,7 +3300,8 @@ module Aws::DirectoryService
     class ListLogSubscriptionsResult < Struct.new(
       :log_subscriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3145,7 +3320,8 @@ module Aws::DirectoryService
       :directory_id,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3160,7 +3336,8 @@ module Aws::DirectoryService
     class ListSchemaExtensionsResult < Struct.new(
       :schema_extensions_info,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3177,7 +3354,8 @@ module Aws::DirectoryService
       :resource_id,
       :next_token,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3190,7 +3368,8 @@ module Aws::DirectoryService
     class ListTagsForResourceResult < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3210,7 +3389,8 @@ module Aws::DirectoryService
       :directory_id,
       :log_group_name,
       :subscription_created_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3225,7 +3405,8 @@ module Aws::DirectoryService
     class NoAvailableCertificateException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3235,7 +3416,8 @@ module Aws::DirectoryService
     #   @return [String]
     class OSUpdateSettings < Struct.new(
       :os_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3249,7 +3431,8 @@ module Aws::DirectoryService
     class OrganizationsException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3281,7 +3464,8 @@ module Aws::DirectoryService
       :vpc_settings,
       :radius_settings,
       :radius_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3323,7 +3507,8 @@ module Aws::DirectoryService
       :authentication_protocol,
       :display_label,
       :use_same_username,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3372,7 +3557,8 @@ module Aws::DirectoryService
       :launch_time,
       :status_last_updated_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3387,7 +3573,8 @@ module Aws::DirectoryService
     class RegionLimitExceededException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3403,7 +3590,8 @@ module Aws::DirectoryService
     class RegionsInfo < Struct.new(
       :primary_region,
       :additional_regions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3427,7 +3615,8 @@ module Aws::DirectoryService
       :certificate_data,
       :type,
       :client_cert_auth_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3436,7 +3625,8 @@ module Aws::DirectoryService
     #   @return [String]
     class RegisterCertificateResult < Struct.new(
       :certificate_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3451,13 +3641,15 @@ module Aws::DirectoryService
     class RegisterEventTopicRequest < Struct.new(
       :directory_id,
       :topic_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a RegisterEventTopic request.</p>
     class RegisterEventTopicResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3467,7 +3659,8 @@ module Aws::DirectoryService
     #   @return [String]
     class RejectSharedDirectoryRequest < Struct.new(
       :shared_directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3476,7 +3669,8 @@ module Aws::DirectoryService
     #   @return [String]
     class RejectSharedDirectoryResult < Struct.new(
       :shared_directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3490,12 +3684,14 @@ module Aws::DirectoryService
     class RemoveIpRoutesRequest < Struct.new(
       :directory_id,
       :cidr_ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveIpRoutesResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3504,12 +3700,14 @@ module Aws::DirectoryService
     #   @return [String]
     class RemoveRegionRequest < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveRegionResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3522,12 +3720,14 @@ module Aws::DirectoryService
     class RemoveTagsFromResourceRequest < Struct.new(
       :resource_id,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveTagsFromResourceResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3544,12 +3744,14 @@ module Aws::DirectoryService
       :directory_id,
       :user_name,
       :new_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class ResetUserPasswordResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3559,13 +3761,15 @@ module Aws::DirectoryService
     #   @return [String]
     class RestoreFromSnapshotRequest < Struct.new(
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>RestoreFromSnapshot</a> operation.</p>
     class RestoreFromSnapshotResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3600,7 +3804,8 @@ module Aws::DirectoryService
       :schema_extension_status_reason,
       :start_date_time,
       :end_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3614,7 +3819,8 @@ module Aws::DirectoryService
     class ServiceException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3633,7 +3839,8 @@ module Aws::DirectoryService
     class Setting < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3696,7 +3903,8 @@ module Aws::DirectoryService
       :last_updated_date_time,
       :last_requested_date_time,
       :data_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3723,7 +3931,8 @@ module Aws::DirectoryService
       :share_notes,
       :share_target,
       :share_method,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3733,7 +3942,8 @@ module Aws::DirectoryService
     #   @return [String]
     class ShareDirectoryResult < Struct.new(
       :shared_directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3748,7 +3958,8 @@ module Aws::DirectoryService
     class ShareLimitExceededException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3762,7 +3973,8 @@ module Aws::DirectoryService
     class ShareTarget < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3812,7 +4024,8 @@ module Aws::DirectoryService
       :share_notes,
       :created_date_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3842,7 +4055,8 @@ module Aws::DirectoryService
       :name,
       :status,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3858,7 +4072,8 @@ module Aws::DirectoryService
     class SnapshotLimitExceededException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3876,7 +4091,8 @@ module Aws::DirectoryService
       :manual_snapshots_limit,
       :manual_snapshots_current_count,
       :manual_snapshots_limit_reached,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3898,7 +4114,8 @@ module Aws::DirectoryService
     class StartADAssessmentRequest < Struct.new(
       :assessment_configuration,
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3908,7 +4125,8 @@ module Aws::DirectoryService
     #   @return [String]
     class StartADAssessmentResult < Struct.new(
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3933,7 +4151,8 @@ module Aws::DirectoryService
       :create_snapshot_before_schema_extension,
       :ldif_content,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3942,7 +4161,8 @@ module Aws::DirectoryService
     #   @return [String]
     class StartSchemaExtensionResult < Struct.new(
       :schema_extension_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3961,7 +4181,8 @@ module Aws::DirectoryService
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3975,7 +4196,8 @@ module Aws::DirectoryService
     class TagLimitExceededException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4027,7 +4249,8 @@ module Aws::DirectoryService
       :state_last_updated_date_time,
       :trust_state_reason,
       :selective_auth,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4041,7 +4264,8 @@ module Aws::DirectoryService
     class UnshareDirectoryRequest < Struct.new(
       :directory_id,
       :unshare_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4051,7 +4275,8 @@ module Aws::DirectoryService
     #   @return [String]
     class UnshareDirectoryResult < Struct.new(
       :shared_directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4066,7 +4291,8 @@ module Aws::DirectoryService
     class UnshareTarget < Struct.new(
       :id,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4080,7 +4306,8 @@ module Aws::DirectoryService
     class UnsupportedOperationException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4094,7 +4321,8 @@ module Aws::DirectoryService
     class UnsupportedSettingsException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4115,13 +4343,15 @@ module Aws::DirectoryService
       :directory_id,
       :remote_domain_name,
       :dns_ip_addrs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The result of an UpdateConditionalForwarder request.</p>
     class UpdateConditionalForwarderResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4143,12 +4373,14 @@ module Aws::DirectoryService
       :update_type,
       :os_update_settings,
       :create_snapshot_before_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDirectorySetupResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4174,7 +4406,8 @@ module Aws::DirectoryService
       :directory_id,
       :hybrid_administrator_account_update,
       :self_managed_instances_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4188,7 +4421,8 @@ module Aws::DirectoryService
     class UpdateHybridADResult < Struct.new(
       :directory_id,
       :assessment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4227,7 +4461,8 @@ module Aws::DirectoryService
       :previous_value,
       :start_time,
       :last_updated_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4241,12 +4476,14 @@ module Aws::DirectoryService
     class UpdateNumberOfDomainControllersRequest < Struct.new(
       :directory_id,
       :desired_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateNumberOfDomainControllersResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4262,13 +4499,15 @@ module Aws::DirectoryService
     class UpdateRadiusRequest < Struct.new(
       :directory_id,
       :radius_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>UpdateRadius</a> operation.</p>
     class UpdateRadiusResult < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4281,7 +4520,8 @@ module Aws::DirectoryService
     class UpdateSettingsRequest < Struct.new(
       :directory_id,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4290,7 +4530,8 @@ module Aws::DirectoryService
     #   @return [String]
     class UpdateSettingsResult < Struct.new(
       :directory_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4303,7 +4544,8 @@ module Aws::DirectoryService
     class UpdateTrustRequest < Struct.new(
       :trust_id,
       :selective_auth,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4316,7 +4558,8 @@ module Aws::DirectoryService
     class UpdateTrustResult < Struct.new(
       :request_id,
       :trust_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4326,7 +4569,8 @@ module Aws::DirectoryService
     #   @return [Types::OSUpdateSettings]
     class UpdateValue < Struct.new(
       :os_update_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4340,7 +4584,8 @@ module Aws::DirectoryService
     class UserDoesNotExistException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4351,7 +4596,8 @@ module Aws::DirectoryService
     #   @return [String]
     class VerifyTrustRequest < Struct.new(
       :trust_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4361,7 +4607,8 @@ module Aws::DirectoryService
     #   @return [String]
     class VerifyTrustResult < Struct.new(
       :trust_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

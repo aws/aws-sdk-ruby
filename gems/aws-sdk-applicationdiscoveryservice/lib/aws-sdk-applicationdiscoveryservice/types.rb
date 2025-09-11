@@ -25,7 +25,8 @@ module Aws::ApplicationDiscoveryService
       :agent_id,
       :operation_succeeded,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -80,7 +81,8 @@ module Aws::ApplicationDiscoveryService
       :collection_status,
       :agent_type,
       :registered_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -95,7 +97,8 @@ module Aws::ApplicationDiscoveryService
     class AgentNetworkInfo < Struct.new(
       :ip_address,
       :mac_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,12 +111,14 @@ module Aws::ApplicationDiscoveryService
     class AssociateConfigurationItemsToApplicationRequest < Struct.new(
       :application_configuration_id,
       :configuration_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateConfigurationItemsToApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +128,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class AuthorizationErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +157,8 @@ module Aws::ApplicationDiscoveryService
       :agent_id,
       :error_message,
       :error_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +169,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<Types::DeleteAgent>]
     class BatchDeleteAgentsRequest < Struct.new(
       :delete_agents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -173,7 +181,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<Types::BatchDeleteAgentError>]
     class BatchDeleteAgentsResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +247,8 @@ module Aws::ApplicationDiscoveryService
       :deleted_configurations,
       :failed_configurations,
       :deletion_warnings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -257,7 +267,8 @@ module Aws::ApplicationDiscoveryService
       :import_task_id,
       :error_code,
       :error_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -273,7 +284,8 @@ module Aws::ApplicationDiscoveryService
     class BatchDeleteImportDataRequest < Struct.new(
       :import_task_ids,
       :delete_history,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -283,7 +295,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<Types::BatchDeleteImportDataError>]
     class BatchDeleteImportDataResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +327,8 @@ module Aws::ApplicationDiscoveryService
       :key,
       :value,
       :time_of_creation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -323,7 +337,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class ConflictErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +486,8 @@ module Aws::ApplicationDiscoveryService
       :stop_time,
       :data_source,
       :schema_storage_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +504,8 @@ module Aws::ApplicationDiscoveryService
       :name,
       :description,
       :wave,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +514,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class CreateApplicationResponse < Struct.new(
       :configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,12 +533,14 @@ module Aws::ApplicationDiscoveryService
     class CreateTagsRequest < Struct.new(
       :configuration_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class CreateTagsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +574,8 @@ module Aws::ApplicationDiscoveryService
       :unhealthy_agents,
       :total_agents,
       :unknown_agents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -600,7 +621,8 @@ module Aws::ApplicationDiscoveryService
       :unhealthy_agentless_collectors,
       :total_agentless_collectors,
       :unknown_agentless_collectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -645,7 +667,8 @@ module Aws::ApplicationDiscoveryService
       :unhealthy_connectors,
       :total_connectors,
       :unknown_connectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -690,7 +713,8 @@ module Aws::ApplicationDiscoveryService
       :unhealthy_me_collectors,
       :total_me_collectors,
       :unknown_me_collectors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -724,7 +748,8 @@ module Aws::ApplicationDiscoveryService
     class DeleteAgent < Struct.new(
       :agent_id,
       :force,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -738,12 +763,14 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<String>]
     class DeleteApplicationsRequest < Struct.new(
       :configuration_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -761,12 +788,14 @@ module Aws::ApplicationDiscoveryService
     class DeleteTagsRequest < Struct.new(
       :configuration_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteTagsResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,7 +821,8 @@ module Aws::ApplicationDiscoveryService
       :configuration_id,
       :warning_code,
       :warning_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -827,7 +857,8 @@ module Aws::ApplicationDiscoveryService
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -846,7 +877,8 @@ module Aws::ApplicationDiscoveryService
     class DescribeAgentsResponse < Struct.new(
       :agents_info,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -857,7 +889,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class DescribeBatchDeleteConfigurationTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -868,7 +901,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Types::BatchDeleteConfigurationTask]
     class DescribeBatchDeleteConfigurationTaskResponse < Struct.new(
       :task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,7 +911,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<String>]
     class DescribeConfigurationsRequest < Struct.new(
       :configuration_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +921,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<Hash<String, String>>]
     class DescribeConfigurationsResponse < Struct.new(
       :configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +940,8 @@ module Aws::ApplicationDiscoveryService
       :export_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -917,7 +954,8 @@ module Aws::ApplicationDiscoveryService
     class DescribeContinuousExportsResponse < Struct.new(
       :descriptions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -935,7 +973,8 @@ module Aws::ApplicationDiscoveryService
       :export_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -948,7 +987,8 @@ module Aws::ApplicationDiscoveryService
     class DescribeExportConfigurationsResponse < Struct.new(
       :exports_info,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,7 +1023,8 @@ module Aws::ApplicationDiscoveryService
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1043,8 @@ module Aws::ApplicationDiscoveryService
     class DescribeExportTasksResponse < Struct.new(
       :exports_info,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1021,7 +1063,8 @@ module Aws::ApplicationDiscoveryService
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,7 +1078,8 @@ module Aws::ApplicationDiscoveryService
     class DescribeImportTasksResponse < Struct.new(
       :next_token,
       :tasks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1055,7 +1099,8 @@ module Aws::ApplicationDiscoveryService
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1069,7 +1114,8 @@ module Aws::ApplicationDiscoveryService
     class DescribeTagsResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,12 +1128,14 @@ module Aws::ApplicationDiscoveryService
     class DisassociateConfigurationItemsFromApplicationRequest < Struct.new(
       :application_configuration_id,
       :configuration_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateConfigurationItemsFromApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1143,7 +1191,8 @@ module Aws::ApplicationDiscoveryService
       :excluded_instance_types,
       :preferred_region,
       :reserved_instance_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1157,7 +1206,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class ExportConfigurationsResponse < Struct.new(
       :export_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1229,8 @@ module Aws::ApplicationDiscoveryService
       :name,
       :values,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1277,8 @@ module Aws::ApplicationDiscoveryService
       :is_truncated,
       :requested_start_time,
       :requested_end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1249,7 +1301,8 @@ module Aws::ApplicationDiscoveryService
     class ExportPreferences < Struct.new(
       :ec2_recommendations_preferences,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Ec2RecommendationsPreferences < ExportPreferences; end
@@ -1278,7 +1331,8 @@ module Aws::ApplicationDiscoveryService
       :configuration_id,
       :error_status_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1311,12 +1365,14 @@ module Aws::ApplicationDiscoveryService
       :name,
       :values,
       :condition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetDiscoverySummaryRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1409,8 @@ module Aws::ApplicationDiscoveryService
       :connector_summary,
       :me_collector_summary,
       :agentless_collector_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1370,7 +1427,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class HomeRegionNotSetException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1456,7 +1514,8 @@ module Aws::ApplicationDiscoveryService
       :application_import_success,
       :application_import_failure,
       :errors_and_failed_entries_zip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1483,7 +1542,8 @@ module Aws::ApplicationDiscoveryService
     class ImportTaskFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1492,7 +1552,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class InvalidParameterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1502,7 +1563,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1575,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1550,7 +1613,8 @@ module Aws::ApplicationDiscoveryService
       :max_results,
       :next_token,
       :order_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1568,7 +1632,8 @@ module Aws::ApplicationDiscoveryService
     class ListConfigurationsResponse < Struct.new(
       :configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1597,7 +1662,8 @@ module Aws::ApplicationDiscoveryService
       :neighbor_configuration_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1618,7 +1684,8 @@ module Aws::ApplicationDiscoveryService
       :neighbors,
       :next_token,
       :known_dependency_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1649,7 +1716,8 @@ module Aws::ApplicationDiscoveryService
       :destination_port,
       :transport_protocol,
       :connections_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1663,7 +1731,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class OperationNotPermittedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1677,7 +1746,8 @@ module Aws::ApplicationDiscoveryService
     class OrderByElement < Struct.new(
       :field_name,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1703,7 +1773,8 @@ module Aws::ApplicationDiscoveryService
       :purchasing_option,
       :offering_class,
       :term_length,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1716,7 +1787,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1726,7 +1798,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1735,7 +1808,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class ServerInternalErrorException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1752,7 +1826,8 @@ module Aws::ApplicationDiscoveryService
     class StartBatchDeleteConfigurationTaskRequest < Struct.new(
       :configuration_type,
       :configuration_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1763,12 +1838,14 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class StartBatchDeleteConfigurationTaskResponse < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartContinuousExportRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1801,7 +1878,8 @@ module Aws::ApplicationDiscoveryService
       :start_time,
       :data_source,
       :schema_storage_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1816,7 +1894,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<String>]
     class StartDataCollectionByAgentIdsRequest < Struct.new(
       :agent_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1827,7 +1906,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<Types::AgentConfigurationStatus>]
     class StartDataCollectionByAgentIdsResponse < Struct.new(
       :agents_configuration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1869,7 +1949,8 @@ module Aws::ApplicationDiscoveryService
       :start_time,
       :end_time,
       :preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1878,7 +1959,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class StartExportTaskResponse < Struct.new(
       :export_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1907,7 +1989,8 @@ module Aws::ApplicationDiscoveryService
       :client_request_token,
       :name,
       :import_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1917,7 +2000,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Types::ImportTask]
     class StartImportTaskResponse < Struct.new(
       :task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1926,7 +2010,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     class StopContinuousExportRequest < Struct.new(
       :export_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1940,7 +2025,8 @@ module Aws::ApplicationDiscoveryService
     class StopContinuousExportResponse < Struct.new(
       :start_time,
       :stop_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1949,7 +2035,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<String>]
     class StopDataCollectionByAgentIdsRequest < Struct.new(
       :agent_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1960,7 +2047,8 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<Types::AgentConfigurationStatus>]
     class StopDataCollectionByAgentIdsResponse < Struct.new(
       :agents_configuration_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1977,7 +2065,8 @@ module Aws::ApplicationDiscoveryService
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1992,7 +2081,8 @@ module Aws::ApplicationDiscoveryService
     class TagFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2013,12 +2103,14 @@ module Aws::ApplicationDiscoveryService
       :name,
       :description,
       :wave,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2038,7 +2130,8 @@ module Aws::ApplicationDiscoveryService
     class UsageMetricBasis < Struct.new(
       :name,
       :percentage_adjust,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

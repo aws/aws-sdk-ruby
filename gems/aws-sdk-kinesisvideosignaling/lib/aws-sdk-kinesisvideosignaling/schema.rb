@@ -93,7 +93,6 @@ module Aws::KinesisVideoSignaling
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/send-alexa-offer-to-master", "code" => 200}}
       end)
-
     end
 
     class << self

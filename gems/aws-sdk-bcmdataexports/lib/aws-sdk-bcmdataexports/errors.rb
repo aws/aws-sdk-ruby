@@ -39,7 +39,7 @@ module Aws::BCMDataExports
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDataExports::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -52,7 +52,7 @@ module Aws::BCMDataExports
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDataExports::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::BCMDataExports
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDataExports::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -110,7 +110,7 @@ module Aws::BCMDataExports
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDataExports::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -135,7 +135,7 @@ module Aws::BCMDataExports
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDataExports::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

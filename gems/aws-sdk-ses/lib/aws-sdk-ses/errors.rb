@@ -68,7 +68,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::AccountSendingPausedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that a resource could not be created because the resource name already
@@ -100,7 +100,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::CannotDeleteException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that a resource could not be deleted because no resource with the specified
@@ -120,7 +120,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::ConfigurationSetAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the configuration set does not exist.</p>
@@ -138,7 +138,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::ConfigurationSetDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the configuration set does not exist.</p>
@@ -157,7 +157,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::ConfigurationSetSendingPausedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The name of the configuration set for which email sending is disabled.</p>
@@ -175,7 +175,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::CustomVerificationEmailInvalidContentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -189,7 +189,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::CustomVerificationEmailTemplateAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the provided custom verification email template with the specified
@@ -209,7 +209,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::CustomVerificationEmailTemplateDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the provided custom verification email template does not exist.</p>
@@ -228,7 +228,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::EventDestinationAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the configuration set does not exist.</p>
@@ -251,7 +251,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::EventDestinationDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the configuration set does not exist.</p>
@@ -275,7 +275,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::FromEmailAddressNotVerifiedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the from email address associated with the custom verification email
@@ -295,7 +295,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidCloudWatchDestinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the configuration set does not exist.</p>
@@ -319,7 +319,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidConfigurationSetException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -332,7 +332,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidDeliveryOptionsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -346,7 +346,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidFirehoseDestinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the configuration set does not exist.</p>
@@ -372,7 +372,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidLambdaFunctionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the ARN of the function was not found.</p>
@@ -391,7 +391,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -405,7 +405,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidRenderingParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def template_name
@@ -425,7 +425,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidS3ConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicated that the S3 Bucket was not found.</p>
@@ -444,7 +444,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidSNSDestinationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the configuration set does not exist.</p>
@@ -470,7 +470,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidSnsTopicException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the topic does not exist.</p>
@@ -489,7 +489,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidTemplateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def template_name
@@ -516,7 +516,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::InvalidTrackingOptionsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -531,7 +531,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -547,7 +547,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::MailFromDomainNotVerifiedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -561,7 +561,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::MessageRejected] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -576,7 +576,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::MissingRenderingAttributeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def template_name
@@ -593,7 +593,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::ProductionAccessNotGrantedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -606,7 +606,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::RuleDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the named receipt rule does not exist.</p>
@@ -624,7 +624,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::RuleSetDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that the named receipt rule set does not exist.</p>
@@ -643,7 +643,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::TemplateDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def template_name
@@ -661,7 +661,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::TrackingOptionsAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that a TrackingOptions object already exists in the specified configuration
@@ -680,7 +680,7 @@ module Aws::SES
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SES::Types::TrackingOptionsDoesNotExistException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Indicates that a TrackingOptions object does not exist in the specified configuration

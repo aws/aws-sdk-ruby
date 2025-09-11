@@ -13,7 +13,8 @@ module Aws::Kendra
     #   @return [String]
     class AccessControlConfigurationSummary < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::Kendra
     #   @return [String]
     class AccessControlListConfiguration < Struct.new(
       :key_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -35,7 +37,8 @@ module Aws::Kendra
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -48,7 +51,8 @@ module Aws::Kendra
     #   @return [String]
     class AclConfiguration < Struct.new(
       :allowed_groups_column_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +70,8 @@ module Aws::Kendra
       :key,
       :value_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -77,7 +82,8 @@ module Aws::Kendra
     #   @return [Types::TextWithHighlights]
     class AdditionalResultAttributeValue < Struct.new(
       :text_with_highlights_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -181,7 +187,8 @@ module Aws::Kendra
       :inclusion_patterns,
       :exclusion_patterns,
       :vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -204,7 +211,8 @@ module Aws::Kendra
       :id,
       :index_id,
       :entity_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +222,8 @@ module Aws::Kendra
     #   @return [Array<Types::FailedEntity>]
     class AssociateEntitiesToExperienceResponse < Struct.new(
       :failed_entity_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -235,7 +244,8 @@ module Aws::Kendra
       :id,
       :index_id,
       :personas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +255,8 @@ module Aws::Kendra
     #   @return [Array<Types::FailedEntity>]
     class AssociatePersonasToEntitiesResponse < Struct.new(
       :failed_entity_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +356,8 @@ module Aws::Kendra
       :greater_than_or_equals,
       :less_than,
       :less_than_or_equals,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -364,7 +376,8 @@ module Aws::Kendra
     class AttributeSuggestionsDescribeConfig < Struct.new(
       :suggestable_config_list,
       :attribute_suggestions_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -392,7 +405,8 @@ module Aws::Kendra
       :additional_response_attributes,
       :attribute_filter,
       :user_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +434,8 @@ module Aws::Kendra
     class AttributeSuggestionsUpdateConfig < Struct.new(
       :suggestable_config_list,
       :attribute_suggestions_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -433,7 +448,8 @@ module Aws::Kendra
     #   @return [Array<Types::BasicAuthenticationConfiguration>]
     class AuthenticationConfiguration < Struct.new(
       :basic_authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +478,8 @@ module Aws::Kendra
       :host,
       :port,
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -479,7 +496,8 @@ module Aws::Kendra
       :index_id,
       :document_id_list,
       :data_source_sync_job_metric_target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +507,8 @@ module Aws::Kendra
     #   @return [Array<Types::BatchDeleteDocumentResponseFailedDocument>]
     class BatchDeleteDocumentResponse < Struct.new(
       :failed_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -512,7 +531,8 @@ module Aws::Kendra
       :data_source_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +554,8 @@ module Aws::Kendra
       :id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +568,8 @@ module Aws::Kendra
     class BatchDeleteFeaturedResultsSetRequest < Struct.new(
       :index_id,
       :featured_results_set_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -557,7 +579,8 @@ module Aws::Kendra
     #   @return [Array<Types::BatchDeleteFeaturedResultsSetError>]
     class BatchDeleteFeaturedResultsSetResponse < Struct.new(
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +597,8 @@ module Aws::Kendra
     class BatchGetDocumentStatusRequest < Struct.new(
       :index_id,
       :document_info_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +614,8 @@ module Aws::Kendra
     class BatchGetDocumentStatusResponse < Struct.new(
       :errors,
       :document_status_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -614,7 +639,8 @@ module Aws::Kendra
       :data_source_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -650,7 +676,8 @@ module Aws::Kendra
       :role_arn,
       :documents,
       :custom_document_enrichment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -663,7 +690,8 @@ module Aws::Kendra
     #   @return [Array<Types::BatchPutDocumentResponseFailedDocument>]
     class BatchPutDocumentResponse < Struct.new(
       :failed_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +714,8 @@ module Aws::Kendra
       :data_source_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +833,8 @@ module Aws::Kendra
       :inclusion_patterns,
       :exclusion_patterns,
       :vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -839,7 +869,8 @@ module Aws::Kendra
     class CapacityUnitsConfiguration < Struct.new(
       :storage_capacity_units,
       :query_capacity_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -848,7 +879,8 @@ module Aws::Kendra
     #   @return [String]
     class ClearQuerySuggestionsRequest < Struct.new(
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +896,8 @@ module Aws::Kendra
     class ClickFeedback < Struct.new(
       :result_id,
       :click_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -912,7 +945,8 @@ module Aws::Kendra
       :missing_attribute_key_strategy,
       :expand,
       :expand_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -931,7 +965,8 @@ module Aws::Kendra
     class CollapsedResultDetail < Struct.new(
       :document_attribute,
       :expanded_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -960,7 +995,8 @@ module Aws::Kendra
       :document_title_column_name,
       :field_mappings,
       :change_detecting_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -970,7 +1006,8 @@ module Aws::Kendra
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -992,7 +1029,8 @@ module Aws::Kendra
       :query_text,
       :set_name,
       :set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,7 +1052,8 @@ module Aws::Kendra
     class ConfluenceAttachmentConfiguration < Struct.new(
       :crawl_attachments,
       :attachment_field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1044,7 +1083,8 @@ module Aws::Kendra
       :data_source_field_name,
       :date_field_format,
       :index_field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1062,7 +1102,8 @@ module Aws::Kendra
     #   @return [Array<Types::ConfluenceBlogToIndexFieldMapping>]
     class ConfluenceBlogConfiguration < Struct.new(
       :blog_field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1127,8 @@ module Aws::Kendra
       :data_source_field_name,
       :date_field_format,
       :index_field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1173,7 +1215,8 @@ module Aws::Kendra
       :exclusion_patterns,
       :proxy_configuration,
       :authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1188,7 +1231,8 @@ module Aws::Kendra
     #   @return [Array<Types::ConfluencePageToIndexFieldMapping>]
     class ConfluencePageConfiguration < Struct.new(
       :page_field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1256,8 @@ module Aws::Kendra
       :data_source_field_name,
       :date_field_format,
       :index_field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1257,7 +1302,8 @@ module Aws::Kendra
       :include_spaces,
       :exclude_spaces,
       :space_field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1287,7 +1333,8 @@ module Aws::Kendra
       :data_source_field_name,
       :date_field_format,
       :index_field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1367,8 @@ module Aws::Kendra
       :database_name,
       :table_name,
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1341,7 +1389,8 @@ module Aws::Kendra
       :data_source_ids,
       :faq_ids,
       :direct_put_content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1370,7 +1419,8 @@ module Aws::Kendra
       :end_offset,
       :term,
       :corrected_term,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1405,7 +1455,8 @@ module Aws::Kendra
       :access_control_list,
       :hierarchical_access_control_list,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1415,7 +1466,8 @@ module Aws::Kendra
     #   @return [String]
     class CreateAccessControlConfigurationResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1498,7 +1550,8 @@ module Aws::Kendra
       :client_token,
       :language_code,
       :custom_document_enrichment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1507,7 +1560,8 @@ module Aws::Kendra
     #   @return [String]
     class CreateDataSourceResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1544,7 +1598,8 @@ module Aws::Kendra
       :configuration,
       :description,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1608,8 @@ module Aws::Kendra
     #   @return [String]
     class CreateExperienceResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1610,7 +1666,8 @@ module Aws::Kendra
       :file_format,
       :client_token,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1619,7 +1676,8 @@ module Aws::Kendra
     #   @return [String]
     class CreateFaqResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1670,7 +1728,8 @@ module Aws::Kendra
       :query_texts,
       :featured_documents,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1681,7 +1740,8 @@ module Aws::Kendra
     #   @return [Types::FeaturedResultsSet]
     class CreateFeaturedResultsSetResponse < Struct.new(
       :featured_results_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1774,7 +1834,8 @@ module Aws::Kendra
       :user_token_configurations,
       :user_context_policy,
       :user_group_resolution_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1784,7 +1845,8 @@ module Aws::Kendra
     #   @return [String]
     class CreateIndexResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1832,7 +1894,8 @@ module Aws::Kendra
       :client_token,
       :role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1841,7 +1904,8 @@ module Aws::Kendra
     #   @return [String]
     class CreateQuerySuggestionsBlockListResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1883,7 +1947,8 @@ module Aws::Kendra
       :tags,
       :source_s3_path,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1893,7 +1958,8 @@ module Aws::Kendra
     #   @return [String]
     class CreateThesaurusResponse < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1928,7 +1994,8 @@ module Aws::Kendra
       :pre_extraction_hook_configuration,
       :post_extraction_hook_configuration,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2068,7 +2135,8 @@ module Aws::Kendra
       :git_hub_configuration,
       :alfresco_configuration,
       :template_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2085,7 +2153,8 @@ module Aws::Kendra
     class DataSourceGroup < Struct.new(
       :group_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2124,7 +2193,8 @@ module Aws::Kendra
       :updated_at,
       :status,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2170,7 +2240,8 @@ module Aws::Kendra
       :error_code,
       :data_source_error_code,
       :metrics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2189,7 +2260,8 @@ module Aws::Kendra
     class DataSourceSyncJobMetricTarget < Struct.new(
       :data_source_id,
       :data_source_sync_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2220,7 +2292,8 @@ module Aws::Kendra
       :documents_deleted,
       :documents_failed,
       :documents_scanned,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2247,7 +2320,8 @@ module Aws::Kendra
       :data_source_field_name,
       :date_field_format,
       :index_field_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2264,7 +2338,8 @@ module Aws::Kendra
     class DataSourceVpcConfiguration < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2298,7 +2373,8 @@ module Aws::Kendra
       :column_configuration,
       :acl_configuration,
       :sql_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2311,12 +2387,14 @@ module Aws::Kendra
     class DeleteAccessControlConfigurationRequest < Struct.new(
       :index_id,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessControlConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2329,7 +2407,8 @@ module Aws::Kendra
     class DeleteDataSourceRequest < Struct.new(
       :id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2342,12 +2421,14 @@ module Aws::Kendra
     class DeleteExperienceRequest < Struct.new(
       :id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteExperienceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2360,7 +2441,8 @@ module Aws::Kendra
     class DeleteFaqRequest < Struct.new(
       :id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2369,7 +2451,8 @@ module Aws::Kendra
     #   @return [String]
     class DeleteIndexRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2408,7 +2491,8 @@ module Aws::Kendra
       :data_source_id,
       :group_id,
       :ordering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2421,7 +2505,8 @@ module Aws::Kendra
     class DeleteQuerySuggestionsBlockListRequest < Struct.new(
       :index_id,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2434,7 +2519,8 @@ module Aws::Kendra
     class DeleteThesaurusRequest < Struct.new(
       :id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2448,7 +2534,8 @@ module Aws::Kendra
     class DescribeAccessControlConfigurationRequest < Struct.new(
       :index_id,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2477,7 +2564,8 @@ module Aws::Kendra
       :error_message,
       :access_control_list,
       :hierarchical_access_control_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2490,7 +2578,8 @@ module Aws::Kendra
     class DescribeDataSourceRequest < Struct.new(
       :id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2570,7 +2659,8 @@ module Aws::Kendra
       :error_message,
       :language_code,
       :custom_document_enrichment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2583,7 +2673,8 @@ module Aws::Kendra
     class DescribeExperienceRequest < Struct.new(
       :id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2642,7 +2733,8 @@ module Aws::Kendra
       :status,
       :role_arn,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2655,7 +2747,8 @@ module Aws::Kendra
     class DescribeFaqRequest < Struct.new(
       :id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2715,7 +2808,8 @@ module Aws::Kendra
       :error_message,
       :file_format,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2729,7 +2823,8 @@ module Aws::Kendra
     class DescribeFeaturedResultsSetRequest < Struct.new(
       :index_id,
       :featured_results_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2782,7 +2877,8 @@ module Aws::Kendra
       :featured_documents_missing,
       :last_updated_timestamp,
       :creation_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2791,7 +2887,8 @@ module Aws::Kendra
     #   @return [String]
     class DescribeIndexRequest < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2874,7 +2971,8 @@ module Aws::Kendra
       :user_token_configurations,
       :user_context_policy,
       :user_group_resolution_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2894,7 +2992,8 @@ module Aws::Kendra
       :index_id,
       :data_source_id,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2943,7 +3042,8 @@ module Aws::Kendra
       :data_source_id,
       :group_id,
       :group_ordering_id_summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2956,7 +3056,8 @@ module Aws::Kendra
     class DescribeQuerySuggestionsBlockListRequest < Struct.new(
       :index_id,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3020,7 +3121,8 @@ module Aws::Kendra
       :item_count,
       :file_size_bytes,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3030,7 +3132,8 @@ module Aws::Kendra
     #   @return [String]
     class DescribeQuerySuggestionsConfigRequest < Struct.new(
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3101,7 +3204,8 @@ module Aws::Kendra
       :last_clear_time,
       :total_suggestions_count,
       :attribute_suggestions_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3114,7 +3218,8 @@ module Aws::Kendra
     class DescribeThesaurusRequest < Struct.new(
       :id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3186,7 +3291,8 @@ module Aws::Kendra
       :file_size_bytes,
       :term_count,
       :synonym_rule_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3203,7 +3309,8 @@ module Aws::Kendra
       :id,
       :index_id,
       :entity_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3213,7 +3320,8 @@ module Aws::Kendra
     #   @return [Array<Types::FailedEntity>]
     class DisassociateEntitiesFromExperienceResponse < Struct.new(
       :failed_entity_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3231,7 +3339,8 @@ module Aws::Kendra
       :id,
       :index_id,
       :entity_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3241,7 +3350,8 @@ module Aws::Kendra
     #   @return [Array<Types::FailedEntity>]
     class DisassociatePersonasFromEntitiesResponse < Struct.new(
       :failed_entity_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3305,7 +3415,8 @@ module Aws::Kendra
       :hierarchical_access_control_list,
       :content_type,
       :access_control_configuration_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3321,7 +3432,8 @@ module Aws::Kendra
     class DocumentAttribute < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3357,7 +3469,8 @@ module Aws::Kendra
       :condition_document_attribute_key,
       :operator,
       :condition_on_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3394,7 +3507,8 @@ module Aws::Kendra
       :target_document_attribute_key,
       :target_document_attribute_value_deletion,
       :target_document_attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3425,7 +3539,8 @@ module Aws::Kendra
       :string_list_value,
       :long_value,
       :date_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3455,7 +3570,8 @@ module Aws::Kendra
       :document_attribute_value,
       :count,
       :facet_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3498,7 +3614,8 @@ module Aws::Kendra
     class DocumentInfo < Struct.new(
       :document_id,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3522,7 +3639,8 @@ module Aws::Kendra
       :type,
       :relevance,
       :search,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3538,7 +3656,8 @@ module Aws::Kendra
     class DocumentRelevanceConfiguration < Struct.new(
       :name,
       :relevance,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3552,7 +3671,8 @@ module Aws::Kendra
     #   @return [String]
     class DocumentsMetadataConfiguration < Struct.new(
       :s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3570,7 +3690,8 @@ module Aws::Kendra
     class EntityConfiguration < Struct.new(
       :entity_id,
       :entity_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3596,7 +3717,8 @@ module Aws::Kendra
       :identified_user_name,
       :first_name,
       :last_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3618,7 +3740,8 @@ module Aws::Kendra
     class EntityPersonaConfiguration < Struct.new(
       :entity_id,
       :persona,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3637,7 +3760,8 @@ module Aws::Kendra
     class ExpandConfiguration < Struct.new(
       :max_result_items_to_expand,
       :max_expanded_results_per_item,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3673,7 +3797,8 @@ module Aws::Kendra
       :document_excerpt,
       :document_uri,
       :document_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3692,7 +3817,8 @@ module Aws::Kendra
     class ExperienceConfiguration < Struct.new(
       :content_source_configuration,
       :user_identity_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3709,7 +3835,8 @@ module Aws::Kendra
     class ExperienceEndpoint < Struct.new(
       :endpoint_type,
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3732,7 +3859,8 @@ module Aws::Kendra
       :entity_id,
       :entity_type,
       :display_data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3762,7 +3890,8 @@ module Aws::Kendra
       :created_at,
       :status,
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3796,7 +3925,8 @@ module Aws::Kendra
       :document_attribute_key,
       :facets,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3822,7 +3952,8 @@ module Aws::Kendra
       :document_attribute_key,
       :document_attribute_value_type,
       :document_attribute_value_count_pairs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3839,7 +3970,8 @@ module Aws::Kendra
     class FailedEntity < Struct.new(
       :entity_id,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3850,7 +3982,8 @@ module Aws::Kendra
     #   @return [Integer]
     class FaqStatistics < Struct.new(
       :indexed_question_answers_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -3895,7 +4028,8 @@ module Aws::Kendra
       :updated_at,
       :file_format,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3910,7 +4044,8 @@ module Aws::Kendra
     #   @return [String]
     class FeaturedDocument < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3925,7 +4060,8 @@ module Aws::Kendra
     #   @return [String]
     class FeaturedDocumentMissing < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3949,7 +4085,8 @@ module Aws::Kendra
       :id,
       :title,
       :uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3967,7 +4104,8 @@ module Aws::Kendra
     class FeaturedResultsConflictException < Struct.new(
       :message,
       :conflicting_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4018,7 +4156,8 @@ module Aws::Kendra
       :document_uri,
       :document_attributes,
       :feedback_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4084,7 +4223,8 @@ module Aws::Kendra
       :featured_documents,
       :last_updated_timestamp,
       :creation_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4118,7 +4258,8 @@ module Aws::Kendra
       :status,
       :last_updated_timestamp,
       :creation_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4192,7 +4333,8 @@ module Aws::Kendra
       :inclusion_patterns,
       :exclusion_patterns,
       :field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4233,7 +4375,8 @@ module Aws::Kendra
       :max_suggestions_count,
       :suggestion_types,
       :attribute_suggestions_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4246,7 +4389,8 @@ module Aws::Kendra
     class GetQuerySuggestionsResponse < Struct.new(
       :query_suggestions_id,
       :suggestions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4308,7 +4452,8 @@ module Aws::Kendra
       :metric_type,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4332,7 +4477,8 @@ module Aws::Kendra
       :snapshots_data_header,
       :snapshots_data,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4512,7 +4658,8 @@ module Aws::Kendra
       :git_hub_pull_request_comment_configuration_field_mappings,
       :git_hub_pull_request_document_configuration_field_mappings,
       :git_hub_pull_request_document_attachment_configuration_field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4560,7 +4707,8 @@ module Aws::Kendra
       :crawl_pull_request,
       :crawl_pull_request_comment,
       :crawl_pull_request_comment_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4626,7 +4774,8 @@ module Aws::Kendra
       :exclude_mime_types,
       :exclude_user_accounts,
       :exclude_shared_drives,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4656,7 +4805,8 @@ module Aws::Kendra
       :member_groups,
       :member_users,
       :s3_pathfor_group_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4690,7 +4840,8 @@ module Aws::Kendra
       :received_at,
       :ordering_id,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4705,7 +4856,8 @@ module Aws::Kendra
     class GroupSummary < Struct.new(
       :group_id,
       :ordering_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4718,7 +4870,8 @@ module Aws::Kendra
     #   @return [Array<Types::Principal>]
     class HierarchicalPrincipal < Struct.new(
       :principal_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4742,7 +4895,8 @@ module Aws::Kendra
       :end_offset,
       :top_answer,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4776,7 +4930,8 @@ module Aws::Kendra
       :invocation_condition,
       :lambda_arn,
       :s3_bucket,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4810,7 +4965,8 @@ module Aws::Kendra
       :created_at,
       :updated_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4825,7 +4981,8 @@ module Aws::Kendra
     class IndexStatistics < Struct.new(
       :faq_statistics,
       :text_document_statistics,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4851,7 +5008,8 @@ module Aws::Kendra
       :condition,
       :target,
       :document_content_deletion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -4866,7 +5024,8 @@ module Aws::Kendra
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4876,7 +5035,8 @@ module Aws::Kendra
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4995,7 +5155,8 @@ module Aws::Kendra
       :inclusion_patterns,
       :exclusion_patterns,
       :vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5014,7 +5175,8 @@ module Aws::Kendra
     class JsonTokenTypeConfiguration < Struct.new(
       :user_name_attribute_field,
       :group_attribute_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5048,7 +5210,8 @@ module Aws::Kendra
       :group_attribute_field,
       :issuer,
       :claim_regex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5067,7 +5230,8 @@ module Aws::Kendra
       :index_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5082,7 +5246,8 @@ module Aws::Kendra
     class ListAccessControlConfigurationsResponse < Struct.new(
       :next_token,
       :access_control_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5115,7 +5280,8 @@ module Aws::Kendra
       :max_results,
       :start_time_filter,
       :status_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5129,7 +5295,8 @@ module Aws::Kendra
     class ListDataSourceSyncJobsResponse < Struct.new(
       :history,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5147,7 +5314,8 @@ module Aws::Kendra
       :index_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5161,7 +5329,8 @@ module Aws::Kendra
     class ListDataSourcesResponse < Struct.new(
       :summary_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5184,7 +5353,8 @@ module Aws::Kendra
       :index_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5198,7 +5368,8 @@ module Aws::Kendra
     class ListEntityPersonasResponse < Struct.new(
       :summary_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5217,7 +5388,8 @@ module Aws::Kendra
       :id,
       :index_id,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5231,7 +5403,8 @@ module Aws::Kendra
     class ListExperienceEntitiesResponse < Struct.new(
       :summary_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5250,7 +5423,8 @@ module Aws::Kendra
       :index_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5264,7 +5438,8 @@ module Aws::Kendra
     class ListExperiencesResponse < Struct.new(
       :summary_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5284,7 +5459,8 @@ module Aws::Kendra
       :index_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5298,7 +5474,8 @@ module Aws::Kendra
     class ListFaqsResponse < Struct.new(
       :next_token,
       :faq_summary_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5317,7 +5494,8 @@ module Aws::Kendra
       :index_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5331,7 +5509,8 @@ module Aws::Kendra
     class ListFeaturedResultsSetsResponse < Struct.new(
       :featured_results_set_summary_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5363,7 +5542,8 @@ module Aws::Kendra
       :ordering_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5379,7 +5559,8 @@ module Aws::Kendra
     class ListGroupsOlderThanOrderingIdResponse < Struct.new(
       :groups_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5393,7 +5574,8 @@ module Aws::Kendra
     class ListIndicesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5407,7 +5589,8 @@ module Aws::Kendra
     class ListIndicesResponse < Struct.new(
       :index_configuration_summary_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5430,7 +5613,8 @@ module Aws::Kendra
       :index_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5450,7 +5634,8 @@ module Aws::Kendra
     class ListQuerySuggestionsBlockListsResponse < Struct.new(
       :block_list_summary_items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5464,7 +5649,8 @@ module Aws::Kendra
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5473,7 +5659,8 @@ module Aws::Kendra
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5493,7 +5680,8 @@ module Aws::Kendra
       :index_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5509,7 +5697,8 @@ module Aws::Kendra
     class ListThesauriResponse < Struct.new(
       :next_token,
       :thesaurus_summary_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5523,7 +5712,8 @@ module Aws::Kendra
     class MemberGroup < Struct.new(
       :group_id,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5533,7 +5723,8 @@ module Aws::Kendra
     #   @return [String]
     class MemberUser < Struct.new(
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5560,7 +5751,8 @@ module Aws::Kendra
       :host_url,
       :organization_name,
       :ssl_certificate_s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5613,7 +5805,8 @@ module Aws::Kendra
       :exclusion_patterns,
       :field_mappings,
       :disable_local_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -5636,7 +5829,8 @@ module Aws::Kendra
     class OneDriveUsers < Struct.new(
       :one_drive_user_list,
       :one_drive_user_s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5668,7 +5862,8 @@ module Aws::Kendra
       :persona,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5691,7 +5886,8 @@ module Aws::Kendra
       :type,
       :access,
       :data_source_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5719,7 +5915,8 @@ module Aws::Kendra
       :host,
       :port,
       :credentials,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5774,7 +5971,8 @@ module Aws::Kendra
       :group_members,
       :ordering_id,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5883,7 +6081,8 @@ module Aws::Kendra
       :visitor_id,
       :spell_correction_configuration,
       :collapse_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5926,7 +6125,8 @@ module Aws::Kendra
       :warnings,
       :spell_corrected_queries,
       :featured_results_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6006,7 +6206,8 @@ module Aws::Kendra
       :feedback_token,
       :table_excerpt,
       :collapsed_result_detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6042,7 +6243,8 @@ module Aws::Kendra
       :created_at,
       :updated_at,
       :item_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6133,7 +6335,8 @@ module Aws::Kendra
       :inclusion_patterns,
       :exclusion_patterns,
       :vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6191,7 +6394,8 @@ module Aws::Kendra
       :duration,
       :rank_order,
       :value_importance_map,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6207,7 +6411,8 @@ module Aws::Kendra
     class RelevanceFeedback < Struct.new(
       :result_id,
       :relevance_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6217,7 +6422,8 @@ module Aws::Kendra
     #   @return [String]
     class ResourceAlreadyExistException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6227,7 +6433,8 @@ module Aws::Kendra
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6237,7 +6444,8 @@ module Aws::Kendra
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6247,7 +6455,8 @@ module Aws::Kendra
     #   @return [String]
     class ResourceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6311,7 +6520,8 @@ module Aws::Kendra
       :page_number,
       :page_size,
       :user_context,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6326,7 +6536,8 @@ module Aws::Kendra
     class RetrieveResult < Struct.new(
       :query_id,
       :result_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6364,7 +6575,8 @@ module Aws::Kendra
       :document_uri,
       :document_attributes,
       :score_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6501,7 +6713,8 @@ module Aws::Kendra
       :exclusion_patterns,
       :documents_metadata_configuration,
       :access_control_list_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6515,7 +6728,8 @@ module Aws::Kendra
     class S3Path < Struct.new(
       :bucket,
       :key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6534,7 +6748,8 @@ module Aws::Kendra
     class SaaSConfiguration < Struct.new(
       :organization_name,
       :host_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6563,7 +6778,8 @@ module Aws::Kendra
       :document_title_field_name,
       :field_mappings,
       :include_filter_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6650,7 +6866,8 @@ module Aws::Kendra
       :standard_object_attachment_configuration,
       :include_attachment_file_patterns,
       :exclude_attachment_file_patterns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6682,7 +6899,8 @@ module Aws::Kendra
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6703,7 +6921,8 @@ module Aws::Kendra
       :included_states,
       :standard_knowledge_article_type_configuration,
       :custom_knowledge_article_type_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6725,7 +6944,8 @@ module Aws::Kendra
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6741,7 +6961,8 @@ module Aws::Kendra
     class SalesforceStandardObjectAttachmentConfiguration < Struct.new(
       :document_title_field_name,
       :field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6768,7 +6989,8 @@ module Aws::Kendra
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6779,7 +7001,8 @@ module Aws::Kendra
     #   @return [String]
     class ScoreAttributes < Struct.new(
       :score_confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6808,7 +7031,8 @@ module Aws::Kendra
       :searchable,
       :displayable,
       :sortable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -6858,7 +7082,8 @@ module Aws::Kendra
     class SeedUrlConfiguration < Struct.new(
       :seed_urls,
       :web_crawler_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6871,7 +7096,8 @@ module Aws::Kendra
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6917,7 +7143,8 @@ module Aws::Kendra
       :knowledge_article_configuration,
       :service_catalog_configuration,
       :authentication_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6970,7 +7197,8 @@ module Aws::Kendra
       :document_title_field_name,
       :field_mappings,
       :filter_query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7022,7 +7250,8 @@ module Aws::Kendra
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7039,7 +7268,8 @@ module Aws::Kendra
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7146,7 +7376,8 @@ module Aws::Kendra
       :ssl_certificate_s3_path,
       :authentication_type,
       :proxy_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7170,7 +7401,8 @@ module Aws::Kendra
     #   @return [Array<String>]
     class SiteMapsConfiguration < Struct.new(
       :site_maps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7286,7 +7518,8 @@ module Aws::Kendra
       :inclusion_patterns,
       :exclusion_patterns,
       :field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7348,7 +7581,8 @@ module Aws::Kendra
     class SortingConfiguration < Struct.new(
       :document_attribute_key,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7369,7 +7603,8 @@ module Aws::Kendra
       :document_id,
       :suggestion_attributes,
       :additional_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7383,7 +7618,8 @@ module Aws::Kendra
     class SpellCorrectedQuery < Struct.new(
       :suggested_query_text,
       :corrections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7400,7 +7636,8 @@ module Aws::Kendra
     #   @return [Boolean]
     class SpellCorrectionConfiguration < Struct.new(
       :include_query_spell_check_suggestions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7424,7 +7661,8 @@ module Aws::Kendra
     #   @return [String]
     class SqlConfiguration < Struct.new(
       :query_identifiers_enclosing_option,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7437,7 +7675,8 @@ module Aws::Kendra
     class StartDataSourceSyncJobRequest < Struct.new(
       :id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7446,7 +7685,8 @@ module Aws::Kendra
     #   @return [String]
     class StartDataSourceSyncJobResponse < Struct.new(
       :execution_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7471,7 +7711,8 @@ module Aws::Kendra
       :document_status,
       :failure_code,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7485,7 +7726,8 @@ module Aws::Kendra
     class StopDataSourceSyncJobRequest < Struct.new(
       :id,
       :index_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7510,7 +7752,8 @@ module Aws::Kendra
       :query_id,
       :click_feedback_items,
       :relevance_feedback_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7527,7 +7770,8 @@ module Aws::Kendra
     class SuggestableConfig < Struct.new(
       :attribute_name,
       :suggestable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7549,7 +7793,8 @@ module Aws::Kendra
       :id,
       :value,
       :source_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7563,7 +7808,8 @@ module Aws::Kendra
     class SuggestionHighlight < Struct.new(
       :begin_offset,
       :end_offset,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7577,7 +7823,8 @@ module Aws::Kendra
     class SuggestionTextWithHighlights < Struct.new(
       :text,
       :highlights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7588,7 +7835,8 @@ module Aws::Kendra
     #   @return [Types::SuggestionTextWithHighlights]
     class SuggestionValue < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7617,7 +7865,8 @@ module Aws::Kendra
       :top_answer,
       :highlighted,
       :header,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7641,7 +7890,8 @@ module Aws::Kendra
     class TableExcerpt < Struct.new(
       :rows,
       :total_number_of_rows,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7651,7 +7901,8 @@ module Aws::Kendra
     #   @return [Array<Types::TableCell>]
     class TableRow < Struct.new(
       :cells,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7669,7 +7920,8 @@ module Aws::Kendra
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7688,12 +7940,14 @@ module Aws::Kendra
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7707,7 +7961,8 @@ module Aws::Kendra
     #   @return [JSON]
     class TemplateConfiguration < Struct.new(
       :template,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7721,7 +7976,8 @@ module Aws::Kendra
     class TextDocumentStatistics < Struct.new(
       :indexed_text_documents_count,
       :indexed_text_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -7741,7 +7997,8 @@ module Aws::Kendra
     class TextWithHighlights < Struct.new(
       :text,
       :highlights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7767,7 +8024,8 @@ module Aws::Kendra
       :status,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7777,7 +8035,8 @@ module Aws::Kendra
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7791,7 +8050,8 @@ module Aws::Kendra
     class TimeRange < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7810,12 +8070,14 @@ module Aws::Kendra
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7847,12 +8109,14 @@ module Aws::Kendra
       :description,
       :access_control_list,
       :hierarchical_access_control_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateAccessControlConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7907,7 +8171,8 @@ module Aws::Kendra
       :role_arn,
       :language_code,
       :custom_document_enrichment_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7939,7 +8204,8 @@ module Aws::Kendra
       :role_arn,
       :configuration,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7980,7 +8246,8 @@ module Aws::Kendra
       :status,
       :query_texts,
       :featured_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7991,7 +8258,8 @@ module Aws::Kendra
     #   @return [Types::FeaturedResultsSet]
     class UpdateFeaturedResultsSetResponse < Struct.new(
       :featured_results_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8058,7 +8326,8 @@ module Aws::Kendra
       :user_token_configurations,
       :user_context_policy,
       :user_group_resolution_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8096,7 +8365,8 @@ module Aws::Kendra
       :description,
       :source_s3_path,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8158,7 +8428,8 @@ module Aws::Kendra
       :minimum_number_of_querying_users,
       :minimum_query_count,
       :attribute_suggestions_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8188,7 +8459,8 @@ module Aws::Kendra
       :description,
       :role_arn,
       :source_s3_path,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8218,7 +8490,8 @@ module Aws::Kendra
     class Urls < Struct.new(
       :seed_url_configuration,
       :site_maps_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8270,7 +8543,8 @@ module Aws::Kendra
       :user_id,
       :groups,
       :data_source_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8295,7 +8569,8 @@ module Aws::Kendra
     #   @return [String]
     class UserGroupResolutionConfiguration < Struct.new(
       :user_group_resolution_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8311,7 +8586,8 @@ module Aws::Kendra
     #   @return [String]
     class UserIdentityConfiguration < Struct.new(
       :identity_attribute_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8330,7 +8606,8 @@ module Aws::Kendra
     class UserTokenConfiguration < Struct.new(
       :jwt_token_type_configuration,
       :json_token_type_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8340,7 +8617,8 @@ module Aws::Kendra
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8354,7 +8632,8 @@ module Aws::Kendra
     class Warning < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8437,7 +8716,8 @@ module Aws::Kendra
       :url_exclusion_patterns,
       :proxy_configuration,
       :authentication_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8502,7 +8782,8 @@ module Aws::Kendra
       :inclusion_patterns,
       :exclusion_patterns,
       :field_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

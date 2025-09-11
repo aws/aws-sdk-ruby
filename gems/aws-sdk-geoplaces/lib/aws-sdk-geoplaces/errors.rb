@@ -37,7 +37,7 @@ module Aws::GeoPlaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GeoPlaces::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -50,7 +50,7 @@ module Aws::GeoPlaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GeoPlaces::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -67,7 +67,7 @@ module Aws::GeoPlaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GeoPlaces::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::GeoPlaces
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GeoPlaces::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

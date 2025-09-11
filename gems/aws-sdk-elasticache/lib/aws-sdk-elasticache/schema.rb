@@ -2893,7 +2893,6 @@ module Aws::ElastiCache
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
         operation.traits = {}
       end)
-
     end
 
     class << self

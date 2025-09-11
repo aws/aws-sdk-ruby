@@ -506,7 +506,6 @@ module Aws::LexRuntimeV2
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/conversation", "code" => 200}}
       end)
-
     end
 
     class << self

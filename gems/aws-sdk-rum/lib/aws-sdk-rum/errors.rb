@@ -44,7 +44,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -80,7 +80,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -102,7 +102,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::InvalidPolicyRevisionIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::MalformedPolicyDocumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -128,7 +128,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::PolicyNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -141,7 +141,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::PolicySizeLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -154,7 +154,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -177,7 +177,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -226,7 +226,7 @@ module Aws::RUM
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RUM::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -52,7 +52,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::CodeBuildNotInServiceRegionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -66,7 +66,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::ElasticBeanstalkServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -81,7 +81,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::InsufficientPrivilegesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -96,7 +96,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -110,7 +110,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::ManagedActionInvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -125,7 +125,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::OperationInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -139,7 +139,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::PlatformVersionStillReferencedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -153,7 +153,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -167,7 +167,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::ResourceTypeNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -193,7 +193,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::S3LocationNotInServiceRegionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -207,7 +207,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::S3SubscriptionRequiredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -222,7 +222,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::SourceBundleDeletionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -236,7 +236,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::TooManyApplicationVersionsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -250,7 +250,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::TooManyApplicationsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -264,7 +264,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::TooManyBucketsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -278,7 +278,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::TooManyConfigurationTemplatesException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -292,7 +292,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::TooManyEnvironmentsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -306,7 +306,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::TooManyPlatformsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>
@@ -323,7 +323,7 @@ module Aws::ElasticBeanstalk
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The exception error message.</p>

@@ -99,7 +99,8 @@ module Aws::DAX
       :parameter_group,
       :sse_description,
       :cluster_endpoint_encryption_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +109,8 @@ module Aws::DAX
     #   @return [String]
     class ClusterAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -117,7 +119,8 @@ module Aws::DAX
     #   @return [String]
     class ClusterNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -127,7 +130,8 @@ module Aws::DAX
     #   @return [String]
     class ClusterQuotaForCustomerExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -284,7 +288,8 @@ module Aws::DAX
       :tags,
       :sse_specification,
       :cluster_endpoint_encryption_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -293,7 +298,8 @@ module Aws::DAX
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,7 +313,8 @@ module Aws::DAX
     class CreateParameterGroupRequest < Struct.new(
       :parameter_group_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -317,7 +324,8 @@ module Aws::DAX
     #   @return [Types::ParameterGroup]
     class CreateParameterGroupResponse < Struct.new(
       :parameter_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +342,8 @@ module Aws::DAX
       :subnet_group_name,
       :description,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +353,8 @@ module Aws::DAX
     #   @return [Types::SubnetGroup]
     class CreateSubnetGroupResponse < Struct.new(
       :subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +375,8 @@ module Aws::DAX
       :new_replication_factor,
       :availability_zones,
       :node_ids_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +386,8 @@ module Aws::DAX
     #   @return [Types::Cluster]
     class DecreaseReplicationFactorResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -384,7 +396,8 @@ module Aws::DAX
     #   @return [String]
     class DeleteClusterRequest < Struct.new(
       :cluster_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -393,7 +406,8 @@ module Aws::DAX
     #   @return [Types::Cluster]
     class DeleteClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +416,8 @@ module Aws::DAX
     #   @return [String]
     class DeleteParameterGroupRequest < Struct.new(
       :parameter_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +427,8 @@ module Aws::DAX
     #   @return [String]
     class DeleteParameterGroupResponse < Struct.new(
       :deletion_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -421,7 +437,8 @@ module Aws::DAX
     #   @return [String]
     class DeleteSubnetGroupRequest < Struct.new(
       :subnet_group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -431,7 +448,8 @@ module Aws::DAX
     #   @return [String]
     class DeleteSubnetGroupResponse < Struct.new(
       :deletion_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +472,8 @@ module Aws::DAX
       :cluster_names,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -468,7 +487,8 @@ module Aws::DAX
     class DescribeClustersResponse < Struct.new(
       :next_token,
       :clusters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,7 +507,8 @@ module Aws::DAX
     class DescribeDefaultParametersRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +521,8 @@ module Aws::DAX
     class DescribeDefaultParametersResponse < Struct.new(
       :next_token,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +565,8 @@ module Aws::DAX
       :duration,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +579,8 @@ module Aws::DAX
     class DescribeEventsResponse < Struct.new(
       :next_token,
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,7 +603,8 @@ module Aws::DAX
       :parameter_group_names,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -592,7 +617,8 @@ module Aws::DAX
     class DescribeParameterGroupsResponse < Struct.new(
       :next_token,
       :parameter_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +646,8 @@ module Aws::DAX
       :source,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +660,8 @@ module Aws::DAX
     class DescribeParametersResponse < Struct.new(
       :next_token,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -656,7 +684,8 @@ module Aws::DAX
       :subnet_group_names,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +698,8 @@ module Aws::DAX
     class DescribeSubnetGroupsResponse < Struct.new(
       :next_token,
       :subnet_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -689,7 +719,8 @@ module Aws::DAX
       :address,
       :port,
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -720,7 +751,8 @@ module Aws::DAX
       :source_type,
       :message,
       :date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -739,7 +771,8 @@ module Aws::DAX
       :cluster_name,
       :new_replication_factor,
       :availability_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -748,7 +781,8 @@ module Aws::DAX
     #   @return [Types::Cluster]
     class IncreaseReplicationFactorResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,7 +792,8 @@ module Aws::DAX
     #   @return [String]
     class InsufficientClusterCapacityFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -767,7 +802,8 @@ module Aws::DAX
     #   @return [String]
     class InvalidARNFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -777,7 +813,8 @@ module Aws::DAX
     #   @return [String]
     class InvalidClusterStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +823,8 @@ module Aws::DAX
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -795,7 +833,8 @@ module Aws::DAX
     #   @return [String]
     class InvalidParameterGroupStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -804,7 +843,8 @@ module Aws::DAX
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +853,8 @@ module Aws::DAX
     #   @return [String]
     class InvalidSubnet < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -822,7 +863,8 @@ module Aws::DAX
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +879,8 @@ module Aws::DAX
     class ListTagsRequest < Struct.new(
       :resource_name,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -851,7 +894,8 @@ module Aws::DAX
     class ListTagsResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -885,7 +929,8 @@ module Aws::DAX
       :availability_zone,
       :node_status,
       :parameter_group_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -894,7 +939,8 @@ module Aws::DAX
     #   @return [String]
     class NodeNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -904,7 +950,8 @@ module Aws::DAX
     #   @return [String]
     class NodeQuotaForClusterExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +961,8 @@ module Aws::DAX
     #   @return [String]
     class NodeQuotaForCustomerExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +977,8 @@ module Aws::DAX
     class NodeTypeSpecificValue < Struct.new(
       :node_type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +996,8 @@ module Aws::DAX
     class NotificationConfiguration < Struct.new(
       :topic_arn,
       :topic_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,7 +1048,8 @@ module Aws::DAX
       :allowed_values,
       :is_modifiable,
       :change_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1013,7 +1064,8 @@ module Aws::DAX
     class ParameterGroup < Struct.new(
       :parameter_group_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1022,7 +1074,8 @@ module Aws::DAX
     #   @return [String]
     class ParameterGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,7 +1084,8 @@ module Aws::DAX
     #   @return [String]
     class ParameterGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1094,8 @@ module Aws::DAX
     #   @return [String]
     class ParameterGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1058,7 +1113,8 @@ module Aws::DAX
       :parameter_group_name,
       :parameter_apply_status,
       :node_ids_to_reboot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1072,7 +1128,8 @@ module Aws::DAX
     class ParameterNameValue < Struct.new(
       :parameter_name,
       :parameter_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1085,7 +1142,8 @@ module Aws::DAX
     class RebootNodeRequest < Struct.new(
       :cluster_name,
       :node_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1094,7 +1152,8 @@ module Aws::DAX
     #   @return [Types::Cluster]
     class RebootNodeResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1122,7 +1181,8 @@ module Aws::DAX
     #   @return [String]
     class SSEDescription < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1132,7 +1192,8 @@ module Aws::DAX
     #   @return [Boolean]
     class SSESpecification < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1207,8 @@ module Aws::DAX
     class SecurityGroupMembership < Struct.new(
       :security_group_identifier,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1217,8 @@ module Aws::DAX
     #   @return [String]
     class ServiceLinkedRoleNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1226,8 @@ module Aws::DAX
     #             encrypted clusters in a 30 day period. Contact AWS customer support to discuss options
     #             for continuing to create encrypted clusters.</p>
     class ServiceQuotaExceededException < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1243,8 @@ module Aws::DAX
     class Subnet < Struct.new(
       :subnet_identifier,
       :subnet_availability_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1213,7 +1278,8 @@ module Aws::DAX
       :description,
       :vpc_id,
       :subnets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1222,7 +1288,8 @@ module Aws::DAX
     #   @return [String]
     class SubnetGroupAlreadyExistsFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1231,7 +1298,8 @@ module Aws::DAX
     #   @return [String]
     class SubnetGroupInUseFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1241,7 +1309,8 @@ module Aws::DAX
     #   @return [String]
     class SubnetGroupNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1251,7 +1320,8 @@ module Aws::DAX
     #   @return [String]
     class SubnetGroupQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1330,8 @@ module Aws::DAX
     #   @return [String]
     class SubnetInUse < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1270,7 +1341,8 @@ module Aws::DAX
     #   @return [String]
     class SubnetQuotaExceededFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1291,7 +1363,8 @@ module Aws::DAX
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1300,7 +1373,8 @@ module Aws::DAX
     #   @return [String]
     class TagNotFoundFault < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1383,8 @@ module Aws::DAX
     #   @return [String]
     class TagQuotaPerResourceExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1322,7 +1397,8 @@ module Aws::DAX
     class TagResourceRequest < Struct.new(
       :resource_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1407,8 @@ module Aws::DAX
     #   @return [Array<Types::Tag>]
     class TagResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1421,8 @@ module Aws::DAX
     class UntagResourceRequest < Struct.new(
       :resource_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1431,8 @@ module Aws::DAX
     #   @return [Array<Types::Tag>]
     class UntagResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1391,7 +1470,8 @@ module Aws::DAX
       :notification_topic_status,
       :parameter_group_name,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1400,7 +1480,8 @@ module Aws::DAX
     #   @return [Types::Cluster]
     class UpdateClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1418,7 +1499,8 @@ module Aws::DAX
     class UpdateParameterGroupRequest < Struct.new(
       :parameter_group_name,
       :parameter_name_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1427,7 +1509,8 @@ module Aws::DAX
     #   @return [Types::ParameterGroup]
     class UpdateParameterGroupResponse < Struct.new(
       :parameter_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1444,7 +1527,8 @@ module Aws::DAX
       :subnet_group_name,
       :description,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1453,7 +1537,8 @@ module Aws::DAX
     #   @return [Types::SubnetGroup]
     class UpdateSubnetGroupResponse < Struct.new(
       :subnet_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

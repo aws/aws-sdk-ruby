@@ -66,7 +66,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ActivityAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ActivityDoesNotExist] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ActivityLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -107,7 +107,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ActivityWorkerLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ExecutionAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ExecutionDoesNotExist] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -166,7 +166,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ExecutionLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -179,7 +179,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ExecutionNotRedrivable] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -192,7 +192,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::InvalidArn] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -205,7 +205,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::InvalidDefinition] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -218,7 +218,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::InvalidEncryptionConfiguration] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -231,7 +231,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::InvalidExecutionInput] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -244,7 +244,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::InvalidLoggingConfiguration] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -257,7 +257,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::InvalidName] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -270,7 +270,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::InvalidOutput] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -283,7 +283,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::InvalidToken] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -297,7 +297,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::InvalidTracingConfiguration] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -310,7 +310,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::KmsAccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -323,7 +323,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::KmsInvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Current status of the KMS; key. For example: <code>DISABLED</code>, <code>PENDING_DELETION</code>, <code>PENDING_IMPORT</code>, <code>UNAVAILABLE</code>, <code>CREATING</code>.</p>
@@ -341,7 +341,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::KmsThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -355,7 +355,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::MissingRequiredParameter] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -368,7 +368,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ResourceNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -386,7 +386,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -400,7 +400,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::StateMachineAlreadyExists] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -413,7 +413,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::StateMachineDeleting] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -426,7 +426,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::StateMachineDoesNotExist] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -440,7 +440,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::StateMachineLimitExceeded] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -453,7 +453,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::StateMachineTypeNotSupported] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -466,7 +466,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::TaskDoesNotExist] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -479,7 +479,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::TaskTimedOut] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -493,7 +493,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::TooManyTags] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -510,7 +510,7 @@ module Aws::SFN
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SFN::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

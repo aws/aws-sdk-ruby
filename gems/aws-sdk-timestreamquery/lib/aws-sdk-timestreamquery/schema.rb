@@ -678,7 +678,6 @@ module Aws::TimestreamQuery
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => true}}
       end)
-
     end
 
     class << self

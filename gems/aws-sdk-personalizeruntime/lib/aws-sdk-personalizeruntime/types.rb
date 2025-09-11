@@ -38,7 +38,8 @@ module Aws::PersonalizeRuntime
       :num_results,
       :filter_arn,
       :filter_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53,7 +54,8 @@ module Aws::PersonalizeRuntime
     class GetActionRecommendationsResponse < Struct.new(
       :action_list,
       :recommendation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -108,7 +110,8 @@ module Aws::PersonalizeRuntime
       :filter_arn,
       :filter_values,
       :metadata_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -121,7 +124,8 @@ module Aws::PersonalizeRuntime
     class GetPersonalizedRankingResponse < Struct.new(
       :personalized_ranking,
       :recommendation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -190,7 +194,8 @@ module Aws::PersonalizeRuntime
       :recommender_arn,
       :promotions,
       :metadata_columns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -204,7 +209,8 @@ module Aws::PersonalizeRuntime
     class GetRecommendationsResponse < Struct.new(
       :item_list,
       :recommendation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -213,7 +219,8 @@ module Aws::PersonalizeRuntime
     #   @return [String]
     class InvalidInputException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -229,7 +236,8 @@ module Aws::PersonalizeRuntime
     class PredictedAction < Struct.new(
       :action_id,
       :score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +286,8 @@ module Aws::PersonalizeRuntime
       :promotion_name,
       :metadata,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +319,8 @@ module Aws::PersonalizeRuntime
       :percent_promoted_items,
       :filter_arn,
       :filter_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -319,7 +329,8 @@ module Aws::PersonalizeRuntime
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

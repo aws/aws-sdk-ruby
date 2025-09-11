@@ -16,7 +16,8 @@ module Aws::MediaTailor
     class AccessConfiguration < Struct.new(
       :access_type,
       :secrets_manager_access_token_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -46,7 +47,8 @@ module Aws::MediaTailor
       :splice_insert_message,
       :time_signal_message,
       :ad_break_metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -61,7 +63,8 @@ module Aws::MediaTailor
     #   @return [Integer]
     class AdBreakOpportunity < Struct.new(
       :offset_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -76,7 +79,8 @@ module Aws::MediaTailor
     #   @return [String]
     class AdConditioningConfiguration < Struct.new(
       :streaming_media_file_conditioning,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +90,8 @@ module Aws::MediaTailor
     #   @return [Boolean]
     class AdMarkerPassthrough < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -105,7 +110,8 @@ module Aws::MediaTailor
     class AdsInteractionLog < Struct.new(
       :publish_opt_in_event_types,
       :exclude_event_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +141,8 @@ module Aws::MediaTailor
       :related_resource_arns,
       :resource_arn,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,7 +176,8 @@ module Aws::MediaTailor
       :scheduled_start_time_millis,
       :ad_breaks,
       :duration_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -183,7 +191,8 @@ module Aws::MediaTailor
     class AudienceMedia < Struct.new(
       :audience,
       :alternate_media,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -197,7 +206,8 @@ module Aws::MediaTailor
     class AvailMatchingCriteria < Struct.new(
       :dynamic_variable,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -215,7 +225,8 @@ module Aws::MediaTailor
       :mode,
       :value,
       :fill_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +235,8 @@ module Aws::MediaTailor
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -238,7 +250,8 @@ module Aws::MediaTailor
     class Bumper < Struct.new(
       :end_url,
       :start_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -252,7 +265,8 @@ module Aws::MediaTailor
     class CdnConfiguration < Struct.new(
       :ad_segment_url_prefix,
       :content_segment_url_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -306,7 +320,8 @@ module Aws::MediaTailor
       :tier,
       :log_configuration,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -320,7 +335,8 @@ module Aws::MediaTailor
     class ClipRange < Struct.new(
       :end_offset_millis,
       :start_offset_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -338,7 +354,8 @@ module Aws::MediaTailor
     class ConfigureLogsForChannelInput < Struct.new(
       :channel_name,
       :log_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +368,8 @@ module Aws::MediaTailor
     class ConfigureLogsForChannelOutput < Struct.new(
       :channel_name,
       :log_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -377,7 +395,8 @@ module Aws::MediaTailor
       :enabled_logging_strategies,
       :ads_interaction_log,
       :manifest_service_interaction_log,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -402,7 +421,8 @@ module Aws::MediaTailor
       :enabled_logging_strategies,
       :ads_interaction_log,
       :manifest_service_interaction_log,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -444,7 +464,8 @@ module Aws::MediaTailor
       :tier,
       :time_shift_configuration,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -500,7 +521,8 @@ module Aws::MediaTailor
       :tier,
       :time_shift_configuration,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -521,7 +543,8 @@ module Aws::MediaTailor
       :live_source_name,
       :source_location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +577,8 @@ module Aws::MediaTailor
       :live_source_name,
       :source_location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -587,7 +611,8 @@ module Aws::MediaTailor
       :recurring_prefetch_configuration,
       :schedule_type,
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -624,7 +649,8 @@ module Aws::MediaTailor
       :recurring_prefetch_configuration,
       :schedule_type,
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +687,8 @@ module Aws::MediaTailor
       :source_location_name,
       :vod_source_name,
       :audience_media,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +741,8 @@ module Aws::MediaTailor
       :clip_range,
       :duration_millis,
       :audience_media,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -743,7 +771,8 @@ module Aws::MediaTailor
       :segment_delivery_configurations,
       :source_location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +813,8 @@ module Aws::MediaTailor
       :segment_delivery_configurations,
       :source_location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +835,8 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       :vod_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -838,7 +869,8 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       :vod_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +888,8 @@ module Aws::MediaTailor
       :manifest_endpoint_prefix,
       :mpd_location,
       :origin_manifest_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -870,7 +903,8 @@ module Aws::MediaTailor
     class DashConfigurationForPut < Struct.new(
       :mpd_location,
       :origin_manifest_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +926,8 @@ module Aws::MediaTailor
       :min_buffer_time_seconds,
       :min_update_period_seconds,
       :suggested_presentation_delay_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +937,8 @@ module Aws::MediaTailor
     #   @return [String]
     class DefaultSegmentDeliveryConfiguration < Struct.new(
       :base_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,12 +947,14 @@ module Aws::MediaTailor
     #   @return [String]
     class DeleteChannelInput < Struct.new(
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,12 +963,14 @@ module Aws::MediaTailor
     #   @return [String]
     class DeleteChannelPolicyInput < Struct.new(
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -943,12 +983,14 @@ module Aws::MediaTailor
     class DeleteLiveSourceInput < Struct.new(
       :live_source_name,
       :source_location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLiveSourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -957,12 +999,14 @@ module Aws::MediaTailor
     #   @return [String]
     class DeletePlaybackConfigurationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePlaybackConfigurationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,12 +1019,14 @@ module Aws::MediaTailor
     class DeletePrefetchScheduleInput < Struct.new(
       :name,
       :playback_configuration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeletePrefetchScheduleOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,12 +1039,14 @@ module Aws::MediaTailor
     class DeleteProgramInput < Struct.new(
       :channel_name,
       :program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteProgramOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1007,12 +1055,14 @@ module Aws::MediaTailor
     #   @return [String]
     class DeleteSourceLocationInput < Struct.new(
       :source_location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteSourceLocationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1025,12 +1075,14 @@ module Aws::MediaTailor
     class DeleteVodSourceInput < Struct.new(
       :source_location_name,
       :vod_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteVodSourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1039,7 +1091,8 @@ module Aws::MediaTailor
     #   @return [String]
     class DescribeChannelInput < Struct.new(
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1099,7 +1152,8 @@ module Aws::MediaTailor
       :log_configuration,
       :time_shift_configuration,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1166,8 @@ module Aws::MediaTailor
     class DescribeLiveSourceInput < Struct.new(
       :live_source_name,
       :source_location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1200,8 @@ module Aws::MediaTailor
       :live_source_name,
       :source_location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,7 +1214,8 @@ module Aws::MediaTailor
     class DescribeProgramInput < Struct.new(
       :channel_name,
       :program_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1211,7 +1268,8 @@ module Aws::MediaTailor
       :clip_range,
       :duration_millis,
       :audience_media,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1220,7 +1278,8 @@ module Aws::MediaTailor
     #   @return [String]
     class DescribeSourceLocationInput < Struct.new(
       :source_location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1320,8 @@ module Aws::MediaTailor
       :segment_delivery_configurations,
       :source_location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1274,7 +1334,8 @@ module Aws::MediaTailor
     class DescribeVodSourceInput < Struct.new(
       :source_location_name,
       :vod_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1311,7 +1372,8 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       :vod_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1320,7 +1382,8 @@ module Aws::MediaTailor
     #   @return [String]
     class GetChannelPolicyInput < Struct.new(
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1329,7 +1392,8 @@ module Aws::MediaTailor
     #   @return [String]
     class GetChannelPolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1354,7 +1418,8 @@ module Aws::MediaTailor
       :max_results,
       :next_token,
       :audience,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1367,7 +1432,8 @@ module Aws::MediaTailor
     class GetChannelScheduleOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1376,7 +1442,8 @@ module Aws::MediaTailor
     #   @return [String]
     class GetPlaybackConfigurationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1465,7 +1532,8 @@ module Aws::MediaTailor
       :transcode_profile_name,
       :video_content_source_url,
       :ad_conditioning_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1483,7 +1551,8 @@ module Aws::MediaTailor
     class GetPrefetchScheduleInput < Struct.new(
       :name,
       :playback_configuration_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1520,7 +1589,8 @@ module Aws::MediaTailor
       :schedule_type,
       :recurring_prefetch_configuration,
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1530,7 +1600,8 @@ module Aws::MediaTailor
     #   @return [String]
     class HlsConfiguration < Struct.new(
       :manifest_endpoint_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1544,7 +1615,8 @@ module Aws::MediaTailor
     class HlsPlaylistSettings < Struct.new(
       :manifest_window_seconds,
       :ad_markup_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1626,8 @@ module Aws::MediaTailor
     #   @return [String]
     class HttpConfiguration < Struct.new(
       :base_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1572,7 +1645,8 @@ module Aws::MediaTailor
       :path,
       :source_group,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1660,8 @@ module Aws::MediaTailor
     class KeyValuePair < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1603,7 +1678,8 @@ module Aws::MediaTailor
       :max_results,
       :next_token,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1692,8 @@ module Aws::MediaTailor
     class ListAlertsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1629,7 +1706,8 @@ module Aws::MediaTailor
     class ListChannelsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1642,7 +1720,8 @@ module Aws::MediaTailor
     class ListChannelsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1659,7 +1738,8 @@ module Aws::MediaTailor
       :max_results,
       :next_token,
       :source_location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1672,7 +1752,8 @@ module Aws::MediaTailor
     class ListLiveSourcesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1685,7 +1766,8 @@ module Aws::MediaTailor
     class ListPlaybackConfigurationsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1698,7 +1780,8 @@ module Aws::MediaTailor
     class ListPlaybackConfigurationsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1806,8 @@ module Aws::MediaTailor
       :playback_configuration_name,
       :schedule_type,
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1736,7 +1820,8 @@ module Aws::MediaTailor
     class ListPrefetchSchedulesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1749,7 +1834,8 @@ module Aws::MediaTailor
     class ListSourceLocationsInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1762,7 +1848,8 @@ module Aws::MediaTailor
     class ListSourceLocationsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1771,7 +1858,8 @@ module Aws::MediaTailor
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1780,7 +1868,8 @@ module Aws::MediaTailor
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1797,7 +1886,8 @@ module Aws::MediaTailor
       :max_results,
       :next_token,
       :source_location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1810,7 +1900,8 @@ module Aws::MediaTailor
     class ListVodSourcesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1824,7 +1915,8 @@ module Aws::MediaTailor
     class LivePreRollConfiguration < Struct.new(
       :ad_decision_server_url,
       :max_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1858,7 +1950,8 @@ module Aws::MediaTailor
       :live_source_name,
       :source_location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1880,7 +1973,8 @@ module Aws::MediaTailor
       :enabled_logging_strategies,
       :ads_interaction_log,
       :manifest_service_interaction_log,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1895,7 +1989,8 @@ module Aws::MediaTailor
     #   @return [Array<String>]
     class LogConfigurationForChannel < Struct.new(
       :log_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1905,7 +2000,8 @@ module Aws::MediaTailor
     #   @return [Types::AdMarkerPassthrough]
     class ManifestProcessingRules < Struct.new(
       :ad_marker_passthrough,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1915,7 +2011,8 @@ module Aws::MediaTailor
     #   @return [Array<String>]
     class ManifestServiceInteractionLog < Struct.new(
       :exclude_event_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2005,7 +2102,8 @@ module Aws::MediaTailor
       :transcode_profile_name,
       :video_content_source_url,
       :ad_conditioning_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2028,7 +2126,8 @@ module Aws::MediaTailor
       :avail_matching_criteria,
       :end_time,
       :start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2054,7 +2153,8 @@ module Aws::MediaTailor
       :start_time,
       :traffic_shaping_type,
       :traffic_shaping_retrieval_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2092,7 +2192,8 @@ module Aws::MediaTailor
       :schedule_type,
       :recurring_prefetch_configuration,
       :stream_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2105,12 +2206,14 @@ module Aws::MediaTailor
     class PutChannelPolicyInput < Struct.new(
       :channel_name,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutChannelPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2179,7 +2282,8 @@ module Aws::MediaTailor
       :transcode_profile_name,
       :video_content_source_url,
       :ad_conditioning_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2268,7 +2372,8 @@ module Aws::MediaTailor
       :transcode_profile_name,
       :video_content_source_url,
       :ad_conditioning_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2287,7 +2392,8 @@ module Aws::MediaTailor
     class RecurringConsumption < Struct.new(
       :retrieved_ad_expiration_seconds,
       :avail_matching_criteria,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2309,7 +2415,8 @@ module Aws::MediaTailor
       :end_time,
       :recurring_consumption,
       :recurring_retrieval,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2331,7 +2438,8 @@ module Aws::MediaTailor
       :delay_after_avail_end_seconds,
       :traffic_shaping_type,
       :traffic_shaping_retrieval_window,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2353,7 +2461,8 @@ module Aws::MediaTailor
       :hls_playlist_settings,
       :manifest_name,
       :source_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2379,7 +2488,8 @@ module Aws::MediaTailor
       :manifest_name,
       :playback_url,
       :source_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2401,7 +2511,8 @@ module Aws::MediaTailor
       :approximate_start_time,
       :source_location_name,
       :vod_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2526,8 @@ module Aws::MediaTailor
     class ScheduleConfiguration < Struct.new(
       :transition,
       :clip_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2465,7 +2577,8 @@ module Aws::MediaTailor
       :source_location_name,
       :vod_source_name,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2483,7 +2596,8 @@ module Aws::MediaTailor
       :header_name,
       :secret_arn,
       :secret_string_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2497,7 +2611,8 @@ module Aws::MediaTailor
     class SegmentDeliveryConfiguration < Struct.new(
       :base_url,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2535,7 +2650,8 @@ module Aws::MediaTailor
       :segments_expected,
       :sub_segment_num,
       :sub_segments_expected,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2549,7 +2665,8 @@ module Aws::MediaTailor
     class SlateSource < Struct.new(
       :source_location_name,
       :vod_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2591,7 +2708,8 @@ module Aws::MediaTailor
       :segment_delivery_configurations,
       :source_location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2613,7 +2731,8 @@ module Aws::MediaTailor
       :avails_expected,
       :splice_event_id,
       :unique_program_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2622,12 +2741,14 @@ module Aws::MediaTailor
     #   @return [String]
     class StartChannelInput < Struct.new(
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartChannelOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2636,12 +2757,14 @@ module Aws::MediaTailor
     #   @return [String]
     class StopChannelInput < Struct.new(
       :channel_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopChannelOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2654,7 +2777,8 @@ module Aws::MediaTailor
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2664,7 +2788,8 @@ module Aws::MediaTailor
     #   @return [Integer]
     class TimeShiftConfiguration < Struct.new(
       :max_time_delay_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2674,7 +2799,8 @@ module Aws::MediaTailor
     #   @return [Array<Types::SegmentationDescriptor>]
     class TimeSignalMessage < Struct.new(
       :segmentation_descriptors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2684,7 +2810,8 @@ module Aws::MediaTailor
     #   @return [Integer]
     class TrafficShapingRetrievalWindow < Struct.new(
       :retrieval_window_duration_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2710,7 +2837,8 @@ module Aws::MediaTailor
       :relative_program,
       :scheduled_start_time_millis,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2723,7 +2851,8 @@ module Aws::MediaTailor
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2748,7 +2877,8 @@ module Aws::MediaTailor
       :outputs,
       :time_shift_configuration,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2804,7 +2934,8 @@ module Aws::MediaTailor
       :tier,
       :time_shift_configuration,
       :audiences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2821,7 +2952,8 @@ module Aws::MediaTailor
       :http_package_configurations,
       :live_source_name,
       :source_location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2854,7 +2986,8 @@ module Aws::MediaTailor
       :live_source_name,
       :source_location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2879,7 +3012,8 @@ module Aws::MediaTailor
       :program_name,
       :schedule_configuration,
       :audience_media,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2932,7 +3066,8 @@ module Aws::MediaTailor
       :duration_millis,
       :scheduled_start_time,
       :audience_media,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2946,7 +3081,8 @@ module Aws::MediaTailor
     class UpdateProgramScheduleConfiguration < Struct.new(
       :transition,
       :clip_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2960,7 +3096,8 @@ module Aws::MediaTailor
     class UpdateProgramTransition < Struct.new(
       :scheduled_start_time_millis,
       :duration_millis,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2985,7 +3122,8 @@ module Aws::MediaTailor
       :http_configuration,
       :segment_delivery_configurations,
       :source_location_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3026,7 +3164,8 @@ module Aws::MediaTailor
       :segment_delivery_configurations,
       :source_location_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3043,7 +3182,8 @@ module Aws::MediaTailor
       :http_package_configurations,
       :source_location_name,
       :vod_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3076,7 +3216,8 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       :vod_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3110,7 +3251,8 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       :vod_source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

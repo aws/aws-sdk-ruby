@@ -56,7 +56,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -79,7 +79,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -101,7 +101,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::HumanLoopQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The resource type.</p>
@@ -139,7 +139,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::IdempotentParameterMismatchException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -164,7 +164,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::ImageTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -186,7 +186,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::InternalServerError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -208,7 +208,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::InvalidImageFormatException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -230,7 +230,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::InvalidManifestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -252,7 +252,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::InvalidPaginationTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -275,7 +275,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -297,7 +297,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::InvalidPolicyRevisionIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -319,7 +319,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::InvalidS3ObjectException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -345,7 +345,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -368,7 +368,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::MalformedPolicyDocumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -391,7 +391,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::ProvisionedThroughputExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -413,7 +413,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -435,7 +435,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -457,7 +457,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -481,7 +481,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::ResourceNotReadyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -505,7 +505,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -527,7 +527,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::SessionNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -549,7 +549,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -572,7 +572,7 @@ module Aws::Rekognition
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Rekognition::Types::VideoTooLargeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

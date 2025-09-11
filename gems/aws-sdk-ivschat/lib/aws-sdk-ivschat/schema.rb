@@ -519,7 +519,6 @@ module Aws::Ivschat
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateRoom"}}
       end)
-
     end
 
     class << self

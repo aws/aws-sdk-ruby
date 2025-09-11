@@ -11,7 +11,8 @@ module Aws::VPCLattice
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +50,8 @@ module Aws::VPCLattice
       :service_network_log_type,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -59,7 +61,8 @@ module Aws::VPCLattice
     #   @return [String]
     class ArnResource < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +79,8 @@ module Aws::VPCLattice
       :service_identifier,
       :listener_identifier,
       :rules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +93,8 @@ module Aws::VPCLattice
     class BatchUpdateRuleOutput < Struct.new(
       :successful,
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -107,7 +112,8 @@ module Aws::VPCLattice
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -136,7 +142,8 @@ module Aws::VPCLattice
       :destination_arn,
       :service_network_log_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -165,7 +172,8 @@ module Aws::VPCLattice
       :resource_arn,
       :service_network_log_type,
       :destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -204,7 +212,8 @@ module Aws::VPCLattice
       :default_action,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +250,8 @@ module Aws::VPCLattice
       :service_arn,
       :service_id,
       :default_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +324,8 @@ module Aws::VPCLattice
       :allow_association_to_shareable_service_network,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +383,8 @@ module Aws::VPCLattice
       :allow_association_to_shareable_service_network,
       :created_at,
       :failure_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -409,7 +421,8 @@ module Aws::VPCLattice
       :security_group_ids,
       :ip_address_type,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -446,7 +459,8 @@ module Aws::VPCLattice
       :subnet_ids,
       :security_group_ids,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +502,8 @@ module Aws::VPCLattice
       :action,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +535,8 @@ module Aws::VPCLattice
       :match,
       :priority,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +579,8 @@ module Aws::VPCLattice
       :custom_domain_name,
       :certificate_arn,
       :auth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -602,7 +619,8 @@ module Aws::VPCLattice
       :auth_type,
       :tags,
       :sharing_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +645,8 @@ module Aws::VPCLattice
       :arn,
       :sharing_config,
       :auth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,7 +670,8 @@ module Aws::VPCLattice
       :resource_configuration_identifier,
       :service_network_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -672,7 +692,8 @@ module Aws::VPCLattice
       :arn,
       :status,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -696,7 +717,8 @@ module Aws::VPCLattice
       :service_identifier,
       :service_network_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -725,7 +747,8 @@ module Aws::VPCLattice
       :created_by,
       :custom_domain_name,
       :dns_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -757,7 +780,8 @@ module Aws::VPCLattice
       :vpc_identifier,
       :security_group_ids,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -782,7 +806,8 @@ module Aws::VPCLattice
       :arn,
       :created_by,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +845,8 @@ module Aws::VPCLattice
       :status,
       :auth_type,
       :dns_entry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -849,7 +875,8 @@ module Aws::VPCLattice
       :config,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -880,7 +907,8 @@ module Aws::VPCLattice
       :type,
       :config,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,12 +917,14 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteAccessLogSubscriptionInput < Struct.new(
       :access_log_subscription_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessLogSubscriptionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,12 +933,14 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteAuthPolicyInput < Struct.new(
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAuthPolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -921,12 +953,14 @@ module Aws::VPCLattice
     class DeleteListenerInput < Struct.new(
       :service_identifier,
       :listener_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteListenerOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -935,12 +969,14 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteResourceConfigurationRequest < Struct.new(
       :resource_configuration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourceConfigurationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -949,7 +985,8 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteResourceEndpointAssociationRequest < Struct.new(
       :resource_endpoint_association_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1012,8 @@ module Aws::VPCLattice
       :resource_configuration_id,
       :resource_configuration_arn,
       :vpc_endpoint_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1022,8 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteResourceGatewayRequest < Struct.new(
       :resource_gateway_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1044,8 @@ module Aws::VPCLattice
       :arn,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1014,12 +1054,14 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteResourcePolicyInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1036,12 +1078,14 @@ module Aws::VPCLattice
       :service_identifier,
       :listener_identifier,
       :rule_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1050,7 +1094,8 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteServiceInput < Struct.new(
       :service_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,12 +1104,14 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteServiceNetworkInput < Struct.new(
       :service_network_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceNetworkOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1120,8 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteServiceNetworkResourceAssociationRequest < Struct.new(
       :service_network_resource_association_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1138,8 @@ module Aws::VPCLattice
       :id,
       :arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1099,7 +1148,8 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteServiceNetworkServiceAssociationInput < Struct.new(
       :service_network_service_association_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1118,7 +1168,8 @@ module Aws::VPCLattice
       :id,
       :status,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1127,7 +1178,8 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteServiceNetworkVpcAssociationInput < Struct.new(
       :service_network_vpc_association_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1198,8 @@ module Aws::VPCLattice
       :id,
       :status,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1169,7 +1222,8 @@ module Aws::VPCLattice
       :arn,
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1178,7 +1232,8 @@ module Aws::VPCLattice
     #   @return [String]
     class DeleteTargetGroupInput < Struct.new(
       :target_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1197,7 +1252,8 @@ module Aws::VPCLattice
       :id,
       :arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1210,7 +1266,8 @@ module Aws::VPCLattice
     class DeregisterTargetsInput < Struct.new(
       :target_group_identifier,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1223,7 +1280,8 @@ module Aws::VPCLattice
     class DeregisterTargetsOutput < Struct.new(
       :successful,
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1237,7 +1295,8 @@ module Aws::VPCLattice
     class DnsEntry < Struct.new(
       :domain_name,
       :hosted_zone_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1251,7 +1310,8 @@ module Aws::VPCLattice
     class DnsResource < Struct.new(
       :domain_name,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1321,8 @@ module Aws::VPCLattice
     #   @return [Integer]
     class FixedResponseAction < Struct.new(
       :status_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1340,8 @@ module Aws::VPCLattice
     #   @return [Array<Types::WeightedTargetGroup>]
     class ForwardAction < Struct.new(
       :target_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1288,7 +1350,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetAccessLogSubscriptionInput < Struct.new(
       :access_log_subscription_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1325,7 +1388,8 @@ module Aws::VPCLattice
       :service_network_log_type,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1334,7 +1398,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetAuthPolicyInput < Struct.new(
       :resource_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1358,7 +1423,8 @@ module Aws::VPCLattice
       :state,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1371,7 +1437,8 @@ module Aws::VPCLattice
     class GetListenerInput < Struct.new(
       :service_identifier,
       :listener_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1416,7 +1483,8 @@ module Aws::VPCLattice
       :default_action,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1425,7 +1493,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetResourceConfigurationRequest < Struct.new(
       :resource_configuration_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1513,7 +1582,8 @@ module Aws::VPCLattice
       :amazon_managed,
       :failure_reason,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1522,7 +1592,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetResourceGatewayRequest < Struct.new(
       :resource_gateway_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1567,7 +1638,8 @@ module Aws::VPCLattice
       :ip_address_type,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1648,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetResourcePolicyInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1585,7 +1658,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetResourcePolicyOutput < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1602,7 +1676,8 @@ module Aws::VPCLattice
       :service_identifier,
       :listener_identifier,
       :rule_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1643,7 +1718,8 @@ module Aws::VPCLattice
       :action,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1652,7 +1728,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetServiceInput < Struct.new(
       :service_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1661,7 +1738,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetServiceNetworkInput < Struct.new(
       :service_network_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1702,7 +1780,8 @@ module Aws::VPCLattice
       :sharing_config,
       :number_of_associated_vp_cs,
       :number_of_associated_services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1711,7 +1790,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetServiceNetworkResourceAssociationRequest < Struct.new(
       :service_network_resource_association_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1784,7 +1864,8 @@ module Aws::VPCLattice
       :private_dns_entry,
       :dns_entry,
       :is_managed_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1793,7 +1874,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetServiceNetworkServiceAssociationInput < Struct.new(
       :service_network_service_association_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1858,7 +1940,8 @@ module Aws::VPCLattice
       :custom_domain_name,
       :failure_message,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1867,7 +1950,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetServiceNetworkVpcAssociationInput < Struct.new(
       :service_network_vpc_association_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1924,7 +2008,8 @@ module Aws::VPCLattice
       :failure_message,
       :failure_code,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1977,7 +2062,8 @@ module Aws::VPCLattice
       :auth_type,
       :failure_code,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1986,7 +2072,8 @@ module Aws::VPCLattice
     #   @return [String]
     class GetTargetGroupInput < Struct.new(
       :target_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2035,7 +2122,8 @@ module Aws::VPCLattice
       :service_arns,
       :failure_message,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2054,7 +2142,8 @@ module Aws::VPCLattice
       :name,
       :match,
       :case_sensitive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2073,7 +2162,8 @@ module Aws::VPCLattice
       :prefix,
       :contains,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Exact < HeaderMatchType; end
@@ -2136,7 +2226,8 @@ module Aws::VPCLattice
       :healthy_threshold_count,
       :unhealthy_threshold_count,
       :matcher,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2155,7 +2246,8 @@ module Aws::VPCLattice
       :method,
       :path_match,
       :header_matches,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2168,7 +2260,8 @@ module Aws::VPCLattice
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2271,8 @@ module Aws::VPCLattice
     #   @return [String]
     class IpResource < Struct.new(
       :ip_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2195,7 +2289,8 @@ module Aws::VPCLattice
       :resource_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2208,7 +2303,8 @@ module Aws::VPCLattice
     class ListAccessLogSubscriptionsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2225,7 +2321,8 @@ module Aws::VPCLattice
       :service_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2238,7 +2335,8 @@ module Aws::VPCLattice
     class ListListenersOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2259,7 +2357,8 @@ module Aws::VPCLattice
       :resource_configuration_group_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2272,7 +2371,8 @@ module Aws::VPCLattice
     class ListResourceConfigurationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2301,7 +2401,8 @@ module Aws::VPCLattice
       :vpc_endpoint_owner,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2314,7 +2415,8 @@ module Aws::VPCLattice
     class ListResourceEndpointAssociationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2327,7 +2429,8 @@ module Aws::VPCLattice
     class ListResourceGatewaysRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2340,7 +2443,8 @@ module Aws::VPCLattice
     class ListResourceGatewaysResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2361,7 +2465,8 @@ module Aws::VPCLattice
       :listener_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2374,7 +2479,8 @@ module Aws::VPCLattice
     class ListRulesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2395,7 +2501,8 @@ module Aws::VPCLattice
       :resource_configuration_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2408,7 +2515,8 @@ module Aws::VPCLattice
     class ListServiceNetworkResourceAssociationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2429,7 +2537,8 @@ module Aws::VPCLattice
       :service_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2442,7 +2551,8 @@ module Aws::VPCLattice
     class ListServiceNetworkServiceAssociationsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,7 +2573,8 @@ module Aws::VPCLattice
       :vpc_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2476,7 +2587,8 @@ module Aws::VPCLattice
     class ListServiceNetworkVpcAssociationsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2493,7 +2605,8 @@ module Aws::VPCLattice
       :service_network_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2506,7 +2619,8 @@ module Aws::VPCLattice
     class ListServiceNetworkVpcEndpointAssociationsResponse < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2519,7 +2633,8 @@ module Aws::VPCLattice
     class ListServiceNetworksInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2532,7 +2647,8 @@ module Aws::VPCLattice
     class ListServiceNetworksOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2545,7 +2661,8 @@ module Aws::VPCLattice
     class ListServicesInput < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2558,7 +2675,8 @@ module Aws::VPCLattice
     class ListServicesOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2567,7 +2685,8 @@ module Aws::VPCLattice
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2576,7 +2695,8 @@ module Aws::VPCLattice
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2597,7 +2717,8 @@ module Aws::VPCLattice
       :next_token,
       :vpc_identifier,
       :target_group_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2610,7 +2731,8 @@ module Aws::VPCLattice
     class ListTargetGroupsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2631,7 +2753,8 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2644,7 +2767,8 @@ module Aws::VPCLattice
     class ListTargetsOutput < Struct.new(
       :items,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2678,7 +2802,8 @@ module Aws::VPCLattice
       :port,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2690,7 +2815,8 @@ module Aws::VPCLattice
     class Matcher < Struct.new(
       :http_code,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class HttpCode < Matcher; end
@@ -2708,7 +2834,8 @@ module Aws::VPCLattice
     class PathMatch < Struct.new(
       :match,
       :case_sensitive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2724,7 +2851,8 @@ module Aws::VPCLattice
       :exact,
       :prefix,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Exact < PathMatchType; end
@@ -2742,7 +2870,8 @@ module Aws::VPCLattice
     class PutAuthPolicyInput < Struct.new(
       :resource_identifier,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2758,7 +2887,8 @@ module Aws::VPCLattice
     class PutAuthPolicyOutput < Struct.new(
       :policy,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2773,12 +2903,14 @@ module Aws::VPCLattice
     class PutResourcePolicyInput < Struct.new(
       :resource_arn,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class PutResourcePolicyOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2791,7 +2923,8 @@ module Aws::VPCLattice
     class RegisterTargetsInput < Struct.new(
       :target_group_identifier,
       :targets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2804,7 +2937,8 @@ module Aws::VPCLattice
     class RegisterTargetsOutput < Struct.new(
       :successful,
       :unsuccessful,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2823,7 +2957,8 @@ module Aws::VPCLattice
       :ip_resource,
       :arn_resource,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class DnsResource < ResourceConfigurationDefinition; end
@@ -2892,7 +3027,8 @@ module Aws::VPCLattice
       :amazon_managed,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2934,7 +3070,8 @@ module Aws::VPCLattice
       :vpc_endpoint_owner,
       :created_by,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2980,7 +3117,8 @@ module Aws::VPCLattice
       :ip_address_type,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2997,7 +3135,8 @@ module Aws::VPCLattice
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3013,7 +3152,8 @@ module Aws::VPCLattice
       :forward,
       :fixed_response,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Forward < RuleAction; end
@@ -3028,7 +3168,8 @@ module Aws::VPCLattice
     class RuleMatch < Struct.new(
       :http_match,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class HttpMatch < RuleMatch; end
@@ -3065,7 +3206,8 @@ module Aws::VPCLattice
       :priority,
       :created_at,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3087,7 +3229,8 @@ module Aws::VPCLattice
       :match,
       :priority,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3105,7 +3248,8 @@ module Aws::VPCLattice
       :rule_identifier,
       :failure_code,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3139,7 +3283,8 @@ module Aws::VPCLattice
       :match,
       :priority,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3173,7 +3318,8 @@ module Aws::VPCLattice
       :state,
       :service_network_arn,
       :created_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3239,7 +3385,8 @@ module Aws::VPCLattice
       :private_dns_entry,
       :is_managed_association,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3297,7 +3444,8 @@ module Aws::VPCLattice
       :service_network_arn,
       :dns_entry,
       :custom_domain_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3335,7 +3483,8 @@ module Aws::VPCLattice
       :number_of_associated_vp_cs,
       :number_of_associated_services,
       :number_of_associated_resource_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3381,7 +3530,8 @@ module Aws::VPCLattice
       :service_network_arn,
       :vpc_id,
       :last_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3406,7 +3556,8 @@ module Aws::VPCLattice
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3444,7 +3595,8 @@ module Aws::VPCLattice
       :dns_entry,
       :custom_domain_name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3454,7 +3606,8 @@ module Aws::VPCLattice
     #   @return [Boolean]
     class SharingConfig < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3467,12 +3620,14 @@ module Aws::VPCLattice
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3490,7 +3645,8 @@ module Aws::VPCLattice
     class Target < Struct.new(
       :id,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3516,7 +3672,8 @@ module Aws::VPCLattice
       :port,
       :failure_code,
       :failure_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3558,7 +3715,8 @@ module Aws::VPCLattice
       :vpc_identifier,
       :health_check,
       :lambda_event_structure_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3621,7 +3779,8 @@ module Aws::VPCLattice
       :status,
       :service_arns,
       :lambda_event_structure_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3674,7 +3833,8 @@ module Aws::VPCLattice
       :port,
       :status,
       :reason_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3695,7 +3855,8 @@ module Aws::VPCLattice
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3708,12 +3869,14 @@ module Aws::VPCLattice
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3726,7 +3889,8 @@ module Aws::VPCLattice
     class UpdateAccessLogSubscriptionInput < Struct.new(
       :access_log_subscription_identifier,
       :destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3751,7 +3915,8 @@ module Aws::VPCLattice
       :resource_id,
       :resource_arn,
       :destination_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3768,7 +3933,8 @@ module Aws::VPCLattice
       :service_identifier,
       :listener_identifier,
       :default_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3805,7 +3971,8 @@ module Aws::VPCLattice
       :service_arn,
       :service_id,
       :default_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3826,7 +3993,8 @@ module Aws::VPCLattice
       :resource_configuration_definition,
       :allow_association_to_shareable_service_network,
       :port_ranges,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3893,7 +4061,8 @@ module Aws::VPCLattice
       :protocol,
       :status,
       :resource_configuration_definition,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3906,7 +4075,8 @@ module Aws::VPCLattice
     class UpdateResourceGatewayRequest < Struct.new(
       :resource_gateway_identifier,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3943,7 +4113,8 @@ module Aws::VPCLattice
       :subnet_ids,
       :security_group_ids,
       :ip_address_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3972,7 +4143,8 @@ module Aws::VPCLattice
       :match,
       :priority,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4005,7 +4177,8 @@ module Aws::VPCLattice
       :match,
       :priority,
       :action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4032,7 +4205,8 @@ module Aws::VPCLattice
       :service_identifier,
       :certificate_arn,
       :auth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4055,7 +4229,8 @@ module Aws::VPCLattice
     class UpdateServiceNetworkInput < Struct.new(
       :service_network_identifier,
       :auth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4076,7 +4251,8 @@ module Aws::VPCLattice
       :name,
       :arn,
       :auth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4089,7 +4265,8 @@ module Aws::VPCLattice
     class UpdateServiceNetworkVpcAssociationInput < Struct.new(
       :service_network_vpc_association_identifier,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4116,7 +4293,8 @@ module Aws::VPCLattice
       :status,
       :created_by,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4145,7 +4323,8 @@ module Aws::VPCLattice
       :custom_domain_name,
       :certificate_arn,
       :auth_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4158,7 +4337,8 @@ module Aws::VPCLattice
     class UpdateTargetGroupInput < Struct.new(
       :target_group_identifier,
       :health_check,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4187,7 +4367,8 @@ module Aws::VPCLattice
       :type,
       :config,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4205,7 +4386,8 @@ module Aws::VPCLattice
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4219,7 +4401,8 @@ module Aws::VPCLattice
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4238,7 +4421,8 @@ module Aws::VPCLattice
     class WeightedTargetGroup < Struct.new(
       :target_group_identifier,
       :weight,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

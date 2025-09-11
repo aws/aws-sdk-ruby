@@ -22,7 +22,8 @@ module Aws::Translate
     class AppliedTerminology < Struct.new(
       :name,
       :terms,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -32,7 +33,8 @@ module Aws::Translate
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +43,8 @@ module Aws::Translate
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -75,7 +78,8 @@ module Aws::Translate
       :encryption_key,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -89,7 +93,8 @@ module Aws::Translate
     class CreateParallelDataResponse < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +103,8 @@ module Aws::Translate
     #   @return [String]
     class DeleteParallelDataRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -111,7 +117,8 @@ module Aws::Translate
     class DeleteParallelDataResponse < Struct.new(
       :name,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -120,7 +127,8 @@ module Aws::Translate
     #   @return [String]
     class DeleteTerminologyRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +138,8 @@ module Aws::Translate
     #   @return [String]
     class DescribeTextTranslationJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -140,7 +149,8 @@ module Aws::Translate
     #   @return [Types::TextTranslationJobProperties]
     class DescribeTextTranslationJobResponse < Struct.new(
       :text_translation_job_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +166,8 @@ module Aws::Translate
     class DetectedLanguageLowConfidenceException < Struct.new(
       :message,
       :detected_language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +202,8 @@ module Aws::Translate
     class Document < Struct.new(
       :content,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +217,8 @@ module Aws::Translate
     class EncryptionKey < Struct.new(
       :type,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -214,7 +227,8 @@ module Aws::Translate
     #   @return [String]
     class GetParallelDataRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -253,7 +267,8 @@ module Aws::Translate
       :data_location,
       :auxiliary_data_location,
       :latest_update_attempt_auxiliary_data_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -271,7 +286,8 @@ module Aws::Translate
     class GetTerminologyRequest < Struct.new(
       :name,
       :terminology_data_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -303,7 +319,8 @@ module Aws::Translate
       :terminology_properties,
       :terminology_data_location,
       :auxiliary_data_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -337,7 +354,8 @@ module Aws::Translate
       :terminology_data,
       :encryption_key,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -353,7 +371,8 @@ module Aws::Translate
     class ImportTerminologyResponse < Struct.new(
       :terminology_properties,
       :auxiliary_data_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +429,8 @@ module Aws::Translate
     class InputDataConfig < Struct.new(
       :s3_uri,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +439,8 @@ module Aws::Translate
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -428,7 +449,8 @@ module Aws::Translate
     #   @return [String]
     class InvalidFilterException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -438,7 +460,8 @@ module Aws::Translate
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +471,8 @@ module Aws::Translate
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +491,8 @@ module Aws::Translate
       :translated_documents_count,
       :documents_with_errors_count,
       :input_documents_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -481,7 +506,8 @@ module Aws::Translate
     class Language < Struct.new(
       :language_name,
       :language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -491,7 +517,8 @@ module Aws::Translate
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,7 +536,8 @@ module Aws::Translate
       :display_language_code,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +555,8 @@ module Aws::Translate
       :languages,
       :display_language_code,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +569,8 @@ module Aws::Translate
     class ListParallelDataRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -554,7 +584,8 @@ module Aws::Translate
     class ListParallelDataResponse < Struct.new(
       :parallel_data_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +595,8 @@ module Aws::Translate
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +608,8 @@ module Aws::Translate
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -590,7 +623,8 @@ module Aws::Translate
     class ListTerminologiesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -604,7 +638,8 @@ module Aws::Translate
     class ListTerminologiesResponse < Struct.new(
       :terminology_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +657,8 @@ module Aws::Translate
       :filter,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -636,7 +672,8 @@ module Aws::Translate
     class ListTextTranslationJobsResponse < Struct.new(
       :text_translation_job_properties_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,7 +688,8 @@ module Aws::Translate
     class OutputDataConfig < Struct.new(
       :s3_uri,
       :encryption_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -666,7 +704,8 @@ module Aws::Translate
     class ParallelDataConfig < Struct.new(
       :s3_uri,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -692,7 +731,8 @@ module Aws::Translate
     class ParallelDataDataLocation < Struct.new(
       :repository_type,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +813,8 @@ module Aws::Translate
       :last_updated_at,
       :latest_update_attempt_status,
       :latest_update_attempt_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +825,8 @@ module Aws::Translate
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +836,8 @@ module Aws::Translate
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,7 +925,8 @@ module Aws::Translate
       :parallel_data_names,
       :client_token,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -930,7 +974,8 @@ module Aws::Translate
     class StartTextTranslationJobResponse < Struct.new(
       :job_id,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +984,8 @@ module Aws::Translate
     #   @return [String]
     class StopTextTranslationJobRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +999,8 @@ module Aws::Translate
     class StopTextTranslationJobResponse < Struct.new(
       :job_id,
       :job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1015,8 @@ module Aws::Translate
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -983,12 +1031,14 @@ module Aws::Translate
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1002,7 +1052,8 @@ module Aws::Translate
     class Term < Struct.new(
       :source_text,
       :target_text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1093,8 @@ module Aws::Translate
       :file,
       :format,
       :directionality,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1120,8 @@ module Aws::Translate
     class TerminologyDataLocation < Struct.new(
       :repository_type,
       :location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1198,8 @@ module Aws::Translate
       :message,
       :skipped_term_count,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1209,8 @@ module Aws::Translate
     #   @return [String]
     class TextSizeLimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1182,7 +1237,8 @@ module Aws::Translate
       :job_status,
       :submitted_before_time,
       :submitted_after_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1311,8 @@ module Aws::Translate
       :output_data_config,
       :data_access_role_arn,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1322,8 @@ module Aws::Translate
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1277,7 +1335,8 @@ module Aws::Translate
     class TooManyTagsException < Struct.new(
       :message,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1330,7 +1389,8 @@ module Aws::Translate
       :source_language_code,
       :target_language_code,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1368,7 +1428,8 @@ module Aws::Translate
       :target_language_code,
       :applied_terminologies,
       :applied_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1481,8 @@ module Aws::Translate
       :source_language_code,
       :target_language_code,
       :settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1446,7 +1508,8 @@ module Aws::Translate
       :target_language_code,
       :applied_terminologies,
       :applied_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1456,7 +1519,8 @@ module Aws::Translate
     #   @return [String]
     class TranslatedDocument < Struct.new(
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1512,7 +1576,8 @@ module Aws::Translate
       :formality,
       :profanity,
       :brevity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1525,7 +1590,8 @@ module Aws::Translate
     class UnsupportedDisplayLanguageCodeException < Struct.new(
       :message,
       :display_language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1543,7 +1609,8 @@ module Aws::Translate
       :message,
       :source_language_code,
       :target_language_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1559,12 +1626,14 @@ module Aws::Translate
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1586,7 +1655,8 @@ module Aws::Translate
       :description,
       :parallel_data_config,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1610,7 +1680,8 @@ module Aws::Translate
       :status,
       :latest_update_attempt_status,
       :latest_update_attempt_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

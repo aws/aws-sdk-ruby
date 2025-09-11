@@ -40,7 +40,7 @@ module Aws::NetworkFlowMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFlowMonitor::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -53,7 +53,7 @@ module Aws::NetworkFlowMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFlowMonitor::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -66,7 +66,7 @@ module Aws::NetworkFlowMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFlowMonitor::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::NetworkFlowMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFlowMonitor::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::NetworkFlowMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFlowMonitor::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::NetworkFlowMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFlowMonitor::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::NetworkFlowMonitor
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NetworkFlowMonitor::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

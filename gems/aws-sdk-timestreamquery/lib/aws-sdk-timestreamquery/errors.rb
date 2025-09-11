@@ -42,7 +42,7 @@ module Aws::TimestreamQuery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamQuery::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::TimestreamQuery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamQuery::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::TimestreamQuery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamQuery::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::TimestreamQuery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamQuery::Types::InvalidEndpointException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::TimestreamQuery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamQuery::Types::QueryExecutionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::TimestreamQuery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamQuery::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::TimestreamQuery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamQuery::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::TimestreamQuery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamQuery::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::TimestreamQuery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TimestreamQuery::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

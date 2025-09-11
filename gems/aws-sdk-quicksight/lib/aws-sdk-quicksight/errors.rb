@@ -57,7 +57,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -76,7 +76,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::ConcurrentUpdatingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -93,7 +93,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -111,7 +111,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::CustomerManagedKeyUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::DomainNotWhitelistedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -149,7 +149,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::IdentityTypeNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -185,7 +185,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -198,7 +198,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -216,7 +216,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::InvalidParameterValueException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -234,7 +234,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -252,7 +252,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -275,7 +275,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::PreconditionNotMetException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -295,7 +295,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::QuickSightUserNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -313,7 +313,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::ResourceExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -336,7 +336,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -359,7 +359,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::ResourceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -383,7 +383,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::SessionLifetimeInMinutesInvalidException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -401,7 +401,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -427,7 +427,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::UnsupportedPricingPlanException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -448,7 +448,7 @@ module Aws::QuickSight
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::UnsupportedUserEditionException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

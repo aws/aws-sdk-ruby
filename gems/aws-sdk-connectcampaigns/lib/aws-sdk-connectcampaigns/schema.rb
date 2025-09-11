@@ -579,7 +579,6 @@ module Aws::ConnectCampaigns
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/campaigns/{id}/outbound-call-config", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

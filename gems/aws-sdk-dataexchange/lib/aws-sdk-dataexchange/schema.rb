@@ -1416,7 +1416,6 @@ module Aws::DataExchange
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/v1/data-sets/{DataSetId}/revisions/{RevisionId}", "code" => 200}}
       end)
-
     end
 
     class << self

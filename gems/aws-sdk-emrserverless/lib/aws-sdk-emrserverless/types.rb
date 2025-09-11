@@ -100,7 +100,8 @@ module Aws::EMRServerless
       :interactive_configuration,
       :scheduler_configuration,
       :identity_center_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +147,8 @@ module Aws::EMRServerless
       :created_at,
       :updated_at,
       :architecture,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -156,7 +158,8 @@ module Aws::EMRServerless
     #   @return [Boolean]
     class AutoStartConfig < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +173,8 @@ module Aws::EMRServerless
     class AutoStopConfig < Struct.new(
       :enabled,
       :idle_timeout_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -192,7 +196,8 @@ module Aws::EMRServerless
       :application_id,
       :job_run_id,
       :shutdown_grace_period_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -205,7 +210,8 @@ module Aws::EMRServerless
     class CancelJobRunOutput < Struct.new(
       :application_id,
       :job_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +237,8 @@ module Aws::EMRServerless
       :log_stream_name_prefix,
       :encryption_key_arn,
       :log_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -249,7 +256,8 @@ module Aws::EMRServerless
       :classification,
       :properties,
       :configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +271,8 @@ module Aws::EMRServerless
     class ConfigurationOverrides < Struct.new(
       :application_configuration,
       :monitoring_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -272,7 +281,8 @@ module Aws::EMRServerless
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -349,7 +359,8 @@ module Aws::EMRServerless
       :interactive_configuration,
       :scheduler_configuration,
       :identity_center_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +377,8 @@ module Aws::EMRServerless
       :application_id,
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,12 +387,14 @@ module Aws::EMRServerless
     #   @return [String]
     class DeleteApplicationInput < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +403,8 @@ module Aws::EMRServerless
     #   @return [String]
     class GetApplicationInput < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +413,8 @@ module Aws::EMRServerless
     #   @return [Types::Application]
     class GetApplicationOutput < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -419,7 +435,8 @@ module Aws::EMRServerless
       :job_run_id,
       :attempt,
       :access_system_profile_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -428,7 +445,8 @@ module Aws::EMRServerless
     #   @return [String]
     class GetDashboardForJobRunOutput < Struct.new(
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -445,7 +463,8 @@ module Aws::EMRServerless
       :application_id,
       :job_run_id,
       :attempt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -454,7 +473,8 @@ module Aws::EMRServerless
     #   @return [Types::JobRun]
     class GetJobRunOutput < Struct.new(
       :job_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -472,7 +492,8 @@ module Aws::EMRServerless
       :query,
       :init_query_file,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -486,7 +507,8 @@ module Aws::EMRServerless
     class IdentityCenterConfiguration < Struct.new(
       :identity_center_instance_arn,
       :identity_center_application_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -496,7 +518,8 @@ module Aws::EMRServerless
     #   @return [String]
     class IdentityCenterConfigurationInput < Struct.new(
       :identity_center_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -510,7 +533,8 @@ module Aws::EMRServerless
     class ImageConfiguration < Struct.new(
       :image_uri,
       :resolved_image_digest,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +544,8 @@ module Aws::EMRServerless
     #   @return [String]
     class ImageConfigurationInput < Struct.new(
       :image_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -536,7 +561,8 @@ module Aws::EMRServerless
     class InitialCapacityConfig < Struct.new(
       :worker_count,
       :worker_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -555,7 +581,8 @@ module Aws::EMRServerless
     class InteractiveConfiguration < Struct.new(
       :studio_enabled,
       :livy_endpoint_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -564,7 +591,8 @@ module Aws::EMRServerless
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,7 +607,8 @@ module Aws::EMRServerless
       :spark_submit,
       :hive,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class SparkSubmit < JobDriver; end
@@ -701,7 +730,8 @@ module Aws::EMRServerless
       :started_at,
       :ended_at,
       :queued_duration_milliseconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -772,7 +802,8 @@ module Aws::EMRServerless
       :release_label,
       :type,
       :attempt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -786,7 +817,8 @@ module Aws::EMRServerless
     class JobRunExecutionIamPolicy < Struct.new(
       :policy,
       :policy_arns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +888,8 @@ module Aws::EMRServerless
       :attempt,
       :attempt_created_at,
       :attempt_updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +906,8 @@ module Aws::EMRServerless
       :next_token,
       :max_results,
       :states,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +920,8 @@ module Aws::EMRServerless
     class ListApplicationsOutput < Struct.new(
       :applications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -907,7 +942,8 @@ module Aws::EMRServerless
       :job_run_id,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,7 +956,8 @@ module Aws::EMRServerless
     class ListJobRunAttemptsResponse < Struct.new(
       :job_run_attempts,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -953,7 +990,8 @@ module Aws::EMRServerless
       :created_at_before,
       :states,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -966,7 +1004,8 @@ module Aws::EMRServerless
     class ListJobRunsOutput < Struct.new(
       :job_runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -975,7 +1014,8 @@ module Aws::EMRServerless
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -984,7 +1024,8 @@ module Aws::EMRServerless
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -998,7 +1039,8 @@ module Aws::EMRServerless
     class ManagedPersistenceMonitoringConfiguration < Struct.new(
       :enabled,
       :encryption_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1058,8 @@ module Aws::EMRServerless
       :cpu,
       :memory,
       :disk,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1081,8 @@ module Aws::EMRServerless
       :managed_persistence_monitoring_configuration,
       :cloud_watch_logging_configuration,
       :prometheus_monitoring_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1052,7 +1096,8 @@ module Aws::EMRServerless
     class NetworkConfiguration < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1062,7 +1107,8 @@ module Aws::EMRServerless
     #   @return [String]
     class PrometheusMonitoringConfiguration < Struct.new(
       :remote_write_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1071,7 +1117,8 @@ module Aws::EMRServerless
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1089,7 +1136,8 @@ module Aws::EMRServerless
       :v_cpu_hour,
       :memory_gb_hour,
       :storage_gb_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1103,7 +1151,8 @@ module Aws::EMRServerless
     class RetryPolicy < Struct.new(
       :max_attempts,
       :max_failed_attempts_per_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1122,7 +1171,8 @@ module Aws::EMRServerless
     class S3MonitoringConfiguration < Struct.new(
       :log_uri,
       :encryption_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1186,8 @@ module Aws::EMRServerless
     class SchedulerConfiguration < Struct.new(
       :queue_timeout_minutes,
       :max_concurrent_runs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1196,8 @@ module Aws::EMRServerless
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1215,8 @@ module Aws::EMRServerless
       :entry_point,
       :entry_point_arguments,
       :spark_submit_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1172,12 +1225,14 @@ module Aws::EMRServerless
     #   @return [String]
     class StartApplicationInput < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartApplicationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1226,7 +1281,8 @@ module Aws::EMRServerless
       :name,
       :mode,
       :retry_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1299,8 @@ module Aws::EMRServerless
       :application_id,
       :job_run_id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1252,12 +1309,14 @@ module Aws::EMRServerless
     #   @return [String]
     class StopApplicationInput < Struct.new(
       :application_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopApplicationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1270,12 +1329,14 @@ module Aws::EMRServerless
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1354,8 @@ module Aws::EMRServerless
       :v_cpu_hour,
       :memory_gb_hour,
       :storage_gb_hour,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1306,12 +1368,14 @@ module Aws::EMRServerless
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1380,7 +1444,8 @@ module Aws::EMRServerless
       :monitoring_configuration,
       :scheduler_configuration,
       :identity_center_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1389,7 +1454,8 @@ module Aws::EMRServerless
     #   @return [Types::Application]
     class UpdateApplicationOutput < Struct.new(
       :application,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1398,7 +1464,8 @@ module Aws::EMRServerless
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1487,8 @@ module Aws::EMRServerless
       :memory,
       :disk,
       :disk_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1430,7 +1498,8 @@ module Aws::EMRServerless
     #   @return [Types::ImageConfiguration]
     class WorkerTypeSpecification < Struct.new(
       :image_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1509,8 @@ module Aws::EMRServerless
     #   @return [Types::ImageConfigurationInput]
     class WorkerTypeSpecificationInput < Struct.new(
       :image_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

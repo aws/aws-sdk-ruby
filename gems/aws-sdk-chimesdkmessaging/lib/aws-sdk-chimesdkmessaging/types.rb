@@ -20,7 +20,8 @@ module Aws::ChimeSDKMessaging
       :type,
       :read_marker_timestamp,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -37,7 +38,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :channel_flow_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -49,7 +51,8 @@ module Aws::ChimeSDKMessaging
     class BadRequestException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +79,8 @@ module Aws::ChimeSDKMessaging
       :members,
       :channel_arn,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +98,8 @@ module Aws::ChimeSDKMessaging
       :member_arn,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -128,7 +133,8 @@ module Aws::ChimeSDKMessaging
       :member_arns,
       :chime_bearer,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +148,8 @@ module Aws::ChimeSDKMessaging
     class BatchCreateChannelMembershipResponse < Struct.new(
       :batch_channel_memberships,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -196,7 +203,8 @@ module Aws::ChimeSDKMessaging
       :channel_flow_arn,
       :elastic_channel_configuration,
       :expiration_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -222,7 +230,8 @@ module Aws::ChimeSDKMessaging
       :mode,
       :privacy,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -244,7 +253,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :created_timestamp,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +264,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::Identity]
     class ChannelBanSummary < Struct.new(
       :member,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +291,8 @@ module Aws::ChimeSDKMessaging
       :name,
       :created_timestamp,
       :last_updated_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +313,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :delete_resource,
       :channel_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -314,7 +327,8 @@ module Aws::ChimeSDKMessaging
     class ChannelFlowCallbackResponse < Struct.new(
       :channel_arn,
       :callback_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -332,7 +346,8 @@ module Aws::ChimeSDKMessaging
       :channel_flow_arn,
       :name,
       :processors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -366,7 +381,8 @@ module Aws::ChimeSDKMessaging
       :created_timestamp,
       :last_updated_timestamp,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -380,7 +396,8 @@ module Aws::ChimeSDKMessaging
     class ChannelMembershipForAppInstanceUserSummary < Struct.new(
       :channel_summary,
       :app_instance_user_membership_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -390,7 +407,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::PushNotificationPreferences]
     class ChannelMembershipPreferences < Struct.new(
       :push_notifications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -400,7 +418,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::Identity]
     class ChannelMembershipSummary < Struct.new(
       :member,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -478,7 +497,8 @@ module Aws::ChimeSDKMessaging
       :sub_channel_id,
       :content_type,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -524,7 +544,8 @@ module Aws::ChimeSDKMessaging
       :message_attributes,
       :sub_channel_id,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +559,8 @@ module Aws::ChimeSDKMessaging
     class ChannelMessageStatusStructure < Struct.new(
       :value,
       :detail,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -605,7 +627,8 @@ module Aws::ChimeSDKMessaging
       :message_attributes,
       :content_type,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -620,7 +643,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelSummary]
     class ChannelModeratedByAppInstanceUserSummary < Struct.new(
       :channel_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -642,7 +666,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :created_timestamp,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +677,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::Identity]
     class ChannelModeratorSummary < Struct.new(
       :moderator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +708,8 @@ module Aws::ChimeSDKMessaging
       :privacy,
       :metadata,
       :last_message_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -695,7 +722,8 @@ module Aws::ChimeSDKMessaging
     class ConflictException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -712,7 +740,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :member_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -726,7 +755,8 @@ module Aws::ChimeSDKMessaging
     class CreateChannelBanResponse < Struct.new(
       :channel_arn,
       :member,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -751,7 +781,8 @@ module Aws::ChimeSDKMessaging
       :name,
       :tags,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -760,7 +791,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class CreateChannelFlowResponse < Struct.new(
       :channel_flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +825,8 @@ module Aws::ChimeSDKMessaging
       :type,
       :chime_bearer,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -810,7 +843,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :member,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +862,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :channel_moderator_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +876,8 @@ module Aws::ChimeSDKMessaging
     class CreateChannelModeratorResponse < Struct.new(
       :channel_arn,
       :channel_moderator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -902,7 +938,8 @@ module Aws::ChimeSDKMessaging
       :moderator_arns,
       :elastic_channel_configuration,
       :expiration_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -911,7 +948,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class CreateChannelResponse < Struct.new(
       :channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +967,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :member_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -938,7 +977,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class DeleteChannelFlowRequest < Struct.new(
       :channel_flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -963,7 +1003,8 @@ module Aws::ChimeSDKMessaging
       :member_arn,
       :chime_bearer,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1029,8 @@ module Aws::ChimeSDKMessaging
       :message_id,
       :chime_bearer,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1006,7 +1048,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :channel_moderator_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1063,8 @@ module Aws::ChimeSDKMessaging
     class DeleteChannelRequest < Struct.new(
       :channel_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1029,7 +1073,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class DeleteMessagingStreamingConfigurationsRequest < Struct.new(
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1047,7 +1092,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :member_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1056,7 +1102,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelBan]
     class DescribeChannelBanResponse < Struct.new(
       :channel_ban,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1065,7 +1112,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class DescribeChannelFlowRequest < Struct.new(
       :channel_flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1074,7 +1122,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelFlow]
     class DescribeChannelFlowResponse < Struct.new(
       :channel_flow,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1092,7 +1141,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :app_instance_user_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1101,7 +1151,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelMembershipForAppInstanceUserSummary]
     class DescribeChannelMembershipForAppInstanceUserResponse < Struct.new(
       :channel_membership,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1126,7 +1177,8 @@ module Aws::ChimeSDKMessaging
       :member_arn,
       :chime_bearer,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1135,7 +1187,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelMembership]
     class DescribeChannelMembershipResponse < Struct.new(
       :channel_membership,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1153,7 +1206,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :app_instance_user_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1216,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelModeratedByAppInstanceUserSummary]
     class DescribeChannelModeratedByAppInstanceUserResponse < Struct.new(
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1180,7 +1235,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :channel_moderator_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1189,7 +1245,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelModerator]
     class DescribeChannelModeratorResponse < Struct.new(
       :channel_moderator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1203,7 +1260,8 @@ module Aws::ChimeSDKMessaging
     class DescribeChannelRequest < Struct.new(
       :channel_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1270,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::Channel]
     class DescribeChannelResponse < Struct.new(
       :channel,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1229,7 +1288,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :channel_flow_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1247,7 +1307,8 @@ module Aws::ChimeSDKMessaging
       :maximum_sub_channels,
       :target_memberships_per_sub_channel,
       :minimum_membership_percentage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1322,8 @@ module Aws::ChimeSDKMessaging
     class ExpirationSettings < Struct.new(
       :expiration_days,
       :expiration_criterion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1273,7 +1335,8 @@ module Aws::ChimeSDKMessaging
     class ForbiddenException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1290,7 +1353,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :member_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1307,7 +1371,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :member,
       :preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1332,7 +1397,8 @@ module Aws::ChimeSDKMessaging
       :message_id,
       :chime_bearer,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1341,7 +1407,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelMessage]
     class GetChannelMessageResponse < Struct.new(
       :channel_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1365,7 +1432,8 @@ module Aws::ChimeSDKMessaging
       :message_id,
       :chime_bearer,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1374,12 +1442,14 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelMessageStatusStructure]
     class GetChannelMessageStatusResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class GetMessagingSessionEndpointRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1388,7 +1458,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::MessagingSessionEndpoint]
     class GetMessagingSessionEndpointResponse < Struct.new(
       :endpoint,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1397,7 +1468,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class GetMessagingStreamingConfigurationsRequest < Struct.new(
       :app_instance_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1406,7 +1478,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Array<Types::StreamingConfiguration>]
     class GetMessagingStreamingConfigurationsResponse < Struct.new(
       :streaming_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1420,7 +1493,8 @@ module Aws::ChimeSDKMessaging
     class Identity < Struct.new(
       :arn,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1434,7 +1508,8 @@ module Aws::ChimeSDKMessaging
     class LambdaConfiguration < Struct.new(
       :resource_arn,
       :invocation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1456,7 +1531,8 @@ module Aws::ChimeSDKMessaging
       :max_results,
       :next_token,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1473,7 +1549,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :next_token,
       :channel_bans,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1490,7 +1567,8 @@ module Aws::ChimeSDKMessaging
       :app_instance_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1503,7 +1581,8 @@ module Aws::ChimeSDKMessaging
     class ListChannelFlowsResponse < Struct.new(
       :channel_flows,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1526,7 +1605,8 @@ module Aws::ChimeSDKMessaging
       :max_results,
       :next_token,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1539,7 +1619,8 @@ module Aws::ChimeSDKMessaging
     class ListChannelMembershipsForAppInstanceUserResponse < Struct.new(
       :channel_memberships,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1657,8 @@ module Aws::ChimeSDKMessaging
       :next_token,
       :chime_bearer,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1594,7 +1676,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :channel_memberships,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1636,7 +1719,8 @@ module Aws::ChimeSDKMessaging
       :next_token,
       :chime_bearer,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1657,7 +1741,8 @@ module Aws::ChimeSDKMessaging
       :next_token,
       :channel_messages,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1765,8 @@ module Aws::ChimeSDKMessaging
       :max_results,
       :next_token,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1698,7 +1784,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :next_token,
       :channel_moderators,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1715,7 +1802,8 @@ module Aws::ChimeSDKMessaging
       :channel_flow_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1728,7 +1816,8 @@ module Aws::ChimeSDKMessaging
     class ListChannelsAssociatedWithChannelFlowResponse < Struct.new(
       :channels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1751,7 +1840,8 @@ module Aws::ChimeSDKMessaging
       :max_results,
       :next_token,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1765,7 +1855,8 @@ module Aws::ChimeSDKMessaging
     class ListChannelsModeratedByAppInstanceUserResponse < Struct.new(
       :channels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1793,7 +1884,8 @@ module Aws::ChimeSDKMessaging
       :max_results,
       :next_token,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1807,7 +1899,8 @@ module Aws::ChimeSDKMessaging
     class ListChannelsResponse < Struct.new(
       :channels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1828,7 +1921,8 @@ module Aws::ChimeSDKMessaging
       :chime_bearer,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1845,7 +1939,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :sub_channels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1854,7 +1949,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1959,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1873,7 +1970,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Array<String>]
     class MessageAttributeValue < Struct.new(
       :string_values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1883,7 +1981,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class MessagingSessionEndpoint < Struct.new(
       :url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1895,7 +1994,8 @@ module Aws::ChimeSDKMessaging
     class NotFoundException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1920,7 +2020,8 @@ module Aws::ChimeSDKMessaging
       :configuration,
       :execution_order,
       :fallback_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1930,7 +2031,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::LambdaConfiguration]
     class ProcessorConfiguration < Struct.new(
       :lambda,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1950,7 +2052,8 @@ module Aws::ChimeSDKMessaging
       :title,
       :body,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1966,7 +2069,8 @@ module Aws::ChimeSDKMessaging
     class PushNotificationPreferences < Struct.new(
       :allow_notifications,
       :filter_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1983,7 +2087,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :chime_bearer,
       :expiration_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1996,7 +2101,8 @@ module Aws::ChimeSDKMessaging
     class PutChannelExpirationSettingsResponse < Struct.new(
       :channel_arn,
       :expiration_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2017,7 +2123,8 @@ module Aws::ChimeSDKMessaging
       :member_arn,
       :chime_bearer,
       :preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2034,7 +2141,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :member,
       :preferences,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2047,7 +2155,8 @@ module Aws::ChimeSDKMessaging
     class PutMessagingStreamingConfigurationsRequest < Struct.new(
       :app_instance_arn,
       :streaming_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2056,7 +2165,8 @@ module Aws::ChimeSDKMessaging
     #   @return [Array<Types::StreamingConfiguration>]
     class PutMessagingStreamingConfigurationsResponse < Struct.new(
       :streaming_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2078,7 +2188,8 @@ module Aws::ChimeSDKMessaging
       :message_id,
       :chime_bearer,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2098,7 +2209,8 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :message_id,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2110,7 +2222,8 @@ module Aws::ChimeSDKMessaging
     class ResourceLimitExceededException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2131,7 +2244,8 @@ module Aws::ChimeSDKMessaging
       :fields,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2144,7 +2258,8 @@ module Aws::ChimeSDKMessaging
     class SearchChannelsResponse < Struct.new(
       :channels,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2167,7 +2282,8 @@ module Aws::ChimeSDKMessaging
       :key,
       :values,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2228,7 +2344,8 @@ module Aws::ChimeSDKMessaging
       :sub_channel_id,
       :content_type,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2249,7 +2366,8 @@ module Aws::ChimeSDKMessaging
       :message_id,
       :status,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2261,7 +2379,8 @@ module Aws::ChimeSDKMessaging
     class ServiceFailureException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2273,7 +2392,8 @@ module Aws::ChimeSDKMessaging
     class ServiceUnavailableException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2287,7 +2407,8 @@ module Aws::ChimeSDKMessaging
     class StreamingConfiguration < Struct.new(
       :data_type,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2301,7 +2422,8 @@ module Aws::ChimeSDKMessaging
     class SubChannelSummary < Struct.new(
       :sub_channel_id,
       :membership_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2315,7 +2437,8 @@ module Aws::ChimeSDKMessaging
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2328,7 +2451,8 @@ module Aws::ChimeSDKMessaging
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2339,7 +2463,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class Target < Struct.new(
       :member_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2351,7 +2476,8 @@ module Aws::ChimeSDKMessaging
     class ThrottledClientException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2363,7 +2489,8 @@ module Aws::ChimeSDKMessaging
     class UnauthorizedClientException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2376,7 +2503,8 @@ module Aws::ChimeSDKMessaging
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2393,7 +2521,8 @@ module Aws::ChimeSDKMessaging
       :channel_flow_arn,
       :processors,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2402,7 +2531,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class UpdateChannelFlowResponse < Struct.new(
       :channel_flow_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,7 +2569,8 @@ module Aws::ChimeSDKMessaging
       :chime_bearer,
       :sub_channel_id,
       :content_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2460,7 +2591,8 @@ module Aws::ChimeSDKMessaging
       :message_id,
       :status,
       :sub_channel_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2474,7 +2606,8 @@ module Aws::ChimeSDKMessaging
     class UpdateChannelReadMarkerRequest < Struct.new(
       :channel_arn,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2483,7 +2616,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class UpdateChannelReadMarkerResponse < Struct.new(
       :channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2509,7 +2643,8 @@ module Aws::ChimeSDKMessaging
       :mode,
       :metadata,
       :chime_bearer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2518,7 +2653,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     class UpdateChannelResponse < Struct.new(
       :channel_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

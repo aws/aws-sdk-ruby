@@ -11,7 +11,8 @@ module Aws::Synthetics
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -27,7 +28,8 @@ module Aws::Synthetics
     #   @return [Types::S3EncryptionConfig]
     class ArtifactConfigInput < Struct.new(
       :s3_encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +40,8 @@ module Aws::Synthetics
     #   @return [Types::S3EncryptionConfig]
     class ArtifactConfigOutput < Struct.new(
       :s3_encryption,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -52,12 +55,14 @@ module Aws::Synthetics
     class AssociateResourceRequest < Struct.new(
       :group_identifier,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class AssociateResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +71,8 @@ module Aws::Synthetics
     #   @return [String]
     class BadRequestException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -86,7 +92,8 @@ module Aws::Synthetics
     class BaseScreenshot < Struct.new(
       :screenshot_name,
       :ignore_coordinates,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -96,7 +103,8 @@ module Aws::Synthetics
     #   @return [String]
     class BrowserConfig < Struct.new(
       :browser_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -224,7 +232,8 @@ module Aws::Synthetics
       :tags,
       :artifact_config,
       :dry_run_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +301,8 @@ module Aws::Synthetics
       :zip_file,
       :handler,
       :dependencies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -311,7 +321,8 @@ module Aws::Synthetics
       :source_location_arn,
       :handler,
       :dependencies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +332,8 @@ module Aws::Synthetics
     #   @return [String]
     class CanaryDryRunConfigOutput < Struct.new(
       :dry_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -335,7 +347,8 @@ module Aws::Synthetics
     class CanaryLastRun < Struct.new(
       :canary_name,
       :last_run,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -378,7 +391,8 @@ module Aws::Synthetics
       :artifact_s3_location,
       :dry_run_config,
       :browser_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +440,8 @@ module Aws::Synthetics
       :active_tracing,
       :environment_variables,
       :ephemeral_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -449,7 +464,8 @@ module Aws::Synthetics
       :memory_in_mb,
       :active_tracing,
       :ephemeral_storage,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +491,8 @@ module Aws::Synthetics
       :state_reason,
       :state_reason_code,
       :test_result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +510,8 @@ module Aws::Synthetics
       :started,
       :completed,
       :metric_timestamp_for_run_and_retries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -527,7 +545,8 @@ module Aws::Synthetics
       :expression,
       :duration_in_seconds,
       :retry_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -561,7 +580,8 @@ module Aws::Synthetics
       :expression,
       :duration_in_seconds,
       :retry_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -579,7 +599,8 @@ module Aws::Synthetics
       :state,
       :state_reason,
       :state_reason_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +622,8 @@ module Aws::Synthetics
       :last_modified,
       :last_started,
       :last_stopped,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +632,8 @@ module Aws::Synthetics
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -765,7 +788,8 @@ module Aws::Synthetics
       :browser_configs,
       :tags,
       :artifact_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +798,8 @@ module Aws::Synthetics
     #   @return [Types::Canary]
     class CreateCanaryResponse < Struct.new(
       :canary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +818,8 @@ module Aws::Synthetics
     class CreateGroupRequest < Struct.new(
       :name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -802,7 +828,8 @@ module Aws::Synthetics
     #   @return [Types::Group]
     class CreateGroupResponse < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,12 +847,14 @@ module Aws::Synthetics
     class DeleteCanaryRequest < Struct.new(
       :name,
       :delete_lambda,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteCanaryResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -835,12 +864,14 @@ module Aws::Synthetics
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
       :group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -855,7 +886,8 @@ module Aws::Synthetics
     class Dependency < Struct.new(
       :type,
       :reference,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -887,7 +919,8 @@ module Aws::Synthetics
       :max_results,
       :names,
       :browser_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +936,8 @@ module Aws::Synthetics
     class DescribeCanariesLastRunResponse < Struct.new(
       :canaries_last_run,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +965,8 @@ module Aws::Synthetics
       :next_token,
       :max_results,
       :names,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -947,7 +982,8 @@ module Aws::Synthetics
     class DescribeCanariesResponse < Struct.new(
       :canaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -963,7 +999,8 @@ module Aws::Synthetics
     class DescribeRuntimeVersionsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -979,7 +1016,8 @@ module Aws::Synthetics
     class DescribeRuntimeVersionsResponse < Struct.new(
       :runtime_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -993,12 +1031,14 @@ module Aws::Synthetics
     class DisassociateResourceRequest < Struct.new(
       :group_identifier,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DisassociateResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1012,7 +1052,8 @@ module Aws::Synthetics
     class DryRunConfigOutput < Struct.new(
       :dry_run_id,
       :last_dry_run_execution_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1027,7 +1068,8 @@ module Aws::Synthetics
     class EngineConfig < Struct.new(
       :engine_arn,
       :browser_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1082,8 @@ module Aws::Synthetics
     class GetCanaryRequest < Struct.new(
       :name,
       :dry_run_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1092,8 @@ module Aws::Synthetics
     #   @return [Types::Canary]
     class GetCanaryResponse < Struct.new(
       :canary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1097,7 +1141,8 @@ module Aws::Synthetics
       :max_results,
       :dry_run_id,
       :run_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,7 +1159,8 @@ module Aws::Synthetics
     class GetCanaryRunsResponse < Struct.new(
       :canary_runs,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1170,8 @@ module Aws::Synthetics
     #   @return [String]
     class GetGroupRequest < Struct.new(
       :group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1133,7 +1180,8 @@ module Aws::Synthetics
     #   @return [Types::Group]
     class GetGroupResponse < Struct.new(
       :group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1163,7 +1211,8 @@ module Aws::Synthetics
       :tags,
       :created_time,
       :last_modified_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1181,7 +1230,8 @@ module Aws::Synthetics
       :id,
       :name,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1240,8 @@ module Aws::Synthetics
     #   @return [String]
     class InternalFailureException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1250,8 @@ module Aws::Synthetics
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1219,7 +1271,8 @@ module Aws::Synthetics
       :next_token,
       :max_results,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1234,7 +1287,8 @@ module Aws::Synthetics
     class ListAssociatedGroupsResponse < Struct.new(
       :groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1255,7 +1309,8 @@ module Aws::Synthetics
       :next_token,
       :max_results,
       :group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1270,7 +1325,8 @@ module Aws::Synthetics
     class ListGroupResourcesResponse < Struct.new(
       :resources,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1286,7 +1342,8 @@ module Aws::Synthetics
     class ListGroupsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1301,7 +1358,8 @@ module Aws::Synthetics
     class ListGroupsResponse < Struct.new(
       :groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1317,7 +1375,8 @@ module Aws::Synthetics
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1326,7 +1385,8 @@ module Aws::Synthetics
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1335,7 +1395,8 @@ module Aws::Synthetics
     #   @return [String]
     class NotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,7 +1405,8 @@ module Aws::Synthetics
     #   @return [String]
     class RequestEntityTooLargeException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1353,7 +1415,8 @@ module Aws::Synthetics
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1370,7 +1433,8 @@ module Aws::Synthetics
     #   @return [Integer]
     class RetryConfigInput < Struct.new(
       :max_retries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1380,7 +1444,8 @@ module Aws::Synthetics
     #   @return [Integer]
     class RetryConfigOutput < Struct.new(
       :max_retries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1406,7 +1471,8 @@ module Aws::Synthetics
       :description,
       :release_date,
       :deprecation_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1431,7 +1497,8 @@ module Aws::Synthetics
     class S3EncryptionConfig < Struct.new(
       :encryption_mode,
       :kms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1507,8 @@ module Aws::Synthetics
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1562,7 +1630,8 @@ module Aws::Synthetics
       :provisioned_resource_cleanup,
       :browser_configs,
       :visual_references,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1571,7 +1640,8 @@ module Aws::Synthetics
     #   @return [Types::DryRunConfigOutput]
     class StartCanaryDryRunResponse < Struct.new(
       :dry_run_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1581,12 +1651,14 @@ module Aws::Synthetics
     #   @return [String]
     class StartCanaryRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartCanaryResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1596,12 +1668,14 @@ module Aws::Synthetics
     #   @return [String]
     class StopCanaryRequest < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopCanaryResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,12 +1695,14 @@ module Aws::Synthetics
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1635,7 +1711,8 @@ module Aws::Synthetics
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1655,12 +1732,14 @@ module Aws::Synthetics
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1820,12 +1899,14 @@ module Aws::Synthetics
       :dry_run_id,
       :visual_references,
       :browser_configs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateCanaryResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1915,8 @@ module Aws::Synthetics
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1863,7 +1945,8 @@ module Aws::Synthetics
       :base_screenshots,
       :base_canary_run_id,
       :browser_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1884,7 +1967,8 @@ module Aws::Synthetics
       :base_screenshots,
       :base_canary_run_id,
       :browser_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1906,7 +1990,8 @@ module Aws::Synthetics
       :subnet_ids,
       :security_group_ids,
       :ipv6_allowed_for_dual_stack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1931,7 +2016,8 @@ module Aws::Synthetics
       :subnet_ids,
       :security_group_ids,
       :ipv6_allowed_for_dual_stack,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

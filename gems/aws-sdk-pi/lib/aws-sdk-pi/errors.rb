@@ -36,7 +36,7 @@ module Aws::PI
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PI::Types::InternalServiceError] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -49,7 +49,7 @@ module Aws::PI
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PI::Types::InvalidArgumentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::PI
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PI::Types::NotAuthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

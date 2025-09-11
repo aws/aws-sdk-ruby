@@ -44,7 +44,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::ConnectorFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::ConnectorTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -96,7 +96,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -109,7 +109,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::QueryTimeoutException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -152,7 +152,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -165,7 +165,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -178,7 +178,7 @@ module Aws::IoTTwinMaker
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IoTTwinMaker::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

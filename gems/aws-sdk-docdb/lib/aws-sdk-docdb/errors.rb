@@ -91,7 +91,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::AuthorizationNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -105,7 +105,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::CertificateNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -118,7 +118,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -132,7 +132,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -146,7 +146,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBClusterParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -159,7 +159,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBClusterQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -172,7 +172,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBClusterSnapshotAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -186,7 +186,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBClusterSnapshotNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -199,7 +199,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBInstanceAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -213,7 +213,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBInstanceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -226,7 +226,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBParameterGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -240,7 +240,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBParameterGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -253,7 +253,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBParameterGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -267,7 +267,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBSecurityGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -281,7 +281,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBSnapshotAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -295,7 +295,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBSnapshotNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -309,7 +309,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBSubnetGroupAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -322,7 +322,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBSubnetGroupDoesNotCoverEnoughAZs] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -336,7 +336,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBSubnetGroupNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -349,7 +349,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBSubnetGroupQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -362,7 +362,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBSubnetQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -376,7 +376,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::DBUpgradeDependencyFailureFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -389,7 +389,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::EventSubscriptionQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -402,7 +402,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::GlobalClusterAlreadyExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -415,7 +415,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::GlobalClusterNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -428,7 +428,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::GlobalClusterQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -441,7 +441,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InstanceQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -454,7 +454,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InsufficientDBClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -467,7 +467,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InsufficientDBInstanceCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -480,7 +480,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InsufficientStorageClusterCapacityFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -493,7 +493,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidDBClusterSnapshotStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -506,7 +506,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidDBClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -520,7 +520,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidDBInstanceStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -533,7 +533,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidDBParameterGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -546,7 +546,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidDBSecurityGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -559,7 +559,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidDBSnapshotStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -572,7 +572,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidDBSubnetGroupStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -585,7 +585,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidDBSubnetStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -599,7 +599,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidEventSubscriptionStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -612,7 +612,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidGlobalClusterStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -626,7 +626,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidRestoreFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -640,7 +640,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidSubnet] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -654,7 +654,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::InvalidVPCNetworkStateFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -667,7 +667,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::KMSKeyNotAccessibleFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -680,7 +680,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::ResourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -693,7 +693,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::SNSInvalidTopicFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -706,7 +706,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::SNSNoAuthorizationFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -719,7 +719,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::SNSTopicArnNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -733,7 +733,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::SharedSnapshotQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -746,7 +746,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::SnapshotQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -759,7 +759,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::SourceNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -773,7 +773,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::StorageQuotaExceededFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -787,7 +787,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::StorageTypeNotSupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -800,7 +800,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::SubnetAlreadyInUse] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -813,7 +813,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::SubscriptionAlreadyExistFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -826,7 +826,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::SubscriptionCategoryNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -839,7 +839,7 @@ module Aws::DocDB
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::SubscriptionNotFoundFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

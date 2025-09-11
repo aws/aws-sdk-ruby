@@ -46,7 +46,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -59,7 +59,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::ApiKeyLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::ApiKeyValidityOutOfBoundsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::ApiLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -100,7 +100,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -122,7 +122,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -137,7 +137,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -150,7 +150,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::GraphQLSchemaException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -163,7 +163,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::InternalFailureException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -176,7 +176,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -190,7 +190,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -203,7 +203,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -216,7 +216,7 @@ module Aws::AppSync
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppSync::Types::UnauthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

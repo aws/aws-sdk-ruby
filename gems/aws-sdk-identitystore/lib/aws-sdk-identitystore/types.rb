@@ -17,7 +17,8 @@ module Aws::Identitystore
     class AccessDeniedException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -60,7 +61,8 @@ module Aws::Identitystore
       :formatted,
       :type,
       :primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -81,7 +83,8 @@ module Aws::Identitystore
       :external_id,
       :unique_attribute,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ExternalId < AlternateIdentifier; end
@@ -101,7 +104,8 @@ module Aws::Identitystore
     class AttributeOperation < Struct.new(
       :attribute_path,
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -134,7 +138,8 @@ module Aws::Identitystore
       :message,
       :request_id,
       :reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -153,7 +158,8 @@ module Aws::Identitystore
       :identity_store_id,
       :display_name,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -170,7 +176,8 @@ module Aws::Identitystore
       :identity_store_id,
       :group_id,
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -184,7 +191,8 @@ module Aws::Identitystore
     class CreateGroupMembershipOutput < Struct.new(
       :membership_id,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -199,7 +207,8 @@ module Aws::Identitystore
     class CreateGroupOutput < Struct.new(
       :group_id,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -268,7 +277,8 @@ module Aws::Identitystore
       :preferred_language,
       :locale,
       :timezone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -281,7 +291,8 @@ module Aws::Identitystore
     class CreateUserOutput < Struct.new(
       :user_id,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +305,8 @@ module Aws::Identitystore
     class DeleteGroupInput < Struct.new(
       :identity_store_id,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -307,17 +319,20 @@ module Aws::Identitystore
     class DeleteGroupMembershipInput < Struct.new(
       :identity_store_id,
       :membership_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupMembershipOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -330,12 +345,14 @@ module Aws::Identitystore
     class DeleteUserInput < Struct.new(
       :identity_store_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteUserOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -352,7 +369,8 @@ module Aws::Identitystore
     class DescribeGroupInput < Struct.new(
       :identity_store_id,
       :group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +383,8 @@ module Aws::Identitystore
     class DescribeGroupMembershipInput < Struct.new(
       :identity_store_id,
       :membership_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +405,8 @@ module Aws::Identitystore
       :membership_id,
       :group_id,
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -416,7 +436,8 @@ module Aws::Identitystore
       :external_ids,
       :description,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -433,7 +454,8 @@ module Aws::Identitystore
     class DescribeUserInput < Struct.new(
       :identity_store_id,
       :user_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -505,7 +527,8 @@ module Aws::Identitystore
       :locale,
       :timezone,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -524,7 +547,8 @@ module Aws::Identitystore
       :value,
       :type,
       :primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -543,7 +567,8 @@ module Aws::Identitystore
     class ExternalId < Struct.new(
       :issuer,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,7 +587,8 @@ module Aws::Identitystore
     class Filter < Struct.new(
       :attribute_path,
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +602,8 @@ module Aws::Identitystore
     class GetGroupIdInput < Struct.new(
       :identity_store_id,
       :alternate_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -589,7 +616,8 @@ module Aws::Identitystore
     class GetGroupIdOutput < Struct.new(
       :group_id,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +634,8 @@ module Aws::Identitystore
       :identity_store_id,
       :group_id,
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -619,7 +648,8 @@ module Aws::Identitystore
     class GetGroupMembershipIdOutput < Struct.new(
       :membership_id,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -633,7 +663,8 @@ module Aws::Identitystore
     class GetUserIdInput < Struct.new(
       :identity_store_id,
       :alternate_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -646,7 +677,8 @@ module Aws::Identitystore
     class GetUserIdOutput < Struct.new(
       :user_id,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +709,8 @@ module Aws::Identitystore
       :external_ids,
       :description,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +733,8 @@ module Aws::Identitystore
       :membership_id,
       :group_id,
       :member_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -718,7 +752,8 @@ module Aws::Identitystore
       :group_id,
       :member_id,
       :membership_exists,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -742,7 +777,8 @@ module Aws::Identitystore
       :message,
       :request_id,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -764,7 +800,8 @@ module Aws::Identitystore
       :identity_store_id,
       :member_id,
       :group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -773,7 +810,8 @@ module Aws::Identitystore
     #   @return [Array<Types::GroupMembershipExistenceResult>]
     class IsMemberInGroupsOutput < Struct.new(
       :results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +832,8 @@ module Aws::Identitystore
       :member_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -808,7 +847,8 @@ module Aws::Identitystore
     class ListGroupMembershipsForMemberOutput < Struct.new(
       :group_memberships,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -830,7 +870,8 @@ module Aws::Identitystore
       :group_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +884,8 @@ module Aws::Identitystore
     class ListGroupMembershipsOutput < Struct.new(
       :group_memberships,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -876,7 +918,8 @@ module Aws::Identitystore
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -892,7 +935,8 @@ module Aws::Identitystore
     class ListGroupsOutput < Struct.new(
       :groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -925,7 +969,8 @@ module Aws::Identitystore
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -941,7 +986,8 @@ module Aws::Identitystore
     class ListUsersOutput < Struct.new(
       :users,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -952,7 +998,8 @@ module Aws::Identitystore
     class MemberId < Struct.new(
       :user_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class UserId < MemberId; end
@@ -987,7 +1034,8 @@ module Aws::Identitystore
       :middle_name,
       :honorific_prefix,
       :honorific_suffix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1008,7 +1056,8 @@ module Aws::Identitystore
       :value,
       :type,
       :primary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1036,7 +1085,8 @@ module Aws::Identitystore
       :resource_id,
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1099,8 @@ module Aws::Identitystore
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1119,8 @@ module Aws::Identitystore
       :message,
       :request_id,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1089,7 +1141,8 @@ module Aws::Identitystore
     class UniqueAttribute < Struct.new(
       :attribute_path,
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1107,12 +1160,14 @@ module Aws::Identitystore
       :identity_store_id,
       :group_id,
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateGroupOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1130,12 +1185,14 @@ module Aws::Identitystore
       :identity_store_id,
       :user_id,
       :operations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateUserOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1269,8 @@ module Aws::Identitystore
       :locale,
       :timezone,
       :identity_store_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1227,7 +1285,8 @@ module Aws::Identitystore
     class ValidationException < Struct.new(
       :message,
       :request_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

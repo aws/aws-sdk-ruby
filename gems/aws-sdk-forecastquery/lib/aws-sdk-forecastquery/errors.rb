@@ -38,7 +38,7 @@ module Aws::Forecastquery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Forecastquery::Types::InvalidInputException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -51,7 +51,7 @@ module Aws::Forecastquery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Forecastquery::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -64,7 +64,7 @@ module Aws::Forecastquery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Forecastquery::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -77,7 +77,7 @@ module Aws::Forecastquery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Forecastquery::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -91,7 +91,7 @@ module Aws::Forecastquery
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Forecastquery::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

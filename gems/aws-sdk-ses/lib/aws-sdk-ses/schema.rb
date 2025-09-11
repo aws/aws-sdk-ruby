@@ -1631,7 +1631,6 @@ module Aws::SES
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VerifyEmailIdentityResponse)
         operation.traits = {}
       end)
-
     end
 
     class << self

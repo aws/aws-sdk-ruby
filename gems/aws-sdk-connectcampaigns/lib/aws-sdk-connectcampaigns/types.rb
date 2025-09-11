@@ -15,7 +15,8 @@ module Aws::ConnectCampaigns
     class AccessDeniedException < Struct.new(
       :message,
       :x_amz_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::ConnectCampaigns
     #   @return [Float]
     class AgentlessDialerConfig < Struct.new(
       :dialing_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +41,8 @@ module Aws::ConnectCampaigns
     class AnswerMachineDetectionConfig < Struct.new(
       :enable_answer_machine_detection,
       :await_answer_machine_prompt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -78,7 +81,8 @@ module Aws::ConnectCampaigns
       :dialer_config,
       :outbound_call_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -88,7 +92,8 @@ module Aws::ConnectCampaigns
     #   @return [Types::InstanceIdFilter]
     class CampaignFilters < Struct.new(
       :instance_id_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -110,7 +115,8 @@ module Aws::ConnectCampaigns
       :arn,
       :name,
       :connect_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +129,8 @@ module Aws::ConnectCampaigns
     class ConflictException < Struct.new(
       :message,
       :x_amz_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -149,7 +156,8 @@ module Aws::ConnectCampaigns
       :dialer_config,
       :outbound_call_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -167,7 +175,8 @@ module Aws::ConnectCampaigns
       :id,
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +186,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class DeleteCampaignInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +197,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class DeleteConnectInstanceConfigInput < Struct.new(
       :connect_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -197,7 +208,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class DeleteInstanceOnboardingJobInput < Struct.new(
       :connect_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -207,7 +219,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class DescribeCampaignInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +230,8 @@ module Aws::ConnectCampaigns
     #   @return [Types::Campaign]
     class DescribeCampaignOutput < Struct.new(
       :campaign,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -239,7 +253,8 @@ module Aws::ConnectCampaigns
       :phone_number,
       :expiration_time,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -258,7 +273,8 @@ module Aws::ConnectCampaigns
       :predictive_dialer_config,
       :agentless_dialer_config,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ProgressiveDialerConfig < DialerConfig; end
@@ -284,7 +300,8 @@ module Aws::ConnectCampaigns
       :enabled,
       :encryption_type,
       :key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -303,7 +320,8 @@ module Aws::ConnectCampaigns
     class FailedCampaignStateResponse < Struct.new(
       :campaign_id,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +339,8 @@ module Aws::ConnectCampaigns
       :client_token,
       :id,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -331,7 +350,8 @@ module Aws::ConnectCampaigns
     #   @return [Array<String>]
     class GetCampaignStateBatchInput < Struct.new(
       :campaign_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -345,7 +365,8 @@ module Aws::ConnectCampaigns
     class GetCampaignStateBatchOutput < Struct.new(
       :successful_requests,
       :failed_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -355,7 +376,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class GetCampaignStateInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -365,7 +387,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class GetCampaignStateOutput < Struct.new(
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -375,7 +398,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class GetConnectInstanceConfigInput < Struct.new(
       :connect_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +409,8 @@ module Aws::ConnectCampaigns
     #   @return [Types::InstanceConfig]
     class GetConnectInstanceConfigOutput < Struct.new(
       :connect_instance_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -395,7 +420,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class GetInstanceOnboardingJobStatusInput < Struct.new(
       :connect_instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -405,7 +431,8 @@ module Aws::ConnectCampaigns
     #   @return [Types::InstanceOnboardingJobStatus]
     class GetInstanceOnboardingJobStatusOutput < Struct.new(
       :connect_instance_onboarding_job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +453,8 @@ module Aws::ConnectCampaigns
       :connect_instance_id,
       :service_linked_role_arn,
       :encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -440,7 +468,8 @@ module Aws::ConnectCampaigns
     class InstanceIdFilter < Struct.new(
       :value,
       :operator,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +487,8 @@ module Aws::ConnectCampaigns
       :connect_instance_id,
       :status,
       :failure_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -471,7 +501,8 @@ module Aws::ConnectCampaigns
     class InternalServerException < Struct.new(
       :message,
       :x_amz_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -488,7 +519,8 @@ module Aws::ConnectCampaigns
       :state,
       :message,
       :x_amz_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +533,8 @@ module Aws::ConnectCampaigns
     class InvalidStateException < Struct.new(
       :message,
       :x_amz_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -519,7 +552,8 @@ module Aws::ConnectCampaigns
       :max_results,
       :next_token,
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -533,7 +567,8 @@ module Aws::ConnectCampaigns
     class ListCampaignsOutput < Struct.new(
       :next_token,
       :campaign_summary_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +578,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -553,7 +589,8 @@ module Aws::ConnectCampaigns
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -575,7 +612,8 @@ module Aws::ConnectCampaigns
       :connect_source_phone_number,
       :connect_queue_id,
       :answer_machine_detection_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +623,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class PauseCampaignInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +638,8 @@ module Aws::ConnectCampaigns
     class PredictiveDialerConfig < Struct.new(
       :bandwidth_allocation,
       :dialing_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -613,7 +653,8 @@ module Aws::ConnectCampaigns
     class ProgressiveDialerConfig < Struct.new(
       :bandwidth_allocation,
       :dialing_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +668,8 @@ module Aws::ConnectCampaigns
     class PutDialRequestBatchInput < Struct.new(
       :id,
       :dial_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -641,7 +683,8 @@ module Aws::ConnectCampaigns
     class PutDialRequestBatchOutput < Struct.new(
       :successful_requests,
       :failed_requests,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +697,8 @@ module Aws::ConnectCampaigns
     class ResourceNotFoundException < Struct.new(
       :message,
       :x_amz_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +708,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class ResumeCampaignInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -677,7 +722,8 @@ module Aws::ConnectCampaigns
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :x_amz_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -687,7 +733,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class StartCampaignInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +751,8 @@ module Aws::ConnectCampaigns
     class StartInstanceOnboardingJobInput < Struct.new(
       :connect_instance_id,
       :encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -714,7 +762,8 @@ module Aws::ConnectCampaigns
     #   @return [Types::InstanceOnboardingJobStatus]
     class StartInstanceOnboardingJobOutput < Struct.new(
       :connect_instance_onboarding_job_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -724,7 +773,8 @@ module Aws::ConnectCampaigns
     #   @return [String]
     class StopCampaignInput < Struct.new(
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -738,7 +788,8 @@ module Aws::ConnectCampaigns
     class SuccessfulCampaignStateResponse < Struct.new(
       :campaign_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +803,8 @@ module Aws::ConnectCampaigns
     class SuccessfulRequest < Struct.new(
       :client_token,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +818,8 @@ module Aws::ConnectCampaigns
     class TagResourceInput < Struct.new(
       :arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -779,7 +832,8 @@ module Aws::ConnectCampaigns
     class ThrottlingException < Struct.new(
       :message,
       :x_amz_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -793,7 +847,8 @@ module Aws::ConnectCampaigns
     class UntagResourceInput < Struct.new(
       :arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +862,8 @@ module Aws::ConnectCampaigns
     class UpdateCampaignDialerConfigInput < Struct.new(
       :id,
       :dialer_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -821,7 +877,8 @@ module Aws::ConnectCampaigns
     class UpdateCampaignNameInput < Struct.new(
       :id,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -843,7 +900,8 @@ module Aws::ConnectCampaigns
       :connect_contact_flow_id,
       :connect_source_phone_number,
       :answer_machine_detection_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +914,8 @@ module Aws::ConnectCampaigns
     class ValidationException < Struct.new(
       :message,
       :x_amz_error_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

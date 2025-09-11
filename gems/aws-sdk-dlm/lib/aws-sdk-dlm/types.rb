@@ -17,7 +17,8 @@ module Aws::DLM
     class Action < Struct.new(
       :name,
       :cross_region_copy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -30,7 +31,8 @@ module Aws::DLM
     #   @return [Types::RetentionArchiveTier]
     class ArchiveRetainRule < Struct.new(
       :retention_archive_tier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +43,8 @@ module Aws::DLM
     #   @return [Types::ArchiveRetainRule]
     class ArchiveRule < Struct.new(
       :retain_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +155,8 @@ module Aws::DLM
       :extend_deletion,
       :cross_region_copy_targets,
       :exclusions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -161,7 +165,8 @@ module Aws::DLM
     #   @return [String]
     class CreateLifecyclePolicyResponse < Struct.new(
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -248,7 +253,8 @@ module Aws::DLM
       :times,
       :cron_expression,
       :scripts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -273,7 +279,8 @@ module Aws::DLM
       :target,
       :encryption_configuration,
       :retain_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -292,7 +299,8 @@ module Aws::DLM
     class CrossRegionCopyDeprecateRule < Struct.new(
       :interval,
       :interval_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -310,7 +318,8 @@ module Aws::DLM
     class CrossRegionCopyRetainRule < Struct.new(
       :interval,
       :interval_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -371,7 +380,8 @@ module Aws::DLM
       :copy_tags,
       :retain_rule,
       :deprecate_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -382,7 +392,8 @@ module Aws::DLM
     #   @return [String]
     class CrossRegionCopyTarget < Struct.new(
       :target_region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -391,12 +402,14 @@ module Aws::DLM
     #   @return [String]
     class DeleteLifecyclePolicyRequest < Struct.new(
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteLifecyclePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +436,8 @@ module Aws::DLM
       :count,
       :interval,
       :interval_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -442,7 +456,8 @@ module Aws::DLM
     class EncryptionConfiguration < Struct.new(
       :encrypted,
       :cmk_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +482,8 @@ module Aws::DLM
       :event_type,
       :snapshot_owner,
       :description_regex,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -482,7 +498,8 @@ module Aws::DLM
     class EventSource < Struct.new(
       :type,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -510,7 +527,8 @@ module Aws::DLM
       :exclude_boot_volumes,
       :exclude_volume_types,
       :exclude_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -536,7 +554,8 @@ module Aws::DLM
       :interval,
       :interval_unit,
       :availability_zones,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +602,8 @@ module Aws::DLM
       :target_tags,
       :tags_to_add,
       :default_policy_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -592,7 +612,8 @@ module Aws::DLM
     #   @return [Array<Types::LifecyclePolicySummary>]
     class GetLifecyclePoliciesResponse < Struct.new(
       :policies,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -601,7 +622,8 @@ module Aws::DLM
     #   @return [String]
     class GetLifecyclePolicyRequest < Struct.new(
       :policy_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -610,7 +632,8 @@ module Aws::DLM
     #   @return [Types::LifecyclePolicy]
     class GetLifecyclePolicyResponse < Struct.new(
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +645,8 @@ module Aws::DLM
     class InternalServerException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -643,7 +667,8 @@ module Aws::DLM
       :code,
       :required_parameters,
       :mutually_exclusive_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -705,7 +730,8 @@ module Aws::DLM
       :tags,
       :policy_arn,
       :default_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -750,7 +776,8 @@ module Aws::DLM
       :tags,
       :policy_type,
       :default_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -766,7 +793,8 @@ module Aws::DLM
       :message,
       :code,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +803,8 @@ module Aws::DLM
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -784,7 +813,8 @@ module Aws::DLM
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +853,8 @@ module Aws::DLM
       :exclude_boot_volume,
       :no_reboot,
       :exclude_data_volume_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1026,8 @@ module Aws::DLM
       :cross_region_copy_targets,
       :extend_deletion,
       :exclusions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1015,7 +1047,8 @@ module Aws::DLM
       :code,
       :resource_type,
       :resource_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1075,7 +1108,8 @@ module Aws::DLM
       :count,
       :interval,
       :interval_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1144,8 @@ module Aws::DLM
       :count,
       :interval,
       :interval_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1182,7 +1217,8 @@ module Aws::DLM
       :share_rules,
       :deprecate_rule,
       :archive_rule,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1298,7 +1334,8 @@ module Aws::DLM
       :execute_operation_on_script_failure,
       :execution_timeout,
       :maximum_retry_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1317,7 +1354,8 @@ module Aws::DLM
       :target_accounts,
       :unshare_interval,
       :unshare_interval_unit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1331,7 +1369,8 @@ module Aws::DLM
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1344,12 +1383,14 @@ module Aws::DLM
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1362,12 +1403,14 @@ module Aws::DLM
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1453,12 +1496,14 @@ module Aws::DLM
       :extend_deletion,
       :cross_region_copy_targets,
       :exclusions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateLifecyclePolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

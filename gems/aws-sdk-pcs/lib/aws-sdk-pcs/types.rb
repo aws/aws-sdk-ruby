@@ -11,7 +11,8 @@ module Aws::PCS
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -25,7 +26,8 @@ module Aws::PCS
     class Accounting < Struct.new(
       :mode,
       :default_purge_time_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -39,7 +41,8 @@ module Aws::PCS
     class AccountingRequest < Struct.new(
       :mode,
       :default_purge_time_in_days,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +96,8 @@ module Aws::PCS
       :networking,
       :endpoints,
       :error_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -115,7 +119,8 @@ module Aws::PCS
       :slurm_custom_settings,
       :auth_key,
       :accounting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -133,7 +138,8 @@ module Aws::PCS
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
       :accounting,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +169,8 @@ module Aws::PCS
       :created_at,
       :modified_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -237,7 +244,8 @@ module Aws::PCS
       :spot_options,
       :slurm_configuration,
       :error_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -247,7 +255,8 @@ module Aws::PCS
     #   @return [String]
     class ComputeNodeGroupConfiguration < Struct.new(
       :compute_node_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -257,7 +266,8 @@ module Aws::PCS
     #   @return [Array<Types::SlurmCustomSetting>]
     class ComputeNodeGroupSlurmConfiguration < Struct.new(
       :slurm_custom_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -267,7 +277,8 @@ module Aws::PCS
     #   @return [Array<Types::SlurmCustomSetting>]
     class ComputeNodeGroupSlurmConfigurationRequest < Struct.new(
       :slurm_custom_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -301,7 +312,8 @@ module Aws::PCS
       :created_at,
       :modified_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -318,7 +330,8 @@ module Aws::PCS
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +364,8 @@ module Aws::PCS
       :slurm_configuration,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -360,7 +374,8 @@ module Aws::PCS
     #   @return [Types::Cluster]
     class CreateClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -417,7 +432,8 @@ module Aws::PCS
       :slurm_configuration,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -426,7 +442,8 @@ module Aws::PCS
     #   @return [Types::ComputeNodeGroup]
     class CreateComputeNodeGroupResponse < Struct.new(
       :compute_node_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -451,7 +468,8 @@ module Aws::PCS
       :compute_node_group_configurations,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -460,7 +478,8 @@ module Aws::PCS
     #   @return [Types::Queue]
     class CreateQueueResponse < Struct.new(
       :queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -474,7 +493,8 @@ module Aws::PCS
     class CustomLaunchTemplate < Struct.new(
       :id,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -487,12 +507,14 @@ module Aws::PCS
     class DeleteClusterRequest < Struct.new(
       :cluster_identifier,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteClusterResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -509,12 +531,14 @@ module Aws::PCS
       :cluster_identifier,
       :compute_node_group_identifier,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteComputeNodeGroupResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -531,12 +555,14 @@ module Aws::PCS
       :cluster_identifier,
       :queue_identifier,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -562,7 +588,8 @@ module Aws::PCS
       :public_ip_address,
       :ipv6_address,
       :port,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +603,8 @@ module Aws::PCS
     class ErrorInfo < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -585,7 +613,8 @@ module Aws::PCS
     #   @return [String]
     class GetClusterRequest < Struct.new(
       :cluster_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +623,8 @@ module Aws::PCS
     #   @return [Types::Cluster]
     class GetClusterResponse < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -607,7 +637,8 @@ module Aws::PCS
     class GetComputeNodeGroupRequest < Struct.new(
       :cluster_identifier,
       :compute_node_group_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -616,7 +647,8 @@ module Aws::PCS
     #   @return [Types::ComputeNodeGroup]
     class GetComputeNodeGroupResponse < Struct.new(
       :compute_node_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -629,7 +661,8 @@ module Aws::PCS
     class GetQueueRequest < Struct.new(
       :cluster_identifier,
       :queue_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -638,7 +671,8 @@ module Aws::PCS
     #   @return [Types::Queue]
     class GetQueueResponse < Struct.new(
       :queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -648,7 +682,8 @@ module Aws::PCS
     #   @return [String]
     class InstanceConfig < Struct.new(
       :instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -657,7 +692,8 @@ module Aws::PCS
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +706,8 @@ module Aws::PCS
     class ListClustersRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +720,8 @@ module Aws::PCS
     class ListClustersResponse < Struct.new(
       :clusters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +738,8 @@ module Aws::PCS
       :cluster_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -713,7 +752,8 @@ module Aws::PCS
     class ListComputeNodeGroupsResponse < Struct.new(
       :compute_node_groups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -730,7 +770,8 @@ module Aws::PCS
       :cluster_identifier,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -743,7 +784,8 @@ module Aws::PCS
     class ListQueuesResponse < Struct.new(
       :queues,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -752,7 +794,8 @@ module Aws::PCS
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -761,7 +804,8 @@ module Aws::PCS
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -779,7 +823,8 @@ module Aws::PCS
       :subnet_ids,
       :security_group_ids,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -797,7 +842,8 @@ module Aws::PCS
       :subnet_ids,
       :security_group_ids,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -839,7 +885,8 @@ module Aws::PCS
       :status,
       :compute_node_group_configurations,
       :error_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +920,8 @@ module Aws::PCS
       :created_at,
       :modified_at,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -886,7 +934,8 @@ module Aws::PCS
     class RegisterComputeNodeGroupInstanceRequest < Struct.new(
       :cluster_identifier,
       :bootstrap_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -903,7 +952,8 @@ module Aws::PCS
       :node_id,
       :shared_secret,
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -920,7 +970,8 @@ module Aws::PCS
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -934,7 +985,8 @@ module Aws::PCS
     class ScalingConfiguration < Struct.new(
       :min_instance_count,
       :max_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -954,7 +1006,8 @@ module Aws::PCS
     class ScalingConfigurationRequest < Struct.new(
       :min_instance_count,
       :max_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -974,7 +1027,8 @@ module Aws::PCS
     class Scheduler < Struct.new(
       :type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -988,7 +1042,8 @@ module Aws::PCS
     class SchedulerRequest < Struct.new(
       :type,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1013,7 +1068,8 @@ module Aws::PCS
       :resource_id,
       :resource_type,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1027,7 +1083,8 @@ module Aws::PCS
     class SlurmAuthKey < Struct.new(
       :secret_arn,
       :secret_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1041,7 +1098,8 @@ module Aws::PCS
     class SlurmCustomSetting < Struct.new(
       :parameter_name,
       :parameter_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1051,7 +1109,8 @@ module Aws::PCS
     #   @return [String]
     class SpotOptions < Struct.new(
       :allocation_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1123,8 @@ module Aws::PCS
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1077,7 +1137,8 @@ module Aws::PCS
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1090,7 +1151,8 @@ module Aws::PCS
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1139,7 +1201,8 @@ module Aws::PCS
       :iam_instance_profile_arn,
       :slurm_configuration,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1148,7 +1211,8 @@ module Aws::PCS
     #   @return [Types::ComputeNodeGroup]
     class UpdateComputeNodeGroupResponse < Struct.new(
       :compute_node_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1158,7 +1222,8 @@ module Aws::PCS
     #   @return [Array<Types::SlurmCustomSetting>]
     class UpdateComputeNodeGroupSlurmConfigurationRequest < Struct.new(
       :slurm_custom_settings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1244,8 @@ module Aws::PCS
       :queue_identifier,
       :compute_node_group_configurations,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1188,7 +1254,8 @@ module Aws::PCS
     #   @return [Types::Queue]
     class UpdateQueueResponse < Struct.new(
       :queue,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1205,7 +1272,8 @@ module Aws::PCS
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1219,7 +1287,8 @@ module Aws::PCS
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

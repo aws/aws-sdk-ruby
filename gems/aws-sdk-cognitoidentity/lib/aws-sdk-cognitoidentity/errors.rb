@@ -44,7 +44,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message returned by a ConcurrentModificationException.</p>
@@ -59,7 +59,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::DeveloperUserAlreadyRegisteredException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>This developer user identifier is already registered with Cognito.</p>
@@ -74,7 +74,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::ExternalServiceException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message returned by an ExternalServiceException</p>
@@ -88,7 +88,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::InternalErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message returned by an InternalErrorException.</p>
@@ -108,7 +108,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::InvalidIdentityPoolConfigurationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message returned for an <code>InvalidIdentityPoolConfigurationException</code>
@@ -123,7 +123,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message returned by an InvalidParameterException.</p>
@@ -137,7 +137,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message returned by a LimitExceededException.</p>
@@ -151,7 +151,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::NotAuthorizedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message returned by a NotAuthorizedException</p>
@@ -166,7 +166,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::ResourceConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message returned by a ResourceConflictException.</p>
@@ -181,7 +181,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The message returned by a ResourceNotFoundException.</p>
@@ -195,7 +195,7 @@ module Aws::CognitoIdentity
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentity::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>Message returned by a TooManyRequestsException</p>

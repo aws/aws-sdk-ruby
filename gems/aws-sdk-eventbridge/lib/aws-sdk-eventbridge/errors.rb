@@ -46,7 +46,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -59,7 +59,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::IllegalStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::InternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::InvalidEventPatternException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -144,7 +144,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::ManagedRuleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -157,7 +157,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::OperationDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -170,7 +170,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::PolicyLengthExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -183,7 +183,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -196,7 +196,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -209,7 +209,7 @@ module Aws::EventBridge
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EventBridge::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

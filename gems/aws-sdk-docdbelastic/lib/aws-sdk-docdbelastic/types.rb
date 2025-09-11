@@ -12,7 +12,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -63,7 +64,8 @@ module Aws::DocDBElastic
       :apply_action,
       :opt_in_type,
       :apply_on,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +74,8 @@ module Aws::DocDBElastic
     #   @return [Types::ResourcePendingMaintenanceAction]
     class ApplyPendingMaintenanceActionOutput < Struct.new(
       :resource_pending_maintenance_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -151,7 +154,8 @@ module Aws::DocDBElastic
       :backup_retention_period,
       :preferred_backup_window,
       :shard_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,7 +173,8 @@ module Aws::DocDBElastic
       :cluster_name,
       :cluster_arn,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -234,7 +239,8 @@ module Aws::DocDBElastic
       :admin_user_name,
       :kms_key_id,
       :snapshot_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -260,7 +266,8 @@ module Aws::DocDBElastic
       :cluster_arn,
       :status,
       :snapshot_creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -277,7 +284,8 @@ module Aws::DocDBElastic
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -324,7 +332,8 @@ module Aws::DocDBElastic
       :kms_key_id,
       :copy_tags,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -333,7 +342,8 @@ module Aws::DocDBElastic
     #   @return [Types::ClusterSnapshot]
     class CopyClusterSnapshotOutput < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -458,7 +468,8 @@ module Aws::DocDBElastic
       :backup_retention_period,
       :preferred_backup_window,
       :shard_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +478,8 @@ module Aws::DocDBElastic
     #   @return [Types::Cluster]
     class CreateClusterOperationOutput < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +496,8 @@ module Aws::DocDBElastic
       :cluster_arn,
       :snapshot_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -493,7 +506,8 @@ module Aws::DocDBElastic
     #   @return [Types::ClusterSnapshot]
     class CreateClusterSnapshotOperationOutput < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -502,7 +516,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class DeleteClusterOperationInput < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -511,7 +526,8 @@ module Aws::DocDBElastic
     #   @return [Types::Cluster]
     class DeleteClusterOperationOutput < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -520,7 +536,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class DeleteClusterSnapshotOperationInput < Struct.new(
       :snapshot_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -529,7 +546,8 @@ module Aws::DocDBElastic
     #   @return [Types::ClusterSnapshot]
     class DeleteClusterSnapshotOperationOutput < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -538,7 +556,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class GetClusterOperationInput < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +566,8 @@ module Aws::DocDBElastic
     #   @return [Types::Cluster]
     class GetClusterOperationOutput < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -556,7 +576,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class GetClusterSnapshotOperationInput < Struct.new(
       :snapshot_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -565,7 +586,8 @@ module Aws::DocDBElastic
     #   @return [Types::ClusterSnapshot]
     class GetClusterSnapshotOperationOutput < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -574,7 +596,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class GetPendingMaintenanceActionInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -583,7 +606,8 @@ module Aws::DocDBElastic
     #   @return [Types::ResourcePendingMaintenanceAction]
     class GetPendingMaintenanceActionOutput < Struct.new(
       :resource_pending_maintenance_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -592,7 +616,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -625,7 +650,8 @@ module Aws::DocDBElastic
       :next_token,
       :max_results,
       :snapshot_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +666,8 @@ module Aws::DocDBElastic
     class ListClusterSnapshotsOperationOutput < Struct.new(
       :snapshots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -655,7 +682,8 @@ module Aws::DocDBElastic
     class ListClustersOperationInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -670,7 +698,8 @@ module Aws::DocDBElastic
     class ListClustersOperationOutput < Struct.new(
       :clusters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +713,8 @@ module Aws::DocDBElastic
     class ListPendingMaintenanceActionsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +727,8 @@ module Aws::DocDBElastic
     class ListPendingMaintenanceActionsOutput < Struct.new(
       :resource_pending_maintenance_actions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -706,7 +737,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -715,7 +747,8 @@ module Aws::DocDBElastic
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -751,7 +784,8 @@ module Aws::DocDBElastic
       :opt_in_status,
       :current_apply_date,
       :description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -769,7 +803,8 @@ module Aws::DocDBElastic
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -783,7 +818,8 @@ module Aws::DocDBElastic
     class ResourcePendingMaintenanceAction < Struct.new(
       :resource_arn,
       :pending_maintenance_action_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -828,7 +864,8 @@ module Aws::DocDBElastic
       :tags,
       :shard_capacity,
       :shard_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -837,7 +874,8 @@ module Aws::DocDBElastic
     #   @return [Types::Cluster]
     class RestoreClusterFromSnapshotOperationOutput < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -846,7 +884,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -864,7 +903,8 @@ module Aws::DocDBElastic
       :shard_id,
       :create_time,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +913,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class StartClusterInput < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -882,7 +923,8 @@ module Aws::DocDBElastic
     #   @return [Types::Cluster]
     class StartClusterOutput < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -891,7 +933,8 @@ module Aws::DocDBElastic
     #   @return [String]
     class StopClusterInput < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +943,8 @@ module Aws::DocDBElastic
     #   @return [Types::Cluster]
     class StopClusterOutput < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -913,12 +957,14 @@ module Aws::DocDBElastic
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -931,7 +977,8 @@ module Aws::DocDBElastic
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -944,12 +991,14 @@ module Aws::DocDBElastic
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1017,7 +1066,8 @@ module Aws::DocDBElastic
       :backup_retention_period,
       :preferred_backup_window,
       :shard_instance_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1026,7 +1076,8 @@ module Aws::DocDBElastic
     #   @return [Types::Cluster]
     class UpdateClusterOperationOutput < Struct.new(
       :cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1045,7 +1096,8 @@ module Aws::DocDBElastic
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1059,7 +1111,8 @@ module Aws::DocDBElastic
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -41,7 +41,7 @@ module Aws::Drs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Drs::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::Drs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Drs::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -85,7 +85,7 @@ module Aws::Drs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Drs::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -103,7 +103,7 @@ module Aws::Drs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Drs::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -130,7 +130,7 @@ module Aws::Drs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Drs::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -167,7 +167,7 @@ module Aws::Drs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Drs::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -195,7 +195,7 @@ module Aws::Drs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Drs::Types::UninitializedAccountException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -212,7 +212,7 @@ module Aws::Drs
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Drs::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

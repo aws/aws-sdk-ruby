@@ -43,7 +43,7 @@ module Aws::AppMesh
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppMesh::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -57,7 +57,7 @@ module Aws::AppMesh
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppMesh::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -70,7 +70,7 @@ module Aws::AppMesh
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppMesh::Types::ForbiddenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::AppMesh
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppMesh::Types::InternalServerErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -102,7 +102,7 @@ module Aws::AppMesh
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppMesh::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -115,7 +115,7 @@ module Aws::AppMesh
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppMesh::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::AppMesh
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppMesh::Types::ResourceInUseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::AppMesh
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppMesh::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -161,7 +161,7 @@ module Aws::AppMesh
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppMesh::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -184,7 +184,7 @@ module Aws::AppMesh
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppMesh::Types::TooManyTagsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

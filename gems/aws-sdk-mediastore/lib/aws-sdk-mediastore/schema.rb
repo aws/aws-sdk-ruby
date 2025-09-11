@@ -443,7 +443,6 @@ module Aws::MediaStore
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerError)
         operation.traits = {}
       end)
-
     end
 
     class << self

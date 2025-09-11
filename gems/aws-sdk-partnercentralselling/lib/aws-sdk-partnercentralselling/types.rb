@@ -15,7 +15,8 @@ module Aws::PartnerCentralSelling
     class AcceptEngagementInvitationRequest < Struct.new(
       :catalog,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -24,7 +25,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -58,7 +60,8 @@ module Aws::PartnerCentralSelling
       :aws_account_id,
       :address,
       :duns,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -72,7 +75,8 @@ module Aws::PartnerCentralSelling
     class AccountReceiver < Struct.new(
       :alias,
       :aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +102,8 @@ module Aws::PartnerCentralSelling
       :company_name,
       :website_url,
       :address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -124,7 +129,8 @@ module Aws::PartnerCentralSelling
       :state_or_region,
       :country_code,
       :street_address,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -146,7 +152,8 @@ module Aws::PartnerCentralSelling
       :postal_code,
       :state_or_region,
       :country_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -163,7 +170,8 @@ module Aws::PartnerCentralSelling
       :catalog,
       :identifier,
       :assignee,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -185,7 +193,8 @@ module Aws::PartnerCentralSelling
       :first_name,
       :last_name,
       :business_title,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -206,7 +215,8 @@ module Aws::PartnerCentralSelling
       :opportunity_identifier,
       :related_entity_type,
       :related_entity_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -216,7 +226,8 @@ module Aws::PartnerCentralSelling
     #   @return [Array<Types::Contact>]
     class AwsOpportunityCustomer < Struct.new(
       :contacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -230,7 +241,8 @@ module Aws::PartnerCentralSelling
     class AwsOpportunityInsights < Struct.new(
       :next_best_actions,
       :engagement_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -256,7 +268,8 @@ module Aws::PartnerCentralSelling
       :stage,
       :next_steps,
       :next_steps_history,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -266,7 +279,8 @@ module Aws::PartnerCentralSelling
     #   @return [Array<Types::ExpectedCustomerSpend>]
     class AwsOpportunityProject < Struct.new(
       :expected_customer_spend,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -280,7 +294,8 @@ module Aws::PartnerCentralSelling
     class AwsOpportunityRelatedEntities < Struct.new(
       :aws_products,
       :solutions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -294,7 +309,8 @@ module Aws::PartnerCentralSelling
     class AwsSubmission < Struct.new(
       :involvement_type,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -316,7 +332,8 @@ module Aws::PartnerCentralSelling
       :first_name,
       :last_name,
       :business_title,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -325,7 +342,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -351,7 +369,8 @@ module Aws::PartnerCentralSelling
       :last_name,
       :business_title,
       :phone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +391,8 @@ module Aws::PartnerCentralSelling
       :client_token,
       :engagement_identifier,
       :invitation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -385,7 +405,8 @@ module Aws::PartnerCentralSelling
     class CreateEngagementInvitationResponse < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -410,7 +431,8 @@ module Aws::PartnerCentralSelling
       :title,
       :description,
       :contexts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -423,7 +445,8 @@ module Aws::PartnerCentralSelling
     class CreateEngagementResponse < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -484,7 +507,8 @@ module Aws::PartnerCentralSelling
       :origin,
       :opportunity_team,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +525,8 @@ module Aws::PartnerCentralSelling
       :id,
       :partner_opportunity_identifier,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -534,7 +559,8 @@ module Aws::PartnerCentralSelling
       :resource_identifier,
       :resource_snapshot_template_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -547,7 +573,8 @@ module Aws::PartnerCentralSelling
     class CreateResourceSnapshotJobResponse < Struct.new(
       :id,
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -576,7 +603,8 @@ module Aws::PartnerCentralSelling
       :resource_identifier,
       :resource_snapshot_template_identifier,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -589,7 +617,8 @@ module Aws::PartnerCentralSelling
     class CreateResourceSnapshotResponse < Struct.new(
       :arn,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +632,8 @@ module Aws::PartnerCentralSelling
     class Customer < Struct.new(
       :account,
       :contacts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -617,7 +647,8 @@ module Aws::PartnerCentralSelling
     class CustomerProjectsContext < Struct.new(
       :customer,
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -627,7 +658,8 @@ module Aws::PartnerCentralSelling
     #   @return [Types::AccountSummary]
     class CustomerSummary < Struct.new(
       :account,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +672,8 @@ module Aws::PartnerCentralSelling
     class DeleteResourceSnapshotJobRequest < Struct.new(
       :catalog,
       :resource_snapshot_job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +694,8 @@ module Aws::PartnerCentralSelling
       :opportunity_identifier,
       :related_entity_type,
       :related_entity_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -675,7 +709,8 @@ module Aws::PartnerCentralSelling
     class EngagementContextDetails < Struct.new(
       :type,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -686,7 +721,8 @@ module Aws::PartnerCentralSelling
     class EngagementContextPayload < Struct.new(
       :customer_project,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class CustomerProject < EngagementContextPayload; end
@@ -711,7 +747,8 @@ module Aws::PartnerCentralSelling
       :company_name,
       :website_url,
       :country_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +766,8 @@ module Aws::PartnerCentralSelling
       :title,
       :business_problem,
       :target_completion_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +825,8 @@ module Aws::PartnerCentralSelling
       :receiver,
       :catalog,
       :participant_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -805,7 +844,8 @@ module Aws::PartnerCentralSelling
       :company_name,
       :website_url,
       :account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -819,7 +859,8 @@ module Aws::PartnerCentralSelling
     class EngagementMemberSummary < Struct.new(
       :company_name,
       :website_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -845,7 +886,8 @@ module Aws::PartnerCentralSelling
       :resource_type,
       :resource_id,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -859,7 +901,8 @@ module Aws::PartnerCentralSelling
     class EngagementSort < Struct.new(
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -889,7 +932,8 @@ module Aws::PartnerCentralSelling
       :created_at,
       :created_by,
       :member_count,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,7 +959,8 @@ module Aws::PartnerCentralSelling
       :frequency,
       :target_company,
       :estimation_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +973,8 @@ module Aws::PartnerCentralSelling
     class GetAwsOpportunitySummaryRequest < Struct.new(
       :catalog,
       :related_opportunity_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +1027,8 @@ module Aws::PartnerCentralSelling
       :related_entity_ids,
       :customer,
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -994,7 +1041,8 @@ module Aws::PartnerCentralSelling
     class GetEngagementInvitationRequest < Struct.new(
       :catalog,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1067,7 +1115,8 @@ module Aws::PartnerCentralSelling
       :invitation_message,
       :engagement_description,
       :existing_members,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1080,7 +1129,8 @@ module Aws::PartnerCentralSelling
     class GetEngagementRequest < Struct.new(
       :catalog,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1117,7 +1167,8 @@ module Aws::PartnerCentralSelling
       :created_by,
       :member_count,
       :contexts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1130,7 +1181,8 @@ module Aws::PartnerCentralSelling
     class GetOpportunityRequest < Struct.new(
       :catalog,
       :identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1199,7 +1251,8 @@ module Aws::PartnerCentralSelling
       :related_entity_identifiers,
       :life_cycle,
       :opportunity_team,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1265,8 @@ module Aws::PartnerCentralSelling
     class GetResourceSnapshotJobRequest < Struct.new(
       :catalog,
       :resource_snapshot_job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1265,7 +1319,8 @@ module Aws::PartnerCentralSelling
       :status,
       :last_successful_execution_date,
       :last_failure,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1294,7 +1349,8 @@ module Aws::PartnerCentralSelling
       :resource_identifier,
       :resource_snapshot_template_identifier,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1395,8 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_template_name,
       :revision,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1348,7 +1405,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     class GetSellingSystemSettingsRequest < Struct.new(
       :catalog,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1361,7 +1419,8 @@ module Aws::PartnerCentralSelling
     class GetSellingSystemSettingsResponse < Struct.new(
       :catalog,
       :resource_snapshot_job_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1370,7 +1429,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1388,7 +1448,8 @@ module Aws::PartnerCentralSelling
       :message,
       :receiver,
       :payload,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1402,7 +1463,8 @@ module Aws::PartnerCentralSelling
     class LastModifiedDate < Struct.new(
       :after_last_modified_date,
       :before_last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1440,7 +1502,8 @@ module Aws::PartnerCentralSelling
       :review_comments,
       :review_status_reason,
       :next_steps_history,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1462,7 +1525,8 @@ module Aws::PartnerCentralSelling
       :review_status,
       :stage,
       :next_steps,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1496,7 +1560,8 @@ module Aws::PartnerCentralSelling
       :review_status,
       :review_comments,
       :review_status_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1538,7 +1603,8 @@ module Aws::PartnerCentralSelling
       :opportunity_id,
       :resource_snapshot_job_id,
       :engagement_invitation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1575,7 +1641,8 @@ module Aws::PartnerCentralSelling
       :opportunity_identifier,
       :engagement_invitation_identifier,
       :task_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1588,7 +1655,8 @@ module Aws::PartnerCentralSelling
     class ListEngagementByAcceptingInvitationTasksResponse < Struct.new(
       :task_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1634,7 +1702,8 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_job_id,
       :engagement_id,
       :engagement_invitation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1671,7 +1740,8 @@ module Aws::PartnerCentralSelling
       :task_identifier,
       :opportunity_identifier,
       :engagement_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1684,7 +1754,8 @@ module Aws::PartnerCentralSelling
     class ListEngagementFromOpportunityTasksResponse < Struct.new(
       :task_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1725,7 +1796,8 @@ module Aws::PartnerCentralSelling
       :status,
       :engagement_identifier,
       :sender_aws_account_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1738,7 +1810,8 @@ module Aws::PartnerCentralSelling
     class ListEngagementInvitationsResponse < Struct.new(
       :engagement_invitation_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1759,7 +1832,8 @@ module Aws::PartnerCentralSelling
       :identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1772,7 +1846,8 @@ module Aws::PartnerCentralSelling
     class ListEngagementMembersResponse < Struct.new(
       :engagement_member_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1805,7 +1880,8 @@ module Aws::PartnerCentralSelling
       :resource_type,
       :resource_identifier,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1818,7 +1894,8 @@ module Aws::PartnerCentralSelling
     class ListEngagementResourceAssociationsResponse < Struct.new(
       :engagement_resource_association_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1851,7 +1928,8 @@ module Aws::PartnerCentralSelling
       :max_results,
       :next_token,
       :engagement_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1864,7 +1942,8 @@ module Aws::PartnerCentralSelling
     class ListEngagementsResponse < Struct.new(
       :engagement_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1905,7 +1984,8 @@ module Aws::PartnerCentralSelling
       :life_cycle_stage,
       :life_cycle_review_status,
       :customer_company_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1918,7 +1998,8 @@ module Aws::PartnerCentralSelling
     class ListOpportunitiesResponse < Struct.new(
       :opportunity_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1947,7 +2028,8 @@ module Aws::PartnerCentralSelling
       :engagement_identifier,
       :status,
       :sort,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1960,7 +2042,8 @@ module Aws::PartnerCentralSelling
     class ListResourceSnapshotJobsResponse < Struct.new(
       :resource_snapshot_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1997,7 +2080,8 @@ module Aws::PartnerCentralSelling
       :resource_identifier,
       :resource_snapshot_template_identifier,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2010,7 +2094,8 @@ module Aws::PartnerCentralSelling
     class ListResourceSnapshotsResponse < Struct.new(
       :resource_snapshot_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2043,7 +2128,8 @@ module Aws::PartnerCentralSelling
       :status,
       :identifier,
       :category,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2056,7 +2142,8 @@ module Aws::PartnerCentralSelling
     class ListSolutionsResponse < Struct.new(
       :solution_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2065,7 +2152,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2074,7 +2162,8 @@ module Aws::PartnerCentralSelling
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2088,7 +2177,8 @@ module Aws::PartnerCentralSelling
     class ListTasksSortBase < Struct.new(
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2114,7 +2204,8 @@ module Aws::PartnerCentralSelling
       :use_cases,
       :channels,
       :aws_funding_used,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2128,7 +2219,8 @@ module Aws::PartnerCentralSelling
     class MonetaryValue < Struct.new(
       :amount,
       :currency_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2142,7 +2234,8 @@ module Aws::PartnerCentralSelling
     class NextStepsHistory < Struct.new(
       :value,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2156,7 +2249,8 @@ module Aws::PartnerCentralSelling
     class OpportunityEngagementInvitationSort < Struct.new(
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2178,7 +2272,8 @@ module Aws::PartnerCentralSelling
       :receiver_responsibilities,
       :customer,
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2192,7 +2287,8 @@ module Aws::PartnerCentralSelling
     class OpportunitySort < Struct.new(
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2238,7 +2334,8 @@ module Aws::PartnerCentralSelling
       :life_cycle,
       :customer,
       :project,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2272,7 +2369,8 @@ module Aws::PartnerCentralSelling
       :customer,
       :project,
       :related_entity_identifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2283,7 +2381,8 @@ module Aws::PartnerCentralSelling
     class Payload < Struct.new(
       :opportunity_invitation,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OpportunityInvitation < Payload; end
@@ -2300,7 +2399,8 @@ module Aws::PartnerCentralSelling
     class ProfileNextStepsHistory < Struct.new(
       :value,
       :time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2354,7 +2454,8 @@ module Aws::PartnerCentralSelling
       :other_competitor_names,
       :other_solution_description,
       :additional_comments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2376,7 +2477,8 @@ module Aws::PartnerCentralSelling
       :title,
       :target_completion_date,
       :expected_customer_spend,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2390,7 +2492,8 @@ module Aws::PartnerCentralSelling
     class ProjectSummary < Struct.new(
       :delivery_models,
       :expected_customer_spend,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2416,7 +2519,8 @@ module Aws::PartnerCentralSelling
       :customer_use_case,
       :sales_activities,
       :other_solution_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2429,7 +2533,8 @@ module Aws::PartnerCentralSelling
     class PutSellingSystemSettingsRequest < Struct.new(
       :catalog,
       :resource_snapshot_job_role_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2442,7 +2547,8 @@ module Aws::PartnerCentralSelling
     class PutSellingSystemSettingsResponse < Struct.new(
       :catalog,
       :resource_snapshot_job_role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2453,7 +2559,8 @@ module Aws::PartnerCentralSelling
     class Receiver < Struct.new(
       :account,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Account < Receiver; end
@@ -2473,7 +2580,8 @@ module Aws::PartnerCentralSelling
       :catalog,
       :identifier,
       :rejection_reason,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2491,7 +2599,8 @@ module Aws::PartnerCentralSelling
       :aws_marketplace_offers,
       :solutions,
       :aws_products,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2500,7 +2609,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2522,7 +2632,8 @@ module Aws::PartnerCentralSelling
       :arn,
       :engagement_id,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2533,7 +2644,8 @@ module Aws::PartnerCentralSelling
     class ResourceSnapshotPayload < Struct.new(
       :opportunity_summary,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class OpportunitySummary < ResourceSnapshotPayload; end
@@ -2566,7 +2678,8 @@ module Aws::PartnerCentralSelling
       :resource_id,
       :resource_snapshot_template_name,
       :created_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2592,7 +2705,8 @@ module Aws::PartnerCentralSelling
       :last_name,
       :business_title,
       :phone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2601,7 +2715,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2623,7 +2738,8 @@ module Aws::PartnerCentralSelling
       :value,
       :effective_date,
       :expiration_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2657,7 +2773,8 @@ module Aws::PartnerCentralSelling
       :status,
       :category,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2671,7 +2788,8 @@ module Aws::PartnerCentralSelling
     class SolutionSort < Struct.new(
       :sort_order,
       :sort_by,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2685,7 +2803,8 @@ module Aws::PartnerCentralSelling
     class SortObject < Struct.new(
       :sort_by,
       :sort_order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2706,7 +2825,8 @@ module Aws::PartnerCentralSelling
       :client_token,
       :identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2747,7 +2867,8 @@ module Aws::PartnerCentralSelling
       :opportunity_id,
       :resource_snapshot_job_id,
       :engagement_invitation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2772,7 +2893,8 @@ module Aws::PartnerCentralSelling
       :identifier,
       :aws_submission,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2817,7 +2939,8 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_job_id,
       :engagement_id,
       :engagement_invitation_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2830,7 +2953,8 @@ module Aws::PartnerCentralSelling
     class StartResourceSnapshotJobRequest < Struct.new(
       :catalog,
       :resource_snapshot_job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2843,7 +2967,8 @@ module Aws::PartnerCentralSelling
     class StopResourceSnapshotJobRequest < Struct.new(
       :catalog,
       :resource_snapshot_job_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2864,7 +2989,8 @@ module Aws::PartnerCentralSelling
       :identifier,
       :involvement_type,
       :visibility,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2878,7 +3004,8 @@ module Aws::PartnerCentralSelling
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2891,12 +3018,14 @@ module Aws::PartnerCentralSelling
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2905,7 +3034,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2918,12 +3048,14 @@ module Aws::PartnerCentralSelling
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2976,7 +3108,8 @@ module Aws::PartnerCentralSelling
       :last_modified_date,
       :identifier,
       :life_cycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2989,7 +3122,8 @@ module Aws::PartnerCentralSelling
     class UpdateOpportunityResponse < Struct.new(
       :id,
       :last_modified_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3006,7 +3140,8 @@ module Aws::PartnerCentralSelling
       :message,
       :reason,
       :error_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3024,7 +3159,8 @@ module Aws::PartnerCentralSelling
       :field_name,
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

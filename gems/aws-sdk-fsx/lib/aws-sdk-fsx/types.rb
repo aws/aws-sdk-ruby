@@ -16,7 +16,8 @@ module Aws::FSx
     class AccessPointAlreadyOwnedByYou < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -38,7 +39,8 @@ module Aws::FSx
       :domain_name,
       :active_directory_id,
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -56,7 +58,8 @@ module Aws::FSx
       :active_directory_id,
       :type,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -285,7 +288,8 @@ module Aws::FSx
       :total_transfer_bytes,
       :remaining_transfer_bytes,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -295,7 +299,8 @@ module Aws::FSx
     #   @return [String]
     class AdministrativeActionFailureDetails < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -321,7 +326,8 @@ module Aws::FSx
     class AggregateConfiguration < Struct.new(
       :aggregates,
       :total_constituents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -372,7 +378,8 @@ module Aws::FSx
     class Alias < Struct.new(
       :name,
       :lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -412,7 +419,8 @@ module Aws::FSx
       :client_request_token,
       :file_system_id,
       :aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -427,7 +435,8 @@ module Aws::FSx
     #   @return [Array<Types::Alias>]
     class AssociateFileSystemAliasesResponse < Struct.new(
       :aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -462,7 +471,8 @@ module Aws::FSx
     #   @return [Array<String>]
     class AutoExportPolicy < Struct.new(
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -497,7 +507,8 @@ module Aws::FSx
     #   @return [Array<String>]
     class AutoImportPolicy < Struct.new(
       :events,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +551,8 @@ module Aws::FSx
     class AutocommitPeriod < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +666,8 @@ module Aws::FSx
       :resource_type,
       :volume,
       :size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -668,7 +681,8 @@ module Aws::FSx
     class BackupBeingCopied < Struct.new(
       :message,
       :backup_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -679,7 +693,8 @@ module Aws::FSx
     #   @return [String]
     class BackupFailureDetails < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +705,8 @@ module Aws::FSx
     #   @return [String]
     class BackupInProgress < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -700,7 +716,8 @@ module Aws::FSx
     #   @return [String]
     class BackupNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -715,7 +732,8 @@ module Aws::FSx
     class BackupRestoring < Struct.new(
       :message,
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -725,7 +743,8 @@ module Aws::FSx
     #   @return [String]
     class BadRequest < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -735,7 +754,8 @@ module Aws::FSx
     #   @return [String]
     class CancelDataRepositoryTaskRequest < Struct.new(
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -775,7 +795,8 @@ module Aws::FSx
     class CancelDataRepositoryTaskResponse < Struct.new(
       :lifecycle,
       :task_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -811,7 +832,8 @@ module Aws::FSx
       :path,
       :format,
       :scope,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -873,7 +895,8 @@ module Aws::FSx
       :kms_key_id,
       :copy_tags,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +907,8 @@ module Aws::FSx
     #   @return [Types::Backup]
     class CopyBackupResponse < Struct.new(
       :backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -954,7 +978,8 @@ module Aws::FSx
       :source_snapshot_arn,
       :copy_strategy,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -973,7 +998,8 @@ module Aws::FSx
       :volume_id,
       :lifecycle,
       :administrative_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -987,7 +1013,8 @@ module Aws::FSx
     class CreateAggregateConfiguration < Struct.new(
       :aggregates,
       :constituents_per_aggregate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1001,7 +1028,8 @@ module Aws::FSx
     class CreateAndAttachS3AccessPointOpenZFSConfiguration < Struct.new(
       :volume_id,
       :file_system_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1029,7 +1057,8 @@ module Aws::FSx
       :type,
       :open_zfs_configuration,
       :s3_access_point,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1038,7 +1067,8 @@ module Aws::FSx
     #   @return [Types::S3AccessPointAttachment]
     class CreateAndAttachS3AccessPointResponse < Struct.new(
       :s3_access_point_attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1054,7 +1084,8 @@ module Aws::FSx
     class CreateAndAttachS3AccessPointS3Configuration < Struct.new(
       :vpc_configuration,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1082,7 +1113,8 @@ module Aws::FSx
       :client_request_token,
       :tags,
       :volume_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1092,7 +1124,8 @@ module Aws::FSx
     #   @return [Types::Backup]
     class CreateBackupResponse < Struct.new(
       :backup,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1195,8 @@ module Aws::FSx
       :s3,
       :client_request_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1171,7 +1205,8 @@ module Aws::FSx
     #   @return [Types::DataRepositoryAssociation]
     class CreateDataRepositoryAssociationResponse < Struct.new(
       :association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1270,7 +1305,8 @@ module Aws::FSx
       :tags,
       :capacity_to_release,
       :release_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1279,7 +1315,8 @@ module Aws::FSx
     #   @return [Types::DataRepositoryTask]
     class CreateDataRepositoryTaskResponse < Struct.new(
       :data_repository_task,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1305,7 +1342,8 @@ module Aws::FSx
       :deployment_type,
       :weekly_maintenance_start_time,
       :metadata_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1388,7 +1426,8 @@ module Aws::FSx
       :kms_key_id,
       :lustre_configuration,
       :data_repository_associations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1397,7 +1436,8 @@ module Aws::FSx
     #   @return [Types::FileCacheCreating]
     class CreateFileCacheResponse < Struct.new(
       :file_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1553,7 +1593,8 @@ module Aws::FSx
       :open_zfs_configuration,
       :storage_capacity,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1564,7 +1605,8 @@ module Aws::FSx
     #   @return [Types::FileSystem]
     class CreateFileSystemFromBackupResponse < Struct.new(
       :file_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1832,7 +1874,8 @@ module Aws::FSx
       :metadata_configuration,
       :throughput_capacity,
       :data_read_cache_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1887,7 +1930,8 @@ module Aws::FSx
     class CreateFileSystemLustreMetadataConfiguration < Struct.new(
       :iops,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2042,7 +2086,8 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :ha_pairs,
       :throughput_capacity_per_ha_pair,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2175,7 +2220,8 @@ module Aws::FSx
       :endpoint_ipv6_address_range,
       :route_table_ids,
       :read_cache_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2403,7 +2449,8 @@ module Aws::FSx
       :file_system_type_version,
       :open_zfs_configuration,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2413,7 +2460,8 @@ module Aws::FSx
     #   @return [Types::FileSystem]
     class CreateFileSystemResponse < Struct.new(
       :file_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2538,7 +2586,8 @@ module Aws::FSx
       :aliases,
       :audit_log_configuration,
       :disk_iops_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2695,7 +2744,8 @@ module Aws::FSx
       :volume_style,
       :aggregate_configuration,
       :size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2733,7 +2783,8 @@ module Aws::FSx
     class CreateOpenZFSOriginSnapshotConfiguration < Struct.new(
       :snapshot_arn,
       :copy_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2826,7 +2877,8 @@ module Aws::FSx
       :read_only,
       :nfs_exports,
       :user_and_group_quotas,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2888,7 +2940,8 @@ module Aws::FSx
       :retention_period,
       :snaplock_type,
       :volume_append_mode_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2911,7 +2964,8 @@ module Aws::FSx
       :name,
       :volume_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2920,7 +2974,8 @@ module Aws::FSx
     #   @return [Types::Snapshot]
     class CreateSnapshotResponse < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2980,7 +3035,8 @@ module Aws::FSx
       :svm_admin_password,
       :tags,
       :root_volume_security_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2989,7 +3045,8 @@ module Aws::FSx
     #   @return [Types::StorageVirtualMachine]
     class CreateStorageVirtualMachineResponse < Struct.new(
       :storage_virtual_machine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3009,7 +3066,8 @@ module Aws::FSx
     class CreateSvmActiveDirectoryConfiguration < Struct.new(
       :net_bios_name,
       :self_managed_active_directory_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3036,7 +3094,8 @@ module Aws::FSx
       :name,
       :ontap_configuration,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3046,7 +3105,8 @@ module Aws::FSx
     #   @return [Types::Volume]
     class CreateVolumeFromBackupResponse < Struct.new(
       :volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3078,7 +3138,8 @@ module Aws::FSx
       :ontap_configuration,
       :tags,
       :open_zfs_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3087,7 +3148,8 @@ module Aws::FSx
     #   @return [Types::Volume]
     class CreateVolumeResponse < Struct.new(
       :volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3305,7 +3367,8 @@ module Aws::FSx
       :file_cache_path,
       :data_repository_subdirectories,
       :nfs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3315,7 +3378,8 @@ module Aws::FSx
     #   @return [String]
     class DataRepositoryAssociationNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3420,7 +3484,8 @@ module Aws::FSx
       :imported_file_chunk_size,
       :auto_import_policy,
       :failure_details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3431,7 +3496,8 @@ module Aws::FSx
     #   @return [String]
     class DataRepositoryFailureDetails < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3587,7 +3653,8 @@ module Aws::FSx
       :capacity_to_release,
       :file_cache_id,
       :release_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3597,7 +3664,8 @@ module Aws::FSx
     #   @return [String]
     class DataRepositoryTaskEnded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3608,7 +3676,8 @@ module Aws::FSx
     #   @return [String]
     class DataRepositoryTaskExecuting < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3618,7 +3687,8 @@ module Aws::FSx
     #   @return [String]
     class DataRepositoryTaskFailureDetails < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3644,7 +3714,8 @@ module Aws::FSx
     class DataRepositoryTaskFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3654,7 +3725,8 @@ module Aws::FSx
     #   @return [String]
     class DataRepositoryTaskNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3684,7 +3756,8 @@ module Aws::FSx
       :failed_count,
       :last_updated_time,
       :released_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3700,7 +3773,8 @@ module Aws::FSx
     class DeleteBackupRequest < Struct.new(
       :backup_id,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3715,7 +3789,8 @@ module Aws::FSx
     class DeleteBackupResponse < Struct.new(
       :backup_id,
       :lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3735,7 +3810,8 @@ module Aws::FSx
       :association_id,
       :client_request_token,
       :delete_data_in_file_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3753,7 +3829,8 @@ module Aws::FSx
       :association_id,
       :lifecycle,
       :delete_data_in_file_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3768,7 +3845,8 @@ module Aws::FSx
     class DeleteFileCacheRequest < Struct.new(
       :file_cache_id,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3783,7 +3861,8 @@ module Aws::FSx
     class DeleteFileCacheResponse < Struct.new(
       :file_cache_id,
       :lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3806,7 +3885,8 @@ module Aws::FSx
     class DeleteFileSystemLustreConfiguration < Struct.new(
       :skip_final_backup,
       :final_backup_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3821,7 +3901,8 @@ module Aws::FSx
     class DeleteFileSystemLustreResponse < Struct.new(
       :final_backup_id,
       :final_backup_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3845,7 +3926,8 @@ module Aws::FSx
       :skip_final_backup,
       :final_backup_tags,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3860,7 +3942,8 @@ module Aws::FSx
     class DeleteFileSystemOpenZFSResponse < Struct.new(
       :final_backup_id,
       :final_backup_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3891,7 +3974,8 @@ module Aws::FSx
       :windows_configuration,
       :lustre_configuration,
       :open_zfs_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3922,7 +4006,8 @@ module Aws::FSx
       :windows_response,
       :lustre_response,
       :open_zfs_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3940,7 +4025,8 @@ module Aws::FSx
     class DeleteFileSystemWindowsConfiguration < Struct.new(
       :skip_final_backup,
       :final_backup_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3955,7 +4041,8 @@ module Aws::FSx
     class DeleteFileSystemWindowsResponse < Struct.new(
       :final_backup_id,
       :final_backup_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3970,7 +4057,8 @@ module Aws::FSx
     class DeleteSnapshotRequest < Struct.new(
       :client_request_token,
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3984,7 +4072,8 @@ module Aws::FSx
     class DeleteSnapshotResponse < Struct.new(
       :snapshot_id,
       :lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3999,7 +4088,8 @@ module Aws::FSx
     class DeleteStorageVirtualMachineRequest < Struct.new(
       :client_request_token,
       :storage_virtual_machine_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4012,7 +4102,8 @@ module Aws::FSx
     class DeleteStorageVirtualMachineResponse < Struct.new(
       :storage_virtual_machine_id,
       :lifecycle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4038,7 +4129,8 @@ module Aws::FSx
       :skip_final_backup,
       :final_backup_tags,
       :bypass_snaplock_enterprise_retention,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4053,7 +4145,8 @@ module Aws::FSx
     class DeleteVolumeOntapResponse < Struct.new(
       :final_backup_id,
       :final_backup_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4064,7 +4157,8 @@ module Aws::FSx
     #   @return [Array<String>]
     class DeleteVolumeOpenZFSConfiguration < Struct.new(
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4090,7 +4184,8 @@ module Aws::FSx
       :volume_id,
       :ontap_configuration,
       :open_zfs_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4109,7 +4204,8 @@ module Aws::FSx
       :volume_id,
       :lifecycle,
       :ontap_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4139,7 +4235,8 @@ module Aws::FSx
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4155,7 +4252,8 @@ module Aws::FSx
     class DescribeBackupsResponse < Struct.new(
       :backups,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4180,7 +4278,8 @@ module Aws::FSx
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4195,7 +4294,8 @@ module Aws::FSx
     class DescribeDataRepositoryAssociationsResponse < Struct.new(
       :associations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4221,7 +4321,8 @@ module Aws::FSx
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4236,7 +4337,8 @@ module Aws::FSx
     class DescribeDataRepositoryTasksResponse < Struct.new(
       :data_repository_tasks,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4256,7 +4358,8 @@ module Aws::FSx
       :file_cache_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4271,7 +4374,8 @@ module Aws::FSx
     class DescribeFileCachesResponse < Struct.new(
       :file_caches,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4301,7 +4405,8 @@ module Aws::FSx
       :file_system_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4317,7 +4422,8 @@ module Aws::FSx
     class DescribeFileSystemAliasesResponse < Struct.new(
       :aliases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4341,7 +4447,8 @@ module Aws::FSx
       :file_system_ids,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4357,7 +4464,8 @@ module Aws::FSx
     class DescribeFileSystemsResponse < Struct.new(
       :file_systems,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4381,7 +4489,8 @@ module Aws::FSx
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4396,12 +4505,14 @@ module Aws::FSx
     class DescribeS3AccessPointAttachmentsResponse < Struct.new(
       :s3_access_point_attachments,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DescribeSharedVpcConfigurationRequest < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4410,7 +4521,8 @@ module Aws::FSx
     #   @return [String]
     class DescribeSharedVpcConfigurationResponse < Struct.new(
       :enable_fsx_route_table_updates_from_participant_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4442,7 +4554,8 @@ module Aws::FSx
       :max_results,
       :next_token,
       :include_shared,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4457,7 +4570,8 @@ module Aws::FSx
     class DescribeSnapshotsResponse < Struct.new(
       :snapshots,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4481,7 +4595,8 @@ module Aws::FSx
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4496,7 +4611,8 @@ module Aws::FSx
     class DescribeStorageVirtualMachinesResponse < Struct.new(
       :storage_virtual_machines,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4521,7 +4637,8 @@ module Aws::FSx
       :filters,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4536,7 +4653,8 @@ module Aws::FSx
     class DescribeVolumesResponse < Struct.new(
       :volumes,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4551,7 +4669,8 @@ module Aws::FSx
     class DetachAndDeleteS3AccessPointRequest < Struct.new(
       :client_request_token,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4564,7 +4683,8 @@ module Aws::FSx
     class DetachAndDeleteS3AccessPointResponse < Struct.new(
       :lifecycle,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4584,7 +4704,8 @@ module Aws::FSx
       :client_request_token,
       :file_system_id,
       :aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4595,7 +4716,8 @@ module Aws::FSx
     #   @return [Array<Types::Alias>]
     class DisassociateFileSystemAliasesResponse < Struct.new(
       :aliases,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4616,7 +4738,8 @@ module Aws::FSx
     class DiskIopsConfiguration < Struct.new(
       :mode,
       :iops,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4648,7 +4771,8 @@ module Aws::FSx
     class DurationSinceLastAccess < Struct.new(
       :unit,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4754,7 +4878,8 @@ module Aws::FSx
       :resource_arn,
       :lustre_configuration,
       :data_repository_association_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4869,7 +4994,8 @@ module Aws::FSx
       :copy_tags_to_data_repository_associations,
       :lustre_configuration,
       :data_repository_association_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4946,7 +5072,8 @@ module Aws::FSx
       :data_repository_path,
       :data_repository_subdirectories,
       :nfs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4956,7 +5083,8 @@ module Aws::FSx
     #   @return [String]
     class FileCacheFailureDetails < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4995,7 +5123,8 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :metadata_configuration,
       :log_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5008,7 +5137,8 @@ module Aws::FSx
     #   @return [Integer]
     class FileCacheLustreMetadataConfiguration < Struct.new(
       :storage_capacity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5029,7 +5159,8 @@ module Aws::FSx
     class FileCacheNFSConfiguration < Struct.new(
       :version,
       :dns_ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5039,7 +5170,8 @@ module Aws::FSx
     #   @return [String]
     class FileCacheNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5221,7 +5353,8 @@ module Aws::FSx
       :file_system_type_version,
       :open_zfs_configuration,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5239,7 +5372,8 @@ module Aws::FSx
     class FileSystemEndpoint < Struct.new(
       :dns_name,
       :ip_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5257,7 +5391,8 @@ module Aws::FSx
     class FileSystemEndpoints < Struct.new(
       :intercluster,
       :management,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5267,7 +5402,8 @@ module Aws::FSx
     #   @return [String]
     class FileSystemFailureDetails < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5307,7 +5443,8 @@ module Aws::FSx
     class FileSystemLustreMetadataConfiguration < Struct.new(
       :iops,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5317,7 +5454,8 @@ module Aws::FSx
     #   @return [String]
     class FileSystemNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5333,7 +5471,8 @@ module Aws::FSx
     class Filter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5349,7 +5488,8 @@ module Aws::FSx
     class IncompatibleParameterError < Struct.new(
       :parameter,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5360,7 +5500,8 @@ module Aws::FSx
     #   @return [String]
     class IncompatibleRegionForMultiAZ < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5370,7 +5511,8 @@ module Aws::FSx
     #   @return [String]
     class InternalServerError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5384,7 +5526,8 @@ module Aws::FSx
     class InvalidAccessPoint < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5394,7 +5537,8 @@ module Aws::FSx
     #   @return [String]
     class InvalidDataRepositoryType < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5405,7 +5549,8 @@ module Aws::FSx
     #   @return [String]
     class InvalidDestinationKmsKey < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5415,7 +5560,8 @@ module Aws::FSx
     #   @return [String]
     class InvalidExportPath < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5425,7 +5571,8 @@ module Aws::FSx
     #   @return [String]
     class InvalidImportPath < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5447,7 +5594,8 @@ module Aws::FSx
       :invalid_subnet_id,
       :invalid_security_group_id,
       :invalid_route_table_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5457,7 +5605,8 @@ module Aws::FSx
     #   @return [String]
     class InvalidPerUnitStorageThroughput < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5468,7 +5617,8 @@ module Aws::FSx
     #   @return [String]
     class InvalidRegion < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5482,7 +5632,8 @@ module Aws::FSx
     class InvalidRequest < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5493,7 +5644,8 @@ module Aws::FSx
     #   @return [String]
     class InvalidSourceKmsKey < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5503,7 +5655,8 @@ module Aws::FSx
     #   @return [String]
     class LifecycleTransitionReason < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5526,7 +5679,8 @@ module Aws::FSx
       :resource_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5542,7 +5696,8 @@ module Aws::FSx
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5687,7 +5842,8 @@ module Aws::FSx
       :efa_enabled,
       :throughput_capacity,
       :data_read_cache_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5728,7 +5884,8 @@ module Aws::FSx
     class LustreLogConfiguration < Struct.new(
       :level,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5793,7 +5950,8 @@ module Aws::FSx
     class LustreLogCreateConfiguration < Struct.new(
       :level,
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5830,7 +5988,8 @@ module Aws::FSx
     class LustreReadCacheConfiguration < Struct.new(
       :sizing_mode,
       :size_gi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5879,7 +6038,8 @@ module Aws::FSx
     class LustreRootSquashConfiguration < Struct.new(
       :root_squash,
       :no_squash_nids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5889,7 +6049,8 @@ module Aws::FSx
     #   @return [String]
     class MissingFileCacheConfiguration < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5899,7 +6060,8 @@ module Aws::FSx
     #   @return [String]
     class MissingFileSystemConfiguration < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5909,7 +6071,8 @@ module Aws::FSx
     #   @return [String]
     class MissingVolumeConfiguration < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5935,7 +6098,8 @@ module Aws::FSx
       :version,
       :dns_ips,
       :auto_export_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -5950,7 +6114,8 @@ module Aws::FSx
     class NotServiceResourceError < Struct.new(
       :resource_arn,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6090,7 +6255,8 @@ module Aws::FSx
       :fsx_admin_password,
       :ha_pairs,
       :throughput_capacity_per_ha_pair,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6232,7 +6398,8 @@ module Aws::FSx
       :volume_style,
       :aggregate_configuration,
       :size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6267,7 +6434,8 @@ module Aws::FSx
     class OpenZFSClientConfiguration < Struct.new(
       :clients,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6330,7 +6498,8 @@ module Aws::FSx
       :user_and_group_quotas,
       :copy_tags_to_snapshots,
       :read_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6433,7 +6602,8 @@ module Aws::FSx
       :endpoint_ip_address,
       :endpoint_ipv6_address,
       :read_cache_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6447,7 +6617,8 @@ module Aws::FSx
     class OpenZFSFileSystemIdentity < Struct.new(
       :type,
       :posix_user,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6459,7 +6630,8 @@ module Aws::FSx
     #   @return [Array<Types::OpenZFSClientConfiguration>]
     class OpenZFSNfsExport < Struct.new(
       :client_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6496,7 +6668,8 @@ module Aws::FSx
     class OpenZFSOriginSnapshotConfiguration < Struct.new(
       :snapshot_arn,
       :copy_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6514,7 +6687,8 @@ module Aws::FSx
       :uid,
       :gid,
       :secondary_gids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6545,7 +6719,8 @@ module Aws::FSx
     class OpenZFSReadCacheConfiguration < Struct.new(
       :sizing_mode,
       :size_gi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6567,7 +6742,8 @@ module Aws::FSx
       :type,
       :id,
       :storage_capacity_quota_gi_b,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6707,7 +6883,8 @@ module Aws::FSx
       :source_snapshot_arn,
       :destination_snapshot,
       :copy_strategy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6739,7 +6916,8 @@ module Aws::FSx
     #   @return [Types::DurationSinceLastAccess]
     class ReleaseConfiguration < Struct.new(
       :duration_since_last_access,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6754,7 +6932,8 @@ module Aws::FSx
     class ReleaseFileSystemNfsV3LocksRequest < Struct.new(
       :file_system_id,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6763,7 +6942,8 @@ module Aws::FSx
     #   @return [Types::FileSystem]
     class ReleaseFileSystemNfsV3LocksResponse < Struct.new(
       :file_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6778,7 +6958,8 @@ module Aws::FSx
     class ResourceDoesNotSupportTagging < Struct.new(
       :resource_arn,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6792,7 +6973,8 @@ module Aws::FSx
     class ResourceNotFound < Struct.new(
       :resource_arn,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6830,7 +7012,8 @@ module Aws::FSx
       :volume_id,
       :snapshot_id,
       :options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6849,7 +7032,8 @@ module Aws::FSx
       :volume_id,
       :lifecycle,
       :administrative_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6899,7 +7083,8 @@ module Aws::FSx
     class RetentionPeriod < Struct.new(
       :type,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6917,7 +7102,8 @@ module Aws::FSx
       :resource_arn,
       :alias,
       :vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6970,7 +7156,8 @@ module Aws::FSx
       :type,
       :open_zfs_configuration,
       :s3_access_point,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6980,7 +7167,8 @@ module Aws::FSx
     #   @return [String]
     class S3AccessPointAttachmentNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -6994,7 +7182,8 @@ module Aws::FSx
     class S3AccessPointAttachmentsFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7008,7 +7197,8 @@ module Aws::FSx
     class S3AccessPointOpenZFSConfiguration < Struct.new(
       :volume_id,
       :file_system_identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7018,7 +7208,8 @@ module Aws::FSx
     #   @return [String]
     class S3AccessPointVpcConfiguration < Struct.new(
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7048,7 +7239,8 @@ module Aws::FSx
     class S3DataRepositoryConfiguration < Struct.new(
       :auto_import_policy,
       :auto_export_policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7079,7 +7271,8 @@ module Aws::FSx
       :file_system_administrators_group,
       :user_name,
       :dns_ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7134,7 +7327,8 @@ module Aws::FSx
       :user_name,
       :password,
       :dns_ips,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7172,7 +7366,8 @@ module Aws::FSx
       :domain_name,
       :organizational_unit_distinguished_name,
       :file_system_administrators_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7187,7 +7382,8 @@ module Aws::FSx
     class ServiceLimitExceeded < Struct.new(
       :limit,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7249,7 +7445,8 @@ module Aws::FSx
       :retention_period,
       :snaplock_type,
       :volume_append_mode_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7273,7 +7470,8 @@ module Aws::FSx
       :default_retention,
       :minimum_retention,
       :maximum_retention,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7340,7 +7538,8 @@ module Aws::FSx
       :lifecycle_transition_reason,
       :tags,
       :administrative_actions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7357,7 +7556,8 @@ module Aws::FSx
     class SnapshotFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7367,7 +7567,8 @@ module Aws::FSx
     #   @return [String]
     class SnapshotNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7382,7 +7583,8 @@ module Aws::FSx
     class SourceBackupUnavailable < Struct.new(
       :message,
       :backup_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7397,7 +7599,8 @@ module Aws::FSx
     class StartMisconfiguredStateRecoveryRequest < Struct.new(
       :client_request_token,
       :file_system_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7406,7 +7609,8 @@ module Aws::FSx
     #   @return [Types::FileSystem]
     class StartMisconfiguredStateRecoveryResponse < Struct.new(
       :file_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7497,7 +7701,8 @@ module Aws::FSx
       :tags,
       :lifecycle_transition_reason,
       :root_volume_security_style,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7514,7 +7719,8 @@ module Aws::FSx
     class StorageVirtualMachineFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7524,7 +7730,8 @@ module Aws::FSx
     #   @return [String]
     class StorageVirtualMachineNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7540,7 +7747,8 @@ module Aws::FSx
     class SvmActiveDirectoryConfiguration < Struct.new(
       :net_bios_name,
       :self_managed_active_directory_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7559,7 +7767,8 @@ module Aws::FSx
     class SvmEndpoint < Struct.new(
       :dns_name,
       :ip_addresses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7583,7 +7792,8 @@ module Aws::FSx
       :management,
       :nfs,
       :smb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7601,7 +7811,8 @@ module Aws::FSx
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7617,13 +7828,15 @@ module Aws::FSx
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the <code>TagResource</code> operation.</p>
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7688,7 +7901,8 @@ module Aws::FSx
     class TieringPolicy < Struct.new(
       :cooling_period,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7703,7 +7917,8 @@ module Aws::FSx
     class TooManyAccessPoints < Struct.new(
       :error_code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7713,7 +7928,8 @@ module Aws::FSx
     #   @return [String]
     class UnsupportedOperation < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7728,13 +7944,15 @@ module Aws::FSx
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for <code>UntagResource</code> action.</p>
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7767,7 +7985,8 @@ module Aws::FSx
       :client_request_token,
       :imported_file_chunk_size,
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7776,7 +7995,8 @@ module Aws::FSx
     #   @return [Types::DataRepositoryAssociation]
     class UpdateDataRepositoryAssociationResponse < Struct.new(
       :association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7788,7 +8008,8 @@ module Aws::FSx
     #   @return [String]
     class UpdateFileCacheLustreConfiguration < Struct.new(
       :weekly_maintenance_start_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7807,7 +8028,8 @@ module Aws::FSx
       :file_cache_id,
       :client_request_token,
       :lustre_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7816,7 +8038,8 @@ module Aws::FSx
     #   @return [Types::FileCache]
     class UpdateFileCacheResponse < Struct.new(
       :file_cache,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -7945,7 +8168,8 @@ module Aws::FSx
       :metadata_configuration,
       :throughput_capacity,
       :data_read_cache_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8007,7 +8231,8 @@ module Aws::FSx
     class UpdateFileSystemLustreMetadataConfiguration < Struct.new(
       :iops,
       :mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8112,7 +8337,8 @@ module Aws::FSx
       :remove_route_table_ids,
       :throughput_capacity_per_ha_pair,
       :ha_pairs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8200,7 +8426,8 @@ module Aws::FSx
       :remove_route_table_ids,
       :read_cache_configuration,
       :endpoint_ipv6_address_range,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8288,7 +8515,8 @@ module Aws::FSx
       :storage_type,
       :file_system_type_version,
       :network_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8298,7 +8526,8 @@ module Aws::FSx
     #   @return [Types::FileSystem]
     class UpdateFileSystemResponse < Struct.new(
       :file_system,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8346,7 +8575,8 @@ module Aws::FSx
       :self_managed_active_directory_configuration,
       :audit_log_configuration,
       :disk_iops_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8416,7 +8646,8 @@ module Aws::FSx
       :copy_tags_to_backups,
       :snaplock_configuration,
       :size_in_bytes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8481,7 +8712,8 @@ module Aws::FSx
       :nfs_exports,
       :user_and_group_quotas,
       :read_only,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8498,7 +8730,8 @@ module Aws::FSx
     class UpdateSharedVpcConfigurationRequest < Struct.new(
       :enable_fsx_route_table_updates_from_participant_accounts,
       :client_request_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8507,7 +8740,8 @@ module Aws::FSx
     #   @return [String]
     class UpdateSharedVpcConfigurationResponse < Struct.new(
       :enable_fsx_route_table_updates_from_participant_accounts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8548,7 +8782,8 @@ module Aws::FSx
       :privileged_delete,
       :retention_period,
       :volume_append_mode_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8568,7 +8803,8 @@ module Aws::FSx
       :client_request_token,
       :name,
       :snapshot_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8578,7 +8814,8 @@ module Aws::FSx
     #   @return [Types::Snapshot]
     class UpdateSnapshotResponse < Struct.new(
       :snapshot,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8601,7 +8838,8 @@ module Aws::FSx
       :client_request_token,
       :storage_virtual_machine_id,
       :svm_admin_password,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8610,7 +8848,8 @@ module Aws::FSx
     #   @return [Types::StorageVirtualMachine]
     class UpdateStorageVirtualMachineResponse < Struct.new(
       :storage_virtual_machine,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8626,7 +8865,8 @@ module Aws::FSx
     class UpdateSvmActiveDirectoryConfiguration < Struct.new(
       :self_managed_active_directory_configuration,
       :net_bios_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8656,7 +8896,8 @@ module Aws::FSx
       :ontap_configuration,
       :name,
       :open_zfs_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8666,7 +8907,8 @@ module Aws::FSx
     #   @return [Types::Volume]
     class UpdateVolumeResponse < Struct.new(
       :volume,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8761,7 +9003,8 @@ module Aws::FSx
       :lifecycle_transition_reason,
       :administrative_actions,
       :open_zfs_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8778,7 +9021,8 @@ module Aws::FSx
     class VolumeFilter < Struct.new(
       :name,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8788,7 +9032,8 @@ module Aws::FSx
     #   @return [String]
     class VolumeNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8860,7 +9105,8 @@ module Aws::FSx
       :file_access_audit_log_level,
       :file_share_access_audit_log_level,
       :audit_log_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -8949,7 +9195,8 @@ module Aws::FSx
       :file_access_audit_log_level,
       :file_share_access_audit_log_level,
       :audit_log_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -9070,7 +9317,8 @@ module Aws::FSx
       :aliases,
       :audit_log_configuration,
       :disk_iops_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

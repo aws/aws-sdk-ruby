@@ -15,7 +15,8 @@ module Aws::Textract
     class AccessDeniedException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -54,7 +55,8 @@ module Aws::Textract
       :adapter_id,
       :pages,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +78,8 @@ module Aws::Textract
       :adapter_name,
       :creation_time,
       :feature_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -93,7 +96,8 @@ module Aws::Textract
     #   @return [Types::S3Object]
     class AdapterVersionDatasetConfig < Struct.new(
       :manifest_s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +116,8 @@ module Aws::Textract
       :baseline,
       :adapter_version,
       :feature_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -142,7 +147,8 @@ module Aws::Textract
       :feature_types,
       :status,
       :status_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -153,7 +159,8 @@ module Aws::Textract
     #   @return [Array<Types::Adapter>]
     class AdaptersConfig < Struct.new(
       :adapters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +194,8 @@ module Aws::Textract
       :human_loop_config,
       :queries_config,
       :adapters_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -208,7 +216,8 @@ module Aws::Textract
       :blocks,
       :human_loop_activation_output,
       :analyze_document_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -232,7 +241,8 @@ module Aws::Textract
     #   @return [Types::Document]
     class AnalyzeExpenseRequest < Struct.new(
       :document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -245,7 +255,8 @@ module Aws::Textract
     class AnalyzeExpenseResponse < Struct.new(
       :document_metadata,
       :expense_documents,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -264,7 +275,8 @@ module Aws::Textract
       :text,
       :normalized_value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -273,7 +285,8 @@ module Aws::Textract
     #   @return [Array<Types::Document>]
     class AnalyzeIDRequest < Struct.new(
       :document_pages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -291,7 +304,8 @@ module Aws::Textract
       :identity_documents,
       :document_metadata,
       :analyze_id_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -304,7 +318,8 @@ module Aws::Textract
     class BadDocumentException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -589,7 +604,8 @@ module Aws::Textract
       :selection_status,
       :page,
       :query,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -626,7 +642,8 @@ module Aws::Textract
       :height,
       :left,
       :top,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -646,7 +663,8 @@ module Aws::Textract
     class ConflictException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -679,7 +697,8 @@ module Aws::Textract
       :feature_types,
       :auto_update,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +707,8 @@ module Aws::Textract
     #   @return [String]
     class CreateAdapterResponse < Struct.new(
       :adapter_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -736,7 +756,8 @@ module Aws::Textract
       :kms_key_id,
       :output_config,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -749,7 +770,8 @@ module Aws::Textract
     class CreateAdapterVersionResponse < Struct.new(
       :adapter_id,
       :adapter_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -758,12 +780,14 @@ module Aws::Textract
     #   @return [String]
     class DeleteAdapterRequest < Struct.new(
       :adapter_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAdapterResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -776,12 +800,14 @@ module Aws::Textract
     class DeleteAdapterVersionRequest < Struct.new(
       :adapter_id,
       :adapter_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAdapterVersionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +820,8 @@ module Aws::Textract
     #   @return [Types::Document]
     class DetectDocumentTextRequest < Struct.new(
       :document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -813,7 +840,8 @@ module Aws::Textract
       :document_metadata,
       :blocks,
       :detect_document_text_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -823,7 +851,8 @@ module Aws::Textract
     #   @return [Integer]
     class DetectedSignature < Struct.new(
       :page,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -856,7 +885,8 @@ module Aws::Textract
     class Document < Struct.new(
       :bytes,
       :s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -878,7 +908,8 @@ module Aws::Textract
       :split_documents,
       :detected_signatures,
       :undetected_signatures,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -891,7 +922,8 @@ module Aws::Textract
     #   @return [Types::S3Object]
     class DocumentLocation < Struct.new(
       :s3_object,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -901,7 +933,8 @@ module Aws::Textract
     #   @return [Integer]
     class DocumentMetadata < Struct.new(
       :pages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -915,7 +948,8 @@ module Aws::Textract
     class DocumentTooLargeException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -933,7 +967,8 @@ module Aws::Textract
       :f1_score,
       :precision,
       :recall,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -992,7 +1027,8 @@ module Aws::Textract
     class ExpenseCurrency < Struct.new(
       :code,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1011,7 +1047,8 @@ module Aws::Textract
       :text,
       :geometry,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1035,7 +1072,8 @@ module Aws::Textract
       :summary_fields,
       :line_item_groups,
       :blocks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1068,7 +1106,8 @@ module Aws::Textract
       :page_number,
       :currency,
       :group_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1123,8 @@ module Aws::Textract
     class ExpenseGroupProperty < Struct.new(
       :types,
       :id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1098,7 +1138,8 @@ module Aws::Textract
     class ExpenseType < Struct.new(
       :text,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1116,7 +1157,8 @@ module Aws::Textract
       :lending_document,
       :expense_document,
       :identity_document,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1136,7 +1178,8 @@ module Aws::Textract
       :bounding_box,
       :polygon,
       :rotation_angle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1188,8 @@ module Aws::Textract
     #   @return [String]
     class GetAdapterRequest < Struct.new(
       :adapter_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1178,7 +1222,8 @@ module Aws::Textract
       :feature_types,
       :auto_update,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1191,7 +1236,8 @@ module Aws::Textract
     class GetAdapterVersionRequest < Struct.new(
       :adapter_id,
       :adapter_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1258,7 +1304,8 @@ module Aws::Textract
       :output_config,
       :evaluation_metrics,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1328,8 @@ module Aws::Textract
       :job_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1318,7 +1366,8 @@ module Aws::Textract
       :warnings,
       :status_message,
       :analyze_document_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1339,7 +1388,8 @@ module Aws::Textract
       :job_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1375,7 +1425,8 @@ module Aws::Textract
       :warnings,
       :status_message,
       :detect_document_text_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1396,7 +1447,8 @@ module Aws::Textract
       :job_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1432,7 +1484,8 @@ module Aws::Textract
       :warnings,
       :status_message,
       :analyze_expense_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1455,7 +1508,8 @@ module Aws::Textract
       :job_id,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1491,7 +1545,8 @@ module Aws::Textract
       :warnings,
       :status_message,
       :analyze_lending_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1501,7 +1556,8 @@ module Aws::Textract
     #   @return [String]
     class GetLendingAnalysisSummaryRequest < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1531,7 +1587,8 @@ module Aws::Textract
       :warnings,
       :status_message,
       :analyze_lending_model_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1551,7 +1608,8 @@ module Aws::Textract
       :human_loop_arn,
       :human_loop_activation_reasons,
       :human_loop_activation_conditions_evaluation_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1571,7 +1629,8 @@ module Aws::Textract
       :human_loop_name,
       :flow_definition_arn,
       :data_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1583,7 +1642,8 @@ module Aws::Textract
     #   @return [Array<String>]
     class HumanLoopDataAttributes < Struct.new(
       :content_classifiers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1607,7 +1667,8 @@ module Aws::Textract
       :service_code,
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1621,7 +1682,8 @@ module Aws::Textract
     class IdempotentParameterMismatchException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1641,7 +1703,8 @@ module Aws::Textract
       :document_index,
       :identity_document_fields,
       :blocks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1656,7 +1719,8 @@ module Aws::Textract
     class IdentityDocumentField < Struct.new(
       :type,
       :value_detection,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1668,7 +1732,8 @@ module Aws::Textract
     class InternalServerError < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1680,7 +1745,8 @@ module Aws::Textract
     class InvalidJobIdException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1693,7 +1759,8 @@ module Aws::Textract
     class InvalidKMSKeyException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1709,7 +1776,8 @@ module Aws::Textract
     class InvalidParameterException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1724,7 +1792,8 @@ module Aws::Textract
     class InvalidS3ObjectException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1747,7 +1816,8 @@ module Aws::Textract
       :selection_status,
       :geometry,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1761,7 +1831,8 @@ module Aws::Textract
     class LendingDocument < Struct.new(
       :lending_fields,
       :signature_detections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1779,7 +1850,8 @@ module Aws::Textract
       :type,
       :key_detection,
       :value_detections,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1797,7 +1869,8 @@ module Aws::Textract
       :page,
       :page_classification,
       :extractions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1811,7 +1884,8 @@ module Aws::Textract
     class LendingSummary < Struct.new(
       :document_groups,
       :undetected_document_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1827,7 +1901,8 @@ module Aws::Textract
     class LimitExceededException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1837,7 +1912,8 @@ module Aws::Textract
     #   @return [Array<Types::ExpenseField>]
     class LineItemFields < Struct.new(
       :line_item_expense_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1851,7 +1927,8 @@ module Aws::Textract
     class LineItemGroup < Struct.new(
       :line_item_group_index,
       :line_items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1878,7 +1955,8 @@ module Aws::Textract
       :before_creation_time,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1891,7 +1969,8 @@ module Aws::Textract
     class ListAdapterVersionsResponse < Struct.new(
       :adapter_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1914,7 +1993,8 @@ module Aws::Textract
       :before_creation_time,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1927,7 +2007,8 @@ module Aws::Textract
     class ListAdaptersResponse < Struct.new(
       :adapters,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1936,7 +2017,8 @@ module Aws::Textract
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1945,7 +2027,8 @@ module Aws::Textract
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1960,7 +2043,8 @@ module Aws::Textract
     class NormalizedValue < Struct.new(
       :value,
       :value_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1975,7 +2059,8 @@ module Aws::Textract
     class NotificationChannel < Struct.new(
       :sns_topic_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2006,7 +2091,8 @@ module Aws::Textract
     class OutputConfig < Struct.new(
       :s3_bucket,
       :s3_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2023,7 +2109,8 @@ module Aws::Textract
     class PageClassification < Struct.new(
       :page_type,
       :page_number,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2044,7 +2131,8 @@ module Aws::Textract
     class Point < Struct.new(
       :x,
       :y,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2065,7 +2153,8 @@ module Aws::Textract
     class Prediction < Struct.new(
       :value,
       :confidence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2078,7 +2167,8 @@ module Aws::Textract
     class ProvisionedThroughputExceededException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2088,7 +2178,8 @@ module Aws::Textract
     #   @return [Array<Types::Query>]
     class QueriesConfig < Struct.new(
       :queries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2126,7 +2217,8 @@ module Aws::Textract
       :text,
       :alias,
       :pages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2185,7 +2277,8 @@ module Aws::Textract
     class Relationship < Struct.new(
       :type,
       :ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2197,7 +2290,8 @@ module Aws::Textract
     class ResourceNotFoundException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2222,7 +2316,8 @@ module Aws::Textract
       :bucket,
       :name,
       :version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2234,7 +2329,8 @@ module Aws::Textract
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2249,7 +2345,8 @@ module Aws::Textract
     class SignatureDetection < Struct.new(
       :confidence,
       :geometry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2263,7 +2360,8 @@ module Aws::Textract
     class SplitDocument < Struct.new(
       :index,
       :pages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2322,7 +2420,8 @@ module Aws::Textract
       :kms_key_id,
       :queries_config,
       :adapters_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2333,7 +2432,8 @@ module Aws::Textract
     #   @return [String]
     class StartDocumentAnalysisResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2375,7 +2475,8 @@ module Aws::Textract
       :notification_channel,
       :output_config,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2386,7 +2487,8 @@ module Aws::Textract
     #   @return [String]
     class StartDocumentTextDetectionResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2428,7 +2530,8 @@ module Aws::Textract
       :notification_channel,
       :output_config,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2438,7 +2541,8 @@ module Aws::Textract
     #   @return [String]
     class StartExpenseAnalysisResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2496,7 +2600,8 @@ module Aws::Textract
       :notification_channel,
       :output_config,
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2507,7 +2612,8 @@ module Aws::Textract
     #   @return [String]
     class StartLendingAnalysisResponse < Struct.new(
       :job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2520,12 +2626,14 @@ module Aws::Textract
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2537,7 +2645,8 @@ module Aws::Textract
     class ThrottlingException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2547,7 +2656,8 @@ module Aws::Textract
     #   @return [Integer]
     class UndetectedSignature < Struct.new(
       :page,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2560,7 +2670,8 @@ module Aws::Textract
     class UnsupportedDocumentException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2573,12 +2684,14 @@ module Aws::Textract
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2599,7 +2712,8 @@ module Aws::Textract
       :description,
       :adapter_name,
       :auto_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2628,7 +2742,8 @@ module Aws::Textract
       :description,
       :feature_types,
       :auto_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2640,7 +2755,8 @@ module Aws::Textract
     class ValidationException < Struct.new(
       :message,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2654,7 +2770,8 @@ module Aws::Textract
     class Warning < Struct.new(
       :error_code,
       :pages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

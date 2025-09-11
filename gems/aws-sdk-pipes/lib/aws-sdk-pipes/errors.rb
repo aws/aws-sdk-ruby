@@ -39,7 +39,7 @@ module Aws::Pipes
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pipes::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -62,7 +62,7 @@ module Aws::Pipes
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pipes::Types::InternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -81,7 +81,7 @@ module Aws::Pipes
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pipes::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -94,7 +94,7 @@ module Aws::Pipes
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pipes::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -127,7 +127,7 @@ module Aws::Pipes
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pipes::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -156,7 +156,7 @@ module Aws::Pipes
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pipes::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

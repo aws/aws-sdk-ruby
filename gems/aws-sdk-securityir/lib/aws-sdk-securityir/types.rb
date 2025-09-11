@@ -12,7 +12,8 @@ module Aws::SecurityIR
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -28,7 +29,8 @@ module Aws::SecurityIR
     class BatchGetMemberAccountDetailsRequest < Struct.new(
       :membership_id,
       :account_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -44,7 +46,8 @@ module Aws::SecurityIR
     class BatchGetMemberAccountDetailsResponse < Struct.new(
       :items,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -55,7 +58,8 @@ module Aws::SecurityIR
     #   @return [String]
     class CancelMembershipRequest < Struct.new(
       :membership_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -66,7 +70,8 @@ module Aws::SecurityIR
     #   @return [String]
     class CancelMembershipResponse < Struct.new(
       :membership_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -98,7 +103,8 @@ module Aws::SecurityIR
       :attachment_status,
       :creator,
       :created_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -125,7 +131,8 @@ module Aws::SecurityIR
       :principal,
       :action,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +142,8 @@ module Aws::SecurityIR
     #   @return [String]
     class CloseCaseRequest < Struct.new(
       :case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -150,7 +158,8 @@ module Aws::SecurityIR
     class CloseCaseResponse < Struct.new(
       :case_status,
       :closed_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -168,7 +177,8 @@ module Aws::SecurityIR
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -188,7 +198,8 @@ module Aws::SecurityIR
       :case_id,
       :client_token,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -198,7 +209,8 @@ module Aws::SecurityIR
     #   @return [String]
     class CreateCaseCommentResponse < Struct.new(
       :comment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -263,7 +275,8 @@ module Aws::SecurityIR
       :impacted_services,
       :impacted_aws_regions,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -274,7 +287,8 @@ module Aws::SecurityIR
     #   @return [String]
     class CreateCaseResponse < Struct.new(
       :case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -309,7 +323,8 @@ module Aws::SecurityIR
       :opt_in_features,
       :tags,
       :cover_entire_organization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -319,7 +334,8 @@ module Aws::SecurityIR
     #   @return [String]
     class CreateMembershipResponse < Struct.new(
       :membership_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -334,7 +350,8 @@ module Aws::SecurityIR
     class GetCaseAttachmentDownloadUrlRequest < Struct.new(
       :case_id,
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -344,7 +361,8 @@ module Aws::SecurityIR
     #   @return [String]
     class GetCaseAttachmentDownloadUrlResponse < Struct.new(
       :attachment_presigned_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -369,7 +387,8 @@ module Aws::SecurityIR
       :file_name,
       :content_length,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -379,7 +398,8 @@ module Aws::SecurityIR
     #   @return [String]
     class GetCaseAttachmentUploadUrlResponse < Struct.new(
       :attachment_presigned_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -389,7 +409,8 @@ module Aws::SecurityIR
     #   @return [String]
     class GetCaseRequest < Struct.new(
       :case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -489,7 +510,8 @@ module Aws::SecurityIR
       :impacted_services,
       :case_attachments,
       :closed_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -511,7 +533,8 @@ module Aws::SecurityIR
       :account_id,
       :error,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -533,7 +556,8 @@ module Aws::SecurityIR
       :account_id,
       :relationship_status,
       :relationship_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +567,8 @@ module Aws::SecurityIR
     #   @return [String]
     class GetMembershipRequest < Struct.new(
       :membership_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -612,7 +637,8 @@ module Aws::SecurityIR
       :incident_response_team,
       :opt_in_features,
       :membership_accounts_configurations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -622,7 +648,8 @@ module Aws::SecurityIR
     #   @return [String]
     class ImpactedAwsRegion < Struct.new(
       :region,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -640,7 +667,8 @@ module Aws::SecurityIR
       :name,
       :job_title,
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +682,8 @@ module Aws::SecurityIR
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -664,7 +693,8 @@ module Aws::SecurityIR
     #   @return [String]
     class InvalidTokenException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -684,7 +714,8 @@ module Aws::SecurityIR
       :next_token,
       :max_results,
       :case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -704,7 +735,8 @@ module Aws::SecurityIR
       :next_token,
       :items,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +791,8 @@ module Aws::SecurityIR
       :closed_date,
       :resolver_type,
       :pending_action,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -774,7 +807,8 @@ module Aws::SecurityIR
     class ListCasesRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -794,7 +828,8 @@ module Aws::SecurityIR
       :next_token,
       :items,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -827,7 +862,8 @@ module Aws::SecurityIR
       :creator,
       :last_updated_by,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -847,7 +883,8 @@ module Aws::SecurityIR
       :next_token,
       :max_results,
       :case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -867,7 +904,8 @@ module Aws::SecurityIR
       :next_token,
       :items,
       :total,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -899,7 +937,8 @@ module Aws::SecurityIR
       :region,
       :membership_arn,
       :membership_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +953,8 @@ module Aws::SecurityIR
     class ListMembershipsRequest < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -929,7 +969,8 @@ module Aws::SecurityIR
     class ListMembershipsResponse < Struct.new(
       :next_token,
       :items,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +980,8 @@ module Aws::SecurityIR
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -949,7 +991,8 @@ module Aws::SecurityIR
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -963,7 +1006,8 @@ module Aws::SecurityIR
     class MembershipAccountsConfigurations < Struct.new(
       :cover_entire_organization,
       :organizational_units,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -981,7 +1025,8 @@ module Aws::SecurityIR
       :cover_entire_organization,
       :organizational_units_to_add,
       :organizational_units_to_remove,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -995,7 +1040,8 @@ module Aws::SecurityIR
     class OptInFeature < Struct.new(
       :feature_name,
       :is_enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1005,7 +1051,8 @@ module Aws::SecurityIR
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1063,8 @@ module Aws::SecurityIR
     #   @return [String]
     class SecurityIncidentResponseNotActiveException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1042,7 +1090,8 @@ module Aws::SecurityIR
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,13 +1106,15 @@ module Aws::SecurityIR
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_TagResource.html#API_TagResource_ResponseSyntax API Reference
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1077,7 +1128,8 @@ module Aws::SecurityIR
     class ThreatActorIp < Struct.new(
       :ip_address,
       :user_agent,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1099,7 +1151,8 @@ module Aws::SecurityIR
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1114,13 +1167,15 @@ module Aws::SecurityIR
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UntagResource.html#API_UntagResource_ResponseSyntax API Reference
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1140,7 +1195,8 @@ module Aws::SecurityIR
       :case_id,
       :comment_id,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1155,7 +1211,8 @@ module Aws::SecurityIR
     class UpdateCaseCommentResponse < Struct.new(
       :comment_id,
       :body,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1240,12 +1297,14 @@ module Aws::SecurityIR
       :impacted_aws_regions_to_delete,
       :impacted_accounts_to_add,
       :impacted_accounts_to_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateCaseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1260,7 +1319,8 @@ module Aws::SecurityIR
     class UpdateCaseStatusRequest < Struct.new(
       :case_id,
       :case_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1270,7 +1330,8 @@ module Aws::SecurityIR
     #   @return [String]
     class UpdateCaseStatusResponse < Struct.new(
       :case_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1305,12 +1366,14 @@ module Aws::SecurityIR
       :opt_in_features,
       :membership_accounts_configurations_update,
       :undo_membership_cancellation,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateMembershipResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1325,7 +1388,8 @@ module Aws::SecurityIR
     class UpdateResolverTypeRequest < Struct.new(
       :case_id,
       :resolver_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1345,7 +1409,8 @@ module Aws::SecurityIR
       :case_id,
       :case_status,
       :resolver_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1363,7 +1428,8 @@ module Aws::SecurityIR
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1377,7 +1443,8 @@ module Aws::SecurityIR
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1399,7 +1466,8 @@ module Aws::SecurityIR
       :email,
       :name,
       :job_title,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

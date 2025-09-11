@@ -38,7 +38,7 @@ module Aws::KeyspacesStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KeyspacesStreams::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>You don't have sufficient permissions to perform this action.</p>
@@ -52,7 +52,7 @@ module Aws::KeyspacesStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KeyspacesStreams::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The service encountered an internal error. Try your request again.</p>
@@ -66,7 +66,7 @@ module Aws::KeyspacesStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KeyspacesStreams::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The requested resource wasn't found. Verify that the resource exists and try again.</p>
@@ -80,7 +80,7 @@ module Aws::KeyspacesStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KeyspacesStreams::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The request was denied due to request throttling. Reduce the frequency of requests and try again.</p>
@@ -94,7 +94,7 @@ module Aws::KeyspacesStreams
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KeyspacesStreams::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>The input fails to satisfy the constraints specified by the service. Check the error details and modify your request.</p>

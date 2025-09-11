@@ -24,7 +24,8 @@ module Aws::Support
     class AddAttachmentsToSetRequest < Struct.new(
       :attachment_set_id,
       :attachments,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +42,8 @@ module Aws::Support
     class AddAttachmentsToSetResponse < Struct.new(
       :attachment_set_id,
       :expiry_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +69,8 @@ module Aws::Support
       :communication_body,
       :cc_email_addresses,
       :attachment_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -78,7 +81,8 @@ module Aws::Support
     #   @return [Boolean]
     class AddCommunicationToCaseResponse < Struct.new(
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -98,7 +102,8 @@ module Aws::Support
     class Attachment < Struct.new(
       :file_name,
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -113,7 +118,8 @@ module Aws::Support
     class AttachmentDetails < Struct.new(
       :attachment_id,
       :file_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -123,7 +129,8 @@ module Aws::Support
     #   @return [String]
     class AttachmentIdNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -135,7 +142,8 @@ module Aws::Support
     #   @return [String]
     class AttachmentLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -147,7 +155,8 @@ module Aws::Support
     #   @return [String]
     class AttachmentSetExpired < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -157,7 +166,8 @@ module Aws::Support
     #   @return [String]
     class AttachmentSetIdNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -169,7 +179,8 @@ module Aws::Support
     #   @return [String]
     class AttachmentSetSizeLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -180,7 +191,8 @@ module Aws::Support
     #   @return [String]
     class CaseCreationLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +410,8 @@ module Aws::Support
       :recent_communications,
       :cc_email_addresses,
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -408,7 +421,8 @@ module Aws::Support
     #   @return [String]
     class CaseIdNotFound < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -424,7 +438,8 @@ module Aws::Support
     class Category < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -459,7 +474,8 @@ module Aws::Support
       :submitted_by,
       :time_created,
       :attachment_set,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -508,7 +524,8 @@ module Aws::Support
       :type,
       :supported_hours,
       :dates_without_support,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -568,7 +585,8 @@ module Aws::Support
       :language,
       :issue_type,
       :attachment_set_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -581,7 +599,8 @@ module Aws::Support
     #   @return [String]
     class CreateCaseResponse < Struct.new(
       :case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -599,7 +618,8 @@ module Aws::Support
     class DateInterval < Struct.new(
       :start_date_time,
       :end_date_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -611,7 +631,8 @@ module Aws::Support
     #   @return [String]
     class DescribeAttachmentLimitExceeded < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -620,7 +641,8 @@ module Aws::Support
     #   @return [String]
     class DescribeAttachmentRequest < Struct.new(
       :attachment_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +656,8 @@ module Aws::Support
     #   @return [Types::Attachment]
     class DescribeAttachmentResponse < Struct.new(
       :attachment,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -682,7 +705,8 @@ module Aws::Support
       :max_results,
       :language,
       :include_communications,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -698,7 +722,8 @@ module Aws::Support
     class DescribeCasesResponse < Struct.new(
       :cases,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +753,8 @@ module Aws::Support
       :after_time,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -743,7 +769,8 @@ module Aws::Support
     class DescribeCommunicationsResponse < Struct.new(
       :communications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +797,8 @@ module Aws::Support
       :service_code,
       :language,
       :category_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +831,8 @@ module Aws::Support
     class DescribeCreateCaseOptionsResponse < Struct.new(
       :language_availability,
       :communication_types,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -818,7 +847,8 @@ module Aws::Support
     class DescribeServicesRequest < Struct.new(
       :service_code_list,
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -829,7 +859,8 @@ module Aws::Support
     #   @return [Array<Types::Service>]
     class DescribeServicesResponse < Struct.new(
       :services,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +871,8 @@ module Aws::Support
     #   @return [String]
     class DescribeSeverityLevelsRequest < Struct.new(
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -852,7 +884,8 @@ module Aws::Support
     #   @return [Array<Types::SeverityLevel>]
     class DescribeSeverityLevelsResponse < Struct.new(
       :severity_levels,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -872,7 +905,8 @@ module Aws::Support
       :issue_type,
       :service_code,
       :category_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -883,7 +917,8 @@ module Aws::Support
     #   @return [Array<Types::SupportedLanguage>]
     class DescribeSupportedLanguagesResponse < Struct.new(
       :supported_languages,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -896,7 +931,8 @@ module Aws::Support
     #   @return [Array<String>]
     class DescribeTrustedAdvisorCheckRefreshStatusesRequest < Struct.new(
       :check_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -906,7 +942,8 @@ module Aws::Support
     #   @return [Array<Types::TrustedAdvisorCheckRefreshStatus>]
     class DescribeTrustedAdvisorCheckRefreshStatusesResponse < Struct.new(
       :statuses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1005,8 @@ module Aws::Support
     class DescribeTrustedAdvisorCheckResultRequest < Struct.new(
       :check_id,
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -978,7 +1016,8 @@ module Aws::Support
     #   @return [Types::TrustedAdvisorCheckResult]
     class DescribeTrustedAdvisorCheckResultResponse < Struct.new(
       :result,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -987,7 +1026,8 @@ module Aws::Support
     #   @return [Array<String>]
     class DescribeTrustedAdvisorCheckSummariesRequest < Struct.new(
       :check_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -997,7 +1037,8 @@ module Aws::Support
     #   @return [Array<Types::TrustedAdvisorCheckSummary>]
     class DescribeTrustedAdvisorCheckSummariesResponse < Struct.new(
       :summaries,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1053,7 +1094,8 @@ module Aws::Support
     #   @return [String]
     class DescribeTrustedAdvisorChecksRequest < Struct.new(
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1063,7 +1105,8 @@ module Aws::Support
     #   @return [Array<Types::TrustedAdvisorCheckDescription>]
     class DescribeTrustedAdvisorChecksResponse < Struct.new(
       :checks,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1116,8 @@ module Aws::Support
     #   @return [String]
     class InternalServerError < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1087,7 +1131,8 @@ module Aws::Support
     class RecentCaseCommunications < Struct.new(
       :communications,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1101,7 +1146,8 @@ module Aws::Support
     #   @return [String]
     class RefreshTrustedAdvisorCheckRequest < Struct.new(
       :check_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1112,7 +1158,8 @@ module Aws::Support
     #   @return [Types::TrustedAdvisorCheckRefreshStatus]
     class RefreshTrustedAdvisorCheckResponse < Struct.new(
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1124,7 +1171,8 @@ module Aws::Support
     #   @return [String]
     class ResolveCaseRequest < Struct.new(
       :case_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1139,7 +1187,8 @@ module Aws::Support
     class ResolveCaseResponse < Struct.new(
       :initial_case_status,
       :final_case_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1162,7 +1211,8 @@ module Aws::Support
       :code,
       :name,
       :categories,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1212,7 +1262,8 @@ module Aws::Support
     class SeverityLevel < Struct.new(
       :code,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1230,7 +1281,8 @@ module Aws::Support
     class SupportedHour < Struct.new(
       :start_time,
       :end_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1258,7 +1310,8 @@ module Aws::Support
       :code,
       :language,
       :display,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1269,7 +1322,8 @@ module Aws::Support
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1281,7 +1335,8 @@ module Aws::Support
     #   @return [Types::TrustedAdvisorCostOptimizingSummary]
     class TrustedAdvisorCategorySpecificSummary < Struct.new(
       :cost_optimizing,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1312,7 +1367,8 @@ module Aws::Support
       :description,
       :category,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1357,7 +1413,8 @@ module Aws::Support
       :check_id,
       :status,
       :millis_until_next_refreshable,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1394,7 +1451,8 @@ module Aws::Support
       :resources_summary,
       :category_specific_summary,
       :flagged_resources,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1427,7 +1485,8 @@ module Aws::Support
       :has_flagged_resources,
       :resources_summary,
       :category_specific_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1449,7 +1508,8 @@ module Aws::Support
     class TrustedAdvisorCostOptimizingSummary < Struct.new(
       :estimated_monthly_savings,
       :estimated_percent_monthly_savings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1485,7 +1545,8 @@ module Aws::Support
       :resource_id,
       :is_suppressed,
       :metadata,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1514,7 +1575,8 @@ module Aws::Support
       :resources_flagged,
       :resources_ignored,
       :resources_suppressed,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})

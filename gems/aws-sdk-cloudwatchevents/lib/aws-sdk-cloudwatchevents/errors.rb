@@ -44,7 +44,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -58,7 +58,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::IllegalStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -71,7 +71,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::InternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -84,7 +84,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::InvalidEventPatternException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::InvalidStateException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -111,7 +111,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -129,7 +129,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::ManagedRuleException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -142,7 +142,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::OperationDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -155,7 +155,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::PolicyLengthExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -168,7 +168,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -181,7 +181,7 @@ module Aws::CloudWatchEvents
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchEvents::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

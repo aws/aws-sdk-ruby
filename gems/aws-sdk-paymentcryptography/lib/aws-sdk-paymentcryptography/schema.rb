@@ -692,7 +692,6 @@ module Aws::PaymentCryptography
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}}
       end)
-
     end
 
     class << self

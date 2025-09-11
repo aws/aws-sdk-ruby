@@ -47,7 +47,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::AccountSuspendedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -60,7 +60,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::AlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -73,7 +73,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -86,7 +86,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::ConcurrentModificationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -99,7 +99,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -112,7 +112,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::InternalServiceErrorException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -125,7 +125,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::InvalidNextTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -138,7 +138,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -151,7 +151,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::MailFromDomainNotVerifiedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -164,7 +164,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::MessageRejected] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -177,7 +177,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::NotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -191,7 +191,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::SendingPausedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -204,7 +204,7 @@ module Aws::SESv2
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SESv2::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

@@ -12,7 +12,8 @@ module Aws::Kafka
     #   @return [String]
     class AmazonMskCluster < Struct.new(
       :msk_cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -26,7 +27,8 @@ module Aws::Kafka
     class BadRequestException < Struct.new(
       :invalid_parameter,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -40,7 +42,8 @@ module Aws::Kafka
     class BatchAssociateScramSecretRequest < Struct.new(
       :cluster_arn,
       :secret_arn_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -53,7 +56,8 @@ module Aws::Kafka
     class BatchAssociateScramSecretResponse < Struct.new(
       :cluster_arn,
       :unprocessed_scram_secrets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -67,7 +71,8 @@ module Aws::Kafka
     class BatchDisassociateScramSecretRequest < Struct.new(
       :cluster_arn,
       :secret_arn_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -80,7 +85,8 @@ module Aws::Kafka
     class BatchDisassociateScramSecretResponse < Struct.new(
       :cluster_arn,
       :unprocessed_scram_secrets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -94,7 +100,8 @@ module Aws::Kafka
     class BrokerCountUpdateInfo < Struct.new(
       :created_broker_ids,
       :deleted_broker_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -112,7 +119,8 @@ module Aws::Kafka
       :kafka_broker_node_id,
       :provisioned_throughput,
       :volume_size_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -126,7 +134,8 @@ module Aws::Kafka
       :cloud_watch_logs,
       :firehose,
       :s3,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -162,7 +171,8 @@ module Aws::Kafka
       :storage_info,
       :connectivity_info,
       :zone_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -192,7 +202,8 @@ module Aws::Kafka
       :client_vpc_ip_address,
       :current_broker_software_info,
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -210,7 +221,8 @@ module Aws::Kafka
       :configuration_arn,
       :configuration_revision,
       :kafka_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -228,7 +240,8 @@ module Aws::Kafka
       :sasl,
       :tls,
       :unauthenticated,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -254,7 +267,8 @@ module Aws::Kafka
       :state,
       :vpc_connection_arn,
       :owner,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -265,7 +279,8 @@ module Aws::Kafka
     class CloudWatchLogs < Struct.new(
       :enabled,
       :log_group,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -315,7 +330,8 @@ module Aws::Kafka
       :tags,
       :provisioned,
       :serverless,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -399,7 +415,8 @@ module Aws::Kafka
       :zookeeper_connect_string_tls,
       :storage_mode,
       :customer_action_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -453,7 +470,8 @@ module Aws::Kafka
       :source_cluster_info,
       :target_cluster_info,
       :vpc_connection_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -467,7 +485,8 @@ module Aws::Kafka
     class ClusterOperationStep < Struct.new(
       :step_info,
       :step_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -477,7 +496,8 @@ module Aws::Kafka
     #   @return [String]
     class ClusterOperationStepInfo < Struct.new(
       :step_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,7 +543,8 @@ module Aws::Kafka
       :operation_type,
       :provisioned,
       :serverless,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -545,7 +566,8 @@ module Aws::Kafka
       :source_cluster_info,
       :target_cluster_info,
       :vpc_connection_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -555,7 +577,8 @@ module Aws::Kafka
     #   @return [Types::VpcConnectionInfoServerless]
     class ClusterOperationV2Serverless < Struct.new(
       :vpc_connection_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -589,7 +612,8 @@ module Aws::Kafka
       :operation_arn,
       :operation_state,
       :operation_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +627,8 @@ module Aws::Kafka
     class CompatibleKafkaVersion < Struct.new(
       :source_version,
       :target_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -637,7 +662,8 @@ module Aws::Kafka
       :latest_revision,
       :name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,7 +677,8 @@ module Aws::Kafka
     class ConfigurationInfo < Struct.new(
       :arn,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -669,7 +696,8 @@ module Aws::Kafka
       :creation_time,
       :description,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -683,7 +711,8 @@ module Aws::Kafka
     class ConflictException < Struct.new(
       :invalid_parameter,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +726,8 @@ module Aws::Kafka
     class ConnectivityInfo < Struct.new(
       :public_access,
       :vpc_connectivity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -719,7 +749,8 @@ module Aws::Kafka
       :consumer_groups_to_replicate,
       :detect_and_copy_new_consumer_groups,
       :synchronise_consumer_group_offsets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -741,7 +772,8 @@ module Aws::Kafka
       :consumer_groups_to_replicate,
       :detect_and_copy_new_consumer_groups,
       :synchronise_consumer_group_offsets,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -751,7 +783,8 @@ module Aws::Kafka
     #   @return [Array<String>]
     class ControllerNodeInfo < Struct.new(
       :endpoints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -803,7 +836,8 @@ module Aws::Kafka
       :number_of_broker_nodes,
       :tags,
       :storage_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -820,7 +854,8 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -841,7 +876,8 @@ module Aws::Kafka
       :tags,
       :provisioned,
       :serverless,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -862,7 +898,8 @@ module Aws::Kafka
       :cluster_name,
       :state,
       :cluster_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -884,7 +921,8 @@ module Aws::Kafka
       :kafka_versions,
       :name,
       :server_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -909,7 +947,8 @@ module Aws::Kafka
       :latest_revision,
       :name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -939,7 +978,8 @@ module Aws::Kafka
       :replicator_name,
       :service_execution_role_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -956,7 +996,8 @@ module Aws::Kafka
       :replicator_arn,
       :replicator_name,
       :replicator_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -985,7 +1026,8 @@ module Aws::Kafka
       :client_subnets,
       :security_groups,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1022,7 +1064,8 @@ module Aws::Kafka
       :security_groups,
       :creation_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1031,12 +1074,14 @@ module Aws::Kafka
     #   @return [String]
     class DeleteClusterPolicyRequest < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteClusterPolicyResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1049,7 +1094,8 @@ module Aws::Kafka
     class DeleteClusterRequest < Struct.new(
       :cluster_arn,
       :current_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1062,7 +1108,8 @@ module Aws::Kafka
     class DeleteClusterResponse < Struct.new(
       :cluster_arn,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1071,7 +1118,8 @@ module Aws::Kafka
     #   @return [String]
     class DeleteConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1084,7 +1132,8 @@ module Aws::Kafka
     class DeleteConfigurationResponse < Struct.new(
       :arn,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1097,7 +1146,8 @@ module Aws::Kafka
     class DeleteReplicatorRequest < Struct.new(
       :current_version,
       :replicator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1110,7 +1160,8 @@ module Aws::Kafka
     class DeleteReplicatorResponse < Struct.new(
       :replicator_arn,
       :replicator_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1170,8 @@ module Aws::Kafka
     #   @return [String]
     class DeleteVpcConnectionRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1132,7 +1184,8 @@ module Aws::Kafka
     class DeleteVpcConnectionResponse < Struct.new(
       :vpc_connection_arn,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1141,7 +1194,8 @@ module Aws::Kafka
     #   @return [String]
     class DescribeClusterOperationRequest < Struct.new(
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1150,7 +1204,8 @@ module Aws::Kafka
     #   @return [Types::ClusterOperationInfo]
     class DescribeClusterOperationResponse < Struct.new(
       :cluster_operation_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1159,7 +1214,8 @@ module Aws::Kafka
     #   @return [String]
     class DescribeClusterOperationV2Request < Struct.new(
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1168,7 +1224,8 @@ module Aws::Kafka
     #   @return [Types::ClusterOperationV2]
     class DescribeClusterOperationV2Response < Struct.new(
       :cluster_operation_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1177,7 +1234,8 @@ module Aws::Kafka
     #   @return [String]
     class DescribeClusterRequest < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1186,7 +1244,8 @@ module Aws::Kafka
     #   @return [Types::ClusterInfo]
     class DescribeClusterResponse < Struct.new(
       :cluster_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1195,7 +1254,8 @@ module Aws::Kafka
     #   @return [String]
     class DescribeClusterV2Request < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1204,7 +1264,8 @@ module Aws::Kafka
     #   @return [Types::Cluster]
     class DescribeClusterV2Response < Struct.new(
       :cluster_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1213,7 +1274,8 @@ module Aws::Kafka
     #   @return [String]
     class DescribeConfigurationRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1246,7 +1308,8 @@ module Aws::Kafka
       :latest_revision,
       :name,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1259,7 +1322,8 @@ module Aws::Kafka
     class DescribeConfigurationRevisionRequest < Struct.new(
       :arn,
       :revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1285,7 +1349,8 @@ module Aws::Kafka
       :description,
       :revision,
       :server_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1294,7 +1359,8 @@ module Aws::Kafka
     #   @return [String]
     class DescribeReplicatorRequest < Struct.new(
       :replicator_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1351,7 +1417,8 @@ module Aws::Kafka
       :service_execution_role_arn,
       :state_info,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1360,7 +1427,8 @@ module Aws::Kafka
     #   @return [String]
     class DescribeVpcConnectionRequest < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1401,7 +1469,8 @@ module Aws::Kafka
       :security_groups,
       :creation_time,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1415,7 +1484,8 @@ module Aws::Kafka
     class EBSStorageInfo < Struct.new(
       :provisioned_throughput,
       :volume_size,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1425,7 +1495,8 @@ module Aws::Kafka
     #   @return [String]
     class EncryptionAtRest < Struct.new(
       :data_volume_kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1447,7 +1518,8 @@ module Aws::Kafka
     class EncryptionInTransit < Struct.new(
       :client_broker,
       :in_cluster,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1461,7 +1533,8 @@ module Aws::Kafka
     class EncryptionInfo < Struct.new(
       :encryption_at_rest,
       :encryption_in_transit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1475,7 +1548,8 @@ module Aws::Kafka
     class ErrorInfo < Struct.new(
       :error_code,
       :error_string,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1486,7 +1560,8 @@ module Aws::Kafka
     class Firehose < Struct.new(
       :delivery_stream,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1500,7 +1575,8 @@ module Aws::Kafka
     class ForbiddenException < Struct.new(
       :invalid_parameter,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1509,7 +1585,8 @@ module Aws::Kafka
     #   @return [String]
     class GetBootstrapBrokersRequest < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1631,8 @@ module Aws::Kafka
       :bootstrap_broker_string_vpc_connectivity_tls,
       :bootstrap_broker_string_vpc_connectivity_sasl_scram,
       :bootstrap_broker_string_vpc_connectivity_sasl_iam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1563,7 +1641,8 @@ module Aws::Kafka
     #   @return [String]
     class GetClusterPolicyRequest < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1576,7 +1655,8 @@ module Aws::Kafka
     class GetClusterPolicyResponse < Struct.new(
       :current_version,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1585,7 +1665,8 @@ module Aws::Kafka
     #   @return [String]
     class GetCompatibleKafkaVersionsRequest < Struct.new(
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1594,7 +1675,8 @@ module Aws::Kafka
     #   @return [Array<Types::CompatibleKafkaVersion>]
     class GetCompatibleKafkaVersionsResponse < Struct.new(
       :compatible_kafka_versions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1604,7 +1686,8 @@ module Aws::Kafka
     #   @return [Boolean]
     class Iam < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1618,7 +1701,8 @@ module Aws::Kafka
     class InternalServerErrorException < Struct.new(
       :invalid_parameter,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1628,7 +1712,8 @@ module Aws::Kafka
     #   @return [Boolean]
     class JmxExporter < Struct.new(
       :enabled_in_broker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1638,7 +1723,8 @@ module Aws::Kafka
     #   @return [Boolean]
     class JmxExporterInfo < Struct.new(
       :enabled_in_broker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1652,7 +1738,8 @@ module Aws::Kafka
     class KafkaCluster < Struct.new(
       :amazon_msk_cluster,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1666,7 +1753,8 @@ module Aws::Kafka
     class KafkaClusterClientVpcConfig < Struct.new(
       :security_group_ids,
       :subnet_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1684,7 +1772,8 @@ module Aws::Kafka
       :amazon_msk_cluster,
       :kafka_cluster_alias,
       :vpc_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1698,7 +1787,8 @@ module Aws::Kafka
     class KafkaClusterSummary < Struct.new(
       :amazon_msk_cluster,
       :kafka_cluster_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1709,7 +1799,8 @@ module Aws::Kafka
     class KafkaVersion < Struct.new(
       :version,
       :status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1727,7 +1818,8 @@ module Aws::Kafka
       :cluster_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1741,7 +1833,8 @@ module Aws::Kafka
     class ListClientVpcConnectionsResponse < Struct.new(
       :client_vpc_connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1759,7 +1852,8 @@ module Aws::Kafka
       :cluster_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1772,7 +1866,8 @@ module Aws::Kafka
     class ListClusterOperationsResponse < Struct.new(
       :cluster_operation_info_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1789,7 +1884,8 @@ module Aws::Kafka
       :cluster_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1802,7 +1898,8 @@ module Aws::Kafka
     class ListClusterOperationsV2Response < Struct.new(
       :cluster_operation_info_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1820,7 +1917,8 @@ module Aws::Kafka
       :cluster_name_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1834,7 +1932,8 @@ module Aws::Kafka
     class ListClustersResponse < Struct.new(
       :cluster_info_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1856,7 +1955,8 @@ module Aws::Kafka
       :cluster_type_filter,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1870,7 +1970,8 @@ module Aws::Kafka
     class ListClustersV2Response < Struct.new(
       :cluster_info_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1888,7 +1989,8 @@ module Aws::Kafka
       :arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1901,7 +2003,8 @@ module Aws::Kafka
     class ListConfigurationRevisionsResponse < Struct.new(
       :next_token,
       :revisions,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1915,7 +2018,8 @@ module Aws::Kafka
     class ListConfigurationsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1929,7 +2033,8 @@ module Aws::Kafka
     class ListConfigurationsResponse < Struct.new(
       :configurations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1942,7 +2047,8 @@ module Aws::Kafka
     class ListKafkaVersionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1953,7 +2059,8 @@ module Aws::Kafka
     class ListKafkaVersionsResponse < Struct.new(
       :kafka_versions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1971,7 +2078,8 @@ module Aws::Kafka
       :cluster_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1985,7 +2093,8 @@ module Aws::Kafka
     class ListNodesResponse < Struct.new(
       :next_token,
       :node_info_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2002,7 +2111,8 @@ module Aws::Kafka
       :max_results,
       :next_token,
       :replicator_name_filter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2015,7 +2125,8 @@ module Aws::Kafka
     class ListReplicatorsResponse < Struct.new(
       :next_token,
       :replicators,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2032,7 +2143,8 @@ module Aws::Kafka
       :cluster_arn,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2045,7 +2157,8 @@ module Aws::Kafka
     class ListScramSecretsResponse < Struct.new(
       :next_token,
       :secret_arn_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2054,7 +2167,8 @@ module Aws::Kafka
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2063,7 +2177,8 @@ module Aws::Kafka
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2077,7 +2192,8 @@ module Aws::Kafka
     class ListVpcConnectionsRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2091,7 +2207,8 @@ module Aws::Kafka
     class ListVpcConnectionsResponse < Struct.new(
       :vpc_connections,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2099,7 +2216,8 @@ module Aws::Kafka
     #   @return [Types::BrokerLogs]
     class LoggingInfo < Struct.new(
       :broker_logs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2157,7 +2275,8 @@ module Aws::Kafka
       :connectivity_info,
       :storage_mode,
       :broker_count_update_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2167,7 +2286,8 @@ module Aws::Kafka
     #   @return [Boolean]
     class NodeExporter < Struct.new(
       :enabled_in_broker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2177,7 +2297,8 @@ module Aws::Kafka
     #   @return [Boolean]
     class NodeExporterInfo < Struct.new(
       :enabled_in_broker,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2211,7 +2332,8 @@ module Aws::Kafka
       :node_arn,
       :node_type,
       :zookeeper_node_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2225,7 +2347,8 @@ module Aws::Kafka
     class NotFoundException < Struct.new(
       :invalid_parameter,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2235,7 +2358,8 @@ module Aws::Kafka
     #   @return [Types::Prometheus]
     class OpenMonitoring < Struct.new(
       :prometheus,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2245,7 +2369,8 @@ module Aws::Kafka
     #   @return [Types::PrometheusInfo]
     class OpenMonitoringInfo < Struct.new(
       :prometheus,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2259,7 +2384,8 @@ module Aws::Kafka
     class Prometheus < Struct.new(
       :jmx_exporter,
       :node_exporter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2273,7 +2399,8 @@ module Aws::Kafka
     class PrometheusInfo < Struct.new(
       :jmx_exporter,
       :node_exporter,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2327,7 +2454,8 @@ module Aws::Kafka
       :zookeeper_connect_string_tls,
       :storage_mode,
       :customer_action_status,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2373,7 +2501,8 @@ module Aws::Kafka
       :logging_info,
       :number_of_broker_nodes,
       :storage_mode,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2387,7 +2516,8 @@ module Aws::Kafka
     class ProvisionedThroughput < Struct.new(
       :enabled,
       :volume_throughput,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2397,7 +2527,8 @@ module Aws::Kafka
     #   @return [String]
     class PublicAccess < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2414,7 +2545,8 @@ module Aws::Kafka
       :cluster_arn,
       :current_version,
       :policy,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2423,7 +2555,8 @@ module Aws::Kafka
     #   @return [String]
     class PutClusterPolicyResponse < Struct.new(
       :current_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2437,7 +2570,8 @@ module Aws::Kafka
     class RebootBrokerRequest < Struct.new(
       :broker_ids,
       :cluster_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2450,7 +2584,8 @@ module Aws::Kafka
     class RebootBrokerResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2463,12 +2598,14 @@ module Aws::Kafka
     class RejectClientVpcConnectionRequest < Struct.new(
       :cluster_arn,
       :vpc_connection_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RejectClientVpcConnectionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2494,7 +2631,8 @@ module Aws::Kafka
       :target_compression_type,
       :target_kafka_cluster_arn,
       :topic_replication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2520,7 +2658,8 @@ module Aws::Kafka
       :target_compression_type,
       :target_kafka_cluster_alias,
       :topic_replication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2534,7 +2673,8 @@ module Aws::Kafka
     class ReplicationInfoSummary < Struct.new(
       :source_kafka_cluster_alias,
       :target_kafka_cluster_alias,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2544,7 +2684,8 @@ module Aws::Kafka
     #   @return [String]
     class ReplicationStartingPosition < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2558,7 +2699,8 @@ module Aws::Kafka
     class ReplicationStateInfo < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2568,7 +2710,8 @@ module Aws::Kafka
     #   @return [String]
     class ReplicationTopicNameConfiguration < Struct.new(
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2610,7 +2753,8 @@ module Aws::Kafka
       :replicator_name,
       :replicator_resource_arn,
       :replicator_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2624,7 +2768,8 @@ module Aws::Kafka
       :bucket,
       :enabled,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2638,7 +2783,8 @@ module Aws::Kafka
     class Sasl < Struct.new(
       :scram,
       :iam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2648,7 +2794,8 @@ module Aws::Kafka
     #   @return [Boolean]
     class Scram < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2662,7 +2809,8 @@ module Aws::Kafka
     class Serverless < Struct.new(
       :vpc_configs,
       :client_authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2672,7 +2820,8 @@ module Aws::Kafka
     #   @return [Types::ServerlessSasl]
     class ServerlessClientAuthentication < Struct.new(
       :sasl,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2686,7 +2835,8 @@ module Aws::Kafka
     class ServerlessRequest < Struct.new(
       :vpc_configs,
       :client_authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2696,7 +2846,8 @@ module Aws::Kafka
     #   @return [Types::Iam]
     class ServerlessSasl < Struct.new(
       :iam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2710,7 +2861,8 @@ module Aws::Kafka
     class ServiceUnavailableException < Struct.new(
       :invalid_parameter,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2721,7 +2873,8 @@ module Aws::Kafka
     class StateInfo < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2731,7 +2884,8 @@ module Aws::Kafka
     #   @return [Types::EBSStorageInfo]
     class StorageInfo < Struct.new(
       :ebs_storage_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2744,7 +2898,8 @@ module Aws::Kafka
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2758,7 +2913,8 @@ module Aws::Kafka
     class Tls < Struct.new(
       :certificate_authority_arn_list,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2772,7 +2928,8 @@ module Aws::Kafka
     class TooManyRequestsException < Struct.new(
       :invalid_parameter,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2806,7 +2963,8 @@ module Aws::Kafka
       :topic_name_configuration,
       :topics_to_exclude,
       :topics_to_replicate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2832,7 +2990,8 @@ module Aws::Kafka
       :detect_and_copy_new_topics,
       :topics_to_exclude,
       :topics_to_replicate,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2841,7 +3000,8 @@ module Aws::Kafka
     #   @return [Boolean]
     class Unauthenticated < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2855,7 +3015,8 @@ module Aws::Kafka
     class UnauthorizedException < Struct.new(
       :invalid_parameter,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2873,7 +3034,8 @@ module Aws::Kafka
       :error_code,
       :error_message,
       :secret_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2905,7 +3067,8 @@ module Aws::Kafka
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2922,7 +3085,8 @@ module Aws::Kafka
       :cluster_arn,
       :current_version,
       :target_number_of_broker_nodes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2935,7 +3099,8 @@ module Aws::Kafka
     class UpdateBrokerCountResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2952,7 +3117,8 @@ module Aws::Kafka
       :cluster_arn,
       :current_version,
       :target_broker_ebs_volume_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2965,7 +3131,8 @@ module Aws::Kafka
     class UpdateBrokerStorageResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2982,7 +3149,8 @@ module Aws::Kafka
       :cluster_arn,
       :current_version,
       :target_instance_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2995,7 +3163,8 @@ module Aws::Kafka
     class UpdateBrokerTypeResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3012,7 +3181,8 @@ module Aws::Kafka
       :cluster_arn,
       :configuration_info,
       :current_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3025,7 +3195,8 @@ module Aws::Kafka
     class UpdateClusterConfigurationResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3046,7 +3217,8 @@ module Aws::Kafka
       :configuration_info,
       :current_version,
       :target_kafka_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3059,7 +3231,8 @@ module Aws::Kafka
     class UpdateClusterKafkaVersionResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3077,7 +3250,8 @@ module Aws::Kafka
       :arn,
       :description,
       :server_properties,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3090,7 +3264,8 @@ module Aws::Kafka
     class UpdateConfigurationResponse < Struct.new(
       :arn,
       :latest_revision,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3108,7 +3283,8 @@ module Aws::Kafka
       :cluster_arn,
       :connectivity_info,
       :current_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3121,7 +3297,8 @@ module Aws::Kafka
     class UpdateConnectivityResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3146,7 +3323,8 @@ module Aws::Kafka
       :enhanced_monitoring,
       :open_monitoring,
       :logging_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3159,7 +3337,8 @@ module Aws::Kafka
     class UpdateMonitoringResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3189,7 +3368,8 @@ module Aws::Kafka
       :source_kafka_cluster_arn,
       :target_kafka_cluster_arn,
       :topic_replication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3202,7 +3382,8 @@ module Aws::Kafka
     class UpdateReplicationInfoResponse < Struct.new(
       :replicator_arn,
       :replicator_state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3223,7 +3404,8 @@ module Aws::Kafka
       :cluster_arn,
       :current_version,
       :encryption_info,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3236,7 +3418,8 @@ module Aws::Kafka
     class UpdateSecurityResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3262,7 +3445,8 @@ module Aws::Kafka
       :provisioned_throughput,
       :storage_mode,
       :volume_size_gb,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3275,7 +3459,8 @@ module Aws::Kafka
     class UpdateStorageResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3289,7 +3474,8 @@ module Aws::Kafka
     class UserIdentity < Struct.new(
       :type,
       :principal_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3303,7 +3489,8 @@ module Aws::Kafka
     class VpcConfig < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3333,7 +3520,8 @@ module Aws::Kafka
       :authentication,
       :vpc_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3355,7 +3543,8 @@ module Aws::Kafka
       :owner,
       :user_identity,
       :creation_time,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3377,7 +3566,8 @@ module Aws::Kafka
       :owner,
       :user_identity,
       :vpc_connection_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3387,7 +3577,8 @@ module Aws::Kafka
     #   @return [Types::VpcConnectivityClientAuthentication]
     class VpcConnectivity < Struct.new(
       :client_authentication,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3401,7 +3592,8 @@ module Aws::Kafka
     class VpcConnectivityClientAuthentication < Struct.new(
       :sasl,
       :tls,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3411,7 +3603,8 @@ module Aws::Kafka
     #   @return [Boolean]
     class VpcConnectivityIam < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3425,7 +3618,8 @@ module Aws::Kafka
     class VpcConnectivitySasl < Struct.new(
       :scram,
       :iam,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3435,7 +3629,8 @@ module Aws::Kafka
     #   @return [Boolean]
     class VpcConnectivityScram < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3445,7 +3640,8 @@ module Aws::Kafka
     #   @return [Boolean]
     class VpcConnectivityTls < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3471,7 +3667,8 @@ module Aws::Kafka
       :endpoints,
       :zookeeper_id,
       :zookeeper_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

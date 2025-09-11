@@ -21,7 +21,8 @@ module Aws::Scheduler
       :subnets,
       :security_groups,
       :assign_public_ip,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -41,7 +42,8 @@ module Aws::Scheduler
       :capacity_provider,
       :weight,
       :base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -56,7 +58,8 @@ module Aws::Scheduler
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -76,7 +79,8 @@ module Aws::Scheduler
       :name,
       :tags,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -85,7 +89,8 @@ module Aws::Scheduler
     #   @return [String]
     class CreateScheduleGroupOperationOutput < Struct.new(
       :schedule_group_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -182,7 +187,8 @@ module Aws::Scheduler
       :flexible_time_window,
       :client_token,
       :action_after_completion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -191,7 +197,8 @@ module Aws::Scheduler
     #   @return [String]
     class CreateScheduleOperationOutput < Struct.new(
       :schedule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +208,8 @@ module Aws::Scheduler
     #   @return [String]
     class DeadLetterConfig < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,12 +225,14 @@ module Aws::Scheduler
     class DeleteScheduleGroupOperationInput < Struct.new(
       :name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteScheduleGroupOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -242,12 +252,14 @@ module Aws::Scheduler
       :name,
       :group_name,
       :client_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteScheduleOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -322,7 +334,8 @@ module Aws::Scheduler
       :propagate_tags,
       :reference_id,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -338,7 +351,8 @@ module Aws::Scheduler
     class EventBridgeParameters < Struct.new(
       :detail_type,
       :source,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -352,7 +366,8 @@ module Aws::Scheduler
     class FlexibleTimeWindow < Struct.new(
       :mode,
       :maximum_window_in_minutes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -361,7 +376,8 @@ module Aws::Scheduler
     #   @return [String]
     class GetScheduleGroupOperationInput < Struct.new(
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -386,7 +402,8 @@ module Aws::Scheduler
       :state,
       :creation_date,
       :last_modification_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -399,7 +416,8 @@ module Aws::Scheduler
     class GetScheduleOperationInput < Struct.new(
       :name,
       :group_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -501,7 +519,8 @@ module Aws::Scheduler
       :target,
       :flexible_time_window,
       :action_after_completion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -510,7 +529,8 @@ module Aws::Scheduler
     #   @return [String]
     class InternalServerException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -523,7 +543,8 @@ module Aws::Scheduler
     #   @return [String]
     class KinesisParameters < Struct.new(
       :partition_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -540,7 +561,8 @@ module Aws::Scheduler
       :name_prefix,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -553,7 +575,8 @@ module Aws::Scheduler
     class ListScheduleGroupsOperationOutput < Struct.new(
       :next_token,
       :schedule_groups,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -578,7 +601,8 @@ module Aws::Scheduler
       :state,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -591,7 +615,8 @@ module Aws::Scheduler
     class ListSchedulesOperationOutput < Struct.new(
       :next_token,
       :schedules,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -600,7 +625,8 @@ module Aws::Scheduler
     #   @return [String]
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -609,7 +635,8 @@ module Aws::Scheduler
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -619,7 +646,8 @@ module Aws::Scheduler
     #   @return [Types::AwsVpcConfiguration]
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -634,7 +662,8 @@ module Aws::Scheduler
     class PlacementConstraint < Struct.new(
       :type,
       :expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -652,7 +681,8 @@ module Aws::Scheduler
     class PlacementStrategy < Struct.new(
       :type,
       :field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -661,7 +691,8 @@ module Aws::Scheduler
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -676,7 +707,8 @@ module Aws::Scheduler
     class RetryPolicy < Struct.new(
       :maximum_event_age_in_seconds,
       :maximum_retry_attempts,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -690,7 +722,8 @@ module Aws::Scheduler
     class SageMakerPipelineParameter < Struct.new(
       :name,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -702,7 +735,8 @@ module Aws::Scheduler
     #   @return [Array<Types::SageMakerPipelineParameter>]
     class SageMakerPipelineParameters < Struct.new(
       :pipeline_parameter_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -728,7 +762,8 @@ module Aws::Scheduler
       :state,
       :creation_date,
       :last_modification_date,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -762,7 +797,8 @@ module Aws::Scheduler
       :creation_date,
       :last_modification_date,
       :target,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +807,8 @@ module Aws::Scheduler
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +824,8 @@ module Aws::Scheduler
     #   @return [String]
     class SqsParameters < Struct.new(
       :message_group_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -801,7 +839,8 @@ module Aws::Scheduler
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -814,12 +853,14 @@ module Aws::Scheduler
     class TagResourceOperationInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -881,7 +922,8 @@ module Aws::Scheduler
       :kinesis_parameters,
       :sage_maker_pipeline_parameters,
       :sqs_parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -891,7 +933,8 @@ module Aws::Scheduler
     #   @return [String]
     class TargetSummary < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +943,8 @@ module Aws::Scheduler
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -913,12 +957,14 @@ module Aws::Scheduler
     class UntagResourceOperationInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1016,7 +1062,8 @@ module Aws::Scheduler
       :flexible_time_window,
       :client_token,
       :action_after_completion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1025,7 +1072,8 @@ module Aws::Scheduler
     #   @return [String]
     class UpdateScheduleOperationOutput < Struct.new(
       :schedule_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1034,7 +1082,8 @@ module Aws::Scheduler
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

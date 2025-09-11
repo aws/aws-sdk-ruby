@@ -11,7 +11,8 @@ module Aws::AppFabric
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -21,7 +22,8 @@ module Aws::AppFabric
     #   @return [String]
     class ApiKeyCredential < Struct.new(
       :api_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -95,7 +97,8 @@ module Aws::AppFabric
       :updated_at,
       :persona,
       :auth_url,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -152,7 +155,8 @@ module Aws::AppFabric
       :tenant,
       :status,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -167,7 +171,8 @@ module Aws::AppFabric
     class AppBundle < Struct.new(
       :arn,
       :customer_managed_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -177,7 +182,8 @@ module Aws::AppFabric
     #   @return [String]
     class AppBundleSummary < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -187,7 +193,8 @@ module Aws::AppFabric
     #   @return [Types::Destination]
     class AuditLogDestinationConfiguration < Struct.new(
       :destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -201,7 +208,8 @@ module Aws::AppFabric
     class AuditLogProcessingConfiguration < Struct.new(
       :schema,
       :format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -217,7 +225,8 @@ module Aws::AppFabric
     class AuthRequest < Struct.new(
       :redirect_uri,
       :code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +240,8 @@ module Aws::AppFabric
     class BatchGetUserAccessTasksRequest < Struct.new(
       :app_bundle_identifier,
       :task_id_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -240,7 +250,8 @@ module Aws::AppFabric
     #   @return [Array<Types::UserAccessResultItem>]
     class BatchGetUserAccessTasksResponse < Struct.new(
       :user_access_results_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -257,7 +268,8 @@ module Aws::AppFabric
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -278,7 +290,8 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :app_authorization_identifier,
       :auth_request,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +300,8 @@ module Aws::AppFabric
     #   @return [Types::AppAuthorizationSummary]
     class ConnectAppAuthorizationResponse < Struct.new(
       :app_authorization_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -398,7 +412,8 @@ module Aws::AppFabric
       :auth_type,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -407,7 +422,8 @@ module Aws::AppFabric
     #   @return [Types::AppAuthorization]
     class CreateAppAuthorizationResponse < Struct.new(
       :app_authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +450,8 @@ module Aws::AppFabric
       :client_token,
       :customer_managed_key_identifier,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -443,7 +460,8 @@ module Aws::AppFabric
     #   @return [Types::AppBundle]
     class CreateAppBundleResponse < Struct.new(
       :app_bundle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -483,7 +501,8 @@ module Aws::AppFabric
       :destination_configuration,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -492,7 +511,8 @@ module Aws::AppFabric
     #   @return [Types::IngestionDestination]
     class CreateIngestionDestinationResponse < Struct.new(
       :ingestion_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -594,7 +614,8 @@ module Aws::AppFabric
       :ingestion_type,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -603,7 +624,8 @@ module Aws::AppFabric
     #   @return [Types::Ingestion]
     class CreateIngestionResponse < Struct.new(
       :ingestion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -618,7 +640,8 @@ module Aws::AppFabric
       :oauth2_credential,
       :api_key_credential,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Oauth2Credential < Credential; end
@@ -637,12 +660,14 @@ module Aws::AppFabric
     class DeleteAppAuthorizationRequest < Struct.new(
       :app_bundle_identifier,
       :app_authorization_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAppAuthorizationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -651,12 +676,14 @@ module Aws::AppFabric
     #   @return [String]
     class DeleteAppBundleRequest < Struct.new(
       :app_bundle_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAppBundleResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -676,12 +703,14 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :ingestion_identifier,
       :ingestion_destination_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIngestionDestinationResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -696,12 +725,14 @@ module Aws::AppFabric
     class DeleteIngestionRequest < Struct.new(
       :app_bundle_identifier,
       :ingestion_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteIngestionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -716,7 +747,8 @@ module Aws::AppFabric
       :s3_bucket,
       :firehose_stream,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class S3Bucket < Destination; end
@@ -731,7 +763,8 @@ module Aws::AppFabric
     class DestinationConfiguration < Struct.new(
       :audit_log,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AuditLog < DestinationConfiguration; end
@@ -744,7 +777,8 @@ module Aws::AppFabric
     #   @return [String]
     class FirehoseStream < Struct.new(
       :stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -759,7 +793,8 @@ module Aws::AppFabric
     class GetAppAuthorizationRequest < Struct.new(
       :app_bundle_identifier,
       :app_authorization_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -768,7 +803,8 @@ module Aws::AppFabric
     #   @return [Types::AppAuthorization]
     class GetAppAuthorizationResponse < Struct.new(
       :app_authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -778,7 +814,8 @@ module Aws::AppFabric
     #   @return [String]
     class GetAppBundleRequest < Struct.new(
       :app_bundle_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -787,7 +824,8 @@ module Aws::AppFabric
     #   @return [Types::AppBundle]
     class GetAppBundleResponse < Struct.new(
       :app_bundle,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -807,7 +845,8 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :ingestion_identifier,
       :ingestion_destination_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -816,7 +855,8 @@ module Aws::AppFabric
     #   @return [Types::IngestionDestination]
     class GetIngestionDestinationResponse < Struct.new(
       :ingestion_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -831,7 +871,8 @@ module Aws::AppFabric
     class GetIngestionRequest < Struct.new(
       :app_bundle_identifier,
       :ingestion_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -840,7 +881,8 @@ module Aws::AppFabric
     #   @return [Types::Ingestion]
     class GetIngestionResponse < Struct.new(
       :ingestion,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -878,7 +920,8 @@ module Aws::AppFabric
       :updated_at,
       :state,
       :ingestion_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -932,7 +975,8 @@ module Aws::AppFabric
       :status_reason,
       :created_at,
       :updated_at,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -942,7 +986,8 @@ module Aws::AppFabric
     #   @return [String]
     class IngestionDestinationSummary < Struct.new(
       :arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -964,7 +1009,8 @@ module Aws::AppFabric
       :app,
       :tenant_id,
       :state,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -978,7 +1024,8 @@ module Aws::AppFabric
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1003,7 +1050,8 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1020,7 +1068,8 @@ module Aws::AppFabric
     class ListAppAuthorizationsResponse < Struct.new(
       :app_authorization_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1040,7 +1089,8 @@ module Aws::AppFabric
     class ListAppBundlesRequest < Struct.new(
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1057,7 +1107,8 @@ module Aws::AppFabric
     class ListAppBundlesResponse < Struct.new(
       :app_bundle_summary_list,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1087,7 +1138,8 @@ module Aws::AppFabric
       :ingestion_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1104,7 +1156,8 @@ module Aws::AppFabric
     class ListIngestionDestinationsResponse < Struct.new(
       :ingestion_destinations,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1129,7 +1182,8 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :max_results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1146,7 +1200,8 @@ module Aws::AppFabric
     class ListIngestionsResponse < Struct.new(
       :ingestions,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1156,7 +1211,8 @@ module Aws::AppFabric
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1165,7 +1221,8 @@ module Aws::AppFabric
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResponse < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1179,7 +1236,8 @@ module Aws::AppFabric
     class Oauth2Credential < Struct.new(
       :client_id,
       :client_secret,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1190,7 +1248,8 @@ module Aws::AppFabric
     class ProcessingConfiguration < Struct.new(
       :audit_log,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AuditLog < ProcessingConfiguration; end
@@ -1210,7 +1269,8 @@ module Aws::AppFabric
       :message,
       :resource_id,
       :resource_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1224,7 +1284,8 @@ module Aws::AppFabric
     class S3Bucket < Struct.new(
       :bucket_name,
       :prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1249,7 +1310,8 @@ module Aws::AppFabric
       :resource_type,
       :service_code,
       :quota_code,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1264,12 +1326,14 @@ module Aws::AppFabric
     class StartIngestionRequest < Struct.new(
       :ingestion_identifier,
       :app_bundle_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartIngestionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1283,7 +1347,8 @@ module Aws::AppFabric
     class StartUserAccessTasksRequest < Struct.new(
       :app_bundle_identifier,
       :email,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1292,7 +1357,8 @@ module Aws::AppFabric
     #   @return [Array<Types::UserAccessTaskItem>]
     class StartUserAccessTasksResponse < Struct.new(
       :user_access_tasks_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1307,12 +1373,14 @@ module Aws::AppFabric
     class StopIngestionRequest < Struct.new(
       :ingestion_identifier,
       :app_bundle_identifier,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopIngestionResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1327,7 +1395,8 @@ module Aws::AppFabric
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1340,12 +1409,14 @@ module Aws::AppFabric
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1359,7 +1430,8 @@ module Aws::AppFabric
     class TaskError < Struct.new(
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1373,7 +1445,8 @@ module Aws::AppFabric
     class Tenant < Struct.new(
       :tenant_identifier,
       :tenant_display_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1394,7 +1467,8 @@ module Aws::AppFabric
       :service_code,
       :quota_code,
       :retry_after_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1408,12 +1482,14 @@ module Aws::AppFabric
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1441,7 +1517,8 @@ module Aws::AppFabric
       :app_authorization_identifier,
       :credential,
       :tenant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1450,7 +1527,8 @@ module Aws::AppFabric
     #   @return [Types::AppAuthorization]
     class UpdateAppAuthorizationResponse < Struct.new(
       :app_authorization,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1474,7 +1552,8 @@ module Aws::AppFabric
       :ingestion_identifier,
       :ingestion_destination_identifier,
       :destination_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1483,7 +1562,8 @@ module Aws::AppFabric
     #   @return [Types::IngestionDestination]
     class UpdateIngestionDestinationResponse < Struct.new(
       :ingestion_destination,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1556,7 +1636,8 @@ module Aws::AppFabric
       :user_last_name,
       :user_status,
       :task_error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1578,7 +1659,8 @@ module Aws::AppFabric
       :tenant_id,
       :task_id,
       :error,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1595,7 +1677,8 @@ module Aws::AppFabric
       :message,
       :reason,
       :field_list,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1610,7 +1693,8 @@ module Aws::AppFabric
     class ValidationExceptionField < Struct.new(
       :name,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

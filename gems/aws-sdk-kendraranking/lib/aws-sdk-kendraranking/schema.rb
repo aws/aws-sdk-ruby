@@ -287,7 +287,6 @@ module Aws::KendraRanking
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/rescore-execution-plans/{Id}", "code" => 200}}
       end)
-
     end
 
     class << self

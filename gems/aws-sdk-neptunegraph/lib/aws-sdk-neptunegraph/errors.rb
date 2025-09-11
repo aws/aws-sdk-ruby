@@ -41,7 +41,7 @@ module Aws::NeptuneGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NeptuneGraph::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -55,7 +55,7 @@ module Aws::NeptuneGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NeptuneGraph::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -74,7 +74,7 @@ module Aws::NeptuneGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NeptuneGraph::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -92,7 +92,7 @@ module Aws::NeptuneGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NeptuneGraph::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -106,7 +106,7 @@ module Aws::NeptuneGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NeptuneGraph::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -139,7 +139,7 @@ module Aws::NeptuneGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NeptuneGraph::Types::ThrottlingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>
@@ -161,7 +161,7 @@ module Aws::NeptuneGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NeptuneGraph::Types::UnprocessableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -179,7 +179,7 @@ module Aws::NeptuneGraph
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::NeptuneGraph::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       # <p>A message describing the problem.</p>

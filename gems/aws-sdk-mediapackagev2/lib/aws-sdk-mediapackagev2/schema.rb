@@ -1365,7 +1365,6 @@ module Aws::MediaPackageV2
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to update an origin endpoint of a channel", "smithy.api#http" => {"method" => "PUT", "uri" => "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-
     end
 
     class << self

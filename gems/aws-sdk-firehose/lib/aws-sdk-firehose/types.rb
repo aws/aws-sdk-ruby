@@ -22,7 +22,8 @@ module Aws::Firehose
     class AmazonOpenSearchServerlessBufferingHints < Struct.new(
       :interval_in_seconds,
       :size_in_m_bs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -81,7 +82,8 @@ module Aws::Firehose
       :processing_configuration,
       :cloud_watch_logging_options,
       :vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -129,7 +131,8 @@ module Aws::Firehose
       :processing_configuration,
       :cloud_watch_logging_options,
       :vpc_configuration_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -174,7 +177,8 @@ module Aws::Firehose
       :s3_update,
       :processing_configuration,
       :cloud_watch_logging_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -189,7 +193,8 @@ module Aws::Firehose
     #   @return [Integer]
     class AmazonOpenSearchServerlessRetryOptions < Struct.new(
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -209,7 +214,8 @@ module Aws::Firehose
     class AmazonopensearchserviceBufferingHints < Struct.new(
       :interval_in_seconds,
       :size_in_m_bs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -287,7 +293,8 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :vpc_configuration,
       :document_id_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -352,7 +359,8 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :vpc_configuration_description,
       :document_id_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -420,7 +428,8 @@ module Aws::Firehose
       :processing_configuration,
       :cloud_watch_logging_options,
       :document_id_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -434,7 +443,8 @@ module Aws::Firehose
     #   @return [Integer]
     class AmazonopensearchserviceRetryOptions < Struct.new(
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -448,7 +458,8 @@ module Aws::Firehose
     class AuthenticationConfiguration < Struct.new(
       :role_arn,
       :connectivity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -475,7 +486,8 @@ module Aws::Firehose
     class BufferingHints < Struct.new(
       :size_in_m_bs,
       :interval_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -495,7 +507,8 @@ module Aws::Firehose
     class CatalogConfiguration < Struct.new(
       :catalog_arn,
       :warehouse_location,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -515,7 +528,8 @@ module Aws::Firehose
       :enabled,
       :log_group_name,
       :log_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -526,7 +540,8 @@ module Aws::Firehose
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -563,7 +578,8 @@ module Aws::Firehose
       :data_table_name,
       :data_table_columns,
       :copy_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -688,7 +704,8 @@ module Aws::Firehose
       :snowflake_destination_configuration,
       :iceberg_destination_configuration,
       :database_source_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -697,7 +714,8 @@ module Aws::Firehose
     #   @return [String]
     class CreateDeliveryStreamOutput < Struct.new(
       :delivery_stream_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -729,7 +747,8 @@ module Aws::Firehose
       :input_format_configuration,
       :output_format_configuration,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -751,7 +770,8 @@ module Aws::Firehose
     class DatabaseColumnList < Struct.new(
       :include,
       :exclude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -771,7 +791,8 @@ module Aws::Firehose
     class DatabaseList < Struct.new(
       :include,
       :exclude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -821,7 +842,8 @@ module Aws::Firehose
       :requested_by,
       :status,
       :failure_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -834,7 +856,8 @@ module Aws::Firehose
     #   @return [Types::SecretsManagerConfiguration]
     class DatabaseSourceAuthenticationConfiguration < Struct.new(
       :secrets_manager_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -932,7 +955,8 @@ module Aws::Firehose
       :snapshot_watermark_table,
       :database_source_authentication_configuration,
       :database_source_vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1037,7 +1061,8 @@ module Aws::Firehose
       :snapshot_info,
       :database_source_authentication_configuration,
       :database_source_vpc_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1053,7 +1078,8 @@ module Aws::Firehose
     #   @return [String]
     class DatabaseSourceVPCConfiguration < Struct.new(
       :vpc_endpoint_service_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1099,8 @@ module Aws::Firehose
     class DatabaseTableList < Struct.new(
       :include,
       :exclude,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1093,12 +1120,14 @@ module Aws::Firehose
     class DeleteDeliveryStreamInput < Struct.new(
       :delivery_stream_name,
       :allow_force_delete,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteDeliveryStreamOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1175,7 +1204,8 @@ module Aws::Firehose
       :source,
       :destinations,
       :has_more_destinations,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1208,7 +1238,8 @@ module Aws::Firehose
       :key_type,
       :status,
       :failure_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1243,7 +1274,8 @@ module Aws::Firehose
     class DeliveryStreamEncryptionConfigurationInput < Struct.new(
       :key_arn,
       :key_type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1261,7 +1293,8 @@ module Aws::Firehose
       :delivery_stream_name,
       :limit,
       :exclusive_start_destination_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1270,7 +1303,8 @@ module Aws::Firehose
     #   @return [Types::DeliveryStreamDescription]
     class DescribeDeliveryStreamOutput < Struct.new(
       :delivery_stream_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1293,7 +1327,8 @@ module Aws::Firehose
     class Deserializer < Struct.new(
       :open_x_json_ser_de,
       :hive_json_ser_de,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1345,7 +1380,8 @@ module Aws::Firehose
       :snowflake_destination_description,
       :amazon_open_search_serverless_destination_description,
       :iceberg_destination_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1384,7 +1420,8 @@ module Aws::Firehose
       :unique_keys,
       :partition_spec,
       :s3_error_output_prefix,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1396,7 +1433,8 @@ module Aws::Firehose
     #   @return [Integer]
     class DirectPutSourceConfiguration < Struct.new(
       :throughput_hint_in_m_bs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1408,7 +1446,8 @@ module Aws::Firehose
     #   @return [Integer]
     class DirectPutSourceDescription < Struct.new(
       :throughput_hint_in_m_bs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1429,7 +1468,8 @@ module Aws::Firehose
     #   @return [String]
     class DocumentIdOptions < Struct.new(
       :default_document_id_format,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1447,7 +1487,8 @@ module Aws::Firehose
     class DynamicPartitioningConfiguration < Struct.new(
       :retry_options,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1467,7 +1508,8 @@ module Aws::Firehose
     class ElasticsearchBufferingHints < Struct.new(
       :interval_in_seconds,
       :size_in_m_bs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1554,7 +1596,8 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :vpc_configuration,
       :document_id_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1626,7 +1669,8 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :vpc_configuration_description,
       :document_id_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1700,7 +1744,8 @@ module Aws::Firehose
       :processing_configuration,
       :cloud_watch_logging_options,
       :document_id_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1714,7 +1759,8 @@ module Aws::Firehose
     #   @return [Integer]
     class ElasticsearchRetryOptions < Struct.new(
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1729,7 +1775,8 @@ module Aws::Firehose
     class EncryptionConfiguration < Struct.new(
       :no_encryption_config,
       :kms_encryption_config,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1811,7 +1858,8 @@ module Aws::Firehose
       :dynamic_partitioning_configuration,
       :file_extension,
       :custom_time_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1891,7 +1939,8 @@ module Aws::Firehose
       :dynamic_partitioning_configuration,
       :file_extension,
       :custom_time_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1972,7 +2021,8 @@ module Aws::Firehose
       :dynamic_partitioning_configuration,
       :file_extension,
       :custom_time_zone,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1988,7 +2038,8 @@ module Aws::Firehose
     class FailureDescription < Struct.new(
       :type,
       :details,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2004,7 +2055,8 @@ module Aws::Firehose
     #   @return [Array<String>]
     class HiveJsonSerDe < Struct.new(
       :timestamp_formats,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2027,7 +2079,8 @@ module Aws::Firehose
     class HttpEndpointBufferingHints < Struct.new(
       :size_in_m_bs,
       :interval_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2042,7 +2095,8 @@ module Aws::Firehose
     class HttpEndpointCommonAttribute < Struct.new(
       :attribute_name,
       :attribute_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2067,7 +2121,8 @@ module Aws::Firehose
       :url,
       :name,
       :access_key,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2081,7 +2136,8 @@ module Aws::Firehose
     class HttpEndpointDescription < Struct.new(
       :url,
       :name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2140,7 +2196,8 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_configuration,
       :secrets_manager_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2199,7 +2256,8 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_destination_description,
       :secrets_manager_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2258,7 +2316,8 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_update,
       :secrets_manager_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2273,7 +2332,8 @@ module Aws::Firehose
     class HttpEndpointRequestConfiguration < Struct.new(
       :content_encoding,
       :common_attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2288,7 +2348,8 @@ module Aws::Firehose
     #   @return [Integer]
     class HttpEndpointRetryOptions < Struct.new(
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2362,7 +2423,8 @@ module Aws::Firehose
       :append_only,
       :catalog_configuration,
       :s3_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2439,7 +2501,8 @@ module Aws::Firehose
       :append_only,
       :catalog_configuration,
       :s3_destination_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2517,7 +2580,8 @@ module Aws::Firehose
       :append_only,
       :catalog_configuration,
       :s3_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2529,7 +2593,8 @@ module Aws::Firehose
     #   @return [Types::Deserializer]
     class InputFormatConfiguration < Struct.new(
       :deserializer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2539,7 +2604,8 @@ module Aws::Firehose
     #   @return [String]
     class InvalidArgumentException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2555,7 +2621,8 @@ module Aws::Firehose
     class InvalidKMSResourceException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2567,7 +2634,8 @@ module Aws::Firehose
     class InvalidSourceException < Struct.new(
       :code,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2578,7 +2646,8 @@ module Aws::Firehose
     #   @return [String]
     class KMSEncryptionConfig < Struct.new(
       :awskms_key_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2596,7 +2665,8 @@ module Aws::Firehose
     class KinesisStreamSourceConfiguration < Struct.new(
       :kinesis_stream_arn,
       :role_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2620,7 +2690,8 @@ module Aws::Firehose
       :kinesis_stream_arn,
       :role_arn,
       :delivery_start_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2630,7 +2701,8 @@ module Aws::Firehose
     #   @return [String]
     class LimitExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2664,7 +2736,8 @@ module Aws::Firehose
       :limit,
       :delivery_stream_type,
       :exclusive_start_delivery_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2677,7 +2750,8 @@ module Aws::Firehose
     class ListDeliveryStreamsOutput < Struct.new(
       :delivery_stream_names,
       :has_more_delivery_streams,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2699,7 +2773,8 @@ module Aws::Firehose
       :delivery_stream_name,
       :exclusive_start_tag_key,
       :limit,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2716,7 +2791,8 @@ module Aws::Firehose
     class ListTagsForDeliveryStreamOutput < Struct.new(
       :tags,
       :has_more_tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2743,7 +2819,8 @@ module Aws::Firehose
       :topic_name,
       :authentication_configuration,
       :read_from_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2774,7 +2851,8 @@ module Aws::Firehose
       :authentication_configuration,
       :delivery_start_timestamp,
       :read_from_timestamp,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2805,7 +2883,8 @@ module Aws::Firehose
       :convert_dots_in_json_keys_to_underscores,
       :case_insensitive,
       :column_to_json_key_mappings,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2872,7 +2951,8 @@ module Aws::Firehose
       :bloom_filter_false_positive_probability,
       :dictionary_key_threshold,
       :format_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2885,7 +2965,8 @@ module Aws::Firehose
     #   @return [Types::Serializer]
     class OutputFormatConfiguration < Struct.new(
       :serializer,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2925,7 +3006,8 @@ module Aws::Firehose
       :enable_dictionary_compression,
       :max_padding_bytes,
       :writer_version,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2939,7 +3021,8 @@ module Aws::Firehose
     #   @return [String]
     class PartitionField < Struct.new(
       :source_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2959,7 +3042,8 @@ module Aws::Firehose
     #   @return [Array<Types::PartitionField>]
     class PartitionSpec < Struct.new(
       :identity,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2973,7 +3057,8 @@ module Aws::Firehose
     class ProcessingConfiguration < Struct.new(
       :enabled,
       :processors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2990,7 +3075,8 @@ module Aws::Firehose
     class Processor < Struct.new(
       :type,
       :parameters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3008,7 +3094,8 @@ module Aws::Firehose
     class ProcessorParameter < Struct.new(
       :parameter_name,
       :parameter_value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3021,7 +3108,8 @@ module Aws::Firehose
     class PutRecordBatchInput < Struct.new(
       :delivery_stream_name,
       :records,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3042,7 +3130,8 @@ module Aws::Firehose
       :failed_put_count,
       :encrypted,
       :request_responses,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3063,7 +3152,8 @@ module Aws::Firehose
       :record_id,
       :error_code,
       :error_message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3076,7 +3166,8 @@ module Aws::Firehose
     class PutRecordInput < Struct.new(
       :delivery_stream_name,
       :record,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3089,7 +3180,8 @@ module Aws::Firehose
     class PutRecordOutput < Struct.new(
       :record_id,
       :encrypted,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3100,7 +3192,8 @@ module Aws::Firehose
     #   @return [String]
     class Record < Struct.new(
       :data,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3166,7 +3259,8 @@ module Aws::Firehose
       :s3_backup_configuration,
       :cloud_watch_logging_options,
       :secrets_manager_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3221,7 +3315,8 @@ module Aws::Firehose
       :s3_backup_description,
       :cloud_watch_logging_options,
       :secrets_manager_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3285,7 +3380,8 @@ module Aws::Firehose
       :s3_backup_update,
       :cloud_watch_logging_options,
       :secrets_manager_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3300,7 +3396,8 @@ module Aws::Firehose
     #   @return [Integer]
     class RedshiftRetryOptions < Struct.new(
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3310,7 +3407,8 @@ module Aws::Firehose
     #   @return [String]
     class ResourceInUseException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3320,7 +3418,8 @@ module Aws::Firehose
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3331,7 +3430,8 @@ module Aws::Firehose
     #   @return [Integer]
     class RetryOptions < Struct.new(
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3383,7 +3483,8 @@ module Aws::Firehose
       :compression_format,
       :encryption_configuration,
       :cloud_watch_logging_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3432,7 +3533,8 @@ module Aws::Firehose
       :compression_format,
       :encryption_configuration,
       :cloud_watch_logging_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3484,7 +3586,8 @@ module Aws::Firehose
       :compression_format,
       :encryption_configuration,
       :cloud_watch_logging_options,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3540,7 +3643,8 @@ module Aws::Firehose
       :table_name,
       :region,
       :version_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3554,7 +3658,8 @@ module Aws::Firehose
     #   @return [Boolean]
     class SchemaEvolutionConfiguration < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3578,7 +3683,8 @@ module Aws::Firehose
       :secret_arn,
       :role_arn,
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3597,7 +3703,8 @@ module Aws::Firehose
     class Serializer < Struct.new(
       :parquet_ser_de,
       :orc_ser_de,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3610,7 +3717,8 @@ module Aws::Firehose
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3629,7 +3737,8 @@ module Aws::Firehose
     class SnowflakeBufferingHints < Struct.new(
       :size_in_m_bs,
       :interval_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3735,7 +3844,8 @@ module Aws::Firehose
       :s3_configuration,
       :secrets_manager_configuration,
       :buffering_hints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3820,7 +3930,8 @@ module Aws::Firehose
       :s3_destination_description,
       :secrets_manager_configuration,
       :buffering_hints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3916,7 +4027,8 @@ module Aws::Firehose
       :s3_update,
       :secrets_manager_configuration,
       :buffering_hints,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3934,7 +4046,8 @@ module Aws::Firehose
     #   @return [Integer]
     class SnowflakeRetryOptions < Struct.new(
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3948,7 +4061,8 @@ module Aws::Firehose
     class SnowflakeRoleConfiguration < Struct.new(
       :enabled,
       :snowflake_role,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3960,7 +4074,8 @@ module Aws::Firehose
     #   @return [String]
     class SnowflakeVpcConfiguration < Struct.new(
       :private_link_vpce_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -3987,7 +4102,8 @@ module Aws::Firehose
       :kinesis_stream_source_description,
       :msk_source_description,
       :database_source_description,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4003,7 +4119,8 @@ module Aws::Firehose
     class SplunkBufferingHints < Struct.new(
       :interval_in_seconds,
       :size_in_m_bs,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4068,7 +4185,8 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :buffering_hints,
       :secrets_manager_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4130,7 +4248,8 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :buffering_hints,
       :secrets_manager_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4195,7 +4314,8 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :buffering_hints,
       :secrets_manager_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4209,7 +4329,8 @@ module Aws::Firehose
     #   @return [Integer]
     class SplunkRetryOptions < Struct.new(
       :duration_in_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4224,12 +4345,14 @@ module Aws::Firehose
     class StartDeliveryStreamEncryptionInput < Struct.new(
       :delivery_stream_name,
       :delivery_stream_encryption_configuration_input,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StartDeliveryStreamEncryptionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4239,12 +4362,14 @@ module Aws::Firehose
     #   @return [String]
     class StopDeliveryStreamEncryptionInput < Struct.new(
       :delivery_stream_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class StopDeliveryStreamEncryptionOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4258,7 +4383,8 @@ module Aws::Firehose
     #   @return [Boolean]
     class TableCreationConfiguration < Struct.new(
       :enabled,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4276,7 +4402,8 @@ module Aws::Firehose
     class Tag < Struct.new(
       :key,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4289,12 +4416,14 @@ module Aws::Firehose
     class TagDeliveryStreamInput < Struct.new(
       :delivery_stream_name,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagDeliveryStreamOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4308,12 +4437,14 @@ module Aws::Firehose
     class UntagDeliveryStreamInput < Struct.new(
       :delivery_stream_name,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagDeliveryStreamOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4378,12 +4509,14 @@ module Aws::Firehose
       :amazon_open_search_serverless_destination_update,
       :snowflake_destination_update,
       :iceberg_destination_update,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateDestinationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4469,7 +4602,8 @@ module Aws::Firehose
       :subnet_ids,
       :role_arn,
       :security_group_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -4556,7 +4690,8 @@ module Aws::Firehose
       :role_arn,
       :security_group_ids,
       :vpc_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

@@ -11,7 +11,8 @@ module Aws::Wisdom
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -84,7 +85,8 @@ module Aws::Wisdom
     class AppIntegrationsConfiguration < Struct.new(
       :app_integration_arn,
       :object_fields,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -118,7 +120,8 @@ module Aws::Wisdom
       :association_type,
       :association_data,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -130,7 +133,8 @@ module Aws::Wisdom
     class AssistantAssociationInputData < Struct.new(
       :knowledge_base_id,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class KnowledgeBaseId < AssistantAssociationInputData; end
@@ -144,7 +148,8 @@ module Aws::Wisdom
     class AssistantAssociationOutputData < Struct.new(
       :knowledge_base_association,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class KnowledgeBaseAssociation < AssistantAssociationOutputData; end
@@ -181,7 +186,8 @@ module Aws::Wisdom
       :association_type,
       :association_data,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -231,7 +237,8 @@ module Aws::Wisdom
       :tags,
       :server_side_encryption_configuration,
       :integration_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -241,7 +248,8 @@ module Aws::Wisdom
     #   @return [String]
     class AssistantIntegrationConfiguration < Struct.new(
       :topic_integration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -291,7 +299,8 @@ module Aws::Wisdom
       :tags,
       :server_side_encryption_configuration,
       :integration_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -302,7 +311,8 @@ module Aws::Wisdom
     class Configuration < Struct.new(
       :connect_configuration,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class ConnectConfiguration < Configuration; end
@@ -317,7 +327,8 @@ module Aws::Wisdom
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -327,7 +338,8 @@ module Aws::Wisdom
     #   @return [String]
     class ConnectConfiguration < Struct.new(
       :instance_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -391,7 +403,8 @@ module Aws::Wisdom
       :link_out_uri,
       :url,
       :url_expiry,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -414,7 +427,8 @@ module Aws::Wisdom
       :knowledge_base_id,
       :content_arn,
       :content_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -466,7 +480,8 @@ module Aws::Wisdom
       :status,
       :metadata,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -494,7 +509,8 @@ module Aws::Wisdom
       :association,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -503,7 +519,8 @@ module Aws::Wisdom
     #   @return [Types::AssistantAssociationData]
     class CreateAssistantAssociationOutput < Struct.new(
       :assistant_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -543,7 +560,8 @@ module Aws::Wisdom
       :description,
       :tags,
       :server_side_encryption_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -552,7 +570,8 @@ module Aws::Wisdom
     #   @return [Types::AssistantData]
     class CreateAssistantOutput < Struct.new(
       :assistant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -597,7 +616,8 @@ module Aws::Wisdom
       :upload_id,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -606,7 +626,8 @@ module Aws::Wisdom
     #   @return [Types::ContentData]
     class CreateContentOutput < Struct.new(
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -654,7 +675,8 @@ module Aws::Wisdom
       :server_side_encryption_configuration,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -663,7 +685,8 @@ module Aws::Wisdom
     #   @return [Types::KnowledgeBaseData]
     class CreateKnowledgeBaseOutput < Struct.new(
       :knowledge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -733,7 +756,8 @@ module Aws::Wisdom
       :language,
       :client_token,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -742,7 +766,8 @@ module Aws::Wisdom
     #   @return [Types::QuickResponseData]
     class CreateQuickResponseResponse < Struct.new(
       :quick_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -770,7 +795,8 @@ module Aws::Wisdom
       :name,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -779,7 +805,8 @@ module Aws::Wisdom
     #   @return [Types::SessionData]
     class CreateSessionOutput < Struct.new(
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -792,12 +819,14 @@ module Aws::Wisdom
     class DeleteAssistantAssociationInput < Struct.new(
       :assistant_association_id,
       :assistant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAssistantAssociationOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -806,12 +835,14 @@ module Aws::Wisdom
     #   @return [String]
     class DeleteAssistantInput < Struct.new(
       :assistant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteAssistantOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -825,12 +856,14 @@ module Aws::Wisdom
     class DeleteContentInput < Struct.new(
       :knowledge_base_id,
       :content_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteContentOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -844,12 +877,14 @@ module Aws::Wisdom
     class DeleteImportJobRequest < Struct.new(
       :knowledge_base_id,
       :import_job_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteImportJobResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -858,12 +893,14 @@ module Aws::Wisdom
     #   @return [String]
     class DeleteKnowledgeBaseInput < Struct.new(
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteKnowledgeBaseOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -877,12 +914,14 @@ module Aws::Wisdom
     class DeleteQuickResponseRequest < Struct.new(
       :knowledge_base_id,
       :quick_response_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class DeleteQuickResponseResponse < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -900,7 +939,8 @@ module Aws::Wisdom
       :content_reference,
       :title,
       :excerpt,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -914,7 +954,8 @@ module Aws::Wisdom
     class DocumentText < Struct.new(
       :text,
       :highlights,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -928,7 +969,8 @@ module Aws::Wisdom
     class ExternalSourceConfiguration < Struct.new(
       :source,
       :configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -946,7 +988,8 @@ module Aws::Wisdom
       :field,
       :operator,
       :value,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -959,7 +1002,8 @@ module Aws::Wisdom
     class GetAssistantAssociationInput < Struct.new(
       :assistant_association_id,
       :assistant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -968,7 +1012,8 @@ module Aws::Wisdom
     #   @return [Types::AssistantAssociationData]
     class GetAssistantAssociationOutput < Struct.new(
       :assistant_association,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -977,7 +1022,8 @@ module Aws::Wisdom
     #   @return [String]
     class GetAssistantInput < Struct.new(
       :assistant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -986,7 +1032,8 @@ module Aws::Wisdom
     #   @return [Types::AssistantData]
     class GetAssistantOutput < Struct.new(
       :assistant,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1000,7 +1047,8 @@ module Aws::Wisdom
     class GetContentInput < Struct.new(
       :content_id,
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1009,7 +1057,8 @@ module Aws::Wisdom
     #   @return [Types::ContentData]
     class GetContentOutput < Struct.new(
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1023,7 +1072,8 @@ module Aws::Wisdom
     class GetContentSummaryInput < Struct.new(
       :content_id,
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1032,7 +1082,8 @@ module Aws::Wisdom
     #   @return [Types::ContentSummary]
     class GetContentSummaryOutput < Struct.new(
       :content_summary,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1045,7 +1096,8 @@ module Aws::Wisdom
     class GetImportJobRequest < Struct.new(
       :import_job_id,
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1054,7 +1106,8 @@ module Aws::Wisdom
     #   @return [Types::ImportJobData]
     class GetImportJobResponse < Struct.new(
       :import_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1064,7 +1117,8 @@ module Aws::Wisdom
     #   @return [String]
     class GetKnowledgeBaseInput < Struct.new(
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1073,7 +1127,8 @@ module Aws::Wisdom
     #   @return [Types::KnowledgeBaseData]
     class GetKnowledgeBaseOutput < Struct.new(
       :knowledge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1086,7 +1141,8 @@ module Aws::Wisdom
     class GetQuickResponseRequest < Struct.new(
       :quick_response_id,
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1095,7 +1151,8 @@ module Aws::Wisdom
     #   @return [Types::QuickResponseData]
     class GetQuickResponseResponse < Struct.new(
       :quick_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1119,7 +1176,8 @@ module Aws::Wisdom
       :session_id,
       :max_results,
       :wait_time_seconds,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1132,7 +1190,8 @@ module Aws::Wisdom
     class GetRecommendationsOutput < Struct.new(
       :recommendations,
       :triggers,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1145,7 +1204,8 @@ module Aws::Wisdom
     class GetSessionInput < Struct.new(
       :assistant_id,
       :session_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1154,7 +1214,8 @@ module Aws::Wisdom
     #   @return [Types::SessionData]
     class GetSessionOutput < Struct.new(
       :session,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1182,7 +1243,8 @@ module Aws::Wisdom
     class GroupingConfiguration < Struct.new(
       :criteria,
       :values,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1197,7 +1259,8 @@ module Aws::Wisdom
     class Highlight < Struct.new(
       :begin_offset_inclusive,
       :end_offset_exclusive,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -1262,7 +1325,8 @@ module Aws::Wisdom
       :last_modified_time,
       :metadata,
       :external_source_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1309,7 +1373,8 @@ module Aws::Wisdom
       :last_modified_time,
       :metadata,
       :external_source_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1324,7 +1389,8 @@ module Aws::Wisdom
     class KnowledgeBaseAssociationData < Struct.new(
       :knowledge_base_id,
       :knowledge_base_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1381,7 +1447,8 @@ module Aws::Wisdom
       :server_side_encryption_configuration,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1433,7 +1500,8 @@ module Aws::Wisdom
       :server_side_encryption_configuration,
       :description,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1451,7 +1519,8 @@ module Aws::Wisdom
       :next_token,
       :max_results,
       :assistant_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1464,7 +1533,8 @@ module Aws::Wisdom
     class ListAssistantAssociationsOutput < Struct.new(
       :assistant_association_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1478,7 +1548,8 @@ module Aws::Wisdom
     class ListAssistantsInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1491,7 +1562,8 @@ module Aws::Wisdom
     class ListAssistantsOutput < Struct.new(
       :assistant_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1510,7 +1582,8 @@ module Aws::Wisdom
       :next_token,
       :max_results,
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1523,7 +1596,8 @@ module Aws::Wisdom
     class ListContentsOutput < Struct.new(
       :content_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1542,7 +1616,8 @@ module Aws::Wisdom
       :next_token,
       :max_results,
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1556,7 +1631,8 @@ module Aws::Wisdom
     class ListImportJobsResponse < Struct.new(
       :import_job_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1570,7 +1646,8 @@ module Aws::Wisdom
     class ListKnowledgeBasesInput < Struct.new(
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1583,7 +1660,8 @@ module Aws::Wisdom
     class ListKnowledgeBasesOutput < Struct.new(
       :knowledge_base_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1602,7 +1680,8 @@ module Aws::Wisdom
       :next_token,
       :max_results,
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1616,7 +1695,8 @@ module Aws::Wisdom
     class ListQuickResponsesResponse < Struct.new(
       :quick_response_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1625,7 +1705,8 @@ module Aws::Wisdom
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1634,7 +1715,8 @@ module Aws::Wisdom
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1648,7 +1730,8 @@ module Aws::Wisdom
     class NotifyRecommendationsReceivedError < Struct.new(
       :recommendation_id,
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1665,7 +1748,8 @@ module Aws::Wisdom
       :assistant_id,
       :session_id,
       :recommendation_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1678,7 +1762,8 @@ module Aws::Wisdom
     class NotifyRecommendationsReceivedOutput < Struct.new(
       :recommendation_ids,
       :errors,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1688,7 +1773,8 @@ module Aws::Wisdom
     #   @return [String]
     class PreconditionFailedException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1710,7 +1796,8 @@ module Aws::Wisdom
       :query_text,
       :next_token,
       :max_results,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1723,7 +1810,8 @@ module Aws::Wisdom
     class QueryAssistantOutput < Struct.new(
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1733,7 +1821,8 @@ module Aws::Wisdom
     #   @return [String]
     class QueryRecommendationTriggerData < Struct.new(
       :text,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1744,7 +1833,8 @@ module Aws::Wisdom
     class QuickResponseContentProvider < Struct.new(
       :content,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Content < QuickResponseContentProvider; end
@@ -1761,7 +1851,8 @@ module Aws::Wisdom
     class QuickResponseContents < Struct.new(
       :plain_text,
       :markdown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1849,7 +1940,8 @@ module Aws::Wisdom
       :channels,
       :language,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1860,7 +1952,8 @@ module Aws::Wisdom
     class QuickResponseDataProvider < Struct.new(
       :content,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Content < QuickResponseDataProvider; end
@@ -1924,7 +2017,8 @@ module Aws::Wisdom
       :values,
       :operator,
       :include_no_existence,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -1977,7 +2071,8 @@ module Aws::Wisdom
     class QuickResponseOrderField < Struct.new(
       :name,
       :order,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2019,7 +2114,8 @@ module Aws::Wisdom
       :operator,
       :allow_fuzziness,
       :priority,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2037,7 +2133,8 @@ module Aws::Wisdom
       :queries,
       :filters,
       :order_on_field,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2133,7 +2230,8 @@ module Aws::Wisdom
       :attributes_not_interpolated,
       :attributes_interpolated,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2204,7 +2302,8 @@ module Aws::Wisdom
       :is_active,
       :channels,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2230,7 +2329,8 @@ module Aws::Wisdom
       :relevance_score,
       :relevance_level,
       :type,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2273,7 +2373,8 @@ module Aws::Wisdom
       :source,
       :data,
       :recommendation_ids,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2284,7 +2385,8 @@ module Aws::Wisdom
     class RecommendationTriggerData < Struct.new(
       :query,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class Query < RecommendationTriggerData; end
@@ -2297,12 +2399,14 @@ module Aws::Wisdom
     #   @return [String]
     class RemoveKnowledgeBaseTemplateUriInput < Struct.new(
       :knowledge_base_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class RemoveKnowledgeBaseTemplateUriOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2332,7 +2436,8 @@ module Aws::Wisdom
     #   @return [String]
     class RenderingConfiguration < Struct.new(
       :template_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2343,7 +2448,8 @@ module Aws::Wisdom
     #   @return [String]
     class RequestTimeoutException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2356,7 +2462,8 @@ module Aws::Wisdom
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2374,7 +2481,8 @@ module Aws::Wisdom
       :result_id,
       :document,
       :relevance_score,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
@@ -2402,7 +2510,8 @@ module Aws::Wisdom
       :max_results,
       :knowledge_base_id,
       :search_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2415,7 +2524,8 @@ module Aws::Wisdom
     class SearchContentOutput < Struct.new(
       :content_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2425,7 +2535,8 @@ module Aws::Wisdom
     #   @return [Array<Types::Filter>]
     class SearchExpression < Struct.new(
       :filters,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2451,7 +2562,8 @@ module Aws::Wisdom
       :next_token,
       :max_results,
       :attributes,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2465,7 +2577,8 @@ module Aws::Wisdom
     class SearchQuickResponsesResponse < Struct.new(
       :results,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2487,7 +2600,8 @@ module Aws::Wisdom
       :max_results,
       :assistant_id,
       :search_expression,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2500,7 +2614,8 @@ module Aws::Wisdom
     class SearchSessionsOutput < Struct.new(
       :session_summaries,
       :next_token,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2512,7 +2627,8 @@ module Aws::Wisdom
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2522,7 +2638,8 @@ module Aws::Wisdom
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2552,7 +2669,8 @@ module Aws::Wisdom
       :description,
       :tags,
       :integration_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2562,7 +2680,8 @@ module Aws::Wisdom
     #   @return [String]
     class SessionIntegrationConfiguration < Struct.new(
       :topic_integration_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2584,7 +2703,8 @@ module Aws::Wisdom
       :session_arn,
       :assistant_id,
       :assistant_arn,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2595,7 +2715,8 @@ module Aws::Wisdom
     class SourceConfiguration < Struct.new(
       :app_integrations,
       :unknown,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Union
 
       class AppIntegrations < SourceConfiguration; end
@@ -2616,7 +2737,8 @@ module Aws::Wisdom
       :knowledge_base_id,
       :content_type,
       :presigned_url_time_to_live,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2637,7 +2759,8 @@ module Aws::Wisdom
       :url,
       :url_expiry,
       :headers_to_include,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2677,7 +2800,8 @@ module Aws::Wisdom
       :client_token,
       :metadata,
       :external_source_configuration,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2686,7 +2810,8 @@ module Aws::Wisdom
     #   @return [Types::ImportJobData]
     class StartImportJobResponse < Struct.new(
       :import_job,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2699,12 +2824,14 @@ module Aws::Wisdom
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2717,7 +2844,8 @@ module Aws::Wisdom
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2730,12 +2858,14 @@ module Aws::Wisdom
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2782,7 +2912,8 @@ module Aws::Wisdom
       :remove_override_link_out_uri,
       :metadata,
       :upload_id,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2791,7 +2922,8 @@ module Aws::Wisdom
     #   @return [Types::ContentData]
     class UpdateContentOutput < Struct.new(
       :content,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2805,7 +2937,8 @@ module Aws::Wisdom
     class UpdateKnowledgeBaseTemplateUriInput < Struct.new(
       :knowledge_base_id,
       :template_uri,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2814,7 +2947,8 @@ module Aws::Wisdom
     #   @return [Types::KnowledgeBaseData]
     class UpdateKnowledgeBaseTemplateUriOutput < Struct.new(
       :knowledge_base,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2888,7 +3022,8 @@ module Aws::Wisdom
       :is_active,
       :channels,
       :language,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2897,7 +3032,8 @@ module Aws::Wisdom
     #   @return [Types::QuickResponseData]
     class UpdateQuickResponseResponse < Struct.new(
       :quick_response,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 
@@ -2906,7 +3042,8 @@ module Aws::Wisdom
     #   @return [String]
     class ValidationException < Struct.new(
       :message,
-      keyword_init: true)
+      keyword_init: true
+    )
       include ::Smithy::Schema::Structure
     end
 

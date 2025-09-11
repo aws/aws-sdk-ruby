@@ -41,7 +41,7 @@ module Aws::ComprehendMedical
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComprehendMedical::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::ComprehendMedical
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComprehendMedical::Types::InvalidEncodingException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -69,7 +69,7 @@ module Aws::ComprehendMedical
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComprehendMedical::Types::InvalidRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -83,7 +83,7 @@ module Aws::ComprehendMedical
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComprehendMedical::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -97,7 +97,7 @@ module Aws::ComprehendMedical
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComprehendMedical::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -111,7 +111,7 @@ module Aws::ComprehendMedical
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComprehendMedical::Types::TextSizeLimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -126,7 +126,7 @@ module Aws::ComprehendMedical
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComprehendMedical::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -140,7 +140,7 @@ module Aws::ComprehendMedical
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ComprehendMedical::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message

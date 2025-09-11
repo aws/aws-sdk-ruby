@@ -42,7 +42,7 @@ module Aws::OSIS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OSIS::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -55,7 +55,7 @@ module Aws::OSIS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OSIS::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -68,7 +68,7 @@ module Aws::OSIS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OSIS::Types::DisabledOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -82,7 +82,7 @@ module Aws::OSIS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OSIS::Types::InternalException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -95,7 +95,7 @@ module Aws::OSIS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OSIS::Types::InvalidPaginationTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -108,7 +108,7 @@ module Aws::OSIS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OSIS::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -121,7 +121,7 @@ module Aws::OSIS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OSIS::Types::ResourceAlreadyExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -134,7 +134,7 @@ module Aws::OSIS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OSIS::Types::ResourceNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
@@ -147,7 +147,7 @@ module Aws::OSIS
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OSIS::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
-        super(context, data)
+        super
       end
 
       def message
