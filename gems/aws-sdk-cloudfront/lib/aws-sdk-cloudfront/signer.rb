@@ -125,7 +125,7 @@ module Aws
         if options[:private_key]
           options[:private_key]
         elsif options[:private_key_path]
-          File.open(options[:private_key_path], 'rb') { |f| f.read }
+          File.open(options[:private_key_path], 'rb', &:read)
         else
           msg = ':private_key or :private_key_path should be provided'
           raise ArgumentError, msg

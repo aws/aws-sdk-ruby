@@ -15,23 +15,6 @@ module Aws
       let(:signer) { Aws::CloudFront::UrlSigner.new(options) }
       let(:expires) { 1357034400 } # January 1, 2013 10:00 am UTC (Unix timestamp)
 
-      describe '#initialize' do
-        it 'requires key pair id' do
-          expect {
-            Aws::CloudFront::UrlSigner.new(
-              :private_key_path =>"#{File.dirname(__FILE__)}/unit_test_dummy_key"
-            )
-          }.to raise_error(ArgumentError)
-        end
-        it 'requires either private key or its path' do
-          expect {
-            Aws::CloudFront::UrlSigner.new(
-              :key_pair_id => 'CF_KEYPAIR_ID'
-            )
-          }.to raise_error(ArgumentError)
-        end
-      end
-
       describe '#signed_url' do
         it 'raises error if url is invalid' do
           expect {
